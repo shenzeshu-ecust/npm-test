@@ -1,0 +1,10 @@
+li {
+    border: 1px solid #ccc;
+    border-bottom: 0;
+}
+li:last-child {
+    border-bottom: 1px solid #ccc;
+}
+li span {
+    padding-left: 10px;
+}
