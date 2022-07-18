@@ -60,8 +60,14 @@ export default {
       console.log('OnBeforeMount');
     })
     //         provide --- inject 跨组件通信 ///////
-    provide('name', '张三') // 父组件传值(Content组件接收)
-  
+    provide('name', '张三') // 父组件传值(非响应式)(Content组件接收)
+
+    // 使用ref或者Reactive使得数据响应式。reactive针对对象
+    const myname = ref('李四')
+    provide('myname', myname)
+    function changeMyName () {
+      myname.value = '王五'
+    }
     // 加入通过ES6的扩展运算符...进行解构会使得对象的属性不是 响应式的！
     // ---> toRefs(obj) 使得结构后的属性重新获得响应式 const {name, child} = toRefs(person）
 
@@ -73,7 +79,8 @@ export default {
       reverseMsg,
       person,
       ...toRefs(person),
-      changePerson
+      changePerson,
+      changeMyName
     }
 
   },
@@ -83,8 +90,8 @@ export default {
     }
   },
   mounted() {
-   
-    console.log("获取expose出的内容",  this.$refs.content.num);
+
+    console.log("获取expose出的内容", this.$refs.content.num);
 
   },
   components: {
@@ -104,7 +111,7 @@ export default {
     <h3>{{ msg }}</h3> <button :style="{ background: '#ccc' }" @click="changeMsg">changeMsg</button>
     <h3>{{ reverseMsg }}</h3>
     <Content ref="content" :message="person.name" class="hahaha" id="hehehehe" @injectNum='injectNum' />
-
+    <button @click="changeMyName">改名咯</button>
   </div>
   <HelloWorld msg="Vite + Vue" />
 

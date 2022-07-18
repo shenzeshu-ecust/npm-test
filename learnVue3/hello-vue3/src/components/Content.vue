@@ -2,11 +2,13 @@
     <div>
         <h2>content组件</h2>
         <button @click="send2Parent">发射数据</button>
-        <h3>获取父组件provide的数据为: {{name}}</h3>
+        <h3 ref="root">获取父组件provide的数据为: {{name}}</h3>
+        <h3>获取父组件provide的响应式数据为: {{reactiveName}}</h3>
+
     </div>
 </template>
 <script>
-import { onUpdated, toRefs, ref, inject } from 'vue'
+import { onUpdated, toRefs, ref, inject, watchEffect} from 'vue'
 export default {
     props: {
         message: {
@@ -29,10 +31,17 @@ export default {
             console.log('content中的', message);
         })
         context.expose({ send2Parent, num }) // 暴露出外界需要的属性、方法
-
+        // 侦听模板引用
+        const root = ref(null)
+        watchEffect(() => {
+            console.log(root.value); // <h3>获取父组件provide的数据为: 张三</h3>
+        }, {
+            flush:'post' // 推迟到DOM更新后运行callback。如果没有这个，则显示null
+        })
         // inject 接受数据
-        const name = inject('name')
-        return { send2Parent, name }
+        const name = inject('name') // 传的不是响应式的
+        const reactiveName = inject('myname')
+        return { send2Parent, name, reactiveName, root }
         // return ()=> h('h2', num.value) // 如果return这一句，只会出现<h2>12345678</h2>,其他模板中的元素都没了。这时候想要
         // 还是能让组件暴露出一些属性方法，就需要context.expose({})
     }
