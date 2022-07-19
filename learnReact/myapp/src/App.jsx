@@ -20,12 +20,22 @@ export default class App extends Component {
         const newTodos = [todoObj, ...todos]
         this.setState({todos: newTodos})
     }
+    updateTodo = (id, done) => {
+        // 获取状态中的todos
+        const {todos} = this.state
+        const newTodos = todos.map(todo => {
+            if(todo.id === id) return {...todo, done} // 用新的传过来的done:done 覆盖原来的旧值
+            else return todo
+        })
+        this.setState({todos: newTodos})
+
+    }
     render() {
         const { todos } = this.state
         return (
             <div className='todo-box'>
                 <Header addTodo={this.addTodo}></Header>
-                <List todos = {todos}></List>
+                <List todos = {todos} updateTodo={this.updateTodo}></List>
                 <Footer></Footer>
             </div>
         )

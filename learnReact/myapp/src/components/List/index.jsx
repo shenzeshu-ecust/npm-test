@@ -3,7 +3,7 @@ import Item from '../Item'
 import './index.css'
 export default class List extends Component {
   render() {
-    const {todos} = this.props
+    const {todos, updateTodo} = this.props
     // console.log(this.props);
     return (
       <div>
@@ -11,7 +11,7 @@ export default class List extends Component {
           {
             todos.map(todo => {
               // console.log(todo);
-              return <Item key={todo.id} {...todo} />
+              return <Item key={todo.id} {...todo} updateTodo={updateTodo}/>
             })
           }
 
