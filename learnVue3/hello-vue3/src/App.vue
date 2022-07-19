@@ -64,7 +64,7 @@ export default {
 
     // 使用ref或者Reactive使得数据响应式。reactive针对对象
     const myname = ref('李四')
-    provide('myname', myname)
+    provide('myname', myname) // 不要传myname.value  会失去响应式
     function changeMyName () {
       myname.value = '王五'
     }
@@ -87,13 +87,17 @@ export default {
   methods: {
     injectNum(num) {
       console.log(num);
+    },
+    getText(val) {
+      console.log('HelloWorld中emit的数据为',val);
     }
   },
   mounted() {
 
     console.log("获取expose出的内容", this.$refs.content.num);
-
+    console.log("获取HelloeWorldexpose出的内容", this.$refs.helloworld);
   },
+  
   components: {
     Content,
     HelloWorld
@@ -113,7 +117,7 @@ export default {
     <Content ref="content" :message="person.name" class="hahaha" id="hehehehe" @injectNum='injectNum' />
     <button @click="changeMyName">改名咯</button>
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <HelloWorld msg="Vite + Vue" ref="helloworld" @getText="getText"/>
 
 </template>
 
