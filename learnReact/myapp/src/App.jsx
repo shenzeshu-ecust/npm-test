@@ -15,11 +15,16 @@ export default class App extends Component {
 
         ]
     }
+    addTodo =  (todoObj) => {
+        const {todos} =  this.state
+        const newTodos = [todoObj, ...todos]
+        this.setState({todos: newTodos})
+    }
     render() {
         const { todos } = this.state
         return (
             <div className='todo-box'>
-                <Header></Header>
+                <Header addTodo={this.addTodo}></Header>
                 <List todos = {todos}></List>
                 <Footer></Footer>
             </div>
