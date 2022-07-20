@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import {nanoid} from 'nanoid'
 import './index.css'
+import PropTypes from 'prop-types'
 export default class Header extends Component {
+  // 对接受的props进行：类型、必要性的限制
+  static propTypes = {
+    addTodo: PropTypes.func.isRequired
+  }
   handleKeyUp = (e)=> {
     // console.log(this);
     const {keyCode, target} = e

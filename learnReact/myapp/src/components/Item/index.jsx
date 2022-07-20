@@ -8,10 +8,17 @@ export default class Item extends Component {
       this.setState({ mouse: flag })
     }
   }
-  handleChange(id) {
+  handleChange = (id) => {
     return (event) => {
-      console.log(id, event.target.checked);
+      // console.log(id, event.target.checked);
       this.props.updateTodo(id, event.target.checked)
+    }
+  }
+  handleDelete = (id) => {
+    if(window.confirm('确认删除吗')) {
+      // 若 点击了确认-确认删除，就调用爷爷组件传过来的方法
+      console.log(this.props);
+      this.props.deleteTodo(id)
     }
   }
   render() {
@@ -21,10 +28,11 @@ export default class Item extends Component {
     return (
       <li style={{ backgroundColor: mouse ? '#ccc' : '#fff' }} onMouseEnter={this.handleMouse(true)} onMouseLeave={this.handleMouse(false)}>
         <label htmlFor="">
-          <input type="checkbox" name="" id="" defaultChecked={done} onChange={this.handleChange(id)}/>
+          <input type="checkbox" name="" id="" checked={done} onChange={this.handleChange(id)}/>
           <span>{name}</span>
         </label>
-        <button className='btn btn-danger' style={{ display: mouse ? 'block' : 'none' }}>删除</button>
+        {/* 不使用柯里化方式 传带参数的函数 */}
+        <button className='btn btn-danger' style={{ display: mouse ? 'block' : 'none' }} onClick={() => {this.handleDelete(id)}}>删除</button>
       </li>
     )
   }

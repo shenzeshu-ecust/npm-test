@@ -1,5 +1,10 @@
 # 想要运行哪个src 就把该src命名恢复为src。
-
+# todoList 案例相关知识点
+    1 状态在哪里，操作状态的方法就在哪里
+    2 注意defaultChecked和checked的区别， 类似的还有： defaultValue和value
+    3 子传父：付给子传递一个函数
+    4 state放在哪里：
+        一些组件共同使用：放在公共的父组件state中（官方称为：状态提升）
 
 
 
