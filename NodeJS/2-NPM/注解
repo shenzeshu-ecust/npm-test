@@ -1,0 +1,64 @@
+
+npm init -y  (-y代表都是选yes)  ————文件夹下创建package.json
+npm i gulp --dev-save (install 简写i； --dev开发环境；  -save 将其配置写进package.json中)
+----------------------------------------------------------------------------------------
+
+在 package.json的 script中修改添加指令。 
+-g 默认全局  如gulp之类命令默认执行全局命令。如果本地当前目录安装，无法直接使用gulp
+需要修改script中的指令。目录不需要写全。在node_module的.bin/gulp。
+----------------------------------------------------------------------------------------
+
+类似git之类不需要把node——modules上传。 只要把package.json留着就行。 执行npm i 就会自动下载相关配置所需的node_modules
+npm list 可以显示包之间的依赖关系。（在package-lock.json当然也显示依赖关系，但是不清晰）
+npm list | grep gulp  只看gulp的依赖
+npm i jquery -S  给生产环境装一个jquery。此时如果测试人员只想安装生产环境的包，执行npm i --production
+----------------------------------------------------------------------------------------
+
+npm view jquery versions  查看jquery有哪些版本
+npm i jquery@2.2.4 具体安装指定版本
+npm i jquery@1 -S 安装1.x.x的最新版
+    # node package versions
+    -13.4.6
+    - major:13,minor:4,patch:6
+    主版本号：大更新；次版本号：新增功能；patch:补丁——偶数的稳定版，奇数不稳定；
+
+    eg: "dependencies": {
+        "jquery": "^3.6.0",
+        "underscore": "^1.13.1"
+        },
+
+    npm outdated 查看当前包是否过期:显示如下
+        Package Current Wanted Latest Location
+        jquery  1.12.4  2.2.4  3.5.1  2-NPM
+    
+    npm update 更新版本（根据npm outdated 信息中的wanted，而这个wanted 是在package.json中决定的）
+    "jquery": "^3.6.0" 中 ^ 表示版本只锁定major。执行npm update后，根据package中的版本更新锁定major后的最新版。
+              "~3.6.0"    ~ 锁定 major 和 minor
+              "3.6.0"       全部锁定；安装指定版本
+              "*"         * 安装最新版本
+----------------------------------------------------------------------------------------
+npm  cache clean --force 清除包安装的缓存(如果之前安装出错，之后安装因为存在缓存所以也会出错。这时执行这个命令)
+----------------------------------------------------------------------------------------
+"scripts":
+            简单的词语代替复杂语句以 执行脚本
+            比如在脚本里添加了"greeting":"echo hello"
+            执行：npm run greeting  —————— npm run ！！！！
+            "runjs":"node scripts1 & node scripts2"    并行执行脚本
+            "runjs":"node scripts1 && node scripts2"   串行执行脚本(等前面的执行完才执行后面的)
+            "start":""
+            "test":""  //start test命令在npm运行时都可以简写 npm start（不需要run）
+----------------------------------------------------------------------------------------
+环境变量process.env拿到package.json字段值
+通过 npm_package_前缀 可以拿到package.json里的字段
+    在package.json内部也可以访问内部字段：采用 $npm_package_config_env  不知为何没用。。。
+
+----------------------------------------------------------------------------------------
+开发环境安装cross-env 可以跨平台（windows、linux、mac），不用担心为平台正确设置或使用环境变量。
+环境变量 NODE_ENV=development 可以在process.env.NODE_ENV获取
+----------------------------------------------------------------------------------------
+
+nrm 安装 npm i nrm -g  (安装完成直接使用nrm命令会报错。需要修改一个js文件的字段-网上查！)
+    nrm ls 查看所有源  *表示当前源
+    nrm use taobao 使用淘宝源（每个源前面有别名）
+    nrm test 查看源的速度
+

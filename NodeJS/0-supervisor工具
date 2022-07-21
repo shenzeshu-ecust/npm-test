@@ -1,0 +1,3 @@
+npm i supervisor g
+node app.js 启动项目后更改项目内容无法实时更新
+采用 supervisor app.js 可以实现实时更新

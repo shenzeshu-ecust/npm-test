@@ -1,0 +1,62 @@
+[2021-05-02T17:33:46.231] [DEBUG] cheese - URL {
+  href: 'https://www.baidu.com/path/index.html?id=2#tag=3',
+  origin: 'https://www.baidu.com',
+  protocol: 'https:',
+  username: '',
+  password: '',
+  host: 'www.baidu.com',
+  hostname: 'www.baidu.com',
+  port: '',
+  pathname: '/path/index.html',
+  search: '?id=2',
+  searchParams: URLSearchParams { 'id' => '2' },
+  hash: '#tag=3'
+}
+[2021-05-02T17:38:37.459] [DEBUG] cheese - URL {
+  href: 'https://www.baidu.com/path/index.html?id=2#tag=3',
+  origin: 'https://www.baidu.com',
+  protocol: 'https:',
+  username: '',
+  password: '',
+  host: 'www.baidu.com',
+  hostname: 'www.baidu.com',
+  port: '',
+  pathname: '/path/index.html',
+  search: '?id=2',
+  searchParams: URLSearchParams { 'id' => '2' },
+  hash: '#tag=3'
+}
+[2021-05-02T17:38:37.464] [DEBUG] cheese - https://www.baidu.com/path/index.html?id=2#tag=3
+[2021-05-02T17:41:41.353] [DEBUG] cheese - URL {
+  href: 'https://www.baidu.com/path/index.html?id=2#tag=3',
+  origin: 'https://www.baidu.com',
+  protocol: 'https:',
+  username: '',
+  password: '',
+  host: 'www.baidu.com',
+  hostname: 'www.baidu.com',
+  port: '',
+  pathname: '/path/index.html',
+  search: '?id=2',
+  searchParams: URLSearchParams { 'id' => '2' },
+  hash: '#tag=3'
+}
+[2021-05-02T17:41:41.356] [DEBUG] cheese - https://www.baidu.com/path/index.html?id=2#tag=3
+[2021-05-02T17:41:41.358] [DEBUG] cheese - https://www.abc.com/
+[2021-05-02T17:42:28.656] [DEBUG] cheese - URL {
+  href: 'https://www.baidu.com/path/index.html?id=2#tag=3',
+  origin: 'https://www.baidu.com',
+  protocol: 'https:',
+  username: '',
+  password: '',
+  host: 'www.baidu.com',
+  hostname: 'www.baidu.com',
+  port: '',
+  pathname: '/path/index.html',
+  search: '?id=2',
+  searchParams: URLSearchParams { 'id' => '2' },
+  hash: '#tag=3'
+}
+[2021-05-02T17:42:28.660] [DEBUG] cheese - https://www.baidu.com/path/index.html?id=2#tag=3
+[2021-05-02T17:42:28.662] [DEBUG] cheese - https://www.abc.com/
+[2021-05-02T17:42:28.662] [DEBUG] cheese - https://www.abc.com/b
