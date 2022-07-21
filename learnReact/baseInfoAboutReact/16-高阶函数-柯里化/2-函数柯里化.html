@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+
+</body>
+<script type="text/babel">
+    
+    class Login extends React.Component {
+        state = {
+            username: '',
+            password: ''
+        }
+        // 不用函数柯里化
+       
+        saveFormData = (dataType,event) => {
+           
+                this.setState({
+                    [dataType]: event.target.value
+                })
+            
+        }
+        handleSubmit = event => {
+            event.preventDefault();
+            const {username,password} = this.state
+            alert(`你的用户名为：${username},密码为${password}`)
+
+        }
+        render() {
+            return (
+                <div>
+                    {/*为了传入不同的参数—
+                    onEvent后面必须跟一函数且 不能立即调用
+                    ->  函数也返回一个函数
+                    */}
+                    <form onSubmit={this.handleSubmit}>
+                        <label>用户名</label> <input type="text" name="username" onChange={event =>this.saveFormData('username',event)} /> <br />
+                        <label>密码</label> <input type="text" name="password" onChange={event =>this.saveFormData('password',event)} />
+                        <button>登录</button>
+                    </form>
+
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(
+        <Login />,
+        document.getElementById('root')
+    );
+
+</script>
+
+</html>

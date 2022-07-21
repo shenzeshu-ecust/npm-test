@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    生命周期回调函数
+    <div id="root"></div>
+
+</body>
+<script type="text/babel">
+    class Count extends React.Component {
+        // 构造器
+        constructor(props) {
+            console.log('Count---constructor');
+            super(props)
+            this.state = { count: 0 }
+
+        }
+        handleClick = () => {
+            let { count } = this.state
+            this.setState({ count: count + 1 });
+        }
+        unMount = () => {
+            ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+        }
+        force = () => {
+            // 强制更新下
+            console.log('Count---强制更新下');
+            this.forceUpdate()
+        }
+        // ============== 需要返回一个状态对象 或 null   ===================
+        static getDerivedStateFromProps(nextProps, prevState) { // 这个钩子会导致代码冗余
+            console.log('Count---getDerivedStateFromProps',nextProps,prevState); 
+            // 状态值 就会只取决于props
+            // 组件内不会更新了
+            // 如果 return null 就可以继续更新
+            return nextProps 
+        }
+        
+
+
+        // 组件已经挂载的钩子
+        componentDidMount() {
+            console.log('Count---componentDidMount');
+
+        }
+        shouldComponentUpdate(nextProps, nextState, nextContext) {
+            console.log('Count---shouldComponentUpdate');
+            return true
+        }
+
+        componentDidUpdate(prevProps, prevState) {
+            console.log('Count---componentDidUpdate');
+
+        }
+        componentWillUnmount() {
+            console.log('Count---componentWillUnmount');
+
+        }
+
+        render() {
+            console.log('Count---render');
+
+            const { count } = this.state
+            return (
+                <div>
+                    <h2>当前求和为:{count}</h2>
+                    <button onClick={this.handleClick}>点我+1</button>
+                    <button onClick={this.unMount}>卸载</button>
+                    <button onClick={this.force}>没改什么，就是强制更新下</button>
+
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<Count count="199"/>, document.getElementById('root'))
+
+</script>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+   
+</body>
+<script type="text/babel">
+// 少数情况下，你可能需要在一个组件中预留出几个“洞”。这种情况下，我们可以不使用 children，而是自行约定：将所需内容传入 props，并使用相应的 prop。
+    
+    function SplitPane(props) {
+        return (
+            <div className="SplitPane">
+                <div className="SplitPane-left">{props.left}</div>
+                <div className="SplitPane-right">{props.right}</div>
+
+            </div>
+            
+        )
+    }
+    function Contacts() {
+        return (
+            <h1>Contacts</h1>
+        )
+    }
+    function Chat() {
+        return (
+            <h4>Chat</h4>
+        )
+    }
+    function App() {
+        return (
+            <SplitPane 
+            left={<Contacts/>}
+            right={<Chat/>}
+            />
+
+           
+        )
+    }
+    ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+    )
+</script>
+
+</html>

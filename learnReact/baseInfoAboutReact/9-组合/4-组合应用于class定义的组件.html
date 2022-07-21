@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    // 特例关系
+
+    // 有些时候，我们会把一些组件看作是其他组件的特殊实例，比如 WelcomeDialog 可以说是 Dialog 的特殊实例。
+
+    // 在 React 中，我们也可以通过组合来实现这一点。“特殊”组件可以通过 props 定制并渲染“一般”组件：
+    function FancyBorder(props) {
+        return (
+            <div className={'FancyBorder FancyBorder-' + props.color}>
+                {props.children}
+            </div>
+        )
+    }
+    function Dialog(props) {
+        return (
+            <FancyBorder color="blue">
+                <h1 className="Dialog-title">{props.title} </h1>
+                <p className="Dialog-message">{props.message} </p>
+                {props.children}
+            </FancyBorder>
+        );
+    }
+    // Props 和 组合 为你提供了清晰而安全地定制组件外观和行为的灵活方式。注意：组件可以接受任意 props，包括基本数据类型，React 元素以及函数。
+    class SignUpDialog extends React.Component {
+        constructor(props) {
+            super(props)
+            this.handleChange = this.handleChange.bind(this)
+            this.handleSignUp = this.handleSignUp.bind(this)
+            this.state = {
+                login: ''
+            }
+
+        }
+        handleChange(e) {
+            this.setState({ login: e.target.value });
+        }
+        handleSignUp() {
+            alert(`Welcome aboard, ${this.state.login}!`)
+        }
+        render() {
+            return (
+                <Dialog title="Mars Exploration Program" message="How should we refer to you?">
+                    <input type="text" value={this.state.login} onChange={this.handleChange}/>
+                    <button onClick={this.handleSignUp}>Sign Me Up!</button>
+                </Dialog>
+
+            )
+        }
+    }
+    ReactDOM.render(<SignUpDialog />, document.getElementById("root"));
+</script>
+
+</html>

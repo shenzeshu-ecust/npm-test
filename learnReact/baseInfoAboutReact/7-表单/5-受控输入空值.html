@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <div id="new"></div>
+    <!-- 
+        在受控组件上指定 value 的 prop 会阻止用户更改输入。如果你指定了 value，但输入仍可编辑，则可能是你意外地将value 设置为 undefined 或 null。
+    -->
+</body>
+<script type="text/babel">
+    // 1 如果指定了value  用户就无法修改了
+    ReactDOM.render(
+        <input value="hi" />,
+        document.getElementById('root')
+    )
+    // 如果你指定了 value，但输入仍可编辑，则可能是你意外地将value 设置为 undefined 或 null
+    ReactDOM.render(
+        <input value={null} />,
+        document.getElementById('new')
+    )
+</script>
+
+</html>

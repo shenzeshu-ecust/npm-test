@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+
+</body>
+<script type="text/babel">
+    // React 中的一个常见模式是一个组件返回多个元素。Fragments 允许你将子列表分组，------而无需向 DOM 添加额外节点--------。
+    // <Columns /> 需要返回多个 <td> 元素以使渲染的 table HTML 有效。如果在 <Columns /> 的 render() 中使用了父 div，则生成的 HTML 将无效。
+    class Columns extends React.Component {
+        render() {
+            return (
+                // <div>
+                    <React.Fragment>
+                    <td>Hello</td>
+                    <td>World</td>
+                    </React.Fragment>
+
+                // </div>
+            );
+        }
+    }
+    // 你可以使用一种新的，且更简短的语法来声明 Fragments。它看起来像空标签：
+    // <></> 
+    // 你可以像使用任何其他元素一样使用 <> </>，除了它不支持 key 或属性。
+    class Table extends React.Component {
+        render() {
+            return (
+                <table>
+                    <tr>
+                        <Columns />
+                    </tr>
+                </table>
+            );
+        }
+    }
+    // key 是唯一可以传递给 Fragment 的属性。
+    ReactDOM.render(
+        <Table />,
+        document.getElementById('root')
+    )
+</script>
+
+</html>

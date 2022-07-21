@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+   
+</body>
+<script type="text/babel">
+// 字符串类型的不太推荐了
+// 用太多后效率不高
+    class App extends React.Component {
+        showData = ()=> {
+            console.log(this);
+            const {input1} = this.refs
+            alert(input1.value)
+        }
+        showData2 = ()=> {
+            const {input2} = this.refs
+            alert(input2.value)
+        }
+        render() {
+            return(
+                <div>
+                    <input ref="input1" type="text" name="" id="" placeholder="点击按钮提示数据" /> <br/>
+                    <button ref="button1"  onClick={this.showData}>点击提示右侧数据</button> <br/>
+                    <input onBlur={this.showData2} ref="input2" type="text" name="" id="" placeholder="失去焦点提示数据" />
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <App a="apple" b="boy"/>,
+        document.getElementById('root')
+    );
+
+</script>
+
+</html>

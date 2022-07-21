@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+
+</body>
+<script type="text/babel">
+    import React, { useState, useEffect } from 'react'
+    // 自定义 Hook 是一个函数，其名称以 “use” 开头，函数内部可以调用其他的 Hook。
+    function useFriendStatus(friendID) {
+        const [isOnline, setIsOnline] = useState(null)
+        useEffect(() => {
+            function handleStatusChange(status) {
+                setIsOnline(status.isOnline)
+            }
+            ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange)
+            return () => {
+                ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange)
+            }
+        })
+
+        return isOnline
+    }
+    // 使用自定义Hook
+    function FriendStatus(props) {
+        const isOnline = useFriendStatus(props.friend.id)
+        if (isOnline === null) return 'Loading...'
+        return isOnline ? 'Online' : 'Offline'
+    }
+    function FriendListItem(props) {
+        const isOnline = useFriendStatus(props.friend.id);
+        return (
+            <li style={{ color: isOnline ? 'green' : 'black' }}>
+                {props.friend.name}
+            </li>
+        );
+    }
+    // 多个Hook之间传递信息
+    const friendList = [
+        { id: 1, name: 'Phoebe' },
+        { id: 2, name: 'Rachel' },
+        { id: 3, name: 'Ross' },
+    ];
+
+    function ChatRecipientPicker() {
+        const [recipientID, setRecipientID] = useState(1); 
+        const isRecipientOnline = useFriendStatus(recipientID);
+        return (
+            <>
+                <Circle color={isRecipientOnline ? 'green' : 'red'} />      
+                <select
+                    value={recipientID}
+                    onChange={e => setRecipientID(Number(e.target.value))}
+                >
+                    {friendList.map(friend => (
+                        <option key={friend.id} value={friend.id}>
+                            {friend.name}
+                        </option>
+                    ))}
+                </select>
+            </>
+        );
+    }
+</script>
+
+</html>

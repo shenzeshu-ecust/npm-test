@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+    这通常会被叫做“自上而下”或是“单向”的数据流。任何的 state 总是所属于特定的组件，而且从该 state 派生的任何数据或 UI 只能影响树中“低于”它们的组件。
+
+如果你把一个以组件构成的树想象成一个 props 的数据瀑布的话，那么每一个组件的 state 就像是在任意一点上给瀑布增加额外的水源，但是它只能向下流动。
+</body>
+<script type="text/babel">
+// FormattedDate 组件会在其 props 中接收参数 date，但是组件本身无法知道它是来自于 Clock 的 state，或是 Clock 的 props，还是手动输入的：
+    function FormattedDate(props) {
+        return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
+    }
+    // 组件可以选择把它的 state 作为 props 向下传递到它的子组件中：
+    <FormattedDate date={this.state.date} />
+    class Comment extends Component {
+        constructor(props) {
+            super(props)
+            // -----  除了 拥有state的组件 其他组件都无法访问
+            // 构造函数是唯一可以给 this.state 赋值的地方：
+            this.state = {
+                comment:'Hello'
+            }
+        }
+        
+        
+        render() {
+            return (
+                <div>
+                    
+                </div>
+            );
+        }
+    }
+    
+  
+</script>
+</html>

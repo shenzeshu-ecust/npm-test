@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+     <div id="root"></div>
+</body>
+<script type="text/babel">
+// 1 最简单的 函数组件——本质就是一个js函数
+function Welcome(props) {
+    // 注意： 组件名称必须以大写字母开头。
+
+// React 会将以小写字母开头的组件视为原生 DOM 标签。
+// 例如，<div /> 代表 HTML 的 div 标签，而 <Welcome /> 则代表一个组件，并且需在作用域内使用 Welcome。
+    return <h1>Hello, {props.name}</h1>
+}
+// 2 ES6 class定义一个组件
+// class Welcome extends React.Component {
+//     render() {
+//         return <h1>Hello, {this.props.name}</h1>
+//     }
+// }
+// React元素可以是用户的自定义组件
+const element = <Welcome name="Sara"/>;
+ReactDOM.render(element,document.getElementById("root"))
+</script>
+</html>

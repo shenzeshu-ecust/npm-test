@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    阻止组件渲染
+
+    在极少数情况下，你可能希望能隐藏组件，即使它已经被其他组件渲染。若要完成此操作，你可以让 render 方法直接返回 null，而不进行任何渲染。
+</body>
+<script type="text/babel">
+    function WarningBanner(props) {
+        if(!props.warning) {
+            return null
+        }
+        return (
+            <div className="warning">Warning!</div>
+        )
+    }
+    class Page extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = {showWarning:true}
+            this.handleToggleClick = this.handleToggleClick.bind(this)
+        }
+        handleToggleClick() {
+            this.setState(state=> ({
+                showWarning:!state.showWarning
+            }))
+        }
+        render() {
+            return (
+                <div>
+                    <WarningBanner warning={this.state.showWarning}/>
+                    <button onClick={this.handleToggleClick}>
+                        {this.state.showWarning? 'Hide' : 'Show'}
+                        </button>
+                    </div>
+            )
+        }
+    }
+    ReactDOM.render(
+        <Page />,
+        document.getElementById('root')
+    )
+</script>
+
+</html>

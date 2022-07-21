@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+
+</body>
+<script type="text/babel">
+    // 内联式的回调ref 在数据更新时会执行两次ref回调
+    // 不过不影响什么
+    class App extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = {isHot:true}
+        }
+        changeMessage = () => {
+            const {isHot} = this.state
+            this.setState({isHot:!isHot})
+        }
+       saveInput = (c)=> {
+            this.input2 = c
+            console.log('!',c);
+       }
+        render() {
+            return (
+                <div>
+                    <h2>今天天气很 {this.state.isHot?'炎热':'寒冷'}</h2>
+                    {/* 内联式callback
+                    会执行两次回调
+                    第一次 传入null
+                    第二次 才传入节点
+                    */}
+                    <input type="text" ref={c=> {
+                        this.input1 = c;
+                        console.log('@',c);
+                    }} /> <br />
+                    <button onClick={this.changeMessage}>点击改变数据</button> <br />
+                    {/* 
+                        这种形式不会执行两次
+                    */}
+                    <input onBlur={this.showData2} ref={this.saveInput} type="text" name="" id="" placeholder="失去焦点提示数据" />
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <App a="apple" b="boy" />,
+        document.getElementById('root')
+    );
+
+</script>
+
+</html>

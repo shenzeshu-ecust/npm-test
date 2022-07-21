@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    key 只是在兄弟节点之间必须唯一
+
+    数组元素中使用的 key 在其兄弟节点之间应该是独一无二的。然而，它们不需要是全局唯一的。当我们生成两个不同的数组时，我们可以使用相同的 key 值：
+</body>
+<script type="text/babel">
+    function Blog(props) {
+        const sidebar = (
+            <ul>
+                {props.posts.map(post =>
+                    <li key={post.id}>{post.title} </li>
+                )}
+            </ul>
+        )
+        // key 会传递信息给 React ，但不会传递给你的组件。如果你的组件中需要使用 key 属性的值，请用其他属性名显式传递这个值
+        // -------------------也就是 组件内 获取不到post.key！！！！！！！
+        const content = props.posts.map(post =>
+            <div key={post.id}>
+                <h3>{post.title}</h3>
+                <p>{post.content}</p>
+            </div>
+        )
+        return (
+            <div>
+                {sidebar} <hr />
+                {content}
+            </div>
+        )
+    }
+    const posts = [
+        { id: 1, title: 'Hello World', content: 'Welcome to learning React!' },
+        { id: 2, title: 'Installation', content: 'You can install React from npm.' }
+    ];
+    ReactDOM.render(
+        <Blog posts={posts} />,
+        document.getElementById('root')
+    )
+</script>
+
+</html>

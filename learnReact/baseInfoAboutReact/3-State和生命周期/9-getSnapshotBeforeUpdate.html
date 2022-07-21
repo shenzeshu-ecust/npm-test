@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    生命周期回调函数
+    <div id="root"></div>
+
+</body>
+<script type="text/babel">
+ /*
+ 新的组件生命周期
+    1 初始化阶段：由ReactDOM.render触发 初次渲染
+    construcor
+    getDerivedStateFromProps
+    render
+    componentDidMount         ---> 用于初始化：开启定时器、发起网络请求、订阅
+    2 更新阶段： 由组件内部的setState触发 或者 父组件render触发
+    getDerivedStateFromProps
+    shouldComponentUpdate
+    render
+    getSnapshotBeforeUpdate
+    componentDidUpdate
+    3 卸载组件： 由ReactDOM.unmountComponentAtNode触发
+    componentWillUnmount      ---> 用于收尾：关闭定时器、取消订阅
+    */
+    
+    class Count extends React.Component {
+        // 构造器
+        constructor(props) {
+            console.log('Count---constructor');
+            super(props)
+            this.state = { count: 0 }
+
+        }
+        handleClick = () => {
+            let { count } = this.state
+            this.setState({ count: count + 1 });
+        }
+        unMount = () => {
+            ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+        }
+        force = () => {
+            // 强制更新下
+            console.log('Count---强制更新下');
+            this.forceUpdate()
+        }
+        static getDerivedStateFromProps(nextProps, prevState) { // 这个钩子会导致代码冗余
+            console.log('Count---getDerivedStateFromProps',nextProps,prevState); 
+            return null
+            
+
+        }
+
+        // 组件已经挂载的钩子
+        componentDidMount() {
+            console.log('Count---componentDidMount');
+
+        }
+        shouldComponentUpdate(nextProps, nextState, nextContext) {
+            console.log('Count---shouldComponentUpdate');
+            return true
+        }
+        // 也需要返回值: 快照值 、 null
+        // 在更新结束前执行\在最近一次渲染输出（提交到DOM节点）之前调用
+        // 可以使得组件在发生更改之前从DOM中获取一些信息（例如：滚动位置），在此生命周期的任何返回值将作为参数 传递给 componentDidUpdate()
+        getSnapshotBeforeUpdate(prevProps, prevState) {
+            console.log('Count---getSnapshotBeforeUpdate',prevProps,prevState);
+            return '尚硅谷'
+        }
+        
+        componentDidUpdate(prevProps, prevState,snapshotValue) { //先前的state/props
+            console.log('Count---componentDidUpdate',prevProps,prevState,snapshotValue);
+
+        }
+        componentWillUnmount() {
+            console.log('Count---componentWillUnmount');
+
+        }
+
+        render() {
+            console.log('Count---render');
+
+            const { count } = this.state
+            return (
+                <div>
+                    <h2>当前求和为:{count}</h2>
+                    <button onClick={this.handleClick}>点我+1</button>
+                    <button onClick={this.unMount}>卸载</button>
+                    <button onClick={this.force}>没改什么，就是强制更新下</button>
+
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<Count count="199"/>, document.getElementById('root'))
+
+</script>
+
+</html>

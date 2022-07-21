@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <!-- 在 HTML 中, <textarea> 元素通过其子元素定义其文本
+    <textarea>
+  你好， 这是在 text area 里的文本
+    </textarea>   
+    而在 React 中，<textarea> 使用 value 属性代替。这样，可以使得使用 <textarea> 的表单和使用单行 input 的表单非常类似 
+    -->
+</body>
+<script type="text/babel">
+    class EssayForm extends React.Component {
+        constructor(props) {
+            super(props);
+            // this.state.value 初始化于构造函数中，因此文本区域默认有初值。
+            this.state = { value: '请撰写一篇关于你喜欢的 DOM 元素的文章.' };
+            this.handleChange = this.handleChange.bind(this);
+            this.handleSubmit = this.handleSubmit.bind(this);
+        }
+
+        handleChange(event) { this.setState({ value: event.target.value }); }
+        handleSubmit(event) {
+            alert('提交的文章: ' + this.state.value);
+            event.preventDefault();
+        }
+
+        render() {
+            return (
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        文章:
+                        <textarea value={this.state.value} onChange={this.handleChange} />        </label>
+                    <input type="submit" value="提交" />
+                </form>
+            );
+        }
+    }
+    ReactDOM.render(
+        <EssayForm />,
+        document.getElementById('root')
+    )
+</script>
+
+</html>

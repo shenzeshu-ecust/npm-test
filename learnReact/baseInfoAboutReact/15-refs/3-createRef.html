@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+
+</body>
+<script type="text/babel">
+    
+    class App extends React.Component {
+        // React.createRef调用后可以返回一个容器，该容器可以存储被ref所标识的节点。——————专人专用！
+        myRef = React.createRef()
+        myRef2 = React.createRef()
+
+        changeMessage = () => {
+            console.log(this);
+            console.log(this.myRef);
+            console.log(this.myRef.current);
+            alert(this.myRef.current.value)
+
+        }
+        showAlert = ()=> {
+            alert(this.myRef2.current.value)
+        }
+        render() {
+            return (
+                <div>
+                    
+                    <input type="text" ref= {this.myRef}/> <br />
+                    <button onClick={this.changeMessage}>点击show数据</button> <br />
+                    <input type="text" ref= {this.myRef2} onBlur={this.showAlert} placeholder="失去焦点显示数据" /> <br />
+
+                   
+                   
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <App a="apple" b="boy" />,
+        document.getElementById('root')
+    );
+
+</script>
+
+</html>

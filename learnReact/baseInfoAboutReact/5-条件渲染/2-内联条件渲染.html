@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+
+</body>
+<script type="text/babel">
+// 因为在 JavaScript 中，true && expression 总是会返回 expression, 而 false && expression 总是会返回 false
+// 如果是 false，React 会忽略并跳过它。
+
+// 请注意，返回 false 的表达式会使 && 后面的元素被跳过，但会返回 falsed的 表达式
+    function Mailbox(props) {
+        const unreadMessages = props.unreadMessages
+        return (
+            <div>
+                <h1>
+                    Hello!
+                </h1>
+            
+                {
+                    unreadMessages.length > 0 &&
+                    <h2>
+                        You have {unreadMessages.length} unread messages.
+                    </h2>
+                }
+
+                {
+                    unreadMessages.length>1 ? <h2>You have many messages unread</h2> : <h2>You must be lonely</h2>
+                }
+            </div>
+        )
+    }
+    //  三目运算符  都放在{}中！
+    const messages = ['React','You are learning React','You can make it!']
+    ReactDOM.render(
+        <Mailbox unreadMessages={messages}/>,
+        document.getElementById('root')
+    )
+</script>
+
+</html>

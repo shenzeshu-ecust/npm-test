@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <!-- 
+当需要处理多个 input 元素时，我们可以给每个元素添加 name 属性，并让处理函数根据 event.target.name 的值选择要执行的操作。
+   由于 setState() 自动将部分 state 合并到当前 state, 只需调用它更改部分 state 即可。    
+    -->
+</body>
+<script type="text/babel">
+    class Reservation extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                isGoing: true,
+                numberOfGuests: 2
+            };
+
+            this.handleInputChange = this.handleInputChange.bind(this);
+        }
+
+        handleInputChange(event) {
+            const target = event.target;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
+            const name = target.name;
+            this.setState({
+                [name]: value
+            });
+        }
+
+        render() {
+            return (
+                <form>
+                    <label>
+                        参与:
+                        <input
+                            name="isGoing" type="checkbox"
+                            checked={this.state.isGoing}
+                            onChange={this.handleInputChange} />
+                    </label>
+                    <br />
+                    <label>
+                        来宾人数:
+                        <input
+                            name="numberOfGuests" type="number"
+                            value={this.state.numberOfGuests}
+                            onChange={this.handleInputChange} />
+                    </label>
+                </form>
+            );
+        }
+    }
+    ReactDOM.render(
+        <Reservation />,
+        document.getElementById('root')
+    )
+</script>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+    
+</body>
+<script type="text/babel">
+    
+    
+    class Comment extends Component {
+        constructor(props) {
+            super(props)
+            // 构造函数是唯一可以给 this.state 赋值的地方：
+            this.state = {
+                comment:'Hello'
+            }
+        }
+        change() {
+            // 关于setState()的注意点
+            // 1 不要直接修改State
+            // Wrong
+            // this.state.comment = 'Hello';
+            // Correct
+            this.setState({comment: 'Hi'});
+            // 2 State 的更新可能是异步的 
+            // 因为 this.props 和 this.state 可能会异步更新，所以你不要依赖他们的值来更新下一个状态。
+            // Wrong
+            // this.setState({
+            // counter: this.state.counter + this.props.increment,
+            // });
+            // 要解决这个问题，可以让 setState() 接收一个函数而不是一个对象。这个函数用上一个 state 作为第一个参数，将此次更新被应用时的 props 做为第二个参数：
+            // Correct
+            this.setState((state, props) => ({
+            counter: state.counter + props.increment
+            // 3 State 的更新会被合并
+            // 当你调用 setState() 的时候，React 会把你提供的对象合并到当前的 state。
+            // 例如，你的 state 包含几个独立的变量：
+            // constructor(props) {
+            //     super(props);
+            //     this.state = {
+            //     posts: [],      comments: []    };
+            // }
+
+
+            }));
+        }
+        // 然后你可以分别调用 setState() 来单独地更新它们：
+        componentDidMount() {
+            fetchPosts().then(response => {
+            this.setState({
+                posts: response.posts      
+                });
+            });
+
+            fetchComments().then(response => {
+            this.setState({
+                comments: response.comments      
+                });
+            });
+            // 这里的合并是浅合并，所以 this.setState({comments}) 完整保留了 this.state.posts， 但是完全替换了 this.state.comments。
+        }
+        
+        render() {
+            return (
+                <div>
+                    
+                </div>
+            );
+        }
+    }
+    
+    
+</script>
+</html>

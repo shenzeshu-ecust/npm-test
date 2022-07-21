@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+<body>
+    生命周期回调函数
+    <div id="root"></div>
+  
+</body>
+<script type="text/babel">
+    class Life extends React.Component {
+        state = {opacity:1}
+        death = ()=> {
+            // clearInterval(this.timer)
+            // 卸载组件
+            ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+        }
+        // 组件挂载完毕
+        componentDidMount() {
+            this.timer = setInterval(()=> {
+                let {opacity} = this.state
+                opacity -= 0.1
+                if(opacity<=0) opacity = 1
+                this.setState({opacity});
+            },200)
+        }
+        // 组件将要卸载
+        componentWillUnmount() {
+            // 清除定时器
+            clearInterval(this.timer)
+            
+        }
+        // 初始化渲染、状态更新时调用
+        render() {
+            return (
+                <div>
+                    <h2 style={{opacity:this.state.opacity}}>REACT 学不会怎么办？</h2>    
+                    <button onClick={this.death}>不活了</button>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(<Life/>,document.getElementById('root'))
+  
+</script>
+</html>
