@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    Ref 转发是一项将 ref 自动地通过组件传递到其一子组件的技巧。
+    Ref 转发是一个可选特性，其允许某些组件接收 ref，并将其向下传递（换句话说，“转发”它）给子组件。
+
+</body>
+<script type="text/babel">
+    // 第二个参数 ref 只在使用 React.forwardRef 定义组件时存在。常规函数和 class 组件不接收 ref 参数，且 props 中也不存在 ref。
+    const FancyButton = React.forwardRef((props, ref) => ( // 
+        <button ref={ref} className="FancyButton">
+            {props.children}
+        </button>
+
+    ));
+   
+    function App() {
+        const ref = React.createRef(0)
+        const {current} = ref
+        console.log(current);
+        return (<FancyButton ref={ref}>click</FancyButton>)
+
+    }
+    /*
+    以下是对上述示例发生情况的逐步解释：
+       我们通过调用 React.createRef 创建了一个 React ref 并将其赋值给 ref 变量。
+       我们通过指定 ref 为 JSX 属性，将其向下传递给 <FancyButton ref={ref}>。
+       React 传递 ref 给 forwardRef 内函数 (props, ref) => ...，作为其第二个参数。
+       我们向下转发该 ref 参数到 <button ref={ref}>，将其指定为 JSX 属性。
+       当 ref 挂载完成，ref.current 将指向 <button> DOM 节点。
+    
+   
+    */
+    /*
+    普通refs 将不会透传下去。这是因为 ref 不是 prop 属性。
+    就像 key 一样，其被 React 进行了特殊处理。如果你对 HOC 添加 ref，该 ref 将引用最外层的容器组件，而不是被包裹的组件。
+    
+    但是
+     如果采用React.forwardRef API 可以明确地将 refs 转发到内部的 FancyButton 组件
+    */
+    function logProps(Component) {
+        class LogProps extends React.Component {
+            render() {
+                const { forwardedRef, ...rest } = this.props;
+
+                // 将自定义的 prop 属性 “forwardedRef” 定义为 ref
+                return <Component ref={forwardedRef} {...rest} />;
+            }
+        }
+
+        // 注意 React.forwardRef 回调的第二个参数 “ref”。
+        // 我们可以将其作为常规 prop 属性传递给 LogProps，例如 “forwardedRef”
+        // 然后它就可以被挂载到被 LogProps 包裹的子组件上。
+        return React.forwardRef((props, ref) => {
+            return <LogProps {...props} forwardedRef={ref} />;
+        });
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+    );
+
+</script>
+
+</html>

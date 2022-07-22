@@ -39,12 +39,12 @@
         constructor(props) {
             super(props);
             // 这里定义选中的内容
-            this.state = { value: 'coconut' };
+            this.state = { value: ['coconut'] };
             this.handleChange = this.handleChange.bind(this);
             this.handleSubmit = this.handleSubmit.bind(this);
         }
 
-        handleChange(event) { this.setState({ value: event.target.value }); }
+        handleChange(event) { this.setState({ value: [event.target.value] }); }
         handleSubmit(event) {
             alert('你喜欢的风味是: ' + this.state.value);
             event.preventDefault();
@@ -55,7 +55,7 @@
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         选择你喜欢的风味:
-                        <select mutiple={true} value={this.state.value} onChange={this.handleChange}>            
+                        <select multiple={true} value={this.state.value} onChange={this.handleChange}>            
                             <option value="grapefruit">葡萄柚</option>
                             <option value="lime">酸橙</option>
                             <option value="coconut">椰子</option>

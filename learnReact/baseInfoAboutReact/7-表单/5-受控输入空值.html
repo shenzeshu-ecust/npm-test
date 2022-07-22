@@ -26,6 +26,7 @@
         document.getElementById('root')
     )
     // 如果你指定了 value，但输入仍可编辑，则可能是你意外地将value 设置为 undefined 或 null
+    // 输入最初被锁定，但在短时间延迟后变为可编辑
     ReactDOM.render(
         <input value={null} />,
         document.getElementById('new')

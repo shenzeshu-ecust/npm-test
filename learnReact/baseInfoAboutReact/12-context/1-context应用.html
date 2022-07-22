@@ -25,7 +25,7 @@
 
     // 只有当组件所处的树中没有匹配到 Provider 时，其 defaultValue 参数才会生效。
     // 此默认值有助于在不使用 Provider 包装组件的情况下对组件进行测试。注意：将 undefined 传递给 Provider 的 value 时，消费组件的 defaultValue 不会生效。
-    const ThemeContext = React.createContext('light')
+    const ThemeContext = React.createContext('light') // defaultValue
     class App extends React.Component {
         render() {
             // 使用一个Provider' 来将当前的theme传递给以下的组件树
@@ -55,7 +55,8 @@
 
         static contextType = ThemeContext
         componentDidMount() {
-            // 挂载在 class 上的 contextType 属性会被重赋值为一个由 React.createContext() 创建的 Context 对象。此属性能让你使用 this.context 来消费最近 Context 上的那个值。你可以在任何生命周期中访问到它，包括 render 函数中。
+            // 挂载在 class 上的 contextType 属性会被重赋值为一个由 React.createContext() 创建的 Context 对象。
+            // 此属性能让你使用 this.context 来消费最近 Context 上的那个值。你可以在任何生命周期中访问到它，包括 render 函数中。
             let value = this.context;
             /* 在组件挂载完成后，使用 MyContext 组件的值来执行一些有副作用的操作 */
         }

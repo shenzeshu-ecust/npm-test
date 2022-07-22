@@ -39,12 +39,15 @@
             this.forceUpdate()
         }
         // ============== 需要返回一个状态对象 或 null   ===================
+        // 在render之前被调用
+        // 初始挂载和更新都会被调用
+        // 此方法适用于罕见的用例，即 state 的值在任何时候都取决于 props。
+        // 例如，实现 <Transition> 组件可能很方便，该组件会比较当前组件与下一组件，以决定针对哪些组件进行转场动画
         static getDerivedStateFromProps(nextProps, prevState) { // 这个钩子会导致代码冗余
             console.log('Count---getDerivedStateFromProps',nextProps,prevState); 
-            // 状态值 就会只取决于props
-            // 组件内不会更新了
-            // 如果 return null 就可以继续更新
-            return nextProps 
+            // 如果 return null 就不更新任何内容(props接收的一直不变)
+            // return nextProps 
+            return null
         }
         
 
@@ -60,6 +63,8 @@
         }
 
         componentDidUpdate(prevProps, prevState) {
+            console.log(this.props.count);
+
             console.log('Count---componentDidUpdate');
 
         }
