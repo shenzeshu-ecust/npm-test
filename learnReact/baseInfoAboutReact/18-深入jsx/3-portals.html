@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="app-root"></div>
+    <div id="modal-root"></div>
+
+
+</body>
+<script type="text/babel">
+// Portal 提供了一种将 子节点 渲染到存在于  父组件以外的 DOM 节点   的优秀的方案。
+// ReactDOM.createPortal(child, container)  第二个参数（container）是一个 DOM 元素。
+// 通常来讲，当你从组件的 render 方法返回一个元素时，该元素将被挂载到 DOM 节点中离其最近的父节点
+// 然而，有时候需要将子元素插入到 DOM 节点中的不同位置
+/*
+    render() {
+        // React 并*没有*创建一个新的 div。它只是把子元素渲染到 `domNode` 中。
+        // `domNode` 是一个可以在任何位置的有效 DOM 节点。
+        return ReactDOM.createPortal(
+            this.props.children,
+            domNode  );
+    }
+
+一个 portal 的典型用例是当父组件有 overflow: hidden 或 z-index 样式时，但你需要子组件能够在视觉上“跳出”其容器。例如，对话框、悬浮卡以及提
+*/
+
+function Child() {
+    return (
+        // 这里的点击事件会冒泡到父元素
+        <div className="modal">
+            <button>点击我</button>
+        </div>
+    )
+}
+const appRoot = document.getElementById('app-root')
+const modalRoot = document.getElementById('modal-root')
+
+class Modal extends React.Component {
+    constructor(props) {
+        super(props)
+        this.el = document.createElement('div')
+    }
+    // 只有当modal根节点渲染完成后再添加这个新建的div
+    componentDidMount = () => {
+      modalRoot.appendChild(this.el)
+    }
+    componentWillUnmount = () => {
+      modalRoot.removeChild(this.el)
+    }
+    render() {
+        return ReactDOM.createPortal(
+            this.props.children,
+            // 子元素挂载在新建的div中，而这个div在modal-root（和app-root处于同级）中。
+            this.el 
+        )
+    }
+}
+class Parent extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state ={ count: 0 }
+    }
+    handleClick = () => {
+        this.setState(state => ({count: state.count + 1}))
+    }
+    render() {
+        return (
+            <div onClick={this.handleClick}>
+                <p>点击了：{this.state.count}次</p>
+                <p>打开检查查看dom，可以发现：按钮并不是挂载的modal的的子元素</p>
+                <p>事实上，按钮在modal-app中，而包括现在这行以上的内容在app-root 中，app和modal是兄弟元素，但是button的事件冒泡还是冒泡给了app中的div上</p>
+                {/*根据React树 冒泡、传值，而不是根据真实DOM*/}
+                <Modal>
+                    <Child/>    
+                </Modal>
+            </div>
+        )
+    }
+}   
+/**
+ * 尽管 portal 可以被放置在 DOM 树中的任何地方，但在任何其他方面，其行为和普通的 React 子节点行为一致。
+ * 由于 portal 仍存在于 React 树， 且与 DOM 树 中的位置无关，那么无论其子节点是否是 portal，像 context 这样的功能特性都是不变的。
+
+ * 这包含事件冒泡。一个从 portal 内部触发的事件会一直冒泡至包含 React 树的祖先！即便这些元素并不是 DOM 树 中的祖先！
+ * 
+*/
+ReactDOM.render(
+    <Parent/>,
+    document.getElementById('app-root')
+)
+
+</script>
+</html>

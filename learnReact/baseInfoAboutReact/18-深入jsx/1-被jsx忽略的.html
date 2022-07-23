@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+
+</body>
+<script type="text/babel">
+    function App() {
+        const arr = []
+        const myVariable = true
+        return (
+            <React.Fragment>
+            // false, null, undefined, and true 是合法的子元素。但它们并不会被渲染
+                <h2>{true}</h2>
+                <h2>{false}</h2>
+                <h2>{null}</h2>
+                <h2>{undefined}</h2>
+                值得注意的是有一些 “falsy” 值，如数字 0，仍然会被 React 渲染。
+                例如，以下代码并不会像你预期那样工作，因为当 props.messages 是空数组时，0 仍然会被渲染：<br />
+                {arr.length && <h3>我会被渲染吗</h3>} 这里0仍然会显示，并且短路后面的h3标签
+                <br />
+                想要达到效果---转化为布尔表达式
+                <br />
+                {arr.length >= 0 && <h3>我会被渲染吗</h3>}
+                <br />
+
+                反之，如果你想渲染 false、true、null、undefined 等值，你需要先将它们转换为字符串：
+                <div>
+                    My JavaScript variable is {String(myVariable)}.
+                </div>
+
+            </React.Fragment>
+        )
+    }
+    ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+    );
+
+</script>
+
+</html>

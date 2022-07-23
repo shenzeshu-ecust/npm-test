@@ -14,7 +14,7 @@
 
 <body>
     <div id="root"></div>
-    Ref 转发是一项将 ref 自动地通过组件传递到其一子组件的技巧。
+    Ref 转发是一项将 ref 自动地通过组件传递到其 一子组件的技巧。
     Ref 转发是一个可选特性，其允许某些组件接收 ref，并将其向下传递（换句话说，“转发”它）给子组件。
 
 </body>
@@ -27,13 +27,11 @@
 
     ));
    
-    function App() {
+   
         const ref = React.createRef(0)
-        const {current} = ref
-        console.log(current);
         return (<FancyButton ref={ref}>click</FancyButton>)
 
-    }
+    
     /*
     以下是对上述示例发生情况的逐步解释：
        我们通过调用 React.createRef 创建了一个 React ref 并将其赋值给 ref 变量。

@@ -20,6 +20,9 @@
     
     class App extends React.Component {
         // React.createRef调用后可以返回一个容器，该容器可以存储被ref所标识的节点。——————专人专用！
+        // 默认情况下，你不能在函数组件上使用 ref 属性，因为他们没有 实例
+        // 只能用于class定义的类组件或者DOM元素
+        // 当 ref 属性用于自定义 class 组件时，ref 对象接收 组件的挂载实例 作为其 current 属性。
         myRef = React.createRef()
         myRef2 = React.createRef()
 
