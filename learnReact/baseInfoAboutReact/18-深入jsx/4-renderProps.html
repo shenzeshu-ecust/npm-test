@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app-root"></div>
+
+
+</body>
+<script type="text/babel">
+    /*
+        术语 “render prop” 是指一种在 React 组件之间使用一个值为 函数 的 prop 共享代码的简单技术
+        具有 render prop 的组件接受一个函数，该函数返回一个 React 元素并调用它而不是实现自己的渲染逻辑。
+    
+        <DataProvider render={data => (
+            <h1>Hello {data.target}</h1>
+        )}/>
+    
+    */
+
+    function Cat(props) {
+        const { mouse } = props
+        return (
+            // 这里的点击事件会冒泡到父元素
+            <img src='./cat.gif' className="catpic" style={{ position: 'absolute', left: mouse.x, top: mouse.y, width: "50px" }}>
+            </img>
+        )
+    }
+    class Mouse extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = { x: 0, y: 0 }
+        }
+        handleMouseMove = (event) => {
+            this.setState({
+                x: event.clientX,
+                y: event.clientY,
+
+            })
+        }
+        render() {
+            return (
+                <div style={{ height: '100vh' }} onMouseMove={this.handleMouseMove}>
+                    {this.props.render(this.state)}
+                </div>
+            )
+        }
+    }
+    class MouseTracker extends React.Component {
+        render() {
+            return (
+                <div>
+                    <h1>移动鼠标</h1>
+                    <Mouse render={mouse => (<Cat mouse={mouse} />)} />
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <MouseTracker />,
+        document.getElementById('app-root')
+    )
+
+</script>
+
+</html>
