@@ -34,12 +34,23 @@ import React, { ReactDOM } from "react";
 //     }
 // }
 // 2 函数式组件
+/**
+ * 
+ ! 传递给 useEffect 的函数在每次渲染中都会有所不同，这是刻意为之的。
+ ! 事实上这正是我们可以在 effect 中获取最新的 count 的值，而不用担心其过期的原因。
+ ! 每次我们重新渲染，都会生成新的 effect，替换掉之前的。
+ ! 某种意义上讲，effect 更像是渲染结果的一部分 —— 每个 effect “属于”一次特定的渲染。
+ */
 function Demo() {
   const [count, setCount] = React.useState(0);
   const [name, setName] = React.useState("Tom");
-  // React.useEffect 相当于componentDidMount + componentDidUpdate + componentWillUnmount
+  // ~ React.useEffect 相当于componentDidMount + componentDidUpdate + componentWillUnmount
   const myRef = React.useRef();
+  // ~ React 保证了每次运行 effect 的同时，DOM 都已经更新完毕(浏览器完成画面渲染之后)
+  // ~ React 将按照 effect 声明的顺序  依次调用组件中的每一个 effect。
+  // ~ useEffect 默认就会处理: 更新update逻辑。它会在调用一个新的 effect 之前对前一个 effect 进行清理。
   React.useEffect(() => {
+    // !  state\prop已经保存在函数作用域中。Hook 使用了 JavaScript 的闭包机制，而不用在 JavaScript 已经提供了解决方案的情况下，还引入特定的 React API。
     let timer = setInterval(() => {
       setCount((count) => ++count);
     }, 1000);
@@ -50,8 +61,8 @@ function Demo() {
   }, []); // 挂载时 开启定时器
   React.useEffect(() => {
     console.log("@");
-  }, [count]); // 第二个参数为空数组时，只在挂载时执行（谁也不监测）
-  // 不加[]（变量都检测） 挂载、更新都会调用
+  }, [count]); // ! 第二个参数为空数组时，只在  挂载时执行（谁也不监测）
+  // ! 不加[]（变量都检测） 挂载、更新都会调用
   //  [count] 只监测count
   function add() {
     // setCount(count +1) // 第一种写法

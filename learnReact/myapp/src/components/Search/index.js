@@ -54,7 +54,7 @@ export default class Search extends Component {
             const res = await fetch(`/api1/search/users?q=${keyword}`)
             const data = await res.json()
             // console.log(data);
-            PubSub.publish('atguigu', { isLoading: false, users: data })
+            PubSub.publish('atguigu', { isLoading: false, users: data.items })
         } catch (error) {
             console.log(error);
             PubSub.publish('atguigu', { isLoading: false, err: error.message })

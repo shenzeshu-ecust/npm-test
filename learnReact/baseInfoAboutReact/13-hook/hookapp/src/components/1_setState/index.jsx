@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 class Demo extends Component {
-    state = {count : 0}
-    add = ()=> {
+    state = { count: 0 }
+    add = () => {
         // 1 获取值
         // const {count} = this.state
         // 2 更新值
@@ -19,12 +19,12 @@ class Demo extends Component {
         console.log(count); //落后一步的count值
         console.log('====================================');
         */
-    //    <2> 函数式的setState setState(updater,[callback])
-        this.setState((state,props)=> {
+        //    <2> 函数式的setState setState(updater,[callback])
+        this.setState((state, props) => {
             console.log('====================================');
-            console.log(state,props);
+            console.log(state, props);
             console.log('====================================');
-            return {count:state.count+1 +props.a}
+            return { count: state.count + 1 + props.a }
         });
     }
     render() {
