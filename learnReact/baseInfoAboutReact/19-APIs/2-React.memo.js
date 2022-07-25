@@ -1,6 +1,6 @@
 const MyComponent = React.memo(function MyComponent(props) {
     /* 使用 props 渲染 */
-  }, areEqual);
+}, areEqual);
 //   React.memo 为高阶组件。
 // ! 它与 React.PureComponent 非常相似，但只适用于 --函数组件-- ，而不适用 class 组件。
 
@@ -14,14 +14,14 @@ const MyComponent = React.memo(function MyComponent(props) {
 
 function MyComponent(props) {
     /* 使用 props 渲染 */
-  }
-  function areEqual(prevProps, nextProps) {
+}
+function areEqual(prevProps, nextProps) {
     /*
     如果把 nextProps 传入 render 方法的返回结果与
     将 prevProps 传入 render 方法的返回结果一致则返回 true，
     否则返回 false
     */
-  }
-  export default React.memo(MyComponent, areEqual);
+}
+export default React.memo(MyComponent, areEqual);
 //   此方法仅作为性能优化的方式而存在。但请不要依赖它来“阻止”渲染，因为这会产生 bug。
 // 与 class 组件中 shouldComponentUpdate() 方法不同的是，如果 props 相等，areEqual 会返回 true；如果 props 不相等，则返回 false。这与 shouldComponentUpdate 方法的返回值相反。

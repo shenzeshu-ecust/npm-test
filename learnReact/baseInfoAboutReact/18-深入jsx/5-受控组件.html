@@ -22,9 +22,37 @@
      * 在一个受控组件中，表单数据是由 React 组件来管理的。
      * 另一种替代方案是使用非受控组件，这时表单数据将交由 DOM 节点来处理。
     */
-    function App() {
-        
+    //    、例如，下面的代码使用非受控组件接受一个表单的值：
+    class App extends React.Component {
+        constructor(props) {
+            super(props)
+            this.input = React.createRef()
+        }
+        handleSubmit = (event) => {
+            console.log('提交的信息为', this.input.current.value);
+            event.preventDefault() // 表单提交后默认行为就是跳转到action所指定的地方（阻止跳转与刷新）。但一般是ajax提交。所以阻止默认事件。
+            // 我们把form标签中的action属性去掉然后点击提交按钮，发现代码也是进入按钮事件绑定的事件处理函数，只是最后没有去跳转url而是页面进行了刷新。
+            // return false  使用return false也可以阻止 页面刷新和跳转的默认行为了
+        }
+        render() {
+            return (
+                <form action="" onSubmit={this.handleSubmit}>
+                    <label htmlFor="">
+                        姓名：<input type="text" ref={this.input} />
+                    </label>
+                    <input type="submit" value="提交" />
+                </form>
+            )
+        }
     }
+    /**
+     * 因为非受控组件将  真实数据储  存在 DOM 节点  中，所以在使用非受控组件时，有时候反而更容易同时集成 React 和非 React 代码。
+     * 如果你不介意代码美观性，并且希望快速编写代码，使用非受控组件往往可以减少你的代码量。否则，你应该使用受控组件。
+     * 
+     * 在 HTML 中，<input type="file"> 可以让用户选择一个或多个文件上传到服务器，或者通过使用 File API 进行操作。
+
+            在 React 中，<input type="file" /> 始终是一个非受控组件，因为它的值只能由用户设置，而不能通过代码控制。
+    */
     ReactDOM.render(
         <App />,
         document.getElementById('root')

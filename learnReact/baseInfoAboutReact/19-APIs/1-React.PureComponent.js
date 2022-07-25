@@ -1,6 +1,6 @@
 // React.PureComponent 与 React.Component 很相似。
-// 两者的区别在于 React.Component 并未实现 shouldComponentUpdate()
-// 而 React.PureComponent 中以  浅层对比 prop 和 state 的方式   来实现了该函数。
+// ! 两者的区别在于 React.Component 并未实现 shouldComponentUpdate()
+// todo 而 React.PureComponent 中以  浅层对比 prop 和 state 的方式   来实现了该函数。
 
 // React.PureComponent 中的 shouldComponentUpdate() 仅作对象的浅层比较。
 // 如果对象中包含复杂的数据结构，则有可能因为无法检查深层的差别，产生错误的比对结果。
