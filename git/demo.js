@@ -93,7 +93,7 @@
     从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
 
  */
-// ! rebase 变基 —— 如果提交存在于你的仓库之外，而别人可能基于这些提交进行开发，那么不要执行变基。
+// ! 11 rebase 变基 —— 如果提交存在于你的仓库之外，而别人可能基于这些提交进行开发，那么不要执行变基。
 // 变基使得提交历史更加整洁。 
 // 你在查看一个经过变基的分支的历史记录时会发现，尽管实际的开发工作是并行的， 但它们看上去就像是串行的一样，提交历史是一条直线没有分叉。
 /**
@@ -104,5 +104,36 @@
  * 请注意，无论是通过变基，还是通过三方合并，整合的最终结果所指向的快照始终是一样的，只不过提交历史不同罢了。 
  * 变基是将一系列提交按照原有次序依次应用到另一分支上，而合并是把最终结果合在一起。
  */
+// $ git checkout experiment
+// $ git rebase master
+// $ git checkout master
+// $ git merge experiment
+
+/**
+ * 
+
+接下来你决定将 server 分支中的修改也整合进来。 使用 git rebase <basebranch> <topicbranch> 命令可以直接将主题分支 （即本例中的 server）变基到目标分支（即 master）上。 这样做能省去你先切换到 server 分支，再对其执行变基命令的多个步骤。
+
+$ git rebase master server
+
+
+ */
+// ! 12 标签
+// 默认标签是打在最新提交的commit上的 
+// git tag v1.0
+// git tag 查看所有标签
+// git tag v0.9 f52c633 针对固定commit id 打标签
+// 标签不是按时间顺序列出，而是按字母排序的。可以用git show <tagname>查看标签信息
+// git tag -a v0.1 -m "version 0.1 released" 1094adb  创建带有说明的标签，用-a指定标签名，-m指定说明文字
+// git tag -d v0.9 删除标签 因为创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。
+// 如果要推送某个标签到远程，使用命令git push origin <tagname>
+// git push origin v1.0
+// 或者，一次性推送全部尚未推送到远程的本地标签：$ git push origin --tags
+
+// 如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：
+// $ git tag -d v0.9
+// 然后，从远程删除。删除命令也是push，但是格式如下：
+// $ git push origin :refs/tags/v0.9 （ git push origin :refs/tags/<tagname> ）
+
 
 
