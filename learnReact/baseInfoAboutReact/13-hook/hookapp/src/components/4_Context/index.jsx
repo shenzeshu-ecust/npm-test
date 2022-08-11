@@ -3,17 +3,17 @@ import './index.css'
 // Context需要放在ABC组件都能访问到的位置
 // 1 创建context
 const MyContext = React.createContext()
-const {Provider,Consumer} = MyContext
+const { Provider, Consumer } = MyContext
 class Demo extends Component {
-    state = {username:'JACK',age:13}
+    state = { username: 'JACK', age: 13 }
     render() {
-        const {username,age}= this.state
+        const { username, age } = this.state
         return (
             <div className="parent">
                 <h3>我是Demo组件</h3>
                 <h4>我的用户名：{username}</h4>
-                <Provider value={{username,age}}> 
-                    <B/>
+                <Provider value={{ username, age }}>
+                    <B />
                 </Provider>
             </div>
         );
@@ -21,13 +21,13 @@ class Demo extends Component {
 }
 class B extends Component {
     render() {
-        console.log('B',this.context); // 没声明 所以收不到
+        console.log('B', this.context); // 没声明 所以收不到
 
         return (
             <div className="child">
                 <h3>我是B组件</h3>
                 <h4>我从Demo组件获得的用户名：??</h4>
-                <C/>
+                <C />
             </div>
         );
     }
@@ -55,7 +55,7 @@ class B extends Component {
 //                 <h4>我从Demo组件获得的用户名：{this.context.username}</h4>
 //                 <h4>我从Demo组件获得的年龄：{this.context.age}</h4>
 
-                
+
 //             </div>
 //         );
 //     }
@@ -75,7 +75,7 @@ function C() {
                     }
                 </Consumer>
             </h4>
-            
+
         </div>
     );
 }

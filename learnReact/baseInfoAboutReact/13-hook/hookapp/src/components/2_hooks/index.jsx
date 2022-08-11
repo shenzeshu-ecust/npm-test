@@ -1,4 +1,6 @@
 import React, { ReactDOM } from "react";
+import { useState } from "react";
+import { useLayoutEffect } from "react";
 // 1 类式组件
 // class Demo extends Component {
 //     state = {count:0}
@@ -51,19 +53,36 @@ function Demo() {
   // ~ useEffect 默认就会处理: 更新update逻辑。它会在调用一个新的 effect 之前对前一个 effect 进行清理。
   React.useEffect(() => {
     // !  state\prop已经保存在函数作用域中。Hook 使用了 JavaScript 的闭包机制，而不用在 JavaScript 已经提供了解决方案的情况下，还引入特定的 React API。
-    let timer = setInterval(() => {
-      setCount((count) => ++count);
-    }, 1000);
+    // let timer = setInterval(() => {
+    //   setCount((count) => ++count);
+    // }, 1000);
     return () => {
       // useEffect的返回的函数语句相当于  componentWillUnmount
-      clearInterval(timer);
+      // clearInterval(timer);
     };
   }, []); // 挂载时 开启定时器
   React.useEffect(() => {
-    console.log("@");
+    // console.log("@");
+    console.log('useEffect执行');
+
   }, [count]); // ! 第二个参数为空数组时，只在  挂载时执行（谁也不监测）
   // ! 不加[]（变量都检测） 挂载、更新都会调用
   //  [count] 只监测count
+
+  const [n, setN] = useState(0)
+    //! useEffect在浏览器渲染完成后执行
+    // ! useLayoutEffect在DOM更新后执行
+// ? useLayoutEffect
+    // useLayoutEffect 总是比 useEffect 先执行
+    // 使用 useLayoutEffect 时，里面的作用最好改变布局 ，否则会占用等待时间
+
+    // 为了用户体验，优先使用 useEffect（优先渲染），因为大部分时候，我们不会去改变DOM
+    // useLayoutEffect 会影响用户看到画面变化的时间
+
+  useLayoutEffect(() => {
+    document.querySelector('.txt').innerHTML = `1000`
+    console.log('useLayoutEffect执行');
+  }, [n])
   function add() {
     // setCount(count +1) // 第一种写法
     setCount((count) => count + 1); // 第二种写法
@@ -86,6 +105,7 @@ function Demo() {
       <button onClick={change}>点我改名</button>
       <button onClick={unLoad}>卸载组件</button>
       <button onClick={show}>显示input</button>
+      <div className="txt">100</div>
     </div>
   );
 }
