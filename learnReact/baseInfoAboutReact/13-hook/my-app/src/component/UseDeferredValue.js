@@ -5,9 +5,9 @@
 // ? 除了 useTransition， React18 还提供了另外一个 api - useDeferredValue，同样可以触发 Concurrent 模式。
 //  类似防抖节流。不过防抖设置了固定时间
 
-// ! 通常情况下，用户会希望能立即看到自己输入的内容，查询的结果可以稍后展示。
-// ! 基于此，我们可以使用 useDeferredValue 来做优化，将 input 更新作为紧急的部分优先处理，长列表更新作为不紧急的部分延迟处理。
-import { useState, useDeferredValue, useEffect } from 'react'
+// * 通常情况下，用户会希望能立即看到自己输入的内容，查询的结果可以稍后展示。
+// * 基于此，我们可以使用 useDeferredValue 来做优化，将 input 更新作为紧急的部分优先处理，长列表更新作为不紧急的部分延迟处理。
+import { useState, useDeferredValue, useEffect, memo } from 'react'
 export default function DeferredValueApp() {
     const [text, setText] = useState('')
     // ! 我们仅需要修改外部组件，使得传入List的Text变量是一个延迟更新的值。
@@ -18,7 +18,7 @@ export default function DeferredValueApp() {
     return (
         <div>
             <input value={text} onChange={handleChange} />
-            <List text={deferredText} />
+            <ListMemo text={deferredText} />
         </div>
     )
 }
@@ -44,3 +44,12 @@ function List(props) {
         , <ul>{list.map(item => <li>Hello:{item.name} value:{item.value}</li>)}</ul>]
 
 }
+/*
+
+ * 在上面示例中，虽然我们使用了 useDeferredValue，但并没有发挥出它的效果。我们仅仅延迟了长列表需要的 deferredValue，长列表对应的协调过程并没有延迟。当 input 更新开始协调时，依旧要处理 50000 个节点，使得 js 引擎占据了较多的时间，从而阻塞了渲染引擎。
+ * 为了能让 useDeferredValue 能发挥它应有的作用，我们可以将长列表抽离为一个 memo 组件，将 deferredValue 通过 props 传递给长列表组件。当 deferredValue 发生变化时，长列表组件开始更新。
+
+ */
+const ListMemo = memo((props) => {
+    return <List></List>
+})
