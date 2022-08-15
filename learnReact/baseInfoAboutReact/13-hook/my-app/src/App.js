@@ -3,6 +3,12 @@ import './App.css';
 import React from 'react'
 import Counter from './component/UseReducer'
 import WithMemo from './component/UseMemo'
+import Parent from './component/UseCallback'
+import TextInputWithFocusButton from './component/UseRef'
+import FancyInput from './component/UseImperativeHandle';
+import { useEffect, useRef } from 'react';
+import {fakeNames} from './utils/fakeNames'
+import { FilterList } from './component/UseTransition'
 const themes = {
   light: {
     foreground: "#000000",
@@ -18,7 +24,13 @@ const themes = {
 const ThemeContext = React.createContext(themes.light)
 
 function App() {
-
+  // const fancyInputRef = useRef()
+  // const focus = () => {
+  //   fancyInputRef.current.focus()
+  // }
+  // useEffect(() => {
+  //   focus()
+  // })
   return (
     <div className="App">
       <header className="App-header">
@@ -26,13 +38,20 @@ function App() {
 
         <WithMemo/>
 
+        <Parent/>
+
+        <TextInputWithFocusButton/>
+
+        {/* <FancyInput ref={fancyInputRef}/> */}
         <img src={logo} className="App-logo" alt="logo" />
 
         <ThemeContext.Provider value={themes.dark}>
           <Toolbar></Toolbar>
         </ThemeContext.Provider>
       </header>
-
+      <footer className='App-footer'>
+        <FilterList names={fakeNames}></FilterList>
+      </footer>
     </div>
   );
 }
