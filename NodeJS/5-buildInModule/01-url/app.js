@@ -37,7 +37,6 @@ let urlObj = {
     port: '',
     pathname: '/path/index.html',
     search: '?id=2',
-
     hash: '#tag=3'
 }
 logger.debug(url.format(urlObj))

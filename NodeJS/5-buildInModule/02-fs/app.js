@@ -1,5 +1,5 @@
 /**
- * 1 fs.stat 检测是 文件还是目录
+ * 1 fs.stat 文件属性，eg：检测是 文件还是目录
  * 2 fs.mkdir 创建目录
  * 3 fs.writeFile 创建写入文件
  * 4 fs.appendFile 追加文件
@@ -11,17 +11,19 @@
  */
 // --------  fs 里的方法 是 异步！！！-----------
 const fs = require('fs')
-    // * 1 fs.stat(url,callback) 检测是 文件还是目录
-    // fs.stat('./html', (err, data) => {
-    //     if (err) {
-    //         console.log(err);
-    //         return
-    //     } else {
-    //         console.log(`是目录：${data.isDirectory()}`);
-    //         console.log(`是文件：${data.isFile()}`);
+// * 1 fs.stat(url,callback) 查看文件属性（是否是文件还是目录、文件大小..）
+    fs.stat('./html', (err, data) => {
+        if (err) {
+            console.log(err);
+            return
+        } else {
+            console.log(`是目录：${data.isDirectory()}`);
+            console.log(`是文件：${data.isFile()}`);
+            data.isSymbolicLink() //false
+            data.size //1024000 //= 1MB
 
-//     }
-// })
+    }
+})
 // * 2 fs.mkdir 创建目录
 /**
  * 有三个参数
