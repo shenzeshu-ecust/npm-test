@@ -1,8 +1,10 @@
-/**接口继承就是说接口可以通过其他接口来扩展自己。
+/*
+    接口继承就是说接口可以通过其他接口来扩展自己。
 
-Typescript 允许接口继承多个接口。
+    Typescript 允许接口继承多个接口。
 
-继承使用关键字 extends。 */
+    继承使用关键字 extends。
+ */
 // 1 单继承
 interface Person {
     age:number
@@ -23,4 +25,4 @@ interface IParent2 {
 } 
 interface Child extends IParent1,IParent2 {}
 
-// var haha:Child = {v1:12,v2:13}
+var haha:Child = {v1:12,v2:13}

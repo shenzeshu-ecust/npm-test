@@ -7,7 +7,7 @@
 
 Type1|Type2|Type3 
  */
-var val:string|number 
+var val: string|number 
 val = 12 
 console.log("数字为 "+ val) 
 val = "Runoob" 

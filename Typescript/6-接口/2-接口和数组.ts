@@ -5,4 +5,4 @@ interface ages {
   
  var agelist:ages; 
  agelist["John"] = 15   // 正确 只能使用字符串来访问
-//  agelist[2] = "nine"   // 错误
+ agelist[2] = "nine"   // 错误

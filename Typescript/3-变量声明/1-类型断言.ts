@@ -35,7 +35,7 @@ interface HttpError extends Error {
 }
 
 function isApiError(error: Error) {
-    if (typeof (error as ApiError).code === 'number') { // 如果直接用error.code会报错：因为HttpError没有code字段！
+    if (typeof (error as ApiError).code === 'number') { // 如果直接用error.code会报错：因为error没有code字段！
         return true;
     }
     return false;

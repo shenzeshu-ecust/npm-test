@@ -23,6 +23,9 @@ let Arr:Array<number> = [2,3]
 let z:[string,number]
 z = ['Run',1]
 console.log(z[1]); // 1
+// ! 当访问一个越界的元素，会使用联合类型替代
+// z[3] = 'world'  (会报错...)
+
 // 4 枚举
 enum Color {
     Red,
@@ -31,6 +34,9 @@ enum Color {
 }
 let color:Color = Color.Blue
 console.log(color); // 2
+let colorname: string = Color[2] 
+console.log(colorname);
+
 const getValue = ()=> {
     return 0 
 }
@@ -74,6 +80,25 @@ console.log(List.C); // 3
  function add():void  {
     x+=1
 }
+// ! 声明一个void类型的变量没有什么大用，因为你只能为它赋予undefined和null：（null会报错）
+let unusable1: void = undefined
+let unusable2: void = null // (报错)
+let unusable3: null = null
+// 7 Object object表示非原始类型
+declare function create(o: object | null) : void
+create({prop: 0}) // 正确
+create(null) // 正确
+
+create(42) //错误
+create("string") //错误
+// 默认值
+function f({ a, b = 0 } = { a: "" }): void {
+    // ...
+}
+f({ a: "yes" }); // ok, default b = 0
+f(); // ok, default to {a: ""}, which then defaults b = 0
+f({}); // error, 'a' is required if you supply an argument
+
 
 
 
