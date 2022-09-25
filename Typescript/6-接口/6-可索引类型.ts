@@ -32,7 +32,7 @@ interface Okay {
     [x: string]: Animal
 }
 
-// 字符串索引签名能够很好的描述dictionary模式，并且它们也会 确保所有属性与其返回值类型相匹配。 
+// ~ 字符串索引签名 能够很好的描述dictionary模式，并且它们也会 确保所有属性与其返回值类型相匹配。 
 // 因为字符串索引声明了 obj.property和obj["property"]两种形式都可以。 
 // 下面的例子里， name的类型与字符串索引类型不匹配，所以类型检查器给出一个错误提示：
 interface NumberDictionary {
