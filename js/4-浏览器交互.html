@@ -20,21 +20,21 @@
             title
                 显示给用户的文本
             default
-                可选的第二个参数，指定 input 框的初始值。 
+                可选的第二个参数，指定 input 框的初始值。
         */
 
         // prompt 将返回用户在 input 框内输入的文本，如果用户取消了输入，则返回 null。
-        // let age = prompt('你的年龄是？', 100)
-        // alert(`你这个${age}岁的老女人！`)
+        let age = prompt('你的年龄是？', 100)
+        alert(`你这个${age}岁的老女人！`)
         // 第二个参数是可选的。但是如果我们不提供的话，Internet Explorer 会把 "undefined" 插入到 prompt。
         // 所以，为了 prompt 在 IE 中有好的效果，我们建议始终提供第二个参数：
         // let test = prompt("Test", '')
 
         // 3 result = confirm(question) confirm 函数显示一个带有 question 以及 确定和取消 两个按钮的模态窗口。
         // 点击确定返回 true，点击取消返回 false。
-        let isBoss = confirm("Are you the boss?");
+        // let isBoss = confirm("Are you the boss?");
 
-        alert(isBoss); // 如果“确定”按钮被按下，则显示 true
+        // alert(isBoss); // 如果“确定”按钮被按下，则显示 true
 
     </script>
 </body>
