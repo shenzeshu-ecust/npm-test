@@ -27,7 +27,7 @@ let personProps: keyof Person; // 'name' | 'age'
 // 在这里，类型语法反映了表达式语法。 这意味着 person['name']具有类型 Person['name'] — 在我们的例子里则为 string类型。
 // 然而，就像索引类型查询一样，你可以在普通的上下文里使用 T[K]，这正是它的强大所在。你只要确保类型变量 K extends keyof T就可以了。
 
-// ~ eg
+// ~ eg 索引类型和字符串索引签名
 interface Map1<T> {
   [key: string]: T;
 }

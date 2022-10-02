@@ -9,10 +9,16 @@ let res = a.map((v) => {
   return v.slice(index + 1);
 });
 console.log(res);
-const obj1 = {a: true}
-const obj2 = {a: false, b: 'name'}
-const obj3 = {a: true}
-const obj4 = {a: false, b: 'age'}
 
-const arr = [obj1, obj2, obj3, obj4]
-console.log(arr.sort((x, y) => Number(y.a) - Number(x.a) ))
+const obj = [
+  { key1: "a", key2: "b", key3: "c" },
+  { key1: "a", key2: null, key3: "c" },
+  { key1: "d", key2: "e", key3: "f" },
+];
+
+console.log(Object.values(obj[0]));
+let r = obj.filter((item) => {
+  const value = Object.values(item); // 得到的是 value: [ 'a', 'b', 'c' ]
+  return value.every((v) => v !== null); // 判断有没有null，有则返回 false
+});
+console.log(r);
