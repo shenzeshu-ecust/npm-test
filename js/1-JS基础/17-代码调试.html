@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    要想看到console —— 要么打开开发者工具中的 Console（控制台）选项卡，要么在一个其他的选项卡中按下 Esc：这会在下方打开一个控制台。
+    <br>
+    —— “步入（Step into）”，快捷键 F11。
+
+    和“下一步（Step）”类似，但在异步函数调用情况下表现不同。如果你刚刚才开始学 JavaScript，那么你可以先忽略此差异，因为我们还没有用到异步调用。
+
+    至于之后，只需要记住“下一步（Step）”命令会忽略异步行为，例如 setTimeout（计划的函数调用），它会过一段时间再执行。而“步入（Step into）”会进入到代码中并等待（如果需要）
+    <br>
+    —— “步出（Step out）”：继续执行到当前函数的末尾，快捷键 Shift+F11。
+
+    继续执行代码并停止在当前函数的最后一行。当我们使用 偶然地进入到一个嵌套调用，但是我们又对这个函数不感兴趣时，我们想要尽可能的继续执行到最后的时候是非常方便的。
+
+    <script>
+        let name = 'szs'
+        function changeName(name) {
+            name = name + 'new name'
+            return name
+        }
+        function resetName() {
+            return this.name
+        }
+        let res = changeName(name)
+        alert(res)
+    </script>
+</body>
+
+</html>
