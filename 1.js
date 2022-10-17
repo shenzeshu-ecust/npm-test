@@ -22,15 +22,19 @@
 //   return value.every((v) => v !== null); // 判断有没有null，有则返回 false
 // });
 // console.log(r);
-let b = false;
+// let b = false;
 // if (typeof b === "boolean") {
 //   return b === true ? "y" : "n";
 // } else {
 //   return test;
 // }
-const state = ["b"];
-function change(state) {
-  state.push("a");
-}
-change(state);
-console.log(state);
+// const state = ["b"];
+// function change(state) {
+//   state.push("a");
+// }
+// change(state);
+// console.log(state);
+let obj1 = { a: 1, b: 2, c: 3 };
+let obj2 = { a: "a", b: "b", c: "c" };
+Object.assign(obj1, obj2);
+console.log(obj1);
