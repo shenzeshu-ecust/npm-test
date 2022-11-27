@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1 创建一个计算器
+        function Calculator() {
+            this.read = function () {
+                this.a = +prompt("first number a is:", 0);
+                this.b = +prompt("second number b is:", 0);
+            };
+            this.sum = function () {
+                return this.a + this.b;
+            };
+            this.mul = function () {
+                return this.a * this.b;
+            };
+        }
+        let calculator = new Calculator();
+        calculator.read();
+        alert("Sum=" + calculator.sum());
+        alert("Mul=" + calculator.mul());
+        // 2 创建一个累计数器
+        function Accumulator(startingValue) {
+            this.value = startingValue
+            this.read = function () {
+                let newVal = +prompt('new value is', 0)
+                this.value += newVal
+            }
+        }
+
+
+        let accumulator = new Accumulator(1); // 初始值 1
+
+        accumulator.read(); // 添加用户输入的 value
+        accumulator.read(); // 添加用户输入的 value
+
+        alert(accumulator.value); // 显示这些值的总和
+    </script>
+</body>
+
+</html>

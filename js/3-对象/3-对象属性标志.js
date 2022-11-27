@@ -1,9 +1,9 @@
 /*
-  对象属性（properties），除 value 外，还有三个特殊的特性（attributes），也就是所谓的“标志”：
+  ! 对象属性（properties），除 value 外，还有三个特殊的特性（attributes），也就是所谓的“标志”：
 
-  writable — 如果为 true，则值可以被修改，否则它是只可读的。
-  enumerable — 如果为 true，则会被在循环中列出，否则不会被列出。
-  configurable — 如果为 true，则此属性可以被删除，这些特性也可以被修改，否的不可以。 false的话，既不可以删除属性，又不可以重新配置对象属性。
+  ~ writable — 如果为 true，则值可以被修改，否则它是只可读的。
+  ~ enumerable — 如果为 true，则会被在循环中列出，否则不会被列出。
+  ~ configurable — 如果为 true，则此属性可以被删除，这些特性也可以被修改. false的话，既不可以删除属性，又不可以重新配置对象属性。
 */
 
 // 1 Object.getOwnPropertyDescriptor(obj, property)
@@ -53,7 +53,7 @@ person1.name = 'dlf'
 console.log('writable:', person1.name); // 'z' 没有修改成功！  严格模式下会报错！
 // 重新定义可以(前提是configurable为true)
 Object.defineProperty(person1, 'name', { value: 'dlf' })
-console.log('writable:',person1.name); // 可以重新定义属性name！
+console.log('writable:', person1.name); // 可以重新定义属性name！
 
 // 3 enumerable 不可枚举
 // 通常 对象内键的 toString是不可枚举的  用for in 显示不出
@@ -112,11 +112,29 @@ delete user1.name; // Error
 
 // 5 Object.defineProperties()
 // 允许一次定义多个属性
-Object.defineProperties(user, {
-  name: { value: "John", writable: false },
+let user2 ={
+  name: '',
+  surname: ''
+}
+Object.defineProperties(user2, {
+  name: { value: "John", writable: true },
   surname: { value: "Smith", writable: false },
   // ...
 })
+console.log('***', JSON.stringify(user2, null, 2))
+
+/*
+  ~ 当Object.defineProperties()方法同时定义或修改多个属性的时候，如果发生错误，那么发生错误之前定义或修改的属性还是会生效，而发出错误所在行及之后的属性不会生效。
+  ~ 并且，Object.defineProperty/ies都针对对象中已经存在的属性！
+  
+  比如：
+    let obj = {}
+    Object.defineProperty(obj, 'name', {
+        value: 1,
+        writable: true
+    })
+  *  console.log(obj) // obj为 {}
+  */
 
 // 6 Object.getOwnPropertyDescriptors
 // 要一次获取所有属性描述符
