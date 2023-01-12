@@ -154,5 +154,64 @@ console.log(res);
 //   },
 // ];
 // console.log(s.split(",").join("，"));
-const arr1 = [1, 0];
-console.log(arr1.slice(1));
+// const arr1 = [1, 0];
+// console.log(arr1.slice(1));
+// console.log(Number(""));
+// console.log(JSON.parse("false"));
+// console.log(JSON.parse("true"));
+// import moment from "moment";
+// const a = [
+//   { time: "10:30" },
+//   { time: "09:10" },
+//   { time: "12:30" },
+//   { time: "00:12" },
+// ]; // 对数组进行排序（按时间先后）
+
+// const result = a.sort((a, b) => {
+//   let m = new Date("2022-4-1 " + a.time).getTime();
+//   let n = new Date("2022-4-1 " + b.time).getTime();
+//   return m - n;
+// });
+// console.log(result);
+// var fruits = ["Banana", "Orange", "Apple", "Mango"];
+// fruits.reverse();
+// console.log(fruits.reverse(), fruits);
+
+// var findNumberIn2DArray = function (matrix, target) {
+//   let length = matrix.length - 1;
+//   return fn(length, 0, target, matrix);
+// };
+// function fn(m, n, target, matrix) {
+//   let col = matrix[0].length;
+//   if (m < 0 || n == col) return false;
+//   if (matrix[m][n] === target) return true;
+//   else if (matrix[m][n] > target) {
+//     m--;
+//   } else {
+//     n++;
+//   }
+//   return fn(m, n, target, matrix);
+// }
+
+// let arrlist = [
+//   [1, 4, 7, 11, 15],
+//   [2, 5, 8, 12, 19],
+//   [3, 6, 9, 16, 22],
+//   [10, 13, 14, 17, 24],
+//   [18, 21, 23, 26, 30],
+// ];
+// console.log(findNumberIn2DArray(arrlist, 5));
+
+// let str = "abc";
+// str[1] = "d"; // 无法通过这种方式原地改变字符串
+// console.log(str);
+
+// console.log("a  c".split(""));
+// console.log("" == " ");
+
+// const arrrr = JSON.parse(
+//   '[{"resource_amount":258,"index":0,"resource_did":3301000604}]'
+// );
+// console.log(arrrr[0]);
+
+// console.log(Object.prototype.toString.call(1) === "[object String]");
