@@ -215,3 +215,99 @@ console.log(res);
 // console.log(arrrr[0]);
 
 // console.log(Object.prototype.toString.call(1) === "[object String]");
+
+// console.log(5 / 3);
+// let i = 2;
+// console.log(i & 1);
+// console.log(i);
+
+const TOUCH_RANGE_WAY_LABEL_OPTIONS = [
+  {
+    label: "短信",
+    value: "Sms",
+
+    sendCountName: "smsUserCount",
+  },
+  {
+    label: "公众号模板",
+    value: "WechatOfficial",
+
+    sendCountName: "officialUserCount",
+  },
+  {
+    label: "订阅消息",
+    value: "WechatMiniProgram",
+
+    sendCountName: "routineUserCount",
+  },
+  {
+    label: "app推送",
+    value: "AppPush",
+
+    sendCountName: "pushUserCount",
+  },
+  {
+    label: "外呼",
+    value: "OutCall",
+
+    sendCountName: "outCallCount",
+    noVarWay: true,
+  },
+  {
+    label: "公众号文章",
+    value: "WechatOfficialArticle",
+
+    sendCountName: "officialArticleUserCount",
+    noVarWay: true,
+  },
+  {
+    label: "企微群发",
+    value: "QyWechat",
+
+    sendCountName: "qyWechatUserCount",
+  },
+  {
+    label: "企微朋友圈",
+    value: "QyWechatPyq",
+
+    sendCountName: "qyWechatUserCount",
+    noVarWay: true,
+  },
+  {
+    label: "Edm",
+    value: "Edm",
+
+    sendCountName: "edmUserCount",
+  },
+  {
+    label: "站内信",
+    value: "Internal",
+
+    sendCountName: "pushUserCount",
+  },
+  {
+    label: "企微流失召回",
+    value: "QyWechatReCall",
+
+    sendCountName: "qyWechatUserCount",
+  },
+  {
+    label: "整体运营",
+    value: "Combination",
+
+    sendCountName: "allUserCount",
+  },
+];
+const sendWayMap = TOUCH_RANGE_WAY_LABEL_OPTIONS.map((item) => {
+  const key = item.value;
+  const val = item.label;
+  return {
+    key,
+    val,
+  };
+});
+let obj = {};
+sendWayMap.forEach((item) => {
+  obj[item.key] = item.val;
+});
+console.log(obj);
