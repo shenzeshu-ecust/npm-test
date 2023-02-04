@@ -311,3 +311,4 @@ sendWayMap.forEach((item) => {
   obj[item.key] = item.val;
 });
 console.log(obj);
+haodou;

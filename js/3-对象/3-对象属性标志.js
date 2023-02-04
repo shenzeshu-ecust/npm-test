@@ -8,15 +8,15 @@
 
 // 1 Object.getOwnPropertyDescriptor(obj, property)
 
-// 当我们用“常用的方式”创建一个属性时，它们都为 true
+// ~ 当我们用“常用的方式”创建一个属性时，它们都为 true
 
 let user = {
-  name: "John"
+  name: "John",
 };
 
-let descriptor = Object.getOwnPropertyDescriptor(user, 'name');
+let descriptor = Object.getOwnPropertyDescriptor(user, "name");
 
-console.log( JSON.stringify(descriptor, null, 2 ) );
+console.log(JSON.stringify(descriptor, null, 2));
 /* 属性描述符：
 {
   "value": "John",
@@ -26,12 +26,12 @@ console.log( JSON.stringify(descriptor, null, 2 ) );
 }
 */
 
-// 当使用Object.defineProperty()时，创建的对象默认标志都为false
-let person = {}
-Object.defineProperty(person, 'name', {
-  value: 'szs'
-})
-console.log(Object.getOwnPropertyDescriptor(person, 'name'));
+// ~ 当使用Object.defineProperty()时，创建的对象默认标志都为false
+let person = {};
+Object.defineProperty(person, "name", {
+  value: "szs",
+});
+console.log(Object.getOwnPropertyDescriptor(person, "name"));
 /*
   {
     value: 'szs',
@@ -42,18 +42,18 @@ console.log(Object.getOwnPropertyDescriptor(person, 'name'));
 */
 
 // 2 writable 只读属性，不许修改
-let person1 = {}
-Object.defineProperty(person1, 'name', {
-  value: 'z',
+let person1 = {};
+Object.defineProperty(person1, "name", {
+  value: "z",
   writable: false,
   configurable: true,
-  enumerable: true
-})
-person1.name = 'dlf'
-console.log('writable:', person1.name); // 'z' 没有修改成功！  严格模式下会报错！
-// 重新定义可以(前提是configurable为true)
-Object.defineProperty(person1, 'name', { value: 'dlf' })
-console.log('writable:', person1.name); // 可以重新定义属性name！
+  enumerable: true,
+});
+person1.name = "dlf";
+console.log("writable:", person1.name); // 'z' 没有修改成功！  严格模式下会报错！
+// ~ 重新定义可以(前提是configurable为true)
+Object.defineProperty(person1, "name", { value: "dlf" });
+console.log("writable:", person1.name); // 可以重新定义属性name！
 
 // 3 enumerable 不可枚举
 // 通常 对象内键的 toString是不可枚举的  用for in 显示不出
@@ -62,25 +62,25 @@ let obj = {
   name: "John",
   toString() {
     return this.name;
-  }
+  },
 };
 
 // 默认情况下，我们的两个属性都会被列出：
 for (let key in obj) console.log(key); // name, toString
 
 // 现在 想让toString无法被枚举
-Object.defineProperty(obj, 'toString', {
-  enumerable:false
-})
+Object.defineProperty(obj, "toString", {
+  enumerable: false,
+});
 // in  Object.keys()都无法枚举出toString
 for (let key in obj) console.log(key); // name
-console.log(Object.keys(obj)) // ['name']
+console.log(Object.keys(obj)); // ['name']
 
 // 4 configurable 配置属性
 // 不可配置的属性不能被删除，它的特性（attribute）不能被修改
 
 // Math.PI 是只读的、不可枚举和不可配置的：
-console.log(Object.getOwnPropertyDescriptor(Math, 'PI'))
+console.log(Object.getOwnPropertyDescriptor(Math, "PI"));
 /*
   {
     value: 3.141592653589793,
@@ -97,31 +97,31 @@ console.log(Object.getOwnPropertyDescriptor(Math, 'PI'))
 
 // ! configurable: false 防止更改和删除属性标志，但是允许更改对象的值。
 let user1 = {
-  name: "John" // * 字面量创建的对象默认的三个标志都为true  这里name可改写！
+  name: "John", // * 字面量创建的对象默认的三个标志都为true  这里name可改写！
 };
 
 Object.defineProperty(user1, "name", {
-  configurable: false
+  configurable: false,
 });
 
 user1.name = "Pete"; // 正常工作
-console.log(user1.name) // 'Pete
+console.log(user1.name); // 'Pete
 delete user1.name; // Error
 
 // ! configurable: false + writable: false 一起可以创建一个像常量一样无法被更改的属性，就像内建的 Math.PI
 
 // 5 Object.defineProperties()
 // 允许一次定义多个属性
-let user2 ={
-  name: '',
-  surname: ''
-}
+let user2 = {
+  name: "",
+  surname: "",
+};
 Object.defineProperties(user2, {
   name: { value: "John", writable: true },
   surname: { value: "Smith", writable: false },
   // ...
-})
-console.log('***', JSON.stringify(user2, null, 2))
+});
+console.log("***", JSON.stringify(user2, null, 2));
 
 /*
   ~ 当Object.defineProperties()方法同时定义或修改多个属性的时候，如果发生错误，那么发生错误之前定义或修改的属性还是会生效，而发出错误所在行及之后的属性不会生效。
@@ -150,12 +150,23 @@ console.log(clone);
 
 // 7 属性描述符在单个属性的级别上工作。还有一些限制访问 整个 对象的方法：
 
-Object.preventExtensions(obj) // 禁止向对象添加新属性。
-Object.seal(obj) // 禁止添加/删除属性。为所有现有的属性设置 configurable: false。
-Object.freeze(obj) //禁止添加/删除/更改属性。为所有现有的属性设置 configurable: false, writable: false。
+Object.preventExtensions(obj); // 禁止向对象添加新属性。
+Object.seal(obj); // 禁止添加/删除属性。为所有现有的属性设置 configurable: false。
+Object.freeze(obj); //禁止添加/删除/更改属性。为所有现有的属性设置 configurable: false, writable: false。
 
 // 还有针对它们的测试：
 
-Object.isExtensible(obj) // 如果添加属性被禁止，则返回 false，否则返回 true。
-Object.isSealed(obj) // 如果添加/删除属性被禁止，并且所有现有的属性都具有 configurable: false则返回 true。
-Object.isFrozen(obj) // 如果添加/删除/更改属性被禁止，并且所有当前属性都是 configurable: false, writable: false，则返回 true。
+Object.isExtensible(obj); // 如果添加属性被禁止，则返回 false，否则返回 true。
+Object.isSealed(obj); // 如果添加/删除属性被禁止，并且所有现有的属性都具有 configurable: false则返回 true。
+Object.isFrozen(obj); // 如果添加/删除/更改属性被禁止，并且所有当前属性都是 configurable: false, writable: false，则返回 true。
+
+// ~ 奇怪现象
+let exam = {};
+Object.defineProperty(exam, "score", {
+  value: 99,
+  // writable: false,
+  // configurable: false,
+  // ~ enumerable: true, // 只有在enumerable为true时， 打印exam才不为空对象
+});
+console.log(exam); // ? {}
+console.log(exam.score); // ? 99 有值

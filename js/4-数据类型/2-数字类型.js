@@ -231,8 +231,27 @@ console.log(parseInt("str90.23")); // NaN  第一个符号停止了读取
 console.log(parseInt("0xff", 16)); // 255
 console.log(parseInt("ff", 16)); // 255 没有 0x 仍然有效
 console.log(parseInt("ff", 8)); // NaN
-console.log(parseInt("133", 2)); // 1
+console.log(parseInt("133", 2)); // ~ 1 （3不是二进制的数字，停止读取）
 
+// ~ parseInt(str, radix)中的radix为0时，默认十进制
+console.log("进制为0：", parseInt("12313", 0)); // 12312
+// 一进制 输出NaN
+console.log(parseInt("23", 1)); //NaN
+
+// ! TEST:
+const res = ["1", "2", "3"].map(parseInt);
+console.log(res); // ! [ 1, NaN, NaN ]
+
+/*
+ * 原因：
+  ["1", "2", "3"].map(parseInt) 相当于
+  * ["1", "2", "3"].map((value, i) => parseInt(value, i))
+  则： 
+  parseInt('1', 0) => 进制0默认十进制  输出 1
+  parseInt('2', 1) => 没有进制1  输出NaN
+  parseInt('3', 2) => 3超过进制2 输出NaN
+  要是有 '4'  '5' ...也都输出NaN
+ */
 // ! 11 Math 库
 
 // Math.random() 返回一个从 0 到 1 的随机数（不包括 1）

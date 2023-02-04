@@ -14,9 +14,9 @@
 // 1 object - string hint
 // 对象到字符串的转换，当我们对期望一个字符串的对象执行操作时，如 “alert”、作为键名：
 let obj = { name: "szs" };
-// 输出
+// ① 输出
 // alert(obj);
-// 将对象作为属性键
+// ② 将对象作为属性键
 // another[obj] = 123;
 
 // 2 object - number hint
@@ -33,7 +33,7 @@ let n = +obj; // 一元加法
 
 // 3 object - default hint
 // 在少数情况下发生，当运算符“不确定”期望值的类型时。
-// 例如，当二元加法得到对象类型的参数时，它将依据 "default" hint 来对其进行转换：
+// ~ ① 例如，当二元加法得到对象类型的参数时，它将依据 "default" hint 来对其进行转换：
 let obj1 = {
   name: "szs",
 };
@@ -43,17 +43,17 @@ let obj2 = {
 let total = obj1 + obj2;
 console.log(total); // [object Object][object Object]
 
-// 此外，如果对象被用于与字符串、数字或 symbol 进行 == 比较，这时到底应该进行哪种转换也不是很明确，因此使用 "default" hint。
+// ~ ② 此外，如果对象被用于 与 字符串、数字或 symbol 进行 == 比较，这时到底应该进行哪种转换也不是很明确，因此使用 "default" hint。
 if (obj == 1) {
   console.log(true);
 }
 
 /*
- * 为了进行转换，JavaScript 尝试查找并调用三个对象方法：
+ *  为了进行转换，JavaScript 尝试查找并调用三个对象方法：
 
-    调用 obj[Symbol.toPrimitive](hint) —— 带有 symbol 键 Symbol.toPrimitive（系统 symbol）的方法，如果这个方法存在的话，
-    否则，如果 hint 是 "string" —— 尝试调用 obj.toString() 或 obj.valueOf()，无论哪个存在。
-    否则，如果 hint 是 "number" 或 "default" —— 尝试调用 obj.valueOf() 或 obj.toString()，无论哪个存在。
+    ~调用 obj[Symbol.toPrimitive](hint) —— 带有 symbol 键 Symbol.toPrimitive（系统 symbol）的方法，如果这个方法存在的话，
+    ~否则，如果 hint 是 "string" —— 尝试调用 obj.toString() 或 obj.valueOf()，无论哪个存在。
+    ~否则，如果 hint 是 "number" 或 "default" —— 尝试调用 obj.valueOf() 或 obj.toString()，无论哪个存在。
 
  */
 
@@ -88,7 +88,7 @@ console.log(user + 500); // hint: default -> 1500
 // ! 2) toString valueOf
 
 // 对于 "string" hint：调用 toString 方法，如果它不存在，则调用 valueOf 方法（因此，对于字符串转换，优先调用 toString）。
-// 对于其他 hint(number/default)：调用 valueOf 方法，如果它不存在，则调用 toString 方法（因此，对于数学运算，优先调用 valueOf 方法）。
+// 对于其他 hint(number/default)：调用 valueOf 方法，如果它不存在，则调用 toString 方法（因此，对于数学运算 或和string/number/symbol == 比较，优先调用 valueOf 方法）。
 // toString 和 valueOf 方法很早己有了。它们提供了一种可选的“老派”的实现转换的方法
 
 /*
@@ -105,7 +105,7 @@ let person = { name: "John" };
 // alert的话不加toString也可以  默认string转换
 console.log(person);
 console.log(person.toString()); // [object Object]
-console.log(person.valueOf()); // { name: 'John' }{ name: 'John' }
+console.log(person.valueOf()); // { name: 'John' }
 console.log(person.valueOf() === person); // true
 
 // 实现例1 一样的效果
@@ -149,8 +149,8 @@ let user1 = {
 
     历史原因
 
-      由于历史原因，如果 toString 或 valueOf 返回一个对象，则不会出现 error，但是这种值会被忽略（就像这种方法根本不存在）。这是因为在 JavaScript 语言发展初期，没有很好的 “error” 的概念。
-      相反，Symbol.toPrimitive 更严格，它 必须 返回一个原始值，否则就会出现 error。
+      * 由于历史原因，如果 toString 或 valueOf 返回一个对象，则不会出现 error，但是这种值会被忽略（就像这种方法根本不存在）。这是因为在 JavaScript 语言发展初期，没有很好的 “error” 的概念。
+      * 相反，Symbol.toPrimitive 更严格，它 必须 返回一个原始值，否则就会出现 error。
 
 */
 
