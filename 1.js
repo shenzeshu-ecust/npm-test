@@ -313,16 +313,29 @@ const TOUCH_RANGE_WAY_LABEL_OPTIONS = [
 // console.log(obj);
 // haodou;
 
-function partition(nums, target) {
-  let i = 0;
-  let j = nums.length - 1;
-  while (i < j) {
-    let mid = Math.floor((i + j) / 2);
-    if (nums[mid] >= target) j = mid;
-    else i = mid + 1;
-  }
-  return i;
-}
+// function partition(nums, target) {
+//   let i = 0;
+//   let j = nums.length - 1;
+//   while (i < j) {
+//     let mid = Math.floor((i + j) / 2);
+//     if (nums[mid] >= target) j = mid;
+//     else i = mid + 1;
+//   }
+//   return i;
+// }
 
-let arrlist = [1, 3, 4, 4, 6, 7];
-console.log("*", partition(arrlist, 0));
+// let arrlist = [1, 3, 4, 4, 6, 7];
+// console.log("*", partition(arrlist, 0));
+// let a = {
+//   // * 这种是属性
+//   eat: function () {},
+// };
+
+// let b = {
+//   __proto__: a,
+//   eat() {
+//     super.eat();
+//   },
+// };
+// b.eat(); // 报错：错误调用super!  因为这里没有[[HomeObject]]
+let ss = console.log(ss);

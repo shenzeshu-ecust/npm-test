@@ -108,6 +108,12 @@ user1.name = "Pete"; // 正常工作
 console.log(user1.name); // 'Pete
 delete user1.name; // Error
 
+// 唯一可行的特性更改：writable true → false
+
+// 对于更改标志，有一个小例外。
+
+// ~ 对于不可配置的属性，我们可以将 writable: true 更改为 false，从而防止其值被修改（以添加另一层保护）。但无法反向行之。
+
 // ! configurable: false + writable: false 一起可以创建一个像常量一样无法被更改的属性，就像内建的 Math.PI
 
 // 5 Object.defineProperties()
@@ -160,7 +166,7 @@ Object.isExtensible(obj); // 如果添加属性被禁止，则返回 false，否
 Object.isSealed(obj); // 如果添加/删除属性被禁止，并且所有现有的属性都具有 configurable: false则返回 true。
 Object.isFrozen(obj); // 如果添加/删除/更改属性被禁止，并且所有当前属性都是 configurable: false, writable: false，则返回 true。
 
-// ~ 奇怪现象
+// ~ 奇怪现象（应该和枚举属性有关， 不可枚举）
 let exam = {};
 Object.defineProperty(exam, "score", {
   value: 99,

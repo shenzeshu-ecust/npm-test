@@ -65,7 +65,7 @@ function sayHi(who) {
 let sayHiDeferred = defer(sayHi, 2000);
 sayHiDeferred("John"); // 2 秒后显示：Hello, John
 
-// 加入采用普通函数
+// ~ 假如采用普通函数实现defer
 function defer(f, ms) {
   // ~ 需要保存参数
   return function (...args) {

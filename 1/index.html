@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, .7);
+        }
+
+        .btn {
+            position: relative;
+            margin: 30px auto;
+            width: 300px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, .8);
+            border: #fff 1px solid;
+            border-radius: 2px;
+            color: #fff;
+            transition: all 0.3;
+        }
+
+        .btn:hover {}
+
+
+        .wrapper {
+
+            margin: auto;
+            width: 100px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .arrow {
+            width: 20px;
+            height: 10px;
+            margin: 0 auto 10px;
+            transition: all 0.3s;
+
+        }
+
+        .tixing {
+            position: absolute;
+            left: 0;
+            width: 20px;
+            height: 60px;
+            background-color: #fff;
+            transform: skewX(-15deg);
+            opacity: 0;
+            /* transition: all 0.2s; */
+
+        }
+
+        .animate {
+            animation: move 0.3s linear;
+        }
+
+        @keyframes move {
+            0% {
+                opacity: 0.1;
+                left: 0;
+            }
+
+            25% {
+                opacity: 0.5;
+                left: 60px;
+            }
+
+            45% {
+                opacity: 0.7;
+                left: 150px;
+            }
+
+            70% {
+                opacity: 1;
+                left: 200px;
+            }
+
+            85% {
+                opacity: 0.5;
+                left: 250px;
+            }
+
+            100% {
+                opacity: 0;
+                left: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="btn">
+        <div class="wrapper">
+            <div class="tixing"></div>
+            <div>下载游戏</div>
+            <div class="arrow">→</div>
+        </div>
+    </div>
+    <script>
+        let arrow = document.querySelector('.arrow')
+        let btn = document.querySelector('.btn')
+        let tx = document.querySelector('.tixing')
+        btn.onmouseover = function () {
+            arrow.style.transform = "translateX(10px)"
+            btn.style.boxShadow = '0 0 3px 2px #fff'
+            btn.style.textShadow = '2px 2px 5px #fff'
+            tx.classList.add('animate')
+        }
+        btn.onmouseout = function () {
+            arrow.style.transform = "translateX(0px)"
+            btn.style.boxShadow = 'none'
+            btn.style.textShadow = 'none'
+            tx.classList.remove('animate')
+
+
+
+        }
+
+    </script>
+</body>
+
+</html>

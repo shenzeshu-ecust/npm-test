@@ -54,22 +54,23 @@ let cat = new Cat();
 console.log(cat.eats); // true
 
 /*
-    Cat.prototype = {};
+  1  Cat.prototype = {};
     ~ Cat.prototype 的赋值操作为新对象设置了 [[Prototype]]，但它不影响已有的对象。
     console.log(cat.eats); // ? true
 */
 
 /*
-    Cat.prototype.eats = false;
+  2  Cat.prototype.eats = false;
     console.log(cat.eats); // ? false
 */
 
 /*
-    delete cat.eats
-    ~ 所有 delete 操作都直接应用于对象。这里的 delete rabbit.eats 试图从 rabbit 中删除 eats 属性，但 rabbit 对象并没有 eats 属性。所以这个操作不会有任何影响。
+  3 delete cat.eats
+    ~ 所有 delete 操作都直接应用于对象。这里的 delete cat.eats 试图从 cat 中删除 eats 属性，但 cat 对象并没有 eats 属性。所以这个操作不会有任何影响。
     console.log(cat.eats); // ? true
 */
 
+// 4
 delete cat.prototype.eats;
 console.log(cat.eats); // ? undefined
 

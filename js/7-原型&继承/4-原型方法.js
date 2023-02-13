@@ -127,3 +127,5 @@ rabbit4.sayHi(); // rabbit
 Rabbit4.prototype.sayHi(); // undefined
 Object.getPrototypeOf(rabbit4).sayHi(); // undefined
 rabbit4.__proto__.sayHi(); // undefined
+
+// * 第一个调用中 this == rabbit，其他的 this 等同于 Rabbit.prototype，因为 this 就是点符号前面的对象。
