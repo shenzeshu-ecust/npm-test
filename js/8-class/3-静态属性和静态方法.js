@@ -117,7 +117,8 @@ class Rabbit2 extends Object {
 let rabbit2 = new Rabbit2("Rab");
 
 console.log(rabbit2.hasOwnProperty("name")); // true
-// extends意味着设置了两个原型
+
+// * extends意味着设置了两个原型
 console.log(Rabbit2.prototype.__proto__ === Object.prototype); // (1) true
 console.log(Rabbit2.__proto__ === Object); // (2) true
 

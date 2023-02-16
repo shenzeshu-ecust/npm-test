@@ -338,4 +338,50 @@ const TOUCH_RANGE_WAY_LABEL_OPTIONS = [
 //   },
 // };
 // b.eat(); // 报错：错误调用super!  因为这里没有[[HomeObject]]
-let ss = console.log(ss);
+// let ss = console.log("维京狂战团是维京战士中巅峰战力的集结。\n在战场之上，总是会爆发出惊人的战力。他们仿佛不知疲倦、不知疼痛，宛如发狂一般杀入敌阵，直至战斗结束或者彻底不能动弹。\n维京狂战团狂暴的战斗方式令敌人胆颤。在交锋之前，披着熊皮的他们会借助强悍的身体，像战车一样高速冲向敌阵，将敌人击倒在地。而紧随的战士将会高高跃起，以泰山崩裂般的气势，将手中的双斧砸向敌人的头顶。当战斗陷入胶着，这些狂暴的维京战士于战斗中积攒的怒意将会完全爆发，陷入彻底的疯狂。进入疯狂状态的战士的力量将会更胜平常，将给周边敌人造成毁灭的打击。但同时，获得疯狂力量的代价则是丧失全部理智，沦为只知战斗的杀戮机器，直至战斗结束，或者死亡。");
+// console.log(Object.getOwnPropertyNames({ a: "1" }));
+// new Promise((resolve, reject) => {
+//   unde();
+// })
+//   .then()
+//   .catch(() => {
+//     console.log(1);
+//   })
+//   .catch(() => {
+//     console.log(2);
+//   });
+
+// new Promise((resolve, reject) => {
+//   unde();
+// })
+//   .then()
+//   .catch(() => {
+//     console.log(1);
+//   })
+//   .then(() => {
+//     console.log(2);
+//   });
+// new Promise(function (resolve, reject) {
+//   setTimeout(() => {
+//     try {
+//       throw new Error("Whoops!");
+//     } catch (error) {
+//       console.log(error.name);
+//     }
+//   }, 1000);
+// }).catch(console.log);
+
+// let map = new Map([
+//   [1, "a"],
+//   [2, "b"],
+// ]);
+// let s = map.entries();
+// console.log(s);
+Promise.any([
+  new Promise((resolve, reject) =>
+    setTimeout(() => reject(new Error("Ouch!")), 1000)
+  ),
+]).then(null, (error) => {
+  console.log(error.constructor.name); // AggregateError
+  console.log(error.errors[0]); // Error: Ouch!
+});

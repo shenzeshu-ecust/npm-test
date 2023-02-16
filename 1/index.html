@@ -23,7 +23,7 @@
             transition: all 0.3;
         }
 
-        .btn:hover {}
+
 
 
         .wrapper {
@@ -39,55 +39,31 @@
             width: 20px;
             height: 10px;
             margin: 0 auto 10px;
-            transition: all 0.3s;
+            transition: all 0.4s;
 
         }
 
-        .tixing {
-            position: absolute;
-            left: 0;
-            width: 20px;
-            height: 60px;
-            background-color: #fff;
-            transform: skewX(-15deg);
-            opacity: 0;
-            /* transition: all 0.2s; */
+        .btn .arrow {
+            animation: move 2s linear infinite alternate;
+            /* transform: translateY(10px); */
 
-        }
-
-        .animate {
-            animation: move 0.3s linear;
         }
 
         @keyframes move {
             0% {
-                opacity: 0.1;
-                left: 0;
+                transform: translateY(-5px);
             }
 
-            25% {
-                opacity: 0.5;
-                left: 60px;
+
+            50% {
+                transform: translateY(0px);
+
             }
 
-            45% {
-                opacity: 0.7;
-                left: 150px;
-            }
-
-            70% {
-                opacity: 1;
-                left: 200px;
-            }
-
-            85% {
-                opacity: 0.5;
-                left: 250px;
-            }
 
             100% {
-                opacity: 0;
-                left: 300px;
+                transform: translateY(5px);
+
             }
         }
     </style>
@@ -96,31 +72,36 @@
 <body>
     <div class="btn">
         <div class="wrapper">
-            <div class="tixing"></div>
+
             <div>下载游戏</div>
-            <div class="arrow">→</div>
+            <div class="arrow">↓</div>
         </div>
     </div>
     <script>
-        let arrow = document.querySelector('.arrow')
-        let btn = document.querySelector('.btn')
-        let tx = document.querySelector('.tixing')
-        btn.onmouseover = function () {
-            arrow.style.transform = "translateX(10px)"
-            btn.style.boxShadow = '0 0 3px 2px #fff'
-            btn.style.textShadow = '2px 2px 5px #fff'
-            tx.classList.add('animate')
-        }
-        btn.onmouseout = function () {
-            arrow.style.transform = "translateX(0px)"
-            btn.style.boxShadow = 'none'
-            btn.style.textShadow = 'none'
-            tx.classList.remove('animate')
+        // let arrow = document.querySelector('.arrow')
+        // let btn = document.querySelector('.btn')
+
+        // btn.onmouseover = function () {
+
+
+        //     arrow.classList.add('animate')
+        // }
+        // btn.onmouseout = function () {
+
+
+        //     arrow.classList.remove('animate')
 
 
 
-        }
+        // }
 
+        // onMouseover = () => {
+        //     setAnimate(true)
+        // }
+        // onMouseout = () => {
+        //     setAnimate(false)
+        // }
+        <p></p>
     </script>
 </body>
 
