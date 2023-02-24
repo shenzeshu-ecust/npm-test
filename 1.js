@@ -377,11 +377,47 @@ const TOUCH_RANGE_WAY_LABEL_OPTIONS = [
 // ]);
 // let s = map.entries();
 // console.log(s);
-Promise.any([
-  new Promise((resolve, reject) =>
-    setTimeout(() => reject(new Error("Ouch!")), 1000)
-  ),
-]).then(null, (error) => {
-  console.log(error.constructor.name); // AggregateError
-  console.log(error.errors[0]); // Error: Ouch!
-});
+// Promise.any([
+//   new Promise((resolve, reject) =>
+//     setTimeout(() => reject(new Error("Ouch!")), 1000)
+//   ),
+// ]).then(null, (error) => {
+//   console.log(error.constructor.name); // AggregateError
+//   console.log(error.errors[0]); // Error: Ouch!
+// });
+// let ress = Promise.resolve(1);
+// console.log(ress.then());
+// let b = {
+//   a: "a",
+// };
+// console.log(Object.values(b)[]);
+
+// a为是都线上， ’1‘为线上
+let array = [
+  { a: true },
+  { a: false },
+  { a: true },
+  { a: false },
+  { a: false },
+  { a: true },
+  { a: false },
+];
+// 双指针
+function sort(arr) {
+  let i = 0;
+  let j = arr.length - 1;
+  while (i < j) {
+    while (i < j && arr[j].a === false) j--;
+    while (i < j && arr[i].a === true) i++;
+    if (i < j) {
+      let temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+      i++;
+      j--;
+    }
+  }
+  return arr;
+}
+let ress = sort(array);
+console.log(ress);

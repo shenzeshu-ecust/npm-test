@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="module">
+        import { sayHi } from './sayHi.js'
+        console.log(import.meta) // {url: 'http://127.0.0.1:5500/js/12-%E6%A8%A1%E5%9D%97/index.html', resolve: ƒ}
+        alert(import.meta.url) // http://127.0.0.1:5500/js/12-%E6%A8%A1%E5%9D%97/index.html
+        // 模块 使用了严格模式
+        a = 5 // Uncaught ReferenceError: a is not defined
+        document.body.innerHTML = sayHi('John')
+    </script>
+    <script type="module">
+        // 变量仅在这个 module script 内可见
+        let user = "John";
+    </script>
+
+    <script type="module">
+        alert(user); // Error: user is not defined
+    </script>
+</body>
+
+</html>

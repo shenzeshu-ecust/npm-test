@@ -125,7 +125,7 @@ worker1.slow = cachingDecorator1(worker1.slow, hash);
 console.log(worker1.slow(3, 5)); // works
 console.log("Again " + worker1.slow(3, 5)); // same (cached)
 
-// ! 5 装饰器和函数属性
+// ! 5 装饰器和函数属性（装饰器丢失了原函数的属性！-- 需要用Proxy、Reflect解决）
 /*
  通常，用装饰的函数替换一个函数或一个方法是安全的，除了一件小东西。
  ~ 如果原始函数有属性，例如 func.calledCount 或其他，则装饰后的函数将不再提供这些属性。因为这是装饰器。因此，如果有人使用它们，那么就需要小心。
@@ -136,6 +136,21 @@ console.log("Again " + worker1.slow(3, 5)); // same (cached)
 
 ~ 存在一种创建装饰器的方法，该装饰器可保留对函数属性的访问权限，但这需要使用特殊的 Proxy 对象来包装函数。我们将在后面的 Proxy 和 Reflect 中学习它。 
  */
+function delay(f, ms) {
+  return function () {
+    setTimeout(() => f.apply(this, arguments), ms);
+  };
+}
+
+function sayHi(user) {
+  alert(`Hello, ${user}!`);
+}
+
+alert(sayHi.length); // 1（函数的 length 是函数声明中的参数个数）
+
+sayHi = delay(sayHi, 3000);
+
+alert(sayHi.length); // 0（在包装器声明中，参数个数为 0)
 
 // TEST:
 // 1 间谍装饰器
