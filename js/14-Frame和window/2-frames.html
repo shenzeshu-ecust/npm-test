@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        获取 <iframe> 的 window 对象的另一个方式是从命名集合 window.frames 中获取：
+
+            1 通过索引获取：window.frames[0] —— 文档中的第一个 iframe 的 window 对象。
+            3 通过名称获取：window.frames.iframeName —— 获取 name="iframeName" 的 iframe 的 window 对象。
+
+     -->
+    <iframe src="/" style="height:80px" name="win" id="iframe"></iframe>
+
+    <script>
+        alert(iframe.contentWindow == frames[0]); // true
+        alert(iframe.contentWindow == frames.win); // true
+    </script>
+    一个 iframe 内可能嵌套了其他的 iframe。相应的 window 对象会形成一个层次结构（hierarchy）。
+
+    可以通过以下方式获取：
+
+    window.frames —— “子”窗口的集合（用于嵌套的 iframe）。
+    window.parent —— 对“父”（外部）窗口的引用。
+    window.top —— 对最顶级父窗口的引用。
+
+    例如：
+
+    window.frames[0].parent === window; // true
+
+    我们可以使用 top 属性来检查当前的文档是否是在 iframe 内打开的：
+    <script>
+        if (window == top) { // 当前 window == window.top?
+            alert('The script is in the topmost window, not in a frame');
+        } else {
+            alert('The script runs in a frame!');
+        }
+    </script>
+
+</body>
+
+</html>

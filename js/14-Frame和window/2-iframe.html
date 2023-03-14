@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 一个 <iframe> 标签承载了一个单独的嵌入的窗口，它具有自己的 document 和 window。
+
+        我们可以使用以下属性访问它们：
+
+        1 iframe.contentWindow 来获取 <iframe> 中的 window。
+        2 iframe.contentDocument 来获取 <iframe> 中的 document，是 iframe.contentWindow.document 的简写形式。
+
+        当我们访问嵌入的窗口中的东西时，浏览器会检查 iframe 是否具有相同的源。如果不是，则会拒绝访问（对 location 进行写入是一个例外，它是会被允许的）。 
+    -->
+
+    <!-- 例如，让我们尝试对来自另一个源的 <iframe> 进行读取和写入 -->
+    <iframe src="http://www.baidu.com" id="frame"></iframe>
+    <!-- 来自同一个网站的 iframe -->
+    <iframe src="/" id="iframe"></iframe>
+    <script>
+        const iframe = document.querySelector('#frame');
+        iframe.onload = () => {
+            // 我们可以获取对内部 window 的引用
+            let iframeWindow = iframe.contentWindow
+            try {
+                // ...但是无法获取其中的文档
+                let doc = iframe.contentDocument // ERROR
+            } catch (e) {
+                alert(e) // Security Error（另一个源）
+            }
+        }
+        // 并且，我们也无法读取 iframe 中页面的 URL
+        try {
+            // 无法从 location 对象中读取 URL
+            let href = iframe.contentWindow.location.href; // ERROR
+            console.log(href)
+        } catch (e) {
+            alert(e); // Security Error
+        }
+
+        // ...我们可以写入 location（所以，在 iframe 中加载了其他内容）！
+        // iframe.contentWindow.location = '/'; // OK
+
+        // iframe.onload = null; // 清空处理程序，在 location 更改后不要再运行它
+
+        // 上述代码除了以下操作都会报错：
+
+        // 通过 iframe.contentWindow 获取对内部 window 的引用 —— 这是被允许的。
+        // 对 location 进行写入
+
+        // 与此相反，如果 <iframe> 具有相同的源，我们可以使用它做任何事情
+
+        /*
+        
+        
+    iframe.onload vs iframe.contentWindow.onload
+    
+    iframe.onload 事件（在 <iframe> 标签上）与 iframe.contentWindow.onload（在嵌入的 window 对象上）基本相同。当嵌入的窗口的所有资源都完全加载完毕时触发。
+    
+    ……但是，我们无法使用 iframe.contentWindow.onload 访问不同源的 iframe。因此，请使用 iframe.onload，
+    
+        */
+    </script>
+</body>
+
+</html>

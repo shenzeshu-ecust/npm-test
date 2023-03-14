@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    根据定义，两个具有不同域的 URL 具有不同的源。
+
+    但是，如果窗口的二级域相同，例如 john.site.com，peter.site.com 和 site.com（它们共同的二级域是
+    site.com），我们可以使浏览器忽略该差异，使得它们可以被作为“同源”的来对待，以便进行跨窗口通信。
+
+    为了做到这一点，每个这样的窗口都应该执行下面这行代码：
+
+    document.domain = 'site.com';
+    这样就可以了。现在它们可以无限制地进行交互了。但是再强调一遍，这仅适用于具有相同二级域的页面。
+    <!-- 
+
+    已弃用，但仍有效
+
+        document.domain 属性正在被从 规范 中删除。跨窗口通信（下面将很快解释到）是建议的替代方案。
+        也就是说，到目前为止，所有浏览器都支持它。并且未来也将继续支持它，而不会导致使用了 document.domain 的旧代码出现问题。
+
+     -->
+</body>
+
+</html>

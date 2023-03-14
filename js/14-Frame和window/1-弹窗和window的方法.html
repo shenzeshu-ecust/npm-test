@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="btn">哈哈</button>
+    <button class="btn1">hehe </button>
+    <button class="btn2">关闭 </button>
+
+    <button class="btn3">出现 </button>
+
+    <!-- 
+        弹窗（popup）是向用户显示其他文档的最古老的方法之一。
+
+        基本上，你只需要运行：
+        window.open('https://javascript.info/')
+
+        ……它将打开一个具有给定 URL 的新窗口。大多数现代浏览器都配置为在新选项卡中打开 url，而不是单独的窗口。
+
+        弹窗自古以来就存在。最初的想法是，在不关闭主窗口的情况下显示其他内容。目前为止，还有其他方式可以实现这一点：我们可以使用 fetch 动态加载内容，并将其显示在动态生成的 <div> 中。弹窗并不是我们每天都会使用的东西。
+
+        并且，弹窗在移动设备上非常棘手，因为移动设备无法同时显示多个窗口。
+
+        但仍然有一些任务在使用弹窗，例如进行 OAuth 授权（使用 Google/Facebook/… 登陆），因为：
+
+            1 弹窗是一个独立的窗口，具有自己的独立 JavaScript 环境。因此，使用弹窗打开一个不信任的第三方网站是安全的。
+            2 打开弹窗非常容易。
+            3 弹窗可以导航（修改 URL），并将消息发送到 opener 窗口（译注：即打开弹窗的窗口）。
+
+
+     -->
+
+    <!-- 1 阻止弹窗 -->
+    <!-- 在过去，很多恶意网站经常滥用弹窗。一个不好的页面可能会打开大量带有广告的弹窗。因此，现在大多数浏览器都会通过阻止弹窗来保护用户。 -->
+    <!-- 如果弹窗是在用户触发的事件处理程序（如 onclick）之外调用的，大多数浏览器都会阻止此类弹窗。 -->
+    <!-- 这种方式可以在某种程度上保护用户免受非必要的弹窗的影响，但是并没有完全阻止该功能。
+    // 3 秒后打开弹窗
+        setTimeout(() => window.open('http://google.com'), 3000);
+        这个弹窗在 Chrome 中会被打开，但是在 Firefox 中会被阻止。
+        ……如果我们减少延迟，则弹窗在 Firefox 中也会被打开.
+        区别在于 Firefox 可以接受 2000ms 或更短的延迟，但是超过这个时间 —— 则移除“信任”。
+    -->
+    <script>
+        // 弹窗会被阻止
+        window.open('https://www.google.com')
+        const button = document.querySelector('.btn')
+        // 弹窗被允许
+        button.onclick = function () {
+            window.open('https://www.google.com')
+        }
+        setTimeout(() => window.open('http://google.com'), 3000);
+    </script>
+    <!-- window.open(url, name, params) 
+    
+url
+    要在新窗口中加载的 URL。
+name
+    新窗口的名称。每个窗口都有一个 window.name，在这里我们可以指定哪个窗口用于弹窗。如果已经有一个这样名字的窗口 —— 将在该窗口打开给定的 URL，否则会打开一个新窗口。
+params
+    新窗口的配置字符串。它包括设置，用逗号分隔。参数之间不能有空格，例如：width=200,height=100。
+
+params 的设置项：
+
+    位置:
+        left/top（数字）—— 屏幕上窗口的左上角的坐标。这有一个限制：不能将新窗口置于屏幕外（offscreen）。
+        width/height（数字）—— 新窗口的宽度和高度。宽度/高度的最小值是有限制的，因此不可能创建一个不可见的窗口。
+    窗口功能：
+        menubar（yes/no）—— 显示或隐藏新窗口的浏览器菜单。
+        toolbar（yes/no）—— 显示或隐藏新窗口的浏览器导航栏（后退，前进，重新加载等）。
+        location（yes/no）—— 显示或隐藏新窗口的 URL 字段。Firefox 和 IE 浏览器不允许默认隐藏它。
+        status（yes/no）—— 显示或隐藏状态栏。同样，大多数浏览器都强制显示它。
+        resizable（yes/no）—— 允许禁用新窗口大小调整。不建议使用。
+        scrollbars（yes/no）—— 允许禁用新窗口的滚动条。不建议使用。
+
+还有一些不太受支持的特定于浏览器的功能，通常不使用。通常不使用这些功能。更多示例请见 MDN 中的 window.open。
+
+    大多数浏览器都会“修复”奇怪的东西，例如 width/height 为零以及脱离屏幕（offscreen）的 left/top 设置。
+    -->
+    <script>
+        let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=300,left=100,top=100`;
+        const button1 = document.querySelector('.btn1')
+        const button2 = document.querySelector('.btn2')
+        const button3 = document.querySelector('.btn3')
+
+        let newWin
+        // 弹窗被允许
+        button1.onclick = function () {
+            // 从窗口访问弹窗（只有在窗口是同源的时，窗口才能自由访问彼此的内容（相同的协议://domain:port）。否则处于安全性考虑，这两个窗口不能访问彼此的内容。）
+            // open 调用会返回对新窗口的引用。它可以用来操纵弹窗的属性，更改位置，甚至更多操作。
+            newWin = window.open('about: blank', 'test', params);
+            newWin.focus()
+            // 在刚刚进行了 window.open 的时候，新窗口还没有加载完成。我们可以通过 (*) 行中的 alert 证实这一点。因此，我们需要等待 onload 以对新窗口进行更改。我们也可以对 newWin.document 使用 DOMContentLoaded 处理程序。
+            alert(newWin.location.href)
+            newWin.onload = () => {
+                let html = `<div style="font-size:30px">Welcome!</div>`;
+                newWin.document.body.insertAdjacentHTML('afterbegin', html);
+                // 弹窗也可以使用 window.opener 来访问 opener 窗口。除了弹窗之外，对其他所有窗口来说，window.opener 均为 null。
+                // 如果你运行下面这段代码，弹窗将用 “Test” 替换 opener（也就是主窗口）窗口的内容：
+                newWin.document.write("<script>window.opener.document.body.innerHTML = 'Test'<\/script>")
+            }
+        }
+        let newWindow
+        button3.onclick = () => {
+            newWindow = open('/', 'example', 'width=300,height=300');
+            // 关闭一个窗口：win.close()。
+            // 检查一个窗口是否被关闭：win.closed。
+            newWindow.onload = () => {
+                newWindow.close();
+                // 从技术上讲，close() 方法可用于任何 window，但是如果 window 不是通过 window.open() 创建的，那么大多数浏览器都会忽略 window.close()。因此，close() 只对弹窗起作用。
+                // 如果窗口被关闭了，那么 closed 属性则为 true。这对于检查弹窗（或主窗口）是否仍处于打开状态很有用。用户可以随时关闭它，我们的代码应该考虑到这种可能性。
+                alert(newWindow.closed) // true
+            }
+        }
+
+
+
+        /*
+            窗口滚动
+            win.scrollBy(x,y)
+                相对于当前位置，将窗口向右滚动 x 像素，并向下滚动 y 像素。允许负值。
+            win.scrollTo(x,y)
+                将窗口滚动到给定坐标 (x,y)。
+            elem.scrollIntoView(top = true)
+                滚动窗口，使 elem 显示在 elem.scrollIntoView(false) 的顶部（默认）或底部。
+        
+        
+        */
+
+        /*
+            弹窗的聚焦/失焦
+            从理论上讲，使用 window.focus() 和 window.blur() 方法可以使窗口获得或失去焦点。此外，这里还有 focus/blur 事件，可以捕获到访问者聚焦到一个窗口和切换到其他地方的时刻。
+
+            尽管，在实际中它们被进行了严格地限制，因为在过去，恶意网站滥用这些方法。
+            例如，移动端浏览器通常会完全忽略 window.focus()。并且，当弹窗是在单独的选项卡而不是新窗口中打开时，也无法进行聚焦。
+
+            尽管如此，在某些情况下，此类调用确实有效且很有用。
+
+        例如：
+
+            1 当我们打开一个弹窗时，在它上面执行 newWindow.focus() 是个好主意。以防万一，对于某些操作系统/浏览器组合（combination），它可以确保用户现在位于新窗口中。
+            2 如果我们想要跟踪访问者何时在实际使用我们的 Web 应用程序，我们可以跟踪 window.onfocus/onblur。
+              这使我们可以暂停/恢复页面活动和动画等。
+              但是请注意，blur 事件意味着访问者从窗口切换了出来，但他们仍然可以观察到它。窗口处在背景中，但可能仍然是可见的。
+
+        */
+
+    </script>
+</body>
+
+</html>

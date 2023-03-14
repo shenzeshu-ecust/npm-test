@@ -8,7 +8,7 @@ message = 123456;
 // ! 意思是虽然编程语言中有不同的数据类型，但是你定义的变量并不会在定义后，被限制为某一数据类型。
 
 // ! 1 NaN 代表一个计算错误。它是一个不正确的或者一个未定义的数学操作所得到的结果，比如：
-console.log( "not a number" / 2 ); // NaN，这样的除法是错误的
+console.log("not a number" / 2); // NaN，这样的除法是错误的
 // NaN 是粘性的。任何对 NaN 的进一步数学运算都会返回 NaN：
 console.log(NaN + 1);
 console.log(NaN * 3);
@@ -26,12 +26,12 @@ console.log(NaN ** 0);
 
 console.log(9007199254740991 + 1); // 9007199254740992
 console.log(9007199254740991 + 2); // 9007199254740992
-// ~ 也就是说，所有大于 (253-1) 的奇数都不能用 “number” 类型存储。
+// ~ 也就是说，所有大于 (2^53-1) 的奇数都不能用 “number” 类型存储。
 
 // ~ 可以通过将 n 附加到整数字段的末尾来创建 BigInt 值。
 
 // 尾部的 "n" 表示这是一个 BigInt 类型
-const bigInt = 1234567890123456789012345678901234567890n
+const bigInt = 1234567890123456789012345678901234567890n;
 // 创建 bigint 的方式有两种：在一个整数字面量后面加 n 或者调用 BigInt 函数，该函数从字符串、数字等中生成 bigint。
 const sameBigint = BigInt("1234567890123456789012345678901234567890");
 const bigintFromNumber = BigInt(10); // 与 10n 相同
@@ -68,25 +68,30 @@ alert(Number(bigint) + number); // 3
 
 let bigint1 = 1n;
 
-alert( +bigint1 ); // error
+alert(+bigint1); // error
 
 // 所以我们应该用 Number() 来将一个 bigint 转换成一个数字类型。
 
 // ! 比较运算符，例如 < 和 >，使用它们来对 bigint 和 number 类型的数字进行比较没有问题：
 
-alert( 2n > 1n ); // true
+alert(2n > 1n); // true
 
-alert( 2n > 1 ); // true
+alert(2n > 1); // true
 
 // ! 但是请注意，由于 number 和 bigint 属于不同类型，它们可能在进行 == 比较时相等，但在进行 ===（严格相等）比较时不相等：
 
-alert( 1 == 1n ); // true
+alert(1 == 1n); // true
 
-alert( 1 === 1n ); // false
+alert(1 === 1n); // false
+
+// ! bigint转换为布尔值时和普通number类型无异
+if (0n) {
+  //... 不会执行
+}
 // ! typeof --- 是运算符 等同于typeof(x)
-typeof null // "object"  
+typeof null; // "object"
 
-typeof alert // "function"  
+typeof alert; // "function"
 /*
  * typeof null 的结果为 "object"。这是官方承认的 typeof 的错误，这个问题来自于 JavaScript 语言的早期阶段，并为了兼容性而保留了下来。null 绝对不是一个 object。null 有自己的类型，它是一个特殊值。typeof 的行为在这里是错误的。
  * typeof alert 的结果是 "function"，因为 alert 在 JavaScript 语言中是一个函数。我们会在下一章学习函数，那时我们会了解到，在 JavaScript 语言中没有一个特别的 “function” 类型。

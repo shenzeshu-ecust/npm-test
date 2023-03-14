@@ -78,7 +78,8 @@ JavaScript 强制执行某些不变量 —— 内部方法和捕捉器必须满�
 
     target —— 是目标对象，该对象被作为第一个参数传递给 new Proxy，
     property —— 目标属性名，
-    receiver —— 如果目标属性是一个 getter 访问器属性，则 receiver 就是本次读取属性所在的 this 对象。通常，这就是 proxy 对象本身（或者，如果我们从 proxy 继承，则是从该 proxy 继承的对象）。现在我们不需要此参数，因此稍后我们将对其进行详细介绍。
+    receiver —— 如果目标属性是一个 getter 访问器属性，则 receiver 就是本次读取属性所在的 this 对象。
+                通常，这就是 proxy 对象本身（或者，如果我们从 proxy 继承，则是从该 proxy 继承的对象）。现在我们不需要此参数，因此稍后我们将对其进行详细介绍。
 
 */
 
@@ -187,7 +188,7 @@ user1 = new Proxy(user1, {
 console.log(Object.keys(user1)); // []
 
 /*
-为什么？原因很简单：Object.keys 仅返回带有 enumerable 标志的属性。
+~ 为什么？原因很简单：Object.keys 仅返回带有 enumerable 标志的属性。
 为了检查它，该方法会对每个属性调用内部方法 [[GetOwnProperty]] 来获取 它的描述符（descriptor）。
 在这里，由于没有属性，其描述符为空，没有 enumerable 标志，因此它被略过。
 
@@ -211,6 +212,27 @@ person = new Proxy(person, {
 });
 console.log(Object.keys(person)); // [ 'a', 'b', 'c', 'd' ]
 
+let p = {
+  a: 1,
+  b: 2,
+};
+
+p = new Proxy(p, {
+  getOwnPropertyDescriptor(target, prop) {
+    if (prop === "a") {
+      return {
+        enumerable: false,
+        configurable: true,
+      };
+    }
+    return {
+      enumerable: true,
+      configurable: true, // 必须得有， 不然报错
+    };
+  },
+});
+
+console.log(Object.keys(p)); // b
 // ! 6 具有 “deleteProperty” 和其他捕捉器的受保护属性
 // 有一个普遍的约定，即以下划线 _ 开头的属性和方法是内部的。不应从对象外部访问它们。
 
@@ -242,6 +264,7 @@ userr = new Proxy(userr, {
     let value = target[prop];
     return typeof value === "function" ? value.bind(target) : value; // ~ 为什么我们需要一个函数去调用 value.bind(target)？
     // * 原因是对象方法（例如 userr.getPassword()）必须能够访问 _password
+    // ! target 是原始被代理的对象， 它是能够直接访问 _password的
   },
   set(target, prop, value) {
     if (prop.startsWith("_")) {
@@ -461,13 +484,13 @@ let object = {
   data: "Valuable Data",
 };
 
-let proxy = Proxy.revocable(object, {});
+let proxyy = Proxy.revocable(object, {});
 
-console.log(proxy.data); // Valuable data
+console.log(proxyy.proxy.data); // Valuable data
 // 稍后，在我们的代码中
-revoke();
+proxyy.revoke();
 // ~ proxy 不再工作（revoked）
-console.log(proxy.data); // ~ Error
+console.log(proxyy.proxy.data); // ~ Error
 
 // ~ 对 revoke() 的调用会从代理中删除对目标对象的所有内部引用，因此它们之间再无连接。
 
@@ -531,7 +554,7 @@ array = new Proxy(array, {
       // prop是字符串类型，需要转化为数字 arr[-1] 其实就是数组末尾 arr[arr.length + (- 1)]
       prop = +prop + target.length;
     }
-    return Reflect.getPrototypeOf(target, prop, receiver);
+    return Reflect.get(target, prop, receiver);
   },
 });
 console.log(array[-1]); // 3
@@ -581,7 +604,7 @@ function makeObservable(target) {
 }
 let user5 = {};
 
-user5 = makeObservable(user);
+user5 = makeObservable(user5);
 
 user5.observe((key, value) => {
   console.log(`SET ${key}=${value}`);
