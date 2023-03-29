@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "@commitlint/cli": "^17.5.1",
+    "@commitlint/config-conventional": "^17.4.4",
+    "husky": "^8.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "node scripts/verifyCommit.js",
+      "pre-push": "npm test"
+    }
+  }
+}

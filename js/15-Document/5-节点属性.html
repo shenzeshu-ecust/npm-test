@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    哈哈哈
+
+    <script>
+        // 1 所有这些标签对应的 DOM 节点之间也存在共有的属性和方法，因为所有类型的 DOM 节点都形成了一个单一层次的结构（single hierarchy）。
+        // 每个 DOM 节点都属于相应的内建类。
+        // 2 层次结构（hierarchy）的根节点是 EventTarget，Node 继承自它，其他 DOM 节点继承自 Node。
+        /*
+
+    Object - 因为像 hasOwnProperty 这样的“普通对象”方法也是可用的
+        1) EventTarget —— 是一切的根“抽象（abstract）”类。
+            该类的对象从未被创建。它作为一个基础，以便让所有 DOM 节点都支持所谓的“事件（event）”
+            2.1) Node —— 一个“抽象”类，充当 DOM 节点的基础。
+                它提供了树的核心功能：parentNode，nextSibling，childNodes 等（它们都是 getter）。
+                Node 类的对象从未被创建。但是还有一些继承自它的其他类（因此继承了 Node 的功能）。
+                2.1.1) Element —— 是 DOM 元素的基础类。
+                    它提供了元素级导航（navigation），如 nextElementSibling，children，以及搜索方法，如 getElementsByTagName 和 querySelector。
+                    浏览器不仅支持 HTML，还支持 XML 和 SVG。因此，Element 类充当的是更具体的类的基础：SVGElement，XMLElement（我们在这里不需要它）和 HTMLElement。
+                    2.1.1.1) HTMLElement
+                        2.1.1.1.1) HTMLBodyElement
+            2.2) Document 由于历史原因通常被 HTMLDocument 继承（尽管最新的规范没有规定）—— 是一个整体的文档。
+                全局变量 document 就是属于这个类。它作为 DOM 的入口。
+            2.3) CharacterData —— 一个“抽象”类，被下述类继承:
+                Text —— 对应于元素内部文本的类，例如 <p>Hello</p> 中的 Hello。
+                Comment —— 注释类。它们不会被展示出来，但每个注释都会成为 DOM 中的一员。
+
+        还有很多其他标签具有自己的类，可能还具有特定的属性和方法，而一些元素，如 <span>、<section>、<article> 等，没有任何特定的属性，所以它们是 HTMLElement 类的实例。
+        ! 因此，给定节点的全部属性和方法都是[继承链]的结果。
+
+      *  例如，我们考虑一下 <input> 元素的 DOM 对象。它属于 HTMLInputElement 类。它获取属性和方法，并将其作为下列类（按继承顺序列出）的叠加：
+
+            HTMLInputElement —— 该类提供特定于输入的属性，
+            HTMLElement —— 它提供了通用（common）的 HTML 元素方法（以及 getter 和 setter）
+            Element —— 提供通用（generic）元素方法，
+            Node —— 提供通用 DOM 节点属性，
+            EventTarget —— 为事件（包括事件本身）提供支持，
+            ……最后，它继承自 Object，因为像 hasOwnProperty 这样的“普通对象”方法也是可用的。
+
+        */
+
+
+        console.log(document.body.constructor.name) // HTMLBodyElement
+        console.log(document.body.toString()) // [object HTMLBodyElement]
+        // DOM 节点是常规的 JavaScript 对象。它们使用基于原型的类进行继承。
+
+        /*
+        
+            console.dir(elem) 与 console.log(elem)区别
+
+                对于 JavaScript 对象，这些命令通常做的是相同的事。
+
+                但对于 DOM 元素，它们是不同的：
+                    console.log(elem) 显示元素的 DOM 树。
+                    console.dir(elem) 将元素显示为 DOM 对象，非常适合探索其属性。
+
+        */
+
+        // 3 nodeType属性(只读)
+        /*
+        
+        nodeType 属性提供了另一种“过时的”用来获取 DOM 节点类型的方法。
+            它有一个数值型值（numeric value）：
+
+                对于元素节点 elem.nodeType == 1，
+                对于文本节点 elem.nodeType == 3，
+                对于 document 对象 elem.nodeType == 9，
+        */
+        console.log(document.body.nodeType) // 1 元素节点
+        console.log(document.body.firstChild.nodeType) // 3 文本节点
+        console.log(document.nodeType) // 9 
+        console.log(document.body.lastChild.nodeType) // 1  在 <script> 执行时，最后一个 DOM 节点就是 <script>，因为浏览器还没有处理页面的其余部分。所以结果是 1（元素节点）。
+        // 4 nodeName, tagName 读取标签名
+        // tagName 仅受元素节点支持（因为它起源于 Element 类），而 nodeName 则可以说明其他节点类型。
+        console.log(document.nodeName) // #document
+        console.log(document.tagName) // undefined document节点不是元素节点！
+        console.log(document.body.tagName) // BODY 标签名称始终是大写的，除非是在 XML 模式下!
+        // 浏览器有两种处理文档（document）的模式：HTML 和 XML。通常，HTML 模式用于网页。只有在浏览器接收到带有 Content-Type: application/xml+xhtml header 的 XML-document 时，XML 模式才会被启用。
+        // 在 HTML 模式下，tagName/nodeName 始终是大写的：它是 BODY，而不是 <body> 或 <BoDy>。
+
+        // 5 innerHTML 可读可写
+        // 1) 我们可以尝试插入无效的 HTML，浏览器会修复我们的错误：
+        document.body.innerHTML = '<b>test'; // 忘记闭合标签
+        console.log(document.body.innerHTML); // <b>test</b>（被修复了）
+        // 2) 如果 innerHTML 将一个 <script> 标签插入到 document 中 —— 它会成为 HTML 的一部分，但是不会执行!
+        // “innerHTML+=” 会进行完全重写!
+        document.body.appendChild(document.createElement('div'))
+        const chatDiv = document.querySelector('div')
+        console.log(chatDiv)
+        chatDiv.innerHTML += "How goes?";
+        /*
+        innerHTML+= 做了以下工作：
+
+            移除旧的内容。
+            然后写入新的 innerHTML（新旧结合）。
+        因为内容已“归零”并从头开始重写，因此所有的图片和其他资源都将重写加载!
+        */
+
+        // 6 outerHTML 包含了元素的完整 HTML。就像 innerHTML 加上元素本身一样。
+        // 与 innerHTML 不同，写入 outerHTML 不会改变元素。而是在 DOM 中替换它。
+        /*
+
+        let div = document.querySelector('div');
+
+            // 使用 <p>...</p> 替换 div.outerHTML
+            div.outerHTML = '<p>A new element</p>'; // (*)
+
+            // 蛤！'div' 还是原来那样！
+            alert(div.outerHTML); // <div>Hello, world!</div> (**)
+
+        在 div.outerHTML=... 中发生的事情是：
+
+            1 div 被从文档（document）中移除。
+            2 另一个 HTML 片段 <p>A new element</p> 被插入到其位置上。
+            3 div 仍拥有其旧的值。新的 HTML 没有被赋值给任何变量。
+
+        */
+
+
+        // 7 nodeValue、data 文本节点内容
+        // innerHTML 属性仅对元素节点有效。
+        // 其他节点类型，例如文本节点，具有它们的对应项：nodeValue 和 data 属性。这两者在实际使用中几乎相同，只有细微规范上的差异。因此，我们将使用 data，因为它更短。
+
+        let text = document.body.firstChild;
+        console.log(text.data); // 注释、纯文本都能获取
+
+        // 8 textContent (读写)提供了对元素内的 文本 的访问权限：仅文本，去掉所有 <tags>。
+        console.log(document.body.textContent); // testHow goes?
+        const elem1 = document.body.appendChild(document.createElement('div'))
+        const elem2 = document.body.appendChild(document.createElement('div'))
+
+        let name = prompt("What's your name?", "<b>Winnie-the-Pooh!</b>");
+
+
+        elem1.innerHTML = name; // 第一个 <div> 获取 name “作为 HTML”：所有标签都变成标签，所以我们可以看到粗体的 name。
+        elem2.textContent = name; // 第二个 <div> 获取 name “作为文本”，因此我们可以从字面上看到 <b>Winnie-the-Pooh!</b>。
+
+        // 9 hidden 属性
+        // “hidden” 特性（attribute）和 DOM 属性（property）指定元素是否可见。
+        // 从技术上来说，hidden 与 style="display:none" 做的是相同的事。但 hidden 写法更简洁。
+
+
+        setInterval(() => elem2.hidden = !elem2.hidden, 1000);
+
+    </script>
+</body>
+
+</html>

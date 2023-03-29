@@ -175,3 +175,150 @@ obj2 = {
 obj2.go(); // (1) { go: [Function: go] }
 // ~ 常规的调用
 obj2.go(); // (2) { go: [Function: go] }
+
+// new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     throw new Error("Error");
+//   }, 1000);
+// }).catch(console.log(222));
+
+if (!Promise.allSettled) {
+  let resolveHandler = (value) => ({ status: "fulfilled", value });
+  let rejectHandler = (reason) => ({ status: "rejected", reason });
+
+  Promise.allSettled = (promises) => {
+    const arr = promises.map((p) => {
+      return Promise.resolve(p).then(resolveHandler, rejectHandler);
+    });
+    return Promise.all(arr);
+  };
+}
+
+// Promise.any([new Promise((_, reject) => reject(new Error("hahaha")))]).then(
+//   null,
+//   (error) => {
+//     console.log(error);
+//   }
+// );
+
+const arre = [[]].reduce((sum, cur) => {
+  cur.push(1);
+  cur.push(2);
+  sum.push(cur);
+  return sum;
+}, []);
+console.log(arre);
+
+let res = [];
+
+for (let i = 0; i < 3; i++) {
+  let fetch = [1, 2]; // 每次产生的数据 假如每次都是【1，2】
+  res.push(fetch);
+}
+console.log(res);
+console.log(/[^\w.$]/.test("get()"));
+
+class Observer {
+  constructor(value) {
+    this.value = value;
+    // def(value,__ob__, this);
+    if (Array.isArray(value)) {
+      //
+    } else {
+      this.walk(value);
+    }
+  }
+  walk(obj) {
+    let keys = Object.keys(obj);
+    for (let i = 0; i < keys.length; i++) {
+      defineReactive(obj, keys[i]);
+    }
+  }
+}
+
+function defineReactive(obj, key, val) {
+  if (arguments.length === 2) val = obj[key];
+  if (typeof val === "object") new Observer(val);
+  const dep = new Dep();
+  Object.defineProperty(obj, key, {
+    configurable: true,
+    enumerable: true,
+    get() {
+      dep.depend();
+      return val;
+    },
+    set(newVal) {
+      if (val === newVal) return;
+      val = newVal;
+      dep.notify();
+    },
+  });
+}
+
+class Dep {
+  constructor() {
+    this.subs = [];
+  }
+
+  addSub(sub) {
+    this.subs.push(sub);
+  }
+
+  removeSub(sub) {
+    remove(this.subs, sub);
+  }
+
+  depend() {
+    if (window.target) this.addSub(window.target);
+  }
+
+  notify() {
+    const subs = this.subs.slice();
+    for (let i = 0; i < subs.length; i++) {
+      subs[i].update();
+    }
+  }
+}
+
+function remove(target, item) {
+  if (target.length) {
+    let index = target.indexOf(item);
+    if (index > -1) {
+      target.splice(index, 1);
+    }
+  }
+}
+
+class Watcher {
+  constructor(target, expOrFn, cb) {
+    this.target = target;
+    this.cb = cb;
+    this.getter = parsePath(expOrFn);
+    this.value = this.get();
+  }
+  get() {
+    window.target = this;
+    const target = this.target;
+    let value = this.getter.call(target, target);
+    window.target = undefined;
+    return value;
+  }
+
+  update() {
+    let oldValue = this.value;
+    let newValue = this.get();
+    this.cb.call(this.target, newValue, oldValue);
+  }
+}
+function parsePath(path) {
+  const regExp = /[^\w.$]/;
+  if (regExp.test(path)) return;
+  const segments = path.split(".");
+  return function (data) {
+    for (let i = 0; i < segments.length; i++) {
+      if (!data) return;
+      data = data[segments[i]];
+    }
+    return data;
+  };
+}

@@ -45,8 +45,8 @@ Promise.all([
 // ~ Promise.allSettled 等待所有的 promise 都被 settle(fulfilled和rejected都是settle状态)，无论结果如何
 
 // ! Promise.allSettled的结果数组中的元素如下：
-// ! {status:"fulfilled", value:result} 对于成功的响应，
-// ! {status:"rejected", reason:error} 对于 error。
+// ! { status: "fulfilled", value: result } 对于成功的响应，
+// ! { status: "rejected", reason: error } 对于 error。
 
 let urls = [
   "https://api.github.com/users/iliakan",
@@ -92,6 +92,7 @@ Promise.allSettled(urls.map((url) => fetch(url))).then((results) => {
   }
 ]
 */
+
 Promise.allSettled(urls.map((url) => fetch(url))).then((results) => {
   // (*)
   results.forEach((result, num) => {
@@ -124,9 +125,11 @@ if (!Promise.allSettled) {
   };
 }
 /*
-在这段代码中，promises.map 获取输入值，并通过 p => Promise.resolve(p) 将输入值转换为 promise（以防传递了非 promise 值），然后向每一个 promise 都添加 .then 处理程序。
+在这段代码中，promises.map 获取输入值，并通过 p => Promise.resolve(p) 将输入值转换为 promise（以防传递了非 promise 值），
+然后向每一个 promise 都添加 .then 处理程序。
 
-这个处理程序将成功的结果 value 转换为 {status:'fulfilled', value}，将 error reason 转换为 {status:'rejected', reason}。这正是 Promise.allSettled 的格式。
+这个处理程序将成功的结果 value 转换为 {status:'fulfilled', value}，将 error reason 转换为 {status:'rejected', reason}。
+这正是 Promise.allSettled 的格式。
 
 然后我们就可以使用 Promise.allSettled 来获取 所有 给定的 promise 的结果，即使其中一些被 reject。
 */

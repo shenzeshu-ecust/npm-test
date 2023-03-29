@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="elem">
+        <!-- id 必须是唯一的。在文档中，只能有一个元素带有给定的 id。 -->
+        <div id="elem-content">Element</div>
+    </div>
+    <ul>
+        <li>The</li>
+        <li>test</li>
+    </ul>
+    <ul>
+        <li>has</li>
+        <li>passed</li>
+    </ul>
+
+    <a href="http://example.com/file.zip">...</a>
+    <a href="http://ya.ru">...</a>
+
+    <h1>Contents</h1>
+
+    <div class="contents">
+        <ul class="book">
+            <li class="chapter">Chapter 1</li>
+            <li class="chapter">Chapter 2</li>
+        </ul>
+    </div>
+
+    <form name="my-form">
+        <div class="article">Article</div>
+        <div class="long article">Long article</div>
+    </form>
+
+    <div>First div</div>
+
+    <script>
+        // let divs = document.querySelectorAll('div');
+        let divs = document.getElementsByTagName('div');
+
+        alert(divs.length); // 6
+    </script>
+
+    <div>Second div</div>
+
+    <script>
+        alert(divs.length); // 如果用querySelectorAll显示6（静态），如果用getElementsByTagName显示7（实时）
+    </script>
+    <script>
+        // 1 document.getElementById(id)
+        // 2 还有一个通过 id 命名的全局变量，它引用了元素.
+        // elem 是对带有 id="elem" 的 DOM 元素的引用
+        elem.style.background = 'red'
+
+        // id="elem-content" 内有连字符，所以它不能成为一个变量
+        // ...但是我们可以通过使用方括号 window['elem-content'] 来访问它
+        window['elem-content'].style.fontSize = '24px'
+
+        /*
+        
+        请不要使用以 id 命名的全局变量来访问元素
+
+            在规范中 对此行为进行了描述，所以它是一种标准。但这是注意考虑到兼容性才支持的。
+            浏览器尝试通过混合 JavaScript 和 DOM 的命名空间来帮助我们。对于内联到 HTML 中的简单脚本来说，这还行，但是通常来说，这不是一件好事。因为这可能会造成命名冲突。
+            另外，当人们阅读 JavaScript 代码且看不到对应的 HTML 时，变量的来源就会不明显。
+
+        在实际开发中，document.getElementById 是首选方法。
+
+        */
+
+        // 3 最通用的方法是 elem.querySelectorAll(css)
+        // 这个方法确实功能强大，因为可以使用任何 CSS 选择器。
+
+        let lis = document.querySelectorAll('ul > li:last-child')
+        for (let el of lis) {
+            console.log(el.innerHTML) // "test", "passed"
+        }
+        // 这个方法也适用于伪类
+        console.log(document.querySelectorAll(':hover')) // 将会返回鼠标指针正处于其上方的元素的集合
+
+        // 4 elem.querySelector(css) 调用会返回给定 CSS 选择器的第一个元素。
+        // 换句话说，结果与 elem.querySelectorAll(css)[0] 相同，但是后者会查找 所有 元素，并从中选取一个，而 elem.querySelector 只会查找一个。
+        // 因此它在速度上更快，并且写起来更短。
+
+        // 5 ele.matches(css) 它只会检查 elem 是否与给定的 CSS 选择器匹配。它返回 true 或 false。
+        for (let ele of document.body.children) {
+            if (ele.matches('a[href$="zip"]')) console.log(ele.href) // http://example.com/file.zip
+        }
+
+        // 6 ele.closest(css) 查找与 CSS 选择器匹配的最近的祖先。elem 自己也会被搜索。
+        // 换句话说，方法 closest 在元素中得到了提升，并检查每个父级。如果它与选择器匹配，则停止搜索并返回该祖先。
+
+        let chapter = document.querySelector('.chapter')
+
+        console.log(chapter.closest('.book')) // <ul class="book">的元素
+        console.log(chapter.closest('.contents')) // <div class="contents">的元素
+
+        console.log(chapter.closest('.h1')) // null（因为 h1 不是祖先）
+
+        // 7 getElementsBy*
+        // 还有其他通过标签，类等查找节点的方法。如今，它们大多已经成为了历史，因为 querySelector 功能更强大，写起来更短。
+
+
+        /*
+        
+        elem.getElementsByTagName(tag) 查找具有给定标签的元素，并返回它们的集合。tag 参数也可以是对于“任何标签”的星号 "*"。
+        elem.getElementsByClassName(className) 返回具有给定CSS类的元素。
+        document.getElementsByName(name) 返回在文档范围内具有给定 name 特性的元素。很少使用。
+
+
+        [返回的是一个集合，不是一个元素！]
+        */
+
+        // 按 name 特性查找
+        let form = document.getElementsByName('my-form')[0]
+        // 在 form 中按 class 查找
+        let articles = form.getElementsByClassName('article')
+        console.log(articles.length) // 2
+
+        // 8 "getElementsBy*" 与 querySelectorAll 区别
+        // 所有的 "getElementsBy*" 方法都会返回一个 实时的（live） 集合。这样的集合始终反映的是文档的当前状态，并且在文档发生更改时会“自动更新”。
+        // 相反，querySelectorAll 返回的是一个 静态的 集合。就像元素的固定数组。
+
+        // 9 contains 用来检查子级与父级之间关系的方法
+        // 如果 elemB 在 elemA 内（elemA 的后代）或者 elemA==elemB，elemA.contains(elemB) 将返回 true。
+        console.log(document.documentElement.contains(document.body)) // true
+
+        /*
+        方法名 	                        搜索方式 	       可以在元素上调用？       	实时的？
+        querySelector 	            CSS-selector 	         ✔ 	                     -
+        querySelectorAll 	        CSS-selector 	         ✔ 	                     -
+        getElementById 	              id 	                 - 	                     -
+        getElementsByName 	          name 	                 - 	                     ✔
+        getElementsByTagName 	     tag or '*' 	         ✔ 	                     ✔
+        getElementsByClassName 	     class 	                 ✔ 	                     ✔
+            
+        */
+    </script>
+</body>
+
+</html>
