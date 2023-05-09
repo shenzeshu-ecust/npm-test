@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div {
+            background-color: cadetblue;
+            width: 300px;
+            height: 300px;
+        }
+
+        .ul .li {
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div">hahah </div>
+    <ul class="ul">
+        <li class="li">1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+
+        页面上的任何点都有坐标：
+
+        1 相对于窗口的坐标 —— elem.getBoundingClientRect()。
+        2 相对于文档的坐标 —— elem.getBoundingClientRect() 加上当前页面滚动。
+
+        窗口坐标非常适合和 position:fixed 一起使用，文档坐标非常适合和 position:absolute 一起使用。
+
+        这两个坐标系统各有利弊。有时我们需要其中一个或另一个，就像 CSS position 的 absolute 和 fixed 一样。
+    </ul>
+    <script>
+        /*
+    大多数 JavaScript 方法处理的是以下两种坐标系中的一个：
+
+        1 相对于窗口 —— 类似于 position:fixed，从【窗口】的顶部/左侧边缘计算得出。
+            我们将这些坐标表示为 clientX/clientY，当我们研究事件属性时，就会明白为什么使用这种名称来表示坐标。
+        2 相对于文档 —— 与文档根（document root）中的 position:absolute 类似，从【文档】的顶部/左侧边缘计算得出。
+            我们将它们表示为 pageX/pageY。
+
+    当页面滚动到最开始时，此时窗口的左上角恰好是文档的左上角，它们的坐标彼此相等。
+    1) 但是，在文档移动之后，元素的窗口相对坐标会发生变化，因为元素在窗口中移动
+    2) 而元素在文档中的相对坐标保持不变。
+
+    —— 当【文档】滚动了：
+
+        pageY —— 元素在文档中的相对坐标保持不变，从文档顶部（现在已滚动出去）开始计算。
+        clientY —— 窗口相对坐标确实发生了变化（箭头变短了），因为同一个点越来越靠近窗口顶部。
+
+        */
+
+        // 1 elem.getBoundingClientRect() 元素坐标
+
+        // 方法 elem.getBoundingClientRect() 返回最小矩形的窗口坐标，该矩形将 elem 作为内建 DOMRect 类的对象。
+        const div = document.querySelector('.div')
+        console.log(div.getBoundingClientRect())
+        /*
+            bottom: 308 顶部/底部矩形边缘的 Y 坐标，
+            height:308 矩形的 width/height（可以为负）
+            left: 8
+            right: 308
+            top: 8
+            width: 308
+            x: 8 矩形原点相对于窗口的 X/Y 坐标，
+            y:8
+
+        x/y width/height 是DOMRect属性
+        top/bottom left/right 是派生属性
+
+        如果你滚动此页面，你会发现随着窗口相对按钮位置的改变，
+        其窗口坐标（如果你垂直滚动页面，则为 y/top/bottom）也随之改变。
+
+        一般来说,很容易从DOMRect属性计算出派生属性：
+        left = x
+        top = y
+        right = x + width
+        bottom = y + height
+        （由于历史原因，IE 浏览器不支持 x/y 属性。）
+        坐标可能是负数。例如滚动页面，使 elem 现在位于窗口的上方，则 elem.getBoundingClientRect().top 为负数。
+
+        ** 坐标的 right/bottom 与 CSS position 属性不同
+
+        CSS 定位中，right 属性表示距右边缘的距离，而 bottom 属性表示距下边缘的距离。
+        【在 JavaScript 中并非如此。窗口的所有坐标都从左上角开始计数，包括这些坐标】
+        */
+
+
+        /*
+            为什么需要派生（derived）属性？如果有了 x/y，为什么还要还会存在 top/left？
+                从数学上讲，一个矩形是使用其起点 (x,y) 和方向向量 (width,height) 唯一定义的。因此，其它派生属性是为了方便起见。
+                从技术上讲，width/height 可能为负数，从而允许“定向（directed）”矩形，例如代表带有正确标记的开始和结束的鼠标选择。
+
+                负的 width/height 值表示矩形从其右下角开始，然后向左上方“增长”。
+                这是一个矩形，其 width 和 height 均为负数（例如 width=-200，height=-100）
+                而此时，left/top 与 x/y 不相等
+
+                * 但是实际上，elem.getBoundingClientRect() 总是返回正数的 width/height，
+                这里我们提及负的 width/height 只是为了帮助你理解，为什么这些看起来重复的属性，实际上并不是重复的。
+        */
+
+        // 2 document.elementFromPoint(x, y)
+        // 返回在窗口坐标 (x, y) 处嵌套最多（the most nested）的元素。
+
+        // 下面的代码会高亮显示并输出现在位于窗口中间的元素的标签
+        let centerX = document.documentElement.clientWidth / 2;
+        let centerY = document.documentElement.clientHeight / 2;
+
+        let ele = document.elementFromPoint(centerX, centerY); // 因为它使用的是窗口坐标，所以元素可能会因当前滚动位置而有所不同。
+        if (ele) ele.style.background = 'pink' // 如果坐标恰好在窗口外，elem=null 会报错
+        console.log(ele.tagName) // LI  但是打开检查 会显示BODY 因为窗口滚动了
+
+        // 对于在窗口之外的坐标，elementFromPoint 返回 null
+        // 方法 document.elementFromPoint(x,y) 只对在可见区域内的坐标 (x,y) 起作用。
+        // 如果任何坐标为负或者超过了窗口的 width/height，那么该方法就会返回 null。
+
+        // 3 用于“fixed”定位
+        // 大多数时候，我们需要使用坐标来确定某些内容的位置。
+
+        // 想要在某元素附近展示内容，我们可以使用 getBoundingClientRect 来获取这个元素的坐标，然后使用 CSS position 以及 left/top（或 right/bottom）。
+
+        // 下面的函数 createMessageUnder(elem, html) 在 elem 下显示了消息
+
+        function createMessageUnder(elem, html) {
+            let message = document.createElement('div')
+            message.style.cssText = 'position:fixed; color: red'
+
+            let coords = elem.getBoundingClientRect()
+
+            message.innerHTML = html
+            message.style.left = coords.left + 'px'
+            message.style.top = coords.bottom + 'px' // 位于元素下面
+
+            return message
+        }
+
+        // 使用
+        let el = document.querySelector('.div')
+
+        let message = createMessageUnder(el, 'Hello world')
+        document.body.append(message)
+        setTimeout(() => message.remove(), 5000)
+
+        // 4 文档坐标
+        // 文档相对坐标从文档的左上角开始计算，而不是窗口。
+        // 没有标准方法来获取元素的文档坐标。但是写起来很容易。
+        // 这两个坐标系统通过以下公式相连接：
+        /*
+            pageX = clientX + 文档的水平滚动出的部分的宽度
+            pageY = clientY + 文档的垂直滚动出的部分的高度
+        */
+
+        // 函数 getCoords(elem) 将从 elem.getBoundingClientRect() 获取窗口坐标，并向其中添加当前滚动
+
+        // 获取元素的【文档】坐标
+        function getCoords(elem) {
+            let box = elem.getBoundingClientRect();
+
+            return {
+                top: box.top + window.pageYOffset,
+                right: box.right + window.pageXOffset,
+                bottom: box.bottom + window.pageYOffset,
+                left: box.left + window.pageXOffset
+            };
+        }
+
+        // 如果在上面的示例中，我们将其与 position:absolute 一起使用，则在页面滚动时，消息仍停留在元素附近。
+        function createMessageUnderAbsolute(elem, html) {
+            let message = document.createElement('div');
+            message.style.cssText = "position:absolute; color: blue";
+
+            let coords = getCoords(elem)
+
+            message.style.left = coords.left + "px";
+            message.style.top = coords.bottom + "px";
+
+            message.innerHTML = html
+            return message
+        }
+
+        let message2 = createMessageUnderAbsolute(el, 'Hello HAHAH')
+        document.body.append(message2)
+
+
+        // TEST
+        // 获取含有边框的左上、右下 内外角 坐标
+        let coords = elem.getBoundingClientRect()
+        // 外角
+        let answer1 = [coords.left, coords.top]
+        let answer2 = [coords.right, coords.bottom]
+        // 左上内角
+        // 内角与外角主要的不同在于边框的宽度。一种获取距离的可靠的方法是 clientLeft/clientTop
+        let answer3 = [coords.left + field.clientLeft, coords.top + field.clientTop]
+
+        // 右下内角
+        // 1 
+        let answer4 = [
+            coords.right - parseInt(getComputedStyle(field).borderRightWidth),
+            coords.bottom - parseInt(getComputedStyle(field).borderBottomWidth)
+        ];
+        // 另一种方式是把 clientWidth/clientHeight 和左上角的坐标相加。这个方式相较于上一个或许更好：
+        let answer5 = [
+            coords.left + elem.clientLeft + elem.clientWidth,
+            coords.top + elem.clientTop + elem.clientHeight
+        ];
+    </script>
+</body>
+
+</html>

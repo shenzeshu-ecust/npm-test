@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .field {
+            position: relative;
+            margin: 100px auto;
+            width: 400px;
+            height: 300px;
+            background-color: cadetblue;
+            border: 20px solid #0c7474;
+            border-radius: 10px;
+        }
+
+        .ball {
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            background: pink;
+            border-radius: 50%;
+            transition: all 0.35s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="field">
+        <div class="ball"></div>
+    </div>
+    <script>
+        // 定位是以 content 为基准的  不包括 border宽度！
+        let ball = document.querySelector('.ball')
+        let field = document.querySelector('.field')
+        field.addEventListener('click', function (e) {
+            const maxWidth = field.getBoundingClientRect().left + field.clientWidth + field.clientLeft - ball.offsetWidth
+            const maxHeight = field.getBoundingClientRect().top + field.clientHeight + field.clientTop - ball.offsetHeight
+            if (e.clientX > maxWidth) ball.style.left = field.clientWidth - ball.offsetWidth + 'px'
+            else ball.style.left = e.clientX - field.getBoundingClientRect().left - field.clientLeft - ball.offsetWidth / 2 + 'px'
+
+            if (e.clientY > maxHeight) ball.style.top = field.clientHeight - ball.offsetHeight + 'px'
+            else ball.style.top = e.clientY - field.getBoundingClientRect().top - field.clientTop - ball.offsetHeight / 2 + 'px'
+        })
+    </script>
+</body>
+
+</html>

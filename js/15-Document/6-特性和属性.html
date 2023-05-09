@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .info[show-info="name"] {
+            color: red;
+        }
+
+        .info[show-info="cadetblue"] {
+            color: cadetblue;
+        }
+    </style>
+</head>
+
+<body id="test" something="non-standard">
+    <div>
+
+        <input id="input" type="text">
+        <div id="elem" about="Elephant" data-about="Elephants"></div>
+        <input type="checkbox" name="checkbox" id="checkbox" checked>
+        <div id="div" style="color:red;font-size:120%">Hello</div>
+        <a id="a" href="#hello">link</a>
+        <!-- 标记这个 div 以在这显示 "name" -->
+        <div show-info="name" class="info"></div>
+        <!-- 标记这个 div 以在这显示 "age" -->
+        <div show-info="age" class="info"></div>
+        <div show-info="color" class="info" id="colorDiv"></div>
+        <!-- 可以用驼峰式调用dataset.orderState -->
+        <div id="order" class="order" data-order-state="new">
+            A new order.
+        </div>
+    </div>
+    <script>
+        // 当浏览器加载页面时，它会“读取”（或者称之为：“解析”）HTML 并从中生成 DOM 对象。
+        // 对于元素节点，大多数标准的 HTML 特性（attributes）会自动变成 DOM 对象的属性（properties）。
+
+        // 例如，如果标签是 <body id="page">，那么 DOM 对象就会有 body.id="page"。
+        // 但特性—属性映射并不是一一对应的!
+
+        /*
+        
+            特性（attribute）—— 写在 HTML 中的内容。
+            属性（property）—— DOM 对象中的内容。
+
+                      属性 	                                     特性
+            类型 	任何值，标准的属性具有规范中描述的类型 	           字符串
+            名字 	名字（name）是大小写敏感的 	                    名字（name）是大小写不敏感的
+
+
+            在大多数情况下，最好使用 DOM 属性。仅当 DOM 属性无法满足开发需求，并且我们真的需要特性时，才使用特性，例如：
+                    我们需要一个非标准的特性。但是如果它以 data- 开头，那么我们应该使用 dataset。
+                    我们想要读取 HTML 中“所写的”值。对应的 DOM 属性可能不同，例如 href 属性一直是一个 完整的 URL，但是我们想要的是“原始的”值。
+
+        */
+        // 1 DOM属性
+        // 1.1 DOM 节点是常规的 JavaScript 对象。我们可以更改它们。
+
+        document.body.myData = {
+            name: 'szs',
+            title: 'Imperator'
+        }
+        console.dir(document.body.myData)
+
+        document.body.sayTagName = function () {
+            console.log(this.tagName);
+        };
+
+        document.body.sayTagName(); // BODY（这个方法中的 "this" 的值是 document.body）
+
+        // 1.2 我们还可以修改内建属性的原型，例如修改 Element.prototype 为所有元素添加一个新方法：
+        Element.prototype.sayHi = function () {
+            console.log(`Hello, I'm ${this.tagName}`);
+        };
+
+        document.documentElement.sayHi(); // Hello, I'm HTML
+        document.body.sayHi(); // Hello, I'm BODY
+
+        /*
+        所以，DOM 属性和方法的行为就像常规的 Javascript 对象一样：
+
+            它们可以有很多值。
+            它们是大小写敏感的（要写成 elem.nodeType，而不是 elem.NoDeTyPe）。
+
+        */
+
+        // 2 HTML特性
+        // 在 HTML 中，标签可能拥有特性（attributes）。当浏览器解析 HTML 文本，并根据标签创建 DOM 对象时，浏览器会辨别 标准的 特性并以此创建 DOM 属性。
+        // 所以，当一个元素有 id 或其他 标准的 特性，那么就会生成对应的 DOM 属性。但是非 标准的 特性则不会。
+        console.log(document.body.id) // test
+        console.log(document.body.something) // undefined
+
+        // 有些元素有自己独有的特性
+        // console.log(input.type) // text
+
+        // ? 如果一个特性不是标准的，那么就没有相对应的 DOM 属性。那我们有什么方法来访问这些特性吗？
+        /*
+            当然。所有特性都可以通过使用以下方法进行访问：
+
+                elem.hasAttribute(name) —— 检查特性是否存在。
+                elem.getAttribute(name) —— 获取这个特性值。
+                elem.setAttribute(name, value) —— 设置这个特性值。
+                elem.removeAttribute(name) —— 移除这个特性。
+         elem.attributes —— 读取所有特性：属于内建 Attr 类的对象的集合，具有 name 和 value 属性。
+
+
+         HTML 特性有以下几个特征：
+
+            1 它们的名字是大小写不敏感的（id 与 ID 相同）。
+            2 它们的值总是字符串类型的。
+
+        */
+        console.log(document.body.getAttribute('something')) // non-standard
+        console.log(elem.getAttribute('About')) // 虽然html中about是小写，但这里其实对大小写不敏感
+        elem.setAttribute('Test', 123) // 写入  -- 但是html中Test会变成小写test
+        console.log(elem.outerHTML) // 查看特性是否在 HTML 中（在）
+        for (let attr of elem.attributes) { // 可以遍历元素的attributes
+            console.log(`${attr.name}: ${attr.value}`);
+        }
+        /*
+        请注意：
+
+            1 getAttribute('About') —— 这里的第一个字母是大写的，但是在 HTML 中，它们都是小写的。但这没有影响：特性的名称是大小写不敏感的。
+            2 我们可以将任何东西赋值给特性，但是这些东西会变成字符串类型的。所以这里我们的值为 "123"。
+            3 所有特性，包括我们设置的那个特性，在 outerHTML 中都是可见的。
+            4 attributes 集合是可迭代对象，该对象将所有元素的特性（标准和非标准的）作为 name 和 value 属性存储在对象中。
+
+        */
+
+
+        // 3 属性prop-特性attr同步
+        // 当一个标准的特性被改变，对应的属性也会自动更新，（除了几个特例）反之亦然。
+
+        // eg: 在下面这个示例中，id 被修改为特性，我们可以看到对应的属性也发生了变化。然后反过来也是同样的效果：
+        const input = document.querySelector('input')
+
+        // 特性 => 属性
+        input.setAttribute('id', 'id')
+        console.log('属性被attr方法改变了：', input.id) // id （被更新了）
+        // 属性 => 特性
+        input.id = 'newId';
+        console.log('属性被属性修改后用特性方法获取：', input.getAttribute('id')); // newId（被更新了）
+
+        // ~~ 但也有例外，例如input.value只能从特性同步到属性，反之不行
+        input.setAttribute('value', 'test') // 特性 => 属性
+        console.log(input.value)
+
+        // input.value = 'newValue'这种方式修改无效  console.log(input.getAttribute('value') (不会被更新)
+        // 改变特性值 value 会更新属性。但是属性的更改不会影响特性。
+
+        // 4 DOM属性的类型不止string！
+        // 例如，input.checked 属性（对于 checkbox 的）是布尔型的。
+        console.log(checkbox.checked) // true
+        console.log(checkbox.getAttribute('checked')) // 空
+
+        // 又如。 style特性是字符串类型，但是style属性是一个对象！
+        console.log(div.getAttribute('style')) // 'color:red;font-size:120%'
+        console.log(div.style.color) // red
+
+        // 有一种非常少见的情况，即使一个 DOM 属性是字符串类型的，但它可能和 HTML 特性也是不同的。
+        // 例如，href DOM 属性一直是一个 完整的 URL，即使该特性包含一个相对路径或者包含一个 #hash。
+        console.log(a.getAttribute('href')) // #hello
+        console.log(a.href) // file:///Users/szz/Desktop/LearnReactAndVite/js/15-Document/6-%E7%89%B9%E6%80%A7%E5%92%8C%E5%B1%9E%E6%80%A7.html#hello
+
+
+        // 5 dataset —— 非标准的特性(或者自定义的特性)
+        // 非标准的特性常常用于将自定义的数据从 HTML 传递到 JavaScript，或者用于为 JavaScript “标记” HTML 元素。
+
+        // 这段代码找到带有标记的元素，并显示需要的内容
+        let user = {
+            name: 'zzz',
+            age: 18
+        }
+
+        for (let div of document.querySelectorAll('[show-info]')) {
+            // 在字段里插入相应信息
+            let field = div.getAttribute('show-info')
+            div.innerHTML = user[field]
+        }
+        // 自定义特性还可以用来设置元素的样式。
+        // 为什么使用特性比使用 .order-state-new，.order-state-pending，.order-state-canceled 这些样式类要好？
+        // 因为特性值更容易管理。我们可以轻松地更改状态：
+        colorDiv.setAttribute('show-info', 'cadetblue') // 蓝色的undefined
+
+        // 5.1 data-开头的特性均被保留供程序员使用。它们可在 dataset 属性中使用。
+        // 这种方式命名的可以避免冲突（因为自定义的特性可能将来会被加入到标准之中）
+
+        console.log(elem.dataset) // DOMStringMap {about: 'Elephants'}
+        console.log(elem.dataset.about) // Elephants
+        console.log(order.dataset.orderState) // new
+        console.log(elem.getAttribute('data-about')) // 也可以用特性的api
+        // 修改 _ 请注意，我们不仅可以读取数据，还可以修改数据属性（data-attributes）
+        order.dataset.orderState = 'pending'
+    </script>
+</body>
+
+</html>

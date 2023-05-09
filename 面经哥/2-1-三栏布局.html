@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .parent {
+            height: 100%;
+            /* BFC */
+            overflow: hidden;
+        }
+
+        .left {
+            float: left;
+            width: 200px;
+            height: 100%;
+            background-color: pink;
+        }
+
+        .right {
+            float: right;
+            width: 200px;
+            height: 100%;
+            background-color: orange;
+        }
+
+        .center {
+            height: 100%;
+            margin-left: 200px;
+            margin-right: 200px;
+            background-color: cadetblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+
+        <div class="left"></div>
+        <div class="right"></div>
+        <!-- 中间盒子一定要在最后 -->
+        <div class="center"></div>
+    </div>
+
+</body>
+
+</html>

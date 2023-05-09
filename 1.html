@@ -8,39 +8,90 @@
     <title>Document</title>
     <style>
         .box {
-            display: flex;
+            width: 400px;
+            height: 300px;
+            margin: 100px auto;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 800;
+            transition: transform 0.5s ease-in-out;
         }
 
-        ul {
-            padding: 0;
-            margin: 0;
+        .rp {
+            left: 0;
+            top: 0;
+            position: absolute;
+            backface-visibility: hidden;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 100%;
+            height: 100%;
         }
 
-        li {
-            list-style: none;
-            width: 120px;
-            height: 30px;
-            border: 1px salmon solid;
+        .front {
+            background-image: url("./assets/grass.jpg");
+        }
+
+        .back {
+            background-image: url('./assets/sunset.jpg');
+            transform: rotateY(180deg);
+        }
+
+        .flip {
+            transform: rotateY(180deg);
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border: 50px solid transparent;
+            border-bottom-color: red;
+            border-radius: 50%;
+        }
+
+        .shanxing {
+            width: 50px;
+            height: 50px;
+            border-radius: 50px 0 0 0;
+            background-color: red;
+        }
+
+        .tixing {
+            width: 100px;
+            height: 100px;
+            border-width: 50px;
+            border-style: solid;
+            border-color: transparent;
+            border-bottom-color: aquamarine;
+        }
+
+        .haha {
+            margin-left: -20px;
+            margin-bottom: -20px;
+            background-color: pink;
         }
     </style>
 </head>
 
 <body>
     <div class="box">
-        <ul>
-            <li>stateName</li>
-            <li>stateValue</li>
-        </ul>
-        <ul>
-            <li>title1</li>
-            <li>content1</li>
-        </ul>
-        <ul>
-            <li>title2</li>
-            <li>content2</li>
-        </ul>
-    </div>
+        <div class="rp front"></div>
+        <div class="rp back"></div>
 
+    </div>
+    <div class="triangle"></div>
+    <div class="shanxing"></div>
+    <div class="tixing"></div>
+    <div class="haha">hahah</div>
+    <script>
+        const box = document.querySelector('.box')
+        box.addEventListener('click', function () {
+            new Promise((resolve, reject) => {
+                this.classList.add('flip')
+            })
+        })
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div {
+            color: red;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body class="main page">
+    <div id="ele"></div>
+    <div id="btn">Button</div>
+    <div id="div">as dasd asd asd asd </div>
+    <!-- 
+        通常有两种设置元素样式的方式：
+
+            1 在 CSS 中创建一个类，并添加它：<div class="...">
+            2 将属性直接写入 style：<div style="...">。
+
+            JavaScript 既可以修改类，也可以修改 style 属性。
+
+            相较于将样式写入 style 属性，我们应该首选通过 CSS 类的方式来添加样式。仅当类“无法处理”时，才应选择使用 style 属性的方式。
+        例如，如果我们动态地计算元素的坐标，并希望通过 JavaScript 来设置它们，那么使用 style 是可以接受的，如下所示：
+            let top = /* 复杂的计算 */;
+            let left = /* 复杂的计算 */;
+
+            elem.style.left = left; // 例如 '123px'，在运行时计算出的
+            elem.style.top = top; // 例如 '456px'
+        对于其他情况，例如将文本设为红色，添加一个背景图标 —— 可以在 CSS 中对这些样式进行描述，然后添加类（JavaScript 可以做到）。这样更灵活，更易于支持。
+     -->
+
+
+    <script>
+        // 1 className
+        console.log(document.body.className) // main page
+        // 如果我们对 elem.className 进行赋值，它将替换类中的整个字符串
+        // 2 classList
+        console.log(document.body.classList) // DOMTokenList(2)   ['main', 'page', value: 'main page'] 类数组对象
+
+        // 2.1 classList拥有add/remove/toggle/contains 单个类的方法
+        // elem.classList.toggle(class) —— 如果类不存在就添加类，存在就移除它。
+        // elem.classList.contains(class) —— 检查给定类，返回 true/false。
+        // classList可迭代
+        for (let name of document.body.classList) {
+            console.log(name) // main page
+        }
+
+        // 3 元素样式
+        // elem.style 属性是一个对象，它对应于 "style" 特性（attribute）中所写的内容。
+        ele.style.width = '100px'
+        ele.style.height = '100px'
+        // 对于多词（multi-word）属性，使用驼峰式 camelCase：
+        ele.style.backgroundColor = 'cadetblue'
+        // 像 -moz-border-radius 和 -webkit-border-radius 这样的浏览器前缀属性，也遵循同样的规则：连字符 - 表示大写。
+        ele.style.MozBorderRadius = '5px'
+        ele.style.WebkitBorderRadius = '5px'
+
+        // 4 重置样式属性
+        // 有时我们想要分配一个样式属性，稍后移除它。
+        // 4.1 赋值置空
+        ele.style.display = 'none'
+        setTimeout(() => ele.style.display = '', 1000)
+
+        // 4.2 ele.style.removeProperty('property') 
+        ele.style.backgroundColor = 'pink'
+        setTimeout(() => ele.style.removeProperty('background'), 2000)
+
+        // 5 ele.style是 只读 的！ 
+        // 不能用类似ele.style="color: red; width: 100px" 设置完整的属性，因为 ele.style 是一个对象，并且它是只读的。
+        // 想要以字符串的形式设置完整的样式，可以使用特殊属性 style.cssText：
+        btn.style.cssText = `color: red !important;
+            background-color: yellow;
+            width: 100px;
+            text-align: center;
+        `;
+        console.log(btn.style.cssText);
+        // 我们很少使用这个属性，因为这样的赋值会删除所有现有样式：它不是进行添加，而是替换它们。有时可能会删除所需的内容。
+        // 可以通过设置一个特性（attribute）来实现同样的效果：
+        // div.setAttribute('style', 'color: red...')。
+
+        // 6 不要忘记将 CSS 单位添加到值上。
+        // 我们不应该将 elem.style.top 设置为 10，而应将其设置为 10px。否则设置会无效
+        // alert(document.body.style.margin); // 20px 这是因为： 浏览器在最后几行代码中对属性 style.margin 进行了“解包”，并从中推断出 style.margin
+
+        // 7 计算样式：getComputedStyle (对于所有类，在应用所有 CSS 并计算最终值之后)
+        // 修改样式很简单。但是如何 读取 样式呢？
+        // style 属性仅对 "style" 特性（attribute）值起作用，而没有任何 CSS 级联（cascade）。
+        // 因此我们无法使用 elem.style 读取来自 CSS 类的任何内容。
+        console.log(div.style.color) // 空的
+
+
+        // ……但如果我们需要，例如，将 margin 增加 20px 呢？那么我们需要 margin 的当前值。对于这个需求，这里有另一种方法：getComputedStyle。
+        /*
+            getComputedStyle(element, [pseudo]) 
+
+                element
+                    需要被读取样式值的元素。
+                pseudo
+                    伪元素（如果需要），例如 ::before。空字符串或无参数则意味着元素本身。 
+
+            结果是一个具有样式属性的对象，像 elem.style，但现在对于所有的 CSS 类来说都是如此。
+        */
+
+        let computedStyle = getComputedStyle(div)
+        console.log(computedStyle) // CSSStyleDeclaration { .....}
+        console.log(computedStyle.color) // rgb(255, 0, 0)
+
+        /*
+
+            计算值和解析值
+
+            在 CSS 中有两个概念：
+                计算 (computed) 样式值是所有 CSS 规则和 CSS 继承都应用后的值，这是 CSS 级联（cascade）的结果。它看起来像 height:1em 或 font-size:125%。
+                解析 (resolved) 样式值是最终应用于元素的样式值。诸如 1em 或 125% 这样的值是相对的。浏览器将使用计算（computed）值，并使所有单位均为固定的，且为绝对单位，例如：height:20px 或 font-size:16px。对于几何属性，解析（resolved）值可能具有浮点，例如：width:50.5px。
+
+            很久以前，创建了 getComputedStyle 来获取计算（computed）值，但事实证明，解析（resolved）值要方便得多，标准也因此发生了变化。
+
+            ------ 所以，现在 getComputedStyle 实际上返回的是属性的解析值（resolved）------
+
+
+            我们应该总是使用我们想要的确切的属性，例如 paddingLeft、marginTop 或 borderTopWidth。否则，就不能保证正确的结果。
+            例如，如果有 paddingLeft/paddingTop 属性，那么对于 getComputedStyle(elem).padding，我们会得到什么？什么都没有，或者是从已知的 padding 中“生成”的值？这里没有标准的规则。
+            还有其他不一致的地方。例如，在下面这个例子中，某些浏览器（Chrome）会显示 0px，而某些浏览器（Firefox）则没有：
+
+        */
+        console.log(computedStyle.padding) // 0px  而在 Firefox 中是空字符串
+
+        /*
+        
+        
+        应用于 :visited 链接的样式被隐藏了！
+            可以使用 CSS 伪类 :visited 对被访问过的链接进行着色。
+            但 getComputedStyle 没有给出访问该颜色的方式，因为如果允许的话，任意页面都可以通过在页面上创建它，并通过检查样式来确定用户是否访问了某链接。
+        JavaScript 看不到 :visited 所应用的样式。
+        此外，CSS 中也有一个限制，即禁止在 :visited 中应用更改几何形状的样式。这是为了确保一个不好的页面无法检测链接是否被访问，进而窥探隐私。
+
+        */
+
+        //  TEST:
+        // 编写一个函数 showNotification(options)：该函数创建一个带有给定内容的通知 <div class="notification">。该通知应该在 1.5 秒后自动消失。
+        function showNotification({ top = 0, right = 0, html, className = '' }) {
+            const div = document.createElement("div");
+            div.style.width = '120px'
+            div.style.height = '80px'
+            div.style.position = 'fixed'
+            div.style.top = top + 'px'
+            div.style.right = right + 'px'
+            div.innerHTML = html
+            if (className) div.classList.add(className)
+            div.style.background = 'cadetblue'
+            div.style.color = '#fff'
+            div.style.textAlign = 'center'
+            div.style.lineHeight = div.style.height
+            div.style.transition = 'all 0.3s'
+            document.body.append(div)
+            setTimeout(() => div.style.display = 'none', 1500)
+        }
+        // 在窗口的右上角附近显示一个带有文本 "Hello" 的元素
+        showNotification({
+            top: 10, // 距窗口顶部 10px（默认为 0px）
+            right: 10, // 距窗口右边缘 10px（默认为 0px）
+            html: "Hello!", // 通知中的 HTML
+            className: "welcome" // div 的附加类（可选）
+        });
+    </script>
+</body>
+
+</html>

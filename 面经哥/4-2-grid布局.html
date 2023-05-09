@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper,
+        .wrapper-1,
+        .wrapper-2 {
+            margin: 50px;
+        }
+
+        .wrapper {
+            display: grid;
+            grid-template-columns: 100px 200px 100px;
+            /* grid-auto-flow 属性控制着自动布局算法怎样运作，精确指定在网格中被自动布局的元素怎样排列。
+            默认的放置顺序是"先行后列"，即先填满第一行，再开始放入第二行*/
+
+            /* grid-auto-flow: row; */
+            /* 第五个项目和第六个项目之间有个空白，这个是由于第六块的长度大于了空白处的长度，被挤到了下一行导致的 */
+            /* 有时候想要让合适的元素填满这个空白 加 dense */
+            grid-auto-flow: row dense;
+            grid-gap: 5px;
+            grid-auto-rows: 50px;
+        }
+
+        .wrapper-1 {
+            display: grid;
+            grid-auto-columns: 100px;
+            grid-auto-flow: column;
+            grid-gap: 5px;
+            grid-template-rows: 50px 50px;
+        }
+
+
+        .one {
+            background: #19CAAD;
+        }
+
+        .two {
+            background: #8CC7B5;
+        }
+
+        .three {
+            background: #D1BA74;
+        }
+
+        .four {
+            background: #BEE7E9;
+        }
+
+        .five {
+            background: #E6CEAC;
+        }
+
+        .six {
+            grid-column-start: span 2;
+            background: #ECAD9E;
+        }
+
+        .seven {
+            background: #BEEDC7;
+        }
+
+        .eight {
+            background: #F4606C;
+        }
+
+        .nine {
+            background: #A0EEE1;
+        }
+
+        .item {
+            text-align: center;
+            font-size: 200%;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>先行后列</h1>
+    <div class="wrapper">
+        <div class="one item">One</div>
+        <div class="two item">Two</div>
+        <div class="three item">Three</div>
+        <div class="four item">Four</div>
+        <div class="five item">Five</div>
+        <div class="six item">Six</div>
+        <div class="seven item">Seven</div>
+        <div class="eight item">eight</div>
+        <div class="nine item">Nine</div>
+    </div>
+
+    <h1>先列后行</h1>
+    <div class="wrapper-1">
+        <div class="one item">One</div>
+        <div class="two item">Two</div>
+        <div class="three item">Three</div>
+        <div class="four item">Four</div>
+        <div class="five item">Five</div>
+        <div class="six item">Six</div>
+        <div class="seven item">Seven</div>
+        <div class="eight item">eight</div>
+        <div class="nine item">Nine</div>
+    </div>
+
+
+</body>
+
+</html>

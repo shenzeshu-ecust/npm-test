@@ -24,8 +24,8 @@ let today = new Date("2023-2-1 16:32:00");
 console.log(today); // 2023-02-01T08:32:00.000Z
 let dt = new Date("2012-1-20T03:12:00");
 console.log(dt);
-// 如果未指定具体时间，所以假定时间为格林尼治标准时间（GMT）的午夜零点
-// 并根据运行代码时的用户的时区进行调整
+// ! ---------   如果未指定具体时间，所以假定时间为格林尼治标准时间（GMT）的午夜零点
+// ! ---------   并根据运行代码时的用户的时区进行调整
 
 // ~ 4) new Date(year, month, date, hours, minutes, seconds, ms) 精度可以到1毫秒
 /*
@@ -67,7 +67,7 @@ console.log(new Date().getTimezoneOffset()); // -480 UTC+8
 
     setFullYear(year, [month], [date])
     setMonth(month, [date])
-  * setDate(date)
+  * setDate(date)  其中date默认从1开始  如果设置为0， 也就是设置为上个月的最后一天
     setHours(hour, [min], [sec], [ms])
     setMinutes(min, [sec], [ms])
     setSeconds(sec, [ms])

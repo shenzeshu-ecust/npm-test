@@ -6,10 +6,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^8.0.3"
   },
-  "scripts": {
-    "commit": "git add . && git cz",
-    "prepare": "husky install"
-  },
+  "scripts": {},
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"

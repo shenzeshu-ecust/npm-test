@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper,
+        .wrapper-1,
+        .wrapper-2,
+        .wrapper-3,
+        .wrapper-4,
+        .wrapper-5,
+        .wrapper-6 {
+            display: grid;
+            grid-template-columns: 100px 200px 100px;
+            grid-gap: 5px;
+            grid-auto-rows: 50px;
+            /* justify-content 属性是整个内容区域在容器里面的水平位置（左中右），align-content 属性是整个内容区域的垂直位置（上中下）。它们都有如下的属性值。 */
+            justify-content: start;
+        }
+
+        .wrapper-1 {
+            /* justify-items 属性设置单元格内容的水平位置（左中右），align-items 属性设置单元格的垂直位置（上中下） */
+            /* /justify-items: start | end | center | stretch; */
+            /* 默认拉伸stretch : 占满单元格的整个宽度 */
+            justify-items: end;
+            justify-content: end;
+        }
+
+        .wrapper-2 {
+            justify-items: start;
+            justify-content: center;
+        }
+
+        .wrapper-3 {
+            /* space-around - 每个项目两侧的间隔相等。所以，项目之间的间隔  比   项目与容器边框的间隔大一倍 */
+            justify-content: space-around;
+        }
+
+        .wrapper-4 {
+            justify-content: space-between;
+        }
+
+        .wrapper-5 {
+            /* space-evenly - 项目与项目的间隔相等，项目与容器边框之间也是同样长度的间隔 */
+            justify-content: space-evenly;
+        }
+
+        .wrapper-6 {
+            justify-content: stretch;
+        }
+
+        .one {
+            background: #19CAAD;
+        }
+
+        .two {
+            background: #8CC7B5;
+        }
+
+        .three {
+            background: #D1BA74;
+        }
+
+        .four {
+            background: #BEE7E9;
+        }
+
+        .five {
+            background: #E6CEAC;
+        }
+
+        .six {
+            background: #ECAD9E;
+        }
+
+        .seven {
+            background: #BEEDC7;
+        }
+
+        .eight {
+            background: #F4606C;
+        }
+
+        .nine {
+            background: #A0EEE1;
+        }
+
+        .item {
+            text-align: center;
+            font-size: 200%;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>justify-content: start;</h1>
+    <div class="wrapper">
+        <div class="one item">One</div>
+        <div class="two item">Two</div>
+        <div class="three item">Three</div>
+        <div class="four item">Four</div>
+        <div class="five item">Five</div>
+        <div class="six item">Six</div>
+        <div class="seven item">Seven</div>
+        <div class="eight item">eight</div>
+        <div class="nine item">Nine</div>
+    </div>
+
+    <h1>justify-content: end;</h1>
+    <div class="wrapper-1">
+        <div class="one item">One</div>
+        <div class="two item">Two</div>
+        <div class="three item">Three</div>
+        <div class="four item">Four</div>
+        <div class="five item">Five</div>
+        <div class="six item">Six</div>
+        <div class="seven item">Seven</div>
+        <div class="eight item">eight</div>
+        <div class="nine item">Nine</div>
+    </div>
+
+    <h1>justify-content: center;</h1>
+    <div class="wrapper-2">
+        <div class="one item">One</div>
+        <div class="two item">Two</div>
+        <div class="three item">Three</div>
+        <div class="four item">Four</div>
+        <div class="five item">Five</div>
+        <div class="six item">Six</div>
+        <div class="seven item">Seven</div>
+        <div class="eight item">eight</div>
+        <div class="nine item">Nine</div>
+    </div>
+
+    <h1>justify-content: space-around;</h1>
+    <div class="wrapper-3">
+        <div class="one item">One</div>
+        <div class="two item">Two</div>
+        <div class="three item">Three</div>
+        <div class="four item">Four</div>
+        <div class="five item">Five</div>
+        <div class="six item">Six</div>
+        <div class="seven item">Seven</div>
+        <div class="eight item">eight</div>
+        <div class="nine item">Nine</div>
+    </div>
+
+    <h1>justify-content:space-between</h1>
+
+    <div class="wrapper-4">
+        <div class="one item">One</div>
+        <div class="two item">Two</div>
+        <div class="three item">Three</div>
+        <div class="four item">Four</div>
+        <div class="five item">Five</div>
+        <div class="six item">Six</div>
+        <div class="seven item">Seven</div>
+        <div class="eight item">eight</div>
+        <div class="nine item">Nine</div>
+    </div>
+
+    <h1>justify-content: space-evenly;</h1>
+    <div class="wrapper-5">
+        <div class="one item">One</div>
+        <div class="two item">Two</div>
+        <div class="three item">Three</div>
+        <div class="four item">Four</div>
+        <div class="five item">Five</div>
+        <div class="six item">Six</div>
+        <div class="seven item">Seven</div>
+        <div class="eight item">eight</div>
+        <div class="nine item">Nine</div>
+    </div>
+
+
+    <h1>justify-content: stretch;</h1>
+    <div class="wrapper-5">
+        <div class="one item">One</div>
+        <div class="two item">Two</div>
+        <div class="three item">Three</div>
+        <div class="four item">Four</div>
+        <div class="five item">Five</div>
+        <div class="six item">Six</div>
+        <div class="seven item">Seven</div>
+        <div class="eight item">eight</div>
+        <div class="nine item">Nine</div>
+    </div>
+</body>
+
+</html>

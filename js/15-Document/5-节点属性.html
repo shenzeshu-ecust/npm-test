@@ -79,8 +79,9 @@
         console.log(document.body.firstChild.nodeType) // 3 文本节点
         console.log(document.nodeType) // 9 
         console.log(document.body.lastChild.nodeType) // 1  在 <script> 执行时，最后一个 DOM 节点就是 <script>，因为浏览器还没有处理页面的其余部分。所以结果是 1（元素节点）。
+
         // 4 nodeName, tagName 读取标签名
-        // tagName 仅受元素节点支持（因为它起源于 Element 类），而 nodeName 则可以说明其他节点类型。
+        // tagName 仅元素节点支持（因为它起源于 Element 类），而 nodeName 则可以说明其他节点类型。
         console.log(document.nodeName) // #document
         console.log(document.tagName) // undefined document节点不是元素节点！
         console.log(document.body.tagName) // BODY 标签名称始终是大写的，除非是在 XML 模式下!

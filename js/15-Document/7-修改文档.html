@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .alert {
+            margin: 10px;
+            padding: 15px;
+            border: 1px solid #d6e9c6;
+            border-radius: 4px;
+            color: #3c763d;
+            background-color: #dff0d8;
+        }
+    </style>
+</head>
+
+<body>
+    <ol id="ol">
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+    </ol>
+    <div id="div"></div>
+
+    <div id="first">First</div>
+    <div id="second">Second</div>
+    <ul id="ul"></ul>
+    <script>
+        // 1 创建DOM节点
+        // 1.1 document.createElement(tag) 用给定的标签创建一个新 元素节点（element node）：
+        let div = document.createElement("div");
+        // 1.2 document.createTextNode(text) 用给定的文本创建一个 文本节点：
+        let textNode = document.createTextNode('Here I am');
+        // 类名设置
+        div.className = 'alert'
+        div.innerHTML = "<strong>Hi there</strong> You have read an important message";
+        // 2 插入方法
+        // ele.append(div)
+        document.body.append(div)
+
+        /*
+        这里是更多的元素插入方法，指明了不同的插入位置：
+            node.append(...nodes or strings) —— 在 node 末尾 插入节点或字符串，
+            node.prepend(...nodes or strings) —— 在 node 开头 插入节点或字符串，
+            node.before(...nodes or strings) —— 在 node 前面 插入节点或字符串，(与node平级)
+            node.after(...nodes or strings) —— 在 node 后面 插入节点或字符串，(与node平级)
+            node.replaceWith(...nodes or strings) —— 将 node 替换为给定的节点或字符串。
+        */
+        ol.before('before'); // 将字符串 "before" 插入到 <ol> 前面
+        ol.after('after'); // 将字符串 "after" 插入到 <ol> 后面
+
+        let liFirst = document.createElement('li');
+        liFirst.innerHTML = 'prepend'
+        ol.prepend(liFirst) // 将 liFirst 插入到 <ol> 里的最开始
+
+        let liLast = document.createElement('li');
+        liLast.innerHTML = 'append'
+        ol.append(liLast) // 将 liLast 插入到 <ol> 里的最末尾
+
+        // 2.1 这些方法可以在单个调用中插入多个节点列表和文本片段。
+        div.before('<p>Hello</p>', document.createElement('hr')) // 产生文本的p标签 以及一根横线（hr正确显示 因为是元素）
+        // 这里的文字都被“作为文本”插入，而不是“作为 HTML 代码”。因此像 <、> 这样的符号都会被作转义处理来保证正确显示。
+        // 换句话说，字符串被以一种安全的方式插入到页面中，就像 elem.textContent 所做的一样。
+
+        // 所以，这些方法只能用来插入 DOM 节点或文本片段。
+
+        // ? 但如果我们想要将内容“作为 HTML 代码插入”，让内容中的所有标签和其他东西都像使用 elem.innerHTML 所表现的效果一样，那应该怎么办呢？
+        // 3 elem.insertAdjacentHTML/Text/Element(where, ...)
+
+        // 3.1 elem.insertAdjacentHTML(where, html)
+        /*
+            该方法的第一个参数是代码字（code word），指定相对于 elem 的插入位置。必须为以下之一：
+                "beforebegin" —— 将 html 插入到 elem 之前，
+                "afterbegin" —— 将 html 插入到 elem 开头，
+                "beforeend" —— 将 html 插入到 elem 末尾，
+                "afterend" —— 将 html 插入到 elem 之后。
+
+        */
+        div.insertAdjacentHTML('beforebegin', '<p>Hello</p>');  // 这里的div暂时还是指创建的绿色消息提示~
+        div.insertAdjacentHTML('afterend', '<p>Bye</p>');
+
+        div.insertAdjacentHTML('afterbegin', '<p>内部开始</p>');
+        div.insertAdjacentHTML('beforeend', '<p>内部末尾</p>');
+        /*
+        这个方法有两个兄弟：
+            elem.insertAdjacentText(where, text) —— 语法一样，但是将 text 字符串“作为文本”插入而不是作为 HTML，
+            elem.insertAdjacentElement(where, elem) —— 语法一样，但是插入的是一个元素。
+        它们的存在主要是为了使语法“统一”。实际上，大多数时候只使用 insertAdjacentHTML。因为对于元素和文本，我们有 append/prepend/before/after 方法 —— 它们也可以用于插入节点/文本片段，但写起来更短。
+
+        */
+        // 4 节点移除 node.remove()
+        setTimeout(() => div.remove(), 2000)
+
+        // 如果我们要将一个元素 移动 到另一个地方，则无需将其从原来的位置中删除。
+        // 因为所有插入方法都会自动从旧位置删除该节点。
+        // 例如，让我们进行元素交换：
+        second.after(first); // 获取 #second，并在其后面插入 #first
+
+        // 5 克隆元素 elem.cloneNode(true)
+        // 调用 elem.cloneNode(true) 来创建元素的一个“深”克隆 —— 具有所有特性（attribute）和子元素。
+        // 调用 elem.cloneNode(false)：克隆 不包括子元素。
+        let div2 = div.cloneNode(true) // 克隆消息
+        let div3 = div.cloneNode(false) // 克隆消息
+
+        div2.querySelector('strong').innerHTML = 'Bye there~' // 修改
+
+        div.after(div2, div3) // 在已存在的div后面添加div2, div3
+
+        // 5 DocumentFragment
+        // DocumentFragment 是一个特殊的 DOM 节点，用作来传递节点列表的包装器（wrapper）。
+        // 我们可以向其附加其他节点，但是当我们将其插入某个位置时，则会插入其内容。
+
+        // 下面这段代码中的 getListContent 会生成带有 <li> 列表项的片段，然后将其插入到 <ul> 中
+        function getListContent() {
+            let fragment = new DocumentFragment()
+            for (let i = 1; i <= 3; i++) {
+                let li = document.createElement('li')
+                li.append(i)
+                fragment.append(li)
+            }
+            return fragment
+        }
+        ul.append(getListContent()) // 最终就好像fragment从来没出现过一样~
+        // DocumentFragment 很少被显式使用。如果可以改为返回一个节点数组，那为什么还要附加到特殊类型的节点上呢？重写示例：
+        function getListContentV2() {
+            let result = []
+            for (let i = 1; i <= 3; i++) {
+                let li = document.createElement('li')
+                li.append(i)
+                result.push(li)
+            }
+            return result
+        }
+
+        ul.append(...getListContentV2())
+
+        // 6 老式的insert/remove方法
+        // 由于历史原因，还存在“老式”的 DOM 操作方法。
+        // 这些方法来自真正的远古时代。如今，没有理由再使用它们了，因为诸如 append，prepend，before，after，remove，replaceWith 这些现代方法更加灵活。
+
+        // 6.1 parentElm.appendChild(node) 将 node 附加为 parentElem 的最后一个子元素。
+        let nl = document.createElement('li')
+        nl.innerHTML = 'xinde '
+        ol.appendChild(nl)
+
+        // 6.2 parentElem.insertBefore(node, nextSibling) 在 parentElem 的 nextSibling 前插入 node
+        ol.insertBefore(document.createElement('hr'), ol.children[1])
+        ol.insertBefore(document.createElement('hr'), ol.firstChild)
+        // 6.3 parentElm.replaceChild(node) 从 parentElem 中删除 node（假设 node 为 parentElem 的后代）。
+        let lili = ol.firstElementChild
+        ol.removeChild(lili)
+        // 所有这些方法都会返回插入/删除的节点。换句话说，parentElem.appendChild(node) 返回 node。但是通常我们不会使用返回值，我们只是使用对应的方法。
+
+
+        // 7 远古的document.write()
+        document.write('<b>Hello from JS</b>');
+        // 调用 document.write(html) 意味着将 html “就地马上”写入页面。html 字符串可以是动态生成的，所以它很灵活。我们可以使用 JavaScript 创建一个完整的页面并对其进行写入。
+        // 由于以下重要的限制，在现代脚本中我们很少看到它：
+        // ———— document.write 调用只在页面加载时工作。如果我们稍后调用它，则现有文档内容将被擦除。
+        // setTimeout(() => document.write('<b>...By this.</b>', 1000)) // 原先所有文档内容没了，只剩By this字段了
+
+
+        // 因此，在某种程度上讲，它在“加载完成”阶段是不可用的，这与我们上面介绍的其他 DOM 方法不同。这是它的缺陷。
+        /*
+            还有一个好处。从技术上讲，当在浏览器正在读取（“解析”）传入的 HTML 时调用 document.write 方法来写入一些东西，浏览器会像它本来就在 HTML 文本中那样使用它。
+            所以它运行起来出奇的快，因为它 不涉及 DOM 修改。它直接写入到页面文本中，而此时 DOM 尚未构建。
+            因此，如果我们需要向 HTML 动态地添加大量文本，并且我们正处于页面加载阶段，并且速度很重要，那么它可能会有帮助。
+            但实际上，这些要求很少同时出现。我们可以在脚本中看到此方法，通常是因为这些脚本很旧。
+        */
+
+    </script>
+</body>
+
+</html>

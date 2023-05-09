@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    事件 是某事发生的信号。所有的 DOM 节点都生成这样的信号（但事件不仅限于 DOM）。 <br>
+    <h2>1 一些不是很熟悉的事件：</h2>
+    <ul>
+        <li>鼠标事件：
+            contextmenu —— 当鼠标右键点击一个元素时。</li>
+        <li>表单（form）元素事件：
+            submit —— 当访问者提交了一个 <form> 时。</li>
+        <li>Document 事件：
+            DOMContentLoaded —— 当 HTML 的加载和处理均完成，DOM 被完全构建完成时</li>
+        <li>CSS 事件：
+            transitionend —— 当一个 CSS 动画完成时。
+        </li>
+    </ul>
+
+    <h2>2 分配事件处理程序的方法—— 3种</h2>
+    <ol>
+        <li>
+            <h4>HTML特性：</h4>
+            处理程序可以设置在 HTML 中名为 on<event> 的特性（attribute）中
+                <input value="Click me" onclick="count()" type="button">
+                在标记（markup）中，事件名确实需要括号：
+                这个区别很容易解释。当浏览器读取 HTML 特性（attribute）时，浏览器将会使用 特性中的内容 创建一个处理程序。
+                <!-- 
+                    所以，标记（markup）会生成下面这个属性：
+
+                        button.onclick = function() {
+                            sayThanks(); // <-- 特性（attribute）中的内容变到了这里
+                        };
+                -->
+                HTML 特性名是大小写不敏感的，所以 ONCLICK 和 onClick 以及 onCLICK 都一样可以运行。但是特性通常是小写的：onclick。
+
+        </li>
+        <li>
+            <h4>DOM属性：</h4>
+            1)我们可以使用 DOM 属性（property）on<event> 来分配处理程序。 <br>
+                2) 要移除一个处理程序 —— 赋值 elem.onclick = null。
+                <input id="elem" type="button" value="Click me">
+        </li>
+        <li>
+            <h4>addEventListener:</h4>
+            HTML特性与DOM属性分配处理程序的问题是——不能为一个时间分配多个处理程序
+            <p>element.addEventListener(event, handler[, options]);</p>
+            移除事件处理程序
+            <p>element.removeEventListener(event, handler[, options]);</p>
+            <button class="btn">点击</button>
+        </li>
+    </ol>
+    <script>
+        function count() {
+            alert('111')
+        }
+        // 1 如果同一个对象 同时存在HTML特性事件和DOM属性事件，那么DOM属性事件会把HTML特性事件覆盖
+
+        // 2 event对象
+        elem.onclick = function (e) {
+            console.log(e) // 事件对象
+            console.log(e.type) // 事件类型，这里是 "click"。
+            // 处理事件的元素。这与 this 相同，除非处理程序是一个箭头函数，或者它的 this 被绑定到了其他东西上，之后我们就可以从 event.currentTarget 获取元素了。
+            console.log(e.currentTarget)
+            console.log(this) // 处理程序中的 this 的值是对应的元素。就是处理程序所在的那个元素。
+        }
+
+
+
+        // 3 element.addEventListener(event, handler[, options]);
+        /*
+            options
+            具有以下属性的附加可选对象：
+
+                once：如果为 true，那么会在被触发后自动删除监听器。
+                capture：事件处理的阶段，我们稍后将在 冒泡和捕获 一章中介绍。由于历史原因，options 也可以是 false/true，它与 {capture: false/true} 相同。
+                passive：如果为 true，那么处理程序将不会调用 preventDefault()，我们稍后将在 浏览器默认行为 一章中介绍。
+
+
+        */
+
+        /*
+        elem.addEventListener( "click" , () => alert('Thanks!'));
+        // ❎ 这种方式无法移除事件处理函数，因为handler不是同一个函数对象
+        elem.removeEventListener( "click", () => alert('Thanks!'));
+
+        ✅正确做法：
+        function handler() {
+            alert( 'Thanks!' );
+        }
+
+        input.addEventListener("click", handler);
+        // ....
+        input.removeEventListener("click", handler);
+        */
+        // 多次调用 addEventListener 允许添加多个处理程序
+
+
+        // 4 对于某些事件，只能通过 addEventListener 设置处理程序
+        // 例如，DOMContentLoaded 事件，该事件在文档加载完成并且 DOM 构建完成时触发。
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("DOM built");
+        }); // 还有transitionend事件
+
+
+        // 5 对象处理程序：handleEvent（1 可以改变handler的this指向；2 动态切换handler 3 不用为不同事件定义不同handler）
+        // 我们不仅可以分配函数，还可以使用 addEventListener 将一个对象分配为事件处理程序。当事件发生时，就会调用该对象的【 handleEvent 】方法。
+
+        const btn = document.querySelector('.btn')
+        let obj = {
+            name: 'zsz',
+            handleEvent(e) {
+                console.log(this.name) // zsz 好处1： this 是指实现EventListener接口的对象，这里指向obj对象。而普通的函数中的this 指向事件源
+                console.log(e.type + '--' + e.currentTarget)
+            }
+        }
+        btn.addEventListener('click', obj)
+
+        // 好处2： 可以动态切换绑定事件的处理函数，而不需要remove之前的事件
+        // 5秒后动态改变事件处理函数
+        function changeHandler() {
+            obj.handleEvent = function () {
+                alert("change the click handle!");
+            };
+        }
+        setTimeout(function () {
+            changeHandler();
+        }, 5000);
+
+        // 好处3：可以把不同事件的处理逻辑放到一起，根据事件类型区分即可，而不用为每个事件类型定义不同的处理函数了。因为处理逻辑都在同一对象中，也使程序更加“内聚”了。
+        // 复杂的情况—— 类
+        class Menu {
+            handleEvent(e) {
+                switch (e.type) {
+                    case 'mousedown':
+                        btn.innerHTML = 'Mouse down'
+                        break;
+                    case 'mouseup':
+                        btn.innerHTML = 'Mouse up and released'
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        let menu = new Menu()
+        btn.addEventListener('mousedown', menu)
+        btn.addEventListener('mouseup', menu)
+        // better 
+        class Menu1 {
+            handleEvent(event) {
+                // mousedown -> onMousedown
+                let method = 'on' + event.type[0].toUpperCase() + event.type.slice(1);
+                this[method](event);
+            }
+
+            onMousedown() {
+                elem.innerHTML = "Mouse button pressed";
+            }
+
+            onMouseup() {
+                elem.innerHTML += "...and released.";
+            }
+        }
+
+        class Menu2 {
+            handleEvent(e) {
+                const method = `on${e.type}`
+                this[method](e)
+            }
+            onclick() {
+                console.log('click')
+            }
+            onmousedown() {
+                console.log('mousedown')
+            }
+        }
+        const menu2 = new Menu2()
+        div.addEventListener('mousedown', Menu2)
+        div.addEventListener('click', Menu2)
+
+    </script>
+</body>
+
+</html>

@@ -393,31 +393,118 @@ const TOUCH_RANGE_WAY_LABEL_OPTIONS = [
 // console.log(Object.values(b)[]);
 
 // a为是都线上， ’1‘为线上
-let array = [
-  { a: true },
-  { a: false },
-  { a: true },
-  { a: false },
-  { a: false },
-  { a: true },
-  { a: false },
-];
-// 双指针
-function sort(arr) {
-  let i = 0;
-  let j = arr.length - 1;
+// let array = [
+//   { a: true },
+//   { a: false },
+//   { a: true },
+//   { a: false },
+//   { a: false },
+//   { a: true },
+//   { a: false },
+// ];
+// // 双指针
+// function sort(arr) {
+//   let i = 0;
+//   let j = arr.length - 1;
+//   while (i < j) {
+//     while (i < j && arr[j].a === false) j--;
+//     while (i < j && arr[i].a === true) i++;
+//     if (i < j) {
+//       let temp = arr[i];
+//       arr[i] = arr[j];
+//       arr[j] = temp;
+//       i++;
+//       j--;
+//     }
+//   }
+//   return arr;
+// }
+// let ress = sort(array);
+// console.log(ress);
+
+// let obj = {
+//   name: "szs",
+//   age: 17,
+//   [Symbol.toPrimitive](hint) {
+//     console.log(hint);
+//     if (hint === "string") return `名字是：${this.name}`;
+//     else return this.age;
+//   },
+// };
+
+// console.log(+obj);
+// console.log(obj.toString()); // 这个不行 还是[object Object]
+
+let range = {
+  from: 1,
+  to: 5,
+  [Symbol.iterator]() {
+    return {
+      current: this.from,
+      last: this.to,
+      next() {
+        if (this.current > this.last) {
+          return { done: true };
+        } else {
+          return { done: false, value: this.current++ };
+        }
+      },
+    };
+  },
+};
+
+for (let v of range) {
+  console.log(v);
+}
+
+function quickSort(nums, left, right) {
+  if (left >= right) return;
+  let pivot = left;
+  let i = left;
+  let j = right;
   while (i < j) {
-    while (i < j && arr[j].a === false) j--;
-    while (i < j && arr[i].a === true) i++;
+    while (i < j && nums[j] >= nums[pivot]) j--;
+    while (i < j && nums[i] <= nums[pivot]) i++;
     if (i < j) {
-      let temp = arr[i];
-      arr[i] = arr[j];
-      arr[j] = temp;
-      i++;
-      j--;
+      [nums[i], nums[j]] = [nums[j], nums[i]];
     }
   }
-  return arr;
+  [nums[pivot], nums[i]] = [nums[i], nums[pivot]];
+  quickSort(nums, left, i - 1);
+  quickSort(nums, i + 1, right);
 }
-let ress = sort(array);
-console.log(ress);
+let arr11 = [2, 11, 1, 1, 5, 9, 0];
+quickSort(arr11, 0, arr11.length - 1);
+console.log(arr11);
+
+function quickSort(nums, left, right) {
+  if (left >= right) return left;
+  let pivot = left;
+  let i = left;
+  let j = right;
+  while (i < j) {
+    while (i < j && nums[j] >= nums[pivot]) j--;
+    while (i < j && nums[i] <= nums[pivot]) i++;
+    if (i < j) [nums[i], nums[j]] = [nums[j], nums[i]];
+  }
+  [nums[pivot], nums[i]] = [nums[i], nums[pivot]];
+  quickSort(nums, left, i - 1);
+  quickSort(nums, i + 1, right);
+}
+function myNew() {
+  let obj = {}; // 创建于一个新对象
+  let constructor = [...arguments][0];
+  let args = [...arguments].slice(1);
+  // 将this 指向这个新对象
+  // obj.__proto__ = constructor.prototype;
+  Object.setPrototypeOf(obj, constructor.prototype);
+  // 执行构造函数
+  let res = constructor.apply(obj, args);
+  let flag = res && res instanceof Object;
+  return flag ? res : obj;
+}
+function A(name) {
+  this.name = name;
+}
+let a = myNew(A, "szs");
+console.log(a);
