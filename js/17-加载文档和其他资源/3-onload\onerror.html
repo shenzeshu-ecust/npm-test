@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 1 script.onload(它会在脚本加载并执行完成时触发。)
+        let script = document.createElement('script');
+
+        // 可以从任意域（domain），加载任意脚本
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.js"
+        document.head.append(script);
+
+        script.onload = function () {
+            // 因此，在 onload 中我们可以使用脚本中的变量，运行函数等。
+            // 该脚本创建了一个变量 "_"
+            alert(_.VERSION); // 显示库的版本
+        };
+
+        // 2 script.onerror
+        let script1 = document.createElement('script');
+        script1.src = "https://example.com/404.js"; // 没有这个脚本
+        document.head.append(script1);
+
+        script1.onerror = function () {
+            // 请注意，在这里我们无法获取更多 HTTP error 的详细信息。我们不知道 error 是 404 还是 500 或者其他情况。只知道是加载失败了。
+            alert("Error loading " + this.src); // Error loading https://example.com/404.js
+        };
+
+        /*
+        onload/onerror 事件仅跟踪加载本身。
+
+            在脚本处理和执行期间可能发生的 error 超出了这些事件跟踪的范围。
+            也就是说：如果脚本成功加载，则即使脚本中有编程 error，也会触发 onload 事件。
+            
+            如果要跟踪脚本 error，可以使用 window.onerror 全局处理程序。
+
+        */
+
+        // 3 其他资源也适用于load和error。基本上适用于具有外部 src 的任何资源
+        let img = document.createElement('img');
+        img.src = "https://js.cx/clipart/train.gif"; // (*)
+
+        img.onload = function () {
+            alert(`Image loaded, size ${img.width}x${img.height}`);
+        };
+
+        img.onerror = function () {
+            alert("Error occurred while loading image");
+        };
+        /*
+        但是有一些注意事项：
+
+            大多数资源在被添加到文档中后，便开始加载。
+            但是 <img> 是个例外。它要等到获得 src (*) 后才开始加载。
+
+            对于 <iframe> 来说，iframe 加载完成时会触发 iframe.onload 事件，无论是成功加载还是出现 error。
+
+        */
+
+        // 4 跨源策略
+        // 如果监听跨域的资源error，关于脚本内部的任何信息（包括error堆栈跟踪）都被隐藏了
+        /*
+        要允许跨源访问，<script> 标签需要具有 crossorigin 特性（attribute），并且远程服务器必须提供特殊的 header。
+
+        这里有三个级别的跨源访问：
+
+            无 crossorigin 特性 —— 禁止访问。
+
+            crossorigin="anonymous" —— 如果服务器的响应带有包含 * 或
+            我们的源（origin）的 header Access-Control-Allow-Origin，则允许访问。
+            浏览器不会将授权信息和 cookie 发送到远程服务器。
+
+            crossorigin="use-credentials" —— 如果服务器发送回带有我们的源的 header Access-Control-Allow-Origin 和
+             Access-Control-Allow-Credentials: true，则允许访问。
+             浏览器会将授权信息和 cookie 发送到远程服务器。
+
+        */
+
+        window.onerror = function (message, url, line, col, errorObj) {
+            alert(`${message}\n${url}, ${line}:${col}`);
+        };
+    </script>
+    // 想要跨域，需要加上crossorigin特性。如果不关系cookie，可以选择anonymous
+    <script crossorigin="anonymous"
+        src="https://cors.javascript.info/article/onload-onerror/crossorigin/error.js"></script>
+
+
+    <script>
+        // 使用回调函数加载图片
+        // 创建一个函数 preloadImages(sources, callback)，来加载来自数组 source 的所有图片，并在准备就绪时运行 callback。
+        // 如果出现错误，函数应该仍假定图片已经“加载完成”。
+
+        /*
+        算法：
+
+            为每个资源创建 img。
+            为每个图片添加 onload/onerror。
+            在 onload 或 onerror 被触发时，增加计数器。
+            当计数器值等于资源值时 —— 我们完成了：callback()。
+
+        */
+        function preloadImages(sources, callback) {
+            let count = 0
+
+            function onLoad() {
+                count++
+                if (count === sources.length) callback()
+            }
+            sources.forEach((source) => {
+                let img = document.createElement("img")
+                // 一定要先绑定 再加载图片
+                // 如果图片从缓存中加载，速度非常快以至于没来得及绑定事件就加载完毕，自然不会触发绑定事件
+                img.onload = img.onerror = onLoad
+                img.src = source
+
+            })
+        }
+        // ---------- The test ----------
+
+        let sources = [
+            "https://en.js.cx/images-load/1.jpg",
+            "https://en.js.cx/images-load/2.jpg",
+            "https://en.js.cx/images-load/3.jpg"
+        ];
+
+        // add random characters to prevent browser caching
+        for (let i = 0; i < sources.length; i++) {
+            sources[i] += '?' + Math.random();
+        }
+
+        // for each image,
+        // let's create another img with the same src and check that we have its width
+        function testLoaded() {
+            let widthSum = 0;
+            for (let i = 0; i < sources.length; i++) {
+                let img = document.createElement('img');
+                img.src = sources[i];
+                widthSum += img.width;
+            }
+            alert(widthSum);
+        }
+
+        // should output 300
+        preloadImages(sources, testLoaded);
+    </script>
+</body>
+
+</html>

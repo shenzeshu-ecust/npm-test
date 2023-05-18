@@ -508,3 +508,41 @@ function A(name) {
 }
 let a = myNew(A, "szs");
 console.log(a);
+
+function delay(fn, ms) {
+  return new Proxy(fn, {
+    apply(target, thisArgs, args) {
+      setTimeout(() => target.apply(thisArgs, args), ms);
+    },
+  });
+}
+
+function quickSort(nums, left, right) {
+  if (left >= right) return;
+  let i = left;
+  let j = right;
+  let pivot = left;
+  while (i < j) {
+    while (i < j && nums[j] >= nums[pivot]) j--;
+    while (i < j && nums[i] <= nums[pivot]) i++;
+    if (i < j) {
+      [nums[i], nums[j]] = [nums[j], nums[i]];
+    }
+  }
+  [nums[pivot], nums[i]] = [nums[i], nums[pivot]];
+  quickSort(nums, left, i - 1);
+  quickSort(nums, i + 1, right);
+}
+
+class Bus {
+  constructor() {
+    this.callbacks = [];
+  }
+  $on(name, callback) {
+    this.callbacks[name] = this.callbacks[name] || [];
+    this.callbacks[name].push(callback);
+  }
+  $emit(name, args) {
+    this.callbacks[name].forEach((cb) => cb(args));
+  }
+}

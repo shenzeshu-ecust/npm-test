@@ -19,7 +19,7 @@ console.log(p.test); // 5 我们也可以从 proxy 对象读取它 (2)
 /*
 由于没有捕捉器，所有对 proxy 的操作都直接转发给了 target。
 
-    写入操作 proxy.test= 会将值写入 target。
+    写入操作 proxy.test = 5会将值写入 target。
     读取操作 proxy.test 会从 target 返回对应的值。
     迭代 proxy 会从 target 返回对应的值。
 
@@ -233,6 +233,7 @@ p = new Proxy(p, {
 });
 
 console.log(Object.keys(p)); // b
+
 // ! 6 具有 “deleteProperty” 和其他捕捉器的受保护属性
 // 有一个普遍的约定，即以下划线 _ 开头的属性和方法是内部的。不应从对象外部访问它们。
 
