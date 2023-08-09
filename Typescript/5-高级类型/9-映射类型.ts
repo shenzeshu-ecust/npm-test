@@ -55,7 +55,7 @@ type ResRequired = Required<Res>;
 */
 
 // ! 3 Readonly
-// 语法： type required = Required<T>
+// 语法： type readonly = readonly<T>
 type ResReadonly = Readonly<Res>;
 
 /*

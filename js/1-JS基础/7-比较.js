@@ -26,8 +26,8 @@ console.log("Bee" > "Be"); // true
 console.log("2" > 1); // true，字符串 '2' 会被转化为数字 2
 console.log("01" == 1); // true，字符串 '01' 会被转化为数字 1)
 // 对于布尔类型值，true 会被转化为 1、false 转化为 0。
-console.log(true === 1); // true
-console.log(false === 0); // true
+console.log(true == 1); // true
+console.log(false == 0); // true
 /*
     有时候，以下两种情况会同时发生：
 
@@ -95,3 +95,13 @@ console.log(undefined == 0); // false (3)
 */
 // test
 console.log(null == "\n0\n"); // false undefined只与null 相等
+
+const a = {
+  isLeader: false,
+  isSelf: true,
+  nickName: "沈泽庶",
+  avatar:
+    "https://images3.c-ctrip.com/zt/activity/20230529-special-troops/touxiang.png",
+  point: 56,
+  memberBonus: "10000.00",
+};

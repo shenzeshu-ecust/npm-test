@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>1 网站最大内容渲染时间LCP。在大多数情况下，约 70-80% 的网站是因为需要渲染或下载图片引起的。</h1>
+    <p>为了优化 LCP 的时间，我们可以让使静态 HTML 中的图片资源更易于被发现，这有可以让浏览器的预加载扫描程序更早的找到并加载它。</p>
+    <p>使用背景图片、客户端渲染和懒加载等方法是可能存在问题的，它们不利于 LCP 的发现。</p>
+    <!-- 背景图不会被预加载扫描程序找到 -->
+    <div style="background-image: url(../assets/grass.jpg)"> </div>
+    <!-- 通过js加载的图片也不容易被发现 -->
+    <img data-src="../assets/grass.jpg" alt="">
+    <!-- 懒加载也会被预加载扫描器忽略 -->
+    <img src="../assets/grass.jpg" alt="" loading="lazy">
+
+    <!-- 而使用传统的 img 元素或添加预加载链接等方式则可以使图像资源被预加载扫描程序发现，并被浏览器尽早加载。 -->
+    <p>但是在将 LCP 图像优化的可以被易于发现后，并不代表就可以更快的加载。因为浏览器更倾向于优先处理阻塞渲染的内容，如 CSS 和同步 JavaScript，而不是图像。</p>
+    <!-- 1.1 使用 fetchpriority -->
+    <img src="../assets/grass.jpg" alt="" fetchpriority="high">
+    <!-- 通过low和high降低非关键资源的优先级 -->
+    <link rel="preload" href="../assets/grass.jpg" as="image" fetchpriority="high">
+    <p>
+        新的 fetch proirity API 允许我们自定义标记资源的优先级。
+        只需将 fetchprority 属性添加到我们的图像或预加载 LCP 元素中，就可以使浏览器更早地开始下载它们，并具有更高的优先级，这可以对
+        LCP 时间产生很大的影响。
+        这个 API 已经在基于 chromium 的浏览器中提供，Safari 和 Firefox 也正在实现相关代码，并且这个属性是渐进式的，在不支持它的其他浏览器中会被简单地忽略。
+        回到之前的例子，我们解决了图片可尽早被发现的问题，但是请求图像和开始下载依然会存在很大的延迟。使用 fetch priority API 可以将延迟最小化，并且让图像尽快下载。
+    </p>
+
+
+    <h1>2 累积布局移位（CLS）优化建议</h1>
+    <p>CLS 是网页视觉稳定性的度量指标，意味着当有新的内容加载时，页面的内容是否经常跳动。</p>
+    <div>2.1 即使不能确定元素大小，也使用min-height保留最小空间，减少CLS的影响</div>
+    <div>2.2 动画和转换中，不要使用定位的left，right之类，会影响布局。</div>
+    <div>
+        使用 translate 进行相同的动画不会在浏览器的布局处理中移动内容，而是在合成器层中进行的，
+        除了对于浏览器来说工作量较小之外，这还意味着它无法影响其他的内容，这也意味着它对 CLS 的影响就变小了。
+    </div>
+
+    <h1>
+        3 最后我们来看看用户响应相关的优化建议，这包括用户和页面进行首次交互操作所花费的时间（FID），以及更全面的交互到下一次绘制的时间（INP）。
+        网站响应性的关键在于确保不阻塞主线程，因为这会导致浏览器无法响应用户输入。
+    </h1>
+    <p>3.1 分解长任务：相当于给浏览器一些喘息的空间，以便它能够响应用户输入。 </p>
+    <div>我们可以使用设置超时 settimeout 0 毫秒延迟来放入非关键的工作和新的任务，这些新任务就会在已经排队的任何任务之后执行。</div>
+</body>
+
+</html>

@@ -7,21 +7,21 @@
 
 Type1|Type2|Type3 
  */
-var val: string|number 
-val = 12 
-console.log("数字为 "+ val) 
-val = "Runoob" 
-console.log("字符串为 " + val)
-function disp(name:string|string[]) { 
-    if(typeof name == "string") { 
-            console.log(name) 
-    } else { 
-            var i; 
-            for(i = 0;i<name.length;i++) { 
-            console.log(name[i])
-            } 
-    } 
-} 
-disp("Runoob") 
-console.log("输出数组....") 
-disp(["Runoob","Google","Taobao","Facebook"])
+var val: string | number;
+val = 12;
+console.log("数字为 " + val);
+val = "Runoob";
+console.log("字符串为 " + val);
+function disp(name: string | string[]) {
+  if (typeof name == "string") {
+    console.log(name);
+  } else {
+    var i;
+    for (i = 0; i < name.length; i++) {
+      console.log(name[i]);
+    }
+  }
+}
+disp("Runoob");
+console.log("输出数组....");
+disp(["Runoob", "Google", "Taobao", "Facebook"]);

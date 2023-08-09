@@ -49,6 +49,10 @@
             function onClickCopy() {
                 const div = document.querySelector('#div')
                 copyText(div.value)
+                const text = document.createElement('h3')
+                text.innerText = '复制成功！'
+                document.body.append(text)
+                setTimeout(() => text.remove(), 1000)
             }
             const button = document.querySelector('.btn')
             button.addEventListener('click', onClickCopy)

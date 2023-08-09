@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    新版本 3个will （除了componentWillUnmount）需要加 UNSAFE_ 前缀 
+    新版本 3个will （除了componentWillUnmount）需要加 UNSAFE_ 前缀
     <div id="root"></div>
 
 </body>
@@ -30,10 +30,10 @@
             let { count } = this.state
             this.setState({ count: count + 1 });
         }
-        unMount= ()=> {
+        unMount = () => {
             ReactDOM.unmountComponentAtNode(document.getElementById('root'))
         }
-        force = ()=> {
+        force = () => {
             // 强制更新下
             console.log('Count---强制更新下');
             this.forceUpdate()
@@ -41,12 +41,12 @@
         // 组件将要挂载的钩子
         UNSAFE_componentWillMount() {
             console.log('Count---UNSAFE_componentWillMount');
-            
+
         }
         // 组件已经挂载的钩子
         componentDidMount() {
             console.log('Count---componentDidMount');
-            
+
         }
         // 控制组件数据更新 - 相当于阀门 不写该函数默认返回true
         // 必须返回一个布尔值
@@ -54,7 +54,7 @@
         // setState()进入
         shouldComponentUpdate(nextProps, nextState, nextContext) {
             console.log('Count---shouldComponentUpdate');
-             return true
+            return true
         }
         // 组件将要更新 ————forceUpdate()  强制更新 跳过shouldComponentUpdate()
         UNSAFE_componentWillUpdate() {
@@ -63,7 +63,7 @@
         // 组件完成更新
         componentDidUpdate(prevProps, prevState) {
             console.log('Count---componentDidUpdate');
-            
+
         }
         // 组件将要卸载
         componentWillUnmount() {
@@ -87,7 +87,7 @@
     }
     /*
     1 初始化阶段：由ReactDOM.render触发 初次渲染
-    construcor
+    constructor
     componentWillMount
     render
     componentDidMount         ---> 用于初始化：开启定时器、发起网络请求、订阅
@@ -99,20 +99,20 @@
     3 卸载组件： 由ReactDOM.unmountComponentAtNode触发
     componentWillUnmount      ---> 用于收尾：关闭定时器、取消订阅
     */
-    
+
     class A extends React.Component {
-        state = {carName:'奔驰'}
-        changeCar= () =>{
-            this.setState({carName:'奥拓'});
+        state = { carName: '奔驰' }
+        changeCar = () => {
+            this.setState({ carName: '奥拓' });
         }
         render() {
-            return(
+            return (
                 <div>
-                    <div>我是A组件</div>   
+                    <div>我是A组件</div>
                     <button onClick={this.changeCar}>
-                        换车    
-                    </button> 
-                    <B carName={this.state.carName}/>
+                        换车
+                    </button>
+                    <B carName={this.state.carName} />
                 </div>
             )
         }
@@ -121,19 +121,19 @@
         // 组件将要接受  新的props 的时候！！！
         // 初次渲染时 不调用
         UNSAFE_componentWillReceiveProps(nextProps) {
-            console.log('B---UNSAFE_componentWillReceiveProps',nextProps);
+            console.log('B---UNSAFE_componentWillReceiveProps', nextProps);
         }
         shouldComponentUpdate(nextProps, nextState, nextContext) {
             console.log('B---shouldComponentUpdate');
-             return true
+            return true
         }
         componentWillUpdate() {
             console.log('B---componentWillUpdate');
-            
+
         }
         componentDidUpdate(prevProps, prevState) {
             console.log('B---componentDidUpdate');
-            
+
         }
         render() {
             console.log('B---render');

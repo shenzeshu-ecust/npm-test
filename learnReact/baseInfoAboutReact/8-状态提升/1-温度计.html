@@ -18,7 +18,9 @@
     <fieldset>
         <legend>状态提升（组件数据同步、共享）</legend>
         在 React 中，将多个组件中需要共享的 state 向上移动到它们的最近共同父组件中，便可实现共享 state。这就是所谓的“状态提升”。
-        在 React 应用中，任何可变数据应当只有一个相对应的唯一“数据源”。通常，state 都是首先添加到需要渲染数据的组件中去。然后，如果其他组件也需要这个 state，那么你可以将它提升至这些组件的最近共同父组件中。你应当依靠自上而下的数据流，而不是尝试在不同组件间同步 state。
+        在 React 应用中，任何可变数据应当只有一个相对应的唯一“数据源”。
+        通常，state 都是首先添加到需要渲染数据的组件中去。然后，如果其他组件也需要这个 state，那么你可以将它提升至这些组件的最近共同父组件中。
+        你应当依靠自上而下的数据流，而不是尝试在不同组件间同步 state。
     </fieldset>
 </body>
 <script type="text/babel">
@@ -81,34 +83,34 @@
             this.handleCelsiusChange = this.handleCelsiusChange.bind(this)
             this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this)
             this.state = {
-                temperature:'',
-                scale:'c'
+                temperature: '',
+                scale: 'c'
             }
 
         }
         handleCelsiusChange(temperature) {
-            this.setState({scale:'c',temperature});
+            this.setState({ scale: 'c', temperature });
         }
         handleFahrenheitChange(temperature) {
-            this.setState({scale:'f',temperature});
+            this.setState({ scale: 'f', temperature });
         }
         render() {
             const scale = this.state.scale
             const temperature = this.state.temperature
-            const celsius = scale === 'f' ? tryConvert(temperature,toCelsius):temperature
-            const fahrenheit = scale === 'c' ? tryConvert(temperature,toFahrenheit):temperature
+            const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature
+            const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature
 
             return (
                 <div>
-                    <TemperatureInput 
-                    scale="c" 
-                    temperature={celsius}
-                    onTemperatureChange={this.handleCelsiusChange}
+                    <TemperatureInput
+                        scale="c"
+                        temperature={celsius}
+                        onTemperatureChange={this.handleCelsiusChange}
                     />
-                    <TemperatureInput 
-                    scale="f" 
-                    temperature={fahrenheit}
-                    onTemperatureChange={this.handleFahrenheitChange}
+                    <TemperatureInput
+                        scale="f"
+                        temperature={fahrenheit}
+                        onTemperatureChange={this.handleFahrenheitChange}
                     />
                     <BoilingVerdict celsius={parseFloat(celsius)} />
 

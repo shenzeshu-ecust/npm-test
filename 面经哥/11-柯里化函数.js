@@ -12,13 +12,10 @@ function curry(fn) {
 /*
     * 只允许确定参数长度的函数
 
+
     柯里化要求函数具有固定数量的参数。
     使用 rest 参数的函数，例如 f(...args)，不能以这种方式进行柯里化。
 
  */
 
-new Promise(() =>
-  setTimeout(function () {
-    throw new Error("Error");
-  }, 0)
-);
+const s = a;

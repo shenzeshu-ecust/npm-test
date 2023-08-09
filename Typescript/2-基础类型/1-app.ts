@@ -5,45 +5,47 @@
  *
  */
 // 1） 变量的值会动态改变时，比如来自用户的输入，任意值类型可以让这些变量跳过编译阶段的类型检查，示例代码如下：
-let x:any = 1;
-x = 'i a m'
-x = false
+let x: any = 1;
+x = "i a m";
+x = false;
 // 2） 改写现有代码时，任意值允许在编译时可选择地包含或移除类型检查，示例代码如下
-let y:any = 4
-y.ifItExists() // 正确
+let y: any = 4;
+y.ifItExists(); // 正确
 y.toFixed(); // 正确
+
 // 2 定义存储各种类型数据的数组时，示例代码如下：
-let arrList:any[] = [1,false,'fine']
-arrList[1] = 100
+let arrList: any[] = [1, false, "fine"];
+arrList[1] = 100;
 // 法1：数组类型
-let arr:number[] = [1,2]
+let arr: number[] = [1, 2];
 // 法2：或者使用泛型
-let Arr:Array<number> = [2,3]
+let Arr: Array<number> = [2, 3];
+
 // 3 元祖 元组类型用来表示已知元素数量和类型的数组，各元素的类型不必相同，对应位置的类型需要相同。
-let z:[string,number]
-z = ['Run',1]
+let z: [string, number];
+z = ["Run", 1];
 console.log(z[1]); // 1
 // ! 当访问一个越界的元素，会使用联合类型替代
 // z[3] = 'world'  (会报错...)
 
 // 4 枚举
 enum Color {
-    Red,
-    Green,
-    Blue
+  Red,
+  Green,
+  Blue,
 }
-let color:Color = Color.Blue
+let color: Color = Color.Blue;
 console.log(color); // 2
-let colorname: string = Color[2] 
+let colorname: string = Color[2];
 console.log(colorname);
 
-const getValue = ()=> {
-    return 0 
-}
+const getValue = () => {
+  return 0;
+};
 enum List {
-    A = getValue(),
-    B = 2, // 次数必须初始化，不然编译不通过
-    C  
+  A = getValue(),
+  B = 2, // 次数必须初始化，不然编译不通过
+  C,
 }
 // A 的值是被计算出来的。注意注释部分，如果某个属性的值是计算出来的，那么它后面一位的成员必须要初始化值。
 console.log(List.A); // 0
@@ -77,30 +79,24 @@ console.log(List.C); // 3
         }
  */
 // 6 void 用于标识方法返回值的类型,表示该方法无返回值
- function add():void  {
-    x+=1
+function add(): void {
+  x += 1;
 }
 // ! 声明一个void类型的变量没有什么大用，因为你只能为它赋予undefined和null：（null会报错）
-let unusable1: void = undefined
-let unusable2: void = null // (报错)
-let unusable3: null = null
+let unusable1: void = undefined;
+let unusable2: void = null; // (报错)
+let unusable3: null = null;
 // 7 Object object表示非原始类型
-declare function create(o: object | null) : void
-create({prop: 0}) // 正确
-create(null) // 正确
+declare function create(o: object | null): void;
+create({ prop: 0 }); // 正确
+create(null); // 正确
 
-create(42) //错误
-create("string") //错误
+create(42); //错误
+create("string"); //错误
 // 默认值
 function f({ a, b = 0 } = { a: "" }): void {
-    // ...
+  // ...
 }
 f({ a: "yes" }); // ok, default b = 0
 f(); // ok, default to {a: ""}, which then defaults b = 0
 f({}); // error, 'a' is required if you supply an argument
-
-
-
-
-
-

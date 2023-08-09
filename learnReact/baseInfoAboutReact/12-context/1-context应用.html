@@ -33,7 +33,8 @@
             // 将 dark 传递下去
             return (
                 // Provider 接收一个 value 属性，传递给消费组件。一个 Provider 可以和多个消费组件有对应关系。多个 Provider 也可以嵌套使用，里层的会覆盖外层的数据。
-                // 当 Provider 的 value 值发生变化时，它内部的所有消费组件都会重新渲染。Provider 及其内部 consumer 组件都不受制于 shouldComponentUpdate 函数，因此当 consumer 组件在其祖先组件退出更新的情况下也能更新。
+                // 当 Provider 的 value 值发生变化时，它内部的所有消费组件都会重新渲染。
+                // Provider 及其内部 consumer 组件都不受制于 shouldComponentUpdate 函数，因此当 consumer 组件在其 祖先组件跳出更新的情况下也能更新。
 
                 // 通过新旧值检测来确定变化，使用了与 Object.is 相同的算法。
                 <ThemeContext.Provider value='dark'>
@@ -59,14 +60,18 @@
             // 此属性能让你使用 this.context 来消费最近 Context 上的那个值。你可以在任何生命周期中访问到它，包括 render 函数中。
             let value = this.context;
             /* 在组件挂载完成后，使用 MyContext 组件的值来执行一些有副作用的操作 */
+            console.log(value)
+
         }
         // React 会往上找到最近的theme Provider 然后使用它的值
         render() { // 这里获取到的值为dark
-            return <Button theme={this.context} />
+            return <button theme={this.context} style={{ backgroundColor: this.context === 'dark' ? '#222' : '#ccc' }} >颜色</button>
         }
     }
+    // 不用static的话可以如下写
+    // ThemedButton.contextType = ThemeContext
     ReactDOM.render(
-        <Table />,
+        <App />,
         document.getElementById('root')
     )
 </script>

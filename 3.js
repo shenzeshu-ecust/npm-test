@@ -25,9 +25,19 @@
 // let s = "1{{}}";
 // console.log(s.split("{{}}"));
 
-const arr = data.map((item) => {
-  if (isJPG(item.downloadName)) {
-    item.isJPG = true;
-  }
-  return item;
-});
+// const arr = data.map((item) => {
+//   if (isJPG(item.downloadName)) {
+//     item.isJPG = true;
+//   }
+//   return item;
+// });
+console.log((0.1).toFixed(20));
+console.log((0.2).toFixed(20));
+console.log((0.5).toFixed(20));
+console.log(0.1 + 0.2);
+console.log("sss"[Symbol.iterator]().next());
+
+(function () {
+  var undefined = 10;
+  console.log(undefined); // 10
+})();

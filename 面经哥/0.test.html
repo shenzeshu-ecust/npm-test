@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            height: 2000px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // 非立即执行
+        function debounceDelay(fn, delay) {
+            let timer;
+            return function (...args) {
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(() => {
+                    fn.apply(this, args);
+                }, delay);
+            };
+        }
+        // 立即执行
+        function debounceAtOnce(fn, delay) {
+            let timer;
+            return function (...args) {
+                if (timer) clearTimeout(timer);
+                let callNow = !timer;
+                timer = setTimeout(() => {
+                    timer = null;
+                }, delay);
+                if (callNow) fn.apply(this, args);
+            };
+        }
+        // 节流完整版，可选前缘节流或延迟节流，个人感觉这个最舒服
+        function throttle(fn, delay, isImmediate = true) {
+            // isImmediate 为 true 时使用前缘节流，首次触发会立即执行，为 false 时使用延迟节流，首次触发不会立即执行
+            let last = Date.now();
+            return function () {
+                let now = Date.now();
+                if (isImmediate) {
+                    fn.apply(this, arguments);
+                    isImmediate = false;
+                    last = now;
+                }
+                if (now - last >= delay) {
+                    fn.apply(this, arguments);
+                    last = now;
+                }
+            };
+        }
+        const handler = debounceDelay(() => { console.log('111') }, 100)
+        const handler1 = throttle(() => { console.log('111') }, 2000, false)
+
+        window.addEventListener('scroll', handler1)
+    </script>
+</body>
+
+</html>

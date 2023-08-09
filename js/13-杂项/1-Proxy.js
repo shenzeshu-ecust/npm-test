@@ -565,7 +565,7 @@ console.log(array[-2]); // 2
 // 创建一个函数 makeObservable(target)，该函数通过返回一个代理“使得对象可观察”。
 /*
     function makeObservable(target) {
-    你的代码 
+        你的代码 
     }
 
     let user = {};

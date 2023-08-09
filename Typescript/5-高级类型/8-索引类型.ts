@@ -33,3 +33,9 @@ interface Map1<T> {
 }
 let keys: keyof Map1<number>; // string
 let value: Map1<number>["foo"]; // number
+
+type TypeKey = keyof Person;
+const bbb = "name";
+const key: TypeKey = bbb;
+const dddd = person[key];
+console.log("_____", dddd);

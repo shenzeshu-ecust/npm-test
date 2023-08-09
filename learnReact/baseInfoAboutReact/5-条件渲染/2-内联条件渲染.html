@@ -17,10 +17,10 @@
 
 </body>
 <script type="text/babel">
-// 因为在 JavaScript 中，true && expression 总是会返回 expression, 而 false && expression 总是会返回 false
-// 如果是 false，React 会忽略并跳过它。
+    // 因为在 JavaScript 中，true && expression 总是会返回 expression, 而 false && expression 总是会返回 false
+    // 如果是 false，React 会忽略并跳过它。
 
-// 请注意，返回 false 的表达式会使 && 后面的元素被跳过，但会返回 falsed的 表达式
+    // 请注意，返回 false 的表达式会使 && 后面的元素被跳过，但会返回 falsed的 表达式
     function Mailbox(props) {
         const unreadMessages = props.unreadMessages
         return (
@@ -28,7 +28,7 @@
                 <h1>
                     Hello!
                 </h1>
-            
+
                 {
                     unreadMessages.length > 0 &&
                     <h2>
@@ -37,15 +37,15 @@
                 }
 
                 {
-                    unreadMessages.length>1 ? <h2>You have many messages unread</h2> : <h2>You must be lonely</h2>
+                    unreadMessages.length > 1 ? <h2>You have many messages unread</h2> : <h2>You must be lonely</h2>
                 }
             </div>
         )
     }
     //  三目运算符  都放在{}中！
-    const messages = ['React','You are learning React','You can make it!']
+    const messages = ['React', 'You are learning React', 'You can make it!']
     ReactDOM.render(
-        <Mailbox unreadMessages={messages}/>,
+        <Mailbox unreadMessages={messages} />,
         document.getElementById('root')
     )
 </script>

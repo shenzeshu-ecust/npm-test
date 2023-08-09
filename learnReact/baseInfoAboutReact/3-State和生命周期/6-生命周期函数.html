@@ -30,10 +30,10 @@
             let { count } = this.state
             this.setState({ count: count + 1 });
         }
-        unMount= ()=> {
+        unMount = () => {
             ReactDOM.unmountComponentAtNode(document.getElementById('root'))
         }
-        force = ()=> {
+        force = () => {
             // 强制更新下
             console.log('Count---强制更新下');
             this.forceUpdate()
@@ -41,12 +41,12 @@
         // 组件将要挂载的钩子
         componentWillMount() {
             console.log('Count---componentWillMount');
-            
+
         }
         // 组件已经挂载的钩子
         componentDidMount() {
             console.log('Count---componentDidMount');
-            
+
         }
         // 根据 shouldComponentUpdate() 的返回值，判断 React 组件的输出是否受当前 state 或 props 更改的影响。
         // 默认行为是 state 每次发生变化组件都会重新渲染。大部分情况下，你应该遵循默认行为。
@@ -57,7 +57,7 @@
         // 仅仅作为性能优化的方式而存在。
         shouldComponentUpdate(nextProps, nextState, nextContext) {
             console.log('Count---shouldComponentUpdate');
-             return true
+            return true
         }
         // 组件将要更新 ————forceUpdate()  强制更新 跳过shouldComponentUpdate()
         componentWillUpdate() {
@@ -66,12 +66,12 @@
         // 组件完成更新
         componentDidUpdate(prevProps, prevState) {
             console.log('Count---componentDidUpdate');
-            
+
         }
         // 组件将要卸载
         componentWillUnmount() {
             console.log('Count---componentWillUnmount');
-            
+
         }
         // 初次渲染、数据更新时
         render() {
@@ -91,7 +91,7 @@
     }
     /*
     1 初始化阶段：由ReactDOM.render触发 初次渲染
-    construcor
+    constructor
     componentWillMount
     render
     componentDidMount         ---> 用于初始化：开启定时器、发起网络请求、订阅
@@ -103,20 +103,20 @@
     3 卸载组件： 由ReactDOM.unmountComponentAtNode触发
     componentWillUnmount      ---> 用于收尾：关闭定时器、取消订阅
     */
-    
+
     class A extends React.Component {
-        state = {carName:'奔驰'}
-        changeCar= () =>{
-            this.setState({carName:'奥拓'});
+        state = { carName: '奔驰' }
+        changeCar = () => {
+            this.setState({ carName: '奥拓' });
         }
         render() {
-            return(
+            return (
                 <div>
-                    <div>我是A组件</div>   
+                    <div>我是A组件</div>
                     <button onClick={this.changeCar}>
-                        换车    
-                    </button> 
-                    <B carName={this.state.carName}/>
+                        换车
+                    </button>
+                    <B carName={this.state.carName} />
                 </div>
             )
         }
@@ -125,19 +125,19 @@
         // 组件将要接受  新的props 的时候！！！
         // 初次渲染时 不调用
         componentWillReceiveProps(nextProps) {
-            console.log('B---componentWillReceiveProps',nextProps);
+            console.log('B---componentWillReceiveProps', nextProps);
         }
         shouldComponentUpdate(nextProps, nextState, nextContext) {
             console.log('B---shouldComponentUpdate');
-             return true
+            return true
         }
         componentWillUpdate() {
             console.log('B---componentWillUpdate');
-            
+
         }
         componentDidUpdate(prevProps, prevState) {
             console.log('B---componentDidUpdate');
-            
+
         }
         render() {
             console.log('B---render');

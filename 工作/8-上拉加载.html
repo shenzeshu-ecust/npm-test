@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        main {
+            width: 400px;
+            background-color: cadetblue;
+            margin: auto;
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            list-style: none;
+            background-color: antiquewhite;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <p class="text"></p>
+        <ul>
+            <li>11111</li>
+            <li>11111</li>
+            <li>11111</li>
+            <li>11111</li>
+            <li>11111</li>
+            <li>11111</li>
+            <li>11111</li>
+            <li>11111</li>
+            <li>11111</li>
+
+            ...
+        </ul>
+    </main>
+
+    <script>
+        const elem = document.querySelector('ul')
+        const textP = document.querySelector('.text')
+        let startPos = 0 // 初始值
+        let transitionHeight = 0 // 移动的距离
+        elem.addEventListener('touchstart', function (e) {
+            startPos = e.touches[0].pageY // 记录起始位置
+            elem.style.position = 'relative'
+            elem.style.transition = `transform 0s`
+        }, false)
+        elem.addEventListener('touchmove', function (e) {
+            // e.touches[0].pageY 当前位置
+            transitionHeight = e.touches[0].pageY - startPos // 记录差值
+            if (transitionHeight > 0 && transitionHeight < 100) {
+                textP.innerText = '下拉刷新'
+                elem.style.transform = `translateY(${transitionHeight}px)`
+                if (transitionHeight > 80) {
+                    textP.innerText = '释放更新'
+                }
+            }
+        }, false)
+        elem.addEventListener('touchend', function (e) {
+            elem.style.transition = 'transform .5s ease .1s'
+            elem.style.transform = 'translateY(0px)'
+            textP.innerText = '更新中...'
+            // todo ...
+            setTimeout(() => {
+                textP.innerText = ''
+            }, 1000)
+        }, false)
+    </script>
+</body>
+
+</html>

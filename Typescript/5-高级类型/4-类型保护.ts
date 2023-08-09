@@ -1,4 +1,13 @@
+interface Bird {
+  fly();
+  layEggs();
+}
+interface Fish {
+  swim();
+  layEggs();
+}
 // 1 自定义类型保护 param is IInterface
+// 以下代码相当于告诉编译器，如果返回结果为 true，则代表 pet 是 Fish 类型：
 function isFish(pet: Fish | Bird): pet is Fish {
   return (<Fish>pet).swim !== undefined;
 }

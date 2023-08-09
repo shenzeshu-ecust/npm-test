@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="p">
+        DOM 变动观察器（Mutation observer）
+    </p>
+    <!-- 它具有 contentEditable 特性。该特性使我们可以聚焦和编辑元素。 -->
+    <div contentEditable id="elem">Click and <b>edit</b>, please</div>
+
+    <pre class="language-javascript">
+     <code>
+        // 这里是代码
+        let hello = "world";
+      </code>
+    </pre>
+    <script>
+        // 1 MutationObserver 是一个内建对象，它观察 DOM 元素，并在检测到更改时触发回调。
+        // 创建一个带回调的观察器
+        // let observer = new MutationObserver(callback)
+        // 附加到dom节点
+        // observer.observe(node, config)
+        /*
+           2  config 是一个具有布尔选项的对象，该布尔选项表示“将对哪些更改做出反应”。
+            config “要观察的内容”选项用于优化，避免不必要的回调调用以节省资源。
+
+                childList —— node 的直接子节点的更改，
+                subtree —— node 的所有后代的更改，
+                attributes —— node 的特性（attribute），
+                attributeFilter —— 特性名称数组，只观察选定的特性。
+                characterData —— 是否观察 node.data（文本内容），
+                其他几个选项：
+                attributeOldValue —— 如果为 true，则将特性的旧值和新值都传递给回调（参见下文），否则只传新值（需要 attributes 选项），
+                characterDataOldValue —— 如果为 true，则将 node.data 的旧值和新值都传递给回调（参见下文），否则只传新值（需要 characterData 选项）。
+
+        */
+
+        // 然后，在发生任何更改后，将执行“回调”：更改被作为一个 MutationRecord 对象列表传入第一个参数，而观察器自身作为第二个参数。
+        /*
+           3  MutationRecord 对象具有以下属性：
+                type —— 变动类型，以下类型之一：
+                    "attributes"：特性被修改了，
+                    "characterData"：数据被修改了，用于文本节点，
+                    "childList"：添加/删除了子元素。
+                target —— 更改发生在何处："attributes" 所在的元素，或 "characterData" 所在的文本节点，或 "childList" 变动所在的元素，
+                addedNodes/removedNodes —— 添加/删除的节点，
+                previousSibling/nextSibling —— 添加/删除的节点的上一个/下一个兄弟节点，
+                attributeName/attributeNamespace —— 被更改的特性的名称/命名空间（用于 XML），
+                oldValue —— 之前的值，仅适用于特性或文本更改，如果设置了相应选项 attributeOldValue/characterDataOldValue。
+
+        */
+        let ob = new MutationObserver(mutationRecords => {
+            console.log(mutationRecords) // [MutationRecord]数组
+            /*
+                mutationRecords = [{
+                    type: "childList",
+                    target: <div#elem>,
+                    removedNodes: [<b>],
+                    nextSibling: <text node>,
+                    previousSibling: <text node>
+                    // 其他属性为空
+                    }, {
+                    type: "characterData"
+                    target: <text node>
+                    // ...变动的详细信息取决于浏览器如何处理此类删除
+                    // 它可能是将两个相邻的文本节点 "edit " 和 ", please" 合并成一个节点，
+                    // 或者可能将它们留在单独的文本节点中
+                }];
+            */
+        })
+        const elem = document.querySelector('#elem')
+        // 观察除了特性之外的所有变动
+        ob.observe(elem, {
+            childList: true, // 观察直接子节点
+            subtree: true,// 及其更低的后代节点
+            characterDataOldValue: true// 将旧的数据传递给回调
+        })
+        // 4 停止观察
+        observer.disconnect()
+
+        // 5 调用获取未处理的变动列表
+        // 当我们停止观察时，观察器可能尚未处理某些更改。在种情况下，我们使用：
+        observer.takeRecords() // 获取尚未处理的变动记录列表，表中记录的是已经发生，但回调暂未处理的变动。
+        // 如果你关心可能未处理的近期的变动，那么，应该在 disconnect 前调用获取未处理的变动列表
+        // ！ observer.takeRecords() 返回的记录被从处理队列中移除，也就是说回调函数不会被 observer.takeRecords() 返回的记录调用。
+
+        /*
+
+            6 垃圾回收
+                观察器在内部对节点使用弱引用。也就是说，如果一个节点被从 DOM 中移除了，并且该节点变得不可访问，那么它就可以被垃圾回收。
+                观察到 DOM 节点这一事实并不能阻止垃圾回收。
+
+        */
+
+        // 7 mutationObserver作用：
+        /*
+            用于集成
+                1 使用 MutationObserver，我们可以监测到我们不需要的元素何时出现在我们的 DOM 中，并将其删除。(删除第三方脚本的小广告)
+                2  还有一些其他情况，例如第三方脚本会将某些内容添加到我们的文档中，并且我们希望检测出这种情况何时发生，以调整页面，动态调整某些内容的大小等。
+                    用于架构
+                3 从架构的角度来看，在某些情况下，MutationObserver 有不错的作用。
+                    假设我们正在建立一个有关编程的网站。自然地，文章和其他材料中可能包含源代码段。
+                    为了提高可读性，同时对其进行美化，我们将在我们的网站上使用 JavaScript 语法高亮显示库，例如 Prism.js。
+                    为了使用 Prism 对以上代码片段进行语法高亮显示，我们调用了 Prism.highlightElem(pre)，它会检查此类 pre 元素的内容，
+                    并为这些元素添加特殊的标签（tag）和样式，以进行彩色语法高亮显示，类似于你在本文的示例中看到的那样。
+
+            ~ 我们可以使用 MutationObserver 来自动检测何时在页面中插入了代码段，并高亮显示它们。
+            因此，我们在一个地方处理高亮显示功能，从而使我们无需集成它。
+        */
+        let obs = new MutationObserver(mutations => {
+
+            for (let mutation of mutations) {
+                // 检查新节点，有什么需要高亮显示的吗？
+
+                for (let node of mutation.addedNodes) {
+                    // 我们只跟踪元素，跳过其他节点（例如文本节点）
+                    if (!(node instanceof HTMLElement)) continue;
+
+                    // 检查插入的元素是否为代码段
+                    if (node.matches('pre[class*="language-"]')) {
+                        Prism.highlightElement(node);
+                    }
+
+                    // 或者可能在子树的某个地方有一个代码段？
+                    for (let elem of node.querySelectorAll('pre[class*="language-"]')) {
+                        Prism.highlightElement(elem);
+                    }
+                }
+            }
+
+        });
+
+        let demoElem = document.getElementById('highlight-demo');
+        obs.observe(demoElem, { childList: true, subtree: true });
+
+    </script>
+</body>
+
+</html>

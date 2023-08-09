@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+            margin: 100px auto;
+            width: 300px;
+            border: 2px solid #999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        li {
+            width: 250px;
+            height: 60px;
+            background-color: cadetblue;
+            border-radius: 10px;
+            margin: 10px auto;
+            color: #fff;
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .enter {
+            border: lightsalmon dashed 2px;
+        }
+    </style>
+</head>
+
+<body>
+    文本、图片和链接是默认可以拖放的，它们的draggable属性自动被设置成了true。
+    图片和链接按住鼠标左键选中，就可以拖放。
+    文本只有在被选中的情况下才能拖放。如果显示设置文本的draggable属性为true，按住鼠标左键也可以直接拖放。
+    <!--
+         draggable属性：设置元素是否可拖动。语法：<element draggable="true | false | auto" >
+
+            true: 可以拖动
+            false: 禁止拖动
+            auto: 跟随浏览器定义是否可以拖动
+
+            被拖动的元素
+                dragstart
+                在元素开始被拖动时候触发
+                drag
+                在元素被拖动时反复触发
+                dragend
+                在拖动操作完成时触发
+
+            目的地对象
+                dragenter
+                当被拖动元素进入目的地元素所占据的屏幕空间时触发
+                dragover
+                当被拖动元素在目的地元素内时触发
+                dragleave
+                当被拖动元素没有放下就离开目的地元素时触发
+            目的地对象 	
+            drop 	当被拖动元素在目的地元素里放下时触发，一般需要取消浏览器的默认行为。
+
+            dragenter和dragover事件的默认行为是拒绝接受任何被拖放的元素。
+            因此，我们必须阻止浏览器这种默认行为。e.preventDefault();
+ -->
+    <ul>
+        <li draggable="true">1</li>
+        <li draggable="true">2</li>
+        <li draggable="true">3</li>
+        <li draggable="true">4</li>
+        <li draggable="true">5</li>
+
+    </ul>
+
+    <script>
+        const ul = document.querySelector('ul')
+        const lis = document.querySelectorAll('li')
+        let dragEl
+        lis.forEach((li, i) => {
+            li.addEventListener('dragstart', function (e) {
+                dragEl = this
+                this.style.opacity = 0.5
+                // 用于设置被拖拽元素可执行的操作，只能在dragstart中设置该属性
+                e.dataTransfer.effectAllowed = 'move'
+            })
+            li.addEventListener('dragend', function () {
+                this.style.opacity = 1
+            })
+            li.addEventListener('dragenter', function (e) {
+
+                // 这是因为设置了dragover属性，所以整个document都变成了可放置目标，都允许触发drop事件
+                // 可以在进入放置目标后才变成这种状态，实现如下
+
+                // const dropBox = e.target.closest('lis')
+                // if (dropBox) {
+                e.preventDefault()
+                // }
+                if (this !== dragEl) {
+                    this.classList.add('enter')
+                }
+            })
+            li.addEventListener('dragover', function (e) {
+                e.preventDefault()
+                // 用于设置目标元素将执行的操作，若属性值属于effectAllowed范围内，则鼠标指针将显示对应的指针样式，否则显示禁止的指针样式
+                e.dataTransfer.dropEffect = 'move'
+
+                return false
+            })
+            li.addEventListener('dragleave', function (e) {
+                this.classList.remove('enter')
+            })
+            li.addEventListener('drop', function (e) {
+                ul.insertBefore(dragEl, this)
+                this.classList.remove('enter')
+            })
+        })
+    </script>
+</body>
+
+</html>

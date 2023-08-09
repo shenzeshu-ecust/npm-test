@@ -51,6 +51,16 @@ const loadMore = (n: number) => {
   return () => (state.rangeNumber += n);
 };
 
+// ! 3 封装组件
+// ! 4 前端监控代码版本，一旦有变更提醒用户刷新
+
+/* 
+  进一步更改：前端做这件事原因一般就是用户经常不刷新页面。
+  可以根据用户交互事件来做，触发点击时判断上次检测版本的时间间隔是否大于预期，大于则请求版本信息，然后执行更新。
+  思路就是1 理由切换时 2点击事件的冒泡。在顶层DOM绑定事件。
+  这样做的好处就是静默时计算机也能休息，不至于定时器轮询浪费资源
+
+*/
 /*
   <el-select
     v-model="state.selectList"
@@ -233,6 +243,20 @@ export default {
 ? 5 定时器的封装，用setInterval不好
 */
 
+// ? 1 tag点击弹窗（表单 ）
+/*
+  使用pinia维护状态:
+  1) 弹窗类型：add / edit
+  2) 所有选中的label - selectedLabelList 
+  3) 当前label - selectedLabel
+  4) 当前标签的位置index（v-for中）
+  1 当前用户点击的标签对应的弹窗：维护一个selectedLabel, 点击后根据表单内容生成当前用户点击的标签对应的弹窗：维护一个selectedLabel的初始值
+  2 点击取消，清除当前选中的selectedLabel。恢复弹窗类型为add。
+  3 选择完成后，点击确认，向selectedLabelList添加。再调一次取消的功能
+  4 点击右侧的已选择标签，弹出之前选择的对应表单弹窗，进入编辑模式。将其设置为selectedLabel，标记出现在点击的标签位置，以便修改。
+  5 还可以删除标签，根据index删除
+  6 点击且或切换关系，改变数据结构中的relation字段。父对象中的relation决定子元素的且或关系（点击的时候传入当前层级、位置）
+*/
 // ? 2 语义化解决方案
 
 /* 

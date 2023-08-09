@@ -21,7 +21,7 @@ type IntersectionType = Interface1 & Interface2;
         name: string;
         age: number;
     }
-`~ 对于接口类型来说，交叉类型确实是具有所有接口类型的所有特性。
+~ 对于接口类型来说，交叉类型确实是具有所有接口类型的所有特性。
  */
 
 // 2 联合类型的交叉类型
@@ -43,3 +43,8 @@ type IntersectionUnion = UnionA & UnionB;
     ! 要想同时满足两个联合类型，那么取的必须要是两个联合类型的交集，否则不可能同时满足两个联合类型。
 
 */
+
+// 3 联合类型与交叉类型同时出现
+// type test = "a" | "b" | 1 & string; // 括号是自动给加上的
+// ~ 等同于 type test = ('a' & string) | ('b' & string) | (1 & string)
+// ~ = 'a' | 'b'

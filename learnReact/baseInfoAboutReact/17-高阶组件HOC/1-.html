@@ -23,7 +23,8 @@
     // 不要在render方法中使用HOC：这不仅仅是性能问题 - 重新挂载组件会导致该组件及其所有子组件的状态丢失。
 
     // 静态方法不会被HOC复制到新的容器组件中，所以需要把接收的组件的静态方法复制到容器组件上
-    // 虽然高阶组件的约定是将所有 props 传递给被包装组件，但这对于 refs 并不适用。那是因为 ref 实际上并不是一个 prop - 就像 key 一样，它是由 React 专门处理的。如果将 ref 添加到 HOC 的返回组件中，则 ref 引用指向容器组件，而不是被包装组件。
+    // 虽然高阶组件的约定是将所有 props 传递给被包装组件，但这对于 refs 并不适用。
+    // 那是因为 ref 实际上并不是一个 prop - 就像 key 一样，它是由 React 专门处理的。如果将 ref 添加到 HOC 的返回组件中，则 ref 引用指向容器组件，而不是被包装组件。
     // 这个问题的解决方案是通过使用 React.forwardRef API
     function LogProps(WrappedComponent) {
         return class extends React.Component {

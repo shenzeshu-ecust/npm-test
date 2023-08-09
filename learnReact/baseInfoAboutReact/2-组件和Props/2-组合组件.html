@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,24 +11,26 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
 </head>
+
 <body>
-     <div id="root"></div>
+    <div id="root"></div>
 </body>
 <script type="text/babel">
 
-function Welcome(props) {
-    
-    return <h1>Hello, {props.name}</h1>
-}
-function App() {
-    return (<div>
-        <Welcome name="Sara"/>
-        <Welcome name="Cahal"/>
-        <Welcome name="Edite"/>
+    function Welcome(props) {
+
+        return <h1>Hello, {props.name}</h1>
+    }
+    function App() {
+        return (<div>
+            <Welcome name="Sara" />
+            <Welcome name="Cahal" />
+            <Welcome name="Edite" />
 
         </div>)
-}
+    }
 
-ReactDOM.render(<App/>,document.getElementById("root"))
+    ReactDOM.render(<App />, document.getElementById("root"))
 </script>
+
 </html>

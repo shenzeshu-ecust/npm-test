@@ -1,6 +1,6 @@
 import { forwardRef, useEffect } from "react";
 import { useImperativeHandle } from "react";
-import { useRef,React } from "react";
+import { useRef, React } from "react";
 // !我们都知道父组件可以利用ref可以访问子组件实例或者DOM元素，这其实相当于子组件向父组件输出  本身实例或者 DOM元素.
 // !子组件利用useImperativeHandle可以让父组件输出  任意数据。
 // ! useImperativeHandle(ref, createHandle, [deps])
@@ -20,15 +20,13 @@ import { useRef,React } from "react";
     !  主要是解决父组件获取子组件的数据或者调用子组件的里声明的函数。
  */
 const FancyInput = forwardRef(function FancyInput(props, ref) {
-    const inputRef = useRef
-    useImperativeHandle(ref, () => ({
-        focus: () => {
-            inputRef.current.focus()
-        }
-    }))
-    return <input ref={inputRef}/>
-}) 
+  const inputRef = useRef();
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      inputRef.current.focus();
+    },
+  }));
+  return <input ref={inputRef} />;
+});
 
-
-
-export default FancyInput
+export default FancyInput;
