@@ -1,10 +1,13 @@
+// ! koa中广泛运用的  洋葱模型
+// app.use()
+
 function compose(middleware) {
-  return async function (...args) {
-    await dispatch(0);
-    async function dispatch(i) {
+  return function (...args) {
+    return dispatch(0);
+    function dispatch(i) {
       const fn = middleware[i];
       if (!fn) return null;
-      await fn(function () {
+      return fn(function next() {
         dispatch(i + 1);
       }, ...args);
     }
@@ -12,20 +15,70 @@ function compose(middleware) {
 }
 
 let middleware = [];
-middleware.push((next) => {
+
+const use = (fn) => {
+  middleware.push(fn);
+};
+use((next) => {
   console.log(0);
   next();
   console.log(3);
 });
-middleware.push((next) => {
+use((next) => {
   console.log(1);
   next();
   console.log(1.1);
 });
-middleware.push((next) => {
+use((next) => {
   console.log(2);
 });
 
 let fn = compose(middleware);
-fn();
+// fn();
 // 0 1 2 1.1 3
+
+
+class TaskPro {
+  constructor() {
+    this._tasks = []
+  }
+  addTask(fn) {
+    this._tasks.push(fn)
+  }
+
+  async run() {
+    
+    const next = async () => {
+      await fn()
+    }
+
+    const fn = async () => {
+      if(this._tasks.length) {
+        const todo = this._tasks.shift()
+        await todo(next)
+        await fn()
+      }
+    }
+
+    await fn()
+  }
+}
+
+const taskPro = new TaskPro()
+taskPro.addTask(async (next) => {
+  console.log(1)
+  await next()
+  console.log('end')
+})
+
+taskPro.addTask(async (next) => {
+  console.log(2)
+  await next();
+  console.log('which is the end')
+})
+
+taskPro.addTask(async (next) => {
+  console.log(3)
+})
+
+taskPro.run()

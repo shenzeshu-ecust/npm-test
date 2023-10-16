@@ -22,7 +22,7 @@ symbol 有两个主要的使用场景：
     * 2 JavaScript 使用了许多系统 symbol，这些 symbol 可以作为 Symbol.* 访问。我们可以使用它们来改变一些内建行为。
     
     例如，在本教程的后面部分，我们将使用 Symbol.iterator 来进行 迭代 操作，使用 Symbol.toPrimitive 来设置 对象原始值的转换 等等。
-
+    使用 Symbol.species 覆盖默认的构造函数
 
 */
 
@@ -97,9 +97,9 @@ console.log(Object.keys(user1)); // [ 'name' ]
 /*
  * 从技术上说，symbol 不是 100% 隐藏的。有一个内建方法 Object.getOwnPropertySymbols(obj) 允许我们获取所有的 symbol。
  * 还有一个名为 Reflect.ownKeys(obj) 的方法可以返回一个对象的 所有 键，包括 symbol。
- *
+
  * 但大多数库、内建方法和语法结构都没有使用这些方法。
- *
+
  */
 
 // ! 7 Object.assign 会同时复制字符串和 symbol 属性：

@@ -39,11 +39,13 @@
         // 1 event.target & event.currentTarget
         // 引发事件的那个嵌套层级最深的元素被称为目标元素,可以通过 event.target 访问。
         // 两者区别
-        // —— event.currentTarget ( = this ) 当前元素（真实DOM）
+        // —— event.currentTarget ( = this ) 当前元素（真实DOM） 
+        // 绑定事件的元素
 
 
         // —— event.target 是引发事件的“目标”元素，它在冒泡过程中不会发生变化。
         // 它总是引用事件处理程序附加到的元素（事件绑定的元素，不一定是那个真实DOM,因为会冒泡）
+        // 触发事件的元素
         const h4 = document.querySelector('#h4');
         console.log(h4)
         h4.onclick = function (e) {

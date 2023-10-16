@@ -4,8 +4,7 @@
 //   .catch((err) => console.log("any error", err)); // [AggregateError: All promises were rejected] { [errors]: [] }
 // Promise.allSettled([]).then((val) => console.log("allSettled", val)); // []
 
-const { group } = require("console");
-const { resolve } = require("path");
+const { default: axios } = require("./面经哥/24-设计模式");
 
 // Promise.race([])
 //   .then((val) => console.log(val))
@@ -411,3 +410,135 @@ console.log(Reflect.get(exa, "name"));
 Reflect.set(exa, "age", 15);
 console.log(Reflect.get(exa, "age"));
 console.log(exa);
+
+function spread(fn) {
+  return function (args) {
+    return fn.apply(this, args);
+  };
+}
+
+async function onion(middleware) {
+  return async function (...args) {
+    await dispatch(0);
+    async function dispatch(i) {
+      let fn = middleware[i];
+      if (!fn) return;
+      fn(async () => {
+        await dispatch(i + 1);
+      }, ...args);
+    }
+  };
+}
+
+const obj = {};
+const sym = Symbol("new");
+obj[sym] = 111;
+// 1 Object.keys() || Object.values()
+console.log(Object.keys(obj).length === 0);
+console.log(Object.values(obj).length === 0);
+
+// 2 JSON.stringify()
+console.log(JSON.stringify(obj) === "{}");
+// 3 Object.getOwnPropertyNames()
+console.log(Object.getOwnPropertyNames(obj).length === 0);
+
+// ~ 但是以上情况不适用于有symbol键的对象
+// 4 Object.getOwnPropertySymbols() + Object.getOwnPropertyNames()
+console.log(
+  Object.getOwnPropertyNames(obj).length === 0 &&
+    Object.getOwnPropertySymbols(obj).length === 0
+);
+// 5 Reflect.ownKeys()
+console.log(Reflect.ownKeys(obj).length === 0); // true
+
+function PromiseAll(iterator) {
+  const arr = Array.from(iterator);
+  let resolvedArray = [];
+  let resolvedCount = 0;
+
+  return new Promise((resolve, reject) => {
+    arr.forEach((item, i) => {
+      try {
+        Promise.resolve(item).then((res) => {
+          resolvedArray[i] = res;
+          resolvedCount++;
+
+          if (resolvedCount === arr.length) resolve(resolvedArray);
+        });
+      } catch (error) {
+        reject(error);
+      }
+    });
+  });
+}
+function PromiseAllSettled(iterator) {
+  const arr = Array.from(iterator);
+  const res = [];
+  let count = 0;
+
+  return new Promise((resolve, reject) => {
+    if (arr.length === 0) resolve(res);
+    arr.forEach((promise, i) => {
+      Promise.resolve(promise)
+        .then(
+          (val) => {
+            res[i] = {
+              status: "fulfilled",
+              value: val,
+            };
+          },
+          (error) => {
+            res[i] = {
+              status: "rejected",
+              reason: error,
+            };
+          }
+        )
+        .finally(() => {
+          if (++count === arr.length) resolve(res);
+        });
+    });
+  });
+}
+
+function cx(root) {
+  let res = [];
+
+  function traverse(root, depth) {
+    if (!root) return;
+    if (!res[depth]) res[depth] = [];
+    res[depth].push(root.val);
+    traverse(root.left, depth + 1);
+    traverse(root.right, depth + 1);
+  }
+
+  traverse(root, 0);
+  return res;
+}
+
+function mergeSort(arr) {
+  if (arr.length < 2) return arr;
+  let mid = Math.floor(arr.length / 2);
+  let left = arr.slice(0, mid);
+  let right = arr.slice(mid);
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right) {
+  let res = [];
+  while (left.length && right.length) {
+    const a = left.shift();
+    const b = right.shift();
+    if (a < b) res.push(a);
+    else res.push(b);
+  }
+  const rest = left.length > 0 ? left : right;
+  res = res.concat(rest);
+}
+
+const lll = [9, 8, 7, 5, 2, 1, 4];
+console.log(mergeSort(lll));
+
+
+
+

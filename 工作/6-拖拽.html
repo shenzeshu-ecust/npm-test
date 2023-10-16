@@ -38,8 +38,13 @@
 
         }
 
+        .after-move {
+            border: #333 1px dashed;
+            background-color: #fff;
+        }
+
         .enter {
-            border: lightsalmon dashed 2px;
+            border: red dashed 2px;
         }
     </style>
 </head>
@@ -87,46 +92,53 @@
 
     <script>
         const ul = document.querySelector('ul')
-        const lis = document.querySelectorAll('li')
         let dragEl
-        lis.forEach((li, i) => {
-            li.addEventListener('dragstart', function (e) {
-                dragEl = this
-                this.style.opacity = 0.5
-                // 用于设置被拖拽元素可执行的操作，只能在dragstart中设置该属性
-                e.dataTransfer.effectAllowed = 'move'
-            })
-            li.addEventListener('dragend', function () {
-                this.style.opacity = 1
-            })
-            li.addEventListener('dragenter', function (e) {
+        // 被拖动的元素
+        ul.addEventListener('dragstart', function (e) {
+            // e.target.style.opacity = 0.5
+            // 如果复杂点自己设计样式
+            // 因为拖动的元素样式和原来元素是一致的，单纯直接加类名会导致  拖动的元素也变成空白.
+            // 解决： 放在异步里面，这样拖动后获取的元素还是原来的模样，
 
-                // 这是因为设置了dragover属性，所以整个document都变成了可放置目标，都允许触发drop事件
-                // 可以在进入放置目标后才变成这种状态，实现如下
-
-                // const dropBox = e.target.closest('lis')
-                // if (dropBox) {
-                e.preventDefault()
-                // }
-                if (this !== dragEl) {
-                    this.classList.add('enter')
-                }
-            })
-            li.addEventListener('dragover', function (e) {
-                e.preventDefault()
-                // 用于设置目标元素将执行的操作，若属性值属于effectAllowed范围内，则鼠标指针将显示对应的指针样式，否则显示禁止的指针样式
-                e.dataTransfer.dropEffect = 'move'
-
-                return false
-            })
-            li.addEventListener('dragleave', function (e) {
-                this.classList.remove('enter')
-            })
-            li.addEventListener('drop', function (e) {
-                ul.insertBefore(dragEl, this)
-                this.classList.remove('enter')
-            })
+            setTimeout(() => {
+                e.target.classList.add('after-move')
+            }, 0)
+            dragEl = e.target
+            // 用于设置被拖拽元素可执行的操作，只能在dragstart中设置该属性
+            e.dataTransfer.effectAllowed = 'move'
         })
+        ul.addEventListener('dragend', function (e) {
+            // e.target.style.opacity = 1
+            e.target.classList.remove('after-move')
+
+        })
+
+        // 目的地对象元素
+        ul.addEventListener('dragenter', function (e) {
+            e.preventDefault()
+
+            if (e.target === ul || e.target === dragEl) return
+
+            const children = [...ul.children]
+            const sourceIndex = children.indexOf(dragEl)
+            const targetIndex = children.indexOf(e.target)
+            if (sourceIndex < targetIndex) {
+                //  向下拖动就是加入到进入元素的下一个元素之间（也就是替换进入的元素，那不就是下一个元素之前吗）
+                ul.insertBefore(dragEl, e.target.nextElementSibling)
+            } else {
+                // 向上拖动 就是插入到这个元素之前
+                ul.insertBefore(dragEl, e.target)
+            }
+        })
+        ul.addEventListener('dragover', function (e) {
+            e.preventDefault()
+        })
+        // ul.addEventListener('dragleave', function (e) {
+        //     e.target.classList.remove('enter')
+
+        // })
+
+
     </script>
 </body>
 

@@ -10,6 +10,89 @@ const fnn = (a, b) => {
 const fnn2 = spread(fnn);
 
 console.log(fnn2([1, 2])); // 3
+// ! 1 创建实例： axios为啥可以使用axios({ }) 和 axios.get()两种方式发送请求
+/**
+ * @param {Object} defaultConfig 默认配置
+ * @return {Axios} 一个 axios 的实例对象
+ */
+function createInstance(defaultConfig) {
+  // 基于默认配置创建一个Axios实例上下文。
+  var context = new Axios(defaultConfig);
+
+  // bind方法返回一个函数，执行这个函数，相当于执行 Axios.prototype.request，方法中的 this 指向 context，
+  // 这就是我们引入 axios 后可以直接通过 axios({...}) 发送请求的原因，
+  var instance = bind(Axios.prototype.request, context);
+
+  // 将 axios 的原型对象 Axios.prototype 上的属性依次赋值给这个实例对象
+  // 这样操作后我们就可以通过 axios.get()发送请求，实际上调用原型对象上的方法
+  utils.extend(instance, Axios.prototype, context);
+
+  // 将 axios 实例的私有属性赋值给当前的 instance
+  // 这样我们可以获取到实例上的属性，例如 通过 axios.defaultConfig 获取默认配置
+  utils.extend(instance, context);
+  return instance;
+}
+
+// 创建一个 axios 实例，实际上就是上述函数中的 instance；
+var axios = createInstance(defaults);
+
+module.exports.default = axios;
+
+/*
+ 创建 axios 实例，也是我们通过 import axios from 'axios' 时的 axios 对象，这个对象实际上是 Axios 类的原型上的 request 方法，
+  方法中的 this 指向 一个新的基于默认配置创建的 axios 实例。
+
+  * 暴露的axios上挂载了基于默认配置创建的Axios实例属性，也挂载了原型上的方法。
+  * 这里就解答了一个问题，使用 axios(config) 发送请求调用的是 Axios.prototype.request 方法，
+  * 使用 axios.get(url[, config] )方法发送请求，调用的是 Axios.prototype.get 方法。
+
+
+ */
+
+// ! 2 Axios构造函数
+/**
+ * Create a new instance of Axios
+ * @param {Object} instanceConfig 默认配置
+ */
+function Axios(instanceConfig) {
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager(),
+  };
+}
+
+Axios.prototype.request = function request() {};
+
+// ! 3 发送请求的 request 方法
+// ~ 这个方法做了两件事
+
+// ~ 1. 获取发送 HTTP 请求的参数
+// ? 2.编排请求的 Promise 链,并执行该 Promise链
+
+/**
+ * 可以看到，axios 上挂载了 axios 类的一个实例，这个实例有一个interceptors 属性，属性值是一个对象，包含request 和 response 两个属性，
+ * 分别是用来注册和管理 请求拦截器和相应拦截器。我们来看一下是如何进行管理的
+ *
+ */
+// 拦截器的构造函数
+function InterceptorManager() {
+  this.handlers = [];
+}
+
+// 注册拦截器函数，注意:这里拦截器可以注册多个, 按照注册的先后顺序排列
+InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+  this.handlers.push({ fulfilled: fulfilled, rejected: rejected });
+  return this.handlers.length - 1;
+};
+// 用于移除拦截器
+InterceptorManager.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
+
+// ~ 注意，后注册的请求拦截器会先执行，响应拦截器是按照注册顺序执行的。
 
 // 拦截器经典代码
 // ~ 任务编排：Axios拦截器的思想是通过对数组中成员进行一定的排列，然后遍历执行，以达到一定的执行顺序。
@@ -138,3 +221,47 @@ while (responseInterceptorChain.length) {
 }
 
 return promise;
+
+// ? 如何使用拦截器
+// 添加请求拦截器
+axios.interceptors.request.use(function (config) {
+  // 在发送请求之前做些什么
+  return config;
+});
+// 添加响应拦截器
+axios.interceptors.response.use(function (response) {
+  // 对响应数据做点什么
+  return response;
+});
+
+// ! 4 Axios 如何防御 CSRF 攻击
+// lib/adapters/xhr.js
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestHeaders = config.headers;
+    var request = new XMLHttpRequest();
+    // 添加xsrf头部
+    if (utils.isStandardBrowserEnv()) {
+      var xsrfValue =
+        (config.withCredentials || isURLSameOrigin(fullPath)) &&
+        config.xsrfCookieName
+          ? cookies.read(config.xsrfCookieName)
+          : undefined;
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+    request.send(requestData);
+  });
+};
+// 利用csrf token防止攻击
+// * 看完以上代码，我们知道了 Axios 是将 token 设置在 Cookie 中，在提交（POST、PUT、PATCH、DELETE）等请求时提交 Cookie，并通过请求头或请求体带上 Cookie 中已设置的 token，服务端接收到请求后，再进行对比校验。
+
+// Axios 提供了 xsrfCookieName 和 xsrfHeaderName 两个属性来分别设置 CSRF 的 Cookie 名称和 HTTP 请求头的名称，它们的默认值如下所示：
+
+// lib/defaults.js
+var defaults = {
+  adapter: getDefaultAdapter(),
+  xsrfCookieName: "XSRF-TOKEN",
+  xsrfHeaderName: "X-XSRF-TOKEN",
+};

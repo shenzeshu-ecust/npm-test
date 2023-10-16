@@ -12,7 +12,11 @@
             height: 600px;
             border: 1px solid #ccc;
             display: flex;
+            flex-direction: column-reverse;
+            
         }
+
+
 
         .inner {
             width: 50px;
@@ -22,10 +26,19 @@
             text-align: center;
             line-height: 50px;
             color: #fff;
+
         }
 
-        .inner1 {
-            margin-top: auto;
+        .inner:last-child {
+            background-color: pink;
+        }
+
+
+
+
+
+        .eg {
+            width: 20px;
         }
     </style>
 </head>
@@ -38,6 +51,16 @@
         <div class="inner4 inner">4</div>
 
     </div>
+    <div class="eg">哈哈哈哈哈哈哈哈哈</div>
+
+    <input type="text" placeholder="输入" onfocus="this.placeholder = ''" onblur="this.placeholder = '输入'">
+    <script>
+        if (!window.location.hash) {
+            // window.location.hash = '/'
+        }
+
+        
+    </script>
 </body>
 
 </html>

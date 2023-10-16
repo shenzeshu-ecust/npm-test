@@ -43,7 +43,8 @@ export function createFiber(vnode, returnFiber) {
 ~ 加入fiber的react将组件更新分为两个时期,这两个时期以render为分界
 
 render前的生命周期为phase1阶段1。
-    这个阶段的生命周期是可以被打断的，每隔一段时间它会跳出当前渲染进程，去确定是否有其他更重要的任务。此过程，React在 workingProgressTree （并不是真实的virtualDomTree）上复用 current 上的 Fiber 数据结构来一步地（通过requestIdleCallback）来构建新的 tree，标记处需要更新的节点，放入队列中
+    这个阶段的生命周期是可以被打断的，每隔一段时间它会跳出当前渲染进程，去确定是否有其他更重要的任务。
+    此过程，React在 workingProgressTree （并不是真实的virtualDomTree）上复用 current 上的 Fiber 数据结构来一步地（通过requestIdleCallback）来构建新的 tree，标记处需要更新的节点，放入队列中
 
 render后的生命周期为phase2阶段2。
     phase2的生命周期是不可被打断的，React 将其所有的变更一次性更新到DOM上

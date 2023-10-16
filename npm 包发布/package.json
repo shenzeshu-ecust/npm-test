@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "shenzeshu-test",
   "version": "1.0.0",
   "description": "my first npm package",
   "main": "index.js",
@@ -11,5 +11,6 @@
     "url": "https://github.com/shenzeshu-ecust/npm-test"
   },
   "author": "szs",
+  "keywords": ["utils", "format"],
   "license": "ISC"
 }
