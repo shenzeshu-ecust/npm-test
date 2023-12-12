@@ -1,0 +1,4 @@
+<view class='load-fail-view'>
+  <image class="load-fail-icon-image" src='https://pages.c-ctrip.com/schedule/pic/wxxcx/cts_fail.png'></image>
+  <text class='load-fail-text'>页面开小差了，我们也在满世界找她…</text>
+</view>

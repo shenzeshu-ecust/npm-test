@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "gift-info": "/pages/hotelplanning/components/giftinfo/giftinfo"
+    }
+}

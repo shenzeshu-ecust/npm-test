@@ -1,0 +1,32 @@
+<template name="reward">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-dashang">
+        <view class="pop-dashang-hd">
+            <image src="{{rewardInfo.PhotoUrl}}" class="img-avatar"></image>
+            <view class="cont">
+                <view class="tit">{{rewardInfo.Title}}</view>
+                <view class="txt">{{rewardInfo.Content}}</view>
+            </view>
+        </view>
+        <view class="pop-dashang-bd">
+            <view class="tit">{{rewardInfo.Tips}}</view>
+            <view class="pop-dashang-lst">
+                <view class="item {{index == rewardSelectedIndex ? 'cur' : ''}}" wx:for="{{rewardInfo.RewardAmountList}}" data-index="{{index}}" bindtap="chooseRewardAmount">
+                    <view class="txt">{{item.Desc}}</view>
+                    <view class="price">{{item.RewardAmount}}</view>
+                </view>
+            </view>
+            <button class="btn-submit" bindtap="rewardSubmit">确认打赏</button>
+        </view>
+        <text class="ifont-closed" bindtap="hideBackDrop"></text>
+    </view>
+</template>
+
+<template name="reward-success">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-dashang-suc">
+        <view class="tit">打赏成功</view>
+        <view class="txt">感谢~~祝您出行愉快！</view>
+        <text class="ifont-closed" bindtap="hideBackDrop"></text>
+    </view>
+</template>

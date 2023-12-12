@@ -1,0 +1,324 @@
+.custom-modal {
+}
+.custom-modal .custom-modal-mask,
+.custom-modal .custom-modal-container {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.custom-modal .custom-modal-mask {
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+}
+
+.custom-modal .fadeIn {
+    animation: fadeIn 220ms linear forwards;
+}
+.custom-modal .fadeOut {
+    animation: fadeOut 220ms linear forwards;
+}
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.custom-modal .backgroundbox {
+    width: 100%;
+    z-index: -1;
+    overflow: visible;
+    position: absolute;
+}
+.custom-modal .backgroundbox.top {
+    bottom: 100%;
+}
+.custom-modal .backgroundbox.bottom {
+    top: 100%;
+}
+
+.custom-modal .box {
+    background: #ffffff;
+    border-radius: 8rpx;
+    z-index: 1;
+    /* min-height: 200rpx; */
+    margin: 0 10%;
+    min-width: 85%;
+    padding: 40rpx 0;
+    align-items: stretch;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+}
+
+.custom-modal .insurance-tip-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    font-size: 24rpx;
+    color: #999;
+}
+.custom-modal .insurance-tip-content .flex1 {
+    flex: 1;
+}
+
+.custom-modal .insurance-tip-content .tip-icon {
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 6rpx;
+}
+
+.custom-modal .bottomModal-box {
+    border-radius: 8rpx 8rpx 0 0;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    position: absolute;
+}
+
+.custom-modal .bottomModal-box .bottomModal-close {
+    font-size: 40rpx;
+}
+
+.custom-modal .boxroundTop {
+    border-top-left-radius: 8rpx;
+    border-top-right-radius: 8rpx;
+}
+
+.custom-modal .box .icon {
+    height: 160rpx;
+    width: 160rpx;
+    border-radius: 160rpx;
+    margin-top: -100rpx;
+    margin-bottom: -20rpx;
+    background-color: #ffffff;
+    position: relative;
+    z-index: 0;
+}
+.custom-modal .box .icon image {
+    /* height: 80rpx;
+  width: 80rpx; */
+    height: 100%;
+    width: 100%;
+}
+.custom-modal .box .title {
+    color: #333333;
+    font-size: 32rpx;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20rpx;
+    background-color: #ffffff;
+    z-index: 1;
+    padding: 0 30rpx;
+}
+
+.custom-modal .antiPadding {
+    margin-top: -40rpx;
+    margin-left: -30rpx;
+    margin-right: -30rpx;
+}
+.custom-modal .box .block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.custom-modal .box .messagebox {
+    z-index: 1;
+    max-height: 800rpx;
+    overflow: auto;
+    padding: 10rpx 30rpx;
+}
+
+.custom-modal .box .message {
+    font-size: 28rpx;
+    margin-bottom: 10rpx;
+    /* max-height: 70%;
+  overflow: scroll; */
+}
+
+.custom-modal .box .info {
+    font-size: 22rpx;
+    color: #999999;
+    text-align: center;
+}
+
+.custom-modal .box .info .actions:after {
+    font-size: 22rpx;
+    font-family: 'bus_wechat_icon';
+    content: '\E008';
+    vertical-align: center;
+    position: relative;
+    display: inline-block;
+    margin-top: 2rpx;
+}
+.custom-modal .box .info.needactions:active {
+    filter: grayscale(0.3) brightness(0.8);
+}
+
+.custom-modal .box .input-title {
+    flex: 3;
+    font-size: 28rpx;
+}
+
+.custom-modal .box .input-row {
+    margin: 20rpx 0 0;
+}
+.custom-modal .box .input {
+    background-color: #f2f2f2;
+    font-weight: 700;
+    line-height: 64rpx;
+    height: 64rpx;
+    font-size: 28rpx;
+    padding: 0 10rpx;
+    border-radius: 8rpx;
+    flex: 7;
+}
+
+.custom-modal .box .button {
+    height: 88rpx;
+    border-radius: 12rpx;
+    background-color: #ff5d13;
+    line-height: 88rpx;
+    color: #ffffff;
+    flex: 0.8;
+    min-width: 40%;
+    margin: auto;
+    font-size: 32rpx;
+    box-sizing: border-box;
+    border-width: 1rpx;
+    border-style: solid;
+}
+.custom-modal .box .button:last-child {
+    margin-left: 30rpx;
+}
+
+.custom-modal .box .button-container-column,
+.custom-modal .box .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30rpx 30rpx 0;
+}
+
+.custom-modal .box .button-container {
+    flex-direction: row;
+}
+
+.custom-modal .box .button-container-column {
+    flex-direction: column;
+}
+
+.custom-modal .box .button:after {
+    border: none;
+}
+
+.custom-modal .box .button_hover {
+    filter: grayscale(0.3);
+}
+
+.custom-modal .line {
+    width: 3rpx;
+    height: 100rpx;
+    position: relative;
+}
+
+.custom-modal .line .trans {
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+}
+
+.custom-modal .lineTransIn {
+    animation: lineTransIn 440ms linear forwards;
+}
+.custom-modal .lineTransOut {
+    animation: lineTransOut 220ms linear forwards;
+}
+@keyframes lineTransIn {
+    0% {
+        height: 0;
+    }
+    50% {
+        height: 100%;
+    }
+    100% {
+        height: 100%;
+    }
+}
+@keyframes lineTransOut {
+    0% {
+        height: 100%;
+    }
+    100% {
+        height: 0;
+    }
+}
+
+.custom-modal .close-modal {
+    margin: -2rpx 0;
+}
+
+.custom-modal .closeTransOut {
+    animation: closeTransOut 220ms linear forwards;
+}
+
+.custom-modal .closeTransIn {
+    animation: closeTransIn 440ms linear forwards;
+}
+@keyframes closeTransIn {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes closeTransOut {
+    0% {
+        opacity: 1;
+    }
+    0.01% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+.headImage {
+    margin-top: -40rpx;
+    background: linear-gradient(
+        -180deg,
+        rgb(234, 252, 245) 0%,
+        rgb(255, 255, 255) 100%
+    );
+    text-align: center;
+    border-radius: 16rpx;
+}
+.headImage image {
+    height: 204rpx;
+    width: 328rpx;
+    padding-top: 24rpx;
+}

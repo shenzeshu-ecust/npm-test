@@ -1,0 +1,151 @@
+<view class="tbody">
+    <view class="trun-title"><image class="title-img" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-title.png"></image></view>
+    <view class="trun-score">我的积分：{{userPoints}}</view>
+    <!-- 抽奖大转盘 -->
+    <view class="turntable">
+        <view class="light"></view>
+        <view class="light"></view>
+        <view class="light"></view>
+        <view class="light"></view>
+        <view class="light"></view>
+        <view class="light"></view>
+        <view class="light"></view>
+        <view class="light"></view>
+        <view class="light"></view>
+        <view class="light"></view>
+        <view class="light"></view>
+        <view class="light"></view>
+        <view class="panel {{panelTran ? 'panel-tran3' : 'panel-tran1'}}" style="{{rollStyle}}">
+            <view class="sector {{current === 6 ? 'current' : ''}}">
+                <view class="sector-inner">
+                    <view class="text-mode">
+                        <view class="sector-txt">100积分</view>
+                        <image class="sector-img" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-score-zhuanpan.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="sector {{current === 1 ? 'current' : ''}}">
+                <view class="sector-inner">
+                    <view class="text-mode">
+                        <view class="sector-txt">谢谢参与</view>
+                        <image class="sector-img" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-smile.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="sector {{current === 2 ? 'current' : ''}}">
+                <view class="sector-inner">
+                    <view class="text-mode">
+                        <view class="sector-txt">5积分</view>
+                        <image class="sector-img" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-score-zhuanpan.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="sector {{current === 3 ? 'current' : ''}}">
+                <view class="sector-inner">
+                    <view class="text-mode">
+                        <view class="sector-txt">10积分</view>
+                        <image class="sector-img" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-score-zhuanpan.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="sector {{current === 4 ? 'current' : ''}}">
+                <view class="sector-inner">
+                    <view class="text-mode">
+                        <view class="sector-txt">20积分</view>
+                        <image class="sector-img" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-score-zhuanpan.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="sector {{current === 5 ? 'current' : ''}}">
+                <view class="sector-inner">
+                    <view class="text-mode">
+                        <view class="sector-txt">50积分</view>
+                        <image class="sector-img" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-score-zhuanpan.png"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{remainingTime}}" class="pointer bg-light" bindtap="getPlayLottery" data-ubt-key="{{shareStatus === 0 ? 'xcx_cxy_point_lottery_paid' : 'xcx_cxy_point_lottery_free'}}" id="autotest_{{shareStatus === 0 ? 'xcx_cxy_point_lottery_paid' : 'xcx_cxy_point_lottery_free'}}" ><view class="center"><block wx:if="{{shareStatus === 0}}">5积分</block><view class="bigft">抽</view></view></view>
+        <view wx:if="{{!remainingTime}}" class="pointer bg-gray" bindtap="{{ usedTimes===1 ? 'showShareTips' : 'overTips'}}" data-ubt-key="{{shareStatus === 0 ? 'xcx_cxy_point_lottery_paid' : 'xcx_cxy_point_lottery_free'}}" id="autotest_{{shareStatus === 0 ? 'xcx_cxy_point_lottery_paid' : 'xcx_cxy_point_lottery_free'}}" ><view class="center"><block wx:if="{{shareStatus === 0}}">5积分</block><view class="bigft">抽</view></view></view>
+    </view>
+
+    <view class="trun-tips" wx:if="{{remainingTime > 0 && (shareStatus===0)}}">每次5积分，今日还可以抽{{remainingTime}}次哦~</view>
+    <view class="trun-tips" wx:elif="{{(usedTimes === 1) && (shareStatus===1)}}">分享成功，今日还可抽1次哦~</view>
+    <view class="trun-tips" wx:elif="{{lotteryLayer.showNotEnough}}" bindtap="toFunScore">积分不足，回积分页赚取积分 ></view>
+    <view wx:else class="{{showShareButton && canShowShareBtn ? '' : 'trun-tips'}}"></view>
+    <!-- 分享按钮 -->
+    <button open-type="share" type="share" data-type="lottery" class="trun-share trun-share-light heartbeat" wx:if="{{showShareButton && canShowShareBtn}}" bindtap="noop" data-ubt-key="xcx_cxy_point_lottery_fxan"><text class="img wechat-font-share"></text>分享给好友，免费多抽1次</button>
+    <!-- 活动规则 -->
+    <view class="rules-bg">
+        <view class="activity-rules">
+            <view class="rules-title">活动规则</view>
+            <view class="rules-text">
+                <view class="mt15">1、参与方式：可从携程微信小程序首页→酒店→我的积分→积分抽奖，进入福利转盘活动页面参与抽奖</view>
+                <view class="mt15">2、抽奖说明：</view>
+                <view>（1）用户须花费5个积分获取1次基础抽奖机会;</view>
+                <block wx:if="{{canShowShareBtn}}">
+                    <view>（2）基础抽奖后，用户分享抽奖给1个好友，完成分享，可免费获得1次抽奖机会，抽奖机会当日有效;</view>
+                    <view>（3）包含邀请好友获取1次抽奖机会在内，同一用户每天最多享有2次抽奖机会</view>                
+                </block>
+                <block wx:else>
+                    <view>（2）同一用户每天有且仅有1次抽奖机会</view>
+                </block>
+                <view class="mt15">3、中奖说明：</view>
+                <view>（1）活动中奖采用随机中奖原则，中奖概率均等;</view>
+                <view>（2）用户须登陆账户后才有机会参与抽奖活动</view>
+                <view class="mt15">4、奖品发放：</view>
+                <view>（1）积分奖品会自动打入用户账户，可在携程微信小程序→酒店→我的积分，查看积分账单明细</view>
+                <view>（2）如果中奖逾期未到账，请联系客服反馈，并请提供明确中奖时间、中奖品弹窗、中奖手机号/微信账号及绑定的携程账号，由携程酒店积分侧在系统核实后给出答复</view>
+                <view class="mt15">5、其他说明</view>
+                <view>（1）用户如果违反诚实信用原则或出现违规行为（如作弊、恶意套取等），一经发现我公司有权终止该客户参加本次活动并取消其获奖资格</view>
+                <view>（2）同一用户：用户的账户、手机号码、身份证件、支付帐号、终端设备号等一项或多项身份认证信息相同或其他可以合理显示为同一用户的，均视为同一用户</view>
+                <view>（3）凡参加本活动者，即视为接受活动所有规则，且须遵循携程公司法律声明及其他关于营销活动的相关规定，携程公司可根据活动的实际情况优化或调整活动规则</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<!--悬浮球-->
+<view wx:if="{{isLandingPage}}" class="floating-ball transpond {{packUpStatus ? 'ball-packup':''}}">
+    <view class="{{packUpStatus ? 'none':'block'}}">
+        <view class="item" bindtap="toFunScore">
+            <view class="wechat-font-credit fn18"></view>积分
+        </view>
+        <view class="item" bindtap="toInquire">
+            <view class="wechat-font-home fn18"></view>首页
+        </view>
+        <view class="border-bottom"></view>
+        <view class="item" bindtap="packUp">
+            <view class="wechat-font-g-arrow-down fn18"></view>
+        </view>
+    </view>
+    <view class="item {{packUpStatus ? 'block':'none'}}" bindtap="packUp">
+        <view>快捷</view>
+        <view>导航</view>
+    </view>
+</view>
+
+<!-- 抽奖提示弹窗 -->
+<block wx:if="{{!lotteryLayer.hidden}}">
+    <view class="cmask" catchtap="closeLayer"></view>
+    <view class="cmask-popbox txt-center">
+        <view class="score-sign">
+            <block wx:if="{{lotteryLayer.showSuccess}}">
+                <view class="tit mt30">恭喜抽中{{lotteryLayer.points}}积分</view>
+                <image class="img mt30" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-score-big.png"></image>
+                <view class="content"><text class="font-big">+{{lotteryLayer.points}}</text> 积分</view>
+            </block>
+            <block wx:if="{{lotteryLayer.showFail}}">
+                <image class="img mt60 mb10" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-warn.png"></image>
+                <view class="tit">哎呀未抽中~</view>
+                <view class="content mb30">下次再接再厉</view>
+            </block>
+            <block wx:if="{{lotteryLayer.showNotEnough}}">
+                <view class="content">您的积分不足，先去酒店积分页赚取吧～</view>
+                <image class="img-small mt60 mb10" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-score-small.png"></image>
+                <view class="layer-button" bindtap="toFunScore">去赚积分 ></view>
+            </block>
+        </view>
+        <view class="score-close wechat-font-close" catchtap="closeLayer"></view>
+    </view>
+</block>

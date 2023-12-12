@@ -1,0 +1,7 @@
+<view class="formid-button-view">
+  <form class="formid-button-form" bindsubmit="formSubmit" report-submit='true'>
+      <button class="formid-button-inner-button formid-button-class" formType="submit" disabled="{{disabled}}" open-type="{{openType}}" data-transmitInfo="{{transmitInfo}}" data-shareModel="{{shareModel}}">
+        <slot></slot>
+      </button>
+  </form>
+</view>

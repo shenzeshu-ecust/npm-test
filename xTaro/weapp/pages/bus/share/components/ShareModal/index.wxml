@@ -1,0 +1,23 @@
+<block wx:if="{{data.visible}}">
+    <view class='share-modal'>
+        <view class="share-modal-mask {{data.inHidden ? 'fadeOut' : 'fadeIn'}}" catchtouchmove='empty' catchlongtap='empty' bindtap="hiddenShareModalMask" />
+        <view class='share-modal-container' catchtouchmove='empty' catchlongtap='empty'>
+            <view class='box' style="{{backgroundStyleText}}">
+                <view class="block-header-bg" />
+                <text class='title' style="{{'color:' + (data.titleColor || '#333333')}}">{{data.title || '温馨提示'}}</text>
+                <text class='message' style="{{'color:' + (data.color || '#703f38')}}">{{data.message || '这是一个提示'}}</text>
+                <button form-type='submit' open-type="{{data.openType}}" bindgetphonenumber="{{ data.openType == 'getPhoneNumber' ? 'onShareModalButton' : ''}}" app-parameter="{{data.launchAppParams}}" binderror="{{data.openType == 'launchApp' ? 'onShareModalButton' : ''}}" openSetting="{{data.openType == 'openSetting' ? 'onShareModalButton' : ''}}" bindgetuserinfo="{{data.openType == 'openSetting' ? 'onShareModalButton' : ''}}" bindtap="{{data.openType ? '' : 'onShareModalButton'}}" class='process-button' hover-class='button_hover' style="{{'background-color:' + (data.buttonColor || '#f84123') + ';color:' + (data.buttonTextColor || '#fee8d1')}}">
+                    {{data.buttonTitle || '知道了'}}
+                </button>
+            </view>
+            <view class='line'>
+                <block wx:if="{{data.showClose && data.showLine}}">
+                    <view class="trans {{data.inHidden ? 'lineTransOut' : 'lineTransIn'}}" />
+                </block>
+            </view>
+            <block wx:if="{{data.showClose}}">
+                <icon class="{{'close-modal ' + (data.inHidden ? 'closeTransOut' : 'closeTransIn') + ' ' + (data.showLine ? '' : ' line-margin')}} " size="{{'50rpx'}}" type='cancel' color='#ffffff' bindtap="closeModal" />
+            </block>
+        </view>
+    </view>
+</block>

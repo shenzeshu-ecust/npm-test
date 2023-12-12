@@ -1,0 +1,222 @@
+.headerContainer {
+    padding: 20rpx 20rpx 0 20rpx;
+}
+.headerInfo {
+    /* overflow: hidden; */
+    position: relative;
+    border-radius: 10rpx;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+.headerInfo-lottery {
+    position: relative;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 10rpx 10rpx 0 0;
+}
+
+.headerInfo .shadow {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 0 150rpx rgba(0, 0, 0, 0.1);
+}
+
+.headerInfo .lefttag {
+    font-size: 24rpx;
+    font-weight: 300;
+    left: 0;
+    top: 0;
+    line-height: 40rpx;
+    padding: 0rpx 20rpx 0 10rpx;
+    border-bottom-right-radius: 12rpx;
+    z-index: 1;
+    margin-top: -30rpx;
+}
+
+.headerInfo .rightScroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    z-index: 2;
+    width: 100%;
+    border-bottom-left-radius: 10rpx;
+    border-bottom-right-radius: 10rpx;
+}
+
+.headerInfo .importantInfo {
+    font-size: 32rpx;
+    font-weight: 700;
+    color: #333333;
+    padding: 0 32rpx;
+    z-index: 2;
+}
+.headerInfo .importantInfo .sub {
+    font-weight: 300;
+}
+
+.headerInfo .importantInfo .gray {
+    color: #666666;
+    font-size: 28rpx;
+}
+
+.icon-arrow-to-long {
+    /* height: 20rpx; */
+    font-family: 'bus_wechat_icon';
+    font-weight: 300;
+}
+.icon-arrow-to-long:before {
+    font-size: 80rpx;
+    height: 30rpx;
+    line-height: 30rpx;
+}
+
+.headerInfo .importantInfo.center {
+    text-align: center;
+}
+
+.headerInfo .light {
+    font-weight: 400;
+}
+
+.headerInfo .subInfo {
+    font-size: 24rpx;
+    font-weight: 300;
+    color: #999999;
+}
+
+.headerInfo .icon-location:before {
+    font-size: 32rpx;
+}
+.headerInfo .stationRow {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.headerInfo .stationContainer {
+    max-width: 60%;
+}
+.headerInfo .stationContainer.wrap {
+    min-width: 30%;
+    max-width: 45%;
+    white-space: normal;
+}
+
+.headerInfo .top {
+    position: relative;
+    overflow: hidden;
+    padding: 34rpx 0 0;
+    border-top-left-radius: 10rpx;
+    border-top-right-radius: 10rpx;
+    padding-bottom: 10rpx;
+}
+
+.headerInfo .bottom {
+    position: relative;
+    overflow: hidden;
+    border-bottom-left-radius: 10rpx;
+    border-bottom-right-radius: 10rpx;
+}
+
+.headerInfo .info {
+    position: relative;
+    z-index: 2;
+}
+
+.headerInfo .dashLine {
+    border-color: transparent;
+    border-width: 0;
+    border-bottom-width: 0;
+    border-top: 1px dashed #e5e5e5;
+    height: 0;
+}
+
+.bus_tip {
+    margin-top: 20rpx;
+    font-size: 24rpx;
+    font-weight: 300;
+    color: #333333;
+}
+.bus_tip image {
+    height: 32rpx;
+    width: 32rpx;
+    margin-right: 20rpx;
+}
+
+.headerdetailinfo,
+.headerdetailinfoMask {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    padding-top: 200rpx;
+}
+.headerdetailinfoMask {
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+.margin-huge {
+    margin-left: 40rpx;
+    margin-right: 50rpx;
+}
+
+.releative {
+    position: relative;
+}
+.headerInfo .button-location {
+    width: 88rpx;
+    height: 88rpx;
+    font-size: 24rpx;
+    padding: 10rpx;
+    margin: 0;
+    position: absolute;
+    line-height: initial;
+    right: 10rpx;
+    top: 10rpx;
+    background-color: transparent;
+}
+.headerInfo .button-location:after {
+    border: none;
+}
+
+.headerInfo .button-location-hover {
+    background-color: #f4f4f4;
+    filter: grayscale(0.3) brightness(0.8);
+}
+
+.headerInfo .checktag {
+    font-size: 24rpx;
+    color: #666666;
+    overflow: hidden;
+    word-break: keep-all;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.headerInfo .button-info {
+    font-size: 24rpx;
+    padding: 0;
+    margin: 0;
+    color: #333333;
+}
+
+.bottom-padding {
+    padding-top: 16rpx;
+    padding-bottom: 16rpx;
+}
+
+.icon-padding-checktag {
+    padding-right: 10rpx;
+}
+
+.service-button {
+    margin-left: 10rpx;
+}

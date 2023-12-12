@@ -1,0 +1,21 @@
+<view wx:if="{{isShowTopLine}}" class='hr'></view>
+<view class='container' wx:if="{{cardOperationData.orderStatusName || cardOperationData.shareOperations || cardOperationData.normalOperations || cardOperationData.cardSource}}">
+
+  <view class='left-container line' wx:if="{{cardOperationData.normalOperations && cardOperationData.normalOperations.length}}">
+    <!-- <view class='status-container' wx:if="{{!cardOperationData.cardSource && cardOperationData.orderStatusName}}" catchtap='statusClickTap' data-orderDetailUrl='{{cardOperationData.orderDetailUrl}}'>
+      <text class='status-name' style='color:{{cardOperationData.orderStatusNameColor}}'>{{cardOperationData.orderStatusName}}</text>
+      <image class="status-icon" src='{{cardOperationData.orderStatusArrow}}'></image>
+      <Icon className='Forward' class="status-icon" color='{{cardOperationData.orderStatusArrow}}' size='14' />
+    </view>
+    <view class='card-source' wx:if="{{cardOperationData.cardSource}}">
+      <text>{{cardOperationData.cardSource}}</text>
+    </view> -->
+    <block wx:for="{{cardOperationData.normalOperations}}" wx:for-item="normalOperation" wx:key="">
+      <formid-button formid-button-class="status-btn" catchtap="jump2h5page" data-operation="{{normalOperation}}">{{normalOperation.name}}</formid-button>
+    </block>
+  </view>
+  <view class="right-container" wx:if="{{cardOperationData.shareOperations && cardOperationData.shareOperations.length}}">
+    <Icon className='share_card_icon' class="share-icon" color="#1980fe" size='14' />
+    <formid-button catch:tap="onShareClick" formid-button-class='share-btn' share-model='{{cardOperationData.shareOperations[0]}}' open-type='share'>{{cardOperationData.shareOperations[0].name}}</formid-button>
+  </view>
+</view>

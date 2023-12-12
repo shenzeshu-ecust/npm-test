@@ -48,3 +48,4 @@ type IntersectionUnion = UnionA & UnionB;
 // type test = "a" | "b" | 1 & string; // 括号是自动给加上的
 // ~ 等同于 type test = ('a' & string) | ('b' & string) | (1 & string)
 // ~ = 'a' | 'b'
+

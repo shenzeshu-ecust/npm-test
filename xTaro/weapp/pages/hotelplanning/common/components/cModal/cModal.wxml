@@ -1,0 +1,23 @@
+<view wx:if="{{isShow}}">
+    <cMask bind:click="onClickMask" duration="{{duration}}"/>
+    <view class="modal-wrapper" style="width:{{width}}; {{animateStyle}}">
+        <!--top -->
+        <view class="modal-header__close-wrapper" bindtap="closeModal">
+            <text class='modal-header__inner-icon {{closeIconType}}'></text>
+        </view>
+
+        <!--mid-->
+        <view class="modal-body">
+            <view class="modal-body__title title-class">{{bodyTitle}}</view>
+            <view class="modal-body__content">{{bodyContent}}</view>    
+        </view>
+        <!-- custom -->
+        <slot></slot>
+
+        <!--bot-->
+        <view class="modal-footer {{btnCol ? 'col' : ''}}">
+            <button wx:if="{{!cancelBtnHide}}" class="modal-footer__button cancel cancel-btn-class" catchtap="onCancel">{{cancelText}}</button>
+            <button wx:if="{{!confirmBtnHide}}" class="modal-footer__button confirm confirm-btn-class" catchtap="onConfirm" open-type="{{ confirmBtnOpenType }}">{{confirmText}}</button>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,8 @@
+<view class="search-header" bindtap="jumpToGlobalSearchHome">
+  <view class="search-box">
+    <view class="search-box-inner">
+      <icon class="search-icon"></icon>
+      <text class="search-box-text">BOSS直播爆款</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,51 @@
+<view class="detail-con">
+  <framework-comp wx:if="{{isCtripOrQunar}}"></framework-comp>
+  <framework-comp wx:else isError="{{isPageError}}" isLoading="{{isPageLoading}}" errorText="{{isPageErrorText}}" isShowPlatformIcon class="{{isShowNavBar?'pad-top':''}}">
+    <!-- 吸顶导航条 -->
+    <nav-bar isShow="{{isShowNavBar}}" navList="{{navBarList}}" currentNavIndex="{{currentNavIndex}}" bind:triggerChangeNav="_handleChangeNav"></nav-bar>
+    <scroll-view class="detail-wrapper" scroll-y="true" scroll-top="{{topNum}}" upper-threshold="180" lower-threshold="300" scroll-with-animation="true" bindscroll="observeScroll">
+      <view class="detail-wrapper-scroll">
+        <!-- 头部 swiper -->
+        <view id="headerSwiper">
+          <header-swiper unitInstanceCount="{{unit.unitInstanceCount}}" houseTopVo="{{topModule}}" product="{{haowuProduct}}" beginDate="{{beginDate}}" endDate="{{endDate}}" unitId="{{unitId}}" activityInfo="{{_activityInfo}}" peopleCount="{{peopleCount}}" isFromLandlord="{{isFromLandlord}}" urlSence="{{urlSence}}" landlordModule="{{landlordModule}}" landlordId="{{landlordId}}" facilityModule="{{facilityModule}}" chatId="{{chatId}}" favoriteHouseIdList="{{favoriteHouseIdList}}"></header-swiper>
+        </view>
+        <view class="detail-inner">
+          <view id="topModule" class="top-module">
+            <!-- 房屋基本信息 -->
+            <basic-info houseTopVo="{{topModule}}" openLocationData="{{openLocationData}}" commentModule="{{commentModule}}" unitId="{{unitId}}" businessType="{{landlordModule.businessType}}" houseCommentSummary="{{unit.houseCommentSummary}}" cityId="{{positionModule.cityId}}"></basic-info>
+            <!-- 日历及优惠信息模块 -->
+            <view class="calendar-promotion">
+              <!-- 日历 -->
+              <price-calendar selectBegin="{{selectBegin}}" selectEnd="{{selectEnd}}" sWeekText="{{sWeekText}}" eWeekText="{{eWeekText}}" interval="{{interval}}" bindchangecalendar="_handleOpenCalendarPage"></price-calendar>
+              <!-- 优惠 -->
+              <promotion-comp promotionInfo="{{topModule}}" hotelId="{{landlordModule.hotelId}}" landlordId="{{landlordId}}" bind:triggerRefreshHouseInfo="_handleGetHouseData"></promotion-comp>
+            </view>
+          </view>
+          <view wx:for="{{moduleSort}}" wx:key="item">
+            <!-- 房屋设施 -->
+            <house-service wx:if="{{item === 'facilityModule' && facilityModule}}" id="{{item}}" facilityModule="{{facilityModule}}"></house-service>
+            <!-- 房东介绍 -->
+            <landlord-introduction wx:if="{{item === 'landlordModule' && landlordModule}}" id="{{item}}" landlordModule="{{landlordModule}}" landlordId="{{landlordId}}" contractModule="{{pricePart.contractModule}}" houseName="{{topModule.houseName}}" unitId="{{unitId}}" isFromLandlord="{{isFromLandlord}}" beginDate="{{beginDate}}" endDate="{{endDate}}"></landlord-introduction>
+            <!-- 房客点评 -->
+            <tenant-comments wx:if="{{item === 'commentModule' && commentModule}}" id="{{item}}" commentModule="{{commentModule}}" unitId="{{unitId}}" businessType="{{landlordModule.businessType}}" houseCommentSummary="{{unit.houseCommentSummary}}" cityId="{{positionModule.cityId}}"></tenant-comments>
+            <!-- 预订须知 -->
+            <house-order-notice wx:if="{{item === 'rulesModule' && rulesModule}}" id="{{item}}" scheduleNoticeData="{{rulesModule}}"></house-order-notice>
+            <!-- 位置周边 -->
+            <house-location wx:if="{{item === 'positionModule' && positionModule}}" id="{{item}}" positionModule="{{positionModule}}" openLocationData="{{openLocationData}}"></house-location>
+          </view>
+        </view>
+        <view id="unitsSimilarHouseModule">
+          <!-- 周边相似房屋 -->
+          <house-nearby-similar wx:if="{{unitsSimilarHouseData.length}}" unitsSimilarHouseData="{{unitsSimilarHouseData}}" beginDate="{{beginDate}}" endDate="{{endDate}}" peopleCount="{{peopleCount}}" hotelId="{{landlordModule.hotelId}}" landlordId="{{landlordId}}"></house-nearby-similar>
+          <!-- 价格说明 -->
+          <house-pricedesc priceDescriptiopnData="{{priceDescriptiopnData}}"></house-pricedesc>
+          <!-- 安心住 -->
+          <house-peacelive peaceLiveData="{{peaceLiveData}}" businessLicenseList="{{businessLicenseList}}" houseNumber="{{houseNumber}}"></house-peacelive>
+        </view>
+      </view>
+      <!-- 底部 -->
+      <bottom-price isInside="{{false}}" priceModule="{{pricePart.priceModule}}" contractModule="{{pricePart.contractModule}}" landlordModule="{{landlordModule}}" houseName="{{topModule.houseName}}" unitId="{{unitId}}" isPageError="{{isPageError}}" isPageLoading="{{isPageLoading}}" isShare="{{isShare}}" isFromLandlord="{{isFromLandlord}}" beginDate="{{beginDate}}" endDate="{{endDate}}" interval="{{interval}}" urlSence="{{urlSence}}" landlordId="{{landlordId}}" bind:changecalendar="_handleOpenCalendarPage" bind:triggerChangeActive="changeActiveUpdateHouse" bind:updateLoginFlag="_handleUpdateLoginFlag" bind:tryAgainOnload="_handleGetHouseData" bind:openDiscountPopup="openDiscountPopup"></bottom-price>
+      <discount-popup show="{{isShowDiscountPopup}}" priceModule="{{pricePart.priceModule}}" contractModule="{{pricePart.contractModule}}" landlordModule="{{landlordModule}}" houseName="{{topModule.houseName}}" unitId="{{unitId}}" isPageError="{{isPageError}}" isPageLoading="{{isPageLoading}}" isShare="{{isShare}}" isFromLandlord="{{isFromLandlord}}" beginDate="{{beginDate}}" endDate="{{endDate}}" interval="{{interval}}" urlSence="{{urlSence}}" bind:changecalendar="_handleOpenCalendarPage" bind:triggerChangeActive="changeActiveUpdateHouse" bind:updateLoginFlag="_handleUpdateLoginFlag" bind:tryAgainOnload="_handleGetHouseData"></discount-popup>
+    </scroll-view>
+  </framework-comp>
+</view>

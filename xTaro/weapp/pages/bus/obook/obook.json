@@ -1,0 +1,6 @@
+{
+  "backgroundColor": "#efefef",
+  "enablePullDownRefresh": false,
+  "usingComponents": { "nav-bar": "../cwx/component/navbar/navbar" },
+  "navigationStyle": "custom"
+}

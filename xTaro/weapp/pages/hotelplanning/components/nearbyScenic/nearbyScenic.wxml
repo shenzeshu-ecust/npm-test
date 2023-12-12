@@ -1,0 +1,36 @@
+<view class="nearby-scenic-model" wx:if="{{isNearbyScenic}}">
+	<view class="nearby-title">附近景点门票</view>
+	<view  wx:for="{{scenicList}}" class="nearby-item" bindtap="jumpToMarket" data-url="{{item.wechatUrl}}">
+			<view class="nearby-item-image"><image src="{{item.imageUrl}}"></image></view>
+			<view class="nearby-item-content">	
+				<view class="nearby-item-title">
+					<text class="item-name">{{item.name}}</text>
+					<text class="item-level"  wx:if="{{item.level}}">{{item.level}}</text>
+				</view>
+				<view class="nearby-item-ranking" wx:if="{{item.rankingDesc}}">
+					<view class="item-ranking"><text class="wechat-font-billboard item-billboard"></text><text class="txt">{{item.rankingDesc}}</text></view>
+				</view>
+				<view class="nearby-item-comment">
+					<text class="item-score" wx:if="{{item.commentScore > 0 }}">{{item.commentScore}}</text>
+					<text class="item-count" wx:if="{{item.commentCount && item.commentCount.length > 0 && item.commentCount !== '0'}}">{{item.commentCount}}条点评</text>
+				</view>
+				<view class="nearby-line nearby-item-desc">
+					<view class="nearby-desc-left">
+						<view class="item-distance">{{item.distanceInfo}}</view>
+						<view class="item-tags">
+							<block wx:for="{{item.bookingTagList}}" wx:for-item="dateItem" >
+								<text class="item-tag">{{dateItem}}	</text>
+							</block>
+						</view>
+					</view>
+					<view class="nearby-desc-right" wx:if="{{item.free || item.price > 0 }}">
+						<text class="item-free" wx:if="{{item.free}}">免费</text>
+						<view wx:elif="{{item.price > 0}}" class="item-price">
+							<text class="item-label">￥<text class="item-money">{{item.price}}</text></text>起
+						</view>
+					</view>
+				</view>
+			</view>		
+	</view>
+	<view class="nearby-more" bindtap="findMore">查看更多<view class="item-arrow wechat-font-arrow-right2"/></view>
+</view>

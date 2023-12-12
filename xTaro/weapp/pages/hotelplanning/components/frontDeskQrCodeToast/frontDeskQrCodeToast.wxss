@@ -1,0 +1,56 @@
+@import "../../common/css/common.wxss";
+
+.qr-code-model-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	padding-top: 395rpx;
+	width: 100%;
+	height: 100%;
+	z-index: 3;
+}
+
+.qr-code-model {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 580rpx;
+	height: 756rpx;
+	border-radius: 16rpx;
+	background-color: #fff;
+	z-index: 1;
+}
+
+.qr-code-image {
+	height: 342rpx;
+	width: 344rpx;
+	z-index: 1;
+}
+
+.qr-bottom-wrapper {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 204rpx;
+	background: rgba(0, 134, 246, 0.05);
+	border-radius: 2rpx;
+}
+
+.qr-code-close {
+	position: absolute;
+	bottom: -95rpx;
+	color: #fff;
+	font-size: 59rpx;
+}
+
+.qr-phone-button {
+	height: 72rpx;
+	width: 380rpx;
+	background: #0086f6;
+	border-radius: 36rpx;
+	color: #fff;
+}

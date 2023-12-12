@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "携程攻略",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "Component-destination":"components/destination/destination",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  }
+}

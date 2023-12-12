@@ -1,0 +1,24 @@
+{
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "disableScroll": true,
+    "usingComponents": {
+        "emegencynotice": "/pages/hotel/components/emegencynotice/emegencynotice",
+        "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar",
+        "price-tag-new": "/pages/hotel/components/pricetagnew/pricetagnew",
+        "common-layer": "/pages/hotel/components/layer/index",
+        "hotel-filter": "/pages/hotel/components/hotelfilter/hotelfilter",
+        "pricestarfilter": "/pages/hotel/components/pricestarfilter/pricestarfilter",
+        "roomlayer": "/pages/hotel/components/roomlayer/roomlayer",
+        "loginbar": "/pages/hotel/components/loginbar/loginbar",
+        "loading-gif": "/pages/hotel/components/loadinggif/loadinggif",
+        "collection-guide": "/pages/hotel/components/collectionguide/collectionguide",
+        "realnamepop": "/pages/hotel/components/realnamepop/realnamepop",
+        "macaopop": "/pages/hotel/components/macaopop/macaopop",
+        "newerpop": "/pages/hotel/components/newerpop/newerpop",
+        "date-recommend": "/pages/hotel/components/daterecommend/index",
+        "countdown": "/pages/hotel/components/countdown/countdown"
+    }
+}

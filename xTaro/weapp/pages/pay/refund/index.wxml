@@ -1,0 +1,36 @@
+
+<block wx:if="{{netLoaded==true}}">
+    <block wx-if="{{refundInfos.length > 0}}">
+        <view class="refund-box">
+        <block wx:for="{{refundInfos}}" wx:for-item="refundInfo" wx:key="bilno">
+        <view class="refund-item">
+            <view class="refund-head">
+                <view class="refund-numtip">{{hasMore ? '第 '+(index + 1)+' 次退款金额' : ''}}</view>
+                <text class="refund-htitle">金额：<text class="refund-hcurrency">{{refundInfo.currency}}</text>{{refundInfo.amount}}</text>
+            </view>
+            <block wx:for="{{refundInfo.processInfo}}" wx:for-item="processInfo" wx:key="protime">
+            <view class="refund-li {{processInfo.prostat !=1 ? 'refund-ling' : ''}}">
+                <view class="refund-lititle">{{processInfo.procname}}</view>
+                <view class="refund-lidesc">{{processInfo.desc}}</view>
+            </view>
+            </block>
+        </view>
+        </block>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="refund-noitems">
+            暂未取到退款数据，请稍后再试！
+        </view>
+    </block>
+</block>
+<block wx:else>
+    <view class="refund-dnone">
+        <image src="https://webresource.c-ctrip.com/ares2/h5paymentsdk/smallprogram/1.0.13/default/img/refund_ok.png"></image>
+        <image src="https://webresource.c-ctrip.com/ares2/h5paymentsdk/smallprogram/1.0.13/default/img/refund_none.png"></image>
+    </view>
+</block>
+
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

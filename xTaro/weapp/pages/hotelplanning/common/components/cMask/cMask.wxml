@@ -1,0 +1,9 @@
+<view 
+    wx:if="{{show}}"
+    class="cmask {{ fadeIn ? 'show-animation' : ''}}"
+    style="animation-duration: {{duration}}ms"
+    bind:tap="onClick"
+    catch:touchmove="{{ lockScroll ? 'noop' : ''}}"
+>
+    <slot></slot>
+</view>

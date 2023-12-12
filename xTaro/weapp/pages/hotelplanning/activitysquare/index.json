@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "活动广场",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "usingComponents": {
+      "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar"
+    },
+    "disableScroll": true
+  }

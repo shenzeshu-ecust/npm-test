@@ -1,0 +1,23 @@
+.pay-detail {
+    position: fixed;
+    left: 0;
+    bottom: 90rpx;
+    right: 0;
+    color: #666;
+}
+.pay-detail .item {
+    overflow: hidden;
+    position: relative;
+}
+.pay-detail .cprice {
+    font-size: 28rpx;
+}
+.pay-detail .dfn {
+    font-size: 12px;
+    color: #ff6913;
+    margin-right: 3px;
+}
+.pay-detail .price {
+    color: #ff6913;
+    font-size: 32rpx;
+}

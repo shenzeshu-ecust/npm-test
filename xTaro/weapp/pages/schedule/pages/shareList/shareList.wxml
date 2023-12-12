@@ -1,0 +1,18 @@
+
+<perinfo-protect-float></perinfo-protect-float>
+<scroll-view scroll-y wx:if="{{isFinishLoading}}">
+  <view class="city_back">
+  </view>
+  <View class="gradient"></View>
+  <view class="top-wrapper">
+    <text class="block padding-32 font-44">好友给你分享了一段行程</text>
+    <text class="block sub-text padding-32 font-26">和我一起去看看吧</text>
+    <card-item wx:for="{{cardList}}" wx:key="smartTripId" card-data="{{item}}" />
+  </view>
+  <view class="bottom_view"/>
+</scroll-view>
+<bottom-options smart-trip-ids="{{smartTripIds}}" theme="3" add-action-code='{{addActionCode}}' checktrip-action-code='{{checktripActionCode}}' isShowRealnameEntry="{{isShowRealnameEntry}}" addBtnStatus="{{addBtnStatus}}" is-show-traveler='{{isShowTraveler}}' bind:addschedule='onAddSchedule'/>
+
+<!-- 白屏检测 -->
+<!-- viewReadyHandle为框架提供、实现 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

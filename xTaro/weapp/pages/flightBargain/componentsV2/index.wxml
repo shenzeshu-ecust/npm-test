@@ -1,0 +1,209 @@
+<view class="{{showBargainDetail && couponList.length ? 'page-pop-container' : 'page-container'}}" bindtouchstart="onScrollStart" bindtouchend="onScrollEnd">
+<!-- <view class="{{showBargainDetail && couponList.length ? 'page-pop-container' : 'page-container'}}"> -->
+<image class="banner-bg" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/banner_bg_new.png"/>
+<!-- <button class="test-button" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取用户信息</button> -->
+<banner-module
+  pageStatus="{{pageStatus}}"
+  orderStatus="{{orderStatus}}"
+  banner="{{bannerInfo.banner}}"
+  startTime="{{bannerInfo.startTime}}"
+  duration="{{bannerInfo.duration}}"
+/>
+<order-info-module
+  pageStatus="{{pageStatus}}"
+  bguserlist="{{orderInfo.bguserlist}}"
+  numberNeeded="{{numberNeeded}}"
+  anchorPoint="{{anchorPoint}}"
+  orderStatus="{{orderStatus}}"
+  orderInfo="{{orderInfo}}"
+  nickName="{{nickName}}"
+  canIUseProfile="{{canIUseProfile}}"
+  isUerLogin="{{isUerLogin}}"
+  phoneNumber="{{phoneNumber}}"
+  getPhoneNumberLoading="{{getPhoneNumberLoading}}"
+  hasHistoryBargained="{{hasHistoryBargained}}"
+  pageErrorMsg="{{pageErrorMsg}}"
+  bind:logTrace="logTrace"
+  bind:getScrollBottom="getScrollBottom"
+  bind:getPhoneNumberByTicket="getPhoneNumberByTicket"
+  bind:phoneNumberHandler="phoneNumberHandler"
+  bind:mobileTokenSeizeBind="mobileTokenSeizeBind"
+  bind:showHistoryBargained="showHistoryBargained"
+  bind:getUserProfile="getUserProfile"
+  bind:handleUnPhoneVerify="handleUnPhoneVerify"
+/>
+<barrage-module
+  brglist="{{orderInfo.brglist}}"
+  bind:logTrace="logTrace"
+/>
+<view wx:if="{{weixinGroupInfo.jumpURL || orderInfo.couponList.length}}">
+    <coupon-module
+        couponList="{{orderInfo.couponList}}"
+        hasBargained="{{orderInfo.hasBargained}}"
+        couponMsg="{{orderInfo.couponMsg}}"
+        weixinGroup="{{weixinGroupInfo}}"
+        bind:logTrace="logTrace"
+    />
+</view>
+
+<!-- 砍价光荣榜 -->
+<leader-board-module
+  gloryList="{{orderInfo.gloryList}}"
+  bind:logTrace="logTrace"
+/>
+<view wx:if="{{recommendList.length || hasClickLocation}}">
+      <recommend-module
+          status="{{recommendStatus}}"
+          recommendList="{{recommendList}}"
+          orderInfo="{{orderInfo}}"
+          showLocation="{{showLocation}}"
+          bind:logTrace="logTrace"
+          bind:onClickLocation="onClickLocation"
+      />
+</view>
+
+<!-- 进群入口动画组件 -->
+<view wx:if="{{isShowGroupEntry && weixinGroupInfo.jumpURL}}" class="pop-modal" animation="{{ ani_modal_hidden }}">
+    <view bindtap="onClickEntry">
+        <image class="modal-bottom" animation="{{ani_bottom}}" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/modal_bottom.png"/>
+        <image class="modal-top" animation="{{ani_top}}" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/modal_top.png"/>
+        <image class="modal-top-left" animation="{{ani_top_left}}"  src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/modal_top_left.png"/>
+        <image class="modal-left-ball"  animation="{{ani_top_left}}" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/modal_left_ball.png"/>
+        <image class="modal-right-ball" animation="{{ani_top_right}}" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/modal_right_ball.png"/>
+        <image class="modal-top-right" animation="{{ani_top_right}}" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/modal_top_right.png"/>
+    </view>
+    <button class="modal-close-button" bindtap="onCloseModal">
+        <image class="modal-close" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/modal_close.png"/>
+    </button>
+</view>
+
+<!-- 弹窗获取用户信息授权入口 -->
+<view wx:if="{{userInfoShow}}" class="bargain-container-modal">
+    <view class="bargain-container-modal-mask"/>
+    <view class="bargain-container-modal-content">
+        <view class="user-info-modal">
+            <button class="user-info-close" bindtap="setModalInvisible">
+                <image class="user-info-close-button" src="//pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/bargain_close_icon.png"/>
+            </button>
+            <view class="user-info-title">
+                <view class="user-info-logo">
+                    <image class="user-info-logo-image" src="//pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/bargain_trip_logo.png"/>
+                </view> 
+                <view class="user-info-welcome">欢迎来到携程机票砍价</view>
+            </view>
+            <view class="user-info-explain">
+                <view class="user-info-mainText">为提供更优质的服务，携程需要获取以下信息 </view>
+            </view>
+            <view class="user-info-detail">
+                <view class="user-info-smallText">· 你的公开信息（昵称、头像等）</view>
+            </view>
+            <view class="user-info-confirm">
+                <button wx:if="{{canIUseProfile}}" class="user-info-confirm-button" lang="zh_CN" bindtap="getUserProfile">确认</button>
+            </view>
+        </view>
+
+    </view>
+</view>
+
+
+<!-- 活动规则入口 -->
+<view class="rule-details-btn" bindtap="onShowRuleDetailsModal">活动规则</view>
+
+<view wx:if="{{showHistoryBargainedModal}}" class="bargain-container-modal" catchtouchmove="disableScroll">
+    <view class="bargain-container-modal-mask"/>
+    <view class="bargain-container-modal-content" bindtap="closeHistoryBargainedModal">
+        <view class="success-modal">
+            <view class="new-wrapper" catchtap="showHistoryBargained">
+                <image class="bg" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/has_history_bargain_bg.png"/>
+                <view class="history-title">
+                    {{orderInfo.icptipList[0]}}
+                </view>
+                <view class="history-subtitle">
+                    {{orderInfo.icptipList[1]}}
+                </view>
+                <view class="history-button-box">
+                    <image src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/new_pop_btn.png"/>
+                    <button class="btn" open-type="share" catchtap="closeHistoryBargainedModal">{{orderInfo.historyBargainText}}</button>
+                </view>
+                <view class="close-btn" catchtap="closeHistoryBargainedModal">
+                    <image class="close-btn-image" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/new_close_btn.png"/>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view wx:if="{{showBargainDetail && !couponList.length}}" class="bargain-container-modal" catchtouchmove="disableScroll">
+    <view class="bargain-container-modal-mask"/>
+    <view class="bargain-container-modal-content" bindtap="onCloseBargainDetailModal">
+        <view class="success-modal">
+            <view class="wrapper" catchtap="showBargainModal">
+                <image class="bg-no-coupon" src="//pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/pop_no_coupon_bg.png"/>
+                <view class="nocoupon-title">
+                    <text class="nocoupon-text">您已成功帮砍</text>
+                    <text class="no-coupon-price"><text class="dfn">¥</text>{{bargainUserInfo.bgprice}}</text>
+                </view>
+                <view wx:if="{{orderInfo.extswitch}}" class="share-tip">{{shareIncentiveMsg}}</view>
+                <view wx:if="{{!orderInfo.extswitch}}" class="nocoupon-button-box">
+                    <image src="https://pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/pop_button_new_2.png"/>
+                    <view>
+                        <button class="btn" catchtap="onCloseBargainDetailModal">知道了</button>
+                    </view>
+                </view>
+                <view wx:else class="nocoupon-button-box">
+                    <image src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/no_coupon_btn.png"/>
+                    <button class="btn" open-type="share" catchtap="onCloseBargainDetailModal">继续分享</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view wx:if="{{showBargainDetail && couponList.length}}" class="bargain-container-modal">
+    <view class="bargain-container-modal-mask"/>
+    <view class="bargain-container-modal-content" bindtap="onCloseBargainDetailModal">
+        <view class="success-modal">
+            <view class="success-modal-container">
+                <view class="new-wrapper" catchtap="showBargainModal">
+                    <image class="bg" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/pop_banner_bg_new.png"/>
+                    <text wx:if="{{!orderInfo.extswitch}}" class="coupon-title">您已成功帮砍</text>
+                    <text wx:if="{{!orderInfo.extswitch}}" class="price"><text class="dfn">¥</text>{{bargainUserInfo.bgprice}}</text>
+                    <text wx:if="{{orderInfo.extswitch}}" class="coupon-title1">{{couponTitle}}</text>
+                    <text wx:if="{{orderInfo.extswitch}}" class="coupon-subtitle">{{shareIncentiveMsg}}</text>
+                    <view class="coupon-list">
+                        <text class="coupon-desc">{{couponMsg}}</text>
+                        <view class="coupon-wrapper">
+                            <view class="coupon-list-container">
+                                <view class="coupon" wx:for="{{couponList}}" wx:key="{{index}}" wx:for-item="item">
+                                    <view class="coupon-type">
+                                    {{item.ctype}}
+                                    <view class="amount">
+                                        <text class="dfn">¥</text>{{item.price}}
+                                    </view>
+                                    </view>
+                                    <view class="coupon-info">
+                                    {{item.title}}
+                                    <text class="validity">{{item.effect}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="coupon-linear-gradient"></view>
+                        </view>
+                    </view>
+                    <view wx:if="{{!orderInfo.extswitch}}" class="history-button-box">
+                        <image src="https://pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/pop_button_new_2.png"/>
+                        <view>
+                            <button class="btn" catchtap="onCloseBargainDetailModal">开心收下</button>
+                        </view>
+                    </view>
+                    <!-- 若再砍一刀开关打开 -->
+                    <view wx:else class="history-button-box">
+                        <image src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/new_pop_btn.png"/>
+                        <button class="btn" open-type="share" catchtap="onCloseBargainDetailModal">继续分享</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+</view>

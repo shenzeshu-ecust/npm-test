@@ -1,0 +1,716 @@
+<!-- 自动扣到无座提示弹窗 -->
+<template name="NoSeatModal">
+    <!-- 候补名额已满弹层 -->
+    <view class="pop-mid active" wx:if="{{show}}">
+        <view class="backmask active" style="z-index:0;" bindtap="{{callback}}"
+            data-ubt-key="train_wx_orderdetail_{{ubtpart}}_mask" data-type="hide"></view>
+        <view class="pop-mid-bd">
+            <view class="pop-white">
+                <view class="pop-sfhy">
+                    <icon class="icon-tips"></icon>
+                    <view class="tit" wx:if="{{title}}">{{title}}</view>
+                    <view class="txt" wx:if="{{content}}">{{content}}</view>
+                    <button class="btn-ok" hover-class="btn-ok_hover" bindtap="{{callback}}"
+                        data-ubt-key="train_wx_orderdetail_{{ubtpart}}_ok">{{btnName || '知道了'}}</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<template name="user-tips">
+    <view class="pop-mid active" bindtap="hideBackDrop">
+        <view class="pop-mid-bd">
+            <view class="pop-white jiashu-info">
+                <view class="icon-closed" bindtap="hideBackDrop"></view>
+                <view class="tit relative">
+                    <text wx:if="{{isIOS}}">如何添加携程小程序到星标？</text>
+                    <text wx:if="{{isAndroid}}">如何使用携程小程序？</text>
+                </view>
+                <view wx:if="{{isIOS}}" class="txt">微信底部-发现入口-小程序列表，找到携程小程序</view>
+                <image wx:if="{{isIOS}}" src="http://images3.c-ctrip.com/train/wechat/jiasu/guide-9.png" class="guide1">
+                </image>
+                <!-- IOS -->
+                <block wx:if="{{isIOS}}">
+                    <view class="txt">左滑，点击“标为星标”，即可添加成功</view>
+                    <image src="http://images3.c-ctrip.com/train/wechat/jiasu/guide-2.png" class="guide2"></image>
+                    <image src="http://images3.c-ctrip.com/train/wechat/jiasu/guide-3.png" class="guide3"></image>
+                </block>
+                <!-- android -->
+                <block wx:if="{{isAndroid}}">
+                    <view class="txt txt--android">点击右上角
+                        <span>
+                            <image src="http://images3.c-ctrip.com/train/wechat/jiasu/guide-4.png"></image>
+                        </span>
+                        添加小程序到桌面</view>
+                    <image src="http://images3.c-ctrip.com/train/wechat/jiasu/guide-5.png" class="guide2--android">
+                    </image>
+                </block>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- <template name="hongkong">
+    <view class="pop-mid pop-mid--hongkong active">
+        <view class="pop-mid-bd">
+            <view class="pop-white pop-x">
+                <icon class="icon-closed" bindtap="hideBackDrop"></icon>
+                <view class="tit">温馨提示</view>
+
+                <view class="cont">
+                    <view class="strong">跨境车票取票规则：</view>
+                    <view class="txt">线上购买跨境车票，需提前携带购票证件在内地车站将纸质车票取出后乘车</view>
+                    <view class="strong">跨境车票退票规则：</view>
+                    <view class="txt">1. 到站为香港西九龙站的车票，办理退票应不晚于票面指定的日期、车次开车前30分钟；发站为香港西九龙站的车票应不晚于60分钟</view>
+                    <view class="txt">2.
+                        退票费核收标准：在票面开车时间前48小时内办理退票的，按票面票价的50%计算；在票面开车时间前48小时至第14天的，按票面票价的30%计算；在票面开车时间前15天及以上的，按票面票价的5%计算。退票费按元计算，不足一元的部分舍去免收。
+                    </view>
+                    <view class="strong">跨境车票改签规则：</view>
+                    <view class="txt">1. 到站为香港西九龙站的车票，办理改签应不晚于票面指定的日期、车次开车前30分钟；发站为香港西九龙站的车票应不晚于60分钟。</view>
+                    <view class="txt">2. 改签后的车票不得退票。</view>
+                    <view class="strong">跨境车票乘车规则：</view>
+                    <view class="txt">旅客必须持有效车票并按票面载明的日期、车次、席别乘车，同时需携带有效的出入境证件及签注。</view>
+                </view>
+
+                <button class="btn-submit" bindtap="hideBackDrop"
+                    data-ubt-key="c_train_wx_orderdetail_hongkong">知道了</button>
+            </view>
+        </view>
+    </view>
+</template> -->
+
+<template name="pay-success">
+    <view class="backmask active" bindtap="hideBackDrop" catchtouchmove="preventBackMove"></view>
+    <view class="pop-add-tips" bindtap="hideBackDrop">
+        <view class="add-top">
+            <icon class="add-arr"></icon>
+            <view class="txt">添加到我的小程序</view>
+        </view>
+
+        <view class="pop-mid-bd">
+            <view class="pop-white pop-pay-suc">
+                <text class="ifont-closed" bindtap="hidePop"></text>
+            </view>
+        </view>
+    </view>
+</template>
+
+<template name="refundboard">
+    <view class="order-notice-white order-heyan">
+        <icon class="icon-ball"></icon>
+        <view class="cont"><rich-text nodes="{{OfficialEleTicketRefundInfo.Message}}" wx:if="{{OfficialEleTicketRefundInfo.Message}}"></rich-text></view>
+        <button class="btn-heyan" bindtap="toWebviewPage" data-ubt-key="c_train_wx_orderdetail_refundinfo_board" data-url="{{OfficialEleTicketRefundInfo.JumpUrl}}">{{OfficialEleTicketRefundInfo.ButtonName}}</button>
+    </view>
+</template>
+
+<!-- 退票  -->
+<template name="refund">
+    <!-- <view class="pop-mid active" catchtouchmove="preventBackMove"> -->
+    <view class="pop-mid active">
+        <view class="pop-mid-bd">
+            <view class="pop-white pop-refound">
+                <view class="pop-refound-hd">退票说明</view>
+                <view class="pop-blue-tips" wx:if="{{refundInfo.topTips}}">
+                    <!-- <view class="pop-blue-tips-hd"><text class="ifont-railway"></text>铁路局最新规定</view> -->
+                    <view class="pop-blue-tips-bd">
+                        <rich-text nodes="{{refundInfo.topTips}}"></rich-text>
+                    </view>
+                </view>
+                <view class="pop-refound-bd">
+                    <view class="item">
+                        <view class="cont">
+                            <view class="tit">车票</view>
+                        </view>
+                        <view class="rbox">¥{{refundInfo.ticketPrice}}</view>
+                    </view>
+                    <view class="item">
+                        <view class="cont">
+                            <view class="tit">预计手续费 (铁路局收取)</view>
+                            <view wx:if="{{refundInfo.feeDesc}}" class="txt" bindtap="onRefundFeeDescCLick">
+                                {{refundInfo.feeDesc}}<text class="ifont-qus"></text></view>
+                        </view>
+                        <view class="rbox">¥{{refundInfo.fee}}</view>
+                    </view>
+                    <view class="item">
+                        <view class="cont">
+                            <view class="tit">预计退款金额</view>
+                            <rich-text nodes="{{refundInfo.returnPriceDesc}}"></rich-text>
+                        </view>
+                        <view class="rbox">¥{{refundInfo.remaining}}</view>
+                    </view>
+                    <!-- 安心退改退票返现 -->
+                    <view class="item" wx:if="{{refundInfo.guaranteePrice}}">
+                        <view class="cont">
+                            <view class="tit">预计退票手续费返现</view>
+                            <view class="txt" style="color: #FF7700">{{refundInfo.guaranteeDesc}}</view>
+                        </view>
+                        <view class="rbox">¥{{refundInfo.guaranteePrice}}</view>
+                    </view>
+                    <!-- 退票关怀金 -->
+                    <view class="item" wx:if="{{refundInfo.carePrice}}">
+                        <view class="cont">
+                            <view class="tit">{{refundInfo.carePriceTitle}}</view>
+                            <view class="txt" style="color: #FF7700">{{refundInfo.carePriceDesc}}</view>
+                        </view>
+                        <view class="rbox">¥{{refundInfo.carePrice}}</view>
+                    </view>
+                </view>
+                <view wx:if="{{refundInfo.instructionList}}" class="pop-refound-info">
+                    <view class="item" wx:for="{{refundInfo.instructionList}}">
+                        <rich-text nodes="{{ item }}"></rich-text>
+                    </view>
+                </view>
+                <view class="pop-refound-btn">
+                    <button class="btn-cancel" hover-class="btn-white_hover" bindtap="cancelRefund"
+                        style="border-radius: 20rpx" data-ubt-key="c_train_wx_orderdetail_refund_cancel">取消</button>
+                    <button class="btn-submit" hover-class="btn-white_hover" bindtap="confirmRefund"
+                        style="border-radius: 20rpx" data-ubt-key="c_train_wx_orderdetail_refund_confirm">确认退票</button>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<template name="12306tips">
+    <view class="pop-mid active" bindtap="hideBackDrop">
+        <view class="pop-mid-bd">
+            <view class="pop-white pop-12306">
+                <icon class="icon-tips"></icon>
+                <icon class="icon-closed" bindtap="hideBackDrop"></icon>
+                <!-- 7=未登录，8=未注册12306会员，9=未激活12306会员 -->
+                <block wx:if="{{orderInfo.AlertInfo.AlertType == 7}}">
+                    <view class="tit">{{textConfigAbout12306[0].popTextTop}}</view>
+                    <view class="txt">{{textConfigAbout12306[0].popTextMid}}</view>
+                    <view class="tips" wx:if="{{textConfigAbout12306[0].popTextBottom}}">
+                        {{textConfigAbout12306[0].popTextBottom}}</view>
+                    <view class="pop-btn">
+                        <button class="btn-submit" data-type="login" bindtap="toWebviewAbout12306"
+                            data-ubt-key="c_train_wx_orderdetail_12306pop_login">{{textConfigAbout12306[0].btn}}</button>
+                    </view>
+                </block>
+                <block wx:if="{{orderInfo.AlertInfo.AlertType == 8}}">
+                    <view class="tit">{{textConfigAbout12306[1].popTextTop}}</view>
+                    <view class="txt">{{textConfigAbout12306[1].popTextMid}}</view>
+                    <view class="tips" wx:if="{{textConfigAbout12306[1].popTextBottom}}">
+                        {{textConfigAbout12306[1].popTextBottom}}</view>
+                    <view class="pop-btn">
+                        <button class="btn-submit" data-type="member" bindtap="toWebviewAbout12306"
+                            data-ubt-key="c_train_wx_orderdetail_12306pop_member">{{textConfigAbout12306[1].btn}}</button>
+                    </view>
+                </block>
+                <block wx:if="{{orderInfo.AlertInfo.AlertType == 9}}">
+                    <view class="tit">{{textConfigAbout12306[2].popTextTop}}</view>
+                    <view class="txt">{{textConfigAbout12306[2].popTextMid}}</view>
+                    <view class="tips" wx:if="{{textConfigAbout12306[2].popTextBottom}}">
+                        {{textConfigAbout12306[2].popTextBottom}}</view>
+                    <view class="pop-btn">
+                        <button class="btn-submit" data-type="active" bindtap="toWebviewAbout12306"
+                            data-ubt-key="c_train_wx_orderdetail_12306pop_active">{{textConfigAbout12306[2].btn}}</button>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</template>
+
+<template name="12306newmodal">
+    <view class="backmask active"></view>
+    <view class="pop-free-conver">
+        <text class="ifont-closed-line" bindtap="hideBackDrop"></text>
+        <view class="txt">登录累计积分，享免费兑换火车票</view>
+        <button class="btn-cover" data-ubt-key="orderdetail_gosigninpop_click" bindtap="onClickHandle12306">登录兑换</button>
+    </view>
+</template>
+
+<template name="login12306suc">
+    <view class="backmask active" ></view>
+    <view class="pop-modal-blue">
+        <view class="icon-suc"></view>
+        <view class="tit">登录成功</view>
+        <view class="txt">可前往手机携程-火车票-个人中心查看积分信息及兑换免费车票</view>
+        <view class="btn-box">
+            <button class="btn-submit"  bindtap="hideBackDrop">我知道了</button>
+        </view>
+    </view>
+</template>
+
+<!-- 保险弹窗 -->
+<template name="insurance">
+    <view class="backmask active" catchtouchmove="preventBackMove"></view>
+    <view class="pop-insur">
+        <view class="pop-insur-hd"></view>
+        <view class="pop-insur-bd">
+            <view class="tips">立刻购买\n出行<text class="torage">更安心</text>，家人<text class="torage">更放心</text></view>
+            <view class="txt">{{insurancePromptEntrance.insuranceInfo.AppendRightTitle}}
+                {{insurancePromptEntrance.insuranceInfo.AppendSubTitle}}</view>
+            <view class="btn-box">
+                <button class="btn-cancel" data-index='0' bindtap='dealWithInsurancePrompt'
+                    bindtap='toggleShowInsurancePrompt'
+                    data-ubt-key="c_train_wx_orderdetail_insurance_cancel">否</button>
+                <button class="btn-submit" data-index='1' bindtap='dealWithInsurancePrompt' bindtap='buyInsurance'
+                    data-ubt-key="c_train_wx_orderdetail_insurance_confirm">是</button>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 酒店弹窗 -->
+<template name="hotel-pop">
+    <view class="pop-mid active">
+        <view class="backmasks" bindtap="hideBackDrop"></view>
+        <view class="pop-mid-bd">
+            <view class="pop-white pop-x">
+                <icon class="icon-closed" bindtap="hideBackDrop"></icon>
+                <view class="tit">购票成功</view>
+                <view class="txt">列车将于<text
+                        class="txt-blue">{{orderInfo.RescheduleTicketList.length ? orderInfo.RescheduleTicketList[0].rescheduledArriveTime : orderInfo.TicketInfos[0].ArriveTime}}到达{{orderInfo.TicketInfos[0].ArriveStation}}火车站</text>，已为您精选了<text
+                        class="txt-blue">{{hotelConfig.cityname}}</text>的精品酒店，快去看看吧</view>
+                <button class="btn-submit" data-opt="hotelView" bindtap="toHotelList">去查看</button>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 砍价banner -->
+<template name="bargain-bar">
+    <view class="order-kanjia" bindtap="goBargain" wx:if="{{ActivityType == 2 || ActivityType == 3}}">
+        <view class="cont" style="padding:20rpx 0" data-ubt-key="c_train_wx_kanjia_banner_buttonclick">
+            <!-- <view class="tit">有<text class="torage">¥10</text>现金砸中你</view> -->
+            <rich-text class="tit" nodes="{{Title}}"></rich-text>
+            <view class="txt" wx:if="{{Status == 1}}">
+                <view class="count">
+                    <block wx:if="{{!!CashBackEndTime}}">
+                        <view class="countdown-block"><text>{{countdown.hour}}</text></view>
+                        <text class="split">:</text>
+                        <view class="countdown-block"><text>{{countdown.min}}</text></view>
+                        <text class="split">:</text>
+                        <view class="countdown-block"><text>{{countdown.second}}</text></view>
+                        <text style="margin-left: 14rpx">{{countdown.txt}}</text>
+                    </block>
+                    <text class="torage" style="{{!!CashBackEndTime ? 'margin-left: 12rpx' : 'margin-left: 0'}}">{{ButtonName}}</text>
+                    <text class="ifont-arr"></text>
+                </view>
+            </view>
+            <view class="txt" wx:else>
+                <text>{{SubTitle}}</text><text class="torage">{{ButtonName}}</text><text class="ifont-arr"></text>
+            </view>
+        </view>
+        <view class="icon-coin"></view>
+    </view>
+    <view class="order-adbox kanjia" wx:else>
+        <view class="cont">
+            <view class="tit">{{desc}}<text class="tyellow" wx:if="{{amount}}">{{amount}}元</text></view>
+            <view class="txt"><text class="no">{{countdown.hour}}</text>:<text class="no">{{countdown.min}}</text>:<text
+                    class="no">{{countdown.second}}</text>{{countdown.txt}}</view>
+        </view>
+        <button class="btn-go" bindtap="goBargain" data-ubt-key="c_train_wx_orderdetail_bargain_banner">{{btnText}}<icon
+                class="icon-dao"></icon></button>
+    </view>
+
+</template>
+
+<!-- 出行成功返现banner -->
+<template name="cashback-coupon">
+    <view class="cashback-coupon">
+        <image class="icon-cashback" src="{{IconUrl}}"></image>
+        <view class="cont">
+            <view class="tit"><rich-text nodes="{{Title}}"></rich-text></view>
+            <view class="txt" data-url="{{JumpUrl}}" bindtap="toWebviewPage">{{Desc}}<text class="ifont-detail"></text></view>
+        </view>
+        <button class="btn-cashback {{StatusCode !== 1 ? 'disabled' : ''}}" disabled="{{StatusCode !== 1}}" bindtap="showWithdrawTip" data-ubt-key="train_detail_cashwithdrawbtn-coupon">{{StatusCode == 1 ? '去提现' : '已失效'}}</button>
+    </view>
+</template>
+
+<!-- 电子客票 -->
+<template name="elec-ticket-pop">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-tupian" wx:if="{{elecTicketPopType == 1}}">
+        <image src="//pic.c-ctrip.com/train/wechat/pop-zizhuzhaji.png" mode="widthFix"></image>
+        <view class="pop-tupian-bd">
+            <view class="tit">无纸质车票</view>
+            <view class="txt">您本次购买的车票是电子客票，<text class="torage">无需换取纸质车票</text>，请持购票证件原件，前往<text
+                    class="torage">自助闸机</text>进站检票乘车</view>
+            <view class="tips">如需报销凭证，请于开车前或乘车之日起30天内，持购票证件原件到车站售票窗口或自动售/取票机换取</view>
+            <view class="btn-box">
+                <button class="btn-submit" bindtap="hideBackDrop"
+                    data-ubt-key="c_train_wx_orderdetail_electicketpop">知道了</button>
+            </view>
+        </view>
+    </view>
+    <view class="pop-tupian" wx:if="{{elecTicketPopType == 2}}">
+        <image src="//pic.c-ctrip.com/train/wechat/pop-rengongtongdao.png" mode="widthFix"></image>
+        <view class="pop-tupian-bd">
+            <view class="tit">无纸质车票</view>
+            <view class="txt">您本次购买的车票是电子客票，<text class="torage">无需换取纸质车票</text>，请持购票证件原件，前往<text
+                    class="torage">人工通道</text>进站检票乘车</view>
+            <view class="tips">如需报销凭证，请于开车前或乘车之日起30天内，持购票证件原件到车站售票窗口或自动售/取票机换取</view>
+            <view class="btn-box">
+                <button class="btn-submit" bindtap="hideBackDrop"
+                    data-ubt-key="c_train_wx_orderdetail_electicketpop">知道了</button>
+            </view>
+        </view>
+    </view>
+    <view class="pop-tupian" wx:if="{{elecTicketPopType == 3}}">
+        <image src="//pic.c-ctrip.com/train/wechat/pop-lianggetongdao.png" mode="widthFix"></image>
+        <view class="pop-tupian-bd no-img">
+            <view class="tit">无纸质车票</view>
+            <view class="txt">您本次购买的车票是电子客票，<text class="torage">无需换取纸质车票</text>，请直接持购票证件原件进站检票乘车。</view>
+            <view class="pop-tongdao-box">
+                <view class="item">
+                    <view class="tit-zz"></view>
+                    <view class="cont">{{elecTicketPopText[0] || '港澳台居民居住证，外国人永久居留身份证'}}</view>
+                </view>
+                <view class="item">
+                    <view class="tit-rg"></view>
+                    <view class="cont">{{elecTicketPopText[1] || '护照，儿童票，学生票'}}</view>
+                </view>
+            </view>
+            <view class="tips">如需报销凭证，请于开车前或乘车之日起30天内，持购票证件原件到车站售票窗口或自动售/取票机换取</view>
+            <view class="btn-box">
+                <button class="btn-submit" bindtap="hideBackDrop"
+                    data-ubt-key="c_train_wx_orderdetail_electicketpop">知道了</button>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 身份未核验 信息确认 -->
+<template name="infoCheck">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-modal-blue">
+        <view class="tit">请确认乘车人信息</view>
+        <view class="txt"><text class="torage">姓名、证件号码错误可能无法取票</text>，请您仔细核对，确保与购票证件一致</view>
+        <view class="grey-box" wx:for="{{PassengerInfoList}}">
+            <view class="item">
+                <view class="label">姓名</view>
+                <view class="strong">{{item.PassengerName}}</view>
+            </view>
+            <view class="item">
+                <view class="label">{{item.IdentityTypeName}}</view>
+                <view class="strong">{{item.IDCardNumber}}</view>
+            </view>
+        </view>
+        <view class="btn-box">
+            <button class="btn-cancel" bindtap="hideBackDrop" data-ubt-key="c_train_wx_orderdetail_infoCheck_cancel">知道了，谢谢</button>
+            <button class="btn-submit" bindtap="clickPay" data-ubt-key="c_train_wx_orderdetail_infoCheck_confirm">确认无误，去支付</button>
+        </view>
+    </view>
+</template>
+
+<!-- 身份未核验 取消订单 -->
+<template name="check-tips">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-modal-blue pop-checktips">
+        <icon class="icon-tips"></icon>
+        <view class="tit">{{cancelOrderRedeemAlertInfo.Title}}</view>
+        <view class="txt">{{cancelOrderRedeemAlertInfo.Content}} </view>
+
+        <view class="btn-box">
+            <block wx:for="{{cancelOrderRedeemAlertInfo.ButtonList}}">
+                <button class="btn-cancel" bindtap="requestCancelOrder" wx:if="{{index == 0}}" data-ubt-key="c_train_wx_orderdetail_checktips_cancel">{{item.Name}}</button>
+                <button class="btn-submit" bindtap="clickPay" wx:if="{{index == 1}}" data-ubt-key="c_train_wx_orderdetail_checktips_confirm">{{item.Name}}</button>
+            </block>
+        </view>
+    </view>
+</template>
+
+<!-- 手机号未核验 信息确认-->
+<template name="check-vs">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="tip-bot pop-vs-check active">
+        <view class="pop-vscheck-hd">
+            <image src="{{checkVsIcon || 'https://images3.c-ctrip.com/train/app/8.21/train_icon.png'}}" class="img"></image>
+            <view class="cont">
+                <view class="tit">{{checkVsTitle}}</view>
+                <view class="txt">{{checkVsContent}}</view>
+            </view>
+        </view>
+        <view class="pop-vscheck-tit"></view>
+        <view class="pop-vscheck-bd">
+            <view class="item"  wx:for="{{PayTypeList}}">
+                <block wx:for="{{item.DescList}}" wx:for-item="desc">
+                    <view class="tit">{{desc.Title}}</view>
+                    <view class="txt">{{desc.SubTitle}}</view>
+                </block>
+            </view>
+        </view>
+        <view class="btn-box">
+            <block wx:for="{{PayTypeList}}">
+                <button class="btn-cancel" bindtap="clickPay" wx:if="{{item.Type == 1}}" data-ubt-key="c_train_wx_orderdetail_checkvs_cancel">{{item.ButtonName}}</button>
+                <button class="btn-submit" bindtap="clickOrderChangeFastPay" data-type="{{item.Type}}" wx:if="{{item.Type == 2 || item.Type == 3}}" data-ubt-key="c_train_wx_orderdetail_checkvs_confirm">{{item.ButtonName}}<text>{{item.ButtonSubTitle}}</text></button>
+            </block>
+        </view>
+    </view>
+</template>
+
+<!-- 手机未核验 取消订单 -->
+<template name="cancel-order">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-modal-blue pop-cancel">
+        <view class="tit">{{CancelAlertInfo.Title}}</view>
+        <view class="txt">{{CancelAlertInfo.Content}}</view>
+        <view class="fast-track">
+            <!-- <icon class="icon-fasttrack"></icon> -->
+            <img src="{{CancelAlertInfo.DescInfo.IconUrl}}" alt="" class="icon-fasttrack"/>
+            <view class="cont">
+                <view class="hd" bindtap="">
+                    <view class="cont">{{CancelAlertInfo.DescInfo.Title}}</view>
+                    <view class="torage">{{CancelAlertInfo.DescInfo.ServiceFeeDesc}}</view>
+                </view>
+                <view class="bd">{{CancelAlertInfo.DescInfo.Content}}</view>
+            </view>
+        </view>
+        <view class="btn-box">
+            <block wx:for="{{CancelAlertInfo.ButtonList}}">
+                <button class="btn-cancel" bindtap="requestCancelOrder" wx:if="{{index == 0}}" data-ubt-key="c_train_wx_orderdetail_cancelorder_cancel">{{item.ButtonName}}</button>
+                <button class="btn-submit" bindtap="clickOrderChangeFastPay" data-type="{{CancelAlertInfo.Type}}" wx:if="{{index == 1}}" data-ubt-key="c_train_wx_orderdetail_cancelorder_confirm">{{item.ButtonName}}<text wx:if="{{item.ButtonSubTitle}}}">{{item.ButtonSubTitle}}</text></button>
+            </block>
+        </view>
+    </view>
+</template>
+
+<template name="service-talk">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-modal-blue pop-will-refund">
+        <view class="tit">{{offlineTicketRefundInfo.Title}}</view>
+        <view class="txt">{{offlineTicketRefundInfo.Content}}</view>
+        <view class="item" wx:for="{{offlineTicketRefundInfo.TipsList}}">
+            <view class="lbox">
+                <image src="{{item.IconUrl}}" class="tit-img"></image>
+            </view>
+            <view class="cont">{{item.Content}}</view>
+        </view>
+
+        <view class="btn-box">
+            <button
+                class="btn-submit" open-type="contact"
+                bindtap="noop"
+                data-ubt-key="c_train_orderdetail_ordinary_contact"
+                show-message-card="true"
+                send-message-path="/pages/train/orderdetail/ordinary/ordinary"
+                send-message-title='查看方法'
+                send-message-img='https://images3.c-ctrip.com/marketing/2019/10/wechatContactImg.png'>
+               {{offlineTicketRefundInfo.ButtonList[0].ButtonName}}
+            </button>
+        </view>
+    </view>
+</template>
+
+<template name="withdraw-tip">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-withdraw">
+      <image src="https://images3.c-ctrip.com/train/applets/8.17/bg_money@3x.png" class="hd"></image>
+      <view class="tit">回复”6“查看提现方法</view>
+      <button class="btn" open-type="contact">前往客服会话</button>
+    </view>
+</template>
+
+<!-- 代购中断 -->
+<template name="account-error-check">
+    <view class="backmask active" bindtap="hidePop"></view>
+    <view class="pop-modal-blue pop-checktips">
+        <icon class="icon-tips" style="background: url('https://pic.c-ctrip.com/train/wechat/icon-checktips.png');background-size: 100% 100%;"></icon>
+        <view class="tit">{{AlertInfo.Title}}</view>
+        <view class="items"><rich-text nodes="{{AlertInfo.Desc || AlertInfo.DefaultDesc}}"></rich-text></view>
+        <view class="btn-box">
+            <button class="btn-submit" bindtap="clickCheckAccount" style="font-size: 34rpx;">{{AlertInfo.ButtonName}}</button>
+        </view>
+        <block wx:if="{{AlertInfo.ActionCode == 1}}">
+            <template is="check-box" data="{{scanFaceNeedCheck, protocalToogle}}" ></template>
+        </block>
+        <view class="tip" wx:else>开始核验代表已阅读并同意<text class="tblue" bindtap="showBookingProtocal">火车票服务协议</text></view>
+    </view>
+</template>
+
+<!-- 抢票中断扫脸失败 -->
+<template name="account-error-check-fail">
+    <view class="backmask active" bindtap="hidePop"></view>
+    <view class="pop-modal-blue pop-checktips">
+        <icon class="icon-tips"></icon>
+        <view class="tit">人证核验失败</view>
+        <view class="txt">{{message || '请稍后再次尝试'}}</view>
+        <view class="btn-box">
+            <button class="btn-submit" bindtap="hidePop" style="font-size: 34rpx;">确定</button>
+        </view>
+    </view>
+</template>
+
+
+<!-- 无账号购票异常 -->
+<template name="noaccount-check">
+    <view class="backmask active" bindtap="hidePop"></view>
+    <view class="tip-bot pop-tick-break active">
+        <view class="pop-tick-break-hd">
+            <image class="icon-tick-break" src="{{AlertInfo.layerInfo.iconUrl}}"></image>
+            <view class="cont">
+                <view class="tit">{{AlertInfo.layerInfo.title}}</view>
+                <view class="txt">{{AlertInfo.layerInfo.content}}</view>
+            </view>
+        </view>
+        <block wx:if="{{AlertInfo.layerInfo.payTypeList.length == 1}}">
+            <view class="pop-tick-break-login" style="padding-top: 26rpx;">
+                <view class="item" wx:for="{{AlertInfo.layerInfo.payTypeList}}">
+                    <view class="tit">{{item.title}}</view>
+                    <view class="txt" wx:for="{{item.descList}}" wx:for-item="desc">
+                        <text class="ifont-gou"></text>
+                        <text class="strong">{{desc.title}}</text>
+                        <text class="tgrey">{{desc.subTitle}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="pop-tick-break-btn single" wx:for="{{AlertInfo.layerInfo.payTypeList}}">
+                <button class="btn-submit" data-type="{{5}}" bindtap="clickLogin12306">{{item.buttonName}}</button>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="pop-tick-break-vs">
+                <view class="pop-tick-break-vs-hd">
+                    <view class="item {{index == 0 ? 'unlogin' : 'login'}}" wx:for="{{AlertInfo.layerInfo.payTypeList}}">{{item.title}}</view>
+                </view>
+                <view class="pop-tick-break-vs-bd">
+                    <view class="item {{index == 0 ? 'unlogin' : 'login'}}" wx:for="{{AlertInfo.layerInfo.payTypeList}}">
+                        <block wx:for="{{item.descList}}" wx:for-item="desc">
+                            <view class="tit">{{desc.title}}</view>
+                            <view class="txt">{{desc.subTitle}}</view>
+                        </block>
+                    </view>
+                </view>
+                <view class="pop-tick-break-btn">
+                    <block wx:for="{{AlertInfo.layerInfo.payTypeList}}">
+                        <button class="btn-cancel" data-type="{{7}}" bindtap="clickTicketBreakOrderChange" wx:if="{{item.type == 1}}" data-ubt-key="buttonclick_offlineticket_after_typea">{{item.buttonName}}<text wx:if="{{item.buttonSubTitle}}">{{item.buttonSubTitle}}</text></button>
+                        <button class="btn-submit" data-type="{{5}}" bindtap="clickLogin12306" wx:if="{{item.type == 2}}" data-ubt-key="buttonclick_gosignin_typea">{{item.buttonName}}<text wx:if="{{item.buttonSubTitle}}">{{item.buttonSubTitle}}</text></button>
+                    </block>
+                </view>
+            </view>
+        </block>
+
+    </view>
+</template>
+<!-- 春节拼团结果入口 -->
+<template name="spring-pintuan-result">
+    <view class="pintuan-result">
+        <view class="icon"></view>
+        <view class="txt">{{teamupInfo.Title}}</view>
+        <view wx:if="{{teamupInfo.ButtonName}}" class="r-btn" bindtap="onTapToTeamupDetail">{{teamupInfo.ButtonName}}</view>
+    </view>
+</template>
+
+
+<!-- 跑腿退票、线上退票、车站退票弹窗 -->
+<!-- 退票方式选择 -->
+<template name="refund-way-select">
+  <view class="refund-backmask" catchtouchmove="true" bindtap="hideBackDrop"></view>
+  <view class="refund-pos">
+      <view class="refund-white-box">
+        <view class="refund-way main-title">{{PEleTicketArtificialReturnAlertInfo.Title}}</view>
+        <view class="refund-way sub-title">
+            <rich-text nodes=" {{PEleTicketArtificialReturnAlertInfo.Content}}"></rich-text>
+        </view>
+        <view class="refund-way-des" wx:if="{{PEleTicketArtificialReturnAlertInfo.OtherInfo}}">
+          <view class="des-img">
+          </view>
+          <view class="des-text">
+            <view class="des-main-title">{{PEleTicketArtificialReturnAlertInfo.OtherInfo.Title}}</view>
+            <view class="des-sub-title">{{PEleTicketArtificialReturnAlertInfo.OtherInfo.Content}}</view>
+            <view class="des-right-price">¥{{PEleTicketArtificialReturnAlertInfo.OtherInfo.ServiceFee}}/人</view>
+          </view>
+        </view>
+        <view class="refund-btns refund-way">
+          <view
+            class="short-btn left-btn"
+            bindtap="{{curSelectType ? 'onTapSelectRescWay' : 'onTapSelectRefundWay'}}"
+            data-btn="{{PEleTicketArtificialReturnAlertInfo.ButtonList[0]}}"
+          >
+           {{PEleTicketArtificialReturnAlertInfo.ButtonList[0].ButtonName}}
+          </view>
+          <view
+            class="short-btn right-btn"
+            bindtap="{{curSelectType ? 'onTapSelectRescWay' :'onTapSelectRefundWay'}}"
+            data-btn="{{PEleTicketArtificialReturnAlertInfo.ButtonList[1]}}"
+          >
+            {{PEleTicketArtificialReturnAlertInfo.ButtonList[1].ButtonName}}
+          </view>
+        </view>
+        <view class="btn-close icon-closed" bindtap="hideBackDrop">
+        </view>
+      </view>
+  </view>
+</template>
+
+<!-- 本人退票-确认本人 -->
+<template name="refund-is-self" >
+  <view class="refund-backmask" catchtouchmove="true" bindtap="hideBackDrop"></view>
+  <view class="refund-pos">
+    <view class="refund-white-box">
+        <view class="refund-self top-icon"></view>
+        <view class="refund-self main-title">{{curSelectType ? '改签' : '退票'}}前请车票本人确认</view>
+        <view class="refund-self sub-title">
+            铁路局规定，用户需要先完成实名认证核验，核验通过后才能办理{{curSelectType ? '改签' : '退票'}}，请确认是否为
+            <text class="blue-text">「{{curRefundPas.PassengerName}}」</text>本人？
+        </view>
+        <view class="refund-btns">
+            <view class="long-btn right-btn long-btn-btm" data-from-type ="{{curSelectType}}" bindtap="onTapSelfVerify">我是{{curRefundPas.PassengerName}}，我要{{curSelectType ? '改签' : '退票'}}</view>
+            <button class="long-btn long-left-btn" data-from-target="shareToVerify"  data-from-type ="{{curSelectType}}"  bindtap="noop" open-type="share">我不是，分享TA确认</button>
+        </view>
+        <view class="btn-close icon-closed" bindtap="hideBackDrop">
+        </view>
+    </view>
+  </view>
+</template>
+<!-- 跑腿退票-本人人证核验 -->
+<template name="refund-identify">
+  <view class="refund-backmask" catchtouchmove="true" bindtap="hideBackDrop"></view>
+  <view class="refund-pos">
+      <view class="refund-white-box">
+        <view class="refund-identify top-icon"></view>
+        <view class="refund-identify main-title">
+          人证核验后才能{{curSelectType ? '改签' : '退票'}}
+        </view>
+        <view class="refund-identify sub-title">
+          铁路局规定，用户需要先完成实名认证核验，核验通过后才能办理{{curSelectType ? '改签' : '退票'}}，请确认您是乘客本人
+          <text class="blue-text">「{{curRefundPas.PassengerName}}」</text>
+        </view>
+        <view class="refund-btns">
+          <view class="long-btn right-btn" data-action-type="{{curSelectType}}"  bindtap="onTapRefundScanFace" data-from-type="6">同意协议并开始核验</view>
+        </view>
+        <template is="check-box" data="{{scanFaceNeedCheck, protocalToogle}}" ></template>
+        <view class="btn-close icon-closed" bindtap="hideBackDrop">
+        </view>
+      </view>
+  </view>
+</template>
+
+<template name="check-box">
+        <view class="tip">
+            <view class="check-box" bindtap="protocalHandle" wx:if="{{scanFaceNeedCheck}}">
+                <text class="ifont-checkbox"></text>
+                <text class="ifont-checked {{protocalToogle ? 'cur' : ''}}"></text>
+            </view>
+            {{scanFaceNeedCheck ? '' : '开始核验代表'}}已阅读并同意<text class="tblue" bindtap="showBookingProtocal">服务协议</text><text class="tblue" bindtap="showBookingProtocal2">认证协议</text>
+        </view>
+        <view class="dialog-tip" wx:if="{{scanFaceNeedCheck}}">请阅读并勾选协议</view>
+</template>
+
+<!-- 企微加群等 -->
+<template name="trip-welfare">
+    <view class="trip-welfare">
+        <view class="title">出行福利专区</view>
+        <view class="list">
+            <view class="item" bind:tap="onClickAddGroup">
+                <image class="icon" src="{{ data.IconUrl }}" />
+                <view class="cont">
+                    <view class="desc">
+                        <text class="tit">{{ data.Title }}</text>
+                        <text class="tag" wx:if="{{data.Tag}}">{{ data.Tag }}</text>
+                    </view>
+                    <view class="sub" wx:if="{{data.SubTitle}}">
+                        <view class="location"></view>
+                        {{ data.SubTitle }}
+                    </view>
+                </view>
+                <view class="btn" wx:if="{{data.ButtonName}}">{{ data.ButtonName || '去加群' }}</view>
+            </view>
+        </view>
+    </view>
+</template>

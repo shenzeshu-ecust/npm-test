@@ -1,0 +1,187 @@
+<import src="../common/components/robCouponPop/robCouponPop.wxml" />
+
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+
+<view class="top-bar" style="padding-top: {{statusBarHeight}}px">
+  <text class="ifont-home" bindtap="goBack" wx:if="{{firstStack}}"></text>
+  <text class="ifont-arr" bindtap="goBack" wx:else></text>
+</view>
+<view class="top {{isIphoneX ? 'iphoneX' : ''}}">
+  <view class="txt-rule" bindtap='toggleShowRulePrompt' data-type='show'>说明</view>
+</view>
+<view class="wrap" wx:if='{{isLoadFinish}}'>
+  <view class="white-box rob-box">
+    <view class="rob-hd">
+      <view class="tit">{{currentLevel}}抢票中</view>
+      <view class="txt">
+        <rich-text nodes='{{accePacketInfo.SpeedLevelDesc}}'></rich-text>
+      </view>
+      <view class="rob-line">
+        <view class="rob-cur" style="width:{{(accePacketInfo.LightningLevel - 1) > 0 ? 20 * (accePacketInfo.LightningLevel - 1) : 5}}%"></view>
+      </view>
+      <view class="rob-type">
+        <view class="item">低速</view>
+        <view class="item">快速</view>
+        <view class="item">高速</view>
+        <view class="item">极速</view>
+        <view class="item">光速</view>
+        <view class="item">VIP</view>
+      </view>
+    </view>
+    <view class="rob-bd" wx:if="{{hideShareFlag == 0  && !closeInviteRobShare}}">
+      <view class="rob-status" wx:if="{{!closeInviteRobShare}}">
+        <view class="item">
+          已获取助力包
+          <text class="strong">{{accePacketInfo.FlowPacketCount}}份</text>
+        </view>
+        <!-- <view class="item">已助力好友<text class="strong">{{accePacketInfo.PassageCount}}人</text></view> -->
+      </view>
+      <button class="btn-invite" bindtap='inviteRob'>邀请好友助力</button>
+      <!-- <view class="txt"
+        wx:if='{{accePacketInfo.LightningLevel < 5 &&!!shareTypeInfo && (shareTypeInfo.shareFriend.IsCanGiftPackage || shareTypeInfo.shareCircle.IsCanGiftPackage)}}'>
+        完成分享，本单可额外获得<text class="torage">{{shareTypeInfo.shareCircle.GiftPackageNum || 1}}</text>个助力包</view> -->
+    </view>
+    <view class="rob-bd" wx:if="{{hideShareFlag !== 0  && !closeInviteRobShare}}">
+      <button class="btn-invite" wx:if='{{hasRejectAlbum}}' open-type='openSetting' bindopensetting='reAuthorize'>
+        保存图片去分享
+      </button>
+      <button class="btn-invite" wx:else bindtap='onClickSaveSharePost'>保存图片去分享</button>
+    </view>
+  </view>
+  <block wx:if="{{taskList.length && LuckyStarList.length && !closeInviteDoubleRobShare && hideShareFlag != 1}}">
+    <view class="task-list">
+      <view class="task-tab">
+        <view class="tab-l {{curTabIndex == 0 ? 'cur' : ''}}" data-index="0" bindtap="clickTab">
+          做任务提速
+          <view class="tag" wx:if="{{showTag}}">免拉人</view>
+        </view>
+        <view class="tab-r {{curTabIndex == 1 ? 'cur' : ''}}" data-index="1" bindtap="clickTab">
+          翻倍助力
+          <view class="tag">100%翻倍</view>
+        </view>
+      </view>
+      <view class="white-box share-box" wx:if='{{curTabIndex == 0}}'>
+        <view class="item" wx:for='{{taskList}}' wx:for-item="task">
+          <image wx:if="{{task.TaskID == 12}}" src="{{task.IconUrl || 'https://images3.c-ctrip.com/train/2021/app/V8.43/qiangpiao/icon_duozhanghao.png'}}"></image>
+          <image wx:else src="{{task.TaskID == 1 ? '//pic.c-ctrip.com/train/wechat/inviterob/icon-12306.png' : '//pic.c-ctrip.com/train/wechat/inviterob/icon-gzh.png'}}"></image>
+          <view class="cont">
+            <view class="tit">{{task.Title}}</view>
+            <view class="txt">{{task.SubTitle}}</view>
+          </view>
+          <button class="{{task.TaskStatus == 1 || (task.TaskStatus == 2 && (task.TaskID == 6 || task.TaskID == 9)) ? 'btn-get' : 'btn-add'}}" disabled="{{task.TaskStatus == 2 && task.TaskID !== 6 && task.TaskID !== 9}}" wx:if="{{task.ButtonName}}" bindtap='clickTask' data-task-id='{{task.TaskID}}' data-task-status='{{task.TaskStatus}}' data-accelerate-package-num='{{task.AcceleratePackageNum}}'>
+            {{task.ButtonName}}
+          </button>
+          <button class="{{task.TaskStatus == 1 ? 'btn-get' : 'btn-add'}}" disabled="{{task.TaskStatus == 2}}" wx:else bindtap='clickTask' data-task-id='{{task.TaskID}}' data-task-status='{{task.TaskStatus}}' data-accelerate-package-num='{{task.AcceleratePackageNum}}'>
+            {{task.TaskStatus == 2 ? '已完成' : task.TaskStatus == 1 ? '领取奖励' : '+' + task.AcceleratePackageNum + '助力包'}}
+          </button>
+        </view>
+      </view>
+      <view class="fuxing-friend" wx:if="{{curTabIndex == 1}}">
+        <view class="tit">邀请以下好友，你得双倍助力包</view>
+        <view class="fuxing-friend-bd">
+          <view class="item" wx:for="{{LuckyStarList}}">
+            <image class="avatar" src="{{item.PhotoUrl}}"></image>
+            <view class="conts">
+              <view class="nickname">{{item.NickName}}</view>
+              <view class="tag" wx:if="{{item.Tag}}">{{item.Tag}}</view>
+              <view class="desc" wx:if="{{item.LuckyStarDesc}}">{{item.LuckyStarDesc}}</view>
+            </view>
+            <button disabled="{{item.Status == 1}}" open-type="share" bindtap="copyText" data-ubt-key="{{item.Status == 2 ? 'c_train_acctask_invitefx_click' : ''}}" data-text="{{item.NickName}}">
+              {{item.ButtonName}}
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:elif="{{!subOrderId && (taskList.length || showMarketComponent)}}">
+    <view class="htit" wx:if="{{taskList.length > 0  || showMarketComponent}}">免费获取助力包</view>
+    <view class="white-box share-box" style="border-radius: 8px" wx:if="{{!showMarketComponent}}">
+      <view class="item" wx:for='{{taskList}}' wx:for-item="task" >
+        <image wx:if="{{task.TaskID == 12}}" src="{{task.IconUrl || 'https://images3.c-ctrip.com/train/2021/app/V8.43/qiangpiao/icon_duozhanghao.png'}}"></image>
+        <image wx:else src="{{task.IconUrl || taskIcon[task.TaskID - 1]}}"></image>
+        <view class="cont">
+          <view class="tit">{{task.Title}}</view>
+          <view class="txt">{{task.SubTitle}}</view>
+        </view>
+        <button class="{{task.TaskStatus == 1 || (task.TaskStatus == 2 && (task.TaskID == 6 || task.TaskID == 9)) ? 'btn-get' : 'btn-add'}}" disabled="{{task.TaskStatus == 2 && task.TaskID !== 6 && task.TaskID !== 9}}" wx:if="{{task.ButtonName}}" bindtap='clickTask' data-task-id='{{task.TaskID}}' data-task-status='{{task.TaskStatus}}' data-accelerate-package-num='{{task.AcceleratePackageNum}}'>
+          {{task.ButtonName}}
+        </button>
+        <button class="{{task.TaskStatus == 1 ? 'btn-get' : 'btn-add'}}" disabled="{{task.TaskStatus == 2}}" wx:else bindtap='clickTask' data-task-id='{{task.TaskID}}' data-task-status='{{task.TaskStatus}}' data-accelerate-package-num='{{task.AcceleratePackageNum}}'>
+          {{task.TaskStatus == 2 ? '已完成' : task.TaskStatus == 1 ? '领取奖励' : '+' + task.AcceleratePackageNum + '助力包'}}
+        </button>
+      </view>
+    </view>
+    <taskList 
+        wx:if="{{showMarketComponent}}"
+        orderData="{{ {secondId:oid+'', secondType:1} }}"
+        channelCodeStr="O90YP7E27F" 
+        tempid='task_trn_wechat_qp_1' 
+        compid='224012'
+        trainMaster = "{{true}}"
+        bind:getTaskList="getMoreAssistTaskList" 
+        bind:userAcceptPrize="userAcceptMoreAssistTaskPrize"
+    />
+  </block>
+</view>
+<view class="loading-box" wx:else>
+  <view class="loading-circle"></view>
+  <view class="loading-light"></view>
+</view>
+<view class="backmask active" wx:if='{{showRulesPrompt || showRobPrompt || showShareImage}}' bindtap='closeRobSharePrompt'></view>
+<view class="pop-botm {{showRobPrompt ? 'active' : ''}}">
+  <!-- <view class="pop-ribbon">分享成功，已获得1个助力包</view> -->
+  <view class="pop-share">
+    <!-- <view class="tit"
+      wx:if='{{!!shareTypeInfo && shareTypeInfo.shareFriend.IsCanGiftPackage && shareTypeInfo.shareCircle.IsCanGiftPackage}}'>
+      完成分享，本单可额外获得<text class="torage">{{shareTypeInfo.shareFriend.GiftPackageNum}}</text>个助力包</view>
+    <view class="tit" wx:elif='{{!!shareTypeInfo && shareTypeInfo.shareFriend.IsCanGiftPackage}}'>分享至微信群，再得<text
+        class="torage">{{shareTypeInfo.shareFriend.GiftPackageNum}}</text>个助力包</view>
+    <view class="tit" wx:elif='{{!!shareTypeInfo && shareTypeInfo.shareCircle.IsCanGiftPackage}}'>分享至朋友圈，再得<text
+        class="torage">{{shareTypeInfo.shareCircle.GiftPackageNum}}</text>个助力包</view>
+    <view class="tit" wx:else='{{accePacketInfo.LightningLevel < 6}}'>邀请好友助力，最高免费升至<text class="torage">VIP抢票</text>
+    </view> -->
+    <view class="share-bd">
+      <view class="item" wx:if="{{hideShareFlag !== 2}}">
+        <button class='share' wx:if='{{hasRejectAlbum}}' open-type='openSetting' bindopensetting='reAuthorize'>
+          <image src="//pic.c-ctrip.com/train/wechat/inviterob/icon-pyq.png"></image>
+        </button>
+        <button class='share' wx:else bindtap='saveAndShowPost' data-ubt-key="c_train_wx_invite_sharebtn_post">
+          <image src="//pic.c-ctrip.com/train/wechat/inviterob/icon-pyq.png"></image>
+        </button>
+        <view class="txt">分享到朋友圈</view>
+      </view>
+      <view class="item" wx:if="{{hideShareFlag !== 1}}">
+        <button class='share' open-type='share' bindtap='onClickShareFriend' data-ubt-key='c_train_wx_invite_robsuccess_jl_acce' id="robtaskshare">
+          <image src="//pic.c-ctrip.com/train/wechat/inviterob/icon-wechat.png"></image>
+        </button>
+        <view class="txt">分享到微信群</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 保存图片成功 COPY -->
+<view class="pop-share-qrcode" wx:if="{{showShareImage}}">
+  <view class="pop-share-qrcode-bd">
+    <image src="{{sharePic}}" mode="widthFix"></image>
+  </view>
+  <view class="info">图片已保存至手机，快去分享吧</view>
+  <text class="ifont-closed" bindtap="hideShareImage"></text>
+</view>
+<!-- 我是说明弹层 -->
+<view class="pop-rule-mid pop-rule active" wx:if='{{showRulesPrompt}}'>
+  <view class="tit">说明</view>
+  <view class="pop-rule-bd">
+    <view class="txt" wx:for="{{ruleList}}">{{item}}</view>
+  </view>
+  <text class="ifont-closed" bindtap='toggleShowRulePrompt'></text>
+</view>
+<!-- 接受浏览任务 -->
+<block wx:if="{{showMask === 'assistTaskReceived'}}">
+  <template is="rob-coupon-pop" data="{{taskRwardInfo, taskCountDownText, showMask}}"></template>
+</block>
+<!-- 助力任务领奖 -->
+<block wx:if="{{showMask === 'assistTaskSucceed'}}">
+  <template is="rob-coupon-pop" data="{{taskRwardInfo, showMask}}"></template>
+</block>
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

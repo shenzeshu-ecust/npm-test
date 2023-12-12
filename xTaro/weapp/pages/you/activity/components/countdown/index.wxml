@@ -1,0 +1,8 @@
+<view class="countDownText" wx:if="{{second}}">
+    <span class="numberText">{{hour}}</span>
+    <span class="wordText">:</span>
+    <span class="numberText">{{min}}</span>
+    <span class="wordText">:</span>
+    <span class="numberText">{{second}}</span>
+    <span class="wordText">后本轮邀请结束</span>
+</view>

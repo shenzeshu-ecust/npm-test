@@ -1,0 +1,190 @@
+/* 页面级别 */
+.page {
+	padding: 30rpx;
+	background-color: #ffffff;
+	font-size: 32rpx;
+}
+.mask {
+	background-color: rgba(0,0,0,0.70);
+	z-index: 9;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+/* 通用 */
+.highlight {
+	color:  #3484f5;
+	font-weight: bold;
+}
+textarea, input {
+	background-color: #eeeeee;
+	padding: 10rpx;
+}
+
+/* 1. 用户个人信息 */
+.user-info .content {
+	background-color: #3484f5;
+	padding: 20rpx;
+	border-radius: 10rpx;
+	color: #ffffff;
+}
+.user-info .content view {
+	margin-bottom: 10rpx;
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.user-info .content view:last-child {
+	margin-bottom: 0;
+}
+.user-info .content text {
+	font-weight: bold;
+}
+.notes {
+	color: #666666;
+	font-size: 20rpx;
+	margin: 10rpx;
+}
+
+/* 2. 功能列表 */
+.features .feature-item {
+	height: 100rpx;
+	align-items: center;
+	display: flex;
+	padding: 0 50rpx;
+	justify-content: space-between;
+	background-color: #ffffff;
+	border-radius: 50rpx;
+	box-shadow: 10rpx 10rpx 20rpx #cccccc;
+	margin-bottom: 20rpx;
+}
+.features .feature-item:last-child {
+	margin: 0;
+}
+.features .arrow::after {
+	content: "";
+	position: relative;
+	top: 10rpx;
+	width: 20rpx;
+	height: 20rpx;
+	border-top: 1px solid #666;
+	border-right: 1px solid #666;
+	transform: translate(-50%, -50%) rotate(45deg);
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: rgb(102, 102, 102);
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: rgb(102, 102, 102);
+}
+.features .local-navigate {
+	display: block;
+	height: unset;
+	padding: 20rpx 50rpx;
+}
+.features .local-navigate .url-input {
+	margin: 20rpx 0;
+}
+
+/* 底部弹框 */
+.pop-bottom {
+	z-index: 10;
+	position: fixed;
+	bottom: 0;
+	border-radius: 10rpx;
+	background: #ffffff;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 40rpx;
+	padding-bottom: 80rpx;
+}
+.pop-bottom textarea {
+	width: 100%;
+	box-sizing: border-box;
+	margin-bottom: 40rpx;
+	height: 200rpx;
+	font-size: 32rpx;
+}
+.pop-bottom .btn-wrapper, .local-navigate .btn-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.pop-bottom .btn-item, .local-navigate .btn-item {
+	height: 60rpx;
+	border: 1px solid #3484f5;
+	line-height: 60rpx;
+	padding: 0 10rpx;
+	border-radius: 10rpx;
+	color: #3484f5;
+}
+.clickView {
+	background-color: #3484f5;
+}
+
+/* 2.2 切换网络环境 */
+/* 2.3 访问堡垒 */
+.env view {
+	line-height: 40px;
+	text-align: center;
+	height: 80rpx;
+	border-bottom: 1px solid #cccccc;
+}
+
+.nav-h5 view {
+	margin-top: 20rpx;
+	display: flex;
+	justify-content: space-between;
+}
+.nav-h5 .res-wrapper {
+	flex-direction: column;
+}
+.nav-h5 .res-wrapper view:last-child {
+	box-sizing: border-box;
+	padding: 20rpx;
+}
+.pop-bottom .res-wrapper view:last-child {
+	word-break: break-all;
+	height: 200rpx;
+	overflow: scroll;
+	background-color: #87CEEB;
+}
+
+.nav-miniapp input {
+	margin-bottom: 40rpx;
+}
+
+.input-section {
+	display: flex;
+	align-items: center;
+}
+.input-section input {
+	flex: 1;
+	margin-right: 40rpx;
+}
+.storage .res-wrapper {
+	margin: 40rpx 0;
+}
+.doc {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20rpx 0;
+}
+.radio-group {
+	display: flex;
+	flex-wrap: wrap;
+}
+/* 酒店测试环境请求是否转发mars平台 */
+.features .feature-item.mars-change {
+	height: unset;
+	padding: 20rpx 50rpx;
+}
+.mars-change .radio {
+	text-align: right;
+	width: 100%;
+}

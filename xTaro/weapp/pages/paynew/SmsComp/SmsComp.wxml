@@ -1,0 +1,26 @@
+
+<view class="sms-comp">
+ <view class="back-modal"></view>
+ <view class="main">
+
+  <!-- 标题栏 -->
+  <view class="head">
+    <view class="icon close" bindtap="onClose"></view>
+    <view class="title">请输入短信验证码</view>
+  </view>
+
+  <!-- 提示文案 -->
+  <view class="tip-wrap">
+    <text>验证码已发送至{{showPhoneNo}}</text>
+    <text wx:if="{{countDown>0}}">{{countDown}}s后重发</text>
+    <text wx:else bindtap="onResend" class="resend">重新获取</text>
+  </view>
+
+  <!-- 输入区 -->
+  <code-input bind:inputdone="onInputDone"></code-input>
+
+  <!-- 提交按钮 -->
+  <button bindtap="onSubmit" class="submit-btn {{codeValue.length == 6 && 'active'}}">确定</button>
+
+ </view>
+</view>

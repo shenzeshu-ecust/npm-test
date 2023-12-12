@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "Icon": "../../../timelineComponent/ICON/ICON"
+  },
+  "componentPlaceholder": {
+    "Icon": "view"
+  }
+}

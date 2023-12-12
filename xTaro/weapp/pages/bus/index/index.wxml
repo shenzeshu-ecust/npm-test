@@ -1,0 +1,464 @@
+<import src="../common/template/Modal.wxml" />
+<import src="../common/template/tipMask.wxml" />
+<import src="../common/template/newUserCoupon.wxml" />
+<import src="../common/template/Debug.wxml" />
+<import src="../common/template/busNotice.wxml" />
+<nav-bar navbar-data="{{navbarData}}"
+  bindback="onBack"
+  bindhome="onHome"></nav-bar>
+<form bindsubmit="reportSubmitFromID"
+  report-submit="{{reportSubmit}}"
+  class="index-container">
+    <block>
+        <view wx:if="{{notice}}"
+          class="index-notes"
+          catchtap="showNotes">
+            <text><text class="bold">公告:</text>{{notice}}</text>
+        </view>
+        <view wx:if="{{isShowGuidetoAdd}}"
+          class="tip_icon_container"
+          style="top: {{ showCustomNaviBar ? titleBarHeight + statusBarHeight + 10: 13 }}px;"
+          bindtap="showTipsWindow"
+          data-ubt-key="{{ 'c_click_show_tips'}}">
+            <image class="guide-icon"
+              src="https://pic.c-ctrip.com/bus/resource/index/guide_icon.png" />
+            <text class="flex1 guide-icon-title">点击“...”添加到我的小程序，购票更方便</text>
+            <view class="close-tips icon-font icon-close guide-icon-close"
+              bindtap="onClickToCloseGuidetoAdd"></view>
+            <view class="tip_icon_triangle" />
+        </view>
+        <view class="index-banner-swiper">
+            <view class="swiper-box">
+                <ad-sdk impId="{{impId}}"
+                  width="{{newAdvertiseData.width}}"
+                  height="{{newAdvertiseData.width * 160/375}}"
+                  slideVideo="{{slideVideo}}"
+                  showSign="{{showSign}}"></ad-sdk>
+            </view>
+        </view>
+        <view class="index-blockcontainer index-blockcontainer-top">
+            <view class="switchbar">
+                <block wx:for="{{tabs}}">
+                    <view class='switchtab {{selectedTab == index ? classConfig.mainColor : ""}}'
+                      bindtap="tapSwitchTab"
+                      data-index="{{index}}">
+                        {{item.name}}
+                    </view>
+                </block>
+                <view style="width:{{selectedTab == tabs.length - 1 ? (710 / tabs.length) : (710 / tabs.length )}}rpx;left:{{selectedTab * 710 / tabs.length}}rpx"
+                  class='selectedTag'>
+                    <view class="right {{selectedTab > 0 ? '' : 'hidden'}}"></view>
+                    <view class="left {{selectedTab < tabs.length - 1 ? '' : 'hidden'}}"></view>
+                    <!-- <view class="{{selectedTab === tabs.length -1  selectedTab === tabs.length -1 ? "left" : "right"}}" ></view> -->
+                    <view class="dash {{classConfig.mainBackColor}}"></view>
+                </view>
+            </view>
+            <view wx:if="{{selectedTab === 0}}"
+              class="lottery-wrap">
+                <view wx:if="{{hasBusNotice || isShowExpireCoupon || isShowNewUseBanner || isShowOldUseBanner}}"
+                  class="swiper-container">
+                    <swiper class='banner'
+                      indicator-dots="{{false}}"
+                      autoplay="{{true}}"
+                      current="{{0}}"
+                      interval="{{3000}}"
+                      duration="{{500}}"
+                      vertical="{{true}}"
+                      circular="{{true}}"
+                      display-multiple-items="{{1}}">
+                        <swiper-item wx:if="{{hasBusNotice}}">
+                            <template is="busnotice"
+                              data="{{busNoticeData}}" />
+                        </swiper-item>
+                        <swiper-item wx:if="{{isShowExpireCoupon}}">
+                            <expiration-coupon expireCouponDate="{{expireCouponDate}}" />
+                        </swiper-item>
+                        <swiper-item wx:if="{{isShowNewUseBanner}}">
+                            <template is="newUserBanner"
+                              data="{{isNewActivity: true, bannerDesc: newUseBannerDesc, isShowBgColor, openNewUserCoupon: 'showNewUserCoupon'}}" />
+                        </swiper-item>
+                        <swiper-item wx:if="{{isShowOldUseBanner}}">
+                            <template is="newUserBanner"
+                              data="{{isNewActivity: false,bannerDesc: oldUseBannerDesc, isShowBgColor, openNewUserCoupon: 'showOldUserCoupon'}}" />
+                        </swiper-item>
+                    </swiper>
+                </view>
+            </view>
+            <view wx:if="{{selectedTab === 1}}"
+              class="ship-notice-wrap">
+                <template wx:if="{{shipNoticeData && shipNoticeData.length}}"
+                  is="shipnotice"
+                  data="{{shipNoticeData}}" />
+            </view>
+            <view class="searchBlock">
+                <!-- 首页公告 -->
+                <view class="index-white">
+                    <view class="infoBlock flex algin-center">
+                        <view class="flex-i1 stationBlock b_border border-b left">
+                            <text wx:if="{{selectedTab === 1}}"
+                              class="title noWrap tgrey">{{tabs[selectedTab].cityBlock.from.desc }}</text>
+                            <button formType="submit"
+                              class="button-noborder left index-station index-station-width"
+                              hover-class="none"
+                              bindtap="{{tabs[selectedTab].cityBlock.from.action}}">
+                                <text class="noWrap {{from ? '' : 'gray'}} {{selectedTab === 0 && fromStation.length > 6 ? 'mix-size' : ''}}">{{fromStation || from || tabs[selectedTab].cityBlock.from.desc}}</text>
+                            </button>
+                        </view>
+                        <view class="index-change {{selectedTab === 0 ? 'change-icon' : ''}} "
+                          bindtap="exchange">
+                            <block wx:if="{{tabs[selectedTab].buttonSkin && tabs[selectedTab].buttonSkin.transButtonUrl }}">
+                                <view class="icon-index-exchange {{isEx ? 'animate' : ''}}"
+                                  style="transform: {{isEx ? 'rotate(180deg)' : ''}};">
+                                    <view class="icon-image"
+                                      style="background-image:url('{{tabs[selectedTab].buttonSkin.transButtonUrl}}');"></view>
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <view class="icon-index-exchange {{isEx ? 'animate' : ''}}"
+                                  style="transform: {{isEx ? 'rotate(180deg)' : ''}}">
+                                    <view class="icon-image"></view>
+                                </view>
+                                <view class="product-icon"
+                                  style="background-image: url({{tabs[selectedTab].icon}}) " />
+                            </block>
+                        </view>
+                        <view class="flex-i1 stationBlock right b_border border-b">
+                            <text wx:if="{{selectedTab === 1}}"
+                              class="title noWrap tgrey">{{tabs[selectedTab].cityBlock.to.desc}}</text>
+                            <button formType="submit"
+                              class="button-noborder right index-station"
+                              hover-class="none"
+                              bindtap="{{tabs[selectedTab].cityBlock.to.action}}">
+                                <text class="noWrap {{to ? '' : 'gray'}} {{selectedTab === 0 && toStation.length > 6 ? 'mix-size' : ''}}">{{toStation || to || tabs[selectedTab].cityBlock.to.desc}}</text>
+                            </button>
+                        </view>
+                    </view>
+                    <!-- 日期展示 -->
+                    <view class="infoBlock date">
+                        <button formType="submit"
+                          class="button-noborder left index-station"
+                          hover-class="none"
+                          bindtap="dateAction">
+                            <text class="noWrap">{{showDate}}<text>{{' ' + displayDate}}</text><text>{{' ' + daySymbol}}</text></text>
+                        </button>
+                    </view>
+                </view>
+                <view wx:if="{{homeCouponNotice.notice}}"
+                  class="index-coupon-notice">
+                    <image class="index-coupon-redbag"
+                      src="https://pic.c-ctrip.com/bus/resource/index/redbag-icon.png" />
+                    <text>{{homeCouponNotice.notice}}</text>
+                </view>
+                <view class="index-bottom">
+                    <button wx:if="{{tabs[selectedTab].buttonSkin && tabs[selectedTab].buttonSkin.buttonUrl }}"
+                      class="btn btn-primary"
+                      style="background-image:url('{{tabs[selectedTab].buttonSkin.buttonUrl}}');"
+                      hover-class="btn-primary_hover"
+                      form-type="submit"
+                      bindtap="onSearch">
+                        <text>查询</text>
+                    </button>
+                    <button wx:else
+                      class="btn btn-primary"
+                      hover-class="btn-primary_hover"
+                      form-type="submit"
+                      bindtap="onSearch">
+                        <text>查询</text>
+                    </button>
+                </view>
+                <view class="index-historyList"
+                  bind:tap="onTapDebug">
+                    <view class="shadow"></view>
+                    <text wx:if="{{historyList.length > 0}}"
+                      class="disable">历史搜索:</text>
+                    <view class="index-history-scroll">
+                        <view wx:for="{{historyList}}"
+                          wx:for-index="index"
+                          wx:key="{{index}}"
+                          class="his-row">
+                            <button class="button-noborder"
+                              form-type="submit"
+                              bindtap="onHistory"
+                              data-data="{{item}}">
+                                <view class="his">
+                                    <text>{{item.fromCity}}-{{item.toCity}}</text>
+                                </view>
+                            </button>
+                        </view>
+                        <view wx:if="{{historyList.length > 0}}"
+                          class="his-row">
+                            <button class="button-noborder"
+                              form-type="submit"
+                              bindtap="onDeleteHistory"
+                              data-data="{{item}}">
+                                <view class="his">
+                                    <text>清除历史</text>
+                                </view>
+                            </button>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 其他业务线入口 -->
+        <block wx:if="{{selectedTab === 0}}">
+            <view wx:if="{{bannerConfigList.length > 0}}"
+              class="index-blockcontainer background-white guide-container">
+                <view>
+                    <image class="banner-back"
+                      src="{{bannerConfigList[0].iamge}}"
+                      data-index="0"
+                      bindtap="onClickBanner">
+                    </image>
+                </view>
+                <view class="guide-content-right">
+                    <image class="banner-back bottom"
+                      src="{{bannerConfigList[1].iamge}}"
+                      data-index="1"
+                      bindtap="onClickBanner">
+                    </image>
+                    <image class="banner-back"
+                      src="{{bannerConfigList[2].iamge}}"
+                      data-index="2"
+                      bindtap="onClickBanner">
+                    </image>
+                </view>
+            </view>
+            <template wx:if="{{otherEnterance.length > 0}}"
+              is="otherenterance"
+              data="{{enteranceList: otherEnterance}}" />
+            <!-- <button type="default" catchtap='dati'>答题测试入口</button> -->
+            <!-- //订单卡片 -->
+            <view class="index-blockcontainer background-white">
+                <!--  -->
+                <template is="ordercard"
+                  wx:if="{{homeOrder.orderNumber}}"
+                  data="{{...homeOrder, isHome: true, axtCountDown}}" />
+            </view>
+        </block>
+        <block wx:elif="{{selectedTab === 1}}">
+            <ship-recommend shipRecommendData="{{shipRecommendData}}"
+              shipTabs="{{shipTabs}}"
+              catch:myevent="getBookModalEvent" />
+        </block>
+        <view wx:if="{{isIPhoneX}}"
+          style="margin-bottom:68rpx;"></view>
+        <view wx:if="{{showBottomBar}}"
+          class="index-order"
+          style='{{isIPhoneX ?"padding-bottom:68rpx;" : ""}}'>
+            <block wx:for="{{tabs[selectedTab].menus}}">
+                <button form-type="submit"
+                  hover-class="button-hover"
+                  bindtap="{{item.action}}"
+                  class="button-noborder column">
+                    <image class="icon"
+                      src="{{item.icon}}" />
+                    <text class="margin-horizontal margin-horizontal-title">{{item.title}}</text>
+                </button>
+                <!-- <view wx:if="{{index !== tabs[selectedTab].menus.length - 1 && tabs[selectedTab].key!=='ship' }}" class="vertical-line"></view> -->
+            </block>
+        </view>
+    </block>
+    <view class="slogan-container">
+        <view wx:if="{{showSlogan}}"
+          class="slogan {{classConfig.sloganImage}}"></view>
+        <view wx:if="{{displayPrivacyPolicy}}"
+          class="privacy-policy-container {{classConfig.mainColor}}">
+            <view class="item"
+              bindtap="showPolicy"
+              data-type="accountsAgreement">服务协议</view>
+            <view class="item"
+              bindtap="showPolicy"
+              data-type="msgPrivacyPolicy">个人信息保护政策</view>
+        </view>
+
+        <view class="flex-row center">
+            <view class="logout-button"
+              wx:if="{{displayLogout && isLogin}}"
+              bindtap="onLogout">退出登录</view>
+        </view>
+
+    </view>
+    <view wx:if="{{isIPhoneX}}"
+      style="margin-bottom:68rpx;"></view>
+    <view wx:if="{{showBottomBar}}"
+      class="index-order"
+      style='{{isIPhoneX ?"padding-bottom:68rpx;" : ""}}'>
+        <block wx:for="{{tabs[selectedTab].menus}}">
+            <button form-type="submit"
+              hover-class="button-hover"
+              bindtap="{{item.action}}"
+              class="button-noborder column"
+              style='{{isOpenTagForJifen ? "position: relative;overflow: visible;" : ""}}'>
+                <view wx:if="{{item.title === '我的积分' && isOpenTagForJifen}}"
+                  class="integration-tag">
+                    玩游戏赢礼品
+                </view>
+                <image class="icon"
+                  src="{{item.icon}}" />
+                <text class="margin-horizontal margin-horizontal-title">{{item.title}}</text>
+            </button>
+            <!-- <view wx:if="{{index !== tabs[selectedTab].menus.length - 1 && tabs[selectedTab].key!=='ship' }}" class="vertical-line"></view> -->
+        </block>
+        <template wx:if="{{isDebug}}"
+          is="debugwindow">测试</template>
+        <template wx:if="{{showCouponWindow}}"
+          is="newUserCoupon"
+          data="{{coupon: mCoupon, onUseCoupon: 'onUseCoupon', onHide: 'hiddenCouponWindow'}}" />
+    </view>
+    <view class="view-check"
+      bindanimationend="viewReadyHandle"></view>
+    <perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+    <authorizationFloat id="cwxAuthFloat"></authorizationFloat>
+</form>
+<block wx:if="{{showShipBookModal}}">
+    <book-modal moreLineData="{{moreShipLineData}}"
+      catch:myevent="onCancelModal" />
+</block>
+<block wx:if="{{showShipNoticeModal}}">
+    <template data="{{shipNoticeContent, shipNoticeTitle}}"
+      is="shipnoticemodal" />
+</block>
+<block wx:if="{{showBusNoticeModal}}">
+    <template data="{{busNoticeData}}"
+      is="busnoticemodal" />
+</block>
+<block wx:if="{{isShowNewUserCoupon}}">
+    <template is="newUserCoupon"
+      data="{{coupon: newUserCoupon, showPolicy: 'showNewPolicy', onUseCoupon: 'onNewUserCoupon', onHide: 'closeNewUserCoupon'}}" />
+</block>
+<block wx:if="{{isShowOldUserCoupon}}">
+    <template is="newUserCoupon"
+      data="{{coupon: oldUserCoupon, showPolicy: 'showOldPolicy', onUseCoupon: 'onOldUserCoupon', onHide: 'closeOldUserCoupon'}}" />
+</block>
+<template name="otherenterance">
+    <view class="index-other index-blockcontainer background-white">
+        <button wx:for="{{enteranceList}}"
+          class="button-noborder item"
+          hover-class="button-hover"
+          form-type="submit"
+          data-url="{{item.link}}"
+          bindtap="onOtherEnterance"
+          data-ubt-key="{{ 'home_other_enterance_' + index}}"
+          data-index="{{index}}">
+            <image class="icon"
+              src="{{item.icon}}">
+            <view class="tag"
+              style="animation-delay: {{200 + index * 800 }}ms;"
+              wx:if="{{item.tag}}">{{item.tag}}
+            </view>
+            </image>
+            <view class="word">
+                <text class="title">{{item.name}}</text>
+                <text class="desc">{{item.desc}}</text>
+            </view>
+            <view class="split-line"
+              style="{{index === enteranceList.length - 1 ? 'background: #ffffff' : ''}}"></view>
+        </button>
+    </view>
+</template>
+<template name="ordercard">
+    <view class="index-blockcontainer background-white">
+        <!-- 安心退banner -->
+        <view class="axt-banner">
+            <view class="axt-banner-head">
+                <view class="head-box">
+                    <view class="head-tag">出发</view>
+                    <view class="head-txt">{{fromDateString}}</view>
+                </view>
+                <view class="head-btn-box">
+                    <text class="head-btn"
+                      hover-class="button-hover"
+                      form-type="submit"
+                      data-type="detail"
+                      data-path="{{'/pages/bus/orderdetail/orderdetail?oid=' + orderNumber }}"
+                      data-order="{{orderNumber}}"
+                      catchtap="homeOrderAction">
+                        <text>{{'订单详情'}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="axt-banner-station">
+                <view class="station-box">
+                    <view class="axt-station">{{fromCityName}}</view>
+                    <image class="axt-station-icon"
+                      src="https://pages.c-ctrip.com/bus-images/order-axtrefund/line-arrow.png" />
+                    <view class="axt-station">{{toCityName}}</view>
+                </view>
+                <text wx:if="{{canPay}}"
+                  class="pay-btn"
+                  hover-class="button-hover"
+                  form-type="submit"
+                  data-type="pay"
+                  data-order="{{orderNumber}}"
+                  catchtap="homeOrderAction">
+                        <text>{{'立即支付'}}</text>
+                </text>
+            </view>
+            <view class="axt-banner-content"
+              wx:if="{{easyRefund}}">
+                <view class="content-box">
+                    <image class="content-icon"
+                      src="https://pages.c-ctrip.com/bus-images/order-axtrefund/banner-icon.png" />
+                    <block wx:for="{{easyRefund.activityBannerDesc}}"
+                      wx:for-key="index">
+                        <text class="{{item.highLight ? 'content-txt-green' : 'content-txt'}}">{{item.text}}</text>
+                    </block>
+                    <text wx:if="{{easyRefund.status === 1}}"
+                      class="content-txt">
+                             <text class="content-txt-green">{{axtCountDown.h}}:{{axtCountDown.m}}:{{axtCountDown.s}}</text>失效
+                    </text>
+                </view>
+                <view class="content-btn"
+                  data-path="/pages/bus/share/index?orderNumber={{orderNumber}}&activityId={{easyRefund.activityId}}"
+                  bindtap="onGoEasyRefundActivity">
+                    <text class="btn-txt">{{easyRefund.buttonTitle}}</text>
+                    <icon class="icon-arrow-right"></icon>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="shipnotice">
+    <view class="ship-notice-container">
+        <swiper class='banner'
+          indicator-dots="{{false}}"
+          autoplay="{{true}}"
+          current="{{0}}"
+          interval="{{3000}}"
+          duration="{{500}}"
+          vertical="{{true}}"
+          circular="{{true}}"
+          display-multiple-items="{{1}}">
+            <swiper-item wx:for="{{shipNoticeData}}"
+              wx:key="shipnotice">
+                <view class="ship-notice-item"
+                  bindtap="onShipNoticeClick"
+                  data-item="{{item}}">
+                    <view class="flex-row-center info">
+                        <image class='image icon'
+                          mode="aspectFill"
+                          src="{{item.icon}}"
+                          bindtap='onTapImage'
+                          data-index="{{index}}">
+                        </image>
+                        <view class="content">{{item.content}}</view>
+                    </view>
+                    <image class="icon"
+                      src="https://pages.c-ctrip.com/bus-images/ship/home/coupon_right.png" />
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+</template>
+<template name="shipnoticemodal">
+    <view class="ship-notice-modal"
+      bindtap="onCloseShipNoticeModal"
+      catchtouchmove='empty'
+      catchlongtap='empty'>
+        <view class="ship-notice-modal-container">
+            <view class="title">{{shipNoticeTitle}}</view>
+            <view class="content">{{shipNoticeContent}}</view>
+        </view>
+    </view>
+</template>

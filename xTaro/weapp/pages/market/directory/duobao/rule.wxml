@@ -1,0 +1,19 @@
+<view class="db_rule">
+    <nav-bar navbar-data="{{navbarData}}"></nav-bar>
+    <view class="db_rule__head">
+        <view class="db_rule__head_btn1 {{tab == '1' ? 'active' : ''}}" bindtap="handleSwitchTab"  data-index="1"></view>
+        <view class="db_rule__head_btn2 {{tab == '2' ? 'active' : ''}}" bindtap="handleSwitchTab"  data-index="2"></view>
+    </view>
+    <view wx:if="{{tab == '1'}}" class="db_rule__content">
+        <image wx:for="{{guide}}" wx:key="index" src="{{item}}" alt=""/>
+    </view>
+    <view wx:else class="db_rule__content db_rule__content_{{tab}}">
+        <block wx:for="{{rule}}" wx:key="index">
+            <view class="db_rule__title {{index == 0 ? 'mt0' : ''}}">{{item.title}}</view>
+            <view wx:for="{{item.text}}" wx:key="index" wx:for-item="textItem" class="db_rule__text">{{textItem}}</view>
+        </block>
+    </view>
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

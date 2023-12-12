@@ -1,0 +1,13 @@
+<block wx:for="{{giftInfo.packageInfoList[0].xItems}}">
+    <block wx:if="{{item.elements && item.elements.length}}">
+    <view class="desc-tit">{{item.itemName}}</view>
+    <view wx:for="{{item.elements}}" wx:for-item="giftDesc" class="desc-item">
+        <text class="desc-key">{{giftDesc.key}}</text>
+        <text class="desc-value {{giftDesc.type === '4' && item.appointType ? 'add-color' : ''}}">{{giftDesc.value}}</text>
+    </view>
+    </block>
+</block>
+<block wx:if="{{giftInfo.specialInfo}}">
+    <view class="desc-tit">特别说明</view>
+    <view class="gift-sp"><text decode="{{true}}">{{giftInfo.specialInfo}}</text></view>
+</block>

@@ -1,0 +1,24 @@
+<!--pages/components/detail-mapView-compt/detail-mapView-compt.wxml-->
+<view class='map-view-container'>
+  <image class='map-view-bgimg' src='{{backgroundImage}}' mode='aspectFill'></image>
+  <view class='map-view-content' wx:if='{{isValidLocation}}'>
+    <view class="map-view-content-box">
+      <view class='map-view-content-detail'>
+        <view class='map-view-title'>{{location.title || ""}}</view>
+        <view class='map-view-desc'>{{location.description || ""}}</view>
+      </view>
+      <view class='map-view-nav' wx:if='{{isValidCoordinate}}'>
+        <image class='map-view-nav-img' src='https://pages.c-ctrip.com/schedule/pic/wxxcx/cts_btn_map_navigate.png' catchtap="onNavigationTap"></image>
+      </view>
+    </view>
+
+    <view class='cutting-line' wx:if="{{btns && btns.length > 0}}"></view>
+
+    <view class='map-view-content-btns' wx:if="{{btns && btns.length > 0}}">
+      <view wx:for="{{btns}}" wx:key="{{item.title}}" catchtap='{{item.tab}}' data-content="{{item.content}}" data-actionCode="{{item.actionCode}}" class='btn-item-box {{index > 0 ? "btn-item-space" : ""}}'>
+        <image class='btn-item-icon' src='{{item.icon}}'></image>
+        <text class='btn-item-text'>{{item.title}}</text>
+      </view>
+    </view>
+  </view>
+</view>

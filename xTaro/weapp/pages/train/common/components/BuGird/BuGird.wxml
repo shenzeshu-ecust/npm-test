@@ -1,0 +1,20 @@
+<!--pages/train/common/components/BuGird.wxml-->
+<view>
+  <view class="other-butab" wx:if="{{buList.length == 2}}">
+    <view class="item" wx:for="{{buList}}" catchtap="goBu" data-url="{{item.JumpUrl}}" data-title="{{item.Title}}"
+      data-ubt-key="c_train_wx_index_bulist_{{index}}">
+      <image src="{{item.Icon}}" class="icon"></image>
+      <view class="cont">
+        <view class="tit">{{item.Title}}</view>
+        <view class="txt">{{item.SubTitle}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="other-butab-muti" wx:if="{{buList.length > 2}}">
+    <view class="item" wx:for="{{buList}}" catchtap="goBu" data-url="{{item.JumpUrl}}" data-ubt-key="c_train_wx_index_bulist_{{index}}" data-title="{{item.Title}}">
+      <view class="tag" wx:if="{{item.Tag}}">{{item.Tag}}</view>
+      <image class="icon" src="{{item.Icon}}"></image>
+      <view class="tit">{{item.Title}}</view>
+    </view>
+  </view>
+</view>

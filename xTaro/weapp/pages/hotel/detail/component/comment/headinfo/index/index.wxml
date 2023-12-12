@@ -1,0 +1,32 @@
+<view class="head-box" wx:if="{{commentRating || hasSimComment}}">
+    <template is="comment-head-tab" data="{{commentInfo: commentRating, title: hasSimComment ? '全部住客点评' : '住客点评', rateDesc, hasSimComment, type: 'statistic_all'}}" wx:if="{{commentRating}}"></template>
+    <block wx:if="{{hasSimComment}}">
+        <text class="center-line"></text>
+        <template is="comment-head-tab" data="{{commentInfo: similarCommentRating, title: '偏好相似住客点评', type: 'statistic_similar'}}"></template>
+    </block>
+</view>
+<template name="comment-head-tab">
+    <view class="commnent-container" bindtap="clickCommentTab" data-type="{{type}}">
+        <view class="comment-title">{{title}}</view>
+        <view class="comment-info">
+            <view class="score" wx:if="{{commentInfo.ratingAll}}">{{commentInfo.ratingAll}}
+                <image class="bg-icon" src="https://pages.c-ctrip.com/hotels/wechat/img/share-journey-wave.png" mode="heightFix"></image>
+            </view>
+            <view class="detail">
+                <text class="level" wx:if="{{commentInfo.level}}">{{commentInfo.level}}</text>
+                <text wx:if="{{commentInfo.commentNum}}">{{commentInfo.commentNum}}条</text>
+                <view class="tip" wx:if="{{commentInfo.positiveTip}}">{{commentInfo.positiveTip}}</view>
+            </view>
+            <view class="desc" wx:if="{{!hasSimComment}}">
+                <view wx:for="{{rateDesc}}" wx:for-item="item" wx:key="*this" class="desc-item">
+                    <text>{{item.title}}</text>
+                    <text class="desc-score">{{item.score}}</text>
+                    <view class="desc-container {{item.isFullScore ? 'full-score' : ''}}">
+                        <view class="desc-progress {{item.isFullScore ? 'full-score' : ''}}" style="width: {{item.progress}}"></view>
+                        <text wx:if="{{item.isFullScore}}" class="wechat-font-great great-score"></text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

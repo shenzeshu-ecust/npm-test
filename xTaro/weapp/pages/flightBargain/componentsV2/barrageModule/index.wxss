@@ -1,0 +1,42 @@
+
+.mod {
+  position: relative;
+  margin-bottom: 48rpx;
+}
+.barrage {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 32rpx;
+  height: 64rpx;
+  color: #fff;
+  font-size: 24rpx;
+  background: #009dff;
+  border-radius: 32rpx;
+  font-weight: 300;
+}
+.barrage-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.mod-mask {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0);
+} 
+
+.avatar {
+  margin: 0 16rpx 0 40rpx; 
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 100%;
+  background: #f2f2f3;
+}
+.name {
+  margin-right: 24rpx;
+}

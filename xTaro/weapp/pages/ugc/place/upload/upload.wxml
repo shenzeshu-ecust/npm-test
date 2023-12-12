@@ -1,0 +1,21 @@
+<view class='page-view'>
+  <text class='title-text'>欢迎来到携程社区</text>
+  <text class='subtitle-text'>留下你的精彩旅行动态</text>
+  <view class='big-view'>
+    <image src="https://pages.c-ctrip.com/you/livestream/lvpai_mini_issuebg.jpg" mode='aspectFit' class='bigimage'></image>
+  </view>
+
+  <view class='small-view'>
+    <image src="https://pages.c-ctrip.com/you/livestream/lvpai_mini_userimgs.jpg" mode='aspectFit' class='smallimage'></image>
+
+  </view>
+  <view class='content'>
+    <text class='number'>1000万+</text><text class='sub-content'>旅行大咖在这里</text>
+  </view>
+  <view class='upload-view'>
+    <view class='upload-image' bindtap="jumpToUploadImg" >
+      <image src="https://pages.c-ctrip.com/you/livestream/lvpai_issue_icon_picture.png" mode='aspectFit' class='icon'></image>
+      <text class='upload-text'>发布笔记</text>
+    </view>
+  </view>
+</view>

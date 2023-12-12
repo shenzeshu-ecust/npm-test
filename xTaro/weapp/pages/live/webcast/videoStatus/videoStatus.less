@@ -1,0 +1,96 @@
+@import "../common.less";
+
+.loading-sbg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 4;
+}
+.lvpai-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -50rpx 0 0 -50rpx;
+  opacity: 0.85;
+  text-align: left;
+  border: 12rpx solid rgba(43, 51, 63, 0.7);
+  box-sizing: border-box;
+  background-clip: padding-box;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50rpx;
+  z-index: 9;
+  -webkit-animation: gs-cui-loading 1.58s linear infinite;
+  &:before {
+    content: "";
+    position: absolute;
+    margin: -12rpx;
+    box-sizing: inherit;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    opacity: 1;
+    border: inherit;
+    border-color: #fff transparent transparent;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    margin: -12rpx;
+    box-sizing: inherit;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    opacity: 1;
+    border: inherit;
+    border-color: #fff transparent transparent;
+  }
+  @-webkit-keyframes gs-cui-loading {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  @keyframes gs-cui-loading {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+ // 视频网络加载提示
+ .reload-wapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+.reload-sbg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: @ls-white;
+  text-align: center;
+  z-index: 101;
+  .t1 {
+    position: absolute;
+    top: 48%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 109;
+    width: 100%;
+    text-align: center;
+    .tt {
+      font-size: 30rpx;
+      line-height: 2;
+    }
+    text {
+      color: @ls-yl;
+    }
+  }
+}

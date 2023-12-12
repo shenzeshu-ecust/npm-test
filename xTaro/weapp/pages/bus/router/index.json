@@ -1,0 +1,11 @@
+{
+  "backgroundColor": "#f5f5f5",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "nav-bar": "../cwx/component/navbar/navbar",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index",
+    "authorizationFloat": "/cwx/component/authorizationFloat/index"
+  },
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "汽车票扫码购票"
+}

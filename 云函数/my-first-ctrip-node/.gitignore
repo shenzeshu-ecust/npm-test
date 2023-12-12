@@ -1,0 +1,8 @@
+node_modules/
+package-lock.json
+.idea/
+scripts/processCount.sh
+scripts/dump.cmd
+scripts/dump.sh
+scripts/vi.cmd
+scripts/vi.sh

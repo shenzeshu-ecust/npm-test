@@ -1,0 +1,105 @@
+@import '../common/css/common.wxss';
+
+page {
+    background-color: #fff;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.wework-header {
+    width: 100%;
+    height: 436rpx;
+}
+
+.wework-body {
+    border-radius: 16rpx;
+    margin: 0 32rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40rpx 0 60rpx 0;
+    box-shadow: 0 6rpx 20rpx 2rpx rgba(0, 0, 0, 0.11);
+    background-color: #fff;
+    position: relative;
+    top: -60rpx;
+}
+
+.wework-title {
+    color: #0066f6;
+    font-weight: 700;
+    font-size: 40rpx;
+    line-height: 40rpx;
+}
+
+.wework-qrcode {
+    margin: 40rpx 0 32rpx 0;
+    border-radius: 20rpx;
+    width: 354rpx;
+    height: 354rpx;
+    background-color: #f6fbff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qrcode-img {
+    width: 270rpx;
+    height: 270rpx;
+}
+
+.wework-desc {
+    color: #fff;
+    font-size: 24rpx;
+    line-height: 24rpx;
+    background: linear-gradient(-236deg, rgb(97, 142, 255) 0%, rgb(36, 183, 255) 100%);
+    border-radius: 20rpx;
+    padding: 8rpx 32rpx;
+    margin-bottom: 60rpx;
+}
+
+.wework-right-group {
+    display: flex;
+}
+
+.wework-right {
+    font-size: 28rpx;
+    color: #0066f6;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    line-height: 28rpx;
+}
+
+.wechat-font-success1 {
+    font-size: 24rpx;
+    font-weight: 300;
+    margin-right: 6rpx;
+}
+
+.float-ball {
+    position: absolute;
+    background: linear-gradient(-230deg, rgb(21, 65, 255) 0%, rgb(39, 141, 254) 100%);
+    opacity: 0.14;
+    border-radius: 50%;
+}
+
+.float-ball-1 {
+    bottom: 24rpx;
+    left: -80rpx;
+    width: 250rpx;
+    height: 250rpx;
+}
+
+.float-ball-2 {
+    bottom: 202rpx;
+    right: -100rpx;
+    width: 264rpx;
+    height: 264rpx;
+}
+
+.float-ball-3 {
+    bottom: 160rpx;
+    left: 195rpx;
+    width: 42rpx;
+    height: 42rpx;
+}

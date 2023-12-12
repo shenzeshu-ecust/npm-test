@@ -65,7 +65,7 @@ console.log(chalk.rgb(123, 45, 67).underline('Underlined reddish color'));
 // ! 创建进度条
 // Progress 是一个很棒的软件包，可在控制台中创建进度条。 使用 npm install progress 进行安装。
 
-const bar = new ProgressBar(':bar', { total: 20 })
+const bar = new ProgressBar(':bar', { total: 50 })
 const timer = setInterval(() => {
   bar.tick()
   if (bar.complete) {

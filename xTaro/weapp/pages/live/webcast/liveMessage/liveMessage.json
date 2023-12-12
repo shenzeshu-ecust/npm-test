@@ -1,0 +1,13 @@
+{
+  "component": true,
+  "pureDataPattern": "^_",
+  "usingComponents": {
+    "mp-html": "../../common/mp-html/index",
+    "product":"/pages/market/directory/legaoComponents/productCanvas/index"
+  },
+  "componentPlaceholder": {
+    "product": "view"
+  }
+}
+ 
+

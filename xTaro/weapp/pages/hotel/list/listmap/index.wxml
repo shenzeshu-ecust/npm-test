@@ -1,0 +1,143 @@
+<import src='../../commontemplates/pricedetail/pricedetail.wxml' />
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+<view class="map-header">
+    <view class="mh-text">
+        {{hotelResText}}<block wx:if="{{hotelShowCount}}">，展示前<text class="blue-aws">{{hotelShowCount}}</text>家</block>
+    </view>
+    <view class="mh-back-list" catchtap="backList" data-ubt-key="131980">
+        <view class="wechat-font-list-normal back-list-icon"></view><view>列表</view>
+    </view>
+</view>
+<!-- 筛选栏 -->
+<view class="g-filter-container">
+    <view class="item blue {{filterSummary.sort.current}}" bindtap="handleSort" data-ubt-key="xcx_hotel_list_sorttype" id="autotest_listpage_sortfilter">
+        <view class="item-text">{{filterSummary.sort.selectedInfo.title}}</view>
+        <view class="i {{filterSummary.sort.hidden ? 'wechat-font-drop-down' : 'wechat-font-drop-up'}}"></view>
+    </view>
+    <view class="item {{filterSummary.area.current}}" bindtap="handleLocation" data-ubt-key="xcx_hotel_list_location" id="autotest_listpage_positionfilter">
+        <text class="item-text">{{filterSummary.area.displayText}}</text>
+        <text wx:if="{{filterSummary.area.filtersNum}}" class="item-num">{{filterSummary.area.filtersNum}}</text>
+        <view class="i {{filterSummary.area.hidden ? 'wechat-font-drop-down' : 'wechat-font-drop-up'}}"></view>
+    </view>
+    <view class="item {{filterSummary.priceStar.current}}" bindtap="handlePriceStar" data-ubt-key="xcx_hotel_list_money" id="autotest_listpage_diamondsfilter">
+        <view class="item-text">{{filterSummary.priceStar.data.text}}</view>
+        <text wx:if="{{filterSummary.priceStar.data.filtersNum}}" class="item-num">{{filterSummary.priceStar.data.filtersNum}}</text>
+        <view class="i {{filterSummary.priceStar.hidden ? 'wechat-font-drop-down' : 'wechat-font-drop-up'}}"></view>
+    </view>
+    <view class="item {{filterSummary.filter.current}}" bindtap="handleFilter" data-ubt-key="xcx_hotel_list_select" id="autotest_listpage_multplefilter">
+        <view class="item-text">{{filterSummary.filter.displayText}}</view>
+        <text wx:if="{{filterSummary.filter.filtersNum}}" class="item-num">{{filterSummary.filter.filtersNum}}</text>
+        <view class="i {{filterSummary.filter.hidden ? 'wechat-font-drop-down' : 'wechat-font-drop-up'}}"></view>
+    </view>
+</view>
+
+<!--定位-->
+<view class="btn-loc" catchtap="getLocation">
+    <view class="wechat-font-location locate-icon"></view><view >定位</view>
+</view>
+<!--地图-->
+<view class="map-box">
+    <map
+            id="listNewMap"
+            class="list-map"
+            scale="{{scale}}"
+            show-scale="{{true}}"
+            longitude="{{longitude}}"
+            latitude="{{latitude}}"
+            markers="{{markers}}"
+            bindmarkertap="markertap"
+            bindcallouttap="calloutTap"
+            bindregionchange="regionChange">
+    </map>
+    <!-- center-pointer -->
+    <view wx:if="{{showCenterAddr}}" class="center-pointer-box">
+        <view class="center-pointer-title">{{centerPointerText}}</view>
+        <view class="triangle-down"></view>
+    </view>
+    <view wx:if="{{showCenterPointer}}" class="pointer">
+        <image class="point-png-wx" src="https://pages.c-ctrip.com/hotels/wechat/img/map-pointer.png"></image>
+    </view>
+</view>
+
+<!--酒店卡片-->
+<view class="hotel-card-box" catchtouchmove="noop" wx:if="{{hotel.price >= 0 || hotel.priceStr}}">
+    <view wx:if="{{curHotelIdx > 0}}" class="arrow left" catchtap="preHotel" data-hotelidx="{{curHotelIdx}}">
+        <view class="arrow-left wechat-font-arrow-right"></view>
+    </view>
+    <include src="../hotelcard.wxml" />
+    <view wx:if="{{!isLastHotel}}" class="arrow right" bindtap="nextHotel" data-hotelidx="{{curHotelIdx}}">
+        <view class="arrow-right wechat-font-arrow-right"></view>
+    </view>
+</view>
+
+<!--价格问号浮层-->
+<common-layer wx:if="{{showPriceDetail}}"
+      title="优惠说明"
+      subTitle="{{priceLayerSubtitle}}"
+      confirmButtonText="{{confirmBtnText}}"
+      bind:closeLayer="closePriceDetail"
+      bind:confirm="{{priceDetailConfirmFuc}}">
+    <template is="price-detail" data="{{dateInfo, priceDetail, priceDetailSkey: detailRoomId}}"></template>
+</common-layer>
+
+<!-- 排序 -->
+<view class="cmask ftop-map" hidden="{{filterSummary.sort.hidden}}" bindtap="handleSort"></view>
+<view class="sort-bar animated fadeInDown ftop-map" hidden="{{filterSummary.sort.hidden}}" bindchange="">
+    <block wx:for="{{filterSummary.sort.items}}" class="sort-wrap">
+        <block wx:if="{{(filterSummary.sort.isShowIllSort && item.key !== 'sort-0|1') || (!filterSummary.sort.isShowIllSort && item.key !== 'sort-45|1')}}">
+            <view class="item {{item.desc ? 'ptb-25' : ''}}" bindtap="handleSortSelect" data-id="{{item.key}}" data-filterid="{{item.data.filterId}}" data-ubt-key="xcx_hotel_list_sorttype_{{item.key}}" id="autotest_xcx_hotel_list_sorttype_{{item.key}}">
+                <view class="con">
+                    <view class="{{item.extra.selected ? 'blue' : ''}} con-text">{{item.title}}</view>
+                <view wx:if="{{item.desc}}" class="comment-disc {{item.extra.selected ? 'current-color' : ''}}">{{item.desc}}</view>
+                </view>
+                <text class="icon-style {{item.extra.selected ? 'wechat-font-selected mr-9' : ''}}"></text>
+            </view>
+        </block>
+    </block>
+</view>
+<!-- 筛选 -->
+
+<hotel-filter
+        filterFromMap="{{fromMap}}"
+        cityId="{{cityInfo.cityId}}"
+        districtId="{{cityInfo.did}}"
+        inDay="{{dateInfo.inDay}}"
+        outDay="{{dateInfo.outDay}}"
+        category="2"
+        _selectedItems="{{filterSummary.filter.selectedItems}}"
+        hide="{{filterSummary.filter.hidden}}"
+        bind:close="handleFilterComponentClose"
+        bind:confirm="handleFilterComponentConfirm"
+        bind:ready="handleFilterComponentReady"
+></hotel-filter>
+<!-- 星级价格 -->
+<pricestarfilter
+        filterFromMap="{{fromMap}}"
+        wx:if="{{!filterSummary.priceStar.hidden}}"
+        bind:closeStarFilter="priceStarFilterClose"
+        bind:updateStarFilterData="priceStarFilterConfirm"
+        page-from="listmap"
+        isOversea="{{cityInfo.biz !== 1}}"
+        cityID="{{cityInfo.cityId}}"
+        priceInfo="{{filterSummary.priceStar.data}}"
+>
+</pricestarfilter>
+<!-- 位置区域 -->
+<hotel-filter
+        filterFromMap="{{fromMap}}"
+        cityId="{{cityInfo.cityId}}"
+        districtId="{{cityInfo.did}}"
+        inDay="{{dateInfo.inDay}}"
+        outDay="{{dateInfo.outDay}}"
+        category="3"
+        _selectedItems="{{filterSummary.area.selectedItems}}"
+        hide="{{filterSummary.area.hidden}}"
+        bind:close="handleAreaComponentClose"
+        bind:confirm="handleAreaComponentConfirm"
+        bind:ready="handleAreaComponentReady"
+></hotel-filter>
+
+<!-- loading-layer -->
+<loading-gif isShown="{{showLoading}}"></loading-gif>
+<!--白屏检测-->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

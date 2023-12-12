@@ -1,0 +1,48 @@
+<!--pages/timeLine/cardItem/baseItem.wxml-->
+<view class='contentView'>
+  <view wx:if="{{cardData.isShowTime}}" class='show_time_backview'>
+    <view class="show_time_view">
+      <view class='show_time_dot'></view>
+      <text class="show_time_text">{{showTime}}</text>
+    </view>
+    <image class="show_activity" mode="aspectFit" wx:if="{{activity}}" catchtap='go2activity' src="{{activity.icon}}"></image>
+
+  </view>
+  <view class='real-container'>
+    <view class='options-content'>
+      <view class='line'></view>
+      <view class='option-view' wx:if="{{cardData.canDelete}}" catchtap='deleteCard' data-cardmodel='{{cardData}}'>
+        <Icon className='timeline_delete' color='#f63b2e' size='22' />
+        <text class='option-title'>删除</text>
+      </view>
+    </view>
+    <view class="card_content {{cardData.sharedCard ? 'margin-share-card' : 'margin-main-card'}} {{util.recoveryAnim(cardData.isRecovery)}}" style="margin-left: {{cardData.marginLeft}}rpx; margin-right: {{cardData.marginRight}}rpx;" bindtouchstart='touchStart' bindtouchmove='touchMove' bindtouchend='touchEnd' bindtouchcancel='touchCancel'
+      data-cardmodel='{{cardData}}'>
+
+      <flight-card wx:if="{{cardData.flightCard}}" card-data="{{cardData}}" />
+      <poi-card wx:if="{{cardData.ticketCard}}" card-data="{{cardData}}" />
+      <hotel-card wx:if="{{cardData.hotelCard}}" card-data="{{cardData}}" />
+      <train-card wx:if="{{cardData.trainCard}}" card-data="{{cardData}}" />
+      <chartered-car wx:if="{{cardData.carCard && cardData.isNewCarCard}}" card-data="{{cardData}}" />
+      <car-card wx:if="{{cardData.carCard && !cardData.isNewCarCard}}" card-data="{{cardData}}" />
+      <common-card wx:if="{{cardData.commonCard}}" card-data="{{cardData}}" />
+    </view>
+  </view>
+</view>
+
+<wxs module="util">
+  var recoveryAnim = function(flag) {
+    var className = "";
+    if (flag == 1) {
+      className = "recoveryAnim1";
+    } else if (flag == 2) {
+      className = "recoveryAnim2";
+    } else {
+      className = "";
+    }
+    return className;
+  }
+  module.exports = {
+    recoveryAnim: recoveryAnim,
+  }
+</wxs>

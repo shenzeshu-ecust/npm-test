@@ -1,0 +1,11 @@
+<swiper wx:if="{{user.length}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}" duration="{{duration}}" interval="{{interval}}" next-margin="{{nextMargin}}" class="rankbox">
+    <swiper-item wx:for="{{user}}" wx:key="index">
+        <view wx:if="{{item.price > 0}}" class="user-item">
+            <image class="avatar" src="{{item.avatar}}" />
+            <view class="info">
+                <text class="nick">{{item.nick}}</text>
+                <text class="txt">获得{{item.price}}元返现</text>
+            </view>
+        </view>
+    </swiper-item>
+</swiper>

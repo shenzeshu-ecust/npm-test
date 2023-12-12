@@ -1,0 +1,10 @@
+/* pages/market/legaoComponents/banner/banner.wxss */
+/* rule */
+.m-banner {
+  display: block;
+  width: 100%;
+}
+.m-banner image{
+  height: 100%;
+  width: 100%;
+}

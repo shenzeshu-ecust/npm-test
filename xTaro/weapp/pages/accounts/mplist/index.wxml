@@ -1,0 +1,38 @@
+<view class="bg">
+  <view class="login-by_phone" id="dynamicLoginView" style="display:{{dynamicLoginShow}}">
+    <view class="tips_top" style="display:none">{{errorMsg}}</view>
+    <view class="login-form_list">
+      <view class="login-item{{mobilephonewarn}}">
+        <label class="login-item_title">手机号</label>
+        <input style="margin:0;" class="login-item_input" type="number" name="mobilephone" id="mobilephone" maxlength="11" bindinput="textChange" placeholder="订单联系人手机号" bindblur="getImageCode"/>
+      </view>
+      <view class="login-item{{imgcodewarn}}" style="{{imgCodeShow}}">
+        <label class="login-item_title">验证码</label>
+        <input class="login-item_input login-item_input-picauth" placeholder="右图所示"  id="img_code_box" name="img_code_box" bindinput="textChange" />
+        <image src="{{imgCodeUrl}}" data_hash="{{captchaID}}" id="img_code" alt="" class="auth-image" bindblur="getImageCode"></image>
+      </view>
+      <view class="login-item">
+        <label class="login-item_title">动态码</label>
+        <input class="login-item_input login-item_input-picauth" placeholder="6位数字"  id="dyncpwd" maxlength="6" name="dyncpwd" bindinput="textChange" />
+        <!-- gray:按钮置灰 -->
+        <button wx:if="{{getdynamicabled==true}}" class="btn_countdown" bindtap="sendVerifyCodeWithRiskControl">发送验证码</button>
+        <button wx:else class="btn_countdown gray" disabled="true">{{getdynamictitle}}</button>
+      </view>
+      <button class="btn-login" hover-class="btn-primary_hover" id="dynamicLogin" bindtap="mobileQueryOrderClick">登录并查询</button>
+    </view>
+  </view>
+  <!-- 服务协议 -->
+  <view wx:if="{{!isLogin}}" class="agreement">
+    <view class="agreement-checkbox" bindtap="onCheckAgreement">
+      <icon type="{{isCheckedAgreement ? 'success' : 'circle'}}" size="17"></icon>
+    </view>
+    阅读并同意携程的
+    <text class="agreement-text" bindtap="onJump" data-jumptype="agreement">《服务协议》</text>
+    和
+    <text class="agreement-text" bindtap="onJump" data-jumptype="policy">《个人信息保护指引》</text>。
+    未注册手机号，查单时将自动注册携程账号。
+  </view>
+  <view class="tips-notice">可支持查询最近1年的订单（火车票仅限最近1月）</view>
+  <view class="tips_top" style="display:{{errorMsgShow}}">{{errorMsg}}</view>
+  <view class="view-check" bindanimationend="viewReadyHandle"></view>
+</view>

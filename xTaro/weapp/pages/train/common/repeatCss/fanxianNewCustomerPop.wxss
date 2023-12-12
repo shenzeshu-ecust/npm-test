@@ -1,0 +1,6 @@
+.pop-xinke-tequan{width: 750rpx;height: 732rpx;position: fixed;left:50%;top:50%;transform: translate(-50%,-50%);z-index: 3002;padding: 86rpx 63rpx 27rpx;box-sizing: border-box;}
+.pop-xinke-tequan .ifont-closed{position: absolute;bottom: -100rpx;left: 50%;transform: translateX(-50%);font-size: 64rpx;color: #fff}
+.pop-xinke-tequan-hd{text-align: center;}
+.pop-xinke-tequan-hd .tit{font-size: 36rpx;font-weight: 600;color: #303143;line-height: 1;}
+.pop-xinke-tequan-hd .tgold{color: #DBA46F;font-family: 'DIN Alternate';}
+.pop-xinke-tequan-bd{margin: 36rpx 0 76rpx;}

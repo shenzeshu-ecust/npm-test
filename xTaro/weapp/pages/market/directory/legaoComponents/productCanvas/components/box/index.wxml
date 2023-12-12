@@ -1,0 +1,12 @@
+
+<block wx:if="{{data.props.values.rowData}}">
+  <block wx:for="{{data.props.values.rowData}}" wx:key="index" wx:for-item="row">
+  <image lazy-load mode="widthFix" wx:if="{{row.componentData.type == 'image'}}" src="{{row.componentData.props.values.src || row.componentData.props.values.value}}" style="{{row.componentData.styles || row.componentData.props.styles}}" data-name="{{row.componentData.name}}" data-key="{{row.componentData.renderKey}}" data-clickhandlersname="{{row.componentData.props.values.name}}" />
+  <sk_label wx:if="{{row.componentData.type == 'label'}}" data="{{row.componentData}}" class="component_label" style="{{row.componentData.styles || row.componentData.props.styles}}" />
+  <sk_row wx:if="{{row.componentData.type == 'row'}}" data="{{row.componentData}}" style="{{row.componentData.styles || row.componentData.props.styles}}" />
+  <sk_column class="component_column" wx:if="{{row.componentData.type == 'column'}}" data="{{row.componentData}}" style="{{row.componentData.styles || row.componentData.props.styles}}" />
+  <sk_container class="component_container" wx:if="{{row.componentData.type == 'container'}}" data="{{row.componentData}}" style="{{row.componentData.styles || row.componentData.props.styles}}" />
+  <sk_box wx:if="{{row.componentData.type == 'box'}}" data="{{row.componentData}}" style="{{row.componentData.styles || row.componentData.props.styles}}" />
+  <sk_inline wx:if="{{row.componentData.type == 'inline'}}" data="{{row.componentData}}" style="{{row.componentData.styles || row.componentData.props.styles}}" />
+</block>
+</block>

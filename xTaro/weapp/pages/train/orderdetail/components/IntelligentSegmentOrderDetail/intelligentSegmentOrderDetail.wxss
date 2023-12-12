@@ -1,0 +1,915 @@
+i {
+    display: inline-block;
+}
+
+.intelligent-order-detail {
+    /* height: 100vh; */
+    /* background: linear-gradient(90deg, rgb(0, 170, 255) 0%, rgb(0, 111, 255) 100%); */
+    background: -webkit-linear-gradient(top, #0086f6 20%, #eef1f6 80%);
+}
+
+.intelligent-order-detail .order-linear {
+    background: none;
+    margin-bottom: 0;
+}
+
+.intelligent-order-detail .order-ticbox {
+    background-color: #fff;
+    margin: 0 16rpx 22rpx;
+    position: relative;
+    border-radius: 6px;
+}
+
+.intelligent-order-detail .order-ticbox-hd {
+    background: #fff;
+
+    border-radius: 6px;
+}
+
+.intelligent-order-detail .order-ticbox-hd .top {
+    border-bottom: none;
+    display: block;
+    background: linear-gradient(
+        -180deg,
+        rgb(241, 247, 253) 0%,
+        rgb(255, 255, 255) 100%
+    );
+    border-radius: 6px;
+}
+
+.intelligent-order-detail .passenger-list {
+    background: #f8fafd;
+    border-radius: 4px;
+    margin: 2rpx 16rpx 16rpx;
+    padding: 12rpx 16rpx;
+}
+
+.intelligent-order-detail .passenger-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 12rpx 0;
+    /* font-size: 11px; */
+    font-family: PingFangSC-Regular;
+}
+
+.intelligent-order-detail .passenger-list-item .item-left {
+    display: flex;
+    align-items: center;
+}
+.intelligent-order-detail .passenger-list-item .item-right {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.intelligent-order-detail .passenger-list-item text {
+    color: #333333;
+    font-family: PingFangSC-Regular;
+    font-size: 28rpx;
+    font-weight: normal;
+    line-height: 40rpx;
+    vertical-align: middle;
+}
+
+.intelligent-order-detail .passenger-list-item .tag {
+    color: #999999;
+    font-family: PingFangSC-Regular;
+    font-size: 22rpx;
+    border-radius: 4px;
+    border: 1px solid #eeeeee;
+    padding: 2rpx 8rpx;
+    line-height: 32rpx;
+}
+
+.intelligent-order-detail .passenger-list-item .passenger {
+    margin-right: 10rpx;
+}
+
+.intelligent-order-detail .passenger-list-item .tag-2 {
+    margin-right: 6rpx;
+}
+
+.intelligent-order-detail .passenger-list-item .seat {
+    position: absolute;
+    right: 150rpx;
+    display: inline-block;
+}
+
+.intelligent-order-detail .passenger-list-item .train-info {
+    margin-right: 16rpx;
+    float: right;
+}
+
+.intelligent-order-detail .electronic-number {
+    font-size: 24rpx;
+    color: #999999;
+    margin-top: 10rpx;
+}
+
+.intelligent-order-detail .ticket-entrance {
+    color: #00b87a;
+    font-size: 24rpx;
+    position: absolute;
+    right: 40rpx;
+    transform: translate(0, -100%);
+}
+
+.intelligent-order-detail .second-slogan {
+    background: #fff8f2;
+    border-radius: 4px;
+    height: 56rpx;
+    line-height: 56rpx;
+    color: #ff7700;
+    padding-left: 1.6rpx;
+    margin-top: 1.6rpx;
+}
+
+.intelligent-order-detail .rob-tips .rob-tips-type {
+    padding-top: 6rpx;
+
+    color: #222222;
+    line-height: 34rpx;
+    font-size: 34rpx;
+    font-weight: 500;
+    font-family: PingFangSC-Medium;
+    display: flex;
+    align-items: center;
+}
+
+.intelligent-order-detail .order-ticbox-hd .tick .checi {
+    color: #999999;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    font-weight: normal;
+    margin: 0;
+}
+
+.intelligent-order-detail .order-ticbox-hd .tick .transit {
+    border-radius: 24rpx;
+    /* border: 0.5px solid #cccccc; */
+    border: 1px solid #cccccc;
+    height: 38rpx;
+    width: 140rpx;
+    margin: 10rpx 0 26rpx;
+    color: #5678a8;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    line-height: 36rpx;
+    padding: 0;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intelligent-order-detail .order-ticbox-hd .tick .transit::before,
+.intelligent-order-detail .order-ticbox-hd .tick .transit::after {
+    background: #cccccc;
+    top: 18rpx;
+}
+
+.intelligent-order-detail .order-ticbox-hd .tick .transit::before {
+    background: linear-gradient(-90deg, #ccc 0%, #fff 100%);
+}
+
+.intelligent-order-detail .order-ticbox-hd .tick .transit::after {
+    background: linear-gradient(90deg, #ccc 0%, #fff 100%);
+}
+
+.intelligent-order-detail .order-ticbox-hd .tick {
+    padding: 0rpx 32rpx 30rpx;
+}
+
+.intelligent-order-detail .order-ticbox-hd .tick .ifont-detail::before {
+    display: block;
+    font-size: 24rpx;
+    color: #999999;
+    height: 24rpx;
+    width: 24rpx;
+    line-height: 24rpx;
+    padding: 0 8rpx;
+    display: none;
+}
+
+.intelligent-order-detail .order-ticbox-hd .tick .chexing {
+    color: #999999;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intelligent-order-detail .top-detail {
+    color: #0086f6;
+    font-family: PingFangSC-Regular;
+    font-size: 30rpx;
+    font-weight: normal;
+    position: absolute;
+    right: 40rpx;
+    top: 26rpx;
+}
+
+.intelligent-order-detail .top-detail .decoration {
+    border-radius: 0px 0px;
+    border-left: 0.5px solid #979797;
+    height: 20rpx;
+    /* width: 2rpx; */
+    margin: 0 16rpx;
+    display: inline-block;
+}
+
+.intelligent-order-detail .decoration-cord {
+    background: linear-gradient(
+        -180deg,
+        rgb(243, 248, 255) 0%,
+        rgb(227, 233, 242) 100%
+    );
+    border-radius: 4px 4px 4px 4px;
+    height: 44rpx;
+    width: 12rpx;
+    position: absolute;
+    bottom: 0;
+    transform: translate(0, 75%);
+    left: 40rpx;
+    z-index: 1;
+}
+
+.intelligent-order-detail .decoration-cord:last-child {
+    left: unset;
+    right: 40rpx;
+}
+
+.intelligent-order-detail .show-more-btn {
+    margin: 20rpx auto;
+    color: #999999;
+    width: 100%;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    font-weight: normal;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intelligent-order-detail .show-more-btn .ifont-arr {
+    transform: rotate(-90deg);
+    height: 18rpx;
+    margin-left: 2rpx;
+}
+
+.intelligent-order-detail .ifont-arr.unfold {
+    transform: rotate(90deg);
+}
+
+.intelligent-order-detail .order-ticbox-bd {
+    background-color: #f8fafd;
+    border-radius: 4px;
+    margin: 0 16rpx 16rpx;
+}
+
+.intelligent-order-detail .order-ticbox-bd .btn-grey {
+    background: #ffffff;
+    border-radius: 4px;
+    border: 0.5px solid #edeff0;
+    height: 60rpx;
+    width: 120rpx;
+    color: #0086f6;
+    font-family: PingFangSC-Medium;
+    font-size: 13px;
+    font-weight: 500;
+    /* height: 17px;
+line-height: 17px;
+width: 26px; */
+}
+
+.intelligent-order-detail .second-trip-tip {
+    background: #2698f7;
+    border-radius: 3px;
+    height: 30rpx;
+    line-height: 30rpx;
+    /* width: 58px; */
+    color: #ffffff;
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4rpx 10rpx;
+    margin-left: 10rpx;
+}
+
+.intelligent-order-detail .cross-route-container {
+    /* background: rgba(0, 61, 202, 0.2); */
+    border-radius: 8px;
+    height: 132rpx;
+    /* width: 359px; */
+    margin: 0 auto;
+    position: relative;
+    /* margin-bottom: 10px; */
+    padding: 10rpx 40rpx 26rpx;
+    box-sizing: border-box;
+}
+
+.intelligent-order-detail .router-top {
+    height: 44rpx;
+    color: #89a0c2;
+    font-family: PingFangSC-Semibold;
+    font-size: 22rpx;
+    font-weight: 600;
+    line-height: 22rpx;
+    display: flex;
+    align-items: center;
+}
+
+.intelligent-order-detail .decoration-stick {
+    background: #bbc9dc;
+    height: 1px;
+    width: 100%;
+    /* transform: translate(0, -50%); */
+    width: 100%;
+}
+
+.intelligent-order-detail .decoration-stick.left-stick {
+    height: 3px;
+    width: 100%;
+}
+
+.intelligent-order-detail .decoration-dot {
+    border-radius: 50%;
+    background: #bbc9dc;
+    height: 12rpx;
+    width: 12rpx;
+}
+
+.intelligent-order-detail .decoration-dot:first-of-type {
+    position: absolute;
+    left: 40rpx;
+}
+
+.intelligent-order-detail .decoration-dot:nth-of-type(2) {
+    position: absolute;
+    right: 40rpx;
+}
+
+.intelligent-order-detail .router-top text {
+    display: inline-block;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #89a0c2;
+    border-radius: 10px;
+    height: 24rpx;
+    line-height: 24rpx;
+    padding: 8rpx 12rpx;
+
+    position: absolute;
+}
+
+.intelligent-order-detail .router-top text.mid-tip {
+    /* background-color: #2078f4; */
+    border: 1px solid #89a0c2;
+    color: #89a0c2;
+
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.intelligent-order-detail .router-top text.from-tip {
+    
+  left: 25%;
+  transform: translateX(-50%);
+}
+
+.intelligent-order-detail .router-top text.focus {
+    background: #99aeca;
+    color: #fff;
+    border-color: #99aeca;
+}
+
+.intelligent-order-detail .router-top text.to-tip {
+    
+  right: 25%;
+  transform: translateX(50%);
+}
+
+.intelligent-order-detail .router-bottom {
+    top: 4rpx;
+    position: relative;
+
+    color: #333333;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    font-weight: normal;
+    line-height: 34rpx;
+}
+
+.intelligent-order-detail .router-bottom .from-station {
+    float: left;
+}
+
+.intelligent-order-detail .router-bottom .mid-station {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.intelligent-order-detail .router-bottom .to-station {
+    float: right;
+}
+
+.intelligent-order-detail .order-ticbox-bd .item {
+    padding: 24rpx 0 0;
+}
+.intelligent-order-detail .red-top {
+    background: linear-gradient(
+        -180deg,
+        rgb(255, 232, 232) 0%,
+        rgb(255, 255, 255) 100%
+    ) !important;
+}
+
+.intelligent-order-detail .failure-tips {
+    margin-top: 14rpx;
+    color: #999999;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.intelligent-order-detail .failure-tips .ifont-detail {
+    color: #f85e53;
+    font-size: 11px;
+    padding-right: 2px;
+}
+
+.intelligent-order-detail .failure-tips .ifont-detail::before {
+    display: block;
+    transform: rotate(180deg);
+}
+
+.intelligent-order-detail .booking-grab-tips {
+    display: flex;
+    background: #f2f8fe;
+    border-radius: 4px;
+    padding: 26rpx 22rpx;
+    margin: 0 16rpx 24rpx;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.intelligent-order-detail .booking-grab-tips .title {
+    color: #222222;
+    font-family: PingFangSC-Medium;
+    font-size: 13px;
+    font-weight: 500;
+}
+.intelligent-order-detail .booking-grab-tips .sub-title {
+    color: #999999;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 15px;
+}
+.intelligent-order-detail .booking-grab-tips .btn {
+    background: #0086f6;
+    border-radius: 4px;
+    height: 60rpx;
+    color: #ffffff;
+    font-family: PingFangSC-Medium;
+    font-size: 13px;
+    line-height: 60rpx;
+    margin: 0;
+}
+.intelligent-order-detail .booking-grab-tips .icon {
+    background: url("https://images3.c-ctrip.com/train/2021/app/V8.39.6/qiangpiao/icon_qiangpiao.png")
+        no-repeat;
+    height: 60rpx;
+    width: 60rpx;
+    background-size: contain;
+}
+.intelligent-order-detail .booking-grab-tips .context {
+}
+
+
+.countdown-container {
+    height: auto;
+    background: #fff;
+    padding: 24rpx;
+    position: relative;
+    z-index: 1;
+    margin: 0 16rpx 20rpx;
+    padding-right: 44rpx;
+}
+
+.countdown-container .background {
+    border-radius: 6px;
+    background: url("https://images3.c-ctrip.com/train/app/827/qiangpiao/bg_tishi.png")
+        no-repeat;
+    background-size: contain;
+    /* width: 100%; */
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: -1;
+}
+
+.countdown-container .cont .tit {
+    color: #333333;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    font-weight: normal;
+    /* line-height: 1.25; */
+    display: inline-block;
+}
+
+/* .countdown-container .cont .circle {
+    width: 2px;
+    height: 2px;
+    background: #eef1f6;
+    display: inline-block;
+} */
+
+.countdown-container .cont .tit .time {
+    color: #333333;
+}
+
+.countdown-container .icon-pop-tishi {
+    width: 64rpx;
+    height: 64rpx;
+    background: url("https://images3.c-ctrip.com/train/app/827/qiangpiao/icon_tishi.png")
+        no-repeat;
+    background-size: cover;
+    margin-right: 40rpx;
+    flex-shrink: 0;
+}
+
+.cross-station-detail .bd {
+    justify-content: space-between;
+}
+
+.cross-station-detail .bd .cross-station-stick {
+    margin-top: 18px;
+    border-top: 1px solid #dddddd;
+    height: 1px;
+    width: 20px;
+}
+
+.cross-station-detail .bd .to.center{
+    text-align: center;
+}
+
+.cross-station-detail .bd .from, .cross-station-detail .bd .to, .cross-station-detail .bd .mid {
+    flex: unset;
+}
+
+/* ff */
+
+.segmentation-cross-container {
+    position: relative;
+    /* background: rgba(0, 61, 202, 0.2); */
+    background: #fff;
+    margin: 0 16rpx 16rpx;
+    border-radius: 8px;
+}
+
+.segmentation-cross-container .segmentation-cross-title {
+    padding-left:20px;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    line-height: 24rpx;
+    position: relative;
+
+z-index: 998;
+
+/* height: 80rpx; */
+    width: auto;
+    display: block;
+
+    color: #333333;
+font-size: 30rpx;
+font-weight: 600;
+line-height: 80rpx;
+}
+
+.segmentation-cross-container .top{
+    background: linear-gradient(-180deg, rgb(221, 237, 255) 0%, rgb(255, 255, 255) 100%);
+border-radius: 6px 6px 0px 0px;
+position: absolute;
+top: 0;
+height: 80rpx;
+width: 100%;
+}
+
+.segmentation-cross-container .cross-section-route {
+    background: none;
+    margin: 0 0 10px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 0;
+}
+
+.segmentation-cross-container .cross-route-container.cross-section-route {
+    width: 75%;
+}
+
+.segmentation-cross-container .cross-route-container {
+    background: rgba(0, 61, 202, 0.2);
+    border-radius: 8px 8px 8px 8px;
+    height: auto;
+    margin: 0 12px;
+    position: relative;
+    margin-bottom: 10px;
+    padding: 0px 20px 0px;
+    box-sizing: border-box;
+}
+
+.segmentation-cross-container .cross-route-container {
+    background: rgba(0, 61, 202, 0.2);
+    border-radius: 8px 8px 8px 8px;
+    height: auto;
+    margin: 0 12px;
+    position: relative;
+    margin-bottom: 10px;
+    padding: 0px 20px 0px;
+    /* box-sizing: border-box; */
+}
+
+.segmentation-cross-container .cross-item.cross-route-container {
+    background: none;
+    border-radius: 0;
+    padding-right: 0;
+    padding-left: 0;
+    margin: 0;
+}
+
+.segmentation-cross-container .cross-item {
+    width: 25%;
+}
+
+
+.segmentation-cross-container .cross-section-route {
+    background: none;
+    margin: 0 0 10px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 0;
+}
+
+.segmentation-cross-container .cross-route-container.cross-section-route {
+    width: 75%;
+}
+
+.segmentation-cross-container .cross-route-container .router-top {
+    height: 22px;
+    color: #00b87a;
+    font-family: PingFangSC-Semibold;
+    font-size: 22rpx;
+    font-weight: 600;
+    line-height: 22rpx;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.segmentation-cross-container .cross-route-container.cross-section-route .router-bottom {
+    top: 4rpx;
+    position: relative;
+
+
+    color: #333333;
+font-family: PingFangSC-Regular;
+font-size: 24rpx;
+font-weight: normal;
+line-height: 34rpx;
+}
+
+.segmentation-cross-container .cross-route-container .router-bottom {
+
+    top: 4rpx;
+    position: relative;
+
+
+    color: #333333;
+font-family: PingFangSC-Regular;
+font-size: 24rpx;
+font-weight: normal;
+line-height: 34rpx;
+}
+
+.segmentation-cross-container .cross-route-container .router-top .decoration-dot {
+    border-radius: 50%;
+    background: #5678a8;
+    height: 6px;
+    width: 6px;
+}
+
+.segmentation-cross-container .cross-route-container .router-top .decoration-dot:first-of-type {
+    position: absolute;
+    left: 20px;
+}
+
+
+.segmentation-cross-container .cross-route-container .router-top .decoration-dot:nth-of-type(2) {
+    position: absolute;
+    right: 20px;
+}
+
+.segmentation-cross-container .router-top .decoration-dot:first-of-type {
+    position: absolute;
+    left: 0!important;
+}
+
+.segmentation-cross-container .router-top .decoration-dot:nth-of-type(2) {
+    position: absolute;
+    right: 0!important;
+}
+
+.segmentation-cross-container .cross-route-container .router-top .decoration-stick {
+    height: 2px;
+    width: 100%;
+}
+
+.segmentation-cross-container .cross-route-container .router-top span {
+    display: inline-block;
+    text-align: center;
+    /* background: #ffffff;
+    border-radius: 11px;
+    line-height: 24rpx;
+    padding: 4px 6px; */
+    position: absolute;
+
+
+color: #5678a8;
+font-family: PingFangSC-Regular;
+font-size: 12px;
+font-weight: normal;
+line-height: 34rpx;
+/* width: 36px; */
+}
+
+.segmentation-cross-container .cross-route-container .router-top span.from-tip {
+    left: 25%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.segmentation-cross-container .cross-route-container.cross-section-route .router-top .from-tip {
+    padding: 4px 15px;
+    left: 22.5%;
+}
+
+.segmentation-cross-container .cross-route-container .router-top span.mid-tip {
+    background: #5678a8;
+    border: 1px solid #fff;
+    color: #fff;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+}
+
+.segmentation-cross-container .cross-route-container .router-top span {
+    display: inline-block;
+    text-align: center;
+    background: #ffffff;
+    line-height: 24rpx;
+    padding: 4px 6px;
+    position: absolute;
+
+    background: #ffffff;
+border-radius: 10px;
+border: 1px solid #5678a8;
+}
+
+.segmentation-cross-container .cross-route-container.cross-section-route .router-top .to-tip {
+    padding: 4px 15px;
+    right: 22.5%;
+}
+
+.segmentation-cross-container .cross-route-container .router-top span.to-tip {
+    right: 25%;
+    -webkit-transform: translateX(50%);
+    transform: translateX(50%);
+}
+
+.segmentation-cross-container .cross-route-container.cross-section-route .router-bottom {
+    top: 4rpx;
+    position: relative;
+    color: #333333;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    font-weight: normal;
+    line-height: 34rpx;
+}
+
+.segmentation-cross-container .cross-route-container .router-bottom .from-station {
+    float: left;
+}
+
+.segmentation-cross-container .cross-route-container.cross-section-route .router-bottom .from-station {
+    float: left;
+}
+
+.segmentation-cross-container .cross-route-container .router-bottom .mid-station {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+}
+
+.segmentation-cross-container .cross-route-container.cross-section-route .router-bottom .mid-station {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+}
+
+
+
+.segmentation-cross-container .cross-route-container .router-bottom .to-station {
+    float: right;
+}
+
+.segmentation-cross-container .cross-route-container.cross-section-route .router-bottom .to-station {
+    float: right;
+}
+
+.segmentation-cross-container .cross-item.cross-right .router-top .decoration-dot {
+    right: 0;
+    left: unset!important;
+    background: #999;
+}
+
+.segmentation-cross-container .router-top .decoration-dashed-stick {
+    width: 100%;
+    border-top: 1px dashed #999;
+    /* border-top: 1px dashed rgba(255, 255, 255, 0.8); */
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+
+.segmentation-cross-container .cross-item.cross-route-container .router-top span.mid-tip {
+    color: rgba(255, 255, 255, 0.8);
+    font-family: PingFangSC-Regular;
+    font-size: 22rpx;
+    font-weight: normal;
+    border: none;
+    white-space: nowrap;
+    background: #0070f4;
+    padding: 0 4px;
+    color: #999999;border:none;background:#fff;
+}
+
+.revise-wrapper {
+    height: 164rpx;
+    padding: 16rpx 20rpx 28rpx;
+    box-sizing: border-box;
+}
+.revise-wrapper .router-top{
+    position: relative;
+}
+.revise-wrapper .revise-title{
+    position: relative;
+    color: #333333;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 17px;
+    text-align: center;
+    margin-bottom: 8rpx;
+}
+
+.revise-wrapper .router-top .from-tip,
+.revise-wrapper .router-top .to-tip{
+    color: #5678a8;
+    font-family: PingFangSC-Regular;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 12px;
+    padding: 8rpx 28rpx;
+}
+
+
+.revise-wrapper .mid-tip {
+    color: #5678a8;
+    font-family: PingFangSC-Regular;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 12px;
+}
+
+.revise-wrapper  .decoration-stick {
+    background: #CCD6E5;
+    height: 2px;
+}
+.revise-wrapper .decoration-dot {
+    background: #5678A8;
+}

@@ -1,0 +1,27 @@
+<view class="share_image_contaienr">
+  <view class="share_img_wrap">
+    <swiper current="{{swiper_current}}" bindanimationfinish="handleSwiperChange" class="share_img_swiper">
+      <swiper-item class="swiper-wrapper" wx:for="{{shareImages}}" wx:key="index" item-id="">
+        <view class="swiper-slide share_img_border">
+          <image class="share_img" src="{{item.imageUrl}}"></image>
+        </view>
+      </swiper-item>
+    </swiper>
+    <view bindtap="changeSwiper" data-val="{{-1}}" class="share_arrow share_arrow_left" wx:if="{{swiper_current > 0}}">
+        <image src='https://pages.c-ctrip.com/livestream/tripshoot/back_grey.png' ></image>
+    </view>
+    <view bindtap="changeSwiper" data-val="{{1}}" class="share_arrow share_arrow_right" wx:if="{{swiper_current < shareImages.length - 1}}">
+        <image src='https://pages.c-ctrip.com/livestream/tripshoot/arrow_right_333.png' ></image>
+    </view>
+  </view>
+  <view class="share-box">
+    <button open-type="{{item.type == 'WeixinFriend' ? 'share' : ''}}" bindtap="{{item.type == 'WeixinFriend' ? 'shareClick' : 'doShare'}}" wx:for="{{buttons}}" data-type="{{item.type}}" class="share-item"  wx:key="index">
+      <view class="imgBox">
+        <image class="" src="{{item.icon}}"></image>
+      </view>
+      <text class="">{{item.name}}</text>
+    </button>
+    
+  </view>
+</view>
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

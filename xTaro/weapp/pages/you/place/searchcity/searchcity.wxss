@@ -1,0 +1,450 @@
+page{
+  position:relative;
+  height:100%;
+  width:100%;
+}
+.iphonex-bottom{
+  /*padding-bottom: 68rpx;*/
+}
+.search-page-view{
+  height: 100%;
+  background: #fff;
+  overflow:hidden
+}
+.search-page-header{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+}
+.search-page-content{
+  width: auto;
+  height: calc(100%-188rpx);
+  /*background: lightblue;*/
+}
+.search-page-content-normal{
+  padding: 0rpx 0rpx 0rpx 40rpx;
+  margin-top: 188rpx;
+}
+.search-page-content-free{
+ padding: 90rpx 0rpx 0rpx 40rpx;
+}
+.search-city-title{
+  line-height: 88rpx;
+  font-size: 30rpx;
+  color: #A3A8AB;
+  background: #fff;
+  width: 100%;
+}
+.iphonex-bottom .searchresult-item:last-child{
+  padding-bottom: 90rpx;
+}
+.iphonex-bottom .searchcitylist-item:last-child .searchcitylist-info:last-child{
+  padding-bottom: 90rpx;
+}
+
+
+
+
+
+
+/** search相关组件样式 **/
+/** searchTabBar **/
+
+.searchtab-bar{
+  display: flex;
+  flex-direction:row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4rpx 6rpx rgba(0,0,0,0.08);
+  background: #FFFFFF;
+}
+
+.searchtab-bar-item{
+  flex:1;
+  height: 80rpx;
+  flex-direction:column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.searchtab-bar-text{
+  font-size: 30rpx;
+  color: #666;
+}
+.searchtab-bar-active{
+  color: #222;
+}
+.searchtab-bar-active::after{
+  content: '';
+  width: 90rpx;
+  height: 6rpx;
+  display: block;
+  background: #0196ff;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -45rpx;
+}
+
+/** searchInputBar **/
+.searchinput-bar{
+  display: flex;
+  flex-direction:row;
+  padding: 12rpx 32rpx 24rpx 32rpx;
+}
+.searchinput-wrap{
+  width: 600rpx;
+  height: 72rpx;
+  /*flex: 1;*/
+  position: relative;
+}
+.searchinput-icon{
+  width: 40rpx;
+  height: 40rpx;
+  background-image: url('https://pages.c-ctrip.com/you/livestream/posts-wechat-iconsearch.png');
+  background-size: 100% 100%;
+  position: absolute;
+  left: 16rpx;
+  top: 16rpx;
+  z-index:2
+}
+.searchinput-wrap input{
+  width: 536rpx;
+  height: 100%;
+  padding-left: 64rpx;
+  background: #ECECEC;
+  border-radius: 4rpx;
+  font-size: 34rpx;
+  color:  #A3A8AB;
+  line-height: 72rpx;
+}
+.searchinput-input-holder{
+  font-size: 34rpx;
+  color:  #A3A8AB;
+  line-height: 66rpx;
+}
+.searchinput-btn{
+  width: 94rpx;
+  line-height: 72rpx;
+  text-align: right;
+  font-size: 34rpx;
+  color: #333;
+}
+
+/** searchHotList **/
+.searchhotlist-con{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 16rpx;
+  margin-right: 40rpx;
+}
+.searchhotlist-item{
+  width: 33.33333333%;
+  text-align: center;
+  margin-bottom: 16rpx;
+}
+.searchhotlist-item text{
+  color: #000;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  color: #222222;
+  margin-right: 16rpx;
+  border: 1rpx solid #E0E0E0;
+  border-radius: 4rpx;
+  text-align: center;
+  display: block;
+  overflow: hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+/** searchCityList **/
+.searchcitylist-con{
+  margin-right: 56rpx;
+}
+.searchcitylist-title{
+  color:  #0196ff;
+  font-size: 30rpx;
+  line-height: 64rpx;
+  text-transform:uppercase;
+  padding-top: 16rpx;
+  width: 100%;
+  background: #fff;
+}
+.searchcitylist-title-fixed{
+  position: fixed;
+  top: 188rpx;
+}
+.searchcitylist-title-fixed-color{
+  color: #FF943E;
+}
+.searchcitylist-info{
+  border-bottom: 1px solid #ececec;
+  padding: 30rpx 0rpx;
+}
+.searchcitylist-top{
+  flex-direction:row;
+  display: flex;
+  align-items: center;
+}
+.searchcitylist-city{
+  font-size: 38rpx;
+  color: #222;
+}
+.searchcitylist-province{
+  font-size: 30rpx;
+  color: #A3A8AB;
+  margin-left: 16rpx;
+}
+.searchcitylist-othername{
+  font-size: 24rpx;
+  color: #A3A8AB;
+  line-height: 33rpx;
+}
+
+/** searchAlphabetBar **/
+.searchalphabetbar-con{
+  width: 56rpx;
+  height: calc(100% - 200rpx);
+  position: fixed;
+  right: 0;
+  text-align: center;
+  font-size: 22rpx;
+  top: 200rpx;
+  color: #0196ff;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+.searchalphabetbar-conhover{
+  background: rgba(0,0,0,.5);
+}
+.searchalphabetbar-item{
+  flex: 1;
+}
+.search-city-bigalpha{
+  width: 120rpx;
+  height: 120rpx;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -60rpx;
+  margin-left: -60rpx;
+  opacity: 0.9;
+  background: #0196ff;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 50rpx;
+  line-height: 120rpx;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/** searchAlphabetBar **/
+.searchresult-bar{
+  width: 100%;
+  position: fixed;
+  bottom:0;
+  height:auto;
+  overflow:auto;
+  top: 108rpx;
+  background: #fff;
+  z-index: 2;
+}
+.searchresult-item{
+  margin: 0 32rpx;
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid #ECECEC;
+  flex-direction: row;
+  display: flex;
+}
+.searchresult-icon{
+  height: 32rpx;
+  background: lightblue;
+  margin-right: 8rpx;
+  position: relative;
+  top: 6rpx;
+  font-size : 20rpx;
+  padding : 2rpx 8rpx;
+  color:#fff;
+  line-height:36rpx;
+}
+.searchresult-icon-hidden{
+  height: 32rpx;
+  background: lightblue;
+  margin-right: 8rpx;
+  position: relative;
+  top:6rpx;
+  font-size : 20rpx;
+  padding : 2rpx 8rpx;
+  color:#fff;
+  visibility: hidden;
+  line-height:36rpx;
+}
+.searchresult-icon-child{
+  height: 32rpx;
+  box-sizing:border-box;
+  background: #fff;
+  border:1rpx solid lightblue;
+  border-radius : 1rpx;
+  margin-right: 8rpx;
+  position: relative;
+  top: 10rpx;
+  font-size : 20rpx;
+  padding : 0 6rpx;
+  color:lightblue;
+  line-height:32rpx;
+}
+.searchresult-counname-child{
+  font-size: 34rpx;
+  color: #333;
+}
+.searchresult-counname-e-child{
+   font-size: 24rpx;
+   color: #999;
+   line-height: 30rpx!important;
+}
+.searchresult-info{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /*align-items: center;*/
+}
+.searchresult-top{
+  line-height: 52rpx;
+}
+.searchresult-cityname{
+  font-size: 34rpx;
+  color: #FF9E51;
+  margin-right: 12rpx;
+}
+.searchresult-provname{
+  font-size: 24rpx;
+  color: #A3A8AB;
+  margin-right: 16rpx;
+}
+.searchresult-counname{
+  margin-left:4rpx;
+  font-size: 24rpx;
+  color:  #A3A8AB;
+}
+.bottom-arrow,.top-arrow{
+  width: 30rpx;
+  height: 30rpx;
+  position: relative;
+  margin: 0 auto;
+}
+.bottom-arrow1{
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 10rpx;
+  border-top:  15rpx #333 solid;
+  border-right: 15rpx transparent dashed;
+  border-bottom: 15rpx transparent dashed;
+  border-left: 15rpx transparent dashed;
+  overflow: hidden;
+}
+.top-arrow1{
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 10rpx;
+  border-top:   15rpx transparent dashed;
+  border-right: 15rpx transparent dashed;
+  border-bottom: 15rpx #333 solid;
+  border-left: 15rpx transparent dashed;
+  overflow: hidden;
+}
+.bottom-arrow2{
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 8rpx;
+  border-top:  15rpx #fff solid;
+  border-right: 15rpx transparent dashed;
+  border-bottom: 15rpx transparent dashed;
+  border-left: 15rpx transparent dashed;
+  overflow: hidden;
+}
+.top-arrow2{
+  width: 0;
+  height: 0;
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 8rpx;
+  border-top: 15rpx transparent dashed;
+  border-right: 15rpx transparent dashed;
+  border-bottom:  15rpx #fff solid;
+  border-left: 15rpx transparent dashed;
+  overflow: hidden;
+}
+.searchresult-poiname{
+  font-size: 34rpx;
+  color: #333;
+}
+.searchresult-poiname-english{
+    font-size: 24rpx;
+    color: #999;
+    line-height : 30rpx;
+    word-break: break-all;
+}
+.searchresult-poiname-light{
+  color: #0196ff;
+  align-self: flex-start;
+}
+.searchresult-btm{
+  font-size: 24rpx;
+  color: #A3A8AB;
+  line-height: 48rpx;
+}
+.searchresult-cityicon{
+  background: url('https://pages.c-ctrip.com/you/livestream/posts-wechat-iconlocation.png');
+  background-size: 100% 100%;
+}
+.searchresult-poiicon{
+  background: url('https://pages.c-ctrip.com/you/livestream/posts-wechat-iconloi.png');
+  background-size: 100% 100%;
+}
+.searchresult-more{
+  font-size: 30rpx;
+  color: #0196ff;
+  text-align: center;
+  padding: 32rpx 0;
+}
+.searchresult-scroll{
+  height: 100%;
+}
+
+
+/** searchHotSpot **/
+.searchhotspot-con{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap
+}
+.searchhotspot-item{
+  font-size: 28rpx;
+  color: #222;
+  padding: 13rpx 16rpx;
+  background: #ECECEC;
+  box-shadow: 0 1rpx 4rpx 0 rgba(1,150,255,0.06);
+  border-radius: 4rpx;
+  margin: 0 16rpx 16rpx 0;
+}
+.maxHeight{
+  max-height:290rpx;
+  overflow:hidden;
+
+}

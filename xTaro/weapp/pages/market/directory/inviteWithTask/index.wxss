@@ -1,0 +1,32 @@
+/* pages/market/directory//inviteWithTask/index.wxss */
+.page-wraper{
+  min-height: 100vh;
+}
+.page-transform{
+  transform: scale(1);
+  transform-origin: left top;
+}
+.item-common{
+  position: fixed;
+}
+.task_list_page{
+  visibility: hidden;
+}
+
+.task_btn_text .task_wrap.task_wrap_5.module{
+  padding: 0;
+}
+
+.task_btn_text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+.task_btn_text button{
+  color: inherit;
+}
+
+.task_btn_text_inner{
+  font-size: 36rpx;
+}

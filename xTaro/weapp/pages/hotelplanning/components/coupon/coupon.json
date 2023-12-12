@@ -1,0 +1,7 @@
+{
+	"component": true,
+	"usingComponents": {
+		"roomlist": "../roomlist/index",
+		"real-name-pop": "/pages/hotelplanning/components/realnamepop/realnamepop"
+	}
+}

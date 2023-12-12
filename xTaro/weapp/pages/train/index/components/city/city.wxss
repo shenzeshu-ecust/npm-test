@@ -1,0 +1,327 @@
+page {
+    height: 100%;
+    background-color: #ffffff;
+}
+.search-module_ico {
+	position: absolute;
+	top: 31rpx;
+	left: 86rpx;
+	width: 25rpx;
+    height: 25rpx;
+}
+.search-module_input {
+	height: 64rpx;
+	background-color: #f4f4f4;
+	border-radius: 32rpx 32rpx 32rpx 32rpx;
+	padding-left: 72rpx;
+    padding-right: 80rpx;
+	margin: 12rpx 32rpx 12rpx 32rpx;
+}
+.search-module_input-focus {
+    margin-right: 120rpx;
+}
+.search-placeholder {
+	font-size: 26rpx;
+	color: #999999;
+    position: absolute;
+    left: 0rpx;
+}
+
+.search-module_clear {
+	position: absolute;
+	top: 28rpx;
+    right: 146rpx;
+    /* z-index: 101; */
+}
+.search-module_cancel {
+	position: absolute;
+	top: 22rpx;
+	right: 32rpx;
+	font-size: 28rpx;
+    color: #333333;
+}
+.top-box{
+    overflow: hidden;
+    height: 88rpx;
+}
+.search-box{
+    background: #ffffff;
+    box-shadow: 0rpx 4rpx 16rpx 1rpx rgba(0, 0, 0, 0.06);
+    width: 100%;
+    height: 88rpx;
+    position: fixed;
+    z-index: 102;
+}
+.body-mask {
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    width: 100%;
+    z-index: 101;
+    position: absolute;
+}
+.body{
+    height: 100%;
+    background: #f5f5f5;
+    position: relative;
+}
+.disableScroll {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100%;
+	overflow: hidden;
+}
+.tabs{
+    width: 160rpx;
+    background-color: #f5f5f5;
+    position: fixed;
+    top: 88rpx;
+    height: 100vh;
+    z-index: 100;
+}
+.tag-item{
+    height: 120rpx;
+    color: #555555;
+    font-size: 28rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: normal;
+    letter-spacing: 0px;
+    line-height: 120rpx;
+    width: 100%;
+    text-align: center;
+}
+.list-category-title {
+    background: #ffffff;
+    font-size: 28rpx;
+    width: 100%;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    letter-spacing: 0rpx;
+    padding-left: 24rpx;
+    height: 120rpx;
+    /* line-height: 160rpx; */
+}
+.list-category-title-box{
+    padding-top: 50rpx;
+}
+.list-category-title-fixed {
+    position: fixed;
+    top: 88rpx;
+    height: 104rpx;
+    line-height: 119rpx;
+}
+.city-list, .history-hot-list {
+    margin-left: 160rpx;
+    width: calc(100% - 160rpx);
+    background-color: #ffffff;
+}
+.city-list {
+    overflow: hidden;
+    height: calc(100vh - 88rpx);
+}
+.history-hot-list {
+    height: calc(100vh - 88rpx);
+}
+.divider {
+    width: 100%;
+    background-color: #f4f4f4;
+    height: 24rpx;
+}
+.list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* background: #ffffff; */
+    background-color: transparent;
+    z-index: 50;
+    border-bottom: 1rpx solid rgb(238, 238, 238);
+}
+.list-item-name{
+    height: 120rpx;
+    padding-left: 24rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.list-city-des {
+    color: #999999;
+    font-size: 24rpx;
+    padding-right: 24rpx;
+    width: 100rpx;
+    text-align: end;
+}
+.list-letter{
+    padding-left: 24rpx;
+    background: #f4f4f4;
+    color: #666666;
+    font-size: 28rpx;
+    line-height: 48rpx;
+}
+.list-item-city-cn{
+    color: #111111;
+    font-size: 30rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: normal;
+    letter-spacing: -0.48rpx;
+    line-height: 38rpx;
+}
+.list-item-city-en{
+    color: #888888;
+    font-size: 24rpx;
+    font-family: SFProText-Regular;
+    font-weight: normal;
+    letter-spacing: 0rpx;
+    line-height: 30rpx;
+    margin-top: 2rpx;
+}
+.search-list-body{
+    height: calc(100vh - 88rpx);
+    background-color: #ffffff;
+}
+.search-list-country-name{
+    height: 64rpx;
+    background: #f5f5f5;
+    padding-left: 32rpx;
+    color: #555555;
+    font-size: 26rpx;
+    letter-spacing: -0.16rpx;
+    line-height: 64rpx;
+}
+.search-list-city-item {
+    margin: 0rpx 32rpx;
+    padding: 25rpx 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #f0f0f0;
+}
+.search-list-city-name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    flex: 1;
+}
+.search-list-city-name-cn {
+    font-size: 30rpx;
+    letter-spacing: -0.48rpx;
+    margin-right: 16rpx;
+}
+.search-list-city-name-en {
+    color: #888888;
+    font-size: 24rpx;
+    font-family: SFProText-Regular;
+    letter-spacing: 0rpx;
+}
+.search-list-city-des {
+    color: #888888;
+    font-size: 24rpx;
+    width: 100rpx;
+    text-align: end;
+}
+.search-list-bottom-bar {
+    line-height: 90rpx;
+    height: 90rpx;
+    padding-bottom: env(safe-area-inset-bottom);
+    color: #555555;
+    font-size: 26rpx;
+    letter-spacing: -0.16rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.search-list-bottom-bar-icon {
+    width: 28rpx;
+    height: 28rpx;
+}
+.letter-category {
+    position: fixed;
+    right: 0rpx;
+    width: 48rpx;
+    color: #006ff6;
+    text-align: center;
+    top: 50%;
+    line-height: 34rpx;
+    transform: translateY(-50%);
+    z-index: 99;
+    font-size: 24rpx;
+}
+.history-category, .hotCity-category{
+    font-size: 20rpx;
+    height: 34rpx;
+}
+.city-list-tips {
+    color: #999999;
+    font-size: 24rpx;
+    margin-top: 40rpx;
+    text-align: center;
+    height: 200rpx;
+}
+.list-category-title-history {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 44rpx;
+}
+
+.history-delete {
+    float: right;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 44rpx;
+}
+.clear-txt {
+    color: #888888;
+    font-size: 26rpx;
+}
+.clear-icon{
+    width: 25.33rpx;
+    height: 28rpx;
+    margin-right: 11rpx;
+}
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+.empty-pic {
+    width: 300rpx;
+    height: 310rpx;
+    margin-top: 143rpx;
+}
+.empty-content {
+    font-size: 34rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    line-height: 42px;
+    margin-top: 63rpx;
+}
+.empty-tip {
+    color: #666666;
+    font-size: 26rpx;
+    line-height: 38rpx;
+    margin-top: 12rpx;
+}
+.item-tag-container {
+  position: relative;
+}
+.new-add {
+  width: 54rpx;
+  height: 30rpx;
+  border-radius: 15rpx;
+  color: white !important;
+  background-color: red;
+  position: absolute;
+  right: 0;
+  top: 17rpx;
+  font-size: 20rpx;
+  text-align: center;
+  line-height: 30rpx;
+}

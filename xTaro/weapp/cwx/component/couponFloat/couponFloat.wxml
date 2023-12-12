@@ -1,0 +1,66 @@
+<view class="float-wrapper" wx:if="{{isShowFloat}}">
+  <view wx:if="{{floatStep == 1}}" class="res-envelope" style="background:url({{floatConfig.redEnvelope}});background-size:100%,100%;">
+    <button bindtap="handleLogin" wx:if="{{!getBtnWidthLogin}}"></button>
+    <button bindtap="openRedEnvelope" wx:if="{{getBtnWidthLogin}}"></button>
+    <view class="close_btn" bindtap="closeFloat"></view>
+  </view>
+
+
+  <view wx:else>
+    <view class="bg" style="background:url({{floatConfig.floatBg}});background-size:100%,100%;">
+      <view class="coupons-wrapper">
+        <view wx:for="{{couponList}}" wx:key="{{index}}" class="coupon-item">
+          <view class="left">
+            <view class="condition" wx:if="{{item.deductionStrategyTypeID == 3 && item.startAmount}}">满{{item.startAmount}}可用</view>
+            <!-- 限金额-->
+            <view class="discount" wx:if="{{item.deductionType == 0}}">{{item.discountAmount}}<span>元</span></view>
+            <!-- 限折扣-->
+            <view class="discount" wx:if="{{item.deductionType == 1}}">{{item.discount1}}<span>{{item.discount2}}折</span></view>
+          </view>
+
+          <view class="middle">
+            <view class="title ellipsis">{{item.name}}</view>
+            <view class="time">{{item.disableDate}} 前可用</view>
+          </view>
+
+          <view class="right">
+            <!-- 已登录 已领券 -->
+            <button wx:if="{{item.status == 1}}" bindtap="goTargetUrl" data-url="{{item.useUrl}}">
+              <view>立即</view>
+              <view>使用</view>
+            </button>
+
+            <view wx:else>
+              <!-- 已登录  未领券 -->
+              <button bindtap="handleSendCoupon" wx:if="{{getBtnWidthLogin && item.generateCountLeft > 0}}" data-awardid="{{item.awardId}}">
+                <view>立即</view>
+                <view>领券</view>
+              </button>
+              <!-- 未登录 -->
+              <button bindtap="handleLogin" 
+                      data-awardid="{{item.awardId}}"
+                      wx:if="{{!getBtnWidthLogin && item.generateCountLeft > 0}}">
+                <view>立即</view>
+                <view>领券</view>
+              </button>
+            </view>
+          </view>
+          <!-- 已领取标记 -->
+          <view class="icon" wx:if="{{item.status == 1}}"></view>
+          <!-- 新客券标记 -->
+          <view class="icon-new" wx:if="{{item.rule != 'none'}}"></view>
+          <!-- 已领完 -->
+          <view class="icon icon-none" wx:if="{{(item.status == 0 || !item.status) && item.generateCountLeft <= 0}}"></view>
+        </view>
+      </view>
+    </view>
+    <view class="bottom-bg" style="background:url({{floatConfig.floatBg2}});background-size:100%,100%;"></view>
+
+    <!-- 关闭按钮 -->
+    <view class="close_btn" bindtap="closeFloat"></view>
+  </view>
+</view>
+
+<view class="mask" wx:if="{{isShowFloat}}" bindtap="closeFloat"></view>
+
+

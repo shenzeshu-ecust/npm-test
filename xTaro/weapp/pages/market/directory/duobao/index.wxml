@@ -1,0 +1,180 @@
+<nav-bar navbar-data="{{navbarData}}"></nav-bar>
+
+<returnAppBtn clazz="db_return_app">
+</returnAppBtn>
+
+<view class="db_head">
+    <image class="db_head_img" mode="aspectFill" src="https://images3.c-ctrip.com/marketing/2023/01/duobao/head_long.png"></image>
+    <image class="img_sy_head_dynic" mode="aspectFill" src="https://pages.c-ctrip.com/market/components/static/duobao/indexHead2.gif"></image>
+    <view class="db_head_btn" bindtap="jumpRule" data-index="1">攻略</view>
+    <view class="db_head_btn2" bindtap="jumpRule" data-index="2">规则</view>
+    <block wx:if="{{avatarList && avatarList.length > 0}}">
+        <swiper class="duobao_swiper" interval="{{2000}}" autoplay="{{true}}" circular="{{true}}" vertical="{{true}}">
+            <block wx:for="{{avatarList}}" wx:key="index">
+                <swiper-item>
+                    <view class="swiper_item">
+                        <image class="swiper_img" src="{{item.avatar}}"></image>
+                        <text class="swiper_text ellipsis">{{item.name}}夺宝成功，获得{{item.prize}}</text>
+                    </view>
+                </swiper-item>
+            </block>
+        </swiper>
+    </block>
+</view>
+
+<view class="db_activity__award" wx:if="{{bigAwardInfo && bigAwardInfo.totalRewardImg}}">
+    <view class="db_activity__award_title">当月夺宝{{bigAwardCount}}期领大奖</view>
+    <view class="db_activity__award_step">
+        <view class="db_activity__award_line" style="width:{{bigAwardLineWidth}}rpx"></view>
+        <view class="db_activity__award_item" wx:for="{{bigAwardArr}}" wx:key="index">
+            <image wx:if="{{index >= bigAwardInfo.totalNum}}" class="db_activity__award_item_img" src="https://images3.c-ctrip.com/marketing/2023/01/duobao/img_yo_lock.png"></image>
+            <image wx:if="{{index < bigAwardInfo.totalNum}}" class="db_activity__award_item_img_done" src="https://images3.c-ctrip.com/marketing/2023/01/duobao/img_yo_unlock.png"></image>
+            <view class="db_activity__award_item_text">第{{index + 1}}期</view>
+        </view>
+    </view>
+    <image class="db_activity__award_right" src="https://images3.c-ctrip.com/marketing/2023/01/duobao/img_yo_arrow.png"></image>
+    <view class="db_activity__award_wrap">
+        <image class="db_activity__award_img" src="{{bigAwardInfo.totalRewardImg}}"></image>
+        <view wx:if="{{bigAwardInfo.totalNum >= bigAwardCount && !bigAwardInfo.receiveTotalReward}}" class="db_activity__award_btn" bindtap="receiveBigAward">领取</view>
+        <view wx:if="{{bigAwardInfo.totalNum >= bigAwardCount && bigAwardInfo.receiveTotalReward}}" class="db_activity__award_btn" bindtap="seePrize">去查看</view>
+        <view class="db_activity__award_text ellipsis">{{bigAwardInfo.totalRewardName}}</view>
+    </view>
+    <image wx:if="{{bigAwardInfo.receiveTotalReward}}" class="db_activity__award_done" src="https://images3.c-ctrip.com/marketing/2023/01/duobao/img_yo_done.png"></image>
+</view>
+
+<view class="db_activity" style="margin-top: {{bigAwardInfo && bigAwardInfo.totalRewardImg ? '' : '-350rpx'}};">
+    <view class="db_activity__head">
+        <text class="db_activity__head_text {{actTabBar == 1 ? 'active' : ''}}" bindtap="handleSwitchTabbar" data-index='1'>活动进行中</text>
+        <text class="db_activity__head_text {{actTabBar == 2 ? 'active' : ''}}" bindtap="handleSwitchTabbar" data-index='2'>我的夺宝</text>
+        <view class="db_activity__head_line{{actTabBar}}"></view>
+    </view>
+
+    <view class="db_activity__myyo" bindtap="jumpMyYo">
+        <text class="db_activity__myyo-text1">我的YO票：</text>
+        <text class="db_activity__myyo-text2">{{yoNumber}}</text>
+        <view class="db_activity__arrow"></view>
+    </view>
+
+    <block wx:if="{{actTabBar == 1}}">
+        <block wx:for="{{activityList}}" wx:key="activityId">
+            <goods clazz="goods_item" data="{{item}}" bind:countDownEnd="onCountDownEnd" tab="1" bind:clickBtn="handleClickBtn" />
+        </block>
+        <view wx:if="{{!activityLoading && activityList.length == 0}}" class="db_activity__mydb_empty">
+            <image class="db_activity__mydb_empty_img" src="https://pages.c-ctrip.com/market/components/static/duobao/img_sy_empty.png"></image>
+            <text class="db_activity__mydb_empty_tips">暂无夺宝活动</text>
+        </view>
+        <view wx:if="{{activityList.length > 0}}" class="db_activity__more">- 更多夺宝活动敬请期待 -</view>
+    </block>
+    <block wx:if="{{actTabBar == 2}}">
+        <block wx:for="{{myList}}" wx:key="activityId">
+            <goods clazz="goods_item" tab="2" data="{{item}}" bind:clickBtn="handleClickBtn" />
+        </block>
+        <view wx:if="{{!myLoading && myList.length == 0}}" class="db_activity__mydb_empty">
+            <image class="db_activity__mydb_empty_img" src="https://pages.c-ctrip.com/market/components/static/duobao/img_sy_empty.png"></image>
+            <text class="db_activity__mydb_empty_tips">您未参与任何活动, 快去参与夺宝吧</text>
+            <view class="db_activity__mydb_empty_btn" bindtap="handleMyEmptyClick">去参与</view>
+        </view>
+    </block>
+</view>
+
+<view class="widget" wx:if="{{widgetConfig && widgetConfig.needShow && widgetConfig.icon}}">
+  <image  src="{{widgetConfig.icon}}" mode="aspectFit" class="widget-img" bindtap="handleClickWidget"/>
+  <image class="widget-close" src="https://images3.c-ctrip.com/marketing/task_components/318/close.png" mode="" bindtap="handleClickWidgetClose"/>
+</view>
+
+<view class="db_task">
+    <view class="db_task__head">
+        <image class="db_task__yopiao" src="https://pages.c-ctrip.com/market/components/static/duobao/img_sy_yopiao.png"></image>攒票子
+    </view>
+    <taskList tempid="{{tempid}}" compid="{{compid}}" bind:userAcceptPrize="userAcceptPrize"></taskList>
+</view>
+
+<taskAssist tempid="{{taskAssistTempid}}" compid="{{taskAssistCompid}}" bind:taskAssistPopupResult="handleTaskAssistPopup">
+</taskAssist>
+
+<!-- guide -->
+<modal show="{{false}}">
+    <view class="db__modal_guide">
+        <image class="db__modal_guide_head" src="https://pages.c-ctrip.com/market/components/static/duobao/img_guidedialog_head.png"></image>
+        <image class="db__modal_guide_content" src="https://pages.c-ctrip.com/market/components/static/duobao/img_guidedialog_win.png"></image>
+        <view class="db__modal_guide_btn">我知道啦</view>
+    </view>
+</modal>
+<!-- yo票不足 -->
+<modal show="{{modalType == 3}}" bind:close="handleCloseModal">
+    <view class="db__modal_notworth">
+        <image class="db__modal_notworth_head" src="https://pages.c-ctrip.com/market/components/static/duobao/img_faildialog_head.png"></image>
+        <view class="db__modal_notworth_title">您的YO票不足</view>
+        <view class="db__modal_notworth_text">快去做任务攒票子吧～</view>
+        <view class="db__modal_btn">去攒YO票</view>
+        <image class="db__modal_close" src="https://pages.c-ctrip.com/market/components/static/duobao/icn_dialog_cancel.png" bindtap="handleCloseModal"></image>
+    </view>
+</modal>
+<!-- 中奖 -->
+<modal show="{{modalType == 2 && winModalInfo}}" extClass="db__modal_success_ext" bind:close="handleCloseModal">
+    <view class="db__modal_success_wraper">
+        <view class="db__modal_success_head">
+            <image class="db__modal_success_stand" src="https://pages.c-ctrip.com/market/components/static/duobao/img_windialog_stand.png"></image>
+            <image class="db__modal_success_gift" src="{{winModalInfo.activityImg}}"></image>
+            <image class="db__modal_success_halo_rotate" src="https://pages.c-ctrip.com/market/components/static/duobao/img_windialog_halo_rotate.png"></image>
+            <image class="db__modal_success_halo_halo1" src="https://pages.c-ctrip.com/market/components/static/duobao/img_windialog_halo1.png"></image>
+            <image class="db__modal_success_halo_halo2" src="https://pages.c-ctrip.com/market/components/static/duobao/img_windialog_halo2.png"></image>
+        </view>
+        <view class="db__modal_success">
+            <image class="db__modal_success_sahua" src="https://pages.c-ctrip.com/market/components/static/duobao/sahua-single.gif"></image>
+            <image class="db__modal_success_title" src="https://pages.c-ctrip.com/market/components/static/duobao/db_modal_wiini_text.png"></image>
+            <view class="db__modal_success_text">获得{{winModalInfo.activityName}}</view>
+            <view class="db__modal_success_btn" bindtap="seePrize">查看奖品</view>
+            <image class="db__modal_close" bindtap="handleCloseModal" src="https://pages.c-ctrip.com/market/components/static/duobao/icn_dialog_cancel.png"></image>
+        </view>
+    </view>
+</modal>
+<!-- 累计五次夺宝成功 -->
+<modal show="{{modalType == 4}}" extClass="db__modal_success_ext" bind:close="handleCloseModal">
+    <view class="db__modal_success_wraper">
+        <view class="db__modal_success_head">
+            <image class="db__modal_success_stand" src="https://pages.c-ctrip.com/market/components/static/duobao/img_windialog_stand.png"></image>
+            <image class="db__modal_success_gift2" src="{{bigAwardInfo.totalRewardImg}}"></image>
+            <image class="db__modal_success_halo_rotate" src="https://pages.c-ctrip.com/market/components/static/duobao/img_windialog_halo_rotate.png"></image>
+            <image class="db__modal_success_halo_halo1" src="https://pages.c-ctrip.com/market/components/static/duobao/img_windialog_halo1.png"></image>
+            <image class="db__modal_success_halo_halo2" src="https://pages.c-ctrip.com/market/components/static/duobao/img_windialog_halo2.png"></image>
+        </view>
+        <view class="db__modal_success">
+            <image class="db__modal_success_sahua" src="https://pages.c-ctrip.com/market/components/static/duobao/sahua-single.gif"></image>
+            <image class="db__modal_success_title2" src="https://images3.c-ctrip.com/marketing/task_components/duobao/img_yodialog_fivedone.png"></image>
+            <view class="db__modal_success_text">恭喜解锁大奖: {{bigAwardInfo.totalRewardName}}</view>
+            <view class="db__modal_success_btn" bindtap="handleClickKxsx">开心收下</view>
+            <image class="db__modal_close" bindtap="handleCloseModal" src="https://pages.c-ctrip.com/market/components/static/duobao/icn_dialog_cancel.png"></image>
+        </view>
+    </view>
+</modal>
+<!-- 首次送100 Yo票 -->
+<modal show="{{modalType == 1}}" extClass="db__modal_first_sendCoupon_ext">
+    <view class="db__modal_first_sendCoupon">
+        <block wx:if="{{step == 1}}">
+            <image class="firstSendCouponText1" src="https://pages.c-ctrip.com/market/components/static/duobao/firstSendCouponText1.png" bindtouchend="handleClickCard1"></image>
+            <image class="firstSendCoupon1" src="{{guideAssistLocalList.step1}}" bindtouchend="handleClickCard1"></image>
+        </block>
+        <view wx:if="{{step == 2}}" class="db__modal_first_cards start_switch{{switchIndex}}">
+            <image wx:for="{{[0,1,2]}}" wx:key="item" data-index="{{item}}" class="db__modal_first_card_item switch{{item}}" src="{{guideAssistLocalList.step2}}"></image>
+        </view>
+        <block wx:if="{{step == 3}}">
+            <image class="firstSendCouponText2" src="https://pages.c-ctrip.com/market/components/static/duobao/firstSendCouponText2.png" bindtouchend="handleClickCard2"></image>
+            <image class="firstSendCoupon2" src="{{guideAssistLocalList.step3}}" bindtouchend="handleClickCard2"></image>
+            <image mode="aspectFill" class="light-xuan" src="https://pages.c-ctrip.com/market/components/static/duobao/img_windialog_halo_rotate.png"></image>
+            <image mode="aspectFill" class="light-bigger" src="https://pages.c-ctrip.com/market/components/static/duobao/img_windialog_halo1.png"></image>
+        </block>
+        <image wx:if="{{step == 3}}" class="db__modal_btn db__modal_first_btn" bindtap="handleCloseFirstModal" src="https://pages.c-ctrip.com/market/components/static/duobao/img_carddialog_btn2.png"></image>
+    </view>
+</modal>
+<image wx:if="{{yotransTop > 0}}" class="youItem" style="top: {{yotransTop}}rpx" src="{{guideAssistLocalList.step4}}"></image>
+
+<!-- <TaskSignIn tempid='mp_task' compid='272553'></TaskSignIn>
+<TaskInvitePlus tempid='mp_task' compid='272560'></TaskInvitePlus> -->
+<view style="height: 0;">
+    <TaskSignIn></TaskSignIn>
+    <TaskInvitePlus></TaskInvitePlus>
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

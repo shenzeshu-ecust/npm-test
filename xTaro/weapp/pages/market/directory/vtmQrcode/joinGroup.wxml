@@ -1,0 +1,61 @@
+<!-- theme必传 liveCode 或 bgimg -->
+<template name='join-group'>
+  <View class="group-view-{{theme}}">
+    <view class="g-nm-{{theme}}">
+      <text class="title-tag">{{tagName || '携程官方群'}}</text>
+      <text class="name-text">{{groupName || ''}}</text>
+      <block wx:if="{{theme =='liveCode'}}">
+        <view class="liveCode-info">
+          <view class="liveCode-top">已有
+            <view class="ml6 font-blue-Jin">300</view>
+            <view class="font-blue-Jin" class="mr6">位</view>旅友进群
+          </view>
+          <view class="liveCode-bottom">累计服务<text class="font-blue-Jin ml6 mr6">3000w</text>用户！</view>
+          <view class="liveCode-btn" style="top: {{btnTop}}px;">
+            {{qrCode ? '点我进群' : errorText}}
+            <cell bind:startmessage='startmessage' bind:completemessage="completemessage" class="wx-qrcode-cell-btn" iconUrl="" contactText="" paddingStyle="15" url="{{qrCode}}" />
+          </view>
+        </view>
+        <view class="n-foot-title">
+          群内提供:
+        </view>
+        <view class="n-foot-content" style="margin-top: 12rpx;">
+          <view wx:for="{{bgimgList}}" class="n-foot-content-item">
+            <text>{{item.text}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="v-main-container" wx:if="{{!(theme === 'liveCode')}}">
+      <view wx:if="{{theme =='blue'}}" class="group-info group-blue-info">
+        <text class="info-text">{{groupInfo || ''}}</text>
+      </view>
+      <view class="qr-image-{{theme}} {{errorText ? 'no-img-view' : ''}}">
+        <text class="no-img-text" wx:if="{{errorText}}">{{errorText || '系统异常'}}</text>
+        <View class="cut-code-big-fix-{{theme}}">
+          <image bindload="onImageLoad" binderror="onImageError" class="{{qrCodeCategory === 1 ? 'cut-code' : 'tiling-code'}} image{{qrType}}" mode="widthFix" show-menu-by-longpress src="{{qrCode}}" wx:if="{{qrCode}}" bindlongtap="imageOnPress" bindtap="imageOnPress" />
+        </View>
+      </view>
+      <view class="join-group-btn join-group-btn-{{theme}}">
+        <image wx:if="{{qrCodeCategory !== 3 && qrCode}}" mode='aspectFit' bindlongtap="btnOnPress" bindtap="btnOnPress" class="join-groud-image-btn" show-menu-by-longpress src="{{qrCode}}" />
+        <block wx:if="{{theme === 'blue'}}">
+          <image src="https://pages.c-ctrip.com/zhuanche/images/vtm_fingerprint_01.png" class="image-fingerprint" />
+          <text class="button-text-{{theme}}">{{'长按识别二维码进群'}}</text>
+        </block>
+        <block wx:if="{{theme === 'bgimg'}}">
+          <image style="width: 308rpx; height:98rpx;" src="{{aresImg + 'btna.png'}}" />
+          <text class="button-text-{{theme}}">{{'长按识别二维码进群'}}</text>
+        </block>
+      </view>
+      <view wx:if="{{theme === 'bgimg'}}" class="bgimg-info">已有<text class="font-blue-Jin ml6 mr6">300位</text>旅友进群，累计服务<text class="font-blue-Jin ml6 mr6">3000w</text>用户！</view>
+      <view class="n-foot n-foot-bgimg" wx:if="{{theme === 'bgimg'}}">
+        <view class="n-foot-title-bgimg"></view>
+        <view class="n-foot-content">
+          <view wx:for="{{bgimgList}}" style="margin-top: 28rpx;background-image: url('{{item.icon}}');" class="n-foot-content-item">
+            <text>{{item.text}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </View>
+</template>

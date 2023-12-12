@@ -1,0 +1,18 @@
+{
+  "navigationBarTitleText": "",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar",
+    "storeservice": "/pages/hotelplanning/components/storeservice/storeservice",
+    "coupon": "/pages/hotelplanning/components/coupon/coupon",
+    "carModel":"/pages/hotelplanning/components/carModel/carModel",
+    "nearbyScenic":"/pages/hotelplanning/components/nearbyScenic/nearbyScenic",
+    "qrCodeToast": "/pages/hotelplanning/components/qrCodeToast/qrCodeToast",
+    "yoyocard": "/pages/hotelplanning/components/yoyocard/index",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  },
+  "restartStrategy": "homePageAndLatestPage",
+  "disableScroll": true
+}

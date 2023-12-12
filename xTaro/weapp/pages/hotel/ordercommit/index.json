@@ -1,0 +1,18 @@
+{
+  "navigationBarTitleText": "酒店点评",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index",
+    "loading-gif": "/pages/hotel/components/loadinggif/loadinggif",
+    "processBar": "./component/processbar/index",
+    "loginLayer": "./component/loginlayer/index",
+    "tripPurpose": "./component/trippurpose/index",
+    "rating": "./component/rating/index",
+    "inputComment": "./component/inputcomment/index",
+    "uploadImage": "./component/uploadimage/index",
+    "submitBtn": "./component/submitbtn/submtbutton",
+    "anonymous": "./component/anonymous/index",
+    "authorizationFloat": "/cwx/component/authorizationFloat/index"
+  }
+}

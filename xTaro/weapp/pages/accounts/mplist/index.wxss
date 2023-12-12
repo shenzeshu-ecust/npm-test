@@ -1,0 +1,189 @@
+html, page {
+	height: 100%;
+}
+.bg {
+	background:#E9EBEE;
+	overflow:hidden;
+	min-height:100%;
+	font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+.login-by_phone {
+	padding-top: 60rpx;
+	margin: 0 20rpx;
+}
+.login-tips {
+	display: block;
+	margin: 40rpx 30rpx 20rpx;
+	font-size: 26rpx;
+	color: #666;
+}
+.login-form_list {
+	position: relative;
+	overflow: hidden;
+	background-color: #fff;
+	border-radius: 4px;
+
+}
+.icon-arrow {
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: inline-block;
+	width: 60rpx;
+	height: 100%;
+	cursor: pointer;
+}
+.icon-arrow:after {
+	content: "";
+	display: inline-block;
+	vertical-align: middle;
+	width: 22rpx;
+	height: 22rpx;
+	border-top: 2px solid #ccc;
+	border-right: 2px solid #ccc;
+	transform: rotate(45deg) translateY(-50%);
+	position: absolute;
+	right: 30rpx;
+	top: 50%;
+	box-sizing: border-box;
+}
+.login-item {
+	position: relative;
+	height: 108rpx;
+	padding-left: 150rpx;
+	margin-left: 30rpx;
+	margin-right: 30rpx;
+	border-bottom: 1px solid #e5e5e5;
+	color: #333;
+	background-color: #fff;
+}
+.login-item:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -28rpx;
+	width: 32rpx;
+	height: 108rpx;
+	overflow: hidden;
+	background-color: #fff;
+}
+.login-item_title {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 150rpx;
+	height: 108rpx;
+	overflow: hidden;
+	line-height: 108rpx;
+	font-size: 32rpx;
+	color: #333;
+}
+.login-item_field {
+	position: relative;
+	height: 108rpx;
+	padding-right: 50rpx;
+	margin-left: 30rpx;
+	margin-right: 30rpx;
+	border-bottom: 1px solid #e5e5e5;
+	color: #333;
+	background-color: #fff;
+}
+.login-item_field_txt {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding-right: 50rpx;
+	height: 108rpx;
+	overflow: hidden;
+	line-height: 108rpx;
+	font-size: 32rpx;
+	color: #333;
+}
+.login-item_input {
+	display: block;
+	width: 98%;
+	height: 108rpx;
+	line-height: 108rpx;
+	font-size: 32rpx;
+	box-sizing: border-box;
+	font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;
+}
+.login-item_input-picauth {
+	padding-right: 240rpx;
+}
+.btn-login {
+	margin:40rpx;
+	color: #fff;
+	background-color: #FF9A14;
+	border-radius: 4px;
+	border: none;
+}
+
+.auth-image {
+	position: absolute;
+	top: 50%;
+	right: 0rpx;
+	max-width: 170rpx;
+	max-height: 60rpx;
+	transform: translate(0, -50%);
+}
+
+/* 隐私政策&服务协议 */
+.agreement {
+	font-size: 24rpx;
+	color: #999;
+	margin: 20rpx;
+}
+
+.agreement-checkbox {
+  width: 34rpx;
+	height: 34rpx;
+	display: inline-block;
+}
+
+.agreement-checkbox-nocheck {
+    width: 34rpx;
+    height: 34rpx;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.agreement-text {
+	text-decoration: underline;
+}
+
+.tips-notice {
+	color: #999;
+	font-size: 24rpx;
+	margin: 20rpx;
+}
+.tips-notice text {
+	color: #19a0f0;
+}
+.btn_countdown {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	height: 54rpx;
+	padding: 0 20rpx;
+	line-height: 46rpx;
+	text-align: center;
+	white-space: nowrap;
+	color: #19A0F0;
+	border: 1px solid #19A0F0;
+	background-color: #FFF;
+	border-radius: 8rpx;
+	transform: translate(0, -50%);
+	font-size: 24rpx;
+	min-width: 164rpx;
+}
+.btn_countdown.gray {
+	cursor: not-allowed;
+	border: 1px solid #bbb;
+	color: #bbb;
+}
+.btn_countdown:after,.btn-login:after {
+	content: "";
+	display: none;
+}

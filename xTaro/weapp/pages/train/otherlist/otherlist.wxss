@@ -1,0 +1,152 @@
+@import "../common/components/BookPuc/BookPuc.wxss";
+@import "../common/repeatCss/ortherlistTransitCard.wxss";
+@import "../common/components/TransitCard/transitCard.wxss";
+@import "../common/repeatCss/listOtherlist.wxss";
+
+.wrap{height:calc(100% -  108rpx);overflow-x:hidden;width:calc(100% - 32rpx);scrollbar-width: none;-ms-overflow-style: none;}
+.wrap::-webkit-scrollbar {
+  display: none;
+  width: 0 !important;
+  height: 0 !important;
+  -webkit-appearance: none;
+  background: transparent;
+}
+
+/* .wrap{margin-top:16rpx;border-radius: 16px 16px 0 0;background: #fff } */
+.pop-checi {padding:0 ;padding-bottom: 40rpx;box-sizing: border-box;width:718rpx}
+.pop-checi.iphone{padding-bottom: 180rpx}
+
+
+
+.pop-checi .sel-box{padding-top:18rpx;padding-bottom: 26rpx;margin:0 24rpx;border-bottom:1rpx solid rgb(238, 238, 238);box-sizing:border-box;}
+.pop-checi .sel-inner-box{display: flex;align-items: center;margin-top:6rpx;margin-bottom:24rpx}
+.pop-checi .sel-box .rbox {text-align: right;flex: 1;color: #999;height:74rpx;}
+.pop-checi .sel-box .rbox .cir-grey{position: relative;height: 40rpx;width: 40rpx;}
+.pop-checi .sel-box .rbox .cir-grey::after{content:'';position: absolute;color:rgb(170,170,170);height: 40rpx;width: 40rpx;background-color: #fff;box-sizing: border-box;border-radius: 50%;border:2rpx solid #999;z-index: inherit 1;top:0;left:0}
+.pop-checi .sel-box .rbox .cir-marker{position: relative;height: 44rpx;width: 44rpx;}
+.pop-checi .sel-box .rbox .cir-marker::after{content:'';position: absolute;height: 50rpx;width: 50rpx;background-color: rgb(250,250,250,.5);box-sizing: border-box;border-radius: 50%;z-index: inherit 1;top:0;left:0}
+
+.norecommandtrain{text-align: center;font-size: 34rpx;font-weight: 600;margin-top: 40rpx}
+.pop-checi .sel-box .seat {color: rgb(51, 51, 51);font-size: 22rpx;line-height: 24rpx;}
+.pop-checi .sel-box .recomand-tag, .pop-checi .rcmd-box .recomand-tag{background: rgb(0, 184, 122);border-radius: 6rpx;height: 30rpx;padding:0 8rpx;width:fit-content;color: rgb(255, 255, 255);font-size: 22rpx;line-height: 30rpx;text-align:center;}
+
+
+.sel-info .icon-jing{width: 22rpx;height: 22rpx;border:1px solid #00B87A;border-radius: 2px;color:#00B87A;font-size: 18rpx;line-height: 22rpx;text-align: center;margin-right: 6rpx;}
+.pop-checi .rcmd-box{background-color: #fff;position: relative;height:244rpx;height: 244rpx;overflow: hidden;}
+.pop-checi .rcmd-inner-box{
+  margin:0rpx 24rpx;
+  padding: 24rpx 0 16rpx 0;
+  height: 244rpx;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid rgb(238,238,238);
+}
+.pop-checi .rcmd-hd .title{color: rgb(51, 51, 51);font-size: 30rpx;font-weight: 600;line-height: 38rpx;padding-bottom:22rpx;}
+.pop-checi .rcmd-bd{position:absolute;width:100%;height: 144rpx;overflow-x:scroll;bottom:16rpx;left:0;scrollbar-width: none;-ms-overflow-style: none;}
+.pop-checi .rcmd-bd::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
+}
+
+.pop-checi .rcmd-bd .bd-ul {
+  display:flex;
+  padding-left: 24rpx;
+  /* padding: 0 24rpx; 这样设置右侧padding失效，原因还不知道 */
+  align-items: center;
+}
+.pop-checi .rcmd-bd .li-r-pad{
+  width: 8rpx;
+  height: 144rpx;
+  flex-shrink:0;
+}
+.pop-checi .rcmd-bd .bd-li{
+  flex-shrink:0;
+  background: rgb(246,248,250);
+  border-radius: 8rpx;
+  height: 144rpx;
+  width: 482rpx;
+  margin-right:16rpx;
+  padding: 12rpx 22rpx 24rpx 20rpx;
+  box-sizing:border-box;
+}
+.pop-checi .bd-li .recomand-blank{
+  height: 16rpx;
+}
+.pop-checi .bd-li .li-inner-box{
+  display: flex;
+  align-items: center;
+  margin-top: 8rpx;
+}
+.pop-checi .bd-li .li-from,.pop-checi .bd-li .li-to{
+  width:96rpx;
+}
+.pop-checi .bd-li .li-rbox{
+  flex:1;
+  text-align: right;
+}
+.pop-checi .bd-li .li-rbox .cir-grey{position: relative;height: 40rpx;width: 40rpx;}
+.pop-checi .bd-li .li-rbox .cir-grey::after{content:'';position: absolute;color:rgb(170,170,170);height: 40rpx;width: 40rpx;background-color: rgb(246,248,250);box-sizing: border-box;border-radius: 50%;border:2rpx solid #999;z-index: inherit 1;top:0;left:0}
+.pop-checi .bd-li .li-rbox .cir-marker{position: relative;height: 40rpx;width: 40rpx;}
+.pop-checi .bd-li .li-rbox .cir-marker::after{content:'';position: absolute;height: 50rpx;width: 50rpx;background-color: rgb(250,250,250,.5);box-sizing: border-box;border-radius: 50%;z-index: inherit 1;top:0;left:0}
+.pop-checi .bd-li .li-to{text-align: right}
+.pop-checi .bd-li .li-checi {width:194rpx;text-align: center;position: relative;}
+.pop-checi .bd-li .li-checi::after{width:112rpx;height: 12rpx;position: absolute;content: "";background: url(https://images3.c-ctrip.com/train/2021/app/V8.41.6/xiaochengxu/zhuliucheng/img-jiantou.png) no-repeat;background-size: contain;top:26rpx;left: 50%;transform: translateX(-50%);}
+.pop-checi .bd-li .txt {white-space: nowrap;font-size: 22rpx;color: #666;line-height: 24rpx;}
+.pop-checi .bd-li .txt.needtime{padding-bottom: 12rpx;}
+
+.pop-checi .bd-li .station {font-size: 24rpx;position: relative;line-height: 30rpx;}
+.pop-checi .bd-li .time {font-size: 34rpx;font-weight: 600;line-height: 42rpx;margin-bottom: 2rpx;}
+
+
+
+
+.btn-screen{width: 160rpx;height: 68rpx;float: right;background: #F2F8FE;padding: 0;border-radius: 4px;line-height: 68rpx;color: #0086F6;font-size: 26rpx;font-weight: 600;margin: -16rpx -24rpx 0 0}
+.btn-screen .ifont-screen{font-size: 30rpx;font-weight: 400;margin: -2px 8rpx 0 0}
+.btn-screen .dot{width: 12rpx;height: 12rpx;border-radius: 12rpx;position: absolute;top:16rpx;right:20rpx;background: #f70}
+
+/* 新的样式 */
+.page{
+  padding-top: 26rpx;
+  background:-webkit-linear-gradient(top,#0086F6 0%,#EEF1F6 35%);
+}
+.filter-bar {
+    margin: 0rpx 16rpx;
+    border-radius: 16rpx 16rpx 0rpx 0rpx;
+    height: 108rpx;
+    box-sizing: border-box;
+    z-index: 100;
+    background-color: #fff;
+    border-bottom: 1rpx solid rgb(238, 238, 238);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.filter-bar .filters-con-li{
+  flex: 1;
+  text-align: center;
+  color: rgb(51, 51, 51);
+  font-size: 28rpx;
+  line-height: 36rpx;
+  box-sizing: border-box;
+  border-right: 1rpx solid rgb(230,230,230);
+}
+.filter-bar .filters-con-li:last-child{
+  border-right:none;
+}
+.filter-bar .filters-con-li.blue{
+  color:#0086F6
+}
+.wrap {
+    margin: 0 16rpx;
+    margin-top: 0rpx;
+    background: #fff
+}
+.local-title {
+    line-height: 22rpx;
+    font-size: 20rpx;
+    white-space: nowrap;
+  }
+  .orange {
+    color: #D96500;
+  }
+  .text-empty {
+    height: 40rpx;
+  }

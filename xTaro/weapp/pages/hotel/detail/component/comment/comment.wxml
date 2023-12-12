@@ -1,0 +1,68 @@
+<view wx:if="{{enable}}" class="comment-box autoExpose" data-expose="{{commentExposeObj}}">
+    <headinfo 
+        commentRating="{{commentRating}}"
+        rateDesc="{{rateDesc}}"
+        similarCommentRating="{{similarCommentRating}}"
+        hasSimComment="{{hasSimComment}}"
+        catch:clickCommentTab="childClickComment">
+    </headinfo>
+    <tag wx:if="{{commentTags.length}}" commentTags="{{commentTags}}" catch:clickCommentTags="childClickComment"></tag>
+    <!-- 用户信息部分 -->
+    <view class="user-box" bindtap="parentClickComment" wx:if="{{comment && !gqlWaitComment.showWaitComment}}" data-position='5'>
+            <view class="user-info">
+                <view class="user-photo" wx:if="{{comment.userInfo.headPictureUrl}}" style="background:url({{comment.userInfo.headPictureUrl}});background-size:cover;"></view>
+                <view class="user-name" wx:if="{{comment.userInfo.nickName}}">{{comment.userInfo.nickName}}</view>
+                <view class="user-level">
+                    <image wx:if="{{comment.userInfo.userLevel}}" src="{{comment.userInfo.userLevel}}" class="level-icon" mode="heightFix"></image>
+                    <view class="user-grade" wx:if="{{comment.userInfo.userGrade}}">{{comment.userInfo.userGrade}}</view>
+                </view>
+                <block wx:if="{{comment.translatedSourceText}}">
+                    <text class="center-line"></text>
+                    <view class="source-txt">{{comment.translatedSourceText}}</view>
+                </block>
+            </view>
+            <view wx:if="{{comment.displayContent}}" class="comment-content {{!showCommentInfo && comment.hasMoreComment ? (comment.hasMediaComment ? 'two-line' : 'three-line') : ''}}">
+                <rich-text nodes="{{comment.displayContent}}" class="{{comment.hasHugeComment ? 'hidden-content' : ''}}"></rich-text>
+                <block wx:if="{{comment.hasMoreComment}}">
+                    <view class="toggle {{showCommentInfo ? 'fold' : 'open'}}" catchtap="toggleCommentInfo">{{showCommentInfo ? '收起' : '展开'}}
+                        <text class="{{showCommentInfo ? 'wechat-font-g-arrow-up' : 'wechat-font-g-arrow-down'}}"></text>
+                    </view>
+                </block>
+            </view>
+            <view class="media-info" wx:if="{{comment.mediaInfo.displayMediaList}}">
+                <block wx:for="{{comment.mediaInfo.displayMediaList}}" wx:for-item="item" wx:key="*this" wx:for-index="index">
+                    <video 
+                        wx:if="{{item.type === 'video'}}"
+                        src="{{item.url}}" 
+                        show-fullscreen-btn="{{false}}"
+                        controls="{{false}}"
+                        show-center-play-btn="{{false}}"
+                        auto-pause-if-navigate
+                        object-fit="cover"
+                        class="img-info"
+                        id="{{index}}"
+                        data-idx="{{index}}"
+                        catchtap="toPreviewMedia"   
+                        binderror="errorVideo">
+                        <view hidden="{{!isShowVideoBtn}}" class="wechat-font-video video-btn"></view>
+                    </video>
+                    <image wx:if="{{item.type === 'image'}}" src="{{item.url}}" mode="heightFix" class="img-info" data-idx="{{index}}" catchtap="toPreviewMedia"></image>
+                </block> 
+                <view class="img-count" wx:if="{{comment.mediaInfo.allMediaCount}}">{{comment.mediaInfo.allMediaCount}}</view>
+            </view>
+    </view>
+    <!-- 待点评部分 -->
+    <wait-comment 
+        wx:if="{{gqlWaitComment.showWaitComment}}"
+        encourageInfo="{{gqlWaitComment.encourageInfo}}"
+        orderId="{{gqlWaitComment.orderId}}"
+        showWaitComment="{{gqlWaitComment.showWaitComment}}"
+        hotelInfo="{{gqlWaitComment.hotelInfo}}"
+        waitCommentExposeObj="{{gqlWaitComment.waitCommentExposeObj}}"
+        catch:closeWaitComment="closeWaitComment">
+    </wait-comment>
+    <view class="btn-box">
+        <view class="btn-info" data-type="statistic_all" catchtap="parentClickComment" data-position='5'>全部点评</view>
+        <view class="btn-info ml-24" wx:if="{{hasSimComment}}" data-type="statistic_similar" catchtap="parentClickComment" data-position='6'>偏好相似点评</view>
+    </view>
+</view>

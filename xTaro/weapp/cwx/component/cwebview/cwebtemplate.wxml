@@ -1,0 +1,11 @@
+<template name="cwebtemplate">
+  <view>
+    <block wx:if="{{canWebView}}">
+      <web-view wx:if="{{url}}" src="{{url}}" bindmessage="webPostMessage" bindload="onPageLoadDone" binderror="onPageLoadDone"></web-view>
+      <view wx:else>{{wsg}}</view>
+    </block>
+    <block wx:else>
+      <view>亲爱的用户，您的微信版本太低啦，快去升级微信吧</view>
+    </block>
+  </view>
+</template>

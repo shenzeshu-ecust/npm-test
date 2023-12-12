@@ -1,0 +1,6 @@
+.pop-seat-list{margin: 0 32rpx;overflow: hidden}
+.pop-seat-list .item{display: flex;align-items: center;padding: 30rpx 0;}
+.pop-seat-list .item .seat{width: 180rpx;font-size: 28rpx;}
+.pop-seat-list .item .price{font-size: 28rpx;color:#333333;flex: 1}
+.pop-seat-list .item .price::before{font-size: 24rpx;content: "\00A5";}
+.pop-seat-list .item .cont{flex: 1;font-size: 28rpx;}

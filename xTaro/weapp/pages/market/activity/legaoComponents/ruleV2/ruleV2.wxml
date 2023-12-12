@@ -1,0 +1,9 @@
+<!--pages/market/legaoComponents/ruleV2/ruleV2.wxml-->
+<view class="m-rule" style="margin-top: {{item.top}};background:{{item.bgContent}} ">
+  	<view class="tt" bindtap="toggleRule" style="color: {{item.titleColor}}">活动规则<view class="carrot {{item.isOpen ? '' : 'active'}}" style="border-top-color: {{item.titleColor}}"></view></view>
+  	<view wx:if="{{item.isOpen}}" style="color: {{item.rulesColor}}">
+	  	<view class="li" wx:for="{{item.rules}}" wx:for-item="item" wx:for-index="idx" wx:key="{{idx}}">
+	  	{{item}}
+	  	</view>
+  	</view>
+</view>

@@ -1,0 +1,15 @@
+<view class="framework-container" catchtouchmove="handleCatchNone">
+  <view wx:if="{{isError}}" class="page-error-container">
+    <image class="{{platformName === 'qunar' ? 'error-img-qunar' : 'error-img'}}" src="{{nullDefaultImg}}" />
+    <text class="error-text">{{errorText}}</text>
+    <button class="to-home-btn" catchtap="handleGoHome" hover-class="none">去逛逛</button>
+  </view>
+  <view wx:else class="common-page">
+    <view class="loading-content {{isLoading ? '' : 'is-hide'}}">
+      <loading-component color="{{globalColor}}" isShowPlatformIcon="{{isShowPlatformIcon}}"></loading-component>
+    </view>
+    <view class="{{isLoading ? 'is-hide' : ''}}">
+      <slot></slot>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,83 @@
+/* pages/bus/share/template/shareMenu.wxss */
+
+/**分享**/
+/**阴影**/
+.FixShareContainer {
+   width:100%;height:100%;position:fixed;z-index:101; 
+}
+.shadow{width:100%;height:100%;position:fixed;z-index:101;background: rgba(0, 0, 0, 0.8);top:0;left:0;}
+
+.fadeIn {
+  animation: fadeIn 220ms linear;
+}
+.fadeOut {
+  animation: fadeOut 220ms linear;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.slideIn {
+  animation: slideIn 220ms linear;
+  animation-fill-mode: forwards;
+}
+.slideOut {
+  animation: slideOut 220ms linear;
+  animation-fill-mode: forwards;
+}
+@keyframes slideOut {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0,100%);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+     transform: translate(0, 100%); 
+
+    /* bottom: -375rpx; */
+  }
+  100% {
+     transform: translate(0, 0); 
+    /* bottom: 0; */
+  }
+}
+
+.share{width:598rpx; height:598rpx;position:fixed;left:50%;margin-left:-299rpx;z-index:102;top:180rpx;} 
+.shareTop{font-size:0;}
+.shareTop image{width:100%;}
+.shareCenter{height:426rpx;background:#fff;position:relative;}
+.save{width:480rpx;height:90rpx;line-height:90rpx;background:#f5693c;color:#fffcf5;font-size:32rpx;-webkit-border-radius:126rpx;-moz-border-radius:126rpx;border-radius:126rpx;position:absolute;bottom:-152rpx;left:50%;margin-left:-240rpx;}
+
+/**底部分享**/
+.FixShare{width:100%;background:#fff;position:fixed;bottom:0;left:0;z-index:102;color:#333;}
+.FixShare .shareTop{font-size:32rpx;line-height:32rpx;text-align:center;display:block;padding-top:40rpx;}
+ .FixShare .center{margin-top:49rpx;height:152rpx;}
+ .FixShare .center .left{float:left;text-align:center;font-size:0;padding-left:64rpx;} 
+ .FixShare .center .left image{width:79rpx;height:79rpx;} 
+ .FixShare .center .left text{display:block;line-height:26rpx;font-size:26rpx;margin-top:37rpx;} 
+ .FixShare .center .left button{background:none;color:#333;}
+.FixShare  button::after{
+  display: none;
+}
+.FixShare .center .left button text{margin-top:2rpx;} 
+.FixShare .bottom{width:100%;border-top:1px solid #DBDBDB;margin-top:20rpx; background-color: #f8f8f8 } 
+.FixShare .bottom button text{font-size:32rpx;background-color:transparent;color:#008ced;line-height:80rpx;} 
+

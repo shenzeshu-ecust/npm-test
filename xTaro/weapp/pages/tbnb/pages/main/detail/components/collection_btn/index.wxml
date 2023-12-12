@@ -1,0 +1,6 @@
+<view catchtap='_handleCollect' class="collection">
+  <image class="collection-image" src="{{isCollection ? hearderCollectionImgList[1] : hearderCollectionImgList[0]}}"></image>
+  <view class="collection-num" wx:if="{{favoriteCount && favoriteCount > 0}}">
+    <text>{{numbersOfCollectionsDesc}}</text>
+  </view>
+</view>

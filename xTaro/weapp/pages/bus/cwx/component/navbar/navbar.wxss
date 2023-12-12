@@ -1,0 +1,124 @@
+/* 顶部要固定定位 */
+.nav-wrap {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 99;
+    background: #0086f6;
+}
+/* 标题要居中 */
+.nav-titleContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+}
+.nav-title {
+    margin: 0 180rpx;
+    text-align: center;
+    /* width: 50%; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 36rpx;
+    color: #ffffff;
+    font-weight: 600;
+    z-index: -1;
+}
+
+.back-home {
+    width: 40rpx;
+    height: 40rpx;
+    cursor: pointer;
+}
+.back-home-return {
+    width: 40rpx;
+    height: 40rpx;
+    cursor: pointer;
+}
+
+.title-bar-group {
+    border: 1rpx solid rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 32rpx;
+    display: flex;
+    height: 64rpx;
+    width: 174rpx;
+    box-sizing: border-box;
+    align-items: center;
+    overflow: hidden;
+}
+
+.title-bar-group.only-group-icon {
+    border: none;
+    background: transparent;
+    width: 87rpx;
+}
+
+.title-bar-group.no-group-icon {
+    border: none;
+    background: transparent;
+    width: 0rpx;
+}
+
+.title-bar-group.no-group-icon + .nav-titleContainer {
+    justify-content: flex-start;
+}
+
+.title-bar-group.no-group-icon + .nav-titleContainer .nav-title {
+    margin: 0 180rpx 0 12rpx;
+    text-align: left;
+}
+
+.title-bar-icon {
+    flex: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.line {
+    height: 38rpx;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.title-bar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 20rpx;
+    position: relative;
+}
+
+.b-nav-wrap.nav-wrap {
+    background: #fff;
+}
+.b-nav-wrap .nav-title {
+    color: #111;
+}
+.b-nav-wrap .title-bar-group {
+    border: 1rpx solid rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+}
+.b-nav-wrap .line {
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.b-nav-wrap .title-bar-group.only-group-icon {
+    border: none;
+    background: transparent;
+    width: 87rpx;
+}
+
+.b-nav-wrap .title-bar-group.no-group-icon {
+    border: none;
+    background: transparent;
+    width: 0rpx;
+}

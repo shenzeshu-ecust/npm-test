@@ -1,0 +1,60 @@
+.loading_bottom_box {
+    padding: 10px 0;
+    color: #999999;
+    text-align: center;
+    background: #fff;
+}
+
+.loading_bottom {
+    display: inline-block;
+    letter-spacing: normal;
+    word-spacing: normal;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    margin-right: 5px;
+    background: url(https://pages.c-ctrip.com/you/component-local/loading_bottom.png?v=20180816_21_08) no-repeat -20px 0;
+    background-size: 36px 18px;
+    vertical-align: middle;
+}
+
+.loading_bottom {
+    background: url(https://pages.c-ctrip.com/you/component-local/loading_bottom.png?v=20180816_21_08) no-repeat -20px 0;
+    background-size: 36px 18px;
+}
+
+.loading_bottom .loading_ring {
+    display: inline-block;
+    letter-spacing: normal;
+    word-spacing: normal;
+    width: 18px;
+    height: 18px;
+    background: url(https://pages.c-ctrip.com/you/component-local/loading_bottom.png?v=20180816_21_08) no-repeat;
+    background-size: 36px 18px;
+    -webkit-animation: gs-cui-loading 1.58s linear infinite;
+    -moz-animation: gs-cui-loading 1.58s linear infinite;
+    -ms-animation: gs-cui-loading 1.58s linear infinite;
+    animation: gs-cui-loading 1.58s linear infinite;
+    -webkit-transform-origin: 50% 49%;
+    -moz-transform-origin: 50% 49%;
+    -ms-transform-origin: 50% 49%;
+    transform-origin: 50% 49%;
+}
+
+.loading_bottom .loading_ring {
+    background: url(https://pages.c-ctrip.com/you/component-local/loading_bottom.png?v=20180816_21_08) no-repeat;
+    background-size: 36px 18px;
+}
+
+/*旋转动画*/
+@-webkit-keyframes gs-cui-loading {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes gs-cui-loading {
+    to {
+        transform: rotate(360deg);
+    }
+}

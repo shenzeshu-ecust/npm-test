@@ -1,0 +1,19 @@
+<view class="input-comment">
+    <textarea
+        maxlength="-1"
+        disable-default-padding="{{true}}"
+        adjust-keyboard-to="bottom"
+        show-confirm-bar="{{false}}"
+        class="im-content"
+        placeholder="{{placeholderText}}"
+        placeholder-class="comment-placeholder"
+        bindinput='inputCommentText'
+        bindfocus='inputCommentFocus'
+        bindblur='inputCommentBlur'>
+    </textarea>
+    <view class="comment-tips">
+        <text wx:for="{{encourageTipArr}}" wx:for-item="tip" wx:key="*this"
+              class="ct-desc {{tip.highLight ? 'high-light' : ''}}"
+        >{{tip.content}}</text>
+    </view>
+</view>

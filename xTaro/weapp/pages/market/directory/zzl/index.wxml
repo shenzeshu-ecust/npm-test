@@ -1,0 +1,103 @@
+<import src="./tpl/float.wxml" />
+<import src="../../components/share/share.wxml" />
+<template is="showShare" data="{{showShare:showShare}}" />
+<template is="mask" data="{{...maskData, isFront, isShortScreen}}" />
+<nav-bar navbar-data="{{navbarData}}"></nav-bar>
+<view class="page_body" wx:if="{{initStatus}}"></view>
+<view class="page_body {{maskData.masktype != -1 ? 'fullscreen' : ''}}" wx:else>
+	<view class="bg_header">
+		<view class="btn_rule" bindtap="showRuleMask"></view>
+		<button class="btn_history" 
+			bindtap="{{isLogin ? 'goTargetUrl' : 'toLoginPhone'}}" 
+			data-url="pages/market/directory/zzl/history"></button>
+		<view class="draw_time" wx:if="{{leftTime}}">距离开奖还剩{{leftTime}}</view>
+	</view>
+
+	<!-- <view class="music_icon {{musicStatus ? 'on' : 'off'}}" bindtap="triggerMusic"></view> -->
+
+	<view class="card_wrap">
+		<view class="card_wrap_top">
+			<view class="period" wx:if="{{userCards.length > 0}}">{{userCards[0].periodNum}}期 共{{userCards.length}}组</view>
+		</view>
+		<scroll-view scroll-y="true" class="card_wrap_middle" scroll-top="{{middleScrollTop}}">
+			<block wx:if="{{isLogin && userCards.length > 0}}">
+				<view wx:for="{{userCards}}" wx:key="{{item.id}}" id="{{index}}" class="card_row">
+					<view class="title card_item counts">第{{item.batchNo}}组 ｜ {{item.channelName}}</view>
+					<view class="card_list">
+						<view class="light {{index == 0  ? 'result_light' : ''}} {{index == 0 && showLight ? 'result_light2' : ''}}"></view>
+						<view class="card" wx:for="{{item.cardConfigs}}" wx:for-item="card" bindtap="showBigImg"
+							data-frontimg="{{card.cardFrontImg}}" data-behindimg="{{card.cardBehindImg}}"
+							data-color="{{card.cardColor}}" data-name="{{card.cardName}}"
+							data-url="{{card.cardAppUrl || card.cardH5Url}}" data-poster="{{card.cardBackgroundImg}}"
+							style="background:url({{card.cardFrontImg}});background-size:100% 100%;">
+							<view class="card_color left_top">
+								<view style="color: {{(card.cardColor =='heart' || card.cardColor == 'diamond') ? 'red' : 'black'}}">
+									{{card.cardName}}</view>
+								<view class="color">{{cardColor[card.cardColor]}}</view>
+							</view>
+							<view class="card_color right_bottom">
+								<view style="color: {{(card.cardColor =='heart' || card.cardColor == 'diamond') ? 'red' : 'black'}}">
+									{{card.cardName}}</view>
+								<view class="color">{{cardColor[card.cardColor]}}</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="title card_item counts"></view>
+				<view class="card_list no_cards">
+					<view wx:for="1234" wx:key="index" class="card"></view>
+				</view>
+			</block>
+		</scroll-view>
+		
+		<view wx:if="{{isLogin}}" class="card_wrap_bottom" >
+			<view class="btn_get_card" wx:if="{{chanceNum == -1}}"></view>
+			<view class="btn_get_card {{chanceNum > 0 ? 'haschance' : 'togetchange'}}" wx:else
+				bindtap="{{subscribeFlag == 0 && chanceNum != 0 ? 'toSubscribeMsg' : 'sendZzlCardToUser'}}">
+				<view class="light"></view>
+			</view>
+			<view class="remain_count" wx:if="{{isLogin && chanceNum != -1}}">还剩<view class="chancenum">{{chanceNum}}</view>次机会</view>
+		</view>
+		<view wx:else class="card_wrap_bottom">
+			<button bindtap="toLoginPhone" class="btn_get_card login-to-see"></button>
+		</view>
+	</view>
+
+	<view class="banner">
+		<view class="slider-show">
+			<ad-sdk impId="05FXHSUH05148XCEYMTZZUQXD" width="{{AdvertiseDataWidth}}" height="{{AdvertiseDataHeight}}"
+				slideVideo="{{slideVideo}}"></ad-sdk>
+		</view>
+	</view>
+
+	<!-- <view class="title h1" wx:if="{{channelConfigs.length > 0}}">获取抽卡机会</view> -->
+	
+	<block wx:if="{{isFat}}">
+		<taskList tempid='zhq123' compid='102891' bind:userAcceptPrize="updateUserZzlChance"
+		bind:completeTask="completeTask" isShow="{{isLogin}}" />
+	</block>
+	<block wx:else>
+		<taskList tempid='zzltask_v2' compid='148606' bind:userAcceptPrize="updateUserZzlChance"
+		bind:completeTask="completeTask" isShow="{{isLogin}}" />
+	</block>
+
+	<image class="ctrip-logo" src="https://images3.c-ctrip.com/marketing/2021/02/zzl2/logo.png"></image>
+</view>
+
+
+<view class="{{showAnimation ? 'round' : ''}}"></view>
+<view class="{{showAnimation ? 'book_short' : ''}}" wx:if="{{isShortScreen}}"></view>
+<view class="book-hide {{showAnimation ? 'book' : ''}}">
+	<view class="book-item"></view>
+	<view class="book-item"></view>
+	<view class="book-item"></view>
+	<view class="book-item"></view>
+</view>
+
+
+
+<!-- 倒计时组件 -->
+<count-down />
+<task-count-down />

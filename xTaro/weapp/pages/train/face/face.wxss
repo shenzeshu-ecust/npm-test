@@ -1,0 +1,61 @@
+/**index.wxss**/
+
+.check-box{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 40%;
+    
+}
+
+.check-box .txt {
+    font-size: 34rpx;
+    font-weight: 600
+}
+
+.check-box .kefu{
+    margin: 60rpx 40rpx 10rpx;height: 88rpx;line-height: 88rpx;border-radius: 6px;background: -webkit-linear-gradient(left,#00A7FA,#0086F6);color: #fff;font-size: 34rpx;font-weight: 600;
+}
+
+.image-txt {position: fixed;text-align: center;color: #FFFFFF;width: 100%;height: 360rpx;z-index: 3002;}
+.wrap{position: fixed;}
+.image-txt-avatar {width: 100%;height: 360rpx;z-index: 3003;}
+.image-txt .tit {font-size: 34rpx;font-weight: 600;margin-top: 32rpx;}
+.image-txt .txt {font-size: 26rpx;margin:16rpx 0;}
+.image-avatar {height: 800rpx;width: 750rpx;position: fixed;top: 232rpx;z-index:960;pointer-events: none;}
+.image-avatar .img{width: 100%;height: 100%;}
+.reject-btn {height: 144rpx;width: 254rpx;position: fixed;bottom: 10%;left: 50%;margin-left:-127rpx;z-index:960;}
+.btn {height: 144rpx;width: 144rpx;position: fixed;bottom: 10%;left: 50%;margin-left:-72rpx;animation: huxi .75s ease-in-out 3; animation-delay: 3s; transform-origin: 0 0;}
+.btn .img{width: 100%;height: 100%;}
+
+@keyframes huxi{
+    0%,100% {transform: scale(1);}
+    50%{transform: scale(1.2);}
+}  
+
+.security-tip {width: 500rpx;height: 500rpx;position: fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:960;border-radius: 16rpx;margin: auto;display: flex;flex-flow: column;align-items:center;}
+.security-tip .security-img{width: 186rpx;height: 186rpx;margin: 32px 0 46rpx;}
+.security-tip .notice{font-size: 30rpx;color: #fff;text-align: center;width: 420rpx;}
+.security-tip .countdown{font-size: 26rpx;color: rgba(255,255,255,0.7);text-align: center;margin-top: 26rpx;display: flex;align-items: center;}
+.security-tip .countdown .int{color: #fff;margin-right: 4rpx;width: 20rpx;}
+.security-tip .tip{font-size: 22rpx;color: rgba(255,255,255,0.9);text-align: center;margin-top: 52rpx;display: flex;align-items: center;}
+.security-tip .tip .img{width: 26rpx;height: 26rpx;margin-right: 10rpx;}
+  
+.pop-mask{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:960;opacity:0;transition:opacity 0.25s ease-in-out;}
+.pop-mask.active{opacity:1}
+
+.pop-submit{width: 500rpx;height: 500rpx;position: fixed;left:0;top:0;right:0;bottom:0;background:#fff;z-index:960;border-radius: 16rpx;margin: auto;display: flex;flex-flow: column;align-items:center;}
+.pop-submit .box{margin: 56rpx 0 72rpx;position: relative;}
+.pop-submit .box .head-img{width: 186rpx;height: 186rpx;}
+.pop-submit .box .line-img{position: absolute ;width: 186rpx;height: 6rpx;top: 0;left: 0;animation:updown 3s linear infinite;}
+
+.pop-submit .row{display: flex;align-items: center;margin-bottom: 30rpx;width: 100%;padding: 0 32rpx;box-sizing: border-box;font-size: 30rpx;color: #333;}
+.pop-submit .row .loading{margin-left: auto;width: 36rpx;height: 36rpx;background: url(https://images3.c-ctrip.com/train/dulujie/Kirby-Yicon-13768.png);background-size: 100%;background-repeat: no-repeat;animation:rotate 1.5s linear infinite;}
+.pop-submit .row .done{margin-left: auto;width: 36rpx;height: 36rpx;background: url(https://images3.c-ctrip.com/train/dulujie/Yicon-right.png);background-size: 100%;background-repeat: no-repeat;}
+
+@keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(359deg)}}
+@keyframes updown{
+0%{top: 0;}
+50%{top: 180rpx}
+100%{top: 0;}
+}

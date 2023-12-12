@@ -1,0 +1,18 @@
+export default {
+  CITY_SOURCECODE: 'Common_Blank1',
+  DEST_SOURCECODE: 'Common_Blank2_Mainland',
+  CHCODE: 'wx',
+  WRAPPER_ID: 'waptujia005',
+  TUJIA_CODE: 'WeChatSmallApp',
+  THIRD_TYPE: 10,
+  THIRD_TYPE_OFFICIAL_ACCOUNT: 16,
+  CODE_LOGIN_BIZCODE: 17,
+  CODE_LOGIN_BIZCODE_OFFICIAL_ACCOUNT: 29,
+  MP_API_VERSION: '6',
+  DETAIL_TANPING_CODE: 'tuminiwtanxqt01',
+  MP_STORAGE_KEY: {
+    USER_INFO_KEY: 'tjUserInfoKey',
+    TJ_OPENID_KEY: 'TJ_OPENID',
+    TJ_UNIONID_KEY: 'TJ_UNIONID'
+  }
+};

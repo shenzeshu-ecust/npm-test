@@ -1,0 +1,36 @@
+<view class="warp-class">
+    <image class="service-img" src="https://pages.c-ctrip.com/hotels/wechat/img/{{name}}" bindtap="showDetail"></image>
+    <!-- layer -->
+    <view hidden="{{!showLayer}}" class="cmask" catchtap="showDetail" catchtouchmove="noop">
+        <view class="cmask-popbox">
+            <view class="assurance">
+                <image class="ass-head" src="https://pages.c-ctrip.com/hotels/wechat/img/servicepop-head.png" ></image>
+                <view class="ass-body">
+                    <view class="ass-body-tit">
+                        <view class="ass-img"></view>
+                        <view class="ass-txt">专业服务 全程保障</view>
+                    </view>
+                    <view wx:if="{{!isOversea}}">
+                        <view class="bd-content-tit">一诺千金  房源有保障</view>
+                        <text class="bd-content-txt black2">确认订单后不涨价，为您的预订负责</text>
+                        <text class="bd-content-txt black2">有房保障，确认订单后无房将全力协助确保入住，并承担差价最高达首晚房费的3倍。</text>
+                        <text class="bd-content-txt black2">由于酒店或代理商的工作方式不同，极少量的订单会暂时未录入酒店前台系统，如您联系酒店未查到您的订单，可随时联系我们帮您协调。</text>
+                        <view class="bd-content-tit">7X24小时专业服务</view>
+                        <text class="bd-content-txt black2">超过10,000名员工热情服务</text>
+                        <view class="bd-content-tit">122,000,000+真实点评</view>
+                        <text class="bd-content-txt black2">海量信息全方位参考</text>
+                    </view>
+                    <view wx:else>
+                        <view class="bd-content-tit">多重房源选择 & 有房保障</view>
+                        <text class="bd-content-txt black2">精心挑选全网优质房源，保障有房可订\n确认后无房，第一时间全力协调并承担差价</text>
+                        <view class="bd-content-tit">超高性价比 & 价格保障</view>
+                        <text class="bd-content-txt black2">每日优惠不断，优惠券特价房抢到手软\n为您的预订负责！预订确认后保障订单价入住</text>
+                        <view class="bd-content-tit">最快秒级确认锁定房源</view>
+                        <text class="bd-content-txt black2">最快秒级确认，急速锁定房源，让您出行无忧</text>
+                    </view>
+                </view>
+            </view>
+            <view class="assurance-close wechat-font-close" catchtap="showDetail"></view>
+        </view>
+    </view>
+</view>

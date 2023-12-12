@@ -1,0 +1,16 @@
+/*预订日志*/
+.operate-content{
+    padding: 26rpx 26rpx 0;
+    max-height: 800rpx;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.operate-content .item{ padding-bottom:50rpx;color: #aaa; position:relative }
+.operate-content .time{ font-size: 22rpx; text-align:right; line-height: 30rpx; width:140rpx; margin-right:60rpx;} 
+.operate-content .desc{line-height: 32rpx;font-size: 24rpx; flex:1} 
+.operate-content .item:before{width: 1rpx; height: 100%; background-color: #c5c5c5; content: ""; position: absolute; left:167rpx; top: 10rpx;}
+.operate-content .item:after{width: 16rpx; height: 16rpx; background-color: #C5C5C5; content: ""; position: absolute; left: 160rpx; top: 3rpx; border-radius: 50%; }
+.operate-content .item:first-child:after{ width: 16rpx; height: 16rpx; background-color: #08a66f; left: 160rpx; box-shadow: 0 0 0 8rpx #e6faf3; }
+.operate-content .item:first-child .time{ color: #111}
+.operate-content .item:first-child .desc{ color: #08a66f; line-height:36rpx}
+.operate-content .item:last-child:before{width: 0;}

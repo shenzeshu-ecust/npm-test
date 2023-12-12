@@ -1,0 +1,126 @@
+@import "../../../../common/css/common.wxss";
+@import "../../icon.wxss";
+@import "../../../cutpriceCommon/index.wxss";
+
+.hotSupport-wrap{
+    width: 100%;
+    margin: 20rpx auto;
+    display: flex;
+    flex:1;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.wrap-left,.wrap-right{
+    width: calc((100vw - 64rpx)/2);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.hotSupport-wrap .item  {
+    padding-bottom: 18rpx;
+    border-radius: 16rpx;
+    background: url(https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/default-bg-recommend-hotel.png) top center / 100% 342rpx no-repeat;
+}
+.img-hotel{
+    border-top-left-radius: 16rpx;
+    border-top-right-radius: 16rpx;
+    height:342rpx;
+}
+/* 星钻 */
+.star-icon {
+    height: 24rpx;
+    width: auto;
+    margin: 0 6rpx;
+}
+/* 金钻/铂钻 */
+.icon-d-star {
+    width: 70rpx;
+    height: 24rpx;
+    margin-right: 8rpx;
+    vertical-align: middle;
+}
+.text-lh {
+    line-height: 1.5;
+    margin-top: 8rpx;
+}
+
+.friend-recommand {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 144rpx;
+    height: 40rpx;
+    background: linear-gradient(90deg, rgb(255, 165, 10) 0%, rgb(255, 119, 0) 100%);
+    border-radius: 8rpx 0px 8rpx 0px;
+    color: #fff;
+    font-size: 24rpx;
+    line-height: 40rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.friend-recommand image{
+    height: 23rpx;
+    width: 24rpx;
+    margin-right: 5rpx;
+}
+.content-wrap{
+    padding: 19rpx 16rpx 23rpx;
+    background: #fff;
+    border-bottom-left-radius: 16rpx;
+    border-bottom-right-radius: 16rpx;
+}
+.content-wrap .hs-title{
+    font-size: 28rpx;
+    color: #333;
+    font-weight: bold;
+
+}
+.content-wrap .hs-comment-num{
+    color: #666;
+    padding-left: 8rpx;
+}
+.content-wrap .hs-addr{
+    line-height : 24rpx;
+}
+/* 定位 */
+.hs-addr-wrap{position:relative;}
+.fs-price{
+    text-align: right;
+}
+.del{
+    position : relative;
+    display:inline-block;
+}
+.del:after{
+    position: absolute;
+    left: 0;
+    bottom: 53%;
+    right:0;
+    content: "";
+    height: 3rpx;
+    width:100%;
+    background:#666;
+}
+.fs-price .price-star{
+    padding-left:4rpx;
+}
+/* 字号 */
+.font-1{font-size: 20rpx}
+.font-2{font-size: 22rpx}
+.font-3{font-size: 28rpx}
+.font-4{font-size: 32rpx}
+
+/* 补充颜色 */
+.color-13{color: #FF7700}
+.color-14{color:#FF4400}
+.color-15{color: #666}
+
+.fl { float:left; }
+.fr { float:right; }
+.bold { font-weight: 600; }
+.light { font-weight: 100; }
+.hidden { display: none;}

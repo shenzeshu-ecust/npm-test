@@ -1,0 +1,14 @@
+<view class="g-layout-webview">
+  <block wx:if="{{canUseWebView}}">
+    <web-view wx:if="{{h5url}}" src="{{h5url}}" bindmessage="webPostMessage" binderror="onPageLoadError"></web-view>
+    <view wx:elif="{{isShowWsg}}" class="page-load-error-tip">{{wsg}}</view>
+    <view wx:else class="page-loading">
+      <loading-component color="{{globalColor}}" isShowPlatformIcon="{{false}}"></loading-component>
+    </view>
+    <!-- C倒计时组件 -->
+    <task-count-down wx:if="{{isCtrip}}" isInWebView="{{true}}" top="200rpx"></task-count-down>
+  </block>
+  <block wx:else>
+    <view>亲爱的用户，您的微信版本太低啦，快去升级微信吧</view>
+  </block>
+</view>

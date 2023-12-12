@@ -1,0 +1,7 @@
+<view class="bubble-tips {{isShowTips ? 'show-dom' : 'hide-dom'}}" id="bubble-tips" style="left:{{leftLocationNum}}px;top:{{topLocationNum}}px;">
+  <block wx:for="{{tipslist}}" wx:for-index="tipindex" wx:for-item="tipitem" wx:key="tipitem">
+    <text class="bubble-tips-item">{{tipitem}}</text>
+  </block>
+  <view class="{{'bubble-tips-' + isShowDirectionRelativeTarget + '-arrow'}}" style="left:{{arrowLeftLocationNum ? arrowLeftLocationNum : ''}}px;top:{{arrowTopLocationNum ?  arrowTopLocationNum : ''}}px;"></view>
+</view>
+<view wx:if="{{isShowTips}}" class="bubble-tips-mask" bindtap="_handleToggleTipsStatus" catchtouchmove="_handleForbiddenScroll"></view>

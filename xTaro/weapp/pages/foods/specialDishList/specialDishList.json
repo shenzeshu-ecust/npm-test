@@ -1,0 +1,7 @@
+{
+  "onReachBottomDistance": 50,
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "本地特色菜",
+  "navigationStyle": "custom"
+}

@@ -1,0 +1,20 @@
+<common-layer title="产品详情"
+              layerStyle="background: #ebeff5"
+              confirmButtonText="{{confirmButtonText ? confirmButtonText : ''}}"
+              bind:confirm="handleConfirm"
+              bind:closeLayer="closeLayer" >
+    <view slot="content" class="travel-coupon autoExpose" data-expose="{{couponInfo.exposeData}}">
+        <view class="travel-coupon-pack" wx:if="{{couponInfo.items && couponInfo.items.length}}">
+            <travel-coupons couponInfo="{{couponInfo}}"></travel-coupons>
+        </view>
+        <view class="travel-coupon-rules" wx:if="{{couponInfo.instruction.length}}">
+            <block  wx:for="{{couponInfo.instruction}}" wx:for-item="rule" wx:key="*this">
+                <view wx:if="{{rule.title || rule.desc}}" class="tcr-item">
+                    <view wx:if="{{rule.title}}" class="trc-title">{{rule.title}}</view>
+                    <view wx:if="{{rule.desc}}" class="trc-content">{{rule.desc}}</view>
+                </view>
+            </block>
+        </view>
+    </view>
+</common-layer>
+

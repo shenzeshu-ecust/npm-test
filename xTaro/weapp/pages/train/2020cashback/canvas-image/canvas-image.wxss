@@ -1,0 +1,19 @@
+.canvas-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: calc(100vw * 0.85); */
+  height: calc(128vw * 0.85);
+}
+
+.btn {
+  width: 546rpx;
+  height: 102rpx;
+  left: 50%;
+  margin-left: -273rpx;
+  margin-top: 80rpx;
+}
+
+.btn::after {
+  border: 0
+}

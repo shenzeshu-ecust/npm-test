@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "邀请好友拆盲盒",
+  "navigationBarBackgroundColor": "#4C45FF",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "assist": "../components/assist/assist",
+    "popping": "../../components/popping/popping"
+  }
+}

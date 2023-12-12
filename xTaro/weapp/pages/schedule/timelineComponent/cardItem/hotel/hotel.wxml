@@ -1,0 +1,32 @@
+<view class='container'>
+  <view class='card-container' catchtap='cardItemClickTap'>
+    <!-- <view class="card-top">
+      <image class="hotel-icon" mode='aspectFit' src='{{sortedCardData.cardIcon}}'></image>
+      <text class="hotel-text">酒店</text>
+      <text wx:if="{{cardData.sharedCard && sortedCardData.checkInDateOrigin}}" class="hotel-text">/ {{sortedCardData.checkInDateOrigin}}</text>
+    </view> -->
+    <card-header-compt iconUrl="{{sortedCardData.cardIcon}}" title="{{sortedCardData.titleType}}" subTitle="{{sortedCardData.subTitle}}" card-operation-data="{{operationData}}" />
+    <view class="card-content">
+      <view class='info-container'>
+        <view class="hotel-name-wrapper" catchtap='cardTitleClickTap'>
+          <view class="hotel-name-wrapper__title">
+            <text wx:if="{{sortedCardData.title}}" class='title only-two-line' >{{sortedCardData.title}}</text>
+            <text wx:if="{{sortedCardData.hotelSubName}}" class='hotel_sub_name'>{{sortedCardData.hotelSubName}}</text>
+          </view>
+          <Icon wx:if="{{!sortedCardData.isHideArrow}}" className='Forward' class="hotel-name-wrapper__forward" color='#333' size='15' />
+        </view>
+        <view class='check-view'>
+            <text class='check-date'>{{sortedCardData.checkInDate}}</text>
+            <text class="check-duration">{{sortedCardData.duration}}</text>
+            <text class='check-date'>{{sortedCardData.checkOutDate}}</text>
+        </view>
+        <text wx:if="{{sortedCardData.roomInfo}}" class='room-info'>{{sortedCardData.roomInfo}}</text>
+      </view>
+      <card-map-compt address='{{sortedCardData.hotelAddress}}' coordinate='{{sortedCardData.location}}' isCanTouch='{{!cardData.sharedCard}}' />
+    </view>
+  </view>
+  <!-- <view wx:if="{{cardData.cardSource === 2 && !cardData.sharedCard}}" class='share_bottom' style="justify-content: flex-start" catchtap='cardItemClickTap'>
+    <text class="share_bottom_left">来自好友分享添加</text>
+  </view> -->
+  <card-operation-compt wx:if="{{sortedCardData.showOperation && !cardData.sharedCard}}" card-operation-data="{{operationData}}" />
+</view>

@@ -1,0 +1,207 @@
+/* 订单详情页style fix开始 */
+.then-by-box {
+  background-color: #fff;
+  padding: 24rpx;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+  position: relative;
+}
+.then-by-box .super-tag {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.then-by-box .super-tag .img {
+  width: 94rpx;
+  height: 36rpx;
+}
+.then-by-box .super-tag .txt {
+  color: #192964;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  background-color: #dfedff;
+}
+.then-by-box .super-tag .img-after {
+  width: 20rpx;
+  height: 36rpx;
+}
+.then-by-box .pick-tip {
+  color: #111;
+  padding: 32rpx 0 20rpx;
+  font-weight: 600;
+  line-height: 38rpx;
+}
+
+/* 跟组合座公用的 */
+.then-by-box .journey-line {
+  margin-bottom: 12rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 100;
+}
+.then-by-box .journey-line .journey {
+  background: #ffffff;
+  border: 2rpx solid #ccd6e5;
+  border-radius: 20rpx;
+  padding: 3rpx 14rpx;
+  font-size: 24rpx;
+  color: #333;
+  font-weight: 600;
+  line-height: 28rpx;
+}
+
+.then-by-box .risk-tip {
+  position: absolute;
+  top: 53rpx;
+  right: 24rpx;
+  font-size: 25rpx;
+}
+.then-by-box .ifont-qus {
+  margin-left: 5rpx;
+}
+
+.combi-info-time {
+  display: flex;
+  flex-direction: row;
+  color: #111111;
+  font-size: 38rpx;
+  font-weight: 600;
+  line-height: 48rpx;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+.station-info {
+  font-size: 28rpx;
+  line-height: 36rpx;
+  margin-bottom: 24rpx;
+}
+/* 跟组合座公用的 */
+
+/* 订单详情页style fix结束 */
+.grey {
+  color: #8f9fb5;
+  font-weight: normal;
+}
+
+.then-by.station-info text {
+  flex: 1;
+  text-align: center;
+}
+.then-by.station-info text:first-child {
+  flex: 1;
+  text-align: left;
+}
+.then-by.station-info text:last-child {
+  flex: 1;
+  text-align: right;
+}
+
+/* 列表页坐席fix */
+.x-page-combi .journey-line-tag .solu-tag {
+  font-size: 22rpx;
+  line-height: 28rpx;
+  font-weight: 600;
+  padding: 4rpx 14rpx;
+}
+.x-page-combi .journey-line .journey {
+  padding: 2rpx 14rpx;
+}
+.x-page-combi .journey-line .journey-two {
+  padding: 4rpx 14rpx;
+}
+.x-page-combi .journey-line.then-by {
+  padding: 0;
+}
+/* 列表页浮层fix */
+.combi-info-box .journey-line.then-by {
+  padding: 0;
+}
+/* 列表页浮层fix */
+
+.then-by .journey.hidden {
+  width: 48rpx;
+  visibility: hidden;
+}
+.journey-btm-line-box {
+  width: 100%;
+  height: 4rpx;
+  left: 0;
+  display: flex;
+  position: absolute;
+  z-index: -2;
+}
+.journey-btm-line-box .dashed {
+  flex: 1;
+  /* border-bottom: 4rpx dashed #ccd6e5; */
+  height: 4rpx;
+  background: linear-gradient(
+    to right,
+    #ccd6e5 0%,
+    #ccd6e5 66.6%,
+    transparent 66.6%,
+    transparent 100%
+  );
+  background-size: 12rpx 4rpx;
+}
+.journey-btm-line-box .solid {
+  flex: 1;
+  height: 4rpx;
+  background: #aabbd3;
+}
+.journey-btm-dot {
+  height: 12rpx;
+  width: 100%;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  z-index: -1;
+}
+.journey-btm-dot .dot {
+  width: 12rpx;
+  height: 12rpx;
+  background: #aabbd3;
+  border-radius: 50%;
+}
+.journey-line-tag {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+}
+
+.journey-line-tag .solu-tag {
+  text-align: center;
+  background: #e2e9f2;
+  border-radius: 20rpx;
+  padding: 6rpx 16rpx;
+  line-height: 30rpx;
+  color: #111;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+.journey-line-tag .solu-tag.hidden {
+  visibility: hidden;
+}
+.journey-line-tag .solu-tag.front {
+  margin-right: 42rpx;
+}
+.journey-line-tag .solu-tag.bupiao {
+  margin-right: 42rpx;
+}
+.journey-line-tag .solu-tag.youpiao {
+  margin-left: 66rpx;
+  margin-right: -20rpx;
+}
+.journey-line-tag .solu-tag.kuazhan {
+  margin-left: 42rpx;
+}
+.then-by-day.combi-info-day .hidden {
+  visibility: hidden;
+}

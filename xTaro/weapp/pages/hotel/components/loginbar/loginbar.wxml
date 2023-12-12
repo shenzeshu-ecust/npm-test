@@ -1,0 +1,5 @@
+<view class="login-box {{pageFrom}} {{isIphoneX ? 'iphonex' : ''}}">
+    <image class="img" src="https://pages.c-ctrip.com/hotels/wechat/img/login-box-img.png"></image>
+    <view class="desc">最高85折·4项权益免费送</view>
+    <view class="login-btn" bindtap="toLoginTap">立即登录</view>
+</view>

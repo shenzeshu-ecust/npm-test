@@ -1,0 +1,6 @@
+<view class='initialbackground loading_bottom_box js_special_loading_box'>
+    <view class='loading_bottom'>
+        <text class='loading_ring'></text>
+    </view>
+    加载中...
+</view>

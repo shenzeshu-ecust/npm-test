@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "积分转转赚",
+  "navigationStyle":"custom",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "nav-bar": "/cwx/component/navbar/navbar",
+    "taskList": "../task/index",
+    "count-down": "/pages/market/directory/components/countDown/index",
+    "task-count-down": "/pages/market/directory/components/taskCountDown/index"
+  }
+}

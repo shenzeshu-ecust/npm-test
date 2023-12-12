@@ -1,0 +1,1 @@
+<image mode="aspectFill" src="{{data.props.values.src && data.props.values.value}}" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" data-clickhandlersname="clickHandlers" bindtap="clickHandlers" lazy-load />

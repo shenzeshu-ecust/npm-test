@@ -1,0 +1,22 @@
+<template name="destinationBanner">
+  	<view class="destination-banner" wx:if="{{bannerData}}" style="background: url({{bannerData.districtInfo.coverImage}});background-size: 100% 100%;">
+	    <!-- destinationBanner -->
+	    <div class="banner-con">
+	    	<!-- <view class="banner-weather" wx:if="{{bannerData.weatherInfo.nightTemperature && bannerData.weatherInfo.dayTemperature}}">
+	    		<text style="background: url({{bannerData.weatherInfo.weatherNo}});background-size: 100% 100%;"></text>{{bannerData.weatherInfo.nightTemperature}}~{{bannerData.weatherInfo.dayTemperature}}°C
+			</view> -->
+		    <view class="banner-cityname-china" bindtap="toSelectCity" data-cityname="{{bannerData.districtInfo.name}}">
+		    	<view class="banner-cityname-china-text">{{bannerData.districtInfo.name}}</view>
+                <view class="banner-tag"></view>
+	    	</view>
+		    <view class="banner-cityname-english">
+		    	{{bannerData.districtInfo.eName}}
+		    </view>
+		</div>
+		<div class="banner-search" bindtap="toSearch">
+			<image src="https://pages.c-ctrip.com/you/destination/dest_ic_search@3x.png" class="search-icon"></image>
+			<div class="search-text">搜索目的地/交通/景点/酒店</div>
+		</div>
+		<div class="banner-mask"></div>
+  	</view>
+</template>

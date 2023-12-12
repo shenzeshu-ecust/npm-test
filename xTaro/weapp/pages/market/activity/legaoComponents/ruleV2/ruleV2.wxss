@@ -1,0 +1,38 @@
+/* pages/market/legaoComponents/ruleV2/ruleV2.wxss */
+/* rule */
+.m-rule {
+  padding: 20rpx 40rpx;
+  line-height: 1.5;
+  color: #333;
+  font-size: 28rpx;
+}
+.m-rule .tt {
+	position: relative;
+	font-size: 30rpx;
+	text-align: center;
+	font-weight: bold;
+}
+.m-rule .carrot {
+	position: relative;
+	left: 6rpx;
+	top: 4rpx;
+	display: inline-block;
+	border: 10rpx solid transparent;
+	border-top-color: #333;
+}
+.m-rule .carrot.active {
+	transform: translateY(-50%) rotate(180deg);
+}
+.m-rule .li::before {
+  content: "•";
+  position: absolute;
+  top: 4rpx;
+  left: -6rpx;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.m-rule .li {
+  position: relative;
+  padding: 4rpx 0 4rpx 16rpx;
+}

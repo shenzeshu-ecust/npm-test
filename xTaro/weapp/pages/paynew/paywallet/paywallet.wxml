@@ -1,0 +1,64 @@
+<nav-bar navbar-data="{{navbarData}}" bindback="onBack"></nav-bar>
+<view class="wallet-wrap">
+
+  <!-- 头部金额 -->
+  <view class="amount-wrap">
+    <text class="amount-title">应付总额：</text>
+    <text class='amount-value'>￥{{orderInfo.orderAmount}}</text>
+  </view>
+
+  <!-- 支付列表 -->
+  <view class="payway-ul">
+    <view class='{{"payway-li " + ((needAmount == 0 && !way.isUsing) || way.status !="1" ? "disable": "")}}'
+      wx:for="{{ showWalletWays }}" wx:for-item="way" bindtap="onWalletWayClick" data-item="{{way}}"
+      id="{{way.brandId}}">
+      <view class="left">
+        <view class="{{'checkIcon ' + (way.isUsing && 'checked')}}"></view>
+        <view>
+          <view class="card-name">{{way.name}}</view>
+          <view class="card-desc">余额：¥{{way.availableAmount}}</view>
+        </view>
+      </view>
+      <view class="right">
+        <block wx:if="{{way.status == '1'}}">
+          <text wx:if="{{way.isUsing}}" class="using">使用 ￥{{way.usingAmount}}</text>
+          <text wx:else class="no-using">未使用</text>
+        </block>
+        <block wx:else>
+          <text class="no-using">暂不可用</text>
+        </block>
+      </view>
+    </view>
+    <view class='payway-li'>
+      <view class="left">
+      </view>
+      <view class="right"><text class="need-other">还需支付：</text> <text class="need-amount">￥{{needAmount}}</text></view>
+    </view>
+  </view>
+
+  <!-- 提示信息 -->
+  <view class="tips-wrap">
+    <view class="tip-title">抵扣须知</view>
+    <text wx:for="{{selectTips}}" wx:for-item='item'>{{item.value}}</text>
+    <view wx:if="{{needAmount == 0}}">点击支付按钮，订单将直接完成支付</view>
+  </view>
+  <view class="tips-wrap" wx:if="{{selectAmount>0 && selectAmount-orderInfo.orderAmount<0}}">
+    <view class="tip-title">钱包使用说明</view>
+    <view wx:for="{{walletTips}}" wx:for-item='item'>{{item.value}}</view>
+  </view>
+
+  <!-- 支付按钮 -->
+  <view class='{{"pay-button-full" + (selectAmount == 0 ? " disable" : "")}}'>
+    <button bindtap="weicatPaysubmit" hover-class="hover">
+      {{needAmount == 0 ? '使用钱包全额抵扣，立即支付' : '确认'}}
+    </button>
+  </view>
+</view>
+
+
+<!-- 短信组件 -->
+<sms-comp wx:if="{{showSms}}" showPhoneNo='{{showPhoneNo}}' payToken='{{payToken}}' sendPhone='{{sendPhone}}'
+  bind:smsclose="onSmsClose" bind:submitpay="onSmsSubmitpay"></sms-comp>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

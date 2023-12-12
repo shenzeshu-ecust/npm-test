@@ -1,0 +1,96 @@
+.second-ticket-box-body .card {
+  background: #ffffff;
+  border-radius: 16rpx 16rpx 16rpx 16rpx;
+  position: relative;
+  padding: 24rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.second-ticket-box-body .card .flex1 {
+  flex: 1;
+}
+
+.second-ticket-box-body .card .des {
+  font-size: 26rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 34rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.second-ticket-box-body .card .des .icon {
+  width: 26rpx;
+  height: 26rpx;
+  background-size: 26rpx 26rpx;
+  margin-right: 8rpx;
+}
+
+.second-ticket-box-body .card .des .txt .route-num {
+  display: inline-block;
+}
+
+.second-ticket-box-body .card .des .status {
+  margin-left: 8rpx;
+}
+
+.second-ticket-box-body .card .info {
+  display: flex;
+  flex-direction: row;
+  font-size: 30rpx;
+  font-weight: 600;
+  line-height: 38rpx;
+  margin-top: 4rpx;
+  letter-spacing: 0rpx;
+}
+
+.second-ticket-box-body .card .info .departStationInfo {
+  margin-right: 8rpx;
+  display: flex;
+}
+
+.second-ticket-box-body .card .info .departStationInfo .departStation,
+.second-ticket-box-body .card .info .arriveStationInfo .arriveStation {
+  font-weight: 600;
+}
+
+.second-ticket-box-body .card .info .arriveStationInfo {
+  margin-left: 8rpx;
+  display: flex;
+  flex-direction: row;
+}
+.second-ticket-box-body .card .info .arriveStationInfo .arriveTime {
+  position: relative;
+}
+.second-ticket-box-body .card .info .arriveStationInfo .arriveTime .diff-day {
+  position: absolute;
+  top: -22rpx;
+  right: 0rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+  line-height: 22rpx;
+}
+.second-ticket-box-body .card .btn {
+  width: 144rpx;
+  line-height: 60rpx;
+  background: #e3f2ff;
+  border-radius: 8rpx 8rpx 8rpx 8rpx;
+  color: #0086f6;
+  font-size: 26rpx;
+  font-weight: 500;
+  letter-spacing: -0.16rpx;
+  padding: 0;
+}
+
+.second-ticket-box-body .connect {
+  width: 614rpx;
+  border-left: 12rpx solid #fff;
+  border-right: 12rpx solid #fff;
+  height: 16rpx;
+  margin: auto;
+}

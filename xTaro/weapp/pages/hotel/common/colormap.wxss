@@ -1,0 +1,179 @@
+/*一级字色*/
+.black1 {
+    color: #111111;
+}
+/*二级字色*/
+.black2 {
+    color: #555555;
+}
+/*三级字色*/
+.black3 {
+    color: #888888;
+}
+/*主色蓝*/
+.blue {
+    color: #006FF6;
+    --color: #006FF6;
+}
+.blue-bgc {
+    --color: #006FF6;
+    background-color: #006FF6;
+}
+.blue2 {
+    color: #257CF5;
+}
+.blue3 {
+    color: #0065F2;
+}
+.blue4 {
+    color: rgba(0,102,246,0.5);
+}
+.blue5 {
+    color: #F5F9FF;
+}
+.blue7 {
+    color: #4B4EA2;
+}
+.blue8 {
+    color: #DAE8FC;
+}
+/*选中快筛标签背景色*/
+.blue9 {
+    color: #ebf3ff;
+}
+.blue9-bgc {
+    background-color: #ebf3ff;
+}
+/*房型早餐取消政策蓝灰*/
+.bluegray {
+    color: #0F4999;
+}
+/*标签字蓝灰*/
+.bluegray2 {
+    color: #3263A6;
+}
+.bluegray3 {
+    color: #B8C6D9;
+}
+/*标签边框蓝灰*/
+.bluegray3-brc {
+    border-color: #B8C6D9;
+}
+/*页面背景色*/
+.bluegrey8 {
+    color: #EBEFF5;
+}
+.bluegrey8-bgc {
+    background-color: #EBEFF5;
+}
+.bluegrey10 {
+    color: rgba(245,247,250,0.6);
+}
+/*默认快筛标签背景色/已浏览卡片背景色*/
+.gray {
+    color: #F5F7FA;
+}
+.gray-bgc {
+    background-color: #F5F7FA;
+}
+/*查询/填写 表单分割线*/
+.gray1 {
+    color: #F0F0F0;
+}
+.gray1-bgc {
+    background-color: #F0F0F0;
+}
+.gray2 {
+    color: #d5d5d5;
+}
+/*酒店列表/房型列表分割线(去掉透明度）*/
+.gray3 {
+    color: #E5E5E5;
+}
+/*白底暗提示文字*/
+.gray5 {
+    color: #C5C5C5;
+}
+.gray8 {
+    color: #888888;
+}
+.gray10 {
+    color: #555555;
+}
+.gray19 {
+    color: #F5F5F5;
+}
+/*满房/售罄/无效信息*/
+.gray26 {
+    color: #AAAAAA;
+}
+/*安心绿*/
+.green {
+    color: #08A66F;
+}
+.green2 {
+    color: #E6FAF3;
+}
+.green3 {
+    color: #24B381;
+}
+/*衬底绿 05*/
+.green10 {
+    color: #F2FCF9;
+}
+/*背景橙(按钮/填充标签）*/
+.orange {
+    color: #FF7700;
+}
+.orange-bgc {
+    background-color: #FF7700;
+}
+/*激励橙*/
+.orange2 {
+    color: #FF5500;
+}
+.orange3 {
+    color: #FFC899;
+}
+.orange4 {
+    color: #FFF4EB;
+}
+/*衬底橙 05*/
+.orange5 {
+    color: #FFFAF5;
+}
+.orange6 {
+    color: #FF6600;
+}
+.orange7 {
+    color: #FF9900;
+}
+.orange8 {
+    color: #FF8800;
+}
+.orange12 {
+    color: #fba765;
+}
+.orange13 {
+    color: #fe802c;
+}
+.gold {
+    color: #a37a50;
+}
+.yellow {
+    color: #FFF4EB;
+}
+.purple {
+    color: #0F4999;
+}
+
+/*警示红(文字)*/
+.red {
+    color: #F2200C;
+}
+.red1 {
+    color: #F5190A;
+}
+.red2 {
+    color: #F24C3D;
+}

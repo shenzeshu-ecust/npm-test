@@ -1,0 +1,20 @@
+{
+  "navigationBarTitleText": "携程旅行BOSS直播",
+  "disableScroll": true,
+  "renderer": "skyline",
+  "navigationStyle": "custom",
+  "lazyCodeLoading": "requiredComponents",
+  "componentFramework": "glass-easel",
+  "rendererOptions": {
+    "skyline": {
+      "disableABTest": true,
+      "defaultDisplayBlock": true
+    }
+  },
+  "usingComponents": {
+    "listComp": "./list",
+    "skyline_bar": "./../videoTaskPage/loreal_bar/index",
+    "product":"./product",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  }
+}

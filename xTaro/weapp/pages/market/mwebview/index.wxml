@@ -1,0 +1,26 @@
+<view>	
+	<block wx:if="{{showGetUserInfo}}">
+		<block wx:if="{{canGetUserInfo}}">
+			<view class="userinfo-wrap">
+				<open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
+				<open-data type="userNickName" class="userinfo-nickname"></open-data>
+				<view class="userinfo-tips">该页面需要获取你的公开信息（昵称、头像等）</view>
+				<view class="userinfo-cntr">
+					<button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" class="userinfo-button">授权登录</button>
+				</view>
+			</view>
+		</block>
+		<block wx:else>
+			<view>请升级微信版本(-1)</view>
+		</block>
+	</block>
+	<block wx:else>
+		<block wx:if="{{canWebView}}">
+			<web-view wx:if="{{url}}" src="{{url}}" bindmessage="webPostMessage"></web-view>
+			<view wx:else>{{wsg}}</view>
+		</block>
+		<block wx:else>
+			<view>请升级微信版本(-2)</view>
+		</block>
+	</block>
+</view>

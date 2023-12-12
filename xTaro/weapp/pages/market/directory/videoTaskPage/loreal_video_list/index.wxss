@@ -1,0 +1,170 @@
+.masonry-list {
+  width: 702rpx;
+  margin: 10rpx auto 25rpx;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.masonry-list-left,
+.masonry-list-right {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.masonry-list .ad_item {
+  border-radius: 16rpx;
+  background: rgba(255, 255, 255, 1);
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.08);
+  /* padding-bottom: 16rpx; */
+}
+.masonry-list .ad_item_channel {
+  width: 100%;
+  border-radius: 16rpx;
+  background: rgba(255, 255, 255, 1);
+  /* margin-bottom: 20rpx; */
+  overflow: hidden;
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.08);
+  padding-bottom: 16rpx;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* width: 340rpx;
+  height: 492rpx; */
+}
+.ad_item_channel .ad_item_video{
+  display: inline-flex;
+  width: 100%;
+  height: 343rpx;
+  border-radius: 16rpx 16rpx 0 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.masonry-list .ad_item .img {
+  width: 100%;
+  /* height: 343rpx; */
+  height: auto;
+  border-radius: 16rpx 16rpx 0 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.masonry-list .ad_item .img .tag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 92rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  background: #F65654;
+  color: #FFFFFF;
+  font-size: 20rpx;
+  border-bottom-right-radius: 16rpx;
+  text-align: center;
+}
+
+.masonry-list .ad_item .content {
+  padding-top: 10rpx;
+  position: relative;
+}
+
+.masonryImg_icon{
+  width: 100%;
+  height: 362rpx;
+}
+
+.masonry-list .ad_item .content .name {
+  /* font-size: 30rpx; */
+  font-size: 26rpx;
+  color: #4C4C4C;
+  line-height: 38rpx;
+  margin-bottom: 12rpx;
+}
+
+.masonry-list .ad_item .info {
+  margin-left: 16rpx;
+  font-size: 24rpx;
+  width: 310rpx;
+  line-height: 33rpx;
+  color: #999999;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-align: left;
+  word-break: break-all;
+  max-height: 78rpx;
+}
+
+.masonry-list .ad_item .price {
+  margin-left: 17rpx;
+  width: 310rpx;
+  margin-top: 8rpx;
+}
+
+.masonry-list .ad_item .price .discount {
+  float: left;
+  width: 84rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  border: 2rpx solid #F65654;
+  border-radius: 4rpx;
+  margin-bottom: 12rpx;
+  margin-right: 10rpx;
+  color: #F65654;
+  font-size: 20rpx;
+  text-align: center;
+}
+
+.masonry-list .ad_item .price .discount.credit {
+  width: 120rpx;
+}
+
+.masonry-list .ad_item .price .now {
+  clear: both;
+  font-family: PingFangSC-Medium;
+  font-size: 30rpx;
+  color: #F65654;
+  letter-spacing: 0;
+  line-height: 48rpx;
+  float: left;
+}
+
+.masonry-list .ad_item .price .now span {
+  font-size: 50rpx;
+}
+
+.masonry-list .ad_item .price .original {
+  font-family: PingFangSC-Regular;
+  font-size: 30rpx;
+  color: #BABABA;
+  letter-spacing: 0;
+  line-height: 48rpx;
+  float: right;
+  text-decoration: line-through;
+}
+
+
+/* 下面是css插槽 */
+.poster_img_icon {
+  position: absolute;
+  /* top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; */
+  margin: auto;
+  display: flex;
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+
+  transform: translateX(-50%) translateY(-50%);
+  left: 50%;
+  top: 50%;
+}

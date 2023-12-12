@@ -1,0 +1,12 @@
+.pop-tupian{width: 600rpx;left: 50%;top:48%;transform: translate(-50%,-50%);position: fixed;background:#fff;border-radius:16rpx;z-index: 3002}
+.pop-tupian image{width: 100%;display: block;}
+.pop-tupian-bd{padding: 20rpx 40rpx 40rpx;}
+.pop-tupian-bd .tit{text-align: center;font-size: 44rpx;color: #1F3C64;font-weight: 600;margin-bottom: 16rpx;}
+.pop-tupian-bd .line{text-align: center;line-height: 54rpx;background: -webkit-linear-gradient(left,rgba(255,241,230,0),rgb(255,241,230,1),rgba(255,241,230,0));margin-bottom: 24rpx;color: #FF7700;font-size: 26rpx; font-weight: 700;}
+
+.pop-tupian-bd .btn-box{margin-top: 40rpx;display: flex;}
+.pop-tupian-bd .btn-box button{flex: 1;height: 88rpx;line-height: 88rpx;border-radius: 6px;font-size: 34rpx;}
+.pop-tupian-bd .btn-box button::after{border:0}
+.pop-tupian-bd .btn-box .btn-cancel{border:1px solid #ccc;background: #fff;color: #333;margin-right: 14rpx}
+.pop-tupian-bd .btn-box .btn-submit{background: -webkit-linear-gradient(left,#00A7FA,#0076F5);color: #fff;font-weight: 600;}
+.pop-tupian .ifont-closed{font-size: 64rpx;color: #fff;position: absolute;bottom: -120rpx;left: 50%;transform: translateX(-50%);}

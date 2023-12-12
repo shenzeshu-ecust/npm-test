@@ -1,0 +1,5 @@
+<view class='verification-code' style='width:100%;height:40px;margin:auto;'>
+  <view class='cpt-loading-box' style='height:38px;background:#f7f9fa;border:1px solid #e4e7eb;display:block;'>
+    <image class='cpt-loading-img' src='https://webresource.c-ctrip.com/ares2/infosec/WechatCaptcha/~1.0.0/default/img/loading.gif?expires=1d' style='margin-top:4px;display:inline-block;'></image>
+  </view>
+</view>

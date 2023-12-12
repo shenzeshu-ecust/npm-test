@@ -1,0 +1,45 @@
+<block wx:if="{{showWinners}}">
+
+	<view catchtouchstart="catchtouchstart" class="userpanel-mask" bindtap="_hidePanel"></view>
+	<view catchtouchmove="catchtouchmove" class="userpanel-wrapper" style="padding-bottom: {{isIphoneX ? '68rpx': '0'}};">
+
+		<!-- 头部头图 -->
+		<view class="head-view">
+			<view class="back-arrow" bindtap="backAction" />
+			<view class="head-title">本场中奖观众{{winnerList.length > 0 ? "(" + winnerList.length + ")" : ""}}</view>
+			<view class="head-right"></view>
+		</view>
+
+		<view class="content-view">
+
+			<!--中奖观众列表弹窗 -->
+			<block wx:if="{{winnerList && winnerList.length > 0}}">
+				<scroll-view class="rec-list" scroll-y scroll-anchoring enhanced show-scrollbar="{{false}}"
+					style="height:656rpx">
+					<block wx:for="{{winnerList}}" wx:key="winnerList{{index}}">
+						<view class="user-item">
+							<image class="user-avart" src="{{item.imageUrl}}" />
+							<block wx:if="{{item.vIcon}}">
+								<image class="vip" src="{{item.vIcon}}" />
+							</block>
+							<text class="username">{{item.nickname}}</text>
+							<view class="line" />
+						</view>
+					</block>
+				</scroll-view>
+			</block>
+
+			<!--加载中弹窗 -->
+			<block wx:elif="{{listLoadingState == 4}}">
+				<image class="loading" src="https://pages.c-ctrip.com/livestream/live/book_live_upload_video_loading.png" />
+			</block>
+
+			<!--空态观众列表数据弹窗 -->
+			<block wx:elif="{{(listLoadingState == 5 || listLoadingState == 6) || winnerList.length == 0}}">
+				<image class="empty-view" src="https://pages.c-ctrip.com/livestream/ic_common_empty.png" />
+				<text class="empty-text">暂无中奖观众</text>
+			</block>
+
+		</view>
+	</view>
+</block>

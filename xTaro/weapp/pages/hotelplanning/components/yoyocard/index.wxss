@@ -1,0 +1,315 @@
+@import "../../common/css/common.wxss";
+
+.mask {
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.6);
+    position:fixed;
+    top:0;
+    left:0;
+    z-index: 10;
+}
+
+/* 兜底领卡弹窗样式 */
+.vip-card-layer {
+  width:654rpx;
+  height:737rpx;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform: translate3d(-50%,-50%,0);
+  background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/vipcard-layer.png);
+  background-size: cover;
+  z-index: 1200;
+  padding-top: 100rpx;
+  box-sizing: border-box;
+}
+.vip-card-layer .wechat-font-close{
+  position: absolute;
+  bottom: -114rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 50rpx;
+  font-weight: 700;
+}
+.vip-card-layer .title {
+  color: #F6D3AC;
+  font-size: 40rpx;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20rpx;
+}
+.vip-card-layer .title .icon{
+  width: 60rpx;
+  height: 44rpx;
+  margin-right: 8rpx;
+}
+.vip-card-layer .function {
+  font-size: 32rpx;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top:32rpx;
+}
+.vip-card-layer .function .icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+}
+.vip-card-layer .abtn {
+  width: 466rpx;
+  font-size: 40rpx;
+  color: #F6D3AC;
+  padding:15rpx 10rpx;
+  background-image: linear-gradient(0deg, #1C222D 0%, #2C3647 100%);
+  border-radius: 50rpx;
+  box-sizing: border-box;
+  position: relative;
+  text-align: center;
+  margin: 210rpx auto 20rpx;
+}
+.vip-card-layer .desc {
+  font-size: 26rpx;
+  color: #666;
+  text-align:center
+}
+.vip-card-layer .lottery-tips {
+  right: 40rpx;
+}
+
+/* 领卡弹窗 */
+.right-vip-card-modal {
+  position: fixed;
+  z-index: 99;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.right-vip-card-modal .new-vip-card-bg {
+  background: linear-gradient(-214.41deg, rgb(255, 186, 126) 0%, rgb(255, 103, 65) 25.77%, rgb(255, 89, 47) 66.44%, rgb(198, 40, 0) 100%);
+  border-radius: 64rpx;
+  width: 572rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.right-vip-card-modal .no-benefit-bg {
+  width: 560rpx;
+  position: relative;
+}
+.right-vip-card-modal .close-card {
+  font-size: 52rpx;
+  margin-top: 66rpx;
+  color: #d2d2d2;
+}
+
+.right-vip-card-modal .vip-card-tip {
+  background: linear-gradient(-124.04deg, rgb(255, 226, 218) 0%, rgb(255, 242, 231) 100%);
+  border-radius: 0 0 40rpx 40rpx;
+  box-shadow: 0 2rpx 10rpx 0 rgb(224, 70, 0);
+  height: 44rpx;
+  width: 296rpx;
+  color: #4f0d09;
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+
+.right-vip-card-modal .vip-coupon-wrapper {
+  background: linear-gradient(-186.83deg, rgb(255, 247, 245) 0%, rgb(255, 246, 238) 100%);
+  border-radius: 17rpx;
+  width: 532rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.right-vip-card-modal .vip-card-title {
+  height: 68rpx;
+  width: 450rpx;
+  margin: 38rpx 0 30rpx 0;
+}
+
+.vip-card-title-bg {
+    background: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/unvip-card-title.png) left top/cover;
+}
+
+.vip-card-title-bg-new {
+    background: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/order-room-packages.png) left top/cover;
+}
+
+.right-vip-card-modal .no-benefit-title {
+  background: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/no-benefit-title.png) left top/cover;
+}
+
+.right-vip-card-modal .vip-button {
+  background: linear-gradient(-180deg, rgb(255, 221, 142) 0%, rgb(255, 142, 10) 100%);
+  border-radius: 42rpx;
+  box-shadow: 0 13rpx 20rpx 0 rgba(178, 39, 4, 0.5);
+  color: #531403;
+  font-size: 34rpx;
+  font-weight: 500;
+  line-height: 42rpx;
+  padding: 20rpx 128rpx 22rpx;
+  margin: 40rpx 0 45rpx 0;
+}
+
+.right-vip-card-modal .no-benefit-wrapper {
+  background: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/no-benefit-discount.png) left top/cover;
+  border-radius: 17rpx;
+  height: 278rpx;
+  width: 460rpx;
+}
+
+.no-benefit-wrapper .right-condition {
+  color: #222;
+  font-size: 28rpx;
+  font-weight: 500;
+  line-height: 36rpx;
+}
+
+.no-benefit-wrapper .right-amount {
+  color: #de3d15;
+  font-size: 120rpx;
+  font-weight: 500;
+  line-height: 70rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin-top: 36rpx;
+}
+
+.no-benefit-wrapper .right-discount {
+  font-size: 28rpx;
+  font-weight: 500;
+  line-height: 24rpx;
+  position: relative;
+  top: -4rpx;
+}
+
+.no-benefit-wrapper .right-promotion {
+  color: #666;
+  font-size: 24rpx;
+  font-weight: 300;
+  line-height: 32rpx;
+  margin-top: 28rpx;
+}
+
+.no-benefit-wrapper .bottom-card {
+  height: 222rpx;
+  width: 560rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/unvip-bottom-wrap.png) left top/cover;
+}
+
+.vip-coupon-wrapper .has-benefit-wrapper {
+  margin-top: 60rpx;
+  padding: 0 76rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vip-coupon-wrapper .full-benefit {
+  padding: 0 16rpx;
+}
+
+.has-benefit-wrapper .benefit-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.benefit-item-main {
+  height: 188rpx;
+  width: 156rpx;
+  display: flex;
+  color: #fff;
+  font-weight: 500;
+  flex-direction: column;
+  align-items: center;
+  font-size: 26rpx;
+  justify-content: flex-end;
+}
+
+.benefit-wrapper .benefit-item {
+  background-position: -176rpx -6.6rpx;
+  height: 188rpx;
+  width: 156rpx;
+  display: flex;
+  color: #fff;
+  font-weight: 500;
+  flex-direction: column;
+  align-items: center;
+}
+
+.benefit-item-new {
+    background: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/hotel-benefit.png) left top/cover;
+}
+
+.benefit-item .coupon-amount {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  font-size: 46rpx;
+  font-weight: 600;
+  line-height: 54rpx;
+  margin-top: 30rpx;
+}
+
+.coupon-amount .coupon-unit {
+  font-size: 24rpx;
+  line-height: 32rpx;
+  margin-left: 2rpx;
+  position: relative;
+  top: -2rpx;
+}
+
+.benefit-item .coupon-desc {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  margin-top: 48rpx;
+}
+
+.benefit-wrapper .right-item {
+  background-position: -6.6rpx -6.6rpx;
+  font-size: 26rpx;
+  justify-content: flex-end;
+}
+
+.right-desc {
+  line-height: 34rpx;
+  margin-bottom: 23rpx;
+}
+
+.has-benefit-wrapper .benefit-desc {
+  color: #4f0d09;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  margin: 38rpx 0 30rpx 0;
+  position: relative;
+  width: 140rpx;
+}
+
+.benefit-desc::before, .benefit-desc::after {
+  content: '';
+  width: 160rpx;
+  height: 1rpx;
+  background: #4f0d09;
+  position: absolute;
+  top: 20rpx;
+}
+
+.benefit-desc::before {
+  right: 150rpx;
+}
+
+.benefit-desc::after {
+  left: 150rpx;
+}

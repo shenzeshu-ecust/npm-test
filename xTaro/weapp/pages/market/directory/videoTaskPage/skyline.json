@@ -1,0 +1,17 @@
+{
+  "navigationBarTextStyle": "black",
+  "componentFramework": "glass-easel",
+  "navigationStyle": "custom",
+  "renderer": "skyline",
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true
+    }
+  },
+  "usingComponents": {
+    "ad-sdk":"/pages/market/advertiseNew/ad-sdk",
+    "skyline_bar": "./loreal_bar/index",
+    "loreal_waterfall": "./loreal_video_list/index",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  }
+}

@@ -1,0 +1,107 @@
+<view class="coupon-wrap">
+  <view class="fixed-list">
+    <view class="fixed-item {{!latelyList.hidden?'current':''}}" data-index="1" bindtap="triggerSort">{{latelyList.curSort.name}}</view>
+    <view class="fixed-item {{!applyList.hidden?'current':''}}" data-index="0" bindtap="productLineOpenKey">{{applyList.curSort.name}}</view>
+  </view>
+  <view wx:if="{{isWechat && latelyList.hidden && applyList.hidden}}" class="wx-tips">仅展示您的小程序可用优惠券</view>
+  <view class="fixed-wrap">
+    <view class="lately-list" wx:if="{{!latelyList.hidden}}" bindchange="triggerSort">
+		<block wx:for="{{latelyList.latelyData}}"  wx:key="{{dir}}">
+			<view bindtap="handleSortTap" data-index="{{index}}" data-dir="{{item.dir}}" class="lately-item {{ item.current ? 'current' : ''}}">{{item.name}}</view>
+		</block>
+    </view>
+    <view class="apply-list" wx:if="{{!applyList.hidden}}" bindchange="productLineOpenKey">
+		<block wx:for="{{applyList.data}}"  wx:key="promoTypeEnumValue">
+			<view bindtap="productLineTap" class="apply-item {{ item.current ? 'current' : ''}}" data-index="{{index}}" data-value="{{item.promoTypeEnumValue}}">{{item.promoTypeEnumName}}</view>
+		</block>
+    </view>
+  </view>
+</view>
+<view style="position:relative;flex:1;margin:20rpx 25rpx 0;" class="{{isWechat ? 'scrolltop-hastips' : 'scrolltop-notips'}}" wx:if="{{list.length!=0}}">
+	<scroll-view scroll-y="true"  bindscrolltolower="loadMore"  class="coupon-list">
+	  <view class="item-li {{item.allowOpen?'current':''}}" wx:for="{{list}}" wx:for-item="item" wx:key="couponCode" data-index="{{index}}"> 
+		<view class="item-con">
+			<view class="item_main {{item.couponStatusClass}}" data-index="{{index}}" bindtap="expandAction">
+				<view class="item_status {{item.statusClass}}"></view>
+				<view class="item_left fl">
+				  <view class="item_price middle">
+					<view ><text class="icon-em">{{item.em}}</text></view>
+					<view class="price_info" wx:if="{{item.discountRule.price>0 && !item.discountRule.showPricetext}}">
+						<view class="icon-b {{item.fontClass}}">
+							<block wx:if="{{item.discountRule.unit == '%'}}">{{item.discountRule.price | 0}}<text class="item_decimal">{{item.decimal}}</text><text class="item_unit">{{item.discountRule.unit}}</text></block>
+							<block wx:else>{{item.discountRule.price}}<text class="item_unit">{{item.discountRule.unit}}</text></block>
+						</view>
+					</view>
+					<view class="item_pricetext" wx:else>{{item.discountRule.pricetext}}</view>
+					<view class="item_available" wx:if="{{item.discountRule.available != -1}}">余额{{item.discountRule.available}}元</view>
+				  </view>
+				</view>
+				<view class="item_right fl">
+				  <view class="act_body">
+					  <view class="item_shortName">{{item.shortName}}</view>
+					  <view class="act_name ellips">{{item.shortRemark}}</view>
+					  <view class="act_duration" wx:if="{{item.startDate && item.disableDate}}" >{{item.startDate}} 至 {{item.disableDate}}</view>
+					  <view class="remark_btn {{item.allowOpen?'cps_expand':''}}">
+						<!-- <text class="remark_text">详细说明</text> -->
+					  </view>
+					  <view  class="cps_item_usebtn" wx:if="{{item.useUrl != '' && !item.goH5}}" catchtap="useAction" data-index="{{index}}" data-promotionid="{{item.promotionID}}">
+						  <navigator hover-class="none" target="{{item.navigatorData.target}}" url="{{item.navigatorData.url}}" open-type="{{item.navigatorData.openType}}" app-id="{{item.navigatorData.appid}}" path="{{item.navigatorData.path}}" extra-data="{{item.navigatorData.extraData}}" bindsuccess="bindSuccess" class="item-btn {{!item.canGo?'c999':''}}"  >去使用</navigator>
+					  </view>
+					  <view class="cps_item_usebtn" wx:elif="{{item.useUrl != '' && item.goH5}}" catchtap="h5Action" data-index="{{index}}" data-promotionid="{{item.promotionID}}">
+						  <view class="item-btn {{item.useUrl != ''?'':'c999'}}" >去使用</view>
+					  </view>
+					  <view class="cps_item_usebtn" catchtap="homeAction" data-index="{{index}}" data-promotionid="{{item.promotionID}}" wx:else>
+						<view class="item-btn " >去使用</view>
+					  </view>
+				  </view>
+				</view>
+			</view>
+			<!-- 展开说明-->
+			<view class="item_sub_list" data-index="{{index}}" wx:if="{{item.allowOpen}}" bindtap="expandAction">
+				<view class="item_sub">
+					  <view class="item_tips" wx:if="{{item.FullReductionHtml.deductionStrategy && item.FullReductionHtml.deductionStrategyTypeID == 3}}">
+						<block wx:for="{{item.FullReductionHtml.deductionStrategy}}"  wx:key="{{index}}" wx:for-item="itemName">
+							<block wx:if="{{itemName.startAmount && itemName.deductionAmount}}">
+							    <block wx:if="{{itemName.deductionType == 0}}">
+									<block wx:if="{{itemName.promotionMethodID == 2}}">
+										<view class="item_tip"><text class="tips_num">{{index+1}}</text>满{{itemName.startAmount}}元返{{itemName.deductionAmount}}元</view>
+									</block>
+									<block wx:else>
+										<view class="item_tip"><text class="tips_num">{{index+1}}</text>满{{itemName.startAmount}}元减{{itemName.deductionAmount}}元</view>
+									</block>
+								</block>
+							    <block wx:elif="{{itemName.deductionType == 1}}">
+									<block wx:if="{{itemName.promotionMethodID == 2}}">
+										<view class="item_tip"><text class="tips_num">{{index+1}}</text>满{{itemName.startAmount}}元返{{itemName.deductionAmount}}%</view>
+									</block>
+									<block wx:else>
+										<view class="item_tip"><text class="tips_num">{{index+1}}</text>满{{itemName.startAmount}}元 {{(100-itemName.deductionAmount)/10}}折</view>
+									</block>
+								</block>
+								
+							</block>
+						</block>
+					  </view>
+					  <view class="item_tips" wx:if="{{item.FullReductionHtml.deductionStrategy && item.FullReductionHtml.deductionStrategyTypeID == 5}}">
+						<block wx:for="{{item.FullReductionHtml.deductionStrategy}}"  wx:key="{{index}}" wx:for-item="itemName">
+							<view class="item_tip" wx:if="{{itemName.startAmount && itemName.deductionAmount && itemName.deductionType == 0 }}"><text class="tips_num">{{index+1}}</text>{{itemName.startAmount}}元以下，一口价{{itemName.deductionAmount}}元</view>
+						</block>
+					  </view>
+					  <rich-text nodes="{{item.remarkHtml}}" class="item-text"></rich-text>
+				</view>		
+			</view>
+		  
+		</view>
+	  </view>
+	  <view style="height:100rpx" wx:if="{{loadall}}">
+		<view class="coupon-more" bindtap="goExchange" >券码兑换</view>
+	  </view>
+	  <!-- <view class="loadall" wx:if="{{!unloadall}}">- 别拉了，我是有底线的 -</view> -->
+	</scroll-view>
+</view>
+<view class="coupon-little {{isWechat ? 'little-hastips' : 'little-notips'}}" wx:if="{{!loading && list.length==0}}">
+  <icon class="little-img"></icon>
+  <text class="little-text">您还没有优惠券哦!</text>
+  <button class="little-btn" bindtap="goExchange">马上去兑换</button>
+</view>
+<view class="coupon-mask" wx:if="{{!applyList.hidden||!latelyList.hidden}}"></view>

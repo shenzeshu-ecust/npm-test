@@ -1,0 +1,52 @@
+<view style="height:100%">
+    <view class="index-top">
+        <view class="swiper-box">
+            <view class="mask"></view>
+            <ad-sdk impId="05HCJNWF0588HCSMHT1121" width="{{newAdvertiseData.width}}" height="{{newAdvertiseData.width * 174/375}}" slideVideo="{{slideVideo}}" lonAndLat="{{lonAndLat}}"></ad-sdk>
+        </view>
+    </view>
+    <view class="index-box" bindtap="testHandle">
+      <view class="notice notice-international" bindtap="noticeHandle" wx:if="{{showKoreaBanner}}">
+        <view class="tag">公告</view>
+        <view class="cont">{{bannerDesc}}</view>
+      </view>
+        <view class="sel-box" >
+            <view class="sel-item first">
+                <view class="from {{exchange ? 'exchange' : ''}}" data-type="d" bindtap="chooseStation">
+                    <view class="strong {{'strong' + fromCityStyle}}">{{fromCity}}</view>
+                </view>
+                <view class="gap"></view>
+                <view class="to {{exchange ? 'exchange' : ''}}" data-type="a" bindtap="chooseStation">
+                    <view class="strong {{'strong' + toCityStyle}}">{{toCity}}</view>
+                </view>
+                <view class="icon-change" bindtap="exchangeStation"></view>
+            </view>
+            <view class="sel-item border">
+                <view class="date" bindtap="chooseDate">
+                    <view class="strong">{{monthDay}}</view>
+                    <view class="week">{{dayInfo}}</view>
+                </view>
+                <picker mode="time" value="{{departTime}}" start="00:00" end="24:00" bindchange="chooseTime">
+                    <view class="sel-time">
+                    {{departTime}}<text class="time-text">后出发</text>
+                    </view>
+                </picker>
+                <!-- <view class="sel-time" bind:tap="chooseTime">{{departTime}}<text class="time-text">后出发</text></view> -->
+            </view>
+            <view class="sel-item border" bindtap="choosePassengerNum" wx:if="{{!hiddenChoose}}">
+                <text class="passenger-info">{{passengerInfo.adultData.num}}成人 {{passengerInfo.childData.num}}儿童/青年 {{passengerInfo.oldData.num}}长者</text>
+                <view class="more-icon"></view>
+                <view class="change-tiptop" wx:if="{{showChangeTip}}">您已切换出行地，请根据当地政策重新录入
+                    <icon class="icon-closed" catchtap="hideTipTop"></icon>
+                </view>
+            </view>
+            <button class="btn-search" hover-class="btn-search_hover" bindtap="search">查询</button>
+        </view>
+    </view>
+    <view wx:if="{{userCoupon && userCoupon.couponNum}}" class='usercoupon-box' bindtap="toCouponListPage">
+        <image src="https://images3.c-ctrip.com/train/2023-3/xiaochengxu/7.19/shouye/img-hb.png" class="icon-coupon"></image>
+        <view class="coupou-text">您有<span>{{userCoupon.couponNum}}</span>张优惠券,最高可减<span>¥{{userCoupon.maxDiscountAmount}}</span></view>
+        <i class="ifont-arr"></i>
+    </view>
+</view>
+

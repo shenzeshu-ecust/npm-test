@@ -1,0 +1,61 @@
+
+<template name="transitCard">
+    <view class="sel-box">
+        <view class="sel-hd" wx:if="{{TransferLineTip}}">
+            <view class="toptip">
+                <view class="l-txt">
+                    <view class="icon"></view>
+                    <view class="text">{{TransferLineTip}}</view>
+                </view>
+                <view class="r-box" catchtap="onTapToTrainTransferList">
+                    <view class="more">更多</view>
+                    <view class="arr"></view>
+                </view>
+            </view>
+        </view>
+        <view class="sel-bd">
+            <view class="sel-from">
+                <view class="dtime number-zx2">{{TrainTransferInfos[0].DepartTime}}</view>
+                <view class="dstation">{{DepartStation + '站'}}</view>
+            </view>
+            <view class="sel-trans">
+                <view class="txt">换乘{{transtimestr}}</view>
+                <view class="trans">{{TransferStation}}转</view>
+                <view class="txt">全程{{costalltime}}</view>
+            </view>
+            <view class="sel-to">
+                <view class="dtime number-zx2">{{TrainTransferInfos[TrainTransferInfos.length-1].ArriveTime}}
+                    <text class="small">{{takeDays ? '+' + takeDays : ''}}</text>
+                </view>
+                <view class="astation">{{ArriveStation + '站'}}</view>
+            </view>
+            <view class="sel-price">
+                <view class="train-price number-zx2">{{_ShowPriceText}}<text class="em">起</text></view>
+                <!-- <view class="tag-orage">最优推荐</view> -->
+                <view class="txt-orage" wx:if="{{TransferDesc}}">{{TransferDesc}}</view>
+            </view>
+        </view>
+
+        <!-- todo : 中转票座席显示  -->
+        <view class="sel-trans-info">
+            <view class="item">
+                <!-- <view class="num"><text>1</text></view>
+                <view class="checi">{{TrainTransferInfos[0].TrainNumber}}</view>
+                <block wx:for="{{TrainTransferInfos[0].SeatList}}" wx:key="{{index}}">
+                    <view class="seat {{!item.disabled ? '' :'disabled'}}">{{item.SeatName + (!item.disabled ? '有票':'无票')}}</view>
+                </block>
+                <view class="seat" wx:for="{{[1,2,3,4]}}" wx:key="{{index}}" wx:if="{{item > TrainTransferInfos[0].SeatList.length}}"></view> -->
+                第一程{{TrainTransferInfos[0].TrainNumber}}  {{TrainTransferInfos[0].mainSeat}}有票
+            </view>
+            <view class="item">
+                <!-- <view class="num"><text>2</text></view>
+                <view class="checi">{{TrainTransferInfos[TrainTransferInfos.length-1].TrainNumber}}</view>
+                <block wx:for="{{TrainTransferInfos[TrainTransferInfos.length-1].SeatList}}" wx:key="{{index}}">
+                    <view class="seat {{!item.disabled ? '' :'disabled'}} ">{{item.SeatName + (!item.disabled ? '有票':'无票')}}</view>
+                </block>
+                <view class="seat" wx:for="{{[1,2,3,4]}}" wx:key="{{index}}" wx:if="{{item > TrainTransferInfos[TrainTransferInfos.length-1].SeatList.length}}"></view> -->
+                第二程{{TrainTransferInfos[TrainTransferInfos.length-1].TrainNumber}}  {{TrainTransferInfos[1].mainSeat}}有票
+            </view>
+        </view>
+    </view>
+</template>

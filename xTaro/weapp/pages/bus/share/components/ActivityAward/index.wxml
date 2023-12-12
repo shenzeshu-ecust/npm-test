@@ -1,0 +1,54 @@
+<template name="activityaward">
+    <view class='block-container'>
+        <view class="block-header-bg"></view>
+        <view class="title-line">
+            <view class='title'>
+                <text>
+                <block wx:for="{{activity.partTitle}}" wx:for-key="index">
+                     <text class="{{item.highLight ? 'high-light' : ''}}" >{{item.text}}</text>
+                </block>    
+            </text>
+            </view>
+        </view>
+        <view class="title-line">
+            <view class='sub-title'>
+                <text>
+                <block wx:for="{{activity.partSubTitle}}" wx:for-key="index">
+                     <text class="{{item.highLight ? 'high-light' : ''}}" >{{item.text}}</text>
+                </block>    
+            </text>
+            </view>
+        </view>
+        <block wx:if="{{activity.awardList && activity.awardList.length > 0}}">
+            <view class="participateList">
+                <block wx:for="{{activity.awardList}}" wx:for-item="item" wx:for-index="index" wx:for-key="index">
+                    <view class="content-full" bindtap="{{goAction}}" data-url="{{item.url}}">
+                        <view class="conLeft">
+                            <text>
+                                <text class="yangjiao">¥</text>
+                                <text class="leftText">{{item.amount}}</text>
+                            </text>
+                        </view>
+                        <view class='customer-ticket-right'>
+                            <text class='customer-ticket-right-title'>{{item.title}}</text>
+                            <text class='customer-ticket-right-time'>{{item.subTitle}}</text>
+                        </view>
+                        <view class='customer-ticket-button'>
+                            <view class='customer-ticket-button-view'>
+                                {{item.button || '去查看'}}
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </block>
+        <view class="title-line">
+            <view class="line left"></view>
+            <view class='title'>
+                <text>更多福利可享</text>
+            </view>
+            <view class="line right"></view>
+        </view>
+        <image mode="widthFix" class="more-suprise" src="https://pages.c-ctrip.com/bus-images/order-axtrefund/more-surprise.png" />
+    </view>
+</template>

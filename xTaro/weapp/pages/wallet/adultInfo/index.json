@@ -1,0 +1,10 @@
+{
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#F2FBFC",
+  "navigationBarTitleText": "监护人身份验证",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "nav-bar": "/cwx/component/navbar/navbar"
+  },
+  "navigationStyle": "custom"
+}

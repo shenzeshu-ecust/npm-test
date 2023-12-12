@@ -1,0 +1,233 @@
+.task-count-down__movable-area {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 90vh;
+  z-index: 10000000;
+}
+
+.task-count-down-wraper203 {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.task-count-down {
+  position: relative;
+  z-index: 1000;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.task-count-down__login-tips2 {
+    position: absolute;
+    top: 0px;
+    right: 52rpx;
+    z-index: 999;
+    overflow: hidden;
+    color: #fff;
+    border-radius: 48rpx 0 0 48rpx;
+    font-size: 24rpx;
+    background: radial-gradient(circle at right,transparent 52rpx, rgba(0, 0, 0, 0.5) 54rpx,rgba(0, 0, 0, 0.5));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100rpx;
+    padding: 0px 80rpx 0 40rpx;
+    white-space: nowrap;
+    /* letter-spacing: 0.1em; */
+    transform: scaleX(0);
+    transform-origin: right;
+    text-align: center;
+}
+.task-count-down__login-tips2__show{
+    animation: show2 0.2s ease-in forwards;
+}
+.task-count-down__login-tips2__hide{
+    animation: hide2 0.2s ease-in forwards;
+}
+@keyframes show2{
+    0%{
+        transform: scaleX(0);
+    }
+    100%{
+        transform: scaleX(1);
+    }
+}
+@keyframes hide2{
+    0%{
+        transform: scaleX(1);
+    }
+    100%{
+        transform: scaleX(0);
+    }
+}
+
+.task-count-down__cover-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.task-count-down__curcle-border-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+  border: 6rpx solid transparent;
+  border-left: 6rpx solid #FFD781;
+  border-bottom: 6rpx solid #FFD781;
+  transform: rotate(-135deg)
+}
+
+.task-count-down__cover-right {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.task-count-down__curcle-border-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+  border: 6rpx solid transparent;
+  border-top: 6rpx solid #FFD781;
+  border-right: 6rpx solid #FFD781;
+  transform: rotate(-135deg)
+}
+
+.task-count-down__cover-transparent {
+  /* background-color: transparent; */
+}
+
+.task-count-down__start .task-count-down__curcle-border-right {
+  animation: circleRight 3s linear 0s;
+}
+
+.task-count-down__start .task-count-down__curcle-border-left {
+  animation: circleLeft 3s linear 0s;
+}
+
+.task-count-down__pause .task-count-down__curcle-border-right {
+  animation-play-state: paused;
+}
+
+.task-count-down__pause .task-count-down__curcle-border-left {
+  animation-play-state: paused;
+}
+
+.task-count-down__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  z-index: 10000;
+}
+
+/* 关闭红包 缩小隐藏 */
+.task-count-down__image-close {
+  transform: scale(1);
+  transition: all 0.5s .5s linear;
+}
+
+.task-count-down__image-close-animate {
+  transform: scale(0);
+}
+
+/* 开封的红包 放大出现 */
+.task-count-down__image-open {
+  transform: scale(0);
+  transition: all 0.5s .5s linear;
+}
+
+.task-count-down__image-open-animate {
+  transform: scale(1);
+  animation: fangda 0.5s 0.5s linear, yaohuang 1.8s 1.5s linear;
+}
+
+.task-count-down__shake {
+  /* animation: yaohuang 1.8s 1s linear; */
+}
+
+@keyframes fangda {
+  0% {
+    transform: scale(0)
+  }
+
+  100% {
+    transform: scale(1)
+  }
+}
+
+@keyframes yaohuang {
+  10% {
+    transform: rotate(15deg);
+  }
+
+  20% {
+    transform: rotate(-10deg);
+  }
+
+  30% {
+    transform: rotate(5deg);
+  }
+
+  40% {
+    transform: rotate(-5deg);
+  }
+
+  50%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes circleLeft {
+  0% {
+    transform: rotate(-135deg)
+  }
+
+  50% {
+    transform: rotate(-135deg);
+  }
+
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes circleRight {
+  0% {
+    transform: rotate(-135deg)
+  }
+
+  50% {
+    transform: rotate(45deg);
+  }
+
+  100% {
+    transform: rotate(45deg);
+  }
+}

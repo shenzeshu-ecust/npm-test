@@ -1,0 +1,21 @@
+/* pages/market/activity/activity.wxss */
+
+.container {
+  padding: 30rpx 0;
+  font-size: 28rpx;
+  background-repeat: repeat;
+}
+
+.btn-home {
+	position: absolute;
+	width: 80%;
+	bottom: 10%;
+	left: 10%;
+	border: 1rpx #e3e3e3 solid;
+	border-radius: 50rpx;
+	/* margin:20rpx auto 40rpx; */
+	line-height:84rpx;
+	text-align:center;
+	color:rgba(0,0,0,.3);
+	font-size:16px;
+}

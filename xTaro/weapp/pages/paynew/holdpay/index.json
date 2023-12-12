@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "微信授权",
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "count-down": "../countdown/index",
+    "nav-bar": "/cwx/component/navbar/navbar"
+
+  },
+  "navigationStyle": "custom"
+}

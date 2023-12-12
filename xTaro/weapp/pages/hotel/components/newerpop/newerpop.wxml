@@ -1,0 +1,13 @@
+<view wx:if="{{showNewerImage}}" class="cmask" catchtap="closeNewerPop">
+    <view class="cmask-popbox newer-box">
+        <image src="https://pages.c-ctrip.com/hotels/wechat/img/member/new-comer-pop.png" mode="widthFix" class="img"></image>
+        <view class="btn" catchtap="receiveMultiCoupons"></view>
+        <view class="wechat-font-close np-close" catchtap="closeNewerPop"></view>
+    </view>
+</view>
+<view wx:elif="{{display}}" class="cmask" catchtouchmove="noop">
+    <view class="cmask-popbox np-box">
+        <image src="{{imgSrc}}" class="np-img" catchtap="toSubscribe"></image>
+        <view class="wechat-font-close np-close" catchtap="close"></view>
+    </view>
+</view>

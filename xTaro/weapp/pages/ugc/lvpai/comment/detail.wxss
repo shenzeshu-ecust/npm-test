@@ -1,0 +1,311 @@
+@import "../../common/base.wxss";
+.container{
+  position: relative;
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  height:100%;
+  background: #fff;
+}
+.s-view{
+  width: 100%;
+  height:100%;
+}
+.head-detail{
+  position: relative;
+  left:0;
+  right:0;
+  top:0;
+  width:100%;
+  height:750rpx;
+  overflow: hidden;
+}
+.head-video-box{
+  width:100%;
+  height:100%;
+}
+.video-play-btn{
+  position: absolute;
+  width: 100rpx;
+  height: 100rpx;
+  top: 325rpx;
+  left: 50%;
+  margin-left: -50rpx;
+}
+.head-img{
+  width:100%;
+  height:100%;
+}
+.head-img-box{
+  width:100%;
+  height:750rpx;
+}
+.head-img-item{
+  width: 100%;
+  height: 750rpx;
+  background: #f2f2f2;
+  display: flex;
+}
+.img-num-show{
+  position: absolute;
+  right:24rpx;
+  bottom:24rpx;
+  height:44rpx;
+  padding:0 20rpx;
+  display: flex;
+  align-items:center;
+  opacity: 0.4;
+  background: #000000;
+  border-radius: 100rpx;
+}
+.img-num{
+  opacity: 0.8;
+  font-size: 22rpx;
+  color: #FFF;
+}
+
+
+.detail-info{
+  position: relative;
+  width:100%;
+  
+  /* margin-top:-24rpx; */
+}
+.top-flex{
+  top:0;
+  /* margin-top:0; */
+}
+.detail-user-detail{
+  display: flex;
+  flex-direction:row;
+  padding:32rpx 32rpx 0;
+  margin-bottom:23rpx;
+  background: #fff;
+  border-top-left-radius: 30rpx;
+  border-top-right-radius: 30rpx;
+}
+.detail-user-img{
+  position: relative;
+  width:72rpx;
+  height:72rpx;
+  overflow: hidden;
+  margin-right:16rpx;
+}
+.detail-user-default{
+  position: absolute;
+  display: flex;
+  justify-content:center; 
+  align-items:center;
+  width:72rpx;
+  height:72rpx;
+  background: #efefef;
+  border-radius: 50%;
+}
+.user-img{
+  position: absolute;
+  display:block;
+  width:100%;
+  height:100%;
+  border-radius: 50%;
+}
+.detail-user-info{
+  flex:1;
+}
+.user-name{
+  font-size: 28rpx;
+  color: #222;
+  line-height: 40rpx;
+}
+.time{
+  font-size: 24rpx;
+  color: #A3A8AB;
+}
+.detail-score{
+  display: flex;
+  align-items:flex-end;
+}
+.detail-score-cur{
+  font-family: PingFangSC-Medium;
+  font-size: 38rpx;
+  color: #FF6633;
+  line-height: 42rpx;
+  margin-bottom:4rpx;
+}
+.detail-score-total{
+  font-size: 28rpx;
+  color: #A3A8AB;
+  line-height: 42rpx;
+  margin-bottom:4rpx;
+}
+.comment-detail-box{
+  padding-left:32rpx;
+  padding-right:32rpx;
+  background-color: #ffffff;
+}
+.comment-detail-text{
+  font-size: 32rpx;
+  color: #333;
+  line-height: 54rpx;
+  word-break:break-word;
+}
+.comment-end-show{
+  display: flex;
+  justify-content:center; 
+  align-items:center;
+  padding-top:60rpx;
+  padding-bottom:60rpx;
+}
+
+.comment-end-lt{
+  display:block;
+  width:120rpx;
+  height:1px;
+  background: -webkit-linear-gradient(right,#999,#fff);   
+}
+.comment-end-text{
+  font-size: 24rpx;
+  color: #999;
+  margin:0 51rpx;
+}
+.comment-end-rt{
+  width:120rpx;
+  height:1px;
+  background: -webkit-linear-gradient(left,#999,#fff);   
+}
+.comment-text-none{
+  font-size: 24rpx;
+  color: #C8CBCD;
+  text-align: center;
+  padding-top:71rpx;
+}
+
+
+
+
+.comment-liked{
+  position: absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:98rpx;
+  display:flex;
+  box-shadow: 0 -2px 4px 0 rgba(0,0,0,0.08);
+}
+
+.comment-liked-iphonex-fixed{
+  padding-bottom: 68rpx;
+}
+.comment-bottom-btn{
+  flex: 1;
+  display: flex;
+  justify-content:center; 
+  align-items:center;
+  height:98rpx;
+  border: none;
+  outline: none;
+  background: #fff;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+.comment-liked-img{
+  width:38rpx;
+  height:36rpx;
+  margin-right:8rpx;
+}
+.comment-liked-num{
+  font-size: 30rpx;
+  color: #D2AF77;
+}
+.liked-view{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60rpx;
+  width: 100%;
+}
+.liked-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width:262rpx;
+  height:86rpx;
+  border:1px solid #3BC6D9;
+  border-radius:46rpx;
+}
+
+.liked-button>text{
+  font-size:30rpx;
+  color:#3DC7D9;
+}
+.lookPoi{
+  background: #FFFFFF;
+  border: 1rpx solid #ECECEC;
+  box-shadow: 0 2rpx 12rpx 0 rgba(0,0,0,0.04);
+  border-radius: 8rpx;
+  height:181rpx;
+  margin-top: 32rpx;
+  display: flex;
+  box-sizing: border-box;
+  padding: 24rpx;
+  background-image: url(https://pages.c-ctrip.com/you/livestream/you-destination-rightarrow.png);
+  background-repeat: no-repeat;
+  background-size: 30rpx;
+  background-position: 95% 50%;
+}
+.poi-img{
+    width:133rpx;
+    height:133rpx;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10rpx;
+  }
+  .poi-detail{
+    margin-left: 16rpx;
+  
+  }
+  .poi-detail-name{
+    font-size: 30rpx;
+    color: #222222;
+    line-height: 46rpx;
+      width:460rpx;
+    overflow: hidden;
+    white-space: nowrap;
+		text-overflow: ellipsis;
+		font-weight:bold;
+  }
+  .poi-datail-num{
+    font-size: 24rpx;
+    color: #999999;
+    line-height: 32rpx;
+     margin-top: 4rpx;
+     height: 32rpx;
+     overflow: hidden;
+  }
+   .poi-datail-grade{
+     color: #222;
+     margin-right: 2rpx;
+   }
+   .poi-datail-gradenum{
+      width:26rpx;
+       height:26rpx;
+       border-radius: 50%;
+       margin-right: 8rpx;
+       margin-top: 3rpx;
+       float: left;
+   }
+  .poi-detail-address{
+    font-size: 22rpx;
+    color: #999999;
+    line-height: 28rpx;
+    margin-top: 23rpx;
+    width:460rpx;
+    height: 28rpx;
+    overflow: hidden;
+    white-space: nowrap;
+		text-overflow: ellipsis;
+  }

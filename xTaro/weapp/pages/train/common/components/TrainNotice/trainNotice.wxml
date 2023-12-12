@@ -1,0 +1,101 @@
+<template name="train-notice">
+    <view class="backmask active" bindtap="hideNoticeBackDrop"></view>
+    <view class="pop-botm active pop-notice">
+        <view class="pop-botm-hd">
+            <view class="btn-cancel" bindtap="hideNoticeBackDrop">
+            </view>
+            <view class="tit">
+                出行提醒
+            </view>
+            <view class="btn-submit btn-more float" bindtap="jumpMoreUrl" wx:if="{{!hkticket}}">
+                <view class="btn-more">更多政策<text class="ifont-arr"> </text>
+                </view>
+            </view>
+        </view>
+        <view class="pop-notice-bd">
+          <!-- 把香港取票提醒塞进来 -->
+            <view wx:if="{{hkticket}}" class="hk-pickup-wrap">
+              <view class="notice-content-title">取票提醒</view>
+              <view class="notice-box">线上购买跨境车票，需在内地车站取票后上车</view>
+            </view>
+            <view class="notice-title" wx:if="{{trainNoticeTitle.length > 1}}">
+                    <view class="{{ activeIndex === index  ? 'title-item active': 'title-item'}}"  wx:for="{{trainNoticeTitle}}" bindtap="onClickNoticeTab" data-index="{{index}}">
+                        {{item}}
+                    </view>
+            </view>
+
+            <view class="notice-content">
+                <scroll-view scroll-y  style="max-height:790rpx;" 	bindscroll="scrollMoveNotice" scroll-into-view="{{ scrollView }}" scroll-with-animation>
+                    <view wx:for="{{noticeInfoList}}" wx:for-index="noticeIndex" id="{{'noticeBox'+noticeIndex}}" class="noticeBox ">
+                        <view class="notice-content-title">
+                            {{item.Title}}
+                            <view class="notice-tags" wx:if="{{item.TagList.length}}" >
+                                {{item.TagList[0].Content}}
+                            </view>
+                        </view>
+                        <view wx:if="{{item.tipList.length}}" class="notice-box" wx:for="{{item.tipList}}" wx:for-item="tip">
+                            {{tip.Tips}}
+                        </view>
+                        <view wx:if="{{(item.LeavePolicy || item.ComePolicy) && !item.IsTransfer}}" class="notice-box noticeContentBox" >
+                            <view wx:if="{{item.FetchTime}}" class="notice-date">
+                                更新日期：{{item.FetchTime}}
+                            </view>
+                            <view class="rich-text-box">
+                                <rich-text class="{{item.ShowOverflowLine ? 'overflowLine' : ''}}" nodes="{{item.LeavePolicy || item.ComePolicy}}"></rich-text>
+
+                            </view>
+                            <view class="notice-source" wx:if="{{item.Source}}"  wx:if="{{!item.ShowOverflowLine}}">
+                                (来源： {{item.Source}})
+                            </view>
+                            <view class="rich-text-overflow"  wx:if="{{item.ShowOverflowLine}}" bindtap="onClickShowOverflowLine" data-cindex="{{noticeIndex}}" >
+                                    <view class="overflow-shadow">
+
+                                    </view>
+                                    <view >
+                                        展开<text class="ifont-arr"></text>
+                                    </view>
+
+                            </view>
+                        </view>
+                        <view wx:if="{{item.IsTransfer}}"  wx:for="{{item.transferTipsList}}" wx:for-item="tip" wx:for-index="tindex">
+                            <view class="notice-transfer-title">
+                                {{tip.Title}}
+                                <view class="notice-tags" wx:if="{{tip.TagList.length}}" >
+                                    {{tip.TagList[0].Content}}
+                                </view>
+                            </view>
+                            <view wx:if="{{tip.LeavePolicy || tip.ComePolicy}}"  class="notice-box noticeContentBox"  >
+                                <view wx:if="{{tip.FetchTime}}" class="notice-date">
+                                    更新日期：{{tip.FetchTime}}
+                                </view>
+                                <view class="rich-text-box">
+                                <rich-text class="{{tip.ShowOverflowLine ? 'overflowLine' : ''}}" nodes="{{tip.LeavePolicy || tip.ComePolicy}}"></rich-text>
+
+                                </view>
+                                <view class="notice-source" wx:if="{{tip.Source}}"  wx:if="{{!tip.ShowOverflowLine}}">
+                                    (来源： {{tip.Source}})
+                                </view>
+                                 <view class="rich-text-overflow" wx:if="{{tip.ShowOverflowLine}}"  bindtap="onClickShowOverflowLine"  data-cindex="{{noticeIndex}}" data-subindex="{{tindex}}">
+                                    <view class="overflow-shadow"> </view>
+                                    <view>
+                                        展开<text class="ifont-arr"></text>
+                                    </view>
+
+
+                            </view>
+                            </view>
+                        </view>
+                    </view>
+                <view class="notice-desc">
+                    <rich-text nodes="{{noticeDesc}}"></rich-text>
+                </view>
+                </scroll-view>
+
+            </view>
+        </view>
+        <view class="pop-notice-botm">
+            <button class="pop-notice-btn" bindtap="hideNoticeBackDrop" >知道了</button>
+        </view>
+    </view>
+
+</template>

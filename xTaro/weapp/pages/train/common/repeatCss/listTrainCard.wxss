@@ -1,0 +1,21 @@
+.suc-rate{position: absolute;left:0;top:0;background: -webkit-linear-gradient(left,rgba(255,105,19,.16),rgba(255,105,19,0));width: 294rpx;height: 32rpx;padding: 6rpx 24rpx;box-sizing: border-box;color: #F70;font-size: 20rpx;line-height: 22rpx;}
+
+.suc-rate + .sel-bd{margin-top: 20rpx}
+
+.urgent-tag{position: absolute;left:0;top:0;color: #00B87A;font-size: 20rpx;background:url(https://images3.c-ctrip.com/train/2021/xiaochengxu/8.37.4/jinji_biaoqian@3x.png) no-repeat;background-size: 100% 100%;width: 155rpx;height: 32rpx;text-align: center;line-height: 32rpx;}
+
+.sel-detail{margin: 24rpx -20rpx -20rpx;background: rgba(248,250,253,.7);border-radius: 8px;padding: 0 20rpx;}
+.sel-detail .item{display: flex;height: 126rpx;align-items: center;border-bottom: 1rpx solid #EDEFF2}
+.sel-detail .item:last-child{border-bottom: 0}
+.sel-detail .item .seat{flex: 1;font-size: 26rpx;display: flex;flex-flow: row wrap;align-items: center;}
+.sel-detail .item .icon-jing{width: 22rpx;height: 22rpx;border:1px solid #00B87A;border-radius: 2px;color:#00B87A;font-size: 18rpx;line-height: 22rpx;text-align: center;margin-left: 6rpx;}
+.sel-detail .item .price{width:170rpx;font-size: 30rpx;font-weight: 600;color: #f60;}
+.sel-detail .item .price.urgent {width: 240rpx;}
+.sel-detail .item .price::before{content: "\00A5";font-size: 24rpx;}
+.sel-detail .item .price text{font-size: 22rpx;font-weight: normal;}
+.sel-detail .item .status{width:110rpx;text-align: right;font-size: 26rpx}
+.sel-detail .item  button{margin-left: 55rpx;width: 128rpx;height: 60rpx;line-height: 60rpx;padding: 0;color: #fff;border-radius: 4px;font-size: 26rpx;font-weight: 600}
+.sel-detail .item  button::after{border:0;}
+.sel-detail .item  .btn-blue{background: -webkit-linear-gradient(left,#00A7FA,#0076F5)}
+.sel-detail .item  .btn-gray{background: #999999;}
+.sel-detail .item  .btn-orage{background: -webkit-linear-gradient(left,#FFA50A,#FF7700)}

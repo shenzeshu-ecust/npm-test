@@ -1,0 +1,16 @@
+
+<view class="wheel-boxs">
+  <view class="{{orderType === 'JL'? 'box-hd jl':'box-hd ordinary' }}">
+    <!-- <view class="tit">{{end ? '参与砍价,最高可提现' : '本单可返现金,正在抽取…'}}</view> -->
+    <view class="tit">{{'参与砍价，本单可得奖励'}}</view>
+    <view class="cont">
+      <view class="num" wx:for="{{price}}" style="background: url(https://images3.c-ctrip.com/train/app/8.29/xcx/ddxq_pop/number_3.png) no-repeat;background-size:40px 1176px; background-position-y:-{{start ? item * 56 + 560 : 0}}px; -webkit-transition-property: all; -webkit-transition-delay:{{(index + 1) * 100 + 'ms'}}; -webkit-transition-duration: 1s;-webkit-transition-timing-function: ease"></view>
+    </view>
+  </view>
+  <view class="box-bm {{end ? 'addHeight' : ''}}">
+    <button class="btn" wx:if="{{end}}" bindtap="toBargainPage">去砍价</button>
+  </view>
+  <text class="ifont-closed" bindtap="hideBackDrop"></text>
+</view>
+<view class="backmask" bindtap="hideBackDrop">
+</view>

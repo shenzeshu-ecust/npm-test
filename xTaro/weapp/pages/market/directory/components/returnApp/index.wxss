@@ -1,0 +1,21 @@
+.common_return_app{
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    margin: 0;
+    height: auto;
+    line-height: 1;
+    position: fixed;
+    left: 0;
+    bottom: 300rpx;
+    z-index: 1000000;
+}
+.common_return_app::after{
+    border: none;
+    height: auto;
+    line-height: 1;
+}
+.returnapp_img{
+  width: 100rpx;
+  height: 45rpx;
+}

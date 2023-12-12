@@ -1,0 +1,15 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#ffffff",
+  "usingComponents": {
+    "bottom-options": "../components/detailBottomOptions/detailBottomOptions",
+    "card-item": "../../timelineComponent/cardItem/baseItem/baseItem",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  },
+  "componentPlaceholder": {
+    "card-item": "view"
+  }
+}

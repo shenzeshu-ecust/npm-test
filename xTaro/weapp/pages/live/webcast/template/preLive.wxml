@@ -1,0 +1,21 @@
+<template name="preLive">
+	<!-- <image class="pre-cover" mode="aspectFill" src="{{liveCoverImageUrl}}" /> -->
+    <view class="pre-sbg"></view>
+    <view class="pre-content">
+        <view class="pre-title">{{liveTitle}}</view>
+        <view class="pre-subtitle js_countDown">{{countDownStr}}</view>
+        <block wx:if="{{isReservedShow}}">
+        	<view class="pre-btn" bindtap="doReserve">预约直播</view>
+    	</block>
+    	
+    </view>
+    <block wx:if="{{preVideoInfo && preVideoInfo.videoUrl}}">
+		<video id="preVideo" class="pre-video" src="{{preVideoInfo.videoUrl}}" object-fit="{{preVideoInfo.preVideoMode}}" controls="{{false}}" show-progress="{{false}}" show-center-play-btn="{{false}}"  show-fullscreen-btn="{{false}}"  autoplay="{{true}}" loop="{{true}}" muted="{{preVideMuted}}"  style="top: {{preVideoInfo.videoWidth > preVideoInfo.videoHeight ? '40%' :'50%'}}; height: {{ preVideoInfo.showVideoHeight}}px; transform: {{preVideoInfo.videoWidth > preVideoInfo.videoHeight ? 'translateY(-50%)' :'translateY(-50%)'}}" bindwaiting="preVideoWaiting" binderror="preVideoErr" ></video>
+		<image class="pre-covervideo" mode="aspectFill" src="{{preVideoInfo.coverImageUrl}}" />
+	</block>
+	<block wx:else>
+    <view class="pre-cover" style="{{'background-image: url('+liveCoverImageUrl+');z-index: -1;filter: blur(50px)'}}">
+    </view>
+		<image class="pre-cover" mode="aspectFit" src="{{liveCoverImageUrl}}" />
+	</block>
+</template>

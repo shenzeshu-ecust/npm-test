@@ -1,0 +1,33 @@
+.mkt-timer {
+    display: flex;
+    align-items: center;
+}
+
+.mkt-timer .timer-num {
+    background: #ff644d;
+    border-radius: 4rpx;
+    height: 34rpx;
+    text-align: center;
+    color: #ffffff;
+    font-size: 24rpx;
+    padding: 0 6rpx;
+}
+
+.mkt-timer .timer-num-day {
+    font-size: 22rpx;
+    color: rgb(255,100,77);
+}
+
+.mkt-timer .symbol {
+    color: #ff644d;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    margin: 0 4rpx;
+}
+
+.mkt-timer .symbol-text {
+    color: rgb(102,102,102);
+    font-family: PingFangSC-Regular;
+    font-size: 22rpx;
+    margin: 0 6rpx;
+}

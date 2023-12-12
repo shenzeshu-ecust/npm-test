@@ -1,0 +1,12 @@
+{
+  "component": true,
+  "usingComponents": {
+    "sk_image": "./../image/index",
+    "sk_label": "./../label/index",
+    "sk_row": "./../row/index",
+    "sk_column": "./../column/index",
+    "sk_container": "./../column/index",
+    "sk_box": "./../column/index",
+    "sk_inline": "./../column/index"
+  }
+}

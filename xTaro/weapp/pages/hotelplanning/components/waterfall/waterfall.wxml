@@ -1,0 +1,37 @@
+
+<!-- 达人探店 -->
+<view wx:if="{{sourceFrom === 'high-star-aggregate' && (waterfallLeftList.length || waterfallRightList.length)}}">
+  <view wx:if="{{isNew}}" class="liner-title-top"></view>
+  <image src="https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/explore_store_titlev1.png" class="es-titlev1" />
+  <view class="wf-container cell es-new">
+    <view wx:for="{{[1,2]}}" wx:for-item="itemName" wx:key="itemName" class="wf-item wf-item-2">
+      <view wx:for="{{itemName == 1 ? waterfallLeftList : waterfallRightList}}" bindtap="handleClickExplore" data-itemdata="{{item}}" wx:key="id" class="wf-item-inner es-item-inner">
+        <view class="itemimg es-itemimg">
+          <view class="protag cell">{{item.dataTypeName}}</view>
+          <image class="img" src="{{item.pictureUrl}}"
+              style="width:{{item.picWidth}}rpx;height: {{item.picHeight}}rpx" lazy-load="true"
+              mode="aspectFill" binderror="noImageTrace"></image>
+          <image class="video-player" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/video_player.png" wx:if="{{item.pictureType === 1}}" />
+        </view>
+        <view class="infotext">
+          <view class="infotitle es-infotitle">{{item.title}}</view>
+          <view class="user-wrapper cell">
+            <view class="avatar-group">
+              <image wx:if="{{item.authorVipIcon}}" class="vip-icon" src="{{item.authorVipIcon}}" />
+              <image class="user-avatar" src="{{item.avatarUrl}}" binderror="noImageTrace"/>
+            </view>
+            <view class="user-info-group cell column">
+              <text wx:if="{{item.nickName}}" class="user-nickname one-line">{{item.nickName}}</text>
+              <view wx:if="{{item.authorTypeName}}" class="user-tag one-line {{ item.authorTypeClass }}">{{item.authorTypeName}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{loadingState == 1}}" class="loading-state cell">
+    <image mode="aspectFit" class="loading-img"></image>
+    <view class="loading-txt">加载中...</view>
+  </view>
+  <view wx:else class="loading-blank"></view>
+</view>

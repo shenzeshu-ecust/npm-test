@@ -1,0 +1,73 @@
+<view class="{{sourceFrom == 'wifi-connect' && 'mb-36'}}" catchtap="noCatch">
+    <view wx:if="{{sourceFrom == 'wifi-connect'}}" class="service-group cell">
+        <view wx:for="{{serviceGroup}}" wx:for-item="service" wx:key="id" class="service-item cell" style="{{(service.open && service.moduleSwitch) || (service.id === '24')? '' : 'filter: grayscale(100%); opacity: 0.7'}}" bindtap="jump" data-id="{{service.id}}">
+            <image src="{{service.icon}}" class="service-icon" />
+            <view class="service-name fs-22">{{service.name}}</view>
+            <view wx:if="{{service.label}}" class="service-label">
+                {{service.label}}
+            </view>
+        </view>
+    </view>
+    <block wx:else>
+        <swiper wx:if="{{matrixFunc && matrixFunc.length > 1}}" bindanimationfinish="swiperAnimationFinishNew" duration="100" easing-function="linear" catchtouchmove="catchTouchMove" class="{{!isOrderCode && 'common-height'}}" style="{{isOrderCode && matrixFunc[0].length > 5 ? 'height: 300rpx': ''}}">
+            <swiper-item class="item-end" wx:for="{{matrixFunc}}" wx:for-item="funcs" wx:key="index1" style="{{isOrderCode ? 'align-items: flex-start;': ''}}">
+                <view class="common-wrap {{isOrderCode && 'wrap'}}" style="{{(!isOrderCode && funcs && funcs.length !== 5) || isOrderCode ? 'justify-content: flex-start;' : ''}}">
+                    <view wx:for="{{funcs}}" wx:for-item="func" wx:key="id" class="common-serivce {{isOrderCode && 'wrap-icon'}}" style="{{isOrderCode || (funcs && funcs.length === 5) ? '' : 'margin-right: 55rpx'}}" catchtap="jump" data-id="{{func.id}}" data-page="{{func.page}}" data-index="{{index}}" data-name="{{func.name}}">
+                        <image src="{{func.icon}}" class="new-common-icon" />
+                        <view class="new-common-font {{func.id === '6' && func.open === false ? 'zero-wifi-font-color' : ''}}">{{func.name}}</view>
+                        <view wx:if="{{func.labelList}}">
+                            <view 
+                                wx:for="{{func.labelList}}" 
+                                wx:for-item="label" 
+                                wx:for-index="labelId" 
+                                class="three-label label-common {{'label-anim'+labelId}}"
+                                >{{label}}
+                            </view>
+                        </view>
+                        <view wx:elif="{{func.label}}" class="{{func.labelClass}} label-common">
+                            {{func.label}}
+                        </view>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
+        <view wx:elif="{{matrixFunc && matrixFunc.length === 1}}" class="item-end pb40" >
+            <view class="common-wrap {{isOrderCode && 'wrap'}}" style="{{(!isOrderCode && matrixFunc[0] && matrixFunc[0].length < 4 ) || (isOrderCode && matrixFunc[0] && matrixFunc[0].length < 4 ||  matrixFunc[0].length > 5)? 'justify-content: flex-start;' : ''}}">
+                <view wx:for="{{matrixFunc[0]}}" wx:for-item="func" wx:key="id" class="common-serivce {{isOrderCode && 'wrap-icon'}}" style="{{isOrderCode || (matrixFunc[0] && matrixFunc[0].length > 3) ? '' : 'margin-right: 55rpx'}}" catchtap="jump" data-id="{{func.id}}" data-page="{{func.page}}" data-index="{{index}}" data-name="{{func.name}}">
+                    <image src="{{func.icon}}" class="new-common-icon" />
+                    <view class="new-common-font {{func.id === '6' && func.open === false ? 'zero-wifi-font-color' : ''}}">{{func.name}}</view>
+                    <view wx:if="{{func.labelList}}">
+                        <view 
+                            wx:for="{{func.labelList}}" 
+                            wx:for-item="label" 
+                            wx:for-index="labelId" 
+                            class="three-label label-common {{'label-anim'+labelId}}"
+                            >{{label}}
+                        </view>
+                    </view>
+                    <view wx:elif="{{func.label}}" class="{{func.labelClass}} label-common" >
+                        {{func.label}}
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="common-position" wx:if="{{matrixFunc && matrixFunc.length > 1}}">
+            <view class="dot-wrapper">
+                <view class="new-bottom-bar"></view>
+                <view wx:if="{{swiperPoint === matrixFunc.length - 1}}" class="new-dot-position dot-final" style="width: {{ percent + '%' }};"></view>
+                <view wx:else class="new-dot-position" style="width: {{ percent + '%' }}; left: {{ left + '%' }}"></view>
+             </view>
+        </view>
+    </block>
+    <view wx:if="{{sourceFrom == 'wifi-connect' && highlightService.id && highlightService.open && highlightService.moduleSwitch}}" class="highlight-service-group cell">
+        <view class="highlight-service cell" style="background-image: url({{highlightService.bigImage}})" bindtap="jump" data-id="{{highlightService.id}}">
+            <view class="cell column">
+                <text class="fs-28 fw-500">{{highlightService.name}}</text>
+                <text class="fs-24 color3">{{highlightService.desc}}</text>
+            </view>
+            <view class="fs-24 colorblue">
+                {{highlightService.jumpName}}<text class="wechat-font-arrow-right fs-20 ml-4"></text>
+            </view>
+        </view>
+    </view>
+</view>

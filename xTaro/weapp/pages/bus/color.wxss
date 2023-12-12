@@ -1,0 +1,166 @@
+.background-white {
+    background-color: #ffffff !important;
+}
+
+.background-gray {
+    background-color: #f2f2f2;
+}
+
+.background-gray-flat {
+    background-color: #f2f2f2;
+}
+
+.background-gray-ping {
+    background-color: #f6f5fb !important;
+}
+
+.background-brand {
+    background-color: #0086f6;
+}
+
+.background-notice {
+    background-color: #fff7ca;
+}
+
+.background-orange {
+    background-color: #ff5d13;
+}
+
+.color-white {
+    color: #ffffff;
+}
+
+.color-brand {
+    color: #0086f6;
+}
+
+.color-dark {
+    color: #111111;
+}
+.color-normal {
+    color: #222222;
+}
+
+.color-gray {
+    color: #999999;
+}
+
+.color-lightgray {
+    color: #e0e0e0;
+}
+
+.color-disabled {
+    color: #aaaaaa;
+}
+
+.color-darkgray {
+    color: #666666;
+}
+
+.color-notice {
+    color: #805f40;
+}
+
+.color-orange {
+    color: #ff5d13;
+}
+/* 以上是统一样式 */
+
+/* 以下是不同马甲的样式 */
+/* 携程 */
+.mainColor {
+    color: #0086f6 !important;
+}
+.headerBgColor {
+    background: #0086f6;
+}
+.titleColor {
+    color: #ffffff !important;
+}
+.mainBackColor {
+    background-color: #0086f6 !important;
+}
+.borderColor {
+    border-color: #0086f6 !important;
+}
+.lightBakColor {
+    background-color: #bbe6ff !important;
+}
+.veryLightBakColor {
+    background-color: #edf7ff !important;
+}
+.lightMainColor {
+    color: #bbe6ff !important;
+}
+.lightBorder {
+    border-color: #bbe6ff !important;
+}
+.linearBackground {
+    background: linear-gradient(to bottom, #0086f6, rgba(0, 134, 246, 0));
+}
+
+/* 智行 */
+.zhixing-mainColor {
+    color: #0066e6 !important;
+}
+.zhixing-headerBgColor {
+    background: #0066e6;
+}
+.zhixing-titleColor {
+    color: #ffffff !important;
+}
+.zhixing-mainBackColor {
+    background-color: #0066e6 !important;
+}
+.zhixing-borderColor {
+    border-color: #0066e6 !important;
+}
+
+.zhixing-lightBakColor {
+    background-color: rgba(84, 149, 230, 0.4) !important;
+}
+.zhixing-veryLightBakColor {
+    background-color: rgba(84, 149, 230, 0.2) !important;
+}
+.zhixing-lightMainColor {
+    color: rgba(84, 149, 230, 0.6) !important;
+}
+.zhixing-lightBorder {
+    border-color: #0066e6 !important;
+}
+
+.zhixing-linearBackground {
+    background: linear-gradient(to bottom, #0066e6, rgba(84, 149, 230, 0.7));
+}
+/* 铁友 */
+.tieyou-mainColor {
+    color: #fc6e51 !important;
+}
+.tieyou-headerBgColor {
+    background: #fc6e51;
+}
+.tieyou-titleColor {
+    color: #ffffff !important;
+}
+.tieyou-mainBackColor {
+    background-color: #fc6e51 !important;
+}
+.tieyou-borderColor {
+    border-color: #fc6e51 !important;
+}
+
+.tieyou-lightBakColor {
+    background-color: rgba(252, 110, 81, 0.4) !important;
+}
+.tieyou-veryLightBakColor {
+    background-color: rgba(252, 110, 81, 0.2) !important;
+}
+.tieyou-lightMainColor {
+    color: rgba(252, 110, 81, 0.6) !important;
+}
+.tieyou-lightBorder {
+    border-color: #fc6e51 !important;
+}
+.tieyou-linearBackground {
+    background: linear-gradient(to bottom, #fc6e51, rgba(252, 110, 81, 0.7));
+}

@@ -1,0 +1,11 @@
+<template name="searchTab">
+  <view class="searchtab-bar" wx:if="{{isHiddenTabBar ? false : true}}">
+    <block wx:for="{{searchTabBarList}}" wx:key="{{key}}">
+      <view class="searchtab-bar-item" data-index="{{index}}" data-tab="{{item.tabText}}" catchtap="searchTabBarClick">
+        <view class="searchtab-bar-textview">
+          <text class="searchtab-bar-text {{item.ac === 1 ? 'searchtab-bar-active' : ''}}">{{item.tabText}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</template>

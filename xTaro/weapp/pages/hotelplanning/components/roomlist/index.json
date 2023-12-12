@@ -1,0 +1,11 @@
+{
+    "component": true,
+    "usingComponents": {
+      "roomlayer": "/pages/hotelplanning/components/roomlayer/roomlayer",
+      "price-tag-new": "/pages/hotelplanning/components/pricetagnew/pricetagnew",
+      "real-name-pop": "/pages/hotelplanning/components/realnamepop/realnamepop",
+      "pricedesc": "/pages/hotelplanning/components/pricedesc/pricedesc",
+      "order-modal": "/pages/hotelplanning/components/ordermodal/ordermodal"
+    },
+    "disableScroll": true
+  }

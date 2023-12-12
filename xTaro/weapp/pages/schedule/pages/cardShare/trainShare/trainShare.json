@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "车次信息",
+  "navigationBarBackgroundColor": "#1980FE",
+  "navigationBarTextStyle": "white",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "train-compt": "../../components/train-compt/train-compt",
+    "detail-card-container": "../../components/detailCardContainer/detailCardContainer"
+  }
+}

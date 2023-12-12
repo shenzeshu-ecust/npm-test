@@ -1,0 +1,232 @@
+<view class="wrap">
+  <view class="mod">
+    <!-- Loading状态 -->
+    <block wx:if="{{pageStatus === FetchStatus.LOADING || getPhoneNumberLoading}}">
+        <view class="loading-wrapper">
+            <view class="block title-block"/>
+            <view class="pop-block">
+                <view class="block pop-rectangle"/>
+                <view class="block pop-triangle"/>
+            </view>
+            <view class="step-block">
+                <view class="block step-line-block"/>
+                <view class="block first-circle circle-block"/>
+                <view class="block second-circle circle-block"/>
+                <view class="block third-circle circle-block"/>
+            </view>
+            <view class="msg-block-container">
+                <view class="block first-msg msg-block"/>
+                <view class="block second-msg msg-block"/>
+                <view class="block third-msg msg-block"/>
+            </view>
+            <view class="block button-block"/>
+            </view>
+    </block>
+    <block wx:elif="{{pageStatus === FetchStatus.ERROR}}">
+        <view class="net-error-container">
+            <image class="net-error-img" src="https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/net_error.png"/>
+            <text class="net-error-text">网络不给力，请检查网络设置后再试</text>
+        </view>
+    </block>
+    <!-- 无结果状态：无结果/错误/已过期 -->
+    <block wx:elif="{{pageStatus === FetchStatus.NO_RESULT }}">
+        <view class="net-error-container">
+            <image class="net-error-img" src="https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/net_error.png"/>
+            <text class="net-error-text">{{pageErrorMsg}}</text>
+        </view>
+    </block>
+    <block wx:elif="{{pageStatus === FetchStatus.OK}}">
+      <!-- 砍价未开始、砍价进行中：不可提现 -->
+      <view wx:if="{{(orderStatus === 1 || orderStatus === 2) && orderInfo.isBlackList}}" class="mod-title">
+        <view wx:if="{{bguserlist.length < 5 }}" class="title">
+          已砍<text class="highlight">{{orderInfo.bargainedPrice}}</text>元，再邀<text class="highlight">{{5 - bguserlist.length}}</text>人就返现
+        </view>
+        <view wx:elif="{{bguserlist.length >= 5 && bguserlist.length < 15 }}" class="title">
+          已砍<text class="highlight">{{orderInfo.bargainedPrice}}</text>元，一鼓作气砍出大金额
+        </view>
+        <view wx:else class="title">
+          已砍<text class="highlight">{{orderInfo.bargainedPrice}}</text>元，加把劲返更多
+        </view>
+      </view>
+
+      <!-- 砍价未开始、砍价进行中：不可提现 -->
+      <view wx:elif="{{(orderStatus === 1 || orderStatus === 2) && !orderInfo.isBlackList}}" class="mod-title">
+        <view wx:if="{{ bguserlist.length < 15 }}" class="title">
+          已砍<text class="highlight">{{orderInfo.bargainedPrice}}</text>元，再邀{{orderInfo.bigAmountNum}}人砍出大金额
+        </view>
+        <view wx:else class="title">
+          已砍<text class="highlight">{{orderInfo.bargainedPrice}}</text>元，加把劲返更多
+        </view>
+      </view>
+
+      <!-- 砍价结束：不可提现（未达到指定砍价数量） -->
+      <view wx:elif="{{orderStatus === 3 && !orderInfo.canReturnCash }}" class="mod-title">
+        <view class="title">砍价已结束，未达到要求人数，下次再努力！</view>
+      </view>
+
+      <!-- 砍价结束：可提现/已提现（已砍满金额/时间到了） -->
+      <view wx:elif="{{orderStatus === 3 && orderInfo.canReturnCash || orderStatus === 4 }}" class="mod-title">
+        <view class="title">砍价结束，共<text class="highlight">{{bguserlist.length}}</text>位好友帮砍了<text class="highlight">{{orderInfo.bargainedPrice}}</text>元</view>
+      </view>
+
+      <!-- 砍价结束：订单退改 -->
+      <view wx:elif="{{orderStatus === 5 }}" class="mod-title">
+        <view class="title">订单状态改变，砍价结束</view>
+      </view>
+
+      <view class="mod-content">
+        <!-- 砍价人数不满5人或满五人但滑动开关关闭，头像条不可滑动 -->
+        <view class="bargain-progress" wx:if="{{bguserlist.length < 5 || !(bguserlist.length >= 5 && orderInfo.canScroll) || orderInfo.isBlackList}}"> 
+            <!-- 已砍价位置 -->
+            <view wx:for="{{bguserlist}}" wx:if="{{index < 5}}" wx:for-item="item" class="{{(bguserlist.length >= 5 && !orderInfo.canScroll) || orderInfo.isBlackList? 'cannot-scroll-head-icon': 'other-head-icon'}}" wx:key="{{index}}" >
+              <!-- 展示用户头像 -->
+              <button class="user-icon-button">
+                <image wx:if="{{item.icon}}" src="{{item.icon}}" class="icon-image"></image>
+                <image wx:else src="https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/user_icon.png" class="icon-image"></image>
+              </button>
+              <view class="icon-new" wx:if="{{item.taglist[0] === '新客'}}"><text class="passenger-type">新客</text></view>
+              <view class="icon-start" wx:if="{{item.taglist[0] === '发起人'}}"><text class="passenger-type">发起人</text></view>
+              <view class="icon-explain"><text class="price-text">砍{{item.bgprice}}元</text></view>
+            </view>
+            <!-- 不满5人须补充位置 -->
+            <view wx:for="{{orderInfo.isBlackList ? 5 - bguserlist.length : 6 - bguserlist.length}}" wx:if="{{bguserlist.length < 5}}" class="{{orderInfo.isBlackList ? 'cannot-scroll-head-icon' : index + bguserlist.length + 1 === 5 ? 'cash-return-head-icon' : 'other-head-icon'}}" wx:for-item="item" wx:key="{{index}}" >
+              <button class="icon-button" wx:if="{{index + 1 + bguserlist.length === 5 && orderInfo.isBlackList}}" open-type="share" bindtap="shareFriend">
+                <image src="https://pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/cash_return_icon.png" class="icon-image"></image>
+              </button>
+              <button class="icon-button" wx:else open-type="share" bindtap="shareFriend">
+                <image src="https://pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/inviteFriend_button.png" class="icon-image"></image>
+              </button>
+              <view class="return-box" wx:if="{{index + bguserlist.length + 1 === 5 && orderInfo.isBlackList}}">
+                <image class="return-tips" src="https://pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/cash_return_tips.png" />
+              </view>
+            </view>
+        </view>
+      <!-- 砍价人数满5人，头像条可滑动 -->
+        <scroll-view scroll-x class="bargain-progress" wx:elif="{{bguserlist.length >= 5}}" scroll-into-view="{{anchorPoint}}" scroll-with-animation="true"> 
+          <!-- 已砍价位置 -->
+          <view wx:for="{{bguserlist}}" wx:for-item="item" class="{{index === 0 ? 'first-head-icon': (orderStatus === 3 && orderInfo.canReturnCash || orderStatus === 4) && index === bguserlist.length - 1 ? 'last-head-icon' : (index === 7 || index === 10 || index === 14)? 'big-amount-head-icon':'other-head-icon'}}" wx:key="{{index}}" id="id{{index}}" >
+            <!-- 用户头像，无头像给默认头像 -->
+            <button class="user-icon-button">
+              <image wx:if="{{item.icon}}" src="{{item.icon}}" class="icon-image"></image>
+              <image wx:else src="https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/user_icon.png" class="icon-image"></image>
+            </button>
+            <!-- 添加新客和发起人标签 -->
+            <view class="icon-new" wx:if="{{item.taglist[0] === '新客'}}"><text class="passenger-type">新客</text></view>
+            <view class="icon-start" wx:if="{{item.taglist[0] === '发起人'}}"><text class="passenger-type">发起人</text></view>
+            <!-- 暴击刀在第8，11，15刀位置 -->
+            <view class="icon-explain-tips" wx:if="{{index === 7 || index === 10 || index === 14}}">
+              <text class="price-text">砍{{item.bgprice}}元</text>
+              <view class="big-amount-view">
+                <view class="left-dot"></view>
+                <text class="explain-text">大金额</text>
+                <view class="right-dot"></view>  
+              </view>
+            </view>
+            <!-- 可返现标识 -->
+            <!-- <view class="icon-explain-tips" wx:elif="{{index === 4}}">
+              <text class="price-text">砍{{item.bgprice}}元</text>
+              <text class="explain-text">·可提现·</text>
+            </view> -->
+            <!-- 正常展示砍xx元 -->
+            <view class="icon-explain" wx:else>
+              <text class="price-text">砍{{item.bgprice}}元</text>
+            </view>
+          </view>
+          <!-- 人数不够须补充位置 -->
+          <view wx:if="{{!(orderStatus === 3 && orderInfo.canReturnCash || orderStatus === 4)}}" wx:for="{{numberNeeded}}" wx:for-item="item" class="{{ index === numberNeeded - 1 ? 'last-head-icon' : (index + 1 + bguserlist.length === 8 || index + 1 + bguserlist.length === 11 || index + 1 + bguserlist.length === 15) ? 'big-amount-head-icon' :'other-head-icon' }}" wx:key="{{index}}" >
+            <button class="icon-button" open-type="share" bindtap="shareFriend">
+             <!-- 暴击位置有专属图片 -->
+              <image wx:if="{{(index + 1 + bguserlist.length === 8 || index + 1 + bguserlist.length === 11 || index + 1 + bguserlist.length === 15) }}" src="https://pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/big_amount.png" class="icon-image"></image>
+              <image wx:else src="https://pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/inviteFriend_button.png" class="icon-image"></image>
+            </button>
+            <!-- 暴击位置专属文案 -->
+            <view class="big-amount-box" wx:if="{{index + 1 + bguserlist.length === 8 || index + 1 + bguserlist.length === 11 || index + 1 + bguserlist.length === 15 }}">
+                <image class="big-amount-tips" src="https://pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/big_amount_tips.png"></image>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+
+
+      <!-- 额外刀激励文案 -->
+
+      <view class="{[{orderStatus === 2 ? 'button-box' : 'button-box'}, {orderInfo.extswitch && orderInfo.extTip ? 'button-box-margin2' : 'button-box-margin1'}]}" >
+        <image class="button-bg" src="{{orderInfo.imageUrl}}"/>
+        <!-- 有历史砍价记录,展示分享按钮 -->
+        <button wx:if="{{hasHistoryBargained}}" class="button" bindtap="getScrollBottom">
+          逛逛低价机票
+        </button>
+        <!-- 默认砍价按钮：需要判断是否登录以及是否授权 -->
+        <block wx:elif="{{orderStatus === 2 && orderInfo.buttonType === 'bargain'}}">
+            <view wx:if="{{orderInfo.hashtybgd}}">
+                <button class="button" bindtap="showHistoryBargained">
+                  {{orderInfo.buttonText}}
+                </button>
+            </view>
+            <view wx:elif="{{!isUerLogin && orderInfo.isPhoneVerify}}">
+              <getPhoneNumBtn
+                  sourceKey="{{orderInfo.phoneDataVerifyData.sourceKey}}"
+                  disableLoading="{{orderInfo.phoneDataVerifyData.disableLoading}}"
+                  limitFrequency="{{orderInfo.phoneDataVerifyData.limitFrequency}}"
+                  btnReadyClassName="btnnew"
+                  btnErrorClassName="btnnew"
+                  btnLoadingClassName="btnnew"
+                  btnErrorText="暂不可用，请稍后再试"
+                  btnReadyText="{{orderInfo.buttonText}}"
+                  btnLoadingText="{{orderInfo.buttonText}}"
+                  bind:cgetphonenumber="phoneNumberHandler"
+              >
+              </getPhoneNumBtn>
+            </view>
+            <view wx:elif="{{!isUerLogin && !orderInfo.isPhoneVerify}}">
+                <button class="button" bindtap="handleUnPhoneVerify">
+                  {{orderInfo.buttonText}}
+                </button>
+            </view>
+            <view wx:elif="{{isUerLogin && phoneNumber && phoneNumber.length}}">
+                <block wx:if="{{(nickName.length && nickName !== '微信用户') || !canIUseProfile}}">
+                  <button class="button" bindtap="getPhoneNumberByTicket">
+                    {{orderInfo.buttonText}}
+                  </button>
+                </block>
+                <block wx:elif="{{canIUseProfile}}">
+                  <button class="button" bindtap="getUserProfile">
+                    {{orderInfo.buttonText}}
+                  </button>
+                </block>
+            </view>
+            <view wx:elif="{{orderInfo.isPhoneVerify}}">
+              <getPhoneNumBtn
+                  sourceKey="{{orderInfo.phoneDataVerifyData.sourceKey}}"
+                  disableLoading="{{orderInfo.phoneDataVerifyData.disableLoading}}"
+                  limitFrequency="{{orderInfo.phoneDataVerifyData.limitFrequency}}"
+                  btnReadyClassName="btnnew"
+                  btnErrorClassName="btnnew"
+                  btnLoadingClassName="btnnew"
+                  btnErrorText="暂不可用，请稍后再试"
+                  btnReadyText="{{orderInfo.buttonText}}"
+                  btnLoadingText="{{orderInfo.buttonText}}"
+                  bind:cgetphonenumber="mobileTokenSeizeBind"
+              >
+              </getPhoneNumBtn>
+            </view>
+            <view wx:else>
+                <button class="button" bindtap="handleUnPhoneVerify">
+                  {{orderInfo.buttonText}}
+                </button>
+            </view>
+        </block>
+       
+        <!-- 已砍，展示分享按钮，再砍一刀开关关闭 -->
+        <button wx:elif="{{orderStatus === 2 && orderInfo.hasBargained}}" class="button" bindtap="getScrollBottom">
+          逛逛低价机票
+        </button>
+
+        <!-- 已结束，置灰 + 不可点击按钮 -->
+        <button wx:elif="{{orderStatus === 3 || orderStatus === 4 || orderStatus === 5}}" class="button">
+          {{orderInfo.buttonText}}
+        </button>
+      </view>
+    </block>
+  </view>
+</view>

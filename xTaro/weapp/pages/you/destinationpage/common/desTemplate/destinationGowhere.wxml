@@ -1,0 +1,29 @@
+<template name="destinationGowhere">
+  <view class="destination-section destination-gowhere" wx:if="{{gowhereData.sightInfoList}}" data-modulename="{{gowhereData.title}}">
+    <!-- destinationGowhere -->
+    <view class="destination-title destination-title-padding2">
+		<view class="title-name">{{gowhereData.title}}</view>
+		<!-- <view class="title-sub" bindtap="toMorePlace" data-moreschema="{{gowhereData.moreSchema}}">更多<text></text></view> -->
+		<navigator class="title-sub" hover-class="none" target="miniProgram" open-type="navigate" app-id="{{gowhereData.appId}}" path="{{gowhereData.moreSchema}}" extra-data="" version="release">更多<text class="title-sub-more"></text></navigator>
+	</view>
+	<view class="destination-scroll-wrap">
+		<scroll-view class="destination-scroll-view gowhere-scroll" scroll-x scroll-left="{{gowhereData.scrollLeft}}">
+			<block wx:for="{{gowhereData.sightInfoList}}" wx:key="*this" wx:index="index">
+				<!-- <navigator bindtap="toPlaceDetail" data-ubttitle="{{gowhereData.title}}" data-ubtitemid="{{item.sightId}}" data-ubtname="{{item.name}}" class="destination-scroll-item" hover-class="none" target="miniProgram" open-type="navigate" app-id="{{gowhereData.appId}}" path="{{item.sightSchema}}" extra-data="" version="release"> -->
+			<view class="destination-scroll-item" bindtap="toPlaceDetail" data-sightschema="{{item.sightSchema}}" data-ubttitle="{{gowhereData.title}}" data-ubtitemid="{{item.sightId}}" data-ubtname="{{item.name}}">
+
+					<view class="gowhere-label" wx:if="{{index==0||index==1||index==2||index==3||index==4}}">
+						<view>TOP</view>
+						<view class="gowhere-labelnum">{{index+1}}</view>
+					</view>
+					<image src="{{item.imageUrl}}" />
+					<view class="gowhere-name">{{item.name}}</view>
+					<view class="gowhere-score">{{item.rating}}分</view>
+				</view>
+				<!-- </navigator> -->
+			</block>
+		</scroll-view>
+	</view>
+
+  </view>
+</template>

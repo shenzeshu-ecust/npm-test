@@ -1,0 +1,110 @@
+.mkt-assist-wrap{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.mkt-ellipsis{
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow-x:hidden;
+}
+.mkt-assist-wrap image{
+  width: 100%;
+  height: 100%;
+}
+.mkt-assist-wrap .mkt-pic{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: 33rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2021/06/xcx_assist/photo.png') center/100rpx 100rpx no-repeat;
+}
+.mkt-assist-wrap .mkt-nickname{
+  font-size: 30rpx;
+  color: #333;
+  margin-top: 13rpx;
+}
+.mkt-assist-wrap .mkt-title{
+  font-size: 34rpx;
+  color: #333;
+  margin-top: 6rpx;
+  font-weight: bold;
+}
+.mkt-assist-wrap .mkt-subtitle{
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 5rpx;
+}
+.mkt-assist-wrap .mkt-assist-list{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap:wrap;
+  
+}
+
+.mkt-assist-wrap .mkt-assist-list .mkt-assist-item{
+  width: 100rpx;
+  flex-shrink:0;
+  margin-top: 30rpx;
+}
+.mkt-assist-wrap .mkt-assist-list .mkt-assist-item .mkt-assist-pic{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #CBE6FF url('https://images3.c-ctrip.com/marketing/2021/06/xcx_assist/head.png') 0 0/100rpx no-repeat;
+}
+.mkt-assist-wrap .mkt-assist-list .mkt-assist-item .mkt-assist-text{
+  font-size: 22rpx;
+  color: #333;
+  text-align: center;
+  max-width: 100%;
+  margin-top: 14rpx;
+}
+.mkt-assist-wrap .mkt-guest-btn{
+  width: 100%;
+  display: flex;
+  margin-top: 44rpx;
+  justify-content: space-around;
+}
+.mkt-assist-wrap .mkt-guest-btn .btn-assist{
+  font-size: 32rpx;
+  color: #fff;
+  width: 280rpx;
+  height: 98rpx;
+  line-height: 96rpx;
+  text-align: center;
+  background-size: 280rpx;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+.mkt-assist-wrap .mkt-guest-btn .btn-assist:after{
+  display: none;
+}
+.mkt-assist-wrap .mkt-guest-btn .btn-assist.red{
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/06/xcx_assist/btn-red.png');
+}
+.mkt-assist-wrap .mkt-guest-btn .btn-assist.blue{
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/06/xcx_assist/btn-blue.png');
+}
+.mkt-assist-wrap .btn-assist-long,.mkt-assist-wrap .mkt-owner-btn{
+  font-size: 32rpx;
+  color: #fff;
+  width: 580rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  margin-top: 44rpx;
+  text-align: center;
+  background-size: 580rpx;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  /* background: url('https://images3.c-ctrip.com/marketing/2021/06/xcx_assist/btn-long2.png') 0 /580rpx no-repeat; */
+}

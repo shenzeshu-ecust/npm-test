@@ -1,0 +1,151 @@
+@import "../../index.wxss";
+
+.sel-box {
+    padding-top: 40rpx;
+}
+.border {
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.sel-item .from, .sel-item .to{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 136rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.sel-item .from {
+    justify-content: flex-start;
+}
+.sel-item .to {
+    justify-content: flex-end;
+}
+.sel-item .strong {
+    color: #333;
+    letter-spacing: -0.16rpx;
+}
+.sel-item .strong0{
+    font-size: 44rpx;
+    line-height: 136rpx;
+}
+.sel-item .strong1{
+    font-size: 34rpx;
+    line-height: 68rpx;
+}
+.sel-item .strong2 {
+    font-size: 26rpx;
+    line-height: 45rpx;
+    font-weight: 500;
+}
+.sel-item .from.exchange, .sel-item .to.exchange {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.sel-item .from.exchange {
+    justify-content: flex-end;
+}
+.sel-item .to.exchange {
+    justify-content: flex-start;
+}
+.sel-box .sel-item .sel-time{
+    color: #111111;
+    font-size: 44rpx;
+    font-family: SFProDisplay-Medium;
+    font-weight: 500;
+    letter-spacing: 0.7rpx;
+    line-height: 54rpx;
+    display: flex;
+    align-items: center;
+}
+.sel-time .time-text {
+    color: #555555;
+    font-size: 30rpx;
+    line-height: 38rpx;
+    font-weight: normal;
+    letter-spacing: -0.48rpx;
+    margin-left: 4rpx;
+}
+
+.sel-box .btn-search {
+    margin-top: 32rpx;
+}
+.sel-box .border .passenger-info{
+    flex: 1;
+    font-size: 30rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    letter-spacing: -0.48rpx;
+}
+.sel-box .sel-item .more-icon {
+    width: 32rpx;
+    height: 32rpx;
+    background: url("https://images3.c-ctrip.com/train/2023-3/xiaochengxu/3.23/shaixuan/ic-zk.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+.change-tiptop {
+    width: 456rpx;
+    height: 42rpx;
+    line-height: 42rpx;
+    text-align: left;
+    position: absolute;
+    padding-left: 15rpx;
+    background: #2582F5;
+    color: #ffffff;
+    border-radius: 4rpx;
+    font-size: 22rpx;
+    font-family: PingFangSC-Regular;
+    top: calc(50% + 33rpx);
+}
+.change-tiptop .icon-closed {
+    width: 22rpx;
+    height: 22rpx;
+    top: 12rpx;
+    right: 10rpx;
+}
+.change-tiptop .icon-closed::before, .change-tiptop .icon-closed::after {
+    background-color: #ffffff;
+    height: 22rpx;
+}
+.change-tiptop::before {
+    content: "";
+    position: absolute;
+    border: 10rpx solid #2582F5;
+    border-color: transparent transparent #2582F5 transparent;
+    top: -17rpx;
+    left: 15rpx;
+}
+.usercoupon-box {
+    height: 80rpx;
+    border-radius: 16rpx;
+    box-shadow: 0px 6px 16px 0px rgba(0, 0, 0, 0.04);
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    margin: 16rpx;
+    justify-content: center;
+}
+.usercoupon-box .icon-coupon {
+    width: 32rpx;
+    height: 38rpx;
+}
+
+.usercoupon-box .coupou-text {
+    color: #111111;
+    font-size: 26rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: normal;
+    letter-spacing: -0.42px;
+    margin-left: 12rpx;
+}
+
+.usercoupon-box .coupou-text span {
+    color: #FF5600;
+}
+.usercoupon-box i {
+    margin-left: 20rpx;
+    color: #666666;
+    font-size: 20rpx;
+}

@@ -1,0 +1,9 @@
+<detail-card-container smart-trip-id="{{smartTripId}}" from-uid="{{fromUid}}" theme="0" add-action-code='c_mp_train_detail_addtrip_click' checktrip-action-code='c_train_share_checktrip_click' load-success="{{loadSuccess}}" show-fail-view="{{isLoadCompleted&&!loadSuccess}}">
+  <view wx:if="{{loadSuccess}}">
+    <train-compt trainCardInfo="{{trainCardInfo}}" bindshowStopStationLayer="showStopStationLayerEventListener"></train-compt>
+  </view>
+</detail-card-container>
+
+<!-- 白屏检测 -->
+<!-- viewReadyHandle为框架提供、实现 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

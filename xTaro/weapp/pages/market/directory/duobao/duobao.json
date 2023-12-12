@@ -1,0 +1,8 @@
+{
+    "navigationStyle":"custom",
+    "usingComponents": {
+      "nav-bar": "/cwx/component/navbar/navbar",
+      "touzhu": "./comps/touzhu",
+      "modal": "./comps/modal"
+    }
+  }

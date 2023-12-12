@@ -1,0 +1,100 @@
+<view class="detail-comp">
+  <view class="back-modal" id='backModel' bindtap="onClose"></view>
+  <view class="open-box" id='openBox' bindtap="onClose">
+    <view class='main-box'>
+      <view class="main">
+
+        <!-- 头部 -->
+        <block wx:if="{{titleType != null}}">
+          <view>
+            <!-- 公共标题 -->
+            <view class="universal" wx:if="{{titleType == 0}}">
+              <view class="line-max-2">{{customTitle[0].title}}</view>
+              <view class="line-max-2">{{customTitle[0].content}}</view>
+            </view>
+            <!-- 酒店标题 -->
+            <view class="top-hotel" wx:if="{{titleType == 1}}">
+              <view class="top-title line-max-2">{{customTitle[0].title}}</view>
+              <view class="top-content line-max-2">{{customTitle[0].content}}</view>
+              <view class="check normalfont">
+                <text class="bigfont">{{customTitle[0].checkin}}</text>
+                <text>入住</text>
+                <text class="bigfont">{{customTitle[0].checkout}}</text>
+                <text>离店</text>
+                <text class="bigfont">{{customTitle[0].night}}</text>
+                <text>晚</text>
+                <text class="bigfont">{{customTitle[0].room}}</text>
+                <text>间</text>
+              </view>
+            </view>
+            <!-- 机票标题 -->
+            <block wx:if="{{titleType == 2}}">
+              <view class="airplay" wx:for="{{customTitle}}" wx:for-item="item">
+                <view class="bigfont">
+                  <view class="title-1 line-max-2">
+                    {{item.tag}}{{item.tag && item.title ? ':' : ''}}{{item.title}}
+                  </view>
+                  <view class="title-2 line-max-2">
+                    {{item.content}}
+                  </view>
+                </view>
+              </view>
+            </block>
+            <!-- 用车标题 -->
+            <block wx:if="{{titleType == 3}}">
+              <view class="useCar">
+                <view class="bigfont">
+                  {{customTitle[0].carModel}} {{customTitle[0].useduration}}
+                </view>
+                <view class="normalfont">取车：{{customTitle[0].takeCarTime}}{{customTitle[0].takeCarAddress}}</view>
+                <view class="normalfont">还车：{{customTitle[0].recarTime}}{{customTitle[0].recarAddress}}</view>
+              </view>
+            </block>
+          </view>
+          <view class="line"></view>
+        </block>
+        <!-- 详情 -->
+        <view class="middle">
+          <!-- Tips -->
+          <view class="line-max-2 tip " wx:if="{{KOrderTips.KOrderTipsContent}}">
+            {{KOrderTips.KOrderTipsTitle}}
+            {{KOrderTips.KOrderTipsTitle ? ':' : ''}}
+            {{KOrderTips.KOrderTipsContent}}
+          </view>
+
+          <!-- Content -->
+          <block wx:if="{{KOrderDetail.length>0}}">
+            <view wx:for="{{KOrderDetail}}" wx:for-item="detail" class="detail-item">
+              <view class="big">{{detail.KOrderDetailMainTitle}}</view>
+              <block wx:if="{{detail.KOrderDetailMinor.length>0}}">
+                <view class="normal" wx:for="{{detail.KOrderDetailMinor}}" wx:for-item="minor" wx:key="">
+                  <view class="item-fee">
+                    <view class="item-fee-l">{{minor.KOrderDetailMinorTitle}}</view>
+                    <view wx:if="{{minor.KOrderDetailMinorValue}}" class="item-fee-r">{{minor.KOrderDetailMinorValue}}
+                    </view>
+                  </view>
+                  <view wx:if="{{minor.KOrderDetailMinorComment}}" class="top-num">{{minor.KOrderDetailMinorComment}}
+                  </view>
+                </view>
+              </block>
+              <view wx:else class="normal-value">{{detail.KOrderDetailMainValue}}</view>
+            </view>
+          </block>
+        </view>
+
+        <!-- 底部 -->
+        <view class="line"></view>
+        <view class="bottom">
+          <view>
+            <text>应付总额 </text>
+            <text class='bottom-num'>￥{{order.orderAmount}}</text>
+          </view>
+          <view style="display: flex">
+            <text class="bottom-r" id='upClose' bindtap="onClose">收起</text>
+            <view class="icon up"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

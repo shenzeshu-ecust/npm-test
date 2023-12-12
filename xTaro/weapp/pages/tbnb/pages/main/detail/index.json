@@ -1,0 +1,17 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "途家民宿",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "nav-bar": "./components/nav_bar/index",
+    "house-service": "./components/house_service/index",
+    "house-pricedesc": "./components/house_price_desc/index",
+    "house-peacelive": "./components/house_peace_live/index",
+    "price-calendar": "./components/price_calendar/index",
+    "promotion-comp": "./components/promotion/index",
+    "landlord-introduction": "./components/landlord_introduction/index",
+    "framework-comp": "../../../component/framework/index"
+  }
+}

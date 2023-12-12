@@ -1,0 +1,58 @@
+<mp-navigation-bar wx:if="{{showCustomNav}}" id="mp-navigation" back="{{navigationBar.back}}" color="{{navigationBar.color}}" background="{{navigationBar.background}}" show="{{navigationBar.show}}">
+  <view slot="center" class="custom-navigation-center">
+    <text class="title">{{navigationBar.title}}</text>
+  </view>
+  <view slot="left" class="custom-navigation-left" bindtap="backTo">
+    <image src="https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/back_v2.png" class="back-icon" />
+  </view>
+</mp-navigation-bar>
+<view class="ls-guest-service">
+  <view class="container">
+    <scroll-view class="guest-service" scroll-y="true" bindscroll="onScroll" bindscrolltoupper="handleScrollToUpper">
+      <view class="guest-header">
+        <view class="guest-img"></view>
+      </view>
+      <view class="guest-body" wx:if="{{serviceList && serviceList.length !== 0 || facilityList && facilityList.length !== 0}}">
+        <view class="service-item" wx:if="{{facilityList && facilityList.length !== 0}}">
+          <view class="item-begin">
+            <text class="wechat-font-guest-hot hot-facility"></text>
+            热门设施
+          </view>
+          <view class="right-detail1">
+            <view wx:for="{{facilityList}}" wx:for-item="facItem" class="facility-content">
+              <view class="facility">
+                <view class="facility-name">{{facItem.facilityName}}</view>
+                <view class="open-time">{{facItem.startTime}}-{{facItem.endTime}}</view>
+              </view>
+              <view class="content-lay">{{facItem.address}}</view>
+              <view wx:if="{{facItem.remark}}" class="content-lay">注：{{facItem.remark}}</view>
+            </view>
+          </view>
+        </view>
+        <block wx:if="{{serviceList && serviceList.length !== 0}}">
+          <view wx:for="{{serviceList}}" wx:for-item="item" class="service-item">
+            <view class="item-begin">
+              <image class="service-icon" src="{{item.noHighCategoryIcon}}" />
+              {{item.serviceCategoryName}}
+            </view>
+            <view class="right-detail">
+              <view class="item-detail" wx:if="{{item.leftList && item.leftList.length !== 0}}">
+                <view wx:for="{{item.leftList}}" wx:for-item="itemLeft">
+                  {{itemLeft.serviceName}}
+                </view>
+              </view>
+              <view class="item-detail" wx:if="{{item.rightList && item.rightList.length !== 0}}">
+                <view wx:for="{{item.rightList}}" wx:for-item="itemRight">
+                  {{itemRight.serviceName}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+    <button class="service-btn" bindtap="contactHotel" wx:if="{{serviceList && serviceList.length !== 0}}">联系前台</button>
+  </view>
+</view>
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

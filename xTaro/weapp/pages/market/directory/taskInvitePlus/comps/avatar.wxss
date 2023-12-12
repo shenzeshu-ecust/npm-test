@@ -1,0 +1,59 @@
+.invitePlus__avatar_box {
+  position: relative;
+  box-sizing: border-box;
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #fff4eb;
+  border: 1rpx dashed #ff8b26;
+  border-radius: 45rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.invitePlus__avatar_box_2{
+  border: none;
+}
+
+.invitePlus__avatar_plus{
+  font-size: 50rpx;
+  /* font-weight: bold; */
+  line-height: 1;
+  color: #FFBF88;
+  margin-top: -10rpx;
+}
+
+.invitePlus__avatar_tips {
+  position: absolute;
+  bottom: -50rpx;
+  color: #bbbbbb;
+  font-size: 20rpx;
+  white-space: nowrap;
+}
+
+.invitePlus__avatar_box_receive_price {
+  bottom: -20rpx;
+  left: 50%;
+  padding: 0 16rpx;
+  line-height: 34rpx;
+  text-align: center;
+  transform: translateX(-50%) scale(.8);
+  color: #ffffff;
+  font-size: 20rpx;
+  font-weight: bold;
+  position: absolute;
+  white-space: nowrap;
+  background-color: rgb(255, 66, 107);
+  border-radius: 40rpx;
+}
+.receive_price_done{
+  background: #bbbbbb;
+  color: #fff;
+}
+.tips__receive{
+  color: #FF7117;
+}

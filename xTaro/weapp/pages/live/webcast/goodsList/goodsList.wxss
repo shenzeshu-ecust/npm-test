@@ -1,0 +1,745 @@
+.live-shop-card {
+  padding: 24rpx 0;
+  display: flex;
+  position: relative;
+}
+.live-shop-card:before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  left: 0;
+  top: 0;
+  border-bottom: 1px solid #eee;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scale(0.5, 0.5);
+  transform: scale(0.5, 0.5);
+  box-sizing: content-box;
+  z-index: -1;
+}
+.live-shop-card .list-img {
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 8rpx;
+  background: url(https://pages.c-ctrip.com/you/component-local/default.png) 50% no-repeat;
+  background-size: 50%;
+  position: relative;
+  overflow: hidden;
+}
+.live-shop-card .list-img image {
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 8rpx;
+}
+.live-shop-card .list-img .tag-warpper {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.live-shop-card .list-img .tag {
+  width: 42rpx;
+  background: rgba(51, 51, 51, 0.8);
+  border-radius: 8rpx 0 8rpx 0;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #ffffff;
+  line-height: 40rpx;
+  text-align: center;
+}
+.live-shop-card .list-img .shop-master-recommend {
+  position: absolute;
+  right: 20rpx;
+  top: 0;
+  width: 50rpx;
+  height: 60rpx;
+  border-radius: 0rpx;
+}
+.live-shop-card .list-img .explanation-item {
+  position: absolute;
+  font-family: PingFangSC-Regular;
+  color: #ffffff;
+  text-align: center;
+  font-size: 26rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.live-shop-card .list-img .explanation-item .i {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 4rpx;
+  background-size: 24rpx;
+}
+.live-shop-card .list-img .explanation {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 32rpx;
+  background: linear-gradient(-90deg, #ff001b 0%, #ff6600 100%);
+  line-height: 32rpx;
+}
+.live-shop-card .list-img .explanation .ask-text {
+  font-size: 20rpx;
+}
+.live-shop-card .list-img .ask-explanation {
+  width: 128rpx;
+  height: 48rpx;
+  bottom: 16rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 44rpx;
+  line-height: 60rpx;
+}
+.live-shop-card .list-img .ask-explanation .i {
+  margin-top: 2rpx;
+  background-image: url("https://pages.c-ctrip.com/livestream/video/white-voicenew.png");
+}
+.live-shop-card .list-img .ask-explanation .ask-text {
+  font-size: 24rpx;
+}
+.live-shop-card .list-img .ask-explanation.on .ask-text {
+  opacity: 0.45;
+}
+.live-shop-card .list-img .ask-explanation.on .i {
+  opacity: 0.45;
+}
+.live-shop-card .list-img .sale-status-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8rpx 8rpx 8rpx 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.live-shop-card .list-img .sale-status-mask .sale-status-text {
+  color: #ffffff;
+  font-size: 26rpx;
+}
+.live-shop-card .card-info {
+  padding: 0 0 0 16rpx;
+  width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.live-shop-card .card-info .title {
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #333333;
+  letter-spacing: -0.17px;
+  line-height: 34rpx;
+  text-align: left;
+  font-weight: bold;
+}
+.live-shop-card .card-info .title.line2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: pre-wrap;
+  max-height: 68rpx;
+}
+.live-shop-card .card-info .score-info {
+  display: flex;
+  align-items: center;
+  margin-top: 12rpx;
+  height: 26rpx;
+  line-height: 26rpx;
+}
+.live-shop-card .card-info .score-info.rankTag {
+  height: 32rpx;
+}
+.live-shop-card .card-info .score-info .comment-score {
+  color: #0086f6;
+  font-family: PingFangSC-Semibold;
+  font-size: 26rpx;
+  font-weight: 600;
+}
+.live-shop-card .card-info .score-info .unit {
+  color: #0086f6;
+  font-size: 22rpx;
+}
+.live-shop-card .card-info .score-info .line-v {
+  background: #dddddd;
+  height: 26rpx;
+  width: 1rpx;
+  margin-left: 12rpx;
+  margin-right: 12rpx;
+}
+.live-shop-card .card-info .score-info .comment-count {
+  color: #666666;
+  font-family: PingFangSC-Light;
+  font-size: 22rpx;
+  font-weight: 300;
+}
+.live-shop-card .card-info .score-info .rank-info-wrapper {
+  display: flex;
+  align-items: center;
+}
+.live-shop-card .card-info .score-info .rank-info-wrapper .rank-info {
+  background: #FFEEDF;
+  border-radius: 4rpx;
+  height: 32rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 8rpx;
+  padding-right: 8rpx;
+}
+.live-shop-card .card-info .score-info .rank-info-wrapper .rank-info .icon {
+  width: 24rpx;
+  height: 24rpx;
+}
+.live-shop-card .card-info .score-info .rank-info-wrapper .rank-info .rank-title {
+  color: #673114;
+  font-family: PingFangSC-Medium;
+  font-size: 22rpx;
+  font-weight: 500;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: pre-wrap;
+  height: 32rpx;
+  line-height: 32rpx;
+  margin-right: 4rpx;
+  font-weight: bold;
+}
+.live-shop-card .card-info .tag-info {
+  display: flex;
+  margin-top: 12rpx;
+  flex-wrap: wrap;
+  height: 32rpx;
+  overflow: hidden;
+}
+.live-shop-card .card-info .tag-info .tag-name {
+  background: #f2f5f8;
+  border-radius: 4rpx;
+  height: 32rpx;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #5678a8;
+  font-size: 22rpx;
+  line-height: 34rpx;
+  padding: 0 6rpx;
+  margin-right: 8rpx;
+}
+.live-shop-card .card-info .down {
+  height: 24rpx;
+  border-radius: 4rpx;
+  width: max-content;
+  font-family: PingFangSC-Regular;
+  font-size: 18rpx;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.live-shop-card .card-info .down .l-low {
+  line-height: 24rpx;
+  padding: 0rpx 10rpx 0 8rpx;
+  color: #ffffff;
+  background: linear-gradient(-90deg, #ff001b 0%, #ff6600 100%);
+  display: flex;
+  align-items: center;
+}
+.live-shop-card .card-info .down .r-discount {
+  background: #ffe6e8;
+  color: #ff0022;
+  padding: 0 12rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 18rpx;
+  height: 24rpx;
+  border: 0.2rpx solid #FF001B;
+  box-sizing: border-box;
+  border-radius: 0 4rpx 4rpx 0;
+  display: flex;
+  align-items: center;
+}
+.live-shop-card .card-info .price-btn {
+  display: flex;
+  align-items: flex-end;
+  flex: 1;
+}
+.live-shop-card .card-info .price {
+  font-family: PingFangSC-Regular;
+  font-size: 0;
+  width: 0;
+  flex: 1;
+  margin-bottom: 4rpx;
+}
+.live-shop-card .card-info .price .price-view {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin-bottom: 2rpx;
+}
+.live-shop-card .card-info .price .new .t1 {
+  color: #ff0022;
+  font-family: PingFangSC-Medium;
+  font-size: 22rpx;
+  font-weight: 500;
+  height: 26rpx;
+  letter-spacing: -0.35rpx;
+  line-height: 26rpx;
+  display: inline-block;
+  min-width: 22rpx;
+  text-align: center;
+}
+.live-shop-card .card-info .price .new .t2 {
+  color: #ff0022;
+  font-size: 40rpx;
+  font-weight: 600;
+  height: 48rpx;
+  letter-spacing: -0.54rpx;
+  line-height: 48rpx;
+}
+.live-shop-card .card-info .price .new .t3 {
+  color: #ff0022;
+  font-family: PingFangSC-Medium;
+  font-size: 22rpx;
+  font-weight: 500;
+  height: 26rpx;
+  letter-spacing: -0.85rpx;
+  line-height: 26rpx;
+  margin-left: 2rpx;
+  display: inline-block;
+  min-width: 22rpx;
+  text-align: center;
+  margin-left: 4rpx;
+}
+.live-shop-card .card-info .price .new .t4 {
+  text-decoration: line-through;
+  color: #999999;
+  font-family: PingFangSC-Regular;
+  font-size: 22rpx;
+  font-weight: normal;
+  letter-spacing: 0rpx;
+  margin-left: 6rpx;
+  height: 24rpx;
+  line-height: 24rpx;
+}
+.live-shop-card .card-info .btn {
+  position: relative;
+  margin-left: 10rpx;
+  background: linear-gradient(-90deg, #ff001b 0%, #ff6600 100%);
+  border-radius: 30rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 26rpx;
+  color: #ffffff;
+  width: 132rpx;
+  text-align: center;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.live-shop-card .card-info .btn .buy {
+  font-weight: bold;
+}
+.live-shop-card .card-info .btn .sale-status-mask-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.product-wrapper-mask {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 120;
+}
+.product-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 125;
+  background: #fff;
+  border-radius: 16rpx 16rpx 0 0;
+  transform: translate3d(0, 100%, 0);
+  transform-origin: center;
+  transition: all 0.3s ease-in-out;
+  visibility: hidden;
+}
+.product-wrapper.on {
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+}
+.inner {
+  padding: 0 24rpx 0;
+  display: flex;
+  flex-direction: column;
+}
+.inner .filter-view {
+  height: 44px;
+  display: flex;
+  white-space: nowrap;
+  width: 100%;
+}
+.inner .filter-view .filter-item {
+  height: 44px;
+  padding-left: 22rpx;
+  padding-right: 22rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.inner .filter-view .filter-item:first-child {
+  padding-left: 0;
+}
+.inner .filter-view .filter-item.on .filter-name {
+  position: relative;
+  color: #333333;
+  font-family: PingFangSC-Medium;
+  font-weight: 700;
+}
+.inner .filter-view .filter-item.on .filter-name::after {
+  content: "";
+  position: absolute;
+  bottom: -11px;
+  left: 0;
+  width: 100%;
+  background: #333333;
+  border-radius: 2rpx;
+  height: 8rpx;
+  transform: scaleY(0.5);
+}
+.inner .filter-view .filter-item .filter-name {
+  color: #666666;
+  font-size: 30rpx;
+}
+.inner .pro-list {
+  overflow-y: auto;
+  height: 100%;
+  position: relative;
+  touch-action: none;
+}
+.inner .pro-list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+  background: transparent;
+  display: none;
+}
+.inner .pro-list .sk_scene_class {
+  width: 100% !important;
+  padding-top: 20rpx !important;
+  padding-bottom: 20rpx !important;
+}
+.inner .no-pro {
+  margin: 80rpx auto 0;
+  text-align: center;
+}
+.inner .no-pro .n-img {
+  margin: 0 auto;
+  width: 200rpx;
+  height: 200rpx;
+  background: url(https://pages.c-ctrip.com/livestream/video/share-noProduct.png);
+  background-size: 200rpx;
+}
+.inner .no-pro .n-text {
+  margin-top: 16rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+  color: #333333;
+}
+.inner .search-no-pro {
+  margin: 80rpx auto 0;
+  text-align: center;
+}
+.inner .search-no-pro .n-img {
+  margin: 0 auto;
+  width: 314rpx;
+  height: 345rpx;
+  background: url(https://pages.c-ctrip.com/livestream/live/error_status/common_noresult.png) no-repeat center;
+  background-size: 100% 100%;
+}
+.inner .search-no-pro .n-text {
+  margin-top: 47rpx;
+  color: #333333;
+  font-size: 34rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+}
+.inner .search-no-pro .n-sub-text {
+  color: #666666;
+  font-size: 26rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  margin-top: 12rpx;
+}
+.inner .search-history-head {
+  margin-top: 16rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.inner .search-history-head .search-back {
+  width: 48rpx;
+  height: 48rpx;
+  background: url("https://pages.c-ctrip.com/livestream/video/333-back.png") no-repeat center;
+  background-size: 48rpx;
+  margin-right: 8rpx;
+}
+.inner .search-history-head .search-input {
+  width: 100%;
+  height: 72rpx;
+  border-radius: 36rpx;
+  background: #f5f5f5;
+  position: relative;
+}
+.inner .search-history-head .search-input .search-comment {
+  width: 100%;
+  padding-left: 32rpx;
+  padding-right: 66rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  color: #333333;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  letter-spacing: 0px;
+  box-sizing: border-box;
+}
+.inner .search-history-head .search-input .search-close {
+  position: absolute;
+  z-index: 10;
+  right: 24rpx;
+  top: 50%;
+  margin-top: -30rpx;
+  width: 60rpx;
+  height: 60rpx;
+  background: url("https://pages.c-ctrip.com/livestream/live/live_good_close.png") no-repeat center;
+  background-size: 32rpx;
+}
+.inner .search-title {
+  margin-top: 32rpx;
+  margin-bottom: 20rpx;
+  color: #333333;
+  font-size: 24rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  letter-spacing: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.inner .search-title .search-delete {
+  width: 32rpx;
+  height: 32rpx;
+  background: url("https://pages.c-ctrip.com/livestream/live/live_good_delete.png") no-repeat center;
+  background-size: 32rpx;
+}
+.inner .search-history-record {
+  width: 100%;
+}
+.inner .search-history-record .search-item-wrap {
+  display: inline-block;
+  min-width: 104rpx;
+  max-width: 100%;
+  margin-right: 20rpx;
+}
+.inner .search-history-record .search-item-wrap .search-item {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+  height: 64rpx;
+  line-height: 64rpx;
+  background: #f5f5f5;
+  border-radius: 32rpx;
+  color: #333333;
+  font-size: 24rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  letter-spacing: 0px;
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.inner .search-goods-result {
+  color: #333333;
+  font-size: 24rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  letter-spacing: 0px;
+  margin-top: 16rpx;
+  height: 38rpx;
+}
+.inner .goods-search-switch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 88rpx;
+}
+.inner .goods-search-switch.on {
+  height: 98rpx;
+}
+.inner .goods-search-switch .pro-title {
+  color: #333333;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  letter-spacing: 0px;
+}
+.inner .goods-search-switch .goods-shop-info {
+  display: flex;
+  align-items: center;
+}
+.inner .goods-search-switch .goods-shop-info .pro-icon {
+  width: 32rpx;
+  height: 32rpx;
+  background: url("https://pages.c-ctrip.com/livestream/live/live_pro_icon.png") no-repeat center;
+  background-size: 32rpx;
+  margin-left: 8rpx;
+}
+.inner .goods-search-switch .goods-shop-info .pro-right-arrow {
+  width: 32rpx;
+  height: 32rpx;
+  background: url("https://pages.c-ctrip.com/livestream/live/live_pro_arrow.png") no-repeat center;
+  background-size: 32rpx;
+  margin-left: 8rpx;
+}
+.inner .goods-search-switch .pro-icons {
+  display: flex;
+}
+.inner .goods-search-switch .pro-icons .pro-icons-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 40rpx;
+}
+.inner .goods-search-switch .pro-icons .pro-icons-item .couple-icon {
+  width: 36rpx;
+  height: 36rpx;
+  background: url("https://dimg04.c-ctrip.com/images/1qv0512000ckbgilgA8FA.png") no-repeat center;
+  background-size: 36rpx;
+}
+.inner .goods-search-switch .pro-icons .pro-icons-item .search-icon {
+  width: 36rpx;
+  height: 36rpx;
+  background: url("https://dimg04.c-ctrip.com/images/0AS3012000a61wdgo757F.png") no-repeat center;
+  background-size: 36rpx;
+}
+.inner .goods-search-switch .pro-icons .pro-icons-item .icon-text {
+  color: #333333;
+  font-size: 22rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 24rpx;
+}
+.inner .goods-close-switch {
+  height: 88rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.inner .goods-close-switch.on {
+  height: 98rpx;
+}
+.inner .goods-close-switch .pro-title {
+  font-family: PingFangSC-Medium;
+  font-size: 34rpx;
+  color: #333333;
+  text-align: center;
+  font-weight: bold;
+}
+.inner .goods-close-switch .goods-shop-info {
+  display: flex;
+  align-items: center;
+}
+.inner .goods-close-switch .goods-shop-info .pro-icon {
+  width: 32rpx;
+  height: 32rpx;
+  background: url("https://pages.c-ctrip.com/livestream/live/live_pro_icon.png") no-repeat center;
+  background-size: 32rpx;
+  margin-left: 8rpx;
+}
+.inner .goods-close-switch .goods-shop-info .pro-right-arrow {
+  width: 32rpx;
+  height: 32rpx;
+  background: url("https://pages.c-ctrip.com/livestream/live/live_pro_arrow.png") no-repeat center;
+  background-size: 32rpx;
+  margin-left: 8rpx;
+}
+.inner .goods-close-switch .product-close {
+  width: 40rpx;
+  height: 40rpx;
+  overflow: hidden;
+  background: url("https://pages.c-ctrip.com/livestream/video/333-close.png") no-repeat center;
+  background-size: 40rpx;
+}
+.inner .product-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.inner .product-loading .product-loading-img {
+  width: 60rpx;
+  height: 60rpx;
+}
+.footer-item-goods {
+  width: 146rpx;
+  height: 146rpx;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.footer-item-goods.shopping {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  border-radius: 0;
+  position: relative;
+  bottom: -20rpx;
+}
+.footer-item-goods.shopping .img {
+  width: 146rpx;
+  height: 146rpx;
+}
+.goods-count {
+  position: absolute;
+  left: 50%;
+  margin-left: -27rpx;
+  bottom: 27rpx;
+  text-align: center;
+  color: #ffffff;
+  font-family: PingFangSC-Medium;
+  font-size: 26rpx;
+  font-weight: 600;
+  height: 33rpx;
+  letter-spacing: 0px;
+  line-height: 33rpx;
+  width: 48rpx;
+}
+.scatter_flower_img {
+  position: absolute;
+  top: 0;
+  width: 146rpx;
+  height: 146rpx;
+  z-index: -1;
+}

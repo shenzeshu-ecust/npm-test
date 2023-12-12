@@ -1,0 +1,141 @@
+@import '../common/common.wxss';
+
+.header {
+  display: flex;
+  flex-direction: column;
+  background-image: url('https://pages.c-ctrip.com/car_dcs/vtm/42ACE9DE-D1AB-44CA-9930-496CBD7EA83F.jpeg');
+  /* background-image: url('https://pages.c-ctrip.com/car_dcs/vtm/homeHead.png'); */
+  background-size: 100%;
+  height: 684rpx;
+  /* height: 590rpx; */
+  padding-left: 24rpx;
+  padding-right: 24rpx;
+}
+.header text{
+  /* margin-top: 308rpx; */
+  margin-top: 412rpx;
+  padding-left: 110rpx;
+  height: 40rpx;
+  color: #ffffff;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  line-height: 40rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 24rpx;
+  padding-right: 24rpx;
+  margin-top: -170rpx;
+}
+.no_guide_info{
+  margin-top: -222rpx;
+}
+
+.find_container{
+  padding: 24rpx 24rpx 0 ;
+}
+.find_fixed_header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20rpx;
+  width: 100%;
+  background-color: #fff;
+  z-index: 100;
+}
+.find_header {
+  display: flex;
+  align-items: center;
+  padding-left: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.find_icon {
+  line-height: 36rpx;
+  font-size: 38rpx !important;
+  margin-right: 8rpx;
+  color: #006FF6;
+}
+
+.find_title{
+  height: 48rpx;
+  color: #111111;
+  font-size: 34rpx;
+  font-weight: 500;
+  letter-spacing: 0px;
+  margin-right: 12rpx;
+}
+
+.find_subtitle {
+  margin-top: 6rpx;
+  color: #888888;
+  font-size: 22rpx;
+}
+.find_tabs {
+  display: flex;
+  align-items: center;
+  padding-left: 24rpx;
+}
+.find_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12rpx;
+  width: 160rpx;
+  height: 60rpx;
+  background: #f5f9ff;
+  border: 1rpx solid #f5f9ff;
+  border-radius: 30rpx;
+  color: #555555;
+  font-size: 26rpx;
+}
+.find_btn.active {
+  border: 1rpx solid #006ff6;
+  color: #006ff6;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  background-color: #ffffff;
+  width: 100%;
+  z-index: 999;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 85rpx 0 108rpx;
+}
+.footer-column {
+  box-sizing: border-box;
+  display: flex;
+  text-align: center;
+  height: 52px;
+  padding-top: 21px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-icon {
+  font-size: 54rpx !important;
+}
+
+.footer-text {
+  font-size: 20rpx;
+  line-height: 30rpx;
+}

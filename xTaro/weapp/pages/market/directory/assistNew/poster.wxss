@@ -1,0 +1,52 @@
+page{
+  background-image:url(https://images3.c-ctrip.com/marketing/2019/08/xcx_deductAmount/poster_bg_bottom_2.png);
+  background-size: 100% 100%;
+  background-repeat: repeat;
+}
+.share_wrap{
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.share_wrap image{
+  width: 100%;
+  margin-bottom: 130rpx;
+}
+.foot{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20rpx 0;
+  background-color: #fff;
+}
+.foot .btn{
+  width: 702rpx;
+  height: 99rpx;
+  line-height: 99rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 32rpx;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 49.5rpx;
+  box-shadow: inset 0px 0px 8px 0px rgba(255, 241, 2, 0.5);
+  background: linear-gradient(-44.56deg, rgb(222, 0, 37) 0%, rgb(255, 111, 54) 100%);
+}
+
+.btn .inner {
+  width: 702rpx;
+  height: 90rpx;
+  border-radius: 45rpx;
+  background: linear-gradient(-45deg, rgb(255, 66, 66) 0%, rgb(255, 155, 93) 100%);
+}
+
+.post_canvas{
+  width:375px;
+  height:603px;
+  position:fixed;
+  top:9999px;
+}

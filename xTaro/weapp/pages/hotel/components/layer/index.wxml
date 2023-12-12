@@ -1,0 +1,26 @@
+<view class="cmask {{needBlurredMask ? 'blur-mask' : ''}}"
+      style="{{maskZIndex ? 'z-index:' + maskZIndex : ''}}"
+      catchtouchmove="noop" bindtap="closeLayer">
+</view>
+<view class="layer"
+      style="{{layerStyle ? layerStyle : ''}}">
+    <view class="layer-header {{needHeadShadow ? 'shadow' : ''}}" catchtouchmove="noop" style="{{headStyle ? headStyle : ''}}">
+        <text class="wechat-font-close4 layer-close black1" catchtap="closeLayer"></text>
+        <block wx:if="{{useTitleSlot}}">
+            <slot name="title"></slot>
+        </block>
+        <block wx:else>
+            <text wx:if="{{titleIconClass}}" class="mr12 {{titleIconClass}}"></text>
+            <text wx:if="{{title}}" class="layer-header-tit ft34">{{title}}</text>
+            <text wx:if="{{subTitle}}" class="layer-header-subtit ft26 mt8 black2">{{subTitle}}</text>
+            <text wx:if="{{topButtonText}}" class="top-btn blue-bgc">{{topButtonText}}</text>
+        </block>
+    </view>
+    <view class="layer-body {{(cancelButtonText || confirmButtonText) ? (subTitle ? 'pd212': 'pd168') : 'pd180'}} {{limitMinHeight ? 'layer-min-height' : ''}}" style="{{contentStyle ? contentStyle : ''}}">
+        <slot name="content"></slot>
+    </view>
+    <view class="layer-footer" wx:if="{{cancelButtonText || confirmButtonText}}" catchtouchmove="noop">
+        <view wx:if="{{cancelButtonText}}" class="layer-btn layer-btn-cancel blue" catchtap="handleCancel">{{cancelButtonText}}</view>
+        <view class="layer-btn layer-btn-confirm blue-bgc {{confirmDisabled ? 'layer-btn-disabled' : ''}}" catchtap="handleConfirm">{{confirmButtonText}}</view>
+    </view>
+</view>

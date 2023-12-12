@@ -1,0 +1,167 @@
+/* pages/you/place/webcast/userPanel/userPanel.wxss */
+
+
+.userpanel-mask{
+	background: rgba(0,0,0, 0.7);
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 110;
+}
+
+.userpanel-wrapper{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 456rpx;
+	z-index: 112;
+	/* background: white; */
+	background: linear-gradient(-211.62deg, rgb(250, 255, 253) 0%, rgb(243, 255, 251) 32.97%, rgb(255, 251, 242) 78.38%, rgb(255, 235, 211) 100%);
+	border-radius: 24rpx 24rpx 0rpx 0rpx;
+}
+
+.panel-avat{
+	width: 120rpx;
+	height: 120rpx;
+	border-radius: 50%;
+	margin: -60rpx auto 0;
+	position: relative;
+	background-image: url(https://pages.c-ctrip.com/livestream/video/userAvat-default.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.panel-avat .avaturl{
+	width: 120rpx;
+	height: 120rpx;
+	border-radius: 50%;
+}
+
+.panel-avat .vip{
+	position: absolute;
+	width: 32rpx;
+	height: 32rpx;
+	right: 0;
+	bottom: 0;
+}
+
+.panel-name{
+	margin: 12rpx 12rpx 0;
+	color: #333333;
+	font-family: PingFangSC-Medium;
+	font-size: 36rpx;
+	font-weight: 500;
+	line-height: 50rpx;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: hidden;
+	text-align: center;
+}
+
+.panel-brief{
+	margin: 8rpx 8rpx 0;
+	color: #999999;
+	font-family: PingFangSC-Regular;
+	font-size: 26rpx;
+	height: 34rpx;
+	text-align: center;
+}
+
+.countdown {
+	margin-top: 24rpx;
+}
+
+.panel-info{
+	margin: 60rpx 45rpx 0 ;
+	display: flex;
+	align-items: center;	
+}
+
+.panel-detail{
+	flex: 1;
+	text-align: center;
+	position: relative;
+}
+.panel-detail.on::after{
+	content: '';
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 0;
+	width: 2rpx;
+	height: 40rpx;
+	background:#eee;
+}
+
+
+.detail-num{
+	color: #333333;
+	font-family: 20TH_bold;
+	font-size: 34rpx;
+	height: 42rpx;
+}
+
+.detail-bri{
+	margin-top: 10rpx;
+	color: #999999;
+	font-family: PingFangSC-Regular;
+	font-size: 24rpx;
+	height: 30rpx;
+}
+
+.panel-buttons{
+	margin: 56rpx 24rpx 0;
+	display: flex;
+
+
+}
+.panel-btnitem{
+	flex:1;
+	margin: 0 8rpx;
+	border-radius: 36rpx 36rpx 36rpx 36rpx;
+	height: 72rpx;
+	color: #0086f6;
+	font-family: PingFangSC-Medium;
+	font-size: 28rpx;
+	font-weight: 500;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+}
+
+.panel-btnitem.focus-btn{
+	background: linear-gradient(-90deg, rgb(0, 134, 246) 0%, rgb(45, 204, 193) 100%);
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.panel-btnitem.userhome{
+	border: 1rpx solid #0086F6 ;
+}
+
+.panel-btnitem .focus-icon{
+	width: 32rpx;
+	height: 32rpx;
+	margin-right: 8rpx;
+	display: block;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

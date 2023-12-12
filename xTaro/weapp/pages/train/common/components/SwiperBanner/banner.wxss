@@ -1,0 +1,3 @@
+.banner-outter {background-color: #fff;overflow: hidden; transform: translateY(0);}
+.banner-outter swiper { width: 100%;}
+.banner-outter image{ width:100%;height: 100%;}

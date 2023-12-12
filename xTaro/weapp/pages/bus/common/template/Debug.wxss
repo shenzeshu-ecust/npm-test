@@ -1,0 +1,57 @@
+/* pages/bus/common/template/Coupon.wxss */
+.debug-icon-move-area {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.debug-icon {
+    position: fixed;
+    height: 100rpx;
+    width: 100rpx;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 11;
+
+    top: 500rpx;
+    right: 10rpx;
+}
+
+.debug-window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 12;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.debug-window .debug-container {
+    width: 670rpx;
+    height: 938rpx;
+
+    border-radius: 10rpx;
+    background: #fb5256;
+    background: linear-gradient(60deg, #fb5256, #fc3c20, #fd9045);
+    background-image: url(http://images3.c-ctrip.com/BUS/wechatapp/image_coupon_window.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 0;
+    position: relative;
+}
+
+.debug-window .debug-container .debug-view {
+    background-color: #f0f0f0;
+    border-radius: 10rpx;
+    position: absolute;
+    left: 40rpx;
+    right: 40rpx;
+    bottom: 40rpx;
+    top: 238rpx;
+}

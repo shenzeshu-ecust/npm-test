@@ -1,0 +1,88 @@
+<wxs module="detailsUtil" src="../details/details.wxs"></wxs>
+<!-- 横向列表栏 -->
+<view class="catalog_horiz catalog_horiz_fix">
+  <scroll-view class="catalogList_horiz" scroll-x="true" scroll-with-animation="{{true}}">
+    <view class='nav' wx:if="{{catalogData && catalogData.length > 0}}" wx:for="{{catalogData}}" wx:key="catalogId" data-type="{{item.catalogId}}" bindtap='switchTap' data-index="{{index}}" >
+      <text class="nav_title">{{item.catalogName}}</text>
+      <view class="{{index == activeIndex ? 'focus' : ''}}"></view>
+    </view>
+  </scroll-view>
+</view>
+<scroll-view class="catalog_page" style="height:{{height-42}}px" scroll-y="{{true}}" scroll-with-animation="{{true}}" scroll-into-view="{{'section'+ activeIndex}}"  wx:if="{{catalogData}}" >
+  
+  <!-- 标签 -->
+  <view class='tags catalog{{index}}' id="{{'section'+ index}}" wx:for="{{catalogData}}" wx:key="category_type" data-index="{{index}}">
+    <!-- 二级标题 -->
+    <view class='tags_title2'>
+      <view class="tags_prefix" style="background:linear-gradient(0deg, {{item.leftBackgroundColor}}, {{item.leftGradualColor}});"></view>
+      <view class="tags_bg">{{item.catalogName}}</view>
+    </view>
+    <!-- 三级标题 -->
+    <view class="tags_title3">
+      <view class="tags_title3_tripCatalog" wx:if="{{item.tripPhotoCatalogList && item.tripPhotoCatalogList.length > 0}}" wx:for="{{item.tripPhotoCatalogList}}" wx:for-item="tCatalog" wx:key="catalogId" bindtap="goToDetails" data-PageId="{{tCatalog.catalogId}}" data-JumpUrl="{{tCatalog.jumpUrl}}">
+        <!-- tripPhotoCatalogList -->
+        <view class="tripCatalog">
+          <view class="tripCatalog_wrapper">
+            <text class="tripCatalog_name">{{tCatalog.catalogName}}</text>
+            <view class="tripCatalog_content" wx:if="{{!!tCatalog.tripPhotoContent}}">
+              <image class="tripCatalog_content_avator" src="{{detailsUtil.ResizeImg(tCatalog.tripPhotoContent.authorCoverImage, '_D_50_50')}}" />
+              <view class="tripCatalog_content_desc">{{tCatalog.tripPhotoContent.content}}</view>
+            </view>
+            <view class="tripCatalog_readCount">
+              {{detailsUtil.checkNumber(tCatalog.readCount)+'次阅读'}}
+            </view>
+          </view>
+          <view class="tripCatalog_img">
+            <image class="tripCatalog_img_cover" src="{{detailsUtil.ResizeImg(tCatalog.coverImage, '_D_150_150')}}" />
+          </view>
+        </view>
+      </view>
+      <!-- pocketBookCatalogList -->
+      <view class="tags_title3_pocketCatalog">
+        <view class="pocketCatalog" wx:if="{{item.pocketBookCatalogList && item.pocketBookCatalogList.length > 0}}" wx:for="{{item.pocketBookCatalogList}}" wx:for-item="pCatalog" wx:key="catalogId" bindtap="goToDetails" data-JumpUrl="{{pCatalog.jumpUrl}}">
+          <view class="pocketCatalog_name">{{pCatalog.catalogName}}</view>
+          <view class="pocketCatalog_subtitle" wx:if="{{pCatalog.subTitle}}">
+            {{pCatalog.subTitle}}
+          </view>
+          <view class="pocketCatalog_subtitle" wx:else></view>
+          <view class="pocketCatalog_readCount">
+            {{detailsUtil.checkNumber(pCatalog.readCount)+'次阅读'}}
+          </view>
+        </view>
+      </view>
+      <!-- rankingDetail -->
+      <view class="tags_title3_rank rank_{{item.rankingDetail.businessType}}" style="" wx:if="{{item.rankingDetail}}" bindtap="goToDetails" data-JumpUrl="{{item.rankingDetail.jumpUrl}}">
+        <view class="rank_title_wrapper">
+          <view class="rank_img_prefix_{{item.rankingDetail.businessType}}"></view>
+          <view class="rank_title">{{item.rankingDetail.title}}</view>
+        </view>
+        <view class="rank_subtitle">{{item.rankingDetail.subTitle}}</view>
+        <view class="rank_img_suffix_{{item.rankingDetail.businessType}}"></view>
+        <view class="rank_img_arrow_{{item.rankingDetail.businessType}}"></view>
+      </view>
+    </view>
+  </view>
+  <!-- END尾部栏 -->
+  <view class="catalogEnd" wx:if="{{catalogData && catalogData.length > 0}}">
+    <view class="circle1"></view>
+    <view class="circle2"></view>
+    <view class="circle3"></view>
+    <image class="endIcon" src="https://m.ctrip.com/webapp/you/gsdestination/static/guideDetail/end@3x.png" />
+    <view class="circle3"></view>
+    <view class="circle2"></view>
+    <view class="circle1"></view>
+  </view>
+  <!-- 目的地攻略 -->
+  <view class="relatedDistrict" bindtap="goToDetails" data-JumpUrl="{{pocketBookDetail.districtJumpUrl}}">
+    <view class="relatedDistrict_imgBlock">
+      <image class="relatedDistrict_image" src="{{detailsUtil.ResizeImg(pocketBookDetail.districtCoverImage, '_D_150_150')}}" wx:if="{{pocketBookDetail.districtCoverImage}}" />
+    </view>
+    <view class="relatedDistrict_content">
+      <text class="relatedDistrict_content_title">{{pocketBookDetail.districtName}}</text>
+      <text class="relatedDistrict_content_subtle">查看目的地攻略</text>
+    </view>
+    <image class="relatedDistrict_arrow" src="https://m.ctrip.com/webapp/you/gsdestination/static/guideList/hotel_arrow@3x.png" />
+  </view>
+  <!-- 留白 -->
+  <view style='height:50rpx;'></view>
+</scroll-view>

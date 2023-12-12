@@ -1,0 +1,1 @@
+@import "../../../taroCommon.wxss";.deposit-page{background:#fff;height:100vh}.deposit-box{padding:40rpx 32rpx}.deposit-item{color:#333;display:-webkit-flex;display:-ms-flexbox;display:flex;font-size:28rpx;line-height:36rpx;margin-bottom:40rpx}.deposit-item:last-child{margin-bottom:0}.deposit-num{margin-right:4rpx}.deposit-text{-webkit-flex:1;-ms-flex:1;flex:1}

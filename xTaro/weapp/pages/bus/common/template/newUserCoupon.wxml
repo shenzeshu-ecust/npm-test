@@ -1,0 +1,78 @@
+<template name="newUserCoupon">
+    <view class="newUserCoupon" catchtouchmove='empty'>
+        <view class="newUserCoupon-mask" catchtouchmove='empty'></view>
+        <view class='couponwindow'>
+            <view wx:if="{{coupon.rule}}" class="rule" bindtap="{{showPolicy}}">
+                <text>规则说明</text>
+                <text class="icon-font icon-question"></text>
+            </view>
+            <view class='header'></view>
+            <view class="couponContentContainer">
+                <view class="titleContainer">
+                    <text class="mainTitle">{{coupon.title || '恭喜你获得以下优惠券'}}</text>
+                    <text wx:if="{{coupon.subTitle}}" class="subTitle">{{coupon.subTitle || '恭喜你获得以下优惠券'}}</text>
+                </view>
+                <scroll-view scroll-y class='couponList'>
+                    <view class="content">
+                        <view wx:for="{{coupon.couponList}}" class="couponItem">
+                            <view class="left">
+                                <text class="couponMoney">{{item.couponPrice}}<text class="unit">{{item.unit || '元'}}</text></text>
+                            </view>
+                            <view class="middle">
+                                <view class="descContainer">
+                                    <text class="couponItemTitle">{{item.title}}</text>
+                                    <text class="desc">{{item.couponDesc}}</text>
+                                </view>
+                            </view>
+                            <view class="right">
+                                <view wx:if="{{item.state}}" class="state">{{item.state}}</view>
+                                <button wx:elif="{{!item.state && item.url}}"
+                                        class="button"
+                                        bindtap='{{onUseCoupon}}'
+                                        data-link="{{item.url}}"
+                                >{{'去使用'}}</button>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+                <view class='buttonContainer'>
+                    <button form-type='submit' class='okButton' bindtap='{{onUseCoupon}}' data-link="{{coupon.buttonUrl}}" data-method="accept">
+                        {{ coupon.buttonText ? coupon.buttonText :'马上收下'}}
+                    </button>
+                </view>
+            </view>
+        </view>
+        <icon class="hide-icon" style='margin-top: 30rpx;' type='cancel' size='40' color="#ffffff" bindtap='{{onHide}}'></icon>
+    </view>
+</template>
+
+<template name="newUserBanner">
+    <view wx:if="{{!fromBook}}" bindtap='{{openNewUserCoupon}}'>
+        <view class="newuserbanner-container {{isShowBgColor ? isNewActivity ? 'container-bg-color' : 'old-container-bg-color' : ''}}">
+            <image wx:if="{{isNewActivity}}" class="new-exclusive" src="https://pic.c-ctrip.com/bus/resource/index/new-exclusive.png" />
+            <image wx:else class="old-exclusive" src="https://pic.c-ctrip.com/bus/resource/index/old-exclusive.png" />
+            <view wx:for="{{bannerDesc}}" class="{{isNewActivity ? 'new-exclusive-item' : 'old-exclusive-item'}}">
+                <text class="title">{{item.name}}</text>
+                <text class="desc">{{item.desc}}</text>
+            </view>
+            <view class="{{isNewActivity ? 'new-guide-container' : 'old-guide-container'}}">
+                <text class="text">更多</text>
+                <text class="icon-font icon-arrow-right"></text>
+            </view>
+        </view>
+    </view>
+    <view wx:else class="from-book">
+        <view class="newuserbanner-container container-bg-color {{isNewActivity ? '' : 'old-container-bg-color' }}">
+            <view class="left">
+                <image wx:if="{{isNewActivity}}" class="gift-bag" src="https://pages.c-ctrip.com/bus-images/busapp/icon.png" />
+                <image wx:else class="gift-bag old-gift-bag" src="https://pic.c-ctrip.com/bus/resource/book/icon.png" />
+                <view class="text-item {{isNewActivity ? '' : 'old-text-item'}}">
+                    <text class="title">{{item.name}}</text>
+                    <text class="desc">{{item.desc}}</text>
+                </view>
+            </view>
+            <image wx:if="{{isNewActivity}}" class="coin" src="https://pages.c-ctrip.com/bus-images/busapp/book_bg.png" />
+            <image wx:else class="coin" src="https://pic.c-ctrip.com/bus/resource/book/book_bg.png" />
+        </view>
+    </view>
+</template>

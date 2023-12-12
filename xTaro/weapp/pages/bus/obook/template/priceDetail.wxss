@@ -1,0 +1,81 @@
+.price-detail {
+    line-height: 85rpx;
+    color: #666666;
+    position: absolute;
+    z-index: 11;
+    bottom: 100%;
+    background-color: #FFF;
+    width: 100%;
+    font-weight: 300;
+    animation: transIn 250ms linear forwards;
+}
+
+@keyframes transIn {
+    0% {
+        transform:  translate(0, 100%);
+    }
+    100% {
+        transform:  translate(0, 0);
+    }
+}
+
+.price-detail .left {
+    width: 45%;
+}
+
+.price-detail .cancelButton {
+    background-color: white;
+    margin-right: 10rpx;
+    font-size: inherit;
+}
+.price-detail .cancelButton[disabled]:not([type])  {
+    color: #999999;
+    background-color: white;
+}
+
+.price-detail .cancelButton:after {
+    display: none;
+}
+
+.price-detail >view:last-child {
+    padding-bottom: 30rpx;
+}
+.price-detail view {
+    border-top: 1px solid #F3F3F3;
+}
+.price-detail .margin {
+    margin-left: 30rpx;
+    padding-right: 30rpx;
+}
+.price-detail .discount {
+    margin-left: 40rpx;
+    position: relative;
+    overflow: visible;
+}
+.price-detail .discount .left {
+    width: 42%;
+
+}
+
+.price-detail .discount:after {
+    content: "";
+    position: absolute;
+    width: 0rpx;
+    border-left: 1rpx solid #F3F3F3;
+    height: 60%;
+    top: -10%;
+    left: -30rpx;
+}
+
+.price-detail .discount:before {
+    content: "";
+    position: absolute;
+    height: 0;
+    border-top: 1rpx solid #F3F3F3;
+    width:  20rpx;
+    top: 50%;
+    left: -30rpx;
+}
+.price-detail .nobr{
+    border-top: none;
+}

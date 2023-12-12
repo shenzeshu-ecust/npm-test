@@ -1,0 +1,24 @@
+<!--pages/implus/chat/chat.wxml-->
+<view class="page-wrap">
+  
+  <block wx:if="{{canWebView}}">
+
+    <block wx:if="{{isLogin}}">
+      <web-view wx:if="{{url}}" src="{{url}}" bindmessage="webPostMessage" bindload="onPageLoadDone" binderror="onPageLoadError"></web-view>
+      <view wx:else>{{wsg}}</view>
+    </block>
+
+    <block wx:else>
+      <view class="login-box">
+        <view class="login-tip">登录后查看消息</view>
+        <view class="login-action" bindtap="login">登录/注册</view>
+      </view>
+    </block>
+
+  </block>
+
+  <block wx:else>
+    <view>亲爱的用户，您的微信版本太低啦，快去升级微信吧</view>
+  </block>
+
+</view>

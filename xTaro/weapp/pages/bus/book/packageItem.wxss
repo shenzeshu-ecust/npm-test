@@ -1,0 +1,136 @@
+.insuranceItem {
+  position: relative;
+  /* width: 40%; */
+  max-width: 40%;
+  min-width: 30%;
+  border-radius: 6rpx;
+  border-width: 1px;
+  border-style: solid;
+  box-sizing: border-box;
+  margin-left: 20rpx;
+  display: inline-block;
+}
+.insuranceItem:first-child {
+  margin-left: 30rpx;
+}
+.insuranceItem:last-child {
+  margin-right: 30rpx;
+}
+
+.insuranceItem .place {
+  height: 32rpx;
+}
+.insuranceItem .subtitle {
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+.insuranceItem .packageTitleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.insuranceItem .packageTitleContainer > view, .insuranceItem .packageTitleContainer > icon {
+  display: inline-block;
+}
+.insuranceItem .packageTitleContainer > icon {
+  margin-left: 10rpx;
+}
+
+.insuranceItem .block {
+  padding: 16rpx 20rpx;
+}
+.insuranceItem .block:first-child {
+  border-top-left-radius: 6rpx;
+  border-top-right-radius: 6rpx;
+}
+.insuranceItem .block:last-child {
+  border-bottom-left-radius: 6rpx;
+  border-bottom-right-radius: 6rpx;
+}
+
+.right-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+.insuranceItem .tag {
+  font-size: 20rpx;
+  border-width: 1rpx;
+  border-style: solid;
+  border-radius: 4rpx;
+  padding: 0rpx 5rpx;
+  margin-right: 10rpx;
+  background-color: #ffffff;
+}
+.insuranceItem.grayborder, .insuranceItem .grayborder {
+  border-color: #e5e5e5
+}
+.insuranceItem .grayColor {
+  color: #e5e5e5
+}
+.insuranceItem .color-orange {
+  color: #FF8300;
+}
+
+.insuranceItem .orangeborder {
+  border-color:  #FFC78C;
+}
+.insuranceItem .textnormal {
+  font-size: 28rpx;
+}
+.insuranceItem .textmin {
+  font-size: 20rpx;
+}
+
+
+.insuranceItem .dotleft, .dotright {
+    position: absolute;
+    z-index: 1;
+    height: 14rpx;
+    width: 9rpx;
+    border-style: solid;
+    border-width: 1rpx;
+    background-color: white;
+}
+.insuranceItem .dotleft {
+  border-top-right-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;  
+  border-left-width: 0;
+  left: -1px;
+}
+
+.insuranceItem .horline {
+  border-style: solid;
+  border-bottom-width: 1rpx;
+  border-top-width: 0;
+  border-color: #f9f9f9;
+
+}
+.insuranceItem .packageTitle {
+  max-width: 85%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 400;
+}
+
+.insuranceItem .dotright {
+    border-top-left-radius: 10rpx;
+    border-bottom-left-radius: 10rpx;
+    border-right-width: 0;
+    right: -1px;
+
+}
+
+.insuranceItem .icon-check-triangle {
+  font-size: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  position: absolute;
+  right: -1px;
+  bottom: 0;
+}

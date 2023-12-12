@@ -1,0 +1,653 @@
+.equity-wrap {
+  position: fixed;
+  /* top: 60px; */
+  left: 24rpx;
+  right: 24rpx;
+  /* height: 322rpx; */
+  overflow: hidden;
+  z-index: 52;
+  border-radius: 24rpx;
+  box-shadow:0 6rpx 20rpx 2rpx rgba(0,0,0,0.11);
+}
+
+.equity-wrap.hidden {
+  display: none;
+}
+
+.equity-box{
+  height: 100%;
+  width: 100%;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+
+.equity-info {
+  display: flex;
+  align-items: center;
+  margin: 32rpx 0 0 36rpx;
+}
+
+.equity-img {
+  height: 100rpx;
+  width: 100rpx;
+  background-color: #FFF;
+  border-radius: 50%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.equity-img-detail {
+  height: 100%;
+  width: 100%;
+}
+
+.equity-user {
+  margin-left: 16rpx;
+}
+
+.equity-name {
+  display: flex;
+  align-items: center;
+}
+
+.equity-name-txt {
+  max-width: 255rpx;
+  font-size: 34rpx;
+  line-height: 42rpx;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.equity-tag {
+  margin-left: 12rpx;
+  width: 118rpx;
+  height: 28rpx;
+}
+
+.equity-progress {
+  position: relative;
+  width: 378rpx;
+  height: 4rpx;
+  border-radius: 2rpx;
+  background-color: #FFF;
+  margin-top: 4rpx;
+  overflow: hidden;
+}
+
+.equity-progress-completed {
+  height: 100%;
+  border-radius: 2rpx;
+}
+
+.equity-grade {
+  font-size: 20rpx;
+  line-height: 22rpx;
+  margin-top: 8rpx;
+}
+
+.equity-discount {
+  display: flex;
+  margin-left: 44rpx;
+  margin-top: 18rpx;
+}
+
+.equity-discount-hotel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 234rpx;
+}
+
+.equity-discount-coupon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 194rpx;
+}
+
+.equity-discount-integral {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.equity-discount-txt {
+  font-size: 20rpx;
+  line-height: 22rpx;
+}
+
+.equity-discount-detail {
+  display: flex;
+  align-items: baseline;
+  margin-top: 10rpx;
+}
+
+.equity-discount-num {
+  font-size: 56rpx;
+  line-height: 56rpx;
+  font-weight: bold;
+}
+
+.equity-discount-unit {
+  font-size: 20rpx;
+  line-height: 22rpx;
+  margin-left: 2rpx;
+}
+
+.equity-discount-sort {
+  font-size: 20rpx;
+  line-height: 28rpx;
+  padding: 0 6rpx;
+  margin-left: 6rpx;
+  border-radius: 4rpx;
+}
+
+.equity-project {
+  display: flex;
+  align-items: center;
+  margin: 20rpx 0 32rpx 40rpx;
+}
+
+.equity-project-item {
+  display: flex;
+  align-items: center;
+}
+
+.equity-project-item + .equity-project-item {
+  margin-left: 20rpx;
+}
+
+.equity-project-img {
+  height: 30rpx;
+  width: 30rpx;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.equity-project-txt {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  margin-left: 4rpx;
+}
+
+.equity-project-more {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  margin-left: 42rpx;
+}
+
+.equity-message {
+  display: none;
+  font-size: 40rpx;
+  line-height: 48rpx;
+  font-weight: bold;
+  margin: 20rpx 0 36rpx 40rpx
+}
+
+
+/* 普通会员 */
+.ordinary .equity-box{
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/ordinary/bg.png) 0 0 no-repeat;
+  background-size: cover;
+}
+
+.ordinary .equity-tag {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/ordinary/tag.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.ordinary .equity-img {
+  border: 2rpx solid #7AC9FF;
+}
+
+.ordinary .equity-name-txt,
+.ordinary .equity-grade, 
+.ordinary .equity-message{
+  color: #0086F6;
+}
+
+.ordinary .equity-progress-completed {
+  background-color: #0086F6;
+}
+
+.ordinary .equity-discount,
+.ordinary .equity-project {
+  display: none;
+}
+
+.ordinary .equity-message {
+  display: block;
+}
+
+
+/* 黄金会员 */
+.gold .equity-box{
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold/bg.png) 0 0 no-repeat;
+  background-size: cover;
+}
+
+.gold .equity-tag {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold/tag.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold .room-upgrade {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold/room-upgrade.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold .accelerate {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold/accelerate.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold .birthday {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold/birthday.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold .cancel {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold/cancel.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold .checkout {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold/checkout.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold .exchange {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold/exchange.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold .breakfast {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold/breakfast.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold .equity-img {
+  border: 2rpx solid #E7C697;
+}
+
+.gold .equity-name-txt,
+.gold .equity-grade, 
+.gold .equity-discount-txt,
+.gold .equity-discount-num,
+.gold .equity-discount-unit,
+.gold .equity-project-txt,
+.gold .equity-project-more,
+.gold .equity-project-more-txt {
+  color: #B3802D;
+}
+
+.gold .equity-discount-sort {
+  color: #FFF;
+}
+
+.gold .equity-progress-completed,
+.gold .equity-discount-sort {
+  background-color: #B3802D;
+}
+
+
+/* 铂金会员 */
+.platinum .equity-box{
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/platinum/bg.png) 0 0 no-repeat;
+  background-size: cover;
+}
+
+.platinum .equity-tag {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/platinum/tag.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.platinum .room-upgrade {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/platinum/room-upgrade.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.platinum .accelerate {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/platinum/accelerate.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.platinum .birthday {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/platinum/birthday.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.platinum .cancel {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/platinum/cancel.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.platinum .checkout {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/platinum/checkout.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.platinum .exchange {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/platinum/exchange.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.platinum .breakfast {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/platinum/breakfast.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.platinum .guarantee {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/platinum/guarantee.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.platinum .equity-img {
+  border: 2rpx solid #9AC4D2;
+}
+
+.platinum .equity-name-txt,
+.platinum .equity-grade, 
+.platinum .equity-discount-txt,
+.platinum .equity-discount-num,
+.platinum .equity-discount-unit,
+.platinum .equity-project-txt,
+.platinum .equity-project-more,
+.platinum .equity-project-more-txt {
+  color: #157B9D;
+}
+
+.platinum .equity-discount-sort {
+  color: #FFF;
+}
+
+.platinum .equity-progress-completed,
+.platinum .equity-discount-sort {
+  background-color: #157B9D;
+}
+
+
+/* 钻石会员 */
+.diamond .equity-box{
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/diamond/bg.png) 0 0 no-repeat;
+  background-size: cover;
+}
+
+.diamond .equity-tag {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/diamond/tag.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.diamond .room-upgrade {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/diamond/room-upgrade.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.diamond .accelerate {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/diamond/accelerate.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.diamond .birthday {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/diamond/birthday.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.diamond .cancel {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/diamond/cancel.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.diamond .checkout {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/diamond/checkout.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.diamond .exchange {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/diamond/exchange.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.diamond .breakfast {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/diamond/breakfast.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.diamond .guarantee {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/diamond/guarantee.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.diamond .VIProom {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/diamond/VIProom.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.diamond .equity-img {
+  border: 2rpx solid #C6C2DF;
+}
+
+.diamond .equity-name-txt,
+.diamond .equity-grade, 
+.diamond .equity-discount-txt,
+.diamond .equity-discount-num,
+.diamond .equity-discount-unit,
+.diamond .equity-project-txt,
+.diamond .equity-project-more,
+.diamond .equity-project-more-txt {
+  color: #5F62BA;
+}
+
+.diamond .equity-discount-sort {
+  color: #FFF;
+}
+
+.diamond .equity-progress-completed,
+.diamond .equity-discount-sort {
+  background-color: #5F62BA;
+}
+
+
+/* 金钻会员 */
+.gold-diamond .equity-box{
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/bg.png) 0 0 no-repeat;
+  background-size: cover;
+}
+
+.gold-diamond .equity-tag {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/tag.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .room-upgrade {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/room-upgrade.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .accelerate {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/accelerate.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .birthday {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/birthday.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .cancel {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/cancel.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .checkout {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/checkout.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .exchange {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/exchange.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .breakfast {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/breakfast.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .guarantee {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/guarantee.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .VIProom {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/VIProom.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .VIPline {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/VIPline.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .invite {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/invite.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .super {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/gold-diamond/super.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.gold-diamond .equity-img {
+  border: 2rpx solid #C6C2DF;
+}
+
+.gold-diamond .equity-name-txt, 
+.gold-diamond .equity-discount-num,
+.gold-diamond .equity-discount-unit,
+.gold-diamond .equity-project-txt,
+.gold-diamond .equity-project-more,
+.gold-diamond .equity-project-more-txt {
+  color: #354683;
+}
+
+.gold-diamond .equity-grade,
+.gold-diamond .equity-discount-txt {
+  color: #354683;
+}
+
+
+.gold-diamond .equity-discount-sort {
+  color: #FDE5BC;
+}
+
+.gold-diamond .equity-discount-sort {
+  background-color: #354683;
+  background-image: linear-gradient(to right, #384A8C , #192039);
+}
+
+.gold-diamond .equity-progress-completed {
+  background-color: #354683;
+}
+
+/* 黑钻会员 */
+.black-diamond .equity-box{
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/bg.png) 0 0 no-repeat;
+  background-size: cover;
+}
+
+.black-diamond .equity-tag {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/tag.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .room-upgrade {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/room-upgrade.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .accelerate {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/accelerate.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .birthday {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/birthday.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .cancel {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/cancel.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .checkout {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/checkout.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .exchange {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/exchange.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .breakfast {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/breakfast.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .guarantee {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/guarantee.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .VIProom {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/VIProom.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .VIPline {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/VIPline.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .invite {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/invite.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .super {
+  background: url(//pic.c-ctrip.com/platform/h5/mini_programe/equity/black-diamond/super.png) 0 0 no-repeat;
+  background-size: contain;
+}
+
+.black-diamond .equity-img {
+  border: 2rpx solid #999;
+}
+
+.black-diamond .equity-name-txt, 
+.black-diamond .equity-discount-num,
+.black-diamond .equity-discount-unit,
+.black-diamond .equity-project-txt,
+.black-diamond .equity-project-more,
+.black-diamond .equity-project-more-txt {
+  color: #333;
+}
+
+.black-diamond .equity-grade,
+.black-diamond .equity-discount-txt {
+  color: #666;
+}
+
+
+.black-diamond .equity-discount-sort {
+  color: #FDE5BC;
+}
+
+.black-diamond .equity-progress-completed,
+.black-diamond .equity-discount-sort {
+  background-color: #333;
+}

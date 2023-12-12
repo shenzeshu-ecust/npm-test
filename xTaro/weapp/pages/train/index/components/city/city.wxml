@@ -1,0 +1,164 @@
+<view>
+    <view class="top-box" wx:if="{{!isSearchFocus}}">
+        <view class="search-box">
+            <icon class="ico-search search-module_ico" type="ctripIcon" />
+            <input class="search-module_input" placeholder-class="search-placeholder" placeholder="搜索城市/车站 (中英文或当地语言)" bindtap="gotoSearch" disabled='true'/>
+        </view>
+    </view>
+    <view class="top-box" wx:if="{{isSearchFocus}}">
+        <view class="search-box">
+            <icon class="ico-search search-module_ico" type="ctripIcon" />
+            <input class="search-module_input search-module_input-focus" value="{{inputKeyword}}" type="text" bindinput="searchInput"  focus="true"/>
+            <icon type="clear" class="search-module_clear color-gray_666" size="16" bindtap="searchClear"/>
+            <view class="search-module_cancel" bindtap="onClickCancel">取消</view>
+        </view>
+    </view>
+    <view class="body-mask" wx:if="{{showMask}}" bindtap="tapMask" catchtouchmove="true"></view>
+    <!--国家城市列表页面-->
+    <view class="body" wx:if="{{!isSearchView}}">
+        <!--左侧tabs-->
+        <scroll-view scroll-y="true" class="tabs">
+            <!--历史/热门tab-->
+            <view class="tag-item" wx:if="{{locationsData.hotLocationList.length > 0 || currentTabCities.locationsData.length > 0}}" style="{{currentLeftTab === 'history' ? 'background: #ffffff; color: #333333': ''}}" bindtap="onClickTab" data-currentlefttab="history">历史/热门</view>
+            <!--国家tab 韩国单拎出来-->
+            <view class="item-tag-container" wx:if="{{showKorea && locationsData.hotCountryList[0].countryCode == 'KR'}}">
+                <view class="tag-item" style="{{currentLeftTab === locationsData.hotCountryList[0].countryCode ? 'background: #ffffff; color: #333333': ''}}" bindtap="onClickTab" data-currentlefttab="{{locationsData.hotCountryList[0].countryCode}}" data-currentcountryname="{{locationsData.hotCountryList[0].countryName}}">{{locationsData.hotCountryList[0].countryName}}
+                </view>
+                <view class="new-add">new</view>
+            </view>
+            <block wx:for="{{locationsData.hotCountryList}}" wx:for-item="item" wx:key="countryCode">
+            <view class="item-tag-container" wx:if="{{item.countryCode !== 'KR'}}">
+                <view class="tag-item" style="{{currentLeftTab === item.countryCode ? 'background: #ffffff; color: #333333': ''}}" bindtap="onClickTab" data-currentlefttab="{{item.countryCode}}" data-currentcountryname="{{item.countryName}}">{{item.countryName}}
+                </view>
+                <view class="new-add" wx:if="{{item.countryCode === 'KR'}}">new</view>
+              </view>
+            </block>
+        </scroll-view>
+        <!--历史/热门tab对应的列表-->
+        <scroll-view scroll-y="true" class="history-hot-list {{showMask ? 'disableScroll' : ''}}" wx:if="{{currentLeftTab === 'history'}}" >
+            <view class="history-list" wx:if="{{locationsData.historyLocationList.length > 0}}">
+                <view class="list-category-title">
+                    <view class="list-category-title-box">
+                        <p>历史</p>
+                        <view class="history-delete" bindtap="clearHistory">
+                            <image class="clear-icon" src="https://images3.c-ctrip.com/train/overseas_train_home/overseas_city/qunar-caret_down.png"></image>
+                            <p class="clear-txt">删除</p>
+                        </view>
+                    </view>
+                </view>
+                <block wx:for="{{locationsData.historyLocationList}}" wx:key="Code">
+                    <view class="list-item" bindtap="cityTap" data-dataitem="{{item}}" data-section="history">
+                        <view class="list-item-name">
+                            <view class="list-item-city-cn" style="{{item.active? 'color: #006ff6':''}}">{{item.CName !== '' ? item.CName:item.EName}}</view>
+                            <view class="list-item-city-en" style="{{item.active? 'color: #006ff6':''}}">{{item.CName !== '' ? item.EName:''}}</view>
+                        </view>
+                        <view class="list-city-des" style="{{item.active? 'color: #006ff6':''}}">{{item.countryName || item.CountryCName}}</view>
+                    </view>
+                </block>
+            </view>
+            <view class="divider" wx:if="{{locationsData.historyLocationList.length > 0}}" ></view>
+            <view class="hot-list" wx:if="{{locationsData.hotLocationList.length > 0}}">
+                <view class="list-category-title">
+                    <view class="list-category-title-box">
+                        <p>热门</p>
+                    </view>
+                </view>
+                <block wx:for="{{locationsData.hotLocationList}}" wx:key="Code">
+                    <view class="list-item" bindtap="cityTap" data-dataitem="{{item}}" data-section="hotCity">
+                        <view class="list-item-name">
+                            <view class="list-item-city-cn">{{item.CName !== '' ? item.CName:item.EName}}</view>
+                            <view class="list-item-city-en">{{item.CName !== '' ? item.EName:''}}</view>
+                        </view>
+                        <view class="list-city-des">{{item.CountryCName}}</view>
+                    </view>
+                </block>
+            </view>
+        </scroll-view>
+        <!--城市列表-->
+        <scroll-view scroll-y="true" class="city-list {{showMask ? 'disableScroll' : ''}}" wx:if="{{currentLeftTab !== 'history'}}" scroll-into-view="{{scrollIntoViewDomId}}">
+            <!--置顶国家名称-->
+            <!--
+            <view class="list-category-title list-category-title-fixed">
+                {{currentCountryName}}
+            </view>
+            -->
+            <!--某个国家下的城市列表-热门栏-->
+            <block wx:if="{{currentTabCities.hotLocationList.length > 0}}">
+                <view class="list-letter" id="hot">热门</view>
+                <block wx:for="{{currentTabCities.hotLocationList}}" wx:key="Code">
+                    <view class="list-item" bindtap="cityTap" data-dataitem="{{item}}" data-section="hotCity">
+                        <view class="list-item-name">
+                            <view class="list-item-city-cn">{{item.CName !== '' ? item.CName:item.EName}}</view>
+                            <view class="list-item-city-en">{{item.CName !== '' ? item.EName:''}}</view>
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <!--某个国家下的城市列表-所有城市栏-->
+            <block wx:for="{{currentTabCities.allLocationList}}" wx:key="Code" wx:for-index="key"  wx:for-item="value">
+                <view class="list-category">
+                    <!--字母标签-->
+                    <view class="list-letter" id="{{key}}">
+                        {{key}}
+                    </view>
+                    <!--城市item-->
+                    <block wx:for="{{value}}" wx:for-item="cityItem" wx:key="cityItem" >
+                        <view class="list-item" bindtap="cityTap" data-dataitem="{{cityItem}}" >
+                            <view class="list-item-name">
+                                <view class="list-item-city-cn">{{cityItem.CName !== '' ? cityItem.CName:cityItem.EName}}</view>
+                                <view class="list-item-city-en">{{cityItem.CName !== '' ? cityItem.EName:''}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <view class="city-list-tips">使用输入框可查找更多城市/车站</view>
+        </scroll-view>
+        <!--右侧tags-->
+        <view class="letter-category" wx:if="{{currentLeftTab !== 'history' && currentLeftTab !== 'hot'}}">
+            <!--<view class="history-category" wx:if="currentTabCities.historyCities.length > 0}}" data-citytag="history" bindtap="tagTap">历史</view>-->
+            <view wx:if="{{currentTabCities.hotLocationList.length > 0}}" class="hotCity-category" data-citytag="hot" bindtap="tagTap">热门</view>
+            <block wx:for="{{cityTags}}" wx:key="index">
+                <view data-citytag="{{item}}" bindtap="tagTap">
+                    {{item}}
+                </view>
+            </block>
+        </view>
+    </view>
+    <!--搜索页面-->
+    <view class="search-list-body" wx:if="{{isSearchView}}">
+        <block wx:if="{{searchListData.length > 0}}">
+            <view class="search-list-country-name">
+                欧铁
+            </view>
+            <block wx:for="{{searchListData}}" wx:for-item="item" wx:key="index">
+                <view class="search-list-city-item" data-dataitem="{{item}}" data-section="searchList" bindtap="cityTap">
+                    <view class="search-list-city-name">
+                        <rich-text class="search-list-city-name-cn" nodes="{{item.CNameColor !== '' ? item.CNameColor:item.ENameColor}}"></rich-text>
+                        <rich-text class="search-list-city-name-en" nodes="{{item.CNameColor !== '' ? item.ENameColor:''}}" wx:if="{{item.EName}}"></rich-text>
+                    </view>
+                    <view class="search-list-city-des">
+                        {{item.CountryCName}}
+                    </view>
+                </view>
+            </block>
+            <view wx:if="{{searchListTmpData.length > 8}}">
+                <view class="search-list-bottom-bar" bindtap="showMore" wx:if="{{showMoreTabBarVisible}}">
+                    <p>展开更多搜索结果</p>
+                    <image class="search-list-bottom-bar-icon" src="https://images3.c-ctrip.com/train/overseas_train_home/overseas_city/qichepiao-drop_downf4cc-f.png"></image>
+                </view>
+                <view class="search-list-bottom-bar" bindtap="dropList" wx:else>
+                    <p>收起</p>
+                    <image class="search-list-bottom-bar-icon" src="https://images3.c-ctrip.com/train/overseas_train_home/overseas_city/qichepiao-drop_upf4d1-f.png"></image>
+                </view>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="empty">
+                <image class="empty-pic" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/empty-pic.png"></image>
+                <p class="empty-content">未找到符合条件的结果</p>
+                <p class="empty-tip">请更改搜索关键词</p>
+            </view>
+        </block>
+    </view>
+</view>

@@ -1,0 +1,143 @@
+<view class="backmask active "
+  bindtap="hide"
+  catchtouchmove="preventBackMove">
+</view>
+<view class="pop-botm active combi-pop-btm"
+  catchtouchmove="preventBackMove">
+    <view class="pop-botm-hd combi-pop-botm-hd">
+        <view class="btn-cancel" />
+        <view class="tit"
+          wx:if="{{ showType === 'combiPopShow' }}">同车次出行，仅需中途换个座</view>
+        <view class="tit"
+          wx:else>同车次出行，仅需{{curThenByTicketInfo.titleTag || curThenByTicketInfo.tag}}</view>
+
+        <text class="ifont-closed-line btn-submit"
+          bindtap="hide" />
+    </view>
+    <view class="hd-pop-center">
+        <view class="center-box">
+            <image src="https://images3.c-ctrip.com/train/2023/app/8.60/zhuliucheng/liuchengganzhi/img-logo.png"
+              class="img" />
+            <text class="txt"
+              wx:if="{{ showType === 'combiPopShow' }}">车内换座</text>
+            <text class="txt"
+              wx:else>{{curThenByTicketInfo.superTag}}</text>
+        </view>
+    </view>
+
+    <view class="pop-botm-bd">
+        <view class="combi-info-box">
+            <!-- 行程信息 -->
+            <block wx:if="{{ showType === 'combiPopShow' }}">
+                <view class="combi-info-tit">{{trainCombiInfo.ticketList[0].departDateD}} {{trainCombiInfo.ticketList[0].departDay}}出发 {{trainCombiInfo.ticketList[0].trainNumber}}</view>
+                <view wx:if="{{trainCombiInfo.isTakeDay}}"
+                  class="combi-info-time combi-info-day">
+                    <text class="hide">{{trainCombiInfo.ticketList[0].departDateD}}</text>
+                    <text class="middle-time {{trainCombiInfo.isZhongzhuanTakeDay ? '' : 'hide'}}">{{trainCombiInfo.ticketList[1].arriveDateD}}</text>
+                    <text class="{{trainCombiInfo.isTakeDay ? '' : 'hide'}}">{{trainCombiInfo.ticketList[1].arriveDateD}}</text>
+                </view>
+                <view class="combi-info-time">
+                    <text>{{trainCombiInfo.ticketList[0].departTime}}</text>
+                    <text class="middle-time">{{trainCombiInfo.ticketList[0].arriveTime}}</text>
+                    <text>{{trainCombiInfo.ticketList[1].arriveTime}}</text>
+                </view>
+
+                <view class="journey-line">
+                    <view class="journey">第1程 {{trainCombiInfo.ticketList[0].seatName}}</view>
+                    <view class="journey journey-two">车内换座</view>
+                    <view class="journey">第2程 {{trainCombiInfo.ticketList[1].seatName}}</view>
+                    <view class="journey-circle journey-circle-one"></view>
+                    <view class="journey-circle journey-circle-two"></view>
+                    <view class="journey-btm-line"></view>
+                </view>
+
+                <view class="combi-info-time station-info">
+                    <text>{{trainCombiInfo.ticketList[0].departStation}}</text>
+                    <text class="middle-time">{{trainCombiInfo.ticketList[0].arriveStation}}</text>
+                    <text>{{trainCombiInfo.ticketList[1].arriveStation}}</text>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="combi-info-tit">{{curThenByTicketInfo.dDateTag}} {{curThenByTicketInfo.weekDay}}出发 {{curThenByTicketInfo.trainNum}}</view>
+                <view class="then-by-day combi-info-time combi-info-day"
+                  wx:if="{{curThenByTicketInfo.hasTakeDays}}">
+                    <text wx:for="{{curThenByTicketInfo.ticketList}}"
+                      wx:for-item="ticket"
+                      class="{{ticket.isReal ? '' : 'grey'}} {{ticket.showDate ? '' : 'hidden'}}">{{!ticket.showDate ? '0月0日' : ticket.showDate }}</text>
+                </view>
+                <view class="combi-info-time then-by-time">
+                    <text wx:for="{{curThenByTicketInfo.ticketList}}"
+                      wx:for-item="ticket"
+                      class="{{ticket.isReal ? '' : 'grey'}}">{{ticket.time}}</text>
+                </view>
+
+                <view class="journey-line then-by">
+                    <text wx:for="{{curThenByTicketInfo.ticketList}}"
+                      wx:for-item="ticket"
+                      class="journey {{ticket.tag ? '' : 'hidden'}}">{{ticket.tag}}</text>
+                    <view class="journey-btm-line-box">
+                        <view class="{{curThenByTicketInfo.crossType === 'FRONT' ? 'dashed' : 'solid' }}"></view>
+                        <view class="{{curThenByTicketInfo.crossType === 'BACK' ? 'dashed' : 'solid' }}"></view>
+                    </view>
+                    <view class="journey-btm-dot">
+                        <view wx:for="{{curThenByTicketInfo.ticketList}}"
+                          class="dot"></view>
+                    </view>
+                    <view class="journey-line-tag">
+                        <view wx:if="{{curThenByTicketInfo.crossType === 'BACK' && curThenByTicketInfo.actionType=== 1}}"
+                          class="solu-tag front youpiao">有票</view>
+                        <view wx:else
+                          class="solu-tag {{curThenByTicketInfo.crossType === 'BACK' ? 'hidden' : 'front'}}">{{curThenByTicketInfo.tag}}</view>
+
+                        <view class="solu-tag {{curThenByTicketInfo.crossType === 'FRONT' ? 'hidden' : ''}}  {{curThenByTicketInfo.solutionType === 1 ? 'bupiao' : 'kuazhan'}}">{{curThenByTicketInfo.tag}}</view>
+                    </view>
+                </view>
+
+                <view class="combi-info-time then-by station-info">
+                    <text wx:for="{{curThenByTicketInfo.ticketList}}"
+                      wx:for-item="ticket"
+                      class="{{ticket.isReal ? '' : 'grey'}}">{{ticket.name}}</text>
+                </view>
+            </block>
+
+
+            <!-- 提示 -->
+            <view wx:if="{{ showType === 'combiPopShow' }}"
+              class="remark-info">
+                <rich-text nodes="{{trainCombiInfo.remark}}"
+                  class="remark-tip"></rich-text>
+            </view>
+            <view wx:elif="{{curThenByTicketInfo.tipList}}"
+              class="remark-info-box then-by-remark">
+                <view class="remark-left">
+                    <view wx:for="{{curThenByTicketInfo.tipList}}"
+                      wx:for-item="tipInfo"
+                      class="remark-info then-by"
+                      bindtap="toWiseProductDetail"
+                      data-jump-url="{{tipInfo.url}}">
+                        <rich-text class="remark-tip"
+                          nodes="{{tipInfo.tip}}"></rich-text>
+                    </view>
+                </view>
+                <view class="remark-right"
+                  bindtap="goTimeTable">
+                    <text>经停信息</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+    <view class="pay-box">
+        <block wx:if="{{ showType === 'combiPopShow' }}">
+            <view class="price number-zx2"><text class="fuhao number-zx2">￥ </text>{{trainCombiInfo.price}} <text class="info">成人票价</text></view>
+            <view class="pay-btn"
+              bindtap="goCombiBuy">立即预订</view>
+        </block>
+        <block wx:else>
+            <view class="price number-zx2"><text class="fuhao number-zx2">￥ </text>{{curThenByTicketInfo.price}} <text class="info">成人票价</text></view>
+            <view class="pay-btn"
+              bindtap="goThenByBuy">立即预订</view>
+        </block>
+    </view>
+</view>

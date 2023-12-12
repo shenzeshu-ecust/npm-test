@@ -1,0 +1,19 @@
+<template name="searchCityList">
+  <view class="searchcitylist-con" wx-if="{{searchAllCityList}}">
+    <block wx:for="{{searchAllCityList}}" wx:key="{{key}}">
+      <view class="searchcitylist-item searchcity-item" id="{{item.categoryName}}">
+       <!--  <view class="searchcitylist-title {{toSearchView ===item.categoryName ? 'searchcitylist-title-fixed' : '' }}">{{item.categoryName}}</view> -->
+        <view class="searchcitylist-title">{{item.categoryName}}</view>
+        <block wx:for="{{item.categoryList}}" wx:key="{{key}}">
+          <view class="searchcitylist-info" data-citydata="{{item}}" bindtap="searchCityJump">
+            <view class="searchcitylist-top">
+              <text class="searchcitylist-city">{{item.cityName}}</text>
+              <text class="searchcitylist-province">{{item.parentName}}</text>
+            </view>
+            <view class="searchcitylist-othername" wx-if="{{item.cityEname}}">{{item.cityEname}}</view>
+          </view>
+        </block>
+      </view>
+    </block>
+  </view>
+</template>

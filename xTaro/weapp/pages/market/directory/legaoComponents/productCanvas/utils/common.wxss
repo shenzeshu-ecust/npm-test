@@ -1,0 +1,436 @@
+.scene_box{
+  overflow: hidden;
+}
+.scene_box>view {
+  margin: 0 auto;
+}
+.component_row{
+  display: flex !important;
+  flex-direction: row;
+}
+.component_container{
+  width: 100% ;
+}
+.component_label{
+  align-items: center !important;
+}
+.component_row_container{
+  height: auto;
+}
+.component_column {
+  display: flex;
+  flex-direction: column;
+}
+.product-diy-container-wrapper{
+  width: 100%;
+  overflow: hidden;
+}
+
+
+
+.location-part {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.location-part .city {
+  display: inline-flex;
+  align-items: center;
+  line-height: auto;
+}
+
+.location-part .location-icon {
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 6rpx;
+}
+
+/* 价格左侧的划线 */
+.product-diy-left-verticle-line::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  width: 1px;
+  height: 80%;
+  background: #ddd;
+  content: " ";
+}
+
+.diyField_explainStatus .diyField_explainStatus_icon {
+  display: inline-flex;
+  margin-right: 5rpx;
+  margin-top: -2rpx;
+}
+.diyField_explainStatus .live_status_text {
+  margin-top: -1rpx;
+}
+
+
+.diyField_explainStatus_statue3 {
+  opacity: 0.7;
+}
+
+/* 产品划线价 */
+.custom_marketPrice {
+  text-decoration: line-through
+}
+
+.product-diy-live-status {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.product-diy-live-icon {
+  display: inline-flex;
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.diyField_liveStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 折扣 */
+.diyField_discount_box {
+  display: inline-flex;
+  align-items: center;
+}
+
+.product-diy-reduction-icon {
+  width: 26rpx;
+  height: 26rpx;
+  display: inline;
+  margin: auto;
+  margin-right: 2rpx;
+  vertical-align: bottom;
+}
+
+.custom_discount {
+  border: solid 1rpx rgb(255,0,27);
+}
+
+/* 标签 */
+.diy-cs-s_tags09 {
+  height: 100%;
+  display: flex;
+  flex: 1;
+}
+
+
+/* 评级 */
+.product-diy-star-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.product-diy-star-wrap .diy-star {
+  width: 20rpx;
+  height: auto;
+  margin-left: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.product-diy-zone-name {
+  display: flex;
+  align-items: center;
+}
+
+
+/* 推荐文案 */
+.product-diy-module-recommend-text {
+  width: max-content !important;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.product-diy-module-recommend-text .underline-bar {
+  position: absolute;
+  bottom: 6rpx;
+  left: 0;
+  height: 8rpx;
+  width: 100%;
+  background-color: #0086f6;
+  opacity: 0.16;
+  border-radius: 4rpx;
+}
+
+.product-diy-module-recommend-text .diy-recommend-text-main {
+  position: relative;
+}
+
+.product-diy-module-recommend-text .diy-recommend-text-quote {}
+
+
+/* xItems */
+.pnr-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: left;
+  font-size: 22rpx;
+  color: #666666;
+  letter-spacing: 0;
+  line-height: 26rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+}
+
+.pnr-content .col-wrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+  width: 100%;
+
+}
+
+.pnr-conten .col-wrap:last-child {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  width: 100%;
+
+}
+
+.pnr-content .before-icon {
+  width: 26rpx;
+  height: 26rpx;
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  background: #FF7700;
+  opacity: 1;
+  line-height: 26rpx;
+  flex-shrink: 0;
+}
+
+.pnr-content .before-icon div {
+  font-size: 18rpx;
+}
+
+.pnr-content .pnr-hs-subcontent {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding-left: 6rpx;
+  position: relative;
+  width: 100%;
+  font-size: 22rpx;
+}
+
+/* 按钮字段 */
+.diyField_btnClick_time {
+  font-size: 20rpx;
+  color: #FF0022;
+  line-height: 22rpx;
+  height: 22rpx;
+  text-align: center;
+  width: calc(100% - 2px);
+  background-color: #FFF;
+  opacity: 0.9;
+  border-radius: 4rpx 4rpx 8rpx 8rpx;
+  margin-bottom: 2rpx;
+}
+.component_column_left{
+
+}
+.component_column_right{
+  width: 100% !important;
+}
+
+.product-diy-rank-box {
+  display: flex;
+  align-items: center;
+}
+
+
+
+/* 榜单 */
+.rankTag_verticalLine_line {
+  width: 2rpx;
+  height: 24rpx;
+  background: rgb(221, 221, 221);
+  display: inline-block;
+}
+.product-diy-rank_text{
+  padding-bottom: 1rpx;
+}
+
+/* 商品类型 */
+.product-diy-businessType-box {
+  display: flex;
+  align-items: center;
+}
+
+.product-diy-businessType-box .product-diy-businessType-icon {
+  width: 30rpx;
+  height: auto;
+  margin-right: 2rpx;
+  display: inline;
+}
+
+/* 新开业 */
+.custom_isNewOpening {
+  background-image: linear-gradient(90deg, #00dd9c 0%, #00bad5 100%) !important;
+  border-radius: 4rpx !important;
+  font-size: 22rpx !important;
+  color: #ffffff !important;
+  padding: 2rpx 10rpx !important;
+  text-align: center !important;
+  height: 32rpx;
+  line-height: 32rpx;
+  background-image: linear-gradient(90deg, #00DD9C 0%, #00BAD5 100%) !important;
+}
+
+/* 是否被推荐 */
+.product-diy-thumbsup {
+  width: 24rpx !important;
+  height: 24rpx !important;
+  vertical-align: baseline;
+}
+
+/* 点评 */
+.diyField_showCommentsCount {
+  display: block !important;
+  align-items: center;
+  height: 100%;
+}
+
+
+/* 景区等级 */
+.custom_levelInfo {}
+
+/** 产品图片 */
+.diyField_imageUrl {
+  display: flex;
+  /* position: static !important; */
+  /* position:  !important; */
+}
+
+/* 按钮文案 */
+.custom_btnText {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 !important;
+}
+
+
+/* 价格单位 */
+.price_unit_icon {
+  font-size: 24rpx;
+}
+
+/* diyField_tuanTag */
+.diyField_tuanTag {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0.5rpx;
+}
+
+.diyField_explainStatus_icon {
+  display: inline-flex;
+  width: 20rpx;
+  height: 24rpx;
+}
+
+
+
+/* 产品名称 */
+.diyField_name {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /* display: -webkit-inline-flex; */
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  word-wrap: break-all;
+  padding: 0 !important;
+  line-height: 18px !important;
+  margin-bottom: 4px !important;
+  border-bottom: none;
+  background: transparent !important;
+}
+
+.diyField_name_overflow {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* display: -webkit-box;  */
+  /* display: -webkit-inline-flex; */
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* diyField_index */
+.diyField_index {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: auto;
+  max-height: auto;
+  color: rgba(255, 255, 255, 1);
+  background-size: 100% 100%;
+  background-color: rgba(51, 51, 51, 0);
+  top: -4rpx;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 8rpx 0rpx 8rpx 0rpx;
+  padding: 0rpx 10rpx 0rpx 10rpx;
+  white-space: nowrap;
+  line-height: 18rpx;
+  font-size: 22rpx;
+  z-index: 3;
+  text-align: center;
+  margin-top: 0rpx;
+  margin-right: auto;
+  margin-bottom: auto;
+
+  
+}
+
+/* 点评数 */
+.product_showCommentsCount_box{
+  display: inline-flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+/* 销售状态 */
+.diyField_saleStatus {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 按钮 */ 
+.btn_opactity{
+  opacity: 0.6 !important;
+}
+.custom_simple_class_1{
+  width: 492rpx !important;
+  height: 164rpx !important;
+}
+.custom_simple_class_2{
+  width: 492rpx !important;
+  height: 223rpx !important;
+}

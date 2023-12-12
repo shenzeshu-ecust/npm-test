@@ -1,0 +1,12 @@
+<cModal
+    isShow="{{enable && message}}"
+    bodyTitle="领券需要实名认证"
+    bodyContent="{{message}}"
+    confirmText="去认证"
+    cancelText="{{skey ? '不领券，直接订' : '放弃优惠券'}}"
+    btnCol="{{!!skey}}"
+    bind:confirm="toAuthRealName"
+    bind:cancel="cancel"
+    title-class="title-class"
+>
+</cModal>

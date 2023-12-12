@@ -1,0 +1,33 @@
+
+var ResizeImg = function(imgUrl, size=''){
+	var newimgUrl = 'https://pages.c-ctrip.com/you/component-local/default.png';
+	var checkJpg = getRegExp('(\_[A-Z0-9]+)+(?=\.jpg)','g');
+	var checkPng = getRegExp('(\_[A-Z0-9]+)+(?=\.png)','g');
+	var a = getRegExp('\_[A-Z](\_\d+){2}(?=\.jpg)','g');
+	var b = getRegExp('\_[A-Z](\_\d+){2}(?=\.png)','g');
+
+	if(checkJpg.test(imgUrl)){
+		newimgUrl = imgUrl.replace(a, size);
+	}else if(checkPng.test(imgUrl)){
+		newimgUrl = imgUrl.replace(b, size);
+	}else if(imgUrl.indexOf(".png")>0){
+		newimgUrl = imgUrl.substring(0,imgUrl.length-4)+size+'.png';
+	}else{
+		newimgUrl = imgUrl.substring(0,imgUrl.length-4)+size+'.jpg';
+	}
+
+	return newimgUrl;
+}
+
+var checkNumber = function(number){
+	var rule = getRegExp('\d+(\.[1-9])?');
+	var newNumber = number>9999?(number/10000).toFixed(1).toString().match(rule)[0]+"w":number;
+    return newNumber;
+}
+
+
+
+module.exports = {
+	ResizeImg:ResizeImg,
+	checkNumber:checkNumber
+}

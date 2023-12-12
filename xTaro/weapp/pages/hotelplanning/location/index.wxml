@@ -1,0 +1,8 @@
+<view class="smz-geo-container">
+    <image class="geo-fail-img" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/location_fail.png"></image>
+    <view wx:if="{{failureStatus === 1}}" class="btn-retry" bindtap="smzReGetPosition">点击尝试获取地理位置</view>
+    <view wx:elif="{{failureStatus === 2}}" class="failure-alert">请打开设备定位服务，允许“携程”确定您的位置</view>
+    <view wx:elif="{{failureStatus === 3}}" class="failure-alert">获取授权失败，请确认系统定位打开，并重启小程序尝试。</view>
+</view>
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

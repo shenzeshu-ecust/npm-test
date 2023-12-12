@@ -1,0 +1,77 @@
+
+.filter-view-banner{
+  height: 152rpx;
+  display:flex;
+  white-space: nowrap;
+  width:100%;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: none;
+}
+
+.filter-view-item{
+  box-shadow: none;
+}
+
+.banner-view{
+  margin-left: 12rpx;
+}
+
+.banner-view-content{
+  position: relative;
+}
+ 
+.banner-view-content.right{
+  margin-right: 24rpx;
+}
+
+.banner-view-img{
+  height: 152rpx;
+  width: 268rpx;
+  border-radius: 8rpx;
+}
+
+
+.banner-explanation{
+  position: absolute;
+  bottom: 8rpx;
+  left: 0;
+  width: 100%;
+  height: 32rpx;
+  background: linear-gradient(-90deg, #ff001b 0%, #ff6600 100%);
+  line-height: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0rpx 0rpx 8rpx 8rpx;
+}
+
+.tag-warpper {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.tag {
+  width: 42rpx;
+  background: rgba(51, 51, 51, 0.8);
+  border-radius: 8rpx 0 8rpx 0;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #ffffff;
+  line-height: 40rpx;
+  text-align: center;
+}
+
+.list-img {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 4rpx;
+  background-size: 24rpx;
+}
+
+.ask-text {
+  font-size: 20rpx;
+  font-family: PingFangSC-Medium;
+  color: #ffffff;
+  text-align: center;
+}

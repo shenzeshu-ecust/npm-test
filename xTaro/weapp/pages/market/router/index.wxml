@@ -1,0 +1,9 @@
+
+<view class="wx_unlimit_qrcode_wrap">
+	<image src="https://images4.c-ctrip.com/img3/marketing/2017/08/wx_marathon/user_photo03.png" mode="widthFix" class="">
+	</image>
+	<view class="loading_tips">
+		<text class="">精彩内容加载中</text>
+		<text class="ani_dot">...</text>
+	</view>
+</view>

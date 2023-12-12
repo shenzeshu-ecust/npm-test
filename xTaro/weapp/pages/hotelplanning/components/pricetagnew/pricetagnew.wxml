@@ -1,0 +1,16 @@
+<view class="pc-box">
+    <view class="pc-text" wx:if="{{tagList && tagList.length}}">
+        <block wx:for="{{tagList}}" wx:for-item="tag" wx:key="text">
+            <text wx:if="{{index > 0}}" class="slim-line"></text>
+            <text class="vm">{{tag.text}}</text>
+        </block>
+    </view>
+    <!-- 低星WiFi落地页强化续住感知（续住立享标签） -->
+    <view wx:if="{{fromLS}}" class="pc-text extend-stay">
+        续住立享
+    </view>
+    <view class="pc-discount {{fromLS && 'border-none'}}" wx:if="{{discountText}}">
+        <view>{{discountText}}</view>
+        <view hidden="{{hideIcon}}" class="pc-icon"></view>
+    </view>
+</view>

@@ -1,0 +1,7 @@
+<view>
+  <image src="{{imageUrl}}" class="main-pic" mode="widthFix"></image>
+  <button class="btn-service" open-type="contact" send-message-title="关注公众号，客服在线咨询" send-message-img="https://images3.c-ctrip.com/marketing/2020/04/wx_service/get.png" send-message-path="{{pagePath}}" show-message-card="true" bindcontact="toContact"></button>
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

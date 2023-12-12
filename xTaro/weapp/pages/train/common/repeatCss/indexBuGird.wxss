@@ -1,0 +1,6 @@
+.other-butab{margin: 20rpx;display: flex; flex-flow: row wrap;justify-content:space-between;}
+.other-butab .item{flex:1;height: 148rpx;background: #fff;border-radius: 10px;display: flex;align-items: center;padding: 0 20rpx;box-sizing: border-box;margin-right: 20rpx;}
+.other-butab .item:last-child{margin-right: 0;}
+.other-butab .icon{width: 96rpx;height: 96rpx;margin-right: 20rpx;}
+.other-butab .tit{font-size: 34rpx;font-weight: 600;}
+.other-butab .txt{font-size: 24rpx;color: #999;margin-top: 6rpx;}

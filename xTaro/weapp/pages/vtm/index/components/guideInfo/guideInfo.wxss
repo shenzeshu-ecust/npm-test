@@ -1,0 +1,189 @@
+@import '../../../common/common.wxss';
+
+.team_container {
+  display: flex;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+  padding:0 24rpx 32rpx;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 179rpx;
+  border-radius: 32rpx;
+  
+}
+
+.team_avatar {
+  width: 136rpx;
+  height: 136rpx;
+  min-width: 136rpx;
+  min-height: 136rpx;
+  border-radius: 50%;
+  border: 2px solid #EFF6FF;
+}
+
+.team_info {
+  margin-left: 20rpx;
+}
+
+.team_name {
+  display: flex;
+  height: 40rpx;
+  color: #111111;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 40rpx;
+}
+.team_name_right{
+  font-size: 26rpx;
+}
+
+.team_city {
+  display: inline-flex;
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  background: #ffeedf;
+  border-radius: 4rpx 4rpx 4rpx 4rpx;
+}
+
+.team_city_tag {
+  height: 36rpx;
+  width: 82rpx;
+  background: url('https://pages.c-ctrip.com/car_dcs/vtm/koubeibang.png');
+  background-size: 100% 100%;
+  border-radius: 4rpx 4rpx 4rpx 4rpx;
+}
+.team_city_content{
+  display: flex;
+  align-items: center;
+  height: 36rpx;
+  line-height: 36rpx;
+  font-family: PingFangSC-Medium;
+  padding: 0 6rpx 0 8rpx;
+  color: #673114;
+}
+.team_city_text {
+  max-width: 380rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.team_city_right{
+  height: 36rpx;
+  line-height: 36rpx;
+  font-size: 20rpx;
+  margin-left: 2rpx;
+}
+.team_service {
+  font-size: 24rpx;
+  color: #555;
+  margin-top: 10rpx;
+}
+
+.team_bold {
+  font-family: PingFangSC-Medium;
+  font-weight: normal;
+  font-size: 28rpx;
+  color: #006FF6;
+}
+
+.team_mini_avatar {
+  display: inline-block;
+  width: 74rpx;
+  height: 30rpx;
+  background-image: url(https://pages.c-ctrip.com/car_dcs/vtm/userImg.png);
+  background-size: 100% 100%;
+  margin-right: 8rpx;
+}
+.team_mini_avatar1{
+  display: inline-block;
+  width: 30rpx;
+  height: 30rpx;
+  background-image: url(https://pages.c-ctrip.com/car_dcs/vtm/userImg1.png);
+  background-size: 100% 100%;
+  margin-right: 8rpx;
+}
+.team_mini_avatar1_text{
+  max-width: 460rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.team_give_thumbs_up {
+  margin-top: 12rpx;
+  display: flex;
+  align-items: center;
+  height: 32rpx;
+  color: #555555;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  letter-spacing: 0px;
+  line-height: 32px;
+  
+}
+
+.gj_t_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+  padding:0 24rpx 24rpx;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 179rpx;
+  border-radius: 32rpx;
+}
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+.gj_t_left {
+  width: 136rpx;
+  height: 136rpx;
+  border-radius: 50%;
+  background-color: #ccc;
+  animation: skeleton-pulse 4s ease-in-out infinite;
+}
+
+.gj_t_right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 136rpx;
+  padding-left: 20rpx;
+}
+
+
+
+.gj_t_row {
+  display: flex;
+  margin-bottom: 12rpx;
+  width: 160rpx;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 40rpx;
+  background-color: #ccc;
+  animation: skeleton-pulse 4s ease-in-out infinite;
+  border-radius: 2rpx;
+}
+
+.gj_t_row:nth-child(2) {
+  width: 400rpx;
+  height: 32rpx;
+}
+
+.gj_t_row:nth-child(3) {
+  height: 36rpx;
+  width: 280rpx;
+}

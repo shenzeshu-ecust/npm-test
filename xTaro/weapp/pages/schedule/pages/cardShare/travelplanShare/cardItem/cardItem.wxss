@@ -1,0 +1,89 @@
+/* {{component}}.wxss */
+.row-view{
+    display: flex;
+    flex-direction: row;
+}
+
+.poi-name-image {
+    width: 180rpx;
+    min-height: 180rpx;
+    height: auto;
+    min-width: 180rpx;
+    border-radius: 10rpx;
+}
+
+.poi-view-2{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    margin-left: 20rpx;
+}
+
+.only-one-line {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.poi-right-up {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.poi-name-text {
+    color: #333333;
+    font-size: 34rpx;
+    font-weight: bold;
+}
+.poi-name-tag {
+    margin-left: 8rpx;
+    font-size: 22rpx;
+    padding: 4rpx 8rpx 4rpx 8rpx;
+    border-radius: 6rpx;
+}
+.poi-dark-text {
+    font-size: 28rpx;
+    color: #333;
+}
+.poi-gray-text {
+    color: #999;
+    font-size: 24rpx;
+}
+.poi-tag {
+    font-size: 22rpx;
+    border-radius: 6rpx;
+    margin-right: 12rpx;
+    padding: 3rpx 8rpx 3rpx 8rpx;
+    /* color: #0086f6;
+    background-color: red; */
+}
+.poi-sub-info {
+    margin-bottom: 14rpx;
+    font-size: 24rpx;
+    color: #333;
+}
+
+.poi-right-down {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.price-container {
+    flex-shrink: 0;
+    margin-left: 5rpx;
+}
+.price-currency-symbol {
+    color: #444;
+    font-size: 22rpx;
+}
+.price-number {
+    color: #444;
+    font-size: 28rpx;
+}
+.pric-reminder {
+    color: #666;
+    font-size: 22rpx;
+}

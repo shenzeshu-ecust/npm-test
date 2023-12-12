@@ -1,0 +1,43 @@
+.rankbox {
+    text-align: left;
+    padding: 16rpx 0 0 14rpx;
+    height: 60rpx;
+    position: absolute;
+    top: 0;
+    width: 50%;
+}
+.rankbox::after {
+    height: 50rpx;
+    content: "";
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 36rpx;
+    position: absolute;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 56%, rgba(255, 255, 255, .44) 100%);
+}
+.user-item {
+    font-size: 20rpx;
+    color: #fff;
+    height: 32rpx;
+    border-radius: 32rpx;
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .24);
+
+}
+.avatar {
+    border: 1rpx solid #fff;
+    height: 30rpx;
+    width: 30rpx;
+    display: block;
+    border-radius: 50%;
+}
+.info {
+    flex: 1;
+    line-height: 1.5;
+    text-align: left;
+    padding: 0 16rpx;
+    margin-right: 8rpx;
+    font-size: 20rpx;
+}

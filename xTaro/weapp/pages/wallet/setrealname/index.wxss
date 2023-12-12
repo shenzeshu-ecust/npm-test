@@ -1,0 +1,448 @@
+/**index.wxss**/
+page{
+    background-color: #FFF;
+}
+
+.wrapbox {
+    padding: 32rpx;
+}
+
+.box-header{
+    padding-top: 20rpx;
+    line-height: 30rpx;
+    height: 216rpx;
+}
+
+.boxheader-h1{
+    font-size: 42rpx;
+    font-weight: 700;
+}
+
+.boxheader-h2{
+    color: #666;
+    font-size: 30rpx;
+}
+
+.inputitem{
+    height: 76rpx;
+    margin-bottom: 30rpx;
+    display: block;
+    width: 100%;
+    position: relative;
+    border: none!important;
+}
+
+.labelitem{
+    height: 76rpx;
+    margin-bottom: 60rpx;
+}
+
+.inputitem:last-child{
+    margin-bottom: 20rpx;
+}
+
+.inputname-box{
+    font-size: 34rpx;
+    color: #CCC;
+    position: absolute;
+    left: 0;
+    top: 8rpx;
+    transition: all .15s ease-in-out;
+    z-index: -1;
+}
+
+.input-tiptxt{
+    font-size: 28rpx;
+    padding-left: 12rpx;
+}
+
+.police-input{
+    border-bottom: 1rpx solid #E0E0E0;
+    height: 26rpx;
+    padding: 12rpx 0;
+    font-size: 34rpx;
+}
+
+.input-focused, .input-focused .police-input{
+    border-bottom: 3rpx solid #dadada;
+}
+
+.input-focused + .inputname-box, .input-focused>.inputname-box{
+    top: -30rpx;
+    font-size: 26rpx;
+    color: #999
+}
+
+.inputname-title{
+    color: #999;
+    font-size: 26rpx;
+}
+
+.inputname-value{
+    font-size: 34rpx;
+    border-bottom: 1rpx solid #E0E0E0;
+    padding-bottom: 10rpx;
+}
+.id_wrapper{
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+}
+.id_qa{
+  width:34rpx;
+  height:34rpx;
+}
+.active-input{
+    padding-top: 26rpx;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 19;
+    overflow: hidden;
+}
+
+.cbinput-active{
+    opacity: 0;
+    z-index: -1;
+    width: 10rpx;
+    margin-left: -100rpx;
+}
+
+.cbinput-holder{
+    font-size: 36rpx;
+    color: #ccc;
+    font-weight: 400;
+}
+
+.agreement-wrap{
+    font-size: 24rpx;
+    color: #999999;
+}
+.agreement-radio{
+    transform:scale(0.7);
+}
+.agreement{
+    color: #0086F6;
+}
+
+.boxform-btnbox{
+    padding-top: 20rpx;
+}
+
+.boxform-btn{
+    border: none;
+    background-color: #EEE;
+    outline: none;
+    color: #999;
+    font-size: 34rpx;
+}
+
+.boxform-enbtn{
+    background-color: #0086F6;
+    color: #FFF;
+}
+
+.box-returnbtns{
+    padding-top: 20rpx;
+}
+
+.box-returnbtn{
+    background-color: #fff;
+    color: #0086F6;
+    font-size: 30rpx;
+}
+
+.boxform-btn::after, .box-returnbtn::after, .pay-modal-button::after{ border: none; }
+
+.pay-modal-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 1000;
+}
+
+.pay-modal {
+    box-sizing: border-box;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    padding: 0 40rpx;
+    z-index: 1001;
+}
+
+.pay-modal-content {
+    position: relative;
+    border-radius: 10rpx;
+    font-size: 36rpx;
+    word-wrap: break-word;
+    word-break: break-all;
+    color: rgb(153, 153, 153);
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
+}
+
+.pay-modal-body {
+    padding: 20rpx;
+}
+
+.p-modal-body-wx {
+    height: 100px;
+    line-height: 80px;
+    text-align: center;
+    color: #000;
+}
+
+.pay-modal-btnwrap{
+    display: flex;
+    border-top: 1px solid #C3BDB8;
+}
+
+.pay-modal-btnbox{
+    flex: 1;
+}
+
+.pay-modal-btnbox:first-child{
+    border-right: 1px solid #C3BDB8;
+}
+
+.pay-modal-button{
+    background-color: #fff;
+    border-radius: 0;
+    color: #007ECC;
+}
+
+
+.wc_icon1,
+.wc_icon2 {
+    display: block;
+    width: 160px;
+    height: 160px;
+    background: url(http://pic.c-ctrip.com/picaresonline/h5paymentsdk/smallprogram/img/realok.b2af1a58.png) left top no-repeat;
+    background-size: 160px 160px;
+    margin: 40px auto 20px auto;
+}
+
+.wc_icon1 {
+    width: 134px;
+    height: 100px;
+    background-size: 100%;
+}
+
+.wc_icon2 {
+    background-image: url(http://pic.c-ctrip.com/picaresonline/fncmobilewallet/fncmobilewallet/webcat/wc_icon02.c4c7f9fa.png);
+}
+
+.wc_txt1 {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    color: #32465B;
+    font-weight: bold;
+    padding: 25px 0 10px;
+}
+
+.wc_btn1,
+.wc_btn2 {
+    display: block;
+    margin: 0 6%;
+    height: 48px;
+    border-radius: 24px;
+    font-size: 22px;
+    line-height: 48px;
+    text-align: center;
+    background-color: #FEB14B;
+    color: #FFF;
+}
+
+.wc_btn2 {
+    background: #fff;
+    color: #FE8A09;
+    border: 2px solid #FEB14B;
+    height: 44px;
+    line-height: 44px;
+    border-radius: 22px;
+    margin-top: 15px;
+}
+
+.re_tit1,
+.re_tit2 {
+    height: 167px;
+    background-image: linear-gradient(0deg, #E0F1FB 3%, #F3FCFB 100%);
+    position: relative;
+}
+
+.re_tit2 {
+    height: 115px;
+    margin-bottom: 25px;
+}
+
+.re_img1,
+.re_img2 {
+    display: block;
+    width: 120px;
+    height: 112px;
+    background: url(http://pic.c-ctrip.com/picaresonline/fncmobilewallet/fncmobilewallet/webcat/img2.d3d21d53.png);
+    background-size: 100% 100%;
+    margin-left: 35px;
+}
+
+.re_img2 {
+    background-image: url(http://pic.c-ctrip.com/picaresonline/fncmobilewallet/fncmobilewallet/webcat/img1.0c0851aa.png);
+    width: 112px;
+    height: 125px;
+    margin-left: 4%;
+}
+
+.re_tit1 text,
+.re_tit2 text {
+    position: absolute;
+    left: 45%;
+    top: 45px;
+    color: #425569;
+    font-size: 22px;
+    font-weight: normal;
+}
+
+.re_tit2 text {
+    left: 38%;
+    font-size: 20px;
+}
+
+.re_list1 {
+    margin: -56px 25px 30px 25px;
+    background-color: #FFF;
+    box-shadow: 0 4px 30px 0 rgba(145, 212, 241, 0.57);
+    border-radius: 10px;
+    height: 80px;
+    list-style: none;
+    position: relative;
+    font-size: 18px;
+    color: #425569;
+    padding: 16px 0;
+}
+
+.re_list1 view {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 12rpx;
+    font-weight: bold;
+	font-size: 34rpx;
+}
+
+.re_list1 view text {
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+    padding-right: 25px;
+    color: #748DAE;
+    font-weight: normal;
+}
+
+.re_list2 {
+    margin: 0 25px;
+    list-style: none;
+}
+
+.re_list2 view {
+    position: relative;
+    padding-left: 50px;
+    font-size: 14px;
+    color: #425569;
+    margin-bottom: 15px;
+}
+
+.re_list2 view text {
+    font-size: 18px;
+    display: block;
+    padding-bottom: 5px;
+}
+
+.re_list2 view text {
+    font-weight: bold;
+}
+
+.re_list2 view .re_txt01 {
+    font-size: 14px;
+    display: inline;
+    padding-bottom: 0;
+    font-weight: bold;
+}
+
+.re_list2 view icon {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 30px;
+    background: url(http://pic.c-ctrip.com/picaresonline/fncmobilewallet/fncmobilewallet/webcat/icon_01.1b0a1f53.png) left top no-repeat;
+    background-size: 100% 100%;
+    height: 36px;
+}
+
+.re_list2 view .re_icon2 {
+    background-image: url(http://pic.c-ctrip.com/picaresonline/fncmobilewallet/fncmobilewallet/webcat/icon_02.2a66b48e.png)
+}
+
+
+/**realname conflicted**/
+.realname-imgbox {
+    text-align: center;
+    padding-top: 200rpx;
+}
+
+.realname-imgbox_img {
+    width: 340rpx;
+    height: 340rpx;
+}
+
+.realname-imgbox_txt{
+    font-size: 34rpx;
+    color: #333;
+    height: 46rpx;
+    line-height: 46rpx;
+    padding: 20rpx 0;
+}
+
+.realname-desc{
+    color: #666;
+    font-size: 26rpx;
+    line-height: 38rpx;
+    padding: 0 32rpx;
+}
+
+.realname-button {
+    padding-top: 56rpx;
+}
+
+.fail-backbutton{
+    background: #0086f6;
+    border-radius: 12rpx 12rpx 12rpx 12rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    width: 250rpx;
+    font-size: 34rpx;
+    color: #fff;
+    text-align: center;
+    outline: none;
+}
+
+.re_infobox {
+    font-size: 12px;
+    color: #32465B;
+    text-align: center;
+    line-height: 26px;
+    padding-bottom: 50rpx;
+}
+.modify_realname_tips{
+  position:fixed;
+  width:100%;
+  bottom:60rpx;
+  text-align:center;
+  color: #0086F6;
+  font-size:28rpx;
+}

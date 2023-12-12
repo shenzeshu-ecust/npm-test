@@ -1,0 +1,21 @@
+<import src="template/searchTab.wxml"/>
+<import src="template/searchInput.wxml"/>
+<import src="template/searchHotList.wxml"/>
+<import src="template/searchAlphabetBar.wxml"/>
+<import src="template/searchCityList.wxml"/>
+<import src="template/searchResult.wxml"/>
+
+<view class="search-page-view {{iphonexFlag ? 'iphonex-bottom' : ''}}">
+  <view class="search-page-header">
+    <template is="searchInput" data="{{searchInputValue:searchInputValue,searchPlaceHolder:searchPlaceHolder}}"/>
+    <template is="searchResult" data="{{searchResultLocationList:searchResultLocationList,searchResultPoiList:searchResultPoiList,fromHomePage:fromHomePage}}"/>
+    <template is="searchTab" wx-if="{{!searchIsFree}}" data="{{searchTabBarList}}"/>
+  </view>
+  <view class="search-city-bigalpha" wx-if="{{searchShowBigAlpha}}">{{searchTitleFixed}}</view>
+  <scroll-view  wx-if="{{!searchIsFree}}" class="pages-view search-page-content {{ fromHomePage ? 'search-page-content-free':'search-page-content-normal'}}" style="height:{{searchScrollHeight}}rpx" scroll-y scroll-into-view="{{toSearchView}}" data-searchview="{{toSearchView}}" scroll-with-animation="{{searchScrollAnimation}}" scroll-top="{{searchScrollTop}}" bindscroll="searchScrollFun">
+    <template is="searchHotList" data="{{searchHotCityList:searchHotCityList,toSearchView:toSearchView}}"/>
+    <template is="searchCityList" data="{{searchAllCityList:searchAllCityList,toSearchView:toSearchView}}"/>
+  </scroll-view>
+  <template wx-if="{{searchAlphabarShow}}" is="searchAlphabetBar" data="{{searchAlphabetBarList:searchAlphabetBarList,touchFlag:touchFlag}}" style="height:{{searchScrollHeight}}rpx"/>
+  <view class="view-check" bindanimationend="viewReadyHandle"></view>
+</view>

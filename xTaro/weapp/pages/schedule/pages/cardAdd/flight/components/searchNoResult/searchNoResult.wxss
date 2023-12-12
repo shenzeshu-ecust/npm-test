@@ -1,0 +1,9 @@
+.searchNoResult {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 220rpx;
+  font-size: 26rpx;
+  line-height: 37rpx;
+  color: #999999;
+}

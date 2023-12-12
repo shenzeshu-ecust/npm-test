@@ -1,0 +1,9 @@
+{
+  "component": true,
+    "navigationBarTitleText": "钱包支付",
+    "usingComponents": {
+      "sms-comp": "../SmsComp/SmsComp",
+      "nav-bar": "/cwx/component/navbar/navbar"
+    },
+    "navigationStyle": "custom"
+}

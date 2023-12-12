@@ -1,0 +1,10 @@
+{
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#F2FBFC",
+  "navigationBarTitleText": "实名认证",
+  "navigationBarTextStyle": "black",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "nav-bar": "/cwx/component/navbar/navbar"
+  }
+}

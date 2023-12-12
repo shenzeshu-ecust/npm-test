@@ -1,0 +1,20 @@
+<!--pages/success/index.wxml-->
+<view class="successBox">
+  <view class="successTips">
+    <view class="icon_success"></view>
+    <text class="successTipsH3">提交成功！</text>
+    <text>可以联系您的朋友查收</text>
+  </view>
+  <view class="travellerList">
+    <view><text>旅客</text> <text class='travellerListH3'>（最多添加10位旅客信息）</text></view>
+    <view class="travellerListBox">
+    <block wx:for="{{passengers}}" wx:key="name">
+      <view class='travellerListBoxLi'><text>{{item.name}}</text><text>已提交</text></view>
+    </block>
+    </view>
+  </view>
+</view>
+<view wx:if="{{isshowAdd==0}}"  class="travellerListBtn" bindtap="addpassengertap"><button><view class="icon-add"></view><text>继续添加</text></button></view>
+
+<!-- 白屏检测节点&框架提供 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

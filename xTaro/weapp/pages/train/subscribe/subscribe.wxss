@@ -1,0 +1,46 @@
+@import '../common/iconfont.wxss';
+page{background: #EEF1F6;}
+
+.wrap{position: absolute;top: 0;left: 0;right: 0;bottom: 0;}
+/* .wrap .btn {background:url("https://images3.c-ctrip.com/train/hd/20200615-ctrip-guess-lowest-price/btn-bg2.png");background-size: 100% 100%;} */
+.wrap .btn{position: absolute;bottom: 120rpx;left: 0;right:0;padding: 0 60rpx;}
+.wrap image{width: 100%; height: auto;}
+
+.blackmask{position: fixed;left: 0;top:0;right: 0;bottom: 0;z-index: 960;background: rgba(0,0,0,.7);}
+.pop-mid{position: fixed;left: 50%;top: 50%;z-index: 1000;transform:translate(-50%,-50%);}
+.pop-model{width: 600rpx;border-radius: .8rem;padding: 40rpx;box-sizing: border-box;background: #fff;}
+.pop-model-bd{margin: 40rpx 12rpx 0;font-size: 28rpx;color: #666;line-height: 40rpx;text-align: center;}
+.pop-model-btn{display: flex;margin-top: 60rpx;}
+.pop-model-btn button{height: 88rpx;flex: 1;margin-right: 24rpx;line-height: 88rpx;border-radius: .3rem;font-size: 32rpx;}
+.pop-model-btn button:last-child{margin-right: 0;}
+.pop-model-btn button::after{border:0}
+.pop-model-btn .btn-cancel{background: #fff;border:.05rem solid #eee;color: #666;}
+.pop-model-btn .btn-submit{background: #0086F6;color: #fff;font-weight: 600;}
+
+.top-bar {
+    width: 100%;
+    padding-top: env(safe-area-inset-top);
+    height: 88rpx;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    -webkit-transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out;
+    text-align: center;
+    color: #fff;
+}
+.ifont-back {
+    width: 68rpx;
+    height: 68rpx;
+    background: url(https://images3.c-ctrip.com/train/activity/20211101-ctrip-spring-calendar/fixed-txt.png) no-repeat;
+    background-size: cover;
+    position: absolute;
+    bottom: 12rpx;
+    line-height: 68rpx;
+    font-weight: bold;
+    left: 24rpx;
+    font-size: 24rpx;
+}
+

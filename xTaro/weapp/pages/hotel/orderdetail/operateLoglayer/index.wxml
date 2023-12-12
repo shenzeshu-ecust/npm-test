@@ -1,0 +1,10 @@
+<template name="operatelog-layer">
+        <scroll-view scroll-y scroll-with-animation class="scroll-y" enable-back-to-top="true" slot="content">
+            <view class="tbody operate-content">
+                <view class="item cell" wx:for="{{operateInfo}}" wx:for-item="item" wx:for-index="idx">
+                    <view class="time"> {{item.day}}\n{{item.clock}}</view>   
+                    <view class="desc"> {{item.content}}</view>
+                </view>
+            </view>
+        </scroll-view>
+</template>

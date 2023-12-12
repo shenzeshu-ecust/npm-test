@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "cModal": "/pages/hotelplanning/common/components/cModal/cModal"
+    }
+}

@@ -1,0 +1,16 @@
+.share-wrap{position: fixed;bottom: 0;left: 0;width: 100%;height: 330rpx;transform: translateY(330rpx);box-sizing: border-box;background-color: #fff;color: #666;font-size: 28rpx;z-index: 4;text-align: center;transition: transform .5s;box-shadow: 2px 0px 13px rgba(0,0,0,.2);}
+.share-wrap.open{transform: translateY(0);}
+.share-wrap .close{position: absolute;top: 0;right: 0;width: 105rpx;height: 95rpx;}
+.share-wrap .close:before,.share-wrap .close:after{content: "";position: absolute;top: 50%;left: 50%;width: 45rpx;margin-left:-15rpx;border-top: 2rpx #828282 solid;transform: rotate(45deg);}
+.share-wrap .close:after{transform: rotate(-45deg);}
+.share-wrap .title{height:110rpx;line-height:110rpx;}
+.share-wrap .share-list{display: flex;justify-content: space-around;align-items: center;padding:0 35rpx;color: #fff;}
+.share-wrap .share-list .s-item{width: 195rpx;height: 240rpx;text-align: center;}
+.share-wrap .share-list .s-item .white{width: 195rpx;height: 130rpx;background-color: #fff;border-radius: 50%;box-sizing:border-box;padding: 10rpx 50rpx;}
+.share-wrap .share-list .s-item .white.friend{height: 125rpx;} 
+.share-wrap .share-list .s-item .i-quan{width: 95rpx;height: 110rpx;background-position: 0 -242rpx;background-size: 280rpx;}
+.share-wrap .share-list .s-item .i-friend{width: 100rpx;height: 94rpx;background-position: -91rpx 10rpx;background-size: 280rpx;}
+.share-wrap .share-list .s-item .text{font-size: 28rpx;color: #333;white-space: nowrap;}
+.share-wrap button.s-item{line-height: 1.6;background-color: transparent;padding: 0;margin: 0;}
+.share-wrap button.s-item:after{display: none;}
+.share-wrap .icon{background:url('https://images4.c-ctrip.com/img3/marketing/2018/06/xcx_face/icon_detail.png') 0 0/320rpx no-repeat;margin:0 auto;}

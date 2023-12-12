@@ -1,0 +1,146 @@
+@import '../../../bus.wxss';
+/* //** */
+
+.process {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 50rpx;
+}
+
+.process-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-left: 48rpx;
+    margin-top: 20rpx;
+}
+.process-user:first-child {
+    margin-left: 0;
+}
+.process-user .process-no-user-icon {
+    width: 120rpx;
+    height: 120rpx;
+    background-image: url('https://pages.c-ctrip.com/bus-images/order-axtrefund/share-avater-default.png');
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.process-user .userNick {
+    width: 120rpx;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #333333;
+    line-height: 34rpx;
+    text-align: center;
+    font-size: 24rpx;
+    margin-top: 10rpx;
+}
+
+.title .high-light {
+    color: #20bb8e;
+}
+.process-user .userNick.orange {
+    color: #ff6600;
+}
+.process-user .process-user-icon {
+    border-radius: 50%;
+    width: 120rpx;
+    height: 120rpx;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    position: relative;
+}
+.process-user .process-user-icon .tip-text {
+    position: absolute;
+    font-size: 20rpx;
+    bottom: -5rpx;
+    background: linear-gradient(
+        -90deg,
+        rgb(255, 195, 110) 0%,
+        rgb(255, 138, 106) 100%
+    );
+    border-radius: 16rpx;
+    line-height: 32rpx;
+    padding: 0 16rpx;
+    color: #ffffff;
+}
+.process-user .process-user-icon .image {
+    width: 120rpx;
+    height: 120rpx;
+    background-color: #fff3e8;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.process-user .process-user-number {
+    color: #b87d6c;
+    font-size: 20rpx;
+    content: '';
+    height: 20rpx;
+}
+.share-awards-container {
+    width: 100%;
+}
+.share-awards {
+    background: linear-gradient(
+        -90deg,
+        rgba(255, 249, 211, 0.35) 0%,
+        rgba(125, 246, 206, 0.25) 100%
+    );
+    border-radius: 24rpx;
+    height: 120rpx;
+    margin: 0 32rpx 50rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.share-awards .award-icon {
+    height: 80rpx;
+    width: 80rpx;
+    margin-right: 20rpx;
+    margin-left: 20rpx;
+}
+.share-awards .award-title {
+    color: #20bb8e;
+    font-size: 32rpx;
+    font-weight: 600;
+    line-height: 40rpx;
+}
+.share-awards .award-title .plain {
+    color: #333333;
+}
+
+.share-awards .award-desc {
+    color: #666666;
+    font-size: 24rpx;
+    font-weight: 500;
+    line-height: 30rpx;
+}
+
+.share-awards .show-award-button {
+    background: linear-gradient(
+        90deg,
+        rgb(61, 212, 162) 0%,
+        rgb(0, 194, 128) 100%
+    );
+    color: #ffffff;
+    font-weight: 500;
+    border-radius: 21rpx;
+    height: 42rpx;
+    font-size: 24rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12rpx 0 20rpx;
+}

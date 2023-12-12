@@ -1,0 +1,52 @@
+<template name="robtask">
+    <view class="qp-task">
+        <view class="item" wx:if="{{JLView&&orderInfo.JLDetailInfo.f_alternativeDates&&orderInfo.JLDetailInfo.f_route}}">
+            <view class="label">行程</view>
+            <view class="txt">{{orderInfo.JLDetailInfo.f_alternativeDates + ' ' + orderInfo.JLDetailInfo.f_route}}</view>
+        </view>
+        <view class="item" wx:if="{{JLView}}">
+            <view class="label">乘客</view>
+            <view class="txt">{{orderInfo.JLDetailInfo.f_passengerNames}}</view>
+        </view>
+        <view class="item" wx:if="{{orderInfo.JLDetailInfo.f_trainTypes}}">
+            <view class="label">{{JLView ? '': '备选'}}车次</view>
+            <view class="txt">{{orderInfo.JLDetailInfo.f_trainTypes}}</view>
+        </view>
+        <view class="item" wx:if="{{orderInfo.JLDetailInfo.JLAllSeatNames}}">
+            <view class="label">{{JLView ? '': '备选'}}座席</view>
+            <view class="txt">{{orderInfo.JLDetailInfo.JLAllSeatNames}}</view>
+        </view>
+        <view class="item" wx:if="{{orderInfo.JLDetailInfo.f_crossStationDesc}}">
+            <view class="label">跨站</view>
+            <view class="txt">{{orderInfo.JLDetailInfo.f_crossStationDesc}}</view>
+        </view>
+        <view class="item" wx:if="{{orderInfo.JLDetailInfo.f_AppendProductDesc}}">
+            <view class="label">其他</view>
+            <view class="txt">{{orderInfo.JLDetailInfo.f_AppendProductDesc}}</view>
+        </view>
+    </view>
+</template>
+<template name="robtask-success">
+    <view class="qp-task">
+        <view class="item" wx:if="{{orderInfo.JLDetailInfo.f_otherTrainTypes}}">
+            <view class="label">备选车次</view>
+            <view class="txt">{{orderInfo.JLDetailInfo.f_otherTrainTypes}}</view>
+        </view>
+        <view class="item" wx:if="{{orderInfo.JLDetailInfo.f_otherJLSeatNames}}">
+            <view class="label">备选座席</view>
+            <view class="txt">{{orderInfo.JLDetailInfo.f_otherJLSeatNames}}</view>
+        </view>
+        <view class="item" wx:if="{{orderInfo.JLDetailInfo.f_otherJLAlternativeDate}}">
+            <view class="label">备选日期</view>
+            <view class="txt">{{orderInfo.JLDetailInfo.f_otherJLAlternativeDate}}</view>
+        </view>
+        <view class="item" wx:if="{{orderInfo.JLDetailInfo.f_crossStationDesc}}">
+            <view class="label">跨站</view>
+            <view class="txt">{{orderInfo.JLDetailInfo.f_crossStationDesc}}</view>
+        </view>
+        <view class="item" wx:if="{{orderInfo.JLDetailInfo.f_AppendProductDesc}}">
+            <view class="label">其他</view>
+            <view class="txt">{{orderInfo.JLDetailInfo.f_AppendProductDesc}}</view>
+        </view>
+    </view>
+</template>

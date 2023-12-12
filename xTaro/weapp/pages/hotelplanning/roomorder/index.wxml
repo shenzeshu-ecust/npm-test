@@ -1,0 +1,55 @@
+<mp-navigation-bar
+    id="mp-navigation"
+    back="{{navigationBar.back}}"
+    color="{{navigationBar.color}}"
+    background="{{navigationBar.background}}"
+    show="{{true}}"
+    bindback="backToHotelSearchPage"
+    >
+    <view slot="center" class="custom-navigation-center">
+        <text class="title">{{navigationBar.title}}</text>
+    </view>
+    <view slot="left" class="custom-navigation-left" bindtap="backToHotelSearchPage">
+        <view class="wechat-font-back back-icon"></view>
+    </view>
+</mp-navigation-bar>
+
+<scroll-view class="scroll-view" scroll-y="{{true}}" scroll-with-animation="{{true}}" bindscroll="onScroll" >
+    <view class="room-order-header"></view>
+    <view class="room-order-body">
+        <template wx:for="{{restaurantList}}" wx:for-item="restaurantItem" data="{{...restaurantItem.restaurantInfo, len: restaurantList.length, productList: restaurantItem.productInfoList}}" is="resturant-item" />
+    </view>
+    <view class="room-order-footer flex-center">
+        <image src="https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/order_footer.png" />
+    </view>
+</scroll-view>
+
+<template name="resturant-item">
+    <view class="res-wrapper">
+        <view class="flex-between cell-v">
+            <view class="cell-v">
+                <text class="res-name">{{restaurantName}}</text>
+                <text class="service-time">服务时间：{{serviceStartTime}}-{{serviceEndTime}}</text>
+            </view>
+            <view wx:if="{{len > 1}}" bindtap="phoneOrder" data-phone="{{restaurantPhone}}" data-resname="{{restaurantName}}" class="order-btn-1 cell flex-center"><view class="wechat-font-phone"></view>点餐</view>
+        </view>
+        <view>
+            <template wx:for="{{productList}}" wx:for-item="productItem" data="{{...productItem}}" is="product-item" />
+        </view>
+        <view wx:if="{{len === 1}}" class="order-btn-wrapper">
+            <button bindtap="phoneOrder" data-phone="{{restaurantPhone}}" data-resname="{{restaurantName}}" class="order-btn-2">电话点餐</button>
+        </view>
+    </view>
+</template>
+
+<template name="product-item">
+    <view class="pro-wrapper">
+        <image mode="aspectFill" class="pro-img" src="{{imageUrl}}" />
+        <view class="cell-column flex-between">
+            <text class="pro-name">{{name}}</text>
+            <text class="pro-price"><text class="pro-unit">{{currency}}</text><text>{{price}}</text></text>
+        </view>
+    </view>
+</template>
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

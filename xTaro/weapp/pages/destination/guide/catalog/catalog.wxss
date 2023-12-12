@@ -1,0 +1,383 @@
+page {
+    background-color: #ffffff;
+}
+
+.catalog_page {
+    width: 750rpx;
+    padding: 0;
+    margin: 0;
+    margin-top:84rpx;
+    box-sizng:border-box;
+}
+
+/* 横向活动列表 */
+.catalog_horiz_fix {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    background-color: #ffffff;
+}
+.catalogList_horiz {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 83rpx;
+}
+.nav {
+    margin: 0 30rpx;
+    display: inline-block;
+    white-space: normal;
+    text-align: center;
+    font-size: 32rpx;
+    position: relative;
+}
+.catalog_horiz_hint {
+    line-height: 83rpx;
+    margin: 0 30rpx;
+}
+.focus {
+    position: absolute;
+    bottom: 21rpx;
+    left: 0;
+    height: 10rpx;
+    width: 100%;
+    background-image: linear-gradient(90deg, #006fff 0, #0af 100%);
+    opacity: 0.8;
+}
+
+
+/* 标签 */
+.tags {
+    box-sizing: border-box;
+    margin: 1rpx 30rpx 35rpx 30rpx;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 3rpx 10rpx 0rpx rgba(141, 164, 181, 0.2);
+    border-radius: 6rpx;
+}
+
+.tags_prefix {
+    height: 50rpx;
+    width: 25rpx;
+}
+.tags_title2 {
+    font-family: PingFangSC-Medium;
+    font-size: 35rpx;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 35rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: flex-end;
+    height: 100rpx;
+    width: 686rpx;
+    box-sizing: border-box;
+    padding-bottom: 20rpx;
+    margin-top: 10rpx;
+}
+.tags_bg {
+    background-color: #333333;
+    height: 50rpx;
+    line-height: 50rpx;
+    padding: 0 18rpx;
+}
+/* Common */
+.tilte_2 {
+    box-sizing: border-box;
+    font-family: PingFangSC-Medium;
+    font-size: 38rpx;
+    color: #222222;
+    width: 686rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    padding-top: 25rpx;
+}
+
+/* 三级目录 */
+.tags_title3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+.tags_title3_tripCatalog,
+.tags_title3_pocketCatalog {
+    padding: 8rpx 30rpx;
+    width: 625rpx;
+}
+.tripCatalog,
+.pocketCatalog {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: rgba(250, 251, 251, 0.84);
+    padding: 20rpx 20rpx;
+    border-radius: 6rpx;
+}
+.tripCatalog_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.tripCatalog_name,
+.pocketCatalog_name {
+    font-weight: bold;
+    font-size: 34rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.tripCatalog_content {
+    width: auto;
+    height: 40rpx;
+    display: flex;
+    background-color: rgba(51, 51, 51, 0.06);
+    padding-right: 10rpx;
+    border-radius: 20rpx;
+    margin: 5rpx 0;
+}
+.tripCatalog_content_avator {
+    width: 34rpx;
+    height: 34rpx;
+    border-radius: 17rpx;
+    margin: 3rpx;
+}
+.tripCatalog_content_desc,
+.pocketCatalog_subtitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 26rpx;
+}
+.tripCatalog_content_desc {
+    width: calc(100vw - 430rpx);
+}
+.tripCatalog_readCount,
+.pocketCatalog_readCount {
+    font-size: 24rpx;
+    color: #afafaf;
+    height: 40rpx;
+}
+.tripCatalog_img {
+    width: 120rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tripCatalog_img_cover {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 10rpx;
+}
+.tags_title3_pocketCatalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.pocketCatalog {
+    position: relative;
+    flex-direction: column;
+    width: 305rpx;
+    margin-bottom: 12rpx;
+}
+.hint_tags {
+    position: absolute;
+    width: 45rpx;
+    height: 25rpx;
+    top: -12rpx;
+    left: -5rpx;
+}
+.tags_title3_rank {
+    position: relative;
+    height: 120rpx;
+    width: 630rpx;
+    margin: 0rpx 30rpx 20rpx;
+    border-radius: 15rpx;
+    overflow: hidden;
+    padding-left: 20rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* 排行榜装饰图 */
+.rank_img_suffix_sight,
+.rank_img_suffix_hotel,
+.rank_img_suffix_restaurant,
+.rank_img_suffix_shop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 120rpx;
+    width: 223rpx;
+}
+.rank_sight {
+    background-image: linear-gradient(-90deg, rgba(255, 152, 0, 0.06) 0%, rgba(255, 203, 69, 0.06) 100%);
+}
+.rank_img_suffix_sight {
+    background: url("https://pages.c-ctrip.com/you/guides/sight_bg@3x.png") no-repeat;
+    background-size: auto 120rpx;
+}
+.rank_hotel {
+    background-image: linear-gradient(-90deg, rgba(40, 183, 255, 0.08) 0%, rgba(18, 120, 255, 0.08) 100%);
+}
+.rank_img_suffix_hotel {
+    background: url("https://pages.c-ctrip.com/you/guides/hotel_bg@3x.png") no-repeat;
+    background-size: auto 120rpx;
+}
+.rank_restaurant {
+    background-image: linear-gradient(-90deg, rgba(227, 44, 59, 0.08) 0%, rgba(255, 126, 126, 0.08) 100%);
+}
+.rank_img_suffix_restaurant {
+    background: url("https://pages.c-ctrip.com/you/guides/food_bg@3x.png") no-repeat;
+    background-size: auto 120rpx;
+}
+.rank_shop {
+    background-image: linear-gradient(-90deg, rgba(243, 129, 255, 0.08) 0%, rgba(151, 48, 244, 0.08) 100%);
+}
+.rank_img_suffix_shop {
+    background: url("https://pages.c-ctrip.com/you/guides/shop_bg@3x.png") no-repeat;
+    background-size: auto 120rpx;
+}
+.rank_title_wrapper {
+    display: flex;
+    height: 40rpx;
+    line-height: 40rpx;
+    font-size: 34rpx;
+    font-weight: bold;
+}
+.rank_title {
+    width: 300rpx;
+}
+.rank_img_prefix_sight,
+.rank_img_prefix_hotel,
+.rank_img_prefix_restaurant,
+.rank_img_prefix_shop {
+    width: 35rpx;
+    height: 35rpx;
+    margin: 2rpx 10rpx 0 0;
+}
+.rank_subtitle {
+    color: #999;
+    font-size: 24rpx;
+}
+.rank_img_prefix_sight {
+    background: url("https://m.ctrip.com/webapp/you/gsdestination/static/guideList/sight_icon@3x.png") no-repeat;
+    background-size: 35rpx 35rpx;
+}
+.rank_img_prefix_hotel {
+    background: url("https://m.ctrip.com/webapp/you/gsdestination/static/guideList/hotel_icon@3x.png") no-repeat;
+    background-size: 35rpx 35rpx;
+}
+.rank_img_prefix_restaurant {
+    background: url("https://m.ctrip.com/webapp/you/gsdestination/static/guideList/food_icon@3x.png") no-repeat;
+    background-size: 35rpx 35rpx;
+}
+.rank_img_prefix_shop {
+    background: url("https://m.ctrip.com/webapp/you/gsdestination/static/guideList/shop_icon@3x.png") no-repeat;
+    background-size: 35rpx 35rpx;
+}
+.rank_img_arrow_sight,
+.rank_img_arrow_hotel,
+.rank_img_arrow_restaurant,
+.rank_img_arrow_shop {
+    position: absolute;
+    width: 34rpx;
+    height: 34rpx;
+    top: 43rpx;
+    right: 21rpx;
+}
+.rank_img_arrow_sight {
+    background: url("https://m.ctrip.com/webapp/you/gsdestination/static/guideList/sight_arrow@3x.png") no-repeat;
+    background-size: 34rpx 34rpx;
+}
+.rank_img_arrow_hotel {
+    background: url("https://m.ctrip.com/webapp/you/gsdestination/static/guideList/hotel_arrow@3x.png") no-repeat;
+    background-size: 34rpx 34rpx;
+}
+.rank_img_arrow_restaurant {
+    background: url("https://m.ctrip.com/webapp/you/gsdestination/static/guideList/food_arrow@3x.png") no-repeat;
+    background-size: 34rpx 34rpx;
+}
+.rank_img_arrow_shop {
+    background: url("https://m.ctrip.com/webapp/you/gsdestination/static/guideList/shop_arrow@3x.png") no-repeat;
+    background-size: 34rpx 34rpx;
+}
+
+/* END尾部样式 */
+.catalogEnd {
+    width: auto;
+    height: 50rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -20rpx;
+}
+.circle1 {
+    background: #d8d8d8;
+    width: 4rpx;
+    height: 4rpx;
+    border-radius: 2rpx;
+    margin: 0 4rpx;
+}
+.circle2 {
+    background: #d8d8d8;
+    width: 6rpx;
+    height: 6rpx;
+    border-radius: 3rpx;
+    margin: 0 4rpx;
+    padding-top: 2rpx;
+}
+.circle3 {
+    background: #d8d8d8;
+    width: 8rpx;
+    height: 8rpx;
+    border-radius: 4rpx;
+    margin: 0 4rpx;
+}
+.endIcon {
+    width: 55rpx;
+    height: 40rpx;
+}
+
+/* 目的地攻略 */
+.relatedDistrict {
+    display: flex;
+    align-items: center;
+    margin: 30rpx;
+    padding: 20rpx;
+    box-shadow: 0 3rpx 10rpx 0rpx rgba(141, 164, 181, 0.2);
+    border-radius: 6rpx;
+}
+.relatedDistrict_imgBlock {
+    width: 120rpx;
+    height: 120rpx;
+}
+.relatedDistrict_image {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 10rpx;
+}
+.relatedDistrict_content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20rpx;
+}
+.relatedDistrict_content_title {
+    font-size: 34rpx;
+    font-weight: bold;
+}
+.relatedDistrict_content_subtle {
+    font-size: 26rpx;
+    color: #999;
+}
+.relatedDistrict_arrow {
+    width: 34rpx;
+    height: 34rpx;
+}

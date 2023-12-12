@@ -1,0 +1,5 @@
+<view class="container" catchtap="subscribeMessageHandle">
+    <view class='btn-wrap' style="margin-bottom: {{bottomHeight + 'px'}}">
+        <image class="mes_btn"  src="https://pic.tujia.com/upload/festatic/mp/mes_btn.png" />
+    </view>
+</view>

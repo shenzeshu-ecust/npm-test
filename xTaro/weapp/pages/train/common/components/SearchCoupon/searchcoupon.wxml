@@ -1,0 +1,13 @@
+<template name="search-coupon">
+    <view class="search-coupon-bd">
+        <view class="bd-cont">
+            <view class="tit" wx:if="{{isFromAwakenH5}}">先囤券，再下单！购火车票套餐立减5元</view>
+            <view class="tit" wx:else><text class="green">微信搜一搜</text>专享，购火车票立减5元</view>
+            <view class="txt">每日限领500张，每名用户限领1次</view>
+        </view>
+        <button class="bd-btn disable" wx:if="{{searchCouponInfo.soldOut}}">今日已领完</button>
+        <!-- 领券 -->
+        <button class="bd-btn {{searchCouponInfo.hasReceived ? 'disable' : ''}}"  data-isFromAwakenH5="{{isFromAwakenH5}}" data-activitycode="{{activityCode}}" data-subtype="{{searchCouponInfo.couponDetail.CouponType}}" bindtap="recieveBusinessCoupon" wx:elif="{{isLogin}}">{{searchCouponInfo.hasReceived  ? '已领取' : '立即领取'}}</button>
+        <button class="bd-btn" data-activitycode="{{activityCode}}" data-subtype="{{searchCouponInfo.couponDetail.CouponType}}" bindtap="recieveBusinessCoupon" wx:else>立即领取</button>
+    </view>
+</template>

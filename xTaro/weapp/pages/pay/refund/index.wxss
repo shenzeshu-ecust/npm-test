@@ -1,0 +1,97 @@
+page {
+    height: 100%;
+    background-color: #f5f5f5;
+}
+
+.refund-box{
+    padding: 20rpx 20rpx 80rpx 40rpx;
+    background-color: #fff;
+}
+
+.refund-item{
+    border-bottom: 1px solid #ededed;
+    margin-bottom: 20rpx;
+}
+
+.refund-item:last-child{
+    border-bottom: none;
+}
+
+    .refund-head{
+        font-size: 34rpx;
+        color: #000;
+        padding-top: 20rpx;
+        padding-right: 24rpx;
+        margin-bottom: 20rpx;
+        overflow: hidden;
+    }
+
+        .refund-numtip{
+            color: #999;
+            font-size: 24rpx;
+            float: right;
+        }
+
+        .refund-hcurrency{
+            font-size: 24rpx;
+        }
+
+    .refund-li{
+        margin-left: 20rpx;
+        padding: 0 0 30rpx 40rpx;
+        border-left: 1px solid #099fde;
+        min-height: 80rpx;
+        color: #666;
+        font-size: 28rpx;
+        position: relative;
+    }
+
+    .refund-li::before{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 38rpx;
+        height: 38rpx;
+        background: url('https://webresource.c-ctrip.com/ares2/h5paymentsdk/smallprogram/1.0.13/default/img/refund_ok.png') no-repeat ;
+        background-size: 38rpx 38rpx;
+        border-radius: 50%;
+        background-color: #fff;
+        top: 0;
+        left: -18.5rpx;
+    }
+
+    .refund-ling::before{
+        width: 30rpx;
+        height: 30rpx;
+        background: #DADADA;
+        top: 6rpx;
+        left: -15.5rpx;
+    }
+
+    .refund-li:last-child{
+        border-left: none;
+    }
+
+        .refund-lititle{
+            height: 40rpx;
+            line-height: 40rpx;
+            font-size: 28rpx;
+        }
+
+        .refund-lidesc{
+            color: #898989;
+            font-size: 24rpx;
+        }
+
+    .refund-noitems{
+        background: url('https://webresource.c-ctrip.com/ares2/h5paymentsdk/smallprogram/1.0.13/default/img/refund_none.png') no-repeat 50% 0;
+        background-size: 220rpx 220rpx;
+        padding-top: 240rpx;
+        font-size: 36rpx;
+        text-align: center;
+        margin-top: 40rpx;
+    }
+
+.refund-dnone{
+    display: none;
+}

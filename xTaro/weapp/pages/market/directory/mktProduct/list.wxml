@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="main">
+    <view class="product">
+      <vertical-drag-gesture-handler tag="scroll-view" native-view="scroll-view" simultaneousHandlers="{{['pan']}}" shouldResponseOnMove="shouldScrollViewResponse">
+        <scroll-view class="product-list" type="custom" scroll-y show-scrollbar="{{false}}" bindscroll="handleScroll">
+          <list-view>
+            <product id="product_legao" type="list" updateType="{{updateType}}" custom_scene_class="sk_scene_class" sceneCode="{{env=='PROD'?'f_c7iueyj2':'f_0esl5k0e'}}" renderDataList="{{filteredGoodsList}}" incrementalUpdateProduct="{{incrementalUpdateProduct}}" bind:clickHandlers="clickHandlersCallback" bind:exposureTrace="exposureTrace"></product>
+          </list-view>
+        </scroll-view>
+      </vertical-drag-gesture-handler>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,20 @@
+<perinfo-protect-float></perinfo-protect-float>
+
+<view wx:if="{{poster}}">
+  <video class="video_box" bindloadedmetadata="loadVideo" src="{{video}}" wx:if="{{video}}" loop autoplay controls="{{false}}" vslide-gesture object-fit="cover" style="height: {{media.height}}rpx;"></video>
+  <image src="{{poster}}" mode="widthFix" class="poster" bindtap="preQrcode" wx:else></image>
+</view>
+
+<view class="wx_unlimit_qrcode_wrap" wx:if="{{!poster && !video}}">
+  <image src="https://images4.c-ctrip.com/img3/marketing/2017/08/wx_marathon/user_photo03.png" mode="widthFix"></image>
+  <view class="loading_tips">
+    <text>精彩内容加载中</text><text class="ani_dot">...</text>
+  </view>
+</view>
+
+<view class="down_btn">
+  <image src="{{downImg}}" mode="widthFix" class="down_btn_img" wx:if="{{(video || poster) && downImg}}" bindtap="saveFile" />
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

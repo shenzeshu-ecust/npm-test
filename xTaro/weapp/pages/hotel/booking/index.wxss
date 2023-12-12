@@ -1,0 +1,1368 @@
+@import '../common/common.wxss';
+@import '../commontemplates/bookingnotice/bookingnotice.wxss';
+@import '../common/style/prime.wxss';
+@import '../booking/bedServiceLayer/index.wxss';
+@import '../commontemplates/forcelogin/forcelogin.wxss';
+@import '../commontemplates/deposit/deposit.wxss';
+page {
+    min-height: 100%;
+    padding-bottom: 200rpx;
+    background: #eef1f6;
+}
+radio {
+    transform: scale(0.8);
+    margin-left: -4rpx;
+}
+.fn24 { font-size: 24rpx; }
+.fn20 { font-size: 20rpx; }
+.fn36 { font-size: 36rpx; }
+.fn32 { font-size: 32rpx; }
+.ml12 { margin-left: 12rpx; }
+.mr8 { margin-right: 8rpx; }
+.mr12 { margin-right: 12rpx; }
+.mr4 {margin-right: 4rpx;}
+.mr10 {margin-right: 10rpx;}
+.transparency { opacity: 0; }
+.flex-center { display: flex; align-items: center; }
+.active-txt { color: #006FF6; }
+.color-focus { color: #006FF6; }
+.color-error { color: #F5190A; }
+.input-warning {
+    background: #fcc;
+    animation: bgWarning 1s;
+}
+@keyframes bgWarning {
+    0% { background: #fcc; }
+    25% { background: #fff; }
+    50% { background: #fcc; }
+    75% { background: #fff; }
+    100% { background: #fcc; }
+}
+.global-layer .layer-head {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    height: 80rpx;
+    align-items: center;
+}
+.global-layer .layer-close {
+    position: absolute;
+    left: 20rpx;
+    font-size: 36rpx;
+    padding: 20rpx;
+}
+.bottom-blank { height: 80rpx; }
+
+.icon-disabled { filter: grayscale(1); }
+.icon-style {
+    font-size: 44rpx;
+    color: #006FF6;
+}
+.icon-arrow {
+    width: 44rpx;
+    text-align: center;
+    font-size: 20rpx;
+}
+
+/* 头部信息 */
+.bk-head {
+    background-color: #fff;
+    padding: 20rpx;
+    box-shadow: inset 0 -2rpx 0 0 rgba(217, 217, 217, 0.5);
+}
+.bk-head .date-box .disabled {
+    color: #6ab7f7;
+}
+.bk-head .date-box {
+    display: flex;
+    align-items: center;
+}
+.bk-head .date-info {
+    flex: 1;
+    font-size: 28rpx;
+    font-weight: 600;
+}
+.bk-head .date-info .h-line {
+    color: #888888;
+    margin: 0 6rpx;
+}
+.bk-head .room-name {
+    font-size: 28rpx;
+    font-weight: 500;
+    margin-top: 14rpx;
+    padding-right: 80rpx;
+}
+.bk-head .hourroom-desc {
+    white-space: nowrap;
+}
+.bk-head .txt-item {
+    font-size: 24rpx;
+    margin-top: 12rpx;
+}
+.head-tags {
+    display: flex;
+    margin-top: 14rpx;
+}
+.head-tags .tag-item {
+    display: inline-block;
+    height: 30rpx;
+    line-height: 28rpx;
+    vertical-align: 6rpx;
+    font-size: 20rpx;
+    margin-right: 8rpx;
+    padding: 0 4rpx;
+    border-radius: 4rpx;
+    color: #555555;
+    border: 1rpx solid #888888;
+    box-sizing: border-box;
+}
+.head-tags .tag-item.constant-bdcolor {
+    border: 1rpx solid #b8c6d9;
+}
+.head-tags .tag-item.confirm-better {
+    color: #5678a8;
+    border: 1rpx solid #bbc9dc;
+}
+.bk-head .head-notice {
+    border-top: 1rpx solid #efefef;
+    padding: 24rpx 0 8rpx;
+    margin-top: 20rpx;
+}
+
+/* 滚动激励 */
+.inspire-swiper {
+    height: 92rpx;
+    width: calc(100% - 40rpx);
+    position: relative;
+    z-index: -1;
+    margin: 20rpx 20rpx -24rpx;
+}
+.inspire-swiper .inspire-item {
+    line-height: 92rpx;
+    padding: 0 32rpx;
+    box-sizing: border-box;
+    border-radius: 16rpx 16rpx 0 0;
+    font-size: 28rpx;
+    font-weight: 500;
+}
+.inspire-swiper .inspire-item.style1,
+.inspire-swiper .inspire-item.style4,
+.inspire-swiper .inspire-item.style21 {
+    color: #00B87A;
+    background-image: linear-gradient(-90deg, #f3fffc 0%, #f7fffc 100%);
+}
+.inspire-swiper .inspire-item.style9 {
+    color: #f60;
+    background-image: linear-gradient(-90deg, #fff7f0 0%, #fff8f5 100%);
+}
+
+/* 卡片公共样式 */
+.card-common {
+    margin: 20rpx;
+    padding: 0 32rpx;
+    background-color: #fff;
+    border-radius: 16rpx;
+}
+.card-common .card-title {
+    padding: 22rpx 0;
+    font-size: 32rpx;
+    font-weight: 600;
+}
+.li-item {
+    min-height: 88rpx;
+    line-height: 1.2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 1rpx solid #efefef;
+    font-size: 28rpx;
+}
+.li-item:last-child {
+    border-bottom: 0;
+}
+.client-info .li-item:nth-last-child(2) {
+    border-bottom: none;
+}
+.add-bb {
+    border-bottom: 1rpx solid #efefef !important;
+}
+.li-item .m-label {
+    width: 180rpx;
+    min-height: 88rpx;
+    box-sizing: border-box;
+    color: #555555;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+}
+.li-item .m-txt {
+    flex: 1;
+}
+.m-txt .input-info {
+    display: flex;
+}
+.li-item .input-box {
+    height: 88rpx;
+    display: flex;
+    align-items: center;
+}
+.li-item .m-input {
+    width: 100%;
+}
+.li-item .clear-area {
+    padding: 16rpx 30rpx;
+    margin-right: -30rpx;
+    position: relative;
+}
+.li-item .input-error-msg {
+    font-size: 20rpx;
+    padding-bottom: 6rpx;
+    margin-top: -14rpx;
+    border-bottom: 1rpx solid #F5190A;
+}
+.li-item .input-error-msg .input-error-text {
+    margin-left: 12rpx;
+    line-height: 1.1;
+}
+
+/* 订房信息 */
+.reservation-info {
+    border-radius: 8rpx 8rpx 16rpx 16rpx;
+    padding: 0;  /**/
+}
+.mr-32 {
+    margin-right: 32rpx;
+}
+.mr-11 {
+    margin-right: 11rpx !important;
+}
+.mr-16 {
+    margin-right: 16rpx !important;
+}
+.ml-0 {
+    margin-left: 0;
+}
+.ml-32 {
+    margin-left: 32rpx;
+}
+.ml-40 {
+    margin-left: 40rpx;
+}
+.reservation-tit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10rpx;
+}
+
+/* 房间数*/
+.reservation-tit .room-quan {
+    margin: 0 8rpx;
+    padding: 0 16rpx;
+}
+.quantity-box {
+    max-height: calc(100vh - 366rpx);
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+}
+.quantity-box .quantity-item {
+    height: 80rpx;
+    line-height: 80rpx;
+    width: 23.5%;
+    margin-bottom: 2%;
+    box-sizing: border-box;
+    border: 1rpx solid #d9d9d9;
+    border-radius: 8rpx;
+    font-size: 28rpx;
+    text-align: center;
+}
+.quantity-box .quantity-item:not(:nth-child(4n)) { margin-right: 2%; }
+.quantity-box .quantity-item.current {
+    background-color: #006FF6;
+    color: #fff;
+}
+
+/* 住客姓名 */
+.enname-item {
+    display: flex;
+    flex-direction: column;
+}
+.enname-item:not(:last-child) {
+    border-bottom: 1rpx solid #efefef;
+}
+.enname-item .lastname, .enname-item .fisrtname {
+    flex: 1;
+}
+.enname-item .country-info {
+    position: relative;
+    width: 400rpx;
+}
+.country-info .color-err {
+    color: #F5190A !important;
+}
+.country-info .country-content {
+    flex-shrink: 0;
+}
+.country-info .icon-pos {
+    position: absolute;
+    right: -10rpx;
+}
+.guest-icon {
+    font-size: 44rpx;
+    color: #006FF6;
+    padding: 20rpx;
+    margin-right: -20rpx;
+}
+.name-box {
+    flex: 1;
+}
+.name-box .name-item {
+    display: flex;
+    align-items: center;
+}
+.name-box .name-item:not(:last-child) {
+    border-bottom: 1rpx solid #efefef;
+}
+/* 税费说明 */
+.tax-info {
+    padding: 0rpx 32rpx 16rpx 32rpx;
+    border-bottom: 1px solid #efefef !important;
+}
+.tax-info .tax-content {
+    background:#fffaf5;
+    border-radius: 8rpx;
+    font-size: 24rpx;
+    color: #FF5500;
+    line-height: 36rpx;
+    padding: 14rpx 16rpx;
+    display: inline-block;
+    vertical-align: top;
+}
+/* 身份证 */
+.card-box {
+    min-height: 72rpx;
+    display: flex;
+    align-items: center;
+    border-top: 1rpx solid #efefef;
+}
+.card-box .title {
+    color: #555555;
+    display: flex;
+    align-items: center;
+    padding-right: 10rpx;
+}
+.card-box .title .text {
+    max-width: 115rpx;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.id-card-flex {
+    display: flex;
+    padding: 20rpx 0;
+    font-size: 24rpx;
+    border-bottom: 1rpx solid #efefef;
+}
+.id-card-flex .id-card-txt {
+    line-height: 2;
+}
+.card-input {
+    flex: 1;
+    margin-left: 10rpx;
+}
+
+.action-tips-box {
+    padding-bottom: 24rpx;
+    margin-top: -2rpx;
+}
+.action-tips-box .action-tips {
+    font-size: 22rpx;
+    color: #F70;
+    background-color: #FFF8F2;
+    padding: 12rpx;
+}
+
+/* 床型要求 */
+.bed-mark {
+    border-radius: 8rpx;
+    background-color: #f6f8fa;
+    font-size: 24rpx;
+    padding: 12rpx 24rpx;
+    margin-right: 8rpx;
+}
+.bed-mark.current {
+    background-color: #e6f3fe;
+    color: #006FF6;
+}
+
+/* 获取手机号 */
+.phone-label-container {
+    height: 100%
+}
+.fl {
+   flex: 1;
+}
+.phone-item {
+    width: 100%;
+    flex-direction: column;
+    overflow: hidden;
+}
+.phone-label-item {
+    display: flex;
+    flex:1;
+}
+.phone-replace-container {
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.08);
+    height: 80rpx;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 8rpx 8rpx 8rpx 8rpx;
+    display: flex;
+    margin-right: 16rpx;
+    padding-left: 22rpx;
+}
+.phone-replace-container:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border: 22rpx solid;
+    position: absolute;
+    left: 10rpx;
+    top: -33rpx;
+    border-color: transparent transparent #fff;
+}
+.phone-replace-container .tip-attention {
+    color: #555;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    font-weight: normal;
+    display: inline-block;
+    height: 80rpx;
+    line-height: 80rpx;
+    width: 360rpx;
+}
+.phone-replace-container .tip-replace {
+    color: #555555;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    font-weight: normal;
+    height: 80rpx;
+    line-height: 80rpx;
+    width: 79rpx;
+}
+.phone-replace-container .tip-replace-phone{
+    background-color: #f5f7fa;
+    border-radius: 8rpx 8rpx 8rpx 8rpx;
+    padding:13rpx 16rpx;
+    margin: 12rpx 0rpx 12rpx 8rpx;
+    width:fit-content;
+	width:-webkit-fit-content;
+	width:-moz-fit-content;
+    flex-shrink: 0;
+}
+.phone-replace-container .tip-replace-phone-number {
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    font-weight: normal;
+    height: 30rpx;
+    line-height: 30rpx;
+}
+.phone-replace-container .close {
+    line-height: 80rpx;
+    flex: 1;
+    text-align: right;
+    font-size: 17rpx;
+    padding-right: 32rpx;
+}
+.phone-btn {
+    width: 84rpx;
+    height: 84rpx;
+    margin-right: 11rpx;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.phone-btn:after {
+    border: none;
+}
+.phone-btn.phone-btn-gvip {
+    padding: 0;
+    margin-right: 0;
+    text-align: right;
+    display: block;
+}
+/* 支付bar */
+.bk-pay-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    box-sizing: border-box;
+    z-index: 100;
+    box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, .15);
+    padding: 32rpx 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.bk-pay-fixed .pay-txt {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.bk-pay-fixed .pay-left {
+    flex: 1;
+    font-size: 24rpx;
+}
+.bk-pay-fixed .pay-left .main-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+.bk-pay-fixed .pay-txt .main-title {
+    font-size: 32rpx;
+    font-weight: 600;
+    margin-right: 8rpx;
+    line-height: 32rpx;
+    margin-bottom: 8rpx;
+}
+.pay-left .price-flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+.pay-left .tax-tip {
+    line-height: 32rpx;
+    height: 32rpx;
+    color: #006FF6;
+    font-weight: 600;
+}
+.bk-pay-fixed .pay-right {
+    color: #006FF6;
+    font-size: 24rpx;
+    font-weight: 500;
+    margin-left: 32rpx;
+}
+.bk-pay-fixed .submit-btn {
+    margin-left: 12rpx;
+    border-radius: 12rpx;
+    font-size: 34rpx;
+    font-weight: 500;
+    color: #fff;
+    padding: 24rpx 28rpx;
+}
+.bk-pay-fixed .btn {
+    padding: 0;
+}
+.bk-pay-fixed .btn:after {
+    border: unset;
+}
+/* 公用price */
+.common-price {
+    font-size: 24rpx;
+    font-weight: 500;
+    text-align: right;
+    line-height: 32rpx;
+}
+.common-price .price-bold {
+    font-size: 40rpx;
+    font-weight: 700;
+}
+
+/* 费用明细 */
+.pd-box {
+    font-size: 24rpx;
+    overflow-y: scroll;
+}
+.pd-item {
+    background-color: #fff;
+    padding-bottom: 30rpx;
+    border-bottom: 20rpx solid #f8f8f8;
+}
+.pd-item .title-box {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-top: 36rpx;
+}
+.pd-item .title {
+    font-size: 32rpx;
+    font-weight: 600;
+}
+.pd-item .pd-li {
+    display: flex;
+    align-items: center;
+    margin-top: 10rpx;
+}
+.li-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.pd-item .discount-box {
+    margin: 20rpx 0;
+    border-top: 1rpx solid #efefef;
+    padding-top: 10rpx;
+}
+.pd-item .days-amount {
+    padding-top: 28rpx;
+    margin-top: 28rpx;
+    border-top: 1rpx solid #efefef;
+    text-align: right;
+}
+.pd-item .tax-inprice {
+    margin-top: 10rpx;
+}
+/* 闪住 */
+.pay-type-box {
+    display: flex;
+    margin: 28rpx 0 24rpx;
+}
+.pay-type-box .pt-item {
+    width: 48%;
+    box-sizing: border-box;
+    padding: 24rpx 20rpx;
+    display: flex;
+    align-items: center;
+    border-radius: 8rpx;
+    background-color: #f6f8fa;
+}
+.pay-type-box .pt-item:first-child {
+    margin-right: 4%;
+}
+.pay-type-box .pt-item.current {
+    border: 1rpx solid #006FF6;
+    background-color: #f2f8fe;
+}
+.pay-type-box .pt-left {
+    flex: 1;
+    font-size: 20rpx;
+}
+.pay-type-box .pt-left .pt-title {
+    font-size: 28rpx;
+    font-weight: 600;
+    margin-bottom: 10rpx;
+}
+.pay-type-desc {
+    font-size: 24rpx;
+    padding-bottom: 24rpx;
+    color: #555555;
+}
+
+.gift-layer {
+    max-height: 900rpx;
+    box-sizing: border-box;
+    font-size: 24rpx;
+    padding: 0 32rpx;
+    background-color: #fff;
+}
+
+/* 会员等级banner */
+.prime-booking {
+    margin: 0px -32rpx;
+    border-radius: 8rpx 8rpx 0 0;
+}
+.prime-banner-bg-gold { background-image: linear-gradient(90deg, #FEEFCF 0%, #FFFFFF 100%) }
+.prime-banner-bg-silver { background-image: linear-gradient(90deg, #DCEAFF 0%, #FFFFFF 100%) }
+.prime-banner-bg-diamond { background-image: linear-gradient(90deg, #E3EDFF 0%, #FFFFFF 100%) }
+.prime-banner-bg-platinum { background-image: linear-gradient(90deg, #D8F5FF 0%, #FFFFFF 100%) }
+.prime-banner-bg-gold-diamond { background-image: linear-gradient(90deg, #384A8C 0%, #192039 100%) }
+.prime-banner-bg-black { background-image: linear-gradient(90deg, #5D5D5D 0%, #626262 27%, #111111 100%) }
+.prime-banner-left { min-width: 180rpx; display: flex; align-items: center; }
+.pro-icon-box { font-size: 24rpx; flex: 1; text-align: right; margin-left: 16rpx;}
+.black .prime-bg-black { color: #F8E4C3; }
+.black .pro-icon-box, .gold-diamond .pro-icon-box { color: #ccc; }
+
+/* 促销优惠 */
+.discount-box .tags-box {
+    align-self: flex-start;
+    margin-top: 20rpx;
+    display: flex;
+    flex-wrap: wrap;
+}
+.discount-box .discount-tag {
+    display: flex;
+    border-radius: 4rpx;
+    height: 30rpx;
+    line-height: 30rpx;
+    padding: 0 8rpx;
+    font-size: 20rpx;
+    color: #fff;
+    margin-right: 8rpx;
+    background-image: linear-gradient(to right, #fe7752 , #fb562a);
+    margin-top: 10rpx;
+}
+.discount-box .max-discount {
+    font-size: 20rpx;
+    color: #fb562a;
+    margin: 14rpx 0;
+}
+.discount-box .discount-info {
+    margin-left: 180rpx;
+}
+.discount-box .discount-text {
+    font-size: 28rpx;
+    font-weight: 600;
+}
+.discount-box .discount-price {
+    color: #f70;
+}
+
+/* 积分 */
+.points-box .title-box {
+    display: block;
+    padding-top: 27rpx;
+}
+.points-box .hotel-remains {
+    color: #F5190A;
+    font-size: 20rpx;
+}
+.points-box .points-cost {
+    height: 88rpx;
+    display: flex;
+    align-items: center;
+}
+.points-box .points-desc {
+    font-size: 20rpx;
+    padding-bottom: 12rpx;
+    margin-top: -12rpx;
+}
+.points-box .static-tit { max-width: 120rpx; }
+.points-box .free-times {
+    font-size: 20rpx;
+    margin-left: 8rpx;
+}
+.points-tag {
+    line-height: 1;
+    font-size: 20rpx;
+    margin-left: 8rpx;
+    padding: 2rpx 4rpx;
+    border-radius: 4rpx;
+    color: #f60;
+    border: 1rpx solid #FFA04D;
+}
+.points-box .select-bar {
+    font-size: 20rpx;
+    padding: 16rpx 0;
+}
+.points-box .daily-exchange-box {
+    padding: 0 20rpx;
+    background-color: #f6f8fa;
+    margin-bottom: 22rpx;
+}
+.points-box .daily-exchange-box .item {
+    display: flex;
+    align-items: center;
+    padding: 16rpx 0;
+    border-bottom: none;
+}
+/* 积分兑换数量控件 */
+.ui-num-adjust {
+    display: flex;
+    align-items: center;
+}
+.ui-num-adjust .ui-adjust-value {
+    width: 66rpx;
+    font-size: 32rpx;
+    font-weight: 600;
+    color: #111111;
+    text-align: center;
+}
+.ui-num-adjust.chk-box {
+    font-size: 48rpx;
+    color: #eee;
+}
+.ui-num-adjust.chk-box .current {
+    color: #006FF6;
+}
+
+/* 选择优惠券浮层 */
+.coupon-list {
+    height: calc(100vh - 872rpx);
+}
+.cou-tab {
+    display: flex;
+    font-size: 30rpx;
+    font-weight: 600;
+    justify-content: space-around;
+}
+.cou-tab .cou-tab-item {
+    height: 88rpx;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+.cou-tab .cou-tab-cur {
+    border-bottom: 6rpx solid #F85E53;
+}
+.bk-coupon {
+    padding: 32rpx 0;
+}
+.bk-no-cou {
+    padding: 200rpx 0;
+    text-align: center;
+    color: #BBC8DC;
+    font-size: 28rpx;
+}
+.bk-coupon .group-name {
+    font-size: 32rpx;
+    font-weight: 500;
+    line-height: 40rpx;
+    margin-bottom: 24rpx;
+}
+.bk-coupon .group-name:not(:first-child) {
+    margin-top: 48rpx;
+}
+.bk-coupon .dis-cou-res {
+    color: #f70;
+    font-size: 20rpx;
+    background-color: #f9f9f9;
+    padding: 10rpx 14rpx;
+}
+.bk-coupon .item {
+    box-shadow: 0 6rpx 20rpx 0 rgba(0, 0, 0, 0.10);
+    margin-bottom: 24rpx;
+    border-radius: 16rpx;
+    overflow: hidden;
+}
+.bk-coupon .item .cp-price {
+    min-width: 160rpx;
+    background-image: linear-gradient(-45deg, #F85E53 0%, #F98078 100%);
+    color: #fff;
+    font-size: 22rpx;
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center
+}
+.bk-coupon .item .dis-price {
+    background-image: linear-gradient(-45deg, #D0D0D0 0%, #D2D2D2 100%);
+}
+.bk-coupon .item .cp-price .strong {
+    font-size: 64rpx
+}
+.bk-coupon .item .tit {
+    font-size: 32rpx;
+    color: #0d1b33;
+    font-weight: 700;
+    padding-bottom: 16rpx
+}
+.bk-coupon .item .dis-tit {
+    color: #888888;
+}
+.bk-coupon .item .subtit {
+    font-size: 22rpx;
+    color: #888888;
+}
+.bk-coupon .item .midbox {
+    padding: 30rpx 20rpx;
+}
+.bk-coupon .item .rightbox {
+    padding-right: 20rpx;
+}
+.bk-coupon .item .end {
+    color: #eee;
+    font-size: 44rpx;
+    padding: 0 20rpx 0 34rpx
+}
+.bk-coupon .item.current .end {
+    color: #F85E53;
+}
+
+.invoice-box {
+    padding: 8rpx 0 28rpx 0;
+}
+.invoice-box .invoice-tit {
+    font-weight: 500;
+}
+.invoice-box .invoice-desc {
+    margin-top: 10rpx;
+    font-size: 24rpx;
+}
+/* 特别要求 */
+.sp-remark-li {
+    border-bottom: 0;
+    border-top: 1rpx solid #efefef;
+}
+.remark-btn {
+    position: absolute;
+    right: 10rpx;
+    background-color: #fff;
+    font-size: 24rpx;
+}
+.remark-btn::after {
+    border: none;
+}
+.remark-layer {
+    box-sizing: border-box;
+    min-height: 30vh;
+    max-height: 68vh;
+}
+.remark-layer .tip {
+    font-size: 24rpx;
+}
+.remark-layer .remark-input {
+    width: 100%;
+    height: 200rpx;
+    background-color: #fff;
+    padding: 24rpx;
+    border-radius: 16rpx;
+    margin-top: 20rpx;
+    box-sizing: border-box;
+    color: #111111;
+    font-size: 24rpx;
+    position: relative;
+}
+.remark-input .current-len {
+    font-size: 24rpx;
+    position: absolute;
+    right: -6rpx;
+    bottom: -6rpx;
+    margin-bottom: 20rpx;
+    margin-right: 20rpx;
+}
+
+
+/*------到店时间弹层------------*/
+.layer-bd {
+    height: 70vh;
+}
+.layer-bd .item {
+    font-size: 28rpx;
+    border-bottom: 1rpx solid #E5E5E5;
+    padding: 30rpx 54rpx;
+    text-align:center;
+    position: relative;
+}
+.layer-bd .item:last-of-type {
+    border-bottom: none;
+}
+.layer-bd .item .wechat-font-filter-yes {
+    position: absolute;
+    right: 26rpx;
+    top:50%;
+    transform: translateY(-50%);
+    opacity: 0;
+}
+.layer-bd .item.current {
+    color: #006FF6;
+}
+.layer-bd .item.current .wechat-font-filter-yes {
+    opacity: 1;
+}
+.layer-bd .item.current .eltxt {
+    color: #006FF6;
+}
+.layer-bd .item .eltxt {
+    font-size: 22rpx;
+    color: #888888;
+    line-height: 1;
+}
+
+
+/*------底部 文案------------*/
+.bk-tips {
+    padding: 0 22rpx;
+    font-size: 24rpx;
+    text-align: justify;
+}
+.bk-tips .notice-info {
+    margin-bottom: 32rpx;
+}
+.bk-tips .left-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(100% - 64rpx);
+    display: inline-block;
+    vertical-align: bottom;
+}
+.bk-tips .right-text {
+    color: #006FF6;
+    vertical-align: bottom;
+}
+.bk-tips .tips-title {
+    margin: 8rpx 0;
+    color: #555555;
+    font-weight: 500;
+}
+.bk-tips .tips-content {
+    margin-bottom: 28rpx;
+}
+.bk-tips .gdpr {
+    padding: 28rpx 0 34rpx 0;
+    line-height: 36rpx;
+}
+.bk-tips .gdpr-row {
+    display: flex;
+    align-items: center;
+}
+.bk-tips .gdpr-row:not(:last-child) {
+    margin-bottom: 16rpx;
+}
+.bk-tips .gdpr-row .icon-style {
+    color: #0065F2;
+    font-size: 30rpx;
+    margin-right: 9rpx;
+}
+.gdpr-active-txt {
+    color: #0065F2;
+    padding: 25rpx 24rpx;
+    margin-bottom: 19rpx;
+    text-align: center;
+    line-height: 38rpx;
+    font-size: 26rpx;
+}
+
+/* 住客、积分、税费等说明浮层 */
+.guest-layer {
+    text-align: center;
+}
+.popbox-thead {
+    display: flex;
+    justify-content: space-between;
+    height: 80rpx;
+    background: #4289ff;
+    border-radius: 16rpx 16rpx 0 0;
+}
+.popbox-thead .tit {
+    font-size: 30rpx;
+    font-weight: 500;
+    line-height: 30rpx;
+    color: #fff;
+    padding: 25rpx;
+}
+.popbox-thead .close-icon {
+    color: #fff;
+    padding: 25rpx;
+}
+.popbox-tbody {
+    width: 562rpx;
+    max-height: 800rpx;
+    background: #fff;
+    padding: 20rpx 30rpx 30rpx 30rpx;
+    border-radius: 0 0 16rpx 16rpx;
+    text-align: justify;
+    font-size: 28rpx;
+}
+.guest-list {
+    font-weight: 300;
+}
+.guest-list .list-tit {
+    font-weight: 700;
+    margin: 24rpx 0 16rpx;
+}
+.guest-list .list-content {
+    margin-top: 16rpx;
+}
+.points-tbody .points-item {
+    margin-bottom: 10rpx;
+}
+
+/* 会员互通注册 */
+.gvip-box .gvip-name {
+    padding: 24rpx 0;
+    font-size: 22rpx;
+    border-bottom: 1rpx solid #efefef;
+}
+.gvip-box .gvip-name .tit {
+    font-size: 28rpx;
+    font-weight: 600;
+}
+.gvip-box .group-ename {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.gvip-box .en-name {
+    font-size: 20rpx;
+}
+.gvip-box .gender-btns {
+    color: #ccc;
+    height: 90rpx;
+    line-height: 90rpx;
+}
+.gender-btns .gender-item {
+    width: 60rpx;
+    height: 100%;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+}
+.gender-btns .gender-item:first-child{
+    margin-right: 106rpx;
+}
+.gender-btns .gender-item.current {
+    border-bottom: 8rpx solid #006FF6;
+    color: #111111;
+}
+.gvip-box .read-agree {
+    font-size: 24rpx;
+    padding: 16rpx 0;
+    line-height: 1.5;
+}
+.name-box .vipname-tips {
+    padding: 12rpx 8rpx;
+    border-radius: 8rpx;
+    font-size: 22rpx;
+    color: #f60;
+    background-image: linear-gradient(-90deg, #fff7f0 0%, #fff8f5 100%);
+}
+.gvip-box .error-msg {
+    padding: 0 0 6rpx 58rpx;
+    font-size: 20rpx;
+}
+.bk-fishbone-half {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 110;
+    background: #fafaff url(https://pages.c-ctrip.com/hotels/wechat/img/bk-fishbone-content.png) center 0 no-repeat;
+    background-size: 750rpx 1188rpx;
+    height: 1175rpx;
+}
+.fishbone-notice {
+    width: 100%;
+    height: 30rpx;
+    background-color: #F3F2F7;
+}
+.bk-fishbone {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 110;
+    background: #fafaff url(https://pages.c-ctrip.com/hotels/wechat/img/bk-fishbone.png) center 160rpx no-repeat;
+    background-size: 750rpx 1188rpx;
+}
+.m-yanzhu-label {
+    display: flex;
+    align-items: center;
+    width: 180rpx;
+}
+
+/* 积分抵房费banner */
+.part-free-banner {
+    margin: 0 24rpx;
+    padding: 32rpx;
+    display: flex;
+    border-radius: 16rpx;
+    background: rgba(0,0,0,0.8);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 130rpx;
+    z-index: 9999;
+    animation: fadeInTop 200ms linear forwards, fadeOutTop 200ms 3s linear forwards;
+}
+.part-free-banner.iphonex {
+    top: 168rpx;
+    animation: fadeInTopIpx 200ms linear forwards, fadeOutTopIpx 200ms 3s linear forwards;
+}
+@keyframes fadeInTopIpx {
+    0% {
+        top: -168rpx;
+    }
+    100% {
+        top: 168rpx;
+    }
+}
+@keyframes fadeOutTopIpx {
+    0% {
+        top: 168rpx;
+    }
+    100% {
+        top: -168rpx;
+    }
+}
+@keyframes fadeInTop {
+    0% {
+        top: -130rpx;
+    }
+    100% {
+        top: 130rpx;
+    }
+}
+@keyframes fadeOutTop {
+    0% {
+        top: 130rpx;
+    }
+    100% {
+        top: -130rpx;
+    }
+}
+.part-free-banner image {
+    width: 56rpx;
+    height: 56rpx;
+    margin-right: 24rpx;
+}
+.part-free-banner .desc {
+    color: #fff;
+    font-size: 30rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+}
+.part-free-banner .desc .high-light {
+    color: #f90;
+    font-weight: 600;
+    font-family: PingFangSC-Semibold;
+}
+.bk-pay-container .new-customer-price-tag {
+    background: linear-gradient(90deg, rgb(255, 101, 105) 0%, rgb(255, 53, 95) 100%);
+    border-radius: 4rpx;
+    font-size: 20rpx;
+    color: #fff;
+    height: 28rpx;
+    padding: 0 4rpx;
+    align-self: center;
+    margin-left: 8rpx;
+}
+
+.inspire-swiper .new-customer-inspire {
+    background-color: rgb(255, 245, 248);
+}
+.inspire-swiper .inspire-item .new-customer-inspire-txt {
+    color: #FF2552;
+    font-weight: bold;
+    line-height: 88rpx;
+}
+.prime-banner .new-customer-cheap-tag {
+    font-size: 20rpx;
+    color: #FF2552;
+    border-radius: 14rpx 14rpx 14rpx 0;
+    background-color: #ffe6ed;
+    padding: 0 8rpx;
+    height: 28rpx;
+}
+.prime-banner-new-customer {
+    background: linear-gradient(-90deg, rgb(255, 255, 255) 0%, rgb(255, 247, 240) 100%);
+    border-radius: 16rpx 16rpx 0 0;
+}
+.new-customer-icon, .inspire-icon {
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 16rpx;
+}
+
+/* 会员享免费兑弹窗  */
+.free-exchange-banner {
+    border-radius: 0rpx 0rpx 16rpx 16rpx;
+    background: rgba(0,0,0,0.8);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 9998;
+    animation: exchangeInTop 200ms linear forwards, exchangeOutTop 200ms 3s linear forwards;
+}
+@keyframes exchangeInTop {
+    0% {
+        top: -800rpx;
+    }
+    100% {
+        top: 0rpx;
+    }
+}
+@keyframes exchangeOutTop {
+    0% {
+        top: 0rpx;
+    }
+    100% {
+        top: -800rpx;
+    }
+}
+.free-exchange-banner image {
+    width: 482rpx;
+    height: auto;
+    margin: 170rpx 134rpx 30rpx 134rpx;
+}
+/* 复杂床型 */
+.complex-bed-tip .bed-type{
+    display: flex;
+    flex-wrap: wrap;
+}
+.complex-bed-tip .m-label {
+    flex: 0 0 auto;
+}
+.complex-bed-tip .m-txt {
+    font-size: 24rpx;
+    padding: 24rpx 0;
+}
+.complex-bed-tip radio {
+    transform: scale(0.6);
+    margin-right: -5rpx;
+}
+.c-bed-tips {
+    display: flex;
+    align-items: center;
+    margin-right: 16rpx;
+}
+.c-single-bed {
+    font-size: 24rpx;
+}
+.complex-bed-tip .input-error-msg {
+    margin-top: 18rpx;
+}
+.complex-bed-tip.input-warning .m-label {
+    color: #F5190A;
+}
+/*超值旅行家*/
+.travel-coupon-bubble {
+    float: right;
+    margin-top: 22rpx;
+}
+.travel-coupon-bubble.mt18 {
+    margin-top: 18rpx;
+}
+.tcb-text {
+    position: relative;
+    color: #fff;
+    font-size: 22rpx;
+    padding: 8rpx 12rpx;
+    border-radius: 8rpx 8rpx 0 8rpx;
+    vertical-align: super;
+    margin-right: 10rpx;
+    font-weight: bold;
+    display: inline-block;
+}
+.tcb-triangle {
+    position: absolute;
+    width: 6rpx;
+    height: 100%;
+    right: -5rpx;
+    bottom: 0;
+}
+.tc-content {
+    line-height: 40rpx;
+    margin: 6rpx 0 8rpx;
+}
+.tc-qa {
+    margin-left: 5rpx;
+    vertical-align: middle;
+}
+.tc-condition {
+    padding-bottom: 32rpx;
+}
+.tc-rule {
+    position: relative;
+    padding: 0 8rpx;
+}
+.tc-rule:first-child {
+    padding-left: 0;
+}
+.tc-rule:last-child {
+    padding-right: 0;
+}
+.tc-rule:not(:last-child):after {
+    content: '';
+    position: absolute;
+    height: 20rpx;
+    width: 1rpx;
+    background: #aaaaaa;
+    right: 0;
+    bottom: 4rpx;
+}

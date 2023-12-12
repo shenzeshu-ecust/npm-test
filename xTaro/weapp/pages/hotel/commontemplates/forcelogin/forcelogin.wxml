@@ -1,0 +1,7 @@
+<template name="force-login">
+<view class="force-login-layer">
+    <view class="fl-img"></view>
+    <view>查看酒店信息请登录</view>
+    <view class="fl-btn" catchtap="forceToLogin">去登录</view>
+</view>
+</template>

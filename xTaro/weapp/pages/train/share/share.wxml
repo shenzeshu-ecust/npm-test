@@ -1,0 +1,42 @@
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+<authorizationFloat id="cwxAuthFloat"></authorizationFloat>
+
+<view class="share-page" style="background-color: #{{bgColor}};">
+    <!-- 带有二维码的分享页面样式 包含分享和保存图片-->
+    <block wx:if="{{!noQrcodeImg}}">
+        <view class="img-box" style="background-color: #{{bgColor}}; background: url({{img}});background-size:100% auto;background-repeat: no-repeat">
+            <!-- <view class="img-mid">
+            <image src="{{img}}" class="img" mode="widthFix"></image>
+            </view> -->
+        </view>
+
+        <view class="btn-box">
+            <button wx:if="{{showLeftBtn}}" class="btn-share" style="background-color:#{{leftBtnBgColor}};color:#{{leftBtnColor}}" bindtap="noop" open-type="share" data-ubt-key="train_wx_h5share_share_{{ubtKey}}">{{leftBtnTxt}}</button>
+            <block wx:if="{{showRightBtn}}">
+                <button class="btn-save"
+                    wx:if="{{hasRejectAlbum}}"
+                    style="background-color:#{{rightBtnBgColor}};color:#{{rightBtnColor}}"
+                    open-type="openSetting"
+                    bindopensetting="reAuthorize"
+                    bindtap="noop"
+                    data-ubt-key="train_wx_h5share_reAuthorize_{{ubtKey}}">授权</button>
+                <button class="btn-save"
+                    wx:else
+                    style="background-color:#{{rightBtnBgColor}};color:#{{rightBtnColor}}"
+                    bindtap="saveImageToAlbumHandle"
+                    data-ubt-key="train_wx_h5share_save_{{ubtKey}}">{{rightBtnTxt}}</button>
+            </block>
+        </view>
+    </block>
+    <!-- 只有分享按钮没有保存 -->
+    <block wx:else>
+        <view class="img-box" style="background: url({{noQrcodeImg}});background-size:100% auto;background-repeat: no-repeat;background-color: #{{bgColor}}">
+          <!-- <image src="{{noQrcodeImg}}" style="display:block;width:671rpx;height:530rpx;margin:0 auto"></image> -->
+            <button bindtap="noop" open-type="share" data-ubt-key="train_wx_h5share_share_{{ubtKey}}">
+                <image src="{{btnImg}}" class="img" mode="widthFix"></image>
+            </button>
+        </view>
+    </block>
+</view>
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

@@ -1,0 +1,68 @@
+<block wx:if="{{showUserPanel}}">
+	
+<view catchtouchstart="_hidePanel" class="userpanel-mask" bindtap="_hidePanel"></view>
+<view catchtouchmove="catchtouchmove" class="userpanel-wrapper" style="padding-bottom: {{isIphoneX ? '64rpx': '0'}}; height: {{userPanelInfo.isSelf ? '332rpx' :'460rpx'}}">
+	<view class="panel-avat">
+		<image class="avaturl" data-url="{{userPanelInfo.userUrl}}"  data-id="{{userPanelInfo.ctripUserID}}"  bindtap="_jumpToUserHome" data-type="usericon" src="{{userPanelInfo.imageUrl || 'https://pages.c-ctrip.com/you/lvpai-home-defaultavat.jpg'}}" />
+		<block wx:if="{{userPanelInfo.vIcon}}">
+			<image class="vip"  src="{{userPanelInfo.vIcon}}" />
+		</block>
+		
+	</view>
+	<view class="panel-name" >
+        <view class="panel-inline" data-url="{{userPanelInfo.userUrl}}" data-type="username" data-id="{{userPanelInfo.ctripUserID}}"  bindtap="_jumpToUserHome">{{userPanelInfo.name}}</view>
+    </view>
+	<view class="panel-brief" >
+        <view class="panel-inline" data-type="userbrief" data-url="{{userPanelInfo.userUrl}}"  data-id="{{userPanelInfo.ctripUserID}}"  bindtap="_jumpToUserHome">{{userPanelInfo.brief}}</view></view>
+	<view class="panel-info">
+		<view class="panel-detail on">
+			<view class="detail-num">{{func.formateNum(userPanelInfo.followerCount)}}</view>
+			<view class="detail-bri">关注</view>
+		</view>
+		<view class="panel-detail on">
+			<view class="detail-num">{{func.formateNum(userPanelInfo.followingCount)}}</view>
+			<view class="detail-bri">粉丝</view>
+		</view>
+		<view class="panel-detail">
+			<view class="detail-num">{{func.formateNum(userPanelInfo.liveCount)}}</view>
+			<view class="detail-bri">直播数</view>
+		</view>
+	</view>
+	<block wx:if="{{!userPanelInfo.isSelf}}">
+	<view class="panel-buttons">
+		<view class="panel-btnitem focus-btn" bindtap="_focusUser" data-id="{{userPanelInfo.ctripUserID}}" data-isfollow="{{userPanelInfo.isFollow}}">
+			<image class="focus-icon" src="{{userPanelInfo.isFollow ? 'https://pages.c-ctrip.com/livestream/video/webcast-focused-btn.png' : 'https://pages.c-ctrip.com/livestream/video/webcast-focus-btn.png'}}"/>
+			<text>{{userPanelInfo.isFollow ? '已': ''}}关注</text>
+		</view>
+
+		<view wx:if="{{userPanelInfo.canGroupChat}}" class="panel-btnitem userhome" bindtap="_jumpToGroupChat">粉丝群</view>
+		<view class="panel-btnitem userhome" data-url="{{userPanelInfo.userUrl}}"  data-id="{{userPanelInfo.ctripUserID}}"  bindtap="_jumpToUserHome">个人主页</view>
+	</view>
+	</block>
+</view>
+</block>
+
+<wxs module="func">
+var formateNum = function(num){
+	var result;
+	  if(num == 0 || num == undefined){
+	    return 0;
+	  }
+	  if(num >= 10000000){
+	    num = (num/10000000).toFixed(1);
+	      result = num + "kw";
+	  }else if (num >= 10000) {
+	      num = (num/10000).toFixed(1);
+	      result = num + "w";
+	  } else {
+	      result = num;
+	  }
+	    return result;
+}
+module.exports = {
+  formateNum : formateNum
+}
+</wxs>
+
+
+

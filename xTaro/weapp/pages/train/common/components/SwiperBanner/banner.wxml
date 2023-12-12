@@ -1,0 +1,16 @@
+<!-- banner -->
+<view class="banner-outter" wx:if="{{_bannerItemList &&_bannerItemList.length}}" style="width:{{Width}}rpx;height:{{Height}}rpx;border-radius:{{Radius}}px">
+    <swiper 
+        class="swiper"
+        style="height:{{Height}}rpx;"
+        autoplay
+        circular
+        interval="{{interval}}" 
+        duration="{{duration}}" 
+        bindchange="swiperChange"
+    >
+      <swiper-item wx:for="{{_bannerItemList}}" wx:key="index">
+        <image src="{{item.imgURL}}" data-item="{{item}}" class="img" bindtap="swiperclick"/>  
+      </swiper-item>
+  </swiper>
+</view>

@@ -1,0 +1,2 @@
+<import src="../../../cwx/component/cwebview/cwebtemplate.wxml" />
+<template is="cwebtemplate" data="{{canWebView, url, wsg}}"/>

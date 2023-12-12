@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "车次信息",
+  "navigationBarBackgroundColor": "#1980FE",
+  "navigationBarTextStyle": "white",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "train-compt": "../../components/train-compt/train-compt",
+    "detail-header-compt": "../../components/detail-header-compt/detail-header-compt",
+    "bottom-options": "../../components/detailBottomOptions/detailBottomOptions",
+    "loading-fail": "../../components/loadingFail/loadingFail"
+  }
+}

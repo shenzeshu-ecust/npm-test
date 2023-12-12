@@ -1,0 +1,227 @@
+page{
+  height: 100%;
+  background-color: #f5f5f5;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.my-prize{
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.banner{
+  position: relative;
+  width: 100%;
+  height: 160rpx;
+}
+.banner image{
+  width: 100%;
+  height: 100%;
+}
+.prize image{
+  width: 100%;
+  height: 100%;
+}
+.scene-list{
+  width: 90%;
+  padding-bottom: 40rpx;
+}
+.scene-list .li{
+  width: 100%;
+  margin-top: 40rpx; 
+} 
+.scene-desc{
+  justify-content: space-between;
+} 
+.scene-name{
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+}
+.record-time{
+  font-size: 24rpx;
+  color: #999;
+}
+.prize-list{
+  width: 100%;
+  margin-top: 10rpx; 
+}
+.prize-list .li{
+  position: relative;
+  width: 100%;
+  height: 140rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+  border-radius: 5px;
+}
+.prize-list .img{
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 20rpx;
+}
+.prize-list .prize-desc{
+  width: 51%;
+  font-size: 28rpx;
+  color: #333;
+  margin-left: 20rpx;
+}
+.prize-desc .name{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.prize-desc .detail{
+  font-size: 20rpx;
+  color: #999999;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.btn{
+  position: absolute;
+  height: 44rpx;
+  line-height: 44rpx;
+  bottom: 20rpx;
+  right: 20rpx;
+  font-size: 24rpx;
+  color: #666;
+  border: 1px solid #999;
+  border-radius: 5px;
+  padding: 0  20rpx;
+}
+.empty{
+  width: 100%;
+}
+.no-bkg{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 260rpx;
+}
+.no-logo{
+  margin-top: 40%;
+  width: 190rpx;
+  height: 30rpx;
+}
+.empty-hint{
+  font-size: 30rpx;
+  color: #666;
+  text-align: center;
+  margin-top: 30rpx;
+}
+.popup{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.6);
+  z-index: 9999;
+}
+.coupon{
+  display: inline-flex;
+  position: absolute;
+  height: 50%;
+  width: 100%;
+  bottom: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background: url('//pages.c-ctrip.com/amsweb/myprize/img/popup-bkg.jpg')  no-repeat center center/100% 100%;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+.ttl{
+  font-size: 35rpx;
+  color: #323334;
+  padding: 55rpx 0  70rpx;
+}
+.ttl .i{
+  height: 1px;
+  width: 70rpx;
+  background-color: #333;
+  margin: 0  20rpx;
+}
+.code{
+  font-size: 48rpx;
+  color: #333;
+  font-weight: bold;
+  margin-left: 68rpx;
+}
+.copy{
+  font-size: 24rpx;
+  color: #0072ff;
+  text-decoration: underline;
+  font-weight: normal;
+  padding-left: 20rpx;
+}
+.cipher{
+  font-size: 24rpx;
+  color: #333;
+  padding-top: 20rpx;
+  margin-left: 68rpx;
+}
+.state{
+  width: 653rpx;
+  font-size: 24rpx;
+  color: #666;
+  text-align: left;
+  margin-top: 30rpx;
+}
+.s-ttl{
+  border-bottom: 1px solid #c3c4c5 ;
+}
+.s-cnt{
+  display: block;
+  margin: 45rpx 0;
+}
+.close-btn{
+  position: absolute;
+  width: 80rpx;
+  height: 80rpx;
+  top: 10rpx;
+  right: 10rpx; 
+  transform: rotate(45deg);
+}
+.close{
+  position: absolute;
+  background: #535353;
+  height: 40rpx;
+  width: 1px;
+  top: 20rpx;
+  right: 40rpx;
+}
+.close::after{
+  content: "";
+  position: absolute;
+  background: #535353;
+  height: 1px;
+  width: 40rpx;
+  top: 20rpx;
+  right: -20rpx;
+}
+.gq-logo{
+  position: absolute;
+  height: 70rpx;
+  width: 70rpx;
+  top: 0;
+  right: 0;
+}
+.gq-logo image{
+  width:100%;
+  height:100%;
+}

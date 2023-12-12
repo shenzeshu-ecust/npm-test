@@ -1,0 +1,4 @@
+<button wx:if="{{showButton}}" class="{{clazz}} common_return_app" open-type="launchApp" app-parameter="{{from}}" binderror="launchAppError">
+  <slot></slot>
+  <image class="returnapp_img" src="https://images3.c-ctrip.com/marketing/static/returnappbtn.png"></image>
+</button>

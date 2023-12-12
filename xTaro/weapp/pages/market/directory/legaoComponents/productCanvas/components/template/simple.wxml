@@ -1,0 +1,11 @@
+<view class='scene_box custom_scene_class custom_simple_class custom_simple_class_{{pageHeight}}' data-index="{{idx}}" style="{{sceneBoxStyle}}" bindtap="clickHandlers" >
+  <block wx:for="{{sceneBoxContent}}" wx:key="index">
+    <sk_image wx:if="{{item.type == 'image'}}" data="{{item}}" style="{{item.styles || item.props.styles}}" class="component_image" data-clickhandlersname="clickHandlers" />
+    <sk_label wx:if="{{item.type == 'label'}}" data="{{item}}" style="{{item.styles || item.props.styles}}" class="component_label" data-clickhandlersname="clickHandlers" />
+    <sk_row wx:if="{{item.type == 'row'}}" data="{{item}}" style="{{item.styles || item.props.styles}}; display: flex;width: 100%; height: 100%;" class="component_row" data-clickhandlersname="clickHandlers" />
+    <sk_column wx:if="{{item.type == 'column'}}" data="{{item}}" style="{{item.styles || item.props.styles}}" class="component_column" data-clickhandlersname="clickHandlers" />
+    <sk_container wx:if="{{item.type == 'container'}}" data="{{item}}" style="{{item.styles || item.props.styles}}" class="component_container" data-clickhandlersname="clickHandlers" />
+    <sk_box wx:if="{{item.type == 'box'}}" data="{{item}}" style="{{item.styles || item.props.styles}}" class="component_box" data-clickhandlersname="clickHandlers" />
+    <sk_inline wx:if="{{item.type == 'inline'}}" data="{{item}}" style="{{item.styles || item.props.styles}}" class="inline_class" data-clickhandlersname="clickHandlers" />
+  </block>
+</view>

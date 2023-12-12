@@ -1,0 +1,20 @@
+.duobao_count_down{
+    display: flex;
+    align-items: center;
+}
+.cd_number{
+    background-color: #FF8B26;
+    border-radius: 4rpx;
+    padding: 3rpx 4rpx 4rpx;
+    color: #ffffff;
+    font-size: 22rpx;
+    font-family: PingFangSC-Medium;
+    line-height: 1;
+}
+.cd_unit{
+    color: #333333;
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular;
+    margin: 0 5rpx;
+    line-height: 1;
+}

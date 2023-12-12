@@ -1,0 +1,205 @@
+<import src="../components/yoyocard/vipcard_templates.wxml" />
+
+<mp-navigation-bar
+    wx:if="{{showCustomNav}}"
+    id="mp-navigation"
+    back="{{showBack}}"
+    color="#000"
+    title="{{hotelBaseInfo.name}}"
+    background="#fff"
+    bindback="backToHotelSearchPage"
+    >
+</mp-navigation-bar>
+<webp bind:pageImageSuccess="pageImageSuccess"></webp>
+
+<template is="qr-code-toast" data="{{isShow:modals.highStarQrModal, communityQRCode}}"></template>
+<template is="front-desk-toast" data="{{frontDeskModal:modals.frontDeskModal, communityQRCode, callPhone}}"></template>
+
+<scroll-view class="scroll-view" style="background: #eff1f6;" scroll-y="{{true}}" bindscroll="onMainVersionScroll" enable-back-to-top="{{true}}" scroll-with-animation="{{true}}" bindscrolltolower="handleScrollToLower" scroll-top="{{scrollTopValue}}" scroll-into-view="{{toView}}">
+    <view class="header-bg"></view>
+    <view style="position:relative; z-index: 2;">
+        <!-- 未登录情况下的顶层蒙层 点击后去登录 -->
+        <view wx:if="{{!hasLogin}}" class="top-mask" catchtouchstart="goLogin"></view>
+
+        <!-- 头部 -->
+        <view class="header-wrapper">
+            <view class="common-header">
+                <view wx:if="{{ refactorList && refactorList.length }}" class="service-wrapper">
+                    <storeservice 
+                        functionList="{{refactorList}}" 
+                        hotelId="{{hotelId}}" 
+                        sourceFrom="{{source}}"
+                        allianceid="{{allianceid}}" 
+                        sid="{{sid}}" 
+                        cityId="{{hotelBaseInfo.cityId}}" 
+                        lat="{{hotelBaseInfo.coordinate.latitude}}" 
+                        lng="{{hotelBaseInfo.coordinate.longitude}}" 
+                        codeID="{{codeID}}" 
+                        communityQRCode="{{communityQRCode}}"
+                        isOrderCode="{{isOrderCode}}"
+                        pageId="{{pageId}}"
+                        materialKey="{{materialKey}}"
+                        scene="{{scene}}"
+                        wifiPageUrl="{{wifiPageUrl}}"
+                        telephone="{{telephone}}"
+                        bind:openCModal="openCModal"
+                        isSendMessageInWifiPage="{{isSendMessageInWifiPage}}"
+                    />
+                </view>
+            </view>
+        </view>
+        <!-- 企微入口 && 问卷入口-->
+        <view class="swiper-wrapper" wx:if="{{isBannerShow}}">
+            <swiper class="swiper" autoplay="true" interval="3000" duration="500" vertical="{{true}}" circular="{{true}}">
+                <block wx:for="{{bannerList}}" wx:for-item="item" wx:key="index">
+                    <swiper-item class="swiper-item-wrapper" bindtap="handleSwiperTap" data-id="{{index}}">
+                        <template is="banner-swiper-item-content" data="{{...item}}"/>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+        <!-- 预售套餐 & 酒店美食 -->
+        <view class="meal-packs-wrapper mealpack-new-theme">
+            <mealpack 
+                wx:if="{{hasLogin}}"
+                hotelId="{{hotelId}}" 
+                eid="{{eid}}" 
+                hotelBaseInfo="{{hotelBaseInfo}}" 
+                inday="{{inday}}" 
+                outday="{{outday}}" 
+                bind:noImageTrace="noImageTrace"
+                pageId="{{pageId}}"
+                source="{{source}}"
+                cikaSwitch="{{cikaSwitch}}"
+            >
+            </mealpack>
+        </view>
+
+        <!-- 领卡弹窗 -->
+        <yoyocard wx:if="{{hasLogin && uninonVipType}}"
+            id="yoyocard"
+            sid="{{sid}}" 
+            allianceid="{{allianceid}}" 
+            hotelId="{{hotelId}}" 
+            unionVipType="{{uninonVipType}}" 
+            unionVipFunc="{{unionVipFunc}}" 
+            source="{{source}}"
+            autoGetVipCard="{{autoGetVipCard}}"
+            bind:onVipCardModalClose="onVipCardModalClose"
+            bind:onGetVipCardSuccess="onGetVipCardSuccess"
+            bind:onGetVipCardFinish="onGetVipCardFinish"
+            isShowVipCardToast="{{isShowVipCardToast}}"
+        />
+        
+        <view class="rm-blue-theme new-room" wx:if="{{continueLiveSwitch}}">
+            <view wx:if="{{!hasLogin}}" class="Coupon-BG"></view>
+            <!--优惠券-->
+            <view class="continue_title_v4">
+                <coupon 
+                    checkInDay="{{inday}}" 
+                    checkOutDay="{{outday}}"
+                    hotelBaseInfo="{{hotelBaseInfo}}" 
+                    hotelId="{{hotelId}}"
+                    source="{{source}}"
+                    hasLogin="{{hasLogin}}"
+                    showBenefitList="{{showBenefitList}}"
+                    bindreloadRoomList="reloadRoomList"
+                    bind:updateNoBenefit="updateNoBenefit"
+                    id="coupon-list"
+                >
+                </coupon>
+            </view>
+                    
+            <roomlist
+                id="room-list-new"
+                hotelId="{{hotelId}}" 
+                showFilter="{{true}}" 
+                showCalender="{{true}}"
+                source="{{source}}"
+                sid="{{sid}}"
+                allianceid="{{allianceid}}"
+                inday="{{inday}}" 
+                outday="{{outday}}"
+                pageId="{{pageId}}"
+                eid="{{eid}}"
+                fromLS="{{source==='wifi-landing' || source==='high-star-aggregate'}}"
+                noBenefit="{{noBenefit}}"
+                mpNavHeight="{{navBarHeight}}"
+                bindonToggleSubRoom="onToggleSubRoom"
+                bind:receiveCouponBooking="receiveCouponBooking"
+                unionVipType="{{uninonVipType}}"
+                scanPriceTag="{{scanPriceTag}}" 
+                bind:showVipLayer="setVipLayerShow"
+                bind:roomlistLoadSuccess="roomlistLoadSuccess"
+                bind:resetInAndOutDay="resetInAndOutDay"
+                bind:noImageTrace="noImageTrace"
+                appscan="{{appscan}}"
+                enableFullRoomApply="{{enableFullRoomApply}}"
+                bind:reloadCouponList="reloadCouponList"
+                matchedRoomParam="{{matchedRoomParam}}"
+                showPmsLayer="{{showPmsLayer}}"
+                disablePlatformDiscount="{{disablePlatformDiscount}}"
+                calendarLimitChooseDay="{{calendarLimitChooseDay}}"
+            />
+        </view>
+    </view>
+    <block wx:if="{{waterModuleSwitch && waterFllowSwitch && hotelBaseInfo && hotelBaseInfo.cityId && personalRecommendSwitch}}">
+            <view class="waterflow">
+                <waterfall 
+                    class="waterfall-content" 
+                    id="waterfallInfo" 
+                    cityId="{{hotelBaseInfo.cityId}}" 
+                    cityName="{{hotelBaseInfo.cityName}}" 
+                    coordinate="{{hotelBaseInfo.coordinate}}" 
+                    hotelId="{{hotelId}}" 
+                    sourceFrom="{{source}}" 
+                    isNew="{{true}}" 
+                    bind:noImageTrace="noImageTrace"
+                    bind:onClickExplore="handleClickExplore"
+                    >
+                </waterfall>
+            </view>
+            <view class="goTopBtn" wx:if="{{showGoTop && source === 'high-star-aggregate'}}" bindtap='goTop' style="bottom:{{isIphoneX ?'194rpx':'160rpx'}}">
+                <view class="wechat-font-icon-totop icon-totop"></view>
+            </view> 
+    </block>
+    <view class="bottom-blank"></view>
+</scroll-view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>
+
+<!--hack标签 保证this.data数据在wxml中使用到-->
+<view wx:if="{{biz && switchUserSubscript && subscriptTemplateIds && isIPhoneX && isSubsHotelWhiteList && false}}"></view>
+
+<!-- 达人探店点评 -->
+<mediapreviewer show="{{mediaPreviewer.showMediaPreviewer}}" title="{{mediaPreviewer.title}}" content="{{mediaPreviewer.content}}" mediaList="{{mediaPreviewer.mediaList}}" authorInfo="{{mediaPreviewer.authorInfo}}" bind:onCloseMediaPreviewer="closeMediaPreviewer"></mediapreviewer>
+
+<!-- 无WIFI弹窗 -->
+<cModal isShow="{{modals.zeroWifiModal}}" cancelBtnHide="{{true}}" bind:confirm="showNoWifiHotelTelModal" confirmCloseBtn="{{true}}" confirmText="联系酒店" bodyTitle="请联系酒店工作人员开通扫码连WI-FI功能" closeIconType="wechat-font-close3"></cModal>
+
+<!-- 入群二维码弹窗 -->
+<template name="qr-code-toast">
+    <qrCodeToast isShowModal="{{isShow}}" communityQRCode="{{communityQRCode}}"></qrCodeToast>
+</template>
+
+<!-- 联系前台社群弹窗 -->
+<template name="front-desk-toast">
+    <frontDeskQrCodeToast bind:callPhone="callPhone"  isShowModal="{{frontDeskModal}}" communityQRCode="{{communityQRCode}}"></frontDeskQrCodeToast>
+</template>
+
+<!-- 企微弹窗 -->
+<qrCodeToast isShowModal="{{modals.groupQrModal}}" communityQRCode="{{groupQRCode}}" type="wework" bind:closeCModal="closeCModal"></qrCodeToast>
+
+<!-- 问卷 && 企微入口 -->
+<template name="banner-swiper-item-content">
+    <view class="qrcode-entrance">
+        <view class="own-service">{{title}}</view>
+        <view class="split-line">|</view>
+        <view class="last-qrcode-text">{{shortTitle}}</view>
+    </view>
+    <view>
+        {{buttonText}}
+        <text class="wechat-font-arrow-right arrow-right-icon"></text>
+    </view>
+</template>

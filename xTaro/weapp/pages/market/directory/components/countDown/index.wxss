@@ -1,0 +1,61 @@
+.wrap {
+  position: fixed;
+  right: 0;
+  width: 166rpx;
+  height: 160rpx;
+  transform: scale(.8);
+  z-index: 1000;
+}
+.main {
+  width: 148rpx;
+  height: 188rpx;
+  margin: 6rpx auto;
+}
+.header {
+  width: 100%;
+  height: 107rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/07/countdown/countdown-icon.png');
+  background-size: 100% 100%;
+}
+.body {
+  width: 100%;
+  height: 98rpx;
+  margin-top: -17rpx;
+  background: linear-gradient(-229.78deg, rgb(255, 219, 163) 0%, rgb(255, 250, 234) 53.22%, rgb(255, 214, 155) 100%);
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+.body .count-down {
+  width: 100%;
+  height: 28rpx;
+}
+.body .count-down .line-wrap {
+  width: 125rpx;
+  height: 16rpx;
+  margin: 6rpx auto;
+  background: #593a0f;
+  border-radius: 8.5rpx;
+  box-shadow: inset 0px 0px 3rpx 0px rgba(0, 0, 0, 0.01);
+  overflow: hidden;
+}
+.body .count-down .line-wrap .line {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgb(255, 175, 0) 0%, rgb(255, 92, 0) 100%);
+  border-radius: 8rpx;
+}
+.body .desc {
+  color: #ffecd0;
+  background: red;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  font-weight: normal;
+  letter-spacing: 0px;
+  line-height: 26rpx;
+  height: 53rpx;
+  width: 140rpx;
+  margin: 0 auto;
+  padding-top: 7rpx;
+  border-radius: 0 0 12rpx 12rpx;
+}

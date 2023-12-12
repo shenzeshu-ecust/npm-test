@@ -1,0 +1,35 @@
+.smz-geo-container {
+    height: 100%;
+    position: relative;
+    background-color: #EFEFEF;
+}
+.smz-geo-container .geo-fail-img {
+    width: 250rpx;
+    height: 250rpx;
+    margin: 320rpx 0 24rpx calc(50% - 125rpx);
+}
+.smz-geo-container .btn-retry {
+    width: 414rpx;
+    margin: 0 auto;
+    padding: 20rpx 0;
+    background-image: linear-gradient(90deg, #00A7FA 0%, #0076F5 100%);
+    border-radius: 80rpx;
+
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 36rpx;
+}
+.smz-geo-container .geo-fail-text {
+    font-weight: 600;
+    font-size: 28rpx;
+    color: #333;
+    text-align: center;
+}
+
+.failure-alert {
+    padding: 40rpx;
+    text-align: center;
+}

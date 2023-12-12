@@ -1,0 +1,23 @@
+.sel-info,.sel-trans-info {
+    line-height: 26rpx;
+    clear: both;
+    margin-top: 32rpx;
+    font-size: 22rpx;
+    display: flex
+  }
+  .torage{color: #f70}
+  .sel-info .item {
+    position: relative;
+    white-space: nowrap;
+    text-align: center;
+    color: #666;display: flex;flex-flow: row wrap;align-items: center;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    flex: 1;
+    height: 26rpx;
+  }
+  .sel-info .item:nth-child(1){justify-content: flex-start;}
+  .sel-info .item:nth-child(2){justify-content: center;}
+  .sel-info .item.disabled {
+    color: #ccc;
+  }

@@ -1,0 +1,316 @@
+@import '../bus.wxss';
+page {
+    background-color: #eef1f6;
+}
+.train-list {
+    margin-top: 32rpx;
+    background: #fff;
+    line-height: 86rpx;
+}
+.train-list .item {
+    border-style: solid;
+    border-image: url(data:image/gif;base64,R0lGODlhBQAFAPABANra2v///yH5BAUHAAEALAAAAAAFAAUAAAIHhB9pGatnCgA7)
+        2 stretch;
+    border-width: 0;
+    border-bottom-width: 1px;
+    padding-right: 30rpx;
+}
+.scan-block {
+    background-color: #fff;
+    margin: 24rpx 24rpx 0;
+    border-radius: 12rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24rpx;
+}
+.scan-block .scan-title {
+    color: #333333;
+    font-size: 34rpx;
+    font-weight: 500;
+    line-height: 42rpx;
+}
+.scan-block .scan-desc {
+    color: #666666;
+    line-height: 30rpx;
+    font-size: 24rpx;
+    height: 30rpx;
+    margin-top: 8rpx;
+}
+
+.add-block {
+    margin-top: 32rpx;
+    background-color: #fff;
+    padding-top: 24rpx;
+}
+.add-block .title {
+    font-size: 34rpx;
+    color: #666;
+    margin-left: 32rpx;
+    line-height: initial;
+}
+.add-block .item {
+    line-height: initial;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8rpx;
+    border: 1rpx dashed #999999;
+    margin: 32rpx 32rpx 32rpx 0;
+    padding: 24rpx !important;
+    position: relative;
+    box-sizing: border-box;
+}
+.add-block .item.selected {
+    border-style: solid;
+}
+.add-block .item .select-tag {
+    position: absolute;
+    content: '';
+    color: #fff;
+    border-radius: 8rpx 0px 8rpx 0px;
+    height: 26rpx;
+    width: 28rpx;
+    bottom: 0;
+    right: 0;
+    font-size: 24rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-block .item:first-child {
+    margin-left: 32rpx;
+}
+.add-block .item .title {
+    font-size: 34rpx;
+    color: #333;
+    font-weight: 600;
+    margin-left: 0;
+}
+.add-block .item-row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+.add-block .item .title-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.add-block .item .price {
+    font-size: 34rpx;
+    color: #333;
+    font-weight: 400;
+}
+.add-block .item .unit {
+    font-size: 24rpx;
+    color: #333;
+    font-weight: 400;
+}
+.add-block .item .desc {
+    font-size: 20rpx;
+    line-height: 24rpx;
+    color: #999999;
+}
+
+.train-list .add-box {
+    position: relative;
+    padding-left: 200rpx;
+    min-height: 96rpx;
+    font-size: 32rpx;
+    margin-left: 32rpx;
+}
+.train-list .add-box.greyarr {
+    padding-right: 70rpx;
+}
+.greyarr::after {
+    width: 12rpx;
+    height: 12rpx;
+    border-top: 2px solid #ccc;
+    border-right: 2px solid #ccc;
+    transform: rotate(45deg);
+    position: absolute;
+    content: '';
+    right: 36rpx;
+    top: 50%;
+    margin-top: -10rpx;
+}
+.train-list .label {
+    width: 200rpx;
+    left: 0;
+    top: 0;
+    position: absolute;
+    color: #666;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon-question {
+    margin-left: 10rpx;
+}
+
+input {
+    width: 100%;
+    height: 90rpx;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    box-sizing: border-box;
+    outline: 0;
+}
+.child-tips {
+    font-size: 24rpx;
+    padding: 30rpx 30rpx 10rpx;
+}
+.btns {
+    bottom: 0;
+    width: 100%;
+    color: #ffffff;
+}
+.tip-txt {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    padding: 40rpx 50rpx;
+    overflow-y: auto;
+    color: #dbdbdb;
+    background: #fff;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+.wrapper {
+    padding-top: 168rpx;
+}
+.tip-txt.active {
+    opacity: 0.9;
+    z-index: 10000;
+}
+.tip-txt .cblue {
+    color: #000;
+    font-weight: 500;
+    padding: 0.5em 0;
+}
+.tip-txt .p {
+    color: #000;
+    padding: 0.5em 0;
+}
+.child-info {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0 30rpx;
+    font-size: 24rpx;
+    color: #666666;
+}
+.child-info .icon-info {
+    margin-right: 8rpx;
+}
+.child-info .icon-info,
+.child-info .icon-info:before {
+    font-size: 28rpx;
+    vertical-align: middle;
+}
+
+.bar-confirm {
+    background-color: #ffffff;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20rpx 20rpx 68rpx;
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    position: relative;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.bar-confirm .btn {
+    flex: 1;
+    width: 100%;
+    line-height: 88rpx;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 32rpx;
+    padding-left: 5rpx;
+    padding-right: 5rpx;
+    border-radius: 12rpx;
+    font-weight: 500;
+}
+.bar-confirm .btn:active {
+    filter: brightness(0.8) opacity(0.8) grayscale(0.2);
+}
+
+.passenger-container {
+    height: 100%;
+}
+.passenger-container .icon-camera {
+    font-size: 34rpx;
+    margin-right: 10rpx;
+}
+
+.item .tip {
+    margin-left: 32rpx;
+    color: #ff7700;
+    font-size: 24rpx;
+    font-weight: normal;
+}
+.item .tip .icon-info {
+    margin-right: 6rpx;
+}
+
+.confirm-content {
+    color: #999999;
+    font-size: 22rpx;
+    font-weight: normal;
+    padding: 30rpx;
+    padding-bottom: 168rpx;
+}
+.confirm-content .desc {
+    margin-top: 10rpx;
+    margin-bottom: 20rpx;
+}
+.confirm-content .desc.important {
+    color: #333333;
+    font-weight: 600;
+}
+.input-placeholder {
+    color: #cccccc;
+}
+
+.content-container {
+    background-color: #fff;
+    padding: 32rpx;
+}
+.child-tip-info {
+    background: #eef1f6;
+    border-radius: 8rpx;
+    padding: 24rpx;
+}
+.child-tip-info .title {
+    font-size: 24rpx;
+    font-weight: 600;
+    color: #666666;
+    margin-bottom: 20rpx;
+}
+.child-tip-info .desc {
+    font-size: 24rpx;
+    font-weight: normal;
+    color: #999999;
+    line-height: initial;
+    margin-bottom: 8rpx;
+}

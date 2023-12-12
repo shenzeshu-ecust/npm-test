@@ -1,0 +1,123 @@
+@import '../../common/common.wxss';
+.rp-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 挽留弹窗信息 */
+.rp-info {
+    width: 562rpx;
+    padding: 80rpx 32rpx 32rpx;
+    border-radius: 16rpx;
+    box-sizing: border-box;
+}
+
+.info-style1 {
+    background-color: transparent;
+    position: absolute;
+    z-index: 2;
+}
+
+.info-style2 {
+    background-color: #fff;
+}
+
+/* 挽留弹窗背景图 */
+.bkg-style1 {
+    position: absolute;
+    z-index: 1;
+    transform: translateY(-30rpx);  /* 18rpx + 4rpx + 8rpx */
+}
+
+.bkg-style1 image {
+    width: 562rpx;
+    height: 420rpx;
+}
+
+.bkg-style2 {
+    position: absolute;
+    transform: translateY(-204rpx);
+}
+
+.bkg-style2 image {
+    width: 562rpx;
+    height: 170rpx;
+}
+
+/* 挽留弹窗文字 */
+.rp-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.rp-tit {
+    height: 48rpx;
+    font-weight: 500;
+    line-height: 48rpx;
+}
+
+.rp-subtit {
+    width: 300rpx;
+    height: 52rpx;
+    border-radius: 26rpx;
+    line-height: 52rpx;
+}
+
+/* 激励气泡 */
+.rp-bubble {
+    color: #fff;
+    height: 24rpx;
+    line-height: 24rpx;
+    padding: 8rpx 12rpx;
+    border-radius: 20rpx;
+    box-sizing: content-box;
+    display: inline-block;
+    position: absolute;
+    right: 32rpx;
+    bottom: 95rpx;
+}
+
+.rp-bubble:after {
+    content: "";
+    width: 0;
+    height: 0;
+    display: block;
+    border-top: 8rpx solid #ff7700;
+    border-bottom: 8rpx solid transparent;
+    border-left: 8rpx solid transparent;
+    border-right: 8rpx solid transparent;
+    position: absolute;
+    left: 14rpx;
+    top: 38rpx;
+}
+
+/* 预定按钮 */
+.rp-btns {
+    display: flex;
+    margin-top: 32rpx;
+}
+
+.rp-btn {
+    flex: 1;
+    height: 72rpx;
+    border-radius: 8rpx;
+    text-align: center;
+    letter-spacing: -0.45rpx;
+}
+
+.left-btn {
+    line-height: 68rpx;
+    box-sizing: border-box;
+    border: 2rpx solid;
+    margin-right: 24rpx;
+}
+
+.right-btn {
+    line-height: 72rpx;
+    box-sizing: content-box;
+}

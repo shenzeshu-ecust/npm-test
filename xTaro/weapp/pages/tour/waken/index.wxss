@@ -1,0 +1,40 @@
+page,.tour_del_bg{
+  height: 100%
+}
+.tour_del_pic{
+  width: 100%;
+  height: 100%;
+}
+.tour_del_content{
+  width: 690rpx;
+  height: 744rpx;
+  position: absolute;
+  top: 290rpx;
+  left: 50%;
+  margin-left: -345rpx;
+  background: #fff;
+  border-radius: 20rpx
+}
+.tour_del_pic_bg{height: 380rpx;}
+.tour_del_pic_content{padding: 0 30rpx 0 30rpx;}
+.tour_del_price_content{font-size: 24rpx;color: #999999; padding: 30rpx 0 15rpx 0;}
+.tour_del_price{ margin-right: 20rpx;}
+.tour_del_price_yellow{color: #FF6913;}
+.tour_del_price_nb{font-size: 50rpx;color: #FF6913;}
+.tour_del_price_blue{font-size: 28rpx;color: #448AFF; margin-right: 20rpx;}
+.tour_del_title{font-size: 32rpx;
+    color: #333333;    
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; height: 84rpx;}
+.tour_del_btn{background: #FF9913;
+box-shadow: 0 2rpx 20rpx 0 rgba(255,153,19,0.40);
+border-radius: 50rpx;  display: inline-block;width: 100%; text-align: center;line-height: 88rpx;font-size: 32rpx;
+color: #FFFFFF; position: relative;}
+.tour_del_btn::before{ content:''; position: absolute; right: 40rpx;top: 26rpx;background: url(https://pic.c-ctrip.com/VacationH5Pic/group_travel/weixin/weixin_go.png)no-repeat;background-size: 20rpx auto; width: 20rpx; height: 35rpx;background-position: 0 0;}
+.tour_del_btn_bg{padding: 40rpx 70rpx 50rpx 70rpx;box-sizing: border-box;}
+.tour_logo_box{ text-align: center; position: absolute; top:60rpx; width: 100%}
+.tour_del_logo{ width: 247rpx; height: 90rpx; display: inline-block;}
+.tour_logo_text{ font-size: 32rpx; color: #fff; display: block; width: 100%; margin-top: 35rpx;}

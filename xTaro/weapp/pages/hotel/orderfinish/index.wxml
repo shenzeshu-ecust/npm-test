@@ -1,0 +1,40 @@
+<scroll-view bindscrolltolower="loadComments" scroll-y="{{true}}" class="comment-success" enable-back-to-top="{{true}}">
+    <view class="success-header">
+        <view class="title-group"><text class="wechat-font-tick"></text><text class="success-title">{{commentSuccessInfo.title}}</text></view>
+        <rich-text class="success-subtitle" nodes="{{commentSuccessInfo.subTitle}}"></rich-text>
+    </view>
+    <view class="success-body">
+        <view class="comment-list-header">
+            <text class="total-count">全部待点评({{commentSuccessInfo.totalCount}})</text>
+            <text wx:if="{{commentSuccessInfo.encourageText}}" class="encourage-text">{{commentSuccessInfo.encourageText}}</text>
+        </view>
+        <view wx:if="{{commentSuccessInfo.loadingState == 1 || commentSuccessInfo.waitCommentList.length}}" class="wait-comment-list">
+            <view wx:for="{{commentSuccessInfo.waitCommentList}}" class="wait-comment-item" style="padding-bottom: {{ item.encourageText ? '90rpx' : '24rpx' }}">
+                <view class="item-body">
+                    <view class="hotel-info">
+                        <image class="hotel-img" src="{{item.logoPicUrl}}" />
+                        <view class="hotel-wrapper">
+                            <text class="hotel-name">{{item.hotelName}}</text>
+                            <text class="check-date">{{item.arriveDate}} 至 {{item.departureDate}} 入住</text>
+                        </view>
+                    </view>
+                    <button bindtap="gotoComment" data-commentinfo="{{item}}" class="comment-btn">写点评</button>
+                </view>
+                <view wx:if="{{item.encourageText}}" class="item-encourage">
+                    <rich-text nodes="{{item.encourageText}}"></rich-text>
+                </view>
+            </view>
+            <view wx:if="{{commentSuccessInfo.loadingState == 1}}" class="loading-state cell">
+                <image mode="aspectFit" class="loading-img"></image>
+                <view class="loading-txt">加载中...</view>
+            </view>
+            <view wx:elif="{{commentSuccessInfo.loadingState == 2}}" class="loading-state cell">
+                <view class="loading-txt">已加载全部待点评</view>
+            </view>
+        </view>
+        <view wx:else class="no-comment">
+            <image src="https://pages.c-ctrip.com/hotels/wechat/img/no-comment.png" />
+            <text>太棒啦！已完成全部订单评价，期待您下次入住后再次评价~</text>
+        </view>
+    </view>
+</scroll-view>

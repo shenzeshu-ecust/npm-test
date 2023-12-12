@@ -1,0 +1,10 @@
+{ 
+  "navigationBarTitleText": "全城餐厅",
+  "usingComponents": {
+    "topFilterComponent": "../components/topFilter/topFilter",
+    "loading-component": "../components/loading/ctripLoading",
+    "food-item": "../components/foodItem/foodItem"
+  },
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black"
+}

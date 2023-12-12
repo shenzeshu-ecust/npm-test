@@ -1,0 +1,4 @@
+<!--cwx/component/timelineFloat.wxml-->
+<view class="fullscreen" catchtouchmove="true" wx:if="{{show}}">
+  <image bindtap="onCompHide" src="{{imageUrl}}"></image>
+</view>

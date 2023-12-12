@@ -1,0 +1,20 @@
+<!-- 关注公众号 -->
+<template name="free-order">
+    <view class="free-backmask active" bindtap="hideBackDrop" catchtouchmove="preventBackMove"></view>
+    <view class="free-order-modal">
+        <view class="free-order-box">
+            <view class="free-order-img">
+                <view class="free-order-title">
+                    关注公众号立即抽奖
+                </view>
+                <view class="free-order-btn" bindtap="onTextClickToFree">立即关注</view>
+                <text class="ifont-closed" bindtap="closePop"></text>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="free-order-icon">
+    <view>
+        <view class="free-icon {{hideIcon ? 'hide' : '' }}" bindtap="onIconClickToFree"></view>
+    </view>
+</template>

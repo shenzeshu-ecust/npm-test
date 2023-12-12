@@ -1,0 +1,11 @@
+<block wx:if="{{show}}">
+    <view class='share-modal' bindtouchmove="empty">
+        <view class="share-modal-mask {{data.inHidden ? 'fadeOut' : 'fadeIn'}}" catchtouchmove='empty' catchlongtap='empty' bindtap="closeModal" />
+        <view class="share-modal-container">
+            <view class='rules'>
+                <rich-text nodes="{{rules}}"></rich-text>
+            </view>
+            <view class='close-modal-btn' bindtap="closeModal"></view>
+        </view>
+    </view>
+</block>

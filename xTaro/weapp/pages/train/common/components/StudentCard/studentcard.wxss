@@ -1,0 +1,2 @@
+.banner-jinli{height: 146rpx;background: url(https://images3.c-ctrip.com/train/applets/8.17/bg_koii@3x.png) no-repeat;background-size: 100% 146rpx;margin: 20rpx;position: relative;}
+.banner-jinli .btn-go{width: 186rpx;height: 66rpx;position: absolute;right: 32rpx;top:40rpx;border-radius: 66rpx;padding: 0;line-height: 66rpx;color: #fff;font-size: 26rpx;font-weight: 600;background: -webkit-linear-gradient(top left,#FF8A5B,#FF155B);}

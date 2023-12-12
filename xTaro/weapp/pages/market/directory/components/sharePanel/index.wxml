@@ -1,0 +1,41 @@
+<!-- 分享 弹窗 -->
+<trip_popup show="{{maskType > 0}}" bind:close="handleCloseMask" l-bg-class="mask" content-align="bottom" locked="{{false}}">
+  <view class="share-bg" wx:if="{{maskType == 1}}">
+    <view class="popop_title">请选择分享方式</view>
+    <view class="close" bindtap="handleCloseMask"></view>
+    <block wx:if="{{shareConfig.pageBottomShareType == 'A'}}">
+      <view class="share-wechat" style="padding:0;">
+        <button class="item reset-button" open-type="share">
+          <view class="img share_button"></view>
+          <view>发送到好友</view>
+        </button>
+      </view>
+    </block>
+    <block wx:if="{{shareConfig.pageBottomShareType == 'B'}}">
+      <view class="share-wechat">
+        <view class="item" bindtap="openPoster" data-status="{{11}}" style="padding:0;">
+          <view class="img share_poster"></view>
+          <view>分享到朋友圈</view>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{shareConfig.pageBottomShareType == 'C'}}">
+      <view class="share-wechat">
+        <view class="item" bindtap="openPoster" data-status="{{11}}">
+          <view class="img share_poster"></view>
+          <view>分享到朋友圈</view>
+        </view>
+        <button class="item reset-button" open-type="share">
+          <view class="img share_button"></view>
+          <view>发送到好友</view>
+        </button>
+      </view>
+    </block>
+  </view>
+
+  <!--分享二维码-->
+  <scroll-view scroll-y class="share-layer" wx:if="{{maskType == 11}}">
+    <image src="{{posterImg}}" style="height: {{posterHeight}}px;" binderror="" class="img" bindtap="changeMaskType"
+      data-status="{{1}}" bindlongtap="savePic"></image>
+  </scroll-view>
+</trip_popup>

@@ -1,0 +1,144 @@
+.slotMachine1 {
+  position: relative;
+  width: 686rpx;
+  height: 296rpx;
+  background: rgb(255, 255, 255);
+  box-shadow: 0px 0px 40rpx 0px rgba(0, 0, 0, 0.07);
+  border-radius: 16rpx;
+  margin: 0 auto;
+  /* background: url(https://dimg04.c-ctrip.com/images/0zg1a12000a5m4rpv4B2A.png) 0 0 / 100% 100% no-repeat; */
+}
+
+.slotMachine1 .slotMachine__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 30rpx 0;
+  line-height: 1;
+  margin-bottom: 30rpx;
+}
+
+.slotMachine1 .slotMachine__title {
+  color: rgb(51, 51, 51);
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium;
+}
+
+.slotMachine1 .slotMachine__prize_btn {
+  color: rgb(51, 51, 51);
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular;
+}
+
+.slotMachine1 .slotMachine__box_container {
+  width: 540rpx;
+  height: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: rgb(255, 255, 255) linear-gradient(-90deg, rgb(254, 155, 110) 0%, rgb(254, 178, 131) 100%); */
+  /* border: 1rpx solid rgba(255, 255, 255, 0.63); */
+  /* box-shadow: inset 0px 1rpx 2rpx 0px rgba(255, 54, 84, 0.44); */
+  border-radius: 12rpx;
+  /* margin-left: 18rpx; */
+  background: url(https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/0315/BG.png) center / contain no-repeat;
+}
+
+.slotMachine1 .slotMachine_submit_btn {
+  position: absolute;
+  top: 105rpx;
+  right: 20rpx;
+}
+
+.slotMachine1 .slotMachine_submit_btn_img {
+  width: 190rpx;
+  height: 160rpx;
+}
+
+.slotMachine1 .slotMachine_submit_btn_text {
+  position: absolute;
+  width: 150rpx;
+  top: 96rpx;
+  right: 0;
+  text-align: center;
+  color: rgb(192, 95, 11);
+  font-size: 20rpx;
+  font-family: PingFangSC-Medium;
+}
+
+.machine_wp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500rpx;
+  height: 168rpx;
+}
+
+.slotMachine1 .machine_item_wp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 130rpx;
+  height: 120rpx;
+  position: relative;
+  /* border: 1rpx solid #6190e8; */
+  border-radius: 4rpx;
+  overflow: hidden;
+  margin-right: 30rpx;
+}
+
+.slotMachine1 .machine_item_wp:last-child {
+  margin-right: 0;
+}
+
+.slotMachine1 .machine_item_wp .machine_item_slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.slotMachine1 .machine_item_wp .machine_item_ele {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 130rpx;
+  height: 120rpx;
+  /* background-color: red; */
+}
+
+.machine_item_ele_img {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.machine_item_ele_text {
+  color: rgb(51, 51, 51);
+  font-size: 22rpx;
+  font-family: PingFangSC-Medium;
+  width: 120rpx;
+  text-align: center;
+  margin-top: 8rpx;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  /* text-overflow: ellipsis; */
+}
+
+.expand_icon {
+  display: inline-block;
+}
+
+.expand_icon .right {
+  width: 10rpx;
+  height: 10rpx;
+  transform: rotate(45deg);
+}
+
+.more_expand_icon {
+  border-top: 2rpx solid #333333;
+  border-right: 2rpx solid #333333;
+}

@@ -1,0 +1,199 @@
+
+<nav-bar navbar-data="{{navbarData}}"></nav-bar>
+<import src="./template/preLive.wxml" />
+<import src="./template/liveAskShopCard.wxml" />
+<!-- <perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float> -->
+<swiper
+      class="video-swiper"
+      vertical
+      current="{{current}}"
+      duration="{{duration}}"
+      circular="{{circular}}"
+      bindanimationfinish="bindanimationfinish"
+      bindchange="bindchange"
+  >
+  
+
+  <view style="display: flex;flex-direction: row;justify-content: center; align-items: center;">
+    <text style="position:absolute;font-size:24rpx;top:-50rpx;color:#fff">已经到顶啦</text>
+  </view>
+ 
+  <View catchtouchstart="handleTouchStart" wx:if="{{showScrollGuide && (pageType==3 || pageType == 5)}}" class="video-swiper-wrapper">
+      <image style="height:240rpx;width:240rpx"  mode="aspectFill" src="https://pages.c-ctrip.com/livestream/live/live_guide.gif"></image>
+      <!-- <canvas id="canvas" type="2d"></canvas> -->
+      <text class="video-swiper_scroll_guide">上下滑动切换直播</text>
+  </View>
+  <swiper-item style="-webkit-overflow-scrolling:touch" wx:for="{{displayList}}" wx:key="index">
+  <block wx:if="{{videoSwiperCurrent==index}}">
+    <view catchtouchmove="true" wx:if="{{commentKeybordBottom>0}}" class="video-swiper-focused" style="bottom: {{commentKeybordBottom ? (commentKeybordBottom + inputHeight+askCardHeight) : 0}}{{commentKeybordBottom?'px':'rpx'}};"></view>
+    <view class="livestream-video">
+      <!-- 视频不存在 -->
+      <block wx:if="{{pageType == 1}}">
+        <view class="livestream-homepage livestream-list" style="height:100%">
+          <view class="nodata" style="margin-top: 0;">
+            <view class="ls-nodataimg"></view>
+            <text class="ls-nodatafont">您打开的资源不存在~\n看看其他资源吧</text>
+          </view>
+        </view>
+      </block>
+      <!-- 直播中 -->
+      <block wx:if="{{pageType == 3}}">
+				<!-- height: {{liveConfig.needTop? liveConfig.height+'px' :'100%'}};margin-top:{{liveConfig.needTop?-200:0}}rpx; -->
+        <view class="video-content" style="z-index: {{loadingStatus == 3 ? 5: 0}};height: {{liveConfig.needTop? liveConfig.height+'px' :'100%'}}">
+          <block wx:if="{{loadingStatus == 1 || loadingStatus == 3}}">
+            <videoStatus loadingStatus="{{loadingStatus}}" bind:reloadWatchLive="reloadWatchLive"></videoStatus>
+          </block>
+          <block wx:if="{{pullStreamUrl && !isPayLiveRoom}}">
+          <block wx:if="{{streamType=='rtmp'}}">
+           <live-room-play liveAppID="{{liveConfig.liveAppID}}" playUrl="{{pullStreamUrl}}" 
+					 mode="live" debug="{{liveConfig.debug}}" 
+					 autoplay="true"
+					 objectFit="{{liveConfig.objectFit}}" 
+					 minCache="{{liveConfig.minCache}}" maxCache="{{liveConfig.maxCache}}" autopause="{{liveConfig.autopause}}" bindPlayEvent="videoPlay" bindNetStatus="videoNetChange" pictureInPictureMode="push" bindenterpictureinpicture="enterpictureinpicture" bindleavepictureinpicture="leavepictureinpicture">
+            </live-room-play>
+          </block>
+          <block wx:if="{{streamType=='hls'}}">
+            <video style="width:100%;height:100%" 
+						src="{{pullStreamUrl}}"  controls="{{false}}" show-progress="{{false}}" show-center-play-btn="{{false}}" 	picture-in-picture-mode="{{['push']}}"
+            show-fullscreen-btn="{{false}}"  autoplay="{{true}}" binderror="preVideoErr" 
+						object-fit="{{liveConfig.objectVideoFit}}"	
+						bindloadedmetadata="handleVideoLoadedmetadata"	></video>
+          </block>
+
+            
+          </block>
+         
+        </view>
+      </block>
+      <!-- 即将开播 -->
+      <block wx:if="{{pageType == 5}}">
+        <view class="pre-live">
+          <template is="preLive" data="{{liveTitle,isReservedShow,liveCoverImageUrl, preVideoInfo,preVideMuted}}"></template>
+        </view>
+      </block>
+      <!-- 主播信息 -->
+      <masterInfo class="master-info" master-infohotBanners="{{hotBanners}}" headerTop="{{headerTop}}"
+      master="{{master}}" totalUserCount="{{totalUserCount}}"  noticeList="{{noticeList}}" pageType="{{pageType}}" preVideoInfo="{{preVideoInfo}}"  commentKeybordBottom="{{commentKeybordBottom}}" liveID="{{item.liveId}}" bind:getUserInfo="doGetUserInfo"
+      bind:doJumpGroupChat="doJumpGroupChat" bind:doTriggerFollow="doTriggerFollow"
+      bind:openVoice="openVoice"
+      />
+      <!-- 底部动作栏 -->
+      <block wx:if="{{pageType == 3 || pageType == 5}}">
+        <view class="bottom" style="bottom: {{bottomSafe+12}}rpx">
+        <!-- 货架icon 和 货架弹框 -->
+        <goodsList class="goods-list" 
+        showGoodsListWrapper="{{showGoodsListWrapper}}"
+        env="{{env}}"
+        bind:clickHandlersCallback="clickHandlersCallback" pageType="{{pageType}}" functionSwitch="{{functionSwitch}}"
+        bind:shelvesBannerClick="shelvesBannerClick"
+        bind:reFreshGoodsList="reFreshGoodsList"
+        bind:handleDefaultRecommendCard="handleDefaultRecommendCard"
+        ></goodsList>
+      <!-- 登陆参与评论的 -->
+        <view class="inputbox" bindtap="toInputFocus">{{bottomInput}}</view>
+      <!-- 更多 -->
+        <block wx:if="{{pageType == 3}}">
+          <view class="footer-item" bindtap="changeToolPanel">
+            <image class="svg" src="https://pages.c-ctrip.com/livestream/video/white-more.png" />
+          </view>
+        </block>
+        <!-- 分享 -->
+        <button class="footer-item share" open-type="share">
+          <image class="svg" src="https://pages.c-ctrip.com/livestream/video/wechat-home-share1.png" />
+        </button>
+      <!-- 喜欢 -->
+        <doLike class="do-like" commentKeybordBottom="{{commentKeybordBottom}}"  likeCounts="{{likeCount}}"/>
+      </view>
+      </block>
+    <!-- 消息模块 -->
+    <!--12rpx: 是底部工具距离底部的距离 90rpx: 底部工具的高度  8rpx 是喜欢上面的数字图标到message-liet的间隙  看视觉搞-->
+      <block wx:if="{{pageType == 3 || pageType == 5}}">
+        <view  class="message-list" style="bottom: {{commentKeybordBottom ? (commentKeybordBottom + inputHeight+askCardHeight) : (bottomSafe+12+90+8)}}{{commentKeybordBottom?'px':'rpx'}};">
+          <liveMessage wx:if="{{item.liveId==liveID}}" class="liveMessage" bind:onLiveMessageCallBack="onLiveMessageCallBack" bind:refreshUsers="refreshUsers" bind:doCard="doCard" bind:clickHandlersCallback="clickHandlersCallback"  liveID="{{item.liveId}}" master="{{master}}" liveStatus="{{pageType}}" pageType="{{pageType}}" formInfoObjectList="{{formInfoObjectList}}" env="{{env}}" 
+          bind:showMessageActionPanel= "showMessageActionPanel"
+          commentKeybordBottom="{{commentKeybordBottom}}"
+          bind:showMessageUserPanel="showMessageUserPanel"
+          />
+        </view>
+      </block>
+
+      <recommendView id="recommend" liveID="{{item.liveId}}" source="{{source}}" displayThemes="{{displayTheme}}" commentKeybordBottom="{{commentKeybordBottom}}" bottomSafe="{{bottomSafe}}" inputHeight="{{inputHeight}}" askCardHeight="{{askCardHeight}}"bind:showRecommendCardDetail="showRecommendCardDetail"></recommendView>
+
+      <!-- 提问商卡 -->
+      <!-- <liveAskShopCard commentKeybordBottom="{{commentKeybordBottom}}" bottomSafe="{{bottomSafe}}" inputHeight="{{inputHeight}}" toAskQuestionsData="{{toAskQuestionsData}}">
+      </liveAskShopCard> -->
+      <template is="liveAskShopCard" data="{{commentKeybordBottom,bottomSafe,inputHeight,toAskQuestionsData,askCardHeight}}"></template>
+      <!-- 输入框 -->
+      <block wx:if="{{isFocused}}">
+        <view class="input-fixed" style="bottom: {{commentKeybordBottom}}px;">
+          <view class="input-wrap">
+            <input type="text" name="comment" maxlength="50" class="comment" placeholder-class="placeholder-comment" placeholder="{{bottomPlaceHolderInput}}" adjust-position="{{false}}" focus="{{isFocused}}" bindinput="commentInput" bindblur="commentBlur" bindfocus="commentFocus" value="{{inputValue}}" bindkeyboardheightchange="keybordHeightChange" bindconfirm="sendComment" confirm-type="send" />
+            <text class="input-num">{{inputValue.length}}/50</text>
+          </view>
+          <view class="send-comment {{inputValue.length ? 'on' : ''}}" catchtap="{{inputValue.length > 0 ? 'sendComment' : ''}}">
+            发送
+          </view>
+        </view>
+      </block>
+    
+      <!-- 点赞气泡区 -->
+      <view class="all-sbg"></view>
+
+      <!-- 抽奖模块 -->
+      <block wx:if="{{pageType == 3 || pageType == 5 }}">
+      <lottery class="lottery" isIphoneX="{{isIphoneX}}"  headerTop="{{headerTop}}" liveID="{{item.liveId}}" master="{{master}}"
+      bind:doPacketMasterFollow="doPacketMasterFollow"
+      bind:hideCommentInput="hideCommentInput"
+      bind:toLogin="toLogin"
+      bind:toInputFocus="toInputFocus"
+      bind:setInputValue="setInputValue"
+      bind:doPacketMasterFollow="doPacketMasterFollow"
+      bind:doTriggerFollow="doTriggerFollow"
+      />
+      <!-- 侧滑推荐直播 -->
+      <block wx:if="{{pageType == 3 || pageType == 5}}">
+        <recommendVideo class="webcast-recommend" headerTop="{{headerTop}}" liveCoverImageUrl="{{liveCoverImageUrl}}" liveID="{{item.liveId}}" windowHeight="{{windowHeight}}" bind:doRecommendListTrace="doRecommendListTrace" bind:handlePageType="handlePageType" />
+      </block>
+      <moreTool class="more-tool" pageType="{{pageType}}"  windowWidth="{{windowWidth}}" currentQuality="{{currentQuality}}" qualityList="{{qualityList}}" isIphoneX="{{isIphoneX}}"></moreTool>
+    <!-- 爆款模块 -->
+      <userPanel showUserPanel="{{showUserPanel}}" isIphoneX="{{isIphoneX}}" userPanelInfo="{{userPanelInfo}}" bind:doPanelFollow="doPanelFollow" bind:hidePanel="hidePanel" bind:jumpToUserHome="jumpToUserHome" bind:jumpToGrouChatForPannel="jumpToGrouChatForPannel"></userPanel>
+    <!-- 关注引导弹窗 -->
+      <block wx:if="{{showFollowGuide}}">
+        <followGuide class="follow-guide" showFollowGuide="{{showFollowGuide}}" liveID="{{item.liveId}}" isIphoneX="{{isIphoneX}}" userPanelInfo="{{master}}" bind:doGuideFollow="doGuideFollow" bind:hideFollowGuide="hideFollowGuide"></followGuide>
+      </block>
+    <!-- 付费弹框 -->
+      <block wx:if="{{showPopBox}}">
+        <popBox showPopBox="{{showPopBox}}" popBoxContent="{{popBoxContent}}" liveID="{{item.liveId}}" bind:hidePopBox="hidePayRoomPopBox" bind:confirmAction="jumpToPayRoom"></popBox>
+      </block>
+      </block>
+
+<!-- 回复面板 -->
+      <actionSheet 
+      actions="{{[{name:'复制'}]}}"
+      visible="{{showActionPanel}}"
+      bottomSafe="{{bottomSafe}}" 
+      show-cancel 
+      bind:cancel="hideReportPanel" 
+      bind:click="handleClickReportPanelItem"
+      >
+      </actionSheet>
+    </view>
+    <!-- 高斯模背景图 -->
+    <!-- <view wx:if="{{showVideoImage}}" style="position: fixed; top:0;bottom:0;left:0;right:0;z-index:1;" class="livestream-video-bg">
+    </view> -->
+    <!-- loading -->
+    <!-- <view wx:if="{{showVideoImage}}" style="position: fixed; top:0;bottom:0;left:0;right:0;z-index:2;display: flex; align-items: center;justify-content: center;">
+    <image class="livestream-video-loading" mode="aspectFill" src="https://pages.c-ctrip.com/livestream/live/earth_rotate_loading.gif" /> -->
+    <!-- </view> -->
+  </block>
+  <block wx:else>
+    <view class="livestream-video" style="background:url('https://pages.c-ctrip.com/livestream/live/live_cover_placeholder.jpg') no-repeat;background-size: cover;"></view>
+  </block>
+
+
+  </swiper-item>
+  <!-- <view style="display: flex;flex-direction: row;justify-content: center; align-items: center;">
+    <text style="position:absolute;bottom:-2100px;color:#fff">已经到底啦</text>
+  </view> -->
+</swiper>
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

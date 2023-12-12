@@ -1,0 +1,210 @@
+@import "../../common/css/common.wxss";
+
+.service-group {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.service-item {
+    flex-direction: column;
+    align-items: center;
+    width: 19%;
+    margin: 16rpx 0;
+    position: relative;
+}
+
+.service-item .service-icon {
+    width: 80rpx;
+    height: 80rpx;
+    margin-bottom: 16rpx;
+}
+
+.service-item .service-icon-box{
+    width: 72rpx;
+    height: 72rpx;
+}
+
+.highlight-service-group {
+    justify-content: space-between;
+    padding: 0 24rpx;
+    margin-top: 40rpx;
+}
+
+.highlight-service {
+    background: #fff;
+    box-shadow: 0 4rpx 16rpx 1rpx rgba(0,0,0,0.06);
+    border-radius: 54rpx;
+    background-size: cover;
+    height: 108rpx;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32rpx 0 100rpx;
+}
+
+.service-item .service-label {
+    position: absolute;
+    top: -36rpx;
+    right: 0;
+    background: linear-gradient(90deg, rgb(255, 156, 10) 0%, rgb(255, 119, 0) 100%);
+    border-radius: 12rpx 18rpx 18rpx 0;
+    padding: 0 8rpx;
+    font-size: 20rpx;
+    color: #fff;
+    line-height: 28rpx;
+}
+
+.item-end {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.common-height {
+    height: 148rpx;
+}
+
+.common-wrap {
+    padding:  0 45rpx;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.common-serivce {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.wrap-icon {
+    width: 20%;
+    height: 150rpx;
+    margin-top: 10rpx;
+}
+
+.new-common-icon {
+    width: 80rpx;
+    height: 80rpx;
+    margin-bottom: 21rpx;
+}
+
+.new-common-font {
+    height: 32rpx;
+    line-height: 32rpx;
+    color: #222;
+    font-size: 24rpx;
+}
+
+.zero-wifi-font-color {
+    color: rgba(0,0,0,0.4);
+}
+
+.common-position {
+    padding: 32rpx 0 40rpx 0;
+    display: flex;
+    justify-content: center;
+}
+
+.dot-wrapper {
+    height: 8rpx;
+    width: 68rpx;
+    position: relative;
+}
+
+.new-bottom-bar {
+    width: 100%;
+    height: 100%;
+    background: #8d8d8d;
+    border-radius: 8.5rpx;
+    opacity: 0.4;
+}
+
+.new-dot-position {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #0078f5;
+    border-radius: 8.5rpx;
+    height: 8rpx;
+}
+
+.dot-final {
+    left: unset;
+    right: 0;
+}
+
+.wrap {
+    flex-wrap: wrap;
+    padding: 0 20rpx;
+}
+
+.label-common {
+    height: 28rpx;
+    line-height: 28rpx;
+    position: absolute;
+    top: -7rpx;
+    left: 50%;
+    font-size: 20rpx;
+    color: #fff;
+    text-align: center;
+}
+
+
+.two-label {
+    width: 68rpx;
+    background: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/twoLabel.png") left top/100% 100% no-repeat;
+}
+
+.three-label {
+    width: 80rpx;
+    background: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/ThreeLabel.png") left top/100% 100% no-repeat;
+}
+
+.four-label {
+    width: 98rpx;
+    background: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/fourLabel.png") left top/100% 100% no-repeat;
+}
+
+.pb40 {
+    padding-bottom: 40rpx;
+}
+
+.label-anim0 {
+    animation-name: scaleAnimation0;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+.label-anim1 {
+    animation-name: scaleAnimation1;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes scaleAnimation0 { 
+    0% {
+        transform: scale(1);
+    }
+    25%, 50%, 75% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleAnimation1 { 
+    0%, 25% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75%,100% {
+        transform: scale(0);
+    }
+}

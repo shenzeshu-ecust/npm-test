@@ -1,0 +1,90 @@
+<template name="mask">
+  <!--蒙层 -->
+  <view class="pop-mask" wx:if="{{masktype != -1}}"></view>
+
+  <view class="pop-wrap box" wx:if="{{masktype == 'boxLoading'}}"></view>
+
+  <view class="pop-login" wx:if="{{masktype == 'login'}}">
+    <view class="pop-light"></view>
+    <view class="pop-wrap small">
+      <view class="pop-smhead"></view>
+      <view class="title">您有积分待领取</view>
+      <view class="sub-title">赶快来开启积分之旅 兑换好礼</view>
+      <view class="pop-btn">
+        <button class="btn longer"  bindtap="toLogin">登录领取</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="pop-dice" wx:if="{{masktype == 'diceGift'}}">
+    <view class="pop-light"></view>
+    <view class="pop-wrap middle">
+      <view class="pop-midhead">偶遇骰子机会</view>
+      <view class="tips">骰子次数+1</view>
+      <view class="description">骰子次数用完时，做任务可增加骰子次数</view>
+      <view class="pop-btn">
+        <view class="btn grey" bindtap="closeFloat">待会再玩</view>
+        <view class="btn orange" bindtap="rollDice">再掷一次</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="pop-energy" wx:if="{{masktype == 'energyGift'}}">
+    <view class="pop-light"></view>
+    <view class="pop-wrap big">
+      <view class="pop-bighead">积分礼包</view>
+      <view class="icon-energy"></view>
+      <view class="tips margin">+{{energyAdd}}积分</view>
+      <view class="pop-btn">
+        <view class="btn longer" bindtap="receiveExtEnergy">开心收下</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="pop-wrap exchange" wx:if="{{masktype == 4}}">
+    <view class="pop-close" bindtap="closeFloat"></view>
+    <view class="pop-pic">
+      <image src="{{imageUrl}}"></image>
+    </view>
+    <view class="pop-name">{{awardName}}</view>
+    <view class="pop-num">{{price}}<text class="f-sm">积分</text></view>
+    <view class="pop-btn">
+      <view class="btn blue" bindtap="handleExchange" data-id="{{awardId}}" data-img="{{imageUrl}}" data-name="{{awardName}}" data-price="{{price}}">确认兑换</view>
+    </view>
+    <view class="pop-remain">
+      <text class="c-white">可用积分：</text><text class="c-orange">{{energyTotal}}</text>
+    </view>
+  </view>
+
+  <view class="pop-exchange" wx:if="{{masktype == 5}}">
+    <view class="pop-light"></view>
+    <view class="pop-wrap exchange success">
+      <view class="pop-close" bindtap="closeFloat"></view>
+      <view class="pop-name">兑换成功</view>
+      <view class="pop-subname">可在"我的奖品"里查看</view>
+      <view class="pop-pic">
+        <image src="{{imageUrl}}"></image>
+      </view>
+      <view class="pop-btn">
+        <view class="btn white" bindtap="handleGoTargetUrl" data-url="pages/market/directory/game/myPrize">立即查看</view>
+      </view>
+      <view class="pop-remain">
+        <text class="c-white">可用积分：</text><text class="c-orange">{{energyTotal}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="pop-energy" wx:if="{{masktype == 'ruleList'||masktype == 'noticeList'}}">
+    <view class="pop-light m-t-530"></view>
+    <view class="pop-wrap bigger">
+      <view class="rule-title">{{masktype == 'ruleList'?'活动规则':'公告通知'}}</view>
+      <view class="rule-list">
+        <view class="rule-item" wx:for="{{list}}">{{item}}</view>
+      </view>
+      <view class="pop-btn">
+        <view class="btn long" bindtap="closeFloat">我知道了</view>
+      </view>
+    </view>
+  </view>
+
+</template>

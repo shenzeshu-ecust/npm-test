@@ -1,0 +1,16 @@
+<view class="login-discount-content {{siteType == 2 ? 'list-component' : ''}}">
+  <view class="package-tip">
+    <image class="packet-icon" src="{{loginGuidance.icon}}"></image>
+    <view class="tip {{siteType == 2 ? 'list-tip' : ''}}">
+      <view>
+        <text class="special-text">{{loginGuidance.focusText && loginGuidance.focusText.focusText}}</text>
+        {{loginGuidanceText}}
+      </view>
+    </view>
+  </view>
+  <view class="receive" wx:if="{{siteType == 1}}" bindtap="handleToLogin">
+    <text class="login">立即登录</text>
+    <view class="arrow"></view>
+  </view>
+  <view class="login-btn" wx:if="{{siteType == 2}}" bindtap="handleToLogin">立即登录</view>
+</view>

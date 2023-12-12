@@ -1,0 +1,251 @@
+/* pages/countryList/index.wxss */
+search-module {
+	position: relative;
+	display: block;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	background-color: #EFEFEF;
+	z-index: 99;
+}
+.search-module_ico {
+	position: absolute;
+	top: 17rpx;
+	left: 50%;
+	width: 25rpx;
+	height: 25rpx;
+	transform: translateX(-440%);
+}
+.search-module_ico:before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: #B2B2B2;
+	font-size: 25rpx;
+	line-height: 1;
+	overflow: hidden;
+}
+.search-module_ico_focus {
+	left: 24rpx;
+	transform: translateX(0);
+}
+.search-module_input {
+	height: 56rpx;
+	font-size: 28rpx;
+	line-height: 60rpx;
+	background-color: #fff;
+	box-sizing: border-box;
+	border-radius: 5px;
+	padding-left: 50rpx;
+	margin: 16rpx;
+}
+.search-module_input_focus {
+	font-size: 26rpx;
+	color: #B2B2B2;
+	padding-left: 50%;
+	text-indent: -4em;
+	width:300rpx;
+}
+.search-module_input-f {
+	margin-right: 100rpx;
+	border-right: 60rpx solid #fff;
+}
+.search-module_clear {
+	position: absolute;
+	top: 14rpx;
+	right: 120rpx;
+}
+.search-module_cancel {
+	position: absolute;
+	top: 14rpx;
+	right: 16rpx;
+	font-size: 32rpx;
+	color: #099FDE;
+}
+.search-list {
+	display: block;
+	overflow: hidden;
+	margin-bottom: -1px;
+	padding-left: 32rpx;
+	color: #666;
+	background-color: #fff;
+	border-top: 1px solid #E5E5E5;
+}
+.search-list_item {
+	height: 88rpx;
+	font-size: 28rpx;
+	line-height: 98rpx;
+	text-indent: 34rpx;
+	border-bottom: 1px solid #E5E5E5;
+}
+.search-list_item .travel-list-country{
+  display: block;
+}
+.search-list_txt {
+	color: #099FDE;
+}
+.city-module_name {
+	display: block;
+	width: 100%;
+	height: 88rpx;
+	box-sizing: border-box;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	line-height: 88rpx;
+	font-size: 32rpx;
+	color: #333;
+	border-bottom: 1px solid #E5E5E5;
+}
+.sel_num_wrap{
+	position:fixed;
+	width: 48rpx;
+	right: 0;
+  top: 304rpx;
+	bottom:0; 
+  text-align: center;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  color:#19A0F0; 
+  line-height: 1.4;
+}
+.sel_num_wrap .sel_num{
+  display:flex; 
+  align-items: center;
+  justify-content: center; 
+  font-size:22rpx;
+}
+.sel_num_wrap .sel_num.selected{
+  width:28rpx;
+  height:28rpx;
+  border-radius:50%;
+  background:#19A0F0;
+  color:#fff;
+}
+.sel_num_wrap .sel_num.bigChart{
+  position:absolute;
+  right:60rpx;
+  background: url(//pic.c-ctrip.com/platform/h5/component/bigChartBg.png) no-repeat 0 0; 
+  background-size: 48px auto; 
+  color:#fff;
+  width:96rpx;
+  height:80rpx;
+  font-size:50rpx;
+  padding-right: 20rpx;
+  box-sizing: border-box; 
+} 
+.serchArea{
+  padding-right: 80rpx; 
+  background: #ECECEC;
+  padding: 20rpx;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  border-bottom:1rpx solid #ccc;
+  position:relative;
+  z-index:11;
+}
+.serchArea .inputWrap { 
+  height: 68rpx;
+  line-height: 68rpx;
+  padding-left:24rpx; 
+  padding-right:10rpx; 
+  border-radius:12rpx;
+  flex: 1;
+  background-color: #fff;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+}
+.serchArea .inputWrap .ico-search{
+  color:#ccc;
+}
+.serchArea .inputWrap .ico-search::before{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+}
+.serchArea .inputWrap input {
+  height: 100%;
+  line-height: 60rpx;
+  border-radius:8rpx;
+  caret-color: #19A0F0;
+  padding: 0 20rpx;
+  color:#222;
+  font-family: PingFangSC-Regular, Arial, Helvetica, sans-serif;
+  font-size:28rpx;
+}
+.serchArea .inputWrap input::-webkit-input-placeholder{ 
+  color:#999; 
+}
+.serchArea .inputWrap .clearValue{
+  background-image: url(//pic.c-ctrip.com/platform/h5/component/common_componentv7.152@2x.png);
+  background-repeat: no-repeat;
+  background-size: 56rpx auto;
+  background-position: 10rpx -718rpx;
+  width: 68rpx;
+  height: 68rpx;
+}
+.serchArea .inputWrap .cancel { 
+  font-size: 30rpx;
+  color: #19A0F0;
+  background: none;
+  border: 0;
+  padding: 10rpx 10rpx 10rpx 20rpx; 
+} 
+.travel-country-lists{
+  position:fixed;
+	top:108rpx;
+	left:0;
+	right:40rpx;
+	bottom:0;
+	background-color: #fff;
+}
+.travel-country-lists .travel-country-list-hd{ 
+  line-height: 56rpx;
+  background-color: #F6F6F6;
+  position: relative;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  color: #666;
+  font-size: 26rpx; 
+} 
+.travel-country-lists .travel-country-li{
+  position: relative;
+  border-bottom: 1rpx solid #e5e5e5;
+  line-height: 66rpx;
+  padding: 10rpx 60rpx 10rpx 0;
+  margin-left:30rpx;  
+  box-sizing:border-box;
+  color: #333;
+  font-size: 32rpx; 
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.travel-country-lists .travel-country-li:last-of-type{
+  border-bottom: none;
+}
+.travel-country-lists .travel-country-li .travel-list-country{
+  flex:1;
+}
+.travel-country-lists .travel-country-li .travel-list-num{
+  color:#999;
+}
+.travel-country-lists .travel-country-li .icon-selected-area{
+  background-image: url(//pic.c-ctrip.com/platform/h5/component/common_componentv7.152@2x.png);
+  background-repeat: no-repeat;
+  background-size: 46rpx auto;
+  width: 40rpx;
+  height: 40rpx;
+  background-position: 6px -356rpx;
+  margin-left: 46rpx;
+  visibility: hidden;
+}
+.travel-country-lists .travel-country-li.active .icon-selected-area{
+  visibility: visible;
+}
+.travel-country-lists .travel-country-li.active .travel-list-country,.travel-country-lists .travel-country-li.active .travel-list-num{
+    color:#19A0F0;
+} 

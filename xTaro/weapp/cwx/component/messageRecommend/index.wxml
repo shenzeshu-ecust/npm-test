@@ -1,0 +1,65 @@
+<perinfo-protect-float></perinfo-protect-float>
+<view wx:if="{{showMask}}" class="mask"></view>
+<view wx:else class="body-view">
+  <!-- 一个设置模块 -->
+  <view  class="settings_group">
+    <view class="settings_header desc_text">新消息通知</view>
+    <!-- 一类设置 -->
+    <view class="settings_list">
+      <!-- 一条设置 -->
+      <view class="settings_item">
+        <view class="item_desc">
+          <view class="item_desc_sup">服务信息</view>
+          <view class="item_desc_sub desc_text">行程、订单类消息</view>
+        </view>
+        <view class="item_switch">默认开启</view>
+      </view>
+      
+      <view class="settings_item">
+        <view class="item_desc">
+          <view class="item_desc_sup">促销信息</view>
+          <view class="item_desc_sub desc_text">精选优惠、活动类消息</view>
+        </view>
+        <switch checked="{{marketSwitch}}" bindchange="switchChange" color="{{switchColor}}" data-type="marketSwitch" />
+      </view>
+    </view>
+  </view>
+
+<!-- 一个设置模块 -->
+<view class="settings_group">
+  <view class="settings_header desc_text">推荐设置</view>
+  <!-- 一类设置 -->
+  <view class="settings_list">
+    <!-- 一条设置 -->
+    <!-- <view class="settings_item">
+      <view class="item_desc">
+        <view class="item_desc_sup">附近推荐</view>
+        <view class="item_desc_sub desc_text">基于当前地理位置的推荐消息</view>
+      </view>
+      <switch checked="{{localRecommendSwitch}}" bindchange="switchChange" color="{{switchColor}}" data-type="localRecommendSwitch" />
+    </view> -->
+    
+    <view class="settings_item">
+      <view class="item_desc">
+        <view class="item_desc_sup">个性推荐</view>
+        <view class="item_desc_sub desc_text">基于用户个人喜好的推荐消息</view>
+      </view>
+      <switch checked="{{personalRecommendSwitch}}" bindchange="switchChange" color="{{switchColor}}" data-type="personalRecommendSwitch" />
+    </view>
+  </view>
+</view>
+
+<!-- 一个设置模块 -->
+<view class="settings_group">
+  <view class="settings_header desc_text">隐私相关</view>
+  <!-- 一类设置 -->
+  <view class="settings_list">
+    <!-- 一条设置 -->
+    <view class="settings_item arrow agreement" bindtap="gotoAgreement">
+      <view class="item_desc">
+        <view class="item_desc_sup">{{agreementText}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+</view>

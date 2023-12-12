@@ -1,0 +1,21 @@
+<block>
+     <scroll-view class="filter-view-banner"  id="item_goods_banner" bindscroll="bannerScroller" scroll-x="true" enable-flex enhanced scroll-anchoring>
+        <block wx:for="{{filteredGoodsList}}" wx:key="{{item.goodsId}}">
+          <view class="filter-view-item" id="{{item.goodsId}}" data-id="{{item.goodsId}}" data-item="{{item}}" data-index="{{index}}" data-coupon="{{item.couponInfo}}" data-salestatus="{{item.saleStatus}}" bindtap="shelvesBannerClick">
+            <view class="banner-view-content {{index === filteredGoodsList.length - 1 ? '':'right'}}">
+              <image class="banner-view-img" src="{{ item.imageUrl }}" mode="aspectFill"></image>
+              <block wx:if="{{item.explainStatus == 2 }}">
+                <view class="banner-explanation">
+                <image class="list-img" src="https://pages.c-ctrip.com/livestream/video/explaining.gif">
+                </image>
+                <view class="ask-text">讲解中</view>
+              </view>
+              </block>
+              <view class="tag-warpper">
+                <view class="tag">{{ item.index }}</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+</block>

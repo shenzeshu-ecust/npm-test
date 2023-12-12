@@ -1,0 +1,40 @@
+@import '../common/common.wxss';
+/* 返回按钮 */
+.jump-box {
+    text-align: center;
+    font-size: 34rpx;
+    margin-top: 132rpx;
+}
+.jump-box .back-btn {
+    border: 1rpx solid #2698F7;
+    padding: 10rpx 16rpx;
+    border-radius: 8rpx;
+    display: inline-block;
+    color: #2698F7;
+    margin-top: 20rpx;
+}
+.comment-con {
+    margin: 16rpx 24rpx 37rpx;
+    background: #fff;
+    border-radius: 24rpx;
+    padding: 32rpx 32rpx 36rpx;
+}
+/* 点评笑脸部分*/
+.comment-rating:last-of-type {
+    border-bottom: 1rpx solid #e5e5e5;
+}
+.comment-rating {
+    display: flex;
+}
+.rating-title {
+    color: #111;
+    font-size: 28rpx; 
+    margin-right: 32rpx;
+}
+/* 用户输入部分 */
+.main-comment {
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1rpx solid #e6e6e6;
+    padding: 15rpx 0 33rpx;
+}
+

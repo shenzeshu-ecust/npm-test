@@ -1,0 +1,90 @@
+<nav-bar navbar-data="{{navbarData}}"
+  bindback="onBack"></nav-bar>
+<view class="container">
+    <scroll-view scroll-y="true"
+      class="coupon-list-content">
+        <view class="coupon-unused"
+          bindtap="onUnUseCoupon">
+            <text class="unused-title">不使用优惠券</text>
+            <icon size="23"
+              class='coupon-select {{unUseChecked ? "icon-checked-round" : "icon-check-round"}} right' />
+        </view>
+        <view wx:for="{{couponList}}"
+          wx:for-index="index"
+          wx:key="{{index}}"
+          class="coupon-item">
+            <view class="coupon-item-top {{item.canCheck ? '' : 'disabled'}}"
+              bindtap="onSelectCoupon"
+              data-index="{{index}}"
+              data-id="{{item['couponCode']}}">
+                <view wx:if="{{item.deductionAmount}}"
+                  class="price-container">
+                    <text class="symbol">¥</text>
+                    <text class="price">{{item.deductionAmount || ''}}</text>
+                </view>
+                <view class="title-container">
+                    <text class="display-name">{{item.displayName || ''}}</text>
+                    <view class="use-time">
+                        <text>有效期至</text>
+                        <text>{{item.couponEndDate}}</text>
+                    </view>
+                </view>
+                <view class="button-container">
+                    <icon size="23"
+                      class='coupon-select {{item.checked ? "icon-checked-round" : "icon-check-round"}} right' />
+                </view>
+            </view>
+            <view class="separator-line"></view>
+            <view class="coupon-item-bottom"
+              bindtap="openRemark"
+              data-index="{{index}}">
+                <block wx:if="{{item.canCheck}}">
+                    <view wx:if="{{!item.showRemark}}"
+                      class="coupon-remark {{item.remark.length > 30 ? 'min-coupon-remark' : '' }}">{{item.remark}}</view>
+                    <view wx:else
+                      class="coupon-remark-max">{{item.remark}}</view>
+                    <view wx:if="{{item.remark.length > 30 && !item.showRemark}}"
+                      class="arrow-down-content">
+                        <icon size="23"
+                          class="icon-arrow-down right" />
+                    </view>
+                    <view wx:if="{{item.showRemark}}"
+                      class="arrow-down-content">
+                        <icon size="23"
+                          class="icon-arrow-up right" />
+                    </view>
+                </block>
+                <block wx:else>
+                    <view wx:if="{{!item.showMessage}}"
+                      class="coupon-unused-message {{item.unUsedMessage.length > 18 ? 'min-coupon-remark' : '' }}">
+                        <icon size="24"
+                          class='icon-font icon-info' />
+                        <text class="title">不可用原因：</text>
+                        <text class="message}">{{item.unUsedMessage}}</text>
+                    </view>
+                    <view wx:else
+                      class="coupon-unused-message-max">
+                        <icon size="24"
+                          class='icon-font icon-info' />
+                        <text class="title">不可用原因：</text>
+                        <text class="message}">{{item.unUsedMessage}}</text>
+                    </view>
+                    <view wx:if="{{item.unUsedMessage.length > 18 && !item.showMessage}}"
+                      class="arrow-down-content">
+                        <icon size="23"
+                          class="icon-arrow-down right" />
+                    </view>
+                    <view wx:if="{{item.showMessage}}"
+                      class="arrow-down-content">
+                        <icon size="23"
+                          class="icon-arrow-up right" />
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view wx:if="{{isIPhoneX}}"
+          style="margin-bottom:68rpx;"></view>
+    </scroll-view>
+    <view class="view-check"
+      bindanimationend="viewReadyHandle"></view>
+</view>

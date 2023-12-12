@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+       "normal": "./styleComps/normal",
+       "sharePanel": "../components/sharePanel/index"
+    }
+}

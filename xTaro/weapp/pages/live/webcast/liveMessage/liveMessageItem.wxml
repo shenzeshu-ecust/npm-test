@@ -1,0 +1,56 @@
+
+<template name="liveMessageItem">
+    <block wx:if="{{liveMessage.messageType == 15}}">
+      <!-- bindlongpress="_showMessageReportPanel" -->
+        <view bindlongpress="_showMessageActionPanel" 
+        data-message="{{liveMessage}}" class="message-item" style="{{liveMessage.bkgColor?'background-color : '+liveMessage.bkgColor :''}}">
+            <!-- <image wx:if="{{levelCode && levelCode.length > 0 && (role != 1 && role != 2)}}" class="user-level" src="{{'https://pages.c-ctrip.com/livestream/live/live_stream_user_level_' + levelCode + '.png'}}"/> -->
+            <view class="userName" style="{{liveMessage.nameColor?'color : '+liveMessage.nameColor :''}}" bindtap="_showMessageUserPanel" data-uid="{{fromUid}}">
+                {{nickName}}
+            </view>
+            <view class="userNameMark" style="{{liveMessage.nameColor?'color : '+liveMessage.nameColor :''}}">
+                {{nickName ? '：' : ''}}
+            </view>
+            <view class="message" style="{{liveMessage.msgColor?'color : '+liveMessage.msgColor:''}}">
+                送出{{liveMessage.presentName}}
+            </view>
+            <view class="message-giftinfo">
+                <image class="message-gift" src="{{liveMessage.presentImg}}"></image>
+                <text class="message-giftcount">x{{liveMessage.presentCount}}</text>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+      <!-- bindlongpress="_showMessageReportPanel" -->
+        <view bindlongpress="_showMessageActionPanel" class="message-item" data-message="{{liveMessage}}" style="{{liveMessage.bkgColor?'background-color : '+liveMessage.bkgColor :''}}">
+            <block wx:if="{{liveMessage.messageType == 106}}">
+                <view class="userName" bindtap="_showMessageUserPanel" data-uid="{{fromUid}}" style="{{liveMessage.nameColor?'color : '+liveMessage.nameColor :''}}">
+                    {{nickName}}
+                </view>
+                <view class="message" style="{{liveMessage.msgColor?'color : '+liveMessage.msgColor:''}}">
+                    {{liveMessage.message}}
+                </view>
+            </block>
+            <block wx:elif="{{liveMessage.messageType == 110 || liveMessage.messageType == 19}}">
+                <view class="message" style="color: {{liveMessage.msgColor ? liveMessage.msgColor : '#BFE0FC'}}">
+                    {{liveMessage.message}}
+                </view>
+            </block>    
+            <block wx:else>
+                <!-- <image wx:if="{{levelCode && levelCode.length > 0 && (role != 1 && role != 2) && (liveMessage.messageType == 3 || liveMessage.messageType == 109 || liveMessage.messageType == 8 || liveMessage.messageType == 9 || liveMessage.messageType == 207 || liveMessage.messageType == 1 || liveMessage.messageType == 15)}}" class="user-level" src="{{'https://pages.c-ctrip.com/livestream/live/live_stream_user_level_' + levelCode + '.png'}}"/> -->
+                <!-- <view class="userName" bindtap="_showMessageUserPanel" data-uid="{{fromUid}}" style="{{liveMessage.nameColor?'color : '+liveMessage.nameColor :''}}">
+                    {{nickName}}
+                </view> -->
+                <view class="userName1 {{liveMessage.atUserName?'replay':''}}" bindtap="_showMessageUserPanel" data-uid="{{fromUid}}" style="{{liveMessage.nameColor?'color : '+liveMessage.nameColor :''}}">
+                   {{nickName}}{{liveMessage.atUserName?' 回复 '+ liveMessage.atUserName:''}}
+                   <view class="userNameMark1 {{liveMessage.atUserName?'replay':''}}" style="{{liveMessage.nameColor?'color : '+liveMessage.nameColor :''}}">
+                    {{nickName ? '：' : ''}}
+                  </view>
+                <mp-html  class="message1" content="{{liveMessage.message}}"></mp-html>
+                </view>
+               
+                <!-- <cemoji-converter class="message" inputObj='{{liveMessage.inputObj}}'></cemoji-converter> -->
+            </block>
+        </view>
+    </block>
+</template>

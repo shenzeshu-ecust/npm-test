@@ -1,0 +1,49 @@
+<view class="content-wrap">
+  <view class="m-item">
+    <view class="m-pic">
+      <image src="{{awardPic}}"></image>
+    </view>
+    <view class="m-detail">
+      <view class="m-name">{{awardName}}</view>
+    </view>
+  </view>
+  <view class="info">
+      <view class="info-name">收货人姓名</view>
+      <input class="info-input {{disabled ? 'disabled': ''}}" 
+        placeholder-class="holder" 
+        bindinput="handleChange"
+        data-type="name"
+        placeholder="请输入收货人姓名"
+        type="text" 
+        disabled="{{disabled}}"
+        value="{{name}}"/>
+  </view>
+  <view class="info">
+      <view class="info-name">联系电话</view>
+      <input class="info-input {{disabled ? 'disabled': ''}}" 
+              placeholder-class="holder" 
+              placeholder="请输入联系电话"
+              bindinput="handleChange"
+              data-type="phone" 
+              type="text" 
+              disabled="{{disabled}}"
+              value="{{phone}}"/>
+  </view>
+  <view class="info textarea">
+      <view class="info-name">收货地址</view>
+      <textarea class="info-input {{disabled ? 'disabled': ''}}" placeholder-class="holder" 
+                auto-height="{{true}}"
+                placeholder="请输入详细地址"
+                bindinput="handleChange"
+                data-type="address"
+                type="text"
+                maxlength="{{-1}}" 
+                disabled="{{disabled}}"
+                value="{{address}}"/>
+  </view>
+</view>
+<view class="btn-save" bindtap="saveAddress" wx:if="{{!disabled}}">提交收货信息</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>
+

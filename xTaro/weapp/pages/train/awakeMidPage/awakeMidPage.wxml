@@ -1,0 +1,12 @@
+<view class="share-page">
+  <block>
+      <view class="btn-box">
+          <image src="{{imgUrl}}"></image>
+          <view class="btn-title">{{title}}</view>
+          <view class="btn-subtitle">{{subtitle}}</view>
+          <button class="btn-spring" bindtap="toOtherApp">{{btnTxt}}</button>
+      </view>
+  </block>
+</view>
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

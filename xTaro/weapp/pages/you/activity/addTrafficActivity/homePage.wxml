@@ -1,0 +1,589 @@
+<nav-bar navbar-data="{{navbarData}}" bindback="onBack" bindhome="onHome"></nav-bar>
+<scroll-view class="body-container {{showAllTasksPop?'fixed':''}}" scroll-y="true" enable-back-to-top="{{true}}" lower-threshold="100" bindscrolltolower="getWaterfallListMore" scroll-into-view='{{toViewDom}}'>
+
+
+
+  <!-- 20230327开始AB实验，实验B， 下面是定制逻辑，走服务端分流 -->
+  <view class="addTrafficBody" style="background-image: url('{{options.pageSource==4?'https://images3.c-ctrip.com/marketing/2023/02/single_pic/fold-bg.png':'https://images3.c-ctrip.com/marketing/2023/03/cash/testB_bg_02.png'}}');">
+    <view class="swiper-wrap swiper_wrap_B" wx:if="{{rollInfoList.length>0}}">
+      <view class="icon-notice"></view>
+      <swiper class="swiper" autoplay="true" interval="3000" vertical="true" circular="true">
+        <block wx:for="{{rollInfoList}}" wx:key="*this">
+          <swiper-item class="swiper-item">
+            <text>{{item.first}}</text><text class="c-yellow c-yellow-B {{!isAndroid && 'B_ios_bold'}}">{{item.second}}</text>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <block wx:if="{{showSaveTips}}">
+      <view class="saveTipsUp"></view>
+      <view class="saveTips">点击···收藏活动，下次访问更方便</view>
+    </block>
+    <image class="coinLeft coinLeft_B" wx:if="{{!options.pageSource||options.pageSource!=4}}" style='margin-top: "12px"' src='https://images3.c-ctrip.com/marketing/2023/03/cash/gold_icon_01.png' />
+    <!-- <image class="coinRight" style='margin-top: "16px"'  src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/n-coin.png'/> -->
+    <!-- <image class="handImg" wx:if="{{!options.pageSource||options.pageSource!=4}}" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/thrHand.png' />              -->
+    <view class="topInfo managerB_topInfo">
+      <view class="rulesAndSubscribeBox rulesAndSubscribeBox_B">
+        <view id='subscribeBox' class="subscribeBox_B" bindtap="getSubscribetrack">
+          <block wx:if="{{subscribeId}}">
+            <taskList class='task-dingyue' tempid='{{tempId}}' compid='{{subscribeId}}' bind:getTaskList="getDingyueList" bind:completeTask="complateSubscribeTask" />
+          </block>
+          <!-- 任务自动领取助手 -->
+          <block wx:if="{{taskAssistTempid}}">
+            <taskAssist tempid='{{taskAssistTempid}}' compid='{{taskAssistCompid}}' bind:batchReceiveResult="batchReceiveResult" />
+          </block>
+        </view>
+        <view class="rulesBox rulesBox_B" bindtap="showRulePop">活动规则</view>
+      </view>
+      <!-- 现金余额 -->
+      <!-- <view class="cashDetail_container">
+          <view class="cashDetail_left">
+              <span class="balanceText">余额</span>
+              <image class="moneyIcon" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/coinInconThree.png'/>
+              <view class="cashDatail">
+                      <view class="{{cashBalanceNew ? 'cashBalancePro' : ''}}">{{cashBalance}}</view>
+                      <view class="cashBalanceNow" wx:if="{{cashBalanceNew}}">{{cashBalanceNew}}</view>
+              </view>
+              <span class="unit">元</span>
+          </view>
+          <view class="cashDetail_right">
+              <span class="withDrawalText">提现秒到账</span>
+              <span class="goToWithdrawal" bindtap="toWithdrawalPage">去提现</span>
+              <span class="leftIcon">></span>
+          </view>
+      </view> -->
+      <!-- 实验B的新增逻辑，去转账浮标 -->
+      <view class="{{(userInfo && userInfo.showRedPoint) ? 'go_start_buoy' : 'go_start_buoy_no'}}" bindtap="toWithdrawalPage">
+        <view class="balanceText_box">
+          <view class="balanceText_count">
+            <view class="{{cashBalanceNew ? 'cashBalanceCoinPro' : ''}}">{{cashBalance}}</view>
+            <view class="cashBalanceNow" wx:if="{{cashBalanceNew}}">{{cashBalanceNew}}</view>
+          </view>
+          <text class="balanceText_unit">元</text>
+        </view>
+      </view>
+      <view class="homepage-task-icon one">
+          <taskList
+            tempid="{{iconTaskTempid}}"
+            compid="{{iconTaskCompid}}"
+            channelCodeStr="{{iconTaskChannelCodeOne}}"
+          />
+      </view>
+      <view class="homepage-task-icon two">
+          <taskList
+            tempid="{{iconTaskTempid}}"
+            compid="{{iconTaskCompid}}"
+            channelCodeStr="{{iconTaskChannelCodeTwo}}"
+          />
+      </view>
+      <!-- 邀请好友分现金 test -->
+      <view class="inviteFriendsBox inviteFriendsBox_B" wx:if="{{!options.pageSource||options.pageSource!=4}}">
+        <view class="wu-tag wu_tag_B"></view>
+        <image src="https://images3.c-ctrip.com/marketing/2023/03/cash/invite_title_icon_01.png" mode="widthFix" class="inviteFriendFirstLine inviteFriendFirstLine_B" />
+        <span class="inviteFriendSecLine inviteFriendSecLine_B" style="font-weight: {{isAndroid?'bold':'normal'}}">
+          <block wx:if="{{userInfo.finishInviteAmount}}">
+            <image src="https://images3.c-ctrip.com/marketing/2023/03/cash/invite_title_icon_02.png" mode="heightFix" class="inviteFriendSecLine_must_B" />
+            <view class="twentyCashNum twentyCashNum_B" wx:if="{{userInfo.finishInviteAmount}}">
+              <view class="twentyCashNum_count_B">{{userInfo.finishInviteAmount}}</view>
+              <image src="https://images3.c-ctrip.com/marketing/2023/03/cash/invite_title_icon_03.png" mode="heightFix" class="inviteFriendUnit inviteFriendUnit_B inviteFriendSecLine_unit_B" />
+            </view>
+          </block>
+          <block wx:else>
+            <image src="https://images3.c-ctrip.com/marketing/2023/03/cash/icon_title_doudi.png" mode="heightFix" class="inviteFriendSecLine_must_coin" />
+          </block>
+        </span>
+        <text class="inviteFriendThridLine inviteFriendThridLine_B">邀携程老用户也能领，可无门槛提现</text>
+        <view class="inviteFriendImgBox inviteFriendImgBox_B">
+          <view class="inviteFriendImgOne" wx:for="{{assistFriendsList}}" wx:key="index">
+            <view class="inviteFriendCircle inviteFriendCircle_B {{item.headImage ? 'no_border': ''}}" bindtap="{{item.headImage?'':'shareAction'}}" data-site="4">
+              <image class="userHeadImg userHeadImg _B" wx:if="{{item.headImage}}" src='{{item.headImage}}' />
+              <image class="inviteFriendImgAdd inviteFriendImgAdd_B" src='https://images3.c-ctrip.com/marketing/2023/03/cash/icon_add_02.png' />
+            </view>
+            <view wx:if="{{userInfo.inviteAmountList && userInfo.inviteAmountList.length>0}}" class="inviteFriendCoupon inviteFriendCoupon_B">{{userInfo.inviteAmountList[index]}}</view>
+            <view wx:elif="{{index!=3}}" class="inviteFriendCoupon inviteFriendCoupon_B">优惠券</view>
+            <view wx:elif="{{index==3}}" class="inviteFriendCoupon inviteFriendCoupon_B">
+              <span wx:if="{{userInfo.finishInviteAmount}}">{{userInfo.finishInviteAmount}}元</span>
+              <span wx:if="{{!userInfo.finishInviteAmount}}">现金</span>
+            </view>
+            <!-- <view class="inviteFriendImgText" wx:if="{{item.headImage}}">已获得</view> -->
+            <view class="inviteFriendImgText_empty"></view>
+            <span class="inviteFriendImgText" wx:if="{{!item.headImage}}"> </span>
+            <view wx:if="{{!isWxAuthed && !item.headImage}}" bindtap="saveUserInfoToShareAction" data-site="4" class="get_red_envelopes_btn2 invite"></view>
+          </view>
+        </view>
+        <!-- isSuccess -->
+        <block wx:if="{{userInfo.finishInviteAmount}}">
+          <view class="inviteFriendBtn inviteFriendBtn_B inviteFriendBtn_subscribe_B {{!isSubscription ? 'isSubscription_1' : 'isSubscription_0'}}" style="font-weight: {{isAndroid?'bold':'normal'}};margin-top:{{isAndroid?'84rpx':'80rpx'}}" wx:if='{{userInfo.friendAssistTask.assistFriends.length == activitySettings.assistMaxNum}}' data-taskId="{{dingyueTaskId}}" bindtap="{{isSubscription?'':'handleDingyue'}}">{{isSubscription?'已设置明天再来提醒':'提醒我明天再来'}}
+          </view>
+        </block>
+        <block wx:else>
+          <view class="p-relative" wx:if="{{windControl == 0}}">
+            <view class="inviteFriendBtn inviteFriendBtn_B" style="font-weight: {{isAndroid?'bold':'normal'}};margin-top:{{isAndroid?'94rpx':'90rpx'}}" data-site="3">立即邀请</view>
+          </view>
+        </block>
+        <view class="p-relative" wx:if='{{userInfo.friendAssistTask.assistFriends.length != activitySettings.assistMaxNum}}'>
+          <view class="inviteFriendBtn inviteFriendBtn_B" style="font-weight: {{isAndroid?'bold':'normal'}};margin-top:{{isAndroid?'94rpx':'90rpx'}}" bindtap="shareAction" data-site="3">
+            立即邀请({{userInfo.friendAssistTask.assistFriends.length || 0}}/{{activitySettings.assistMaxNum}})
+          </view>
+        </view>
+        <view wx:if="{{!isWxAuthed && userInfo.friendAssistTask.assistFriends.length != activitySettings.assistMaxNum}}" bindtap="saveUserInfoToShareAction" data-site="3" class="get_red_envelopes_btn2 p-invite"></view>
+        <view class="countdown countdown_B" wx:if="{{countdown}}">
+          <countdown countdowns="{{countdown}}" bindmyevent="onMyEvent" />
+        </view>
+      </view>
+      <view class="foldInviteBox" wx:if="{{options.pageSource==4}}">
+        <view class="icon-tag"></view>
+        <view class="top-title">惊喜任务：邀4位好友必得{{userInfo.finishInviteAmount||'0'}}元</view>
+        <view class="f-invite">
+          <view class="f-left">
+            <view class="head-wraper">
+              <view class="h-item {{item.headImage?'new-border':''}}" style="background-image: url('{{item.headImage}}')" wx:for="{{assistFriendsList}}" wx:key="index">
+                <view class="h-plus" wx:if="{{!item.headImage}}">+</view>
+                <view class="h-price" wx:if="{{userInfo.inviteAmountList[index]}}">{{userInfo.inviteAmountList[index]}}</view>
+                <view bindtap="{{item.headImage?'':'shareAction'}}" data-site="4" class="head-auth"></view>
+                <view wx:if="{{!isWxAuthed && !item.headImage}}" bindtap="saveUserInfoToShareAction" data-site="4" class="head-auth"></view>
+              </view>
+            </view>
+            <view class="h-tips">邀请携程老用户也能领，<text class="c-red">无门槛提现</text></view>
+          </view>
+          <view class="f-right">
+            <view class="f-subtitle">现金红包</view>
+            <view class="f-btn" bindtap="{{isWxAuthed?'shareAction':'saveUserInfoToShareAction'}}" data-site="3" wx:if='{{userInfo.friendAssistTask.assistFriends.length != activitySettings.assistMaxNum}}'></view>
+            <view class="f-btn disabled" wx:else>明日再来</view>
+            <view class="f-desc">{{remainTimeObj.hour}}:{{remainTimeObj.min}}:{{remainTimeObj.second}}后刷新</view>
+          </view>
+        </view>
+      </view>
+      <view></view>
+      <view class="task-wrapper task_wrapper_B {{isAndroid?'task_wrapper_B_android':'task_wrapper_B_ios'}}" id="noteTask">
+        <image src="https://images3.c-ctrip.com/marketing/2023/03/cash/task_panel_bg_01.png" class="task_wrapper_B_bg" />
+        <!-- 任务组件 -->
+        <view id='browseNote' class="browseNote_B" wx:if="{{pageBrowseNoteId}}">
+          <view bindtap="showBlacklistTipsPop" class="taskDialog taskDialog_B" wx:if="{{userInfo.taskStatus == 4}}"></view>
+          <taskList extraData='{{extraData}}' clazz="browseNote" id="taskComp" tempid='{{pageTaskListTempId}}' compid='{{pageBrowseNoteId}}' bind:clickTodo="browseNoteClickTodo" bind:getTaskList="getTaskList" hideUpdateAvatar='{{true}}' />
+          <!-- <view class="intro" wx:if="{{showTaskIntro && options.task_sort}}">
+              <view>邀好友立得现金</view>
+          </view> -->
+        </view>
+        <!-- 更多任务提示 -->
+        <view class="moreTasks moreTasks_B {{isAndroid?'':'moreTasks_B_bottom'}}" wx:if="{{showMoreTask}}" bindtap="getMoreTasks">
+          <view class="moreTasksText moreTasksText_B {{isAndroid?'':'B_ios_bold'}}">继续领现金</view>
+          <image src="https://images3.c-ctrip.com/marketing/2023/03/cash/icon_right_arrow.png" class="downIcon downIcon_B"></image>
+        </view>
+        <view class="{{isAndroid?'moreTasks_empty_B':'moreTasks_empty_B_ios'}}"></view>
+      </view>
+    </view>
+    <!-- 信息流组件  滚动组件 需绑定bindscrolltolower -->
+    <view id='waterfallBox' class="waterfallBox_B">
+      <waterfall class="{{class}}" cStyle="{{style}}" id="waterfall" source="{{source}}" ignoreLocation="{{ignoreLocation}}" callback='{{waterfallCallback}}'>
+      </waterfall>
+    </view>
+  </view>
+  <!-- AB实验结束， 以下是历史逻辑 -->
+
+</scroll-view>
+<!-- 规则弹框 -->
+<view class="backgroundPop" wx:if="{{showRule}}" catchtouchmove="true">
+  <view class="activityRulesBox">
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/ruleIcon.png" class="activityRulesIcon"></image>
+    <view class="activityRulesTitle">规则说明</view>
+    <scroll-view scroll-y="true" lower-threshold="100" class="activityRulesContent">
+      <rich-text nodes="{{activitySettings.activityRule}}"></rich-text>
+    </scroll-view>
+    <view class="activityRulesButton" bindtap="closeRulePop">我知道了</view>
+  </view>
+</view>
+<!-- 领取红包封面 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showNotLoginRedEnvelopes}}">
+  <view class="RedEnvelopesBox loginNewPop">
+    <view class="RedEnvelopesFrom">
+      <image src='{{userInfo.inviterHeadImg}}' alt="" class="fromIcon"></image>
+      <view class="fromName">{{userInfo.inviterNickName||""}}</view>
+    </view>
+    <view class="notLoginRedEnvelopesTitle">来帮我助力！</view>
+    <view class="notLoginRedEnvelopesTitle m-t-20">送您最高<span class="big_text"><span class="big_number">88</span>元</span>现金红包</view>
+    <!-- <view class="notLoginRedEnvelopesSubTitle">或优惠券</view> -->
+    <!-- <block wx:if="{{showLoginedAssistInfo}}">
+            <view class="notLoginRedEnvelopesTitle m-t-20">送您<span class="big_text">{{assistAmount}}元</span>现金红包</view> 
+            <view class="notLoginRedEnvelopesSubTitle">和{{couponName}}</view>
+        </block>
+        <block wx:else>
+            <view class="notLoginRedEnvelopesTitle m-t-20">送您<span class="big_text">最高<span class="big_number">88</span>元</span>现金红包</view> 
+            <view class="notLoginRedEnvelopesSubTitle">和优惠券</view>
+        </block> -->
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/receiveButton.gif" class="get_red_envelopes_btn" bindtap="login"></image>
+    <view wx:if="{{!isWxAuthed}}" bindtap="{{isLogin?'saveUserInfoToAssist':'saveUserInfoTologin'}}" class="get_red_envelopes_btn2"></view>
+    <!-- <button wx:elif="{{!canIUse && !isWxAuthed}}" open-type="getUserInfo" bindgetuserinfo="saveUserInfoTologin" class="get_red_envelopes_btn2"></button> -->
+    <view wx:if="{{showLoginedAssistInfo}}" class="RedEnvelopesButtonsTips">领取红包即可助力成功哦</view>
+  </view>
+</view>
+<!-- 助力红包||企微助力成功||携程红包 助力成功 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showRedEnvelopes}}">
+  <view class="RedEnvelopesBox RedEnvelopesBox2 assistSuccessPop">
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closeIcon.png" alt="" class="RedEnvelopesCloseIcon" bindtap="closeAssistSuccess"></image>
+    <view class="RedEnvelopesSubTitle">助力成功！</view>
+    <view class="RedEnvelopesFrom">
+      <image src='{{userInfo.inviterHeadImg}}' alt="" class="fromIcon" wx:if="{{userInfo.inviterHeadImg}}"></image>
+      <view class="fromName">{{userInfo.inviterNickName||""}}</view>
+      <!-- <view class="couponName">送您优惠券</view> -->
+      <view class="couponName">送您{{isQwAssistSuccess?'现金':'优惠券'}}</view>
+    </view>
+    <view class="redNumber" wx:if="{{isQwAssistSuccess}}"><span class="f-big">{{wecomCashAmount}}</span>元</view>
+    <view class="RedEnvelopesSubTitle {{isQwAssistSuccess?'m-t-40':'m-t-60'}}" wx:if="{{redEnvelopesInfo.couponName}}">{{isQwAssistSuccess?'和'+redEnvelopesInfo.couponName:redEnvelopesInfo.couponName}}</view>
+    <!-- <view class="redEnvelopesTitle">送您<span class="get_big_text"><span class="get_big_number">{{redEnvelopesInfo.amount|| redEnvelopesInfo.cashBalance}}</span>元</span>现金红包</view> 
+        <view class="RedEnvelopesSubTitle">和{{redEnvelopesInfo.couponName}}</view> -->
+    <view class="RedEnvelopesButtons" bindtap="toSubscribe">开心收下</view>
+    <!-- <view class="RedEnvelopesButtonsTips">领取红包即可助力成功哦</view> -->
+  </view>
+</view>
+
+<!-- 客态浏览笔记任务完成弹窗 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showGuestNotePop}}">
+  <view class="RedEnvelopesBox RedEnvelopesBox2 assistSuccessPop notePop">
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closeIcon.png" alt="" class="RedEnvelopesCloseIcon" bindtap="closeJoinEnterpriseWechatPop"></image>
+    <view class="noteTitle">恭喜！{{lookDialogType=='notes'?'笔记':lookDialogType=='rank'?'榜单':lookDialogType=='pocket'?'攻略':''}}浏览完成</view>
+    <view class="noteSubtitle" style="font-weight: {{isAndroid?'normal':'bold'}}">送您<text class="red">{{lookNotesInfo.lookNotesAmount}}元现金</text></view>
+    <view class="couponName m-t-20" wx:if="{{lookNotesInfo.finishTask}}">去做任务领更多现金</view>
+    <view class="couponName" wx:if="{{!lookNotesInfo.finishTask}}">邀好友看{{lookDialogType=='notes'?'笔记':lookDialogType=='rank'?'榜单':lookDialogType=='pocket'?'攻略':''}}再得</view>
+    <view class="redNumber" wx:if="{{!lookNotesInfo.finishTask}}"><span class="f-big">{{lookNotesInfo.inviteLookNotesAmount}}</span>元现金</view>
+    <view class="RedEnvelopesButtons" bindtap="closeJoinEnterpriseWechatPop">知道了</view>
+  </view>
+</view>
+
+<!-- 主态邀请好友浏览笔记任务完成弹窗 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showOwnerNotePop}}">
+  <view class="RedEnvelopesBox RedEnvelopesBox2 assistSuccessPop notePop">
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closeIcon.png" alt="" class="RedEnvelopesCloseIcon" bindtap="closeJoinEnterpriseWechatPop"></image>
+    <view class="noteTitle">
+      <view>好友</view>
+      <view class="notePic">
+        <view class="noteItem" wx:for="{{lookNotesInfo.headImgList}}" wx:key="index">
+          <image src="{{item}}" />
+        </view>
+      </view>
+      <view>完成{{lookDialogType=='notes'?'笔记':lookDialogType=='rank'?'榜单':lookDialogType=='pocket'?'攻略':''}}浏览</view>
+    </view>
+    <view class="noteSubtitle" style="font-weight: {{isAndroid?'normal':'bold'}}">到账<text class="red">{{lookNotesInfo.getAmount}}元现金</text></view>
+    <view class="couponName">{{lookNotesInfo.finishTask?'做更多任务，继续领现金':'去邀请好友再得'}}</view>
+    <view class="redNumber" wx:if="{{!lookNotesInfo.finishTask}}"><span class="f-big">{{lookNotesInfo.inviteAmount}}</span>元现金</view>
+    <view class="RedEnvelopesButtons" bindtap="closeJoinEnterpriseWechatPop">{{lookNotesInfo.finishTask?'去做任务':'去邀好友'}}</view>
+  </view>
+</view>
+
+<!-- 好友助力提示弹框 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showRedEnvelopesTips}}">
+  <view class="RedEnvelopesBox RedEnvelopesBox2">
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closeIcon.png" alt="" class="RedEnvelopesCloseIcon" bindtap="closeRedEnvelopes" />
+    <view class="RedEnvelopesHelperNames">
+      好友
+      <view class="RedEnvelopesHelperIcons">
+        <image src='{{item.headImage}}' alt="" class="helperIcon" vx:key='index' wx:for='{{succeeAssistedFriends.assistFriends}}' />
+      </view>
+      接受了邀请
+    </view>
+    <view class="RedEnvelopesHelpWhat">昨日帮你领到现金</view>
+    <view class="RedEnvelopesHelpNumber">{{succeeAssistedFriends.totalAmount}}<span>元</span></view>
+    <view class="RedEnvelopesButtons" bindtap="getMoreRedEnvelopes">继续领现金</view>
+  </view>
+</view>
+<!-- 助力满四人提示弹框 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showNumberIsFull}}">
+  <view class="persuadeStayBox">
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/ruleIcon.png" alt="" class="persuadeStayIcon" />
+    <view class="persuadeStayTitle">好友红包已分完，快去做任务领现金吧</view>
+    <view class="buttonList">
+      <view class="shareAcceptButton" bindtap="toReceiveCash">去领现金</view>
+    </view>
+  </view>
+</view>
+<!-- 黑名单提示弹框 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showBlacklistTips}}">
+  <view class="promptBox">
+    <view class="persuadeStayTitle">暂时无法参与活动</view>
+    <view class="persuadeStayContent">账号存在异常，暂无法参与活动</view>
+    <view class="persuadeStayButton" bindtap="closePromptPop">好的</view>
+  </view>
+</view>
+<!-- 消息订阅提示弹框 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showSubscribePop}}">
+  <view class="promptBox">
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closeIcon.png" alt="" class="RedEnvelopesCloseIcon" bindtap="closePromptPop" />
+    <view class="persuadeStayTitle">开启推送服务</view>
+    <view class="persuadeStayContent">开启后，提醒再来领现金</view>
+    <view class="persuadeStayButton" data-taskId="{{dingyueTaskId}}" bindtap="handleDingyue"> 好的</view>
+  </view>
+</view>
+<!-- 分享成功提示弹框 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showShareSuccess}}">
+  <view class="persuadeStayBox">
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closeIcon.png" alt="" class="RedEnvelopesCloseIcon" bindtap="closePromptPop" />
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/ruleIcon.png" alt="" class="persuadeStayIcon" />
+    <view class="persuadeStayTitle">分享成功</view>
+    <view class="persuadeStayContent">
+      <view>记得提醒好友助力哦～今日邀请到4位好友助力，必得<span>{{finishInviteAmount}}元</span>现金</view>
+    </view>
+    <view class="buttonList">
+      <view class="shareAcceptButton" bindtap="closePromptPop" wx:if="{{isSubscription}}">继续邀好友，领现金</view>
+      <view class="shareAcceptButton" wx:if="{{!isSubscription}}" data-taskId="{{dingyueTaskId}}" bindtap="handleDingyue">打开助力成功提醒</view>
+    </view>
+  </view>
+</view>
+<!-- 滑块验证弹框 class="backgroundPop"-->
+<view catchtouchmove="true" wx:if="{{showSlipVerificationPop}}">
+  <!-- <view class="RedEnvelopesBox slipVerificationBox">
+        <view class="slipVerificationTitle">请完成拼图验证</view>
+        <view id="verification-box"> -->
+  <captcha id="captcha" settings="{{settings}}"></captcha>
+  <!-- </view>
+    </view> -->
+</view>
+<!-- 分享到朋友圈||微信好友弹框 -->
+<view class="sharePop" wx:if="{{showSharePop}}">
+  <view class="shareTop" bindtap="closeSharePop"></view>
+  <view class="shareBox {{showSharePop?'heightMove':''}}">
+    <button open-type="share" class="shareFriendButton" bindtap="inviteFriends">
+      <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/weChatIcon.png" alt="" class="shareIcon" />
+      <view>分享给好友</view>
+    </button>
+    <button class="shareFriendButton" bindtap="inviteTimeline">
+      <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/outLine.png" alt="" class="shareIcon" />
+      <view>分享到朋友圈</view>
+    </button>
+  </view>
+</view>
+<!-- 保存海报弹框 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showInviteTimelineSuccess}}" bindtap="closeInviteTimelinePop">
+  <view class="posterBox">
+    <image src="{{posterImg}}" alt="" class="posterIcon" />
+    <view class="posterText">图片已保存到<span>本地相册</span></view>
+    <view class="posterText">快去<span>朋友圈</span>分享海报领现金吧</view>
+  </view>
+</view>
+<!-- 收藏弹框 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showFavoriteCard}}">
+  <view class="addFavoriteCard">
+    <view class="addFavoriteCardTitile">记得每天都来领现金哦</view>
+    <view class="addFavoriteCardsubTitle">微信入口：我的-收藏</view>
+    <image class="addFavoriteCardImg" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/AndroidIcon.png'></image>
+    <view class="addFavoriteCardButton" bindtap="closePromptPop">我知道了</view>
+  </view>
+</view>
+<!-- 返回拦截弹框 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showRetainPop}}">
+  <view class="addFavoriteCard">
+    <view class="bottom-close" bindtap="closePromptPop"></view>
+    <view class="addFavoriteCardTitile">记得每天都来领现金哦</view>
+    <view class="addFavoriteCardsubTitle">
+      固定入口：携程小程序「首页-热门活动」</view>
+    <image class="addFavoriteCardImg" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/iosIcon.png'></image>
+    <view class="addFavoriteCardButton" bindtap="closeRetainPop" wx:if="{{isSubscription}}">明天再来领现金</view>
+    <view class="button-wrap red" wx:else>
+      <view class="btn-white" bindtap="closeRetainPop">返回</view>
+      <view class="btn-red" data-taskId="{{dingyueTaskId}}" bindtap="handleDingyue">明天再来领现金</view>
+    </view>
+  </view>
+</view>
+<!-- 发布任务完成弹框 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showPostSuccessPop}}">
+  <view class="RedEnvelopesBox RedEnvelopesBox2">
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closeIcon.png" alt="" class="RedEnvelopesCloseIcon" bindtap="closePostSuccessPop" />
+    <view class="RedEnvelopesHelpWhat">恭喜！笔记发布成功</view>
+    <view class="RedEnvelopesHelpNumber RedEnvelopesColor"><span>送您</span>{{publishArticleAmount}}<span class="cashUnit">元</span><span>现金</span></view>
+    <view class="RedEnvelopesButtons" bindtap="closePostSuccessPop">开心收下</view>
+  </view>
+</view>
+<!-- 企业微信审核通过弹框 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showJoinEnterpriseWechatPop}}">
+  <view class="RedEnvelopesBox RedEnvelopesBox2">
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closeIcon.png" alt="" class="RedEnvelopesCloseIcon" bindtap="closeJoinEnterpriseWechatPop" />
+    <view class="RedEnvelopesHelpWhat">携程助手添加成功</view>
+    <view class="RedEnvelopesColor"><span>送您</span>{{addGroupAmount}}<span class="cashUnit">元</span><span>现金</span></view>
+    <view class="RedEnvelopesButtons" bindtap="closeJoinEnterpriseWechatPop">开心收下</view>
+  </view>
+</view>
+<!-- 全部任务浮层弹框 -->
+<!-- <view class="backgroundPop backgroundPopTask" hidden="{{!showAllTasksPop}}">
+  <view style="flex: 1"></view>
+  <view class="allTasks">
+    <view class="allTasksTittle">
+      <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closePng.png" alt="" class="allTasksCloseIcon" bindtap="closePromptPop" />
+      做任务领现金
+    </view>
+    <view class="pop-task-content">
+      <taskList clazz="browseNote" tempid='{{taskListTempId}}' compid='{{browseNoteId}}' extraData='{{extraData}}' bind:clickTodo="browseNoteClickTodo" hideUpdateAvatar='{{true}}' />
+    </view>
+  </view>
+</view> -->
+
+<!-- 通用任务弹窗 -->
+<view class="withdrawalDetailBg" catchtouchmove="true" wx:if="{{showCommonTaskPop && !isLogin}}">
+  <view class="successRecivedText">
+    <text class="firstLine" style="font-weight: {{isAndroid?'bold':'normal'}}">恭喜</text>
+  </view>
+  <text class="withdrawalText" style="font-weight: {{isAndroid?'bold':'normal'}}">- 抽到福利任务 -</text>
+  <image mode="widthFix" class="lightCircle" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-lightn.png' />
+  <view class="redCardBox">
+    <image mode="widthFix" class="lineCardBox" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-lineShape.png' />
+    <image mode="widthFix" class="pinkCardBg" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-pinkCard.png' />
+    <image mode="widthFix" class="smallCardsBox" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/smallCars.png' />
+    <view class="userInfoBox">
+      <!-- <view class="userHeadImgPop">
+                <image mode="widthFix" class="userImg" src="{{userInfo.headImage}}"></image>
+            </view> -->
+      <text class="userNameText">每日任务福利</text>
+    </view>
+    <view class="withdrawalTextNo2" style="font-weight: {{isAndroid?'bold':'normal'}}">{{taskInfo.taskName}}必得</view>
+    <view class="moneyText">
+      <block wx:if="{{isLogin}}">
+        <text class="moneyNum" style="font-weight: {{isAndroid?'bold':'normal'}}">{{taskInfo.awardAmount}}</text>
+      </block>
+      <block wx:else>
+        <text class="moneyNum" style="font-weight: {{isAndroid?'bold':'normal'}}" wx:if="{{taskInfo.noLoginMaxAmount == taskInfo.noLoginMinAmount}}">{{taskInfo.noLoginMinAmount}}</text>
+        <text class="moneyNum" style="font-weight: {{isAndroid?'bold':'normal'}}" wx:else>{{taskInfo.noLoginMinAmount}}~{{taskInfo.noLoginMaxAmount}}</text>
+      </block>
+      <text class="moneyUnit">元现金</text>
+    </view>
+    <!-- <image mode="widthFix" class="coinLeftPop" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-coinL.png'/> -->
+    <image mode="widthFix" class="coinRightPop" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s_coin.png' />
+    <!-- <image mode="widthFix" class="handsImg" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-hand.png'/> -->
+    <text class="countDownTextPop">可提现至银行卡</text>
+    <text class="inviteFriendsText" style="font-weight: {{isAndroid?'bold':'normal'}}" bindtap="taskClick">{{taskInfo.buttonTxt || '登录并参与'}}</text>
+  </view>
+  <view class="closeBox" bindtap="closeCommonPop" wx:if="{{isLogin}}">
+    <image mode="widthFix" class="closeBtn" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closePng.png' />
+  </view>
+</view>
+
+<view class="withdrawalDetailBg" catchtouchmove="true" wx:if="{{showCommonTaskPop && isLogin}}">
+  <view class="successRecivedText">
+    <text class="firstLine" style="font-weight: {{isAndroid?'bold':'normal'}}">恭喜</text>
+  </view>
+  <text class="withdrawalText" style="font-weight: {{isAndroid?'bold':'normal'}}">- 抽到福利任务 -</text>
+  <image mode="widthFix" class="lightCircle" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-lightn.png' />
+  <view class="redCardBox qwPop">
+    <view class="withdrawalTextNo2 m-t-126" style="font-weight: {{isAndroid?'bold':'normal'}}">
+      {{taskInfo.taskName}}
+      必得<text class="red">{{taskInfo.awardAmount}}元</text>现金
+    </view>
+    <view class="pressTips">
+      长按识别二维码，<text class="red">领取奖励</text>
+    </view>
+    <view class="qrcode">
+      <image src="{{groupEntryActiveQrCode}}" bindlongpress="qrcodeUbt" show-menu-by-longpress></image>
+    </view>
+    <text class="qwCash">可提现至银行卡</text>
+  </view>
+  <view class="closeBox" bindtap="closeCommonPop">
+    <image mode="widthFix" class="closeBtn" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closePng.png' />
+  </view>
+</view>
+
+
+<!-- 添加企微携程福利官 -->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showAddQwPop}}">
+  <view class="promptBox qw">
+    <image src="https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closeIcon.png" alt="" class="RedEnvelopesCloseIcon" bindtap="closeAddQwPop" />
+    <image src="https://images3.c-ctrip.com/marketing/2022/07/you/pop-qw.png" alt="" class="pop-qw" bindtap="closePromptPop" />
+    <view class="persuadeStayTitle">添加携程福利官</view>
+    <view class="persuadeStayContent">即可 <span class="red-bg">为好友助力</span>，还能领<span>{{wecomCashAmount}}元</span>现金</view>
+    <view class="persuadeStayButton red" bindtap="login" data-site="addQw"> 去助力</view>
+  </view>
+</view>
+
+<!-- 未添加企微携程福利官-->
+<view class="backgroundPop" catchtouchmove="true" wx:if="{{showNotAddQwPop}}">
+  <view class="promptBox">
+    <view class="persuadeStayTitle">助力未成功</view>
+    <view class="persuadeStayContent">稍后还在“加企微”任务完成助力</view>
+    <view class="button-wrap">
+      <view class="btn-white" bindtap="closeRedEnvelopes">知道了</view>
+      <view class="btn-red" bindtap="login" data-site="addQwAgain">去完成任务</view>
+    </view>
+  </view>
+</view>
+
+<!-- 无门槛弹窗  -->
+<view class="giudeToShareCarcBox threshold {{guideShareStep==1?'center':''}}" wx:if="{{showShareGuideMain}}">
+  <block wx:if="{{guideShareStep==1}}">
+    <view class="pop-back" catchtap="navBack" wx:if="{{!isLogin}}"></view>
+    <view class="userInfoBox">
+      <view class="userHeadImgShareBox">
+        <image class="userImg" src="{{userInfo.headImage || 'https://pages.c-ctrip.com/livestream/tripshoot/default_avatar.png'}}" />
+      </view>
+      <span class="userNameText">{{userInfo.nickName || '携程用户'}}</span>
+    </view>
+    <view class="successRecivedText">
+      <span class="firstLine">领取成功</span>
+      <span class="secondLine">恭喜！抽到幸运用户特权</span>
+    </view>
+    <span class="withdrawalText">无门槛提现红包</span>
+    <view class="redEnvlopsBox">
+      <image class="firstRedEnvlop" bindtap="choseNolimitRedCard" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/smallRedEnv.png' />
+      <image class="secondRedEnvlop" bindtap="choseNolimitRedCard" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/largeRedEnv.png' />
+      <image class="thirdRedEnvlop" bindtap="choseNolimitRedCard" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/smallRedEnv.png' />
+    </view>
+    <span class="autoChoseText" wx:if="{{isLogin}}">{{autoChoseCount}}秒后自动选择</span>
+    <image class="smallCardsBox" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/smallCars.png' />
+    <view class="btn-login" wx:if="{{!isLogin}}" bindtap="choseNolimitRedCard"></view>
+  </block>
+  <block wx:if="{{guideShareStep === 2 || guideShareStep === 3}}">
+    <view class="successRecivedTextMiddle">
+      <span class="firstLine">恭喜抽中</span>
+    </view>
+    <span class="withdrawalTextMiddle">- 必得现金红包模式 -</span>
+  </block>
+  <image wx:if="{{guideShareStep === 2}}" class="secondRedEnvlopMiddle" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/largeRedEnv.png' />
+  <image wx:if="{{guideShareStep === 3 || guideShareStep === 4}}" mode="widthFix" class="lightCircle" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-lightn.png' />
+  <block wx:if="{{guideShareStep === 3}}">
+    <image mode="widthFix" class="lightLine" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/smallCars.png' />
+    <view class="redCardBox">
+      <image mode="widthFix" class="lineCardBox" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-lineShape.png' />
+      <image class="pinkCardBg" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-pinkCard.png' />
+      <image mode="widthFix" class="smallCardsBox" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/smallCars.png' />
+      <span class="withdrawalTextNo2">邀请{{activitySettings.assistMaxNum}}位好友必得</span>
+      <view class="moneyText">
+        <span class="moneyNum">{{userInfo.finishInviteAmount}}</span>
+        <span class="moneyUnit">元</span>
+      </view>
+      <image mode="widthFix" class="coinLeft2" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-coinL.png' />
+      <image mode="widthFix" class="coinRight2" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s_coin.png' />
+      <view class="countDownText2">{{remainTimeObj.hour}}:{{remainTimeObj.min}}:{{remainTimeObj.second}}后结束</view>
+      <view class="assistBox">
+        <view class="assistItem" wx:for="{{assistFriendsList}}" bindtap="{{item.headImage?'':'shareAction'}}" data-site="2" data-type="pop">
+          <view class="addBox">
+            <image class="addImg" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/n-addIcon.png' />
+            <image class="userHeadImg" wx:if="{{item.headImage}}" src="{{item.headImage}}" />
+          </view>
+          <view class="rewardText">
+            <span wx:if="{{userInfo.inviteAmountList && userInfo.inviteAmountList.length>0}}">{{userInfo.inviteAmountList[index]}}</span>
+            <span wx:elif="{{index == 3}}">{{userInfo.finishInviteAmount?userInfo.finishInviteAmount+'元':'现金'}}</span>
+            <span wx:else>优惠券</span>
+          </view>
+          <view class="inviteText">{{item.headImage ? "已获得" : "邀第"+(index+1)+"位"}}</view>
+          <view wx:if="{{!isWxAuthed && !item.headImage}}" bindtap="saveUserInfoToShareAction" data-type="pop" class="get_red_envelopes_btn2 invite"></view>
+        </view>
+      </view>
+      <view class="inviteFriendsText" bindtap="shareAction" data-site="1" data-type="pop">邀请<span class="boldNum">{{activitySettings.assistMaxNum}}</span>位好友可领</view>
+      <view wx:if="{{!isWxAuthed}}" bindtap="saveUserInfoToShareAction" data-type="pop" class="get_red_envelopes_btn2 btn-invite"></view>
+    </view>
+  </block>
+  <view class="shareToGroupCard" wx:if="{{guideShareStep === 4}}">
+    <image mode="widthFix" class="headImg" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-head.png' />
+    <span class="firstLineText">邀请到{{activitySettings.assistMaxNum}}位好友必得</span>
+    <span class="secondLineText">分享到群聊，更快领到</span>
+    <view class="moneyText">
+      <span class="moneyNum">{{userInfo.finishInviteAmount}}</span>
+      <span class="moneyUnit">元</span>
+    </view>
+    <span class="thirdText">现金红包</span>
+    <span class="countDownText3">{{remainTimeObj.hour}}:{{remainTimeObj.min}}:{{remainTimeObj.second}}后结束</span>
+    <image mode="widthFix" class="inviteButton" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/button.png' />
+    <button open-type="share" data-site="shareToGroup" class="popShare"></button>
+  </view>
+  <view class="closeBox" bindtap="closeGuideShare" wx:if="{{isLogin && (guideShareStep === 3||guideShareStep === 4)}}">
+    <image class="closeBtn" src='https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/closePng.png' />
+  </view>
+</view>
+
+
+<task-count-down></task-count-down>

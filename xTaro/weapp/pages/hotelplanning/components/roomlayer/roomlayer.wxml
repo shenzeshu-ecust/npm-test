@@ -1,0 +1,258 @@
+<import src='../roomlist/templates/pricedetail/pricedetail.wxml' />
+<view hidden="{{!isShown}}" class="cmask" bindtap="closeRoomLayer" catchtouchmove="noop"></view>
+<view wx:if="{{isShown}}" class="modal global-layer" catchtouchmove="noop">
+    <view class="h {{subRoom.isCalendarSuite && 'suite-title'}}">
+        <block wx:if="{{!subRoom.isCalendarSuite}}">
+            <view class="tit">{{subRoom.name || room.name}}
+                <text wx:if="{{subRoom.roomNo}}" class="r-num">编号.{{subRoom.roomNo}}</text>
+            </view>
+        </block>
+        <view wx:if="{{from === 'detail' && !isQuickApp}}">
+            <button class="wechat-font-share subroom-share" id="roomshare" open-type="share" data-ubt-key="xcx_hotel_detail_share"></button>
+        </view>
+        <view class="wechat-font-close room-float-clsoe" bindtap="closeRoomLayer"></view>
+    </view>
+
+    <scroll-view
+            class="bd {{ from === 'detail' ? 'layer-detail' : 'layer-booking'}}"
+            scroll-y
+            scroll-with-animation
+            scroll-into-view="{{priceId}}">
+        <!-- 套餐 -->
+        <view wx:if="{{subRoom.roomPackageInfo && subRoom.roomPackageInfo.packageInfoList}}" class="pac-info">
+            <view wx:for="{{subRoom.roomPackageInfo.packageInfoList}}" class="item-subtit">
+                <text class="icon">{{item.icon}}</text>
+                <text>{{item.name}}</text>
+            </view>
+        </view>
+        <view class="pac-title live" wx:if="{{subRoom.isCalendarSuite}}">
+            <view class="name">
+                <image class="pac-icon" src="{{'https://pages.c-ctrip.com/hotels/wechat/img/suite-icon1.png'}}"></image>{{subRoom.name}}
+            </view>
+            <view class="r-num">编号:{{subRoom.roomNo}}</view>
+        </view>
+        <!--滚动图片-->
+        <template is="swiper-img" data="{{pictureList: room.pictureList, isCalendarSuite: subRoom.isCalendarSuite, imageIndex: currentImageIndex, type: 'live'}}" />
+
+        <!--限时抢购倒计时-->
+        <view class="timelimt" wx:if="{{subRoom.timeLimitInterval}}"><text class="wechat-font-time"></text> {{subRoom.timeLimitInterval.title}} {{subRoom.timeLimitInterval.countdown}}</view>
+
+        <!-- 钟点房信息 -->
+        <view wx:if="{{subRoom.isHourRoom && subRoom.hourInfoName}}" class="hourroom-info">
+            <view class="hourroom-title">
+                <text class="flex1">{{subRoom.hourInfoName}}</text>
+                <block class="toggle-btn" wx:if="{{subRoom.hourInfoDesc}}">
+                    <text class="mr8" catchtap="toggleHourDescInfo">{{showHourDescInfo ? '收起' : '详情'}}</text>
+                    <text class="{{showHourDescInfo ? 'wechat-font-g-arrow-up' : 'wechat-font-g-arrow-down'}}"></text>
+                </block>
+            </view>
+            <view wx:if="{{subRoom.hourInfoDesc && showHourDescInfo}}" class="desc">{{subRoom.hourInfoDesc}}</view>
+        </view>
+
+        <!--房型信息-->
+        <view class="base-info {{room.facilityCategoryList.length && 'pb0'}}">
+            <!-- 面积楼层等 -->
+            <view class="base-box">
+                <view wx:if="{{room.area}}" class="base-item">
+                    <view class="tit">面积</view>
+                    <view class="txt">{{room.area}}</view>
+                </view>
+                <view wx:if="{{room.floor}}" class="base-item">
+                    <view class="tit">楼层</view>
+                    <view class="txt">{{room.floor}}</view>
+                </view>
+                <view wx:if="{{room.wirelessBroadInfo}}" class="base-item">
+                    <view class="tit">网络</view>
+                    <view class="txt">{{room.wirelessBroadInfo.desc}}
+                    </view>
+                </view>
+                <view wx:if="{{subRoom.windowInfo && subRoom.windowInfo.desc}}" class="base-item">
+                    <view class="tit">窗户</view>
+                    <view class="txt">{{subRoom.windowInfo.desc}}</view>
+                </view>
+                <view wx:if="{{subRoom.smokeInfo && subRoom.smokeInfo.desc}}" class="base-item">
+                    <view class="tit">吸烟政策</view>
+                    <view class="txt">{{subRoom.smokeInfo.desc}}</view>
+                </view>
+            </view>
+            <view class="base-detail-box">
+            <!-- 床型 -->
+            <view wx:if="{{subRoom.bedWidth || room.addBed}}" class="bed-info">
+                <view class="bed-title">床型</view>
+                <view>
+                    <text class="mr8">{{subRoom.bedWidth}}</text>
+                    <block wx:if="{{room.addBed}}">加床:{{room.addBed}}</block>
+                </view>
+            </view>
+            <!-- 餐食 -->
+            <view class="meal-info">
+                <view class="meal-title">餐食</view>
+                <view class="flex1">
+                    <view>{{subRoom.breakfast}}</view>
+                    <view wx:if="{{subRoom.mealInfo.dailyMealInfos && subRoom.mealInfo.dailyMealInfos.length}}" class="meal-details">
+                        <block wx:for="{{subRoom.mealInfo.dailyMealInfos}}">
+                        <view class="meal-item" wx:if="{{item.displayDesc}}">
+                            <text>{{item.date}}</text>
+                            <text class="meal-txt">{{item.displayDesc}}</text>
+                        </view>
+                        </block>
+                    </view>
+                    <view wx:if="{{room.addBreakfast}}">加早:{{room.addBreakfast}}</view>
+                    <view wx:if="{{subRoom.mealInfo.mealInfoTip}}" class="meal-tip">
+                        <view>*{{subRoom.mealInfo.mealInfoTip}}</view>
+                    </view>
+                </view>
+            </view>
+            <!-- 房型设施 -->
+            <block wx:for="{{room.facilityCategoryList}}" wx:for-item="facility" wx:key="categoryId">
+                <view hidden="{{!showMoreFacility}}" class="fac-item">
+                    <view class="fac-title {{facility.categoryName.length > 4 && 'pr34'}}">{{facility.categoryName}}</view>
+                    <view class="txt-box">
+                        <view wx:for="{{facility.facilityList}}" wx:key="id" class="fac-txt {{item.normalShow ? '' : 'no-facility'}}">
+                            {{item.name}}
+                            <text wx:if="{{item.freeType === 1}}" class="fac-pay">收费</text>
+                            <text wx:elif="{{item.freeType === 2}}" class="fac-free">免费</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <view wx:if="{{room.facilityCategoryList.length}}" class="base-more-fold" catchtap="toggleMoreFacility"
+                data-ubt-key="{{showMoreFacility ? 'xcx_jdxq_gdfxss' : 'xcx_jdxq_fcsq'}}">
+                <text class="mr8">{{showMoreFacility ? '收起' : '更多设施'}}</text>
+                <text class="{{showMoreFacility ? 'wechat-font-g-arrow-up' : 'wechat-font-g-arrow-down'}}"></text>
+            </view>
+            </view>
+        </view>
+
+        <!-- 礼盒 -->
+        <view wx:if="{{subRoom.giftInfo.packageInfoList}}" class="common-card gift-info">
+            <view class="tit">礼赠</view>
+            <view class="gift-title">{{subRoom.giftInfo.packageInfoList[0].name}}</view>
+            <view hidden="{{!showGiftDesc}}">
+                <gift-info giftInfo="{{subRoom.giftInfo}}"></gift-info>
+            </view>
+            <view class="base-more-fold" catchtap="toggleGiftDesc">
+                <text class="mr8">{{showGiftDesc ? '收起' : '详情'}}</text>
+                <text class="{{showGiftDesc ? 'wechat-font-g-arrow-up' : 'wechat-font-g-arrow-down'}}"></text>
+            </view>
+        </view>
+
+        <!-- 套餐：2食 3享 -->
+        <block wx:if="{{subRoom.roomPackageInfo && subRoom.roomPackageInfo.packageInfoList}}">
+        <block wx:for="{{subRoom.roomPackageInfo.packageInfoList}}" wx:for-item="package">
+            <view wx:if="{{package.type === 2 || package.type === 3}}" class="pac-item">
+                <view class="pac-title pl24"><image class="pac-icon" src="{{'https://pages.c-ctrip.com/hotels/wechat/img/suite-icon' + package.type + '.png'}}"></image>{{package.name}}</view>
+                <view wx:for="{{package.xItems}}" wx:for-item="xItem" wx:key="xItem.xProID" class="pac-content" wx:for-index="index">
+                    <template is="swiper-img" data="{{pictureList: xItem.imgs, isCalendarSuite: true, imageIndex: suiteImgIndex[package.type][index], suiteType: package.type, index}}" />
+                    <view class="pac-subtit-box pr24 pl24">
+                        <text class="pac-subtit">{{xItem.name}}</text>
+                        <text >{{xItem.valueDesc}}</text>
+                    </view>
+                    <view wx:for="{{xItem.elements}}" wx:for-item="xElement" class="x-item mr24 pl24" wx:for-index="idx">
+                        <view class="cell {{xElement.isFold && hiddenMoreInfo[package.type][index] ? '' : 'hide-height'}}">
+                            <text class="mr10 name">{{xElement.key}}</text>
+                            <text class="desc">{{xElement.value}}</text>
+                        </view>
+                        <view wx:if="{{xElement.isFold}}" class="base-more-fold" catchtap="toggleMoreSuite" data-index="{{index}}" data-type="{{package.type}}">
+                            <text class="mr8">{{hiddenMoreInfo[package.type][index] ? '收起' : '展开全部'}}</text>
+                            <text class="{{hiddenMoreInfo[package.type][index] ? 'wechat-font-g-arrow-up' : 'wechat-font-g-arrow-down'}}"></text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        </block>
+
+        <!-- 会员权益 -->
+        <view wx:if="{{subRoom.benefits && subRoom.benefits.length}}" class="common-card benefits-info">
+            <view class="tit">会员权益</view>
+            <view wx:for="{{subRoom.benefits}}" class="benefits-item">
+                <text class="benefits-tit">{{item.title}}</text>
+                <text>{{item.desc}}</text>
+            </view>
+            <view class="desc">
+                <view class="prime-icon">
+                    <image src="https://pages.c-ctrip.com/hotels/wechat/img/member/prime-icon.png"></image>
+                </view>
+                以上权益可在下一页填写订单时进行兑换操作，兑换后即可入住时享受
+            </view>
+        </view>
+
+        <view class="common-card policy-info">
+            <view class="tit">政策与服务</view>
+            <!--特别提示-->
+            <block wx:if="{{subRoom.specialRemindList && subRoom.specialRemindList.length}}">
+                <view class="item-title">特别提示</view>
+                <view wx:for="{{subRoom.specialRemindList}}" class="item-desc">{{item}}</view>
+            </block>
+            <!-- 取消政策 -->
+            <block wx:if="{{subRoom.cancelPolicyInfo}}">
+                <view class="item-title {{subRoom.cancelPolicyInfo.adType === 1 ? 'tag-better' : ''}}">{{subRoom.cancelPolicyInfo.title}}</view>
+                <view wx:if="{{subRoom.cancelPolicyInfo.details && subRoom.cancelPolicyInfo.details[1]}}" class="ladder-cancel">
+                    <view wx:for="{{subRoom.cancelPolicyInfo.details}}">
+                        <view wx:if="{{index === 0}}" class="jt-thead">
+                            <view class="jt-txt">{{item.timeDesc}}</view>
+                            <view class="jt-txt">{{item.policyDesc}}</view>
+                        </view>
+                        <view wx:elif="{{index > 0}}" class="jt-tbody">
+                            <view class="jt-txt">{{item.timeDesc}}</view>
+                            <view class="jt-txt {{item.isFreeCancel ? 'tag-better' : ''}}">{{item.policyDesc}}</view>
+                        </view>
+                    </view>
+                </view>
+                <view class="item-desc">{{subRoom.cancelPolicyInfo.desc}}</view>
+            </block>
+            <!-- 确认政策 -->
+            <block wx:if="{{subRoom.confirmInfo}}">
+                <view class="item-title {{subRoom.confirmInfo.adType === 1 ? 'tag-better' : ''}}">{{subRoom.confirmInfo.title}}</view>
+                <view class="item-desc">{{subRoom.confirmInfo.desc}}</view>
+            </block>
+            <!-- 闪住 -->
+            <block wx:if="{{subRoom.quickCheckInDesc}}">
+                <view class="item-title">闪住<text class="tag-better">·先住后付</text></view>
+                <view class="item-desc">{{subRoom.quickCheckInDesc}}</view>
+            </block>
+            <!-- 发票 -->
+            <block wx:if="{{subRoom.invoiceInfo}}">
+                <view class="item-title">{{subRoom.invoiceInfo.title}}</view>
+                <view class="item-desc">{{subRoom.invoiceInfo.desc}}</view>
+            </block>
+            <!-- 支付 -->
+            <block wx:if="{{subRoom.paymentInfo}}">
+                <view class="item-title">{{subRoom.paymentInfo.title}}</view>
+                <view class="item-desc">{{subRoom.paymentInfo.desc}}</view>
+            </block>
+        </view>
+
+        <!--费用明细-->
+        <view wx:if="{{showPriceDetail}}" class="common-card price-info" id="price-detail">
+            <view class="tit">费用明细</view>
+            <template is="cost-detail" data="{{...subRoom, totalDays}}" />
+        </view>
+
+        <view class="{{isIphoneX ? 'bottom-iphonex' : 'bottom-blank'}}"></view>
+    </scroll-view>
+
+    <slot></slot>
+</view>
+
+<template name="swiper-img">
+    <view wx:if="{{pictureList && pictureList.length}}" class="slider {{index > 0 && 'pt12'}} {{!isCalendarSuite && type}}" catchtap="checkBigPhoto">
+        <swiper skip-hidden-item-layout
+                current="{{imageIndex || 0}}"
+                next-margin="{{!isCalendarSuite || pictureList.length === 1 ? '' : '110rpx'}}"
+                bindchange="roomImgSwiperChange"
+                snap-to-edge
+                data-type="{{type}}"
+                data-index="{{index}}"
+                data-suitetype="{{suiteType}}"
+                class="swiper {{isCalendarSuite && 'suite-swiper'}}">
+            <block wx:for="{{pictureList}}">
+                <swiper-item class="single-swiper">
+                    <image src="{{item}}" class="slide-image" mode="aspectFill" binderror="{{type && 'noImageTrace'}}"/>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="swiper-num">{{(imageIndex || 0) + 1}}/{{pictureList.length}}</view>
+    </view>
+</template>

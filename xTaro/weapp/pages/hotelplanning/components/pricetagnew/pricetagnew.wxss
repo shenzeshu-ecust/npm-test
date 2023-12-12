@@ -1,0 +1,22 @@
+@import '../../common/css/theme.wxss';
+.pc-box {border: var(--pc-box-border); border-radius: 6rpx; color: var(--pc-box-color); display: flex; font-size: 20rpx;line-height: 1;}
+.pc-box .pc-text {padding: 6rpx 4rpx;}
+.pc-box .pc-discount {background-color: #FFF1E6; border-left: 1rpx dashed #FFA04D; padding: 6rpx 4rpx; display: flex; align-items: center;}
+.pc-box .pc-icon {height: 0; width: 0; border: 8rpx solid; border-color: transparent transparent transparent #f60; border-right: 0; margin-left: 4rpx;}
+.pc-box .slim-line {
+    display: inline-block;
+    height: 20rpx;
+    width: 1rpx;
+    transform: scale(.5, 0, 0);
+    background-color: #f60;
+    margin: 0 4rpx;
+    vertical-align: middle;
+}
+.vm {vertical-align: middle}
+.pc-box .extend-stay {
+    background: #fe6806;
+    color: #fff;
+}
+.pc-box .border-none {
+    border-left: none;
+}

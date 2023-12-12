@@ -1,0 +1,18 @@
+.force-login-layer {
+    position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 1001;
+    font-size: 28rpx; background-color: #fff;
+    display: flex; flex-direction: column; align-items: center;
+}
+.force-login-layer .fl-img {
+    height: 240rpx;
+    width: 240rpx;
+    background-image: url(https://pages.c-ctrip.com/hotels/wechat/img/status-infoerror.png);
+    background-size: cover;
+    margin: 380rpx 0 32rpx;
+}
+.force-login-layer .fl-btn {
+    height: 70rpx; width: 250rpx; background-color: #006FF6; border-radius: 8rpx;
+    font-size: 30rpx; color: #fff; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 46rpx;
+}

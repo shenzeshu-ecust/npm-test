@@ -1,0 +1,65 @@
+<page-meta page-style="overflow: {{showMask ? 'hidden' : 'visible'}}" />
+<view class="group-chat__wrapper" style="padding-top:{{contentTop}}rpx">
+  <!-- 为了显示图片全部 -->
+  <image class="group-chat__bgImg" src="{{bgimgUrl}}" mode="widthFix" lazy-load="false" />
+  <view class="group-chat__mainContent">
+    <!-- tab区 -->
+    <view wx:if="{{typeList && typeList.length>1}}" class="group-chat__tabGroup">
+        <view class="{{type === typeList[0] ? 'group-chat__tab--select' : 'group-chat__tab'}} group-chat__tab--left" data-typeid="{{typeList[0]}}" bindtap="changeTab">
+          <view class="{{type === typeList[0] ? 'group-chat__tabText--select' : 'group-chat__tabText'}}">
+            {{typeList[0]}}
+          </view>
+        </view>
+        <view class="{{type === typeList[1] ? 'group-chat__tab--select' : 'group-chat__tab'}} group-chat__tab--right" data-typeid="{{typeList[1]}}" bindtap="changeTab">
+          <view class="{{type === typeList[1] ? 'group-chat__tabText--select' : 'group-chat__tabText'}}">
+            {{typeList[1]}}
+          </view>
+        </view>
+    </view>
+    <!-- 信息区 -->
+    <view class="group-chat__groupWrapper {{chatGroupType == 'qrCode' && 'group-chat__groupQrcodeWrapper'}}">
+      <view class="group-chat__title">{{welcomeTitle}}</view>
+      <view class="group-chat__selectGroup">
+        <!-- local -->
+        <view class="group-chat__select" bindtap="changeLocal">
+          {{local}}
+          <view class="group-chat__select--icon"></view>
+        </view>
+        <!-- activity -->
+        <view wx:if="{{activityType}}" class="group-chat__select" bindtap="changeActivityType">
+          {{activityType}}
+          <view class="group-chat__select--icon"></view>
+        </view>
+        <view class="group-chat__selectText">{{typeText}}</view>
+      </view>
+      <!-- 加群入口 -->
+      <view class="group-chat__btn" wx:if="{{chatGroupType == 'miniQrCode'}}">
+        点我加群
+        <cell class="group-chat__groupCell" iconUrl="" contactText="" paddingStyle="15" url="{{chatGroupUrl}}" 
+        bind:startmessage='startmessage' 
+        bind:completemessage="completemessage" />
+      </view>
+      <view class="group-chat__qrcode" wx:if="{{chatGroupType == 'qrCode'}}">
+        <image src="{{chatGroupUrl}}" mode="widthFix" class="group-chat__groupImg" bindtap="previewGroupQrcode" />
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{showMask}}" class="group-chat__mask">
+  <view class="group-chat__selectWrapper">
+    <image bindtap="closeMask" class="group-chat__maskIcon" src="https://images3.c-ctrip.com/marketing/2022/08/groupChatEntry/cancelicon.png" mode="widthFix" lazy-load="false" />
+    <view class="group-chat__selectTitle">
+      {{maskType === 'local' ? CorpwechatentryOtherText.localText : CorpwechatentryOtherText.acttypeText}}
+    </view>
+    <view class="group-chat__selectMain">
+      <view bindtap="handleSelectChange" data-val="{{item}}" wx:for="{{maskSelectList}}" wx:for-item="item" wx:for-index="idx" wx:key="idx" class="group-chat__selectItem {{item === (maskType === 'local'?local:activityType) ? 'group-chat__selectItem--selected' : 'group-chat__selectItem--unselected' }}">
+        {{item}}
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>
+
+<timelineFloat></timelineFloat>

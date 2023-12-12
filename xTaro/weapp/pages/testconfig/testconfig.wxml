@@ -1,0 +1,220 @@
+<view class="page">
+    <!-- 1. 用户个人信息 -->
+    <view class="user-info">
+        <view class="content">
+            <view><text>小程序版本：</text>{{envVersionMap[envVersion]}}</view>
+            <view><text>登录态：</text>{{isLogin}}</view>
+            <view bindlongpress="copyToClipboard" data-value="{{clientID}}"><text>clientID: </text>{{clientID}}</view>
+            <view bindlongpress="copyToClipboard" data-value="{{openid}}"><text>openid: </text>{{openid}}</view>
+            <view bindlongpress="copyToClipboard" data-value="{{vid}}"><text>vid: </text>{{vid}}</view>
+        </view>
+        <view class="notes">* 长按文字可复制相应的值</view>
+    </view>
+
+    <!-- 2. 功能列表 -->
+    <view class="features">
+        <!-- 2.1 调试 -->
+        <view class="feature-item" hover-class="clickView">
+            <text>是否打开调试 (vConsole)</text>
+            <switch checked="{{debugMode}}" bindchange="debugModeChange" />
+        </view>
+        <!-- 2.2.1 网络环境 -->
+        <!-- 切换网络环境后， mktOpenid 要重新获取下，登录态也要清理 -->
+        <view class="feature-item arrow" bindtap="handleShowModal" data-key="showEnvSelector" hover-class="clickView">
+            <text>切换网络环境（当前 <text class="highlight">{{envTextMap[env]}}</text>）</text>
+        </view>
+        <!-- 2.2.2 网络子环境 -->
+        <view class="feature-item  local-navigate"  hover-class="clickView">
+            <text>设置网络子环境</text>
+            <input placeholder="请填入期望设置的 网络子环境" bindinput="handleInputChange" data-key="inputSubEnv" value="{{inputSubEnv}}" maxlength="{{-1}}" class="url-input"></input>
+            <view class="btn-wrapper">
+                <view class="btn-item" bindtap="clearInput" data-key="inputSubEnv">清空输入框内的值</view>
+                <view class="btn-item" bindtap="modifySubEnv">修改网络子环境</view>
+            </view>
+        </view>
+        <!-- 2.3 指定访问堡垒 -->
+        <view class="feature-item arrow" bindtap="handleShowModal" data-key="showCanarySelector" hover-class="clickView">
+            <text>访问堡垒</text>
+        </view>
+        <!-- 2.4 酒店添加的功能 -->
+        <view class="feature-item hotel" hover-class="clickView">
+            <text>酒店堡垒/镜像测试</text>
+            <radio-group class="radio-group" bindchange="hotelBastionChange">
+                <label class="radio" wx:for="{{itemsHotelBastion}}">
+                    <radio value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+                </label>
+            </radio-group>
+        </view>
+        <view class="feature-item hotel" hover-class="clickView">
+            <text>请求加密/解密</text>
+            <radio-group class="radio-group" bindchange="hotelEncodeReqChange">
+                <label class="radio" wx:for="{{itemsHotelEncodeReq}}">
+                    <radio value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+                </label>
+            </radio-group>
+        </view>
+        <view class="feature-item hotel mars-change" hover-class="clickView">
+            <text>酒店fws环境的请求转发到mars</text>
+            <radio-group class="radio-group" bindchange="handleHotelMarsChange">
+                <label class="radio" wx:for="{{itemsHotelMars}}">
+                    <radio value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+                </label>
+            </radio-group>
+        </view>
+        <!-- 2.5 汽车票添加的功能 -->
+        <view class="feature-item bus" hover-class="clickView">
+            <text>汽车票堡垒测试</text>
+            <radio-group class="radio-group" bindchange="busHeaderChange">
+                <label class="radio" wx:for="{{itemBusHeader}}">
+                    <radio value="{{item.value}}" checked="{{item.checked}}" />{{item.name}}
+                </label>
+            </radio-group>
+        </view>
+        <!-- 2.6.1 跳转当前小程序的原生页 -->
+        <view class="feature-item local-navigate" hover-class="clickView">
+            <text>跳转当前小程序的原生页</text>
+            <input placeholder="输入小程序页面地址" bindinput="handleInputChange" data-key="navPagePath" value="{{navPagePath}}" maxlength="{{-1}}" class="url-input" id='wechatUrl'></input>
+            <view class="btn-wrapper">
+                <view class="btn-item" bindtap="handleNavigate" data-type="navPage">navigateTo</view>
+                <view class="btn-item" bindtap="handleNavigate" data-type="rediPage">redirectTo</view>
+                <view class="btn-item" bindtap="handleNavigate" data-type="switchPage">switchTab</view>
+            </view>
+        </view>
+        <!-- 2.6.2 跳转小程序内嵌 h5 -->
+        <view class="feature-item arrow" bindtap="handleShowModal" data-key="showNavH5Toast" hover-class="clickView">
+            <text>跳转小程序内嵌 h5</text>
+        </view>
+        <!-- 2.6.3 跳转其他小程序 -->
+        <view class="feature-item arrow" bindtap="handleShowModal" data-key="showNavMiniappToast" hover-class="clickView">
+            <text>跳转其他小程序</text>
+        </view>
+        <!-- 2.7 查询/修改本地缓存 -->
+        <view class="feature-item arrow" bindtap="handleShowModal" data-key="showStorageToast" hover-class="clickView">
+            <text>设置本地缓存({{storageInfo.currentSize}}KB/{{storageInfo.limitSize}}KB)</text>
+        </view>
+
+        <!--2.8 修改 clientID -->
+        <view class="feature-item  local-navigate"  hover-class="clickView">
+            <text>设置 clientID</text>
+            <input placeholder="请填入期望设置的 clientID 值" bindinput="handleInputChange" data-key="inputCid" value="{{inputCid}}" maxlength="{{-1}}" class="url-input"></input>
+            <view class="btn-wrapper">
+                <view class="btn-item" bindtap="clearInput" data-key="inputCid">清空输入框内的值</view>
+                <view class="btn-item" bindtap="modifyClientID">修改 clientID</view>
+            </view>
+        </view>
+
+        <!-- <view class="feature-item arrow">
+            <text>分享指定内容</text>
+        </view> -->
+        <!-- 2.9 扫码 -->
+        <view class="feature-item arrow" bindtap="handleScanCode" hover-class="clickView">
+            <text>扫码</text>
+        </view>
+        <!-- 2.10 系统信息 -->
+        <view class="feature-item arrow" bindtap="handleShowModal" data-key="showSystemInfo" hover-class="clickView">
+            <text>系统信息</text>
+        </view>
+        <!-- <view class="feature-item arrow">
+            <text>启动参数</text>
+        </view> -->
+        <!-- path, scene, query, 来源信息 referrerInfo && referrerInfo.appId, referrerInfo && referrerInfo.extraData -->
+    </view>
+</view>
+<view class="doc">小程序开发文档 短链接：minidoc/</view>
+
+<view class="mask" wx:if="{{showMask}}" bindtap="handleHideMask" catchtouchmove="true"></view>
+
+<!-- 2.2 切换网络环境 -->
+<view class="env pop-bottom" wx:if="{{showEnvSelector && showMask}}">
+    <view data-type="prd" bindtap="selectGlobalEnv" class="{{env === 'prd' ? 'highlight' : ''}}">生产</view>
+    <view data-type="uat" bindtap="selectGlobalEnv" class="{{env === 'uat' ? 'highlight' : ''}}">UAT</view>
+    <view data-type="fat" bindtap="selectGlobalEnv" class="{{env === 'fat' ? 'highlight' : ''}}">FAT</view>
+</view>
+
+<!-- 2.3 访问堡垒 -->
+<view class="env pop-bottom" wx:if="{{showCanarySelector && showMask}}">
+    <view data-value="{{false}}" bindtap="selectCanary" class="{{!useCanary ? 'highlight' : ''}}">不使用堡垒</view>
+    <view data-value="LATEST" bindtap="selectCanary" class="{{useCanary === 'LATEST' ? 'highlight' : ''}}">最近一次发布的IDC</view>
+    <view data-value="SHAOY" bindtap="selectCanary" class="{{useCanary === 'SHAOY' ? 'highlight' : ''}}">上海欧阳</view>
+    <view data-value="SHARB" bindtap="selectCanary" class="{{useCanary === 'SHARB' ? 'highlight' : ''}}">上海日阪</view>
+    <view data-value="SHAXY" bindtap="selectCanary" class="{{useCanary === 'SHAXY' ? 'highlight' : ''}}">上海新源</view>
+    <view data-value="NTGXH" bindtap="selectCanary" class="{{useCanary === 'NTGXH' ? 'highlight' : ''}}">南通</view>
+</view>
+
+<!-- 2.6.2 跳转小程序内嵌 h5 -->
+<view class="nav-h5 pop-bottom" wx:if="{{showNavH5Toast && showMask}}">
+    <input placeholder="输入H5地址" bindinput="handleInputChange" data-key="h5url" value="{{h5url}}" maxlength="{{-1}}"></input>
+    <view>
+        <text>是否必须登录</text>
+        <switch checked="{{needLogin}}" bindchange="handleNeedLogin" />
+    </view>
+    <view>
+        <text>是否使用WebSocket通讯</text>
+        <switch checked="{{needSocket}}" bindchange="handleNeedSocket" />
+    </view>
+
+    <view class="res-wrapper">
+        <view>最终跳转的地址：</view>
+        <view>{{h5urlPagePath}}</view>
+    </view>
+    <view class="btn-wrapper">
+        <view class="btn-item" bindtap="handleNavigate" data-type="navToH5url">跳转小程序内嵌 h5</view>
+    </view>
+</view>
+
+<!-- 2.6.3 跳转其他小程序 -->
+<view class="nav-miniapp pop-bottom" wx:if="{{showNavMiniappToast && showMask}}">
+    <input placeholder="输入小程序AppId" bindinput="handleInputChange" data-key="miniappId" value="{{miniappId}}" maxlength="{{-1}}"></input>
+    <textarea placeholder="输入小程序页面地址" bindinput="handleInputChange" data-key="miniappPagePath" value="{{miniappPagePath}}" maxlength="{{-1}}"></textarea>
+    <view class="btn-wrapper">
+        <view class="btn-item" bindtap="handleNavigate" data-type="navToMiniappRelease">线上版</view>
+        <view class="btn-item" bindtap="handleNavigate" data-type="navToMiniappTrial">体验版</view>
+        <view class="btn-item" bindtap="handleNavigate" data-type="navToMiniappDev">开发版</view>
+    </view>
+</view>
+
+<!-- 2.7 查询/修改本地缓存 -->
+<view class="storage pop-bottom" wx:if="{{showStorageToast && showMask}}">
+    <view class="input-section">
+        <input placeholder="要查看的本地缓存keyName" bindinput="handleInputChange" data-key="storageKey" value="{{storageKey}}" maxlength="{{-1}}"></input>
+        <view class="btn-item" bindtap="getStorageSync">查询</view>
+    </view>
+    <view class="res-wrapper" bindlongpress="copyToClipboard" data-value="{{currentStorageValue}}">
+        <view>{{currentStorageValue}}</view>
+    </view>
+    <view class="input-section">
+        <input placeholder="要修改的本地缓存keyValue" bindinput="handleInputChange" data-key="storageValue" value="{{storageValue}}" maxlength="{{-1}}"></input>
+        <view class="btn-item" bindtap="handleSetStore">修改</view>
+    </view>
+</view>
+
+<!-- 2.10 系统信息 -->
+<view class="pop-bottom" wx:if="{{showSystemInfo && showMask}}">
+    <view class="env">
+        <view>
+            <label>设备品牌：</label>
+            <text>{{systemInfo.brand}}</text>
+        </view>
+        <view>
+            <label>设备型号：</label>
+            <text>{{systemInfo.model}}</text>
+        </view>
+        <view>
+            <label>微信版本号：</label>
+            <text>{{systemInfo.version}}</text>
+        </view>
+        <view>
+            <label>操作系统及版本：</label>
+            <text>{{systemInfo.system}}</text>
+        </view>
+        <view>
+            <label>客户端平台：</label>
+            <text>{{systemInfo.platform}}</text>
+        </view>
+        <view>
+            <label>客户端基础库版本：</label>
+            <text>{{systemInfo.SDKVersion}}</text>
+        </view>
+    </view>
+</view>
+

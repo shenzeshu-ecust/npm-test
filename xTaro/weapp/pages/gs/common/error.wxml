@@ -1,0 +1,5 @@
+<view class="container">
+  <view class="error-icon" />
+  <view>数据加载失败, 请检查网络</view>
+  <view wx:if="{{canRetry}}" class="retry-btn" bindtap="retryBtnTaped">点击重试</view>
+</view>

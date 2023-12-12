@@ -1,0 +1,8 @@
+<view class="comment-submit-placeholder"></view>
+<view class="comment-submit">
+    <view
+        bindtap="submitComment"
+        class="comment-submit-btn {{enableSubmit ? 'enable-submit' : 'disable-submit'}}">
+        提交评价
+    </view>
+</view>

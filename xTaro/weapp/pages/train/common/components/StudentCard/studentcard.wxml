@@ -1,0 +1,8 @@
+<template name="student-card">
+    <view class="banner-jinli" wx:if="{{studentCardInfo.IsReceived || studentCardInfo.IsCanReceive}}">
+        <button class="btn-go" 
+            bindtap="toStudentCardPage"
+            data-ubt-key="{{from == 'robshare' ? 'train_grab_hpstudent' : 'train_inquire_hpstudent'}}"
+            data-url="{{studentCardInfo.IsReceived ? studentCardInfo.CardDetailUrl : studentCardInfo.ReceiveCardUrl}}">{{studentCardInfo.IsReceived ? '去查看' : '学生免费领'}}</button>
+    </view>
+</template>

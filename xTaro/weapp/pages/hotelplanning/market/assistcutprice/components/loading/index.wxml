@@ -1,0 +1,14 @@
+<!-- loading -->
+<block>
+    <view wx:if="{{loadingState == 'LOADING'}}" class="loading-state cell">
+        <image mode="aspectFit" class="loading-img"></image>
+        <view class="loading-txt">加载中...</view>
+    </view>
+    <view wx:if="{{loadingState == 'END'}}" class="loading-state cell">
+        <view class="loading-txt all">已经到底了</view>
+    </view>
+    <view wx:if="{{loadingState == 'FAILURE'}}" class="loading-state cell" bindtap="handleRefreshList">
+        <image mode="aspectFit" class="loading-fail-img"></image>
+        <view class="loading-txt">加载失败，点击重试</view>
+    </view>
+</block>

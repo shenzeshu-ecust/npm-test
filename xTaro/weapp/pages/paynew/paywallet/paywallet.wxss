@@ -1,0 +1,121 @@
+.wallet-wrap {}
+
+.amount-wrap {
+  background-color: #fff;
+  padding: 27rpx 32rpx;
+  box-shadow: 0px 2px 6px 0px rgba(39, 65, 85, 0.1);
+  display: flex;
+  justify-content: space-between;
+}
+
+.amount-title {
+  color: #474747;
+  font-size: 28rpx;
+}
+
+.amount-value {
+  color: #000000;
+  font-size: 32rpx;
+}
+
+.payway-ul {
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+
+.payway-li {
+  display: flex;
+  padding: 27rpx 32rpx;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: #eee 1rpx solid;
+}
+
+.payway-ul .left {
+  display: flex;
+  align-items: center;
+}
+
+.payway-li.disable view{
+  color: #aaa 
+}
+
+.checkIcon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 20rpx;
+  background-image: url(https://pages.c-ctrip.com/Finance/miniprogram/duigou2.png);
+  background-size: 100% 100%;
+}
+
+.checkIcon.checked{
+  background-image: url(https://pages.c-ctrip.com/Finance/miniprogram/duigou.png);
+}
+
+.card-name {
+  color: #333333;
+  font-size: 32rpx;
+}
+
+.card-desc {
+  color: #999999;
+  font-size: 24rpx;
+}
+
+.right {
+  color: #333333;
+  font-size: 28rpx;
+}
+
+.no-using {
+  color: '#666'
+}
+
+.need-other {
+  color: #999999;
+}
+
+.need-amount {
+  font-size: 32rpx;
+  color: #FF6600
+}
+
+.tips-wrap {
+  margin: 48rpx 32rpx;
+  color: #666666;
+  font-size: 24rpx;
+}
+
+.tips-wrap view{
+  margin-top: 12rpx;
+}
+
+.tip-title {
+  color: #333333;
+  font-weight: 500;
+}
+.pay-button-full {
+  margin: 80rpx 30rpx 0;
+}
+.pay-button-full button {
+  height: 94rpx;
+  width: 100%;
+  background: linear-gradient(90deg, rgb(255, 165, 10) 0%, rgb(255, 119, 0) 100%);
+  font-size: 36rpx;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+.pay-button-full button[loading] {
+  background-color: rgb(229,138,17);
+  color: rgba(255, 255, 255, .6);
+}
+.pay-button-full .hover {
+  background-color: rgba(229,138,17,.6);
+  color: rgba(255, 255, 255, .6);
+}
+
+.pay-button-full.disable button {
+  background: none;
+  background-color: #eee;
+  color: #999;
+}

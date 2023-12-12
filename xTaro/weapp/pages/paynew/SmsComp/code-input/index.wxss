@@ -1,0 +1,38 @@
+.code-input {
+  display: flex;
+  justify-content: space-between;
+  margin: 40rpx 50rpx;
+}
+
+.input-item {
+  width: 90rpx;
+  height: 100rpx;
+  border-bottom: 1px solid #416ADA;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-number {
+  color: #333;
+  font-size: 54rpx;
+}
+
+@keyframes twinkle{
+  0% {opacity: 1;}
+  50% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.cursor{
+  width: 4rpx;
+  height: 44rpx;
+  background-color: #416ADA;
+  animation: 1.5s twinkle infinite;
+}
+
+.hidden-input{
+  position: absolute;
+  right: -100vw;
+}
+

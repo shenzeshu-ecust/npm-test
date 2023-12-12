@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "携程旅行",
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom",
+    "usingComponents": {
+      "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+    }
+}

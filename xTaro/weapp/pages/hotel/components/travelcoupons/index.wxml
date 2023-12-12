@@ -1,0 +1,18 @@
+<view class="tcl-title black1" wx:if="{{couponInfo.name}}">{{couponInfo.name}}</view>
+<view class="travel-coupon-list" style="{{couponListStyle ? couponListStyle : ''}}">
+    <view wx:for="{{couponInfo.items}}" wx:for-item="coupon" wx:key="*this"
+          class="single-travel-coupon orange2"
+          style="{{singleCouponStyle ? singleCouponStyle : ''}}">
+        <view class="stc-type ft20">{{coupon.useCondition}}</view>
+        <view class="stc-content ft24">
+            <text wx:if="{{coupon.name}}" class="ft34">{{coupon.name}}</text>
+            <text>{{coupon.discountValueSuffix}}</text>
+            <block wx:if="{{coupon.quantity > 1}}">
+                <text>×</text>
+                <text class="ft34">{{coupon.quantity}}</text>
+                <text>{{coupon.classifier}}</text>
+            </block>
+        </view>
+        <view class="stc-name ft24">{{coupon.description}}</view>
+    </view>
+</view>

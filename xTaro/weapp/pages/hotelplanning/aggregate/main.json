@@ -1,0 +1,22 @@
+{
+    "navigationBarTitleText": "",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "usingComponents": {
+        "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar",
+        "waterfall": "/pages/hotelplanning/components/waterfall/waterfall",
+        "storeservice": "/pages/hotelplanning/components/storeservice/storeservice",
+        "roomlist": "/pages/hotelplanning/components/roomlist/index",
+        "mealpack": "/pages/hotelplanning/components/mealpack/mealpack",
+        "yoyocard": "/pages/hotelplanning/components/yoyocard/index",
+        "webp": "/pages/hotelplanning/components/webp/webp",
+        "coupon": "/pages/hotelplanning/components/coupon/coupon",
+        "qrCodeToast": "/pages/hotelplanning/components/qrCodeToast/qrCodeToast",
+        "frontDeskQrCodeToast": "/pages/hotelplanning/components/frontDeskQrCodeToast/frontDeskQrCodeToast",
+        "mediapreviewer": "/pages/hotelplanning/components/mediapreviewer/mediapreviewer",
+        "cModal": "/pages/hotelplanning/common/components/cModal/cModal"
+    },
+    "restartStrategy": "homePageAndLatestPage",
+    "disableScroll": true
+}

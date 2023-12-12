@@ -1,0 +1,22 @@
+<view wx:if='{{show}}' catchtap="_handleCatchNone" catchtouchmove='_handleCatchNone'>
+  <view class='wrap {{wrapAnimate}}'></view>
+  <view catchtap='_handleHideFrame' class='frame-wrapper {{frameAnimate}}'>
+    <view catchtap='_handleCatchNone' class='frame-content {{noPadding ? "" : "frame-content-padding"}}' style="background:{{!!popupBgColor ? popupBgColor : '#f1f3f5'}};">
+      <!-- 标题 -->
+      <view wx:if="{{frameTitle || isShowTitleIcon}}" class='frame-title'>
+        <view class="title-box">
+          <image wx:if="{{isShowTitleIcon}}" class="title-icon" src="{{titleIconPath}}"></image>
+          <view class="title-cont">{{frameTitle}}</view>
+        </view>
+        <image class="frame-close" catchtap='_handleHideFrame' src="https://pic.tujia.com/upload/festatic/mp/ndetail_close.png" mode='widthFix'></image>
+      </view>
+      <!-- 内容 -->
+      <scroll-view scroll-y="{{true}}" class="frame-slot">
+        <slot></slot>
+      </scroll-view>
+      <view class="frame-bottom">
+        <slot name="footer"></slot>
+      </view>
+    </view>
+  </view>
+</view>

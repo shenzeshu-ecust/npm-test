@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "formid-button": "../../formid-button/formid-button",
+    "Icon": "../../ICON/ICON"
+  }
+}

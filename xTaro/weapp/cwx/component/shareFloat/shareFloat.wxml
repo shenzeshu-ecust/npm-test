@@ -1,0 +1,29 @@
+<!-- 分享浮层 -->
+<cover-view class="fullscreen" bindtap="onCompHide">
+  <cover-view class="pop">
+    <cover-view class="share-wrapper">
+      <!-- 标题 + 关闭按钮 -->
+      <cover-view class="share-head">
+        <cover-view class="title">{{floatTitle}}</cover-view>
+        <cover-image class="close" src="https://pages.ctrip.com/hotel_h5/wechat/duanwu/dw-close2.png"></cover-image>
+      </cover-view>
+      <!-- 2 个分享按钮 -->
+      <cover-view class="share-content">
+        <!-- 分享 1 -->
+        <cover-view class="timeline pad" catchtap="onShare" data-type="timeline" wx:if="{{showTimeline}}">
+          <cover-image class="icon" src="https://pages.c-ctrip.com/market/components/static/icon-friend.png"></cover-image>
+          <cover-view class="text">分享到朋友圈</cover-view>
+        </cover-view>
+        <!-- 分享 2 -->
+        <cover-view class="friend" wx:if="{{showFriend}}">
+          <button class="reset-button pad" open-type="share" catchtap="onShare" data-type="friend">
+            <cover-view class="center">
+                <cover-image class="icon" src="https://pages.c-ctrip.com/miniapp/common-wechat.png"></cover-image>
+                <cover-view class="text">发送给好友</cover-view>
+            </cover-view>
+          </button>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+</cover-view>

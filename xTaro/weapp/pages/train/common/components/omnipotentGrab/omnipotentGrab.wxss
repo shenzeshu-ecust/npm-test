@@ -1,0 +1,288 @@
+@import "../../pop-box.wxss";
+@import "../../iconfont.wxss";
+
+::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+.omn-pop {
+    width: 100%;
+    height: 1160rpx;
+    border-radius: 32rpx 32rpx 0 0;
+    box-sizing: border-box;
+    padding-top: 188rpx;
+    overflow: hidden;
+}
+
+.omn-pop-hd {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 188rpx;
+    border-radius: 32rpx 32rpx 0 0;
+    background-position: top left;
+    background-size: cover;
+    text-align: center;
+    z-index: 2;
+}
+.omn-pop-hd .tit {
+    width: 442rpx;
+    height: 150rpx;
+}
+.omn-pop-hd .sub {
+    position: absolute;
+    bottom: 38rpx;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    font-size: 28rpx;
+    color: #fff;
+    font-weight: 500;
+    line-height: 36rpx;
+}
+.omn-pop-bd {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1160rpx;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.omn-pop-bd > view {
+    padding-top: 188rpx;
+    padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
+    background-color: #fff;
+    background-position: top left;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+.omn-pop-bd > view.bottom {
+    padding-bottom: calc(152rpx + env(safe-area-inset-bottom));
+}
+.ifont-closed-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    font-size: 30rpx;
+    padding: 32rpx;
+    color: #fff;
+}
+
+.swiper-wrapper {
+    width: 100%;
+    height: 442rpx;
+    margin-bottom: 50rpx;
+    position: relative;
+}
+.swiper-box {
+    width: 100%;
+    height: 442rpx;
+    padding: 8rpx 0;
+    box-sizing: border-box;
+}
+.swiper {
+    display: flex;
+    align-items: center;
+    transform: translateY(28rpx);
+    position: relative;
+}
+.swiper-wrapper .mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.swiper-item {
+    width: 280rpx;
+    height: 372rpx;
+    border-radius: 24rpx;
+    background-size: 100% 100%;
+    background-position: center center;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 28rpx;
+    padding-bottom: 24rpx;
+    box-sizing: border-box;
+}
+.swiper-item.active {
+    transform: scale(1.142);
+    transition: all 0.4s ease;
+}
+.swiper-item .tag {
+    width: 116rpx;
+    height: 32rpx;
+    margin: 4rpx auto 0;
+    display: block;
+}
+.swiper-item .tit {
+    font-size: 34rpx;
+    color: #fff;
+    letter-spacing: -0.82rpx;
+    font-weight: 600;
+    margin-bottom: 4rpx;
+    margin-top: auto;
+}
+.swiper-item .sub {
+    font-size: 24rpx;
+    line-height: 30rpx;
+    color: #fff;
+    margin-bottom: 10rpx;
+}
+.swiper-item .value {
+    font-size: 24rpx;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 4rpx;
+    background: #ff5900a6;
+    padding: 0 4rpx;
+}
+
+.omn-pop-right, .omn-pop-desc {
+    border-radius: 24rpx;
+    background: linear-gradient(0deg, rgba(254, 247, 242, 0.7) 0%, rgb(255, 243, 236) 100%);
+    padding: 32rpx;
+    margin: 0 32rpx;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24rpx;
+}
+.omn-pop-right .item, .omn-pop-desc .item {
+    position: relative;
+    padding-left: 24rpx;
+    font-size: 24rpx;
+    color: #333;
+    letter-spacing: -0.16rpx;
+    line-height: 34rpx;
+    text-align: left;
+}
+.omn-pop-right .item::before, .omn-pop-desc .item::before {
+    content: "";
+    position: absolute;
+    top: 14rpx;
+    left: 0;
+    width: 8rpx;
+    height: 8rpx;
+    background: #8B4A12;
+    border-radius: 50%;
+}
+.omn-pop-right {
+    margin-bottom: 20rpx;
+}
+.omn-pop-right::before {
+    content: "";
+    position: absolute;
+    top: -100rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-width: 68rpx;
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: #FFF3ED;
+}
+.omn-pop-desc {
+    text-align: center;
+}
+.omn-pop-desc .tit {
+    font-size: 28rpx;
+    font-weight: 600;
+    letter-spacing: .36rpx;
+    color: #713B0E;
+    position: relative;
+    display: inline-block;
+    width: 120rpx;
+    margin: 0 auto 24rpx;
+}
+.omn-pop-desc .tit::before,
+.omn-pop-desc .tit::after {
+    content: "";
+    width: 88rpx;
+    height: 4rpx;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url(https://images3.c-ctrip.com/train/2023/xiaochengxu/qiangpiao/8.60/quannengqiangpiao/img-xian.png) no-repeat;
+    background-size: contain;
+}
+.omn-pop-desc .tit::before {
+    left: -20rpx;
+    transform: translateX(-100%) rotate(180deg);
+}
+.omn-pop-desc .tit::after {
+    right: -20rpx;
+    transform: translateX(100%);
+}
+.omn-pop-right .more {
+    position: absolute;
+    bottom: 32rpx;
+    right: 32rpx;
+    font-size: 24rpx;
+    color: #5678A8;
+    line-height: 34rpx;
+    display: flex;
+    align-items: center;
+}
+.omn-pop-right .more .ifont-arr {
+    transform: rotate(90deg);
+    font-size: 20rpx;
+    margin-left: 4rpx;
+    background: rgb(255, 243, 236);
+}
+.omn-pop-pay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(120rpx + env(safe-area-inset-bottom));
+    background: #fff;
+    box-sizing: border-box;
+    padding: 16rpx 32rpx calc(16rpx + env(safe-area-inset-bottom));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1001;
+}
+.omn-pop-pay .price {
+    font-size: 44rpx;
+    color: #0088FF;
+    font-weight: 500;
+    line-height: 54rpx;
+    font-family: SFProDisplay-Medium;
+    padding-left: 26rpx;
+    position: relative;
+    margin-right: 12rpx;
+}
+.omn-pop-pay .price::before {
+    content: "￥";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 26rpx;
+    font-weight: 500;
+}
+.omn-pop-pay .sub {
+    font-size: 24rpx;
+    color: #0088FF;
+    font-weight: 500;
+    margin-right: auto;
+}
+.omn-pop-pay .btn {
+    font-size: 34rpx;
+    font-weight: 600;
+    color: #fff;
+    padding: 22rpx 44rpx;
+    border-radius: 12rpx;
+    background: linear-gradient(90deg, rgb(255, 165, 10) 0%, rgb(255, 119, 0) 100%);
+}

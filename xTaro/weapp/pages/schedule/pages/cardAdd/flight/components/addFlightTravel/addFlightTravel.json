@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "formid-button": "../../../../../timelineComponent/formid-button/formid-button"
+  },
+  "componentPlaceholder": {
+    "formid-button": "view"
+  }
+}

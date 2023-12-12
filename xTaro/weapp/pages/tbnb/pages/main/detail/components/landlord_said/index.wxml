@@ -1,0 +1,24 @@
+<view class="landlord-said {{isCtrip ? 'landlord-said-ctrip-bg' : ''}}" bindtap='_handleOpenLandlordPopup'>
+  <view class="landlord-said-top">
+    <view class="landlord-said-left">
+      <image class="landlord-said-head" src="{{topScroll.icon}}"></image>
+      <text class="landlord-said-left-title">{{topScroll.title}}</text>
+      <view class="say-context text-hidden">“{{topScroll.text}}</view>
+      <text>”</text>
+    </view>
+    <view class="landlord-said-right">
+      <text>更多</text>
+      <image class="landlord-said-right-more" src="https://pic.tujia.com/upload/festatic/mp/ndetail_down.png" />
+    </view>
+  </view>
+  <view class="landlord-said-bottom"></view>
+</view>
+<!-- 房东说设施 & 房东说周边 -->
+<bottom-popup id="bottomFrame" frameTitle="房东说" show="{{isShowLandlordPopup}}">
+  <view wx:for="{{topScroll.titleTips}}" wx:key="item">
+    <view class="landload-say-frame-desc">{{item.title}}</view>
+    <view class="landload-say-frame-context">
+      <text class="context-txt">{{item.introduction}}</text>
+    </view>
+  </view>
+</bottom-popup>

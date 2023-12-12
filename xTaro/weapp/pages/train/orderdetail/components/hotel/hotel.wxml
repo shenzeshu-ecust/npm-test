@@ -1,0 +1,37 @@
+<template name="hotel">
+    <view class="order-x-box order-x-box-img" id="hotelView">
+        <view class="order-x-box-title">
+            
+        <view class="hotel-tit">预订{{hotelConfig.cityname}}酒店
+        
+            <!-- <text class="fr txt-blue" bindtap="chooseCity">搜索其他城市</text> -->
+        </view>
+        <text class="hotel-txt">火车票用户订房</text>
+        <text class="hotel-subtxt"> 75折起</text>
+        <view class="hotel-desc">
+            房型升级 <text class="hotel-line"> |</text> 免费早餐  <text class="hotel-line"> |</text> 免费取消  <text class="hotel-line"> |</text> 延迟退房
+        </view>
+        </view>
+
+        <view class="order-x-hotel" bindtap="chooseDate">
+            <view class="station" bindtap="toHotelList">
+            <text class="station-txt">{{hotelConfig.cityname}}</text>
+            <image class="station-arrow" src="https://images3.c-ctrip.com/train/2021/app/V8.44/jiaocha/xiaochengxujiaru_faquanzhitiaorukou/icon_drop_down_59717.png" />
+            </view>
+            <view class="from" bindtap="toHotelList">{{hotelConfig.inDay}}入住</view>
+            <view class="day">{{hotelConfig.days}}晚</view>
+            <view class="to" bindtap="toHotelList">{{hotelConfig.outDay}}离店</view>
+        </view>
+        <button class="btn-search" hover-class="btn-x_hover" bindtap="toHotelList" data-ubt-key="c_train_wx_orderdetail_orderHotel">看看优惠好酒店</button>
+
+        <view class="hotel-list" wx:if="{{hotelList && hotelList.length}}" >
+          <view class="hotel-item" wx:for="{{hotelList}}" >
+              <image class="hotel-image" src="{{item.ImgUrl}}" data-url="{{item.JumpUrl}}" bindtap="toTrainOrderRecommendHotel"  />
+              <view class="hotel-name">{{item.Name}}</view>
+              <view class="hotel-score">{{item.ScoreDesc}}</view>
+              <view class="hotel-price">￥{{item.SalePriceDesc}}起<text wx:if="{{item.OriginalPriceDesc}}" class="hotel-originpPrice">{{item.OriginalPriceDesc}}</text> </view>
+          </view>
+        <button class="hotel-btn" data-url="{{jumpHotelIndexUrl}}" bindtap="toTrainOrderRecommendHotel" ></button>
+        </view>
+    </view>
+</template>

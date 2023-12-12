@@ -1,0 +1,17 @@
+.xinke-tequan-hd .cont{flex: 1;}
+.xinke-tequan-hd .tit{font-size: 32rpx;font-weight: 600;color: #262737;}
+.xinke-tequan-hd .tit text{color: #DBA46F;font-family: 'DIN Alternate';}
+.xinke-tequan-hd .txt{font-size: 22rpx;color: #A3A3B5;margin-top: 4rpx;}
+.xinke-tequan-hd .btn-get{width: 192rpx;height: 66rpx;border-radius: 66rpx;line-height: 66rpx;background: -webkit-linear-gradient(left,#EBC9B0,#DC995A);font-size: 26rpx;color: #262737;font-weight: 600;}
+.xinke-tequan-bd{padding: 8rpx 32rpx 32rpx;}
+
+.card-equity-bd {display: flex;}
+.card-equity-bd .item{flex:1;margin-right: 18rpx;height: 248rpx;border-radius: 6px;background: #F7F7FB;position: relative;text-align: center;padding: 60rpx 20rpx 20rpx;box-sizing: border-box;}
+.card-equity-bd .item:last-child{margin-right: 0;}
+.card-equity-bd .item::after{width: 62rpx;height: 62rpx;position: absolute;content: "";right: -40rpx;top: 94rpx;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/icon-and.png) no-repeat;background-size: cover;z-index: 2;}
+.card-equity-bd .item:last-child::after{display: none;}
+.card-equity-bd .tag{position: absolute;line-height: 32rpx;left: 50%;transform: translateX(-50%);top:0;padding: 0 10rpx;background: -webkit-linear-gradient(left,#EBC9B0,#DC995A);border-radius: 0 0 3px 3px;font-size: 18rpx;color: #fff;white-space: nowrap;}
+.card-equity-bd .icon{width: 70rpx;height: 70rpx;border-radius: 70rpx;box-shadow: 0 3px 10px rgba(231,177,125,.16);}
+.card-equity-bd .tit{margin-top: 20rpx;font-size: 30rpx;font-weight: 600;}
+.card-equity-bd .txt{margin-top: 4rpx;color: #A3A3B5;font-size: 22rpx;display: flex;flex-flow: row wrap;align-items: center;}
+.card-equity-bd .ifont-detail{margin:2px 0 0 6rpx;font-size: 20rpx;}

@@ -1,0 +1,423 @@
+@import '../common/iconfont.wxss';
+
+page{background: #141D52;}
+
+.cont{flex: 1;}
+button::after{border:0;}
+button {margin: 0;padding: 0;background-color: transparent;overflow: visible;}
+
+.tgold{color: #DBA46F;}
+
+.index-box{background: -webkit-linear-gradient(top,#1F2B64,#141D52 40%);}
+
+.top-bar{height: 88rpx;position: fixed;color: #fff;line-height: 88rpx;left:0;top:0;right:0;z-index: 100;}
+.top-bar.fixed{background: #1F2B64;}
+.top-bar .ifont-back{width: 96rpx;height: 88rpx;position: absolute;left: 0;bottom: 0;font-size: 36rpx;text-align: center;}
+.top-bar .tit{padding: 0 200rpx;font-size: 34rpx;font-weight: 600;text-align: center;}
+.guest-top{position: relative;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/guest-top.png) no-repeat left bottom;background-size: 100% 460rpx;}
+.guest-top.stu{background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/stu-top.png) no-repeat left bottom;background-size: 100% 460rpx;}
+.guest-top-bd{height: 300rpx;padding-top: 120rpx}
+.guest-top-bd .slogan{width: 510rpx;height: 68rpx;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/slogan.png) no-repeat;background-size: cover;margin: 0 auto;}
+.guest-top-bd .txt{text-align: center;color: #FFF8EE;font-weight: 600;font-size: 34rpx;margin-top: 20rpx;line-height: 42rpx;}
+.owner-top{position: relative;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/owner-top.png) no-repeat left bottom;background-size: 100% 350rpx;}
+.owner-top-bd{height: 200rpx;padding: 100rpx 52rpx 0;display: flex;align-items: flex-start;}
+.owner-top-bd .lbox{width: 128rpx;height:172rpx;position: relative;margin-right: 32rpx;overflow: hidden;}
+.owner-top-bd .icon-rock{width: 84rpx;height: 192rpx;position: absolute;background:url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/icon-rock.png) no-repeat;background-size: cover;left: 50%;top: 12rpx;margin-left: -42rpx;z-index: 5; animation: rock 1s linear infinite;}
+@-webkit-keyframes rock{
+  0%,100% {top: 12rpx;}
+  66%{top:0;}
+}
+.owner-top-bd .icon-light{width: 128rpx;height: 240rpx;position: absolute;background:url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/top-light.png) no-repeat;background-size: cover;left: 50%;top: 8rpx;transform: translateX(-50%);z-index: 4;animation: light 1.5s linear infinite;}
+@-webkit-keyframes light{
+  0% {top: 8rpx;}
+  100%{top:-152rpx;}
+}
+.owner-top-bd .cont{padding-top: 26rpx;}
+.owner-top-bd .tit{width: 412rpx;height: 52rpx;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/status-tit.png) no-repeat;background-size: 412rpx 108rpx;}
+.owner-top-bd .tit.now{background-position: 0 0;}
+.owner-top-bd .tit.suc{background-position: 0 -56rpx;}
+.owner-top-bd .txt{margin-top: 16rpx;font-size: 28rpx;color: #FFF8EF;font-weight: 600;}
+
+.wrap{position: relative;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/line-circle.png) no-repeat 0 22rpx;background-size: 120rpx 1900rpx;padding-bottom: 32rpx;padding-bottom: calc(9.662rpx + env(safe-area-inset-bottom));z-index: 10;}
+.guest-top + .wrap{margin-top: -10rpx;}
+.owner-top + .wrap{margin-top: -30rpx;}
+
+.notice-box{margin: 0 56rpx 24rpx;background: #272F64;border-radius: 0 7.246rpx 7.246rpx 7.246rpx;box-shadow: inset 0 0 9.662rpx rgba(255,255,255,.16);padding: 32rpx 28rpx;display: flex;align-items: center;position: relative;z-index: 2;}
+.notice-box .avatar{width: 64rpx;height: 64rpx;border-radius: 32rpx;margin-right: 20rpx;}
+.notice-box .cont{font-size: 26rpx;color: #9A9ABB;font-weight: 600;}
+.notice-box .strong{color: #fff;}
+
+.card-box{margin:0 32rpx 24rpx;position: relative;z-index: 2;}
+.card-xinke,.card-equity,.card-book,.card-suc{border-radius: 7.246rpx 7.246rpx 0 0;margin: 0 24rpx;position: relative;background:url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/piao-1.png) no-repeat #fff;background-size: 94rpx 70rpx;}
+.card-xinke::before,.card-equity::before,.card-book::before,.card-suc::before{width: 114rpx;height: 122rpx;position: absolute;content: "";right: -56rpx;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/piao-2.png) no-repeat;background-size: cover;z-index: 2;}
+.card-xinke::before{bottom: 66rpx;}
+.card-equity::before{bottom: 80rpx;}
+.card-book::before{bottom: 0;}
+.card-suc::before{bottom: 128rpx;}
+.card-xinke::after,.card-equity::after,.card-book::after,.card-suc::after{position: absolute;content: "";left: -24rpx;right: -24rpx;bottom: 0;z-index: -1;background: -webkit-linear-gradient(top,#3E488A 10%,#515CA4);border-radius: 14.493rpx 14.493rpx 0 0;}
+.card-xinke::after{top: 170rpx;}
+.card-equity::after{top:114rpx}
+.card-book::after{top:76rpx}
+.card-suc::after{top:128rpx}
+
+.card-btn{padding: 36rpx;border-radius: 0 0 8.454rpx 8.454rpx;background: -webkit-linear-gradient(top,#323B73,#272F64);box-shadow: 0 -3.019rpx 12.077rpx rgba(17,25,56,.3);position: relative;}
+.card-btn::before{width: 178rpx;height: 92rpx;position: absolute;content: "";left: -32rpx;bottom: 52rpx;z-index: -1;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/piao-3.png) no-repeat;background-size: cover;}
+.card-btn .btn-submit,.card-btn .btn-share{width:614rpx;height: 112rpx;border-radius: 112rpx;line-height: 112rpx;font-size: 40rpx;font-weight: 600;margin: 0 auto;background-repeat: no-repeat;background-size: cover;background-color: transparent;}
+.card-btn .btn-submit{background-image:url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/btn-submit.png);color: #262737;}
+.card-btn .btn-share{margin-top: 24rpx;background-image: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/btn-share.png);color: #E2B58B;}
+.card-btn .breathe{ animation: breathe 1s linear infinite;}
+.card-coupon-desc{}
+.card-coupon-desc .price{font-size:60rpx}
+.card-coupon-desc .yuan{font-size:26rpx;color: #262737;}
+.card-coupon-desc .name{font-size:30rpx;}
+.coupon-desc-text{width:100%;margin:24rpx auto;padding:10rpx;background: linear-gradient(-90deg, #272F64,#323B73 52.94%, #272F64 100%);}
+.coupon-desc-text{color:#ffffff;font-size: 24rpx;text-align: center;}
+@-webkit-keyframes breathe{
+  0%,100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.card-xinke-hd{height: 132rpx;border-radius: 7.246rpx 7.246rpx 0 0;display: flex;align-items: center;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/card-xinke-hd.png) no-repeat;background-size: 100% 136rpx;padding: 0 28rpx;}
+.card-xinke-hd .icon{width: 64rpx;height: 64rpx;border-radius: 64rpx;box-shadow: 0 1.812rpx 6.039rpx rgba(231,177,125,.16);margin-right: 16rpx;}
+.card-xinke-hd .tit{display: flex;align-items: center;flex-flow: row wrap;font-size: 32rpx;font-weight: 600;color: #303143;}
+.card-xinke-hd .tag{height: 38rpx;border-radius: 38rpx;margin-left: 12rpx;display: flex;align-items: center;flex-flow: row wrap;background: -webkit-linear-gradient(left,#EBC9B0,#DC995A);color: #fff;font-size: 20rpx;padding: 0 16rpx;}
+.card-xinke-hd .ifont-radio,.card-xinke-hd .ifont-lock{font-size: 20rpx;margin:2rpx 6rpx 0 0;font-weight: 400;}
+.card-xinke-hd .txt{margin-top: 4rpx;font-size: 22rpx;color: #A88B79;}
+.card-xinke-add{padding: 48rpx 70rpx 74rpx;display: flex;flex-flow: row wrap;justify-content: center;}
+.card-xinke-add .tit{font-size: 36rpx;color: #303143;text-align: center;font-weight: 600;width: 100%;margin-bottom: 36rpx;line-height: 44rpx;}
+.card-xinke-add .item{position: relative;width: 95rpx;text-align: center;margin-right: 40rpx;background: transparent;}
+.card-xinke-add .item:last-child{margin-right: 0;}
+.card-xinke-add .avatar{width: 96rpx;height: 96rpx;border-radius: 96rpx;border:8rpx solid #D8DBF7;display: block;margin: 0 auto;}
+.card-xinke-add .add{width: 112rpx;height: 112rpx;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/icon-add.png) no-repeat;background-size: cover;margin: 0 auto;}
+.card-xinke-add .txt{position: absolute;bottom: -18rpx;left: 60%;transform: translateX(-50%);line-height: 38rpx;padding: 0 16rpx;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;font-size: 20rpx;color: #fff;background: -webkit-linear-gradient(left,#8D96D5,#5D69BB);border-radius: 38rpx;max-width: 132rpx;box-sizing: border-box;}
+
+.card-xinke-frd{margin: 0 28rpx;padding: 28rpx 0;border-bottom: 1rpx solid #EDEEFD;display: flex;flex-flow: row wrap;align-items: center;}
+.card-xinke-frd .item{position: relative;margin-left: 16rpx;}
+.card-xinke-frd .item:first-child{padding-left: 0;margin-left: 0;}
+.card-xinke-frd .item::before{width: 0.604rpx;height: 64rpx;position: absolute;left: 0;top:50%;margin-top: -16rpx;content: "";background: #EDEEFD;transform: scale(0.5);transform-origin: left top;}
+.card-xinke-frd .item:first-child::before{display: none;}
+.card-xinke-frd .avatar{width: 46rpx;height: 46rpx;border-radius: 46rpx;display: block;}
+.card-xinke-frd .txt{margin-left: 12rpx;font-size: 26rpx;color: #303143;font-weight: 600;}
+
+.card-xinke-info{padding: 48rpx 0;text-align: center;}
+.card-xinke-info .tit{font-size: 36rpx;color: #303143;text-align: center;font-weight: 600;line-height: 44rpx;}
+.card-xinke-info .txt{font-size: 26rpx;margin-top: 8rpx;color: #A3A3B5;}
+
+
+/* .card-equity{padding: 40rpx 28rpx 40rpx;} */
+.card-equity{padding: 32rpx}
+.card-equity-hd{text-align: center;width: 100%;margin-bottom: 30rpx;color: #303143;font-weight: 600;}
+.card-equity-hd .tit{font-size: 36rpx;line-height: 44rpx;}
+.card-equity-hd .txt{margin-bottom: 12rpx;font-size: 30rpx;}
+.card-equity-hd .top{width: 404rpx;height: 66rpx;position: absolute;top:-20rpx;left: 50%;transform: translateX(-50%);background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/pop-equity-tit.png) no-repeat;background-size: cover;}
+.card-equity-hd .top + .txt{margin-top: 46rpx;}
+.card-equity-bd {display: flex;}
+.card-equity-bd .item{flex:1;margin-right: 18rpx;height: 248rpx;border-radius: 3.623rpx;background: #F7F7FB;position: relative;text-align: center;padding: 60rpx 20rpx 20rpx;box-sizing: border-box;}
+.card-equity-bd .item:last-child{margin-right: 0;}
+.card-equity-bd .item::after{width: 62rpx;height: 62rpx;position: absolute;content: "";right: -40rpx;top: 94rpx;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/icon-and.png) no-repeat;background-size: cover;z-index: 2;}
+.card-equity-bd .item:last-child::after{display: none;}
+.card-equity-bd .tag{position: absolute;line-height: 32rpx;left: 50%;transform: translateX(-50%);top:0;padding: 0 10rpx;background: -webkit-linear-gradient(left,#EBC9B0,#DC995A);border-radius: 0 0 1.812rpx 1.812rpx;font-size: 18rpx;color: #fff;white-space: nowrap;}
+.card-equity-bd .icon{width: 70rpx;height: 70rpx;border-radius: 70rpx;}
+.card-equity-bd .tit{margin-top: 20rpx;font-size: 30rpx;font-weight: 600;}
+.card-equity-bd .txt{margin-top: 4rpx;color: #A3A3B5;font-size: 22rpx;display: flex;flex-flow: row wrap;align-items: center;}
+.card-equity-bd .ifont-detail{margin:1.208rpx 0 0 6rpx;font-size: 20rpx;}
+
+.card-book{padding: 64rpx;text-align: center;}
+.card-book .tit{font-size: 36rpx;color: #303143;text-align: center;font-weight: 600;line-height: 44rpx;}
+.card-book .txt{font-size: 26rpx;margin-top: 8rpx;color: #A3A3B5;}
+
+.card-suc{padding: 48rpx 40rpx;}
+.card-suc .tit{font-size: 36rpx;color: #303143;text-align: center;font-weight: 600;line-height: 44rpx;text-align: center;}
+.card-suc-coupon{margin-top: 36rpx;height: 140rpx;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/pop-suc-coupon.png) no-repeat;background-size: 100% 140rpx;border-radius: 4.831rpx 8rpx 0 0;display: flex;align-items: center;padding: 0 28rpx;}
+.card-suc-coupon .icon{width: 64rpx;height: 64rpx;border-radius: 64rpx;box-shadow: 0 1.812rpx 6.039rpx rgba(231,177,125,.16);margin-right: 16rpx;}
+.card-suc-coupon .strong{font-size: 32rpx;color: #303143;font-weight: 600;}
+.card-suc-coupon .txt{font-size: 22rpx;color: #A88B79;margin-top: 4rpx;}
+
+.white-box{margin: 0 32rpx 24rpx;border-radius: 7.246rpx;background: #272F64;position: relative;z-index: 2;}
+
+.jinli-box{padding: 18rpx 12rpx 32rpx;}
+.jinli-hd{height: 122rpx;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/jingli-top.png) no-repeat;background-size: 100% 122rpx;}
+.jinli-bd{margin: 0 20rpx;background: #fff;border-radius: 3.623rpx;padding-bottom: 28rpx;}
+.jinli-get{height: 114rpx;border-radius: 3.623rpx 3.623rpx 0 0;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/jingli-bg.png) no-repeat;background-size: 100% 114rpx;display: flex;align-items: center;padding: 0 24rpx;}
+.jinli-get .cont{font-size: 32rpx;color: #303143;font-weight: 600;}
+.jinli-get .btn-get{width: 168rpx;height: 66rpx;border-radius: 66rpx;padding: 0;line-height: 66rpx;background: -webkit-linear-gradient(left,#FFB695,#FF4F4A);font-size: 26rpx;color: #fff;font-weight: 600;}
+.jinli-get .rbox{font-size: 26rpx;color: #A75C5C;font-weight: 600;}
+.jinli-info{margin: 32rpx 24rpx 0;display: flex;flex-flow: row wrap; justify-content: space-between;}
+.jinli-info .item{width: 130rpx;text-align: center;}
+.jinli-info .icon{display: block;margin: 0 auto;width: 64rpx;height: 64rpx;}
+.jinli-info .txt{font-size: 24rpx;font-weight: 600;color: #262737;margin-top: 16rpx;}
+
+.rule-box{padding:40rpx 36rpx 36rpx;}
+.rule-box .tit{text-align: center;font-size: 36rpx;color: #fff;font-weight: 600;margin-bottom: 40rpx;}
+.rule-box .tit::before,.rule-box .tit::after{width: 122rpx;height: 6rpx;display: inline-block;vertical-align: middle;content: "";margin: -1.208rpx 24rpx 0;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/rule-tit.png) no-repeat;background-size: 122rpx 14rpx;}
+.rule-box .tit::before{background-position: 0 0;}
+.rule-box .tit::after{background-position: 0 -8rpx;}
+.rule-box .txt{margin-top: 28rpx;font-size: 26rpx;color: #9A9ABB;}
+
+.blackmask{position: fixed;left: 0;top:0;right: 0;bottom: 0;z-index: 960;background: rgba(0,0,0,.7);}
+.pop-botm{position: fixed;left: 0;bottom: 0;right: 0;background: #fff;border-radius: 9.662rpx 9.662rpx 0 0;padding-bottom: env(safe-area-inset-bottom);z-index: 1000;}
+.pop-mid{position: fixed;left: 32rpx;right:32rpx;top: 50%;z-index: 1000;transform:translateY(-50%);}
+.pop-mid .ifont-closed{font-size: 64rpx;color: #fff;position: absolute;left: 50%;transform: translateX(-50%);bottom: -144rpx;}
+
+.pop-share{padding: 52rpx 144rpx 40rpx;display: flex;flex-flow: row wrap;justify-content: space-between;}
+.pop-share .item{text-align: center;}
+.pop-share .logo{width: 112rpx;height: 112rpx;display: block;margin: 0 auto;}
+.pop-share .txt{font-size: 28rpx;color: #262737;font-weight: 600;margin-top: 20rpx;}
+
+.pop-jinli-cont{background: -webkit-linear-gradient(top,#272F64 15%,#4C5592);border-radius: 7.246rpx 7.246rpx 0 0;padding-top: 16rpx;position: relative;}
+.pop-jinli-cont::after{width: 114rpx;height: 122rpx;position: absolute;content: "";right: -32rpx;bottom: 44rpx;background: url(https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/piao-2.png) no-repeat;background-size: cover;z-index: 2;}
+.pop-jinli .jinli-hd{margin: 0 16rpx;height: 120rpx;background-size: 100% 120rpx;}
+.pop-jinli .jinli-bd{padding-bottom: 36rpx;border-radius: 3.623rpx 3.623rpx 0 0;margin: 0 32rpx;}
+
+.pop-liuming .card-book::before,.pop-liuming .card-btn::before{display: none;}
+.pop-liuming .card-book{background-image: none;}
+
+
+/*分享好友底部弹窗*/
+.shadow {width: 100%;height: 100%;position: fixed;z-index: 100;background: rgba(0, 0, 0, 0.7);top: 0;left: 0;}
+.share-box{height:332rpx;background:#fff;border-radius:32rpx 32rpx 0 0;position:fixed;left:0;bottom:-332rpx;width:100%;z-index: 960;}
+.share-box.active{bottom:0;transition: all ease-in-out 300ms;}
+.share-box .title{font-size:40rpx;text-align:center;font-weight:bold;line-height:58rpx;padding-top:40rpx;}
+.share-box .title text{position:relative;}
+.share-box .title text::after,.share-box .title text::before{position:absolute;width:24rpx;height:4rpx;background:url(https://images3.c-ctrip.com/train/hd/20200305-ztrip-miandan/pop/Line.png) no-repeat;background-size:100% 100%;content:"";top:25rpx;}
+.share-box .title text::after{left:-38rpx;}
+.share-box .title text::before{right:-38rpx;}
+.share-box .share-btn{display:flex;justify-content:center;padding-top:20rpx;}
+.share-box .wx,.share-box .pyqs{width:128rpx;height:158rpx;margin:0 30rpx;}
+.share-box .wx{background:url(https://images3.c-ctrip.com/train/hd/20200305-ztrip-miandan/pop/wx.png) no-repeat;background-size:100% 100%;}
+.share-box .pyqs{background:url(https://images3.c-ctrip.com/train/hd/20200305-ztrip-miandan/pop/pyq.png) no-repeat;background-size:100% 100%;}
+.share-box .wx::after{ border: none; }
+.share-box .pyqs::after{ border: none; }
+
+.share-image {position: fixed;top: 0;left: 0;z-index: 1000;display: flex;justify-content: center;  align-items: center;width: 100vw;height: 100vh;}
+
+
+.coupon-bd {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16rpx;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  background: url(https://images3.c-ctrip.com/train/2021/app/V8.44/xiaochengxu/quanyifenxiang/img-coupons.png) ;
+  background-size: cover;
+  margin-top: 32rpx;
+}
+
+.coupon-left {
+  box-sizing: border-box;
+  padding: 40rpx 50rpx;
+}
+
+.coupon-left-txt {
+  color: #262737;
+  font-family: PingFangSC-Regular;
+  font-size: 60rpx;
+  margin-bottom: 14rpx;
+}
+
+.coupon-left-price {
+  color:  #262737;
+  font-size: 60rpx;
+  font-weight: 500;
+  line-height: 60rpx;
+}
+
+.coupon-left-price text {
+  font-size: 26rpx;
+  line-height: 32rpx;
+}
+
+.coupon-right {
+  padding: 32rpx 24rpx 18rpx 24rpx;
+  flex: 1;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.coupon-right .txts-title {
+  color: #333333;
+  font-size: 30rpx;
+  font-weight: 500;
+  line-height: 38rpx;
+  padding-bottom: 10rpx;
+  padding-left: 10rpx;
+  position: relative;
+}
+.coupon-right .txts-title .icon-doc {
+  height: 26rpx;
+  width: 26rpx;
+}
+.coupon-right .txts-date {
+  color: #999999;
+  font-size: 22rpx;
+  line-height: 32rpx;
+  padding-left: 10rpx;
+  padding-bottom: 26rpx;
+}
+.coupon-box{height:482rpx;background:#fff;border-radius:32rpx 32rpx 0 0;position:fixed;left:0;bottom:-482rpx;width:100%;z-index: 960;}
+.coupon-box.active{bottom:0;transition: all ease-in-out 300ms;}
+.coupon-box .title{font-size:40rpx;text-align:center;font-weight:bold;line-height:58rpx;padding-top:40rpx;padding-bottom:36rpx}
+.coupon-box .coupon-rule .item {display: block;padding: 12rpx 32rpx;}
+.coupon-box .coupon-rule .item:last-child{ padding-bottom: 46px;}
+.coupon-box .ifont-closed-line {font-size: 34rpx;color: #B8B8B8;position: absolute;left: 5%;}
+
+.new-user-card-box .ticket-container {
+  
+}
+.new-user-card-box .ticket-container .ticket-box {
+  display: flex;
+  height: 134rpx;
+width: 574rpx;
+align-items: center;
+background: url(https://images3.c-ctrip.com/train/2022/app/8.52/zhuliucheng/jihetu/img-quan.png)no-repeat;
+background-size: contain;
+margin-bottom: 20rpx;
+}
+.new-user-card-box .ticket-container .ticket-box:last-child {
+margin-bottom: 0;
+}
+.new-user-card-box .ticket-container .ticket-box .ticket-box-left {
+  width: 154rpx;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+
+.new-user-card-box .ticket-container .ticket-box .ticket-box-left .ticket-tip {
+  position: absolute;
+  color: #b0622e;
+font-family: PingFangSC-Regular;
+font-size: 20rpx;
+font-weight: normal;
+padding: 4rpx 12rpx;
+/* height: 13px; */
+/* line-height: 13px; */
+/* width: 50px; */
+background: linear-gradient(-90deg, rgb(250, 204, 163) 0%, rgba(255, 242, 228, 0.24) 100%);
+border-radius: 6px 0px 6px 0px;
+left: 0;
+top: 0;
+}
+
+.new-user-card-box .ticket-container .ticket-box .ticket-box-left .ticket-price {
+  /* background: #262737; */
+/* border: 0.5px solid #262737; */
+color: #262737;
+font-size: 26rpx;
+font-family: PingFangSC-Semibold;
+height: 48rpx;
+align-items: center;
+margin-top: 16rpx;
+}
+.new-user-card-box .ticket-container .ticket-box .ticket-box-left .ticket-price text{
+  height: 48rpx;
+  line-height: 48rpx;
+  display: inline-block;
+}
+.new-user-card-box .ticket-container .ticket-box .ticket-box-left .ticket-price .num{
+  /* font-size: 50rpx; */
+  font-size: 56rpx;
+}
+.new-user-card-box .ticket-container .ticket-box .ticket-box-right {
+  width: 420rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 28rpx;
+}
+.new-user-card-box .ticket-container .ticket-box .ticket-box-right .ticket-name{
+  color: #262737;
+font-family: PingFangSC-Semibold;
+font-size: 34rpx;
+font-weight: 600;
+display: flex;
+align-items: center;
+line-height: 48rpx;
+}
+.new-user-card-box .ticket-container .ticket-box .ticket-box-right .ticket-name .ifont-arr{
+  font-size: 19rpx;
+  padding-left: 4rpx;
+  line-height: 48rpx;
+}
+.new-user-card-box .ticket-container .ticket-box .ticket-box-right .ticket-desc{
+  color: #999999;
+  font-family: SFProText-Regular;
+  font-size: 24rpx;
+  font-weight: normal;
+}
+
+.qrcode-container {
+  background: url('https://images3.c-ctrip.com/train/2022/app/8.56/zengzhang/zhuli/kap.png') no-repeat;
+  /* height: 363rpx; */
+  height: 750rpx;
+  width: 100%;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.qrcode-container .qrcode {
+  width: 343rpx;
+  height: 343rpx;
+  border-radius: 8px;
+  margin-top: 50rpx;
+}
+.qrcode-container .title {
+  margin-top: 54rpx;
+color: #fff9e8;
+font-size: 34rpx;
+font-family: PingFangSC-Semibold;
+font-weight: 600;
+background: linear-gradient(-90deg, rgb(237, 211, 181) 0%, rgb(227, 176, 127) 100%);
+border-radius: 21px;
+padding: 10rpx 48rpx;
+/* box-shadow: 0px 2px 8px 0px rgba(122, 73, 17, 0.34); */
+}
+.qrcode-container .subtitle {
+color: #ffffff;
+font-size: 26rpx;
+margin-top: 8rpx;
+font-family: PingFangSC-Medium;
+font-weight: 500;
+}
+.qrcode-container .tips {
+  margin-top: 48rpx;
+color: #fff9e8;
+font-size: 30rpx;
+font-family: PingFangSC-Semibold;
+font-weight: 600;
+}
+.qrcode-container .hand-illustration {
+  position: absolute;
+  width: 188rpx;
+  right: 83rpx;
+  bottom: 150rpx;
+  animation: handAni 0.96s ease-in-out infinite;
+}
+
+@keyframes handAni {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-0.3rem, -0.3rem, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.card-box.without-side-margin {
+  margin-left: 0;
+  margin-right: 0;
+}

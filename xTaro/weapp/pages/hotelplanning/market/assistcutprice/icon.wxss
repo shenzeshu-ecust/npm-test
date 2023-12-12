@@ -1,0 +1,132 @@
+.ast-icon {
+    background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/spritesheet4.png);
+    background-repeat: no-repeat;
+    background-size: 968rpx 578rpx;
+}
+
+.ast-arrow {
+    width: 150rpx;
+    height: 150rpx;
+    background-position: -12rpx -12rpx;
+}
+
+.ast-btn-large {
+    width: 630rpx;
+    height: 124rpx;
+    background-position: -12rpx -186rpx;
+    border: none;
+}
+
+.ast-bz {
+    width: 105rpx;
+    height: 36rpx;
+    background-position: -186rpx -12rpx;
+}
+
+.ast-check {
+    width: 34rpx;
+    height: 34rpx;
+    background-position: -315rpx -12rpx;
+}
+
+.ast-check-current {
+    width: 33rpx;
+    height: 33rpx;
+    background-position: -371rpx -12rpx;
+}
+
+.ast-checkpoint-fail {
+    width: 126rpx;
+    height: 138rpx;
+    background-position: -427rpx -12rpx;
+}
+
+.ast-checkpoint-success {
+    width: 126rpx;
+    height: 138rpx;
+    background-position: -12rpx -334rpx;
+}
+
+.ast-fail {
+    width: 236rpx;
+    height: 92rpx;
+    background-position: -162rpx -334rpx;
+}
+
+.ast-friends {
+    width: 33rpx;
+    height: 33rpx;
+    background-position: -577rpx -12rpx;
+}
+
+.ast-grident-title {
+    width: 505rpx;
+    height: 70rpx;
+    background-position: -12rpx -496rpx;
+}
+
+.ast-head {
+    width: 306rpx;
+    height: 60rpx;
+    background-position: -633rpx -12rpx;
+}
+
+.ast-invite {
+    width: 74rpx;
+    height: 74rpx;
+    background-position: -666rpx -96rpx;
+}
+
+.ast-jz {
+    width: 105rpx;
+    height: 36rpx;
+    background-position: -186rpx -96rpx;
+}
+
+.ast-lock {
+    width: 136rpx;
+    height: 136rpx;
+    background-position: -762rpx -96rpx;
+}
+
+.ast-logo {
+    width: 352rpx;
+    height: 80rpx;
+    background-position: -422rpx -334rpx;
+}
+
+.ast-pop {
+    width: 65rpx;
+    height: 34rpx;
+    background-position: -315rpx -96rpx;
+}
+
+.ast-rank-1 {
+    width: 34rpx;
+    height: 33rpx;
+    background-position: -577rpx -96rpx;
+}
+
+.ast-rank-2 {
+    width: 34rpx;
+    height: 33rpx;
+    background-position: -922rpx -96rpx;
+}
+
+.ast-rank-3 {
+    width: 34rpx;
+    height: 33rpx;
+    background-position: -922rpx -153rpx;
+}
+
+.ast-success {
+    width: 236rpx;
+    height: 92rpx;
+    background-position: -541rpx -438rpx;
+}
+
+.ast-title {
+    width: 36rpx;
+    height: 36rpx;
+    background-position: -666rpx -210rpx;
+}

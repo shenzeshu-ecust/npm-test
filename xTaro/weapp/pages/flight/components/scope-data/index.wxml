@@ -1,0 +1,2 @@
+<!-- 微信SEO -->
+<view id="seo" style="position: absolute; top: -2000rpx;" wx:scope-data="{{...wxSEOdata}}"></view>

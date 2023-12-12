@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "验证",
+  "backgroundColorTop": "#0086F6",
+  "backgroundColorBottom": "#EEF1F6",
+  "navigationBarBackgroundColor": "#0086F6",
+  "disableScroll": true,
+  "disableSwipeBack": true,
+  "usingComponents": {
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index",
+    "authorization-float": "/cwx/component/authorizationFloat/index"
+  }
+}

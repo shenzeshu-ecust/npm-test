@@ -1,0 +1,18 @@
+.load-fail-view {
+  height: 800rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.load-fail-icon-image {
+  width: 180rpx;
+  height: 180rpx;
+}
+
+.load-fail-text {
+  margin-top: 40rpx;
+  font-size: 30rpx;
+  color: #666;
+}

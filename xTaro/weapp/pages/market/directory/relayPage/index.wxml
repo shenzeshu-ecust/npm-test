@@ -1,0 +1,129 @@
+<perinfo-protect-float></perinfo-protect-float>
+
+
+<nav-bar title-color="#000000" bind:lefttap="backWebAct" home-page="{{pageOption.jumpBack || '/pages/home/homepage'}}" title="{{pageOption.pageTitle || pageConfig.pageTitle || ''}}"></nav-bar>
+<view class="layout">
+  <image src="{{pageOption.bgdPic || pageConfig.bgdPic}}" class="bg_img" mode="widthFix"></image>
+  <view class="buttom_img_box" style="top: {{btnPicTop}}rpx;" wx:if="{{pageOption.bgdPic || pageConfig.bgdPic}}">
+    <!-- 分享 -->
+    <block wx:if="{{shareType == 'A'}}">
+      <block wx:if="{{pageBottomShareType == 'A'}}">
+        <!-- 直接分享 -->
+        <button class="buttom_img_box_share" open-type="share" style="z-index: 2;"></button>
+        <image src="{{pageOption.btnPic || pageConfig.btnPic}}" mode="widthFix" class="buttom_img"></image>
+      </block>
+      <block wx:if="{{pageBottomShareType == 'B'}}">
+        <!-- 预览海报 -->
+        <image src="{{pageOption.btnPic || pageConfig.btnPic}}" bindtap="previewPoster" mode="widthFix" class="buttom_img"></image>
+      </block>
+      <block wx:if="{{pageBottomShareType == 'C'}}">
+        <!-- 正常逻辑 -->
+        <image src="{{pageOption.btnPic || pageConfig.btnPic}}" bindtap="start" mode="widthFix" class="buttom_img">
+        </image>
+      </block>
+    </block>
+    <!-- 订阅 -->
+    <block wx:if="{{shareType == 'B'}}">
+      <image src="{{pageOption.btnPic || pageConfig.btnPic}}" bindtap="start" mode="widthFix" class="buttom_img">
+      </image>
+    </block>
+    <!-- 分享+订阅 -->
+    <block wx:if="{{shareType === 'C'}}">
+      <!-- 正常逻辑 -->
+      <image src="{{pageOption.btnPic || pageConfig.btnPic}}" bindtap="start" mode="widthFix" class="buttom_img">
+      </image>
+    </block>
+    <!-- 激励广告 -->
+    <view class="buttom_img" wx:if="{{shareType == 'D'}}" bindtap="{{(pageOption.ad && (adTask[0] < adTask[1])) ? 'debounceOpenAd' : 'backWebAct'}}">
+      <image src="{{pageOption.btnPic || pageConfig.btnPic}}" mode="widthFix"></image>
+      <!-- 激励广告任务 没完成 -->
+      <view class="warn" wx:if="{{pageOption.ad && (adTask[0] < adTask[1])}}">开始观看({{adTask[0]}}/{{adTask[1]}})</view>
+      <!-- 激励广告任务 完成 -->
+      <view class="warn" wx:if="{{pageOption.ad && (adTask[0] >= adTask[1])}}">返回领奖励</view>
+    </view>
+    <!-- 分享任务 -->
+    <view class="buttom_img" wx:if="{{shareType == 'E'}}" bindtap="{{(!taskStatus) ? 'start' : 'backWebAct'}}">
+      <image src="{{pageOption.btnPic || pageConfig.btnPic}}" mode="widthFix"></image>
+      <!-- 激励广告任务 没完成 -->
+      <view class="warn" wx:if="{{!taskStatus}}">开始订阅</view>
+      <!-- 激励广告任务 完成 -->
+      <view class="warn" wx:else>返回活动</view>
+    </view>
+    <!-- 纯跳转 -->
+    <block wx:if="{{shareType === 'F'}}">
+      <!-- 正常逻辑 -->
+      <image src="{{pageOption.btnPic || pageConfig.btnPic}}" bindtap="customJump" mode="widthFix" class="buttom_img">
+      </image>
+    </block>
+  </view>
+
+  <!-- 预览图片视频下载 -->
+  <block wx:if="{{pageOption.pageFunction === 'G'}}">
+    <image src="{{pageOption.downposter}}" mode="widthFix" class="preview_poster" bindtap="preQrcode" wx:if="{{pageOption.downposter}}"></image>
+    <video class="preview_video_box" bindloadedmetadata="loadVideo" src="{{pageOption.downvideo}}" loop autoplay controls="{{false}}" vslide-gesture object-fit="cover" style="height: {{downmedia.height}}rpx;" wx:if="{{pageOption.downvideo}}"></video>
+    <block wx:if="{{pageOption.btnPicTop || pageConfig.btnPicTop}}">
+      <view class="preview_down_btn" style="top: {{btnPicTop}}rpx;bottom: auto;" wx:if="{{(pageOption.downvideo || pageOption.downposter) && pageOption.downbutton}}">
+        <image src="{{pageOption.downbutton}}" mode="widthFix" class="preview_down_btn_img" bindtap="saveFile" />
+      </view>
+    </block>
+    <block wx:else="">
+      <view class="preview_down_btn" wx:if="{{(pageOption.downvideo || pageOption.downposter) && pageOption.downbutton}}">
+        <image src="{{pageOption.downbutton}}" mode="widthFix" class="preview_down_btn_img" bindtap="saveFile" />
+      </view>
+    </block>
+  </block>
+
+</view>
+
+<!-- 分享 弹窗 -->
+<trip_popup show="{{maskType > 0}}" l-bg-class="mask" content-align="bottom" locked="{{false}}">
+  <view class="share-bg" wx:if="{{maskType == 1}}">
+    <view class="popop_title">请选择分享方式</view>
+    <view class="close" bindtap="changeMaskType" data-status="{{0}}"></view>
+    <block wx:if="{{pageBottomShareType == 'A'}}">
+      <view class="share-wechat" style="padding:0;">
+        <button class="item reset-button" open-type="share">
+          <view class="img share_button"></view>
+          <view>发送到好友</view>
+        </button>
+      </view>
+    </block>
+    <block wx:if="{{pageBottomShareType == 'B'}}">
+      <view class="share-wechat">
+        <view class="item" bindtap="openPoster" data-status="{{11}}" style="padding:0;">
+          <view class="img share_poster"></view>
+          <view>分享到朋友圈</view>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{pageBottomShareType == 'C'}}">
+      <view class="share-wechat">
+        <view class="item" bindtap="openPoster" data-status="{{11}}">
+          <view class="img share_poster"></view>
+          <view>分享到朋友圈</view>
+        </view>
+        <button class="item reset-button" open-type="share">
+          <view class="img share_button"></view>
+          <view>发送到好友</view>
+        </button>
+      </view>
+    </block>
+  </view>
+
+  <block wx:if="{{maskType == 2}}">
+    <view class="qq-share">
+      <image class="qq-share-image" src="https://images3.c-ctrip.com/marketing/task_components/static/arraw.png"></image>
+      <view class="qq-share-text1">发送给QQ好友</view>
+    </view>
+  </block>
+
+  <!--分享二维码-->
+  <scroll-view scroll-y class="share-layer" wx:if="{{maskType == 11}}">
+    <image src="{{posterImg}}" style="height: {{posterHeight}}px;" binderror="" class="img" bindtap="changeMaskType" data-status="{{1}}" bindlongtap="savePic"></image>
+  </scroll-view>
+</trip_popup>
+
+<canvas canvas-id="mycanvas" style="height: {{posterHeight}}px;" class="post_canvas"></canvas>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

@@ -1,0 +1,195 @@
+<view class="pay-index-container {{nopayment? 'hideview':''}}">
+	<view class="pay-order-detail">
+        <view class="detail-titlebox">
+		<view class="title">
+            <view id="detail-titlewrap" class="title-mainbox {{showMoreTitle ? 'title-moreopen':''}}">
+                <view class="title-maintxt" id="detail-titletxt">
+                {{payData.title}}
+                </view>
+                <block wx:if="{{isMoreTitle}}">
+                <view class="detail-moretitle" bindtap="showMoreTitle">
+                    <block wx:if="{{showMoreTitle}}">
+                    <text class="moretitle-txt">收起</text>
+                    </block>
+                    <block wx:else>
+                    ...<text class="moretitle-txt">展开</text>
+                    </block>
+                </view>
+                </block>
+            </view>
+            <block wx:if="{{payData.customTitle && payData.customTitle.checkin}}">
+            <view class="title-props">
+                <text class="tprops-tag">{{payData.customTitle.checkin}}</text>入住
+                <text class="tprops-tag tag-space">{{payData.customTitle.checkout}}</text>离店
+                <text class="tprops-tag tag-space">{{payData.customTitle.night}}</text>晚
+                <text class="tprops-tag tag-space">{{payData.customTitle.room}}</text>间
+            </view>
+            </block>
+        </view>
+        <block wx:if="{{payData.subtitle}}">
+        <text class="other">{{payData.subtitle}}</text>
+        </block>
+        </view>
+		<view class="price">
+			<text class="price-title">应付总额：</text>
+			<text class="price-ncy">{{payData.currency}} </text>
+			<text class="price-content">{{payData.disp_Amount}}</text>
+            <block wx:if="{{payData.displayCurrency && payData.displayAmount}}">
+            <view class="cny-pricebox">
+                <text class="price-ncy">{{payData.displayCurrency}} </text>
+                <text class="cny-price">{{payData.displayAmount}}</text>
+                （仅参考，实际支付金额以银行扣款为准）
+            </view>
+            </block>
+		</view>
+    </view>
+    <block wx:if="{{oneselfInfos}}">
+    <view class="pay-oneself-tip">该产品仅限“<text class="txt-orange">{{oneselfInfos.name}}</text>”的支付账户进行支付，如需使用其他账户，请返回修改购买人信息</view>
+    </block>
+    <!--new card panel-->
+    <block wx:if="{{carData.length > 0}}">
+    <view>
+        <block wx:if="{{cardLimit}}">
+        <text class="cardpay-tips">本产品仅限以下银行卡进行支付</text>
+        </block>
+        <!--new card panel-->
+        <block wx:if="{{cardBinScuess}}">
+        <view class="cardpay-inputswrap">
+            <view class="cardpay-head">
+                <view class="cardpay-icon bankicon-{{cardInfos.typeid}}"></view>
+                <view class="cardpay-name">
+                    {{cardInfos.typename}} 信用卡
+                    <text class="card-number">{{cardInfos.cardNum}}</text>
+                </view>
+                <view class="cardpay-change" bindtap="cardBinScene">更换</view>
+            </view>
+            <view class="cardpay-inputsbox">
+                <block wx:if="{{(policy & 64) === 64}}">
+                <label class="inputitem {{(focusKey & 1) === 1 ? 'input-focused':''}}">
+                    <view class="inputname-box">卡有效期<text class="input-tiptxt">月份/年份（如：09/23）</text></view>
+                    <view data-key="1" class="cardpay-qicon" bindtap="showTips"></view>
+                    <input value="{{inputKeys[1]}}" class="police-input" type="text" maxlength="5" />
+                    <view data-key="1" class="active-input" bindtap="activeInput">
+                    <input data-key="1" class="cbinput-css cbinput-active" type="number" auto-focus="{{focusList[1]}}" focus="{{focusList[1]}}" maxlength="4" bindinput="bindKeyInput" bindfocus="focusAction" bindblur="blurAction" value="{{cinputData[1]}}" cursor-spacing="30" />
+                    </view>
+                </label>
+                </block>
+                <block wx:if="{{(policy & 1) === 1}}">
+                <label class="inputitem {{(focusKey & 2) === 2 ? 'input-focused':''}}">
+                    <view class="inputname-box">卡验证码<text class="input-tiptxt">卡背面{{cardCvvMax}}位数字</text></view>
+                    <view data-key="2" class="cardpay-qicon" bindtap="showTips"></view>
+                    <input value="{{inputKeys[2]}}" class="police-input" type="text" maxlength="{{cardCvvMax}}" />
+                    <view data-key="2" class="active-input" bindtap="activeInput">
+                    <input data-key="2" class="cbinput-css cbinput-active" type="number" auto-focus="{{focusList[2]}}" focus="{{focusList[2]}}" maxlength="{{cardCvvMax}}" bindinput="bindKeyInput" bindfocus="focusAction" bindblur="blurAction" value="{{cinputData[2]}}" cursor-spacing="30" />
+                    </view>
+                </label>
+                </block>
+                <block wx:if="{{(policy & 2) === 2}}">
+                <label class="inputitem" for="pay-cardhold">
+                    <input id="pay-cardhold" value="{{inputKeys[4]}}" data-key="4" class="police-input {{(focusKey & 4) === 4 ? 'input-focused':''}}" type="text" maxlength="40" bindinput="bindKeyInput" bindfocus="focusAction" bindblur="blurAction"  cursor-spacing="30" />
+                    <view class="inputname-box">持卡人</view>
+                </label>
+                </block>
+            </view>
+            <view class="cardpay-overdue">
+                <view>请仔细阅读并充分理解 <text data-id="0" class="overdue-txt" bindtap="quickTip">《快捷支付协议》</text></view>
+            </view>
+        </view>
+        <view class="pay-button-full cardpay-submitbtn">
+            <button bindtap="cardPaysubmit" hover-class="hover">
+            {{payData.btnTxt}}
+            </button>
+        </view>
+        </block>
+        <block wx:else>
+        <view class="cardpay-box">
+            <block wx:for="{{carData}}" wx:key="typeid">
+            <view class="cardpay-item">
+                <view class="cardpay-icon bankicon-{{item.typeid}}"></view>
+                <view data-key="{{item.typeid}}" class="cardpay-name" bindtap="cardBinScene">{{item.typename}} 信用卡</view>
+            </view>
+            </block>
+        </view>
+        </block>
+    </view>
+    </block>
+    <block wx:else>
+    <block wx:if="{{weiChatPay}}">
+    <view class="pay-order-method">
+        <view class="pay-order-item wechat-pay"> 
+            <view class="icon"></view>
+            <view class="info">
+                <view class="name">微信支付</view>
+            </view>
+        </view>
+	</view>
+	<view class="pay-button-full">
+		<button bindtap="weicatPaysubmit" hover-class="hover">
+		  {{payData.btnTxt}}
+		</button>
+	</view>
+    </block>
+    </block>
+	<view class="pay-button-bottom {{introButtonShow? '':'hideview'}}">
+	  <text class="pay-intro-link" bindtap="openInstructionsModal">担保说明</text>
+      <block wx:if="{{carData.length > 0}}">
+      <text data-id="1" class="pay-intro-link" bindtap="quickTip">信用卡安全说明</text>
+      <text data-id="2" class="pay-intro-link" bindtap="quickTip">温馨提示</text>
+      </block>
+	</view>
+</view>
+<view class="hnopay {{nopayment? '':'hideview'}}">
+	<view class="hpayeicon"></view>
+	<text class="hpayetext">
+	您预订的产品无法进行微信支付，请至携程应用程序订购或电话联系我们
+	</text>
+</view>
+<view class="pay-modal-mask" hidden="{{instructionsModalHidden}}"></view>
+<view class="pay-modal {{cardBin? 'cpop-modal' : ''}}" hidden="{{instructionsModalHidden}}">
+    <block wx:if="{{cardBin}}">
+        <view class="cpop-head">
+        新增银行卡
+        <view class="cpop-close" bindtap='closeInstructionsModal'>X</view>
+        </view>
+        <view class="cardbin-wrap">
+            <view class="cpop-tipbox">请输入<text class="cpop-tiptxt">{{cardBinTxt}}</text>卡号</view>
+            <view class="cpop-form">
+                <label class="cardbin-label">
+                    <input class="cbinput-css" placeholder="{{cardBinTxt}}号" placeholder-class="cbinput-holder" type="text" maxlength="23" value="{{inputKeys[256]}}" />
+                    <view data-key="256" class="active-input" bindtap="activeInput">
+                    <block wx:if="{{focusList[256]}}">
+                    <input data-key="256" auto-focus="{{focusList[256]}}" focus="{{focusList[256]}}" class="cbinput-css cbinput-active" type="number" maxlength="19" bindinput="bindKeyInput" value="{{cinputData[256]}}" />
+                    </block>
+                    </view>
+                    <view data-key="256" class="cinput-clearbox" bindtap="clearInput" hidden="{{clearIconHide}}">
+                        <view data-key="256" class="cinput-clear"></view>
+                    </view>
+                </label>
+                <text class="cpop-stip">此订单支持境外信用卡</text>
+            </view>
+            <view class="pay-button-full">
+                <button bindtap="cardBinSubmit" hover-class="hover">
+                下一步
+                </button>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="pay-modal-content">
+            <view class="pay-modal-header">
+                <text class="pay-modal-title">{{introTextData.title}}</text>
+                <block wx:if="{{introTextData.img}}">
+                    <image style="width: 100%; padding-top: 20px" mode="widthFix" src="{{introTextData.img}}"></image>
+                </block>
+                <block wx:if="{{introTextData.subTitle}}">
+                    <text class="pay-modal-subtitle">{{introTextData.subTitle}}</text>
+                </block>
+                <view class="pay-modal-close" bindtap='closeInstructionsModal'>关闭</view>
+            </view>
+            <view class="pay-modal-body">{{introTextData.desc}}</view>
+        </view>
+    </block>
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

@@ -1,0 +1,3 @@
+<view wx:if='{{isShowLoading}}' class='loading-container'>
+  <image src='https://pages.c-ctrip.com/schedule/pic/wxxcx/cts_loading_white.gif'></image>
+</view>

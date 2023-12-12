@@ -1,0 +1,182 @@
+/** 通用 **/
+.dw_main_wrap{background-color: #fff;font-family: "Hiragino Sans GB",Arial,"Microsoft Yahei",sans-serif;color: #333;}
+
+.dw_mdpop_main{width:80%;max-width:414px;position:fixed;top:48%;left:50%;-webkit-transform: translate(-50%,-50%);transform: translate(-50%,-50%);z-index:2002;font-size: 32px;font-size: 8.5vw;color: #fce389;}
+.dw_mdpop_main .pop_pic{display: block;width: 100%;}
+/* .dw_mdpop_main .dw_btn{width: 100%;font-size: 20px;line-height: 45px;height: 45px;background-color: transparent;color: #fff;} */
+
+
+.dw_pop_mask{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,.8);z-index: 1050;transition: opacity .2s linear;}
+button.pop_close{position: absolute;bottom:-105rpx;left:50%;width: 40px;height: 40px;color: #fff;border:1px solid #fff;border-radius: 50%;transform: translateX(-50%);padding: 0;overflow: visible;background-color: transparent;}
+button.pop_close:before,button.pop_close:after{content: "";position: absolute;top:50%;left:50%;width: 22px;height: 0;border-top: 1px solid;margin-left:-11px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
+button.pop_close:after{-webkit-transform:rotate(45deg);transform:rotate(45deg);-webkit-transform-origin:center;transform-origin:center;}
+.pop_close.swing{position: fixed;top:50%;z-index: 1051;opacity: 0;animation: scalein .8s steps(1) forwards;transform: translate(-50%,-50%);margin-top: 390rpx;}
+/* .dw_btn.white{background-color: #fff;color: #cf3a50;box-sizing: border-box;border:1px #e1e1e1 solid;}
+.dw_btn.yellow{background-color: #fffbeb; color: #d33f54;} */
+
+.animate_fadeout{display: none;}
+.animate_boxout{-webkit-animation: boxout .5s ease-in forwards;animation: boxout .5s ease-in forwards;-webkit-transform-origin: left top;transform-origin: left top;}
+.animate_boxin{-webkit-animation: .5s boxin .5s ease-out forwards;animation:.5s boxin .5s ease-out forwards;}
+@-webkit-keyframes boxout{
+    100%{top:100%;-webkit-transform: scale(.1);transform: scale(.1);opacity: 0}
+}
+@keyframes boxout{
+    100%{top: 100%;-webkit-transform: scale(.1);transform: scale(.1);opacity: 0}
+}
+@-webkit-keyframes boxin{
+    0%{-webkit-transform:rotate(0);transform:rotate(0);}
+    50%{-webkit-transform:rotate(20deg);transform:rotate(20deg);}
+    70%{-webkit-transform:rotate(-20deg);transform:rotate(-20deg);}
+    90%{-webkit-transform:rotate(20deg);transform:rotate(20deg);}
+    100%{-webkit-transform:rotate(0);transform:rotate(0);}
+}
+@keyframes boxin{
+    0%{-webkit-transform:rotate(0);transform:rotate(0);}
+    50%{-webkit-transform:rotate(20deg);transform:rotate(20deg);}
+    70%{-webkit-transform:rotate(-20deg);transform:rotate(-20deg);}
+    90%{-webkit-transform:rotate(20deg);transform:rotate(20deg);}
+    100%{-webkit-transform:rotate(0);transform:rotate(0);}
+}
+@media screen and (max-width: 340px){
+    .dw_mdpop_main{width: 80%;font-size: 27px;font-size: 8.5vw;}
+    .dw_mdpop_main .dw_btn{margin-top: 3%;}
+}
+@media screen and (min-width: 375px){
+    .dw_mdpop_main{font-size: 32px;}
+}
+
+/** 首页活动 **/
+.home_main_wrap .dw_smpop_wrap{position: fixed;background-size: 100%;background-repeat: no-repeat;transition: right 300ms;z-index: 2001;}
+.home_main_wrap .dw_smpop_wrap .sm_btn{width: 100%;height: 100%;border: none;}
+.home_main_wrap .bigImg_formButton{width:100%;height:100%;z-index:3;position:absolute;border:none;}
+
+
+
+/** 首页- 互动屏浮层 **/
+.hdp_main_wrap{position:fixed;width:85%;max-width:414px;top:50%;left:50%;transform: translate(-50%,-50%);z-index:2002;animation: scalein .5s ease-in forwards;}
+.hdp_main_wrap .pic{width:100%;}
+/* .hdp_main_wrap .coupon_wrap .coupon_close{position: absolute;bottom: 0;left: 50%;width: 100rpx;height: 60rpx;transform: translateX(-50%);} */
+.hdp_main_wrap .btn_coupon{position: absolute;bottom: -20rpx;left: 50%;transform: translateX(-50%);width: 350rpx;height: 200rpx;background-color: transparent;}
+.hdp_main_wrap .btn_coupon:after{display: none;}
+.hdp_main_wrap .btn{position: absolute;bottom: -20rpx;width: 320rpx;height: 200rpx;}
+.hdp_main_wrap .btn.cancel{left: 0;}
+.hdp_main_wrap .btn.confirm{right: 0;}
+
+@keyframes scalein{
+    0%{transform: translate(-50%,-50%) scale(.1);opacity: 0}
+    100%{transform: translate(-50%,-50%) scale(1);opacity: 1}
+}
+
+
+/* 首页-摇一摇新年福袋 */
+.swing_sm_pop{position: fixed;top: 860rpx;width: 120rpx;height: 120rpx;background: url('https://images3.c-ctrip.com/marketing/2020/01/single_pic/sm_img.gif') 0 0/120rpx no-repeat;z-index: 990;transition: right 300ms;}
+.swing_big_wrap{position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 0;height: 640rpx;z-index:1051;background-size: 640rpx;background-position: center;background-repeat: no-repeat;animation: swingwidth .8s linear forwards;}
+.swing_big_wrap .content{width: 640rpx;height: 640rpx;}
+.swing_rule image{width: 100%;height: 100%;}
+.swing_rule{position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 500rpx;height: 650rpx;z-index:1051;}
+.swing_rule .rule_shake{position: absolute;top: 40rpx;left: 50%;width: 307rpx;height: 318rpx;background-position:0 0;background-size:307rpx;background-repeat:no-repeat;transform: translateX(-50%);animation: ruleswing 1s steps(1) infinite 0s;background-image: url('https://images3.c-ctrip.com/marketing/2019/01/xcx_swing/1.png')}
+
+
+@keyframes swingwidth{
+    0%{width: 0rpx;}
+    50%{width: 320rpx;}
+    100%{width: 640rpx;}
+}
+
+@keyframes ruleswing{
+    0%{background-image: url('https://images3.c-ctrip.com/marketing/2019/01/xcx_swing/1.png')}
+    30%{background-image: url('https://images3.c-ctrip.com/marketing/2019/01/xcx_swing/2.png')}
+    40%{background-image: url('https://images3.c-ctrip.com/marketing/2019/01/xcx_swing/3.png')}
+    50%{background-image: url('https://images3.c-ctrip.com/marketing/2019/01/xcx_swing/4.png')}
+    60%{background-image: url('https://images3.c-ctrip.com/marketing/2019/01/xcx_swing/5.png')}
+    70%{background-image: url('https://images3.c-ctrip.com/marketing/2019/01/xcx_swing/6.png')}
+    80%{background-image: url('https://images3.c-ctrip.com/marketing/2019/01/xcx_swing/7.png')}
+    90%{background-image: url('https://images3.c-ctrip.com/marketing/2019/01/xcx_swing/8.png')}
+    100%{background-image: url('https://images3.c-ctrip.com/marketing/2019/01/xcx_swing/1.png')}
+}
+
+.souyisou_wrap {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 644rpx;
+    height: 611rpx;
+    background: url('https://images3.c-ctrip.com/marketing/2020/09/souyisou_float/coupon_wrap_bg.png');
+    background-size: 100% 100%;
+    z-index: 1052;
+    padding-top: 61rpx;
+}
+.souyisou_wrap .title {
+    margin-top: 61rpx;
+}
+.souyisou_wrap .sub_title {
+    margin-bottom: 29rpx;
+    font-weight: bolder;
+}
+.souyisou_wrap .title, .souyisou_wrap .sub_title{
+    font-family: PingFangSC-Semibold;
+    font-size: 28rpx;
+    color: #FF5F5F;
+    text-align: center;
+    line-height: 41.92rpx;
+}
+.souyisou_wrap .coupon_list {
+    width: 474rpx;
+    height: 310rpx;
+    margin: 0 auto 62rpx;
+}
+.souyisou_wrap .coupon {
+    width: 150rpx;
+    height: 120rpx;
+    margin: 4rpx;
+    background: url('https://images3.c-ctrip.com/marketing/2020/09/souyisou_float/coupon_bg.png');
+    background-size: 100% 100%;
+    box-shadow: 0 2rpx 10rpx 1rpx rgba(0,0,0,0.06);
+    float: left;
+}
+.souyisou_wrap .souyisou_btn_coupon {
+    width: 276rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    color: #ffffff;
+    position: absolute;
+    left: 50%;
+    bottom: 60rpx;
+    margin-left: -138rpx;
+    background-image: linear-gradient(90deg, #FFD639 4%, #FFBC51 97%);
+    box-shadow: inset 0 0 8rpx 2rpx rgba(255,254,244,0.23);
+    border-radius: 41.27rpx;
+    font-size: 36rpx;
+    text-align: center;
+}
+.souyisou_wrap .coupon {
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    font-size: 18rpx;
+    color: #FF5F5F;
+    text-align: center;
+    line-height: 18rpx;
+    margin-bottom: 7rpx;
+}
+.souyisou_wrap .coupon .desc {
+    margin-top: 20rpx;
+}
+.souyisou_wrap .coupon .count {
+    font-size: 66rpx;
+    line-height: 57.6rpx;
+    margin-top: 7rpx;
+}
+.souyisou_wrap .coupon .count span {
+    font-size: 18rpx;
+}
+.souyisou_wrap .has_receive_icon {
+    width: 198rpx;
+    height: 200rpx;
+    background: url('https://images3.c-ctrip.com/marketing/2020/09/souyisou_float/i_ylq@3x.png');
+    background-size: 100% 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}

@@ -1,0 +1,9 @@
+{
+  "navigationStyle":"custom",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "nav-bar": "./../videoTaskPage/loreal_capsul_bar/index",
+    "trip_popup": "../assist/components/popup/index",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  }
+}

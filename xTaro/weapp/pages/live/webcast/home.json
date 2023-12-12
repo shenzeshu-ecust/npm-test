@@ -1,0 +1,27 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "enablePullDownRefresh": false,
+  "disableScroll": true,
+  "usingComponents": {
+    "liveMessage": "./liveMessage/liveMessage",
+    "recommendVideo": "./recommendVideo/recommendVideo",
+    "userPanel": "./userPanel/userPanel",
+    "followGuide": "./followGuide/followGuide",
+    "popBox": "./popBox/popBox",
+    "luckyBag": "./luckyBag/luckyBag",
+    "liveLotteryWinnerList":"./liveLotteryWinnerList/liveLotteryWinnerList",
+    "live-room-play": "plugin://liveRoomPlugin/live-room-play",
+    "nav-bar": "../../../../cwx/component/navbar/navbar",
+    "recommendView":"./recommendView/recommendView",
+    "videoStatus":"./videoStatus/videoStatus",
+    "masterInfo":"./masterInfo/masterInfo",
+    "moreTool":"./moreTool/moreTool",
+    "doLike":"./doLike/doLike",
+    "goodsList":"./goodsList/goodsList",
+    "lottery":"./lottery/lottery",
+		"actionSheet":"./actionSheet/actionSheet",
+		"perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+	},
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "white"
+}

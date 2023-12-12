@@ -1,0 +1,82 @@
+<!--pages/timeLine/flight/flight.wxml-->
+<view catchtap='gotoDetail'>
+  <card-header-compt iconUrl="{{processedFlightCard.originCard.flightCard.airlineLogo}}" title="{{processedFlightCard.originCard.flightCard.airlineName + ' ' + processedFlightCard.originCard.flightCard.flightNo}}" subTitle="{{cardData.sharedCard ? processedFlightCard.departureDate : '' }}" carrier-content="{{processedFlightCard.actualCarrierAirlineNameText}}" card-operation-data="{{processedFlightCard.timeline_operations}}" />
+  <view class='container'>
+    <view class='flight-basic-info row text-color-333'>
+      <view class='depart-item-view column'>
+        <text class='maintime-tip font-size-24'>{{processedFlightCard.timeline_departMainTimeTipText}}</text>
+        <text class='maintime time-padding-bottom font-size-48 helvetica-bold'>{{processedFlightCard.timeline_departMainTimeText}}</text>
+        <text class='secondtime font-size-24'>{{processedFlightCard.timeline_secondDepartureTimeText}}</text>
+        <text wx:if="{{processedFlightCard.isMiniCard}}" class='font-size-26 ellipsis text-color-333'>{{processedFlightCard.timeline_departStationTerminalText}}
+        </text>
+        <text wx:else class='font-size-26 ellipsis'>{{processedFlightCard.timeline_departStationTerminalText}}</text>
+      </view>
+      <view class='column flight-status'>
+        <text wx:if="{{processedFlightCard.flightStatus}}" style='background:{{processedFlightCard.timeline_flightStatusColor}}' class='flight-state-label white-color font-size-22'>{{processedFlightCard.flightStatus}}</text>
+        <image src='https://pages.c-ctrip.com/schedule/pic/wxxcx/icon_arrow_v2.png' mode='aspectFit' class='cts_icon_arrow_line1'></image>
+      </view>
+      <view class='arrival-item-view column align-right text-color-333'>
+        <text class='maintime-tip font-size-24'>{{processedFlightCard.timeline_arriveMainTimeTipText}}</text>
+        <view class="time-padding-bottom">
+          <text class='maintime font-size-48 helvetica-bold'>{{processedFlightCard.timeline_arriveMainTimeText}}</text>
+          <text wx:if="{{processedFlightCard.timeline_mainNumberOfDays}}" class='font-size-24'>{{processedFlightCard.timeline_mainNumberOfDays}}</text>
+        </view>
+        <view>
+          <text class='secondtime font-size-24'>{{processedFlightCard.timeline_secondArrivalTimeText}}</text>
+          <text wx:if="{{processedFlightCard.timeline_secondNumberOfDays}}" class='secondtime font-size-24'>{{processedFlightCard.timeline_secondNumberOfDays}}</text>
+        </view>
+        <text wx:if="{{processedFlightCard.isMiniCard}}" class='font-size-26 ellipsis'>{{processedFlightCard.timeline_arriveStationTerminalText}}</text>
+        <text wx:else class='font-size-26 ellipsis'>{{processedFlightCard.timeline_arriveStationTerminalText}}</text>
+      </view>
+    </view>
+  </view>
+  <swiper wx:if="{{processedFlightCard.noticeList && processedFlightCard.noticeList.length > 0}}" autoplay="true" circular="true" vertical="true" interval="5000" duration="300" previous-margin="0" next-margin="0" class="notice-view {{processedFlightCard.noticeList.length === 1 && !processedFlightCard.noticeList[0].maybeDalay ? 'normal-height' : ''}}">
+    <view  wx:for="{{processedFlightCard.noticeList}}" wx:for-item="item" wx:key="*this">
+      <swiper-item class="swiper-wrapper  {{item.maybeDalay ? '' : 'normal-height'}}">
+        <view wx:if="{{item.maybeDalay}}" class='maybe-delay-view row' catchtap='flightDynamicsTapped'>
+          <view class='ellipsis-2'>
+            <text class='notice-tip-label font-size-24' style='color:{{item.textColor}}'>{{item.label}}</text>
+            <text class='notice-label text-color-666 font-size-24'>{{item.description}}</text>
+          </view>
+          <Icon className='Forward' color='#ccc' size='13' />
+        </view>
+        <view wx:else class='normal-tip ellipsis-2'>
+          <text class='notice-tip-label font-size-24' style='color:{{item.textColor}}'>{{item.label}}</text>
+          <text class='notice-label text-color-666 font-size-24'>{{item.description}}</text>
+        </view>
+      </swiper-item>
+    </view>
+  </swiper>
+  <view class="checkin-item-wrapper column">
+    <view wx:if="{{processedFlightCard.timeline_showCheckInfo}}" class='checkin-info commonHeight text-color-999'>
+      <view class='checkin-item checkin-info-left' wx:if="{{processedFlightCard.timeline_showCheckInfoEntry}}">
+        <text class='tip-text font-size-26'>值机口</text>
+        <text class='item-text font-size26 ellipsis'>{{processedFlightCard.checkInCounter}}</text>
+      </view>
+      <view class='checkin-item checkin-info-middle' wx:if="{{processedFlightCard.timeline_showCheckInfoEntry}}">
+        <text class='tip-text font-size-26 '>登机口</text>
+        <text class='item-text font-size-26 ellipsis'>{{processedFlightCard.boardingGate}}</text>
+      </view>
+      <view class='checkin-item checkin-info-right'>
+        <text class='tip-text font-size-26'>{{processedFlightCard.airlineRecordNo ? "预订号" : "行李转盘"}}</text>
+        <text class='item-text font-size-26 ellipsis'>{{processedFlightCard.airlineRecordNo || processedFlightCard.baggageTurntable}}</text>
+      </view>
+    </view>
+    <view wx:if="{{processedFlightCard.timeline_passengerText}}" class="passenger-view commonHeight text-color-333 padding-lr-16 {{processedFlightCard.timeline_showCheckInfo ? 'mid-line' : ''}}">
+      <text class='passenger-tip-label text-color-999 font-size-26'>出行人</text>
+      <text class='passenger-label text-color-333 font-size-26 ellipsis'>{{processedFlightCard.timeline_passengerText}}</text>
+    </view>
+  </view>
+  <view wx:if="{{processedFlightCard.timeline_flightChangeText}}" class="flight-change-notice font-size-26" catchtap='flightChangeButtonTaped'>
+    <view class='change-view'>
+      <Icon className='trippal-error' color='#f63b2e' size='15' class="font-icon-error" />
+      <view class='ellipsis-2 change-item-view'>
+        <text class='change-notice-tip color-red'>接航司通知：</text>
+        <text class='change-notice color-red text-color-666'>{{processedFlightCard.timeline_flightChangeText}}</text>
+      </view>
+    </view>
+    <!--    <image src="../../../images/flight/cts_icon_gray_arrow.png" class='arrow-size'></image>-->
+    <Icon className='Forward' color='#666' size='13' />
+  </view>
+</view>
+<card-operation-compt wx:if="{{processedFlightCard.timeline_operations && !cardData.sharedCard}}" card-operation-data="{{processedFlightCard.timeline_operations}}" isShowTopLine="{{!processedFlightCard.timeline_showCheckInfo && !processedFlightCard.timeline_passengerText}}" />

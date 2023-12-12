@@ -1,0 +1,169 @@
+<!-- 此文件为开发者工具生成，生成时间: 2020/11/26 下午1:47:50 
+使用方法：
+在 /Users/jhyi/WorkSpace/weixinapp/WechatApp/pages/bus/book/book.wxml 引入模板
+
+```
+<import src="book.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 /Users/jhyi/WorkSpace/weixinapp/WechatApp/pages/bus/book/book.wxss 中引入样式
+```
+@import "./book.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html -->
+<template name="skeleton">
+  <view class="sk-container">
+    <view class="container" style="background-color:#f2f2f2">
+      <scroll-view scroll-with-animation="true" class="container" scroll-into-view="true" scroll-y="true" upper-threshold="10">
+        <view class="headerContainer linearBackground">
+          <view class="headerInfo">
+            <view class="shadow"></view>
+            <view class="top">
+              <view class="info">
+                <view class="importantInfo">
+                  <view class="sub">
+                    <text class="margin-vertical-half sk-transparent sk-text-14-2857-860 sk-text">11月26日 周四 15:30 </text>
+                    <text class="sk-transparent">约1时39分<text class="subInfo sk-transparent sk-text-14-2857-881 sk-text">(仅供参考)</text></text>
+                  </view>
+                  <view class="stationRow margin-top-half">
+                    <view class="stationContainer">
+                      <text class="sk-transparent sk-text-14-2857-980 sk-text">长途汽车客运总站</text>
+                    </view>
+                    <icon class="icon-arrow-to color-gray margin-horizontal sk-image sk-pseudo sk-pseudo-rect" color="#EFEFEF"></icon>
+                    <view class="stationContainer wrap">
+                      <text class="sk-transparent sk-text-14-2857-851 sk-text">启东汽车站</text>
+                    </view>
+                  </view>
+                  <view class="color-gray fontsize-extrasmall">
+                    <text class="sk-transparent sk-text-14-2857-752 sk-text">票价:¥58</text>
+                    <text class="margin-horizontal sk-transparent sk-text-14-2857-797 sk-text">服务费:¥4</text>
+                  </view>
+                </view>
+                <button class="button-location sk-button sk-pseudo sk-pseudo-rect" hover-class="button-location-hover">
+                  <icon class="icon-location mainColor sk-image sk-pseudo sk-pseudo-rect" size="0" color="#EFEFEF"></icon>
+                  <view class="mainColor sk-transparent sk-text-14-2857-494 sk-text" style="background-position-x: 50%;">
+                    地址
+                  </view>
+                </button>
+              </view>
+            </view>
+            <view class="flex-row full-row">
+              <view class="dashLine flex1 margin-horizontal" style="border: none;"></view>
+            </view>
+            <view class="bottom">
+              <view class="padding-vertical padding-horizontal flex-row" data-index="undefined">
+                <text class="checktag color-darkgray"><text class="icon-font icon-info color-darkgray sk-pseudo sk-pseudo-rect"></text>
+                <text class="color-darkgray" data-index="0"><text class="color-darkgray sk-transparent sk-text-14-2857-363 sk-text">免取票乘车</text></text>
+                <text class="color-darkgray" data-index="1"><text class="color-darkgray sk-transparent sk-opacity"> | </text>
+                <text class="color-darkgray sk-transparent sk-text-14-2857-883 sk-text">发车前60分钟可在线退票</text></text>
+                <text class="color-darkgray" data-index="2"><text class="color-darkgray sk-transparent sk-opacity"> | </text>
+                <text class="color-darkgray sk-transparent sk-text-14-2857-890 sk-text">支持身份证购票</text></text>
+                </text>
+                <button class="button-noborder button-info sk-button sk-pseudo sk-pseudo-rect">
+                  <text class="mainColor sk-transparent">须知<text class="icon-font icon-arrow-right color-darkgray sk-pseudo sk-pseudo-rect"></text></text>
+                </button>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="bus_tip color-bg_fff padding-horizontal padding-vertical">
+          <view class="flex-row">
+            <image class="sk-image"></image>
+            <text class="sk-transparent sk-text-14-2857-408 sk-text">仅需20秒轻松下单</text>
+          </view>
+          <view class="flex-row margin-top-half">
+            <image class="sk-image"></image>
+            <text class="sk-transparent sk-text-14-2857-694 sk-text">官方合作 保障出行</text>
+          </view>
+        </view>
+        <view class="bus-pass-list color-bg_fff">
+          <view class="pass-title flex-row">
+            <text class="sk-transparent">乘客<text class="small sk-transparent sk-text-35-7143-719 sk-text"> (单笔订单限5张) </text></text>
+            <view class="flex1"></view>
+          </view>
+          <view class="b-b-passlist">
+            <view class="dash_b_border item" style="border: none;">
+              <view class="flex item memberPasRow">
+                <button class="memberPasItem sk-button sk-pseudo sk-pseudo-rect" data-index="0" data-item="[object Object]">
+                  <text class="sk-transparent sk-text-27-7778-740 sk-text" style="background-position-x: 50%;">易佳豪二</text>
+                </button>
+                <button class="memberPasItem sk-button sk-pseudo sk-pseudo-rect" data-index="1" data-item="[object Object]">
+                  <text class="sk-transparent sk-text-27-7778-857 sk-text" style="background-position-x: 50%;">测测上</text>
+                </button>
+                <button class="memberPasItem sk-button sk-pseudo sk-pseudo-rect" data-index="2" data-item="[object Object]">
+                  <text class="sk-transparent sk-text-27-7778-226 sk-text" style="background-position-x: 50%;">测测</text>
+                </button>
+                <button class="memberPasItem sk-button sk-pseudo sk-pseudo-rect">
+                  <view class="extend mainColor sk-pseudo sk-pseudo-rect"></view>
+                  <view class="mainColor sk-transparent sk-text-27-7778-656 sk-text" style="background-position-x: 50%;">
+                    新增
+                  </view>
+                </button>
+              </view>
+            </view>
+          </view>
+          <view class="flex-row b-b-phonenum color-bg_fff flex">
+            <view class="row-title sk-transparent sk-text-30-9524-543 sk-text">联系手机</view>
+            <view class="flex-i3">
+              <view class="phoneInput sk-image" maxlength="11" placeholder="用于接收取票信息" style="border-style:none" type="number" value="17326905245" id="phone"></view>
+            </view>
+          </view>
+        </view>
+        <view class="color-bg_fff line25 mt10 b-b-row">
+          <view class="flex-row">
+            <view class="row-title sk-transparent sk-text-32-6087-518 sk-text">备选车次</view>
+            <view class="flex1 bus-book-explain-dark">
+              <text class="sk-transparent sk-text-6-2500-686 sk-text">无票时更换前后两小时车次</text>
+            </view>
+            <icon class="padding-margin select mainColor icon-check-round right sk-image sk-pseudo sk-pseudo-rect" size="23" color="#EFEFEF"></icon>
+          </view>
+        </view>
+        <view class="bus-warmnotes">
+          <view class="flex-row">
+            <text style="max-width:316px;" class="sk-transparent sk-text-22-7273-642 sk-text">销售供应商：上海极途信息技术有限公司 客服电话：400-828-3066</text>
+            <button class="button-noborder mainColor sk-transparent sk-button sk-pseudo sk-pseudo-rect" form-type="submit">
+              查看资质
+            </button>
+          </view>
+          <view>
+            <text class="sk-transparent sk-text-22-7273-362 sk-text">订单包含汽车票、服务费</text>
+          </view>
+          <view class="flex-row">
+            <text class="sk-transparent sk-text-22-7273-561 sk-text">点击去支付表示已阅读并同意</text>
+            <button class="button-noborder mainColor sk-transparent sk-button sk-pseudo sk-pseudo-rect">
+              汽车票预订协议
+            </button>
+          </view>
+        </view>
+        <view class="slogan-container">
+          <view class="slogan ctripSlogan"></view>
+        </view>
+        <view style="padding-bottom:124px"></view>
+      </scroll-view>
+      <view class="fixed bar-pay disabled">
+        <view class="bar" style="padding-bottom:34px">
+          <view class="flex-row">
+            <view class="flex-i2 flex-row">
+              <button class="button-noborder left flex-column flex-i1 sk-button sk-pseudo sk-pseudo-rect" form-type="submit">
+                <view class="flex-row full-row">
+                  <view class="price-contanier">
+                    <text class="torange sk-transparent">¥ <text class="fontsize-super sk-transparent sk-opacity">0</text></text>
+                  </view>
+                  <text class="fontsize-extrasmall detail margin-horizontal triangleclose sk-transparent sk-text-14-2857-538 sk-text sk-pseudo sk-pseudo-rect">明细</text>
+                </view>
+              </button>
+            </view>
+            <view class="flex-i1">
+              <button class="btn-primary btn-pay sk-transparent sk-button sk-pseudo sk-pseudo-rect" data-method="normal" form-type="submit" hover-class="btn-primary_hover">
+                去支付
+              </button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="sk-loading"></view>
+  </view>
+</template>

@@ -1,0 +1,6 @@
+<view class="pay-back-container">
+	<web-view src="{{backData.url}}" bindmessage="webPostMessage" class="pay-back-webview"></web-view>
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

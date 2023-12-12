@@ -1,0 +1,64 @@
+
+/* 
+1: 景点 2: 餐饮 4: 购物 
+5: 机场 6: 火车站 7: 港口 8：汽车站
+*/
+var poiTypeIconCfg = {
+    t_1: "../../images/shareTravelLine/line_poi_icon.png", 
+    t_2: "../../images/shareTravelLine/line_food_icon.png",
+    t_4: "../../images/shareTravelLine/line_shopping_icon.png",
+    t_5: "../../images/shareTravelLine/line_flight_icon.png",
+    t_6: "../../images/shareTravelLine/line_train_icon.png",
+    t_7: "../../images/shareTravelLine/line_ship_icon.png",
+    t_8: "../../images/shareTravelLine/line_bus_icon.png",
+    traffic_1: "../../images/shareTravelLine/line_flight_icon.png",
+    traffic_2: "../../images/shareTravelLine/line_train_icon.png",
+    traffic_3: "../../images/shareTravelLine/line_bus_icon.png"
+};
+var hotelIcon = "../../images/shareTravelLine/line_hotel_icon.png";
+
+function getTypeIcon(item) {
+    if (item.type == 2) {
+        return hotelIcon;
+    } else if (item.type == 3) {
+        key = 'traffic_'.concat(item.trafficType);
+        return poiTypeIconCfg[key];
+    } else {
+        key = 't_'.concat(item.poiType);
+        return poiTypeIconCfg[key];
+    }
+}
+
+function titleTagColor(item) {
+    if (item.type == 2) {
+        return '#fff';
+    } else {
+        if (item.poiType === 1) return '#999';
+    }
+    return '#0086f6';
+}
+
+function titleTagBgColor(item) {
+    if (item.type === 2) {
+        return '#E3CE96';
+    } else {
+        if (item.poiType === 1) return '#f4f4f4';
+    }
+    return '#f2f8fe';
+}
+
+function descriptionColor(item) {
+    if (item.poiType === 1) {
+        return '#328b6d';
+    } else if (item.poiType === 2) {
+        return '#c8534b';
+    }
+    return '#333';
+}
+
+module.exports = {
+    getTypeIcon: getTypeIcon,
+    titleTagColor: titleTagColor,
+    titleTagBgColor: titleTagBgColor,
+    descriptionColor: descriptionColor
+}

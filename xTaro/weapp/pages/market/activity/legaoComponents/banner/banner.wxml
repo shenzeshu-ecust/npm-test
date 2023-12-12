@@ -1,0 +1,5 @@
+<!--pages/market/legaoComponents/banner/banner.wxml-->
+<view class="m-banner" style="box-sizing: border-box;{{item.top>0?'padding-top:'+item.top+'px;':'margin-top:'+item.top+'px;'}} padding-left:{{item.paddingLR}}px; padding-right:{{item.paddingLR}}px; width: 100%; vertical-align: middle; display: block; height: {{item.height}}px">
+  <image lazy-load src="{{item.background}}" bindtap="_handleClick"/>
+</view>
+

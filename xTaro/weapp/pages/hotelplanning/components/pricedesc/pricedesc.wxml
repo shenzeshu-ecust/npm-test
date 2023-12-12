@@ -1,0 +1,11 @@
+<!-- 价格说明 -->
+<view class="price-description {{isWifi?'':'pb-24'}}">
+    <view class="price-title {{isWifi?'fs-30':'fs-34'}}">价格说明</view>
+    <view class="price-detail {{showAll ? 'shrink' : '' }}">
+        <view class="detail-item" wx:for="{{priceDescList}}" wx:for-item="item">{{item}}</view>
+    </view>
+    <view class="price-btn {{isWifi?'colorblue':'color6'}}" catchtap="openBtn">
+        <text>{{showAll ? '展开全部':'收起'}}</text>
+        <text class="item-arrow {{showAll ? 'wechat-font-g-arrow-down' : 'wechat-font-g-arrow-up' }}"></text>
+    </view>
+</view>

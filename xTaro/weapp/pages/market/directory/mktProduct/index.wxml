@@ -1,0 +1,10 @@
+<perinfo-protect-float></perinfo-protect-float>
+
+<skyline_bar back bind:lefttap="backWebAct" title="携程旅行直播"></skyline_bar>
+<!-- 加载商卡 -->
+<view class="sk_layout">
+  <listComp updateType="refresh" env="{{env}}" filteredGoodsList="{{filteredGoodsList}}" incrementalUpdateProduct="{{incrementalUpdateProduct}}" />
+</view>
+
+
+

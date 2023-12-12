@@ -1,0 +1,15 @@
+{
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "nav-bar": "/cwx/component/navbar/navbar",
+    "taskList": "../task/index",
+    "taskAssist": "../taskAssist/index",
+    "count-down": "/pages/market/directory/components/countDown/index",
+    "task-count-down": "/pages/market/directory/components/taskCountDown/index",
+    "goods": "./comps/goods",
+    "modal": "./comps/modal",
+    "returnAppBtn": "../components/returnApp/index",
+    "TaskSignIn": "./../taskSignIn/index",
+    "TaskInvitePlus": "./../taskInvitePlus/index"
+  }
+}

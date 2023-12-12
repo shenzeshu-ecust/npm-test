@@ -1,0 +1,8 @@
+<block>
+    <view class="travel-title">出行目的</view>
+    <view class="travel-content">
+        <view class="travel-item {{item.current ? 'current' : ''}}" wx:for="{{tripTypeState}}" wx:for-item="item" wx:key="key" data-idx='{{index}}' data-key="{{item.key}}" bindtap="tapToggleType">
+        {{item.text}}
+    </view>
+    </view> 
+</block>

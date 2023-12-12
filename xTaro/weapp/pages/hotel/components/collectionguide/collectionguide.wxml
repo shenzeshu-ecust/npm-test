@@ -1,0 +1,7 @@
+<view wx:if="{{showCollect}}" class="collect-guide">
+    <view class="triangle-up" style="margin-left:{{collectPointerLeft}}px;"></view>
+    <view class='collect-window'>
+        <text>点击</text><text class="little-dot"></text><text class="border-right">添加到我的小程序,下次访问更方便</text>
+        <view class="wechat-font-close2 collect-close" bindtap="closeCollection"></view>
+    </view>
+</view>

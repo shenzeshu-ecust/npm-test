@@ -1,0 +1,6 @@
+<template name="landing">
+    <view class="page-loading d-flex flex-center" catchtouchmove="noop">
+        <image class="page-loading-gif" src="https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/loading.gif"></image>
+        页面加载中，请耐心等待...
+    </view>
+</template>

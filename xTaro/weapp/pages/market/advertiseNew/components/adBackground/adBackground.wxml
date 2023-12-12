@@ -1,0 +1,56 @@
+<!-- 组件模板 -->
+<view style='{{wraperStyle}}'>
+    <view style='{{backgroundStyle}}{{swiperStyle}}' bindtap="adItemClick">
+    <!-- 图片元素 -->
+      <block wx:if="{{adData.creativeMaterial.images}}" wx:for="{{adData.creativeMaterial.images}}"  wx:for-item="aditem" wx:key="index">
+        <image src="{{aditem.imageUrl}}" style="position:absolute;width:{{aditem.width*scaleRadio}}px;height:{{aditem.height*scaleRadio}}px;left:{{aditem.leftMargin*scaleRadio}}px;top:{{aditem.topMargin*scaleRadio}}px;z-index:{{aditem.index}}" />
+      </block>
+       <!-- 视频元素 -->
+       <block  wx:if="{{adData.creativeMaterial.video && adData.creativeMaterial.video.videoUrl}}">
+        <video
+          id="video-{{adData.creativeMaterial.creativeid}}"
+          src="{{adData.creativeMaterial.video.videoUrl}}"
+          duration="{{adData.creativeMaterial.video.duration}}"
+          style="{{videoStyle}}"
+          show-mute-btn="{{false}}"
+          show-progress="{{false}}"
+          controls="{{!adData.creativeMaterial.video.isAutoPlay}}"
+          muted="{{videoMuted}}"
+          show-fullscreen-btn="{{false}}"
+          show-center-play-btn="{{false}}"
+          show-bottom-progress="{{false}}"
+          enable-progress-gesture="{{false}}"
+          bindplay="videoPlay"
+          bindpause="videoPause"
+          binderror="videoError"
+          bindended="videoEnd"
+        ></video>
+       </block>
+       <view  wx:if="{{adData.creativeMaterial.video && !adData.creativeMaterial.video.isAutoPlay}}" style="opcity:0;position:absolute;width:30px;height:30px;left:10px;bottom:10px" id="videoPlayBtn"></view>    
+       <image
+          wx:if="{{adData.creativeMaterial.video && adData.creativeMaterial.video.showSoundControl}}"
+          style="{{videoVoiceStyle}}"
+          id="videoVoiceBtn"
+          src="//images3.c-ctrip.com/marketing/adsdk/img/{{videoMuted?'voice_close':'voice_open'}}.png"  
+          mode="scaleToFill"
+        />
+      <!-- 主标题 --> 
+     <view  wx:if="{{adData.creativeMaterial.title}}" style="{{titleStyleWrap}}"><text style="{{titleStyle}}">{{adData.creativeMaterial.title.content}}</text></view>
+      <!-- 副标题 --> 
+      <block  wx:if="{{adData.creativeMaterial.subTitles && adData.creativeMaterial.subTitles.length>0}}"  wx:for-item="item"  wx:for="{{adData.creativeMaterial.subTitles}}"  wx:key="index">
+      <view style="{{subheadsStyleWrap[index]}}"><text style="{{subheadsStyle[index]}}">{{item.content}}</text></view> 
+      </block>
+       <!-- 标签 --> 
+      <block  wx:if="{{adData.creativeMaterial.tags && adData.creativeMaterial.tags.length>0}}"  wx:for-item="item"  wx:for="{{adData.creativeMaterial.tags}}"  wx:key="index">
+      <text style='{{tagStyle[index]}}'>{{item && item.content}}</text>
+      </block>
+       <!-- 按钮 --> 
+      <block wx:if="{{adData.creativeMaterial.button}}">
+        <button style="{{buttonStyle}}"  bindtap="adButtonClick">{{adData.creativeMaterial.button.content}}</button>
+      </block>
+      <!-- 广告角标 --> 
+      <view wx:if="{{adData.creativeMaterial.showCorner}}" style='{{showSignStyleWrap}}'>
+       <text style='{{showSignStyle}}'>广告</text>
+      </view>
+    </view>
+</view>

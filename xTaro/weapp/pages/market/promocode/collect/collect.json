@@ -1,0 +1,7 @@
+{
+    "backgroundColor": "#eee",
+    "navigationBarTitleText": "口令兑换",
+    "usingComponents": {
+        "captcha":"../../../../commonComponent/captcha_min/captcha"
+      }
+}

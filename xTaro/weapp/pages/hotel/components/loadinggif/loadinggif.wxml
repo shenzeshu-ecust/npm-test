@@ -1,0 +1,3 @@
+<view hidden="{{!isShown}}" class="loading-layer" catchtouchmove="noop">
+    <image src="https://pages.c-ctrip.com/hotels/h5/img/loadingnew.gif" class="loading-img" />
+</view>

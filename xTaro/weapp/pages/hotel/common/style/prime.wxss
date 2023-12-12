@@ -1,0 +1,45 @@
+.prime-bg-diamond { background-image: linear-gradient(90deg, #7788DC 0%, #5F62BA 100%); }
+.prime-bg-platinum { background-image: linear-gradient(90deg, #7CBBD0 0%, #218DB1 100%); }
+.prime-bg-gold { background-image: linear-gradient(90deg, #DDB57E 0%, #9D763F 100%); }
+.prime-bg-silver { background-image: linear-gradient(90deg, #A8C0E2 0%, #4274BC 100%); }
+.prime-bg-black { background-image: linear-gradient(90deg, #5D5D5D 0%, #111111 100%); }
+.prime-bg-gold-diamond { background-image: linear-gradient(90deg, #384A8C 0%, #192039 100%);  }
+
+/*字体*/
+.prime-font { font-weight: bold; }
+.prime-color-diamond { color: #4B4EA2; }
+.prime-color-platinum { color: #218DB1; }
+.prime-color-gold { color: #9F6D26; }
+.prime-color-silver { color: #4476BD; }
+.prime-color-black, .prime-color-gold-diamond { color: #F8E4C3; }
+
+.prime-detail-diamond { color: #5F62BA !important; }
+.prime-detail-platinum { color: #218DB1 !important; }
+.prime-detail-gold { color: #AD8E5A !important; }
+.prime-detail-silver { color: #4274BC !important; }
+.prime-detail-black, .prime-detail-gold-diamond { color: #F8E4C3 !important; }
+
+.ft20 { font-size: 20rpx; }
+.ft24 { font-size: 24rpx; }
+.ft26 { font-size: 26rpx; }
+.ft31 { font-size: 31rpx; }
+.ft42 { font-size: 42rpx; }
+
+
+/*banner*/
+.prime-banner {
+    display: flex;
+    align-items: center;
+    height: 88rpx;
+    box-sizing: border-box;
+    padding: 30rpx 24rpx;
+}
+.prime-banner-left { min-width: 245rpx; }
+.prime-banner-middle { flex: 1; }
+.prime-banner-right { color: #9F6D26; }
+
+.prime-banner .prime-bg-black, .prime-banner .prime-bg-gold-diamond { background-image: linear-gradient(90deg, #FFEFD6 0%, #F5D7A6 100%); }
+.prime-banner .prime-color-black { background-image: linear-gradient(90deg, #F5D7A6 0%, #FFEFD6 55%, #F5D7A6 100%); -webkit-background-clip: text; color: transparent;}
+
+/*icon*/
+.prime-icon { vertical-align: middle; display: inline-block; margin-right: 5rpx; }

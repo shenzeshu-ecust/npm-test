@@ -1,0 +1,57 @@
+@import "../../common/common.wxss";
+.travel-coupon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+}
+.travel-coupon-list::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+    height: 0 !important;
+    -webkit-appearance: none;
+    background: transparent;
+    color: transparent;
+}
+.travel-coupon-list::after {
+    content: "";
+    flex: auto;
+    min-width: 202rpx;
+    max-width: 202rpx;
+}
+.tcl-title {
+    font-size: 30rpx;
+    font-weight: bold;
+    margin-bottom: 24rpx;
+}
+.single-travel-coupon:nth-of-type(3n) {
+    margin-right: 0;
+}
+.single-travel-coupon {
+    flex: 0 0 auto;
+    display: inline-block;
+    margin-bottom: 24rpx;
+    width: 202rpx;
+    text-align: center;
+    background: url("https://pages.c-ctrip.com/hotels/wechat/img/travel-coupon-bgc.png") no-repeat;
+    background-size: 100% 100%;
+}
+.stc-content {
+    height: 54rpx;
+    box-sizing: border-box;
+    font-weight: bold;
+    line-height: 54rpx;
+}
+.stc-type {
+    height: 34rpx;
+    line-height: 34rpx;
+}
+.stc-name {
+    color: #fff;
+    height: 56rpx;
+    box-sizing: border-box;
+    padding-top: 20rpx;
+    line-height: 1;
+}

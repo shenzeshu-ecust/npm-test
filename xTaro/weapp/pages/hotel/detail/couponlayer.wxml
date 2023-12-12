@@ -1,0 +1,131 @@
+<!-- 会员权益&优惠信息浮层 -->
+<template name="coupon-layer">
+    <view wx:if="{{bannerFloatData}}" class="coupon-box promotion-layer" slot="content">
+        <view class="pro-item" wx:if="{{bannerFloatData.cutPriceHotel}}">
+            <view class="promotion-ctag">助力返现</view>
+            <view class="pro-text">下单后邀请好友助力，最高返现100元</view>
+        </view>
+
+        <!-- 优惠券 -->
+        <view wx:if="{{hotelCouponsModule}}" class="promotion-item coupon">
+            <view class="pro-title">{{hotelCouponsModule.modelName}}</view>
+            <view wx:for="{{hotelCouponsModule.hotelCoupons}}" wx:for-item="c" wx:key="id" class="{{c.extraRemark ? 'coupon-extra-remark' : ''}} {{c.state === 2 ? 'disabled' : ''}}">
+                <view class="card">
+                    <view class="item cell-v">
+                        <view class="cp-price">
+                            <image wx:if="{{c.state === 2}}" class="bg-icon" wx:key="id" src="https://pages.c-ctrip.com/hotels/wechat/img/icons/gray-bg-icon.png"></image>
+                            <image wx:else class="bg-icon" src="https://pages.c-ctrip.com/hotels/wechat/img/icons/red-bg-icon.png"></image>
+                            <view class="z-index-10" wx:if="{{c.deductions[0].deductionType === 1}}">
+                                <text class="bold">{{c.deductions[0].deductionAmountText}}</text>
+                                <text class="discont">折</text>
+                            </view>
+                            <view class="z-index-10" wx:else>
+                                ¥<text class="bold">{{c.deductions[0].deductionAmountText}}</text>
+                            </view>
+                            <view class="subtitle z-index-10">{{c.deductions[0].startAmountText}}</view>
+                            <view class="subtitle z-index-10">{{c.deductionAmountLimitDesc}}</view>
+                        </view>
+                        <view class="cell-star midbox of-hidden">
+                            <view wx:if="{{c.couponName}}" class="tit">{{c.couponName}}</view>
+                            <view wx:if="{{c.shortRemark}}" class="subtit clamp2">{{c.shortRemark}}</view>
+                            <view wx:if="{{c.extraShortRemark}}" class="subtit clamp2 ht-64">{{c.extraShortRemark}}</view>
+                            <view wx:if="{{c.assistIcons}}" >
+                                <view wx:if="{{c.couponDesc}}" class="subtit mt-28">{{c.couponDesc}}</view>
+                                <view class="mt-16" >
+                                    <image wx:for="{{c.assistIcons}}" wx:for-item="icon" wx:key="id" class="hook-icon" src="{{icon}}"></image>
+                                </view>
+                            </view>
+                            <view wx:elif="{{c.couponDesc}}" class="subtit {{c.extraShortRemark ? '': 'bottom-24'}}">{{c.couponDesc}}</view>
+
+                            <view wx:if="{{c.state === 1}}" class="get-box">
+                                <!-- 领券/已领取 -->
+                                <view class="got-img">
+                                    <image src="https://pages.c-ctrip.com/hotels/wechat/img/icons/get-hb-icon.png" class="img"></image>
+                                </view>
+                            </view>
+                            <view wx:elif="{{c.couponCategory === 10}}" class="button-box" data-id="{{c.activityId}}" data-unitid="{{c.assistActivityId}}" catchtap="toHelpGetCoupon">
+                                <view class="button-contain">
+                                    <view class="get go-assist">{{c.btnText}}</view>
+                                </view>
+                            </view>
+                            <view wx:else class="button-box" catchtap="handleGetCoupon" data-assist="{{true}}" data-id="{{c.couponStrategyId}}" data-ubt-key="xcx_xqy_yhqdj" id="autotest_xcx_xqy_yhqdj">
+                                <view wx:if="{{c.btnText}}" class="button-contain">
+                                    <view class="get">{{c.btnText}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view wx:if="{{c.extraRemark}}" class="extra-remark">{{c.extraRemark}}</view>
+                </view>
+            </view>
+            <!--超值旅行家-->
+            <block wx:for="{{hotelCouponsModule.travelCoupons}}" wx:for-item="travelCoupon" wx:key="*this" wx:for-index="idx">
+                <view class="travel-coupon-info autoExpose" data-expose="{{travelCoupon.exposeData}}">
+                    <travel-coupons
+                            class="travel-pos"
+                            couponInfo="{{travelCoupon}}"
+                            couponListStyle="flex-wrap: nowrap;overflow-x:scroll;"
+                            singleCouponStyle="margin-right: 16rpx;"></travel-coupons>
+                    <view wx:if="{{travelCoupon.instruction.length}}" class="tci-rules black2" data-idx="{{idx}}" catchtap="toggleTravelCouponLayer">
+                        <text wx:for="{{travelCoupon.useRule}}" wx:for-item="rule" wx:for-index="ruleIdx" class="tci-rule {{ruleIdx === travelCoupon.useRule.length - 1 ? 'last' : ''}}">{{rule}}</text>
+                        <text class="wechat-font-qa tci-qa"></text>
+                    </view>
+                    <view class="tci-book-mask">
+                        <text class="tci-discount orange2">最高省¥{{travelCoupon.linePrice}}</text>
+                        <view class="tci-book-btn orange-bgc" catchtap="bookTravelCoupons" data-id="{{travelCoupon.id}}">¥{{travelCoupon.salePrice}}购买</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+
+        <!-- 会员权益 -->
+        <view wx:if="{{rewardModule}}" class="promotion-item member coupon">
+            <view class="pro-title">{{rewardModule.modelName}}</view>
+            <view wx:if="{{rewardModule.additionalBenefits}}" class="item cell-v rela" catchtap="toRewardCoupon">
+                <view class="cp-price">
+                    <image class="bg-icon" src="https://pages.c-ctrip.com/hotels/wechat/img/icons/red-bg-icon.png"></image>
+                    <view class="z-index-10">
+                        <text class="bold">{{rewardModule.additionalBenefits.integral}}</text>
+                        <text class="discont">积分</text>
+                    </view>
+                    <view class="subtitle z-index-10">最高抵{{rewardModule.additionalBenefits.money}}元</view>
+                </view>
+                <view class="cell-star midbox of-hidden">
+                    <view class="tit">{{rewardModule.additionalBenefits.title}}</view>
+                    <view wx:for="{{rewardModule.additionalBenefits.describe}}" wx:for-item="value" wx:key="desId"  class="clamp2">
+                        <view class="subtit">{{value}}</view>
+                    </view>
+
+                    <view wx:if="{{rewardModule.additionalBenefits.state === 3}}" class="get-box">
+                        <!-- 领券/已领取 -->
+                        <view class="got-img">
+                            <image src="https://pages.c-ctrip.com/hotels/wechat/img/icons/get-hb-icon.png" class="img"></image>
+                        </view>
+                    </view>
+                    <view wx:else class="member-btn">
+                        <view class="button-contain">
+                            <view class="get go-assist">{{rewardModule.additionalBenefits.btnText}}</view>
+                        </view>
+                    </view>
+
+                </view>
+            </view>
+
+            <view wx:if="{{rewardModule.additionalBenefits && rewardModule.detailItems}}" class="member-title mt-16">积分可用于兑换以下权益：</view>
+            <view wx:if="{{rewardModule.detailItems}}" class="member-box">
+                <view wx:for="{{rewardModule.detailItems}}" wx:for-item="item" wx:key="key" >
+                    <view class="member-item">
+                        <text class="member-tit">{{item.title}}</text>
+                        <text class="txt">{{item.desc}}</text>
+                    </view>
+                </view>
+                <view wx:if="{{rewardModule.rewardTipDesc}}" class="desc">
+                    <view class="p-icon">
+                        <image src="https://pages.c-ctrip.com/hotels/wechat/img/member/prime-icon.png"></image>
+                    </view>
+                    {{rewardModule.rewardTipDesc}}
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

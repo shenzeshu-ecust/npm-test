@@ -1,0 +1,366 @@
+.arrow-default{
+  margin-bottom: -8rpx;
+  margin-left: 12rpx;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border:8rpx solid #a3a8ab;
+  border-color: #a3a8ab transparent transparent; 
+}
+.arrow-current{
+  margin-bottom: 8rpx;
+  margin-left: 12rpx;
+  width: 0;
+  height: 0;
+  line-height: 0;
+  border:8rpx solid #a3a8ab;
+  border-color:  transparent transparent #DD2626; 
+}
+.bg_mask{
+  position: fixed;
+  top:78rpx;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index: 2;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.version_f_filter{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 78rpx;
+  padding: 0 40rpx;
+  background-color: #fff;
+  border-bottom:1rpx solid #C8C8C8;
+}
+
+.version_f_item{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.version_f_filter--nofull .version_f_item{
+  flex:1;
+}
+.version_f_item .dot{
+  position: absolute;
+  width: 10rpx;
+  height: 10rpx;
+  top:20rpx;
+  right:20rpx;
+  background-color: #DD2626;
+  border-radius: 50%;
+}
+.version_f_itemview{
+  position: relative;
+  min-width:68rpx;
+  max-width:154rpx;
+  height: 78rpx;
+  display: flex;
+  align-items: center;
+}
+
+
+.version_f_item--text{
+  display: -webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  font-family: 'PingFangSC-Regular';
+  font-size:28rpx;
+  color:#000;
+}
+.version_f_item--text.current{
+  color:#DD2626;
+}
+
+.filter_box{
+  position: absolute;
+  top:78rpx;
+  left:0;
+  right:0;
+  height:782rpx;
+  display: flex;
+  flex-direction: row;
+  background-color:#fff;
+}
+.filter-col-1{
+  display: flex;
+  flex-direction: column;
+  width: 210rpx;
+  height:782rpx;
+  background-color:#f0f0f0;
+}
+.filter-col-1-item{
+  position: relative;
+  padding: 24rpx 0 24rpx 40rpx;
+  border-bottom: 2rpx solid rgba(236,236,236,1);
+}
+.filter-col-1-item.current{
+  background-color: #fafafa;
+}
+.filter-col-1-item > text{
+  font-size:30rpx;
+  font-family: "PingFangSC-Regular";
+  color:#666;
+}
+.filter-col-1-item> .current{
+  color:#222;
+}
+.filter-col-1-item> .current-red{
+  color: #DD2626;
+}
+.filter-col-1-item> .icon-dot{
+  position: absolute;
+  left: 18rpx;
+  top: 40rpx;
+  height: 10rpx;
+  width: 10rpx;
+  border-radius: 50%;
+  background-color: #DD2626;
+}
+
+.filter-col-2{
+  /* padding-left: 40rpx; */
+  height:782rpx;
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
+}
+.filter-col-2-bg{
+  background-color: #fff;
+}
+.filter-col-2-item{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.filter-col-2-item .space-line{
+  margin-left: 40rpx;
+  height:2rpx;
+  background-color: rgba(236,236,236,1);
+}
+.filter-col-2-itemview{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 40rpx;
+  padding-top: 24rpx;
+  padding-right: 80rpx;
+  padding-bottom: 24rpx;
+}
+.filter-col-2-itemview.current2{
+  background-color: #fff;
+}
+.filter-col-2-itemview.menu2{
+  padding-right: 10rpx;
+}
+.filter-col-2-item-textview{
+  flex:1;
+  display: flex;
+  flex-direction: column;
+}
+.filter-col-2-item-textview .name, 
+.filter-col-2-item-textview .ZoneName{
+  font-family: "PingFangSC-Regular";
+  font-size:30rpx;
+  color:#333;
+}
+.filter-col-2-item-textview .ename{
+  font-family: "PingFangSC-Regular";
+  font-size: 24rpx;
+  line-height: 1;
+  color:#666;
+}
+.filter-col-2-item-textview .name.current,
+.filter-col-2-item-textview .ename.current,
+.filter-col-2-item-textview .ZoneName.current{
+  color: #DD2626;
+}
+
+.filter-col-2-item-col{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.filter-col-2-itemview.current-fixed2 .name,
+.filter-col-2-itemview.current-fixed2 .ZoneName{
+  color: #666;
+}
+
+.filter-col-2-itemview.current-fixed2 .name.current{
+  color: #DD2626;
+}
+
+.filter-col-2-itemview.current2 .name{
+  color:#222;
+}
+.filter-col-2-itemview.current2 .name.current2{
+  color: #222;
+}
+.filter-col-2-itemview.current2 .name.current{
+  color: #DD2626;
+}
+.filter-col-2-itemview.current2 .ename{
+  color:#222;
+}
+
+.name.current,
+.ZoneName.current{
+  color: #DD2626;
+}
+
+.filter-col-2-item .icon-dot{
+  position: absolute;
+  left: 18rpx;
+  top: 40rpx;
+  height: 10rpx;
+  width: 10rpx;
+  border-radius: 50%;
+  background-color: #DD2626;
+}
+
+.filter-col-3{
+  display: flex;
+  flex-direction: column;
+  width: 330rpx;
+  height:782rpx;
+}
+
+.icon-current{
+  position: absolute;
+  top:50%;
+  margin-top: -12rpx;
+  right:34rpx;
+  width:20rpx;
+  height:14rpx;
+  border-radius: 2rpx;
+  border-bottom:4rpx solid #DD2626;
+  border-left:4rpx solid #DD2626;
+  transform: rotate(-45deg);
+}
+
+.l-filterbox{
+  position: absolute;
+  top:78rpx;
+  left:0;
+  right:0;
+  display: flex;
+  flex-direction: column;
+  background-color:#fff;
+}
+
+.l-filterline{
+  position: absolute;
+  top:78rpx;
+  left:0;
+  right:0;
+  max-height:880rpx; 
+  display: flex;
+  flex-direction: row;
+  background-color:#fff;
+}
+
+.filter_btn{
+  flex:1;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 98rpx;
+  background-color: #fff;
+  border-top:1rpx solid #ececec;
+}
+.c_filter_clear{
+  flex:1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 98rpx;
+}
+.c_filter_clear>text{
+  font-family: 'PingFangSC-Regular';
+  font-size: 34rpx;
+  color:#666;
+}
+.c_filter_confirm{
+  height: 98rpx;
+  flex:1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #DD2626;
+}
+.c_filter_confirm>text{
+  font-family: 'PingFangSC-Regular';
+  font-size: 34rpx;
+  color:#fff;
+}
+.l-filterbox-scroll{
+  height:782rpx;
+}
+.filter-tab-line{
+  padding-top:24rpx;
+  padding-right: 16rpx;
+  padding-bottom: 2rpx;
+  padding-left: 16rpx;
+  display: flex;
+  flex-direction: column;
+}
+.filter-tab-line-title{
+  padding-right: 8rpx;
+  padding-bottom: 16rpx;
+  padding-left: 8rpx; 
+}
+.filter-tab-line-title>text{
+  font-family: 'PingFangSC-Medium';
+  font-size: 26rpx;
+}
+.label-box{
+  flex:1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.label-box-item{
+  margin-bottom: 14rpx;
+  width: 25%;
+}
+.filter-tab-line-label-bd{
+  position: relative;
+  margin-left: 8rpx;
+  margin-right: 10rpx;
+  padding-left: 8rpx;
+  padding-right: 8rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 68rpx;
+  border:1px solid #e2e3e6;
+  border-radius: 14rpx;
+}
+.filter-tab-line-label-bd>text{
+  font-family: 'PingFangSC-Regular';
+  font-size: 22rpx;
+}
+.filter-tab-line-label-bd.active{
+  background-image: url(https://pages.ctrip.com/you/foods/grid_vd_screen.png);
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: 36rpx;
+  border-color:#DD2626;
+}
+
+.filter-tab-line-label-bd.active > text{
+  color:#DD2626;
+}
+

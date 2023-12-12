@@ -1,0 +1,92 @@
+<template name="expandTaskItem">
+  <view class="task-main">
+    <view class="icon"
+      wx:if="{{!taskInfo.hideIcon}}"
+      style="background-image:url({{item.taskIcon || 'https://images3.c-ctrip.com/marketing/yoyo/yoyo.png'}}); background-size: 100% 100%;">
+    </view>
+    <view class="info">
+      <view class="title ellipsis" style="font-size:{{taskInfo.taskNameSize}}rpx;color:{{taskInfo.taskNameColor}}">
+        {{name}}
+        <block wx:if="{{item.taskTarget > 1}}">
+          <text class="taskProcess">({{item.taskProcess || 0}}</text>
+          <text class="connection-symbol">/</text>
+          <text class="taskProcess">{{item.taskTarget}})</text>
+        </block>
+      </view>
+      <view class="avatat-wraper" wx:if="{{item.eventType === 'INVITE_HELP' || item.eventType === 'INVITE_HELP_TASK'}}">
+        <view class="avatar_box {{avatar.data.headUrl ? 'avatar_box_headUrl' :''}} {{avatar.data.awardStatus == '0' ? 'avatar_box_receive_award' : ''}}" wx:for="{{item.itemList}}" wx:for-item="avatar"
+          style="background-image: url({{avatar.data.headUrl}});" bindtap="clickAvatar" data-taskid="{{item.taskId}}" data-idx="{{index}}">
+          <view class="avatar_plus" wx:if="{{!avatar.data.headUrl}}">+</view>
+          <view wx:if="{{avatar.acount}}" class="avatar_box_receive_price">{{avatar.acount}}</view>
+          <view wx:elif="{{avatar.data.awardStatus == '0'}}" class="avatar_box_receive_coupon">领券</view>
+        </view>
+      </view>
+      <view class="point ellipsis"
+        style="color:{{item.taskStatus == 3 ? taskInfo.donePointColor: taskInfo.unDonePointColor}}" bindtap="{{item.taskDesc ? 'toggleDesc' : ''}}"
+        data-taskid="{{item.taskId}}">
+        {{item.currencyNum}}
+        <view class="expand_icon" wx:if="{{item.taskDesc}}">
+          <view class="up" wx:if="{{!!item.expand}}"
+            style="border-top: 2rpx solid {{item.taskStatus == 3 ? taskInfo.donePointColor: taskInfo.unDonePointColor}};border-right: 2rpx solid {{item.taskStatus == 3 ? taskInfo.donePointColor: taskInfo.unDonePointColor}};">
+          </view>
+          <view class="down" wx:else
+            style="border-top: 2rpx solid {{item.taskStatus == 3 ? taskInfo.donePointColor: taskInfo.unDonePointColor}};border-right: 2rpx solid {{item.taskStatus == 3 ? taskInfo.donePointColor: taskInfo.unDonePointColor}};">
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="tap_wrap">
+      <view class="task_btn ellipsis task_btn3" wx:if="{{item.disabeld}}"
+        style="background-color:{{taskInfo.rewardDoneBtn}};background-image:url({{taskInfo.rewardDoneBtnBgImg}});border-radius: {{taskInfo.rewardDoneBtnBgImg ? 'unset' : 'inhert'}}">
+        <button style="color:{{taskInfo.rewardDone}}" data-taskid="{{item.taskId}}" bindtap="handleTask">{{item.buttonText}}</button>
+      </view>
+
+      <block  wx:elif="{{item.taskStatus == 0}}">
+          <view class="task_btn ellipsis task_btn0" wx:if="{{item.needReceive == 1}}"
+            style="background-color:{{taskInfo.taskToReceiveBtn}};background-image:url({{taskInfo.taskToReceiveBtnBgImg}});border-radius:  {{taskInfo.taskToReceiveBtnBgImg ? 'unset' : 'inhert'}};box-shadow:{{item.taskStatus == 2 ? 'none': ''}}">
+            <button style="color:{{taskInfo.taskToReceive}}"
+              bindtap="handleTask" data-type="{{item.eventType}}"
+              data-taskid="{{item.taskId}}" data-viewtime="{{item.viewTime}}" data-customcode="{{item.customCode}}"
+              data-aim="{{item.taskTarget}}" data-progress="{{item.taskProcess}}"
+              data-url="{{item.wechatUrl}}">领任务</button>
+          </view>
+          <view class="task_btn ellipsis task_btn1" wx:else
+            style="background-color:{{taskInfo.taskTodoBtn}};background-image:url({{taskInfo.taskTodoBtnBgImg}});border-radius:  {{taskInfo.taskTodoBtnBgImg ? 'unset' : 'inhert'}};box-shadow:{{item.taskStatus == 2 ? 'none': ''}}">
+            <button style="color:{{taskInfo.taskTodo}}"
+              bindtap="handleTask" data-type="{{item.eventType}}"
+              data-taskid="{{item.taskId}}" data-viewtime="{{item.viewTime}}" data-customcode="{{item.customCode}}"
+              data-aim="{{item.taskTarget}}" data-progress="{{item.taskProcess}}"
+              data-url="{{item.wechatUrl}}">{{item.buttonText}}</button>
+          </view>
+        </block>
+      <view class="task_btn ellipsis task_btn1" wx:elif="{{item.taskStatus == 1}}"
+        style="background-color:{{taskInfo.taskTodoBtn}};background-image:url({{taskInfo.taskTodoBtnBgImg}});border-radius:  {{taskInfo.taskTodoBtnBgImg ? 'unset' : 'inhert'}};box-shadow:{{item.taskStatus == 3 ? 'none': ''}}">
+        <button style="color:{{taskInfo.taskTodo}}"
+          bindtap="handleTask" data-type="{{item.eventType}}"
+          data-taskid="{{item.taskId}}" data-viewtime="{{item.viewTime}}" data-customcode="{{item.customCode}}"
+          data-aim="{{item.taskTarget}}" data-progress="{{item.taskProcess}}"
+          data-url="{{item.wechatUrl}}">{{item.buttonText}}</button>
+      </view>
+      <view class="task_btn ellipsis task_btn2" wx:elif="{{item.taskStatus == 2}}"
+        style="background-color:{{taskInfo.taskDoneBtn}};background-image:url({{taskInfo.taskDoneBtnBgImg}});border-radius: {{taskInfo.taskDoneBtnBgImg ? 'unset' : 'inhert'}};box-shadow:{{item.taskStatus == 3 ? 'none': ''}}">
+        <button style="color:{{taskInfo.taskDone}}"
+          bindtap="handleUserAcceptPrize"
+          data-taskid="{{item.taskId}}" data-currencynum="{{item.currencyNum}}">{{item.receiveAwardTaskText}}</button>
+      </view>
+
+      <view class="task_btn ellipsis task_btn3" wx:else
+        style="background-color:{{taskInfo.rewardDoneBtn}};background-image:url({{taskInfo.rewardDoneBtnBgImg}});border-radius: {{taskInfo.rewardDoneBtnBgImg ? 'unset' : 'inhert'}};box-shadow:{{item.taskStatus == 3 ? 'none': ''}}">
+        <button style="color:{{taskInfo.rewardDone}}"
+          data-url="{{item.wechatUrl}}" data-type="{{item.eventType}}"
+          data-isdone="{{true}}" data-taskid="{{item.taskId}}"
+          bindtap="handleWithoutTask">{{item.buttonDoneText || '已完成'}}</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="desc-wrap {{item.expand ? 'expand' : ''}}">
+    <view wx:for="{{item.descList}}" wx:for-item="descItem" wx:key="index"
+      style="font-size:{{taskInfo.taskDescSize}}rpx;color:{{taskInfo.taskDescColor}}">· {{descItem}}</view>
+  </view>
+  <!-- <view class="gap_line"></view> -->
+</template>

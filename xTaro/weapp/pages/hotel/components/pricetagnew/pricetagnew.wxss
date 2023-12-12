@@ -1,0 +1,45 @@
+@import "../../common/common.wxss";
+.pc-box {
+  border-radius: 4rpx;
+  color: #ff5500;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 244, 235, 0) 0%,
+    rgba(255, 244, 235, 1) 30%
+  );
+  display: flex;
+  font-size: 20rpx;
+  line-height: 1;
+  margin-top: 8rpx;
+}
+.pc-box .pc-text {
+  padding: 6rpx 4rpx;
+}
+.pc-box .pc-discount {
+  background-color: #fff1e6;
+  padding: 6rpx 4rpx;
+  border-radius: 0 4rpx 4rpx 0;
+}
+.pc-box .slim-line.pc-discount-line {
+  border-left: 2rpx dashed #ffc899;
+  width: 2rpx;
+  box-sizing: border-box;
+  height: unset;
+  transform: scale(0.5, 1);
+  background: unset;
+}
+.pc-box .pc-icon {
+  color: #ff5500;
+}
+.pc-box .slim-line {
+  display: inline-block;
+  height: 20rpx;
+  width: 1rpx;
+  transform: scale(0.5, 0, 0);
+  background-color: #ffc899;
+  margin: 0 4rpx;
+  vertical-align: middle;
+}
+.vm {
+  vertical-align: middle;
+}

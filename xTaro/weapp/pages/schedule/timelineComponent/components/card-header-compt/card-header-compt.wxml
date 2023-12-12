@@ -1,0 +1,25 @@
+<view class='container'>
+  <view class='title-container' wx:if="{{title}}">
+    <view class="row">
+      <image class="icon" mode='aspectFit' src='{{iconUrl}}'></image>
+      <text class='title' wx:if="{{title}}">{{title}}</text>
+      <text class='subTitle' wx:if="{{subTitle}}">/ {{subTitle}}</text>
+    </view>
+    <view class="row">
+        <view class='status-name'>
+          <text wx:if="{{cardOperationData.cardSource}}">{{cardOperationData.cardSource}}</text>
+          <text wx:else="{{cardOperationData.orderStatusName}}">{{cardOperationData.orderStatusName}}</text>
+        </view>
+      <!-- <view class="share-card-icon-wrapper row" >
+        <formid-button catch:tap="onShareClick" wx:if="{{cardOperationData.shareOperations.length}}" share-model='{{cardOperationData.shareOperations[0]}}' open-type='share'>
+          <Icon className='share_card_icon' color='#999' size='15'/>
+        </formid-button>
+      </view> -->
+    </view>
+  </view>
+  <view class='carrier-container' wx:if="{{carrierContent}}">
+    <!-- <image class="carrier-icon" src='../../../images/icon/cts_carrier_icon.png'></image> -->
+    <Icon className='cts_carrier_icon' color='#ccc' size='11' />
+    <text class='carrier-content'>{{carrierContent}}</text>
+  </view>
+</view>

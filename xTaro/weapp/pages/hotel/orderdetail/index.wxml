@@ -1,0 +1,570 @@
+<import src="./operateLoglayer/index.wxml" xmlns:wx=""/>
+<import src="./noticelayer/index.wxml" />
+<import src="./suiteInfo.wxml" />
+<import src="../commontemplates/minidialog/dialog.wxml" />
+<page-meta page-style="overflow: {{showMask ? 'hidden' : 'visible'}}" />
+
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+<mp-navigation-bar wx:if="{{!isQuickApp}}" extClass="nav-bar" back="{{false}}" id="mp-navigation">
+    <view slot="left" class="custom-navigation-back" bindtap="handleCustomBack">
+        <view class="navback-arrow wechat-font-g-arrow-down"></view>
+    </view>
+    <view slot="center" class="custom-navigation-center">
+        <text class="title">{{navTitle}}</text>
+    </view>
+</mp-navigation-bar>
+<!-- fishBone -->
+<view wx:if="{{showFishBone}}" class="order-fishbone">
+    <image class="img" src="https://pages.c-ctrip.com/hotels/wechat/img/orderdetailnew-fish-bone.png" lazy-load></image>
+    <view class="fishbone-loading"></view>
+</view>
+<scroll-view style="height: calc(100vh - {{contentHeight}}px);"
+             refresher-enabled
+             scroll-with-animation
+             scroll-y
+             enhanced
+             refresher-triggered="{{showFreshLoading}}"
+             bindrefresherrefresh="handlePullDownRefresh"
+             show-scrollbar="{{false}}"
+             scroll-into-view="{{toView}}">
+<!--消息订阅 todo: 后续产品提需修改-->
+<block wx:if="{{false}}">
+<!--<block wx:if="{{orderSubscribe.display && isWechat}}">-->
+    <subscribeMsg
+            templates="{{orderSubscribe.template}}"
+            state="{{orderSubscribe.state}}"
+            bind:subscribeMsg="subscribeMsgCb">
+    </subscribeMsg>
+</block>
+<view class="head-info">
+    <view class="order-status">
+        <view class="order-status-title" bindtap="{{operateInfo ? 'toggleOrderLogLayer' : ''}}">
+            {{orderStatus.name}}<text wx:if="{{operateInfo}}" class="arrow-ico wechat-font-arrow-right"></text>
+            <view class="refresh" catchtap="updateOrderStatus" wx:if="{{cardExtendInfo && cardExtendInfo.showRefreshAction}}">
+                <text class="wechat-font-refresh"></text>
+                <text decode>&nbsp;刷新</text>
+            </view>
+        </view>
+        <view class="order-status-desc">{{orderStatus.sceneDesc}}</view>
+    </view>
+    <!--动态卡片-->
+    <block wx:for="{{orderCardList}}" wx:for-item="orderCard">
+        <swiper circular autoplay
+                indicator-dots="{{orderCard.cardDetails && orderCard.cardDetails.length > 1}}"
+                indicator-color="#b8c6d9" indicator-active-color="#0066f6"
+                class="order-card-swiper {{orderCard.hasExtraBtns ? 'high-height' : ''}}">
+            <block wx:for="{{orderCard.cardDetails}}" wx:for-item="detail" wx:key="id">
+                <swiper-item class="order-card">
+                    <!--订房必读-->
+                    <template wx:if="{{detail.cardType === 4}}" is="notice-card" data="{{detail, noticeNum}}"></template>
+                    <view wx:else class="content">
+                        <view class="left single-ellipsis">
+                            <text wx:for="{{detail.titleList}}" wx:for-item="title" class="oc-title {{title.color}}">{{title.name}}</text>
+                            <view class="single-ellipsis mt7">
+                                <text wx:for="{{detail.subTitleList}}" wx:for-item="subtitle" class="oc-subtitle {{subtitle.color}}">{{subtitle.name}}</text>
+                                <text wx:if="{{detail.showDetailBtn}}" bindtap="handleOrderCardClick"
+                                      data-title="{{detail.title}}"
+                                      data-msg="{{detail.subTitle}}"
+                                      data-operate="showCardDetail" class="oc-detail-btn">详情</text>
+                            </view>
+                        </view>
+                        <!--点击按钮-->
+                        <view wx:if="{{remainingTime && detail.cardType === 1}}" class="pay-btn btn"
+                              bindtap="handleOrderCardClick"
+                              data-operate="{{detail.operateType}}"
+                              data-event="toPay"
+                              data-type="{{detail.cardType}}">
+                            <text class="desc">去支付</text>
+                            <view class="count-down">{{remainingTime}}</view>
+                        </view>
+                        <view wx:elif="{{detail.operateText}}" class="btn" bindtap="handleOrderCardClick" data-id="{{detail.id}}"
+                              data-operate="{{detail.operateType}}"
+                              data-event="{{detail.event}}"
+                              data-type="{{detail.cardType}}"
+                              data-url="{{detail.jumpUrl}}"
+                              data-domid="{{detail.domId}}">{{detail.operateText}}
+                        </view>
+                    </view>
+                    <!--防疫政策查询等跳转-->
+                    <view class="btns" wx:if="{{detail.extraBtns && detail.extraBtns.length}}">
+                        <view wx:for="{{detail.extraBtns}}" wx:for-item="btn" wx:key="index" bindtap="handleOrderCardClick"
+                              data-operate="jumpH5Url"
+                              data-url="{{btn.url}}"
+                              data-type="{{btn.type}}"
+                              class="single-btn">
+                            {{btn.text}}<text wx:if="{{btn.subLabel}}" class="sub-label">{{btn.subLabel}}</text>
+                        </view>
+                    </view>
+                </swiper-item>
+            </block>
+        </swiper>
+    </block>
+</view>
+<!--价格&取消政策模块-->
+<view class="price-cancel-area module" wx:if="{{priceSummaryList}}">
+    <view class="price-info" wx:if="{{reservationOrder !== 1}}">
+        <view wx:for="{{priceSummaryList}}" wx:for-item="payInfo" wx:key="type" wx:for-index="idx" class="pay-info">
+            <view class="pay-item">
+                <text class="title">{{payInfo.title}}</text>
+                <text wx:if="{{payInfo.additionalInfo && payInfo.additionalInfo.innerTitle}}" class="wechat-font-qa" bindtap="showPayDesc" data-index="{{idx}}"></text>
+                <view class="price">
+                    <text>{{payInfo.currency}}{{payInfo.amount}}</text>
+                    <text wx:if="{{payInfo.amountDesc}}" class="desc">({{payInfo.amountDesc}})</text>
+                    <!--外币-->
+                    <text wx:if="{{payInfo.cnyAmount >= 0}}" class="desc">(约¥{{payInfo.cnyAmount}})</text>
+                </view>
+            </view>
+            <view wx:if="{{priceDetail && idx === 0}}" class="price-detail-btn" bindtap="togglePriceDetail">
+                {{priceDetail.title}}<text class="wechat-font-arrow-right va"></text>
+            </view>
+        </view>
+        <!--砍价按钮-->
+        <form bindsubmit="submitFromId" report-submit="true" wx:if="{{bargain.showBargainBlock && bargain.topBtnText && !orderIsCanceled}}" data-type="btn">
+            <button class="bargain-btn" formType="submit" open-type="getUserInfo" bindgetuserinfo="goToJoin">
+                <view class="bargain-desc">{{bargain.topBtnText}}</view>
+                <view class="wechat-font-arrow-right"></view>
+            </button>
+        </form>
+    </view>
+    <view wx:if="{{cancelInfo.simpleDesc || cancelInfo.deductionDetail}}" class="policy {{reservationOrder === 1 ? 'presale-order' : ''}}">
+        <view wx:if="{{cancelInfo.anXinCancelInfo && cancelInfo.anXinCancelInfo.text}}" class="desc">
+            <image wx:if="{{cancelInfo.anXinCancelInfo.icon}}" class="ec-icon" src="{{cancelInfo.anXinCancelInfo.icon}}"></image>
+            <text class="ec-name">{{cancelInfo.anXinCancelInfo.text}}</text>
+            <text class="ec-detail">因疫情不可抗力因素可免费取消</text>
+        </view>
+        <view wx:elif="{{cancelInfo.simpleDesc}}" class="desc">{{cancelInfo.simpleDesc}}</view>
+        <view wx:if="{{cancelInfo.detail}}" class="btn" catchtap="toggleCancelDescLayer" data-type="new">
+            取消政策<text class="wechat-font-arrow-right va"></text>
+        </view>
+    </view>
+</view>
+<block wx:if="{{nps.show && nps.topPosition}}">
+    <include src="nps.wxml" />
+</block>
+<!--酒店信息-->
+<view class="hotel-module module">
+    <view class="hotel-info">
+        <view class="hotel-logo" style="background: url({{hotelInfo.logoPic}}) center center no-repeat; background-size: cover;">
+            <text class="days">{{dateInfo.days}}晚</text>
+        </view>
+        <view class="hotel-content">
+            <view class="hc-name" bindtap="goToDetail" data-type="title">
+                {{hotelInfo.name}} <text class="wechat-font-arrow-right"></text>
+                <view class="hc-en-name" wx:if="{{hotelInfo.isOversea && hotelInfo.enName}}">{{hotelInfo.enName}}</view>
+            </view>
+            <view class="hc-address" bindtap="handleCopy" data-text="{{hotelInfo.address}}" data-type="address">
+                {{hotelInfo.address}} <text class="wechat-font-copy"></text>
+            </view>
+        </view>
+    </view>
+    <view class="hotel-btns" wx:if="{{coordinate || hotelTelInfo.call || isWechat && useCarInfo.jumpUrl}}">
+        <view wx:if="{{hotelTelInfo.call}}" class="btn" bindtap="callPhone" data-tel="{{hotelTelInfo.call}}" data-from="hotelcardBtn">
+            <text class="wechat-font-tel icon"></text> 联系酒店
+        </view>
+        <view class="btn" bindtap="tapGotoMap" wx:if="{{coordinate}}">
+            <text class="wechat-font-locate-fill icon"></text> 地图/导航
+        </view>
+        <view wx:if="{{isWechat && useCarInfo.jumpUrl}}" class="btn car-box" bindtap="useCar">
+            <view class="promotion-tag">
+                <text class="promotion-text">{{useCarInfo.cornerMark || '特惠'}}</text>
+            </view>
+            <text class="wechat-font-usecar icon car-tag"></text>
+            <text>{{useCarInfo.name || '打车'}}</text>
+        </view>
+    </view>
+</view>
+<!--入住信息-->
+<view class="checkin-info-module module">
+    <view class="module-title">入住信息</view>
+    <view class="checkin-content">
+        <!--入离日期-->
+        <view wx:if="{{!hourTimeInfo && dateInfo.indayDisplay && dateInfo.outdayDisplay}}" class="date-info">
+            <view class="checkin item">
+                <text class="icon">住</text>
+                <text class="time">{{dateInfo.indayDisplay}}</text>
+            </view>
+            <view class="checkout item">
+                <text class="icon">离</text>
+                <text class="time">{{dateInfo.outdayDisplay}}</text>
+            </view>
+            <view wx:if="{{hotelInfo.isOversea}}" class="oversea-time-tip">*当地酒店时间</view>
+        </view>
+        <view wx:elif="{{hourTimeInfo}}" class="date-info-hourrroom">
+            <view class="tit">{{hourTimeInfo.checkInDesc}}</view>
+            <view class="desc">{{hourTimeInfo.hourRoomDesc}}</view>
+        </view>
+        <view class="room-info">
+            <view class="room-title" bindtap="toggleRoomLayer">
+                <text class="tit">{{subRoomInfo.name}}</text>
+                <text wx:if="{{roomQuantity}}" class="quantity" decode>&nbsp;{{roomQuantity}}间</text>
+                <text class="wechat-font-arrow-right ft26"></text>
+                <view class="room-en-name" wx:if="{{hotelInfo.isOversea && subRoomInfo.enName}}">{{subRoomInfo.enName}}</view>
+            </view>
+            <view class="room-basic" wx:if="{{basicFacility.length}}">
+                <text wx:for="{{basicFacility}}" wx:for-item="facility" wx:key="index" class="facility-item">{{facility}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="checkin-breakfast" wx:if="{{mealInfo && mealInfo.title}}">
+        <!--房型包含的餐食-->
+        <view class="cb-title">{{mealInfo.title}}</view>
+        <view class="cb-sub-title" wx:if="{{mealInfo.memberPointRewardBreakfastDesc}}">
+            <view class="line"></view>
+            <view class="subtitle">{{mealInfo.memberPointRewardBreakfastDesc}}</view>
+        </view>
+        <view wx:if="{{mealInfo.dailyMealList.length}}"
+              class="breakfast-detail {{mealInfo.hasToggleBtn && mealInfo.showMore ? 'pb40' : ''}}">
+            <view wx:for="{{mealInfo.dailyMealList}}" wx:for-item="meal" wx:key="index" class="item"
+                  wx:if="{{index > 4 ? !mealInfo.showMore : true}}">
+                <text class="{{meal.noMeal ? '' : 'bd-title'}}">{{meal.title}}</text>
+                <text class="bd-desc">{{meal.desc}}</text>
+            </view>
+            <view wx:if="{{mealInfo.hasToggleBtn}}" bindtap="toggleBreakfastDetail"
+                  class="toggle-btn {{mealInfo.showMore ? 'breakfast-fold' : ''}}">
+                <text>{{mealInfo.showMore ? '展开' : '收起'}}</text>
+                <text class="{{mealInfo.showMore ? 'wechat-font-g-arrow-down' : 'wechat-font-g-arrow-up'}}"></text>
+            </view>
+        </view>
+    </view>
+    <!--套餐内所含餐食-->
+    <view class="meal-suite" wx:if="{{mealSuite && mealSuite.xItems.length}}">
+        <view class="cb-sub-title" wx:if="{{mealSuite.title}}">
+            <view class="line"></view>
+            <view class="subtitle">{{mealSuite.title}}</view>
+        </view>
+        <template is="suite-tiling-content" data="{{suiteInfo: mealSuite, clickEvent: 'toggleMealSuite', suiteLayer}}"></template>
+    </view>
+    <!--已购及赠送服务-->
+    <view wx:if="{{(giftWithSuite && giftWithSuite.xItems.length) || ticketList.length || superTravellerInfo}}" id="package-info">
+        <view wx:if="{{packageModuleTitle}}" class="gift-suite-title">{{packageModuleTitle}}</view>
+        <block wx:if="{{ticketList.length}}">
+            <view class="ticket-info" wx:for="{{ticketList}}" wx:for-item="ticket" wx:for-index="index" wx:key="index" bindtap="toggleSuiteLayer" data-ticketidx="{{index}}" data-type="ticket">
+            <view class="ticket-img" style="background: url({{ticket.imageUrl}}) center center no-repeat; background-size: cover">
+                <view class="t-icon">享</view>
+            </view>
+            <view class="ticket-content">
+                <view class="tc-left">
+                    <view class="ticket-title">
+                        <text>含{{ticket.name}}</text>
+                        <text class="wechat-font-arrow-right color"></text>
+                    </view>
+                    <view wx:if="{{ticket.cancelText}}">{{ticket.cancelText}}</view>
+                    <block wx:else class="ticket-desc">
+                        <text wx:if="{{ticket.useDateDesc}}" class="date">{{ticket.useDateDesc}}</text>
+                        <text wx:if="{{ticket.appointTips}}" class="appoint {{ticket.appointType !== 0 ? 'highlight' : ''}}">{{ticket.appointTips}}</text>
+                    </block>
+                    <view class="tags" wx:if="{{ticket.tips.length}}">
+                        <text wx:for="{{ticket.tips}}" wx:for-item="tip" class="item">{{tip}}</text>
+                    </view>
+                </view>
+                <view wx:if="{{ticket.showAppointBtn && ticket.jumpUrl}}"
+                        class="ticket-button" catchtap="jumpH5Url"
+                        data-oid="{{ticket.orderId}}" data-url="{{ticket.jumpUrl}}}">{{ticket.btnText}}<text class="wechat-font-arrow-right"></text>
+                </view>
+            </view>
+            </view>
+        </block>
+        <view class="gift-suite" wx:if="{{giftWithSuite && giftWithSuite.xItems.length || superTravellerInfo}}">
+            <template is="suite-tiling-content" data="{{suiteInfo: giftWithSuite, clickEvent: 'toggleGiftSuite', suiteLayer, superTravellerInfo}}"></template>
+        </view>
+    </view>
+</view>
+<!--预订信息-->
+<view class="reservation-info-module module">
+    <view class="module-title">预订信息</view>
+    <view class="basic-info">
+        <view wx:for="{{reservationInfoList}}" wx:for-item="info" class="bi-item" wx:key="{{info.type}}">
+            <view class="title">{{info.name}}</view>
+            <view class="ri-content">
+                <view class="content">
+                    <view wx:if="{{info.content}}" class="con">
+                        {{info.content}}
+                    </view>
+                    <block wx:elif="{{info.contentList && info.contentList.length}}">
+                        <view wx:for="{{info.contentList}}" wx:for-item="content" wx:for-index="idx" wx:key="index" class="con">
+                            {{content}}
+                        </view>
+                    </block>
+                    <view class="tag" wx:if="{{info.tag}}">{{info.tag}}</view>
+                </view>
+                <text wx:if="{{info.className}}" bindtap="handleReservationBtn"
+                      class="icon {{info.className}}"
+                      data-check-valid="{{info.needCheckValid}}"
+                      data-trace-text="{{info.traceBtnText}}"
+                      data-text="{{info.content}}"
+                      data-event="{{info.event}}">
+                </text>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{reservateBtns.length}}" class="reservate-btns">
+        <view wx:for="{{reservateBtns}}" wx:for-item="btn" wx:key="index" wx:if="{{btn}}"
+              bindtap="handleReservationBtn"
+              data-event="{{btn.event}}"
+              data-check-valid="{{btn.needCheckValid}}"
+              data-trace-text="{{btn.traceBtnText}}"
+              class="rb-item">
+            <text class="rb-icon {{btn.icon}}"></text>
+            <text class="rb-title">{{btn.title}}</text>
+        </view>
+    </view>
+</view>
+<!--发票信息 todo: 先屏蔽问号浮层-->
+<view class="module" wx:if="{{invoiceInfoV2 && invoiceInfoV2.title}}">
+    <view class="module-title">{{invoiceInfoV2.title}}</view>
+    <view class="invoice-info">
+        <view class="invoice-content {{invoiceInfoV2.linkText ? 'max-wd' : ''}}">
+            <view class="sub-title" wx:if="{{invoiceInfoV2.subtitle}}">{{invoiceInfoV2.subtitle}}</view>
+            <view class="normal-desc" wx:if="{{invoiceInfoV2.normalDesc}}">{{invoiceInfoV2.normalDesc}}</view>
+            <view class="special-desc single-ellipsis" wx:if="{{invoiceInfoV2.specialDesc}}">
+                <text class="desc-item" wx:for="{{invoiceInfoV2.specialDesc}}" wx:key="*this" wx:for-item="item">{{item}}</text>
+            </view>
+        </view>
+        <view class="invoice-btn"
+              data-event="handleInvoiceInfo"
+              data-name="{{invoiceInfoV2.linkText}}"
+              data-type="{{invoiceInfoV2.actionType}}"
+              bindtap="checkValidOperate"
+              wx:if="{{invoiceInfoV2.linkText}}">
+            {{invoiceInfoV2.linkText}}
+        </view>
+    </view>
+</view>
+<block wx:else>
+    <view class="invoice-module module" wx:if="{{userInvoice && userInvoice.displayText}}">
+        <view class="module-title">{{userInvoice.displayTitle}}</view>
+        <view class="invoice-content">
+            <view class="ic-desc">{{userInvoice.displayText}}</view>
+            <view wx:if="{{userInvoice.type === 2 && userInvoice.maskedEmail}}">{{userInvoice.maskedEmail}}</view>
+        </view>
+    </view>
+</block>
+<!--nps位于底部-->
+<block wx:if="{{nps.show && !nps.topPosition}}">
+    <include src="nps.wxml"/>
+</block>
+<!--滚动banner-->
+<view class="module bargain-module" wx:if="{{bargain.showBargainBlock && isWechat}}">
+    <barginbanner
+            orderId="{{orderId + ''}}"
+            masterHotelId="{{hotelInfo.masterHotelId}}"
+            orderStatus="{{orderStatus.statusCode}}"
+            miniCut="{{miniCut}}"
+            cutpricePage="{{cutpricePage}}" />
+</view>
+<block wx:elif="{{swiperBanner.enable && isWechat}}">
+    <swiper class="swiper-container"
+            indicator-dots autoplay interval="5000" duration="500"
+            indicator-active-color="rgba(0,0,0,0.6)" indicator-color="rgba(0,0,0,.4)">
+        <block wx:for="{{swiperBanner.banners}}">
+            <swiper-item>
+                <image
+                    lazy-load
+                    class="swiper-banner"
+                    src="{{item.bannerImage}}"
+                    bindtap="openComponentHongbaoWebview"
+                    data-ubt-key="{{item.title}}"
+                    data-order="{{index}}"
+                    id="autotest_detailpage_mainbanner"></image>
+            </swiper-item>
+        </block>
+    </swiper>
+</block>
+
+<!--扫码住相关 WIFI、发票、商城、X产品（门票、用车）等推荐 -->
+<block wx:if="{{smzModule.show && smzModuleSwitch}}">
+    <block wx:if="{{smzModule.functions.length > 1}}">
+        <view class="g-box">
+            <view class="smz-title">更多店内服务</view>
+            <view class="module-container">
+                <block wx:for="{{smzModule.functions}}" wx:for-item="func">
+                    <view class="module-card" bindtap="goAggregate" data-id="{{func.id}}" data-ubt-key="{{func.ubtKey}}">
+                        <image class="module-ico" src="{{func.icon}}"></image>
+                        <view class="module-mid">
+                            <view class="title">{{smzModuleText[func.id].tit}}<view class="wechat-font-arrow-right black3"></view></view>
+                            <view class="text black2">{{smzModuleText[func.id].text}}</view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="g-box" bindtap="goAggregate" data-id="{{smzModule.functions[0].id}}" data-ubt-key="{{smzModule.functions[0].ubtKey}}">
+            <view class="smz-title">店内服务</view>
+            <view class="row-module">
+                <image class="module-ico" src="{{smzModule.functions[0].icon}}"></image>
+                <view class="module-mid">
+                    <view class="module-title">{{smzModuleText[smzModule.functions[0].id].tit}}</view>
+                    <view class="module-text black2">{{smzModuleText[smzModule.functions[0].id].text}}</view>
+                </view>
+                <view class="wechat-font-arrow-right black3 mla"></view>
+            </view>
+        </view>
+    </block>
+</block>
+
+<!--资质备案-->
+<view wx:if="{{homestayDisplay}}" class="qualification-module" bindtap="gotoSellingPoint" data-type="policy">
+    <text class="wechat-font-qualification qualification-icon"></text>
+    <text class="qualification-desc">查看资质备案</text>
+    <text class="wechat-font-arrow-right"></text>
+</view>
+</scroll-view>
+<!--操作按钮-->
+<view wx:if="{{operateBtns.length}}">
+    <view class="operation-placeholder"></view>
+    <view class="operation-btns">
+        <view class="operation" wx:for="{{operateBtns}}" wx:for-item="operate" wx:if="{{index < 4}}"
+              bindtap="checkValidOperate"
+              data-name="{{operate.name}}"
+              data-event="{{operate.event}}">
+            {{operate.name}}
+        </view>
+    </view>
+    <view class="operate-layer {{isIphoneX ? 'iphonex-margin' : ''}}"
+          wx:if="{{showMoreOperateLayer}}" catchtouchmove="closeMoreOperateBtn" catchtap="closeMoreOperateBtn">
+        <view class="remain-btns">
+            <view wx:for="{{operateBtns}}"
+                  wx:for-item="operate"
+                  wx:if="{{index >= 4}}"
+                  data-name="{{operate.name}}"
+                  data-type="{{operate.type}}"
+                  data-event="{{operate.event}}"
+                  bindtap="checkValidOperate"
+                  class="btn">
+                {{operate.name}}
+            </view>
+        </view>
+    </view>
+</view>
+
+<!--客服浮标-->
+<view wx:if="{{showCustomerServiceIcon}}" class="customer-service" bindtap="handleAskClick" data-type="askctrip">
+    <view class="wechat-font-customer-service"></view>
+    <view class="name">客服</view>
+</view>
+
+<!--价格明细浮层-->
+<price-detail
+    wx:if="{{priceDetail.show}}"
+    priceDetail="{{priceDetail}}"
+    userInfo="{{userInfo}}"
+    bind:close="togglePriceDetail"
+></price-detail>
+<!--预订日志浮层-->
+<common-layer wx:if="{{showLogLayer}}" bind:closeLayer="toggleOrderLogLayer">
+    <template is="operatelog-layer" data="{{operateInfo: operateInfo}}" />
+</common-layer>
+
+<!--订房必读-->
+<common-layer wx:if="{{showNoticeLayer}}" useTitleSlot="{{true}}" bind:closeLayer="toggleNoticeLayer">
+    <template is="notice-layer" data="{{notice: reservationNoticeTips}}" />
+</common-layer>
+<!--通用浮层-->
+<block wx:if="{{universalLayer.show}}">
+    <common-layer title="{{universalLayer.title}}" bind:closeLayer="closeUniversalLayer">
+        <view class="ft28" slot="content">
+            <view wx:for="{{universalLayer.contentList}}" wx:for-item="content">
+                {{content.title}}
+            </view>
+        </view>
+    </common-layer>
+</block>
+<!--姓名鉴权浮层-->
+<block wx:if="{{showNameValidLayer}}">
+    <include src="nameconfirm.wxml" />
+</block>
+<!-- 取消政策浮层 -->
+<common-layer wx:if="{{showCancelDescLayer}}"
+              title="取消政策"
+              bind:closeLayer="toggleCancelDescLayer">
+    <view class="tips-list" slot="content">
+        <view wx:if="{{cancelInfo.anXinCancelInfo && cancelInfo.anXinCancelInfo.content}}" class="ec-detail-desc">
+            <view class="ec-title" wx:if="{{cancelInfo.anXinCancelInfo.text}}">
+                <image wx:if="{{cancelInfo.anXinCancelInfo.icon}}" class="ec-icon" src="{{cancelInfo.anXinCancelInfo.icon}}"></image>
+                <text class="ec-name">{{cancelInfo.anXinCancelInfo.text}}</text>
+            </view>
+            <view class="desc">{{cancelInfo.anXinCancelInfo.content}}</view>
+            <view class="old-title">原政策为:</view>
+        </view>
+        <view class="ladder-cancel" wx:if="{{cancelInfo.celPolicyTable && cancelInfo.celPolicyTable.rows}}">
+            <block wx:for="{{cancelInfo.celPolicyTable.rows}}" wx:for-item="item">
+                <view class="{{item.headFlag ? 'jt-thead' : 'jt-tbody'}} {{item.highLight ? 'hight-light' : ''}}">
+                    <block wx:for="{{item.cells}}" wx:for-item="con">
+                        <view class="jt-txt {{con.isFree ? 'jt-free constant-tip-color' : ''}} {{con.needGray ? 'jt-grey' : ''}}">{{con.context}}</view>
+                    </block>
+                </view>
+            </block>
+        </view>
+        <view class="tips-item">{{cancelInfo.detail}}</view>
+    </view>
+</common-layer>
+<!-- 登录弹窗引导 -->
+<block wx:if="{{showLoginLayer}}">
+    <view class="cmask"></view>
+    <view class="cmask-popbox login-layer" bindtap="toLogin">
+        <view class="text-title">立即登录携程账号，查阅该订单信息</view>
+        <view class="text-line"></view>
+        <view class="text-crude">tips：登录对应的携程账号才可看到相关订单信息哦，若提示账号信息不一致，请点击右上角“···”中的“返回小程序首页”，重新切换账号再尝试~</view>
+        <view class='agree-btn'>立即登录</view>
+    </view>
+</block>
+<!-- 房型浮层 -->
+<roomlayer
+    wx:if="{{showRoomLayer}}"
+    isShown="{{showRoomLayer}}"
+    isIphoneX="{{isIphoneX}}"
+    room="{{baseRoomInfo}}"
+    subRoom="{{subRoomInfo}}"
+    from="orderdetail"
+    bind:hiddenLayer="toggleRoomLayer"
+>
+    <template is="room-layer-bottom" data="{{isIphoneX}}" />
+</roomlayer>
+<!--客服浮层-->
+<include src="../orderdetail/customerservice.wxml"></include>
+<loading-gif isShown="{{showLoading}}"></loading-gif>
+
+<!-- 砍价浮层-->
+<block wx:if="{{bargain.showLayer && !orderIsCanceled}}">
+    <view class="cmask" bindtap="closeBargainLayer" catchtouchmove="noop"></view>
+    <form bindsubmit="submitFromId" report-submit="true">
+        <view class="bargain-view" catchtouchmove="noop">
+            <view class="bargain-close" bindtap="closeBargainLayer" id="autotest_orderpage_closekanjia"></view>
+            <view class="bargain-join">
+                <view class="bargain-header"></view>
+                <view class="bargain-body">
+                    <view class="bargain-title">
+                        <text class="bargain-title-body">{{bargain.title}}</text>
+                        <text class="bargain-amount">{{bargain.amount}}</text>
+                        <text class="bargain-title-end">{{bargain.titleEnd}}</text>
+                    </view>
+                    <view class="bargain-sub-title">{{bargain.subTitle}}</view>
+                    <button class="bargain-button" formType="submit" open-type="getUserInfo" bindgetuserinfo="goToJoin">{{bargain.buttonText}}</button>
+                </view>
+            </view>
+        </view>
+    </form>
+</block>
+<template name="room-layer-bottom">
+    <view class="room-layer-btn {{isIphoneX ? 'iphonx-bottom' : ''}}" catchtap="gotoSellingPoint" data-type="facility">
+        <view class="rl-btn-content">
+            <view class="rl-btn-top">更多酒店设施</view>
+            <view class="rl-btn-bottom">停车场·泳池·行李寄送</view>
+        </view>
+    </view>
+</template>
+
+<!--白屏检测-->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>
+
+<!-- 套餐浮层 -->
+<block wx:if="{{suiteLayer.show && suiteLayer.suiteInfo.type === suiteLayer.type}}">
+    <common-layer class="content-pt0"
+            title="{{suiteLayer.suiteInfo.title}}详情"
+            contentStyle="background: #ebeff5; padding-top: 0"
+            bind:closeLayer="toggleSuiteLayer">
+        <template is="suite-layer" data="{{suiteInfo: suiteLayer.suiteInfo, suiteLayer}}"></template>
+    </common-layer>
+</block>

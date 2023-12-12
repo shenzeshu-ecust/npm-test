@@ -1,0 +1,39 @@
+<view hidden="{{!isShown}}" class="cmask" bindtap="closeOrderLayer" catchtouchmove="noop"></view>
+<view wx:if="{{isShown}}" class="global-layer order-layer" catchtouchmove="noop">
+    <view class="head">
+        <view class="wechat-font-close2 order-layer-close" bindtap="closeOrderLayer"></view>
+        <text>预订信息</text>
+    </view>
+    <view class="body">
+        <view class="order-title">您有一个订单待支付</view>
+        <view class="order-info">
+            <view class="info-wrapper">
+                <text class="mr-8">{{roomInfo.inDayText}}</text>
+                <text>{{roomInfo.inDayDesc}}</text>
+                <block wx:if="{{!roomInfo.isHourRoom}}">
+                    <view class="line">-</view>
+                    <text class="mr-8">{{roomInfo.outDayText}}</text>
+                    <text>{{roomInfo.outDayDesc}}</text>
+                    <text wx:if="{{roomInfo.days > 0}}" class="divider"></text>
+                    <text wx:if="{{roomInfo.days > 0}}">{{roomInfo.days}}晚</text>
+                </block>
+            </view>
+            <view class="info-wrapper mt-16">
+                <text>{{roomInfo.name}}</text>
+                <text class="divider"></text>
+                <text wx:if="{{roomInfo.breakfast}}">{{roomInfo.breakfast}}</text>
+            </view>
+            <view class="mt-50">
+                <text class="mr-76">住客姓名</text>
+                <text>{{roomInfo.guestName}}</text>
+            </view>
+            <view class="mt-50">
+                <text class="mr-76">联系方式</text>
+                <text>{{roomInfo.guestPhone}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <button class="order-btn" bindtap="goBooking">去支付</button>
+    </view>
+</view>

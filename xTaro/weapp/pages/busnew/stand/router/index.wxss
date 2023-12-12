@@ -1,0 +1,22 @@
+/* pages/bus/router/index.wxss */
+page {
+    height: 100%;
+    font-size: 0.75rem;
+    background-color: #efefef;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.tips {
+    font-size: 1.5rem;
+    color: #999;
+}
+.tips2 {
+    font-size: 1.5rem;
+    color: #999;
+}
+
+.button {
+    margin: 40rpx 40rpx;
+}

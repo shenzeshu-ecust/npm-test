@@ -1,0 +1,147 @@
+<template name="mask">
+  <!--蒙层 -->
+  <view class="pop-mask" wx:if="{{masktype != -1 && masktype != 5 && masktype != 6 && masktype != 7}}" bindtap="closeFloatByMask"></view>
+
+  <view class="{{isShortScreen ? 'short_screen' :''}}" wx:if="{{masktype == 1}}">
+    <view class="float-card-result">
+        <view class="float-card-result-item card"  wx:for="{{floatCardList}}"  wx:key="{{index}}" style="background-image:url({{floatCardList[index].cardFrontImg}});background-size:cover">
+          <view class="card_color left_top" style="left: 10rpx">
+            <view style="color: {{(floatCardList[index].cardColor =='heart' || floatCardList[index].cardColor == 'diamond') ? 'red' : 'black'}};font-size: 22rpx">{{floatCardList[index].cardName}}</view>
+            <view class="color" style="color: {{(floatCardList[index].cardColor =='heart' || floatCardList[index].cardColor == 'diamond') ? 'red' : 'black'}};">{{cardColorCfg[floatCardList[index].cardColor]}}</view>
+          </view>
+          <view class="card_color right_bottom" style="right: 10rpx">
+            <view style="color: {{(floatCardList[index].cardColor =='heart' || floatCardList[index].cardColor == 'diamond') ? 'red' : 'black'}};font-size: 22rpx">{{floatCardList[index].cardName}}</view>
+            <view class="color" style="color: {{(floatCardList[index].cardColor =='heart' || floatCardList[index].cardColor == 'diamond') ? 'red' : 'black'}};">{{cardColorCfg[item.cardColor]}}</view>
+          </view>
+        </view>
+      </view>
+  </view>
+
+  <!-- 开奖--中奖/未中奖 -->
+  <view class="float award {{isShortScreen ? 'short_screen' :''}}" wx:if="{{masktype == 2}}">
+    <view class="title">
+
+      <view class="tips" wx:if="{{!openAward}}">开奖啦!</view>
+      <view class="tips" wx:if="{{openAward && userPeriodCards.length > 0}}">恭喜中奖啦!</view>
+      <view class="tips" wx:if="{{openAward && userPeriodCards.length <= 0}}">很遗憾，没中奖</view>
+
+      <view class="period">第{{periodNum}}期</view>
+    </view>
+
+    <view class="award_cards card_wrap">
+      <view class="float_bg_middle award">
+        <view class="award_cards period">
+          <view class="card" wx:for="{{periodCards.cardConfigs}}" style="background:url({{item.cardFrontImg || 'https://images3.c-ctrip.com/marketing/2021/02/lottery/default_bg.png'}})  0 0 / 100% 100% no-repeat;">
+            <view class="card_color left_top">
+              <view style="color: {{(item.cardColor =='heart' || item.cardColor == 'diamond') ? 'red' : 'black'}}">{{item.cardName}}</view>
+              <view class="color" style="line-height: 10rpx">{{cardColorCfg[item.cardColor]}}</view>
+            </view>
+            <view class="card_color right_bottom">
+              <view style="color: {{(item.cardColor =='heart' || item.cardColor == 'diamond') ? 'red' : 'black'}}">{{item.cardName}}</view>
+              <view class="color" style="line-height: 10rpx">{{cardColorCfg[item.cardColor]}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card_wrap award_cards award_cards_mycards_bg"  wx:if="{{openAward}}">
+      <view class="place-holder-mycards"></view>
+      <view class="float_bg_middle my_cards">
+        <view wx:for="{{userPeriodCards}}">
+          <view class="title">
+            第 {{ item.batchNo }} 组 ｜ {{item.channelName}}  {{item.prizeLevel != 0 ? prizeLevelCfg[item.prizeLevel] + '等' : '未中'}}奖
+          </view>
+          <view class="award_cards">
+            <view wx:for="{{item.cardConfigs}}" 
+                  wx:for-item="card" 
+                  style="background:url({{card.cardFrontImg}});background-size:100%"
+                  class="card {{card.cardNo == periodCards.cardA || card.cardNo == periodCards.cardB || card.cardNo == periodCards.cardC || card.cardNo == periodCards.cardD ? '' : 'mask' }}" >
+                    <view class="card_color left_top">
+                      <view style="color: {{(card.cardColor =='heart' || card.cardColor == 'diamond') ? 'red' : 'black'}}">{{card.cardName}}</view>
+                      <view class="color" style="line-height: 10rpx">{{cardColorCfg[card.cardColor]}}</view>
+                    </view>
+                    <view class="card_color right_bottom">
+                      <view style="color: {{(card.cardColor =='heart' || card.cardColor == 'diamond') ? 'red' : 'black'}}">{{card.cardName}}</view>
+                      <view class="color" style="line-height: 10rpx">{{cardColorCfg[card.cardColor]}}</view>
+                    </view>
+                  </view>
+          </view>
+        </view>
+        <view wx:for="{{noPrize}}">
+          <view class="title">
+            第 {{ item.batchNo }} 组 ｜ {{item.channelName}}  {{item.prizeLevel != 0 ? item.prizeLevel + '等' : '未中'}}奖
+          </view>
+          <view class="award_cards">
+            <view wx:for="{{item.cardConfigs}}" 
+                  wx:for-item="card" 
+                  style="background:url({{card.cardFrontImg}});background-size:100%"
+                  class="card {{card.cardNo == periodCards.cardA || card.cardNo == periodCards.cardB || card.cardNo == periodCards.cardC || card.cardNo == periodCards.cardD ? '' : 'mask' }}" >
+                    <view class="card_color left_top">
+                      <view style="color: {{(card.cardColor =='heart' || card.cardColor == 'diamond') ? 'red' : 'black'}}">{{card.cardName}}</view>
+                      <view class="color" style="line-height: 10rpx">{{cardColorCfg[card.cardColor]}}</view>
+                    </view>
+                    <view class="card_color right_bottom">
+                      <view style="color: {{(card.cardColor =='heart' || card.cardColor == 'diamond') ? 'red' : 'black'}}">{{card.cardName}}</view>
+                      <view class="color" style="line-height: 10rpx">{{cardColorCfg[card.cardColor]}}</view>
+                    </view>
+                  </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="complete {{openAward ? '' : 'click-to-see'}}" bindtap="{{openAward ? 'closeMask' : 'handleOpenAward'}}"></view>
+    <view class="btn_card_jump" wx:if="{{!openAward}}" bindtap="closeMaskAndClearStorage">稍后再看</view>
+  </view>
+
+    <!-- 点击卡牌放大 -->
+    <view class="float" wx:if="{{masktype == 3}}">
+    <view class="flip_container" bindtap="goTargetUrl" data-url="{{url}}">
+      <view class="flipper {{isFront ? '': 'tap'}}">
+        <view class="front card preview" style="background:url({{cardFrontImg}});background-size:100%">
+          <!-- <view class="btn_reverse" catchtap="changeFront"></view> -->
+          <view class="card_color left_top">
+            <view style="color: {{(cardColor =='heart' || cardColor == 'diamond') ? 'red' : 'black'}};font-size: 48px">{{cardName}}</view>
+            <view class="color">{{cardColorCfg[cardColor]}}</view>
+          </view>
+          <view class="card_color right_bottom">
+            <view style="color: {{(cardColor =='heart' || cardColor == 'diamond') ? 'red' : 'black'}};font-size: 48px">{{cardName}}</view>
+            <view class="color">{{cardColorCfg[cardColor]}}</view>
+          </view>
+        </view>
+        <view class="back" style="background:url({{cardBehindImg}});background-size:100%">
+          <view class="btn_reverse" catchtap="changeFront"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="float rule" wx:if="{{masktype == 4}}">
+    <!-- <view class="title"></view> -->
+    <view class="content">
+      <view wx:for="{{content}}" wx:key="index" class="item">
+        {{item}}
+      </view>
+    </view>
+    <view class="btn_card_jump rule-close" bindtap="closeMask"></view>
+  </view>
+
+  <view class="welcome_float" wx:if="{{masktype == 5}}" bindtap="openWelcomeFloat" catchtouchmove="catchMove">
+    <!-- <view class="welcome_left {{hasWelcome ? 'toleft' : ''}}"></view> -->
+    <!-- <view class="welcome_right {{hasWelcome ? 'toright' : ''}}"></view> -->
+    <view class="welcome_cover {{hasWelcome ? 'toBottom' : ''}}"></view>
+    <view class="welcome_btn {{hasWelcome ? 'hide' : ''}}"></view>
+  </view>
+
+  <view class="guide_float guide1" wx:if="{{masktype == 6}}" bindtap="handleGuide1">
+    <view class="tip1"></view>
+    <view class="guide-hand"></view>
+    <view class="know">我知道了</view>
+  </view>
+  <view class="guide_float guide2" wx:if="{{masktype == 7}}" bindtap="closeMask">
+    <view class="tip2"></view>
+    <view class="guide-hand"></view>
+    <view class="know">我知道了</view>
+  </view>
+</template>

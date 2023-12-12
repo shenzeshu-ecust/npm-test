@@ -1,0 +1,48 @@
+/************************** 助力成功弹窗 ***************************************************/
+.assist-success-wrap{
+    position: relative;
+    width: 600rpx;
+    border-radius: 16rpx;
+    text-align: center;
+    padding-top: 60rpx;
+    padding-bottom: 40rpx;
+}
+.assist-success-wrap__title {
+    color: #333333;
+    font-family: PingFangSC-Medium;
+    font-size: 40rpx;
+    font-weight: 600;
+    margin-top: 8rpx;
+    margin-bottom: 64rpx;
+}
+.assist-success-wrap__coupon-img{
+    height: 138rpx;
+    width: 520rpx;
+    margin-bottom: 40rpx;
+}
+.assist-success-wrap__brn-wrap{
+    display: flex;
+    justify-content: center;
+}
+.assist-success-wrap__assist-btn{
+    height: 88rpx;
+    width: 520rpx;
+    background: url('https://images3.c-ctrip.com/marketing/2021/06/xcx_deductAmount/btn-long.png') no-repeat 0 0 / 100% 100%;
+    color: #ffffff;
+    font-family: PingFangSC-Medium;
+    font-size: 34rpx;
+    font-weight: 500;
+    padding-bottom: 8rpx;
+    /* border-radius: 45rpx; */
+}
+.assist-success-wrap__assist-btn.gray{
+    background: #33333340;
+}
+.assist-success-wrap__close-btn{
+    position: absolute;
+    right: 20rpx;
+    top: 20rpx;
+    width: 50rpx;
+    height: 50rpx;
+    background: url("https://images3.c-ctrip.com/marketing/static/wangzhe_ic_popup_close.png")  center / 32rpx 32rpx no-repeat;
+}

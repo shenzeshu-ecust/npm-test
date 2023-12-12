@@ -33,7 +33,7 @@ document.body.appendChild(a); // 这时才会发起请求
  */
 
 // ~ img优势
-// ~ 通常使用img标签去做埋点上报，img标签加载并不需要挂载到页面上，
+// ~ 通常使用img标签去做埋点上报，img标签加载并不需要挂载到页面上(用 1x1 像素的gif图片)，
 // ~ 基于js去new image()，设置其src之后就可以直接请求图片。
 
 var img = new Image();
@@ -54,11 +54,18 @@ img.src =
 /*
  * 优势 
     相较于img标签，使用navigator.sendBeacon会更规范，数据传输上可传输资源类型会更多。
-    对于ajax在页面卸载时上报，ajax有可能没上报完，页面就卸载了导致请求中断，因此ajax处理这种情况时必须作为同步操作.
+    对于ajax在页面卸载时上报，ajax有可能没上报完，页面就卸载了导致请求中断，因此ajax处理这种情况时必须作为[同步]操作——xhr.open("POST", "/log", false); // third parameter indicates sync xhr. :(
     ~ sendBeacon是异步的，不会影响当前页到下一个页面的跳转速度，且不受同域限制。
     ~ 这个方法还是异步发出请求，但是请求与当前页面脱离关联，作为浏览器的任务，因此可以保证会把数据发出去，不拖延卸载流程。
+    ~ 低优先级，sendBeacon 是低优先级的，它不会影响页面的其他网络请求
+
+  *  缺点
+   *  只能是 post 请求，不支持 get
+   * 兼容性问题：旧的浏览器不支持
+   * 发送的请求没有返回值，不能接收服务器的响应
+
  */
-// ! 本项目
+// ! 本项目 ajax
 function xhr(e, t, n) {
   var i = win.ActiveXObject
     ? new win.ActiveXObject("Microsoft.XMLHTTP")
@@ -75,3 +82,26 @@ function xhr(e, t, n) {
     }),
     i.send(JSON.stringify({ d: t }));
 }
+
+
+// ! 最优解：
+// ~  优先navigator.sendBeacon，降级使用1x1像素gif图片，根据实际情况需要采用xhr。
+import {isSupportSendBeacon} from './util'
+const isSupportSendBeacon = () => window.navigator.sendBeacon !== undefined && typeof window.navigator.sendBeacon === 'function'
+
+// 如果浏览器不支持 sendBeacon，就使用图片打点
+const sendBeacon = (function(){
+    if(isSupportSendBeacon()){
+      return window.navigator.sendBeacon.bind(window.navigator)
+    }
+    const reportImageBeacon = function(url, data){
+        reportImage(url, data)
+    }
+    return reportImageBeacon
+})()
+
+ function reportImage(url, data) {
+    const img = new Image();
+    img.src = url + '?reportData=' + encodeURIComponent(JSON.stringify(data));
+}
+

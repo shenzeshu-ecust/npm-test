@@ -1,0 +1,5 @@
+<view class="banner">
+  <view wx:if="{{orderStatus === 2 || orderStatus === 3 || orderStatus === 4}}" class="countdown">
+    <text class="countdownText">剩余时间：<text class="boldText firstBoldText">{{hours}}</text>时<text class="boldText">{{minutes}}</text>分<text class="boldText">{{seconds}}</text>秒</text>
+  </view>
+</view>

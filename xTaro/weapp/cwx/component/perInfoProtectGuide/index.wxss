@@ -1,0 +1,75 @@
+/* cwx/component/perInfoProtectGuide/index.wxss */
+page {
+  height: 100%;
+  width: 100%;
+  background: #000000;
+}
+.page {
+  background: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.float-wrapper {
+  background: #ffffff;
+  width: 562rpx;
+  height: 790rpx;
+  border-radius: 16rpx;
+}
+.title {
+    margin: 40rpx 0 20rpx;
+    text-align: center;
+    height: 46rpx;
+    color: #333333;
+    font-size: 34rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    letter-spacing: 0.2rpx;
+    line-height: 46rpx;
+}
+.content {
+  margin: 0 44rpx;
+  text-align: left;
+  height: 506rpx;
+  color: #333333;
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: normal;
+  letter-spacing: 0;
+  line-height: 42rpx;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.btns .agree {
+  margin: 24rpx 32rpx;
+  height: 72rpx;
+  background: #0086f6;
+  border-radius: 8rpx;
+  color: #ffffff;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  letter-spacing: 0.3rpx;
+  line-height: 72rpx;
+}
+.btns .reject {
+  background: #ffffff;
+  height: 30rpx;
+  color: #999999;
+  font-size: 22rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  letter-spacing: 0;
+  line-height: 30rpx;
+}
+button {
+  border: none;
+}
+button::after {
+  border: none;
+}
+text.link {
+  color: #0086F6;
+}

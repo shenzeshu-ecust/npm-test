@@ -1,0 +1,27 @@
+<!--pages/market/activity/activity.wxml-->
+
+<template name="banner">
+  <banner item="{{data}}" item="{{data}}" tplId="{{tplId}}" tplName="{{tplName}}" componentId="{{componentId}}" componentName="{{componentName}}"></banner>
+</template>
+<template name="imageSlider">
+  <imageSlider item="{{data}}" tplId="{{tplId}}" tplName="{{tplName}}" componentId="{{componentId}}" componentName="{{componentName}}"></imageSlider>
+</template>
+<template name="multibanner">
+  <multibanner item="{{data}}" item="{{data}}" tplId="{{tplId}}" tplName="{{tplName}}" componentId="{{componentId}}" componentName="{{componentName}}"></multibanner>
+</template>
+<template name="picture">
+  <picture item="{{data}}"></picture>
+</template>
+<template name="ruleV2">
+  <ruleV2 item="{{data}}"></ruleV2>
+</template>
+<template name="lucky">
+  <lucky item="{{data}}" bind:share="buildFn"></lucky>
+</template>
+
+<view style="background-color:{{pageProps.backgroundcolor?pageProps.backgroundcolor:'transparent'}};min-height:100vh;">
+  <block wx:for="{{dataList}}" wx:for-item="item" wx:for-index="idx" wx:key="idx">
+    <template wx-if="{{item.tpl}}" is="{{item.tpl}}" data="{{...item}}">{{idx}}</template>
+  </block>
+</view>
+<view class="btn-home" bindtap="jump" data-url="/pages/home/homepage" wx-if="{{isHomeBtn}}">去携程旅行小程序 发现更多优惠</view>

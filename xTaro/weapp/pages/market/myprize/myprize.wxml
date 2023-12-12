@@ -1,0 +1,54 @@
+<perinfo-protect-float forceExitMiniapp="{{false}}"></perinfo-protect-float>
+
+<view class="my-prize" style="background-color: {{isNoCnt ? '#e3f9ff': '#f5f5f5'}}; height: {{isNoCnt || isShowPopup ? '100%': 'auto'}}; overflow: {{isShowPopup ? 'hidden' : 'scroll'}}">
+  <view class="banner">
+    <image src="https://dimg04.c-ctrip.com/images/700t1h000001hlia28B6B.jpg"/>
+  </view>
+  <block wx:if="{{isNoCnt}}">
+    <view class="empty flex-column">
+      <image class="no-logo" src="https://pages.c-ctrip.com/amsweb/myprize/img/no-logo.png"/>
+      <view class="empty-hint">您还没参加过活动哦~</view>
+      <image class="no-bkg" src="https://pages.c-ctrip.com/amsweb/myprize/img/no-bkg.png"/>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="prize flex-column">
+      <view class="scene-list flex-column ul">
+        <view wx:key="idx" id="{{item.activityID}}" class="li" wx:for="{{activityRecordList}}" wx:for-index="idx" wx:for-item="item">
+          <view class="scene-desc flex-row">
+            <text class="scene-name">{{item.mainTitle}}</text>
+            <text class="record-time">{{item.participateTime}}</text>
+          </view>
+          <view class="prize-list flex-column ul">
+            <view class="flex-row" wx:key="idx" class="flex-row li"  wx:for="{{item.prizeList}}" wx:for-index="idx" wx:for-item="name">
+              <view class="img"><image src="{{name.imgUrl}}"/></view>
+              <view class="prize-desc">
+                <text class="name">{{name.prizeName}}</text>
+                <text class="detail">
+                  <text class="type i">{{name.title}}</text>
+                  <text class="expire-time i" wx:if="{{name.prizeType < 3}}"> 有效期至{{name.deadlineTime}}</text>
+                </text>
+              </view>
+              <view class="gq-logo"  wx:if="{{name.prizeType < 3 && name.isExpire}}">
+                <image src="https://pages.c-ctrip.com/amsweb/myprize/img/gq.png"/>
+              </view>
+              <view class="btn" style="border: {{name.btn !== '' ? '1px solid #999' : 'none'}}" bindtap="handleBtn" data-detail="{{name}}">{{name.btn}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="popup" wx:if="{{isShowPopup}}">
+    <view class="coupon flex-column">
+      <view class="ttl flex-row"><text class="i"></text>兑换券码<text class="i"></text></view>
+      <view class="close-btn" bindtap="handleClose"><view class="close"></view></view>
+      <view class="code" bindtap="copyText" data-text="{{couponDetail.code}}"><text class="i">{{couponDetail.code}}</text><text class="copy i">复制</text></view>
+      <view class="cipher" wx:if="{{couponDetail.cipher !== ''}}" bindtap="copyText" data-text="{{couponDetail.cipher}}">密码:  <text class="i">{{couponDetail.cipher}}</text><text class="copy i">复制</text></view>
+      <view class="state">
+        <view class="s-ttl">【使用说明】</view>
+        <rich-text class="s-cnt" nodes="{{couponDetail.instruction}}"></rich-text>
+      </view>
+    </view>
+  </view>
+</view>

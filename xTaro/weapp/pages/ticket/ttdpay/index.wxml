@@ -1,0 +1,40 @@
+<view class="pay-index-container {{nopayment? 'hideview':''}}">
+	<view class="pay-order-detail">
+		<view class="title">{{payData.title}}</view>
+		<view class="other" hidden="{{!!payData.subtitle}}">{{payData.subtitle}}</view>
+		<view class="price">
+			<text class="price-title">应付总额：</text>
+			<text class="price-ncy">￥</text>
+			<text class="price-content">{{payData.disp_Amount}}</text>
+		</view>
+	</view>
+	<view class="pay-order-method">
+	  <view class="pay-order-item wechat-pay"> 
+		<view class="icon"></view>
+		<view class="info">
+		  <view class="name">微信支付</view>
+		</view>
+	  </view>
+	</view>
+	<view class="pay-button-full">
+		<button bindtap="weicatPaysubmit" hover-class="hover">
+		  {{payData.btnTxt}}
+		</button>
+	</view>
+</view>
+<view class="hnopay {{nopayment? '':'hideview'}}">
+	<view class="hpayeicon"></view>
+	<text class="hpayetext">
+	您预订的产品无法进行微信支付，请至手机APP订购或电话联系我们
+	</text>
+</view>
+<view class="pay-modal-mask" hidden="{{instructionsModalHidden}}"></view>
+<view class="pay-modal" hidden="{{instructionsModalHidden}}">
+  <view class="pay-modal-content">
+    <view class="pay-modal-header">
+      <text class="pay-modal-title">担保说明</text>
+      <view class="pay-modal-close" bindtap='closeInstructionsModal'>关闭</view>
+    </view>
+    <view class="pay-modal-body">{{introTextData}}</view>
+  </view>
+</view>

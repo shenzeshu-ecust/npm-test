@@ -1,0 +1,163 @@
+/* pages/timeLine/timeLine.wxss */
+@import "addScheduleLayer.wxss";
+@import "./noLogin/noLogin.wxss";
+
+page {
+  background-color:#f8f8f8;
+  height: 100%;
+}
+
+.scroll_login {
+  /* margin-bottom: 49rpx; */
+  /* height: 1200rpx; */
+  height: 100%;
+}
+
+.vertical_line {
+  position: absolute;
+  top: 34rpx;
+  left: 29rpx;
+  height: calc(100% - 34rpx);
+  width: 2rpx;
+  background-color: #eeeef0;
+  z-index: -1;
+}
+
+.inview {
+  height: 100%;
+}
+
+.no_schedule_back {
+  display: flex;
+  flex-grow: 1;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.no_schedule_view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.no_schedule_icon {
+  width: 750rpx;
+  height: 500rpx;
+}
+
+.empty_schedule_icon {
+  width: 304rpx;
+  height: 277rpx;
+  margin-top: 100rpx;
+  margin-bottom: 45rpx;
+}
+
+.empty_schedule_title{
+  color: #333333;
+  font-size: 29rpx;
+  line-height: 44rpx;
+  margin-bottom: 110rpx;
+}
+
+.no_schedule_maintext{
+  margin-top: 20rpx;
+  color: #666;
+  font-size: 40rpx;
+  font-weight: bolder;
+}
+
+.no_schedule_subtext {
+  margin-top: 28rpx;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.view_hidden {
+  display: none;
+}
+
+.no_schecule_action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80rpx;
+  width: 450rpx;
+  height: 98rpx;
+  background-color: #1980fe;
+  border-radius: 48rpx;
+  font-size: 38rpx;
+  color: #fff;
+}
+
+.timeline-tips {
+  display: flex;
+  flex: 1;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 12rpx;
+  padding-left: 83rpx;
+}
+.noschedule-add-content-view{
+  width: 100%;
+  position: relative;
+  margin-top: 40rpx;
+}
+
+.add-content-view{
+  width: 100%;
+  position: fixed;
+  bottom: 40rpx;
+}
+.add-view{
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+.add-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  width: 248rpx;
+  height: 80rpx;
+  background-color: #1980fe;
+  border-radius: 100rpx;
+  font-size: 26rpx;
+  color: #fff;
+}
+.add-icon{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 16rpx;
+}
+.custom-button-for-compt {
+  z-index: 10;
+  width:100%;
+  height:100%;
+}
+.only_travel_plan{
+  margin: 36rpx 36rpx 0rpx 36rpx
+}
+
+.empty-schedule-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.travel-list-container{
+  padding: 40rpx 36rpx 180rpx 36rpx;
+  background-color: #f8f8f8;
+}
+.empty-space{
+  height: 180rpx;
+}
+.concern-train-view{
+  width: 100%;
+  left: 0rpx;
+  right: 0rpx;
+  bottom: 40rpx;
+  position: fixed;
+}

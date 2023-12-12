@@ -1,0 +1,73 @@
+<template name="pack-modal">
+    <view class="contentbox-wrapper">
+        <view wx:for="{{highStarData.packProductList}}" wx:for-item="pack" wx:for-index="index">
+            <view bindtap="gotoProductDetail" data-url="{{pack.urlInfo}}" data-idx="{{index}}" class="content-box">
+                <image mode="aspectFill" class="content-pic" src="{{pack.basicInfo.picUrl ? pack.basicInfo.picUrl : defaultPackUrl}}" binderror="noImageTrace"/>
+                <view class="content-info" style="{{index===1 ? 'border:none;': ''}}">
+                    <view class="product-name {{pack.basicInfo.isSoldOut && 'sold-out-text'}}">{{pack.title}}<text class="wechat-font-arrow-right2 arrow-right"></text>
+                    </view>
+                    <view class="mealenjoy-wrapper">
+                        <view wx:if="{{pack.basicInfo.roomName && pack.mealInfosText}}" class="logo-wrapper relative">
+                            <view class="new-heigh-start-wifi-sprite icon-log {{pack.basicInfo.isSoldOut ? 'no-meal-icon': 'has-meal-icon'}}"></view>
+                            <view class="detail {{pack.basicInfo.isSoldOut && 'sold-out-text'}}">
+                                <text class="detail-text">{{pack.mealInfosText}}</text>
+                            </view>
+                            <view class="connect" wx:if="{{pack.basicInfo.xItemInfo}}"></view>
+                        </view>
+                        <view wx:if="{{pack.basicInfo.roomName && pack.basicInfo.xItemInfo}}" class="logo-wrapper">
+                            <view class="new-heigh-start-wifi-sprite icon-log {{pack.basicInfo.isSoldOut ? 'no-enjoy-icon': 'has-enjoy-icon'}}"></view>
+                            <view class="detail {{pack.basicInfo.isSoldOut && 'sold-out-text'}}">
+                                <text class="detail-text">{{pack.basicInfo.xItemInfo}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="content">
+                        <view class="content-left">
+                            <view class="center-info">
+                                <view wx:if="{{pack.basicInfo.soldQuantity > 0 && pack.basicInfo.excitationDesc}}" class="copies {{pack.basicInfo.isSoldOut && 'sold-out-text'}}">
+                                    {{pack.basicInfo.excitationDesc}}
+                                </view>
+                                <view class="price-box">
+                                    <view wx:if="{{pack.productPriceInfo.originalPrice && pack.productPriceInfo.originalPrice !== pack.productPriceInfo.actualPrice}}" class="original-price {{pack.basicInfo.isSoldOut && 'sold-out-text'}}">
+                                        ¥{{pack.productPriceInfo.originalPrice}}
+                                    </view>
+                                    <view class="now-price {{pack.basicInfo.isSoldOut && 'sold-out-text'}}">
+                                        <text class="money-type">¥</text>
+                                        <text class="price-value">{{pack.productPriceInfo.actualPrice}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="bottom-info">
+                                <view class="tip {{pack.basicInfo.isSoldOut && 'sold-out-text'}}">
+                                    过期退·随时退
+                                </view>
+                                <view wx:if="{{pack.productPriceInfo.discount || pack.productPriceInfo.reducedAmount}}" class="discount-wrapper {{pack.basicInfo.isSoldOut && 'sold-out-text sold-out-label'}}">
+                                    <view wx:if="{{pack.productPriceInfo.discount}}" class="discount br">
+                                        {{pack.productPriceInfo.discount}}折
+                                    </view>
+                                    <view wx:if="{{pack.productPriceInfo.reducedAmount}}" class="discount-price">
+                                        优惠{{pack.productPriceInfo.reducedAmount}}
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="content-right">
+                            <view catchtap="gotoProductDetail" data-url="{{pack.urlInfo}}" data-idx="{{index}}" data-producttype="2" data-clicktype="1" class="buy-car {{pack.basicInfo.isSoldOut && 'sold-out-btn'}}">
+                                <view class="wechat-font-shop-car car-icon"></view>
+                                <view class="buying">
+                                    {{pack.basicInfo.isSoldOut ? '售罄' : '抢购'}}
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view wx:if="{{!pack.basicInfo.isCanReserveNow && pack.basicInfo.defectiveDesc}}" class="alert-box">
+                        <view class="little-alert-icon">
+                            <text class="alert-icon wechat-font-hotel-alert"></text>
+                        </view>
+                        <view class="alert-text">{{pack.basicInfo.defectiveDesc}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

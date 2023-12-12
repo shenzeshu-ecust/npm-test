@@ -1,0 +1,34 @@
+.invitePlus__normal {
+  width: 714rpx;
+  margin: 0 auto;
+  padding-bottom: 24rpx;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.invitePlus__normal__title {
+  color: #333333;
+  font-size: 34rpx;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+  padding-top: 32rpx;
+}
+
+.invitePlus__normal__avatat-wraper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  height: 134rpx;
+  margin-top: 36rpx;
+}
+
+.invitePlus__normal__avatar {
+  margin-right: 70rpx;
+}
+
+.invitePlus__normal__avatar:nth-last-child(1){
+  margin-right: 0rpx;
+}
+

@@ -1,0 +1,86 @@
+<!-- 一键转抢功能 -->
+<template name="turn-to-grab-order-banner">
+    <view class="ttgob-white-box">
+        <view class="ttgob-outter-title">{{grabShowInfo.TopTips ||'占座失败别气馁，携程抢票来助力'}}</view>
+        <view class="ttgob-inner-banner">
+            <view class="left-img kuaisu"></view>
+            <view class="mid-txt">
+                <view class="main-title">
+                    {{defaultPackage.PackageTitle}}<view class="tag">(成功率{{defalutJLSuccessRateShow || '较低'}})</view>
+                </view>
+                <view class="sub-title">{{defaultPackage.PackageShowTitle || '取消订单或购票失败全额退款'}}</view>
+
+            </view>
+            <view class="ttgob-right-btn org" catchtap="onClickGrabOrder" data-package-type="default" data-trace-type="banner-kuaisu">{{defaultPackage.PackageTitle}}</view>
+        </view>
+        <view class="ttgob-extra-des">
+            <view wx:for="{{defaultPackage.desList}}" wx:key="index">
+                <view class="ifont-gou"></view>
+                <text>{{item}}</text> 
+            </view>
+        </view>
+        <view class="ttgob-inner-banner disutop">
+            <view class="left-img disu"></view>
+            <view class="mid-txt">
+                <view class="main-title">
+                    {{normalPackage.PackageTitle}}
+                </view>
+                <view class="sub-title">
+                   {{ normalPackage.PackageShowTitle || '主动取消或抢票失败全额退款'}}
+                </view>
+            </view>
+            <view class="ttgob-right-btn normal" catchtap="onClickGrabOrder" data-package-type="normal" data-trace-type="banner-disu">{{normalPackage.PackageTitle}}</view>
+        </view>
+    </view>
+</template>
+<template name="turn-to-grab-order-drawer">
+    <view class="ttgod-backmask" catchtouchmove="true" bindtap="hideBack"></view>
+
+    <view class="ttgod-botm-box">
+        <view class="ttgod-card">
+            <view class="ttgod-hd">
+                <view class="ttgod-left-img"></view>
+                <view class="ttgod-right-txt">
+                    <view class="ttgod-main-title">{{grabShowInfo.Title || '余票不足，建议立即抢票'}}</view>
+                    <view class="ttgod-sub-title">{{grabShowInfo.SubTitle||'抱歉，当前余票张数小于您添加的乘客人数'}}</view>
+                </view>
+            </view>
+            <view class="ttgod-bd">
+                <view class="ttgod-order-box">
+                    <view class="depart-time">{{ticketInfo.showDepartDate+' '+ticketInfo.DepartTime}}</view>
+                    <view class="train-info">
+                        <view class="dstation">{{ticketInfo.DepartStation}}</view>
+                        <view class="icon-go"></view>
+                        <view class="no">{{ticketInfo.TrainNumber}}</view>
+                        <view class="astation">{{ticketInfo.ArriveStation}}</view>
+                    </view>
+                    <view class="ticket-info">
+                        <view class="pas">{{ticketInfo.showPasStr}}</view>
+                        <text>({{ticketInfo.PassengerInfos.length}}人)</text>
+                        <view class="seat">{{ticketInfo.SeatName}}￥{{ticketInfo.TicketPrice}}</view>
+                    </view>
+                </view>
+                <!-- <view class="ttgod-des">
+                    <view class="ttgod-des-li"> <view class="ifont-gou"></view> 越早下单，出票越容易！</view>
+                    <view class="ttgod-des-li"> <view class="ifont-gou"></view> 取消订单或抢票失败自动全额退款</view>
+                    <view class="ttgod-des-li"> <view class="ifont-gou"></view> 需预付订单金额，抢至发车前两小时</view>
+                </view> -->
+
+                <view class="ttgod-des">
+                    <view  wx:for="{{defaultPackage.normalAlertInfoList}}" wx:key="index"> 
+                        <view class="ttgod-des-li"> <view class="ifont-gou"></view> {{item}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="ttgod-btns">
+            <view class="ttgod-btn normal" catchtap="onClickGrabOrder" data-package-type="normal" data-trace-type="drawer-disu"> {{normalPackage.PackageTitle}}</view>
+            <view class="ttgod-btn org"> 
+                <view>
+                    <view class="txt" catchtap="onClickGrabOrder" data-package-type="default" data-trace-type="drawer-kuaisu">{{defaultPackage.PackageTitle}}</view>
+                    <view class="price">¥{{defaultPackage.PackagePrice}}×{{ticketInfo.PassengerInfos.length}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

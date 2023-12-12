@@ -1,0 +1,244 @@
+<import src="./tpl/float.wxml" />
+<template is="mask"  data="{{...maskData}}" />
+<view class="index-wrap {{(maskData.masktype=='login'||showTaskList)?'fullscreen':''}}">
+  <nav-bar navbar-data="{{navbarData}}"></nav-bar>
+  <view class="main">
+    <view class="btn-icon notice" data-type="noticeList" wx:if="{{noticeList.length>0}}">
+      <view class="bell-small"></view>
+      <view class="bell-big"></view>
+      <view class="bell-tips"></view>
+    </view>
+    <view class="btn-icon rule" data-type="ruleList">
+    </view>
+    <view class="user current_{{currentPosition}} {{jump}}">
+      <view class="user-head" animation="{{animationData}}">
+        <image src="{{headImg}}"></image>
+      </view>
+    </view>
+    <view class="box position-10" wx:if="{{currentPosition!=10}}"></view>
+    <view class="box position-20" wx:if="{{currentPosition!=20}}"></view>
+    <view class="box position-5" wx:if="{{currentPosition!=5}}"></view>
+    <view class="box position-15" wx:if="{{currentPosition!=15}}"></view>
+    <view class="dice-center {{isIntro?'animate':''}}" >
+      <view class="light one"><image src="https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/light.png"></image></view>
+      <view class="light two"><image src="https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/light.png"></image></view>
+      <view class="round"></view>
+      <button class="dice" wx:if="{{diceStatus=='init'}}" bindtap="clickDice" data-type="{{currentChance?'roll':'showtask'}}"></button>
+      <!-- <button class="dice" open-type="getUserInfo" bindgetuserinfo="getUserInfo"
+      data-type="{{currentChance?'roll':'showtask'}}" wx:if="{{!canIUseProfile && diceStatus=='init'}}"></button> -->
+      <view class="long">
+        <view class="dice-count">{{currentChance}}</view>
+        <view class="timer f-sm" wx:if="{{currentChance>=6}}">骰子机会已满</view>
+        <view class="timer" wx:else>{{remainTime.hour}}:{{remainTime.minute}}:{{remainTime.second}}</view>
+        <!-- <view class="btn-add" bindtap="toggleTask"></view> -->
+      </view>
+      <view class="finger"></view>
+    </view>
+    <image class="icon-live" bindtap="toUrl" src="{{box.img}}" data-url="{{box.url}}" data-ubt="box"></image>
+    <!-- <view class="icon-myprize" bindtap="toUrl" data-url="/pages/market/directory/game/myPrize"></view> -->
+    <view class="icon-prizelist" bindtap="toWebview" data-h5url="https://m.ctrip.com/webapp/cshop/product/jflist?bid=2&cid=2&pid=144&ctm_ref=M_mkt_1mbr_scard_ospgs4"></view>
+    <view class="add-energy {{gezi1?'current1':''}}"></view>
+    <view class="add-energy {{gezi2?'current2':''}}"></view>
+    <view class="add-energy {{gezi3?'current3':''}}"></view>
+    <view class="add-energy {{gezi4?'current4':''}}"></view>
+    <view class="add-energy {{gezi5?'current5':''}}"></view>
+    <view class="add-energy {{gezi6?'current6':''}}"></view>
+    <view class="add-energy {{gezi7?'current7':''}}"></view>
+    <view class="add-energy {{gezi8?'current8':''}}"></view>
+    <view class="add-energy {{gezi9?'current9':''}}"></view>
+    <view class="add-energy {{gezi10?'current10':''}}"></view>
+    <view class="add-energy {{gezi11?'current11':''}}"></view>
+    <view class="add-energy {{gezi12?'current12':''}}"></view>
+    <view class="add-energy {{gezi13?'current13':''}}"></view>
+    <view class="add-energy {{gezi14?'current14':''}}"></view>
+    <view class="add-energy {{gezi15?'current15':''}}"></view>
+    <view class="add-energy {{gezi16?'current16':''}}"></view>
+    <view class="add-energy {{gezi17?'current17':''}}"></view>
+    <view class="add-energy {{gezi18?'current18':''}}"></view>
+    <view class="add-energy {{gezi19?'current19':''}}"></view>
+    <view class="add-energy {{gezi20?'current20':''}}"></view>
+  </view>
+  <!-- <swiper class="scroll-wrap" autoplay="true" vertical="true" circular="true" interval="2000">
+    <block wx:for="{{exchangeList}}">
+      <swiper-item class="scroll-item">
+        <view class="s-pic">
+          <image src="{{item.headImg}}"></image>
+        </view>
+        <view class="s-log">
+          <view class="s-user">{{item.newName}}</view>
+          <view>兑换了</view>
+          <view class="s-prize ellipsis">{{item.awardName}}</view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper> -->
+  
+  <view class="content" style="top:{{navbarData.bgTransparent?'990rpx':'1158rpx'}}">
+    <view class="my-energy">
+      <button class="my-head" bindtap="{{isAuthUserInfo?'getUserProfile':'updateUserInfo'}}">
+        <image src="{{headImg}}"></image>
+      </button>
+      <!-- <button class="my-head" open-type="getUserInfo" bindgetuserinfo="updateUserInfo" data-type="head" wx:else>
+        <image src="{{headImg}}"></image>
+      </button> -->
+      <view class="energy">
+        <!-- <view class="e-txt" wx:if="{{maskData.masktype=='login'}}">立即登录赚更多积分</view> -->
+        <view class="e-txt">我的积分</view>
+        <!-- <view class="e-num e-login" wx:if="{{maskData.masktype=='login'}}">请登录</view> -->
+        <view class="row-center">
+          <view class="e-num">{{energyTotal||0}}</view>
+          <view class="e-detail" bindtap="toDetailsUrl" data-url="/pages/market/signIn/integral">明细</view>
+        </view>
+      </view>
+    </view>
+    <view class="row-between">
+      <view class="row-title">积分换好物</view>
+      <view class="topic-more" bindtap="toWebview" data-h5url="https://m.ctrip.com/webapp/cshop/product/jflist?bid=2&cid=2&pid=144&ctm_ref=M_mkt_1mbr_scard_ospgs4">更多积分兑换</view>
+      <view class="topic-arrow"></view>
+    </view>
+    <!-- <view class="score-wrap">
+      <view class="s-item {{item.selected?'active':''}}" bindtap="getHomeAwardList" wx:for="{{groupSection}}" data-index="{{index}}" data-min="{{item.min}}" data-max="{{item.max}}">{{item.nameHome}}</view>
+    </view>   -->
+    <swiper class="prize-list" interval="3000" autoplay="true" circular="true" bindchange="changeSwiper">
+      <block wx:for="{{awardList}}" wx:key="awardId"  wx:for-index="idx" wx:for-item="gitem">
+      <swiper-item class="p-item-wrap">
+        <view class="p-item"  wx:for="{{gitem}}"  wx:key="awardId"  bindtap="toWebview" data-h5url="{{item.productDetailH5Url}}">
+          <view class="p-tag" wx:if="{{item.isSelf}}"></view>
+          <view class="p-pic">
+            <image src="{{item.productMainImg}}"></image>
+          </view>
+          <view class="p-name">{{item.productTitle}}</view>
+          <view class="p-del">{{item.activityPoint?item.sellPoint:''}}</view>
+          <view class="p-num">
+            <view class="p-icon"></view>
+            <view class="p-txt-big">{{item.activityPoint?item.activityPoint:item.sellPoint}}</view><view class="p-txt">分起</view>
+          </view>
+        </view>
+      </swiper-item>
+    </block>
+    </swiper>
+    <view class="bar-list">
+      <view class="bar-item {{currentSwiper==index?'active':''}}" wx:for="{{awardList}}"></view>
+    </view>
+    <swiper class="ad-list" autoplay="true" circular="true" indicator-dots="{{topBanner.length>1}}" indicator-color="#CFCFCF" indicator-active-color="#229CFF" wx:if="{{topBanner.length>0}}">
+      <block wx:for="{{topBanner}}">
+        <swiper-item class="a-item" bindtap="toUrl" data-url="{{item.url}}">
+          <image class="img" src="{{item.img}}"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="topic-title" id="taskList">积分加油站</view>
+    <taskList tempid='dafuwengnew' compid='117986' bind:userAcceptPrize="userAcceptPrize" />
+    <!-- <view class="task-list">
+      <view class="task-item" wx:for="{{taskList}}" wx:if="{{index<3}}">
+        <view class="t-pic">
+          <image src="{{item.icon}}"></image>
+        </view>
+        <view class="t-data">
+          <view class="t-name ellipsis">{{item.taskName}}</view>
+          <view class="t-intro ellipsis">{{item.taskDesc}}</view>
+        </view>
+        <view class="t-info">
+          <view class="t-tips" wx:if="{{item.chanceNum}}">骰子次数+{{item.chanceNum}}</view>
+          <view class="t-tips" wx:else>
+            <view class="t-icon"></view>
+            <view>+{{item.currencyNum}}</view>
+          </view>
+          <button open-type="{{item.openType}}" class="t-btn todo" bindtap="{{item.doType=='video'?'getUserProfileVideo':'doTask'}}" wx:if="{{item.taskStatus==1}}" data-type="task" data-id="{{item.taskId}}" data-tasktype="{{item.doType}}" data-templateid="{{item.templateId}}" data-url="{{item.wechatUrl}}">{{item.btn}}</button>
+          <view class="t-btn doing" bindtap="receiveTaskAward" wx:elif="{{!item.award}}" data-id="{{item.taskId}}">领取奖励</view>
+          <view class="t-btn done" wx:else>已完成</view>
+        </view>
+      </view>
+      <view class="task-more" bindtap="toggleTask">查看更多</view>
+    </view> -->
+    <view class="topic-title" style="display:none">热门推荐</view>
+    <view class="recommend-list" style="display:none">
+      <view class="r-item">
+        <view class="bu-icon">
+          <image src="https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/hotel.png"></image>
+        </view>
+        <view class="bu-name">酒店</view>
+      </view>
+      <view class="r-item">
+        <view class="bu-icon">
+          <image src="https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/travel.png"></image>
+        </view>
+        <view class="bu-name">旅游</view>
+      </view>
+      <view class="r-item">
+        <view class="bu-icon m-r-15">
+          <image src="https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/train.png"></image>
+        </view>
+        <view class="bu-name">火车票</view>
+      </view>
+      <view class="r-item">
+        <view class="bu-icon m-r-15">
+          <image src="https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/bus.png"></image>
+        </view>
+        <view class="bu-name">汽车票</view>
+      </view>
+      <view class="r-item">
+        <view class="bu-icon">
+          <image src="https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/flight.png"></image>
+        </view>
+        <view class="bu-name">机票</view>
+      </view>
+      <view class="r-item">
+        <view class="bu-icon">
+          <image src="https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/apart.png"></image>
+        </view>
+        <view class="bu-name">民宿</view>
+      </view>
+    </view>
+    <view class="banner" wx:for="{{bottomBanner}}" bindtap="toUrl" data-url="{{item.url}}">
+      <image src="{{item.img}}"></image>
+    </view>
+  </view>
+</view>
+
+
+<!-- <view class="pop-mask {{showTaskList?'open':'close'}}"  catchtouchmove="noop">
+  <view class="task-light" style="bottom:{{showTaskList?taskList.length>3?480:15+(taskList.length-1)*190:-960}}rpx"></view>
+  <view class="pop-task-wrap" catchtouchmove="noop">
+    <view class="task-head"></view>
+    <view class="task-title">做任务赚积分，换取更多精彩好礼哦~</view>
+    <view class="pop-close" bindtap="toggleTask"></view>
+    <scroll-view class="pop-task-list" scroll-y="true">
+      <view class="task-item" wx:for="{{taskList}}">
+        <view class="t-pic">
+          <image src="{{item.icon}}"></image>
+        </view>
+        <view class="t-data">
+          <view class="t-name ellipsis">{{item.taskName}}</view>
+          <view class="t-intro ellipsis">{{item.taskDesc}}</view>
+        </view>
+        <view class="t-info">
+          <view class="t-tips" wx:if="{{item.chanceNum}}">骰子次数+{{item.chanceNum}}</view>
+          <view class="t-tips" wx:else>
+            <view class="t-icon"></view>
+            <view>+{{item.currencyNum}}</view>
+          </view>
+          <button open-type="{{item.openType}}" class="t-btn todo"  bindtap="{{item.doType=='video'?'getUserProfileVideo':'doTask'}}" wx:if="{{item.taskStatus==1}}"  data-type="task" data-id="{{item.taskId}}" data-tasktype="{{item.doType}}" data-templateid="{{item.templateId}}" data-url="{{item.wechatUrl}}">{{item.btn}}</button>
+          <view class="t-btn doing" bindtap="receiveTaskAward" wx:elif="{{!item.award}}" data-id="{{item.taskId}}">领取奖励</view>
+          <view class="t-btn done" wx:else>已完成</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view> -->
+
+
+
+  
+
+<view class="dice-loading" wx:if="{{diceStatus=='loading'}}"></view>
+<!--  -->
+<view class="dice-result number-{{diceStatus}}"></view>
+<view class="dice-tips" wx:if="{{diceStatus!='init' && diceStatus!='loading'}}">前进{{diceStatus}}步</view>
+
+<!-- 倒计时 -->
+<count-down />
+<task-count-down/>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

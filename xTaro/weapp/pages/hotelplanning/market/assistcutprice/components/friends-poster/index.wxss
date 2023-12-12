@@ -1,0 +1,46 @@
+@import "../../../../common/css/common.wxss";
+
+.friends-poster {
+  height: 80vh;
+  position: fixed;
+  top: 40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+}
+
+.friends-poster image {
+  height: 100%;
+}
+
+.friends-poster .btn {
+  width: 310rpx;
+  height: 84rpx;
+  position: absolute;
+  bottom: -140rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    -90deg,
+    rgb(0, 118, 245) 0%,
+    rgb(0, 167, 250) 100%
+  );
+  border-radius: 42rpx;
+  color: #fff;
+  font-weight: 700;
+  font-size: 32rpx;
+}
+
+.friends-poster .wechat-font-download {
+  margin-right: 8rpx;
+}
+.mask {
+  z-index: 1000;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+

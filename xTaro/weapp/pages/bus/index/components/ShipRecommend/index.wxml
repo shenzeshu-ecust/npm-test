@@ -1,0 +1,145 @@
+<view class="ship-recommend" wx:if="{{shipTabs && shipTabs.length > 0}}">
+    <view class="recommend-tabs">
+        <block wx:for="{{shipTabs}}" wx:key="recommendtabs">
+            <view bindtap="toSwitchShipTab" class='recommend-tabs-item {{selectedShipTab === item.type ? "active" : ""}}' data-index="{{index}}" data-item="{{item}}">
+                <image wx:if="{{selectedShipTab === item.type}}" class="icon" src="{{item.icon}}"/>
+                <text>{{item.name}}</text>
+                <view wx:if="{{index !== shipTabs.length -1}}" class="line"></view>
+            </view>
+        </block>
+    </view>
+    <block wx:if="{{selectedShipTab === 'hot' && recommendData && recommendData.hotBoatLine && recommendData.hotBoatLine.cityList &&  recommendData.hotBoatLine.cityList.length}}">
+        <view class="city-list-scroll flex-row-center ml24 mr24">
+            <block wx:for="{{recommendData.hotBoatLine.cityList}}" wx:key="citylist">
+                <view class="city-list-item flex-row-center {{selectedCity === item ? 'active': ''}}" bindtap="toSwitchCityTab" data-city="{{item}}">{{item}}</view>
+            </block>
+        </view>
+    </block>
+    <template wx:if="{{selectedShipTab === 'hot' }}" is="boatlist" data="{{selectedBoatList}}"/>
+    <template wx:if="{{selectedShipTab === 'cheaper' && recommendData && recommendData.topLine && recommendData.topLine.length}}" is="topline" data="{{recommendData}}" />
+    <template wx:if="{{selectedShipTab === 'cheaper' && recommendData && recommendData.bottomLine && recommendData.bottomLine.length}}" is="bottomline" data="{{recommendData}}" />
+    <template wx:if="{{selectedShipTab === 'island' && recommendData && recommendData.islandLine && recommendData.bottomLine.length}}" is="islandline" data="{{recommendData}}"/>
+</view>
+<template name="boatlist">
+    <view class="boat-list ml24 mr24 pb24">
+        <block wx:for="{{selectedBoatList}}" wx:key="boatlist">
+            <view class="boat-list-item card-item" bindtap="onJump" data-item="{{item}}">
+                <image src="{{item.showImage}}" class="show-image" />
+                <view class="content">
+                    <view>
+                        <view class="show-name">{{item.showName}}</view>
+                        <text class="recommend-date">{{item.recommendDateDesc}}</text>
+                        <view class="flex-row-center mt8">
+                            <view class="recommend-desc">
+                                <text>{{item.recommendDesc}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view>
+                        <text class="rmb">¥</text>
+                        <text class="cheaper-price">{{item.cheaperPrice}}</text>
+                        <text class="p-txt ml8">起</text>
+                        <text class="price ml24 ft24" wx:if="{{item.cheaperPrice < item.price}}">¥{{item.price}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</template>
+
+<template name="topline">
+    <view class="mr24 ml24">
+        <block wx:for="{{recommendData.topLine}}" wx:key="topline"> 
+            <view class="card-item" bindtap="jumpShipList" data-item="{{item}}">
+                <image src="{{item.showImage}}" class="show-image" />
+                <view class="content">
+                    <view>
+                        <view class="show-name">
+                            <text>{{item.fromCity}}</text>
+                            <image src="https://pages.c-ctrip.com/bus-images/ship_index_line.png" class="arrow"/>
+                            <text>{{item.toCity}}</text>
+                        </view>
+                        <text class="recommend-date">{{item.recommendDateDesc}}</text>
+                        <view class="flex-row-center mt8">
+                            <view class="recommend-desc">
+                                <text>{{item.recommendDesc}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view>
+                        <text class="rmb">¥</text>
+                        <text class="cheaper-price">{{item.cheaperPrice}}</text>
+                        <text class="p-txt ml8">起</text>
+                        <text class="price ml24 ft24" wx:if="{{item.cheaperPrice < item.price}}">¥{{item.price}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</template>
+
+<template name="bottomline">
+    <view class="bottom-line">
+        <view class="flex-row-center bottom-line-title">
+            <image class="title-img" src="https://pages.c-ctrip.com/bus-images/title_left.png" />
+            <text class="txt ft28">更多特价线路</text>
+            <image class="title-img" src="https://pages.c-ctrip.com/bus-images/title_right.png"/>
+        </view>
+        <view class="bottom-line-content mr24 ml24">
+            <block wx:for="{{recommendData.bottomLine}}" wx:key="bottomline">
+                    <view class="bottom-item" bindtap="jumpShipList" data-item="{{item}}">
+                    <view class="city-name">
+                        <text>{{item.fromCity}}</text>
+                        <image src="https://pages.c-ctrip.com/bus-images/ship_index_line.png" class="arrow"/>
+                        <text>{{item.toCity}}</text>
+                    </view>
+                    <text class="recommend-date mt8">{{item.recommendDateDesc}}</text>
+                    <view>
+                        <text class="ft24 price-color">¥</text>
+                        <text class="ft24 price-color">{{item.cheaperPrice}}</text>
+                        <text class="p-txt ml8">起</text>
+                        <text class="price ml24 ft24" wx:if="{{item.cheaperPrice < item.price}}">¥{{item.price}}</text>        
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</template>
+
+<template name="islandline">
+    <view class="mr24 ml24 island-line">
+        <block wx:for="{{recommendData.islandLine}}" wx:key="topline"> 
+            <view class="card-item">
+                <view class="container" bindtap="lookMore" data-item="{{item}}">
+                    <image src="{{item.showImage}}" class="show-image" />
+                    <view class="more-look flex-row-center">查看更多</view>
+                </view>
+                <view class="content">
+                    <view>
+                        <view class="show-name">{{item.showName}}</view>
+                        <block wx:if="{{item.tagList && item.tagList.length}}">
+                            <view class="tag-list-scroll flex-row-center">
+                                <view class="tag-item flex-row-center" wx:for="{{item.tagList}}" wx:key="taglist" wx:for-item="tag">
+                                    {{tag}}
+                                </view>
+                            </view>
+                        </block>
+                        <view class="flex-row-center shoucang">
+                            <view>
+                                <text class="ft30 price-color">¥{{item.cheaperPrice}}</text>
+                                <text class="p-txt ml8">起</text>
+                            </view>
+                            <view class="flex-row-center">
+                                <image class="img" src="https://pages.c-ctrip.com/bus-images/ship_shoucang.png"/>
+                                <text class="num">{{item.attention}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="flex-row-center btn">
+                        <view class="book-btn flex-row-center ft28" bindtap="onBook" data-item="{{item}}">立即预订</view>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</template>

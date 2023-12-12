@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的积分",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "common-layer": "/pages/hotel/components/layer/index"
+  }
+}

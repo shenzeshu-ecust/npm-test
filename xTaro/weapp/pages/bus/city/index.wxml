@@ -1,0 +1,20 @@
+<block>
+    <city-search bindsearch="onSearchData"
+      bindselect="onSeletCity"
+      color="{{color}}"
+      show-current="{{isShowCurrentPosition}}"
+      bind:cityDate="exposureAndClickForCity" />
+    <city-list bindloaddata="onLoadData"
+      bindtabchange="onCityTabChange"
+      bindselect="onSeletCity"
+      selected-city="{{selectedCity}}"
+      bindlocation="startLocation"
+      show-current="{{isShowCurrentPosition}}"
+      color="{{color}}"
+      bind:cityDate="exposureAndClickForCity" />
+    <view class="view-check"
+      bindanimationend="viewReadyHandle"></view>
+    <perinfo-protect-float></perinfo-protect-float>
+    <authorizationFloat id="cwxAuthFloat"></authorizationFloat>
+
+</block>

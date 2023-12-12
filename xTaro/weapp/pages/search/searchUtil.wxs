@@ -1,0 +1,12 @@
+var utils = {
+    // 截取str
+    getShowText: function (text) {
+      if(!!text&&text.length>8){
+        return text.slice(0,8)+"...";
+      }
+      return text;
+    }
+}
+module.exports = {
+    getShowText: utils.getShowText,
+}

@@ -1,0 +1,375 @@
+@font-face {
+  font-family: "FZLTCHJW--GB1-0";
+  src: url("https://images3.c-ctrip.com/marketing/2022/08/groupChatEntry/FZLTCHJW-GB1-0.woff")
+    format("woff");
+  font-display: swap;
+}
+
+.group-chat__wrapper {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.group-chat__bgImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+
+.group-chat__mainContent {
+  width: 700rpx;
+  margin: 0 auto;
+}
+
+.group-chat__tabGroup {
+  position: relative;
+  width: 700rpx;
+  height: 108rpx;
+}
+
+/* 未选中tab */
+.group-chat__tab {
+  display: inline-block;
+  position: absolute;
+  width: 370rpx;
+  height: 130rpx;
+  background: linear-gradient(
+    -180deg,
+    rgb(254, 233, 188) 0%,
+    rgb(254, 244, 218) 100%
+  );
+  border-radius: 20rpx 20rpx 0 0;
+  top: 10rpx;
+  z-index: 1;
+}
+
+/* 选中tab */
+.group-chat__tab--select {
+  display: inline-block;
+  position: absolute;
+  background: #fff;
+  width: 350rpx;
+  height: 130rpx;
+  border-radius: 20rpx 20rpx 0 0;
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.group-chat__tab--left {
+  position: absolute;
+  left: 0;
+}
+
+.group-chat__tab--right {
+  position: absolute;
+  right: 0;
+}
+
+/* 未选中在左右时的阴影 */
+.group-chat__tab.group-chat__tab--left {
+  box-shadow: -25rpx -33rpx 15rpx 1rpx rgb(254, 218, 174) inset;
+}
+.group-chat__tab.group-chat__tab--right {
+  box-shadow: 23rpx -33rpx 15rpx 1rpx rgb(254, 218, 174) inset;
+}
+
+/* 未选中文字渐变 */
+.group-chat__tabText {
+  text-align: center;
+  line-height: 34rpx;
+  font-family: FZLTCHJW--GB1-0;
+  font-size: 32rpx;
+  font-weight: normal;
+  letter-spacing: 0px;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  background: linear-gradient(
+    -180deg,
+    rgb(255, 146, 96) 0%,
+    rgb(255, 103, 112) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  margin-top: 35rpx;
+}
+
+/* 选中文字&::after */
+.group-chat__tabText--select {
+  background: none;
+  color: #333333;
+  font-family: FZLTCHJW--GB1-0;
+  font-size: 32rpx;
+  font-weight: normal;
+  line-height: 34rpx;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  margin-top: 40rpx;
+}
+
+.group-chat__tabText--select::after {
+  content: "";
+  display: block;
+  background: linear-gradient(
+    -180deg,
+    rgb(249, 149, 103) 0%,
+    rgb(249, 111, 119) 100%
+  );
+  border-radius: 5rpx 5rpx 5rpx 5rpx;
+  height: 10rpx;
+  width: 168rpx;
+  position: absolute;
+  top: 84rpx;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+/* 下方固定大块 */
+.group-chat__groupWrapper {
+  background: linear-gradient(
+    -180deg,
+    rgb(255, 255, 255) 0%,
+    rgb(255, 248, 224) 100%
+  );
+  height: 420rpx;
+  width: 700rpx;
+  border-radius: 20rpx;
+  z-index: 3;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.group-chat__title {
+  color: #333333;
+  font-family: FZLTCHJW--GB1-0;
+  font-size: 40rpx;
+  font-weight: normal;
+  line-height: 42rpx;
+  margin-top: 55rpx;
+}
+
+/* 下拉部分 */
+.group-chat__selectGroup {
+  display: flex;
+  align-items: center;
+  margin-top: 32rpx;
+}
+
+.group-chat__select {
+  background: #ffffff;
+  border-radius: 32rpx 32rpx 32rpx 32rpx;
+  border: 2rpx solid #76aaf6;
+  height: 64rpx;
+  box-sizing: border-box;
+  padding: 0 24rpx;
+  color: #333333;
+  font-family: FZLTCHJW--GB1-0;
+  font-size: 32rpx;
+  font-weight: normal;
+  line-height: 64rpx;
+  letter-spacing: 0px;
+  margin-right: 16rpx;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.group-chat__select--icon {
+  display: inline-block;
+  background: #186ff1;
+  height: 32rpx;
+  width: 32rpx;
+  border-radius: 50%;
+  margin-left: 8rpx;
+}
+.group-chat__select--icon::after {
+  content: "";
+  display: block;
+  position: relative;
+  width: 12rpx;
+  height: 12rpx;
+  border-left: 2rpx solid #fff;
+  border-bottom: 2rpx solid #fff;
+  transform: rotate(-45deg);
+  left: 9rpx;
+  top: 5rpx;
+}
+
+.group-chat__selectText {
+  color: #333333;
+  font-family: FZLTCHJW--GB1-0;
+  font-size: 32rpx;
+  line-height: 36rpx;
+  font-weight: normal;
+}
+
+.group-chat__btn {
+  width: 652rpx;
+  height: 164rpx;
+  margin-top: 51rpx;
+  background-image: url("https://images3.c-ctrip.com/marketing/2022/08/groupChatEntry/btn.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-top: 36rpx;
+
+  text-align: center;
+  color: #ffffff;
+  font-family: FZLTDHJW--GB1-0;
+  font-size: 44rpx;
+  font-weight: bold;
+  letter-spacing: 9.17rpx;
+  line-height: 50rpx;
+  text-shadow: -1px -1px 10px rgba(227, 26, 65, 0.8);
+
+  position: relative;
+}
+
+.group-chat__groupQrcodeWrapper{
+  height: auto;
+  margin-bottom: 36rpx;
+}
+
+.group-chat__qrcode{
+  width: 452rpx;
+  margin-top: 20rpx;
+  margin-bottom: 55rpx;
+  text-align: center;
+  color: #ffffff;
+  font-family: FZLTDHJW--GB1-0;
+  font-size: 44rpx;
+  font-weight: bold;
+  letter-spacing: 9.17rpx;
+  line-height: 50rpx;
+  text-shadow: -1px -1px 10px rgba(227, 26, 65, 0.8);
+
+  position: relative;
+}
+
+.group-chat__btn::after {
+  content: "";
+  display: block;
+  width: 158rpx;
+  height: 172rpx;
+  background-image: url("https://images3.c-ctrip.com/marketing/2022/08/groupChatEntry/hand.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  right: 80rpx;
+  top: 26rpx;
+}
+
+.group-chat__groupCell {
+  width: 700rpx;
+  height: 100%;
+  position: absolute;
+  left: -20rpx;
+  top: 5rpx;
+  opacity: 0;
+  z-index: 99;
+  /* 进入群码页面返回后会滚动 */
+  overflow: hidden;
+}
+
+/* 浮层 */
+/* .noscroll {
+  overflow: hidden;
+} */
+.group-chat__mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 99;
+  box-sizing: border-box;
+}
+
+.group-chat__selectWrapper {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color: #fff;
+  border-radius: 20rpx 20rpx 0 0;
+  padding: 24rpx 32rpx 84rpx 32rpx;
+  box-sizing: border-box;
+}
+
+.group-chat__maskIcon {
+  position: absolute;
+  top: 24rpx;
+  left: 32rpx;
+  width: 32rpx;
+  height: 32rpx;
+  padding: 0 15rpx 15rpx 0;
+}
+
+.group-chat__selectTitle {
+  color: #333333;
+  font-family: FZLTDHJW--GB1-0;
+  font-size: 34rpx;
+  font-weight: 500;
+  line-height: 36rpx;
+  text-align: center;
+}
+
+.group-chat__selectMain {
+  margin-top: 56rpx;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  max-height: 600rpx;
+  overflow-y: scroll;
+}
+
+.group-chat__selectItem {
+  height: 66rpx;
+  width: 210rpx;
+  border-radius: 8rpx;
+  font-family: FZLTDHJW--GB1-0;
+  font-size: 28rpx;
+  font-weight: normal;
+  line-height: 66rpx;
+  text-align: center;
+  margin: 0 16rpx 24rpx 0;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.group-chat__selectItem--unselected {
+  background: #f8f8f7;
+
+  color: #333333;
+}
+
+.group-chat__selectItem--selected {
+  background: #f2f7fd;
+  border-radius: 8rpx;
+
+  color: #0086f5;
+}
+
+.group-chat__groupImg{
+  display: flex;
+  width: 100%;
+}

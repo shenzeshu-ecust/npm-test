@@ -1,0 +1,783 @@
+<import src="./couponlayer.wxml" />
+<import src='../commontemplates/pricedetail/pricedetail.wxml' />
+<import src="../commontemplates/forcelogin/forcelogin.wxml"/>
+<import src="../commontemplates/promotionbanner/promotionbanner.wxml"/>
+<import src="./roomlist.wxml" />
+
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+<webp bind:pageImageSuccess="pageImageSuccess"></webp>
+<mp-navigation-bar
+    wx:if="{{!isQuickApp}}"
+    id="mp-navigation"
+    back="{{navigationBar.back}}"
+    color="{{navigationBar.color}}"
+    background="{{navigationBar.background}}"
+    animated="{{navigationBar.animated}}">
+    <!-- 自定义返回按钮，根据滑动位置切换样式 -->
+    <view wx:if="{{!hiddenNavBack}}" slot="left" class="custom-navigation-back" bindtap="handleCustomBack">
+        <view wx:if="{{isShareToMore}}" class="navback-more">
+            <view class="navback-arrow-share wechat-font-g-arrow-down"></view>
+            <text class="navback-more-text" catchtap="shareGoList">更多\n酒店</text>
+        </view>
+        <view wx:else class="navback-arrow wechat-font-g-arrow-down {{navigationBar.leftCls}}"></view>
+    </view>
+    <view slot="center" class="custom-navigation-center">
+        <text class="title">{{navigationBar.title}}</text>
+    </view>
+</mp-navigation-bar>
+<view hidden="{{!showCalendarBar || !showCalendar}}" class="calendar-top-bar" style="top: {{mpNavHeight}}px">
+    <calendarbar
+        showCalendarBar="{{showCalendarBar}}"
+        dateInfo="{{dateInfo}}"
+        isHourroom="{{isHourroomModule}}"
+        bind:showCalender="showCalender">
+    </calendarbar>
+</view>
+
+<!-- 收藏引导 -->
+<collection-guide wx:if="{{!isQuickApp && collectStorage}}"></collection-guide>
+
+<scroll-view id="scroll_view" class="dt" scroll-with-animation scroll-y scroll-top="{{scrollTopHeight}}"
+             enhanced show-scrollbar="{{false}}" bounces="{{false}}"
+             binddragend="onScrollEnd"
+             bindscroll="onScroll">
+    <view class="dt-header autoExpose" data-expose="{{headInfo.headInfoExposeObj}}">
+
+        <view wx:if="{{headInfo.headPictures.length}}" class="head-img" bindtap="toPhotoList" data-type="0"
+              style="{{hotelBaseInfo.starLevel >= highStarLimit ? 'height: 500rpx' : 'height: 375rpx'}}">
+            <swiper class="img-slider"
+                current="0"
+                bindchange="lastToPhotoList"
+                bindtransition="headPicAnimation"
+                bindtouchend="headPicTouchend">
+                <block wx:for="{{headInfo.headPictures}}">
+                <swiper-item wx:if="{{!isQuickApp && (index < 2 || showAllHeadPic)}}">
+                    <image src="{{item}}" class="bg" mode="widthFix" binderror="noImageTrace" />
+                </swiper-item>
+                </block>
+            </swiper>
+            <view wx:if="{{headInfo.totalPictureCount}}" class="phone-num">
+                <view class="dt-font wechat-font-icon-photo"></view>
+                <text class="ml4">{{headInfo.totalPictureCount}}</text>
+            </view>
+        </view>
+        <view wx:else class="head-img" style='background-image: url("https://pages.c-ctrip.com/hotels/wechat/img/no-photo.jpg");'></view>
+        <!-- hotel name card -->
+        <view class="card black1">
+            <include src="./headinfo.wxml" />
+            <view class="comment-address">
+            <!-- 点评 -->
+                <!--鱼骨-->
+                <view wx:if="{{!headInfo.bestCommentSentence}}" class="fishbone-module04"><view class="fishbone-loading"></view></view>
+                <view wx:else bindtap="parentClickComment" class="comment-brief-info" data-ubt-key="xcx_hotel_detail_comment" id="autotest_detailpage_commentbanner">
+                        <view wx:if="{{headInfo.commentScore > 0 || headInfo.commentCount}}" id="autotest_detailpage_commentinfo1" class="mb8">
+                            <block wx:if="{{headInfo.commentScore > 0}}">
+                                <text class="fen blue-bgc">{{headInfo.commentScore}}</text>
+                                <text class="fen-desc blue">{{headInfo.commentDesc}}</text>
+                            </block>
+                            <block wx:if="{{headInfo.commentCount}}">
+                                <text class="num black1">{{headInfo.commentCount}}条</text>
+                                <view class="dt-font wechat-font-arrow-right"></view>
+                            </block>
+                        </view>
+                        <text wx:else class="cust">暂无评分</text>
+                        <view class="no-comment">{{headInfo.bestCommentSentence}}</view>
+                </view>
+            <!--鱼骨-->
+            <view wx:if="{{(!headInfo.zoneName && !headInfo.address)}}" class="fishbone-module04 ml12"><view class="fishbone-loading"></view></view>
+            <view wx:else catchtap="toMap" class="map autoExpose" data-ubt-key="xcx_hotel_detail_map" id="autotest_xcx_hotel_detail_map" data-expose="{{mapExposeObj}}">
+                    <view class="txt" id="js_map_txt">
+                        <view wx:if="{{headInfo.detailPositionDesc}}" class="round clamp2">{{headInfo.detailPositionDesc}}</view>
+                        <view wx:elif="{{headInfo.fuzzyAddressTip}}" class="round clamp2">{{headInfo.fuzzyAddressTip}}</view>
+                        <view wx:elif="{{headInfo.trafficeDesc}}" class="round clamp2">{{headInfo.trafficeDesc}}</view>
+                        <view class="{{ (headInfo.fuzzyAddressTip || headInfo.trafficeDesc) ? 'map-loc' : 'round'}} clamp2" id="autotest_detailpage_address">
+                            {{headInfo.address}}
+                        </view>
+                    </view>
+                <view class="dt-map-box">
+                    <text class="wechat-font-locate-fill"></text>
+                    <view class="mark" id="autotest_detailpage_maplabel">地图</view>
+                </view>
+            </view>
+            </view>
+        </view>
+    </view>
+
+    <!-- 星球号 -->
+    <view wx:if="{{showPlanetStyle}}" class="from-planet-banner">
+        <image class="planet-img" src="https://dimg04.c-ctrip.com/images/0AS2q120008nttkkgDB2D.png"></image>
+    </view>
+
+    <!--爆款预售banner-->
+    <block wx:if="{{showPresalePackage}}">
+        <image class="presale-banner" src="https://pages.c-ctrip.com/hotels/wechat/img/detail-presale-banner.png"></image>
+    </block>
+    <!-- 会员等级banner todo -->
+    <view wx:elif="{{memberBannerShow}}" class="prime-banner member-banner-bg-{{memberInfo.type}} prime-color-{{memberInfo.type}} ">
+        <view class="prime-banner-left">
+            <view class="prime-icon prime-bg-{{memberInfo.type}} icon-gradient-c wechat-font-prime ft31"></view>
+            <text class="prime-font ft26">尊敬的{{memberInfo.name}}</text>
+        </view>
+        <view class="prime-banner-middle">
+            <text wx:for="{{memberInfo.text}}" wx:for-item="desc" class="item">
+                <text class="prime-icon wechat-font-yes"></text>
+                <text class="ft24">{{desc}}</text>
+            </text>
+        </view>
+        <view wx:if="{{canPointsExchange && rightsInfo.length}}" class="prime-detail-{{memberInfo.type}} pro-icon-box" bindtap="toggleMemberLayer">
+            <view>详情</view>
+            <view class="member-icon-arrow wechat-font-arrow-right"></view>
+        </view>
+    </view>
+
+    <!-- 特色房型包装banner -->
+    <block wx:if="{{atmosphereBannerInfo.title}}">
+        <specialroombanner
+            atmosphereBannerInfo="{{atmosphereBannerInfo}}"
+            hasCouponBanner="{{bannerBasicInfo.bannerTags.length && isLoggedin}}"
+            marketBannerExposeObj="{{marketBannerExposeObj}}"
+            bind:marketBannerClick="marketBannerClick">
+        </specialroombanner>
+    </block>
+
+    <!-- 身份包装banner，这期仅支持优享会 -->
+    <view wx:if="{{!hasPromotionBack}}" class="fishbone-module05"><view class="fishbone-loading"></view></view>
+    <block wx:else>
+        <view wx:if="{{bannerBasicInfo.bannerTags.length && isLoggedin}}" class="autoExpose" bindtap="toggleCouponList" data-expose="{{detailCouponsExposeObj}}">
+            <template is="promotion-banner-info" data="{{bannerBasicInfo, atmosphereBannerInfo}}"></template>
+        </view>
+    </block>
+<view class="room-mod" id="room_mod">
+    <!-- 出行提醒 -->
+    <view class="detail-emerge">
+        <emegencynotice
+            warp-class="em-detail-notice"
+            inner="em-detail-inner"
+            lmask="em-detail-lmask"
+            page='DETAIL_PAGE'
+            cityId="{{hotelBaseInfo.cityId}}"
+        >
+        </emegencynotice>
+    </view>
+    <!--入离日期-->
+    <view wx:if="{{showCalendar}}">
+        <calendarbar
+            id="calendar-bar"
+            dateInfo="{{dateInfo}}"
+            isHourroom="{{isHourroomModule}}"
+            bind:showCalender="showCalender">
+        </calendarbar>
+    </view>
+    <!-- 快筛 -->
+    <view wx:if="{{!dateInfo.isLongRent && sortedQuickFilterIds.length}}" class="dt-filter" id="hotel_filters">
+        <view class="qs-box black1">
+            <view wx:if="{{priceFilter.isShown}}" class="qs-item filter-s gray-bgc" catchtap="cancelPriceFilter">{{priceFilter.text}}</view>
+            <block wx:for="{{sortedQuickFilterIds}}" wx:for-item="fkey" wx:key="fkey">
+                <view wx:if="{{filterSummary[fkey]}}" class="qs-item {{filterSelectedMap[fkey] ? 'filter-s' : ''}} gray-bgc"
+                    catchtap="filterSelect" data-key="{{fkey}}">
+                    {{filterSummary[fkey].title}}
+                </view>
+            </block>
+        </view>
+        <view class="filter-btn" catchtap="showFilterLayer">
+            筛选
+            <text class="arrow-down wechat-font-filter-arrow-full-down"></text>
+            <text wx:if="{{hasFilterSelected}}" class="filtered-sign">·</text>
+        </view>
+    </view>
+
+    <!--分割区-->
+    <view class="roomlist-divider"></view>
+
+    <!-- 新版房型列表 -->
+    <view class="room-list transz0" id="roomList" >
+        <block wx:if="{{noRoomRes}}">
+            <view class="no-room {{recommendDateList.length ? 'no-bottom-border' : 'mb7'}}">
+                <image class="no-room-img" src="{{canNotBeOrderedInfo.picUrl || noRoomDefaultImage}}"></image>
+                <view class="no-room-reason">
+                    <view class="no-room-tit">{{canNotBeOrderedInfo.messageBold}}</view>
+                    <view wx:if="{{canNotBeOrderedInfo.messageUnBold}}" class="no-room-subtit">{{canNotBeOrderedInfo.messageUnBold}}</view>
+                </view>
+            </view>
+            <block wx:if="{{recommendDateList.length}}">
+                <date-recommend
+                    recommendDateList="{{recommendDateList}}"
+                    bind:updateDate="replaceCurrentDate"
+                ></date-recommend>
+            </block>
+        </block>
+
+        <!--鱼骨-->
+        <view wx:if="{{isRoomLoading}}" class="fishbone-module06"><view class="fishbone-loading"></view></view>
+        <block wx:else>
+
+            <view wx:if="{{friendShareRoom.id}}" class="friend_share_room">
+                <image class="friend_share_title" src="https://pages.c-ctrip.com/hotels/wechat/img/detail-shareroom.png"/>
+                <template is="tilingroomVB"
+                    data="{{keyMap: friendShareRoom, isShareShow: false, room: baseRoomMap[friendShareRoom.key], subRoom: subRoomMap[friendShareRoom.skey], dateInfo, showPlanetStyle, showPresalePackage}}">
+                </template>
+            </view>
+
+            <block wx:if="{{guessLikeRoom.id}}">
+            <template is="tilingroomVB"
+                data="{{keyMap: guessLikeRoom, room: baseRoomMap[guessLikeRoom.key], subRoom: subRoomMap[guessLikeRoom.skey], dateInfo, showPlanetStyle, showPresalePackage, isGuessLike: true, isShareShow}}">
+            </template>
+            </block>
+
+            <block wx:if="{{tilingRoomList.length}}">
+            <block wx:for="{{tilingRoomList}}" wx:key="item.id">
+                <template is="tilingroomVB" wx:if="{{item.skey !== guessLikeRoom.skey}}"
+                    data="{{keyMap: item, room: baseRoomMap[item.key], subRoom: subRoomMap[item.skey], dateInfo, showPlanetStyle, showPresalePackage, isShareShow}}">
+                </template>
+            </block>
+            <!-- 更多房型按钮 -->
+            </block>
+            <block wx:elif="{{baseRoomList.length}}">
+                <block wx:for="{{baseRoomList}}" wx:key="item.id" wx:for-index="bIndex">
+                <view class="m-room">
+                    <template is="baseroomVB"
+                        data="{{keyMap: {key: item.key}, room: baseRoomMap[item.key], minPriceRoom: subRoomMap[baseRoomMap[item.key].minPriceSkey], dateInfo, showPlanetStyle, showPresalePackage, fixedHeight}}">
+                    </template>
+                    <view class="sub" hidden="{{baseRoomMap[item.key].hiddenSub}}">
+                        <block wx:for="{{item.subRoomList}}" wx:for-item="sub" wx:key="sub.id">
+                            <template is="subroomVB"
+                                data="{{keyMap: sub, room: baseRoomMap[item.key], item: subRoomMap[sub.skey], dateInfo, showPlanetStyle, showPresalePackage, isShareShow}}">
+                            </template>
+                        </block>
+                        <!-- 展开更多子房型 -->
+                        <view wx:if="{{baseRoomMap[item.key].moreSubRoomTxt}}" class="jump-box more-room-btn"
+                            catchtap="moreSubRoomShow" data-base-key="{{item.key}}" data-base-index="{{bIndex}}">
+                            <view class="more-btn">
+                                {{baseRoomMap[item.key].moreSubRoomTxt}}
+                                <text class=".wechat-font-g-arrow-down"></text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                </block>
+                <view wx:if="{{moreBaseRoomTxt}}" class="jump-box more-room-btn" catchtap="moreBaseRoomShow">
+                    <view class="more-btn baseroom-more">
+                        {{moreBaseRoomTxt}}
+                        <text class=".wechat-font-g-arrow-down"></text>
+                    </view>
+                </view>
+            </block>
+
+            <view wx:if="{{hourRoomList.length}}" class="hour-room {{moreBaseRoomTxt ? '' : 'border-t'}}" id="hour_room">
+                <view class="room-title">钟点房</view>
+                <block wx:for="{{showHourRoomList}}" wx:key="item.id">
+                    <template is="tilingroomVB"
+                        data="{{keyMap: item, room: baseRoomMap[item.key], subRoom: subRoomMap[item.skey], dateInfo, isShareShow}}">
+                    </template>
+                </block>
+
+                <view wx:if="{{hourRoomList.length>1 && !isHourroomModule}}" class="jump-box more-room-btn" catchtap="moreHourRoom">
+                    <view class="more-btn baseroom-more">
+                        {{moreHourRoomShow ? '查看其他钟点房': '收起'}}
+                        <text class="{{moreHourRoomShow ? '.wechat-font-g-arrow-down' :'.wechat-font-g-arrow-up'}}"></text>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
+
+    <!-- 酒店商城 -->
+    <view wx:if="{{hotelProduct.list.length}}" class="product-box">
+        <view class="hd">
+            <view class="hd-title">预售套餐</view>
+            <view wx:if="{{hotelProduct.tags}}" class="hd-tags">{{hotelProduct.tags}}</view>
+        </view>
+        <view class="pac-box">
+            <view class="item space autoExpose" bindtap="toProductDetail"
+                wx:for="{{hotelProduct.list}}" wx:for-index="productidx" data-id="{{item.productId}}" data-idx="{{productidx}}"
+                data-ubt-key="xcx_xqy_scsp" id="autotest_xcx_xqy_scsp" data-expose="{{storeDetailExposeObj}}">
+                <view class="pac-img-container" style="background: url({{item.picUrl}}) no-repeat center center; background-size: cover;" />
+                <view class="ml16 pac-info-box">
+                    <view wx:if="{{item.productName}}" class="h3">{{item.productName}}</view>
+                    <view wx:if="{{item.xProducts.length}}" class="product-info-wapper">
+                        <view wx:for="{{item.xProducts}}" class="product-info-item cell-v">
+                            <image class="pac-icon" src="{{'https://pages.c-ctrip.com/hotels/wechat/img/suite-icons/suite-icon-28-' + item.productType + '.png'}}"></image>
+                            <view class="single-ellipsis">{{item.productInfo}}</view>
+                        </view>
+                    </view>
+                    <view wx:if="{{item.excitationDesc}}" class="sellnum">{{item.excitationDesc}}</view>
+                    <view class="sold-flex">
+                        <view class="sold-price-wrap">
+                            <view class="sold-price-wrap">
+                                <text wx:if="{{item.sellingPrice > 0 && item.sellingPrice !== item.realPrice}}" class="del">
+                                    <text>￥{{item.sellingPrice}}</text>
+                                </text>
+                                <text wx:if="{{item.realPrice > 0}}" class="price2 constant-color">
+                                    <text>￥</text><text class="strong">{{item.realPrice}}</text>
+                                </text>
+                            </view>
+                            <view wx:if="{{item.reducedAmount > 0}}" class="tags-wrap">
+                                <text class="ctag">已减¥{{item.reducedAmount}}</text>
+                            </view>
+                        </view>
+                        <view class="gobuy-button constant-bgc">抢购</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--查看全部-->
+        <view wx:if="{{hotelProduct.totalCount > 2}}" class="click-btn">
+            <text class="dt-circle-btn" bindtap="toProductList"
+                data-ubt-key="xcx_xqy_scqb" id="autotest_xcx_xqy_scqb">查看全部{{hotelProduct.totalCount}}个预售套餐</text>
+        </view>
+    </view>
+
+    <!-- 星球号广告 -->
+    <view class="planet-ad autoExpose" wx:if="{{planetBanner.targetUrl}}" data-expose="{{planetBanner.planetBannerExposeObj}}">
+        <view class="pa-live" catchtap="toPlanetLive">
+            <view class="pal-logo" style="{{'background-image: url('+planetBanner.logo+');'}}"></view>
+            <view class="pal-status" wx:if="{{planetBanner.isLive}}">直播中</view>
+        </view>
+        <view class="pa-content" catchtap="toPlanetStore" style="{{(!planetBanner.vendorText && !planetBanner.rightTagsArr.length) ? 'justify-content:center' : ''}}">
+            <view class="pac-header">
+                <view class="pach-title single-ellipsis">{{planetBanner.title}}</view>
+                <view class="pach-fansnum">{{planetBanner.subTitle}}</view>
+                <view class="pach-entry">
+                    <view class="pache-txt">进店</view>
+                    <view class="promotion-cicon wechat-font-arrow-right"></view>
+                </view>
+            </view>
+            <view class="pac-right">
+                <view wx:if="{{planetBanner.vendorText}}" class="pac-vendor-text single-ellipsis">{{planetBanner.vendorText}}</view>
+                <block wx:elif="{{planetBanner.rightTagsArr.length}}">
+                    <view wx:for="{{planetBanner.rightTagsArr}}" wx:for-item="rightTag" class="pac-right-text">
+                        <text class="prt-img" style="{{'background-image: url('+rightTag.icon+');'}}"></text>
+                        <text class="prt-desc single-ellipsis">{{rightTag.content}}</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+    <!-- 点评-->
+    <block wx:if="{{enableGuestComment}}">
+        <comment
+            wx:if="{{gqlComment.enable}}"
+            enable="{{gqlComment.enable}}"
+            commentRating="{{gqlComment.commentRating}}"
+            similarCommentRating="{{gqlComment.similarCommentRating}}"
+            commentTags="{{gqlComment.commentTags}}"
+            comment="{{gqlComment.comment}}"
+            rateDesc="{{gqlComment.rateDesc}}"
+            commentExposeObj="{{gqlComment.commentExposeObj}}"
+            hasSimComment="{{gqlComment.hasSimComment}}"
+            gqlWaitComment="{{gqlWaitComment}}"
+            bind:clickComment="childClickComment">
+        </comment>
+    </block>
+    <block wx:else>
+        <block wx:if="{{gqlComment.enable}}">
+            <view class="dt-fs-box autoExpose" id="comments" data-expose="{{gqlComment.commentExposeObj}}">
+                <view class="h2">住客评价</view>
+                <view class="comment-info">
+                    <block wx:if="{{gqlComment.commentRating.ratingAll > 0}}">
+                        <text class="fen">{{gqlComment.commentRating.ratingAll}}</text><text>分</text>
+                        <text wx:if="{{gqlComment.commentRating.level}}" class="fen-desc">{{" "}}{{gqlComment.commentRating.level}}</text>
+                    </block>
+                    <block wx:if="{{gqlComment.rateDesc}}">
+                        <text class="cutting-line"></text>
+                        <text class="gray-txt-small">{{gqlComment.rateDesc}}</text>
+                    </block>
+                </view>
+                <view wx:if="{{gqlComment.commentTags.length}}" class="dp-tags gray-txt-small">
+                    <view class="item"
+                        wx:for="{{gqlComment.commentTags}}"
+                        wx:for-item="tag"
+                        data-id="{{tag.id}}"
+                        data-value="{{tag.name}}"
+                        catchtap="parentClickComment">
+                    {{tag.name +'('+ tag.count + ')'}}</view>
+                </view>
+
+                <view class="cd" bindtap="parentClickComment">
+                    <view class="cdh">
+                        <view class="user-photo" style="background:url({{gqlComment.comment.userInfo.headPictureUrl}});background-size:cover;"></view>
+                        <view>
+                            <view class="cun">{{gqlComment.comment.userInfo.nickName}}</view>
+                            <block wx:if="{{gqlComment.comment.translatedSourceText}}">
+                                <text class="center-line"></text>
+                                <view class="source-txt">{{gqlComment.comment.translatedSourceText}}</view>
+                            </block>
+                        </view>
+                    </view>
+                    <rich-text nodes="{{gqlComment.comment.displayContent}}" class="cdct"></rich-text>
+                </view>
+                <view class="jump-box" bindtap="parentClickComment">
+                    <text class="cbtn">全部点评</text>
+                </view>
+            </view>
+        </block>
+    </block>
+    <template is="blog-article" data="{{groupArticleList, newPhotoListSwitch}}"></template>
+
+    <!-- 疑问解答 -->
+    <view wx:if="{{askInfo.enable}}" class="dt-fs-box autoExpose" id="question_answer" data-expose="{{askInfo.quesAnsExposeObj}}">
+        <view class="flex-center ask-tit-box" id="autotest_wd_wendajia">
+            <view class="h2">疑问解答</view>
+        </view>
+        <view bindtap="toQuestionPage" data-ubt-key="xcx_xqy_wdrq">
+            <block wx:for="{{askInfo.list}}" wx:for-item="qaItem">
+                <view class="ques-item">
+                    <view class="flex-center ques-desc">
+                        <view class="ques-item-icon">问大家</view><rich-text nodes="{{qaItem.node}}" style="overflow: hidden;"></rich-text>
+                    </view>
+                    <view class="ans-num">{{qaItem.replyCount}}条回答</view>
+                </view>
+            </block>
+            <view wx:if="{{askInfo.count > 2}}" class="jump-box" id="autotest_wd_chakanwenti">
+                <text class="cbtn">用户问答 · {{askInfo.count}}条</text>
+            </view>
+        </view>
+    </view>
+
+    <!--订房必读/政策-->
+    <include src="./policy.wxml" />
+    <!-- 美食交通等周边 -->
+    <view wx:if="{{isWechat && nearbyFacility.length}}" id="traffic_entertainment" class="traffic autoExpose" data-expose="{{nearbyFacilityExposeObj}}">
+        <view class="title">酒店周边</view>
+        <view class="dt-tabs">
+            <block wx:for="{{nearbyFacility}}">
+                <view class="item {{item.current ? 'current' : ''}}"
+                    bindtap="nearbyFacilityTab"
+                    data-type="{{item.type}}" data-current="{{item.current}}"
+                    data-ubt-key="{{item.ubtKey}}" id="autotest_{{item.ubtKey}}">
+                {{item.name}}
+                </view>
+            </block>
+        </view>
+        <view class="items">
+            <block wx:for="{{nearbyFacility}}">
+                <!--酒店周边新接口-->
+                <block wx:if="{{item.newFacility && item.current}}">
+                    <view wx:for="{{item.facList}}" wx:for-item="fac" class="item"
+                          bindtap="toNearbyFacility"
+                          data-url="{{fac.poiDetailUrl}}"
+                          data-type="{{item.type}}"
+                          data-ubt-key="{{item.subUbtKey}}" id="autotest_{{item.subUbtKey}}">
+                        <view class="thead">
+                            <image class="pic" src="{{fac.imageUrl}}" lazy-load></image>
+                            <text class="distance">{{fac.distanceDescription}}</text>
+                        </view>
+                        <view class="tit">{{fac.name}}</view>
+                        <view class="cell">
+                            <view wx:if="{{fac.score}}" class="cell-star dpfen">{{fac.score}}分</view>
+                            <view wx:if="{{fac.extraDesc}}" class="cnyprice">{{fac.extraDesc}}</view>
+                        </view>
+                    </view>
+                </block>
+            <!--todo:酒店周边全部接口新接口时可删掉-->
+            <block wx:elif="{{item.current}}">
+                <view wx:for="{{item.facList}}" wx:for-item="fac" class="item"
+                    bindtap="toNearbyItem"
+                    data-type="{{item.type}}" data-id="{{fac.id}}" data-district-id="{{fac.districtId}}"
+                    data-ubt-key="{{item.subUbtKey}}" id="autotest_{{item.subUbtKey}}">
+                    <view class="thead">
+                        <image class="pic" src="{{fac.picture}}" lazy-load></image>
+                        <text class="distance">{{fac.desc}}</text>
+                    </view>
+                    <view class="tit">{{fac.name}}</view>
+                    <view class="cell">
+                        <view wx:if="{{fac.commentRate}}" class="cell-star dpfen">{{fac.commentRate}}分</view>
+                        <view wx:if="{{fac.extraDesc}}" class="cnyprice">{{fac.extraDesc}}</view>
+                    </view>
+                </view>
+            </block>
+            </block>
+        </view>
+    </view>
+
+    <!-- 附近同类型 -->
+    <view class="nearby-box" wx:if="{{nearbyHotels.length}}" id="nearby_list">
+        <view class="title">{{nearbyHotelsTitle}}</view>
+        <block wx:for="{{nearbyHotels}}" wx:for-index="idx" wx:for-item="hotel" wx:key="hotelId">
+            <include src="../list/hotelcard.wxml" />
+        </block>
+    </view>
+
+    <view class="price-desc-box">
+        <view class="price-desc-tit">价格说明</view>
+        <view class="price-desc-item">
+            划线价格为参考价，该价格指商品或服务的门市价、服务提供商的指导价、零售价或该商品或服务曾经展示过的销售价等，并非原价；
+            由于产品信息实时更新、市场价格波动等可能会与您预订时展示的不一致，该价格仅供您参考。
+        </view>
+        <view class="price-desc-item">未划线价格指商品或服务的实时标价，为划线价基础上计算出的优惠金额。具体成交价格根据商品或服务参加活动，或会员使用优惠券等发生变化，最终以订单结算页价格为准。</view>
+        <view class="price-desc-item">如有疑问，您可在预订前联系客服进行咨询。</view>
+        <view class="price-desc-item">此说明仅当出现价格比较时有效。若服务提供商单独对划线价格进行说明的，以服务提供商的表述为准。</view>
+    </view>
+    <!--服务保障 -->
+    <service wx:if="{{biz}}" isOversea="{{biz !== 1}}" warp-class="serv-wrap"></service>
+    <view class="btm-space"></view>
+
+    <!-- 收藏与分享功能-->
+    <view class="collect-share-box {{isIphoneX ? 'bt' : ''}}">
+        <view bindtap="changeCollect" class="collect-share-item {{collection.collectClass}}"
+            data-ubt-key="{{collection.actionKey}}" id="autotest_detailpage_collectlabel">
+        </view>
+        <view bindtap="showSharePlugin" class="collect-share-item wechat-font-share" wx:if="{{isWechat}}"
+            data-ubt-key="xcx_hotel_detail_share" id="autotest_detailpage_sharelabel">
+        </view>
+        <button wx:elif="{{!isQuickApp}}" class="collect-share-item wechat-font-share" open-type="share"></button>
+    </view>
+</scroll-view>
+
+<!-- 查看房型bar -->
+<view hidden="{{!showBottomBar}}" class="more-room-container {{isIphoneX ? 'fix-iphonex-border' : ''}}">
+    <view class="btns">
+        <view wx:if="{{showAskHotel}}" bindtap="askHotel" class="askhotel-box black1">
+            <view class="wechat-font-ask-hotel ask-hotel-icon"></view>
+            <view>问问店家</view>
+        </view>
+        <view class="min-price blue">
+            <block wx:if="{{!hotelBaseInfo.isOversea && (minSubroomPrice || minHourroomPrice)}}">
+                <text class="price-type">¥</text>{{minSubroomPrice || minHourroomPrice}}
+            </block>
+        </view>
+        <view class="blue-bgc button-style more-view-box" bindtap="scrollRoomTop" data-ubt-key="xcx_xqy_ckfx" id="autotest_xcx_xqy_ckfx">查看房型</view>
+    </view>
+</view>
+
+<!-- 房型浮层 -->
+<roomlayer
+    wx:if="{{roomLayer.isShown}}"
+    isShown="{{roomLayer.isShown}}"
+    isIphoneX="{{isIphoneX}}"
+    totalDays="{{dateInfo.days}}"
+    room="{{baseRoomMap[roomLayer.key]}}"
+    subRoom="{{subRoomMap[roomLayer.skey]}}"
+    priceId="{{priceId}}"
+    from="detail"
+    isQuickApp="{{isQuickApp}}"
+    data-id="{{subRoomMap[roomLayer.skey].id}}"
+    data-type="room"
+    roomLayerExposeObj="{{roomLayer.roomLayerExposeObj}}"
+    bind:noImageTrace="noImageTrace"
+    bind:hiddenLayer="hiddenRoomLayer"
+    bind:roomSceneLayerClick="roomSceneLayerClick"
+>
+    <template is="room-layer-bottom" data="{{subRoom: subRoomMap[roomLayer.skey], showAskHotel, isIphoneX, roomLayer, dateInfo}}"></template>
+</roomlayer>
+
+<!-- 筛选浮层 -->
+<block wx:if="{{showFilterLayer}}">
+    <common-layer
+            cancelButtonText="重置"
+            confirmButtonText="完成"
+            bind:cancel="handleFilterReset"
+            bind:confirm="closeFilterLayer"
+            bind:closeLayer="closeFilterLayer">
+        <scroll-view scroll-y enhanced show-scrollbar="{{false}}"
+                     slot="content"
+                     class="filter-layer content autoExpose"
+                     data-expose="{{filterLayerExposeObj}}">
+            <block wx:for="{{filterInfo}}" wx:for-item="bFilter" wx:key="bFilter.data.filterId">
+                <block wx:if="{{bFilter.subItems}}">
+                    <view class="filter-tit">{{bFilter.title}}</view>
+                    <view class="filter-box">
+                        <view class="filter-item {{filterSelectedMap[subFilter.data.filterId] ? 'filter-s' : ''}}"
+                              catchtap="filterSelect" data-key="{{subFilter.data.filterId}}"
+                              wx:for="{{bFilter.subItems}}" wx:for-item="subFilter" wx:key="subFilter.data.filterId">
+                            {{subFilter.title}}
+                        </view>
+                    </view>
+                </block>
+            </block>
+        </scroll-view>
+    </common-layer>
+</block>
+
+<!-- pricedetail -->
+<common-layer wx:if="{{showPriceDetail}}"
+      title="优惠说明"
+      subTitle="{{priceLayerSubtitle}}"
+      confirmButtonText="{{confirmBtnText}}"
+      bind:closeLayer="closePriceDetail"
+      bind:confirm="{{priceDetailConfirmFuc}}">
+    <template is="price-detail" data="{{dateInfo, priceDetail}}"></template>
+</common-layer>
+
+<!-- 新版优惠券浮层 -->
+<common-layer wx:if="{{showCouponLayer}}"
+      layerStyle="background: #f5f7fa"
+      title="{{bannerFloatData.floatingTopText}}"
+      exposeData="{{hotelCouponsModule.travelCoupons[0].exposeData}}"
+      bind:closeLayer="toggleCouponList">
+    <template is="coupon-layer" data="{{showCouponLayer: showCouponLayer, bannerFloatData, hotelCouponsModule, rewardModule}}"></template>
+</common-layer>
+
+<!-- 澳门券实名认证弹窗 -->
+<realnamepop enable="{{realNamePop.enable}}" message="{{realNamePop.message}}" skey="{{realNamePop.skey}}" promotionID="{{realNamePop.promotionID}}" bind:authRealNameCallback="onAuthRealNameCallback" bind:closeRealName="onCloseRealName"></realnamepop>
+
+<!-- 分享好友朋友圈 -->
+<screenshare hotelId="{{hotelId}}"></screenshare>
+<share hidden="{{share.hidden}}" from="hoteldetail" imageUrl="{{share.friendShareImg}}" bind:shareClose="shareClose"></share>
+
+<!-- 0元住 -->
+<view wx:if="{{isAppShare && isLandingPage && !showShareList}}"
+    class="floating-ball ball-zero-packup {{isIphoneX ? 'iphonex-ball': ''}} container-block {{appWakeRight ? 'trans-right': ''}}">
+    <button class="itemapp gozero" bindtap="toZero">
+        <image class="floating-logo" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/hotel_icon.png"></image>0元住
+    </button>
+</view>
+
+<!-- 微信SEO -->
+<view id="seo" style="position: absolute; top: -2000rpx;" wx:scope-data="{{...wxSEOdata}}"></view>
+
+<!-- 房型浮层底部预订按钮&&价格展示 -->
+<template name="room-layer-bottom">
+    <view class="des-bottom {{isIphoneX ? 'iphonx-bottom' : 'pb30'}}">
+        <view class="justify-flex-end dt-cell-v mr16 {{subRoom.status !== 1 ? 'gray-filter dt-disabled' : ''}}">
+            <view wx:if="{{showAskHotel}}" class="askhotel-box black1 flex-center">
+                <view bindtap="askHotel" data-is-roomlayer="{{true}}">
+                    <view class="wechat-font-ask-hotel ask-hotel-icon"></view>
+                    <view>问问店家</view>
+                </view>
+            </view>
+            <view class="cell-v">
+                <!--价格展示-->
+                <view class="price-layout pr10 relative" wx:if="{{subRoom.status === 1}}">
+                    <view class="lnumb">
+                        <text wx:if="{{subRoom.priceLabelDesc}}"
+                            class="ft20 black3">{{subRoom.priceLabelDesc}}</text>
+                        <block wx:if="{{!subRoom.showFuzzyPrice && (subRoom.minusAmount || subRoom.refundAmount)}}">
+                            <text class="del">
+                                <text class='yen'>￥</text>
+                                <text class='strong'>{{subRoom.originPrice}}</text>
+                            </text>
+                        </block>
+                        <text class="price2 constant-color">
+                            <text wx:if="{{dateInfo.days > 1 && !dateInfo.isLongRent}}" class="dt-fn12">均</text>
+                            <template is="roomPrice" data="{{...subRoom}}" />
+                        </text>
+                    </view>
+                    <template is="taxExtraDesc" data="{{...subRoom, keyMap: roomLayer, from: 'layer'}}"></template>
+                    <view wx:if="{{!subRoom.showFuzzyPrice && subRoom.priceTags && subRoom.priceTags.length}}"
+                        catchtap="scrollPriceDetail" data-ubt-key="xcx_xqy_jgdj" id="autotest_xcx_xqy_jgdj">
+                        <price-tag-new priceCalcItems="{{subRoom.priceTags}}"></price-tag-new>
+                    </view>
+                </view>
+                <view bindtap="noop" data-ubt-key="xcx_hotel_detail_sellroomdetailbutton">
+                    <!--预订按钮-->
+                    <template is="toBookingBtn" data="{{subRoom, keyMap: roomLayer, autoTestKey: 'autotest_detailpage_likebookbutton', comeFrom: 'roomLayer'}}"></template>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!--强制登录-->
+<template wx:if="{{showForceLogin}}" is="force-login"></template>
+
+<!-- 会员等级弹窗 -->
+<memberpop enable="{{rightsPop.enable}}" imgSrc="{{rightsPop.imgSrc}}"></memberpop>
+
+<!-- 新客弹窗 -->
+<block wx:if="{{isPrimeHotel}}">
+<newerpop enable="{{newerPop.enable}}" newGuestType="{{newerPop.newGuestType}}"></newerpop>
+</block>
+
+<!--一起选酒店入口浮层-->
+<block wx:if="{{isWechat && showShareList}}">
+    <view class="share-list-bg" wx:if="{{showShareBar}}" bindtap="closeShareBar" catchtouchmove="closeShareBar"></view>
+    <view class="share-list-bar {{showShareBar ? '' : 'bar-close-animation share-list-btn'}} {{isIphoneX ? 'iphonex' : ''}}">
+        <view class="con">
+        <image class="title"></image>
+        <view class="imgs">
+            <image wx:for="{{floatingItems}}"
+                   wx:key="index"
+                   src="{{item.coverImg}}"
+                   wx:if="{{index < 10}}"
+                   class="single-img"
+                   data-hotelid="{{item.hotelId}}">
+            </image>
+        </view>
+        <button class="desc" open-type="{{canIUseGetUserProfile ? '' : 'getUserInfo'}}" catchtap="goToShareList" bindgetuserinfo="goToShareList">
+            立即投票
+            <text class="wechat-font-arrow-right dt-fn12"></text>
+        </button>
+        </view>
+    </view>
+    <view class="share-list-btn {{showShareBar ? 'none' : 'icon-open-animation'}} {{isIphoneX ? 'iphonex' : ''}}" catchtap="showShareBarLayer">
+        <view class="share-list-icon">
+            <view class="share-img"><image class="img" src="{{floatingItems[0].coverImg}}"></image></view>
+        </view>
+        <view class="share-total" wx:if="{{total > 0}}">{{total}}</view>
+    </view>
+</block>
+
+<!--交叉浏览倒计时挂件-->
+<block wx:if="{{countdownParams.showCountdown}}">
+    <countdown
+        usenew="{{countdownParams.usenew}}"
+        taskid="{{countdownParams.taskid}}"
+        actionid="{{countdownParams.actionid}}"
+        usertaskactionid="{{countdownParams.userTaskActionId}}"
+    ></countdown>
+</block>
+
+<!--优惠券弹窗-->
+<include src="./sharecoupon.wxml" />
+
+<!-- loading-layer -->
+<loading-gif isShown="{{showLoading}}"></loading-gif>
+
+<!--登录bar-->
+<loginbar wx:if="{{!isLoggedin}}" bind:toLoginTap="toLoginTap" page-from="{{showBottomBar ? 'high-detail' : 'detail'}}"></loginbar>
+<!--超值旅行家浮层-->
+<travel-coupon-pack
+        wx:if="{{showTravelCouponLayer && travelCouponLayerInfo}}"
+        couponInfo="{{travelCouponLayerInfo}}"
+        bind:closeLayer="toggleTravelCouponLayer">
+</travel-coupon-pack>
+
+<!-- 白屏检测及上报 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>
+
+<!--达人晒图-->
+<template name="blog-article">
+    <view wx:if="{{groupArticleList.length}}" class="blog-article-module">
+        <view class="ba-title">达人晒图</view>
+        <scroll-view class="ba-item" scroll-x enable-flex>
+            <view wx:for="{{groupArticleList}}" wx:for-item="article" wx:key="id" wx:for-index="idx"
+                  class="single-article autoExpose" data-id="{{article.id}}" data-expose="{{article.exposeTraceObj}}"
+                  data-idx="{{idx+1}}"
+                  bindtap="toLvPai">
+                <view class="ba-image" style="background: url({{article.pictureUrl}}) no-repeat center;background-size:cover;">
+                    <view class="ba-image-bottom" wx:if="{{article.likeCount || article.pictureType === 1}}">
+                        <view class="left">
+                            <text class="wechat-font-zan mr5"></text>
+                            <text class="zan-num">{{article.likeCount}}</text>
+                        </view>
+                        <!--视频icon-->
+                        <text class="right wechat-font-video" wx:if="{{article.pictureType === 1}}"></text>
+                    </view>
+                </view>
+                <view class="ba-content">
+                    <view class="blog-title two-line-ellipsis">{{article.title}}</view>
+                    <view class="blog-content two-line-ellipsis">{{article.content}}</view>
+                    <view class="blog-author">
+                        <view class="profile mr8">
+                            <image class="avatar" src="{{article.avatarUrl}}" />
+                            <view class="user-level-{{article.authorLevel}}"></view>
+                        </view>
+                        <view class="private-info">
+                            <text class="name">{{article.nickName}}</text>
+                            <text wx:if="{{article.authorTypeName}}" class="label label-{{article.authorLevel}}">{{article.authorTypeName}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="ba-space" bindtap="toPhotoList" data-type="1">
+                <text class="wechat-font-view-more"></text>
+                <text class="ba-view-more">查看更多</text>
+            </view>
+        </scroll-view>
+        <view class="ba-all-article" bindtap="toPhotoList" data-type="1">
+            <text class="btn transz0">全部达人晒图</text>
+        </view>
+    </view>
+</template>

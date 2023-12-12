@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "disableScroll": true,
+  "usingComponents": {
+    "common-layer": "/pages/hotel/components/layer/index",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index",
+    "loading-gif": "/pages/hotel/components/loadinggif/loadinggif",
+    "emegencynotice": "/pages/hotel/components/emegencynotice/emegencynotice",
+    "price-tag-new": "/pages/hotel/components/pricetagnew/pricetagnew",
+    "hotel-filter": "/pages/hotel/components/hotelfilter/hotelfilter",
+    "pricestarfilter": "/pages/hotel/components/pricestarfilter/pricestarfilter"
+  }
+}

@@ -1,0 +1,50 @@
+<nav-bar navbar-data="{{navbarData}}" bindback="onBack"></nav-bar>
+<view class="hpaybox {{nopayment? 'hideview':''}}">
+  <view class='tip-box'>
+    <text class="hpaytip">{{payTitle}} </text>
+    <count-down
+    time="{{expireTime}}"
+      bind:lineEnd="onCountEnd"
+    ></count-down>
+  </view>
+	<block wx:if="{{isWXHF}}">
+	<view class="hpayitem">
+		<text class="hpaytextwxf">{{descTxt}}</text>
+	</view>	
+	</block>
+    <block wx:else>
+	<view class="hpayitemwxf">
+		<text class="hpaytext">{{descTxt}}</text>
+		<text class="hpaysubtext">{{descSubTxt}}</text>
+	</view>	
+	</block>
+
+    <block wx:if="{{fromed}}">
+        <button class="hpaybtn" bindtap="submitPayhold">{{payTxt}}</button>
+    </block>
+    <block wx:else>
+        <block wx:if="{{loading}}">
+            <button loading="{{loading}}" disabled="{{loading}}" class="hpaybtn">{{payTxt}}</button>
+        </block>
+        <block wx:else>
+                <button class="hpaybtn" bindtap="handlePay" >{{payTxt}}</button>
+            <!-- <navigator hover-class="none" target="miniProgram" open-type="navigate" app-id="{{navigatorData.appId}}" path="{{navigatorData.pathUrl}}" extra-data="{{extData}}" version="release" bindsuccess="miniSuccess" bindfail="miniFail" bindcomplete="miniComplete">
+                <button class="hpaybtn">{{payTxt}}</button>
+            </navigator> -->
+        </block>
+    </block>
+	<view class="hpayamtw">请仔细阅读并充分理解<text class="hpayamt" bindtap="showamt">《代扣服务协议》</text></view>
+<!-- <button class="hpaybtn" bindtap="getResult">查询</button> -->
+
+</view>
+<view class="hnopay {{nopayment? '':'hideview'}}">
+	<view class="hpayeicon"></view>
+	<text class="hpayetext">
+	您预订的产品无法进行授权支付，请至携程应用程序订购或电话联系我们
+	</text>
+</view>
+<view class="wxf-test">
+<button class="hpaybtn" bindtap="submitPayhold66">支付测试</button>
+</view>
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

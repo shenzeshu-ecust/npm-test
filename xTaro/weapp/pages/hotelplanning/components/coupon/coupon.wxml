@@ -1,0 +1,214 @@
+<!-- wifi连接页优惠券 -->
+<block wx:if="{{couponType === 3}}">
+    <view class="wifi-cl-wrapper">
+        <view wx:if="{{!newCouponInfoList.length && !rightItemListBar.length}}" class="no-benefit-bar" style="z-index: 1"></view>
+        <view class="wifi-coupon" bindtap="toggleBenefitList" wx:if="{{(newCouponInfoList && newCouponInfoList.length || rightItemListBar && rightItemListBar.length)}}">
+            <template is="coupon-right" data="{{isOrderCode, needReceive, newCouponInfoList, rightItemListBar}}"></template>
+        </view>
+        <view class="cl-module rm-blue-theme" style="{{!newCouponInfoList.length && !rightItemListBar.length ? 'padding-top: 50rpx;' : ''}}">
+            <block wx:if="{{!showRoomList}}">
+                <view class="cl-btn-wrapper">
+                    <view class="dt-date dt-date-wifi" id="calendar_bar">
+                        <view bindtap="showCalender" class="date-box-wifi">
+                            <view class="date-left">
+                                <view class="wifi-in-day">
+                                    <text class="times">{{inDay_disp[0]}}</text>
+                                    <text class="cust">{{inDay_disp[1]}}</text>
+                                </view>
+                                <view class="time-line-wrapper">
+                                    <view class="date-line"></view>
+                                </view>
+                                <view class="wifi-out-day">
+                                    <text class="times">{{outDay_disp[0]}}</text>
+                                    <text class="cust">{{outDay_disp[1]}}</text>
+                                </view>
+                            </view>
+                             <view wx:if="{{totalDays >= 0}}" class="flex-align-center cl-nights wifi-calendar">
+                                <text>续住</text>
+                                <text class="count-str">{{totalDays}}</text>
+                                <text>晚</text>
+                            </view>
+                            <view class="dt-font wechat-font-arrow-right2"></view>
+                        </view>
+                        <view wx:if="{{dateInfo.showMorningOutTips}}" class="moning-out-tips">如您不是今天离店，请点击修改</view>
+                    </view>
+                    <view class="cl-btn" bindtap="handleClickCLBtn">
+                        优惠续住
+                    </view>
+                </view>
+            </block>
+            <!-- B版直接平铺房型列表 -->
+            <block wx:else>
+                <roomlist
+                    id="room-list-new"
+                    hotelId="{{hotelId}}" 
+                    sid="{{sid}}"
+                    allianceid="{{allianceid}}"
+                    showFilter="{{true}}" 
+                    showCalender="{{true}}"
+                    source="wifi-connect"
+                    inday="{{inDay}}" 
+                    outday="{{outDay}}"
+                    pageId="10650022492"
+                    bind:receiveCouponBooking="receiveCouponBooking"
+                    unionVipType="{{unionVipType}}" 
+                    fromLS="{{true}}"
+                    scanPriceTag="{{scanPriceTag}}"
+                    bind:showVipLayer="setVipLayerShow"
+                    isWifi="{{true}}"
+                    bind:resetInAndOutDay="clickReloadCoupon"
+                    disablePlatformDiscount="{{disablePlatformDiscount}}"
+                />
+            </block>
+
+            <view wx:if="{{showRoomList}}" class="cl-tags-divider"></view>
+            <view class="cl-tags">
+                <template is="bottom-desc" data="{{couponIconList}}"></template>
+            </view>
+        </view>
+    </view>
+</block>
+<!-- 落地页优惠券 -->
+<block wx:else>
+    <!-- 未登录 -->
+    <view wx:if="{{!hasLogin}}" class="promotion-bar">
+        <view class="pro-tag-box-nologin ellips">
+            <text class="promotion-ctag-nologin pro-tag">请登录后查看续住优惠价</text>
+        </view>
+        <view class="pro-icon-box">
+            <view>登录</view>
+        </view>
+    </view>
+    <!-- 已登录 -->
+    <block wx:else>
+        <view class="continue-packet" style="{{'margin: 0 0 36rpx 0;'}}" bindtap="toggleBenefitList" wx:if="{{newCouponInfoList && newCouponInfoList.length || rightItemListBar && rightItemListBar.length}}">
+            <template is="coupon-right" data="{{isOrderCode, needReceive, newCouponInfoList, rightItemListBar}}"></template>
+            <view class="coupon-bottom">
+                <template is="bottom-desc" data="{{couponIconList}}"></template>
+            </view>
+        </view>
+        <view wx:elif="{{source === 'wifi-landing' || source === 'high-star-aggregate'}}" class="no-benefit-bar new-no-benefit" ></view>
+    </block>
+</block>
+
+<!-- 优惠券弹窗 -->
+<view hidden="{{!showBenefitList}}" class="cmask" bindtap="toggleBenefitList" catchtouchmove="noop">
+    <view class="global-layer benefit-layer">
+        <view class="thead">
+            <view class="benefit-layer-title {{isOrderCode ? 'benefit-layer-bg-new' : 'benefit-layer-bg'}}"></view>
+            <view class="wechat-font-close2 benefit-close" catchtap="toggleBenefitList"></view>
+        </view>
+        <view class="tbody">
+            <scroll-view scroll-y class="benefit-scroll">
+                <view class="benefit-layer-wrapper">
+                    <!-- 折扣券、优惠券 -->
+                    <view class="package-wrapper" wx:if="{{discount && discount.discountName || (couponItemList && couponItemList.length)}}">
+                        <block wx:if="{{discount && discount.discountName}}">
+                            <text class="benefit-title">{{isOrderCode ? "订房折扣" : "折扣"}}</text>
+                            <view class="benefit-card" catchtap="handleCouponReceive">
+                                <view class="benefit-info">
+                                    <text>{{discount.discountValue}}</text>
+                                    <text class="benefit-unit">{{discount.discountUnit}}</text>
+                                </view>
+                                <view class="benefit-detail">
+                                    <view class="desc-wrapper">
+                                        {{isOrderCode ? "订房折扣" : discount.discountName}}
+                                        <text class="benefit-desc">{{discount.discountDesc}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </block>
+                        <block wx:if="{{couponItemList && couponItemList.length}}">
+                            <text class="benefit-title">优惠券</text>
+                            <view wx:for="{{couponItemList}}" wx:for-item="couponInfoItem" class="benefit-card coupon-new-card">
+                                <view class="benefit-info">
+                                    <text>{{couponInfoItem.couponValue}}</text>
+                                    <text class="benefit-unit">{{couponInfoItem.couponUnit}}</text>
+                                </view>
+                                <view class="benefit-detail coupon-detail">
+                                    <view class="desc-wrapper">
+                                        {{couponInfoItem.couponName}}
+                                        <text class="benefit-desc" wx:if="{{couponInfoItem.couponDesc}}">{{couponInfoItem.couponDesc}}</text>
+                                        <view class="benefit-desc" wx:if="{{couponInfoItem.condition}}">{{couponInfoItem.condition}}</view>
+                                        <view class="benefit-desc" wx:if="{{couponInfoItem.couponUseRule}}">{{couponInfoItem.couponUseRule}}</view>
+                                    </view>
+                                    <block wx:if="{{couponInfoItem.needReceive}}">
+                                        <button wx:if="{{couponInfoItem.shareBeforeBinding}}" data-ubt-key="xcx_xqy_yhqdj" data-share-url="{{couponInfoItem.shareActivityUrl}}" data-canstartassist="{{couponInfoItem.canStartAssist}}" class="to-receive" catchtap="handleHelpCoupon">去助力({{couponInfoItem.totalNum}}/{{couponInfoItem.needTotalNum}})</button>
+                                        <button wx:else data-ubt-key="xcx_xqy_yhqdj" id="autotest_xcx_xqy_yhqdj" data-id="{{couponInfoItem.promotionID}}" data-name="{{couponInfoItem.couponName}}" class="to-receive" catchtap="handleCouponReceive">领取</button>
+                                    </block>
+                                    <block wx:else>
+                                        <image class="continue-right-sprite has-received" />
+                                    </block>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                    <!-- 权益 -->
+                    <view class="package-wrapper right-wrapper"  wx:if="{{rightItemList && rightItemList.length}}">
+                        <text class="benefit-title">{{isOrderCode ? "免费酒店权益" : "免费续住权益"}}</text>
+                        <view class="rights">
+                            <view wx:for="{{rightItemList}}" wx:for-item="rightItem" class="right-module">
+                                <image src="{{rightItem.rightIconUrl}}" />
+                                {{rightItem.rightName}}
+                            </view>
+                        </view>
+                        <text class="right-desc">*不同房型之间权益有差别，以最终下单房型为准</text>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="tfooter">
+            <button class="continue-live-btn" catchtap="continueLiveNow">{{isOrderCode ? "立即下单" : "立即续住"}}</button>
+        </view>
+    </view>
+</view>
+
+<!-- 优惠券权益bar -->
+<template name="coupon-right">
+    <view class="coupon-header">
+        <view class="coupon-header-title">
+            {{isOrderCode ? "订房专享礼包" : "续住专享礼包"}}
+            <view class="coupon-header-pop"></view>
+        </view>
+        <view class="receive-btn">
+            {{ needReceive ? '领取' : '查看详情'}}
+            <view class="wechat-font-arrow-right2 receive-arrow-right"></view>
+        </view>
+    </view>
+    <view class="benefit-list">
+        <view class="coupon-list {{(newCouponInfoList && newCouponInfoList.length === 1 || rightItemListBar && rightItemListBar.length === 1) && 'coupon-list-special'}}" wx:if="{{newCouponInfoList && newCouponInfoList.length}}">
+            <view wx:for="{{newCouponInfoList}}" wx:for-item="newCouponItem" class="continue-right-sprite benefit-wrapper">
+                <view class="benefit-info">
+                    <text>{{newCouponItem.couponValue}}</text>
+                    <text class="benefit-unit">{{newCouponItem.couponUnit}}</text>
+                </view>
+                {{isOrderCode && newCouponItem.couponTitle === "续住立享" ? "下单即享": newCouponItem.couponTitle}}
+            </view>
+        </view>
+        <view class="right-list" wx:if="{{rightItemListBar && rightItemListBar.length}}">
+            <view wx:for="{{rightItemListBar}}" wx:for-item="cRightItem" class="benefit-wrapper cright-item">
+                <image src="{{cRightItem.rightIconUrl}}" />
+                {{cRightItem.rightName}}
+                <view class="right-bottom">下单可享</view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 优惠券区域底部描述 -->
+<template name="bottom-desc">
+    <view wx:for="{{couponIconList}}" wx:for-item="iconItem" class="icon-item">
+        <image src="{{iconItem.icon}}" />
+        <text>{{iconItem.title}}</text>
+    </view>
+</template>
+
+<!-- 澳门券实名认证弹窗 -->
+<real-name-pop 
+    enable="{{realNamePop.enable}}" 
+    message="{{realNamePop.message}}" 
+    skey="{{realNamePop.skey}}" 
+    promotionID="{{realNamePop.promotionID}}" 
+    bind:authRealNameCallback="onAuthRealNameCallback" 
+    bind:closeRealName="onCloseRealName">
+</real-name-pop>

@@ -82,3 +82,30 @@ taskPro.addTask(async (next) => {
 })
 
 taskPro.run()
+
+
+// ~ koa 中 compose
+// 通过 compose 将中间件进行了合并，这也是 koa 的一个核心实现。
+function compose (middleware) { // middleware 中间件函数数组, 数组中是一个个的中间件函数
+  if (!Array.isArray(middleware)) throw new TypeError('Middleware stack must be an array!')
+  for (const fn of middleware) {
+    if (typeof fn !== 'function') throw new TypeError('Middleware must be composed of functions!')
+  }
+  return function (context, next) {
+    // last called middleware #
+    let index = -1
+    return dispatch(0)
+    function dispatch (i) {
+      if (i <= index) return Promise.reject(new Error('next() called multiple times'))
+      index = i
+      let fn = middleware[i]
+      if (i === middleware.length) fn = next
+      if (!fn) return Promise.resolve()
+      try {
+        return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    }
+  }
+}

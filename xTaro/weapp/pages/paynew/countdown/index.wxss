@@ -1,0 +1,21 @@
+.l-countdown {
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.l-countdown-item {
+  display: inline-block;
+}
+
+.l-countdown-time {
+	color: #0086F6;
+}
+
+.l-countdown-prefix{
+  color: #666;
+  font-size: 24rpx;
+}
+
+.l-time-class{
+  background-color: orange;
+}

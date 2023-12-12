@@ -1,0 +1,93 @@
+<template name="price-detail">
+    <view class="cmask" wx:if="{{showPriceDetail}}" catchtap="closePriceDetail" catchtouchmove="noop">
+        <view class="global-layer price-detail-layer" catchtouchmove="noop">
+            <view class="thead">
+                <view class="tit">
+                    <view>优惠说明</view>
+                    <view wx:if="{{!priceDetail.isHourRoom}}" class="pd-subtit">{{dateInfo.inDayText}}-{{dateInfo.outDayText}} {{dateInfo.days}}晚</view>
+                </view>
+                <view class="wechat-font-close" catchtap="closePriceDetail"></view>
+            </view>
+            <scroll-view scroll-y class="pd-body">
+                <view>
+                    {{priceDetail.name}}
+                    <text class="pd-room-num">编号:{{priceDetail.roomNo}}</text>
+                </view>
+                <template is='cost-detail' data="{{...priceDetail, showUnitText: dateInfo.days > 1 && !dateInfo.isLongRent}}"></template>
+            </scroll-view>
+            <view class="global-pd-confirm-btn" bindtap="{{cofirmFunc}}" data-skey="{{priceDetailSkey}}" data-id="{{priceDetailSkey}}">{{confirmBtnText}}</view>
+        </view>
+    </view>
+</template>
+
+<template name="cost-detail">
+    <!-- 原价 -->
+    <view class="op-box">
+        <view class="price-item">
+            <text class="box-tit">{{priceFloatInfo.title}}</text>
+            <text wx:if="{{showUnitText}}" class="mr8 single-day">每间每晚</text>
+            <text wx:if="{{priceFloatInfo.price}}" class="price-color">
+                ¥<text class="strong">{{priceFloatInfo.price}}</text>
+            </text>
+        </view>
+    </view>
+    <!-- 每间每晚优惠 -->
+    <view class="detail-box" wx:if="{{priceCalcItems && priceCalcItems.length}}">
+        <view class="price-item sale-tit" wx:for="{{priceFloatInfo.roomPrice.priceSections}}" wx:for-item="priceDiscount" wx:for-index="index">
+            <block wx:if="{{index === 0}}">
+                <text class="box-tit">{{priceDiscount.title}}</text>
+                <text wx:if="{{showUnitText}}" class="mr8 single-day">每间每晚</text>
+                <text class="price-color">- ¥<text class="strong">{{priceDiscount.price}}</text></text>
+            </block>
+        </view>
+        <block wx:for="{{priceCalcItems}}">
+            <view class="price-item">
+                <text class="price-tag">{{item.title}}</text>
+                <text class="price-amount">{{item.amountDesc}}</text>
+            </view>
+            <view class="price-desc">{{item.desc}}</view>
+        </block>
+    </view>
+    <!-- 现价 -->
+    <view class="tr price-avg">
+        <text wx:if="{{priceFloatInfo.roomPrice.priceSum && priceFloatInfo.roomPrice.priceSum.extraTitle}}"
+            class="price-left-desc">{{priceFloatInfo.roomPrice.priceSum.extraTitle}}</text>
+        <text wx:if="{{priceFloatInfo.roomPrice.priceSum.beforeEqualPrice !== priceFloatInfo.roomPrice.priceSum.price}}" class="single-day price-before">
+            ¥<text>{{priceFloatInfo.roomPrice.priceSum.beforeEqualPrice}}</text>
+            <text decode="{{true}}">&nbsp;≈&nbsp;</text>
+        </text>
+        <text>¥</text><text class="price-strong">{{priceFloatInfo.roomPrice.priceSum.price}}</text>
+        <text wx:if="{{priceFloatInfo.roomPrice.priceSum.beforeEqualPrice !== priceFloatInfo.roomPrice.priceSum.price && priceFloatInfo.roomPrice.priceSum.tips}}" class="tips">
+            {{priceFloatInfo.roomPrice.priceSum.tips}}
+        </text>
+    </view>
+
+    <template is="tax-module" data="{{...priceFloatInfo, showUnitText}}"></template>
+</template>
+
+
+<template name="tax-module">
+<!-- 税费明细 -->
+<view wx:if="{{taxFee.priceSum}}" class="tax-box">
+    <view class="price-item">
+        <text class="tax-tit">{{taxFee.priceSum.title}}</text>
+        <text wx:if="{{showUnitText}}" class="mr8 single-day">每间每晚</text>
+        <text class="price-color">¥{{taxFee.priceSum.price}}</text>
+    </view>
+    <view wx:if="{{taxFee.priceSections}}" wx:for="{{taxFee.priceSections}}">
+        <block wx:if="{{item.priceItems}}">
+            <view wx:if="{{item.title}}" class="mt16">{{item.title}}</view>
+            <view wx:for="{{item.priceItems}}" wx:for-item="taxItem" class="price-item tax-item">
+                <text>{{taxItem.title}}</text>
+                <text>¥{{taxItem.price}}</text>
+            </view>
+        </block>
+    </view>
+</view>
+
+<!-- 含税总价 -->
+<view wx:if="{{priceSum}}" class="tr price-avg">
+    <text class="price-left-desc">{{priceSum.extraTitle}}</text>
+    <text>¥</text><text class="price-strong">{{priceSum.price}}</text>
+</view>
+</template>

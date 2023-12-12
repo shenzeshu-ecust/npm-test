@@ -1,0 +1,30 @@
+<view class="warp-class" wx:if="{{display}}" bindtap="showLayer">
+   <view class="inner">
+      <text class="wechat-font-book-notice"></text>
+      <view class="content">
+         <text class="topic">出行提醒:</text>
+         <text class="desc black2">{{info.title}}</text>
+      </view>
+      <view class="lmask"></view>
+      <text class="wechat-font-arrow-right black2"></text>
+   </view>
+</view>
+
+<!-- 重要提示浮层 -->
+<block wx:if="{{showNoticeLayer}}">
+    <common-layer
+            title="出行提醒"
+            confirmButtonText="知道了"
+            bind:confirm="closeLayer"
+            bind:closeLayer="closeLayer">
+        <scroll-view scroll-y enhanced show-scrollbar="{{false}}" catchtouchmove="noop" slot="content">
+            <view class="box-title">
+               <view class="wechat-font-book-notice mr-8"></view>
+               <view>{{info.title}}</view>
+            </view>
+            <view class="box-desc black1">
+               {{info.subTitle}}
+            </view>
+        </scroll-view>
+    </common-layer>
+</block>

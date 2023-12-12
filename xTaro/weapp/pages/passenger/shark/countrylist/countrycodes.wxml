@@ -1,0 +1,55 @@
+<!--pages/countryList/index.wxml-->
+<view  wx:if="{{isSearchView}}" class="search-module search-module_focus">
+	<icon class="ico-search search-module_ico search-module_ico_focus" type="ctripIcon" />
+<input class="search-module_input search-module_input-f" placeholder-class="search-module_input_focus" placeholder="中文/英文" value="{{inputKeyword}}" type="text" bindinput="searchInput"  focus="true"/>
+<icon type="clear" class="search-module_clear color-gray_666" size="16" bindtap="searchClear"/>
+	<text class="search-module_cancel" bindtap="searchCancel">取消</text>
+	<view class="search-list">
+		<view wx:for="{{searchResult}}" wx:for-item="item" class="search-list_item" >
+			<text class="travel-list-country" bindtap="countryTap" data-countryname="{{item.countryname}}" data-section="search" data-row="{{index}}">{{item.countryname}}</text>
+		</view>
+	</view>
+</view>
+
+<block wx:if='{{ isSearchView === false}}'>
+<view class="serchArea">
+  <view class="inputWrap">
+    <icon class="ico-search" type="ctripIcon" />
+    <input type="text" placeholder="中文/英文" data-cardid="{{item.cardTypeCode}}"  value="{{inputKeyword}}" bindinput="searchInput"  bindfocus="searchFocus" disabled='true'/>
+  </view>
+  <view  bindtap='gotoSearch' style='position:absolute;top:0;right:0;bottom:0;left:0; background-color:clear;z-index:100;'></view>
+</view>
+
+ <scroll-view scroll-y="true" class="travel-country-lists" bindscrolltolower="conuntryHandlerScrollLower"  scroll-into-view="{{toView}}">
+  <view id="hot" wx:if="{{ currentTabCountries.hotCountries && currentTabCountries.hotCountries.length > 0}}" class="travel-country-list-hd" bindtap="tagTap" data-countrytag="hot">热门</view>
+  <view class="travel-country-list">
+   <block wx:for="{{currentTabCountries.hotCountries}}" wx:key="countryname">
+    <view  class="travel-country-li {{item.selectedCountry == 1 ? 'active' : ''}}" bindtap="countryTap" data-code="{{item.code}}" data-countrycode="{{item.countrycode}}" data-section="hotCountries" data-row="{{index}}">
+      <text class="travel-list-country">{{item.countryname}}</text>
+      <text class="travel-list-num">{{item.code}}</text>
+      <view class="icon-selected-area"></view>
+    </view>
+   </block>
+  </view>
+  <block wx:for="{{ currentTabCountries.countryTags}}" wx:for-item="i" wx:key="index">
+  <view id="{{i}}" class="travel-country-list-hd" bindtap="tagTap" data-countrytag="{{i}}">{{i}}</view>
+  <view class="travel-country-list" style="position: relative"  wx:for="{{currentTabCountries.countryMainList[i]}}" wx:for-item="item" wx:key="countryname">
+    <view class="travel-country-li {{item.selectedCountry == 1 ? 'active' : ''}}" bindtap="countryTap" data-code="{{item.code}}" data-countrycode="{{item.countrycode}}" data-section="{{i}}" data-row="{{index}}">
+      <text class="travel-list-country">{{item.countryname}}</text>
+      <text class="travel-list-num">{{item.code}}</text>
+      <view class="icon-selected-area"></view>
+    </view>
+  </view>
+  </block>
+</scroll-view>
+
+<view class="sel_num_wrap">
+	<text wx:if="{{ currentTabCountries.hotCountries && currentTabCountries.hotCountries.length > 0}}" class="sel_num" bindtap="tagTap" data-countrytag="hot">热门</text>
+   <view wx:for="{{ countryIndexs }}" wx:key="index">
+    <text class="sel_num {{item.isselected == 1 ? 'selected' : ''}}"  bindtap="tagTap" data-countrytag="{{item.countryindex}}">{{item.countryindex}}</text>
+  </view>
+</view>
+</block>
+
+<!-- 白屏检测节点&框架提供 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

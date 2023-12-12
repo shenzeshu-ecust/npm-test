@@ -1,0 +1,69 @@
+<template name="train-card-info">
+    <view class="sel-from">
+        <view wx:if="{{train.TimeZoneFlag}}"
+          class="local-title">
+            <text class="{{train.TimeZoneFlag === 1 ? 'orange' : ''}}">{{ train.TimeZoneFlag === 1 ? '当地时间' : '北京时间'}}</text><text wx:if="{{train.LocalStartDate}}"> {{train.LocalStartDate}}</text>
+        </view>
+        <view class="dtime number-zx2">{{train.ShowDepartTime || train.DepartTime}}</view>
+        <view class="dstation">{{train.DepartStation + '站'}}</view>
+    </view>
+    <view class="sel-checi">
+        <view wx:if="{{train.TimeZoneFlag}}"
+          class="text-empty"> </view>
+        <view class="text">{{train.TimesCost}}</view>
+        <view class="text">
+            {{train.TrainNumber}}
+            <!-- <text class="ifont-cert" wx:if="{{train.IsFastPass}}"></text> -->
+            <view class="cert"
+              wx:if="{{train.IsFastPass}}"></view>
+            <view class="icon-img bed"
+              wx:if="{{train.CanChooseBed}}"></view>
+            <view class="icon-img fuxing"
+              wx:if="{{train.IsFuXingTrain}}"></view>
+            <view class="icon-img point"
+              wx:if="{{train.IsCanPointsPay}}"></view>
+            <view class="icon-img silent"
+              wx:if="{{train.IsCanSilent}}"></view>
+        </view>
+    </view>
+    <view class="sel-to">
+        <view wx:if="{{train.TimeZoneFlag}}"
+          class="local-title">
+            <text class="{{train.TimeZoneFlag === 2 ? 'orange' : ''}}">{{ train.TimeZoneFlag === 2 ? '当地时间' : '北京时间'}}</text><text wx:if="{{train.LocalArriveDate}}"> {{train.LocalArriveDate}}</text>
+        </view>
+        <view class="dtime number-zx2">
+            {{train.ShowArriveTime || train.ArriveTime }}
+            <text class="small">{{train.TakeDays ? '+' + train.TakeDays : ''}}</text>
+        </view>
+        <view class="astation">{{train.ArriveStation + '站'}}</view>
+    </view>
+</template>
+
+<template name="train-sale-info">
+    <view class="sel-info">
+        <view wx:if="{{train.isPreSale}}"
+          class="torage">{{train.preSaleTimeStr}}</view>
+        <view wx:elif="{{!train.SeatCount && train.SucRate && !train.hasWiseSeatRecommend}}"
+          class="torage">暂无余票，建议抢票</view>
+        <block wx:else>
+            <view wx:for="{{train.SeatList}}"
+              wx:key="SeatName"
+              wx:for-item="seat"
+              class="item {{!seat.SeatInventory && !seat.hasWiseSeatRecommend ? 'disabled' : ''}}"
+              hidden="{{index > 3}}">
+                <view class="icon-jing"
+                  wx:if="{{seat.IsCanSilent}}">静</view>
+                {{seat.SeatName + ((seat.SeatInventory < 21 && !seat.hasWiseSeatRecommend) ? (seat.SeatInventory ? ' ' + seat.SeatInventory + '张' : '') : seat.hasWiseSeatRecommend ? ' ' + seat.wiseTag : ' 有票')}}
+                <text class="torage torage-left"
+                  wx:if="{{!seat.SeatInventory && !seat.hasWiseSeatRecommend}}"> 抢</text>
+                <image wx:if="{{train.combiInfo && train.combiInfo.seatType === seat.SeatName || train.thenByTicketInfo && train.thenByTicketInfo.seatType === seat.SeatName}}"
+                  class="triangle"
+                  src="https://images3.c-ctrip.com/train/2023-3/xiaochengxu/3.23/zhihuixilie/img-jiantou.png">
+                </image>
+            </view>
+            <view class="item"
+              wx:for="{{train.extraEmptytSeat}}"></view>
+            <!-- 不足4个的时候，补齐4个item -->
+        </block>
+    </view>
+</template>

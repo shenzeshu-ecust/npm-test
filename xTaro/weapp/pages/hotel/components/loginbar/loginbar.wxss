@@ -1,0 +1,48 @@
+.login-box {
+    position: fixed;
+    background: rgba(0,0,0,0.8);
+    left: 16rpx;
+    right: 16rpx;
+    bottom: 132rpx;
+    padding: 20rpx 24rpx;
+    box-shadow: 0 6rpx 16rpx 2rpx rgba(0, 0, 0, 0.08);
+    border-radius: 16rpx;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+    font-size: 24rpx;
+    transition: bottom 200ms linear;
+}
+.login-box.iphonex {
+    bottom: 220rpx;
+}
+.login-box.high-detail.iphonex {
+    bottom: 186rpx;
+}
+.login-box.list {
+    bottom: 220rpx;
+}
+.login-box.detail {
+    bottom: 80rpx;
+}
+.login-box.high-detail {
+    bottom: 120rpx;
+}
+.login-box .img {
+    width: 196rpx;
+    height: 28rpx;
+}
+.login-box .desc {
+    color: #fff;
+    margin-left: 12rpx;
+    flex: 1;
+}
+.login-box .login-btn {
+    padding: 14rpx 20rpx;
+    background: linear-gradient(-90deg, rgb(255, 119, 0) 0%, rgb(255, 165, 10) 100%);
+    border-radius: 8rpx;
+    font-weight: 500;
+    font-family: PingFangSC-Medium;
+    color: #fff;
+    text-align: center;
+}

@@ -1,0 +1,24 @@
+<view wx:if="{{item}}" class="invitePlus__avatar_box invitePlus__avatar_box_{{status}}" 
+  style="background-image: url({{item.data.headUrl}});"
+  bindtap="clickAvatar"
+>
+  <view wx:if="{{status === 0}}" class="invitePlus__avatar_plus">+</view>
+  
+  <view 
+    wx:if="{{status === 2}}"
+    class="invitePlus__avatar_box_receive_price receive_price_done"
+  >{{item.currenyData.showName}}</view>
+  <view 
+    wx:else
+    class="invitePlus__avatar_box_receive_price"
+    style="color: {{legaoInfo.prizeColor}};background-color: {{legaoInfo.prizeBg}};"
+  >{{item.currenyData.showName}}</view>
+  
+  <view wx:if="{{status === 0}}" class="invitePlus__avatar_tips">待邀请</view>
+  <view wx:if="{{status === 1}}" 
+    class="invitePlus__avatar_tips tips__receive" 
+    style="color: {{legaoInfo.avatarColor}};"
+    catchtap="clickSmallAward">立即领取</view>
+  <view wx:if="{{status === 2}}" class="invitePlus__avatar_tips">已领取</view>
+
+</view>

@@ -1,0 +1,959 @@
+@import '../../common/common.wxss';
+@import '../../commontemplates/pricedetail/pricedetail.wxss';
+@import '../../commontemplates/roompackage/package.wxss';
+@import '../../commontemplates/deposit/deposit.wxss';
+.modal { height: 80%;  z-index: 1002; border-radius: 16rpx 16rpx 0rpx 0rpx; overflow: hidden;}
+.modal .h {background-color: #fff; color: #333; display: flex; align-items: center; position: -webkit-sticky; position: sticky; top: 0; z-index: 2;}
+.modal .bd {background-color: #fff;}
+.modal .suite-title {flex: 1; padding-left: 309rpx; color: #111; font-size: 34rpx; font-weight: 500;}
+.modal .h .tit {flex: 1; padding: 20rpx 0 20rpx 24rpx; font-weight: 700;}
+.modal .h .wechat-font-close {color: #333; font-size: 40rpx; padding: 20rpx;}
+.modal .h .r-num {font-size: 18rpx; color: #ccc; white-space: nowrap;}
+.modal .bottom-blank { height: 140rpx; }
+.modal .bottom-iphonex { height: 206rpx; }
+.modal .layer-booking {height: calc(100% - 88rpx);}
+
+.base-info { overflow: hidden; padding: 20rpx 0 36rpx; background-color: #fff; }
+.tag-better { color: #009c67; }
+/* 公共样式*/
+.layer-detail {
+    height: 100%;
+}
+.full-modal {
+    height: 100%;
+    z-index: 1002; 
+}
+.half-modal {
+    z-index: 1002; 
+    border-radius: 16rpx 16rpx 0 0;
+    overflow: hidden;
+}
+.bd {
+    background-color: #fff;
+}
+.bottom-blank { height: 140rpx; }
+.bottom-iphonex { height: 206rpx; }
+.layer-booking {height: calc(100% - 88rpx);}
+.base-title {
+    color: #111;
+    font-size: 38rpx;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    margin-bottom: 28rpx;
+}
+.base-font-icon {
+    width: 40rpx;
+    font-size: 32rpx;
+    vertical-align: middle;
+    margin-right: 8rpx;
+    display: inline-block;
+}
+.flex1 { flex: 1; }
+.mr8 { margin-right: 8rpx; }
+.mr16 {
+    margin-right: 16rpx;
+}
+.mr18 {
+    margin-right: 18rpx;
+}
+.mb28 {
+    margin-bottom: 28rpx !important;
+}
+.mr61 {
+    margin-right: 61rpx;
+}
+.ml48 {
+    margin-left: 48rpx;
+}
+.mt32 {
+    margin-top: 32rpx;
+}
+.mb8 {
+    margin-bottom: 8rpx;
+}
+.flex-layout {
+    display: flex;
+}
+.middle {
+    vertical-align: middle;
+}
+.mr24 { margin-right: 24rpx; }
+.pr24 { padding-right: 24rpx; }
+.pl24 { padding-left: 24rpx !important; }
+.pl32 { padding-left: 32rpx; }
+.pr34 { padding-right: 34rpx !important; }
+.pt12 { padding-top: 12rpx; }
+.ptr32 { padding: 32rpx 0 }
+.mb44 {
+    margin-bottom: 44rpx;
+}
+.mr48 { margin-right: 48rpx }
+.mr30 { margin-right: 30rpx }
+.bold { font-weight: bold; }
+.zidx6000 { z-index: 6000 }
+.zidx9999 { z-index: 9999 }
+.base-more-fold {
+    font-size: 24rpx;
+    color: #555555;
+    text-align: center;
+}
+.color555 {
+    color: #555555;
+}
+.fw300 {
+    font-weight: 300;
+}
+.fw600 {
+    font-weight: 600;
+}
+.fw500 {
+    font-weight: 500;
+}
+.arrow-font {
+    color: #000000;
+    transform: rotate(90deg);
+    font-size: 48rpx;
+    width: 48rpx;
+    height: 48rpx;
+    position: absolute;
+    left: 24rpx;
+    text-align: center;
+}
+.fz20 {
+    font-size: 20rpx !important;
+    line-height: 1.5;
+}
+/* 套餐头部样式 */
+.suite-layer-detail {height: calc(100% - 228rpx);}
+.h {
+    background-color: #f7f7f7;
+    color: #333; 
+    display: flex; 
+    align-items: center; 
+    position: -webkit-sticky; 
+    position: sticky; 
+    top: 0; 
+    z-index: 2;
+}
+.h .subroom-share {
+    background: unset;
+    font-size: 40rpx;
+    color: #333;
+}
+.h .wechat-font-close {
+    color: #333;
+    font-size: 40rpx;
+    padding: 20rpx;
+}
+/* 新版房型浮层头部样式*/
+.head-info .r-num {
+    font-size: 18rpx;
+    color: #c5c5c5;
+    white-space: nowrap;
+    margin-top: 14rpx;
+    margin-right: 24rpx;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4rpx;
+    line-height: 1;
+}
+.head-info .tit {
+    padding: 10rpx 24rpx 0;
+    color: #111;
+    font-size: 40rpx;
+    font-family: PingFangSC-Semibold;
+    font-weight: bold;
+    line-height: 1;
+}
+/* 关闭按钮样式 */
+.img-info {
+    position: relative;
+}
+.img-info .arrow-font {
+    width: 64rpx;
+    height: 64rpx;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 12rpx;
+    border: 1rpx solid #979797;
+}
+.close-btn {
+    position: absolute;
+    left: 24rpx;
+    background: rgba(0, 0, 0, 0.4);
+    font-size: 32rpx;
+    border-radius: 50%;
+    color: #fff;
+    width: 56rpx;
+    height: 56rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* 分享按钮样式 */
+.share-icon {
+    height: 80rpx;
+    width: 80rpx;
+    background: #fff;
+    border: 0.6rpx solid #e5e5e5;
+    box-shadow: 0rpx 0rpx 16rpx 0rpx rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 20rpx;
+    bottom: 240rpx;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+}
+.share-icon image {
+    width: 48rpx;
+    height: 48rpx;
+}
+/* 图片滚动 */
+.slider { position: relative; margin-bottom: 36rpx; }
+.live { margin-bottom: 0; }
+.live .slide-image{ border-radius: unset; }
+.swiper { width: 100%; height: 421rpx; }
+.suite-swiper {
+    border-radius: 8rpx;
+    box-sizing: border-box;
+}
+.suite-swiper .single-swiper:first-child {
+    padding-left: 24rpx;
+}
+.suite-swiper .single-swiper {
+    padding-right: 16rpx;
+    box-sizing: border-box;
+}
+.swiper-num {
+    padding: 4rpx 12rpx;
+    color: #fff;
+    font-size: 20rpx;
+    position: absolute;
+    right: 24rpx;
+    bottom: 24rpx;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 16rpx;
+}
+.slide-image { width: 100%; height: 100%; border-radius: 8rpx; }
+
+/* 套餐 */
+.pac-info {
+    margin: 20rpx 24rpx 40rpx;
+    padding: 28rpx 20rpx;
+    border-radius: 4rpx;
+    font-size: 24rpx;
+    background-color: #f8fafd;
+    line-height: 2;
+    font-weight: 500;
+}
+.pac-info .item-subtit {
+    font-size: 24rpx;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: justify;
+    display: flex;
+}
+.pac-info .item-subtit:not(:last-child) {
+    margin-bottom: 24rpx;
+}
+.pac-info .icon {
+    height: 28rpx;
+    width: 28rpx;
+    margin: 4rpx 16rpx 0 0;
+    flex-shrink: 0;  /* 防止被压缩 */
+}
+.pac-item {
+    padding-bottom: 44rpx;
+    background-color: #fff;
+    font-size: 24rpx;
+    border-top: 8rpx solid #f8f8f8;
+}
+.pac-item .pac-title {
+    padding: 40rpx 24rpx 0 0;
+}
+.pac-item .pac-content {
+    font-size: 24rpx;
+    color: #666;
+    padding-top: 36rpx;
+}
+.pac-item .pac-content:not(:last-child) .x-item:last-child {
+    border-bottom: 1px solid #eee;
+}
+.pac-content .slider .suite-swiper {
+    padding-left: 0;
+}
+.pac-item .pac-subtit-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8rpx;
+}
+.pac-item .pac-subtit {
+    font-size: 28rpx;
+    font-weight: 500;
+    color: #333;
+}
+.pac-item .pac-imgs {
+    display: flex;
+    overflow-x: auto;
+}
+.pac-item .pac-imgs::-webkit-scrollbar { display: none; }
+.pac-item .pac-imgs .slide-img {
+    width: 600rpx;
+    margin-right: 16px;
+    border-radius: 8rpx;
+    flex-shrink: 0;
+}
+.pac-item .pac-imgs .sigle-img {
+    width: 100%;
+    border-radius: 8rpx;
+}
+.pac-title.live {
+    display: block;
+    padding-bottom: 12rpx;
+    border-top: 8rpx solid #f8f8f8;
+}
+.pac-title {
+    align-items: center;
+    padding: 40rpx 24rpx;
+    background: #fff;
+    font-size: 32rpx;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    font-family: PingFangSC-Medium;
+}
+.pac-title .name {
+    display: flex;
+}
+.pac-title .pac-icon {
+    height: 48rpx;
+    width: 48rpx;
+    margin-right: 16rpx;
+    flex-shrink: 0;  /* 防止被压缩 */
+}
+.pac-title .r-num {
+    color: #999;
+    font-size: 20rpx;
+    text-align: right;
+}
+/*钟点房*/
+.hourroom-info {
+    font-size: 24rpx;
+    background-color: #fff;
+    padding: 12rpx 24rpx 44rpx;
+}
+.hourroom-info .hourroom-title {
+    display: flex;
+    align-items: center;
+}
+.hourroom-info .desc {
+    margin-top: 16rpx;
+}
+/* 房型信息 */
+.base-info.pb0 {
+    padding-bottom: 0;
+}
+.base-icon {
+    width: 40rpx;
+    height: 40rpx;
+}
+/* 面积楼层等 */
+.base-box {
+    display: flex;
+    justify-content: space-around;
+    margin: 0rpx 24rpx;
+    padding-bottom: 32rpx;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+.base-box .base-item {
+    color: #111;
+    font-size: 24rpx;
+    font-weight: 500;
+    text-align: center;
+    flex: 1;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+.base-box .five-max-wid {
+    max-width: 119rpx;
+    line-height: 1.2;
+}
+.base-box .seven-max-wid {
+    max-width: 144rpx;
+}
+.base-box .base-item:last-of-type {
+    margin-right: 0rpx !important;
+}
+/* 床型+餐食 */
+.base-info .base-detail-box {
+    font-size: 24rpx;
+    color: #111;
+    padding: 35rpx 24rpx 32rpx 24rpx;
+}
+
+.bed-info, .meal-info {
+    width: calc(100% - 32rpx);
+    margin-bottom: 44rpx;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    font-family: PingFangSC-Medium;
+    margin-left: 32rpx;
+    font-size: 24rpx;
+    line-height: 32rpx;
+}
+.meal-info .meal-details {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 8rpx;
+}
+.meal-info .meal-details .meal-item {
+    flex: 1;
+    margin-right: 16rpx;
+}
+.meal-info .meal-details .meal-txt {
+    margin-left: 8rpx;
+    white-space: nowrap;
+}
+/*会员免费兑*/
+.exchange-info {
+    height: 92rpx;
+    display: flex;
+    flex-direction: row;
+    border-radius: 8rpx 8rpx;
+    overflow: hidden;
+    margin-bottom: 16rpx;
+}
+.exchange-info .origin-detail {
+    background: #eef1f6;
+    display: flex;
+    position: relative;
+    min-width: 0;
+}
+.exchange-info .origin-content {
+    display: block;
+    color: #555555;
+    font-size: 24rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    line-height: 32rpx;
+    height: 32rpx;
+    margin: 0rpx 28rpx 4rpx 0rpx;
+    white-space: nowrap;
+}
+.exchange-info .origin-room {
+    display: block;
+    color: #555555;
+    font-size: 20rpx;
+    font-weight: normal;
+    line-height: 20rpx;
+    height: 20rpx;
+}
+.exchange-info .arrow {
+    position: relative;
+}
+.exchange-info .arrow>image{
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 0px 0px 0px 0px 2.29px 0px 0px 2.29px 0px 0px 0px 0px 0px;
+}
+.exchange-info .arrow text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 16rpx;
+    white-space: nowrap;
+}
+.exchange-info .exchange-box {
+    padding: 16rpx;
+}
+.exchange-info .exchange-detail {
+    flex: 1;
+    margin-left: -40rpx;
+    border-radius: 8rpx;
+    min-width: 0;
+}
+.exchange-detail .exchange-content {
+    height: 32rpx;
+    line-height: 32rpx;
+    font-size: 24rpx;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    display: block;
+    margin: 0rpx 0rpx 4rpx 70rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.exchange-detail .exchange-item {
+    display: flex;
+    align-items: center;
+    margin-left: 70rpx;
+}
+.exchange-info .tag-icon {
+    width: 20rpx;
+    height: 20rpx;
+    margin-right: 4rpx;
+}
+.exchange-info .tag-icon image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.exchange-info .vip-exchange {
+    height: 20rpx;
+    line-height: 20rpx;
+    font-size: 20rpx;
+    font-weight: normal;
+
+}
+/* 基础设施 */
+.fac-item {
+    width: 100%;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    border-top: 1rpx solid#e5e5e5;
+    padding: 32rpx 0rpx 32rpx 32rpx;
+    color: #111;
+    box-sizing: border-box;
+}
+.bed-info .bed-title, .fac-item .fac-title {
+    font-weight: 600;
+    box-sizing: border-box;
+    margin-right: 56rpx;
+    text-align: center;
+    flex-shrink: 0;
+    font-family: PingFangSC-Medium;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.fac-item .fac-name {
+    width: 48rpx;
+}
+.fac-item .txt-box {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    overflow: hidden;
+}
+.fac-item .fac-txt {
+    margin-right: 4%;
+    line-height: 1.5;
+    overflow: hidden;
+}
+.fac-item .fac-brand {
+    text-overflow: ellipsis;
+    width: 30%;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+}
+.fac-item .max-wid {
+    width: 46%;
+}
+.no-mr24 {
+    margin-right: 0rpx !important;
+}
+.fac-item .fac-txt .fac-pay, .fac-item .fac-txt .fac-free {
+    display: inline-block;
+    height: 24rpx;
+    line-height: 24rpx;
+    border-radius: 4rpx;
+    font-size: 24rpx;
+    margin-left: 4rpx;
+}
+.fac-pay {
+    color: #ff5500;
+}
+.fac-item .fac-detail {
+    padding: 8rpx 12rpx;
+    border-radius: 8rpx;
+    background: #f5f7fa;
+    margin-bottom: 16rpx;
+    color: #555555;
+    margin-top: 8rpx;
+}
+/* 礼盒 */
+.gift-info .gift-title {
+    font-weight: 600;
+    margin-top: 26rpx;
+    font-family: PingFangSC-Medium;
+    font-size: 30rpx;
+    text-align: justify;
+}
+/* 公共卡片 */
+.common-card {
+    padding: 36rpx 24rpx;
+    font-size: 24rpx;
+    background-color: #fff;
+    border-top: 16rpx solid#ebeff5;
+}
+.common-card .tit {
+    color: #121212;
+    font-size: 38rpx;
+    font-weight: 600;
+    font-family: PingFangSC-Semibold;
+}
+/* 老版会员权益，后期可删除*/
+.benefits-info .benefits-item {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 16rpx;
+}
+.benefits-info .benefits-tit {
+    flex-shrink: 0;
+    margin-right: 16rpx;
+    padding: 2rpx 4rpx;
+    border-radius: 4rpx;
+    color: #f70;
+    background-color: #fff1e6;
+}
+.benefits-info .desc {
+    height: 72rpx;
+    color: #666;
+    font-size: 20rpx;
+    margin-top: 12rpx;
+    line-height: 58rpx;
+    padding-top: 14rpx;
+    box-sizing: border-box;
+    background-size: 100%;
+    background-image: url(https://pages.c-ctrip.com/hotels/wechat/img/layer-right-bg.png);
+}
+.benefits-info .desc .prime-icon {
+    display: inline-block;
+    width: 32rpx;
+    height: 32rpx;
+    border-radius: 50%;
+    background-color: #fff1e6;
+    text-align: center;
+    margin-top: 14rpx;
+    line-height: 37rpx;
+}
+.benefits-info .desc .prime-icon image {
+    width: 20rpx;
+    height: 14rpx;
+}
+/*新版会员权益*/
+.reward-info {
+    padding: 36rpx 24rpx;
+}
+.reward-info .reward-item {
+    margin-bottom: 16rpx;
+    display: flex;
+    align-items: center;
+}
+.reward-info .item-title {
+    padding: 6rpx;
+    border-radius: 4rpx;
+    margin-right: 16rpx;
+    font-size: 20rpx;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+.reward-info .item-icon {
+    margin-right: 4rpx;
+    height: 20rpx;
+    width: 20rpx;
+}
+.reward-info .item-content {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.reward-info .reward-desc {
+    color: #555;
+    font-size: 20rpx;
+    padding: 32rpx 0 20rpx;
+    line-height: 1;
+}
+/* 会员权益样式,根据服务下发styleId映射颜色 */
+/* 兜底颜色 */
+.reward-info .member-30600 {
+    color: #ff5500;
+    border: 1rpx solid #ffc899;
+}
+/* 普通会员 */
+.reward-info .member-30601 {
+    color: #1d81bb;
+    border: 1rpx solid #b8c6d9;
+}
+/* 白银会员 */
+.reward-info .member-30602 {
+    color: #21406f;
+    border: 1rpx solid #b8c6d9;
+}
+/* 黄金会员 */
+.reward-info .member-30603 {
+    color: #a27210;
+    border: 1rpx solid #dfcca4;
+}
+/* 铂金会员 */
+.reward-info .member-30604 {
+    color: #103d38;
+    border: 1rpx solid #a4c6ca;
+}
+/* 钻石会员 */
+.reward-info .member-30605 {
+    color: #573dcc;
+    border: 1rpx solid #ccc4ef;
+}
+/* 金钻会员 */
+.reward-info .member-30606 {
+    color: #193887;
+    border: 1rpx solid #ccc4ef;
+}
+/* 黑钻会员 */
+.reward-info .member-30607 {
+    color: #111111;
+    border: 1rpx solid #b3802d;
+}
+/* 政策与服务 */
+.policy-info {
+    color: #111;
+}
+.policy-info .item-title {
+    font-size: 30rpx;
+    font-weight: 600;
+    margin-bottom: 16rpx;
+    font-family: PingFangSC-Medium;
+    display: flex;
+    align-items: center;
+}
+.policy-info .item-desc {
+    text-align: justify;
+    margin-bottom: 32rpx;
+    font-size: 26rpx;
+    line-height: 40rpx;
+    margin-left: 48rpx;
+}
+.policy-info .no-mb:not(:last-of-type) {
+    margin-bottom: 0rpx !important;
+}
+.policy-info .mb24 {
+    margin-bottom: 24rpx;
+}
+/* 儿童政策  */
+.child-table {
+    border-radius: 12rpx;
+    border: 1rpx solid #B8C6D9;
+    overflow: hidden;
+    margin-left: 48rpx;
+}
+.child-table .thead {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f7fa;
+    font-size: 24rpx;
+    font-weight: 500;
+    height: 64rpx;
+}
+.child-table .thead .item-head {
+    text-align: center;
+    height: 64rpx;
+    line-height: 64rpx;
+    font-family: PingFangSC-Medium;
+    box-sizing: border-box;
+    border-left: 1rpx solid#B8C6D9;
+    padding: 0 8rpx;
+}
+.child-table .thead .item-head:first-child {
+    border-left: none;
+}
+.child-table .thead .item-head:first-child {
+    flex: 0 0 auto;
+}
+/* 温泉酒店单独给样式 */
+.child-table .thead .jcp-hotel:nth-child(2) {
+    width: 47.56% !important;
+    box-sizing: border-box;
+}
+.child-table .thead .jcp-hotel:nth-child(3) {
+    flex: 1;
+}
+.child-table .tbody {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #B8C6D9;
+}
+.child-table .tbody:last-child {
+    border-bottom: none;
+}
+.child-table .tbody .sub-title {
+    height: 100%;
+    text-align: center;
+    font-size: 24rpx;
+    box-sizing: border-box;
+    padding: 0 8rpx;
+}
+.child-table .tbody .sub-container {
+    flex: 1;
+    height: 100%;
+}
+.child-table .tbody .sub-content {
+    display: flex;
+    font-size: 24rpx;
+    font-weight: normal;
+}
+.child-table .tbody .sub-content:not(:last-child) {
+    border-bottom: 1rpx solid #B8C6D9;
+}
+.child-table .tbody .sub-content .sub-detail {
+    text-align: center;
+    flex: 1;
+    border-left: 1rpx solid #B8C6D9;
+    padding: 29rpx 8rpx;
+}
+.child-table .tbody .sub-content .sub-detail:last-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+/* 温泉酒店单独给样式 */
+.child-table .tbody .sub-content .jcp-hotel:first-of-type {
+    width: 58%;
+    flex: 0 0 auto !important;
+    box-sizing: border-box;
+}
+.iphonx-bottom {
+    padding-bottom: 68rpx;
+}
+.no-facility {
+    text-decoration: line-through;
+    color: #555;
+}
+/* 复杂床型 */
+.base-detail-box .complicate-bed {
+    color: #333333;
+    margin-bottom: 36rpx;
+}
+.complex-bed-table {
+    margin-left: 130rpx;
+    color: #111;
+    font-size: 24rpx;
+    margin-top: 36rpx;
+    border-radius: 12rpx;
+    border: 1rpx solid #b8c6d9;
+    overflow: hidden;
+    font-weight: normal;
+    margin-bottom: 44rpx;
+}
+.cb-room {
+    display: flex;
+}
+.cb-room-name {
+    width: 96rpx;
+    flex: 0 0 aut0;
+    text-align: center;
+    flex-shrink: 0;
+    border-bottom: 1rpx solid #b8c6d9;
+    box-sizing: border-box;
+    background: #f5f7fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cb-con {
+    display: flex;
+}
+.cb-sub-tit {
+    text-align: center;
+    width: 96rpx;
+    flex: 0 0 auto;
+    background: #f5f7fa;
+    border-bottom: 1rpx solid #b8c6d9;
+    box-sizing: border-box;
+    font-family: PingFangSC-Medium;
+}
+.cb-sub-con {
+    flex: 1;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #b8c6d9;
+}
+.cb-room:last-of-type .cb-room-name,
+.cb-room:last-of-type .cb-con:last-of-type .cb-sub-tit,
+.cb-room:last-of-type .cb-con:last-of-type .cb-sub-con {
+    border-bottom: none;
+}
+.cb-bed-type {
+    margin: 0 0 32rpx 40rpx;
+    display: flex;
+    align-items: center;
+}
+.cb-bed-type:last-child {
+    margin-bottom: 0;
+}
+.cb-bed-type .item:not(:last-child) {
+    width: 40%;
+    display: inline-block;
+    margin-right: 16rpx;
+}
+.cb-bed-type .item:last-child {
+    width: 20%;
+    display: inline-block;
+}
+.cb-bed-type .cb-bed-icon {
+    width: 32rpx;
+    height: 32rpx;
+    margin-right: 16rpx;
+    flex-shrink: 0;
+}
+.cd-bed-size {
+    color: #555;
+}
+.no-left-border {
+    border-left: none;
+}
+/* 房型浮层头部导航栏 */
+.nav-box {
+    background: #fff;
+    width: 100%;
+    height: 150rpx;
+    z-index: 10000;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.nav-box .arrow-font {
+    text-align: center;
+    text-shadow: 0 0 20rpx rgba(0,0,0,0.2);
+}
+.nav-box .close-btn {
+    color: #111111;
+    font-size: 40rpx;
+    background-color: #fff;
+    text-align: center;
+}
+.nav-box .title {
+    max-width: 40%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: absolute;
+    font-weight: 500;
+    font-family: PingFangSC-Medium;
+    color: #111111;
+    font-size: 34rpx;
+    white-space: nowrap;
+}

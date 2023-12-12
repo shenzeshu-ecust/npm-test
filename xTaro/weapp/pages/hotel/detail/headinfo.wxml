@@ -1,0 +1,47 @@
+<view class="item col" bindtap="gotoSellingPoint" data-ubt-key="xcx_actmdy_entrance" id="autotest_xcx_actmdy_entrance">
+    <view class="head-info-row">
+        <view wx:if="{{!headInfo.displayHotelName}}" class="fishbone-module01"><view class="fishbone-loading"></view></view>
+        <view wx:else class="hotel-title-box">
+            <view wx:if="{{showHotelNameCopy}}" class="copy-btn" catchtap="copyHotelName">复制</view>
+            <!-- 酒店名 -->
+            <text class="hotel-title {{showHotelNameCopy ? 'copy-bg' : ''}}{{headInfo.displayHotelName.length > 17 ? 'ft36' : ''}}"
+                catchlongpress="hotelNameLP">{{headInfo.displayHotelName}}
+            </text>
+            <!-- 酒店类型 -->
+            <view class="hotel-type" wx:if="{{headInfo.categoryTag.title}}">{{headInfo.categoryTag.title}}</view>
+            <!-- 星钻 -->
+            <image wx:if="{{headInfo.starTag.icon}}" src="{{headInfo.starTag.icon}}" mode="heightFix" class="tag-img"/>
+            <!-- 金钻/铂钻 -->
+            <image wx:if="{{headInfo.dStarTag.icon}}" src="{{headInfo.dStarTag.icon}}" mode="heightFix" class="tag-img"/>
+            <!-- 挂牌 -->
+            <image wx:if="{{headInfo.medalTag.icon}}" src="{{headInfo.medalTag.icon}}" mode="heightFix" class="tag-img"/>
+            <!-- 优享会 -->
+            <image wx:if="{{headInfo.primeTag.icon}}" src="{{headInfo.primeTag.icon}}" mode="heightFix" class="prime-img"/>
+            <!-- 榜单标签 -->
+            <view class="rank-label autoExpose {{headInfo.topAwardInfo.isAnnualList ? 'annual-label' : ''}}" wx:if="{{headInfo.topAwardInfo.listSubTitle}}" data-type="label" catchtap="rankClick"  data-expose="{{headInfo.topAwardInfo.labelExposeObj}}">
+                <text>{{headInfo.topAwardInfo.listSubTitle}}</text>
+                <text class="wechat-font-arrow-right rank-icon"></text> 
+            </view>
+        </view>
+        <!-- 榜单头部勋章展示 -->
+        <view class="rank-medal" wx:if="{{headInfo.topAwardInfo.annualListAwardIconUrl || headInfo.topAwardInfo.awardIconUrl}}" data-type="medal" catchtap="rankClick">
+            <image src="{{headInfo.topAwardInfo.annualListAwardIconUrl || headInfo.topAwardInfo.awardIconUrl}}" class="autoExpose" mode="heightFix" data-expose="{{headInfo.topAwardInfo.medalExposeObj}}"/>
+        </view>
+    </view>
+    <!-- 详情设施 -->
+    <view class="fac">
+        <view class="l">
+            <!--鱼骨-->
+            <view wx:if="{{!headInfo.facilityTags}}" class="fishbone-module03"><view class="fishbone-loading"></view></view>
+
+            <view wx:if="{{headInfo.displayHotelTime}}" class="li fac-tag black2">{{headInfo.displayHotelTime}} <text class="center-line"></text> </view>
+            <view wx:for="{{headInfo.facilityTags}}" class="li fac-tag black2" wx:for-item="item">{{item.title}} <text class="center-line"></text> </view>
+        </view>
+        <view class="r">
+            <view id="autotest_detailpage_facilitiesbanner" class="fl">
+                <text class="detail-fac mr4">详情·设施</text>
+                <view class="dt-font wechat-font-arrow-right dt-color dt-fn12"></view>
+            </view>
+        </view>
+    </view>
+</view>

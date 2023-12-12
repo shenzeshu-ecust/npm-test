@@ -1,0 +1,36 @@
+<template name="pointsUsingLayer">
+    <view wx:if="{{showPointsUsingLayer}}" class="cmask" bindtap="togglePointsUsingLayer" catchtouchmove="noop">
+        <view class="global-layer">
+            <view class="thead">
+                <view class="tit">权益兑换预订规则</view>
+                <view class="wechat-font-close" catchtap="togglePointsUsingLayer"></view>
+            </view>
+            <view class="tbody">
+                <scroll-view scroll-y>
+                    <view class="scroll-box">
+                        <view class="pointsl-tit">权益兑换说明</view>
+                        <view>选择带有【积分兑/免费兑XX】权益标签的酒店和房型；填写订单时，勾选需要使用的权益，本单即可享受对应权益；</view>
+                        <view class="pointsl-tit">权益使用说明</view>
+                        <view>订单上所含权益对应使用说明：</view>
+                        <view>①早餐：权益确认后，到店可享受免费早餐；</view>
+                        <view>②房型升级：权益确认后，到店可享受免费房型升级，相同床型升级，实际安排视酒店客房供应情况而定；</view>
+                        <view>③免费取消：权益确认后，若您未入住，在入住当天20点前可免费取消订单；</view>
+                        <view>④延迟退房：权益确认后，离店当天可免费延迟退房，具体延迟时间以订单显示为准；</view>
+                        <view>⑤首晚房费：可享受每个订单首晚一间夜免房费优惠（预订多间或多晚订单恕无法兑换首晚房费权益）；</view>
+                        <view>⑥提前入住：权益确认后，可享酒店规定入住时间最多提前4小时入住服务；</view>
+                        <view>⑦欢迎水果：权益确认后，可享入住当天免费欢迎水果。</view>
+                        <view class="pointsl-tit">权益退订规则</view>
+                        <view>1）权益不可单独取消，如需取消权益，需取消订单后重新预订。</view>
+                        <view>2）取消订单后，对应积分/免费权益将原路退还；如果订单取消时，免费权益已过期，权益将不会退还；【限时专享】权益为酒店本单赠送的权益，订单取消或权益未使用，权益将不会退还，下次下单兑换【限时专享】权益可继续免费享受。</view>
+                        <view>3）免费取消、首晚房费权益下单后恕无法取消；已到店入住后，房型升级、延迟退房、提前入住权益也无法取消。</view>
+                        <view>4）所享权益根据酒店房间实际情况而定；如酒店因故无法提供权益或实际未使用，可联系携程核实后退还积分/免费权益。</view>
+                        <view class="pointsl-tit">更多规则</view>
+                        <view>1）积分兑换首晚房费权益，仅铂金、钻石、金钻、黑钻用户可享，限本人入住使用；按自然年计算，即每年1月1日起至12月31日期间，首晚房费权益每用户每年至多享受3次；酒店订单预订成功即扣减权益次数，一单扣减一次。</view>
+                        <view>2）部分高峰日期权益库存有限，先订先得，请以实际页面显示为准。</view>
+                        <view>3）积分兑换权益仅供携程会员用户享有，如存在恶意刷单下单套现，利用程序漏洞等作弊行为，携程有权取消订单并收回权益；产品相关信息按照产品实际购买页面展示为准，如发生订单修改时优惠政策发生变动，请以最新的优惠政策为准。</view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,16 @@
+<template name="cashback">
+    <view class="advs-subsidy" data-ubt-key="c_train_wx_getbonus_fixbanner" bindtap="toCashbackPage">
+        <!-- <view class="tit">下张车票<text class="torage">最高返100元</text></view> -->
+        <view class="tit"><rich-text nodes="{{cashbackInfo.Title}}"></rich-text></view>
+        <!-- 发起过活动 活动未结束 显示倒计时 -->
+        <block wx:if="{{cashbackInfo.ActivityStatusCode == 2}}">
+            <view class="txt">
+                <text class="no">{{cashbackInfo.countdown.hour}}</text><text class="torage">:</text><text class="no">{{cashbackInfo.countdown.min}}</text><text class="torage">:</text><text class="no">{{cashbackInfo.countdown.second}}</text>{{cashbackInfo.countdown.txt}} <text class="torage">{{cashbackInfo.ButtonName}}<text class="ifont-more"></text></text>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="txt">{{cashbackInfo.Content}} <text class="torage">{{cashbackInfo.ButtonName}}<text class="ifont-more"></text></text></view>
+        </block>
+        <icon class="icon-subsidy"></icon>
+    </view>
+</template>

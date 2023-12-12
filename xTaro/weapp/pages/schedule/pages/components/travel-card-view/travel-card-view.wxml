@@ -1,0 +1,57 @@
+<view class="wrapper">
+    <view class='options-content'>
+        <view class='option-view' data-cardmodel='{{itemData}}' catch:tap="deleteCard">
+            <Icon className='delete-card' color='#f63b2e' size='23' />
+            <text class='option-title'>移除</text>
+        </view>
+    </view>
+    <view style='margin: 24rpx {{itemData.marginRight}}rpx 24rpx {{itemData.marginLeft}}rpx;'
+          class="container"
+          data-cardmodel='{{itemData}}'
+          bind:tap='goToDetails'>
+        <image class="image-bg" src="{{itemData.image}}" mode="aspectFill"/>
+        <view wx:if="{{itemData.travelStatus ===1}}" class="circular-bg green-bg">
+            <text class="statusDesc">{{itemData.statusDesc}}</text>
+        </view>
+        <view wx:elif="{{itemData.travelStatus ===2}}" class="circular-bg orange-bg">
+            <text class="statusDesc">{{itemData.statusDesc}}</text>
+        </view>
+        <view wx:elif="{{itemData.travelStatus ===3}}" class="circular-bg blue-bg">
+            <text class="statusDesc">{{itemData.statusDesc}}</text>
+        </view>
+        <view wx:else class="circular-bg grey-bg">
+            <text class="statusDesc">{{itemData.statusDesc}}</text>
+        </view>
+        <view class="blur_mask"/>
+        <view class="content">
+            <text class="title">{{itemData.title}}</text>
+            <view class="btm-desc">
+                <text class="subTitle">{{itemData.travelDesc}}</text>
+                <view wx:if="{{!itemData.startDate}}" class="set-date" catch:tap="onSettingDate" data-cardmodel='{{itemData}}'>
+                    <image src="../../images/cts_modify_date.png" class="set-date-img"/>
+                    <text class="set-date-text">设置日期</text>
+                </view>
+            </view>
+        </view>
+        <button class="share" open-type="share" data-model="{{itemData}}" catch:tap="share">
+            <Icon class="share_icon" className='share-card' color='#FFFFFF' size='23' />
+        </button>
+    </view>
+</view>
+
+<wxs module="util">
+    var recoveryAnim = function(flag) {
+        var className = "";
+        if (flag == 1) {
+            className = "recoveryAnim1";
+        } else if (flag == 2) {
+            className = "recoveryAnim2";
+        } else {
+            className = "";
+        }
+        return className;
+    }
+    module.exports = {
+        recoveryAnim: recoveryAnim,
+    }
+</wxs>

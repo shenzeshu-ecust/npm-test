@@ -1,0 +1,23 @@
+<!-- 由于无法通过js检测到 页面是否开启了自定义导航栏，但是组件又需要知道并且动态判断position的值，所以通过传参区分 -->
+<block wx:if="{{isWebview}}">
+  <cover-view class="collection_comp_layout" wx:if="{{colltectStatus == 'show'}}">
+    <cover-view class="collection_virtual_button">
+      <cover-view class="mkt-collect-wrap-default {{colltectStatus}}">
+        <cover-image class="mkt-collect-icon" src="https://images3.c-ctrip.com/marketing/2023/02/single_pic/icon-collect.png"></cover-image>
+        <cover-view class="mkt-collect-flex">{{collectText}}</cover-view>
+        <cover-view class="mkt-collect-close" bindtap="closeCollection">
+          <cover-image src="https://images3.c-ctrip.com/marketing/2023/03/figure/icon_miniapp_close.png" mode="widthFix" class="mkt-collect-icon-close"></cover-image>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+</block>
+<block wx:else>
+  <cover-view class="mkt-collect-wrap {{colltectStatus}}" style="margin-top:{{navHeight}}px">
+    <cover-image class="mkt-collect-icon" src="https://images3.c-ctrip.com/marketing/2023/02/single_pic/icon-collect.png"></cover-image>
+    <cover-view class="mkt-collect-flex">{{collectText}}</cover-view>
+    <cover-view class="mkt-collect-close" bindtap="closeCollection">
+      <cover-image src="https://images3.c-ctrip.com/marketing/2023/03/figure/icon_miniapp_close.png" mode="widthFix" class="mkt-collect-icon-close"></cover-image>
+    </cover-view>
+  </cover-view>
+</block>

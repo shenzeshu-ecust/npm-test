@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "携程社群福利",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "cell": "plugin://materialPlugin/cell"
+  }
+}

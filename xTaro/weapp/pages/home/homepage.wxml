@@ -1,0 +1,201 @@
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+<timelineFloat></timelineFloat>
+<block wx:if="{{!skipLoad}}">
+  <!-- 头部导航栏 -->
+  <view class="home-navigation-bar {{homeBgGray ? 'home-bg-gray' : ''}}" wx:if="{{isSupportCustom}}">
+    <view class="home-navigation-bar__placeholder {{ios ? 'ios' : 'android'}}"
+      style="padding-top: {{statusBarHeight}}px;visibility: hidden;"></view>
+    <view class="home-navigation-bar__inner {{ios ? 'ios' : 'android'}}"
+      style="padding-top: {{statusBarHeight}}px;{{innerPaddingRight}};{{innerWidth}}">
+      <view class='home-navigation-bar__center' style="height: {{barHeight}}px;">
+        <search slot="center" style="flex: auto;height: 100%;"></search>
+      </view>
+      <view class="signin-box" bindtap="clickGridAction" data-item="{{titleItem}}" data-position="signin">
+        <image mode="aspectFill" class="signin-img" src="http://pic.c-ctrip.com/platform/h5/mini_programe/{{defaultSign ? 'v2021.1.7/home/signin.png' : 'signToday.gif'}}"></image>
+      </view>
+    </view>
+  </view>
+  <equity equityShowStatus="{{equityShow}}"></equity>
+  <!-- 插屏广告 -->
+  <ad-sdk impId="05FXNABO0589FXXNJMWXLWYD" lonAndLat="{{lonAndLat}}" bindgetAdData="homeADeve"></ad-sdk>
+  <!-- 悬浮广告 -->
+  <view class="float-ad">
+    <ad-sdk impId="05FXNABO0589FXXNJMWXFSYK" lonAndLat="{{lonAndLat}}" height="60" width="60"></ad-sdk>
+  </view>
+  <!-- 主内容区域 -->
+  <scroll-view class="body-container {{homeBgGray ? 'home-bg-gray' : ''}}" scroll-y="true" enable-back-to-top="{{true}}" lower-threshold="100"
+    bindscrolltolower="getWaterfallListMore">
+    <collection isCustomNav="{{true}}"></collection>
+    <!-- 宫格 -->
+    <view class="swiper-wrap">
+      <swiper class="bu-list-content {{fakeData?'local':'online'}}" style="height:{{swiperHeight}}rpx"
+        bindanimationfinish="swiperAnimationFinish" duration="100" easing-function="linear">
+        <swiper-item class="bu-wrap firstpage">
+          <block wx:for="{{items}}" wx:key="buName">
+            <view class="bu-list_item bu-list_item_{{item.bu}}" data-item="{{item}}"
+              bindtap="clickGridAction" data-position="grid">
+              <image class="bu-icon" src="{{item.imgUrl}}"></image>
+              <text class="bu-name">{{item.buName}}</text>
+              <view wx:if="{{item.tip}}" class="bu-tip">{{item.tip}}</view>
+            </view>
+          </block>
+        </swiper-item>
+        <swiper-item class="bu-wrap">
+          <block wx:for="{{cusitems}}" wx:key="buName">
+            <view class="bu-list_cusitem bu-list_cusitem_{{item.bu}}" data-item="{{item}}"
+              bindtap="clickGridAction" data-position="second-grid">
+              <image class="bu-icon" src="{{item.imgUrl}}"></image>
+              <text class="bu-name">{{item.buName}}</text>
+              <view wx:if="{{item.tip}}" class='bu-tip'>{{item.tip}}</view>
+            </view>
+          </block>
+        </swiper-item>
+      </swiper>
+    </view>
+    <view class="dots">
+      <block wx:for="{{[1,2]}}" wx:key="item">
+        <view class="dot{{index == swiperPoint ? ' active' : ''}}"></view>
+      </block>
+    </view>
+    <!-- banner -->
+    <view class="slider-wrap">
+      <view class="slider-show">
+        <ad-sdk wx:if="{{AdvertiseDataWidth && AdvertiseDataHeight}}" impId="05FXNABO0589FXXNJM1121" width="{{AdvertiseDataWidth}}" height="{{AdvertiseDataHeight}}" slideVideo="{{slideVideo}}" lonAndLat="{{lonAndLat}}"></ad-sdk>
+      </view>
+    </view>
+    <!-- 二屏 -->
+    <view class="second-wrap" wx:if="{{secondScreenVersion !== 'B'}}">
+      <view
+        wx:if="{{secondScreenHotSaleData && secondScreenLiveData.items && secondScreenLiveData && secondScreenLiveData.items}}"
+        class="hot-sale">
+        <view class="hot-special-item">
+          <view class="hot-special-head" data-ubt="hotelsale_2nd" data-url="{{secondScreenHotSaleData.blockUrl}}"
+            bindtap="secondScreenTap" data-position="second">
+            <!-- todo 文本时，怎么显示？区分文本和图片 -->
+            <view class="hot-special-head-img">
+              <image
+                wx:if="{{secondScreenHotSaleData.blockTitleImage && secondScreenHotSaleData.blockTitleImage.length > 0}}"
+                class="image" mode="aspectFill" src="{{secondScreenHotSaleData.blockTitleImage}}"></image>
+            </view>
+            <view class="hot-special-head-txt">{{secondScreenHotSaleData.items[currentSpecialDot].showSlogan}}
+            </view>
+          </view>
+          <view class="hot-special-content">
+            <swiper class="hot-special-content-group" autoplay="true" circular="true" bindchange="changeSpecialDot">
+              <swiper-item class="hot-special-box" wx:for="{{secondScreenHotSaleData.items}}" data-item="{{item}}"
+                wx:key="id">
+                <view class="hot-special-box-content" data-ubt="hotelsale_2nd" data-url="{{item.url}}" bindtap="secondScreenTap" data-position="second">
+                  <view class="hot-special-box-top">
+                    <view class="hot-special-box-tag" wx:if="{{item.tag.text.length > 0}}">
+                      <image wx:if="{{item.tag.icon.length > 0}}" mode="aspectFill" class="hot-special-box-tag-icon"
+                        src="{{item.tag.icon}}"></image>
+                      <view class="hot-special-box-tag-text">{{item.tag.text}}</view>
+                    </view>
+                    <image class="hot-special-box-image" mode="aspectFill" src="{{item.image}}"></image>
+                    <view class="hot-special-box-title">{{item.title}}</view>
+                    <view wx:if="{{item.title}}" class="hot-special-box-img-bg"></view>
+                  </view>
+                  <view class="hot-special-box-bottom" wx:if="{{item.price}}">
+                    <view wx:if="{{item.price > 0}}" class="hot-special-box-price">
+                      <view class="hot-special-box-price-content">
+                        <view class="hot-special-box-price-sign">￥</view>
+                        <view class="hot-special-box-price-num">{{item.price}}</view>
+                      </view>
+                      <view class="hot-special-box-originprice" wx:if="{{item.originPrice}}">{{item.originPrice}}
+                      </view>
+                    </view>
+                    <view wx:else class="hot-special-box-real-time-price">实时计价</view>
+                    <view class="hot-special-box-subtitle" wx:if="{{item.subTitle.text.length > 0}}">
+                      <image class="hot-special-box-subtitle-icon" mode="aspectFill"
+                        wx:if="{{item.subTitle.icon.length > 0}}" src="{{item.subTitle.icon}}"></image>
+                      <view class="hot-special-box-subtitle-text">{{item.subTitle.text}}</view>
+                    </view>
+                  </view>
+                </view>
+              </swiper-item>
+            </swiper>
+            <view class="hot-special-content-dots" wx:if="{{secondScreenHotSaleData.items.length > 1}}">
+              <block wx:for="{{secondScreenHotSaleData.items.length}}" wx:key="index">
+                <view class="hot-special-content-dot{{index == currentSpecialDot ? ' active' : ''}}"></view>
+              </block>
+            </view>
+          </view>
+        </view>
+        <view class="hot-live-item">
+          <view class="hot-live-head" data-ubt="live_2nd" data-url="{{secondScreenLiveData.blockUrl}}"
+            bindtap="secondScreenTap" data-position="second">
+            <!-- todo 文本时，怎么显示？区分文本和图片 -->
+            <view class="hot-live-head-img">
+              <image
+                wx:if="{{secondScreenHotSaleData.blockTitleImage && secondScreenHotSaleData.blockTitleImage.length > 0}}"
+                class="image" mode="aspectFill" src="{{secondScreenLiveData.blockTitleImage}}"></image>
+            </view>
+            <view class="hot-live-head-txt">{{secondScreenLiveData.blockTag}}</view>
+          </view>
+          <view class="hot-live-content">
+            <view class="hot-live-content-group" wx:for="{{secondScreenLiveData.items}}" data-url="{{item.url}}" wx:key="id" data-ubt="live_2nd" bindtap="secondScreenTap" data-position="second">
+              <view class="hot-live-content-left">
+                <view class="hot-live-content-img">
+                  <image class="image" mode="aspectFill" src="{{item.image}}"></image>
+                </view>
+                <view class="hot-live-content-tag">
+                  <image class="hot-live-content-tag-icon" mode="aspectFill" src="{{item.icon}}"></image>
+                  <image wx:if="{{item.tag.icon.length > 0}}" class="hot-live-content-tag-icon-location"
+                    mode="aspectFill" src="{{item.tag.icon}}"></image>
+                  <view wx:if="{{item.tag.text.length > 0}}" class="hot-live-content-tag-text">{{item.tag.text}}
+                  </view>
+                </view>
+                <view wx:if="{{item.liveStatus == 0}}" class="hot-live-content-effetct">
+                  <image class="image" mode="aspectFill"
+                    src="https://pic.c-ctrip.com/platform/h5/mini_programe/v2021.1.7/home/iSpt.gif"></image>
+                </view>
+              </view>
+              <view class="hot-live-content-right">
+                <view class="hot-live-content-title">{{item.title}}</view>
+                <text wx:if="{{item.stag}}" class="hot-live-content-stag">{{item.stag}}</text>
+                <view class="hot-live-content-name">
+                  <view class="hot-live-content-name-icon">
+                    <image class="hot-live-content-name-headphoto" mode="aspectFill" src="{{item.user.icon}}">
+                    </image>
+                    <image wx:if="{{item.user.vicon}}" class="hot-live-content-name-vicon" mode="aspectFill"
+                      src="{{item.user.vicon}}"></image>
+                  </view>
+                  <view class="hot-live-content-name-text">{{item.user.nickname}}</view>
+                </view>
+                <view class="hot-live-content-subtitle">{{item.subTitle.text}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 热门活动 -->
+    <view class="activity" wx:if="{{activities.length > 1}}">
+      <view class="activity-title">
+        <view class="activity-title-text">热门活动</view>
+        <view class="activity-title-more" bindtap="clickMoreActivityAction">更多活动<image class="icon-activity-title-more" mode="aspectFill" src="https://pic.c-ctrip.com/platform/h5/mini_programe/icon-arrow-right.png"></image></view>
+      </view>
+      <view class="activity-content">
+        <view class="activity-item item-{{activities.length}}" wx:for="{{activities}}" wx:key="actTitle"
+          data-item="{{item}}" data-position="activity" bindtap='clickGridAction'>
+          <view class="activity-item-content">
+            <text class="activity-item-name">{{item.title}}</text>
+            <text class="activity-item-text">{{item.subTitle}}</text>
+          </view>
+          <image wx:if="{{item.imgUrl.length}}" class="activity-item-icon" src="{{item.imgUrl}} "
+            mode="aspectFill"></image>
+          <view wx:else class="activity-item-icon activity-item-icon-bg"></view>
+        </view>
+      </view>
+    </view>
+    <!-- 瀑布流 -->
+    <waterfall id="waterfall" source="{{source}}" appId="{{appId}}" ignoreLocation="{{ignoreLocation}}" bindgetref="getWaterfallRef" extra="{{extra}}" cStyle="margin-bottom:120rpx;"></waterfall>
+    <view>
+      <redcom id='redcom' bind:returnHome="_ToReturnHome" bind:openApp="_ToOpenApp">
+      </redcom>
+    </view>
+  </scroll-view>
+</block>
+<!-- 白屏检测 -->
+<!-- viewReadyHandle为框架提供、实现 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

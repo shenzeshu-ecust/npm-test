@@ -1,0 +1,44 @@
+<!--快筛-->
+<template name="quick-filter">
+  <view wx:if="{{quickFilterIds.length}}" class="dt-filter" id="hotel_filters">
+        <view class="qs-box">
+            <view wx:if="{{priceFilter.isShown}}" class="qs-item filter-s" catchtap="cancelPriceFilter">{{priceFilter.text}}</view>
+            <block wx:for="{{quickFilterIds}}" wx:for-item="fkey" wx:key="fkey">
+                <view wx:if="{{filterSummary[fkey]}}" class="qs-item {{filterSelectedMap[fkey] ? 'filter-s' : ''}}"
+                    catchtap="filterSelect" data-key="{{fkey}}">
+                    {{filterSummary[fkey].title}}
+                </view>
+            </block>
+        </view>
+        <view class="filter-btn" catchtap="showFilterLayer">
+            <text>筛选</text>
+            <text class="arrow-down wechat-font-filter-arrow-full-down"></text>
+            <text wx:if="{{hasSelectedItem}}" class="filtered-sign">·</text>
+        </view>
+  </view>
+</template>
+<!-- 筛选浮层 -->
+<template name="filter-layer">
+<view hidden="{{!showFilterLayer}}" class="cmask" catchtap="closeFilterLayer" catchtouchmove="noop">
+    <view class="global-layer filter-layer {{isIphoneX ? 'fix-iphonex-border' : ''}}">
+        <scroll-view scroll-y class="content">
+            <block wx:for="{{filterInfo}}" wx:for-item="bFilter" wx:key="data.filterId">
+                <block wx:if="{{bFilter.subItems}}">
+                    <view class="filter-tit">{{bFilter.title}}</view>
+                    <view class="filter-box">
+                        <view class="filter-item {{filterSelectedMap[subFilter.data.filterId] ? 'filter-s' : ''}}"
+                              catchtap="filterSelect" data-key="{{subFilter.data.filterId}}"
+                              wx:for="{{bFilter.subItems}}" wx:for-item="subFilter" wx:key="data.filterId">
+                            {{subFilter.title}}
+                        </view>
+                    </view>
+                </block>
+            </block>
+        </scroll-view>
+        <view class="btns">
+            <view class="btn reset" catchtap="handleFilterReset">重置</view>
+            <view class="btn confirm" catchtap="closeFilterLayer">完成</view>
+        </view>
+    </view>
+</view>
+</template>

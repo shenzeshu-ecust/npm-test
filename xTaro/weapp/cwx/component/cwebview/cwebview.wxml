@@ -1,0 +1,2 @@
+<import src="./cwebshare.wxml" />
+<template is="cwebshare" data="{{canWebView, url, wsg, showShareFloat, shareType, floatTitle}}"/>

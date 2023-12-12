@@ -1,0 +1,180 @@
+page {
+	height: 100%
+}
+
+.realname-box{
+	height: 100%;
+    background-image: linear-gradient(-180deg, rgb(252, 252, 252) -48.77%, rgb(238, 238, 238) 100%);
+    color: #333;
+}
+
+.rn-paytext{
+	height: 16px;
+	line-height: 16px;
+    padding: 20rpx 0;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    overflow: hidden;
+}
+
+.rn-paystate{
+    line-height: 16px;
+    position: relative;
+}
+
+.rn-paystate::before{
+    content: '';
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #4A4A4A;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 6px;
+}
+
+.rn-paystate::after{
+    content: '';
+    position: absolute;
+    width: 7px;
+    height: 3px;
+    border-left: 2px solid #fff;
+    border-top: none;
+    border-bottom: 2px solid #fff;
+    border-right: none;
+    transform: rotate(-45deg);
+    left: 3px;
+    top: 4px;
+}
+
+.rn-cbox{
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0 21rpx;
+    padding: 0 27rpx
+}
+
+.rn-cbar{
+    text-align: center;
+    height: 276rpx;
+}
+
+.rn-csbar{
+    height: 155px;
+}
+
+.rn-cimg{
+  width: 100%;
+  height: 100%;
+  margin: 15px auto;
+  background-image: url(http://webresource.c-ctrip.com/ares2/fncmobilewallet/walletstatic/5.16.4/default/images/ctrip/realname.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.rn-csimg{
+  width: 100%;
+  height: 100%;
+  margin: 15px auto;
+  background-image: url(http://webresource.c-ctrip.com/ares2/fncmobilewallet/walletstatic/5.16.4/default/images/ctrip/realnamed.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.rn-realtip{
+    font-size: 21px; 
+    text-align: center;
+    line-height: 32px;
+}
+
+.rn-mrealtip{
+    padding: 0 0 20px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #888;
+}
+
+.rn-btxt{
+    font-weight: 700
+}
+
+.rn-cbuttons{
+    padding: 0 18px;
+    overflow: hidden;
+}
+
+.rn-cbutton{
+    display: inline-block;
+    width: 45%;
+    height: 48px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #FEB14B;
+    color: #ff7700;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-weight: 500;
+}
+
+.rn-cbutton::after {
+    border: none
+}
+
+.rn-cdbutton {
+    float: right;
+    background-image: linear-gradient(-90deg, rgb(255, 119, 0) 0%, rgb(255, 165, 10) 100%);
+    color: #FFF;
+    font-weight: normal;
+}
+
+.rn-canceltip{
+    font-size: 12px;
+    color: #888;
+    line-height: 17px;
+    text-align: center;
+    padding: 15px 0 10px;
+}
+
+.rn-succeedtxt{
+    font-size: 22px;
+    height: 86px;
+    line-height: 86px;
+    text-align: center;
+}
+
+.rn-succeedbtn{
+    height: 70px;
+    padding: 0 18px;
+}
+
+.rn-sbutton{
+    width: 100%;
+    background: #FEB14B;
+    color: #FFF;
+}
+
+.g-toastbox{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items:center;/*垂直居中*/
+    justify-content: center;/*水平居中*/
+}
+
+.g-toastmain{
+    min-width: 100px;
+    padding: 20px 15px;
+    background: rgba(0,0,0, .8);
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    transform: translateY(-15%);
+}

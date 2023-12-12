@@ -1,0 +1,256 @@
+.customer-open-redbag {
+    margin: 0 auto;
+    width: 702rpx;
+    height: 851rpx;
+    margin-top: 32rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    background-image: url('https://pages.c-ctrip.com/bus-images/rn_bus/share/bang.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+.customer-open-redbag .timer {
+    position: absolute;
+    top: 0rpx;
+    width: 372rpx;
+    height: 57rpx;
+    font-size: 22rpx;
+    color: #5c0a0a;
+    padding: 0 32rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.customer-open-redbag .timer .timer-section {
+    background: #fef9e9;
+    padding: 0rpx 2rpx;
+    text-align: center;
+    border-radius: 4rpx;
+    margin: 0rpx 4rpx;
+    width: 32rpx;
+    display: inline-block;
+}
+.customer-open-redbag .timer-bg-overtime {
+    color: #fff7d9;
+    background-image: url('https://s.qunarzz.com/nnc_module_qunar_bus/share_top_tip_overtime.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.customer-open-redbag .timer-bg-overtime .overtime-icon {
+    width: 30rpx;
+    height: 30rpx;
+    background-color: #fff7d8;
+    color: #de403b;
+    margin-right: 6rpx;
+    line-height: 20rpx;
+    text-align: center;
+    border-radius: 50%;
+}
+.customer-open-redbag .title {
+    margin-top: 84rpx;
+    color: #5c0a0a;
+    font-size: 34rpx;
+    font-weight: 600;
+}
+.customer-open-redbag .title .highlight {
+    color: #fc2929;
+}
+.customer-open-redbag .title:after,
+.customer-open-redbag .title:before {
+    content: '';
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(255, 129, 51, 0.8) 100%
+    );
+    display: inline-block;
+    height: 6rpx;
+    width: 32rpx;
+    vertical-align: middle;
+    margin: 0 16rpx 6rpx;
+}
+.customer-open-redbag .title:after {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 129, 51, 0.8) 0,
+        rgba(255, 255, 255, 0.8) 100%
+    );
+}
+.customer-open-redbag .customer-ticket-left {
+    width: 145rpx;
+    height: 126rpx;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    color: #f5190a;
+}
+.customer-open-redbag .customer-ticket-left .normal {
+    font-size: 30rpx;
+}
+.customer-open-redbag .customer-ticket-left .highlight {
+    font-size: 72rpx;
+    font-weight: 600;
+}
+.buy-ticket-btn {
+    position: absolute;
+    font-size: 34rpx;
+    text-align: center;
+    width: 692rpx;
+    height: 130rpx;
+    line-height: 117rpx;
+    font-weight: 600;
+    color: #f5190a;
+    background-image: url('https://s.qunarzz.com/nnc_module_qunar_bus/share_btn.png');
+    background-size: 100% 100%;
+    margin: 0 auto;
+    bottom: 24rpx;
+
+    animation: transIn 750ms linear 0s infinite alternate;
+}
+@keyframes transIn {
+    0% {
+        transform: scale(0.95, 0.95);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+.buy-ticket-btn:active {
+    filter: grayscale(0.1);
+    transform: scale(0.95);
+    opacity: 0.8;
+    animation: none;
+}
+
+.participateList {
+    display: flex;
+    flex-wrap: wrap;
+    width: 630rpx;
+    margin-bottom: 20rpx;
+}
+.participateList .content {
+    display: flex;
+    width: 310rpx;
+    height: 122rpx;
+    display: flex;
+    justify-content: center;
+    background-image: url('https://pages.c-ctrip.com/bus-images/rn_bus/share/couponBg.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    flex-direction: row;
+    margin-top: 26rpx;
+}
+
+.participateList .content-full {
+    display: flex;
+    flex-direction: row;
+    width: 646rpx;
+    height: 151rpx;
+    background-size: 100% 100%;
+    background-position: center;
+    margin: 0 auto;
+    background-image: url('https://pages.c-ctrip.com/bus-images/order-axtrefund/coupon-border.png?v=1');
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 10rpx;
+}
+
+.participateList .content-full .customer-ticket-button {
+    /* display: fle; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    margin-bottom: 10rpx;
+    width: 160rpx;
+}
+.participateList
+    .content-full
+    .customer-ticket-button
+    .customer-ticket-button-view {
+    font-size: 22rpx;
+    font-weight: 500;
+    margin-right: 20rpx;
+    background: linear-gradient(
+        -90deg,
+        rgb(255, 135, 103) 0%,
+        rgb(255, 122, 38) 45.98%,
+        rgb(255, 210, 139) 100%
+    );
+    border-radius: 28rpx;
+    border: 2px solid #f8f8d7;
+    box-sizing: border-box;
+    line-height: 48rpx;
+    padding: 0 20rpx;
+    text-align: center;
+    white-space: nowrap;
+}
+.participateList
+    .content-full
+    .customer-ticket-button
+    .customer-ticket-button-view:active {
+    transform: scale(0.98);
+    filter: grayscale(0.1) opacity(0.8);
+}
+.participateList .conLeft {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ff6600;
+    font-size: 60rpx;
+    margin-top: -10rpx;
+}
+.participateList .conLeft .yangjiao {
+    font-size: 32rpx;
+}
+.participateList .conLeft .leftText {
+    font-weight: 600;
+}
+.participateList .customer-ticket-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.participateList .customer-ticket-right .customer-ticket-right-title {
+    margin-left: 10rpx;
+    font-size: 28rpx;
+    color: #5c0a0a;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.participateList .customer-ticket-right .customer-ticket-right-time {
+    margin-left: 10rpx;
+    font-size: 22rpx;
+    color: #a55e4a;
+}
+
+.new-customer {
+    width: 618rpx;
+    height: 133rpx;
+    margin: 0 auto;
+    background-image: url('https://pages.c-ctrip.com/bus-images/rn_bus/share/kequan.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 60rpx;
+    margin-top: 26rpx;
+}
+
+.more-suprise {
+    width: 620rpx;
+    height: 186rpx;
+    margin-bottom: 30rpx;
+}

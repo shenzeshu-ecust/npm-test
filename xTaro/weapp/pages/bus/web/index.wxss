@@ -1,0 +1,12 @@
+/* pages/bus/web/index.wxss */
+
+.webview {
+  top: 100px;
+    padding-top: 100px;
+}
+
+.container {
+  position: relative;
+  margin-top: 100px;
+  padding-top: 100px;
+}

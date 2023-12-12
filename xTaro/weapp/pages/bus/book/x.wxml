@@ -1,0 +1,46 @@
+<nav-bar navbar-data="{{navbarData}}"></nav-bar>
+<import src="../common/template/bookExplain.wxml" />
+<import src="../common/template/busInfo.wxml" />
+<import src="../common/template/xPackageItem.wxml" />
+<import src="../common/template/busNotice.wxml" />
+<form bindsubmit='reportSubmitFromID' report-submit="{{reportSubmit}}">
+  <view hidden="{{isLoading}}">
+    <!-- 车次信息 -->
+    <template is="businfo" data="{{time, detail, classConfig, colorConfig, isPromotion, showServiceTip: servicePrice > 0,  serviceFeeTip: 'serviceFeeTip', showServiceFeeDesc: 'showServiceFeeDesc', showInXList, servicePrice}}" />
+    <view wx:if="{{hasBusNotice}}" class="bus-notice-wrap">
+      <template is="busnotice" data="{{busNoticeData}}" />
+    </view>
+    <block wx:if="{{showBusNoticeModal}}">
+      <template data="{{busNoticeData}}" is="busnoticemodal" />
+    </block>
+    <view wx:if="{{maxCouponPrice}}" class="bus-coupontip">
+      <text class="icon-font icon-red-package lottery-icon red"></text>
+      <text>您已享</text>
+      <text class="red">{{maxCouponPrice}}元</text>
+      <text>限时优惠，购票立减！</text>
+    </view>
+    <view class="x-list">
+      <block wx:if="{{!showAllXList}}">
+        <block wx:for="{{xList.length > 3 ? 3 : xList.length }}">
+          <template is="xlistitem" data="{{index, item: xList[index], purseInfo, classConfig, colorConfig, servicePrice: servicePrice || 0, bindTap:'onBook' ,showExplain: 'showPackageExplain', showExtraDesc: 'showExtraDesc', showExplainDesc: 'showPackageExplainDesc',isLast: (index == xList.length -1)}}" />
+        </block>
+        <view bindtap="showAllList" class="show-component" wx:if="{{xList.length > 3}}">
+          更多优惠套餐
+        </view>
+      </block>
+      <block wx:else>
+        <block wx:for="{{xList}}">
+          <template is="xlistitem" data="{{index,item,xPackage, purseInfo, classConfig, colorConfig, servicePrice: servicePrice || 0, bindTap:'onBook' ,showExplain: 'showPackageExplain', showExtraDesc: 'showExtraDesc', showExplainDesc: 'showPackageExplainDesc', serviceFeeTip: 'serviceFeeTip',isLast: (index == xList.length -1)}}" />
+        </block>
+      </block>
+      <view class="slogan-container">
+        <view class="slogan ctripSlogan"></view>
+      </view>
+    </view>
+  </view>
+  <!-- </block> -->
+  <template wx:if="{{showExplain}}" is="explain" data="{{explains: detail.explainList, servicePrice: servicePrice || 0, showExplainIndex, classConfig, isIPhoneX, onClickExplainShowMap}}" />
+  <template is="desccontent" wx:if="{{showDescContent}}" data="{{item: descContentItem,servicePrice: servicePrice || 0, isIPhoneX, bindTap:'onBookWithDismissDesc', showExtraDesc: 'showExtraDesc', classConfig, colorConfig}}" />
+  <template is="offerdesc" wx:if="{{showOfferDesc}}" data="{{isIPhoneX, bindTap:'hideOfferDesc', sellerName: detail.tempFields.sellerName ,carrierInfo: detail.tempFields.carrierInfo, businessLicense: detail.tempFields.businessLicense, note:detail.tempFields.sellerNote}}" />
+  <template is="servicefee-modal" wx:if="{{showServiceFeeDesc}}" data="{{serviceFeeExplainData}}" />
+</form>

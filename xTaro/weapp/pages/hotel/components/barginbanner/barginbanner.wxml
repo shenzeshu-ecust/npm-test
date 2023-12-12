@@ -1,0 +1,48 @@
+<form bindsubmit="submitFromId" report-submit="true">
+<button class="bargin-btn" formType="submit"  wx:if="{{showBlock}}" open-type="getUserInfo" bindgetuserinfo="goToJoin" data-ubt-key="xcx_order_detail_bargain_banner">
+    <view class="bargin-banner {{type === 1 ? 'unstarted-new' : 'unstarted'}}" wx:if="{{status === 1}}"/>
+    <view class="bargin-banner" wx:if="{{status === 2}}">
+        <view class="title">目前{{type === 1 ? '可返' : '已砍'}}<text class="price">{{bargain.currentAmount}}</text>元</view>
+        <view class="detail">
+            还剩<text class="time">{{countdown.hh}}</text>:<text class="time">{{countdown.mm}}</text>:<text class="time">{{countdown.ss}}</text>结束
+        </view>
+        <text class="action">{{type === 1 ? '去邀请' : '继续砍'}}</text>
+    </view>
+    <view class="bargin-banner" wx:if="{{status === 3}}">
+        <view class="title">{{type === 1 ? '累计可返' : '任性共砍'}}<text class="price">{{bargain.currentAmount}}</text>元</view>
+        <view class="detail">24小时结束</view>
+        <text class="action">去看看</text>
+    </view>
+    <view class="bargin-banner" wx:if="{{status === 4}}">
+        <view class="title">{{type === 1 ? '累计可返' : '任性共砍'}}<text class="price">{{bargain.currentAmount}}</text>元</view>
+        <view class="detail">{{type === 1 ? '恭喜已通关!' : '已上天! 恭喜砍到最高价!'}}</view>
+        <text class="action">去看看</text>
+    </view>
+    <view class="bargin-banner" wx:if="{{status === 5}}">
+        <block wx:if="{{type === 1}}">
+            <view class="title">累计可返<text class="price">{{bargain.currentAmount}}</text>元</view>
+            <view class="detail">恭喜已通关!</view>
+            <text class="action">去看看</text>
+        </block>
+        <block wx:else>
+            <view class="title">任性共砍<text class="price">{{bargain.currentAmount}}</text>元</view>
+            <view class="detail">超级厉害! 砍到定额</view>
+            <text class="action">去看看</text>
+        </block>
+    </view>
+    <view class="bargin-banner" wx:if="{{status === 6}}">
+        <view class="title">已返现<text class="price">{{bargain.currentAmount}}</text>元</view>
+        <text class="action">去看看</text>
+    </view>
+    <view class="bargin-banner" wx:if="{{status === 7}}">
+        <view class="title">很遗憾，{{type === 1 ? '闯关' : '砍价'}}失败</view>
+        <view class="detail">不符合活动条件</view>
+        <text class="action">去看看</text>
+    </view>
+    <view class="bargin-banner" wx:if="{{status === 8}}">
+        <view class="title">很遗憾，{{type === 1 ? '闯关' : '砍价'}}失败</view>
+        <view class="detail">未达到返现门槛</view>
+        <text class="action">去看看</text>
+    </view>
+</button>
+</form>

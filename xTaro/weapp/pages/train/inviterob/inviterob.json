@@ -1,0 +1,14 @@
+{
+  "backgroundColorTop": "#051157",
+  "backgroundColorBottom": "#EEF1F6",
+  "navigationBarBackgroundColor": "#051157",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "taskList": "/pages/market/directory/task",
+    "taskSignIn": "/pages/market/directory/taskSignIn",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  },
+  "componentPlaceholder": {
+    "taskList": "view"
+  }
+}

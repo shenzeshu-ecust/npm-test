@@ -1,0 +1,13 @@
+<view class="share-page">
+  <block>
+      <view class="btn-box">
+          <image src="https://images3.c-ctrip.com/train/2021/app/V8.40.6/maipiao/img-renwu.png"></image>
+          <view class="btn-title">{{title}}</view>
+          <view class="btn-subtitle">{{subtitle}}</view>
+          <button class="btn-spring" bindtap="closeWeapp">关闭</button>
+          <button class="btn-spring" bindtap="toTrainHome">回到首页</button>
+      </view>
+  </block>
+</view>
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

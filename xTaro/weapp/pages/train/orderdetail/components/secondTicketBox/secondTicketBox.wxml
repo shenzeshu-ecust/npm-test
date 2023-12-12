@@ -1,0 +1,35 @@
+<template name="second-ticbox">
+    <view class="second-ticket-box-body">
+        <view class="card">
+            <view class="flex1">
+                <view class="des">
+                    <view class="txt">第<text class="route-num">{{multipleBookingAndGrabSegmentationInfo.routeSequence}}</text>程</view>
+                    <view class="status">{{multipleBookingAndGrabSegmentationInfo.orderStatusName}}</view>
+                </view>
+                <view class="info"
+                  wx:if="{{multipleBookingAndGrabSegmentationInfo.canShowStationInfo}}">
+                    <view class="departStationInfo">
+                        <view class="departTime">{{multipleBookingAndGrabSegmentationInfo.departTime}}</view>
+                        <view class="departStation">{{multipleBookingAndGrabSegmentationInfo.departStation}}</view>
+                    </view>
+                    -
+                    <view class="arriveStationInfo">
+                        <view class="arriveTime">
+                            {{multipleBookingAndGrabSegmentationInfo.arriveTime}}
+                            <view class="diff-day"
+                              wx:if="{{multipleBookingAndGrabSegmentationInfo.diffDays !== 0}}">+{{multipleBookingAndGrabSegmentationInfo.diffDays}}天</view>
+                        </view>
+                        <view class="arriveStation">
+                            {{multipleBookingAndGrabSegmentationInfo.arriveStation}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <button class="btn"
+              data-currentordernumber="{{multipleBookingAndGrabSegmentationInfo.currentOrderNumber}}"
+              data-ordernumber="{{multipleBookingAndGrabSegmentationInfo.orderNumber}}"
+              bindtap="gotoOrderDetail">立即查看</button>
+        </view>
+        <view class="connect"></view>
+    </view>
+</template>

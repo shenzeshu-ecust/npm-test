@@ -1,0 +1,126 @@
+<template name="explain">
+    <view class="explain-modal" catchtouchmove="empty">
+        <view class="explain-modal mask" catchtouchmove="empty" bindtap="disMissExplain" />
+        <view class="explain-container">
+            <view class="flex-row bar explain-view ">
+                <view wx:for="{{explains}}" class="explainTitle" data-index="{{index}}" bindtap="showExplain">
+                    <text class='title {{showExplainIndex === index ? "selected " + classConfig.borderColor + " " + classConfig.mainColor : "" }}'>{{item.title}}</text>
+                </view>
+            </view>
+            <scroll-view class="explain-scroll" scroll-y="{{true}}" catchtouchmove="empty">
+                <view class="flex-row descItem">
+                    <view wx:for="{{explains[showExplainIndex].content}}" data-index="{{index}}" class="descItem-content">
+                        <view class="descItem-content-title">{{item._title}}</view>
+                        <view wx:for="{{item._list}}" class="info-content" data-index="{{index}}">
+                            <view class="info-item">
+                                <view wx:if="{{item.title}}" class="info-item-title">
+                                    {{item.title}}
+                                </view>
+                                <view wx:if="{{item.desc}}" class="info-item-desc {{item.station ? 'station-color' : ''}}" data-station="{{item.station}}" bindtap="onClickExplainShowMap">
+                                    <text wx:if="{{item.station}}" class='icon-font icon-location {{classConfig.mainColor}}' size='32rpx'></text>
+                                    <text>{{item.desc}}</text>
+                                </view>
+                                <view wx:if="{{item.table && item.table.data && item.table.data.length > 0}}" class="item-table">
+                                    <view wx:for="{{item.table.data}}" data-index="{{index}}">
+                                        <view style="{{item.list && item.list.length > 0 ? 'height:' + item.list.length * 84 + 'rpx' : 'height: 84rpx;'}}" class="table-content {{index === 0 ? 'bgColor' : ''}} {{!item.showButton ? 'textLine' : ''}}">
+                                            <view class="item-time">{{item.time}}</view>
+                                            <block wx:if="{{item.list && item.list.length > 0}}">
+                                                <view class="item-list-content">
+                                                    <view wx:for="{{item.list}}" data-index="{{index}}" class="item-list" style="{{index !== 0 ? 'border-top: 2rpx #dddddd solid' : '' }}">
+                                                        <view class="item-type">{{item.type}}</view>
+                                                        <view class="item-desc">{{item.desc}}</view>
+                                                    </view>
+                                                </view>
+                                            </block>
+                                            <block wx:else>
+                                                <view class="item-type">{{item.type}}</view>
+                                                <view class="item-desc">{{item.desc}}</view>
+                                            </block>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+            <view style="padding-bottom:{{isIPhoneX ? '68rpx' : '0'}};background-color: #ffffff;"></view>
+        </view>
+    </view>
+</template>
+<template name="desccontent">
+    <view class="explain-modal" catchtouchmove="empty">
+        <view class="explain-modal mask" bindtap="hiddenExplainDesc" />
+        <view class="explain-container">
+            <view class="explain-view background-white">
+                <view class="contentTitle">
+                    <text>{{item.hallwayTitle}}</text>
+                </view>
+            </view>
+            <scroll-view class="explain-scroll desc-scroll " scroll-y="{{true}}">
+                <view class="desc-content" wx:if="{{item.hallwayDesc}}">{{item.hallwayDesc}}</view>
+                <!-- <view style="padding-bottom:{{isIPhoneX ? '68rpx' : '0'}};"></view> -->
+            </scroll-view>
+            <view class="button-view" style="padding-bottom:{{isIPhoneX ? '68rpx' : '0'}};">
+                <button catchtap="{{bindTap}}" data-item="{{item}}" data-type="x" data-trace='onBookWithDismissDesc'>
+                    立即预订
+                </button>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="offerdesc">
+    <view class="explain-modal" catchtouchmove="empty">
+        <view class="mask" bindtap="hideOfferDesc" />
+        <view class="explain-container">
+            <scroll-view class="explain-scroll" scroll-y>
+                <view wx:if="{{ !!carrierInfo }}" class="offer-info">
+                    <text class="title">承运方：</text>
+                    <text class="des">{{carrierInfo}}</text>
+                </view>
+                <view wx:if="{{ !!sellerName }}" class="offer-info">
+                    <text class="title">销售供应商：</text>
+                    <text class="des">{{sellerName}}</text>
+                </view>
+                <view wx:if="{{ !!licenseCode }}" class="offer-info">
+                    <text class="title">统一社会信用代码：</text>
+                    <text class="des">{{licenseCode}}</text>
+                </view>
+                <view wx:if="{{ !!note }}" class="offer-info">
+                    <view class="tips">{{note}}</view>
+                </view>
+                <view class="offer-info">
+                    <view wx:if="{{ businessLicense }}">
+                        <image mode="widthFix" src="{{businessLicense}}"></image>
+                    </view>
+                </view>
+                <view style="padding-bottom:{{isIPhoneX ? '88rpx' : '20rpx'}};"></view>
+            </scroll-view>
+        </view>
+    </view>
+</template>
+<template name="servicefee-modal">
+    <view class="explain-modal" catchtouchmove="empty">
+        <view class="mask" bindtap="hideServiceFeeDesc" />
+        <view class="explain-container">
+            <scroll-view class="servicefee-container" scroll-y>
+                <view class="servicefee-head">
+                    <view class="close-tips icon-font icon-close bus-notice-close" bindtap="hideServiceFeeDesc"></view>
+                    <view class="title">服务费说明</view>
+                </view>
+                <image class="servicefee-image" src="https://pages.c-ctrip.com/bus-images/busapp/rnbus/cious/serviceFeeDescBg.png"></image>
+                <view class="servicefee-content">
+                    <view wx:for="{{serviceFeeExplainData.content}}" class="text-content" wx:for-item="content">
+                        <view class="descTit">{{content.title}}</view>
+                        <view wx:for="{{content.desc}}" class="item-content">
+                            <view wx:if="{{content.desc.length > 1}}" class="item-icon"></view>
+                            <text>{{item}}</text>
+                        </view>
+                    </view>
+                    <view class="desc">{{serviceFeeExplainData.desc}}</view>
+                    <button class="button" bindtap="hideServiceFeeDesc">继续购票</button>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</template>

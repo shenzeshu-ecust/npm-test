@@ -1,0 +1,15 @@
+page {
+    height: 100%
+}
+
+.bg {
+    background: url(https://pages.c-ctrip.com/hotels/wechat/market/ctoc/auth-bg.png) center;
+    background-size: cover;
+    height: 100%;
+}
+
+.cover {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}

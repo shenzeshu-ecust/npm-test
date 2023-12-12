@@ -1,0 +1,18 @@
+{
+  "navigationBarTitleText": "微领队",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "guide-info": "./components/guideInfo/guideInfo",
+    "before-beparture": "./components/beforeDeparture/beforeDeparture",
+    "method": "./components/method/method",
+    "ask-list": "./components/askList/askList",
+    "waterfall": "../../../commonComponent/cwaterfall/cwaterfall",
+    "waterfall-placeholder": "../../../cwx/component/cwaterfall/cwaterfall",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  },
+  "componentPlaceholder": {
+    "waterfall": "waterfall-placeholder"
+  }
+}

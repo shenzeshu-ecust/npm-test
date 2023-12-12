@@ -1,0 +1,83 @@
+<view class="mask" catchtouchmove="true"></view>
+<view class="passenger-number-component" wx:if="passengerChoiceVisible" catchtouchmove="true">
+    <view class="card">
+        <view class="card-top">
+            <view class="cancel" bindtap="closePassengerChoice">
+                <image class="cancel-icon" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/Close@3x.png"></image>   
+            </view>
+            <text class="title">选择乘客人数</text>
+        </view>
+        <view class="card-body">
+            <view class="passenger-line">
+                <view class="passenger-line-left">
+                    <view class="passenger-type">
+                        成人
+                    </view>
+                    <view class="passenger-des">
+                        {{adultData.min}}-{{adultData.max}}周岁 (含)
+                    </view>
+                </view>
+                <view class="passenger-line-right">
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/Subteact-60682@3x.png" bindtap="subtractNumber" data-tag="adult" wx:if="{{adultData.num > 0 && !numSubSelectorIsDisabled}}"></image>
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/yo-jianhaoed0b-f.png" wx:else></image>
+                    <text class="passenger-number">{{adultData.num}}</text>
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/Add-59710@3x.png" bindtap="addNumber" data-tag="adult" wx:if="{{!numAddSelectorIsDisabled}}"></image>
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/qunar-chevron_up.png" wx:else></image>
+                </view>
+            </view>
+            <view class="passenger-line">
+                <view class="passenger-line-left">
+                    <view class="passenger-type">儿童/青年</view>
+                    <view class="passenger-des">{{childData.min}}-{{childData.max}}周岁 (含)</view>
+                </view>
+                <view class="passenger-line-right">
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/Subteact-60682@3x.png" bindtap="subtractNumber" data-tag="child" wx:if="{{childData.num > 0 && !numSubSelectorIsDisabled}}"></image>
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/yo-jianhaoed0b-f.png" wx:else></image>
+                    <text class="passenger-number">{{childData.num}}</text>
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/Add-59710@3x.png" bindtap="addNumber" data-tag="child" wx:if="{{!numAddSelectorIsDisabled}}"></image>
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/qunar-chevron_up.png" wx:else></image>
+                </view>
+            </view>
+            <view class="passenger-line-list" wx:if="{{childData.list.length>0}}">
+                <block wx:for="{{childData.list}}">
+                    <view class="age-box" hover-class="age-box-hover" bindtap="openChildrenAgeSelector" data-index="{{index}}">
+                        <view class="age-box-des">儿童/青年{{index+1}}</view>
+                        <view class="age-box-content">
+                            <view class="age-box-num"><text>{{item}}岁</text></view>
+                            <image src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/right-arr.png" class="age-number-choice"></image>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <view class="passenger-line">
+                <view class="passenger-line-left">
+                    <view class="passenger-type">
+                        长者
+                    </view> 
+                    <view class="passenger-des">
+                        {{oldData.min}}周岁及以上
+                    </view>
+                </view>
+                <view class="passenger-line-right">
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/Subteact-60682@3x.png" bindtap="subtractNumber" data-tag="old" wx:if="{{oldData.num > 0 && !numSubSelectorIsDisabled}}"></image>
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/yo-jianhaoed0b-f.png" wx:else></image>
+                    <text class="passenger-number">{{oldData.num}}</text>
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/Add-59710@3x.png" bindtap="addNumber" data-tag="old" wx:if="{{!numAddSelectorIsDisabled}}"></image>
+                    <image class="passenger-number-choice" src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/qunar-chevron_up.png" wx:else></image>
+                </view>
+            </view>
+            <view class="tips-box">
+                <block wx:for="{{tips}}">
+                    <view class="tips-item">
+                        <span class="tips-point">· </span>
+                        <span class="tips-text">{{item}}</span>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="finish-box">
+            <button class="finish" bindtap="onClickConfirm">完成</button>
+        </view>
+        <childrenFloatingLayer visible="{{showChildren}}" min="{{childData.min}}" max="{{childData.max}}" value="{{chooseChildNum}}" title="选择儿童/青年年龄" bind:change="onAgeChange" bind:close="closeChildrenAgeSelector"/>
+    </view>
+</view>

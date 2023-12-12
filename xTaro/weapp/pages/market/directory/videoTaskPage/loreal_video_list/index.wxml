@@ -1,0 +1,32 @@
+<view scroll-y type="list" style="flex: 1; width: 100%; overflow: auto;" class="masonry-list" style="width: 720rpx;">
+  <view class="masonry-list-left">
+    <view id="left-col-inner" class="left-col-inner">
+      <block wx:for="{{masonryList}}" wx:key="index">
+        <view class='ad_item' wx:if="{{item.columnPosition === 'left'}}" item="{{item}}" bindtap='goTargetUrl' data-url="{{item.masonryJumpUrl}}">
+          <view class="img" data-item="{{item}}" bindtap="openDetail">
+            <image fade-in class="masonryImg_icon" mode="aspectFill" src="{{item.masonryImg}}"></image>
+            <image src="https://images3.c-ctrip.com/marketing/2021/09/task/play_icon.png" mode="widthFix" class="poster_img_icon"></image>
+          </view>
+          <view class="content">
+            <view class="name info">{{item.masonryTitle}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="masonry-list-right">
+    <view id="right-col-inner" class="right-col-inner">
+      <block wx:for="{{masonryList}}" wx:key="index">
+        <view class='ad_item' wx:if="{{item.columnPosition === 'right'}}" item="{{item}}" bindtap='goTargetUrl' data-url="{{item.masonryJumpUrl}}">
+          <view class="img" data-item="{{item}}" bindtap="openDetail">
+            <image fade-in class="masonryImg_icon"  mode="aspectFill" src="{{item.masonryImg}}"></image>
+            <image src="https://images3.c-ctrip.com/marketing/2021/09/task/play_icon.png" mode="widthFix" class="poster_img_icon"></image>
+          </view>
+          <view class="content">
+            <view class="name info">{{item.masonryTitle}}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

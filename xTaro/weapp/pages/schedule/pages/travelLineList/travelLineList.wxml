@@ -1,0 +1,34 @@
+<block wx:if="{{travelPlanList.length === 0}}">
+    <view class="{{isLoading? 'view-hidden' : 'empty-view'}}">
+        <view class="empty-container">
+            <image class="empty-view-bg" src='https://pages.c-ctrip.com/schedule/pic/wxxcx/image_sousuo.png' mode="aspectFill" />
+            <text class="empty_title">您还没有规划旅行路线哦～</text>
+        </view>
+    </view>
+</block>
+<block wx:else>
+    <scroll-view scroll-y class="travel-list">
+        <view class="travel-item" wx:for="{{travelPlanList}}" wx:for-index="index" wx:key="travelPlanId">
+            <view wx:if="{{item.showTitle}}" class="finishedTitle">已完成</view>
+            <movable-area>
+                <movable-view out-of-bounds="true" direction="horizontal" x="{{item.xmove}}"
+                              inertia="true"
+                              data-productIndex="{{index}}"
+                              bindtouchstart="handleTouchStart"
+                              bindtouchend="handleTouchEnd"
+                              bindchange="handleMovableChange">
+                    <travel-card-view itemData="{{item}}" bindCardSetDate='setDate'/>
+                </movable-view>
+            </movable-area>
+            <view class="delete-btn {{item.showTitle ? 'with-title-item' : index === travelPlanList.length - 1 ? 'last-one-item' : 'normal-item'}}" data-productIndex="{{index}}" catch:tap="handleDeleteProduct">
+                <Icon className='delete-card' color='#f63b2e' size='23' />
+                <text class='option-title'>移除</text>
+            </view>
+            <view wx:if="{{index === travelPlanList.length - 1}}" class="padding-view"></view>
+        </view>
+    </scroll-view>
+</block>
+
+<!-- 白屏检测 -->
+<!-- viewReadyHandle为框架提供、实现 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

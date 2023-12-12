@@ -1,0 +1,1288 @@
+<import src="../../common/components/robtask/robtask-template.wxml" />
+<import src="../../common/components/strideTrain/strideTrain.wxml" />
+<import src="../../common/components/favoriteModal/favoriteModal.wxml" />
+<import src="../components/hotel/hotel.wxml" />
+<import src="../components/car/car.wxml" />
+<import src="../components/reward/reward.wxml" />
+<import src="../components/cashback/cashback.wxml" />
+<import src="./ordinary.templates.wxml" />
+<import src="../components/orderdetail.templates.wxml" />
+<import src="../components/FreeOrder/freeorder.wxml" />
+<import src="../components/TurnToGrabOrder/turnToGrabOrder.wxml" />
+<!-- <import src="../components/IntelligentSegmentOrderDetail/intelligentSegmentOrderDetail.wxml" /> -->
+<import src="../components/CouponModal/couponmodal.wxml" />
+<import src="../../common/components/omnipotentGrab/omnipotentGrab.wxml" />
+<import src="../components/intelligentSegment/intelligentSegment.wxml" />
+<import src="../components/secondTicketBox/secondTicketBox.wxml" />
+
+<view class="oinfo {{isIphoneX ? 'iphone-x':''}}"
+  style="{{popType === 'elecTicketPop' || popType === 'bargain'  ? 'position:fixed;top:0;left:0;right:0;bottom:0;' : ''}}">
+    <!-- 新的订单详情页 start -->
+    <block>
+        <!-- 智能推荐 第二程/分段 -->
+        <block wx:if="{{ intelligentDisplay }}">
+            <template is="intelligent-segment"
+              data="{{ intelligentInfo, tripAxis, isSuccess, paidSuccess, orderInfo, extendValues, preHoldPercent, segmentationOrderStatusName, countdownOrderTips, bookTips, ZLTopMessage, isPreHolding, preHoldingMesssage, isShowRobSame, rewardInfo, isMergePay, orderMessageInfo, extendValues, isIssueTicketSuccess, showChildTip  }}"></template>
+        </block>
+        <!-- <block wx:elif="{{intelligentSegmentDisplay}}">
+            <template id="intelligent-segment" is="intelligent-segment-orderDetail" data="{{ originOrderInfo, recommendTicketInfo, jLDetailInfo, recommendInfo, orderInfo, isSuccess, paidSuccess, bookTips, countdownOrderTips, ZLTopMessage, isPreHolding, preHoldingMesssage, isShowRobSame, rewardInfo,orderInfo1,orderInfo2, isOriginOrderFromSecondTrip, segmentationOrderStatusName, segmentationInfo, claimDisplay, segmentationCrossInfo, intelligentType }}" />
+        </block> -->
+
+        <view wx:else
+          class="order-linear">
+            <!-- 订单详情页header -->
+            <!-- <view class="order-status" wx:if="{{orderInfo.OrderStatusBarInfo.StatusName}}"> -->
+            <view class="order-status">
+                <view class="status">
+                    <!-- suc,fail,time,refund -->
+                    <icon class="icon-status-fail"
+                      wx:if="{{orderInfo.AlertInfo.AlertType == 25 || (orderInfo.AlertInfo.AlertType == 23 && extendValues.ETicketUser12306Process.guideCode == 2)}}"></icon>
+                    <!-- <block wx:elif="{{IsRescGrabOrder}}">
+                        <view class="status">
+                            <icon class="icon-status-loading"></icon>
+                            <icon class="icon-light"></icon>
+                        </view>
+                    </block> -->
+                    <icon class="icon-status-suc"
+                      wx:elif="{{isSuccess || paidSuccess}}"></icon>
+                    <icon class="icon-status-refund"
+                      wx:elif="{{orderInfo.EnablePayOrder}}"></icon>
+                    <block wx:elif="{{isPreHolding}}">
+                        <view class="status">
+                            <icon class="icon-status-loading"></icon>
+                            <icon class="icon-seat"></icon>
+                        </view>
+                    </block>
+                    <icon class="icon-status-fail"
+                      wx:elif="{{!orderInfo.EnablePayOrder && !isSuccess}}"></icon>
+                </view>
+                <view class="cont">
+                    <!-- 顶部提示语 -->
+                    <!-- 扣位中订单包含扣位进度 -->
+                    <view class="tit">
+                        {{isPreHolding ? orderInfo.OrderStatusBarInfo.StatusName + ' ' + preHoldPercent + '%' : orderInfo.OrderStatusBarInfo.StatusName}}
+                        <image wx:if="{{ orderInfo.NewCustomerFirstOrderTagUrl }}"
+                          class="tag"
+                          src="{{ orderInfo.NewCustomerFirstOrderTagUrl }}" />
+                    </view>
+                    <!-- 二推文案 -->
+                    <!-- 抢票订单 -->
+                    <view class="txt"
+                      wx:if="{{countdownOrderTips}}">座位已成功锁定！请在
+                        <text class="orange">{{bookTips}}</text>
+                        内完成支付。
+                    </view>
+                    <!-- 改签抢订单 -->
+                    <!-- <view class="txt" wx:elif="{{IsRescGrabOrder}}">{{rescGrabInfo.JLExpiredTimeStr}}</view> -->
+                    <!-- 直连订单 -->
+                    <view class="txt"
+                      wx:elif="{{ZLTopMessage && !orderInfo.IsCanPointsPay}}">{{ZLTopMessage}}</view>
+                    <!-- 扣位中订单 -->
+                    <view class="txt"
+                      wx:elif="{{isPreHolding}}">{{preHoldingMesssage}}</view>
+                    <!-- 常规订单 -->
+                    <view class="txt"
+                      wx:elif="{{!isShowRobSame}}"><rich-text nodes="{{orderInfo.OrderStatusBarInfo.StatusNameDesc}}"></rich-text></view>
+                    <!-- 失败订单 -->
+                    <view class="txt"
+                      wx:elif="{{isShowRobSame}}">
+                        <text class="qiangpiao-txt">{{orderInfo.FailReason}}</text>
+                    </view>
+                    <!-- <view class="tit">抢票已中断</view>
+                    <view class="txt">乘客联系方式未核验，无法出票</view> -->
+                </view>
+                <view class="fixed-dashang"
+                  wx:if="{{orderInfo.IsCanReward && rewardInfo}}"
+                  bindtap="showRewardPop"></view>
+            </view>
+
+            <view class="countdown-container point-card"
+              wx:if="{{orderInfo.ShowCardList[0].CardType === 18 && pointCard}}">
+                <view>
+                    <rich-text nodes="{{pointCard}}"></rich-text>
+                </view>
+            </view>
+            <view class="login-12306-new"
+              wx:if="{{orderInfo.UserName12306Status > 0 && orderInfo.UserName12306Status < 4 && isOpen12306Config}}">
+                <icon class="icon-12306"></icon>
+                <block wx:if="{{orderInfo.UserName12306Status == 1}}">
+                    <view class="cont">
+                        <view class="tit">{{textConfigAbout12306[0].popTextTop}}</view>
+                        <view class="txt">{{textConfigAbout12306[0].popTextMid}}</view>
+                    </view>
+                    <view class="rbox">
+                        <view class="tag">免费兑换车票</view>
+                        <button class="btn-login"
+                          data-type="login"
+                          data-ubt-key="orderdetail_gosignin_click"
+                          bindtap="onClickHandle12306">{{textConfigAbout12306[0].btn}}</button>
+                    </view>
+                </block>
+                <block wx:if="{{orderInfo.UserName12306Status == 2}}">
+                    <view class="cont">
+                        <view class="tit">{{textConfigAbout12306[1].popTextTop}}</view>
+                        <view class="txt">{{textConfigAbout12306[1].popTextMid}}</view>
+                    </view>
+                    <view class="rbox">
+                        <button class="btn-login"
+                          data-type="member"
+                          bindtap="toWebviewAbout12306">{{textConfigAbout12306[1].btn}}</button>
+                    </view>
+                </block>
+                <block wx:if="{{orderInfo.UserName12306Status == 3}}">
+                    <view class="cont">
+                        <view class="tit">{{textConfigAbout12306[2].popTextTop}}</view>
+                        <view class="txt">{{textConfigAbout12306[2].popTextMid}}</view>
+                    </view>
+                    <view class="rbox">
+                        <button class="btn-login"
+                          data-type="active"
+                          bindtap="toWebviewAbout12306">{{textConfigAbout12306[2].btn}}</button>
+                    </view>
+                </block>
+            </view>
+
+            <!-- TODO: -->
+            <template is="journey-line"
+              wx:if="{{combiJourneyInfo.isCombi}}"
+              data="{{tripAxis: combiJourneyInfo}}" />
+            <!-- 上车补/跨站 -->
+            <block wx:if="{{curThenByTicketInfo}}">
+                <view class="then-by-box">
+                    <view class="super-tag">
+                        <image src="https://images3.c-ctrip.com/train/2023/app/8.60/zhuliucheng/liuchengganzhi/img-logo1.png"
+                          class="img">
+                        </image>
+                        <view class="txt">{{curThenByTicketInfo.orderSuperTag}}</view>
+                        <image src="https://images3.c-ctrip.com/train/2023/app/8.60/zhuliucheng/liuchengganzhi/img-jiao.png"
+                          class="img-after">
+                        </image>
+                    </view>
+                    <view class="pick-tip"
+                      style="{{curThenByTicketInfo.jumpUrl && 'width:80%'}}">
+                        <rich-text nodes="{{curThenByTicketInfo.pickUpTip}}"></rich-text>
+                    </view>
+                    <view class="journey-line then-by">
+                        <text wx:for="{{curThenByTicketInfo.ticketList}}"
+                          wx:for-item="ticket"
+                          class="journey {{ticket.tag ? '' : 'hidden'}}">{{ticket.tag}}</text>
+                        <view class="journey-btm-line-box">
+                            <view class="{{curThenByTicketInfo.crossType === 'FRONT' ? 'dashed' : 'solid' }}"></view>
+                            <view class="{{curThenByTicketInfo.crossType === 'BACK' ? 'dashed' : 'solid' }}"></view>
+                        </view>
+                        <view class="journey-btm-dot">
+                            <view wx:for="{{curThenByTicketInfo.ticketList}}"
+                              class="dot"></view>
+                        </view>
+                        <view class="journey-line-tag">
+                            <view class="solu-tag {{curThenByTicketInfo.crossType === 'BACK' ? 'hidden' : 'front'}}">{{curThenByTicketInfo.tag}}</view>
+                            <view class="solu-tag {{curThenByTicketInfo.crossType === 'FRONT' ? 'hidden' : ''}} {{curThenByTicketInfo.solutionType === 1 ? 'bupiao' : 'kuazhan'}}">{{curThenByTicketInfo.tag}}</view>
+                        </view>
+                    </view>
+                    <view class="combi-info-time then-by station-info">
+                        <text wx:for="{{curThenByTicketInfo.ticketList}}"
+                          wx:for-item="ticket"
+                          class="{{ticket.isReal ? '' : 'grey'}}">{{ticket.name}}</text>
+                    </view>
+                    <view class="risk-tip"
+                      wx:if="{{curThenByTicketInfo.jumpUrl}}"
+                      bindtap="clickTips"
+                      data-url="{{curThenByTicketInfo.jumpUrl}}">
+                        <text>风险提示</text>
+                        <i class="ifont-qus"></i>
+                    </view>
+                </view>
+            </block>
+            <!-- WXYellowTip 临时兼容有票查询候补方案的 -->
+            <view class="order-notice-white"
+              wx:if="{{(orderInfo.TopNoticeInfo && orderInfo.TopNoticeInfo.Message) || (orderInfo.TopMessageInfo && orderInfo.TopMessageInfo.Message) || (extendValues && extendValues.WXYellowTip)}}">
+                <view class="tit"
+                  wx:if="{{boardNoticeTitile}}"><text class="ifont-horn"></text>{{boardNoticeTitile}}</view>
+                <!-- <rich-text nodes="{{orderInfo.TopNoticeInfo.Message}}" wx:if="{{orderInfo.TopNoticeInfo && orderInfo.TopNoticeInfo.Message}}"></rich-text> -->
+                <!-- <rich-text nodes="{{orderInfo.TopMessageInfo.Message}}" wx:if="{{orderInfo.TopMessageInfo && orderInfo.TopMessageInfo.Message}}"></rich-text> -->
+                <view class="txt txt-topmessage"
+                  wx:if="{{orderInfo.TopNoticeInfo && orderInfo.TopNoticeInfo.Message}}">{{orderInfo.TopNoticeInfo.Message}}</view>
+                <view class="txt"
+                  wx:if="{{orderInfo.TopMessageInfo && orderInfo.TopMessageInfo.Message}}">{{orderInfo.TopMessageInfo.Message}}</view>
+                <view class="txt"
+                  wx:if="{{ extendValues.WXYellowTip }}">{{ extendValues.WXYellowTip }}</view>
+            </view>
+
+
+            <!-- 分段购票中转提示 -->
+            <view class="order-notice-white"
+              wx:if="{{orderInfo.SectionTicketTips}}">
+                <view class="txt section"><rich-text nodes="{{orderInfo.SectionTicketTips}}"></rich-text></view>
+            </view>
+
+            <!-- 手机核验banner -->
+            <template is="mobilecheckNotice"
+              data="{{TopVerifyInfo: orderInfo.TopVerifyInfo}}"
+              wx:if="{{orderInfo.TopVerifyInfo}}"></template>
+
+            <!-- 有账号购票异常-->
+            <template is="ticketsBreakNotice"
+              data="{{TopVerifyInfo: extendValues.ETicketUser12306Process}}"
+              wx:if="{{extendValues.ETicketUser12306Process}}"></template>
+
+            <!-- 无账号购票异常 -->
+            <template is="ticketsBreakNoAccountNotice"
+              data="{{TopVerifyInfo: extendValues.ETicketUser12306ProcessNoAccount.topInfo}}"
+              wx:if="{{extendValues.ETicketUser12306ProcessNoAccount.topInfo}}"></template>
+
+            <template is="refundboard"
+              data="{{OfficialEleTicketRefundInfo: orderInfo.OfficialEleTicketRefundInfo}}"
+              wx:if="{{orderInfo.OfficialEleTicketRefundInfo}}"></template>
+            <!-- <view class="order-hint"> <view class="txt">这里是2推信息文案，2推信息文案文案息文案，2推信息文案文案</view> <view class="rbox"> <button class="btn-blue" hover-class="btn-blue_hover">按钮</button> </view> </view> -->
+            <!-- 二推文案 -->
+            <!-- <view class="order-hbp" wx:if="{{orderInfo.TopMessageInfo && orderInfo.TopMessageInfo.Message}}">{{orderInfo.TopMessageInfo.Message}}</view> -->
+
+            <!-- 身份未通过核验 -->
+            <block wx:if="{{ orderInfo.TopMessageInfo && orderInfo.TopMessageInfo.MessageList.length }}">
+                <block wx:for="{{ orderInfo.TopMessageInfo.MessageList }}"
+                  wx:for-item="MsgItem">
+                    <view class="order-notice-uncheck"
+                      wx:if="{{ MsgItem.MessageType === 3 }}">
+                        <view class="uncheck-head">
+                            <rich-text nodes="{{ MsgItem.Content.content }}"></rich-text>
+                            <image src="https://images3.c-ctrip.com/train/2021/xiaochengxu/V8.40.6/zhifubao/iamge.png"
+                              alt="" />
+                        </view>
+                        <view class="uncheck-content">
+                            <rich-text wx:for="{{ MsgItem.Content.tipList }}"
+                              wx:for-item="tip"
+                              nodes="{{ tip.tipContent }}"></rich-text>
+                        </view>
+                    </view>
+                </block>
+            </block>
+
+            <!-- 省钱任务入口 -->
+            <template is="saveTaskBanner"
+              data="{{isShowSaveTaskPop, saveTaskInfo, saveTaskTips, saveRuleConfig}}"
+              wx:if="{{saveTaskInfo}}"></template>
+
+            <!--  省钱任务规则弹窗 -->
+            <view class="backmask {{showSaveRuleModal ? 'active' : ''}}"
+              bindtap="changeSaveModal"
+              catchtouchmove="preventBackMove"></view>
+            <view class="pop-botm pop-save-box {{showSaveRuleModal ? 'active' : ''}}"
+              catchtouchmove="preventBackMove">
+                <view class="pop-botm-hd">
+                    <text class="ifont-closed-line"
+                      bindtap="changeSaveModal" />
+                    <view class="tit">{{saveRuleConfig.pageTitle}}</view>
+                    <view class="btn-submit"></view>
+                </view>
+                <scroll-view scroll-y='true'
+                  class="pop-botm-bd pop-save-info">
+                    <rich-text nodes="{{saveRuleConfig.htmlContent}}"></rich-text>
+                </scroll-view>
+            </view>
+
+            <!-- 一键转抢banner -->
+            <template is="turn-to-grab-order-banner"
+              data="{{ticketInfo,grabShowInfo,defalutJLSuccessRateShow,defaultPackage,normalPackage}}"
+              wx:if="{{isShowTurnToGrab}}"></template>
+
+            <!-- 买加抢第二程 -->
+            <template is="second-ticbox"
+              data="{{multipleBookingAndGrabSegmentationInfo}}"
+              wx:if="{{multipleBookingAndGrabSegmentationInfo}}"></template>
+            <!-- 改签票 -->
+            <block wx:for="{{orderInfo.RescheduleTicketList}}"
+              wx:for-item="ticket">
+                <!-- 在改签抢中的票不展示 -->
+                <view class="order-ticbox">
+                    <view class="order-ticbox-hd">
+                        <view class="sequence-status"
+                          wx:if="{{multipleBookingAndGrabSegmentationInfo}}">
+                            <text class="route-squence">第{{multipleBookingAndGrabSegmentationInfo.currentRouteSequence}}程</text>
+                        </view>
+                        <block>
+                            <view class="top">
+                                <text class="num"
+                                  wx:if="{{ticket.ElectronicNumber}}">取票号：{{ticket.ElectronicNumber}}</text>
+                                <text class="tag-gaiqian orange">改签票</text>
+                                <view class="entrance"
+                                  wx:if="{{ticket.TicketEntrance}}">
+                                    检票口：{{ticket.TicketEntrance || ''}}
+                                    <view class="tips"
+                                      wx:if="{{entranceTipShow}}">仅供参考，请以车站为准</view>
+                                </view>
+                            </view>
+                        </block>
+
+                        <!-- 列车信息 -->
+                        <view class="tick">
+                            <view class="from">
+                                <view class="txt timestr"
+                                  wx:if="{{ticket.rescheduledDepartDate}}">{{ticket.rescheduledDepartDate}} <text wx:if="{{ticket.TimeZoneFlag}}"
+                                      class="{{ticket.TimeZoneFlag === 1 ? 'orange' : ''}}">{{ ticket.TimeZoneFlag === 1 ? '当地时间' : '北京时间'}}</text></view>
+                                <view class="time">{{ticket.rescheduledDepartTime}}</view>
+                                <view class="txt">{{ticket.DepartStation + '站'}}</view>
+                            </view>
+                            <view class="mid">
+                                <view class="checi">{{ticket.TrainNumber}}</view>
+                                <view class="transit"
+                                  bindtap="goTTReschedule"
+                                  data-index="{{index}}">经停信息</view>
+                            </view>
+                            <view class="to">
+                                <view class="txt timestr"
+                                  wx:if="{{ticket.rescheduledArriveDate}}"><text wx:if="{{ticket.TimeZoneFlag}}"
+                                      class="{{ticket.TimeZoneFlag === 2 ? 'orange' : ''}}">{{ ticket.TimeZoneFlag === 2 ? '当地时间' : '北京时间'}}</text> {{ticket.rescheduledArriveDate}}</view>
+                                <view class="time">{{ticket.rescheduledArriveTime}}
+                                    <!-- <text class="add">+1</text> -->
+                                </view>
+                                <view class="txt">{{ticket.ArriveStation + '站'}}</view>
+                            </view>
+                        </view>
+                    </view>
+
+                    <!-- 乘车人信息 -->
+                    <view class="order-ticbox-bd">
+                        <view class="item"
+                          wx:for="{{ticket.ReschedulePassengerList}}"
+                          wx:key="BirthDate"
+                          wx:for-item="pInfo"
+                          wx:for-index="pidx">
+                            <view class="txt">
+                                <text class="name">{{pInfo.PassengerName}}</text>
+                                <text class="tag-grey">{{reschedulePassengerType[pInfo.PassengerType - 1]}}</text>
+                                <view class="seat">
+                                    <!-- <text class="tag-seat">靠窗?</text> -->
+                                    {{pInfo.DealSeatNo || ''}}
+                                </view>
+                            </view>
+                            <view class="txt">
+                                <text class="tgrey"
+                                  wx:if="{{pInfo.PassengerType != 2}}">{{pInfo.IdentityTypeName == '身份证' ? '二代身份证': pInfo.IdentityTypeName}}
+                                {{pInfo.IdentityNo}}</text>
+                                <text class="tgrey"
+                                  wx:else="wx:else">使用{{(pInfo.RealName !== pInfo.PassengerName && pInfo.RealName) ? pInfo.RealName : '同行成人'}}的证件取票</text>
+                                <!-- <block class="tgrey"> <view class="order-tick__id_type">{{pInfo.IdentityTypeName}}</view> <view class="order-tick__id_no">{{pInfo.IdentityNo}}</view> </block> -->
+                                <!-- <block wx:else class="tgrey"> <view class="order-tick__id_type">使用{{(pInfo.RealName !== pInfo.PassengerName && pInfo.RealName) ? pInfo.RealName : '同行成人'}}的证件取票</view> <view class="order-tick__id_no"></view> </block> -->
+                                <view class="price">{{pInfo.SeatName || ''}}
+                                    ¥
+                                    {{pInfo.DealTicketPrice || pInfo.TicketPrice}}
+                                </view>
+                            </view>
+                            <view class="status">
+                                <text class="tred">{{pInfo.TicketStatus}}</text>
+                                <view class="blankDiv"></view>
+                                <view class="child-declare-view"
+                                  wx:if="{{(pInfo.CanAddFreeChild || pInfo.FreePassengerInfo) && isIssueTicketSuccess}}">
+                                    <view class="child-declare-box"
+                                      wx:if="{{showChildTip && pInfo.CanAddFreeChild}}">携带6岁以下儿童需申报哦~
+                                        <view class="separate-box" /><text class="ifont-closed-line"
+                                          bindtap="closeChildTip" />
+                                    </view>
+                                    <image src='https://images3.c-ctrip.com/train/2023/app/8.60/xiaochengxv/ertongshenbao/img-triggle.png'
+                                      class="child-triangle"
+                                      wx:if="{{showChildTip && pInfo.CanAddFreeChild}}" />
+                                    <button class="btn-grey btn-childdeclare {{pInfo.FreePassengerInfo ? 'disabled' : ''}}"
+                                      hover-class="btn-refund_hover"
+                                      data-index="{{pidx}}"
+                                      data-tickindex="{{index}}"
+                                      data-canaddfreechild="{{pInfo.CanAddFreeChild}}"
+                                      data-isfromreschedule="{{true}}"
+                                      bindtap="goChildrenDeclare">儿童申报</button>
+                                </view>
+                                <button wx:if="{{pInfo.ChangeButtonDisplay}}"
+                                  class="btn-grey"
+                                  hover-class="btn-refund_hover"
+                                  data-t-index="{{index}}"
+                                  data-p-index="{{pidx}}"
+                                  bindtap="rescheduleTicketRescheduled"
+                                  id="c_train_wx_orderdetail_reschedule">改签</button>
+                                <button wx:if="{{pInfo.ReturnButtonDisplay}}"
+                                  class="btn-grey"
+                                  hover-class="btn-refund_hover"
+                                  data-t-index="{{index}}"
+                                  data-p-index="{{pidx}}"
+                                  bindtap="refundTicketRescheduled">退票</button>
+                                <button wx:if="{{pInfo.GrabTicketDetailButtonDisplay && pInfo.RescheduleType != 9}}"
+                                  class="btn-grey btn-resc-grab-detail disabled"
+                                  hover-class="btn-refund_hover"
+                                  data-type="change"
+                                  data-index="{{pidx}}"
+                                  data-tindex="{{ index }}"
+                                  bindtap="rescGrabDetail">查看进度</button>
+                                <block wx:if="{{ isShareEntranceOpen }}">
+                                    <button wx:if="{{isSuccess && orderInfo.TicketInfos.length === 1}}"
+                                      class="btn-grey"
+                                      data-index="{{index}}"
+                                      hover-class="btn-grey_hover"
+                                      id="journey"
+                                      bindtap="shareTripPage"
+                                      data-ubt-key="c_train_wx_orderdetail_sharejourney">分享</button>
+                                </block>
+                                <block wx:else>
+                                    <button wx:if="{{isSuccess && orderInfo.TicketInfos.length === 1}}"
+                                      class="btn-grey"
+                                      open-type="share"
+                                      hover-class="btn-grey_hover"
+                                      id="journey"
+                                      bindtap="noop"
+                                      data-ubt-key="c_train_wx_orderdetail_sharejourney">分享</button>
+                                </block>
+                            </view>
+                            <view class="free-child-view"
+                              wx:if="{{pInfo.FreePassengerInfo}}">
+                                <view class="free-child-line" />
+                                <view class="free-child-box">
+                                    <view class="free-child-left">
+                                        <view class="free-child-up">{{pInfo.FreePassengerInfo.PassportName}}
+                                            <view class="free-child-tag">免费乘车儿童</view>
+                                        </view>
+                                        <view class="free-child-down">{{pInfo.FreePassengerInfo.PassportTypeName}} {{pInfo.FreePassengerInfo.PassportNo}}</view>
+                                    </view>
+                                    <i wx:if="{{isIssueTicketSuccess}}"
+                                      class="ifont-del"
+                                      data-index="{{pidx}}"
+                                      data-tickindex="{{index}}"
+                                      data-isfromreschedule="{{true}}"
+                                      data-freepassenger="{{pInfo.FreePassengerInfo}}"
+                                      bindtap="handleFreeChild"></i>
+                                </view>
+                            </view>
+                        </view>
+                        <!-- <view class="item"> <view class="txt"> <text class="name">张晗玮</text><text class="tag-grey">成人票</text> <view class="seat"><text class="tag-seat">靠窗</text>04车10F号</view> </view> <view class="txt"> <text class="tgrey">身份证 393928****0390</text>
+                        <view class="price">二等座 ¥ 50</view> </view> <view class="status"> <text class="tred">购票成功</text> <button class="btn-grey" hover-class="btn-grey_hover">改签</button> <button class="btn-grey" hover-class="btn-grey_hover">退票</button> </view> </view> -->
+                    </view>
+                </view>
+            </block>
+            <!-- 原始票 -->
+            <view class="order-ticbox"
+              wx:for="{{orderInfo.TicketInfos}}"
+              wx:for-item="TckInfo"
+              wx:for-index="TickIndex">
+                <view class="order-ticbox-hd">
+                    <view class="sequence-status"
+                      wx:if="{{multipleBookingAndGrabSegmentationInfo}}">
+                        <text class="route-squence">第{{multipleBookingAndGrabSegmentationInfo.currentRouteSequence}}程</text>
+                    </view>
+                    <block wx:if="{{!TckInfo.hasChanged}}">
+                        <view class="top ElectronicNumber"
+                          wx:if="{{TckInfo.ElectronicNumber}}">
+                            <view class="num">取票号：{{TckInfo.ElectronicNumber || ''}}</view>
+                            <view class="entrance"
+                              wx:if="{{TckInfo.TicketEntrance && !hideTicketEntrance }}">
+                                检票口：{{TckInfo.TicketEntrance}}
+                                <view class="tips"
+                                  wx:if="{{entranceTipShow}}">仅供参考，请以车站为准</view>
+                            </view>
+                        </view>
+                        <view class="top OrderNumber"
+                          wx:else>
+                            <view class="num">订单号：{{orderInfo.OrderId}}</view>
+                            <view class="entrance"
+                              wx:if="{{TckInfo.TicketEntrance}}">
+                                检票口：{{TckInfo.TicketEntrance || ''}}
+                                <view class="tips"
+                                  wx:if="{{entranceTipShow}}">仅供参考，请以车站为准</view>
+                            </view>
+                        </view>
+                    </block>
+
+                    <!-- 列车信息 -->
+                    <view class="tick">
+                        <view class="from">
+                            <view class="txt timestr"
+                              wx:if="{{TckInfo.DepartDateStr}}">{{TckInfo.DepartDateStr}} <text wx:if="{{TckInfo.TimeZoneFlag}}"
+                                  class="{{TckInfo.TimeZoneFlag === 1 ? 'orange' : ''}}">{{ TckInfo.TimeZoneFlag === 1 ? '当地时间' : '北京时间'}}</text></view>
+                            <view class="time">{{TckInfo.ShowDepartTime || TckInfo.DepartTime}}</view>
+                            <view class="txt">{{TckInfo.DepartStation + '站'}}</view>
+                        </view>
+                        <view class="mid">
+                            <view class="checi">{{TckInfo.TrainNumber}}</view>
+                            <view class="transit"
+                              bindtap="goTTOrigin"
+                              data-index="{{TickIndex}}">经停信息</view>
+                        </view>
+                        <view class="to">
+                            <view class="txt timestr"
+                              wx:if="{{TckInfo.ArriveDateStr}}"><text wx:if="{{TckInfo.TimeZoneFlag}}"
+                                  class="{{TckInfo.TimeZoneFlag === 2 ? 'orange' : ''}}">{{ TckInfo.TimeZoneFlag === 2 ? '当地时间' : '北京时间'}}</text> {{TckInfo.ArriveDateStr}}</view>
+                            <view class="time">{{TckInfo.ShowArriveTime || TckInfo.ArriveTime}}
+                                <!-- <text class="add">+1</text> -->
+                            </view>
+                            <view class="txt">{{TckInfo.ArriveStation + '站'}}</view>
+                        </view>
+                    </view>
+                </view>
+
+                <!-- 乘车人信息 -->
+                <view class="order-ticbox-bd">
+                    <view class="item {{pInfo.RealTicketInfo.TicketStatusCode === 5 ? 'disabled' : ''}}"
+                      wx:for="{{TckInfo.PassengerInfos}}"
+                      wx:key="BirthDate"
+                      wx:for-item="pInfo">
+                        <view class="txt">
+                            <text class="name">{{pInfo.TicketPassengerName}}</text>
+                            <text class="tag-grey">{{pInfo.TicketTypeName}}</text>
+                            <view class="seat">
+                                <!-- <text class="tag-seat">靠窗?</text> -->
+                                {{pInfo.RealTicketInfo.DealSeatNo || ''}}
+                            </view>
+                        </view>
+                        <view class="txt">
+                            <text class="tgrey">{{pInfo.IdentityTypeName == '身份证' ? '二代身份证': pInfo.IdentityTypeName}}
+                            {{pInfo.IdentityNo}}</text>
+                            <view class="price">
+                                <view class="icon-jing"
+                                  wx:if="{{pInfo.IsSilent}}">静</view>{{pInfo.RealTicketInfo.SeatName || (TckInfo.SeatName || '')}}
+                                ¥
+                                {{pInfo.RealTicketInfo.DealTicketPrice || TckInfo.TicketPrice}}
+                            </view>
+                        </view>
+                        <block wx:if="{{isNoSeat == 1}}">
+                            <view class="noseat-tips">
+                                <image class="noseat-img"
+                                  src="https://images3.c-ctrip.com/train/2023-3/app-maipiao/5.18/jifenbuzugoumai/img-gg.png" />
+                                <text class="noseat-txt">抱歉，您预定的座位无票，已为您选择其他有票座位</text>
+                            </view>
+                        </block>
+                        <view wx:else
+                          class="status">
+                            <text wx:if="{{preholdSeatId == 2}}">占座中</text>
+                            <text wx:elif="{{IsRescGrabOrder}}"
+                              class="tred">{{(orderInfo.OrderStatusBarInfo.StatusName)}}</text>
+                            <text wx:else
+                              class="{{pInfo.RealTicketInfo.TicketStatusCode === 5 ? 'tgrey' : 'tred'}}">{{(pInfo.RealTicketInfo.TicketStatus || orderInfo.OrderStatusBarInfo.StatusName)}}</text>
+                            <!-- <text class="tred">{{(pInfo.RealTicketInfo.TicketStatus || orderInfo.OrderStatusName)}}</text> -->
+                            <!-- <button class="btn-grey" hover-class="btn-grey_hover" disabled="true">改签</button> -->
+                            <view class="blankDiv"></view>
+                            <view class="child-declare-view"
+                              wx:if="{{(pInfo.CanAddFreeChild || pInfo.FreePassengerInfo) && isIssueTicketSuccess}}">
+                                <view class="child-declare-box"
+                                  wx:if="{{showChildTip && pInfo.CanAddFreeChild}}">携带6岁以下儿童需申报哦~
+                                    <view class="separate-box" /><text class="ifont-closed-line"
+                                      bindtap="closeChildTip" />
+                                </view>
+                                <image src='https://images3.c-ctrip.com/train/2023/app/8.60/xiaochengxv/ertongshenbao/img-triggle.png'
+                                  class="child-triangle"
+                                  wx:if="{{showChildTip && pInfo.CanAddFreeChild}}" />
+                                <button class="btn-grey btn-child {{pInfo.FreePassengerInfo ? 'disabled' : ''}}"
+                                  hover-class="btn-refund_hover"
+                                  data-index="{{index}}"
+                                  data-tickindex="{{TickIndex}}"
+                                  data-canaddfreechild="{{pInfo.CanAddFreeChild}}"
+                                  bindtap="goChildrenDeclare">儿童申报</button>
+                            </view>
+                            <button wx:if="{{pInfo.RealTicketInfo.ChangeButtonDisplay}}"
+                              class="btn-grey"
+                              hover-class="btn-refund_hover"
+                              data-index="{{index}}"
+                              data-tickindex="{{TickIndex}}"
+                              bindtap="rescheduleTicket"
+                              id="c_train_wx_orderdetail_reschedule">改签</button>
+                            <!-- <button class="btn-grey" hover-class="btn-grey_hover">退票</button> -->
+                            <button wx:if="{{pInfo.changing}}"
+                              class="btn-grey"
+                              hover-class="btn-refund_hover"
+                              data-index="{{index}}"
+                              bindtap="rescGrabDetail">查看进度</button>
+                            <button wx:if="{{pInfo.RealTicketInfo.ReturnButtonDisplay}}"
+                              class="btn-grey {{!(pInfo.RealTicketInfo && pInfo.RealTicketInfo.ReturnButtonDisplay) || noRefundType == 'expire' || noRefundType == 'time' ? 'disabled' : ''}}"
+                              hover-class="btn-refund_hover"
+                              data-index="{{index}}"
+                              data-tickindex="{{TickIndex}}"
+                              bindtap="refundTicket">退票</button>
+                            <block wx:if="{{ isShareEntranceOpen }}">
+                                <button wx:if="{{isSuccess && (!orderInfo.RescheduleTicketList.length || IsRescGrabOrder) && orderInfo.TicketInfos.length === 1}}"
+                                  class="btn-grey"
+                                  hover-class="btn-grey_hover"
+                                  id="journey"
+                                  bindtap="shareTripPage"
+                                  data-index="{{TickIndex}}"
+                                  data-ubt-key="c_train_wx_orderdetail_sharejourney">分享</button>
+                            </block>
+                            <block wx:else>
+                                <button wx:if="{{isSuccess && (!orderInfo.RescheduleTicketList.length || IsRescGrabOrder) && orderInfo.TicketInfos.length === 1}}"
+                                  class="btn-grey"
+                                  open-type="share"
+                                  hover-class="btn-grey_hover"
+                                  id="journey"
+                                  bindtap="noop"
+                                  data-ubt-key="c_train_wx_orderdetail_sharejourney">分享</button>
+                            </block>
+
+                        </view>
+                        <view class="free-child-view"
+                          wx:if="{{pInfo.FreePassengerInfo && isIssueTicketSuccess}}">
+                            <view class="free-child-line" />
+                            <view class="free-child-box">
+                                <view class="free-child-left">
+                                    <view class="free-child-up">{{pInfo.FreePassengerInfo.PassportName}}
+                                        <view class="free-child-tag">免费乘车儿童</view>
+                                    </view>
+                                    <view class="free-child-down">{{pInfo.FreePassengerInfo.PassportTypeName}} {{pInfo.FreePassengerInfo.PassportNo}}</view>
+                                </view>
+                                <i class="ifont-del"
+                                  data-index="{{index}}"
+                                  data-tickindex="{{TickIndex}}"
+                                  data-freepassenger="{{pInfo.FreePassengerInfo}}"
+                                  bindtap="handleFreeChild"></i>
+                            </view>
+                        </view>
+                    </view>
+
+                    <view class="free-child-view free-child-view-pay"
+                      wx:if="{{freeDeclareChildren.length > 0 && !isIssueTicketSuccess}}"
+                      wx:for="{{freeDeclareChildren}}"
+                      wx:key="index"
+                      wx:for-item="item">
+                        <view class="free-child-box free-child-box-pay">
+                            <view class="free-child-left">
+                                <view class="free-child-up">{{item.PassportName}}
+                                    <view class="free-child-tag">免费乘车儿童</view>
+                                </view>
+                                <view class="free-child-down">{{item.PassportTypeName}} {{item.PassportNo}}</view>
+                            </view>
+                        </view>
+                    </view>
+
+                </view>
+
+                <!-- 垫付黄条提示 -->
+                <view class="order-ticbox-yellow-tip"
+                  wx:if="{{ orderInfo.MiddleMessageList && orderInfo.MiddleMessageList.length }}">
+                    <text class="ifont-detail"></text><rich-text wx:if="{{ orderInfo.MiddleMessageList }}"
+                      nodes="{{orderInfo.MiddleMessageList[0].Content}}"></rich-text>
+                </view>
+
+                <!-- 买票出票失败中部黄条提示 -->
+                <view class="order-ticbox-yellow-tip"
+                  wx:if="{{ orderInfo.MiddleMessage }}">
+                    <text class="ifont-detail"></text><rich-text nodes="{{orderInfo.MiddleMessage}}"></rich-text>
+                </view>
+            </view>
+
+            <!-- 改签抢票 -->
+            <!-- <view class="resc-grab-ticbox" wx:if="{{rescGrabInfo}}">
+                <view class="resc-hd" bindtap="onTapOpenRescGrabDetail">
+                    <view class="tit">改签抢任务</view>
+                    <view class="more" wx:if="{{!showRescGrabDetail}}">查看详情<text class="ifont-arr " ></text></view>
+                    <view class="more" wx:else>收起详情<text class="ifont-arr open" ></text></view>
+                </view>
+                <view class="resc-bd">
+                    <view class="brief" wx:if="{{!showRescGrabDetail}}">
+                        {{rescGrabInfo.StationsStr}} {{rescGrabInfo.DepartDateStr}} {{rescGrabInfo.JLAlternativeTrain}} {{rescGrabInfo.JLAlternativeSeat}}
+                        <view class="price">¥{{rescGrabInfo.TicketPrice}}</view>
+                    </view>
+                    <view class="detail-box" wx:else>
+                        <view class="item">
+                            <view class="label">行程</view>
+                            <view class="txt">{{rescGrabInfo.StationsStr}} {{rescGrabInfo.TimeStr}}</view>
+                        </view>
+                        <view class="item">
+                            <view class="label">出行日期</view>
+                            <view class="txt">{{rescGrabInfo.JLAlternativeDateStr}}</view>
+                        </view>
+                        <view class="item">
+                            <view class="label">车次</view>
+                            <view class="txt">{{rescGrabInfo.JLAllTrainNumbers}}</view>
+                        </view>
+                        <view class="item">
+                            <view class="label">坐席</view>
+                            <view class="txt">{{rescGrabInfo.JLAlternativeSeat}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view> -->
+
+        </view>
+
+        <!-- 购票成功返现banner -->
+        <template is="cashback"
+          data="{{cashbackInfo}}"
+          wx:if="{{cashbackInfo}}"></template>
+
+        <!-- 砍价banner -->
+        <block wx:if="{{bargainInfo}}">
+            <template is="bargain-bar"
+              data="{{...bargainInfo}}"></template>
+        </block>
+
+        <!-- 出行成功获得返现券banner -->
+        <block wx:if="{{cashBackCouponInfo && cashBackCouponInfo.IsShow && !configs.isHideGuideApp}}">
+            <template is="cashback-coupon"
+              data="{{...cashBackCouponInfo}}"></template>
+        </block>
+
+        <!-- 收藏小程序 -->
+        <view class="collect-box"
+          id="c_train_wx_orderdetail_collect"
+          wx:if="{{!hasCollected && isCtripApp && collectFlag}}">
+            <icon class="icon-collect"></icon>
+            <view class="txt">收藏小程序，出行更便捷</view>
+            <button class="btn-collect"
+              hover-class="btn-collect_hover"
+              bindtap="showGuide">收藏</button>
+        </view>
+
+        <!-- 改签抢模块 -->
+        <view class="order-resc-grab"
+          wx:if="{{rescGrabShowInfo && orderInfo.IsCanGrabTicket && isSuccess && rescGrabShowInfo.Title && (!isShowChangeSeat)}}">
+            <view class="sub">
+                <view class="title">
+                    <icon class="icon-grab"></icon>购票不满意？推荐使用改签抢
+                </view>
+                <view class="title"
+                  bindtap="onClickRescGrabDesc">{{rescGrabShowInfo.DescTitle}}</view>
+            </view>
+            <view class="cont">
+                <view class="content">
+                    <view class="tit">
+                        <rich-text nodes="{{rescGrabShowInfo.Title}}"></rich-text>
+                    </view>
+                    <view class="txt">
+                        <rich-text nodes="{{rescGrabShowInfo.SubTitle}}"></rich-text>
+                    </view>
+                </view>
+                <button class="btn-insur"
+                  bindtap="onClickRescGrab">{{rescGrabShowInfo.ButtonName}}</button>
+            </view>
+        </view>
+
+        <!-- 在线换座入口 -->
+        <view class="changeSeat-entrance"
+          wx:if="{{isShowChangeSeat}}">
+            <image src="{{OnlineChangeCardInfo.Image}}"
+              class="image" />
+            <view class="cont">
+                <view class="content">
+                    <view class="tit">
+                        <rich-text nodes="{{OnlineChangeCardInfo.Title}}"></rich-text>
+                    </view>
+                    <view class="txt">
+                        <rich-text nodes="{{OnlineChangeCardInfo.SubTitle}}"></rich-text>
+                    </view>
+                </view>
+            </view>
+            <button class="btn-insur"
+              bindtap="goToOnline">{{OnlineChangeCardInfo.ButtonList[0].Name}}</button>
+        </view>
+
+        <!-- 福利企微加群 -->
+        <template is="trip-welfare"
+          wx:if="{{wechatGroupData.IsShow}}"
+          data="{{ data: wechatGroupData.WelfareInfo }}" />
+
+        <!-- 工具栏功能入口 -->
+        <template is="func-tools-entrance"
+          wx:if="{{ isSuccess && effectConfig.funcToolsEntrance.isShow }}"
+          data="{{ list: effectConfig.funcToolsEntrance.list }}" />
+
+        <!-- 取消订单 -->
+        <view class="order-btn-box"
+          wx:if="{{orderInfo.OrderCanCancel && !isPreHolding}}">
+            <button class="btn-cancel"
+              hover-class="btn-cancel_hover"
+              id="c_train_wx_orderdetail_cancelorder"
+              bindtap="cancelOrder">取消订单</button>
+        </view>
+        <!-- <view class="order-insur" wx:if='{{mark==="free"}}'>
+            <icon class="icon-moneybag"></icon>
+            <view class="cont">
+                <view class="tit">关注公众号赢免单机会</view>
+                <view class="txt">点击去关注，每周抽免单，100%中奖</view>
+            </view>
+            <button class="btn-insur" bindtap='onBannerClickToFree' data-show-type='show'>去关注</button>
+        </view>-->
+        <view class="order-insur"
+          wx:if='{{insurancePromptEntrance.isShow}}'>
+            <icon class="icon-insur"></icon>
+            <view class="cont">
+                <view class="tit">{{insurancePromptEntrance.saleProductEntranceInfo.Title}}</view>
+                <view class="txt">{{insurancePromptEntrance.saleProductEntranceInfo.SubTitle}}</view>
+            </view>
+            <button class="btn-insur"
+              bindtap='toggleShowInsurancePrompt'
+              data-show-type='show'>添加保障</button>
+        </view>
+
+        <view class="order-insur"
+          wx:if="{{transitInfo && configs.splittransitflag}}">
+            <view class="cont">
+                <view class="tit">预订另一程</view>
+                <view class="txt">{{transitInfo.DepartStation}} - {{transitInfo.ArriveStation}} {{transitInfo.TrainNumber}} 车次</view>
+            </view>
+            <button class="btn-insur"
+              style="background: -webkit-linear-gradient(left,#FFA50A,#FF7700);color: #fff"
+              bindtap="toBookingTransit">预订</button>
+        </view>
+
+        <!-- 其他功能模块 -->
+        <view class="qptj"
+          wx:if="{{isShowRobSame}}"
+          id="c_train_wx_orderdetail_robsamebar"
+          bindtap="buySame"
+          data-type="book">
+            <icon class="icon-qptj"></icon>
+            <view class="tit">去抢票</view>
+            <view class="txt">将为您持续监控扫余票</view>
+        </view>
+        <view class="bupiao-tit mt5"
+          wx:if="{{GetOnTrainThenByTicketSoluList.length}}">其它方案推荐</view>
+        <view wx:if="{{GetOnTrainThenByTicketSoluList.length}}">
+            <block wx:for="{{GetOnTrainThenByTicketSoluList}}"
+              wx:for-item="mainTrainItem"
+              wx:for-index="mIdx">
+                <view class="bupiao-box">
+                    <view class="tit">{{mainTrainItem.TrainNum}}
+                        <text>{{mainTrainItem.SpendTime}}</text>
+                    </view>
+                    <view class="bupiao-box-list"
+                      wx:for="{{mainTrainItem.SolutionInfoList}}"
+                      wx:for-item="solItem"
+                      wx:for-index="solIdx"
+                      data-ubt-key="{{mainTrainItem.TrainNum + '_' + solIdx}}"
+                      data-m-idx="{{mIdx}}"
+                      data-sol-idx="{{solIdx}}"
+                      data-date="{{getOnQueryDate}}"
+                      bindtap="clickGetOnItem">
+                        <template is="strideTrain"
+                          data="{{solItem, mainTrainItem}}"></template>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="order-services"
+          wx:if='{{orderInfo.ExpansionList.length > 0}}'>
+            <view class="order-services-hd {{showExpansionList ? 'closed ' : ''}}"
+              bindtap='toggleShowExpandList'>附加服务<text class="ifont-arr"></text></view>
+            <!--addclass="closed-->
+            <block wx:if='{{showExpansionList}}'>
+                <view class="order-services-bd">
+                    <view class="item"
+                      wx:for='{{orderInfo.ExpansionList}}'>
+                        <view class="label"
+                          data-item="{{item}}"
+                          bindtap="onClickJumpToDesc">
+                            {{item.ExName}}
+                            <image wx:if="{{item.Type === 1}}"
+                              src="https://images3.c-ctrip.com/train/2022/app/8.54/zhuliucheng/taocanxuanze/ic-hs.png"
+                              class="desc-image" />
+                            <text class="tag {{orderInfo.RefundAmount ? 'tag-grey' : ''}}"
+                              wx:if="{{item.StatusName}}">{{item.StatusName}}</text>
+                            <text wx:if="{{ item.ExName === '携程全能抢票' && omnipotentInfo }}"
+                              class="ifont-qus"
+                              bindtap="onClickShowOmniPop"></text>
+                        </view>
+                        <view class="dash"></view>
+                        <view class="rbox">{{item.ExValue}}</view>
+                        <view class="btn"
+                          wx:if="{{ expansionBtn }}"
+                          data-index="{{ index }}"
+                          bindtap="onClickApply">{{ item.ButtonName || '' }}</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="order-banner"
+          wx:if="{{daigoushareswitch && activity}}"
+          id="c_train_wx_orderdetail_daigoushare"
+          bindtap="goDaigouShare">
+            <image src="{{orderBannerImg}}"
+              class="img-banner">
+            </image>
+        </view>
+
+        <!-- 退款模块 -->
+        <view class="order-layout">
+            <view class="train-list order-list"
+              wx:if="{{orderInfo.RefundInfoUrl}}"
+              bindtap="goRefundUrl">
+                <view class="item greyarr">
+                    <icon class="icon-refund"></icon>您有￥{{orderInfo.RefundAmount}}退款 已退至您的支付账户
+                </view>
+            </view>
+            <view class="qp-tongdao-item bg-green care-refund"
+              wx:if="{{claimDisplay}}">
+                <view class="qp-tongdao-item-hd"
+                  bindtap="toggleCareRefundFlag">
+                    <view class="cont">
+                        <view class="tit">退票关怀金<text class="ifont-qus"
+                              catchtap="onClickGoClaim"></text></view>
+                    </view>
+                    <view class="rbox">{{showCareRefundFlag ? '收起' : '展开'}}<text class="ifont-arr {{showCareRefundFlag ? 'open' : 'closed'}}"></text></view>
+                </view>
+
+                <view class="care-refund-detail"
+                  wx:if="{{showCareRefundFlag}}">
+                    <view class="priceList"
+                      wx:for="{{claimPriceList}}"
+                      wx:for-item="item">
+                        <view class="desc">
+                            <rich-text class=""
+                              nodes="{{item.ClaimPriceDesc}}">
+                            </rich-text>
+                        </view>
+                        <button class="btn"
+                          bindtap="onCareRefundClick"
+                          data-item="{{item}}"
+                          wx:if="{{item.Status === 0}}">
+                            {{item.ButtonName}}
+                        </button>
+                        <view class="btn-disable"
+                          wx:else>
+                            {{item.ButtonName}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 春节拼团结果入口-->
+            <block>
+                <template is="spring-pintuan-result"
+                  data="{{teamupInfo}}"
+                  wx:if="{{teamupInfo && teamupInfo.IsShow}}"></template>
+            </block>
+
+            <!-- 购票成功(中转 改签 往返) 专车 酒店服务-->
+            <block wx:if="{{!isTrainApp && isShowHotelSuccess && hotelConfig.showHotel && hotelConfig.handle && hotelConfig.cityname}}">
+                <!-- 酒店服务 -->
+                <!-- hotelConfigHandle 后台下发状态 -->
+                <template is="hotel"
+                  data="{{hotelConfig,hotelList,jumpHotelIndexUrl}}" />
+            </block>
+
+            <!-- 轮播图banner -->
+            <view style="margin: 0 16rpx"
+              wx:if="{{isSuccess}}">
+                <swiper-banner Width="718"
+                  Height="125"
+                  Radius="10"
+                  bannerItemList="{{bannerItemList}}"
+                  pageId="10320640941"
+                  arrivedCity="{{arrivedCity}}"
+                  arrivedStation="{{arrivedStation}}"
+                  clickUbtKey="196828"
+                  exposureUbtKey="196827"></swiper-banner>
+            </view>
+            <!-- 专车模块 -->
+            <template is="car"
+              wx:if="{{carRecommendInfo.IsShow && isShowHotelSuccess}}"
+              data="{{carRecommendInfo}}" />
+
+            <!-- 客服模块 -->
+            <!-- <template is="customerService" data="{{QuestionList}}" wx:if="{{configs.guessbox && !isPreHolding && QuestionList.length}}"></template> -->
+            <customer-service questionList="{{QuestionList}}"
+              questionsUrl="{{QuestionsUrl}}"
+              pageId="10650037941"
+              wx:if="{{configs.guessbox && !isPreHolding && QuestionList.length}}"></customer-service>
+        </view>
+
+
+
+        <!-- 客服icon -->
+        <movable-area>
+            <movable-view class="icon-customer-service"
+              direction="all"
+              x="0"
+              y="0"
+              bindtap="toIMPage"
+              wx:if="{{QuestionsUrl}}">
+                <image src="https://images3.c-ctrip.com/train/2021/xiaochengxu/8.35/icon_kefu@2x.png">
+                </image>客服
+            </movable-view>
+        </movable-area>
+
+        <!--支付明细-->
+        <view class="tip-black pay-detail-bd {{isOpenPrice ? 'active' : ''}}"
+          wx:if="{{orderInfo.EnablePayOrder}}"
+          bindtap="hidePrice">
+            <view class="pay-detail tip-bot {{isOpenPrice ? 'active' : ''}}">
+                <view class="train-list">
+                    <view class="item"
+                      wx:for="{{orderInfo.OrderPriceList}}"
+                      wx:for-item="priceItem">
+                        <text class="label"
+                          data-item="{{priceItem}}"
+                          bindtap="onClickJumpToDesc">{{priceItem.OrderPriceName}}<text wx:if="{{priceItem.DescUrl}}"
+                          class="ifont-qus" /></text>
+                        <view class="fr cprice">{{priceItem.OrderPriceValue}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+
+        <!-- 支付按钮 -->
+        <view class="pay-box"
+          wx:if="{{orderInfo.EnablePayOrder}}">
+            <view class="cont"
+              bindtap="openPrice">
+                <text class="label">订单总额</text>
+                <text class="price">{{orderInfo.IsCanPointsPay ? 0 : orderInfo.OrderAmount}}</text>
+                <text class="ifont-arr {{isOpenPrice ? 'open' : ''}}"></text>
+            </view>
+            <form bindsubmit="paySubmit"
+              report-submit="true">
+                <button class="btn-pay"
+                  formType="submit"
+                  bindtap="noop"
+                  id="c_train_wx_orderdetail_paysubmit">{{orderInfo.IsCanPointsPay ? '立即兑换' : '去支付'}}</button>
+            </form>
+        </view>
+
+        <!-- 底部其他吸底按钮 -->
+        <view class="order-fixed-btn {{isIphoneX ? 'iphone':''}}"
+          wx:if="{{!intelligentSegmentDisplay && (orderInfo.OrderStatus == 5 || isShowRobSame || (!isShowRobSame && isShowBuyAgain && orderInfo.TicketInfos.length == 1 || isTimeOut) || isShowBuyReturn)}}">
+            <button class="btn-submit"
+              hover-class="btn-submit_hover"
+              wx:if="{{orderInfo.OrderStatus == 5}}"
+              bindtap="onPullDownRefresh">更新购票进度</button>
+            <button class="btn-submit"
+              hover-class="btn-submit_hover"
+              wx:if="{{isShowRobSame}}"
+              bindtap="buySame"
+              id="c_train_wx_orderdetail_gorob"
+              data-type="list">查看当天其他车次</button>
+            <button class="btn-submit"
+              hover-class="btn-sumbit_hover"
+              wx:if="{{!isShowRobSame && isShowBuyAgain && orderInfo.TicketInfos.length == 1 || isTimeOut}}"
+              bindtap="buySame"
+              id="c_train_wx_orderdetail_buyagain"
+              data-type="list">重新购票</button>
+            <button class="btn-submit"
+              hover-class="btn-submit_hover"
+              wx:if="{{isShowBuyReturn}}"
+              bindtap="buySame"
+              data-type="list-cal"
+              id="c_train_wx_orderdetail_buyreturn">购买返程</button>
+        </view>
+    </block>
+    <!-- 新的订单详情页 end -->
+</view>
+
+<block wx:if="{{NoSeatModal}}">
+    <template is="NoSeatModal"
+      data="{{...NoSeatModal}}"></template>
+</block>
+
+<view class="refresh">下拉可刷新订单状态</view>
+
+<view class="pop-add-tips"
+  wx:if="{{(popType == 'user-tips' && ((isIOS && canAddMiniapp) || isAndroid))}}"
+  bindtap="hideBackDrop">
+    <image src="http://images3.c-ctrip.com/train/wxapp/add-xcx.png"
+      class="img-tips"
+      wx:if="{{isIOS}}">
+    </image>
+    <image src="http://images3.c-ctrip.com/train/wxapp/add-zm.png"
+      class="img-tips"
+      wx:if="{{isAndroid}}">
+    </image>
+</view>
+
+<template is="user-tips"
+  data="{{isIOS, isAndroid}}"
+  wx:if="{{(popType == 'user-tips' && (isIOS && !canAddMiniapp))}}"></template>
+
+<!-- 支付成功 -->
+<template is="pay-success"
+  wx:if="{{popType == 'pay-success-popup'}}"></template>
+
+<!-- 港铁弹窗 -->
+<template is="hongkong"
+  wx:if="{{popType === 'hongkong'}}"></template>
+
+<!-- 退票弹窗 -->
+<template is="refund"
+  data="{{refundInfo}}"
+  wx:if="{{popType == 'refund'}}"></template>
+
+<!-- 12306提示 -->
+<template is="12306tips"
+  data="{{orderInfo, textConfigAbout12306}}"
+  wx:if="{{popType == '12306ALERT' && isOpen12306Config}}"></template>
+
+<!-- 关注公众号免单 -->
+<template is="free-order"
+  wx:if="{{freeOrderModalConfig.open && popType == 'FREEORDERMODAL'}}"></template>
+
+<!-- 关注公众号免单角标 -->
+<template is="free-order-icon"
+  data="{{hideIcon}}"
+  wx:if="{{isSuccess && freeOrderIconConfig.open &&( isShowFreeOrder || mark==='free')  }}"></template>
+
+<!-- 关注公众号免单banner
+ <template is="free-order-banner" wx:if="{{mark==='free'}}"></template>-->
+<!-- 行程状态banner
+<template is="itineray-status" wx:if="{{mark==='itineray'}}"></template>-->
+
+<!-- 订单完成页发券弹窗-->
+<template is="coupon-dialog"
+  wx:if="{{ popType == 'COUPONMODAL'}}"
+  data="{{couponList}}"></template>
+
+<!-- 保险 -->
+<template is="insurance"
+  data="{{insurancePromptEntrance}}"
+  wx:if="{{showInsurancePrompt}}"></template>
+
+<!-- 酒店服务弹窗 -->
+<template is="hotel-pop"
+  data="{{orderInfo, hotelConfig}}"
+  wx:if="{{popType == 'hotel' && hotelConfig.handle && isSuccess && hotelConfig.cityname}}"></template>
+
+<!-- 电子客票 -->
+<template is="elec-ticket-pop"
+  data="{{elecTicketPopType, elecTicketPopText}}"
+  wx:if="{{popType === 'ELECTICKET'}}"></template>
+
+<!-- 砍价 -->
+
+<!-- 乘客核验 -->
+<template is="mobilecheckPop"
+  data="{{AlertInfo: orderInfo.AlertInfo}}"
+  wx:if="{{popType == 'mobileCheck'}}"></template>
+
+<!-- 乘客信息确认 -->
+<template is="infoCheck"
+  data="{{PassengerInfoList: orderInfo.TicketInfos[0].PassengerInfos}}"
+  wx:if="{{popType == 'infoCheck'}}"></template>
+
+<!-- 取消订单 -->
+<template is="cancel-order"
+  data="{{CancelAlertInfo}}"
+  wx:if="{{popType == 'cancelOrder'}}"></template>
+
+<!-- 乘车人联系方式未核验 -->
+<template is="check-vs"
+  data="{{PayTypeList, checkVsTitle, checkVsContent, checkVsIcon}}"
+  wx:if="{{popType == 'checkVs'}}"></template>
+
+<!-- 无账号购票异常 -->
+<template is="noaccount-check"
+  data="{{AlertInfo: extendValues.ETicketUser12306ProcessNoAccount}}"
+  wx:if="{{popType == 'noaccountCheck' && extendValues.ETicketUser12306ProcessNoAccount}}"></template>
+
+<!-- 无账号购票异常 -->
+<!-- <template is="noaccount-check2" data="{{AlertInfo: extendValues.ETicketUser12306ProcessNoAccount}}" wx:if="{{popType == 'noaccountCheck2'}}"></template> -->
+<!-- 取消订单挽回 -->
+<template is="check-tips"
+  data="{{cancelOrderRedeemAlertInfo}}"
+  wx:if="{{popType == 'infoCheckCancel'}}"></template>
+
+<!-- 抢票成功打赏 -->
+<template is="reward"
+  wx:if="{{popType == 'reward'}}"
+  data="{{rewardInfo, rewardSelectedIndex}}"></template>
+
+<!-- 打赏成功 -->
+<template is="reward-success"
+  wx:if="{{popType == 'rewardSuccess'}}"></template>
+
+<!-- 即将进入客服会话 -->
+<template is="service-talk"
+  data="{{offlineTicketRefundInfo}}"
+  wx:if="{{popType == 'serviceTalk'}}"></template>
+
+<!-- 购票返现弹窗 -->
+<template is="cashbackPop"
+  data="{{alertInfo: extendValues.ticketallowanceactivityalert}}"
+  wx:if="{{popType == 'cashback'}}"></template>
+
+<!-- 提现提示引导去app -->
+<template is="withdraw-tip"
+  wx:if="{{popType == 'withdrawTip'}}"></template>
+
+<!-- 引导用户注册12306 -->
+<template is="12306newmodal"
+  wx:if="{{popType == '12305NEWMODAL'}}"></template>
+
+<!-- 登录/注册成功后返回订单详情页 -->
+<template is="login12306suc"
+  wx:if="{{popType == '12306LOGINSUC'}}"></template>
+
+<!-- 砍价弹窗 -->
+<slot-machine price="{{bargainInfo.CashBackSumAmountArr}}"
+  activityType="{{bargainInfo.ActivityType}}"
+  orderType="{{orderInfo.OrderType}}"
+  orderNumber="{{orderInfo.OrderId}}"
+  bindtap="hidePop"
+  wx:if="{{popType === 'BARGAIN' && bargainInfo.CashBackSumAmountArr}}"></slot-machine>
+
+<!-- 抢票中断引导扫脸 -->
+<template is="account-error-check"
+  data="{{AlertInfo: extendValues.ETicketGuidUserCheckFace, scanFaceNeedCheck, protocalToogle}}"
+  wx:if="{{popType == 'robbreakScan'}}"></template>
+
+<!-- 抢票中断扫脸失败 -->
+<template is="account-error-check-fail"
+  data="{{message: certificationResult.retMessage}}"
+  wx:if="{{popType == 'robbreakScanFail'}}"></template>
+
+<!-- 收藏引导 -->
+<template is="favoriteModal"
+  wx:if="{{popType === 'guide'}}" />
+
+<!-- 引导订阅 -->
+<block wx:if="{{popType == 'HASSUBSCRIBED'}}">
+    <view class="backmask active"
+      bindtap="hideBackDrop"></view>
+    <view class="pop-subscribe">
+        <image src="https://images3.c-ctrip.com/train/2021/xiaochengxu/8.37.4/xiaoxidingyue/xiaoxidingyue@3x.png"
+          alt=""
+          class="slogan" />
+        <view class="tit">请求打开消息订阅</view>
+        <view class="txt">建议允许订阅消息通知，以便及时获取重要提醒，保障出行体验</view>
+        <view class="btn-box">
+            <button class="btn-cancel"
+              bindtap="hideBackDrop">暂不开启</button>
+            <button class="btn-submit"
+              bindtap="onClickSubscribeTicket">一键开启</button>
+        </view>
+        <text class="ifont-closed"
+          bindtap="hideBackDrop"></text>
+    </view>
+</block>
+
+<!-- 一键转抢浮层 -->
+<block wx:if="{{ popType === 'TURNTOGRABORDERDRAWER'}}">
+    <template data="{{ticketInfo,grabShowInfo,canCreditPay,isAuthPrePay,defaultPackage,normalPackage}}"
+      is="turn-to-grab-order-drawer">
+    </template>
+</block>
+
+<template is="refund-is-self"
+  wx:if="{{popType === 'REFUNDISSELF' || popType === 'RESCHEDULEISSELF'}}"
+  data="{{PEleTicketArtificialReturnAlertInfo: popType === 'RESCHEDULEISSELF' ? PEleTicketArtificialRescheduleAlertInfo :PEleTicketArtificialReturnAlertInfo, curRefundPas: popType === 'RESCHEDULEISSELF' ? curRescPas:curRefundPas, curSelectType :  popType === 'RESCHEDULEISSELF' ? 1 : 0 }}"></template>
+<template is="refund-way-select"
+  wx:if="{{popType === 'REFUNDWAYSELECT' || popType === 'RESCHEDULEWAYSELECT'}}"
+  data="{{PEleTicketArtificialReturnAlertInfo : popType === 'RESCHEDULEWAYSELECT' ? PEleTicketArtificialRescheduleAlertInfo : PEleTicketArtificialReturnAlertInfo , curRefundPas : popType === 'RESCHEDULEWAYSELECT' ? curRescPas : curRefundPas ,curSelectType :  popType === 'RESCHEDULEWAYSELECT' ? 1 : 0 }}"></template>
+<template is="refund-identify"
+  wx:if="{{popType === 'REFUNDIDENTIFY' || popType === 'RESCHEDULEIDENTIFY'}}"
+  data="{{PEleTicketArtificialReturnAlertInfo : popType === 'RESCHEDULEIDENTIFY' ? PEleTicketArtificialRescheduleAlertInfo : PEleTicketArtificialReturnAlertInfo , curRefundPas: popType === 'RESCHEDULEIDENTIFY' ? curRescPas : curRefundPas,curSelectType :  popType === 'RESCHEDULEIDENTIFY' ? 1 : 0, scanFaceNeedCheck, protocalToogle}}"></template>
+
+<!-- 省钱任务弹窗 -->
+<template is="saveTaskPop"
+  wx:if="{{popType === 'saveTask' || popType === 'saveTaskGuide'}}"
+  data="{{saveTaskPopInfo : popType === 'saveTaskGuide' ? saveTaskGuidePopInfo : saveTaskPopInfo}}"></template>
+
+<!-- 全能抢票 -->
+<OmnipotentGrab visible="{{ popType === 'omniShow' }}"
+  info="{{ omnipotentInfo }}"
+  bind:hideBackDrop="hideBackDrop" />
+
+<!-- 积分兑换弹窗 -->
+<template is="pointsPay"
+  wx:if="{{popType === 'pointsPay'}}"
+  data="{{pointUseTotal,shopPoint,showPayPwdInput,pwdVal,payFocus}}"></template>
+
+<!-- 消费密码错误弹窗 -->
+<template is="pwdError"
+  wx:if="{{popType === 'pointsPayFail'}}"
+  data=""></template>
+
+<view class="view-check"
+  bindanimationend="viewReadyHandle"></view>
+
+<!-- 新人特权出票成功弹窗 -->
+<template is="newGuestPrivilege"
+  wx:if="{{ popType === 'newGuestPrivilege' }}"
+  data="{{ time: newGuestPopCount, alertInfo: orderInfo.AlertInfo }}" />

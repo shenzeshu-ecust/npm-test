@@ -1,0 +1,60 @@
+<!-- pages/bus/share/template/share.wxml -->
+<template name="custommodal">
+  <view wx:if="{{visible}}" class='custom-modal'>
+    <view class="custom-modal-mask {{inHidden ? 'fadeOut' : 'fadeIn'}}" bindtouchmove='empty' catchlongtap='empty' />
+    <view class="custom-modal-container" bindtouchmove='empty' catchlongtap='empty'>
+      <view class="box {{bottomModal ? 'bottomModal-box' : ''}}" style="{{isIPhoneX && bottomModal ? 'padding-bottom:68rpx' : ''}}">
+        <rich-text wx:if="{{extraBackgroundTop}}" class='backgroundbox top' style="text-align:center;" nodes="{{extraBackgroundTop}}" />
+        <rich-text wx:if="{{extraBackgroundBottom}}" class='backgroundbox bottom' style="text-align:center;" nodes="{{extraBackgroundBottom}}" />
+        <view wx:if="{{icon}}" class='block flex-column'>
+          <view class='icon' style="background-color:{{iconBack || '#ffffff'}}">
+            <image mode='aspectFit' src='{{icon}}' style="transform: scale({{(iconSize || 80)/160}});"></image>
+          </view>
+        </view>
+        <view wx:if="{{modalHeadImage}}" class="headImage">
+          <image src='{{modalHeadImage}}'></image>
+        </view>
+        <rich-text wx:if="{{richTextTitle}}" class='title' style="text-align:center;" nodes="{{richTextTitle}}" bindtap="{{bottomModal ? 'hiddenCustomModal' : ''}}"></rich-text>
+        <text wx:if="{{title}}" class='title'>{{title}}</text>
+        <view class='messagebox'>
+          <view class="block">
+            <rich-text wx:if="{{richTextMessage}}" class='message' style="text-align:center;" nodes="{{richTextMessage}}"></rich-text>
+            <text wx:if="{{message}}" class="message" style='color:{{color || "#222222"}}'>{{message}}</text>
+            <block wx:if="{{inputs}}">
+              <view wx:for="{{inputs}}" class='flex-row input-row' wx:for-item="input" wx:key="custom_input">
+                <text class='input-title'>{{input.title}}</text>
+                <input class="input" cursor-spacing="{{input.cursorSpacing || 20}}" style="border-style:none" id="{{input.id}}" bindchange="onCustomModalInput" bindinput='onCustomModalInput' bindblur="onCustomModalInput" type="{{input.type || 'text'}}" maxlength="{{input.maxLength || -1}}" placeholder="{{input.placeholder}}" value="{{input.value}}" data-index='{{index}}' />
+              </view>
+            </block>
+            <block wx:if="{{others}}">
+              <view wx:for="{{others}}" wx:for-item="other" wx:key="custom_info" class='flex-column'>
+                <view wx:if="{{other.isInsuranceTip}}" id="{{other.id}}" class="insurance-tip-content" bindtap='onCustomModalOther' data-index='{{index}}'>
+                  <image class="tip-icon" src="https://pages.c-ctrip.com/bus-images/busapp/official.png" />
+                  <text>官方合作·保障出行</text>
+                  <view class="flex1" />
+                  <text>{{other.title ? other.title : '详细说明'}}</text>
+                  <view wx:if="{{other.needAction}}" class='icon-font icon-arrow-right'></view>
+                </view>
+                <view wx:else id="{{other.id}}" class="info flex-row {{other.needAction ? 'needactions' : '' }}" bindtap='onCustomModalOther' data-index='{{index}}' style="{{other.style ? other.style : ''}}">
+                  <view style="{{other.style ? other.style : ''}}">{{other.title}}</view>
+                  <view wx:if="{{other.needAction}}" class='icon-font icon-arrow-right'></view>
+                </view>
+              </view>
+            </block>
+            <rich-text wx:if="{{richTextDesc}}" class='message' style="text-align:center;" nodes="{{richTextDesc}}"></rich-text>
+          </view>
+        </view>
+        <view class='{{buttons.length >= 3 ? "button-container-column" : "button-container"}} '>
+          <button wx:for="{{buttons}}" wx:for-item="button" wx:key="custom_button" form-type='submit' open-type="{{button.openType}}" bindgetphonenumber="{{button.openType == 'getPhoneNumber' ? 'onCustomModalButton' : ''}}" app-parameter="{{button.launchAppParams}}" binderror="{{button.openType == 'launchApp' ? 'onCustomModalButton' : ''}}" openSetting="{{button.openType == 'openSetting' ? 'onCustomModalButton' : ''}}" bindgetuserinfo="{{button.openType == 'getUserInfo' ? 'onCustomModalButton' : ''}}" bindtap='{{button.openType ? "onCustomModalEmpty" : "onCustomModalButton"}}' data-ubt-key="{{button.logKey || 'modalbutton_' + button.buttonTitle}}" data-buttondata="{{button}}" data-index="{{index}}" class='button' hover-class='button_hover' style="background:{{button.buttonColor || '#FF5D13'}};color:{{button.buttonTextColor || '#ffffff'}};{{button.buttonStyle}}">
+            {{button.buttonTitle || '确定'}}
+          </button>
+          <view wx:if="{{buttons.length == 1}}"></view>
+        </view>
+      </view>
+      <view wx:if="{{showClose}}" class="line">
+        <view class="trans {{inHidden ? 'lineTransOut' : 'lineTransIn'}}"></view>
+      </view>
+      <icon wx:if="{{showClose}}" class="close-modal {{inHidden ? 'closeTransOut' : 'closeTransIn'}}" size='40' type="cancel" color="#ffffff" bindtap='hiddenCustomModal' />
+    </view>
+  </view>
+</template>

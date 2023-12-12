@@ -1,0 +1,71 @@
+<wxs src="../utils.wxs" module="tools"></wxs>
+
+<template name="onIconTaskItem">
+  <view class="task-main no-icon-taskItem">
+    <view class="info">
+      <view class="title ellipsis" style="{{tools.resolveStyle({color: taskInfo.taskNameColor})}}">{{name}}<text wx:if="{{item.taskTarget > 1}}" class="no-icon-taskProcess">
+          <text>({{item.taskProcess || 0}}</text>
+          <text>/</text>
+          <text>{{item.taskTarget}})</text>
+        </text>
+      </view>
+      <view class="avatat-wraper" wx:if="{{item.eventType === 'INVITE_HELP' || item.eventType === 'INVITE_HELP_TASK'}}">
+        <view class="avatar_box {{avatar.data.headUrl ? 'avatar_box_headUrl' :''}} {{avatar.data.awardStatus == '0' ? 'avatar_box_receive_award' : ''}}" wx:for="{{item.itemList}}" wx:for-item="avatar"
+          style="background-image: url({{avatar.data.headUrl}});" bindtap="clickAvatar" data-taskid="{{item.taskId}}" data-idx="{{index}}">
+          <view class="avatar_plus" wx:if="{{!avatar.data.headUrl}}">+</view>
+          <view wx:if="{{avatar.data.awardStatus == '0'}}" class="avatar_box_receive_coupon">领券</view>
+        </view>
+      </view>
+      <view class="desc ellipsis" style="{{tools.resolveStyle({color: taskInfo.taskDescColor})}}">
+        {{item.taskDesc}}</view>
+    </view>
+    <view class="tap_wrap">
+      <!-- <view class="point ellipsis" style="color:{{ item.taskStatus == 3 ? (taskInfo.donePointColor || '#bbbbbb') : (taskInfo.unDonePointColor || '#ff6600') }}">
+        {{item.currencyNum}}</view> -->
+        <block  wx:if="{{item.taskStatus == 0}}">
+          <view class="task_btn ellipsis" wx:if="{{item.needReceive == 1}}"
+          style="{{tools.resolveStyle({ backgroundColor: taskInfo.taskToReceiveBtn, backgroundImage: taskInfo.taskToReceiveBtnBgImg})}}">
+            <button style="{{tools.resolveStyle({color: taskInfo.taskToReceive})}}"
+              bindtap="handleTask" data-type="{{item.eventType}}"
+              data-taskid="{{item.taskId}}" data-viewtime="{{item.viewTime}}" data-customcode="{{item.customCode}}"
+              data-aim="{{item.taskTarget}}" data-progress="{{item.taskProcess}}"
+              data-url="{{item.wechatUrl}}">领任务</button>
+          </view>
+          <view class="task_btn ellipsis" wx:else
+          style="{{tools.resolveStyle({ backgroundColor: taskInfo.taskTodoBtn, backgroundImage: taskInfo.taskTodoBtnBgImg})}}">
+            <button style="{{tools.resolveStyle({color: taskInfo.taskTodo})}}"
+              bindtap="handleTask" data-type="{{item.eventType}}"
+              data-taskid="{{item.taskId}}" data-viewtime="{{item.viewTime}}" data-customcode="{{item.customCode}}"
+              data-aim="{{item.taskTarget}}" data-progress="{{item.taskProcess}}"
+              data-url="{{item.wechatUrl}}">{{item.buttonText}}</button>
+          </view>
+        </block>
+
+      <view class="task_btn task_btn1 ellipsis" wx:elif="{{item.taskStatus == 1}}"
+        style="{{tools.resolveStyle({ backgroundColor: taskInfo.taskTodoBtn, backgroundImage: taskInfo.taskTodoBtnBgImg})}}">
+        <button style="{{tools.resolveStyle({color: taskInfo.taskTodo})}}" 
+          bindtap="handleTask" data-type="{{item.eventType}}"
+          data-taskid="{{item.taskId}}" data-viewtime="{{item.viewTime}}" data-customcode="{{item.customCode}}"
+          data-aim="{{item.taskTarget}}" data-progress="{{item.taskProcess}}"
+          data-url="{{item.wechatUrl}}">{{item.buttonText}}</button>
+      </view>
+
+      <view class="task_btn task_btn2 ellipsis" wx:elif="{{item.taskStatus == 2}}"
+        style="{{tools.resolveStyle({ backgroundColor: taskInfo.taskDoneBtn, backgroundImage: taskInfo.taskDoneBtnBgImg})}}">
+        <button style="{{tools.resolveStyle({color: taskInfo.taskDone})}}"
+          bindtap="handleUserAcceptPrize"
+          data-taskid="{{item.taskId}}" data-currencynum="{{item.currencyNum}}">{{item.receiveAwardTaskText}}</button>
+      </view>
+
+      <view class="task_btn task_btn3 ellipsis" wx:else
+        style="{{tools.resolveStyle({ backgroundColor: taskInfo.rewardDoneBtn, backgroundImage: taskInfo.rewardDoneBtnBgImg})}}">
+        <button  style="{{tools.resolveStyle({color: taskInfo.rewardDone})}}" 
+          data-url="{{item.wechatUrl}}" data-type="{{item.eventType}}"
+          data-isdone="{{true}}" data-taskid="{{item.taskId}}"
+          bindtap="handleWithoutTask">{{item.buttonDoneText || '已完成'}}</button>
+      </view>
+    </view>
+  </view>
+  
+  <!-- <view class="gap_line"></view> -->
+</template>

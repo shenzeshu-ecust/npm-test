@@ -1,0 +1,46 @@
+<block wx:if="{{data.props.values.rowData}}">
+  <block wx:for="{{data.props.values.rowData}}" wx:key="index" wx:for-item="row">
+  <image lazy-load mode="widthFix" wx:if="{{row.componentData.type == 'image' && row.componentData.props.values.value}}" src="{{row.componentData.props.values.src || row.componentData.props.values.value}}" style="{{row.componentData.styles || row.componentData.props.styles}}" data-name="{{row.componentData.name}}" data-key="{{row.componentData.renderKey}}" data-clickhandlersname="{{row.componentData.props.values.name}}" bindtap="clickHandlers" />
+  <!-- 产品图片 -->
+  <block wx:if="{{row.componentData.props.values.name=='diyField_imageUrl'}}">
+    <image wx:if="{{row.componentData.type == 'label' && row.componentData.props.values.name=='diyField_imageUrl' && showImageStatus}}" mode="" src="{{row.componentData.props.values.src || row.componentData.props.values.value || 'https://images3.c-ctrip.com/marketing/2022/11/sk/defalt_product.png'}}" style="{{row.componentData.styles || row.componentData.props.styles}}" class="diyField_imageUrl" data-name="{{row.componentData.name}}" data-key="{{row.componentData.renderKey}}" data-clickhandlersname="{{row.componentData.props.values.name}}" bindtap="clickHandlers" bindload="checkImageLoad" data-index="{{index}}" binderror="checkImageLoadError" mode="aspectFill" lazy-load />
+    <image wx:if="{{row.componentData.type == 'label' && row.componentData.props.values.name=='diyField_imageUrl' && !showImageStatus}}" mode="" src="https://images3.c-ctrip.com/marketing/2022/11/sk/defalt_product.png" style="{{row.componentData.styles || row.componentData.props.styles}}" class="diyField_imageUrl" data-name="{{row.componentData.name}}" data-key="{{row.componentData.renderKey}}" data-clickhandlersname="{{row.componentData.props.values.name}}"  data-index="{{index}}" binderror="checkImageLoadError" mode="aspectFill" lazy-load />
+  </block>
+  <block wx:else>
+    <sk_label wx:if="{{row.componentData.type == 'label'}}" data="{{row.componentData}}" class="component_label" />
+  </block>
+  <!-- 讲解状态 -->
+  <block wx:if="{{row.componentData.type == 'row'}}">
+    <block wx:if="{{row.childNodeType == 'explainStatus' && row.childNodeValue > 0}}">
+      <block wx:if="{{ row.childNodeValue == 2 || row.childNodeValue == 4}}">
+        <view class="diyField_explainStatus_box" data-clickhandlersname="diyField_explainStatus" bindtap="clickHandlers">
+          <!-- 讲解中 -->
+          <span class="diyField_explainStatus_two" wx:if="{{ row.childNodeValue == 2}}" bindtap="clickHandlers" data-clickhandlersname="diyField_explainStatus">
+            <image src="https://pages.c-ctrip.com/livestream/video/explaining.gif" mode="widthFix" class="diyField_explainStatus_icon" />
+            <span class="live_status_text">讲解中</span>
+          </span>
+          <!-- 看讲解 -->
+          <span class="diyField_explainStatus_one" wx:if="{{ row.childNodeValue == 4}}" bindtap="clickHandlers" data-clickhandlersname="diyField_explainStatus">
+            <image src="https://pages.c-ctrip.com/livestream/video/explaining.gif" mode="widthFix" class="diyField_explainStatus_icon" />
+            <span class="live_status_text">看讲解</span>
+          </span>
+        </view>
+      </block>
+      <block wx:else>
+        <sk_row class="component_row component_row_margin" data="{{row.componentData}}" style="{{row.componentData.styles || row.componentData.props.styles}}" />
+      </block>
+    </block>
+    <block wx:else>
+      <block wx:if="{{row.childNodeType !== 'explainStatus'}}">
+        <sk_row data="{{row.componentData}}" style="{{row.componentData.styles || row.componentData.props.styles}}" class="component_row" />
+      </block>
+    </block>
+  </block>
+  
+  <sk_column class="component_column" wx:if="{{row.componentData.type == 'column'}}" data="{{row.componentData}}" style="{{row.componentData.styles || row.componentData.props.styles}}" />
+  <sk_box wx:if="{{row.componentData.type == 'box'}}" data="{{row.componentData}}" style="{{row.componentData.styles || row.componentData.props.styles}}" class="component_box" />
+  <sk_inline wx:if="{{row.componentData.type == 'inline'}}" data="{{row.componentData}}" style="{{row.componentData.styles || row.componentData.props.styles}}" class="inline_class" />
+  <sk_container class="component_container" wx:if="{{row.componentData.type == 'container'}}" data="{{row.componentData}}" style="{{row.componentData.styles || row.componentData.props.styles}}" />
+</block>
+
+</block>

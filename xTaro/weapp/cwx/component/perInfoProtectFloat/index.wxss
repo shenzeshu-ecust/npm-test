@@ -1,0 +1,87 @@
+/* cwx/component/perInfoProtectGuide/index.wxss */
+.perInfoProtectFloat {
+  z-index: 10011; /* 比授权弹窗高一级 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+}
+.perInfoProtectFloat .bg {
+  position: fixed;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  width: 100%;
+}
+.perInfoProtectFloat .pop {
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.perInfoProtectFloat .wrapper {
+  margin: 0 30rpx;
+}
+.perInfoProtectFloat .float-wrapper {
+  background: #ffffff;
+  width: 562rpx;
+  height: 790rpx;
+  border-radius: 16rpx;
+}
+.perInfoProtectFloat .title {
+    margin: 40rpx 0 20rpx;
+    text-align: center;
+    height: 46rpx;
+    color: #333333;
+    font-size: 34rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    letter-spacing: 0.2rpx;
+    line-height: 46rpx;
+}
+.perInfoProtectFloat .content {
+  margin: 0 44rpx;
+  text-align: left;
+  height: 506rpx;
+  color: #333333;
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: normal;
+  letter-spacing: 0;
+  line-height: 42rpx;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.perInfoProtectFloat .btns .agree {
+  margin: 24rpx 32rpx;
+  height: 72rpx;
+  background: #0086f6;
+  border-radius: 8rpx;
+  color: #ffffff;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  letter-spacing: 0.3rpx;
+  line-height: 72rpx;
+}
+.perInfoProtectFloat .btns .reject {
+  background: #ffffff;
+  height: 30rpx;
+  color: #999999;
+  font-size: 22rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  letter-spacing: 0;
+  line-height: 30rpx;
+}
+.perInfoProtectFloat button {
+  border: none;
+}
+.perInfoProtectFloat button::after {
+  border: none;
+}
+.perInfoProtectFloat text.link {
+  color: #0086F6;
+}

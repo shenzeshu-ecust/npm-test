@@ -1,0 +1,59 @@
+<view wx:if="{{isSearchView}}" class="search-module search-module_focus">
+    <icon class="ico-search search-module_ico search-module_ico_focus" type="ctripIcon" />
+    <input class="search-module_input search-module_input-f" placeholder-class="search-module_input_focus" placeholder="中文/拼音/首字母" value="{{inputKeyword}}" type="text" bindinput="searchInput" focus="true" />
+    <icon type="clear" class="search-module_clear color-gray_666" size="16" bindtap="searchClear" />
+    <text class="search-module_cancel" style="color:{{color}};" bindtap="searchCancel">取消</text>
+    <scroll-view scroll-y="{{true}}" class="search-list">
+        <block wx:for="{{searchResult}}" wx:key="index" wx:for-item="item">
+            <view class="search-list_item-head" bindtap="cityTap" data-cityname="{{item.cityName}}" data-type="city" data-section="{{index}}">
+                <!-- <block wx:if="{{}}" > -->
+                <view wx:if="{{item.forceSearch}}" class="city-tag" style="color:{{color}};min-width: 100rpx;">
+                    {{'仍然搜索'}}
+                </view>
+                <view wx:else class="city-tag" style="color:{{color}};">{{'城市'}}</view>
+                <view class="city-text">
+                    <block wx:if="{{item.dis}}">
+                        <text wx:for="{{item.dis}}" wx:for-item="disObj" class="city-name {{disObj.style}}" style="{{disObj.style === 'highlight' ? 'color:' + color + ';' : ''}}">{{disObj.text}}</text>
+                    </block>
+                    <text wx:else class="city-name">{{item.cityName}}</text>
+                    <view wx:if="{{item.tag}}" class="station-tag">{{item.tag}}</view>
+                    <text wx:if="{{item.province}}" class="province-name">{{item.province}}</text>
+                </view>
+            </view>
+            <view wx:for="{{(item.showSlice ? item.showStations : item.stations) || []}}" wx:for-item="station" wx:for-index="row" wx:key="row" class="search-list_item" bindtap="cityTap" data-cityname="{{station.cityName}}" data-type="station" data-section="{{index}}" data-row="{{row}}">
+                <!-- <block wx:if="{{}}" > -->
+                <view class="city-text">
+                    <view wx:if="{{station.tag}}" class="station-tag-content">
+                        <view class="station-tag">{{station.tag || '汽车站'}}</view>
+                    </view>
+                    <view wx:if="{{station.dis}}" class="station-dis">
+                        <view class="station-dis-content">
+                            <text wx:for="{{station.dis}}" wx:for-item="disObj" class="city-name {{disObj.style}}" style="{{disObj.style === 'highlight' ? 'color:' + color + ';' : ''}}">{{disObj.text}}</text>
+                        </view>
+                        <block wx:if="{{station.tagList}}">
+                            <view wx:for="{{station.tagList}}" wx:for-item="tagListItem" class="city-tagList">
+                                <text class="city-tagList-text">{{tagListItem}}</text>
+                            </view>
+                        </block>
+                    </view>
+                    <text wx:else class="city-name">{{station.cityName}}</text>
+                    <text wx:if="{{station.province}}" class="province-name">{{station.province}}</text>
+                </view>
+            </view>
+            <view wx:if="{{item.stations && item.stations.length > 3}}" class="search-list_item-head expand last" style="color:{{color}};" style="" bindtap="cityTap" data-cityname="{{item.cityName}}" data-type="expand" data-section="{{index}}">
+                <view class="city-tag" style="color:{{color}};">{{''}}</view>
+                <view class="expand-text {{item.showSlice ? 'open' : 'close'}} ">
+                    {{isShowCurrentPosition ? "更多 " +  item.cityName + " 出发车站..." : "更多 " +  item.cityName + " 到达车站..."}}
+                </view>
+            </view>
+        </block>
+        <view style="padding-bottom: 140rpx;" />
+    </scroll-view>
+</view>
+<block wx:else>
+    <view class="search-module">
+        <icon class="ico-search search-module_ico" type="ctripIcon" />
+        <input class="search-module_input" placeholder-class="search-module_input_focus" placeholder="中文/拼音/首字母" value="{{inputKeyword}}" type="text" bindinput="searchInput" bindfocus="searchFocus" disabled='true' />
+        <view bindtap='gotoSearch' style='position:absolute;top:0;right:0;bottom:0;left:0; background-color:clear;z-index:100;'></view>
+    </view>
+</block>

@@ -1,0 +1,101 @@
+.country-lists {
+  background-color: #fff;
+}
+.country-lists .country-list-hd {
+  line-height: 56rpx;
+  background-color: #EFEFF4;
+  position: relative;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  color: #666;
+  font-size: 26rpx;
+  margin-right: 52rpx;
+}
+.country-lists .country-list li {
+  position: relative;
+  border-bottom: 1px solid #e5e5e5;
+  line-height: 66rpx;
+  padding: 10rpx 16rpx 10rpx 0;
+  margin-left: 30rpx;
+  margin-right: 52rpx;
+  box-sizing: border-box;
+  color: #333;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.country-lists .country-list li:last-of-type {
+  border-bottom: none;
+}
+.country-lists .country-list li .country-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.country-lists .country-list li .country-num {
+  width:150rpx;
+  color: #999;
+  margin-left:10rpx;
+}
+.country-lists .country-list li .icon-selected-area {
+  background: url(//pic.c-ctrip.com/platform/h5/component/checked.png) no-repeat 0 0;
+  background-size: 32rpx auto;
+  width: 40rpx;
+  height: 28rpx;
+  margin-left: 46rpx;
+  visibility: hidden;
+}
+.country-lists .country-list li.active .icon-selected-area {
+  visibility: visible;
+}
+.country-lists .country-list li.active .country-name, .country-lists .country-list li.active .country-num {
+  color: #19A0F0;
+}
+
+.sel_num_wrap {
+  position: fixed;
+  width: 52rpx;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: #19A0F0;
+  line-height: 1.6;
+}
+.sel_num_wrap text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22rpx;
+  width: 100%;
+}
+.sel_num_wrap text.selected {
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 50%;
+  background: #19A0F0;
+  color: #fff;
+}
+.sel_num_wrap text.bigChart {
+  position: absolute;
+  right: 60rpx;
+  background: url(//pic.c-ctrip.com/platform/h5/component/bigChartBg.png) no-repeat 0 0;
+  background-size: 96rpx auto;
+  color: #fff;
+  width: 96rpx;
+  height: 80rpx;
+  font-size: 50rpx;
+  padding-right: 20rpx;
+  box-sizing: border-box;
+}
+
+.country-lists .country-end{
+  padding-bottom: constant(safe-area-inset-bottom); 
+  padding-bottom: env(safe-area-inset-bottom);
+}

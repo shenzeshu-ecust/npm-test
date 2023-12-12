@@ -1,0 +1,170 @@
+<block wx:if="{{tab==1 && data}}">
+    <!-- 待开奖 -->
+    <view wx:if="{{data.activityStatus == 1 && data.numberFull}}" class="db_goods db_goods__win {{clazz}}">
+        <image class="db_goods__icon" src="{{data.activityImg}}"></image>
+        <view class="db_goods__right">
+            <view class="db_goods__content">
+                <view class="db_goods__title ellipsis">{{data.activityName}}</view>
+                <view class="db_goods__count_down">
+                    <text wx:if="{{data.remindTime <= 0}}" class="db_goods__count_down_pre">开奖中</text>
+                    <block wx:else>
+                      <text class="db_goods__count_down_pre">距开奖</text><countDown endTime="{{data.announceTimeNum}}" bind:end="onCountDownEnd" />
+                    </block>
+                </view>
+            </view>
+            <view class="db_goods__btn db_goods__btn_tosee" bindtap="handleClickBtn">
+                去查看
+            </view>
+        </view>
+    </view>
+    <!-- 未开奖 夺宝号已满 -->
+    <view wx:elif="{{data.numberFull}}" class="db_goods db_goods__win {{clazz}}">
+        <image class="db_goods__icon" src="{{data.activityImg}}"></image>
+        <view class="db_goods__right">
+            <view class="db_goods__content">
+                <view class="db_goods__title ellipsis">{{data.activityName}}</view>
+                <template is="process" data="{{...processInfo}}"></template>
+                <View class="db_goods__tips">
+                    <image src="https://pages.c-ctrip.com/market/components/static/duobao/gou.png"></image>
+                    您的夺宝号已满，待总额达标后开奖
+                </View>
+            </view>
+            <view class="db_goods__btn db_goods__btn_tosee" bindtap="handleClickBtn">
+                去查看
+            </view>
+        </view>
+    </view>
+    <view wx:else class="db_goods {{clazz}}">
+        <image class="db_goods__icon" src="{{data.activityImg}}"></image>
+        <view class="db_goods__right">
+            <view class="db_goods__content">
+                <view class="db_goods__title ellipsis">{{data.activityName}}</view>
+                <block wx:if="{{data.activityProgress.reached < data.activityProgress.total}}">
+                    <template is="process" data="{{...processInfo}}"></template>
+                    <text wx:if="{{data.activityProgress.reached > 0}}" class="db_goods__time">达标后次日10:00开奖</text>
+                    <text wx:else class="db_goods__time">YO票总额达到{{data.activityProgress.total}}后，次日10:00开奖</text>
+                </block>
+                <view wx:else class="db_goods__count_down">
+                    <text wx:if="{{data.remindTime <= 0}}" class="db_goods__count_down_pre">开奖中</text>
+                    <block wx:else>
+                      <text class="db_goods__count_down_pre">距开奖</text><countDown endTime="{{data.announceTimeNum}}" bind:end="onCountDownEnd" />
+                    </block>
+                </view>
+            </view>
+            <view wx:if="{{data.join}}" class="db_goods__btn" bindtap="handleClickBtn">继续加投</view>
+            <view wx:else class="db_goods__btn db_goods__btn1" bindtap="handleClickBtn">立即夺宝</view>
+        </view>
+    </view>
+</block>
+
+<block wx:if="{{tab == 2}}">
+    <view wx:if="{{type == 1 && data}}" class="db_goods {{clazz}}">
+        <image class="db_goods__icon" src="{{data.activityImg}}"></image>
+        <view class="db_goods__right">
+            <view class="db_goods__content">
+                <view class="db_goods__title ellipsis">{{data.activityName}}</view>
+                <template is="process" data="{{...processInfo}}"></template>
+                <text wx:if="{{data.activityProgress.reached > 0}}" class="db_goods__time">达标后次日10:00开奖</text>
+                <text wx:else class="db_goods__time">YO票总额达到{{data.activityProgress.total}}后，次日10:00开奖</text>
+            </view>
+            <view class="db_goods__btn db_goods__btn1" bindtap="handleClickBtn">
+                立即夺宝
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{type == 2 && data}}" class="db_goods {{clazz}}">
+        <image class="db_goods__icon" src="{{data.activityImg}}"></image>
+        <view class="db_goods__right">
+            <view class="db_goods__content">
+                <view class="db_goods__title ellipsis">{{data.activityName}}</view>
+                <template is="process" data="{{...processInfo}}"></template>
+                <View class="db_goods__tips">
+                    <image src="https://pages.c-ctrip.com/market/components/static/duobao/img_sy_more.png"></image>
+                    夺宝号越多越幸运
+                </View>
+            </view>
+            <view class="db_goods__btn" bindtap="handleClickBtn">
+                继续加投
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{type == 3 && data}}" class="db_goods db_goods__win {{clazz}}">
+        <image class="db_goods__icon" src="{{data.activityImg}}">
+          <view class="db_goods__fail_time">{{data.announceDay}} 开奖</view>
+        </image>
+        <view class="db_goods__right">
+            <view class="db_goods__content">
+                <view class="db_goods__title ellipsis">{{data.activityName}}</view>
+                <view class="db_goods__win_tips">
+                    <image class="db_goods__avatar" src="{{data.selfHeadImg}}"></image>
+                    <text class="db_goods__win_tips_text1">恭喜您中奖啦!</text>
+                    <text class="db_goods__win_tips_text2">中奖号: {{data.selfWinNumber}}</text>
+                    <image class="db_goods__win_tips_flower" src="https://pages.c-ctrip.com/market/components/static/duobao/img_congrats.png"></image>
+                </view>
+            </view>
+            <image class="db_goods__status_img" src="https://pages.c-ctrip.com/market/components/static/duobao/img_sy_stamp_win.png"></image>
+            <view class="db_goods__btn" bindtap="handleClickBtn">
+                查看奖品
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{type == 4 && data}}" class="db_goods db_goods__win {{clazz}}">
+        <image class="db_goods__icon" src="{{data.activityImg}}"></image>
+        <view class="db_goods__right">
+            <view class="db_goods__content">
+                <view class="db_goods__title ellipsis">{{data.activityName}}</view>
+                <template is="process" data="{{...processInfo}}"></template>
+                <View class="db_goods__tips">
+                    <image src="https://pages.c-ctrip.com/market/components/static/duobao/gou.png"></image>
+                    您的夺宝号已满，待总额达标后开奖
+                </View>
+            </view>
+            <view class="db_goods__btn db_goods__btn_tosee" bindtap="handleClickBtn">
+                去查看
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{(type == 5 || type == 6 || type == 7) && data}}" class="db_goods db_goods__fail {{clazz}}">
+        <image class="db_goods__icon" src="{{data.activityImg}}">
+          <view wx:if="{{type == 5}}" class="db_goods__fail_time">{{data.announceDay}} 开奖</view>
+        </image>
+        <view class="db_goods__right fail">
+            <view class="db_goods__content">
+                <view class="db_goods__title ellipsis">{{data.activityName}}</view>
+                <view wx:if="{{type == 5}}" class="db_goods__win_tips">
+                    <image class="db_goods__avatar" src="{{data.selfHeadImg}}"></image>
+                    <text class="db_goods__fail_tips_text1">不好意思, 您未中奖, 下次努力～!</text>
+                </view>
+                <template is="process" wx:if="{{type == 6}}" data="{{...processInfo}}"></template>
+
+                <view wx:if="{{type == 6}}" class="db_goods__fail_tips">
+                    <image class="db_goods__fail_icon" src="https://pages.c-ctrip.com/market/components/static/duobao/img_fail.png"></image>
+                    <text class="db_goods__fail_text">参与总YO票数未达标</text>
+                </view>
+                <view wx:if="{{type == 7}}" class="db_goods__fail_tips">
+                    <image class="db_goods__fail_icon" src="https://pages.c-ctrip.com/market/components/static/duobao/img_fail.png"></image>
+                    <text class="db_goods__fail_text">本次活动的所有夺宝号均为重复数</text>
+                </view>
+            </view>
+            <image wx:if="{{type == 5}}" class="db_goods__status_img" src="https://pages.c-ctrip.com/market/components/static/duobao/img_sy_stamp_lose.png"></image>
+            <image wx:else class="db_goods__status_img" src="https://pages.c-ctrip.com/market/components/static/duobao/img_sy_stamp_fail.png"></image>
+            <view class="db_goods__btn_fail_see" bindtap="handleClickBtn">
+                <text>去查看</text>
+                <view class="db_goods__btn_fail_see_arrow"></view>
+            </view>
+        </view>
+    </view>
+</block>
+
+
+<template name="process">
+    <view class="db_goods__process_wraper">
+        <view class="db_goods__process">
+            <view class="db_goods__process_inner" style="width: {{width}}"></view>
+        </view>
+        <text class="db_goods__process_text1">{{process}}</text>
+        <text class="db_goods__process_text2">/</text>
+        <text class="db_goods__process_text2">{{target}}</text>
+        <text class="db_goods__process_text2"> YO票</text>
+    </view>
+</template>

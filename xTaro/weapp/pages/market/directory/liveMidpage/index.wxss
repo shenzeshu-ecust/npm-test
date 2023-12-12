@@ -1,0 +1,4 @@
+
+.main-pic{width: 750rpx;}
+.btn-service{position: absolute;top: 600rpx;left: 30rpx;width: 690rpx;height: 200rpx;background-color: transparent;border: none;}
+.btn-service::after{display: none;}

@@ -1,0 +1,71 @@
+.layer-notice-icon {
+    margin-right: 10rpx;
+    vertical-align: text-top;
+    transform: rotate(180deg);
+}
+.notice-layer-tit {
+    color: #333333;
+    font-weight: bold;
+}
+/*订房必读*/
+.highlight {
+    color: #4cbf52
+}
+
+.notice-layer {
+    min-height: 20vh;
+    padding: 0 8rpx 30rpx 56rpx;
+}
+.notice-layer .item {
+    padding-bottom: 36rpx;
+}
+.notice-layer .title {
+    font-size: 28rpx;
+    font-weight: 800;
+    color: #111;
+    line-height: 1;
+    margin-bottom: 20rpx;
+    position: relative;
+    font-family: PingFangSC-Medium;
+}
+.notice-layer .title:before {
+    font-size: 36rpx;
+    content: "•";
+    position: absolute;
+    left: -36rpx;
+    top: -4rpx;
+}
+.notice-layer .content {
+    color: #111;
+    font-size: 24rpx;
+    padding-bottom: 16rpx;
+    text-align: justify;
+    line-height: 36rpx;
+}
+.notice-layer .content:last-of-type{
+    padding-bottom: 0;
+}
+.notice-layer .sub-info {
+    margin-bottom: 26rpx;
+}
+.notice-layer .sub-info:last-of-type {
+    margin-bottom: 0rpx;
+}
+.notice-layer .sub-title {
+    font-size: 26rpx;
+    color: #111;
+    font-family: PingFangSC-Medium;
+    margin: 20rpx 0rpx 12rpx;
+    font-weight: 700;
+}
+.notice-layer .sub-content {
+    font-size: 24rpx;
+    color: #111;
+    margin-bottom: 12rpx;
+    text-align: justify;
+    line-height: 36rpx;
+    display: block;
+}
+.notice-layer .sub-content:last-of-type {
+    margin-bottom: 0rpx;
+}

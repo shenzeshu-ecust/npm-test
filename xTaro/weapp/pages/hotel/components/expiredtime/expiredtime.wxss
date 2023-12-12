@@ -1,0 +1,21 @@
+.expired-time-box {
+    display: flex;
+    align-items: center;
+}
+
+.expired-time-text {
+    background: #fff;
+    border-radius: 4rpx;
+    height: 32rpx;
+    width: 37rpx;
+    font-weight: 500;
+    color: #f60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.expired-time-colon {
+    color: #fff;
+    margin: 0 4rpx;
+}

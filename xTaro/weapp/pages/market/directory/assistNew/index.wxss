@@ -1,0 +1,732 @@
+@charset "utf-8";
+@import '../../components/share/share.wxss';
+@import "./tpl.wxss";
+/* 隐藏安卓滚动条 */
+::-webkit-scrollbar {
+  display:none;
+  width:0;
+  height:0;
+  color:transparent;
+}
+
+.market-assist-new {
+  background-size: 100% 3713rpx;
+  background-repeat: no-repeat;
+  padding-bottom: 180rpx;
+}
+
+/* 活动规则按钮 */
+.rule-btn{
+  position: fixed;
+  right: 0;
+  z-index: 101; /*比弹幕高1*/
+  top: 10rpx;
+  padding: 10rpx 0 10rpx 10rpx;
+}
+.rule-btn .rule-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0);
+  opacity: 0.2;
+  border-radius: 23.5rpx 0 0 23.5rpx;
+  height: 47rpx;
+  width: 80rpx;
+  color: #ffffff;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+}
+
+/* 头图 + 弹幕 */
+.market-assist-new__banner {
+  width: 100vw;
+  height: 350rpx;
+}
+
+.market-assist-new__banner image{
+  width: 100%;
+  height: 100%;
+}
+
+.master-banner {
+  height: 560rpx;
+}
+
+.bullets {
+  position: absolute;
+  top: 330rpx;
+  left: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* 助力--主人态 */
+.market-assist-new__assist {
+  padding: 0rpx 30rpx 0 30rpx;
+}
+
+.market-assist-new__assist .master {
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 16rpx;
+  padding: 0 0 30rpx 0;
+}
+/* 实体商品  */
+.market-assist-new__assist .master .goods-image{
+  display: block;
+  width: 650rpx;
+  height: 100%;
+  margin: auto;
+  margin-top: 20rpx;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.market-assist-new__assist .master .goods-item {
+  position: relative;
+  width: 140rpx;
+  height: 140rpx;
+}
+.market-assist-new__assist .master .goods-item-img {
+  background: linear-gradient(-225.92deg, rgb(254, 226, 202) 0%, rgb(250, 243, 213) 44.61%, rgb(254, 219, 164) 100%);
+  height: 140rpx;
+  width: 140rpx;
+  border-radius: 50%;
+}
+.market-assist-new__assist .master .goods-item-text{
+  position: absolute;
+  bottom: -15rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: #ff644d;
+  border-radius: 20rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  width: 98rpx;
+  color: #ffffff;
+  font-family: PingFangSC-Regular;
+  font-size: 22rpx;
+  text-align: center;
+}
+.market-assist-new__assist .master .assist-coupon .coupon-left {
+  border-bottom-left-radius: 0;
+}
+.market-assist-new__assist .master .assist-coupon .coupon-center-right-wraper {
+  border-bottom-right-radius: 0;
+}
+/* 优惠券 */
+.market-assist-new__assist .coupon-warper {
+  display: flex;
+  justify-content: center;
+  /* box-shadow: 0rpx -14rpx 16rpx 0rpx rgba(255, 58, 75, 0.2) inset; */
+}
+.market-assist-new__assist .master .coupon-warper {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+}
+.market-assist-new__assist .coupon-warper .single-coupon {
+  /* margin-top: 32rpx; */
+}
+.market-assist-new__assist .coupon-warper .coupon-list {
+  display: flex;
+}
+.market-assist-new__assist .coupon-list-master {
+  padding: 0rpx 20rpx;
+  display: flex;
+  overflow-x: auto;
+  /* width: 100%;
+  box-sizing: border-box;
+  padding: 0 20rpx; */
+}
+.coupon-list-master .assist-coupon {
+  margin-right: 20rpx;
+  margin-top: 30rpx;
+}
+.coupon-list-master .assist-coupon:nth-last-child(1) {
+  padding-right: 20rpx;
+  margin-right: 0;
+}
+.scroll-view_H{
+}
+.coupon-warper .assist-coupon{
+  margin-right: 20rpx;
+  margin-top: 30rpx;
+}
+.coupon-warper .assist-coupon:nth-last-child(1){
+  margin-right: 0;
+}
+
+.market-assist-new__assist .master .main-wraper {
+  padding-top: 16rpx;
+}
+
+.main-wraper.shadow {
+  box-shadow: 0rpx -16rpx 16rpx 10rpx rgba(0, 0, 0, 0.04);
+}
+
+.market-assist-new__assist .master .count {
+  color: #666666;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.market-assist-new__assist .master .number {
+  color: #FF644D;
+}
+
+.market-assist-new__assist .master .tips {
+  color: #333333;
+  font-family: PingFangSC-Medium;
+  font-size: 34rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40rpx;
+}
+
+.market-assist-new__assist .master .timer {
+  color: #666666;
+  font-family: PingFangSC-Regular;
+  font-size: 22rpx;
+  margin-top: 23rpx;
+}
+
+.market-assist-new__assist .timer {
+  display: flex;
+  justify-content: center;
+  margin: 20rpx 0 10rpx;
+}
+
+.btns {
+  margin: 40rpx 55rpx 0;
+}
+
+.market-assist-new__assist .master .btns .assist-btn {
+  height: 98rpx;
+  width: 580rpx;
+}
+
+.market-assist-new__assist .master .btns button {
+  height: 89.09rpx;
+  width: 580rpx;
+}
+
+.btns-double{
+  display: flex;
+  justify-content: space-between;
+}
+
+.market-assist-new__assist .master .btns-double .assist-btn{
+  width: 280rpx;
+}
+.market-assist-new__assist .master .btns-double button {
+  width: 280rpx;
+}
+
+.master .prize-tips {
+  color: rgb(153, 153, 153);
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  text-align: center;
+  margin-top: 8rpx;
+}
+
+/* 客态下 */
+.market-assist-new__assist .guests {
+  position: relative;
+  background-color: #fff;
+  /* overflow: hidden; */
+  border-radius: 16rpx;
+  padding: 0 0 30rpx 0;
+}
+
+.market-assist-new__assist .guests-slot {
+  width: 100%;
+  /* padding: 0 20rpx; */
+  box-sizing: border-box;
+}
+
+.guests-slot .goods-image {
+  margin-top: 40rpx;
+}
+
+.guests-slot .timer {
+  margin-bottom: 0;
+}
+
+.market-assist-new__assist .guests .mkt-pic {
+  position: absolute;
+  top: -55rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  background-color: #fff;
+  width: 110rpx;
+  height: 110rpx;
+}
+
+.market-assist-new__assist .guests .mkt-pic image{
+  width: 100rpx;
+  height: 100rpx;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.market-assist-new__assist .guests .mkt-assist-wrap {
+  padding-top: 63rpx;
+}
+
+.market-assist-new__assist .guests .mkt-title, .market-assist-new__assist .guests .mkt-subtitle {
+  max-width: 90%;
+}
+
+/* 优惠券使用规则 */
+.market-assist-new__coupon-rule {
+  padding-bottom: 30rpx;
+  margin: 30rpx 30rpx 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 16rpx;
+}
+
+.market-assist-new__coupon-rule .rule-title {
+  padding-top: 30rpx;
+}
+
+.market-assist-new__coupon-rule .coupon-rule-content {
+  margin-top: 16rpx;
+  padding: 0 40rpx;
+  color: #fff;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  opacity: 0.8;
+  overflow: hidden;
+}
+
+.market-assist-new__coupon-rule .more {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  font-family: PingFangSC-Medium;
+  font-weight: bold;
+  font-size: 24rpx;
+  margin-top: 20rpx;
+  opacity: 0.8;
+}
+
+.arrow-top {
+  position: relative;
+  margin-left: 12rpx;
+}
+
+.arrow-top::after {
+  content: "";
+  position: absolute;
+  width: 14rpx;
+  height: 14rpx;
+  border-top: 3rpx solid #fff;
+  border-right: 3rpx solid #fff;
+  transform: rotate(135deg);
+  top: -6rpx;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  /* transition: all 0.1s linear; */
+}
+
+.arrow-down::after{
+  top: 8rpx;
+  border-top: none;
+  border-right: none;
+  /* transform: rotate(-45deg); */
+  border-left: 3rpx solid #fff;
+  border-bottom: 3rpx solid #fff;
+}
+
+/* 推荐使用 */
+.market-assist-new__recommend {
+  margin: 50rpx 0 0;
+}
+
+.market-assist-new__recommend .title-block {
+  margin-bottom: 25rpx;
+}
+
+.market-assist-new__recommend .content {
+  margin: 0 auto;
+  width: 630rpx;
+  padding: 30rpx;
+  padding-bottom: 0;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0rpx 4rpx 20rpx 0rpx rgba(0, 0, 0, 0.1);
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.market-assist-new__recommend .content .item {
+  width: 300rpx;
+  height: 250rpx;
+  border-radius: 5rpx;
+  background-size: 100% 100%;
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  background-repeat: no-repeat;
+}
+
+.market-assist-new__recommend .content .item:nth-child(odd) {
+  margin: 0 30rpx 30rpx 0;
+}
+
+.market-assist-new__recommend .content .item:nth-child(even) {
+  margin: 0 0 30rpx;
+}
+
+.market-assist-new__recommend .content .item .title {
+  font-size: 32rpx;
+  font-weight: bold;
+  line-height: 45rpx;
+  margin: 62rpx 0 20rpx;
+  text-align: center;
+}
+
+.market-assist-new__recommend .content .item .subtitle {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  text-align: center;
+}
+
+/* 活动专区 */
+.market-assist-new__area .title-block {
+  margin-bottom: 25rpx;
+}
+
+.market-assist-new__area {
+  margin: 50rpx 0 0;
+}
+
+.market-assist-new__area .item {
+  width: 690rpx;
+  height: 200rpx;
+  margin: 0 auto 30rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.market-assist-new__area .item:last-child {
+  margin-bottom: 0;
+}
+
+.market-assist-new__area image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 公共样式 */
+.title-block {
+  color: #fff;
+  font-family: PingFangSC-Medium;
+  font-size: 32rpx;
+  font-weight: bold;
+  text-align: center;
+}
+
+.two-line::after {
+  display: inline-block;
+  content: "";
+  width: 60rpx;
+  height: 2rpx;
+  background-color: #fff;
+  vertical-align: middle;
+  margin-left: 16rpx;
+}
+
+.two-line::before {
+  display: inline-block;
+  content: "";
+  width: 60rpx;
+  height: 2rpx;
+  background-color: #fff;
+  vertical-align: middle;
+  margin-right: 16rpx;
+}
+/* 倒计时 */
+.timer {
+  color: #666666;
+  font-family: PingFangSC-Regular;
+  font-size: 22rpx;
+}
+
+.timer .desc-left {
+  display: flex;
+  align-items: center;
+  margin-right: 10rpx;
+}
+
+.timer .desc-right {
+  display: flex;
+  align-items: center;
+  margin-left: 10rpx;
+}
+
+/****************************** 浮层相关 ******************************/
+.no_move {
+  position: fixed;
+}
+
+/* 蒙层 */
+.pop_mask{position: fixed;top: 0;left: 0;width: 100%;height: 100%;  background:rgba(0,0,0,0.5);
+  z-index: 1;}
+
+/*============ 助力成功浮层--发券通用样式（目前携程券用的这个样式） ============*/
+.pop_wrap{
+  z-index: 2;
+  background: rgba(248,248,248,1);
+  border-radius: 20rpx;
+}
+.pop-close{
+  position: absolute;
+  bottom: -110rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60rpx;
+  height: 60rpx;
+  padding: 15rpx;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+.pop-close::before,
+.pop-close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28rpx;
+  height: 1px;
+  background-color: #fff;
+  margin-left: -14rpx;
+}
+.pop-close::before {
+  transform: rotate(45deg);
+}
+.pop-close::after {
+  transform: rotate(-45deg);
+}
+.pop_wrap-content{
+  overflow: hidden;
+}
+.pop_wrap-content.relative{
+  position: relative;
+  overflow: visible;
+}
+.pop_wrap-content .pop-close{
+    bottom: -170rpx;
+    
+}
+.pop_wrap .title{
+  text-align: center;
+  color: #333333;
+  font-family: PingFangSC-Semibold;
+  font-size: 36rpx;
+  font-weight: 600;
+  margin: 40rpx 0 50rpx;
+}
+.pop_wrap .content {
+  text-align: center;
+}
+
+.pop_wrap .desc {
+  color: #666666;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+}
+
+
+.pop_wrap .btn_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 60rpx 0 50rpx;
+}
+/*============ 规则浮层 ============*/
+.pop_wrap.rule{
+  padding-bottom:80rpx ;
+}
+.pop_wrap.rule .content {
+}
+.pop_wrap.rule .title {
+  margin: 48rpx auto 50rpx;
+  font-size:36rpx;
+  font-weight:bold;
+  color:rgba(0,0,0,1);
+  line-height:50rpx;
+}
+.pop_wrap.rule .title:before {
+  content: '';
+  width: 80rpx;
+  height: 1rpx;
+  border-bottom: 1rpx solid rgba(216,216,216,1);
+  display: inline-block;
+  margin-right: 20rpx;
+  margin-bottom: 12rpx;
+}
+.pop_wrap.rule .title:after {
+  content: '';
+  width: 80rpx;
+  height: 1rpx;
+  border-bottom: 1rpx solid rgba(216,216,216,1);
+  display: inline-block;
+  margin-left: 20rpx;
+  margin-bottom: 12rpx;
+}
+.pop_wrap.rule .list {
+  width: 614rpx;
+  /* padding: 0 20rpx ; */
+  max-height: 570rpx;
+  overflow-y: auto;
+  font-size: 28rpx;
+  line-height: 42rpx;
+  color: rgba(51,51,51,1);
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.pop_wrap.rule .list .item {
+  margin: 0 32rpx 40rpx;
+}
+.pop_wrap.rule .list .item:last-child {
+  margin-bottom: 0;
+}
+ .btn_wrap2 {
+  background-image: url('https://images3.c-ctrip.com/marketing/2019/08/xcx_deductAmount/float_close_1.png');
+  background-size: 100% 100%;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -100rpx;
+  margin: 0 auto;
+}
+.coupon1-pop{
+  width: 600rpx;
+}
+/* 按钮样式 */
+.assist-btn{
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* background: linear-gradient(-44.56deg, rgb(222, 0, 37) 0%, rgb(255, 111, 54) 100%); */
+  /* border-radius: 49.5rpx 49.5rpx 49.5rpx 49.5rpx; */
+  /* box-shadow: inset 1rpx 1rpx 8px 1rpx rgba(255, 241, 2, 0.5); */
+}
+.assist-btn button{
+  width: 580rpx;
+  height: 98rpx;
+  line-height:89rpx;
+  /* background: linear-gradient(-45deg, rgb(255, 66, 66) 0%, rgb(255, 155, 93) 100%); */
+  border-radius: 45rpx;
+  font-size:32rpx;
+  font-weight:bold;
+  color:rgba(255,255,255,1);
+  text-align: center;
+}
+/* 优惠券弹窗 */
+.coupon-pop{
+  width: 620rpx;
+}
+.coupon-pop .avatar{
+  position: absolute;
+  top: -55rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: px px 8px 8px rgba(131, 131, 131, 0.08);
+  height: 110rpx;
+  width: 110rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.coupon-pop .avatar image{
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 50%;
+}
+.coupon-pop .title{
+  margin: 84rpx 0 30rpx;
+}
+.coupon-pop .title2{
+  margin-top: 64rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 34rpx;
+  font-weight: bold;
+  padding: 0 60rpx;
+  margin-bottom: 56rpx;
+}
+.coupon-pop .coupon-pop-scroll{
+  max-height: 500rpx;
+}
+
+.coupon-pop .assist-coupon{
+  margin: 0 auto 16rpx;
+}
+.coupon-pop .assist-coupon:nth-last-child(1){
+  margin-bottom: 0;
+}
+.coupon-pop .assist-coupon .coupon-center-right-wraper{
+  border-bottom-right-radius: 10rpx;
+}
+.coupon-pop .assist-coupon .coupon-left{
+  border-bottom-left-radius: 10rpx;
+}
+.coupon-pop .tips{
+  color: #999999;
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-top: 5rpx;
+}
+.coupon-pop .get-status{
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+.coupon-pop .btn_wrap{
+  margin-top: 30rpx;
+}
+
+/* .coupon-pop .assist-btn{
+  height: 98rpx;
+  background: linear-gradient(-44.56deg, rgb(222, 0, 37) 0%, rgb(255, 111, 54) 100%);
+  border-radius: 49.5rpx 49.5rpx 49.5rpx 49.5rpx;
+  box-shadow: inset 1rpx 1rpx 8px 1rpx rgba(255, 241, 2, 0.5);
+}
+.coupon-pop .assist-btn button{
+  height: 89rpx;
+  background: linear-gradient(-45deg, rgb(255, 66, 66) 0%, rgb(255, 155, 93) 100%);
+} */
+
+.clear-btn {
+  margin:0;
+  padding:0;
+  background-color:transparent;
+  line-height:inherit;
+  border-radius:0;
+  border:none;
+  text-align: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+.clear-btn::after{
+  border: none;
+}

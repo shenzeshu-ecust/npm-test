@@ -1,0 +1,9 @@
+.ast-jump {
+    display: flex;
+    justify-content: center;
+    padding: 9rpx 0;
+}
+.ast-jump .img {
+    width: 700rpx;
+    height: 126rpx;
+}

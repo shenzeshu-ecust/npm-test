@@ -1,0 +1,27 @@
+<template name="promotion-banner-info">
+    <view class="banner-info {{atmosphereBannerInfo.title ? 'special-border': 'normal-border'}}">
+        <view class="banner-title" wx:if="{{bannerBasicInfo.headTitle}}">{{bannerBasicInfo.headTitle}}</view>
+        <view class="banner-content" wx:if="{{bannerBasicInfo.bannerTags}}">
+            <view class="banner-item {{tagItem.exposeData ? 'autoExpose' : ''}}"
+                  wx:for="{{bannerBasicInfo.bannerTags}}"
+                  wx:key="idx" wx:for-item="tagItem" data-expose="{{tagItem.exposeData}}">
+                <block wx:if="{{tagItem.showCouponText}}">
+                    <view class="left-text">{{tagItem.leftText}}</view>
+                    <view class="right-text">{{tagItem.rightText}}</view>
+                </block>
+                <view wx:else class="full-text">{{tagItem.tag}}</view>
+            </view>
+        </view>
+        <block>
+            <block wx:if="{{bannerBasicInfo.bannerButtonData.buttonDesc}}">
+                <view class="banner-btn {{bannerBasicInfo.bannerButtonData.isShowReceive ? 'receive-btn' : 'normal-btn'}}">{{bannerBasicInfo.bannerButtonData.buttonDesc}}</view>
+                <text wx:if="{{bannerBasicInfo.bannerButtonData.isShowReceive}}" class="promotion-cicon wechat-font-arrow-right"></text>
+            </block>
+            <view wx:else>
+                <view class="pro-icon-box">
+                    <view class="promotion-cicon wechat-font-arrow-right"></view>
+                </view>
+            </view>
+        </block>
+    </view>
+</template>

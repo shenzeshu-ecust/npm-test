@@ -1,0 +1,156 @@
+<nav-bar navbar-data="{{navbarData}}"
+  bindback="onBack"></nav-bar>
+<import src="../common/template/CustomModal.wxml" />
+<import src="./template/busInfo.wxml" />
+<import src="./template/packageRow.wxml" />
+<import src="./template/priceDetail.wxml" />
+<form bindsubmit='reportSubmitFromID'
+  report-submit="{{reportSubmit}}">
+    <view class='container'
+      hidden="{{isLoading}}"
+      style="background-color:#f2f2f2">
+        <!-- 填写信息 -->
+        <scroll-view scroll-y='true'
+          class="container"
+          bindscrolltoupper="onScrollToTop"
+          scroll-into-view="{{bookAnchor}}"
+          upper-threshold="10"
+          scroll-with-animation>
+            <!-- 车次信息 -->
+            <template is="businfo"
+              data="{{detail, hasSalePackage, classConfig, colorConfig, isPromotion, isBook:true, count: ticketCount}}" />
+            <!-- 搭售 -->
+            <block wx:if="{{xlist.length > 0}}">
+                <view class='salepackagerow-container'
+                  wx:for="{{xlist}}"
+                  wx:key="insurance">
+                    <template is="salepackagerow"
+                      data="{{mutil: true, type: 'right', item:item, number: item.sellType == 1 ? ticketCount : 1, index:index, onSelect: 'switchSalePackage', onExplain: 'showPackageExplain', classConfig: classConfig, colorConfig: colorConfig}}" />
+                    <view wx:if="{{index < xlist.length - 1}}"
+                      class='line' />
+                </view>
+            </block>
+            <!-- 手机号 -->
+            <view wx:if="{{showPhoneNumber}}"
+              class="flex-row b-b-phonenum color-bg_fff flex mt10 line25 b-b-row">
+                <view class="row-title">联系手机</view>
+                <view class="flex-i3">
+                    <input class="phoneInput"
+                      style="border-style:none"
+                      id="phone"
+                      bindchange="bindInputChange"
+                      auto-focus="{{focusInput === 'phone'}}"
+                      focus="{{focusInput === 'phone'}}"
+                      bindinput="bindInputChange"
+                      bindblur="bindInputChange"
+                      type="number"
+                      maxlength="11"
+                      placeholder="{{phoneNumberPlaceHolder}}"
+                      value="{{phoneNumber}}"
+                      bindtap="bindInputClick" />
+                </view>
+            </view>
+            <view wx:if="{{isShowPhoneNumberHint}}"
+              class="flex-row b-b-phonenum color-bg_fff flex b-b-row phoneNumber-hint-container">
+                <view class="row-title phoneNumber-hint">
+                    <icon type=""
+                      size="32rpx"
+                      class="icon-info phoneNumber-icon" />
+                    <text>请输入正确的手机号</text>
+                    <view class="tip_icon_triangle" />
+                </view>
+            </view>
+            <!-- 总额 -->
+            <view wx:if="{{!riskOrder}}"
+              class="color-bg_fff mt10 line25 b-b-row"
+              bindtap="empty">
+                <view class="flex-row">
+                    <view class='row-title'>总额</view>
+                    <view class="flex-i1 bus-book-explain-dark"></view>
+                    <view class='flex-row margin-horizontal'>
+                        <text class="torange">¥<text class="fontsize-super">{{showTotal || 0}}</text></text>
+                    </view>
+                </view>
+            </view>
+            <view class="bus-warmnotes">
+                <view class="flex-row">
+                    <text wx:if="{{priceComposeDesc}}">{{priceComposeDesc + '，'}}</text>
+                    <text>点击去支付表示已阅读并同意</text>
+                    <button class="button-noborder {{classConfig.mainColor}}"
+                      bindtap="showPolicy">
+                        汽车票预订协议
+                    </button>
+                    <text wx:if="{{onLineDescUrl}}">、</text>
+                    <button class="button-noborder {{classConfig.mainColor}}"
+                      wx:if="{{onLineDescUrl}}"
+                      data-url="{{onLineDescUrl}}"
+                      bindtap="showOnlinePackageExplain">
+                        保险须知
+                    </button>
+                </view>
+                <view wx:if="{{riskOrder}}"
+                  class="flex-row">
+                    <text>因账号存在风险，此订单额外加收<text>{{servicePrice}}</text>元/份服务费</text>
+                </view>
+            </view>
+            <view class="slogan-container">
+                <view wx:if="{{showSlogan}}"
+                  class="slogan {{classConfig.sloganImage}}"></view>
+            </view>
+            <!-- 底部按钮 -->
+            <view style="padding-bottom:248rpx"></view>
+        </scroll-view>
+        <view class="fixed  bar-pay">
+            <!-- 价格明细 -->
+            <template wx:if="{{showPriceDetail}}"
+              is="pricedetail"
+              data="{{priceList, priceListExtra, togglePriceDetail: 'togglePriceDetail',cancelSalePackage: 'switchSalePackage', mutil: true}}" />
+            <!-- 底部按钮 -->
+            <view class='bar'
+              style="{{isIPhoneX ? 'padding-bottom:68rpx' : ''}}">
+                <view wx:if="{{!riskOrder}}">
+                    <button form-type='submit'
+                      class="btn-primary btn-pay"
+                      hover-class="btn-primary_hover"
+                      bindtap="beforeSubmit"
+                      data-method='next'>
+                        去支付
+                    </button>
+                </view>
+                <view wx:else
+                  class="flex-row">
+                    <view class="flex-i2 flex-row">
+                        <button form-type='submit'
+                          class='button-noborder left flex-column flex-i1'
+                          bindtap='togglePriceDetail'>
+                            <view class='flex-row full-row'>
+                                <view class="price-contanier">
+                                    <text class="torange">¥ <text class="fontsize-super" >{{showTotal || 0}}</text></text>
+                                    <view wx:if="{{decountFee > 0}}"
+                                      class="tag-back">
+                                        <text class="tagText">节省{{decountFee}}元</text>
+                                    </view>
+                                </view>
+                                <text class="fontsize-extrasmall detail margin-horizontal {{showPriceDetail ? 'triangle' : 'triangleclose'}}">明细</text>
+                            </view>
+                        </button>
+                    </view>
+                    <view class="flex-i1">
+                        <button form-type="submit"
+                          class="btn-primary btn-pay"
+                          hover-class="btn-primary_hover"
+                          bindtap="beforeSubmit"
+                          data-method="next">
+                            去支付
+                        </button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 弹框 -->
+    <template is="custommodal"
+      data="{{...customModalData}}" />
+    <view class="view-check"
+      bindanimationend="viewReadyHandle"></view>
+</form>

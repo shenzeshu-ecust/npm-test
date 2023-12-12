@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "detail-header-compt":"../detail-header-compt/detail-header-compt",
+    "bottom-options":"../detailBottomOptions/detailBottomOptions",
+    "loading-fail": "../loadingFail/loadingFail"
+  }
+}

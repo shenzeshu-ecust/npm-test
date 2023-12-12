@@ -1,0 +1,25 @@
+@import "../../iconfont.wxss";
+.notice-comp{max-height: 80rpx; opacity: 1;transition: all .4s;}
+.notice-comp.hide{max-height: 0; opacity: 0;}
+.notice-comp .top-tips{background: #FFF8F2;line-height: 80rpx;display: flex;align-items: center;padding: 0 24rpx;overflow-x:hidden}
+.notice-comp .top-tips .horn{
+  width: 30rpx;
+  height: 30rpx;
+  background-image: url(https://images3.c-ctrip.com/train/2023-3/xiaochengxu/3.23/shaixuan/ic-gg.png);
+  background-size: 100% 100%;
+  margin-right: 6rpx;
+  margin-top: -4rpx;
+}
+.notice-comp .top-tips .txt{flex: 1;height: 80rpx; overflow: hidden;}
+.notice-comp .top-tips .cont.animation{
+   animation: 4s linear 0s normal none infinite upDown; 
+}
+.notice-comp .top-tips .ifont-arr{font-size: 20rpx;color: #999;}
+.notice-comp .notice-cont{white-space: nowrap;font-size: 24rpx;color: #666;height: 80rpx;overflow: hidden;}
+@keyframes upDown {
+  0% {transform: translate3d(0, 0, 0)}
+  30% {transform: translate3d(0, 0, 0)}
+  50% {transform: translate3d(0, -50%, 0)}
+  80% {transform: translate3d(0, -50%, 0)}
+  100% {transform: translate3d(0, 0, 0)}
+}

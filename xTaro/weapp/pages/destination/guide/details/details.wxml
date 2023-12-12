@@ -1,0 +1,251 @@
+<import src="../../common/wxParse/wxParse.wxml"/>
+<wxs module="detailsUtil" src="./details.wxs"></wxs>
+
+<scroll-view style="height:{{height}}px" class="article-scroll-view" scroll-y="true" wx:if="{{pocketBookCatalogContent}}">
+  <!----------------------------------- header ----------------------------------->
+  <view class="imageContent"  wx:if="{{!!pocketBookCatalogContent}}">
+    <view class="bgImageContent">
+      <image style="width:100%" wx:if="{{!!pocketBookCatalogContent.backgroundImage && !!pocketBookCatalogContent.backgroundImage.originalUrl}}" class="title_img" src="{{detailsUtil.ResizeImg(pocketBookCatalogContent.backgroundImage.originalUrl,'_D_750_280')}}"  mode="widthFix"></image>
+      <view class="infoView">
+        <view class="{sourcefrom==2 && authorList.length>0 ?'info' : 'infoNoAuthor' }">
+          <view class="bookName">{{pocketBookCatalogContent.catalogName}}</view>
+          <view class="readCount" wx:if="{{!!pocketBookCatalogContent.readCount}}">{{detailsUtil.checkNumber(pocketBookCatalogContent.readCount)+'次阅读'}}</view>
+          <view wx:if="{{sourcefrom==2 && authorList.length>0}}" class="pgcAuthor">
+            <view class="userLogo">
+              <image wx:if="{{!!authorList[0].coverImage && !!authorList[0].coverImage.originalUrl}}" src="{{detailsUtil.ResizeImg(authorList[0].coverImage.originalUrl,'_C_180_180')}}" class="user"></image>
+              <image wx:if="{{authorList[0].identitySign ==1}}" class="vipTag" src="https://pages.c-ctrip.com/you/livestream/lvpai_user_vip.png"></image>
+            </view>
+            <view class="authorName">{{authorList[0].nickName}}</view>
+            <view wx:if="{{!!authorList[0].userTagList && authorList[0].userTagList.length>0}}" class="author_tags">
+              <view class="tag">{{authorList[0].userTagList[0].tagName}}</view>
+            </view>
+          </view>
+        </view>
+        
+      </view>
+    </view>
+  </view>
+
+  <!----------------------------------- summary ----------------------------------->
+  <view wx:if="{{!!pocketBookCatalogContent.summary}}" class="guideQuote">
+    <image src="https://pages.c-ctrip.com/you/guides/quote@3x.png" class="quote"></image>
+    {{pocketBookCatalogContent.summary}}
+  </view>
+
+
+  <!----------------------------------- 正文 ----------------------------------->
+  <!-- PGC -->
+  <view class="ArticleContainer" wx:if="{{sourcefrom==2}}">
+    <block wx:for="{{travelPhotoContentList}}" wx:for-index="index" wx:for-item="vPGC" wx:key="index">
+      <view class="{{travelPhotoContentList.length == 1? 'guideArticleFirst guideArticle guideArticleLast' : index == 0 ? 'guideArticleFirst guideArticle' : travelPhotoContentList.length - 1 == index ? 'guideArticleLast guideArticle' : 'guideArticle'}}">
+
+        <!-- 是否显示标题 -->
+        <block wx:if="{{!!vPGC.isShowCatalogName}}">
+          <view class="articlePGCTitle bottomline" wx:if="{{!!vPGC.jumpUrl}}" bindtap='linked_to_detail' data-jumpurl="{{vPGC.jumpUrl}}">{{vPGC.catalogName}}</view>
+          <view class="articlePGCTitle" wx:else>{{vPGC.catalogName}}</view>
+        </block>
+
+        <block wx:if="{{!!vPGC.catalogContentList && vPGC.catalogContentList.length>0}}" wx:for="{{vPGC.catalogContentList}}"  wx:for-index="t" wx:for-item="item_catalog_content" wx:key="index">
+          <view class="{{t == 0 ? 'guideArticleFirst subArticleList' : vPGC.catalogContentList.length - 1 == t ? 'guideArticleLast subArticleList' : 'subArticleList'}}" >
+
+            <view class="subArticleTitle">{{item_catalog_content.contentTitle}}</view>
+
+            <!-- 富文本 -->
+            <view wx:if="{{!!textTemArray && textTemArray.length>0}}" wx:for="{{textTemArray}}" wx:key="text_idx" wx:for-index="text_idx" class='text_item' wx:if="{{rank_index[text_idx].rank === index && rank_index[text_idx].chapter === t}}">
+              <template is="wxParse" data="{{wxParseData:item}}" />
+            </view>
+
+            <!-- 图片 -->
+            <block wx:if="{{!!item_catalog_content.imageList && item_catalog_content.imageList.length>0}}">
+              <template is="slideImages" data="{{imageList:item_catalog_content.imageList,width:width}}"></template>
+            </block>
+
+
+           <!-- relatedGuide -->
+            <view class='relatedCatalog' wx:if="{{!!item_catalog_content.relationCatalogList && item_catalog_content.relationCatalogList.length>0}}">
+              <view class='relatedCatalogTitle'>相关内容</view>
+              <block wx:for="{{item_catalog_content.relationCatalogList}}" wx:for-item="relate_item" wx:key="index" >
+                <view bindtap="redirect_to_detail"  data-jumpurl='{{relate_item.jumpUrl}}' data-catalogId='{{relate_item.catalogId}}' class="relatedCataloglist">{{relate_item.title}}</view>
+              </block>
+            </view>
+
+            <!-------  POI ---------->
+            <block wx:if="{{!!item_catalog_content.poiList && item_catalog_content.poiList.length>0}}">
+              <template is="wxPoiStyle" data="{{poiList:item_catalog_content.poiList}}"></template>
+            </block>
+
+          </view>
+        </block>
+      </view>
+    </block>
+  </view>
+  <!-- UGC -->
+  <view class="ArticleContainer" wx:else>
+    <block wx:for="{{travelPhotoContentList}}" wx:for-index="index" wx:for-item="vUGC" wx:key="index">
+      <view class="{{travelPhotoContentList.length == 1? 'guideArticleFirst guideArticle guideArticleLast' : index == 0 ? 'guideArticleFirst guideArticle' : travelPhotoContentList.length - 1 == index ? 'guideArticleLast guideArticle' : 'guideArticle'}}">
+
+        <view class="articleHeader">
+          <text class="topText" wx:if="{{!!vUGC.topRankingText}}">{{vUGC.topRankingText}}</text>
+          <text class="zanText" wx:if="{{!!vUGC.topLikeText}}">{{vUGC.topLikeText}}</text>
+        </view>
+        <view class="articleTitle">{{vUGC.travelPhotoContentTitle}}</view>
+
+        <!-- 图片 -->
+        <block wx:if="{{!!vUGC.imageVideoList && vUGC.imageVideoList.length>0}}">
+          <template is="slideImages" data="{{imageList:vUGC.imageVideoList,width:width}}"></template>
+        </block>
+
+        <!-- 作者信息 -->
+        <view class="ugcAuthorContent" wx:if="{{!!vUGC.author}}">
+          <view class="authorInfo">
+            <view class="authorDetail">
+              <view class="authorPhoto">
+                <view class="authorPhoto_userLogo">
+                  <image wx:if="{{!!vUGC.author.coverImage && !!vUGC.author.coverImage.originalUrl}}" class="authorPhoto_user" src="{{detailsUtil.ResizeImg(vUGC.author.coverImage.originalUrl,'_C_180_180')}}"></image>
+                  <image wx:if="{{vUGC.author.identitySign == 1}}" class="authorPhoto_vipTag" src="https://pages.c-ctrip.com/you/livestream/lvpai_user_vip.png"></image>
+                </view>
+              </view>
+              <view class="ugcAuthorName">
+                <view class="nickName">{{vUGC.author.nickName}}</view>
+                <view class="tags" wx:if="{{!!vUGC.author.userTagList && vUGC.author.userTagList.length>0}}">
+                  <view class="{{item.tagType===1?'vtag':'stag'}}" wx:for="{{vUGC.author.userTagList}}" wx:key="index">{{item.tagName}}</view>
+                </view>
+                <view class="getFocused" wx:else>{{detailsUtil.checkNumber(vUGC.author.followCount)}}人关注了TA</view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 富文本 -->
+        <view wx:for="{{textTemArray}}" wx:key="text_idx" wx:for-index="text_idx" class='text_item' wx:if="{{rank_index[text_idx].chapter === index }}">
+          <template is="wxParse" data="{{wxParseData:item}}" />
+        </view>
+
+        <!-- 旅拍来源 -->
+        <view class="articleSource">
+          <view class="articleSource_left">
+            <view class="articleSource_date">{{vUGC.publishTime}}发布</view>
+            <view class="articleSource_source" bindtap="linked_to_detail" data-jumpurl="{{vUGC.from.jumpUrl}}">{{vUGC.from.fromName}}</view>
+          </view>
+          <view class="articleSource_right">
+            <view class="articleSource_zan">{{detailsUtil.checkNumber(vUGC.likeCount)}}个赞</view>
+            <view class="articleSource_collect">{{detailsUtil.checkNumber(vUGC.collectCount)}}人收藏</view>
+          </view>
+        </view>
+
+        <!-------  POI ---------->
+        <block wx:if="{{!!vUGC.poiList && vUGC.poiList.length>0}}">
+          <template is="wxPoiStyle" data="{{poiList:vUGC.poiList}}"></template>
+        </block>
+
+      </view>
+       
+    </block>
+  </view>
+
+  <!-------------end---------->
+  <view class="articleEnd" wx:if="{{travelPhotoContentList}}">
+    <view class="circle1"></view>
+    <view class="circle2"></view>
+    <view class="circle3"></view>
+    <image class="endIcon" mode="widthFix" src="https://pages.c-ctrip.com/you/guides/end@3x.png"></image>
+    <view class="circle3"></view>
+    <view class="circle2"></view>
+    <view class="circle1"></view>
+  </view>
+
+  <!----------------------------------- 相关推荐 ----------------------------------->
+  <view class="scenceGuide" wx:if="{{pocketBookCatalogList.length>0}}">
+    <view class="blockArea"></view>
+    <view class="scenceGuideTitle">
+      <view class="scenceGuideTitleText">相关推荐</view>
+      <view class="allGuide" wx:if="{{pocketBookCatalogList.length>6}}" bindtap="links_to_guidebook">
+        <view class="allText">全部</view>
+        <image class="moreIcon" src="https://pages.c-ctrip.com/you/guides/dest_ic_back_black@3x.png"></image>
+      </view>
+    </view>
+    <view class="scenePicList" >
+      <view class="scenePicItem" wx:for="{{pocketBookCatalogList}}" wx:key="index" bindtap="redirect_to_detail" data-jumpurl="{{item.jumpUrl}}" wx:if="{{index<6}}">
+        <view class="scenePicItemInner" >
+          <view class="sceneName">{{item.catalogName}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部补偿 -->
+  <view style='height:98rpx;width:750rpx;'></view>
+
+</scroll-view>
+
+<!--------------------- template for poi-------------------------->
+
+<template name="wxPoiStyle">
+  <view class="articleMentioned">
+    <view class="articleMentionedTitle">作者提及({{poiList.length}})</view>
+    <block wx:if="{{poiList.length == 1}}">
+      <template is="wxsinglePoiStyle" data="{{...poiList[0],...{multi:flase} }}"></template>
+    </block>
+    <block wx:else>
+      <scroll-view class='pgh_img_more_box' scroll-x>
+        <view wx:for="{{poiList}}" wx:key="index" wx:for-item="poi_item" class="{{index==0?'scroll_item scroll_item_first':'scroll_item'}}">
+          <template is="wxsinglePoiStyle" data="{{...poi_item,...{multi:true} }}"></template>
+        </view>
+      </scroll-view>
+    </block>
+  </view>
+</template>
+
+<!--------------------- template for singlepoi-------------------------->
+<template name="wxsinglePoiStyle">
+  <view class="{{multi==true?'poi_noborder_content':'poi_content'}}">
+    <view class="poi_container">
+      <view class="sceneMenu" bindtap="linked_to_detail" data-jumpurl ="{{poiJumpUrl}}">
+        <view class="poi_left">
+          <view class="poi_tag">{{poiType}}</view>
+          <image class="sceneImg" wx:if="{{!!coverImage && coverImage.originalUrl}}" src="{{detailsUtil.ResizeImg(coverImage.originalUrl, '_D_150_150')}}" mode='aspectFill'></image>
+        </view>
+        <view class="poi_right">
+          <view class="poisceneName">
+            <view class="sceneTitle">{{poiName}}</view>
+            <view wx:if="{{!!sightLevel}}" class="sceneTag">{{sightLevel}}</view>
+          </view>
+          <view class="sceneContent">
+            <view class="sceneScore">
+              <view class="score" wx:if="{{!!rating}}">
+                <view class="score_rate"><text class="score_font">{{rating}}</text>分</view>
+              </view>
+              <view class="line" wx:if="{{!!rating && !!commentCount}}"></view>
+              <view class="comment" wx:if="{{!!commentCount}}">
+                {{detailsUtil.checkNumber(commentCount)}}条点评
+              </view>
+            </view>
+            <view class="experienceDes" wx:if="{{!!shortFeatureList && shortFeatureList.length>0}}">{{shortFeatureList[0]}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+
+<!--------------------- template for SlideImages-------------------------->
+<template name="slideImages">
+  <view >
+    <!-- 一张 -->
+    <view class='singleImage' wx:if="{{imageList.length === 1}}">
+      <image style="width:100%" src="{{detailsUtil.ResizeImg(imageList[0].originalUrl || imageList[0].imageInfo.originalUrl, '_D_900_600')}}" mode='widthFix'></image>
+    </view>
+    <!-- 多图 -->
+
+    <view class="articleImages swiper"  wx:if="{{imageList.length > 1}}">
+      <swiper indicator-dots="{{true}}" style='width:{{width*2}}rpx;height:{{width*2/1.5}}rpx'>
+        <block wx:for="{{imageList}}" wx:key="index">
+          <swiper-item>
+            <image style='width:100%'  src="{{detailsUtil.ResizeImg(item.originalUrl || item.imageInfo.originalUrl, '_D_900_600')}}" mode='widthFix'></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+</template>

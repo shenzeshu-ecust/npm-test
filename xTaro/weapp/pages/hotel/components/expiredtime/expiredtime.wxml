@@ -1,0 +1,7 @@
+<view class="expired-time-box">
+    <view class="expired-time-text">{{expiredHours}}</view>
+    <view class="expired-time-colon">:</view>
+    <view class="expired-time-text">{{expiredMinutes}}</view>
+    <view class="expired-time-colon">:</view>
+    <view class="expired-time-text">{{expiredSeconds}}</view>
+</view>

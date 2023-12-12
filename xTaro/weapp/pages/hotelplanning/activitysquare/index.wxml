@@ -1,0 +1,50 @@
+<mp-navigation-bar 
+    wx:if="{{showCustomNav}}" 
+    id="mp-navigation"
+    back="{{true}}" 
+    color="#000" 
+    background="transparent"
+>
+    <view slot="right" class="active-bubble" wx:if="{{isShowBubble}}">
+        <view class="bubble-tip">点击“…”添加到我的小程序，微信首页下拉即可快速访问</view>
+        <view class="bubble-close wechat-font-close3" catchtap="closeBubble"></view>
+    </view>
+</mp-navigation-bar>
+<view class='active-wrapper'>
+    <view class='active-bg'>
+        <image class='square-title-image' src='https://pages.c-ctrip.com/hotels/wechat/market/smz/activity-square2.png'></image>
+        <view class='active-content active-game-content'>
+            <view class='game-title'>
+                <image class='game-image' src='https://pages.c-ctrip.com/hotels/wechat/market/smz/activity-square-game.png'></image>
+                <view class='game-title-text'>游戏区</view>
+            </view>
+            <image 
+                wx:for="{{gameList}}"  
+                wx:for-item="game" 
+                catchtap="jump"  
+                data-type="{{game.type}}" 
+                data-jumpurl="{{game.jumpUrl}}" 
+                class='game-module' 
+                src='{{game.image}}'>
+            </image>
+        </view>
+    </view>
+    <view class="right-wrapper">
+        <view class='active-content active-rights-content'>
+        <view class='game-title'>
+            <image class='right-image' src='https://pages.c-ctrip.com/hotels/wechat/market/smz/activity-square-rights.png'></image>
+            <view class='game-title-text'>权益区</view>
+        </view>
+        <view class="rights-item" wx:for="{{rightsList}}" wx:for-item="right">
+            <image class="rights-icon-img" src="{{right.icon}}"/>
+            <view class="rights-text">{{right.title}}</view>
+            <view 
+                catchtap="jump" 
+                class="rights-join-btn" 
+                data-type="{{right.type}}" 
+                data-jumpurl="{{right.jumpUrl}}" 
+            >{{right.btnText}}</view>
+        </view>
+    </view>
+    </view>
+</view>

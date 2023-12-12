@@ -1,0 +1,13 @@
+<view class="qr-code-toast-wrapper" wx:if="{{isShowModal}}">
+    <view class="mask" bindtap="closeModal"></view>
+    <view class="qr-code-toast cell">
+        <view class="popup-title-wrapper  {{communityQRCode.qrCodeType ? 'blue-bg' : 'red-bg'}}">
+            <view class="fs-40">{{communityQRCode.popupTitle}}</view>
+            <view class="fs-28 mt-8">{{communityQRCode.popupShortTitle}}</view>
+        </view>
+        <image bind:longpress="onLongPress" show-menu-by-longpress="true" class="qr-code-toast-image" src="{{communityQRCode.qrCodeUrl}}" />
+        <view class="cell flex-center qr-code-toast-tip {{communityQRCode.qrCodeType ? 'blue-tip-bg' : 'red-tip-bg'}}">长按或截图扫码识别二维码</view>
+        <view class="wifi-success-sprite qr-code-bg-image {{communityQRCode.qrCodeType ? 'transparent-blue-star' : 'transparent-red-gift'}}" ></view>
+        <view class="wechat-font-close qr-code-close" bindtap="closeModal"></view>
+    </view>
+</view>

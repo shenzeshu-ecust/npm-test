@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "点评详情",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "VideoComponent": "../../components/Video/video",
+    "WakeUpComponent": "../../components/WakeUp/WakeUp",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  }
+}

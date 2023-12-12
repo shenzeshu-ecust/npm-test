@@ -1,0 +1,51 @@
+<import src="template/commonTitle.wxml"/>
+
+<template name="destinationAsk">
+    <view wx:if="{{askData.totalCount > 0}}" class="ask" id="ask">
+        <template is="commonTitle" data="{{title:'大家都在问'}}"></template>
+        <view class="ask-list">
+          <view wx:for="{{askData.sightAskItemBOS}}" class="askBox" wx:key="{{item.itemId}}" data-itemid="{{item.itemId}}"
+             data-itemindex="{{index}}"
+             data-detail-url="{{item.jumpUrl}}" bindtap="toAskDetail">
+            <view class="askItemTitleWrap">
+              <image class="askItemTitleIcon" src='https://pages.c-ctrip.com/you/ttd/sightDetail/ic_ask.png' />
+              <view class="askItemTitle">{{item.ask.words}}</view>
+            </view>
+            <view class="askAnswerWrap">
+              <image class="askAnswerIcon" src='https://pages.c-ctrip.com/you/ttd/sightDetail/ic_answer.png' />
+              <view class="answerWrap">
+                <view class="askAnswerUserInfo">
+                  <image wx:if="{{item.answer.author.portrait}}" class="avatar" src="{{item.answer.author.portrait}}" />
+                  <test wx:if="{{item.answer.author.name}}" class="username">{{item.answer.author.name}}</test>
+                  <view wx:if="{{item.answer.author.isExpert}}" class="titleBox ask-container">
+                    <test class="title">问答专家</test>
+                  </view>
+                  <view wx:if="{{item.answer.isAdopt}}" class="acceptanceBox ask-container">
+                    <image class="icon" src='https://pages.c-ctrip.com/you/ttd/sightDetail/ic_get.png' />
+                    <test class="acceptance">已采纳</test>
+                  </view>
+                  <view wx:if="{{item.answer.author.isBest}}" class="bestBox ask-container">
+                    <image class="icon" src='https://pages.c-ctrip.com/you/ttd/sightDetail/ic_best.png'></image>
+                    <test class="best">最佳</test>
+                  </view>
+                </view>
+                <view class="askAnswer">{{item.answer.words}}</view>
+              </view>
+            </view>
+            <view class="askBottomIconWrap">
+              <view wx:if="{{item.answer.viewCount}}" class="askBottomIconItem">
+                <image class="askBottomIcon" src='https://pages.c-ctrip.com/you/ttd/sightDetail/ic_view.png' />
+                <test class="askBottomtest">{{item.answer.viewCount}}</test>
+              </view>
+              <view wx:if="{{item.answer.commentCount}}" class="askBottomIconItem">
+                <image class="askBottomIcon" src='https://pages.c-ctrip.com/you/ttd/sightDetail/ic_review.png' />
+                <test class="askBottomtest">{{item.answer.commentCount}}</test>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{!!askData.moreInfo.url}}" class="more-jump-wrap" bindtap="toAskList" data-moreurl="{{askData.moreInfo.url}}">
+          {{askData.moreInfo.text}}
+        </view>
+      </view>
+</template>

@@ -1,0 +1,80 @@
+/* pages/demo/authorizationFloat/index.wxss */
+.float {
+  z-index: 10010;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+.pop {
+  z-index: 10000;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #eeeeee;
+  border-radius: 20rpx 20rpx 0 0;
+  padding: 50rpx 0;
+}
+.wrapper {
+  margin: 0 30rpx;
+}
+.icon {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+}
+.title {
+  display: flex;
+  justify-content: flex-start;
+  /* overflow: inherit; */
+  align-items: center;
+}
+.appName {
+  margin: 0 15rpx;
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.content {
+  display: flex;
+  justify-content: center;
+  padding: 50rpx 0 70rpx;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.desc {
+  color: #999999;
+  padding: 10rpx 0 0;
+}
+.selectors {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selectors view {
+  padding: 15rpx 70rpx;
+  border-radius: 8rpx;
+}
+.reject {
+  background: #ffffff;
+  margin-right: 20rpx;
+}
+.allow {
+  background: #07C160;
+  color: #fff;
+  margin-left: 20rpx;
+}
+
+.middle {
+  font-size: 26rpx;
+}
+.small {
+  font-size: 24rpx;
+}
+.big {
+  font-size: 28rpx;
+}

@@ -1,0 +1,6 @@
+<view wx:if="{{category === '2'}}">
+    <include src="./tpl/filter.wxml" />
+</view>
+<block wx:elif="{{category === '3'}}">
+    <include src="./tpl/area.wxml" />
+</block>

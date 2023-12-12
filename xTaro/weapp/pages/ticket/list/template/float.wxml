@@ -1,0 +1,106 @@
+<template name="floatTest">
+    <!-- 首页活动 -->
+    <view class="home_main_wrap dw_main_wrap" wx:if="{{ls.showBigPop || ls.showSmallPop}}">
+        <!-- 蒙层+关闭按钮 -->
+        <view class="dw_pop_mask {{!ls.showBigPop? 'animate_fadeout' : ''}}" data-type="showSmall" bindtap="marketFloatEntrance"></view>
+        <!-- 大浮层-->
+        <view class="dw_mdpop_main {{ls.showBigPop?'':view.floatData.isAnimate?'animate_boxout':'animate_fadeout'}}">
+            
+                <button plain="true" class="bigImg_formButton" data-type="toPage" bindtap="marketFloatEntrance" data-isredirect="{{view.floatData.isRedirect}}"  data-url="{{view.floatData.url}}" data-appid="{{view.floatData.appId}}" data-ctype="float"></button>
+            
+            <image class="pop_pic" src="{{view.floatData.bigFloatImage}}" mode="widthFix" data-type="toPage" data-isredirect="{{view.floatData.isRedirect}}"  data-url="{{view.floatData.url}}" data-appid="{{view.floatData.appId}}" bindtap="marketFloatEntrance" data-ubt-key="MKT_FLOAT_BIG_IMAGE" data-ctype="float"></image>
+            
+                <button plain="true" class="pop_close" data-type="showSmall" bindtap="marketFloatEntrance" data-ubt-key="MKT_FLOAT_CLOSE"></button>
+            
+        </view>
+        <!-- 小浮层 -->
+        <div class="dw_smpop_wrap {{!ls.showBigPop && ls.showSmallPop && view.floatData.floatType!=2 ? 'animate_boxin' : 'animate_fadeout'}}"  style="bottom:{{view.floatData.fbottom}};right:{{view.floatData.fright}};width:{{view.floatData.fwidth}};height:{{view.floatData.fheight}};background-image:url('{{view.floatData.smallFloatImage}}')">
+             <button plain="true"  class="sm_btn" data-type="toPage"  data-isredirect="{{view.floatData.isRedirect}}"  data-url="{{view.floatData.url}}" data-appid="{{view.floatData.appId}}" bindtap="marketFloatEntrance" data-ubt-key="MKT_FLOAT_SMALL_IMAGE" data-ctype="float"></button>
+        </div>
+    </view>
+
+
+     <!-- 首页 - 互动屏大浮层二期 -->
+    <view class="hdp_wrap" wx:if="{{ls.hdpShowBigMask}}">
+        <view class="dw_pop_mask"></view>
+        <view class="hdp_main_wrap">
+         <image class="pic" src="https://images4.c-ctrip.com/img3/marketing/2018/11/pop_pic/{{view.hdpInfo.hdpPic}}.png"  mode="widthFix"></image>
+         <form bindsubmit="marketFloatEntrance" report-submit="true" data-type="homeFormSubmit" wx:if="{{view.hdpInfo.hdpPic=='red'||view.hdpInfo.hdpPic=='red04'}}">
+            <button form-type="submit" class="btn_coupon" data-type="getHdpCoupon" open-type="getPhoneNumber" bindgetphonenumber="marketFloatEntrance" data-sid="{{view.hdpInfo.sid}}"></button>
+         </form>
+         <view wx:elif="{{view.hdpInfo.hdpPic=='lc'}}">
+            <view class="btn cancel" data-type="closeHdp" bindtap="marketFloatEntrance"></view>
+            <view class="btn confirm" data-type="sendbizofdaoyin" bindtap="marketFloatEntrance"></view>
+         </view>
+         <form bindsubmit="marketFloatEntrance" report-submit="true" data-type="homeFormSubmit" wx:else>
+            <button form-type="submit" class="btn_coupon" data-type="closeHdp" bindtap="marketFloatEntrance" data-coupontype="{{view.hdpInfo.hdpPic}}" data-aid="{{view.hdpInfo.aid}}" data-sid="{{view.hdpInfo.sid}}"></button>
+         </form>
+        </view>
+    </view>
+
+    <!-- 首页-摇一摇新年福袋 -->
+    <view class="swing_wrap">
+      <view class="dw_pop_mask" bindtap="marketFloatEntrance" data-type="closeSwingPop" wx:if="{{ls.swingShowBigPop || ls.swingShowRules}}"></view>
+      <view class="swing_big_wrap" style="background-image: url('{{view.swingInfo.bigPic}}')" data-type="toPage" data-isredirect="{{view.swingInfo.isRedirect}}"  data-url="{{view.swingInfo.url}}" data-appid="{{view.swingInfo.appId}}" data-ctype="swing" bindtap="marketFloatEntrance" wx:if="{{ls.swingShowBigPop}}">
+      </view>
+      <button class="pop_close swing" bindtap="marketFloatEntrance" data-type="closeSwingPop" wx:if="{{ls.swingShowBigPop}}"></button>
+      <view class="swing_sm_pop" wx:if="{{ls.swingShowSmallPop}}" bindtap="marketFloatEntrance" data-type="showRules" style="right:{{view.swingInfo.right||0}}rpx"></view>
+      <view class="swing_rule" wx:if="{{ls.swingShowRules}}">
+        <button class="pop_close" bindtap="marketFloatEntrance" data-type="closeSwingPop"></button>
+        <image src="https://images3.c-ctrip.com/marketing/2020/01/single_pic/rule_img.gif"></image>
+        <!-- <view class="rule_shake"></view> -->
+      </view>
+    </view>
+    
+    <!-- POI页面 门票领券浮层 -->
+    <view wx:if="{{ls.souYiSouFloatShow}}">
+      <view class="dw_pop_mask" data-type="closeSouYiSouPop" bindtap="marketFloatEntrance"></view>
+      <view class="souyisou_wrap">
+        <view class="has_receive_icon" wx:if="{{ls.loginStatus && ls.isReceive}}"></view>
+        <view class="title">十一FUN价</view>
+        <view class="sub_title">送您价值￥{{view.floatData.couponCount}}门票优惠券</view>
+        <view class="coupon_list">
+          <view wx:for="{{view.floatData.couponList}}" class="coupon">
+              <view class="desc">满{{item.startAmount}}元可用</view>
+              <view class="count">{{item.discountAmount}}<span>元</span></view>
+          </view>
+        </view>
+        
+        <!-- 未登录----立即领取按钮 -->
+        <view>
+          <button class="souyisou_btn_coupon"
+                open-type="getPhoneNumber" 
+                data-type="checkIsSouYiSouGetCoupon"
+                data-loginstatus="{{ls.loginStatus}}"
+                bindgetphonenumber="marketFloatEntrance"
+                wx:if="{{!ls.loginStatus}}">
+                立即领取
+          </button>
+        
+          <!-- 已经登录  立即领取按钮 -->
+          <view 
+              wx:if="{{ls.loginStatus && !ls.isReceive}}"
+              class="souyisou_btn_coupon"
+              data-type="getSouYiSouCoupon"
+              data-loginstatus="{{ls.loginStatus}}"
+              bindtap="marketFloatEntrance">
+              立即领取
+          </view>
+
+          <!-- 已经登录并且领取 -->
+          <view 
+              wx:if="{{ls.loginStatus && ls.isReceive}}"
+              class="souyisou_btn_coupon"
+              data-type="closeSouYiSouPop"
+              bindtap="marketFloatEntrance">
+              立即使用
+          </view>
+        </view>
+      </view>
+      <!-- close float -->
+      <button class="pop_close swing" 
+              bindtap="marketFloatEntrance"
+              data-type="closeSouYiSouPop">
+      </button>
+    </view>
+</template>

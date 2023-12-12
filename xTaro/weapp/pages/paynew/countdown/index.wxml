@@ -1,0 +1,7 @@
+<view class="l-countdown l-class" wx:if="{{time}}">
+  <view wx:if="{{lineEnd}}" class="l-countdown-item">{{doneText}}</view>
+  <view wx:else class="l-countdown-item">
+    <text class="l-countdown-prefix">{{prefix}}</text>
+    <text class="l-countdown-time">{{date}}</text>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "ad-sdk":"/pages/market/advertiseNew/ad-sdk"
+  }
+}

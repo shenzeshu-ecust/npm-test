@@ -1,0 +1,365 @@
+<import src="../TrainCardInfo/TrainCardInfo.wxml" />
+
+<view class="urgent-tag"
+  wx:if="{{train.IsUrgent}}">可紧急代购</view>
+<view class="suc-rate"
+  wx:elif="{{(train.SucRate && !train.preSaleTimeStr)}}">
+    抢票成功率 {{train.SucRate}}
+</view>
+<view class="sel-bd">
+    <template is="train-card-info"
+      data="{{train}}"></template>
+    <view class="sel-price">
+        <view class="train-price number-zx2">{{train.Price}}</view>
+        <view class="tag-orage"
+          wx:if="{{train.Tag}}">{{train.Tag}}</view>
+        <!-- <view class="tag-orage" wx:if="{{train.isPreSale}}">去预约</view>
+                                <view class="tag-orage" wx:elif="{{!train.SeatCount}}">去抢票</view>
+                                <view class="tag-orage" wx:elif="{{train.canRobTag}}">可抢票</view> -->
+    </view>
+</view>
+
+<!-- 展开的选择座席按钮 -->
+<!-- 现在基本都是x页，这段可以忽略 -->
+<view id="seatdetail"
+  class="sel-detail {{index === seatCardIndex ? 'an' : ''}}"
+  wx:if="{{keyIndex === seatCardIndex && !isXpageNew}}">
+    <view class="item"
+      wx:for="{{train.SeatList}}"
+      wx:for-item="seat"
+      wx:key="{{index}}">
+        <view class="seat">
+            {{seat.SeatName}}
+            <view class="icon-jing"
+              wx:if="{{seat.IsCanSilent}}">静</view>
+        </view>
+        <view class="price urgent"
+          wx:if="{{seat.IsUrgentSeat}}">
+            {{seat.ShowSeatPrice}}
+            <text>{{seat.PackagePriceDesc}}</text>
+        </view>
+        <view class="price"
+          wx:else>{{seat.ShowSeatPrice}}</view>
+        <view class="status">
+            {{!train.isPreSale ? (seat.SeatInventory < 21 ? (seat.SeatInventory ? seat.SeatInventory + '张' : '无票') : '有票') : ''}}
+        </view>
+        <view data-index="{{keyIndex}}"
+          data-dstation="{{train.DepartStation}}"
+          data-astation="{{train.ArriveStation}}"
+          data-seatinventory="{{seat.SeatInventory}}"
+          data-seatname="{{seat.SeatName}}"
+          data-price="{{seat.SeatPrice}}"
+          data-selfindex="{{index}}"
+          data-ubt-key="{{train.TrainNumber}}"
+          data-from="{{from}}"
+          catchtap="itemHandle">
+            <button class="{{train.IsUrgent || isCannotGrabTicket ? 'btn-gray' : 'btn-blue'}}"
+              wx:if="{{!seat.SeatInventory}}">
+                {{train.IsUrgent ? '无票': (train.isPreSale ? '预约抢票' : '抢票')}}
+            </button>
+            <button class="btn-orage"
+              wx:else>{{seat.IsUrgentSeat ? '紧急代购' : '预订'}}</button>
+        </view>
+    </view>
+</view>
+
+<!-- x页展开的选择座席按钮新样式 -->
+<view id="seatdetail"
+  class="sel-detail x-sel-detail {{index === seatCardIndex ? 'an' : ''}}"
+  wx:if="{{ keyIndex === seatCardIndex && isXpageNew }}">
+    <!-- 走兜底表示无供应商信息，seatVendorList表示服务包接口有下发坐席供应商信息  这里的判断表示坐席接口请求完毕-->
+    <view wx:if="{{!train.isDoudi && train.SeatList[train.curSeatIndex].seatVendorList.length > 0 || train.isDoudi}}">
+        <!-- 这里是横着的坐席信息，座位大于三种横向滑动 -->
+        <view class="seat-item-box flex-row"
+          wx:if="{{train.SeatList.length <= 3 }}">
+            <!-- 这里的itemHandle 是点击横向的座位 不应该有跳转的 所以没传jumpdirect-->
+            <view class="seat-item {{index ? 'seat-item-left' : ''}} {{train.SeatList.length === 2 ? 'seat-item-two' : ''}}  {{index === train.curSeatIndex ? 'seat-item-border' : ''}}"
+              wx:for="{{train.SeatList}}"
+              wx:for-item="seat"
+              wx:key="index"
+              data-index="{{keyIndex}}"
+              data-dstation="{{train.DepartStation}}"
+              data-astation="{{train.ArriveStation}}"
+              data-seatinventory="{{seat.SeatInventory}}"
+              data-seatname="{{seat.SeatName}}"
+              data-price="{{seat.SeatPrice}}"
+              data-selfindex="{{index}}"
+              data-ubt-key="{{train.TrainNumber}}"
+              data-from="{{from}}"
+              data-isXpageNew="{{true}}"
+              catchtap="itemHandle">
+                <view class="seat-item-seatname flex-row {{index === train.curSeatIndex ? 'blue' : ''}}">{{seat.SeatName}}
+                    <view class="slient flex-row"
+                      wx:if="{{seat.IsCanSilent}}"><text class="slienttxt">静</text></view>
+                </view>
+                <view class="seat-item-seatprice {{index === train.curSeatIndex ? 'blue' : ''}}">¥{{seat.SeatPrice}}<text class="seat-item-seatsplit">/</text>
+                    <!-- hasWiseSeat表示有智慧方案 没智慧方案也没坐席才展示抢票 -->
+                    <text wx:if="{{!seat.SeatInventory && !seat.hasWiseSeat}}"
+                      class="{{!train.isPreSale ? 'isurgent' : ''}}">{{train.IsUrgent ? '停售': (train.isPreSale ? '--' : '抢票')}}</text>
+                    <text wx:else>{{(seat.SeatInventory < 21 && !seat.hasWiseSeat) ? (seat.SeatInventory ? '' + seat.SeatInventory + '张' : '') : '有票'}}</text>
+                </view>
+                <image wx:if="{{index === train.curSeatIndex}}"
+                  class="seat-item-bottom"
+                  src="https://images3.c-ctrip.com/train/2022/app/8.53/xiaochengxu/zhuliucheng/img-jb.png" />
+            </view>
+        </view>
+        <view class="seat-view"
+          wx:else>
+            <scroll-view class="seat-item-box seat-item-scroll-box"
+              scroll-x
+              scroll-with-animation>
+                <view class="seat-scroll-item-box {{index ? 'seat-item-left' : ''}} {{index === train.curSeatIndex ? 'seat-item-border' : ''}}"
+                  wx:for="{{train.SeatList}}"
+                  wx:for-item="seat"
+                  wx:key="index"
+                  data-index="{{keyIndex}}"
+                  data-dstation="{{train.DepartStation}}"
+                  data-astation="{{train.ArriveStation}}"
+                  data-seatinventory="{{seat.SeatInventory}}"
+                  data-seatname="{{seat.SeatName}}"
+                  data-price="{{seat.SeatPrice}}"
+                  data-selfindex="{{index}}"
+                  data-ubt-key="{{train.TrainNumber}}"
+                  data-from="{{from}}"
+                  data-isXpageNew="{{true}}"
+                  catchtap="itemHandle">
+                    <view class="seat-scroll-item">
+                        <view class="seat-item-seatname flex-row {{index === train.curSeatIndex ? 'blue' : ''}}">{{seat.SeatName}}
+                            <view class="slient flex-row"
+                              wx:if="{{seat.IsCanSilent}}"><text class="slienttxt">静</text></view>
+                        </view>
+                        <view class="seat-item-seatprice {{index === train.curSeatIndex ? 'blue' : ''}}">¥{{seat.SeatPrice}}<text class="seat-item-seatsplit">/</text>
+                            <text wx:if="{{!seat.SeatInventory && !seat.hasWiseSeat}}"
+                              class="{{!train.isPreSale ? 'isurgent' : ''}}">{{train.IsUrgent ? '停售': (train.isPreSale ? '--' : '抢票')}}</text>
+                            <text wx:else>{{(seat.SeatInventory < 21 && !seat.hasWiseSeat) ? (seat.SeatInventory ? '' + seat.SeatInventory + '张' : '') : '有票'}}</text>
+                        </view>
+                    </view>
+                    <image wx:if="{{index === train.curSeatIndex}}"
+                      class="seat-item-bottom"
+                      src="https://images3.c-ctrip.com/train/2022/app/8.53/xiaochengxu/zhuliucheng/img-jb.png" />
+                </view>
+            </scroll-view>
+        </view>
+        <!-- 这里是每种座位对应的产品：全能抢票/专人抢票/智慧系列/优享预订等 -->
+        <block wx:if="{{!train.isDoudi}}">
+            <view class="sel-box-shadow"></view>
+            <!-- //TODO: -->
+            <view wx:for="{{train.SeatList[train.curSeatIndex].seatVendorList}}"
+              wx:for-item="seatVendor"
+              wx:key="index">
+                <view class="flex-row seat-booking-box-bottom {{train.SeatList[train.curSeatIndex].seatVendorList.length-1 === index ? 'seat-booking-box-margin-bottom' : ''}}"
+                  data-vendorid="{{seatVendor.VendorID}}"
+                  data-wise-type="{{seatVendor.thenByTicketInfo ? 'THEN_BY' : 'COMBINE'}}"
+                  data-isxpagenew="{{true}}"
+                  data-jumpdirect="{{true}}"
+                  data-vendoridtype="{{seatVendor.VendorIdType}}"
+                  data-seatidx="{{train.curSeatIndex}}"
+                  data-seatvendoridx="{{index}}"
+                  data-keyidx="{{keyIndex}}"
+                  data-from="{{from}}"
+                  catchtap="itemHandle">
+                    <view class="flex-row seat-booking-box">
+                        <image class="seat-img"
+                          src="{{seatVendor.TrainTicketSeatVendorInfo.VendorIcon}}"
+                          mode="widthFix" />
+                        <view style="flex:1;">
+                            <view class="booking-info-title">{{seatVendor.TrainTicketSeatVendorInfo.VendorName}}
+                                <text wx:if="{{seatVendor.VendorID === 44}}"
+                                  class="ifont-qus"
+                                  data-infodetail="{{seatVendor.TrainTicketSeatVendorInfo.VendorDescUrl}}"
+                                  data-vendorid="{{seatVendor.VendorID}}"
+                                  catchtap="detailClick"></text>
+                                <block wx:if="{{(seatVendor.TrainTicketSeatVendorInfo.VendorPriceDesc || seatVendor.vendorText) && seatVendor.VendorID !== 65 &&  seatVendor.VendorID !== 92}}">
+                                    <text wx:if="{{ seatVendor.VendorID === 74 }}"
+                                      class="booking-vendor-txt">+￥{{ seatVendor.TrainTicketSeatVendorInfo.VendorPrice}}/人</text>
+                                    <text wx:else
+                                      class="booking-vendor-txt">{{ seatVendor.TrainTicketSeatVendorInfo.VendorPriceDesc || seatVendor.vendorText}}</text>
+                                </block>
+                                <image wx:if="{{seatVendor.VendorID === 65 || seatVendor.VendorID === 92 }}"
+                                  class="combi-cnl"
+                                  src="https://images3.c-ctrip.com/train/2023/app/8.60/zhuliucheng/liuchengganzhi/img-logo.png">
+                                </image>
+
+
+                            </view>
+                            <!-- 全能抢票的东西 -->
+                            <view class="booking-omni-desc"
+                              wx:if="{{ seatVendor.VendorID === 74 }}">
+                                <view class="hd">
+                                    <image class="tit"
+                                      mode="aspectFit"
+                                      src="{{ seatVendor.ServiceBottomInfo.ServiceTitle }}" />
+                                    <view class="tag"
+                                      wx:if="{{ seatVendor.DiscountPrice }}">平台补贴￥{{ seatVendor.DiscountPrice }}</view>
+                                    <view class="desc"
+                                      catchtap="openOmniPop">详情<text class="ifont-triangle"></text></view>
+                                </view>
+                                <view class="bd">
+                                    <view class="bd-item"
+                                      wx:for="{{ seatVendor.ServiceBottomInfo.BottomTagList }}">
+                                        <image class="item-icon"
+                                          src="{{ item.Icon }}" />
+                                        <text>{{ item.Content }}</text>
+                                    </view>
+                                </view>
+                            </view>
+                            <rich-text wx:else
+                              class="booking-info-subtitle"
+                              nodes="{{seatVendor.TrainTicketSeatVendorInfo.VendorRemark}}"></rich-text>
+
+                            <!-- 组合座/上车补/跨站 -->
+                            <view wx:if="{{(seatVendor.VendorID === 65 || seatVendor.VendorID === 92) && (seatVendor.combiInfo || seatVendor.thenByTicketInfo)}}"
+                              class="flex-row combi-box">
+                                <!-- 组合座 -->
+                                <block wx:if="{{seatVendor.combiInfo}}">
+                                    <view class="x-page-combi">
+                                        <view class="journey-line">
+                                            <view class="journey">{{seatVendor.combiInfo.ticketList[0].seatName}}</view>
+                                            <view class="journey journey-two"
+                                              catchtap="combiDetailClick">车内换座
+                                                <image class="detail-icon"
+                                                  src="https://images3.c-ctrip.com/train/2022/app/8.58/zhuliucheng/cheneihuanzuo/img-js.png">
+                                                </image>
+                                            </view>
+                                            <view class="journey">{{seatVendor.combiInfo.ticketList[1].seatName}}</view>
+                                            <view class="journey-circle journey-circle-one"></view>
+                                            <view class="journey-circle journey-circle-two"></view>
+                                            <view class="journey-btm-line"></view>
+                                        </view>
+
+                                        <view class="combi-info-time station-info">
+                                            <text>{{seatVendor.combiInfo.ticketList[0].departStation}}</text>
+                                            <text class="middle-time">{{seatVendor.combiInfo.ticketList[0].arriveStation}}</text>
+                                            <text>{{seatVendor.combiInfo.ticketList[1].arriveStation}}</text>
+                                        </view>
+                                    </view>
+                                </block>
+                                <!-- 上车补/跨站 -->
+                                <block wx:else="{{seatVendor.thenByTicketInfo}}">
+                                    <view class="x-page-combi">
+                                        <view class="journey-line then-by">
+                                            <text wx:for="{{seatVendor.thenByTicketInfo.ticketList}}"
+                                              wx:for-item="ticket"
+                                              class="journey {{ticket.tag ? '' : 'hidden'}}">{{ticket.tag}}</text>
+                                            <view class="journey-btm-line-box">
+                                                <view class="{{seatVendor.thenByTicketInfo.crossType === 'FRONT' ? 'dashed' : 'solid' }}"></view>
+                                                <view class="{{seatVendor.thenByTicketInfo.crossType === 'BACK' ? 'dashed' : 'solid' }}"></view>
+                                            </view>
+                                            <view class="journey-btm-dot">
+                                                <view wx:for="{{seatVendor.thenByTicketInfo.ticketList}}"
+                                                  class="dot"></view>
+                                            </view>
+                                            <view class="journey-line-tag">
+                                                <view wx:if="{{seatVendor.thenByTicketInfo.crossType === 'BACK' && seatVendor.thenByTicketInfo.actionType=== 1}}"
+                                                  class="solu-tag front youpiao">有票</view>
+                                                <view wx:else
+                                                  class="solu-tag {{seatVendor.thenByTicketInfo.crossType === 'BACK' ? 'hidden' : 'front'}}">{{seatVendor.thenByTicketInfo.tag}}</view>
+                                                <view class="solu-tag {{seatVendor.thenByTicketInfo.crossType === 'FRONT' ? 'hidden' : ''}} {{seatVendor.thenByTicketInfo.solutionType === 1 ? 'bupiao' : 'kuazhan'}}">{{seatVendor.thenByTicketInfo.tag}}</view>
+                                            </view>
+                                        </view>
+                                        <view class="combi-info-time then-by station-info">
+                                            <text wx:for="{{seatVendor.thenByTicketInfo.ticketList}}"
+                                              wx:for-item="ticket"
+                                              class="{{ticket.isReal ? '' : 'grey'}}">{{ticket.name}}</text>
+                                        </view>
+                                    </view>
+                                </block>
+                                <view class="combi-detail">
+                                    <view class="btn"
+                                      data-isexpand="{{true}}"
+                                      data-from="{{from}}"
+                                      data-wise-type="{{seatVendor.combiInfo ? 'COMBINE' : 'THEN_BY'}}"
+                                      catchtap="openWiseSeatPop">
+                                    </view>
+                                </view>
+
+                            </view>
+                            <view class="seat-line {{seatVendor.VendorID === 65 || seatVendor.VendorID === 92 || seatVendor.VendorID === 74 ? '' : 'seat-line-two'}}"
+                              wx:if="{{ index < train.SeatList[train.curSeatIndex].seatVendorList.length - 1 }}" />
+                        </view>
+                    </view>
+                    <button class="{{ seatVendor.ButtonName === '抢' ? 'btn-blue' : 'btn-orage' }}  booking-btn flex-row">
+                        <view class="button-name">{{seatVendor.ButtonName}}</view>
+                        <view class="button-price-tag {{ seatVendor.ButtonName === '抢' ? 'btn-price-tag-blue' : 'btn-price-tag-orange'}}"
+                          wx:if="{{ seatVendor.PriceTag }}">{{seatVendor.PriceTag}}</view>
+                    </button>
+
+                </view>
+
+            </view>
+        </block>
+        <!-- 12306 兜底 -->
+        <view wx:else
+          class="flex-column seat-booking-box-upper seat-booking-box-bottom seat-booking-box-margin-bottom}}"
+          data-jumpindex="{{0}}"
+          data-isxpagenew="{{true}}"
+          data-jumpdirect="{{true}}"
+          catchtap="itemHandle">
+            <view class="sel-box-shadow"></view>
+            <view class="flex-row seat-booking-box">
+                <image class="seat-img"
+                  src="https://images3.c-ctrip.com/train/2023-3/xiaochengxu/3.23/zhihuixilie/ic-12306.png"
+                  mode="widthFix" />
+                <view>
+                    <view class="booking-info-title">12306预订</view>
+                    <view class="booking-info-subtitle">携程预订，官网免费直购</view>
+                </view>
+            </view>
+            <button class="btn-orage booking-btn booking-doudi-btn flex-row">订</button>
+        </view>
+    </view>
+    <view wx:else>
+        <view class="seat-item-box flex-row">
+            <view class="seat-item {{index ? 'seat-item-left' : ''}}"
+              wx:for="{{[0,1,2]}}"
+              wx:for-item="seat"
+              wx:key="index"
+              data-index="{{keyIndex}}">
+                <view class="seat-item-top flex-row skeleton-breath" />
+                <view class="seat-item-top seat-item-bom skeleton-breath" />
+            </view>
+        </view>
+        <view class="sel-box-shadow"></view>
+        <view wx:for="{{[0,1]}}"
+          wx:key="index">
+            <view class="flex-row seat-booking-box-upper seat-booking-box-bottom seat-booking-box-margin-bottom">
+                <view class="flex-row seat-booking-box skeleton-breath">
+                    <image class="seat-img-doudi skeleton-breath" />
+                    <view>
+                        <view class="booking-info-title booking-info-title-skeleton skeleton-breath" />
+                        <view class="booking-info-subtitle booking-info-subtitle-skeleton skeleton-breath" />
+                    </view>
+                </view>
+                <button class="btn-orage booking-btn flex-row booking-btn-skeleton skeleton-breath" />
+            </view>
+        </view>
+    </view>
+</view>
+
+<!-- 座席余票显示 -->
+<template is="train-sale-info"
+  wx:if="{{keyIndex !== seatCardIndex}}"
+  data="{{train}}"></template>
+
+<!-- 组合座坐席、上车补、跨站坐席提示（不下拉坐席时的横条） -->
+<view class="train-combi-remark"
+  wx:if="{{isXpageNew && keyIndex !== seatCardIndex && (train.combiInfo || train.thenByTicketInfo)}}">
+    <rich-text wx:if="{{train.combiInfo}}"
+      class="train-combi-remark-left"
+      nodes="{{train.combiInfo.remark}}" />
+    <rich-text wx:else
+      class="train-combi-remark-left"
+      nodes="{{train.thenByTicketInfo.remark}}" />
+    <view class="detail"
+      data-isexpand="{{false}}"
+      data-from="{{from}}"
+      data-wise-type="{{train.combiInfo ? 'COMBINE' : 'THEN_BY' }}"
+      catchtap="openWiseSeatPop"><text>详情</text>
+        <image class="detail-triangle"
+          src="https://images3.c-ctrip.com/train/2022/app/8.57/zhuliucheng/zhongzhuanbaoguang/img-zhankai.png">
+        </image>
+    </view>
+    <image class="detail-img"
+      src="https://images3.c-ctrip.com/train/2023-3/xiaochengxu/3.23/zhihuixilie/img-line.png">
+    </image>
+</view>

@@ -1,0 +1,261 @@
+
+<view class="guest d-flex column">
+    <view class="sponsor">
+        <view class="user-hotel">
+            <view class="user" wx:if="{{creater}}">
+                <view class="avatar">
+                    <image src="{{creater.avatar}}" />
+                </view>
+                <view class="pl-20 flex-auto d-flex column">
+                    <text class="name">{{creater.nick}}</text>
+                    <text class="tips">{{nickSubtitle}}</text>
+                </view>
+            </view>
+            <view class="hotel" bindtap="hoteltap" wx:if="{{hotelInfo.hotelId > 0 && showHotel === 1}}" data-id="{{hotelInfo.hotelId}}">
+                <view class="arrow">
+                    <view class="arrow-up"></view>
+                </view>
+                <view class="info">
+                    <view class="pictrue">
+                        <image mode="aspectFill" src="{{hotelInfo.logo}}" />
+                    </view>
+                    <view class="d-flex column just-center flex-auto ml-16 name-wrapper">
+                        <view class="d-flex algn-center mb-12">
+                            <text class="name">{{hotelInfo.name}}</text>
+                            <view class="icon-wrap ml-16">
+                                <icon class="{{hotelInfo.isStarLicence ? 'icon-star' : 'icon-diamond'}}" wx:if="{{hotelInfo.starLevel > 0}}"></icon>
+                                <icon class="{{hotelInfo.isStarLicence ? 'icon-star' : 'icon-diamond'}}" wx:if="{{hotelInfo.starLevel > 1}}"></icon>
+                                <icon class="{{hotelInfo.isStarLicence ? 'icon-star' : 'icon-diamond'}}" wx:if="{{hotelInfo.starLevel > 2}}"></icon>
+                                <icon class="{{hotelInfo.isStarLicence ? 'icon-star' : 'icon-diamond'}}" wx:if="{{hotelInfo.starLevel > 3}}"></icon>
+                                <icon class="{{hotelInfo.isStarLicence ? 'icon-star' : 'icon-diamond'}}" wx:if="{{hotelInfo.starLevel > 4}}"></icon>
+                            </view>
+                            <text wx:if="{{hotelInfo.dStar === 1}}" class="level ast-icon ast-jz"></text>
+                            <text wx:if="{{hotelInfo.dStar === 2}}" class="level ast-icon ast-bz"></text>
+                        </view>
+                        <view class="d-flex algn-center">
+                            <view class="d-flex flex-auto algn-baseline flex-wrap">
+                                <view class="score ast-icon ast-pop" wx:if="{{hotelInfo.commentScore >= 4.5}}">
+                                    <text >{{hotelInfo.commentScore}}</text>
+                                </view>
+                                <text class="score-cn">{{hotelInfo.commentDesc}}</text>
+                                <block wx:if="{{hotelInfo.featureTags.length}}"><text class="score-tip" wx:key="*this" wx:for="{{hotelInfo.featureTags}}">{{item}}</text></block>
+                                <block wx:else><text class="score-tip" >这家酒店还不错哦</text></block>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="button">
+                        <text>去看看</text>
+                    </view>
+                </view>
+            </view>
+            <view class="bottom-shadow"></view>
+        </view>
+        <view class="user-bottom-shadow">
+            <view class="inner"></view>
+        </view>
+    </view>
+    <!-- Wrapper -->
+    <view class="wrapper flex-auto">
+        <!-- buttons -->
+        <view class="buttons-wrapper d-flex column algn-stretch">
+            <template is="header-tip" data="{{title: bigButtonSubtitle}}"></template>
+
+            <block wx:if="{{hasAssist}}">
+                <view wx:if="{{assistPopupDisplay.itemCount > 0}}" class="my-coupons d-flex column self-stretch ml-24 mr-24 pb-24 assist-reward-v1">
+                    <view class="ast-icon ast-head self-center d-flex flex-center">
+                        <text class="title">助力奖励</text>
+                    </view>
+                    <view wx:if="{{homeInfo.newGuest}}" bindtap="goHotelList" class="d-flex reward-rights-wrapper">
+                        <view class="width-blank"></view>
+                        <template is="reward-85-right" wx:if="{{assistPopupDisplay.show85Right}}" data="{{ sizeClass: 'reward-size-small' }}" />
+                        <template is="reward-redpacket-item" wx:for="{{cutCoupons}}" wx:if="{{assistPopupDisplay.showCoupon}}" data="{{ sizeClass: 'reward-size-small', coupon: item }}" />
+                        <template is="reward-right-item" wx:if="{{assistPopupDisplay.showRights}}" wx:for="{{cutUserRightsInterests}}" data="{{ sizeClass: 'reward-size-small', right: item }}" />
+                        <view class="width-blank"></view>
+                    </view>
+                    <view wx:else>
+                        <view class="pb-40"></view>
+                        <template is="coupon-item" wx:for="{{cutCoupons}}" wx:for-item="item" wx:key="id" data="{{ preClass: '', amount: item.amount, desc: item.desc,showButton: true, effectDays: '领取后' + item.effectDays + '天可用', url: item.jumpUrl}}"></template>
+                        <template is="coupon-item" wx:for="{{cutUserRightsInterests}}" wx:for-item="item" wx:key="id" data="{{ preClass: '', amount: item.amount, desc: item.desc, showButton: true, effectDays: item.fm_effectDate + '前下单有效', url: 'https://m.ctrip.com/webapp/hotel/eventsale/youxianghuijiudianzuigaokexiang9zhefangfeiyouhuiapp' }}"></template>
+                    </view>
+                </view>
+                <button bind:tap="goHotelSearch" data-type="1" class="cut-btn d-flex just-center mb-16" plain="true">
+                    <view class="ast-icon ast-btn-large d-flex flex-center">
+                        <text class="btn-txt">用助力优惠订酒店</text>
+                    </view>
+                </button>
+                <button class="assist-link" open-type="share">召集好友 为TA助力</button>
+                <view class="jump-bar self-stretch mt-32 ml-24 mr-24">
+                    <component-jump jumpLink="{{jumpLink}}" isSponsor="{{isSponsor}}"></component-jump>
+                </view>
+            </block>
+            <block wx:else>
+                <component-assist-button class="flex-center" assistStatus="{{bigButtonStatus}}" isSponsor="{{false}}"   
+                orderId="{{orderId}}" hotel="{{hotelInfo.hotel}}"
+                bind:buttonTap="onTapAssist"></component-assist-button>
+                <!-- myrewards -->
+                <view wx:if="{{cutCoupons.length > 0 || cutUserRightsInterests.length > 0}}" class="my-coupons d-flex column self-stretch mt-40 ml-24 mr-24 pb-24">
+                    <view class="ast-icon ast-head self-center d-flex flex-center">
+                        <text class="title">我的奖励</text>
+                    </view>
+                    <view class="pb-40"></view>
+                    <template is="coupon-item" wx:for="{{cutCoupons}}" wx:for-item="item" wx:key="id" data="{{ preClass: '', amount: item.amount, desc: item.desc,showButton: true, effectDays: '领取后' + item.effectDays + '天可用', url: item.jumpUrl}}"></template>
+                    <template is="coupon-item" wx:for="{{cutUserRightsInterests}}" wx:for-item="item" wx:key="id" data="{{ preClass: '', amount: item.amount, desc: item.desc, showButton: true, effectDays: item.fm_effectDate + '前下单有效', url: 'https://m.ctrip.com/webapp/hotel/eventsale/youxianghuijiudianzuigaokexiang9zhefangfeiyouhuiapp' }}"></template>
+                </view>
+                <view class="jump-bar self-stretch mt-32 ml-24 mr-24">
+                    <component-jump jumpLink="{{jumpLink}}" isSponsor="{{isSponsor}}"></component-jump>
+                </view>
+            </block>
+        </view>
+        <!-- recommend hotel -->
+        <view wx:if="{{showHotellistSwitch}}" class="hotel-recomend-wrapper">
+            <view class="header d-flex algn-center just-between">
+                <view class="flex-auto d-flex algn-center" bindtap="handleSelectCity" >
+                    <view class="city d-flex flex-center" data-type="{{location.type}}">
+                        <view class='wechat-font-location'></view>{{location.cityName}}
+                    </view>
+                </view>
+                <template is="header-tip" data="{{title: '热门酒店推荐'}}"></template>
+                <view class="flex-auto" style="opacity: 0;">.</view>
+            </view>
+            <view>
+                <component-hotel-waterfall hotelList="{{recommendHotelList}}" clearHotelList="{{clearWaterfallHotelList}}" friendRecommendHotelId="{{friendRecommendHotelId}}" bind:onTap="waterHotelTap"></component-hotel-waterfall>
+            </view>
+            <!-- loading -->
+            <component-loading type="{{loadingState}}" bind:refreshList='onRefreshRecommendHotel'></component-loading>
+        </view>
+        <view wx:else class="guest-ctrip-logo">
+            <view class="ast-icon ast-logo"></view>
+        </view>
+    </view>
+    <!-- 新客 && 已助力 && 有红包或权益 && 命中实验组 展示新版弹窗 -->
+    <template wx:if="{{showAssistPopupV1}}" is="assist-result-pop-up-v1" data="{{cutCoupons, cutUserRightsInterests, showResultMask, homeInfo, ...assistPopupDisplay}}"></template>
+    <template wx:else is="assist-result-pop-up" data="{{assistResult: assistResult, cutCoupons, cutUserRightsInterests, showResultMask, homeInfo}}"></template>
+</view>
+<!-- coupon-item -->
+<template name='coupon-item'>
+    <view class="{{preClass}} temp-coupon d-flex algn-center">
+        <view class="left d-flex flex-center">
+            <view class="d-flex just-center algn-baseline">
+                <text class="left-1">{{amount}}</text>
+                <text class="left-2">折</text>
+            </view>
+        </view>
+        <view class="mid flex-auto d-flex flex-column ml-32">
+            <text class="mid-1">{{desc}}</text>
+            <text class="mid-2">{{effectDays}}</text>
+        </view>
+        <view hidden="{{!showButton}}" data-url="{{url}}"  bind:tap="onGotoCouponsRights" class="right d-flex flex-center mr-24 ml-24">
+            <text class="txt">去使用</text>
+        </view>
+    </view>
+</template>
+<!-- 砍价结果弹窗 -->
+<template name="assist-result-pop-up">
+    <view class="cmask {{assistResult.result ? '' : 'fail'}} d-flex flex-center" hidden="{{!showResultMask}}" catchtouchmove="noop">
+        <view class="assist-result d-flex flex-column flex-center">
+            <view class="assist-result-wrapper flex-auto d-flex flex-column algn-stretch">
+                <view class="header ">
+                    <template is="header-tip" wx:if="{{ assistResult.result }}" data="{{title: cutCoupons && cutCoupons.length || cutUserRightsInterests && cutUserRightsInterests.length ? '送您一份好礼' : '谢谢你帮我助力'}}"></template>
+                    <template is="header-tip" wx:else data="{{title: '助力失败'}}"></template>
+                </view>
+                <view class="trunk">
+                    <block wx:if="{{assistResult.result}}">
+                        <template is="coupon-item" wx:for="{{cutCoupons}}" data="{{ preClass: 'pop-assist-result', amount: item.amount, desc: item.desc, showButton: false, effectDays: '领取后' + item.effectDays + '天可用', url: '' }}"></template>
+                        <template is="coupon-item" wx:for="{{cutUserRightsInterests}}" data="{{ preClass: 'pop-assist-result', amount: item.amount, desc: item.desc, showButton: false, effectDays: item.fm_effectDate + '前下单有效', url: '' }}"></template>
+                    </block>
+                    <block wx:else>
+                        <view class="fail-text d-flex flex-column flex-center">
+                            <text >{{assistResult.message}}</text>
+                        </view>
+                    </block>
+                </view>
+                <view class="footer d-flex just-center algn-end">
+                    <view 
+                        class="button-wrapper d-flex flex-center" 
+                        bind:tap="onSubmitResultMask" 
+                        data-url="{{assistResult.couponJumpUrl}}"
+                        data-result="{{assistResult.result}}"
+                        data-coupons="{{cutCoupons}}"
+                        data-userRightsInterests="{{cutUserRightsInterests}}"
+                    >
+                        <block wx:if="{{assistResult.result}}">
+                            <block wx:if="{{cutCoupons && cutCoupons.length || cutUserRightsInterests && cutUserRightsInterests.length}}"><text class="button-text">立即使用</text></block>
+                            <block wx:else><text class="button-text">看看热卖酒店</text></block>
+                        </block>
+                        <block wx:else>
+                            <block wx:if="{{(assistCashbackAmount === totalAmount) || (currentCheckpoint != current)}}"><text class="button-text">我知道了</text></block>
+                            <block wx:else><button open-type="share" class="button-text">召集好友 为TA助力</button></block>
+                        </block>
+                    </view>
+                </view>
+            </view>
+            <view bind:tap="onCloseResultMask" class="wechat-font-close"></view>
+        </view>
+    </view>
+</template>
+
+<!-- 砍价结果弹窗 实验组 -->
+<template name="assist-result-pop-up-v1">
+    <view class="cmask d-flex" hidden="{{!showResultMask}}" catchtouchmove="noop">
+        <view class="assist-result-v1 d-flex flex-column">
+            <view class="reward-group {{sizeClass === 'reward-size-xlarge' ? 'mt-312' : sizeClass === 'reward-size-large' ? 'mt-300' : 'mt-350'}}">
+                <template is="reward-redpacket-item" wx:if="{{showCoupon}}" data="{{sizeClass, coupon: cutCoupons[0]}}" />
+                <template is="reward-85-right" wx:if="{{show85Right}}" data="{{sizeClass}}" />
+                <template is="reward-rights" wx:if="{{showRights}}" data="{{sizeClass, rights: cutUserRightsInterests}}" />
+                <image src="https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/redpacket_icon.png" class="redpacket-icon" />
+            </view>
+            <view bind:tap="goHotelSearch" data-type="2" class="assist-btn mt-56">用助力优惠订酒店</view>
+            <view bind:tap="onCloseResultMask" class="wechat-font-close"></view>
+        </view>
+    </view>
+</template>
+
+<template name="header-tip">
+    <view class="template_title mt-30 mb-30 d-flex flex-center">
+        <view class="ast-icon ast-title title-left"></view>
+        <text class="title ml-16 mr-16">{{title}}</text>
+        <view class="ast-icon ast-title"></view>
+    </view>
+</template>
+
+<template name="reward-redpacket-item">
+    <view class="hotel-redpacket reward-item {{sizeClass}}">
+        <view class="reward-content">
+            <text class="r-unit">¥</text>
+            <text class="r-price">{{coupon.couponAmount}}</text>
+            <text class="r-desc">最高</text>
+        </view>
+        <view class="reward-title">
+            酒店红包
+        </view>
+    </view>
+</template>
+
+<template name="reward-85-right">
+    <view class="hotel-85-rights reward-item {{sizeClass}} {{sizeClass === 'reward-size-normal' && 'mt--24'}}">
+        <view class="reward-content">
+            <text class="r-discount">85</text>
+            <text class="r-desc">折起</text>
+        </view>
+    </view>
+</template>
+
+<template name="reward-rights">
+    <view class="hotel-rights reward-item {{sizeClass}}">
+        <view class="rights-wrapper">
+            <block wx:for="{{rights}}">
+                <view wx:if="{{item.deductionType === 3}}" class="right-item">房型升级</view>
+                <view wx:elif="{{item.deductionType === 2}}" class="right-item">免费早餐</view>
+                <view wx:elif="{{item.deductionType === 4}}" class="right-item">免费取消</view>
+                <view wx:elif="{{item.deductionType === 5}}" class="right-item">延迟退房</view>
+            </block>
+        </view>
+    </view>
+</template>
+
+<template name="reward-right-item">
+    <view wx:if="{{right.deductionType !== 1}}" bindtap="openMiniHotelList" class="hotel-rights hotel-right-item reward-item reward-size-small">
+        <image class="right-icon" src="{{right.img}}" />
+        <view class="right-name">{{right.desc}}</view>
+    </view>
+</template>

@@ -1,0 +1,22 @@
+.redirect {
+  position: fixed;
+  bottom: 80rpx;
+  right: 40rpx;
+  width: 98rpx;
+}
+.return-page {
+  margin-top: 30rpx;
+  width: 98rpx;
+  height: 98rpx;
+  display: table;
+  background: rgba(68, 74, 85, .8);
+  color: #fff;
+  font-size:24rpx;
+  text-align: center;
+  border-radius: 50%;
+  float: left;
+}
+.return-page text {
+  display:table-cell; 
+  vertical-align:middle; 
+}

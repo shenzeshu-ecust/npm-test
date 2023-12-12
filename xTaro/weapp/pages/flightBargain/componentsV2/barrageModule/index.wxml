@@ -1,0 +1,17 @@
+<view class="mod">
+    <view wx:if="{{brglist.length}}">
+        <view class="mod-mask" />
+        <swiper
+            class="barrage" 
+            indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" circular="{{circular}}" vertical="{{vertical}}"
+            interval="{{interval}}" duration="{{duration}}" previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
+            <block wx:for="{{brglist}}" wx:key="{{index}}">
+                <swiper-item class="barrage-item">
+                        <image class="avatar" src="{{item.icon && item.icon.length ? item.icon: 'https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/user_icon.png'}}"/>
+                        <text class="name">{{item.name}}</text>
+                        {{item.rtncash}}
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+</view>

@@ -1,0 +1,18 @@
+<view wx:if="{{enable && message}}" class="cmask" catchtouchmove="noop">
+    <view class="cmask-popbox mp-box">
+        <view class="mp-title">领券需要实名认证</view>
+        <view class="mp-content">{{message}}</view>
+        <view wx:if="{{skey}}" class="mp-btn-box" style="flex-direction: column;">
+            <button class="mp-btn confirm" style="width: 498rpx;" catchtap="toAuthRealName">
+                去认证
+            </button>
+            <button class="mp-btn cancel" style="width: 498rpx; margin-top: 24rpx;" catchtap="cancel">
+                不领券，直接订
+            </button>
+        </view>
+        <view wx:else class="mp-btn-box">
+            <button class="mp-btn cancel" catchtap="cancel">放弃优惠券</button>
+            <button class="mp-btn confirm" catchtap="toAuthRealName">去认证</button>
+        </view>
+    </view>
+</view>

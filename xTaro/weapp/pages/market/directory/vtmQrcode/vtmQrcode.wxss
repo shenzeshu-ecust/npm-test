@@ -1,0 +1,552 @@
+.img-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: url('https://pages.c-ctrip.com/car_dcs/vtm/imgmask.png') no-repeat;
+  background-size: contain;
+}
+.v-main-pos{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(0deg, #fff 50%, rgba(0,0,0,0) 50%,  rgba(0,0,0,0));
+}
+.v-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-bg {
+  background: url('https://pages.c-ctrip.com/car_dcs/vtm/imglog.png') no-repeat;
+  background-size: contain;
+  width: 494rpx;
+  height: 220rpx;
+}
+
+.v-m-new-qrcode {
+  background: url('https://pages.c-ctrip.com/car_dcs/vtm/phonea.png') no-repeat;
+  background-size: 100%;
+  margin-top: 16px;
+  width: 750rpx;
+  min-height: 1153rpx;
+}
+
+
+.cut-code-big-fix-liveCode {
+  position: absolute;
+  overflow: hidden;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 24rpx;
+}
+
+.cut-code-big-fix-bgimg {
+  position: absolute;
+  overflow: hidden;
+  width: 270rpx;
+  height: 270rpx;
+  border-radius: 24rpx;
+}
+
+.cut-code {
+  width: 100%;
+  position: absolute;
+  border-radius: 24rpx;
+}
+.tiling-code{
+  padding: 3%;
+  width: 94%;
+  border-radius: 24rpx;
+}
+
+.v-m-new-qrcode .cut-code.image1 {
+  width: 222%;
+  top: -366rpx;
+  left: -162rpx;
+}
+
+
+
+.v-m-new-qrcode .cut-code.image2 {
+  width: 224%;
+  top: -286rpx;
+  left: -166rpx;
+}
+
+
+.button-text-bgimg {
+  position: absolute;
+  font-weight: 500;
+  line-height: 40rpx;
+  color: #ffffff;
+  top: 32rpx;
+  font-size: 28rpx;
+}
+
+.join-groud-image-btn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  opacity: 0;
+  height: 90rpx;
+}
+
+.g-nm-liveCode{
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  padding: 64rpx 80rpx 80rpx;
+}
+.g-nm-bgimg {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  padding-left: 100rpx;
+  margin-top: 116rpx;
+}
+
+.g-nm-liveCode .name-text,
+.g-nm-bgimg .name-text {
+  margin-top: 12rpx;
+  height: 40rpx;
+  color: #111111;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+}
+.g-nm-blue .name-text {
+  color: #333333;
+  font-size: 32rpx;
+  font-weight: 600;
+  line-height: 40rpx;
+  margin: 0 12rpx;
+}
+
+.bgimg-info {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-top: 36rpx;
+  color: #111111;
+  font-size: 22rpx;
+  line-height: 30rpx;
+}
+.liveCode-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #111111;
+  font-size: 26rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  line-height: 30rpx;
+  margin-top: 80rpx;
+}
+
+.liveCode-top {
+  display: flex;
+  margin-left: 240rpx;
+}
+
+.liveCode-bottom {
+  margin-top: 11rpx;
+  margin-left: 240rpx;
+}
+.liveCode-btn{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 128rpx;
+  line-height: 128rpx;
+  text-align: center;
+  color: #fff;
+  font-family: PingFangSC-Medium;
+  font-size: 40rpx;
+}
+.wx-qrcode-cell-btn {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  background-color: rgba(111, 111, 246, 0.6);
+  opacity: 0;
+  z-index: 99;
+  /* 进入群码页面返回后会滚动 */
+  overflow: hidden;
+}
+/* 图片 */
+.qr-image-liveCode {
+  margin-top: 52rpx;
+  margin-bottom: 40rpx;
+  width: 192rpx;
+  height: 192rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://pages.c-ctrip.com/car_dcs/vtm/qrcode.png');
+  background-size: contain;
+}
+
+.qr-image-bgimg {
+  margin-top: 32rpx;
+  margin-bottom: 16rpx;
+  width: 304rpx;
+  height: 304rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://pages.c-ctrip.com/car_dcs/vtm/qrcode.png');
+  background-size: contain;
+}
+
+
+
+.qr-image-liveCode img {
+  width: 100%;
+}
+
+.qr-image-bgimg.no-img-view,
+.qr-image-liveCode.no-img-view {
+  padding: 0 16rpx;
+  box-sizing: border-box;
+}
+
+.qr-image-bgimg .no-img-text,
+.qr-image-liveCode .no-img-text {
+  color: #111;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 500;
+  line-height: 40rpx;
+}
+
+/* button */
+.join-group-btn {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+
+@font-face {
+  font-family: 'DingTalk-JinBuTi';
+  src: url('https://pages.c-ctrip.com/car_dcs/vtm/DingTalk_JinBuTi.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-blue-Jin {
+  font-size: 36rpx;
+  color: #006ff6;
+  font-family: DingTalk-JinBuTi;
+}
+
+.ml6{
+  padding-left: 6rpx;
+}
+.mr6{
+  padding-right: 6rpx;
+}
+
+.n-foot-title {
+  margin-top: 220rpx;
+  height: 40rpx;
+  color: #111111;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  letter-spacing: 0px;
+  line-height: 40rpx;
+  text-align: left;
+}
+
+.n-foot-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.n-foot-content-item {
+  display: flex;
+  align-items: center;
+  background: url('https://pages.c-ctrip.com/car_dcs/vtm/icon2.png') no-repeat;
+  background-size: 32rpx 32rpx;
+  padding-left: 40rpx;
+  color: #111111;
+  font-size: 26rpx;
+  font-weight: normal;
+  line-height: 34rpx;
+  margin-top: 12rpx;
+  width: 35%;
+}
+
+.n-foot-bgimg {
+  margin-top: 141rpx;
+  padding-left: 98rpx;
+}
+
+.n-foot-title-bgimg {
+  background: url('https://pages.c-ctrip.com/car_dcs/vtm/qntg.png') no-repeat;
+  width: 144rpx;
+  height: 33rpx;
+  background-size: contain;
+}
+.wx-qrcode-img-btn{
+  width: 432rpx; 
+  height:112rpx;
+}
+.wx-qrcode-cell-box {
+  position: absolute;
+  left: 0;
+  top:0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 120rpx;
+}
+
+.v-m-blue {
+  box-sizing: border-box;
+  position: relative;
+  padding: 220rpx 20rpx 20rpx 20rpx;
+  background: linear-gradient(-180deg, rgb(0, 111, 246) 39.2%, rgb(249, 249, 249) 86.29%);
+}
+.v-m-blue-livecode{
+  box-sizing: border-box;
+  position: relative;
+  background: linear-gradient(180deg, rgba(0,111,246,1) 40%, rgba(249,249,249,1) 100%);
+}
+.v-m-blue-livecode .bg-people{
+  min-height: 1624rpx;
+  background-image: url('https://dimg04.c-ctrip.com/images/1vt2h12000cl8vwpbD1F5.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.v-m-blue .qrcode-container {
+  background-color: #fff;
+  width: 100%;
+  height: 744rpx;
+  text-align: center;
+  border-radius: 24rpx;
+}
+.v-m-blue-livecode .title,
+.v-m-blue .title {
+  margin-bottom: 48rpx;
+  color: #fff;
+  text-align: center;
+}
+.v-m-blue-livecode .title{
+  padding-top: 248rpx;
+}
+.v-m-blue .cut-code.image1 {
+  width: 222%;
+  top: -576rpx;
+  left: -260rpx;
+}
+.v-m-blue .cut-code.image2 {
+  width: 222%;
+  top: -446rpx;
+  left: -260rpx;
+}
+.v-m-blue .footer-content {
+  margin: 0 100rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+.group-view-blue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 名称  */
+.g-nm-blue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 32rpx 0;
+}
+
+
+
+.g-nm-liveCode .title-tag,
+.g-nm-blue .title-tag {
+  padding: 6rpx 10rpx;
+  font-size: 22rpx;
+  color: #fff;
+  border-radius: 8rpx;
+  background: linear-gradient(-118.98deg, rgb(214, 149, 255) -72.9%, rgb(0, 148, 249) 0.2%, rgb(0, 132, 248) 80.29%, rgb(251, 219, 103) 171.59%);
+}
+
+.g-nm-bgimg .title-tag {
+  height: 42rpx;
+  background: linear-gradient(-103.61deg, rgb(214, 149, 255) -43.4%, rgb(0, 111, 246) 40.63%, rgb(0, 132, 248) 86.48%, rgb(251, 219, 103) 157.77%);
+  box-shadow: inset 0px 0px 1rpx 0px rgb(255, 255, 255);
+  border-radius: 12rpx 12rpx 12rpx 12rpx;
+  color: #ffffff;
+  font-size: 22rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  letter-spacing: -0.14px;
+  line-height: 42rpx;
+  text-align: center;
+  padding: 0 8rpx;
+}
+.group-info.group-blue-info {
+  width: 424rpx;
+  background: rgba(0, 111, 246, 0.06);
+}
+.group-gif-info {
+  margin-top: 12rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 514rpx;
+  height: 128rpx;
+  background: url('https://pages.c-ctrip.com/car_dcs/vtm/pel.png');
+  background-size: contain;
+  color: #111111;
+  font-size: 26rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  line-height: 36rpx;
+}
+.group-info.group-blue-info .info-text {
+  color: #006ff6;
+}
+/* 图片 */
+.qr-image-blue {
+  width: 424rpx;
+  height: 424rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cut-code-big-fix-blue {
+  position: absolute;
+  overflow: hidden;
+  width: 424rpx;
+  height: 424rpx;
+  border-radius: 12rpx;
+}
+.qr-image-blue img {
+  width: 100%;
+}
+.qr-image-blue.no-image-view {
+  background-color: #aaaaaa;
+}
+.qr-image-blue .no-image-text {
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 500;
+  line-height: 40rpx;
+}
+
+.join-group-btn-blue {
+  width: 558rpx;
+  height: 88rpx;
+  margin-top: 28rpx;
+  background: #006ff6;
+  border-radius: 16rpx;
+}
+.button-text-blue{
+  font-size: 32rpx;
+  font-weight: 500;
+  line-height: 40rpx;
+  color: #ffffff;
+}
+.title-main {
+  font-size: 44rpx;
+}
+.title-sub {
+  font-size: 58rpx;
+  position: relative;
+  left: 14rpx;
+  font-weight: bold;
+  text-align: center;
+}
+
+.footer {
+  margin-top: 40rpx;
+  padding: 36rpx 0 40rpx 0;
+  background: #fff;
+  border: 1rpx solid #ffffff;
+  border-radius: 24rpx;
+}
+
+.footer-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 36rpx;
+}
+
+.footer-title-text {
+  margin: 0 32rpx;
+  font-size: 32rpx;
+  color: #006ff6;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+}
+
+.line {
+  width: 200rpx;
+  height: 1px;
+}
+
+.line-left {
+  background-image: linear-gradient(to left, #006ff6, #FFFFFF);
+}
+
+.line-right {
+  background-image: linear-gradient(to right, #006ff6, #FFFFFF);
+}
+
+.v-m-blue .footer-content {
+  margin: 0 100rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-content text {
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  color: #333333;
+}
+
+.footer-content-item {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin-bottom: 16rpx;
+}
+
+.spot {
+  width: 12rpx;
+  height: 12rpx;
+  margin-right: 8rpx;
+  border-radius: 50%;
+  background: linear-gradient(-142.52deg, rgb(214, 149, 255) -4.47%, rgb(0, 148, 249) 33.22%, rgb(0, 132, 248) 74.52%, rgb(251, 219, 103) 121.6%);
+}
+.image-fingerprint {
+  width: 54rpx;
+  height: 54rpx;
+  border-radius: 54rpx;
+  margin-right: 12px;
+}
+.group-info .info-text {
+  font-size: 20rpx;
+  font-weight: 500;
+  height: 48rpx;
+  line-height: 50rpx;
+}

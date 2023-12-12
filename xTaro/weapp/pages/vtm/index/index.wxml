@@ -1,0 +1,49 @@
+<!-- 微领队头部 -->
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+<scroll-view class="scroll-container" scroll-y="true" enable-back-to-top="{{true}}" lower-threshold="100" style="margin-top: {{safeAreaHeight- scrollHeight}}px; height: {{scrollHeight}}px" bindscrolltolower="getWaterfallListMore">
+  <view class="header">
+    <text>我们是你的{{destSetName}}站领队～</text>
+  </view>
+  <view class="content {{guideSuccess || guideLoading ? '' : 'no_guide_info'}}">
+    <!-- 向导信息 -->
+    <guide-info guideSuccess="{{guideSuccess}}" guideLoading="{{guideLoading}}" guideBasicInfo="{{guideBasicInfo}}" orderAmount="{{orderAmount}}" hideCityTop="{{hideCityTop}}" ubtInfo="{{ubtInfo}}" />
+    <!-- 行前 -->
+    <before-beparture noGuideInfo="{{guideSuccess || guideLoading ? false : true}}" weatherInfo="{{weatherInfo}}" beforeDepartureList="{{beforeDepartureList}}" gs_cid="{{gs_cid}}" weatherSuccess="{{weatherSuccess}}" weatherLoading="{{weatherLoading}}" beforeDepartureSuccess="{{beforeDepartureSuccess}}" beforeDepartureLoading="{{beforeDepartureLoading}}" ubtInfo="{{ubtInfo}}" />
+    <!-- 攻略 口碑榜 -->
+    <method gs_cid="{{gs_cid}}" methodInfo="{{methodInfo}}" methodSuccess="{{methodSuccess}}" methodLoading="{{methodLoading}}" ubtInfo="{{ubtInfo}}" />
+    <!-- 常见问答 -->
+    <ask-list askList="{{askList}}" askListAppUrl="{{askListAppUrl}}" askListSuccess="{{askListSuccess}}" askListLoading="{{askListLoading}}" ubtInfo="{{ubtInfo}}" />
+  </view>
+  <!-- 信息流 -->
+  <view class="find_container">
+    <view class="find_header">
+      <text class="wechat_vtm_font-Discover find_icon"></text>
+      <view class="find_title">发现灵感</view>
+      <view class="find_subtitle">遇见更多灵感</view>
+    </view>
+    <view class="find_tabs">
+      <view class="find_btn {{activeIndex === 0 ? 'active' : ''}} autoExpose" data-expose="{{exposeFind1}}" bindtap="handleBtnClick" data-index="0"><text>用户分享</text></view>
+      <view wx:if="{{showTab}}" class="find_btn {{activeIndex === 1 ? 'active' : ''}} autoExpose" data-expose="{{exposeFind2}}"bindtap="handleBtnClick" data-index="1"><text>私家攻略</text></view>
+    </view>
+    <view hidden="{{activeIndex === 1}}">
+      <!-- 用户分享  source=miniguide，城市globalInfo-->
+      <waterfall id='waterfall1' className="waterfall_container" cStyle="margin-bottom: 84rpx" source="{{'miniguide'}}" ignoreLocation="true" bindgetref="getWaterfallRef0" globalInfo="{{globalInfo}}" extra="{{extraJsonString1}}">
+      </waterfall>
+    </view>
+    <view hidden="{{activeIndex === 0}}" wx:if="{{showTab}}">
+      <!-- 私家攻略 extra为json_string-->
+      <waterfall className="waterfall_container" cStyle="margin-bottom: 84rpx" source="{{'guideteam'}}" ignoreLocation="true" extra="{{extraJsonString2}}" bindgetref="getWaterfallRef1">
+      </waterfall>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 首页 出行清单 紧急支援 tab -->
+<view class="footer">
+  <view class="footer-container" style="padding-bottom: {{bottomSafeArea}}px;">
+    <view data-index="{{item.index}}" bindtap="footerJump" class="footer-column" wx:for="{{footerTab}}" wx:key="index" style="color: {{item.color}}">
+      <text class="footer-icon {{item.icon}} "></text>
+      <text class="footer-text">{{item.text}}</text>
+    </view>
+  </view>
+</view>

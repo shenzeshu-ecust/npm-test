@@ -1,0 +1,67 @@
+<view hidden="{{hide}}" class="cmask" style="z-index: 999; {{filterFromMap ? 'top: 160rpx;' : ''}}" catchtap="handleClose" catchtouchmove="noop"></view>
+<view class="g-filter-box animated fadeInDown {{filterFromMap ? 'ftop-map' : 'filter-topa'}}" hidden="{{hide}}" catchtap="noop">
+    <view wx:if="{{loading}}" class="g-filter-base-v h-full">
+        <image src="https://pic.ctrip.com/h5/hotel/hotel-loading100x100.gif" style="width:100rpx;height:100rpx;" />
+    </view>
+    <view wx:else class="g-filter-menu flex h-full">
+        <scroll-view class="g-menu-1 h-full" scroll-y="true">
+            <block wx:for="{{filterItems}}" wx:for-item="area" wx:for-index="idx" wx:key="id">
+                <view bindtap="handleModuleTap" class="item {{idx === activeIndex_lv1 ? 'current' : ''}}" data-level="lv1" data-id="{{area.id}}" data-idx="{{idx}}">
+                    {{area.title}}
+                    <view class="elem" wx:if="{{area.extra.selected}}"/></view>
+            </block>
+        </scroll-view>
+        <view class="g-menu-2 flex star">
+            <block wx:if="{{filterItems[activeIndex_lv1].subItems[0].subItems && filterItems[activeIndex_lv1].subItems[0].subItems.length}}">
+                <scroll-view scroll-y="true" class="g-menu-2-1 h-full">
+                    <block wx:for="{{filterItems[activeIndex_lv1].subItems}}" wx:for-item="lv2Area" wx:key="id">
+                        <view class="item ptb-14 {{index === activeIndex_lv2 ? 'current' : ''}}" data-level="lv2" data-id="{{lv2Area.id}}" data-idx="{{index}}" bindtap="handleModuleTap">
+                            {{lv2Area.title}}
+                            <view wx:if="{{index === activeIndex_lv2}}" class="extra-elem"></view>
+                        </view>
+                    </block>
+                </scroll-view>
+                <scroll-view class="g-menu-2-2 star g-filter-v h-full" scroll-y="true">
+                    <block wx:for="{{filterItems[activeIndex_lv1].subItems[activeIndex_lv2].subItems}}" wx:key="id">
+                        <view class="item {{itemSelectedMap[item.data.filterId] ? 'current' : ''}} {{item.popularInfo && item.popularInfo.length ? 'ptb-25' : ''}}" data-filterid="{{item.data.filterId}}" bindtap="handleFilterItemTap">
+                            <view class="star">
+                                <view class="star-text">{{item.title}}</view>
+                                <block wx:if="{{item.popularInfo && item.popularInfo.length}}">
+                                    <view class="choose-text">
+                                        <text class="choose-top">item.popularInfo[0]</text>{{item.popularInfo[1] || ''}}
+                                    </view>
+                                </block>
+                            </view>
+                            <view wx:if="{{itemSelectedMap[item.data.filterId]}}" class="i wechat-font-selected icon-style mr-9"></view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </block>
+            <block wx:else>
+                <scroll-view class="g-menu-2-2 star g-filter-v h-full" scroll-y="true">
+                    <view wx:for="{{filterItems[activeIndex_lv1].subItems}}" wx:key="id" class="item {{itemSelectedMap[item.data.filterId] ? 'current' : ''}} {{item.popularInfo && item.popularInfo.length ? 'ptb-25' : ''}}" data-filterid="{{item.data.filterId}}" bindtap="handleFilterItemTap" id="autotest_xcx_hotel_list_{{item.id}}">
+                        <view class="star">
+                            <view class="star-text">{{item.title}}</view>
+                            <block wx:if="{{item.popularInfo && item.popularInfo.length}}">
+                                <view class="choose-text">
+                                    <text class="{{index < 3 ? 'choose-top' : ''}}">{{item.popularInfo[0]}}</text>{{item.popularInfo[1] || ''}}
+                                </view>
+                            </block>
+                        </view>
+                        <block wx:if="{{filterItems[activeIndex_lv1].operation && filterItems[activeIndex_lv1].operation.isMultiSelect}}">
+                            <view class="i {{itemSelectedMap[item.data.filterId] ? 'icon-style wechat-font-selected' : ''}}"></view>
+                        </block>
+                        <block wx:else>
+                            <view wx:if="{{itemSelectedMap[item.data.filterId]}}" class="i wechat-font-selected icon-style mr-9"></view>
+                        </block>
+                    </view>
+                </scroll-view>
+            </block>
+        </view>
+    </view>
+    <!--Star 底部btn-->
+    <view class="gbtn-box">
+        <view class="btn reset" data-ubt-key="xcx_hotel_list_location_reset" bindtap="reset" id="autotest_xcx_hotel_list_location_reset">清空</view>
+       <view class="btn confirm" data-ubt-key="xcx_hotel_list_location_confirm" bindtap="confirm" id="autotest_xcx_hotel_list_location_confirm">完成</view>
+    </view>
+</view>

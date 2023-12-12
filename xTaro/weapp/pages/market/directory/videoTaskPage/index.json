@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "视频号点赞",
+  "navigationStyle":"custom",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "ad-sdk":"/pages/market/advertiseNew/ad-sdk",
+    "nav_bar": "./loreal_capsul_bar/index",
+    "loreal_waterfall": "./loreal_waterfall/index",
+    "authorizePopup": "/pages/market/directory/components/authorizePopup/index",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  }
+}

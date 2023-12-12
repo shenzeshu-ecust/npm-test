@@ -1,0 +1,32 @@
+<view class="nps-module module" id="nps">
+    <block wx:if="{{!nps.submitted}}">
+        <view class="nps-title">{{nps.title}}</view>
+        <view class="nps-txt">
+            <view class="item"><image src="https://pages.c-ctrip.com/hotels/wechat/img/low-score-nps.png"></image> 非常不愿意</view>
+            <view class="item">非常愿意 <image src="https://pages.c-ctrip.com/hotels/wechat/img/high-score-nps.png"></image></view>
+        </view>
+
+        <view class="nps-num">
+            <block wx:for="{{[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}}" wx:for-item="i">
+                <view class="item {{i === nps.score ? 'current' : ''}}" data-score="{{i}}" bindtap="handleScoreSelect">{{i}}</view>
+            </block>
+        </view>
+
+        <block wx:if="{{nps.showFeedBack}}">
+            <view class="feed-back-title">{{nps.feedBackTitle}}</view>
+            <form bindsubmit="bindFormSubmit">
+                <textarea class="fb-input" placeholder="其他想说的（选填）" placeholder-class="fb-placeholder" name="textarea" bindblur="inputNpsTrace"></textarea>
+                <button form-type="submit" class="nps-submit">提交反馈</button>
+            </form>
+        </block>
+    </block>
+    <block wx:else>
+        <view class="nps-title">感谢您的反馈</view>
+        <view class="icon-info">
+            <icon class="submit-icon" type="success" color="#24b381" size="84rpx"></icon>
+            <text class="submit-desc">已完成评价</text>
+        </view>
+    </block>
+
+
+</view>

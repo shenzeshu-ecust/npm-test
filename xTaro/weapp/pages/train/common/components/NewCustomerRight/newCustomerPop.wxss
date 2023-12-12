@@ -1,0 +1,244 @@
+@import "../../repeatCss/indexFanxianRobshare.wxss";
+@import "../../repeatCss/fanxianNewCustomerPop.wxss";
+.pop-xinke-bag{    width: 100%;
+    height: 950rpx;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3002;
+    background: url(https://images3.c-ctrip.com/train/2023-3/zengzhang/7yue/xinke/hb-weikai.png) no-repeat;
+    background-size: contain;
+    /* padding: 102rpx 68rpx 36rpx; */
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 165rpx;}
+.pop-xinke-bag .ifont-closed-line{position: absolute;top: 45rpx;right: 104rpx;font-size: 28rpx;color: #fdb3b3;display: none;}
+.pop-xinke-bag .tit{font-size: 40rpx;font-weight: 600;color: #FFF7C0;}
+.pop-xinke-bag .price{font-size: 160rpx;font-weight: normal;color: #FFF7C0;font-weight: 600;}
+.pop-xinke-bag .price text{font-size: 60rpx;}
+.pop-xinke-bag button{width: 320rpx;height: 320rpx;border-radius: 50%;background: none;background-size: contain;}
+
+.pop-xinke-bag .ifont-closed{    position: absolute;
+    bottom: 0rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 64rpx;
+    color: #fff;}
+.pop-xinke-tequan{background: url(https://images3.c-ctrip.com/train/2021/xiaochengxu/V8.45/img_120hb_2@3x.png) no-repeat;background-size: cover;}
+.pop-xinke-tequan .btn-submit{width:550rpx;height: 200rpx;line-height: 200rpx;font-size: 36rpx;font-weight: 600;margin: 0 auto;background-repeat: no-repeat;background: url(https://images3.c-ctrip.com/train/2021/xiaochengxu/V8.45/%E6%8C%89%E9%92%AE@3x.png);color: #a72f18;background-size: cover;}
+.pop-xinke-tequan .dialog-hd {display: flex;position: absolute;top: -136rpx;left: 60rpx;}
+.pop-xinke-tequan .dialog-hd .avatar {width: 88rpx;height: 88rpx;border-radius: 50%;border: 2px solid #fff;}
+.pop-xinke-tequan .dialog-hd .txt {width: 436rpx;height: 88rpx;background: url('https://images3.c-ctrip.com/train/dulujie/bg_dialog1@3x.png') no-repeat;background-size: 100% 100%;text-align: center;line-height: 88rpx;color: #9A9AD0;font-size: 28rpx;margin-left: 16rpx;}
+
+
+/* 新客 ab 弹窗 */
+.pop-new-guest-activity-coupon .ifont-closed{font-size: 64rpx;color: #fff;position: absolute;left: 50%;transform: translateX(-50%);bottom: -100rpx;}
+
+/* v8.50新客弹窗 */
+.pop-new-guest-activity-coupon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 100%;
+}
+.pop-new-guest-activity-coupon .new-guest-bd-coupon{
+    position: relative;
+    height: 674rpx;
+    width: 566rpx;
+    margin: 0 auto;
+}
+.pop-new-guest-activity-coupon .new-guest-bd-top{
+    width: 566rpx;
+    height: 562rpx;
+    background: url('https://images3.c-ctrip.com/train/2022/app/8.50/zengzhang/xinke/hb-di@3x.png')no-repeat;
+    background-size: cover;
+}
+.pop-new-guest-activity-coupon .new-guest-bd-botm{
+    width: 566rpx;
+    background: url('https://images3.c-ctrip.com/train/2022/app/8.50/zengzhang/xinke/hb-wai@3x.png')no-repeat;
+    background-size: contain;
+    width: 566rpx;
+    height: 350rpx;
+    position: absolute;
+    bottom: -39rpx;
+}
+.pop-new-guest-activity-coupon .new-guest-decoration-left{
+    top: 1rpx;
+    height: 700rpx;
+    width: 192rpx;
+    position: absolute;
+    left: 0;
+    background: url(https://images3.c-ctrip.com/train/2022/app/8.50/zengzhang/xinke/jinbi-zuo@3x.png)no-repeat;
+    background-size: cover;
+}
+.pop-new-guest-activity-coupon .new-guest-decoration-right{
+    top: 31rpx;
+    height: 700rpx;
+    width: 192rpx;
+    position: absolute;
+    right: -8rpx;
+    background: url(https://images3.c-ctrip.com/train/2022/app/8.50/zengzhang/xinke/jinbi-you@3x.png)no-repeat;
+    background-size: contain;
+}
+.pop-new-guest-activity-coupon .btn-submit{top: 80rpx;position: relative;width:550rpx;height: 200rpx;line-height: 200rpx;font-size: 36rpx;font-weight: 600;margin: 0 auto;background-repeat: no-repeat;background: url(https://images3.c-ctrip.com/train/2021/xiaochengxu/V8.45/%E6%8C%89%E9%92%AE@3x.png);color: #a72f18;background-size: cover;}
+.pop-new-guest-activity-coupon .new-guest-bd-top-title{
+    text-align: center;
+    font-family: PingFangSC-Semibold;
+    color: #fff;
+    font-size: 34rpx;
+    font-weight: 500;
+    padding: 40rpx 0 8rpx;
+    text-align: center;
+}
+
+.pop-result-normal-container{margin:12rpx auto;height: 152rpx;width: 498rpx;background:url(https://images3.c-ctrip.com/train/2022/app/8.49/kanjia/quan-1@3x.png) no-repeat;background-size:cover;display:flex;align-items:center;justify-content:flex-start;position: relative;}
+.pop-result-normal-container .price{color: #ff7700;font-family: PingFangSC-Semibold;font-size: 56rpx;font-weight: 600;line-height: 66rpx;letter-spacing:0px;margin-left:40rpx;}
+.pop-result-normal-container text {/* letter-spacing: -8rpx; */}
+.pop-result-normal-container .split-line {background: #ffdcbf;height: 56px;width: 1px;position: absolute;left: 148rpx;}
+.pop-result-normal-container .tag {color: #ffffff;font-family: PingFangSC-Semibold;font-size: 20rpx;font-weight: 600;background: #ff7700;border-radius: 0px 10px 0px 10px;height: 34rpx;width: 100rpx;right: 0;top: 0;position: absolute;line-height: 34rpx;text-align: center;}
+.pop-result-normal-container .price::before {color: #ff7700;font-family: PingFangSC-Medium;font-size: 34rpx;height: 21px;line-height: 42rpx;content: "\00A5";margin-right: 4rpx;}
+.pop-result-normal-container .reward-info {margin-left: 180rpx;position: absolute;}
+.pop-result-normal-container .pop-result-bd-ticket {display: flex;align-items: center;margin-top: -5rpx;}
+.pop-result-normal-container .reward-info-name {color: #ff7700;font-family: PingFangSC-Medium;font-size: 30rpx;font-weight: 500;letter-spacing: 0px;line-height: 38rpx;text-align: left;}
+.pop-result-normal-container .reward-info-tips {color: #ff7700;font-family: PingFangSC-Medium;font-size: 24rpx;font-weight: 500;line-height: 32rpx;text-align: left;}
+.pop-result-normal-container.new-user-type .reward-info-tips,
+.pop-result-normal-container.new-user-type .reward-info-name,
+.pop-result-normal-container.new-user-type .price,
+.pop-result-normal-container.new-user-type .price::before {color: #ff5a75;}
+.pop-result-normal-container.new-user-type .split-line {background-color: #f8d6e1;}
+.pop-result-normal-container.new-user-type .invite-btn {background: #ff7742;border-radius: 15px;box-shadow: inset 0px 0px 7px 0px rgb(255, 22, 201);color: #ffffff;font-family: PingFangSC-Medium;font-size: 26rpx;font-weight: 500;letter-spacing: -0.08px;padding: 14rpx 28rpx;line-height: 34rpx;position: absolute;right: 16rpx;}
+.pop-result-normal-container.new-user-type{background:url(https://images3.c-ctrip.com/train/2022/app/8.49/kanjia/quan-2@3x.png) no-repeat;background-size:contain;}
+
+.pop-xinke-bag .wecom-guest-title {
+    width: 440rpx;
+    position: absolute;
+    top: -38rpx;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* 230713 新客礼包固定展示 */
+.new-guest-panel {margin: 16rpx; border-radius: 16rpx;padding: 16rpx 16rpx 8rpx;box-sizing: border-box;box-shadow: inset 0px 0px 15px 0px rgba(255, 188, 188, 0.3);background: url(https://images3.c-ctrip.com/train/2023-3/zengzhang/7yue/xinke/BG.png) no-repeat;background-size: 100% 100%;position: relative;}
+.new-guest-panel::before {content: '';position: absolute;top: 0;right: 0;width: 104rpx;height: 104rpx;background: url(https://images3.c-ctrip.com/train/2023-3/zengzhang/7yue/xinke/yilingqu.png) no-repeat;background-size: 100% 100%;}
+.new-guest-panel.no-rights::before {
+    content: none;
+}
+.new-guest-panel .tit{display: flex;align-items: flex-end;margin-bottom: 28rpx;text-indent: 8rpx;}
+.new-guest-panel .tit .price{font-size: 50rpx;font-weight: 500;color: #333;line-height: 44rpx;}
+.new-guest-panel .tit image{width: 168rpx;height: 34rpx;}
+.new-guest-panel .tit .ifont-qus{font-size: 28rpx;color: #FA758A;}
+
+.new-guest-panel .list {display: flex;align-items: center;gap: 8rpx;flex: 1;position: relative;z-index: 1;}
+.new-guest-panel .item {background: #fff;border-radius: 12rpx;text-align: center;color: #333;flex: 1;box-shadow: inset 0px 0px 15px 0px rgba(255, 130, 146, 0.25);height: 158rpx;}
+.new-guest-panel .item image {width: 90rpx;height: 90rpx;margin-top: -20rpx;transform: translateY(2px);}
+.new-guest-panel .item .title {font-size: 28rpx;font-weight: 600;line-height: 36rpx;margin-bottom: 4rpx}
+.new-guest-panel .item .desc {font-size: 24rpx;line-height: 30rpx;margin-bottom: 18rpx;}
+.new-guest-panel .btn-get {
+    width: 152rpx;
+    height: 52rpx;
+    background: linear-gradient(-249.33deg, rgb(255, 138, 91) -0.79%, rgb(255, 21, 91) 96.95%);
+    border-radius: 16.5px 16.5px 16.5px 16.5px;
+    color: #ffffff;
+    font-size: 22rpx;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    line-height: 52rpx;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;position: absolute;
+    right: 16rpx;
+    top: 16rpx;
+}
+
+/* 230713 新客已领取礼包弹窗的 button */
+.r-bg-btn-submit{width:550rpx;height: 200rpx;line-height: 200rpx;font-size: 36rpx;font-weight: 600;margin: 0 auto;background-repeat: no-repeat;background: url(https://images3.c-ctrip.com/train/2021/xiaochengxu/V8.45/%E6%8C%89%E9%92%AE@3x.png);color: #a72f18;background-size: cover;margin-top: 70rpx;}
+
+/* 230713 列表页顶部新客礼包信息入口 */
+.new-guest-panel-mini { margin: 16rpx 16rpx 0;padding: 24rpx;box-sizing: border-box;border-radius: 12rpx;position: relative;background: url(https://images3.c-ctrip.com/train/2022/app/8.52/zhuliucheng/xinkeganzhitixi/bg-liebiaoye.png) no-repeat, #fff;background-size: 100% 100%;}
+.new-guest-panel-mini .tit {margin-bottom: 14rpx;display: flex;
+    flex-direction: row;
+    align-items: flex-end;}
+.new-guest-panel-mini .tit image{width: 372rpx;height: 30rpx;object-fit: contain;}
+.new-guest-panel-mini .tit .img1{width: 128rpx;}
+.new-guest-panel-mini .tit .img2{width: 156rpx;}
+.new-guest-panel-mini .tit .price{
+    height: 48rpx;
+    color: #f73452;
+    font-size: 40rpx;
+    font-weight: normal;
+    letter-spacing: -1.8rpx;
+    margin: 0 4rpx -2rpx 6rpx;
+}
+.new-guest-panel-mini .list{overflow-x: auto;display: flex;align-items: center;gap: 8rpx;position: relative;}
+.new-guest-panel-mini .list::-webkit-scrollbar{display: none;}
+.new-guest-panel-mini .tag{padding: 6rpx 8rpx;border-radius: 4rpx;background: #FEF3F2;font-size: 22rpx;color: #FF3251;line-height: 24rpx;white-space: nowrap;}
+.new-guest-panel-mini .check{font-size: 26rpx;color: #111414;line-height: 34rpx;position: absolute;bottom: 24rpx;right: 24rpx;}
+
+/* 230713 列表新客礼包浮层 */
+.new-guest-slideup {position: fixed;bottom: 0;left: 0;width: 100%;padding-bottom: env(safe-area-inset-bottom);background: #fff;border-radius: 24rpx 24rpx 0 0;overflow: hidden;box-shadow: inset 0px 0px 15px 0px rgba(255, 188, 188, 0.3);z-index: 3002;}
+.new-guest-slideup::before{content: '';position: absolute;top: 0;left: 0;width: 100%;height: 140rpx;background: linear-gradient(0deg, #fff 0%, rgb(255, 188, 188) 100%);opacity: 0.67;}
+.new-guest-slideup .ifont-closed-line{position: absolute;top: 0;left: 0;font-size: 28rpx;padding: 40rpx 30rpx;color: #666;z-index: 2;}
+.new-guest-slideup .tit{font-size: 50rpx;font-weight: 600;color: #333;display: flex;align-items: flex-end;justify-content: center;margin-bottom: 14rpx;position: relative;z-index: 1;padding-top: 20rpx;}
+.new-guest-slideup .tit .p{line-height: 44rpx;}
+.new-guest-slideup .tit image{width: 168rpx;height: 34rpx;margin-right: 10rpx;}
+.new-guest-slideup .ifont-qus {font-size: 28rpx;color: #FA758A;}
+.new-guest-slideup .expire{font-size: 24rpx;color: #555;text-align: center;margin-bottom: 32rpx;position: relative;z-index: 1;}
+.new-guest-slideup .return-cash-card {
+    width: 686rpx;
+    height: 160rpx;
+    margin: 0 32rpx;
+    max-height: 576rpx;
+    border-radius: 16rpx;
+    border: 2rpx solid #ffe0e5;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 28rpx;
+}
+.new-guest-slideup .return-cash-card .left{
+    width: 188rpx;
+    height: 160rpx;
+    background: #ff5164;
+    border-radius: 16rpx 0px 0px 16rpx;
+    line-height: 160rpx;
+    color: #fff;
+    text-align: center;
+}
+.new-guest-slideup .return-cash-card .left .amount {
+    font-size: 68rpx;
+    font-family: SFProDisplay-Semibold;
+    font-weight: 600;
+}
+.new-guest-slideup .return-cash-card .cont {
+    margin-left: 44rpx;
+}
+.new-guest-slideup .return-cash-card .cont .title {
+    font-size: 34rpx;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    line-height: 42rpx;
+}
+.new-guest-slideup .return-cash-card .cont .desc {
+    font-size: 26rpx;
+    line-height: 34rpx;
+    margin-top: 6rpx;
+}
+.new-guest-slideup .box{margin: 0 32rpx;max-height: 576rpx;border-radius: 16rpx;border: 2rpx solid #ffe0e5;box-sizing: border-box;position: relative;padding: 28rpx;z-index: 1;background: #fff;}
+.new-guest-slideup .box::before{content: '';position: absolute;top: 0;right: 0;width: 104rpx;height: 104rpx;background: url(https://images3.c-ctrip.com/train/2023-3/zengzhang/7yue/xinke/yilingqu.png) no-repeat;background-size: 100% 100%;}
+.new-guest-slideup .sub{font-size: 30rpx;color: #111;line-height: 40rpx;margin-bottom: 28rpx;}
+.new-guest-slideup .list{max-height: 480rpx;overflow: auto;}
+.new-guest-slideup .item{display: flex;align-items: center;justify-content: space-between;height: 100rpx;margin-bottom: 32rpx;}
+.new-guest-slideup .item:last-child{margin-bottom: 0;}
+.new-guest-slideup .item .icon{width: 100rpx;height: 100rpx;margin-right: 16rpx;}
+.new-guest-slideup .item .cont{display: flex;flex-direction: column;justify-content: center;gap: 6rpx;margin-right: auto;}
+.new-guest-slideup .item .title{font-size: 34rpx;color: #333;font-weight: 600;}
+.new-guest-slideup .item .desc{font-size: 26rpx;color: #333;}
+.new-guest-slideup .item .value{padding: 8rpx 20rpx;border-radius: 10rpx;background: #fff2f4;font-size: 24rpx;color: #F73452;line-height: 30rpx;display: flex;flex-direction: column;}

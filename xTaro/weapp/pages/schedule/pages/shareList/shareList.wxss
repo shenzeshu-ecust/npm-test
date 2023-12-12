@@ -1,0 +1,70 @@
+@import '../../index/index.wxss';
+
+page {
+  background-color:#f8f8f8;
+}
+.bottom_view {
+  height: 100rpx;
+}
+
+.city_name{
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  font-size: 48rpx;
+  color: white;
+
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.city_front {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 375rpx;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.top-wrapper {
+  padding-top: 70rpx;
+  padding-bottom: 114rpx;
+  color: #fff;
+}
+.sub-text {
+  margin: 16rpx 0 32rpx;
+}
+.font-44 {
+  font-size: 44rpx;
+}
+.font-26 {
+  font-size: 26rpx;
+}
+.city_back {
+  height: 326rpx;
+  position: absolute;
+  background-image: url(https://pages.c-ctrip.com/schedule/pic/wxxcx/share_list_bg_v2.png);
+  background-color: #007bf5;
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+  z-index: -1;
+  width: 100%;
+}
+.gradient {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 1));
+  position: absolute;
+  top: 230rpx;
+  height: 100rpx;
+  width: 100%;
+}
+.block {
+  display: block;
+}
+.padding-32 {
+  padding-left: 32rpx;
+}

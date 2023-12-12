@@ -1,0 +1,40 @@
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+<import src='./joinGroup' />
+<view class="vbody">
+  <view class="v-m-new" style="min-height: {{height}}px; " wx:if="{{abtResult === 'B'}}">
+    <view style="width: {{width}}px; height: {{width}}px; background-image: url('{{backgroundImage}}'); background-size: 100%;"></view>
+    <view style="width: {{width}}px;height: {{width}}px;" class="img-mask"></view>
+    <view class="v-main-pos" style="min-height: {{height}}px; ">
+      <view class="v-main-container" style="background: linear-gradient(0deg, {{color1}} 54%, {{color2}} 82%);">
+        <view class="title-bg" style="margin-top: 222rpx;"></view>
+        <view class="v-m-new-qrcode">
+          <template is='join-group' data="{{...groupData, bgimgList, aresImg}}"></template>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="{{abtResult === 'C' ? 'v-m-blue-livecode':'v-m-blue'}}" wx:elif="{{abtResult !== ''}}">
+    <view class="bg-people">
+      <view class="title">
+        <view class="title-main">携程 · 微领队</view>
+        <view class="title-sub">带您玩转当地！</view>
+      </view>
+      <view class="qrcode-container">
+        <template is='join-group' data="{{...groupData, bgimgList, btnTop}}"></template>
+      </view>
+    </view>
+    <view class="footer" wx:if="{{abtResult !== 'C'}}">
+      <view class="footer-title">
+        <view class="line line-left" />
+        <view class="footer-title-text">群内提供</view>
+        <view class="line line-right" />
+      </view>
+      <view class="footer-content">
+        <view wx:for="{{bgimgList}}" wx:key="*this" class="footer-content-item">
+          <view class="spot" />
+          <text>{{item.text}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

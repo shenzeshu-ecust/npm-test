@@ -1,0 +1,75 @@
+<template name="instantDeductionCard" >
+    <view class="mask" wx:if="{{showInstantDeductionModal}}" catchtap="onClickInstantDeductionModal"></view>
+    <view class='{{showInstantDeductionModal ? "instantDeductionCardAnimationShow instantDeductionCard "  : "instantDeductionCard"}}'>
+        <view class="head" wx:if="{{(showInstantDeductionModal && reductionCardInfo.checked )|| (isShowDeductionCard && canShowDeductionCard) }}">
+            <view class="deduction-content" bindtap="onClickInstantDeductionModal">
+                <image src="https://pages.c-ctrip.com/bus-images/instant-deduction/tag.png" />
+                <text class="text" wx:if="{{!reductionCardInfo.checked}}">领{{reductionCardInfo.originPrice}}元无门槛立减，本单减<text class="orange">{{reductionCardInfo.discountFee}}元</text></text>
+                <text class="text" wx:else>本单减<text class="orange">{{reductionCardInfo.discountFee}}元</text></text>
+                <icon class='{{showInstantDeductionModal ?  "icon-arrow-up" :  "icon-arrow-down"}}' />
+            </view>
+            <view class="deduction-button" bindtap="onClickInstantDeductionBtn">
+                <text class='{{selectInstantDeductionCard ? "grey" :"green"}}'>{{selectInstantDeductionCard ? '放弃': '领取'}}</text>
+                <icon size="23" class='{{selectInstantDeductionCard ? "icon-checked-round" : "icon-check-round"}}' />
+            </view>
+        </view>
+        <view class="deduction-modal-content"  wx:if="{{showInstantDeductionModal}}" >
+            <view class="deduction-ad">
+                <view class="deduction-head-box">
+                    <view class="head-row">
+                        <image class="pic" src="https://pages.c-ctrip.com/bus-images/instant-deduction/modal-title.png" />
+                        <text class="text">{{reductionCardInfo.reductionCardDesc}}</text>
+                    </view>
+                    <image class="car" src="https://pages.c-ctrip.com/bus-images/instant-deduction/modal-car.png" />
+                    <view class="head-box-tag" wx:if="{{reductionCardInfo.discountTag && !reductionCardInfo.checked}}">
+                        {{reductionCardInfo.discountTag}}
+                    </view>
+                </view>
+                <view class="deduction-coupou-box" >
+                    <view class="coupon">
+                        <view class="value">
+                            <text class="spec">{{reductionCardInfo.discountFee}}</text>
+                            <text>元</text>
+                            <text>x</text>
+                            <text class="spec">{{reductionCardInfo.totalQuantity || reductionCardInfo.productQuantity || 3}}</text>
+                            <text>次</text>
+                        </view>
+                        <view class="tag">
+                            <text>无门槛立减</text> 
+                        </view>
+                    </view>
+                    <!-- --> 
+                    <view class="price" wx:if="{{!reductionCardInfo.checked}}">
+                        <view class="old">
+                                原价
+                            <text>￥{{reductionCardInfo.originPrice}}</text>
+                        </view>
+                        <view class="now">
+                            <text>￥</text>
+                            <text class="spec">{{reductionCardInfo.showPrice}}</text>
+                        </view>
+                    </view>
+                    <view  wx:else  class="price green">
+                        还剩{{reductionCardInfo.quantity || 0}}次
+                    </view>
+                </view>
+            </view>
+            <view class="deduction-desc">
+                <view wx:if="{{!reductionCardInfo.checked}}">
+                    <image src="https://pages.c-ctrip.com/bus-images/insurancebox/logo-white.png"  />
+                    <text>不自动续费·可与其他优惠叠加使用</text>
+                </view>
+                <view bindtap="onClickInstantDeductionRule" wx:if="{{reductionCardInfo.rule}}" >
+                    <text>详细规则</text>
+                    <icon class='{{showInstantDeductionRule ?  "icon-arrow-up" :  "icon-arrow-down"}}'  size="18rpx"  />
+                </view>
+            </view>
+            <view class="deduction-rule" wx:if="{{showInstantDeductionRule}}">
+                    <view wx:for="{{reductionCardInfo.rule}}">
+                        {{item}}
+                    </view>
+            </view>
+        </view>
+
+    </view>
+</template>

@@ -1,0 +1,10 @@
+<view class="duobao_count_down">
+    <view class="cd_number" wx:if="{{t > 0}}">{{t}}</view>
+    <text class="cd_unit" wx:if="{{t > 0}}">天</text>
+    <view class="cd_number">{{h}}</view>
+    <text class="cd_unit">时</text>
+    <view class="cd_number">{{m}}</view>
+    <text class="cd_unit">分</text>
+    <view class="cd_number">{{s}}</view>
+    <text class="cd_unit">秒</text>
+</view>

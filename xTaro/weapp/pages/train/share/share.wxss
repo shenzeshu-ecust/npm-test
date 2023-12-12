@@ -1,0 +1,15 @@
+button::after{display:none;}
+
+page, .share-page {
+    height: 100%;
+    width: 100%;
+}
+.img-box{position: absolute;top: 0;left: 0;right: 0;bottom: 0;}
+.img-box button{position: absolute;bottom: 120rpx;left: 0;right:0}
+.img-mid{display: table-cell;vertical-align: middle}
+.img-box button{position: absolute;bottom: 120rpx;left: 0;right:0;background-color:transparent;}
+.img-box image{width: 100%; height: auto;}
+
+.btn-box{position: absolute;height: 140rpx;left: 0;bottom: 120rpx;right: 0;text-align: center;}
+.btn-share,.btn-save{width: 280rpx;height: 88rpx;line-height: 88rpx;border-radius: 88rpx;font-size: 36rpx;display: inline-block;margin:26rpx 20rpx;}
+.btn-share::after,.btn-save::after{border: 0;}

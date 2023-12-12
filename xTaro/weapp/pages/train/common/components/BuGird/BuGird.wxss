@@ -1,0 +1,8 @@
+/* pages/train/common/components/BuGird.wxss */
+@import "../../repeatCss/indexBuGird.wxss";
+.other-butab .txt{max-width: 150rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.other-butab-muti{display: flex;background: #fff;border-radius: 10px;margin: 20rpx 16rpx;padding: 20rpx 0;justify-content: space-around;}
+.other-butab-muti .item{text-align: center;position: relative;}
+.other-butab-muti .item .tag{background: linear-gradient(270deg, #FF7700 0%, #FFA50A 100%);font-size: 20rpx;color: #fff;padding: 4rpx 8rpx;border-radius: 18px 18px 18px 0;position: absolute;left: 50%;transform: translateY(-50%);max-width: 90rpx;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.other-butab-muti .icon{width: 96rpx;height: 96rpx;border-radius: 50%;}
+.other-butab-muti .tit{font-size: 24rpx;color: #333333;}

@@ -1,0 +1,36 @@
+<view style="padding-top:{{statusBarHeight+titleBarHeight}}px" wx:if='{{showNavbar}}'>
+  <view wx:if='{{navibarData.showColor}}' class="nav-wrap" style='background-color:{{navibarData && navibarData.navigationBarColor}};'>
+    <view class="status-bar" style="height:{{statusBarHeight}}px"></view>
+    <view class="title-bar" style="height:{{titleBarHeight}}px">
+      <view class="title-bar-group {{navibarData.showBack ^ navibarData.showCapsule ? 'only-group-icon' : navibarData.showBack && navibarData.showCapsule ? '' :'no-group-icon'}}">
+        <view class="title-bar-icon" bindtap='_backlast' wx:if='{{navibarData.showBack}}'>
+          <image src='http://pic.c-ctrip.com/platform/h5/mini_programe/wx_ico_back_w.png' mode='aspectFit' class='back-home-return'></image>
+        </view>
+        <view class="line" wx:if='{{navibarData.showBack && navibarData.showCapsule}}'></view>
+        <view class="title-bar-icon" bindtap='_backhome' wx:if='{{navibarData.showCapsule}}'>
+          <image src='http://pic.c-ctrip.com/platform/h5/mini_programe/wx_ico_home_w.png' mode='aspectFit' class='back-home'></image>
+        </view>
+      </view>
+      <view class='nav-titleContainer'>
+          <view class="nav-title">{{navibarData.title}}</view>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="nav-wrap b-nav-wrap">
+    <view class="status-bar" style="height:{{statusBarHeight}}px"></view>
+    <view class="title-bar" style="height:{{titleBarHeight}}px">
+      <view class="title-bar-group {{navibarData.showBack ^ navibarData.showCapsule ? 'only-group-icon' : navibarData.showBack && navibarData.showCapsule ? '' :'no-group-icon'}}">
+        <view class="title-bar-icon" bindtap='_backlast' wx:if='{{navibarData.showBack}}'>
+          <image src='http://pic.c-ctrip.com/platform/h5/mini_programe/wx_ico_back.png' mode='aspectFit' class='back-home-return'></image>
+        </view>
+        <view class="line" wx:if='{{navibarData.showBack && navibarData.showCapsule}}'></view>
+        <view class="title-bar-icon" bindtap='_backhome' wx:if='{{navibarData.showCapsule}}'>
+          <image src='http://pic.c-ctrip.com/platform/h5/mini_programe/wx_ico_home.png' mode='aspectFit' class='back-home'></image>
+        </view>
+      </view>
+      <view class='nav-titleContainer'>
+        <view class="nav-title">{{navibarData.title}}</view>
+      </view>
+    </view>
+  </view>
+</view>

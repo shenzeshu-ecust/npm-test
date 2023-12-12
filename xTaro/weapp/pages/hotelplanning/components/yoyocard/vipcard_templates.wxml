@@ -1,0 +1,45 @@
+<!-- 领卡弹窗 -->
+<template name="new-right-vip-card">
+  <block wx:if="{{showGetVipCardModal}}">
+    <view class="mask" catchtouchmove="noop"></view>
+    <view class="right-vip-card-modal">
+      <view class="new-vip-card-bg {{ (!couponsReceivedAfterGetCard.couponInfoList || !couponsReceivedAfterGetCard.couponInfoList.length) && 'no-benefit-bg' }}">
+        <text class="vip-card-tip">{{couponsReceivedAfterGetCard.popupDesc}}</text>
+        <text class="vip-card-title {{isOrderCode ? 'vip-card-title-bg-new' : 'vip-card-title-bg'}} {{ (!couponsReceivedAfterGetCard.couponInfoList || !couponsReceivedAfterGetCard.couponInfoList.length) && 'no-benefit-title' }}"></text>
+        <block wx:if="{{ !couponsReceivedAfterGetCard.couponInfoList || !couponsReceivedAfterGetCard.couponInfoList.length }}">
+          <view class="no-benefit-wrapper">
+            <view class="bottom-card"></view>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="vip-coupon-wrapper">
+            <view class="has-benefit-wrapper {{ couponsReceivedAfterGetCard.couponInfoList && couponsReceivedAfterGetCard.couponInfoList.length > 1 && 'full-benefit' }}">
+              <view class="benefit-wrapper">
+                <!-- 折扣、优惠券 -->
+                <view wx:for="{{couponsReceivedAfterGetCard.couponInfoList}}" wx:for-item="couponInfo" class="continue-right-sprite benefit-item">
+                  <view class="coupon-amount">
+                    {{couponInfo.couponValue}}
+                    <text class="coupon-unit">{{couponInfo.couponUnit}}</text>
+                  </view>
+                  <text class="coupon-desc">{{couponInfo.couponTitle}}</text>
+                </view>
+                <!-- 权益 -->
+                <view class="benefit-item-main {{isOrderCode ? 'benefit-item-new' : 'right-item continue-right-sprite benefit-item'}}">
+                  <text class="right-desc">下单可享</text>
+                </view>
+              </view>
+              <text class="benefit-desc">可叠加使用</text>
+            </view>
+          </view>
+        </block>
+        <button class="vip-button" data-id="1" catchtap="closeVipCardModal">好的收下了</button>
+      </view>
+      <view class="wechat-font-close close-card" data-id="2" catchtap="closeVipCardModal"></view>
+    </view>
+  </block>
+</template>
+
+
+
+
+

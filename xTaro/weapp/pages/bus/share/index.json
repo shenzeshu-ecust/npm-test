@@ -1,0 +1,16 @@
+{
+    "backgroundTextStyle": "dark",
+    "backgroundColorTop": "#ffffff",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "安心退免费领",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#ffffff",
+    "navigationStyle": "custom",
+    "usingComponents": {
+        "nav-bar": "../cwx/component/navbar/navbar",
+        "activity-ownerprocess": "./components/ActivityOwnerProcess/index",
+        "activity-customerprocess": "./components/ActivityCustomerProcess/index",
+        "activity-modal-rules": "./components/ActivityModalRules/index",
+        "share-modal": "./components/ShareModal/index"
+    }
+}

@@ -1,0 +1,276 @@
+page{
+  background:#EFEFF4;
+} 
+.passengerWrap{
+  display: flex; 
+  justify-content: flex-start;  
+  align-items: flex-start;
+  flex-direction: column; 
+  font-family: PingFangSC-Regular, Arial, Helvetica, sans-serif;
+}
+.passengerCon_tip{
+  background: #EFEFF4;
+  color: #999;
+  font-size: 26rpx;
+  line-height: 32rpx;
+  padding: 20rpx 32rpx; 
+  display: flex; 
+  justify-content: center;  
+  align-items: center;
+} 
+.passengerCon_block{
+  background: #fff;
+  padding: 0 32rpx;
+  margin-bottom: 20rpx;
+  width:100%;
+  box-sizing:border-box; 
+} 
+.passengerCon_wrap{
+  border-bottom: 1rpx solid #ececec; 
+  box-sizing: border-box; 
+  display: flex; 
+  justify-content: flex-start; 
+  align-items: center;
+  padding: 10rpx 0; 
+  flex-wrap: wrap;
+} 
+.passengerCon_block .passengerCon_wrap:last-child{
+  border:none;
+}
+.passengerCon_inputName {
+  width: 150rpx;  
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: flex-start;
+  color: #666;
+} 
+.passengerCon_inputName_cn{
+  white-space: nowrap;
+  font-size: 30rpx;  
+}
+
+.passengerCon_inputName_en {
+  white-space: nowrap;
+  font-size: 24rpx;
+}
+.passengerCon_inputWrap{
+  flex: 1; 
+  color: #222;
+  display: flex; 
+  justify-content: flex-start; 
+  align-items: center;
+} 
+
+.passengerCon_inputWrap input {
+  width:100%;
+  height: 70rpx; 
+  line-height:70rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, Arial, Helvetica, sans-serif;
+  color: #222;
+  caret-color: #19A0F0;
+  padding:0 5rpx;
+  min-height: initial;
+}
+
+.passengerCon_inputWrap input::-webkit-input-placeholder {
+  color: #ccc
+}
+
+.passengerCon_inputWrap input:-ms-input-placeholder {
+  color: #ccc
+}
+
+.passengerCon_inputWrap input::-ms-input-placeholder {
+  color: #ccc
+}
+
+.passengerCon_inputWrap input::placeholder {
+  color: #ccc
+}
+ 
+.passengerCon_inputWrap .formIcon { 
+  flex: 0 0 70rpx;
+  height: 70rpx; 
+  display: none;
+  justify-content: center;  
+  align-items: center; 
+}
+.passengerCon_inputWrap.isClear .formIcon{
+   display: flex;
+}
+.passengerCon_inputWrap .formIcon .icon-clear{
+  background-image: url(//pic.c-ctrip.com/platform/h5/component/common_componentv7.152@2x.png);
+  background-repeat: no-repeat;
+  background-size: 23px auto;
+  background-position: 2px -299px;
+  width: 20px;
+  height: 20px; 
+} 
+.passengerCon_inputError{ 
+  flex: 1 0 100%; 
+  box-sizing: border-box;
+  padding-left: 155rpx;
+  color: #ff3c20;
+  font-size: 24rpx;
+  padding-bottom:10rpx;
+  margin-top:-10rpx; 
+} 
+.passengerCon_doute{
+  width:60rpx;
+  height:60rpx;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin-right:-10rpx;
+} 
+.passengerCon_douteIcon{ 
+  background: url(//pic.c-ctrip.com/platform/h5/component/wx/douteIcon.png) no-repeat;  
+  background-size:contain;
+  width: 36rpx;
+  height: 36rpx;
+  display: block;
+}
+.passengerCon_certificates{
+  width:100%;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+} 
+.passengerCon_certificates text{
+  font-size:32rpx;
+  font-family: PingFangSC-Medium, Arial, Helvetica, sans-serif;
+  flex:1;
+}
+.passengerCon_cer_delete{
+  width:70rpx;
+  height:70rpx;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  margin-right:-10rpx;
+}
+.passengerCon_cer_deleteIcon{
+  background: url(//pic.c-ctrip.com/platform/h5/component/wx/deleteIcon.png) no-repeat;  
+  background-size:contain; 
+  width:32rpx; 
+  height:37rpx;
+  display: block;
+}
+.passengerCon_dropdown{
+  width:70rpx;
+  height:70rpx;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  margin-right:-10rpx;
+}
+.passengerCon_dropdownIcon{
+  color: #999;
+  width: 8px;
+  height: 8px;
+  border-bottom: solid 1px currentColor;
+  border-left: solid 1px currentColor;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  margin-top: -5px;
+}
+.passengerCon_add{
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  font-size:30rpx;
+  color:#19A0F0;
+  padding:15rpx 0;
+  width:100%;
+  box-sizing: border-box;
+}
+.passengerCon_addIcon{
+  background: url(//pic.c-ctrip.com/platform/h5/component/wx/addIcon.png) no-repeat;  
+  background-size:contain;
+  width:32rpx;
+  height:32rpx;
+  margin-right: 8rpx;
+}
+.passengerCon_sezWrap{ 
+  display: flex; 
+  justify-content: flex-start;
+  padding:20rpx 0;
+  height: 32rpx;
+}
+.passengerCon_sex{
+  color: #ccc;
+  font-size:32rpx; 
+  flex:1; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  margin-right: 122rpx; 
+}
+.passengerCon_sex.active{
+  color: #222;
+}
+.passengerCon_sexPic{
+  width: 44rpx;
+  height: 42rpx;
+  margin-right: 10rpx;  
+}
+.passengerCon_sexPic.male{  
+  background: url(//pic.c-ctrip.com/platform/h5/component/wx/maleIcon.png) no-repeat;  
+  background-size:contain; 
+}
+.passengerCon_sex.active .passengerCon_sexPic.male{  
+  background: url(//pic.c-ctrip.com/platform/h5/component/wx/maleActiveIcon.png) no-repeat; 
+  background-size:contain;
+}
+.passengerCon_sexPic.female{  
+  background: url(//pic.c-ctrip.com/platform/h5/component/wx/femaleIcon.png) no-repeat; 
+  background-size:contain;
+}
+.passengerCon_sex.active .passengerCon_sexPic.female{  
+  background: url(//pic.c-ctrip.com/platform/h5/component/wx/femaleActiveIcon.png) no-repeat; 
+  background-size:contain;
+}
+.passengerCon_inputExtra{ 
+  display: flex;
+  width:160rpx;
+  height: 32rpx; 
+  align-items: center; 
+  justify-content: center;
+  margin-right: 10rpx;
+  padding-right: 20rpx;
+  border-right: 1rpx solid #D8D8D8;
+}
+.passengerCon_contact{
+  width:70rpx;
+  height:70rpx;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  margin-right:-10rpx;
+}
+.passengerCon_contactIcon{
+  width: 36rpx;
+  height: 38rpx;
+  background: url(//pic.c-ctrip.com/platform/h5/component/wx/contactIcon.png) no-repeat; 
+  background-size:contain;
+}
+.passengerBtn_wrap{
+  padding:30rpx 40rpx 98rpx;
+  width:100%;
+  box-sizing: border-box;
+}
+.passengerBtn_wrap button{
+  background:#19A0F0;
+  border-radius: 47rpx;
+  height:94rpx;
+  line-height: 94rpx;
+  width:100%;
+  text-align: center;
+  display: block;
+  color:#fff;
+  font-size:34rpx;
+  letter-spacing:20rpx;
+}

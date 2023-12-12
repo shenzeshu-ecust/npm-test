@@ -1,0 +1,22 @@
+@import "../../../common/common.wxss";
+.anonymous {
+    display: flex;
+    align-items: center;
+    margin-top: 33rpx;
+}
+.select-icon.wechat-font-selected {
+    color: #006FF6;
+}
+.select-icon.unselected {
+    color: #aaa;
+}
+.anonymous .title {
+    color: #111111;
+    font-size: 28rpx;
+    margin-left: 9rpx;
+}
+.anonymous .sub {
+    color: #888888;
+    font-size: 22rpx;
+    margin-left: 8rpx;
+}

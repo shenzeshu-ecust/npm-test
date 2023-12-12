@@ -1,0 +1,39 @@
+<template name="lostUserPop">
+    <block>
+        <view class="backmask active" bindtap="hideBackDrop" wx:if="{{lostUserPopType === 'index'}}"></view>
+        <image class="coin-decoration" mode="widthFix" style="width:100%;top:{{lostUserPopType === 'index'?'19%':'233rpx'}}" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/6yue/liushi/jinbi@3x.png" />
+        <view class="pop-lost-sec">
+            <view class="title">
+                <text>{{lostUserPopDetail.AlertTitle}}</text>
+                <image bindtap="onClickLostUserRuleBtn" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/6yue/liushi/wenhao.png" alt="" mode="aspectFit" style="height:29rpx;width:29rpx" data-url="{{lostUserPopDetail.RuleUrl || lostUserSwiperDetail.RuleUrl}}" />
+            </view>
+            <view class="subtitle {{lostUserPopType === 'index'?'':'hidden'}}">{{lostUserPopDetail.AlertSubTitle}}</view>
+            <view class="coupon-list">
+                <view class="coupon-container" wx:for="{{lostUserPopDetail.AlertGiftList}}" wx:for-item="item" wx:key="index">
+                    <view class="coupon-left">
+                        <text class="num">{{item.Price}}</text>
+                        {{item.Unit}}
+                        <view class="tag" wx:if="{{item.Tag}}">{{item.Tag}}</view>
+                    </view>
+                    <view class="coupon-right">
+                        <view class="coupon-title">{{item.Title}}</view>
+                        <view class="coupon-desc">{{item.SubTitle}}</view>
+                    </view>
+                    <view class="receive-tag" wx:if="{{item.IsSend}}">已领取</view>
+                </view>
+            </view>
+            <view class="pop-botm">
+                <button bindtap="onClickLosrUserSubscribeBtn" wx:if="{{lostUserPopType === 'index'}}">
+                    知道了
+                </button>
+                <button bindtap="hideBackDrop" wx:else>知道了</button>
+                <text class="tips">{{lostUserPopDetail.AlertTip}}</text>
+            </view>
+            <text class="ifont-closed" bindtap="hideBackDrop"></text>
+            <view class="assist-info" style="top: -60rpx;width:100%" wx:if="{{lostUserPopType !== 'index'}}">
+                <image mode="aspectFit" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/sept/zhuli/pop/%E6%96%87%E6%A1%882.png" />
+                <text>您的好友已获得{{ GrabAccelNumber }}个助力包</text>
+            </view>
+        </view>
+    </block>
+</template>

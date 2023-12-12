@@ -1,0 +1,75 @@
+<template name="businfo">
+  <view class='headerContainer {{classConfig.linearBackground}}'>
+    <view class="headerInfo" style="border-radius: {{lotteryCouponPrice && effectiveTime ? '10rpx 10rpx 0 0' : '10rpx'}}">
+      <view class="shadow"></view>
+      <view class="top ">
+        <view class="info">
+          <view wx:if="{{detail.busTagName}}" class="flex-row">
+            <view class="lefttag {{classConfig.lightBakColor}}">
+              <text class="{{classConfig.mainColor}}">{{detail.busTagName}}</text>
+            </view>
+          </view>
+          <view class="importantInfo">
+            <view class='sub'>
+              <text class="margin-vertical-half">{{time}} <text class='gray' wx:if="{{detail.shiftType == 1}}">前</text></text>
+              <text wx:if="{{detail.costTime}}">{{detail.costTime}}<text class="subInfo" >({{'仅供参考'}})</text></text>
+            </view>
+            <view class='stationRow margin-top-half'>
+              <view class='stationContainer'>
+                <text>{{(detail.fromStation || ' ')}}</text>
+              </view>
+              <icon class="icon-arrow-to color-gray margin-horizontal" wx:if="{{detail.fromStation && detail.toStation}}" />
+              <view class='stationContainer wrap'>
+                <text>{{detail.toStationShow || detail.toStation || ' '}}</text>
+              </view>
+            </view>
+          </view>
+          <button class="button-location" hover-class="button-location-hover" bindtap="showMap">
+            <icon class='icon-location {{classConfig.mainColor}} ' size='32prpx'></icon>
+            <view class='{{classConfig.mainColor}}'>地址</view>
+          </button>
+        </view>
+      </view>
+      <!-- 线 -->
+      <view class="flex-row full-row">
+        <view class="dashLine flex1 margin-horizontal"></view>
+      </view>
+      <!-- 信息 -->
+      <view class="bottom ">
+        <view class="padding-horizontal flex-row">
+          <view class='bottom-padding  flex-row flex1'>
+            <text class="checktag color-darkgray"  bindtap="showExplain" data-index="{{showExplainIndex}}">
+              <text class="icon-font icon-info color-darkgray icon-padding-checktag" ></text>
+              <text wx:for="{{detail.tagList}}" class="color-darkgray" form-type='submit' data-index="{{index}}">
+                <text class="color-darkgray" wx:if="{{index !==0}}">{{' | '}}</text>
+                <text class="color-darkgray">{{item || ''}}</text>
+              </text>
+            </text>
+            <button class="button-noborder button-info" bindtap="showExplain" data-index="{{showExplainIndex}}">
+              <text>须知<text class="icon-font icon-arrow-right color-darkgray "></text></text>
+            </button>
+            <view wx:if="{{showServiceTip}}" class="service-button">
+              <button class="button-noborder button-info" bindtap="{{showServiceFeeDesc}}">
+                <text>服务费<text wx:if="{{showInXList}}">{{servicePrice}}元</text><text wx:else>说明</text><text class="icon-font icon-arrow-right color-darkgray "></text></text>
+              </button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<template name="bustip">
+  <view class='bus_tip color-bg_fff padding-horizontal padding-vertical'>
+    <view class='flex-row  '>
+      <image src="https://pic.c-ctrip.com/bus/resource/book/icon_flash.png"></image>
+      <text>仅需20秒轻松下单</text>
+    </view>
+    <view wx:if="{{detail && ((detail.isPresale && detail.tempFields.presaleBuyTicketDesc) || !detail.isPresale)  }}" class='flex-row margin-top-half '>
+      <image src="https://pic.c-ctrip.com/bus/resource/book/icon_service.png"></image>
+      <text wx:if="{{detail.isPresale && detail.tempFields.presaleBuyTicketDesc}}">{{detail.tempFields.presaleBuyTicketDesc}}</text>
+      <text wx:elif="{{hasSalePackage}}">支付后立即出票 保障出行</text>
+      <text wx:else>官方合作 保障出行</text>
+    </view>
+  </view>
+</template>

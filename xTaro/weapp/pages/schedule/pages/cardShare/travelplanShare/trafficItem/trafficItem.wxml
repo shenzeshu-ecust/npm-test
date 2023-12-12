@@ -1,0 +1,13 @@
+<!--pages/schedule/pages/cardShare/travelplanShare/trafficItem.wxml-->
+<view>
+    <view class='row-view'>
+        <image class="traffic-icon" src='{{itemData.icon}}' />
+        <text class='title'>{{itemData.title}}</text>
+    </view>
+    <view class='row-view' style="margin-top: 20rpx; align-items: center;">
+        <text class='placeName'>{{itemData.depart}}</text>
+        <image class='separatorImg' src='../../../images/shareTravelLine/cts_traffic_arrow.png' />
+        <text class='placeName'>{{itemData.arrival}}</text>
+    </view>
+    <text class='dpToArrTime'>{{itemData.timeStr}}</text>
+</view>

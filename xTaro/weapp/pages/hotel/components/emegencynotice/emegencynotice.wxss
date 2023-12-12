@@ -1,0 +1,56 @@
+@import '../../common/common.wxss';
+.mr-8 {
+    margin-right: 8rpx;
+}
+
+.inner {
+    display: flex;
+    background: #FEF3F2;
+    height: 80rpx;
+    font-size: 24rpx;
+    line-height: 30rpx;
+    border-radius: 8rpx 8rpx 8rpx 8rpx;
+}
+.content {
+    margin-left: 8rpx;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.lmask {
+    position: absolute;
+    right: 48rpx;
+    height: 100%;
+    width: 32rpx;
+    background: linear-gradient(90deg, rgb(255, 255, 255, 0) 0%, rgb(255, 255, 255, 1) 100%);
+}
+.wechat-font-arrow-right {
+    width: 32rpx;
+    padding: 0 16rpx;
+}
+.topic {
+    padding-right: 10rpx;
+    font-weight: bold;
+    color: #F5190A;
+}
+.box-title {
+    font-size: 30rpx;
+    padding-right: 10rpx;
+    font-weight: bold;
+    color: #F5190A;
+    line-height: 30rpx;
+    display: flex;
+}
+.desc {
+    margin-top: 10rpx;
+}
+.box-desc {
+    min-height: 240rpx;
+    background: #f5f7fa;
+    font-size: 26rpx;
+    line-height: 40rpx;
+    padding: 24rpx;
+    margin: 24rpx 0;
+    border-radius: 8rpx 8rpx 8rpx 8rpx;
+}

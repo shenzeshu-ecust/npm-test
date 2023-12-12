@@ -1,0 +1,197 @@
+page {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  height: 100%;
+
+  background-image: url("https://images3.c-ctrip.com/marketing/2022/11/authorize/auth_bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#myCanvas{
+  position: absolute;
+  bottom: -999999rpx;
+}
+
+.auth_layout{
+  width: 670rpx;
+  margin: 0 auto;
+  text-align: center;
+
+
+}
+.auth_top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.auth_top .top_title{
+  width: 100%;
+  text-align: center;
+  font-size: 39rpx;
+  font-weight: bold;
+  color: rgb(0, 128, 255);
+
+  margin: 70rpx auto 15rpx;
+}
+.auth_top .top_guide{
+  width: 100%;
+  color: rgb(1,55,114);
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  line-height: 34rpx;
+  margin-bottom: 30rpx;
+}
+
+.auth_box_layout{
+  margin: 40rpx auto;
+  width: 668rpx;
+  background: rgb(255, 255, 255);
+  border-radius: 36rpx;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth_box_layout .step{
+  margin: 30rpx auto 10rpx;
+  text-align: center;
+  color: rgb(51, 51, 51);
+  font-size: 26rpx;
+  font-family: PingFangSC-Semibold;
+  font-weight: 600;
+  position: relative;
+}
+.auth_box_layout .step::before{
+  content: " ";
+  height: 4rpx;
+  width: 28rpx;
+  background: linear-gradient(0deg, rgb(136, 198, 250) 0%, rgb(255, 255, 255) 100%);
+  border-radius: 29rpx;
+  position: absolute;
+  left: -40rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+
+}
+.auth_box_layout .step::after{
+  content: " ";
+  height: 4rpx;
+  width: 28rpx;
+  background: linear-gradient(0deg, rgb(136, 198, 250) 0%, rgb(255, 255, 255) 100%);
+  border-radius: 29rpx;
+  position: absolute;
+  right: -40rpx;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+.auth_box_layout .auth_guide{
+  color: rgb(51, 51, 51);
+  font-size: 26rpx;
+  font-family: AppleColorEmoji;
+  font-weight: normal;
+  line-height: 34rpx;
+}
+.auth_box_layout .auth_content{
+  margin: 40rpx auto;
+}
+.auth_box_layout .auth_content .avatar-wrapper{
+  width: 100rpx;
+  height: 100rpx;
+  background: rgb(244, 244, 244);
+  border-radius: 8rpx;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+.auth_box_layout .nick_input_box{
+  height: 80rpx;
+  background: rgb(242, 248, 254);
+  border: 1rpx solid rgb(86, 120, 168);
+  border-radius: 8rpx;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.nick_input_label{
+  width: 150rpx;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgb(51, 51, 51);
+  font-size: 26rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+}
+.nick_input{
+  width: 457rpx;
+  height: 100%;
+  outline: none;
+  border: none;
+
+  color: rgb(51, 51, 51);
+  font-size: 26rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  text-align: left;
+  padding-left: 100rpx;
+  box-sizing: border-box;
+}
+
+.avatar-wrapper .avatar{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.auth_submit_box{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.auth_submit_box .auth_submit_button{
+  width: 360rpx;
+  height: 88rpx;
+  background: rgb(0, 134, 246);
+  border-radius: 12rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: rgb(255, 255, 255);
+  font-size: 34rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: 500;
+  letter-spacing: 1rpx;
+}
+
+.auth_guide{
+  color: rgb(1,55,114);
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: normal;
+  line-height: 34rpx;
+
+  width: 100%;
+  text-align: center;
+
+}
+.auth_guide_bottom{
+  margin-top: 150rpx;
+}
+.submit_opacty{
+  background: rgba(0, 134, 246, 0.6) !important;
+}
+

@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* page{background-color: rgb(148,185,70);} */
+.share_wrap{position: absolute;top: 0;left: 0;height: 100%;width: 100%;}
+.share_wrap image{width: 100%;}
+.foot{position: fixed;bottom: 0;left: 0;width: 100%;padding: 20rpx 0;background-color: #fff;}
+.foot .btn{font-size: 36rpx;color: #fff;width: 440rpx;height: 88rpx;line-height: 88rpx;background:-webkit-linear-gradient(#0ddec3, #00c9c2);margin: 0 auto;border-radius: 45rpx;text-align: center;}
+/*  */
+.post_canvas{width:375px;height:612px;position:fixed;top:9999px;} 
+page {background: transparent;}

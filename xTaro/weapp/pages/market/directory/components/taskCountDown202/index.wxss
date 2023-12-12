@@ -1,0 +1,338 @@
+/**webview倒计时组件**/
+.coverview-taskcountdown {
+  position: fixed;
+  width: 120rpx;
+  height: 160rpx;
+  top: 70%;
+  right: 20rpx;
+  z-index: 100000000;
+  text-align: center;
+}
+
+.coverview-taskcountdown__image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 120rpx;
+  height: 160rpx;
+}
+
+.coverview-taskcountdown__process {
+  position: absolute;
+  top: 83rpx;
+  left: 8rpx;
+  width: 102rpx;
+  height: 14rpx;
+  z-index: 100000000;
+}
+
+.coverview-taskcountdown__process-inner {
+  height: 14rpx;
+  background: rgba(255, 92, 0);
+  border-radius: 14rpx;
+  box-shadow: inset 0 -2px 2px rgb(0 0 0 / 20%);
+  z-index: 100000000;
+}
+
+.coverview-taskcountdown__text {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  color: #ffecd0;
+  position: absolute;
+  top: 107rpx;
+  font-size: 20rpx;
+  line-height: 28rpx;
+  color: #fff;
+  z-index: 100000000;
+}
+
+.coverview-fn-color-yellow {
+  color: #FFED00;
+}
+
+.coverview-row {
+  display: flex;
+  justify-content: center;
+}
+
+
+/**正常组件**/
+
+.task-count-down__movable-area {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 90vh;
+  z-index: 10000000;
+}
+
+.popup202 {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.popup202_head {
+  position: relative;
+}
+
+.popup202_head_bg {
+  width: 60px;
+  height: 60px;
+}
+
+.popup202_head_icon_dongxiao_wraper {
+  position: absolute;
+  top: 12px;
+  left: 13px;
+}
+
+.popup202_head_icon_dongxiao_wraper.pingyi {
+  animation: popup202_icon1 1.5s ease-in-out infinite;
+}
+
+.popup202_head_icon {
+  width: 35px;
+  height: 35px;
+}
+
+.popup202_head_icon.dongxiao {
+  animation: popup202_rorate 2.5s linear infinite;
+}
+
+.popup202_head_icon.popup202_head_icon_dong {
+  animation: popup202_head_icon_bigger 0.34s ease-out 0.5s 3;
+}
+
+.mkt_popup202-2-img {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.mkt_popup202-2-img:nth-child(1) {
+  top: 22px;
+}
+
+.mkt_popup202-2-img:nth-child(2) {
+  top: 20px;
+}
+
+.mkt_popup202-2-img:nth-child(3) {
+  top: 18px;
+}
+
+.show {
+  opacity: 1;
+}
+
+.start-donghua {
+  animation:
+      jumper1 0.5s ease-in 0s 1 forwards,
+      jumper2 0.2s ease-out 0.5s 1 forwards,
+      jumper3 0.2s ease-in 0.7s 1 forwards,
+      jumper4 0.15s ease-out 0.9s 1 forwards,
+      jumper5 0.15s ease-in 1.05s 1 forwards;
+}
+
+.popup202_footer {
+  box-sizing: border-box;
+  width: 60px;
+  height: 70px;
+  border-radius: 0 0 30px 30px;
+  background-color: red;
+  border: 4px solid yellow;
+}
+
+.popup202_content_wraper {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateZ(12000px);
+  overflow: hidden;
+}
+
+.popup202_process {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  background: url('https://pages.c-ctrip.com/market/activity-h5/img/popup202_process-line2.png') center / contain no-repeat;
+}
+
+.loader-container {
+  position: absolute;
+  top: 11px;
+  left: 5px;
+  width: 50px;
+  transform: translateZ(120px);
+}
+
+.loader-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  width: 0px;
+  background: -webkit-linear-gradient(left, rgba(255, 175, 0), rgba(255, 92, 0));
+  background: -moz-linear-gradient(left, rgba(255, 175, 0), rgba(255, 92, 0));
+  background: -o-linear-gradient(left, rgba(255, 175, 0), rgba(255, 92, 0));
+  background: -ms-linear-gradient(left, rgba(255, 175, 0), rgba(255, 92, 0));
+  background: linear-gradient(left, rgba(255, 175, 0), rgba(255, 92, 0));
+  border-radius: 7px;
+  box-shadow: inset 0 -2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.process-finish {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 56px;
+  padding: 5px 0;
+  border-radius: 0 0 10px 10px;
+  border: 4px solid #ffdda8;
+  margin-top: -1px;
+  background-color: #eb2739;
+
+}
+
+.process-finish>view {
+  line-height: 1;
+  color: #fff;
+  font-size: 12px;
+  transform: scale(0.75);
+  white-space: nowrap;
+}
+
+text.fn-color-yellow,
+view.fn-color-yellow {
+  color: #FFED00;
+}
+
+.process-finish>p:nth-child(2) {
+  margin-top: 2px;
+}
+
+@keyframes popup202_head_icon_bigger {
+  0% {
+      transform: scale(1);
+  }
+
+  50% {
+      transform: scale(1.2);
+  }
+
+  100% {
+      transform: scale(1);
+  }
+}
+
+@keyframes popup202_icon1 {
+  0% {
+      transform: translateY(-4px);
+  }
+
+  50% {
+      transform: translateY(1px);
+  }
+
+  100% {
+      transform: translateY(-4px);
+  }
+}
+
+@keyframes popup202_rorate {
+  0% {
+      transform: rotateY(0);
+  }
+
+  100% {
+      transform: rotateY(360deg);
+  }
+}
+
+@keyframes jumper1 {
+  0% {
+      transform: translateY(-100px);
+  }
+
+  100% {
+      transform: translateY(0);
+  }
+}
+
+@keyframes jumper2 {
+  0% {
+      transform: translateY(0);
+  }
+
+  100% {
+      transform: translateY(-20px);
+  }
+}
+
+@keyframes jumper3 {
+  0% {
+      transform: translateY(-20px);
+  }
+
+  100% {
+      transform: translateY(0);
+  }
+}
+
+@keyframes jumper4 {
+  0% {
+      transform: translateY(0px);
+  }
+
+  100% {
+      transform: translateY(-10px);
+  }
+}
+
+@keyframes jumper5 {
+  0% {
+      transform: translateY(-10px);
+  }
+
+  100% {
+      transform: translateY(0);
+  }
+}
+
+.light {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100rpx;
+  height: 112rpx;
+  background-image: linear-gradient(0deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  transform: skewx(-25deg) translateX(-100px);
+  animation: taskcountlight linear 0.5s forwards 1s;
+}
+
+@keyframes taskcountlight {
+  0% {
+      transform: skewx(-25deg) translateX(-100px);
+  }
+
+  100% {
+      transform: skewx(-25deg) translateX(100px);
+  }
+}

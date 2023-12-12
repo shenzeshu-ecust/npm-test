@@ -1,0 +1,50 @@
+<view class="page-wraper" style="background:{{pageBg}};">
+  <view class="page-transform" style="transform: scale({{pageScale}});height:{{pageHeight}}">
+    <block wx:for="{{componentList}}" wx:for-item="item" wx:key="id">
+
+      <!-- 任务按钮 -->
+      <block wx:if="{{item.props.key == 'task_btn_text'}}">
+        <block wx:if="{{isFat}}">
+            <taskList wx:if="{{taskBtn.status==0 || taskBtn.status==1 && inviteInfo}}" channelCodeStr="{{inviteInfo.infoMap._channelCode}}" class="abTask item-common {{item.props.key}}" style="{{item.styles}}" tempid='taskab' compid='103175' bind:userAcceptPrize="userAcceptPrize" bind:completeTask="completeTask" bind:receiveTask="receiveTask" />
+            <view wx:else class="item-common {{item.props.key}}" style="{{item.styles}}"  data-item="{{item}}" catchtap="handleClick">
+              <view class="task_btn_text_inner">{{ taskBtn.btnText }}</view>
+            </view>
+          </block>
+          <block wx:else>
+            <taskList wx:if="{{taskBtn.status==0 || taskBtn.status==1 && inviteInfo}}" channelCodeStr="{{inviteInfo.infoMap._channelCode}}" class="abTask item-common {{item.props.key}}" style="{{item.styles}}" tempid='sqyqb' compid='149165' bind:userAcceptPrize="userAcceptPrize" bind:completeTask="completeTask" bind:receiveTask="receiveTask">
+              <view slot="btn_text">
+                {{taskList &&  taskList[0] && taskList[0].buttonText}}
+              </view>
+            </taskList>
+            <view wx:else class="item-common {{item.props.key}}" style="{{item.styles}}"  data-item="{{item}}" catchtap="handleClick">
+              <view class="task_btn_text_inner">{{ taskBtn.btnText }}</view>
+            </view>
+          </block>
+      </block>
+
+      <!-- 图片 -->
+      <block wx:elif="{{item.type == 'image'}}">
+        <image class="item-common {{item.props.key}}" src="{{item.props.values.src}}" style="{{item.styles}}"
+          catchtap="handleClick" data-item="{{item}}"></image>
+      </block>
+
+      <!-- 单行文字 -->
+      <block wx:elif="{{item.type == 'label'}}">
+        <view class="item-common {{item.props.key}}" style="{{item.styles}}" catchtap="handleClick"
+          data-item="{{item}}">{{ item.props.values.value }}</view>
+      </block>
+
+      <!-- 块状背景 -->
+      <block wx:elif="{{item.type == 'box'}}">
+        <view class="item-common {{item.props.key}}" style="{{item.styles}}" catchtap="handleClick"
+          data-item="{{item}}"></view>
+      </block>
+
+    </block>
+
+  </view>
+
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

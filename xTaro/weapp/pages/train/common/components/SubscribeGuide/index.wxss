@@ -1,0 +1,40 @@
+@import "../../pop-box.wxss";
+@import "../../iconfont.wxss";
+
+.save-task-pop{
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit:contain;
+  /* height: ; */
+  background: #FFFFFF;
+  border-radius: 32rpx; 
+  box-sizing: border-box;
+  z-index: 3030;
+}
+.save-task-pop .save-task-pop-body { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  width: 648rpx;
+  height:  576rpx;
+  border-radius: 12rpx;
+  opacity:0
+}
+.save-task-pop .save-task-pop-body.body-show {
+  opacity: 1;
+}
+.save-task-pop-shadow{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.5;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+}
+

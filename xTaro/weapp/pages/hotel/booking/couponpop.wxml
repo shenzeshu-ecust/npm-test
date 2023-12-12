@@ -1,0 +1,63 @@
+<common-layer wx:if="{{couponData.showLayer}}"
+              title="选择优惠券"
+              bind:closeLayer="closeCouponLayer">
+    <view class="coupon-layer autoExpose" data-expose="{{couponExposeObj}}" slot="content">
+        <view class="cou-tab">
+            <view catchtap="changeCouponLayer"
+                  class="cou-tab-item {{couponData.isUsedCouponsTab ? 'cou-tab-cur' : ''}}"
+                  data-type="canUse">可用券({{availCouponLen}})</view>
+            <view catchtap="changeCouponLayer"
+                  class="cou-tab-item {{couponData.isUsedCouponsTab ? '' : 'cou-tab-cur'}}"
+                  data-type="disUse">不可用券({{unavailableCoupons.length}})</view>
+        </view>
+        <scroll-view scroll-y class="scroll-y coupon-list">
+            <view hidden="{{!couponData.isUsedCouponsTab}}" class="bk-coupon">
+                <block wx:for="{{availCouponGroups}}" wx:for-item="id">
+                    <view wx:if="{{enableMultipleCoupon && availCouponMap[id]}}" class="group-name black1">
+                        {{availCouponMap[id][0].groupName}}
+                    </view>
+                    <template is="coupons" data="{{coupons: availCouponMap[id], couponData}}"></template>
+                </block>
+                <view wx:if="{{!availCouponLen}}" class="bk-no-cou">
+                    <text>您还没有可用的优惠券\n快去酒店领取吧~</text>
+                </view>
+            </view>
+            <view hidden="{{couponData.isUsedCouponsTab}}" class="bk-coupon">
+                <block wx:if="{{unavailableCoupons.length}}">
+                    <view wx:for="{{unavailableCoupons}}" wx:for-item="c" wx:key="id" class="item">
+                        <view class="cell-v">
+                            <template is="singleCoupon" data="{{c, unavailable: 1}}"></template>
+                        </view>
+                        <view class="dis-cou-res">该房型不在适用范围内</view>
+                    </view>
+                </block>
+                <view wx:else class="bk-no-cou">您没有不可用的优惠券哦~</view>
+            </view>
+        </scroll-view>
+    </view>
+</common-layer>
+
+<template name="coupons">
+    <block wx:if="{{coupons && coupons.length}}">
+        <view wx:for="{{coupons}}" wx:for-item="c" wx:key="id" wx:for-index="idx"
+              class="item cell-v {{c.isSelect ? 'current' : ''}}"
+              data-groupid="{{c.groupId}}" data-idx="{{idx}}" data-current="{{c.isSelect}}"
+              catchtap="couponSelect" data-ubt-key="xcx_hotel_order_coupon">
+            <template is="singleCoupon" data="{{c}}"></template>
+            <view class="end">
+                <text class="wechat-font-tick"></text>
+            </view>
+        </view>
+    </block>
+</template>
+
+<template name="singleCoupon">
+    <view class="cp-price {{unavailable ? 'dis-price' : ''}}">
+        <view wx:if="{{c.amountText}}"><text class="strong">{{c.amountText}}</text>折</view>
+        <view wx:else>{{c.itemType === 2 ? '返' : ''}}¥<text class="strong">{{c.amount}}</text></view>
+    </view>
+    <view class="cell-star midbox">
+        <view class="tit {{unavailable ? 'dis-tit' : ''}}">{{c.title}}</view>
+        <view class="subtit">{{c.description}}</view>
+    </view>
+</template>

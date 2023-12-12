@@ -1,0 +1,14 @@
+<view class="qr-code-model-wrapper" wx:if="{{isShowModal}}">
+    <view class="mask" bindtap="closeModal"></view>
+    <view class="qr-code-model cell">
+        <view class="fs-36 mt-32 fw-500">方式一</view>
+        <view class="fs-28 mt-24 fw-500">添加私人管家享受专属服务</view>
+        <image show-menu-by-longpress="true" class="qr-code-image mt-8" src="{{communityQRCode.qrCodeUrl}}" />
+        <view class="fs-20 mt-8 color5">长按或截图扫码识别二维码</view>
+        <view class="qr-bottom-wrapper cell-v column">
+            <view class="fs-36 mt-20 fw-500">方式二</view>
+            <view class="mt-24 qr-phone-button cell flex-center" bindtap="callPhone">电话联系</view>
+        </view>
+        <view class="wechat-font-close qr-code-close" bindtap="closeModal"></view>
+    </view>
+</view>

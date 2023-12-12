@@ -1,0 +1,145 @@
+<template name="listCompilation">
+    <view class="listCompContainer" id="sight">
+        <!-- 一级标签 -->
+        <view class="tagLevel1">
+            <block wx:for="{{listCompData.catalog}}" key="{{index}}">
+                <view class="{{listCompData.currentTagOne == index ? 'tagItemOneOn' : 'tagItemOneOff'}}" bindtap="tapTagLv1" data-idx="{{index}}"
+                    data-_data="{{item}}"  data-itemtype="{{item.type}}">
+                    <view class="tapTagLv1">
+                        <view class="tapTagLv1Text">{{item.name}}</view>
+                        <view class="underLine" wx:if="{{listCompData.currentTagOne == index}}"></view>
+                    </view>
+                </view>
+            </block>
+            <view wx:if="{{listCompData.catalog.length < 3}}" class="tagItemOneOff"></view>
+        </view>
+
+        <!-- 二级标签 -->
+        <scroll-view class="tagLevel2" scroll-x  scroll-into-view="{{listCompData.currentTagTwo == 0 ? 'tag'+ listCompData.currentTagTwo : ''}}" wx:if="{{listCompData.catalog[listCompData.currentTagOne].subTabList && listCompData.catalog[listCompData.currentTagOne].subTabList.length > 1}}">
+            <block wx:for="{{listCompData.catalog[listCompData.currentTagOne].subTabList}}" key="{{index}}">
+                <view wx:if="true" class="{{listCompData.currentTagTwo == index ? 'tagItemTwoOn' : 'tagItemTwoOff'}}" bindtap="tapTagLv2"
+                data-idx="{{index}}" id="{{'tag'+index}}" data-_data="{{item}}"
+                data-tabrankname="{{item.name}}"
+                 data-itemtype="{{listCompData.catalog[listCompData.currentTagOne].type}}"
+                style="margin-right: {{listCompData.catalog[listCompData.currentTagOne].subTabList.length == index+1 ? '36rpx' : '12rpx'}}">
+                    <view class="tagTwoItem" wx:if="{{listCompData.currentTagTwo == index}}">
+                        <view class="tagTwoContent">
+                            <view class="tagTwoTitle">{{item.name}}</view>
+                            <image class="tagTwoBgImg" src="{{listCompData.currentTagTwo == index ? 'https://dimg02.c-ctrip.com/images/100n170000012nshuE634.png' : ''}}"></image>
+                            <!-- <view class="tagTwoSubtitle">50w浏览</view> -->
+                        </view>
+                        <image class="selectItemArrow" src="https://dimg02.c-ctrip.com/images/100l170000012p7fu581D.png"></image>
+                    </view>
+                    <view wx:if="{{listCompData.currentTagTwo != index}}">
+                        <view class="tagTwoTitle">{{item.name}}</view>
+                        <image class="tagTwoBgImg" src="{{listCompData.currentTagTwo == index ? 'https://dimg02.c-ctrip.com/images/100n170000012nshuE634.png' : ''}}"></image>
+                        <!-- <view class="tagTwoSubtitle">50w浏览</view> -->
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+
+        <!-- 列表1 -->
+        <view class="listOneContainer" wx:if="{{(listCompData.detail.type === 1 || listCompData.detail.type === 2) && listCompData.isNotEmpty && !listCompData.isLoading}}">
+            <block wx:for="{{listCompData.detail.subTemplate1.itemList}}">
+                <view class="listCard" style="margin-top:{{index === 0 ? '0' : '32rpx'}}" bindtap="_goToCommentListDetail"
+                    data-itemtype="{{listCompData.catalog[listCompData.currentTagOne].type}}"
+                    data-tabrankname="{{listCompData.catalog[listCompData.currentTagOne].subTabList[listCompData.currentTagTwo].name}}"
+                    data-idx="{{index}}"
+                     data-idx2="{{listCompData.currentTagTwo}}"
+                    data-commentListData="{{item}}">
+                    <view class="listLeftBox" style="background-image:url('{{item.coverImage}}')">
+                        <view class="tagRank" wx:if="{{item.ranking}}">{{item.ranking}}</view>
+                    </view>
+                    <view class="listRightBox">
+                        <view class="lineOne">
+                            <view class="title oneLineOverflow">{{item.title}}</view>
+                            <view class="level" wx:if="{{item.level}}">{{item.level}}</view>
+                        </view>
+                        <view class="lineTwo oneLineOverflow">
+                            <!-- <view class="heat"></view> -->
+                            <view class="score" wx:if="{{item.rating}}">{{item.rating}}</view>
+                            <view class="cutOffLine" wx:if="{{item.commentCount}}"></view>
+                            <view class="comment" wx:if="{{item.commentCount}}">{{item.commentCount}}</view>
+                        </view>
+                        <view class="lineThree">
+                            <view class="tag oneLineOverflow">{{item.shortFeature}}</view>
+                            <view class="_underLine"></view>
+                        </view>
+                        <view class="lineBottom">
+                            <view class="area oneLineOverflow" wx:if="{{item.zone}}">{{item.zone}}</view>
+                            <view class="_line" wx:if="{{item.zone && item.minPrice}}"></view>
+                            <view class="price oneLineOverflow" wx:if="{{item.minPrice}}">{{item.minPrice}}</view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <view class="seeMore" wx:if="{{listCompData.detail.subTemplate1.more.text}}" bindtap="_seeMore"
+                data-itemtype="{{listCompData.catalog[listCompData.currentTagOne].type}}"
+                data-tabrankname="{{listCompData.catalog[listCompData.currentTagOne].subTabList[listCompData.currentTagTwo].name}}"
+                data-idx2="{{listCompData.currentTagTwo}}"
+                data-moreurl="{{listCompData.detail.subTemplate1.more.url}}">{{listCompData.detail.subTemplate1.more.text}}</view>
+        </view>
+        <!-- end 列表1 -->
+
+        <!-- 列表2 -->
+        <view class="listTwoContainer"  wx:if="{{listCompData.detail.type === 3 && listCompData.isNotEmpty && !listCompData.isLoading}}">
+            <scroll-view class="listTwoScrollView" scroll-x>
+                <block wx:for="{{listCompData.detail.subTemplate3.itemList}}">
+                    <view class="listTwoItem" bindtap="{{item.type == 0 ? 'tapTagLv3' : 'tapTagLv3More'}}"
+                         data-itemtype="{{listCompData.catalog[listCompData.currentTagOne].type}}"
+                        data-tabrankname="{{listCompData.catalog[listCompData.currentTagOne].subTabList[listCompData.currentTagTwo].name}}"
+                         data-idx2="{{listCompData.currentTagTwo}}"
+                        data-idx="{{index}}" data-moreurl="{{!!item.more.url ? item.more.url : ''}}">
+                        <view class="listTwoImg">
+                            <view class="upNums">
+                                <image class="upIcon" src="https://dimg02.c-ctrip.com/images/100h170000012r2sn5313.png" wx:if="{{item.likeCount}}"></image>
+                                <view class="upNum" wx:if="{{item.likeCount}}">{{item.likeCount}}</view>
+                            </view>
+                            <image src="{{item.coverImage}}"></image>
+                            <view class="listTwoMore" wx:if="{{item.type == 1}}">
+                                <view class="listTwoMoreText">{{item.more.text}}</view>
+                                <image class="listTwoMoreIcon" src="https://pages.c-ctrip.com/you/destination/dest_linetemplate_more.png"></image>
+                            </view>
+                            <view class="selectedBoard" wx:if="{{listCompData.currentTagThree == index}}"></view>
+                        </view>
+                        <view class="listTwoTitle" style="color:{{listCompData.currentTagThree == index ? '#0086f6' : '#333333'}}">{{!!item.title ? item.title : ' '}}</view>
+                    </view>
+                </block>
+            </scroll-view>
+            <view class="listTwoDetailCard" bindtap="_goToLineDetail"
+                 data-itemtype="{{listCompData.catalog[listCompData.currentTagOne].type}}"
+                data-tabrankname="{{listCompData.catalog[listCompData.currentTagOne].subTabList[listCompData.currentTagTwo].name}}"
+                data-idx="{{index}}"
+                 data-idx2="{{listCompData.currentTagTwo}}"
+                data-url="{{listCompData.detail.subTemplate3.itemList[listCompData.currentTagThree].more.url}}">
+                <view class="listTwoCardBgMask"></view>
+                <image class="listTwoCardBg" src="{{listCompData.detail.subTemplate3.itemList[listCompData.currentTagThree].coverImage}}"></image>
+                <view class="cardTitle">{{listCompData.detail.subTemplate3.itemList[listCompData.currentTagThree].title}}</view>
+                <view class="cardDesc">{{listCompData.detail.subTemplate3.itemList[listCompData.currentTagThree].summary}}</view>
+                <view class="cardRec">
+                    <view>{{listCompData.detail.subTemplate3.itemList[listCompData.currentTagThree].more.text}}</view>
+                    <image class="jumpImg" src="https://dimg02.c-ctrip.com/images/100e170000012rn2d380B.png"></image>
+                </view>
+            </view>
+        </view>
+        <!-- end 列表2 -->
+
+        <!-- 加载 -->
+        <view class="loadingContainer"  wx:if="{{listCompData.isLoading}}">
+            <view class="loading">
+                <image class="loadingImg" src="https://dimg02.c-ctrip.com/images/1008170000012pqy49C5D.png"></image>
+                <view class="loadingText">加载中...</view>
+            </view>
+        </view>
+        <!-- end 加载 -->
+
+        <!-- 空态 -->
+        <view class="emptyStateContainer"  wx:if="{{!listCompData.isNotEmpty && !listCompData.isLoading}}">
+            <image class="emptyImg" src="https://dimg02.c-ctrip.com/images/1009170000012rw334DDF.png"></image>
+            <view class="emptyText">网络不给力，请再试试吧~</view>
+            <view class="emptyBtn" bindtap="_refresh">刷新重试</view>
+        </view>
+        <!-- end 空态 -->
+    </view>
+</template>

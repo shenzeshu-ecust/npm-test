@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "Modal": "./modal/index",
+        "InviteHelp": "./inviteHelp/index"
+    }
+}

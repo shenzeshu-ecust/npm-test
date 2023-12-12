@@ -1,0 +1,235 @@
+<!-- 乘客联系方式未核验弹窗 -->
+<template name="mobilecheckPop">
+    <view class="backmask active" bindtap="hidePop" catchtouchmove="preventBackMove"></view>
+    <view class="pop-heyan">
+        <view class="tit">{{AlertInfo.Title}}</view>
+        <view class="txt">{{AlertInfo.Content}}</view>
+        <button class="btn-go" bindtap="toWebviewPageVerify" data-url="{{AlertInfo.JumpUrl}}" data-ubt-key="c_train_wx_orderdetail_mobilecheckbtn_notice">{{AlertInfo.ButtonName}}</button>
+    </view>
+</template>
+
+<!-- 乘客联系方式未核验banner -->
+<template name="mobilecheckNotice">
+    <view class="order-notice-white order-heyan">
+        <icon class="icon-ball"></icon>
+        <view class="cont"><rich-text nodes="{{TopVerifyInfo.Message}}"></rich-text></view>
+        <button class="btn-heyan" bindtap="toWebviewPageVerify" data-url="{{TopVerifyInfo.JumpUrl}}" data-ubt-key="c_train_wx_orderdetail_mobilecheckbtn_pop">{{TopVerifyInfo.ButtonName}}</button>
+    </view>
+</template>
+
+<!-- 买票中断  -->
+<template name="ticketsBreakNotice">
+    <view class="order-notice-white-break order-break">
+        <!-- <icon class="icon-ball"></icon> -->
+        <view class="cont">
+            <view class="tit {{TopVerifyInfo.guideCode == 1 ? 'org' : ''}}"><rich-text nodes="{{TopVerifyInfo.topTitle}}"></rich-text></view>
+            <view class="txt"><rich-text nodes="{{TopVerifyInfo.topSubTitle}}"></rich-text></view>
+        </view>
+        <button class="btn-heyan {{TopVerifyInfo.guideCode == 1 ? 'org' : ''}}" data-guidecode="{{TopVerifyInfo.guideCode}}" bindtap="clickTicketBreakNotice" data-ubt-key="c_train_wx_orderdetail_ticketsBreakNoticeBanner">{{TopVerifyInfo.topButtonName}}</button>
+    </view>
+</template>
+
+<!-- 买票中断  -->
+<template name="ticketsBreakNoAccountNotice">
+    <view class="order-notice-white-break order-break">
+        <!-- <icon class="icon-ball"></icon> -->
+        <view class="cont">
+            <view class="tit"><rich-text nodes="{{TopVerifyInfo.topTitle}}"></rich-text></view>
+            <view class="txt"><rich-text nodes="{{TopVerifyInfo.topSubTitle}}"></rich-text></view>
+        </view>
+        <button class="btn-heyan" bindtap="showBreakPopNoaccount" data-ubt-key="c_train_wx_orderdetail_ticketsBreakNoticeBanner">{{TopVerifyInfo.topButtonName}}</button>
+    </view>
+</template>
+
+<!-- 省钱任务banner -->
+<template name="saveTaskBanner">
+    <view class="order-notice-white order-heyan save-banner">
+       <view class="save-left-view">
+            <view class="save-left-upper" wx:if="{{isShowSaveTaskPop || saveTaskInfo.TaskType === 31}}">
+                <image class="img" src="{{saveTaskInfo.Icon}}" />
+                <view class="split-line" />
+                <view class="save-tit"><rich-text nodes="{{saveTaskInfo.Title}}"/></view>
+                <view class="ifont-qus" bindtap="changeSaveModal"  wx:if="{{saveRuleConfig}}"/>
+            </view>
+             <view class="save-left-upper" wx:else>
+                <image class="img" src="{{saveTaskInfo.Icon}}" />
+                <view class="ifont-qus" bindtap="changeSaveModal"  wx:if="{{saveRuleConfig}}"/>
+                <view class="txt-box"><view class="save-txt">{{saveTaskTips}}</view></view>
+            </view>
+            <view class="save-left-down">{{saveTaskInfo.SubTitle}}</view>
+       </view>
+       <view class="save-btn" bindtap="onClickFinishSaveTask">{{saveTaskInfo.ButtonName}}</view>
+    </view>
+</template>
+
+<!-- 猜您想问 -->
+<template name="customerService">
+    <view class="train-list order-qus">
+        <view class="tit">猜您想问<text class="fr txt-blue" bindtap="goQuestionList" data-ubt-key="c_train_wx_orderdetail_otherquestion">其他问题</text>
+        </view>
+        <view class="item greyarr" wx:for="{{QuestionList}}" wx:key="{{index}}" data-item="{{item}}" data-ubt-key="{{item.RelationGuid}}" bindtap="goToBuAnswer">{{item.Content}}</view>
+    </view>
+</template>
+
+<!--补贴弹层-->
+<template name="cashbackPop">
+    <view class="backmask active" bindtap="hidePop"></view>
+    <view class="pop-advs-subsidy">
+        <view class="tit">{{alertInfo.title}}</view>
+        <view class="txt">{{alertInfo.content}}</view>
+        <view class="price"><icon class="icon-coin"></icon><text class="strong">{{alertInfo.award}}</text></view>
+        <button class="btn-get" data-ubt-key="c_train_wx_getbonus_pop_confirm" bindtap="toCashbackPage" >{{alertInfo.buttonList[0].buttonName}}</button>
+        <text class="ifont-closed" bindtap="hidePop"></text>
+    </view>
+</template>
+
+<!--返现任务弹窗 -->
+<template name="saveTaskPop">
+  <view class="backmask active"></view>
+  <view class="save-task-pop">
+    <image src="{{saveTaskPopInfo.TopImg}}" class="slogan" />
+    <view class="save-task-pop-body">
+      <view class="tit">{{saveTaskPopInfo.Title}}</view>
+      <view class="task-box">
+        <view wx:for="{{saveTaskPopInfo.ProcessList}}" wx:index="{{index}}" wx:for-item="task" class="task-box">
+          <view class="task-box-item">
+            <image src="{{task.Icon}}" class="task-img" />
+            <text class="task-tit">{{task.Title}}</text>
+            <text class="task-subtit">{{task.SubTitle}}</text>
+          </view>
+          <image class="task-arr" wx:if="{{index < saveTaskPopInfo.ProcessList.length - 1}}" src="https://images3.c-ctrip.com/train/2022/app/8.56/jiaocha/maiqiangchenggonghou_fanxianrenwu/ic_arrow_right.png" />
+        </view>
+      </view>
+      <view class="info-box">
+        <view class="info-tit"><rich-text nodes="{{saveTaskPopInfo.ContentInfo.Title}}"></rich-text></view>
+        <view class="info-subtit"><rich-text nodes="{{saveTaskPopInfo.ContentInfo.SubTitle}}"></rich-text></view>
+      </view>
+      <view class="btn-box" bindtap="onClickTaskBtn">{{saveTaskPopInfo.ButtonName}}</view>
+    </view>
+    <text class="ifont-closed" bindtap="hideBackDrop"></text>
+  </view>
+</template>
+
+<!--积分兑换弹窗 -->
+<template name="pointsPay">
+  <view class="backmaskss active"></view>
+  <view class="point-pay-pop">
+    <view class="point-pay-pop-top">
+    </view>
+      <view class="tit">输入6位消费密码完成兑换</view>
+        <view class="point-left">
+            <view class="txt">账户积分余额</view>
+            <view class="num">{{pointUseTotal}}分</view>
+        </view>
+        <view class="point-shop">
+            <view class="txt">本次消费积分</view>
+            <view class="num">{{shopPoint}}分</view>
+        </view>
+        <view class="point-notification">积分兑换的车票不可退票，请确认后兑换</view>
+        <view class="point-password" bindtap="getFocus" >
+            <view class='point-pwd-item' wx:for='{{6}}' wx:key='i' wx:for-index='i'>
+                <text wx:if='{{pwdVal.length>i}}'></text>
+            </view>
+            <input class='point-input-control' password type='number' bindinput='inputPwd' focus="{{payFocus}}" maxlength='6' cursor-spacing="130"/>
+        </view>
+        <!-- <view>
+            <input  class='point-input-control' password type='number' bindinput='inputPwd' focus='{{payFocus}}' maxlength='6' placeholder="11111"/>
+        </view> -->
+        <button class="btn-cancel" bindtap="onClickHidePointPop">取消</button>
+        <button class="btn-confirm" bindtap="onClickConfirmPointPop">确认</button>
+        <view class="forget-a" bindtap="onClickResetPwd">忘记密码？点击去重置</view>
+      </view>
+</template>
+
+<!-- 积分兑换输入消费密码错误弹窗 -->
+<template name="pwdError">
+    <view class="backmaskss active"></view>
+    <view class="pwd-error">
+        <view class="point-pay-pop-top"></view>
+        <view class="ic-close" bindtap="onClickHidePointPop"></view>
+        <view class="error-message"><text>消费密码错误 \n 请选择再次输入或重置密码</text></view>
+        <button class="btn-cancel" bindtap="onClickResetPwd">重置密码</button>
+        <button class="btn-confirm" bindtap="onClickInputAgain">再次输入</button>
+    </view>
+</template>
+
+<template name="journey-line">
+   <!-- 同车、中转 全部出票成功才展示 -->
+   <view class="white-panel trip-axis {{tripAxis.isCombi ? 'combi-white-panel' : ''}}" wx:if="{{tripAxis && !tripAxis.isCross}}">
+        <view wx:if="{{tripAxis.isCombi}}" class="combi-tit">
+            <image src="https://images3.c-ctrip.com/train/2023/app/8.60/zhuliucheng/liuchengganzhi/img-logo1.png" class="img"></image>
+            <view class="txt">车内换座</view>
+            <image src="https://images3.c-ctrip.com/train/2023/app/8.60/zhuliucheng/liuchengganzhi/img-jiao.png" class="img-after"></image>
+        </view>
+        <view class="tit {{tripAxis.isCombi ? 'combi-txt' : ''}} ">
+            <rich-text nodes="{{tripAxis.tit}}"></rich-text>
+        </view>
+        <view class="axis">
+            <view class="axis-line"></view>
+            <view class="real">
+                <view class="train {{tripAxis.isCombi ? 'combi-train' : ''}}">{{ tripAxis.isSameTrain ? tripAxis.fSeat : '第一程' + tripAxis.fNumber }}<text class="ifont-arr" wx:if="{{ !tripAxis.isSameTrain }}"></text></view>
+                <view class="mid {{tripAxis.isCombi ? 'combi-train' : ''}}">{{ tripAxis.isSameTrain ? '车内换座' : '中转' }}</view>
+                <view class="train {{tripAxis.isCombi ? 'combi-train' : ''}}">{{ tripAxis.isSameTrain ? tripAxis.sSeat : '第二程' + tripAxis.sNumber }}<text class="ifont-arr" wx:if="{{ !tripAxis.isSameTrain }}"></text></view>
+            </view>
+        </view>
+        <view class="stations {{tripAxis.isCombi ? 'combi-stations' : ''}}">
+            <view class="txt" wx:for="{{tripAxis.stations}}" wx:for-item="name" wx:for-index="index"><text class="{{index === 1 && tripAxis.isCombi ? 'combi-middle-station' : ''}}">{{ name }}{{tripAxis.isCombi ? '' : '站'}}</text></view>
+        </view>
+    </view>
+    <!-- 分段跨站 -->
+    <view class="white-panel trip-axis" wx:if="{{tripAxis && tripAxis.isCross}}">
+        <view class="tit">
+            <rich-text nodes="{{tripAxis.tit}}"></rich-text>
+        </view>
+        <view class="axis">
+            <view class="axis-line"></view>
+            <view wx:if="{{tripAxis.crossType === 1}}" class="cross">
+                <view class="axis-dotted"></view>
+                <text>多抢{{tripAxis.crossOffset}}站</text>
+            </view>
+            <view class="real">
+                <view class="train">第一程</view>
+                <view class="mid">{{ tripAxis.isSameTrain ? '车内换座' : '中转' }}</view>
+                <view class="train">第二程</view>
+            </view>
+            <view wx:if="{{tripAxis.crossType === 2}}" class="cross">
+                <view class="axis-dotted after"></view>
+                <text>多抢{{tripAxis.crossOffset}}站</text>
+            </view>
+        </view>
+        <view class="stations">
+            <view
+                class="txt {{ ((tripAxis.crossType === 1 && !index) || (tripAxis.crossType === 2 && index === tripAxis.stations.length - 1)) && 'cross'  }}"
+                wx:for="{{tripAxis.stations}}"
+                wx:for-item="name"
+            >{{ name }}</view>
+        </view>
+    </view>
+</template>
+
+<!-- 工具箱功能入口 -->
+<template name="func-tools-entrance">
+    <view class="func-tools-box">
+        <view class="item" wx:for="{{ list }}" wx:index="{{index}}" bindtap="onClickFuncTools" data-key="{{ item.key }}">
+            <image src="{{ item.icon }}" />
+            <view class="tit">{{ item.name }}</view>
+        </view>
+    </view>
+</template>
+
+<!-- 新人特权出票成功弹窗 -->
+<template name="newGuestPrivilege">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="new-guest-privilege-pop">
+        <image class="top-img"
+            src="{{ alertInfo.ImgUrl }}" />
+        <view class="txt" wx:for="{{ alertInfo.TitleList }}">{{ item }}</view>
+        <view class="strip">
+            <image src="{{ alertInfo.MiddleimageUrl }}" />
+            <view class="desc">线下专人跑腿代购</view>
+            <view class="tgreen">已生效</view>
+        </view>
+        <view class="txt">{{ alertInfo.Content }}</view>
+        <view class="btn" bindtap="hideBackDrop">知道了({{ time }}s后自动关闭)</view>
+    </view>
+</template>

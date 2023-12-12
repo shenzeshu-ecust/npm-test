@@ -1,0 +1,5 @@
+<view class="mkt-popping-list">
+  <view class="mkt-pop-item {{item.animate}}" wx:for="{{list}}">
+      <image src="{{item.src}}"></image>
+  </view>
+</view>

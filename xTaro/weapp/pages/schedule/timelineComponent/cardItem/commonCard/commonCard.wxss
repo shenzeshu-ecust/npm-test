@@ -1,0 +1,22 @@
+/* pages/schedule/index/cardItem/commonCard.wxss */
+
+.container{
+  display: flex;
+  flex-direction: column;
+  padding: 18rpx 36rpx;
+  margin-bottom: 10rpx;
+}
+.title {
+  font-size: 34rpx;
+  color: #333333;
+  font-weight: bold;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.summary {
+  margin-top: 2rpx;
+  font-size: 26rpx;
+  color: #999;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}

@@ -1,0 +1,22 @@
+// 注意: 不可使用任何 ES6 语法
+var getProductImg = function(MediaInfo) {
+    if (!MediaInfo.ImgList.length) {
+        return 'https://pic.c-ctrip.com/vacation_v2/h5/group_travel/pic_none.png'
+    }
+    return MediaInfo.ImgList[0].UrlList[0].Value
+}
+
+var getWakePageUrl = function(BasicInfo) {
+    var url =
+        'ctrip://wireless/tour_vacation_detail?productId=' +
+        BasicInfo.ProductId +
+        '&departCityId=' +
+        BasicInfo.DepartureId +
+        '&sourcetype=wxback&ctm_ref=vdc_ctm_3094&allianceid=947272&sid=1858475'
+    return url
+}
+
+module.exports = {
+    getProductImg: getProductImg,
+    getWakePageUrl: getWakePageUrl
+}

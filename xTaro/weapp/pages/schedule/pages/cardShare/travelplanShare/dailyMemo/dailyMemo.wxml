@@ -1,0 +1,8 @@
+<!--{{component}}.wxml-->
+<view class='card-content-view'>
+    <view class='row-view'>
+        <image class='memo-icon-image' mode="scaleToFill" src='../../../images/icon/cts_memo_icon.png'></image>
+        <text class='memo-name-text'>今日备忘</text>
+    </view>
+    <text class="memo-content-text {{maxShowTwoLine ? 'max-two-line': '' }}" bindtouchend="showAllContent">{{memoText}}</text>
+</view>

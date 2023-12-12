@@ -1,0 +1,28 @@
+<!-- 注意，这个组件必须放在顶层，z-index 设置为 9999 , BU 使用时不能有比他层级还高的元素 -->
+<!-- 测试是否有自动滚动到顶部的问题 -->
+<!-- 解决滚动穿透 -->
+<!-- 方案1 已放弃：因为有使用限制，必须把这个元素置于顶部 https://developers.weixin.qq.com/community/develop/article/doc/000886e3d182a8c8d00ca216e5fc13 -->
+<view class="float" catchtouchmove="true" wx:if="{{show}}">
+  <view class="pop">
+    <view class="wrapper">
+      <view class="title">
+        <!-- config.js 可配置 图 -->
+        <image class="icon" src="{{appFloatInfo.logo}}"></image>
+        <!-- config.js 可配置 文案，样式上要考虑到 标题过长的情况，限制 width，变成省略号 -->
+        <view class="appName big">{{appFloatInfo.name}}</view>
+        <!-- 固定文案 -->
+        <view class="access middle">申请</view>
+      </view>
+      <view class="content">
+        <!-- 允许BU自定义，有默认值 -->
+        <view class="action big">{{apiFloatInfo.action}}</view>
+        <!-- 允许BU自定义，有默认值 -->
+        <view class="desc small">{{apiFloatInfo.desc}}</view>
+      </view>
+      <view class="selectors small">
+        <view class="reject" bindtap="reject">拒绝</view>
+        <view class="allow" bindtap="agree">允许</view>
+      </view>
+    </view>
+  </view>
+</view>

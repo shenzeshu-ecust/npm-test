@@ -1,0 +1,8 @@
+<!--截屏分享-->
+<view hidden="{{hidden}}" class="cmask" bindtap="close" catchtouchmove="noop">
+    <view class="cp-screen-share">
+        <view class="cp-close" catchtap="close"><view class="components-font components-font-close"></view></view>
+        <view class="cp-tips">推荐酒店给好友？点击<text class="cp-color">按钮</text>即可分享</view>
+        <button open-type="share" class="cp-btn" catchtap="share"><text class="components-font components-font-wechat"></text> 分享给您的好友</button>
+    </view>
+</view>

@@ -1,0 +1,100 @@
+<import src="../../commontemplates/minidialog/dialog.wxml" />
+<import src="../../commontemplates/deposit/deposit.wxml"/>
+<common-layer title="{{title}}" bind:closeLayer="close">
+<view class="price-layer" slot="content">
+    <view class="tbody">
+        <!--可展示多房，目前只展示一房-->
+        <!--<view wx:for="{{detailList}}" wx:for-item="detail" wx:key="index" wx:for-index="idx">-->
+        <view class="price-detail {{payInfo.isGuarantee ? 'grey-border guarantee-module' : ''}}"
+              wx:for="{{priceList}}" wx:for-item="payInfo" wx:key="type" wx:for-index="idx">
+            <template is="detail-info" data="{{...payInfo, idx}}"></template>
+        </view>
+
+        <!--积分模块-->
+        <view wx:if="{{pointsInfo && pointsInfo.title}}" class="points-detail">
+            <template is="detail-info-head" data="{{...pointsInfo}}"></template>
+            <view class="pd-extra" catchtap="showPointsExtraInfo"
+                  wx:if="{{pointsInfo.additionalInfo && pointsInfo.additionalInfo.content}}">
+                {{pointsInfo.additionalInfo.content}}<text class="wechat-font-qa"></text>
+            </view>
+            <view class="pd-content">
+                <view wx:for="{{pointsInfo.subList}}" wx:for-item="subInfo" wx:for-index="idx" class="point-item">
+                    <template is="sub-info" data="{{...subInfo, userInfo, idx}}"></template>
+                    <view class="pd-extra" catchtap="showPointsExtraInfo"
+                          data-idx="{{idx}}"
+                          wx:if="{{subInfo.additionalInfo && subInfo.additionalInfo.content}}">
+                        {{subInfo.additionalInfo.content}}<text class="wechat-font-qa"></text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!--</view>-->
+    </view>
+    <!--总价格-->
+    <view class="total-price">
+        <view class="tp-left">总计</view>
+        <view class="tp-right">
+            <block wx:for="{{totalInfo}}" wx:for-item="total" wx:for-index="idx">
+                <view class="title">
+                    {{total.title}}
+                    <text class="price ft36" wx:if="{{total.amount >= 0}}"><text class="ft-24">{{total.currency}}</text>{{total.amount}}</text>
+                    <text class="price ft-24 dbk" wx:if="{{total.cnyAmount >= 0}}" decode>约&nbsp;¥&nbsp;{{total.cnyAmount}}</text>
+                </view>
+                <view wx:for="{{total.subList}}" wx:for-item="subTotal" class="sub-title">
+                    {{subTotal.title}}
+                    <text class="price ft36" wx:if="{{subTotal.amount >= 0}}"><text class="ft-24">{{subTotal.currency}}</text>{{subTotal.amount}}</text>
+                    <text class="price ft-24" wx:if="{{subTotal.cnyAmount >= 0}}" decode>(约&nbsp;¥{{subTotal.cnyAmount}})</text>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
+</common-layer>
+
+<!--详细信息-->
+<template name="detail-info">
+    <template is="detail-info-head" data="{{title, currency, amount, cnyAmount}}"></template>
+    <view class="pd-extra" catchtap="showExtraInfo"
+          data-idx="{{idx}}"
+          wx:if="{{additionalInfo && additionalInfo.content}}">
+        {{additionalInfo.content}}<text class="wechat-font-qa"></text>
+    </view>
+    <block wx:if="depositPolicy">
+        <view class="mt16">
+            <template is="deposit-policy-table" data="{{depositPolicyTable: depositPolicy.depositPolicyTable, desc: depositPolicy.desc}}"> </template>
+        </view>    
+    </block>
+    <view class="pd-content">
+        <view wx:for="{{subList}}" wx:for-item="subInfo" wx:for-index="subidx" class="pd-content-item">
+            <view wx:for="{{subInfo.subList}}" wx:for-item="sub" class="item">
+                <template is="sub-info" data="{{...sub}}"></template>
+            </view>
+            <view class="pd-extra" wx:if="{{subInfo.additionalInfo && subInfo.additionalInfo.innnerContent}}">
+                {{subInfo.additionalInfo.innnerContent}}
+            </view>
+        </view>
+    </view>
+</template>
+<template name="detail-info-head">
+    <view class="pd-head">
+        <view class="title">{{title}}</view>
+        <view wx:if="{{type !== 'POINTS' && (amount >= 0 || cnyAmount >= 0)}}" class="price ft36">
+            <text class="ft-24">{{currency}}</text>{{amount}}
+            <!--外币-->
+            <text wx:if="{{cnyAmount >= 0}}" decode class="dbk ft-24">约&nbsp;¥&nbsp;{{cnyAmount}}</text>
+        </view>
+    </view>
+</template>
+<template name="sub-info">
+    <view class="left">
+        <text class="pd-tit" decode>{{title}}</text>
+        <text wx:if="{{subTitle}}" class="pd-subtit" decode>&nbsp;{{subTitle}}</text>
+        <view wx:if="{{userInfo && idx === 0}}" class="speed-box user-level-{{userInfo.level}}">
+            <text class="user-level-icon wechat-font-prime icon-gradient-c"></text>
+            <text class="user-level-desc">{{userInfo.desc}}</text>
+        </view>
+    </view>
+    <text wx:if="{{amountShowDesc}}" class="right" decode>{{amountShowDesc}}</text>
+</template>
+<!--积分、付款方式说明浮层-->
+<template wx:if="{{showDialog}}" is="mini-dialog" data="{{dialogTitle, dialogContent}}"></template>

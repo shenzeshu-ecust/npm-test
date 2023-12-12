@@ -1,0 +1,9 @@
+<view class="price-instr" wx:if="{{isShowCurrentComponent}}">
+  <view class="price-instr-title">{{priceDescriptiopnData.title || ''}}</view>
+  <view class="price-instr-cont {{ isShowPriceInstr ? 'cont-auto-height' : '' }}">
+    <text>{{priceDescriptiopnData.introduction || ''}}</text>
+    <view wx:if="{{!isShowPriceInstr}}" class="price-instr-arrow" bindtap="handleChangePriceInstrDisplay">
+      <image class="arrow-image" src="{{arrowImgUrl}}"></image>
+    </view>
+  </view>
+</view>

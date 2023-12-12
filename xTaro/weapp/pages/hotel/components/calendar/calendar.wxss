@@ -1,0 +1,297 @@
+@import '../../common/common.wxss';
+
+page {
+    background-color: #fff;
+}
+
+.calendar-module {
+    position: relative;
+    padding-top: 30px;
+    background-color: #fff;
+    box-sizing: border-box;
+    min-height: 100%;
+}
+.calendar-week {
+    height: 30px;
+    font-size: 14px;
+    line-height: 30px;
+    overflow: hidden;
+    background-color: #F5F5F5;
+    border-bottom: 1px solid #D0D0D0;
+    z-index: 99;
+    position: relative;
+}
+.calendar-module_tips {
+    padding-top: 60px;
+}
+.calendar-week_tips {
+    height: 60px;
+}
+.calendar-module_tips-show {
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    padding: 0 10px;
+    text-align: center;
+    line-height: 30px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    font-size: 26rpx;
+    background-color: #FFF8BD;
+}
+.calendar-week_item {
+    float: left;
+    width: 14.25%;
+    height: 30px;
+    text-align: center;
+}
+.calendar-week_sun,
+.calendar-week_sat {
+    color: #006FF6;
+}
+.calendar-month {
+    padding:15px 0 10px;
+    text-align:center;
+    font-size:32rpx;
+    font-weight:500;
+    position: -webkit-sticky;
+    position: sticky;
+    background-color:#fff;
+    /* box-shadow: 0 -10rpx 0 8rpx #fff; */
+    z-index: 9;
+    clear: both;
+}
+.calendar-month_tips {
+    padding: 25px 0 10px;
+    text-align: center;
+    font-size: 14px;
+}
+.calendar-month_items {
+    clear: both;
+    padding: 10px 0;
+}
+.calendar-day {
+    float: left;
+    position: relative;
+    width: 14.25%;
+    box-sizing: border-box;
+}
+.calendar-day:after {
+    content: "";
+    display: block;
+    padding-bottom: 120%;
+}
+.calendar-info_box {
+    position: absolute;
+    top: 50rpx;
+    right: 0;
+    left: 0;
+}
+.calendar-txt {
+    display:block;
+    font-size:28rpx;
+    text-align:center;
+    line-height:28rpx;
+    font-weight:500;
+}
+.calendar-txt_checkin {
+    color: #fff;
+}
+.calendar-txt_stay {
+    color: #006FF6;
+}
+.calendar-price {
+    display: block;
+    font-size: 22rpx;
+    color: #FF7D13;
+    text-align: center;
+}
+.calendar-price_checkin {
+    display:block;
+    font-size:22rpx;
+    color:#fff;
+    line-height:22rpx;
+    opacity:0.8;
+    text-align:center;
+    margin-top:12rpx;
+    font-weight:500;
+}
+.calendar-work,
+.calendar-rest {
+    position: absolute;
+    top: 15rpx;
+    width: 24rpx;
+    height: 24rpx;
+    overflow: hidden;
+    line-height: 1.1;
+    font-size: 22rpx;
+    margin-left: 40%;
+    text-align: left;
+}
+.cal-today-tomorrow {
+    position: absolute;
+    top: 15rpx;
+    height: 24rpx;
+    overflow: hidden;
+    line-height: 22rpx;
+    font-size: 22rpx;
+    left: 50%;
+    transform: translate(-50%, 0);
+    white-space:nowrap;
+}
+.calendar-rest {
+    color: #006FF6;
+}
+.calendar-item_rest {
+    color: #ccc;
+}
+.calendar-item_checkin {
+    color: #fff;
+    background-color: #006FF6;
+}
+.calendar-work_checkin,
+.calendar-rest_checkin {
+    color: #fff;
+    border-color: #fff;
+}
+.cal-checkin-text {
+    color: #fff;
+    border-color: #fff;
+}
+.calendar-checkin {
+    position: absolute;
+    top: 68rpx;
+    left: 0;
+    right: 0;
+    font-size: 20rpx;
+    text-align: center;
+    opacity: 0.6;
+}
+
+.calendar-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    color:#fff;
+}
+
+.out-of-range {
+    color: #ccc;
+}
+
+.calendar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top:0;
+    z-index: 10;
+}
+
+/* 上面是copy的公共的，下面是自己加的css */
+.calendar-week {border-bottom-width:0 }
+.calendar-item-range {
+  background-color: #D3EAFF;
+}
+.calendar-tip {
+    position:fixed;
+    top:30px;
+    left:0;
+    right:0;
+    height:30px;
+    font-size:14px;
+    line-height:30px;
+    overflow:hidden;
+    background-color:#F5F5F5;
+    border-bottom:1px solid #D0D0D0;
+    z-index:99;
+    text-align: center;
+}
+
+.calendar-holiday {
+    position:absolute;
+    font-size:22rpx;
+    line-height:22rpx;
+    overflow:hidden;
+    left:50%;
+    top:15rpx;
+    transform:translate(-50%, 0);
+    white-space:nowrap;
+}
+.font-bule {
+    color: #006FF6;
+}
+/* tips */
+.calendar-tips {
+    height: 28px;
+    background-color: #FFFBD7;
+    font-size: 24rpx;
+    line-height: 24rpx;
+    text-align: center;
+    padding: 16rpx;
+    font-weight: 400;
+    box-sizing: border-box;
+}
+.calendar-day-tips {
+    width: 100%;
+    font-size: 24rpx;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    z-index: 9;
+    left: 50%;
+    top: -80rpx;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, .55);
+    border-radius: 6rpx;
+    padding: 14rpx 0;
+    pointer-events: none;
+}
+.calendar-day-tips.tips1 {
+    width: 200%;
+}
+.calendar-day-tips:after{
+    position: absolute;
+    bottom: -10rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    content: "";
+    width: 0;
+    height: 0;
+    border-width: 10rpx 10rpx 0 10rpx;
+    border-style: solid;
+    border-color: rgba(0,0,0,.55) transparent transparent transparent;
+}
+.calendar-month_items .calendar-day:nth-of-type(7n + 1) .tips1 {
+    left:100%;
+}
+.calendar-month_items .calendar-day:nth-of-type(7n + 7) .tips1 {
+    left:0;
+}
+.calendar-month_items .calendar-day:nth-of-type(7n + 1) .tips1:after {
+    left:25%;
+}
+.calendar-month_items .calendar-day:nth-of-type(7n + 7) .tips1:after {
+    left:75%;
+}
+.calendar-day-tips.tips-wrap {
+    width: 400%;
+    top: -112rpx;
+}
+.calendar-month_items .calendar-day:nth-of-type(7n + 1) .tips-wrap { left: 200%; }
+.calendar-month_items .calendar-day:nth-of-type(7n + 2) .tips-wrap { left: 100%; }
+.calendar-month_items .calendar-day:nth-of-type(7n + 6) .tips-wrap { left: 0; }
+.calendar-month_items .calendar-day:nth-of-type(7n + 7) .tips-wrap { left: -100%; }
+.calendar-month_items .calendar-day:nth-of-type(7n + 1) .tips-wrap:after { left: 12%; }
+.calendar-month_items .calendar-day:nth-of-type(7n + 2) .tips-wrap:after { left: 37%; }
+.calendar-month_items .calendar-day:nth-of-type(7n + 6) .tips-wrap:after { left: 62%; }
+.calendar-month_items .calendar-day:nth-of-type(7n + 7) .tips-wrap:after { left: 87%; }
+
+.hourroom-gif-box{ text-align: center; color: #fff; background-color: rgba(0, 0, 0, .8); }
+.hourroom-gif-box .hourroom-gif{
+    width: 100%; height: 240rpx; margin: 316rpx 0 16rpx;
+    background-image: url(https://pages.c-ctrip.com/hotels/wechat/img/calendar-hourroom.gif);
+    background-size: cover;
+}
+.hourroom-gif-box .hourroom-btn{ width: 248rpx; height: 88rpx; line-height: 88rpx; font-size: 34rpx; font-weight: 700; background-color: #006FF6; border-radius: 12rpx; margin: 48rpx auto 0; }

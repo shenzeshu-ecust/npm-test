@@ -1,0 +1,47 @@
+<!-- 常旅 -->
+<view wx:if="{{showType}}" class="tip-bot {{active ? 'active' : ''}}">
+    <view wx:if="{{active}}" class="mask" />
+    <view class="content">
+        <nav-bar navbar-data="{{navbarData}}" bindback="onBack"></nav-bar>
+        <view class="tip">
+            <text>
+                <text class="icon-font icon-info" />
+                <text >一单最多添加{{maxSelect}}人，携童票不计入人数内</text>
+            </text>
+        </view>
+        <view class="cui-bg tip-addpas" style="{{isPhoneX ? 'padding-bottom:68rpx' : ''}}">
+            <view class="flex-row">
+                <view wx:if="{{showType == 'pas'}}" class="add-btn {{classConfig.mainColor}}" bindtap="addNewPas">
+                    <view class="icon-font icon-add" />
+                    <view>新增乘客</view>
+                </view>
+                <view wx:if="{{showOcr}}" class="add-btn {{classConfig.mainColor}}" bindtap="onOcr">
+                    <view class="icon-font icon-scan" />
+                    <view>扫描证件添加</view>
+                </view>
+            </view>
+            <view class="train-list tip-pass-list mt5">
+                <block wx:for="{{passList}}">
+                    <view wx:key="{{index}}" wx:if="{{item.isChild || (item.idcard.text && item.idcard.no)}}" class="item {{item.chosen ? 'current ' + classConfig.mainColor : ''}} {{showType == 'pick' ? 'item-noedit' : 'item-edit'}}" data-index="{{index}}" data-item="{{item}}" bindtap="choosePas">
+                        <view class="checkbox icon-font {{item.chosen ? 'icon-checkedbox ' + classConfig.mainColor : 'icon-checkbox color-gray'}}"></view>
+                        <view class="info">
+                            <text class="name {{item.chosen ? classConfig.mainColor : ''}}">{{item.name}}</text>
+                            <text class="tag-grey {{item.chosen ? classConfig.mainColor : ''}}">{{item.ptypeText}}</text>
+                            <view class="identity ">
+                                {{(item.idcard.text && item.idcard.no) ? (item.idcard.text + ' ' + item.idcard.no) : '点击完善证件信息'}}
+                            </view>
+                        </view>
+                        <view wx:if="{{showType == 'pas'}}" class="icon-font icon-edit-line" data-index="{{index}}" catchtap="editPas"></view>
+                    </view>
+                </block>
+            </view>
+            <view wx:if="{{!passList.length}}" class="tip-pass-none">您还没有添加过乘客信息哦</view>
+            <view wx:else class="tip-text">乘客需为实际乘车人，否则会影响保险保障的权益哦</view>
+        </view>
+        <view class="bottom-bar">
+            <view class="btn {{ classConfig.mainBackColor}}" bindtap="confirmPasChoose">
+                <text>确定</text>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,1486 @@
+
+<import src="../common/components/favoriteModal/favoriteModal.wxml" />
+<import src="../common/components/StudentCard/studentcard.wxml" />
+<import src="../common/components/robCouponPop/robCouponPop.wxml" />
+<import src="../common/components/NewCustomerRight/newGuest.templates.wxml" />
+<import src="../common/components/NewCustomerRight/index.wxml" />
+<import src="../common/components/lostUserPop/lostUserPop.wxml" />
+
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+
+<view bindtap="onClickWindow">
+<!-- loading -->
+<view class="loading-box" wx:if="{{showLoading}}">
+    <!-- <view class="loading-gif"></view> -->
+    <view class="loading-circle"></view>
+    <view class="loading-light"></view>
+</view>
+
+
+<view class="new {{showMask ? 'fixbg' : ''}} {{themeConfig.chunyun ? 'chunyun' : ''}}" style="padding-bottom: {{(!isAccelerating || acceState !== 0) && isLogin && !hasSubscribedTicket && subscribeTicketToggle && isShowSubsribeTemp ? '100rpx' : 0}};">
+    <!-- 抢票老版 -->
+    <view class="preFeat" wx:if="{{!newFeatureFlag}}">
+        <!-- 页面头图部分 -->
+        <view class="jiasu-top-box">
+            <image src="{{themeConfig.topSrc}}" mode="widthFix" class="top-img" wx:if="{{themeConfig.open}}"></image>
+            <image src="https://pic.c-ctrip.com/train/wechat/robshare/top-bg-jiasu.png" mode="widthFix" class="top-img" wx:else></image>
+            <view class="jiasu-slogan {{isAccelerating ? 'help' : (acceOver ? 'finish' : 'suc')}}"></view>
+            <!-- help,suc,finish -->
+            <view class="jiasu-tick">
+                <view class="l" wx:if="{{ArriveStation}}">
+                    开往
+                    <text class="city">{{ArriveStation}}</text>
+                    的火车票
+                </view>
+                <view></view>
+            </view>
+        </view>
+
+        <!-- 助力中 -->
+        <view class="qp-white" id="qp-white" wx:if="{{isAccelerating}}">
+           <view class="qp-shuangtongdao">
+              <view class="img-std"></view>
+              <text class="ifont-qus" bindtap="showHBIntro"></text>
+              <view class="rbox">
+                <view class="item">候补购票</view>
+                <view class="item">余票监控</view>
+              </view>
+            </view>
+
+            <!--这块不要了，信息挪下面去-->
+            <view class="tit" hidden>
+                <text>当前速度：{{SpeedLevelName}}</text>
+                <block>
+                    <!-- 已经帮人助力完，且可助力的时候，显示助力按钮， 助力到光速不显示分享按钮 -->
+                    <block wx:if="{{!(isAccelerating && acceState == 0) && canShare && isAccelerating && LightningLevel < 5}}">
+                        <form wx:if="{{isCtripApp && !isSubOrder}}" bindsubmit="showShareMenuSubmit" report-submit="true">
+                            <button id="share-btn" class="btn-help" hover-class="btn-help_hover" wx:if="{{isCtripApp && !isSubOrder}}" bindtap="empty" form-type="submit" data-ubt-key="c_train_wx_robsharenew_share">
+                                帮TA分享
+                            </button>
+                        </form>
+                        <button class="btn-help" hover-class="btn-help_hover" wx:else catchtap="saveAndShowPost" data-ubt-key="c_train_wx_robsharenew_share" open-type="{{hideShareFlag === 1 ? '' : 'share'}}" data-share="more">
+                            帮TA分享
+                        </button>
+                    </block>
+                </block>
+            </view>
+            <view class="txt" hidden>
+                <rich-text nodes="{{nextLevel}}" wx:if="{{canRichText}}"></rich-text>
+                <text wx:else>{{nextLevel}}</text>
+            </view>
+            <!--以上-->
+
+            <view class="qp-speed">
+                 <view class="qp-speed-stage">
+                    <view class="item {{index+1 == LightningLevel ? 'current':''}}" wx:key="index" wx:for="{{['低速','快速','高速','极速','光速','VIP']}}">
+                        {{item}}
+                    </view>
+                </view>
+                <view class="qp-speed-line">
+                    <!-- <view class="item" wx:for="{{[0,1,2,3,4,5]}}" wx:key="index" wx:if="{{index<LightningLevel}}"></view>
+                <view class="item next">
+                <view class="tips">速度可提升20%</view>
+                </view> -->
+                    <view class="item" style="width:{{['4%', '20%', '40%', '60%', '80%', '97.5%'][LightningLevel-1]}}"></view>
+                    <!-- 这里的百分比按：4%,20%,40%,60%,80%,97.5% -->
+                </view>
+
+            </view>
+            <!--上面这坨搬这里-->
+            <view class="qp-hd">
+              <view class="tit">{{SpeedLevelName}}</view>
+              <view class="txt">
+                <rich-text nodes="{{nextLevel}}" wx:if="{{canRichText}}"></rich-text>
+                <text wx:else>{{nextLevel}}</text>
+              </view>
+            </view>
+            <!-- 不能助力的原因 -->
+            <view class="txt-warn" wx:if="{{UnableSpeedReason && acceState !== 0}}">
+                {{UnableSpeedReason}}
+            </view>
+            <!-- 助力达到上限提示 -->
+            <view class="txt-warn" style="color: #666666;" wx:if="{{isAssistLimit && !(UnableSpeedReason && acceState !== 0)}}">
+                助力达到上限
+            </view>
+
+            <!-- 没有助力的情况 展示学生优惠券-->
+            <!-- <view class="stu-coupon" wx:if="{{couponListStu.length && !(isAccelerating && acceState == 0)}}">
+                <view class="item" wx:for="{{couponListStu}}">
+                    <view class="lbox">
+                        <text class="strong">{{item.Price}}</text>元
+                    </view>
+                    <view class="cont">
+                        <view class="tit">{{item.Tittle}}<text class="tag">{{item.Tag || '学生专享'}}</text></view>
+                        <view class="s">{{item.SubTittle}}</view>
+                    </view>
+                    <button class="btn-get" disabled="true" wx:if="{{item.IsSend}}">已领取</button>
+                    <button class="btn-get" data-subtype="{{item.SubType}}" wx:else bindtap="recieveNewCoupon" data-subtype="{{item.SubType}}" data-activitycode="e10adc3949ba59abbe56e057f20f883e">立即领取</button>
+                </view>
+            </view> -->
+
+            <view class="jiasu-btn-box">
+                <!-- 未助力 -->
+                <form bindsubmit="acceSubmit" report-submit="true" wx:if="{{isAccelerating && acceState == 0}}">
+                    <!-- B版实验 4.11版本 -->
+                    <block>
+                        <view class="jiasu-btn" wx:if="{{!isSuperVip && !OrderUserIsSuperMember}}">
+                            <!-- 登录状态 -->
+                            <block wx:if="{{isLogin}}">
+                                <!-- 存在个人信息 直接助力 -->
+                                <button wx:if="{{userInfo}}" class="btn-go {{isNationalActivityOpen ? 'btn-guoqing':''}}" hover-class="btn-go_hover" form-type="submit" bindtap="acce" id="c_train_wx_robsharenew_acce" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                    一键帮TA助力
+                                </button>
+                                <!--  获取个人信息并助力 -->
+                                <button wx:elif="{{canIUseGetUserProfile}}" class="btn-go {{isNationalActivityOpen ? 'btn-guoqing':''}}" hover-class="btn-go_hover" form-type="submit" bindtap="getUserProfileAndAcce" id="c_train_wx_robsharenew_acce" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                    一键帮TA助力
+                                </button>
+                                <button wx:else class="btn-go {{isNationalActivityOpen ? 'btn-guoqing':''}}" hover-class="btn-go_hover" form-type="submit" bindtap="empty" open-type="getUserInfo" bindgetuserinfo="getUserInfoAndAcce" id="c_train_wx_robsharenew_acce" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                    一键帮TA助力
+                                </button>
+                            </block>
+                            <!-- 未登录 -->
+                            <block wx:else>
+                                <button class="btn-go {{isNationalActivityOpen ? 'btn-guoqing':''}}" hover-class="btn-go_hover" form-type="submit" bindtap="getUserPhoneAndAcce" id="c_train_wx_robsharenew_acce" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                    一键帮TA助力
+                                </button>
+                            </block>
+                        </view>
+                        <view class="jiasu-btn-vip" wx:else>
+                            <block wx:if="{{isLogin}}">
+                                <button wx:if="{{userInfo}}" class="btn-vip" hover-class="btn-vip_hover" form-type="submit" data-ubt-key="c_train_wx_robshare_super_double" bindtap="acce" id="c_train_wx_robsharenew_acce">
+                                    一键超级助力
+                                </button>
+                                <button wx:elif="{{canIUseGetUserProfile}}"  class="btn-vip" hover-class="btn-vip_hover" form-type="submit" data-ubt-key="c_train_wx_robshare_super_double" bindtap="getUserProfileAndAcce" id="c_train_wx_robsharenew_acce">
+                                    一键超级助力
+                                </button>
+                                <button wx:else class="btn-vip" hover-class="btn-vip_hover" form-type="submit" data-ubt-key="c_train_wx_robshare_super_double" bindtap="empty" open-type="getUserInfo" bindgetuserinfo="getUserInfoAndAcce" id="c_train_wx_robsharenew_acce">
+                                    一键超级助力
+                                </button>
+                                <text class="tag-vip">助力包翻倍</text>
+                            </block>
+                            <block wx:else>
+                                <button class="btn-vip" hover-class="btn-vip_hover" form-type="submit" data-ubt-key="c_train_wx_robshare_super_double" bindtap="getUserPhoneAndAcce" id="c_train_wx_robsharenew_acce">
+                                    一键超级助力
+                                </button>
+                                <text class="tag-vip">助力包翻倍</text>
+                            </block>
+                        </view>
+                    </block>
+                </form>
+                <!-- 已助力 -->
+                <block wx:else>
+                    <view class="gain-afass gain-afass-loss" wx:if="{{ lostUserPopDetail.ShowLostUserRight }}">
+                        <view class="tit">
+                            <view class="price">{{ lostUserPopDetail.Price }}</view>
+                            <image src="https://images3.c-ctrip.com/train/2023-3/zengzhang/sept/zhuli/wenan-liushi.png" />
+                            <view class="ifont-qus" data-url="{{ lostUserPopDetail.RuleUrl }}" bindtap="toDetailPage"></view>
+                        </view>
+                        <scroll-view class="gain-afass-list" scroll-x>
+                            <view class="gain-afass-item-list {{lostUserPopDetail.EntranceGiftList.length<4?'gain-afass-flex':''}}">
+                                <view class="gain-afass-item" wx:for="{{lostUserPopDetail.EntranceGiftList}}">
+                                    <image class="icon" src="{{item.Icon}}"></image>
+                                    <view class="title">{{ item.Title }}</view>
+                                    <view class="desc">{{ item.SubTitle }}</view>
+                                </view>
+                            </view>
+                        </scroll-view>
+                    </view>
+                    <view class="gain-afass gain-afass-new" wx:if="{{ newCustomerRightInfoAfterAssist.IsHaveRights }}">
+                        <view class="tit">
+                            <view class="price">{{ newCustomerRightInfoAfterAssist.OriginPrice }}</view>
+                            <image src="https://images3.c-ctrip.com/train/2023-3/zengzhang/sept/zhuli/wenan-xinke.png" />
+                            <view class="ifont-qus" data-url="{{ newCustomerRightInfoAfterAssist.JumpUrl }}" bindtap="toDetailPage"></view>
+                        </view>
+                        <scroll-view class="gain-afass-list" scroll-x>
+                            <view class="gain-afass-item-list {{newCustomerRightInfoAfterAssist.RightList.length<4?'gain-afass-flex':''}}">
+                                <view class="gain-afass-item" wx:for="{{newCustomerRightInfoAfterAssist.RightList}}">
+                                    <image class="icon" src="{{item.IconUrl}}"></image>
+                                    <view class="title">{{item.Name}}</view>
+                                    <view class="desc">{{item.Desc}}</view>
+                                </view>
+                            </view>
+                        </scroll-view>
+                    </view>
+                    <view class="jiasu-btn-line">
+                        <!-- 如果有优惠券或者是新客，需要两行文字 -->
+                        <form bindsubmit="buyTicketSubmit" report-submit="true">
+                            <view>
+                                <!-- class="{{((couponCount > 0) ? 'btn-go-big':'btn-go')}}" -->
+                                <button class="btn-go" hover-class="btn-go_hover" bindtap="empty" form-type="submit" id="c_train_wx_robsharenew_gohome_mp" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                    去购票
+                                    <!-- <text wx:if="{{couponCount > 0}}">{{couponProfitDesc}}</text> -->
+                                </button>
+                                <view class="cashback-tag" wx:if="{{couponItemListCashBack.length}}">返{{couponItemListCashBack[0].Price}}元现金</view>
+                            </view>
+                        </form>
+                        <button class="btn-line-go" hover-class="btn-go_hover" catchtap="onClickReshare" form-type="submit" id="c_train_wx_robsharenew_share" open-type="{{hideShareFlag === 1 ? '' : 'share'}}" data-ubt-key="inviteFriendAssistClick" wx:if="{{hideShareInRobshare===0}}">
+                            邀请好友为TA助力
+                            <text>分享至好友群,购票成功率更高</text>
+                         </button>
+                    </view>
+                </block>
+            </view>
+        </view>
+        
+        <!-- 助力成功和助力结束 -->
+        <view class="qp-white finish" id="qp-white-finish" wx:else>
+            <view class="suc" wx:if="{{acceSuccess}}">好友已成功抢到票，快去试试携程抢票吧~</view>
+            <view class="done" wx:if="{{acceOver}}">抢票已结束，快去试试携程抢票吧~</view>
+
+            <!-- 没有助力的情况 展示学生优惠券-->
+            <!-- <view class="stu-coupon" wx:if="{{couponListStu.length && !(isAccelerating && acceState == 0)}}" style="margin-top:-20rpx">
+                <view class="item" wx:for="{{couponListStu}}">
+                    <view class="lbox">
+                        <text class="strong">{{item.Price}}</text>元
+                    </view>
+                    <view class="cont">
+                        <view class="tit">{{item.Tittle}}<text class="tag">{{item.Tag || '学生专享'}}</text></view>
+                        <view class="s">{{item.SubTittle}}</view>
+                    </view>
+                    <button class="btn-get" disabled="true" wx:if="{{item.IsSend}}">已领取</button>
+                    <button class="btn-get" data-subtype="{{item.SubType}}" wx:else bindtap="recieveNewCoupon" data-subtype="{{item.SubType}}" data-activitycode="e10adc3949ba59abbe56e057f20f883e">立即领取</button>
+                </view>
+            </view> -->
+
+            <view class="jiasu-btn-line">
+                <!-- 如果有优惠券或者是新客，需要两行文字 -->
+                <form bindsubmit="buyTicketSubmit" report-submit="true">
+                    <view wx:if="{{fromApp && abtest.launchAppAbTest === 'B' && !isCtripNew}}">
+                        <button class="btn-go" hover-class="btn-go_hover" bindtap="empty" form-type="submit" id="c_train_wx_robsharenew_gohome_app" open-type="launchApp" app-parameter="{{launchAPPUrl}}" binderror="launchAppError" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                            去购票
+                            <!-- <text wx:if="{{couponCount > 0}}">{{couponProfitDesc}}</text> -->
+                        </button>
+                        <view class="cashback-tag" wx:if="{{couponItemListCashBack.length}}">返{{couponItemListCashBack[0].Price}}元现金</view>
+                        <!-- <view class="jiasu-tag">新客返现10元</view> -->
+                    </view>
+                    <view wx:else>
+                        <!--按钮的匹配在这里-->
+                        <button class="btn-go" hover-class="btn-go_hover" bindtap="empty" form-type="submit" id="c_train_wx_robsharenew_gohome_mp" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                            去购票
+                            <!-- <text wx:if="{{couponCount > 0}}">{{couponProfitDesc}}</text> -->
+                        </button>
+                        <view class="cashback-tag" wx:if="{{couponItemListCashBack.length}}">返{{couponItemListCashBack[0].Price}}元现金</view>
+                    </view>
+                </form>
+            </view>
+        </view>
+    </view>
+    <!-- 抢票新版 -->
+    <view class="newfeat" wx:else>
+        <!-- 页面头部部分 -->
+        <view class="jiasu-top-box">
+            <image src="{{themeConfig.topSrc}}" mode="widthFix" class="top-img" wx:if="{{themeConfig.open}}"></image>
+            <image src="https://pic.c-ctrip.com/train/wechat/robshare/top-bg-chaoren.png" mode="widthFix" class="top-img" wx:else></image>
+            <view class="jiasu-slogan">
+                <view class="tit {{isAccelerating ? 'help' : (acceOver ? 'finish' : 'suc')}}"></view>
+                <!-- help,suc,finish -->
+            </view>
+            <view class="jiasu-tick">
+                <view class="l" wx:if="{{ArriveStation}}">
+                    开往
+                    <text class="city">{{ArriveStation}}</text>
+                    的火车票
+                </view>
+                <view></view>
+            </view>
+        </view>
+        <!-- 助力中 -->
+        <view class="white-box jiasu-box" wx:if="{{isAccelerating}}">
+            <view class="jiasu-hd">
+                <view class="cont">
+                    <view class="tit">{{robDescList[0].title || '火力超人正在帮我买票'}}</view>
+                    <view class="txt">{{robDescList[0].desc || '给火力超人送火箭，可提升火力等级'}}</view>
+                </view>
+            </view>
+            <view class="jiasu-bd">
+                <view class="jiasu-line">
+                    <view class="line" style="width:{{['4%', '30%', '50%', '73%', '100%'][currentLevel-1]}}"></view>
+                </view>
+                <view class="jiasu-label">
+                    <view wx:for="{{trainRangeList}}" class="item {{item.Current ? 'cur' : ''}}">
+                        {{item.levelName}}
+                    </view>
+                    <view class="txt-warn" wx:if="{{UnableSpeedReason}}">
+                            {{UnableSpeedReason}}
+                        </view>
+                </view>
+                <view class="jiasu-txt">
+                    {{acceleratePackageText}}
+                </view>
+
+                <view class="jiasu-btnbox">
+                    <!-- 用户未助力 -->
+                    <form bindsubmit="acceSubmit" report-submit="true" wx:if="{{isAccelerating && acceState == 0}}">
+                        <block wx:if="{{abtest.acceAbTest == 'B'}}">
+                            <!-- 登录状态 -->
+                            <block wx:if="{{isLogin}}">
+                                <!-- 个人信息及手机号信息都存在 直接助力 -->
+                                <button wx:if="{{userInfo}}" class="btn-orage" form-type="submit" bindtap="acce" id="c_train_wx_robsharenew_acce" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                    一键支援火力
+                                </button>
+                                <!-- 不存在手机号信息 获取手机号信息并助力 -->
+                                <button wx:elif="{{canIUseGetUserProfile}}" class="btn-orage" form-type="submit" bindtap="getUserProfileAndAcce" id="c_train_wx_robsharenew_acce" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                    一键支援火力
+                                </button>
+                                <!-- 不存在个人信息存在手机号信息 获取个人信息并助力 -->
+                                <button wx:else class="btn-orage" form-type="submit" bindtap="empty" open-type="getUserInfo" bindgetuserinfo="getUserInfoAndAcce" id="c_train_wx_robsharenew_acce" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                    一键支援火力
+                                </button>
+                            </block>
+                            <!-- 未登录 -->
+                            <block wx:else>
+                                <button class="btn-orage" form-type="submit" bindtap="getUserPhoneAndAcce" id="c_train_wx_robsharenew_acce" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                    一键支援火力
+                                </button>
+                            </block>
+                        </block>
+                        <!-- ACD实验 -->
+                        <block wx:else>
+                            <button class="btn-orage" wx:if="{{canIUseGetUserProfile}}" form-type="submit" bindtap="getUserProfileAndAcce" id="c_train_wx_robsharenew_acce" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                一键支援火力
+                            </button>
+                            <button class="btn-orage" wx:else form-type="submit" bindtap="empty" open-type="getUserInfo" bindgetuserinfo="getUserInfoAndAcce" id="c_train_wx_robsharenew_acce" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                一键支援火力
+                            </button>
+                        </block>
+                    </form>
+                    <!-- 用户已助力 -->
+                    <block wx:else>
+                        <form bindsubmit="buyTicketSubmit" report-submit="true">
+                            <block wx:if="{{fromApp && abtest.launchAppAbTest === 'B' && !isCtripNew}}">
+                                <button class="btn-orage" bindtap="empty" form-type="submit" id="c_train_wx_robsharenew_gohome_app" open-type="launchApp" app-parameter="{{launchAPPUrl}}" binderror="launchAppError" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                    我也要买票
+                                    <text class="tag" wx:if="{{wxDiscountTag}}">{{wxDiscountTag}}</text>
+                                </button>
+                            </block>
+                            <block wx:else>
+                                <button class="btn-orage" bindtap="empty" form-type="submit" id="c_train_wx_robsharenew_gohome_mp" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                                    我也要买票
+                                    <text class="tag" wx:if="{{wxDiscountTag}}">{{wxDiscountTag}}</text>
+                                </button>
+                            </block>
+                        </form>
+                        <button class="btn-blue mt20" bindtap="showShareMenu" form-type="submit" id="c_train_wx_robsharenew_gohome_mp">
+                            邀请其他人支援火力
+                        </button>
+                    </block>
+                </view>
+            </view>
+        </view>
+        <!-- 订单结束助力 -->
+        <view class="white-box finish-box suc" wx:else>
+            <view class="finish-bd" wx:if="{{acceSuccess}}">
+                <view class="tit">{{robDescList[1].title || '火力超人已成功帮忙买到票'}}</view>
+                <view class="txt">{{robDescList[1].title || '有火力超人帮忙，买票更容易'}}</view>
+            </view>
+            <view class="finish-bd" wx:if="{{acceOver}}">
+                <view class="tit">{{robDescList[2].title || '火力超人-你的买票小助手'}}</view>
+                <view class="txt">{{robDescList[2].title || '有超人帮忙，买票更容易~'}}</view>
+            </view>
+            <view class="jiasu-btnbox">
+                <form bindsubmit="buyTicketSubmit" report-submit="true">
+                    <block wx:if="{{fromApp && abtest.launchAppAbTest === 'B' && !isCtripNew}}">
+                        <button class="btn-orage" bindtap="empty" form-type="submit" id="c_train_wx_robsharenew_gohome_app" open-type="launchApp" app-parameter="{{launchAPPUrl}}" binderror="launchAppError" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                            去购票
+                            <text class="tag" wx:if="{{wxDiscountTag}}">{{wxDiscountTag}}</text>
+                            <!-- <text wx:if="{{couponCount > 0}}" class="txt">{{couponProfitDesc}}</text> -->
+                        </button>
+                        <!-- <view class="jiasu-tag" wx:if="{{isCtripNew}}">新客返现10元</view> -->
+                    </block>
+                    <block wx:else>
+                         <!-- {{couponCount > 0 ? 'btn-2line' : ''}} -->
+                        <button class="btn-orage" bindtap="empty" form-type="submit" id="c_train_wx_robsharenew_gohome_mp" style="{{themeConfig.open ? themeConfig.btnStyle : 'background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/btn-go-default.png);'}}">
+                            去购票
+                            <!-- <text wx:if="{{couponCount > 0}}" class="txt">{{couponProfitDesc}}</text> -->
+                        </button>
+                    </block>
+                </form>
+            </view>
+        </view>
+    </view>
+    
+    <view class="toolbar-after-assist" wx:if="{{ abtest.rightAfterAssistAb === 'B' && isLogin && !(isAccelerating && acceState == 0) && toolbarAfterAssist.isToolsShow && toolbarAfterAssist.toolsConfig && toolbarAfterAssist.toolsConfig.length }}">
+        <scroll-view class="toolbar-list" scroll-x>
+            <view class="toolbar-item-list {{toolbarAfterAssist.toolsConfig.length >= 5 ? '' :'toolbar-item-list-flex'}}">
+                <view class="toolbar-item" wx:for="{{ toolbarAfterAssist.toolsConfig }}" data-index="{{ index }}" bindtap="onClickTools">
+                    <image class="toolbar-img" src="{{ item.icon }}" />
+                    <view class="toolbar-tag" wx:if="{{ item.tag }}">
+                        <image class="frag" src="https://images3.c-ctrip.com/train/2023-3/app-jiaocha/8.66/cjmdyh/img_jiao.png" />
+                        <view class="tit">{{ item.tag }}</view>
+                    </view>
+                    <view class="point" wx:if="{{ item.point }}"></view>
+                    <view class="toolbar-name">{{ item.name }}</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <!-- 二次分享 -->
+    <view class="activity-box wx-reshare" wx:if="{{reshareInfo}}">
+        <view class="title-bar">
+            <view class="tit">邀请好友奖励福利</view>
+            <view class="detail-btn" bindtap="onClickReshareRuleBtn">查看规则<text class="ifont-arr"></text></view>
+        </view>
+        <view class="ticket-box-container">
+            <block wx:for="{{reshareInfo.RewardList}}">
+                <view class="ticket-box {{item.Status === 2 ? 'gray': '' }}">
+                    <view class="ticket-detail">
+                        <view class="ticket-tips" wx:if="{{item.Tag}}">
+                            {{item.Tag}}
+                        </view>
+                        <view class="ticket-price">
+                            <text class="num">{{item.Price}}</text>
+                            <text>{{item.Unit}}</text>
+                        </view>
+                        <view class="ticket-name">
+                            {{item.Title}}
+                        </view>
+                    </view>
+                    <!-- <button class="ticket-btn" wx:if="{{item.Status === 1}}" open-type="{{hideShareFlag === 1 ? '' : 'share'}}" catchtap="onClickReshare">
+                        <text>邀请</text>
+                    </button> -->
+                    <view class="ticket-stamp" wx:if="{{item.Status === 2}}"/>
+                </view>
+            </block>
+        </view>
+        <view class="invite-progress">
+            <view class="progress-target">
+                <view class="progress-stick-container">
+                    <view class="progress-stick orange" style="width:{{reshareInfo.progressPercent}}%"/>
+                    <view class="progress-stick" style="width:calc(100% - {{reshareInfo.progressPercent}}%)"/>
+                </view>
+                <block wx:for="{{reshareInfo.RewardList}}">
+                    <view class="progress-target-box">
+                        <view class="progress-target-dot-wrapper">
+                            <view class="progress-target-dot-back {{item.Status === 1 ? '' : 'orange'}}">
+                                <view class="progress-target-dot"/>
+                            </view>
+                        </view>
+                        <view class="progress-target-desc">`
+                            邀请{{item.ReceiveRewardFriendCount}}人
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+    <!-- <button bindtap="onClick123">123213</button> -->
+    <!-- {{ moreAssistTaskInitComplete}} {{abtest.taskComponentAb}} {{isLogin}} {{!IsSelf}} {{!closeAssistTaskContainer}}{{!isChangeOrderFlag }} -->
+    <!-- 抢票助力任务列表-任务组件 -->
+    <view class="assist-task-container task-title" wx:if="{{moreAssistTaskInitComplete && abtest.taskComponentAb == 'B' && isLogin && !IsSelf && !closeAssistTaskContainer && !isChangeOrderFlag}}">
+      <view class="assist-task-title"></view>
+      <view class="assist-task-container-question" bind:tap="handleShowRule"></view>
+    </view>
+    <view class="assist-task-connect" wx:if="{{moreAssistTaskInitComplete && abtest.taskComponentAb == 'B' && isLogin && !IsSelf && !closeAssistTaskContainer && !isChangeOrderFlag}}"></view>
+    <!-- <view class="assist-task-container assist-task-container-connct" wx:if="{{abtest.taskComponentAb == 'B' && isLogin && !IsSelf && !closeAssistTaskContainer && !isChangeOrderFlag}}">
+        <view>
+            <taskSignIn tempid="task_trn_wechat_qp_b" compid="224010" />
+        </view>
+    </view>
+    <view class="assist-task-connect" wx:if="{{moreAssistTaskInitComplete && abtest.taskComponentAb == 'B' && isLogin && !IsSelf && !closeAssistTaskContainer && !isChangeOrderFlag}}"></view> -->
+    <view class="assist-task-container assist-task-container-connct" wx:if="{{!moreAssistTaskNotShow && isLogin && !closeAssistTaskContainer && !isChangeOrderFlag}}">
+        <taskList wx:if="{{moreAssistTaskChannel}}" orderData="{{orderData}}" channelCodeStr="{{moreAssistTaskChannel}}" tempid='{{moreAssistTaskTempid}}' compid='{{moreAssistTaskCompid}}' bind:getTaskList="getMoreAssistTaskList" bind:userAcceptPrize="userAcceptMoreAssistTaskPrize"/>
+    </view>
+    <view class="assist-task-connect" wx:if="{{moreAssistTaskInitComplete && !moreAssistTaskNotShow && abtest.taskComponentAb == 'B' && isLogin && !IsSelf && !closeAssistTaskContainer && !isChangeOrderFlag}}"></view>
+    
+    <view class="assist-task-container"  wx:if="{{abtest.taskComponentAb == 'B' && isLogin && !IsSelf && !closeAssistTaskContainer && !isChangeOrderFlag}}">
+        <slotMachine tempid="task_trn_wechat_qp_b" compid="224011"></slotMachine>
+    </view>
+
+    <!-- 抢票助力任务列表-任务组件-规则弹窗 -->
+    <taskModal show="{{showTaskRulePanel}}" popupType="{{2}}" maskClosable="{{true}}" bind:close="handleCloseRule">
+      <view class='train_rule'>
+          <image bind:tap="handleCloseRule" class="train_rule__close" src="https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/close-btn2.png"></image>
+        <view class='train_rule__title'>任务说明</view>
+        <view class='train_rule__tips'>
+            <view><text>{{ruleDesc}}</text></view>
+        </view>
+      </view>
+    </taskModal>
+
+    <!-- 返现券+新客权益 -->
+    <block wx:if="{{!hideNewUserSwiper && (!isLogin || canReceiveNewUserRights)}}">
+        <view class="gifts-temp">
+            <view class="gifts-temp-hd">
+                <view class="cont-wrap">
+                    <view class="tit">￥{{newCustomerRightInfo.OriginPrice}}权益大礼包待领取</view>
+                    <view class="txt">新客专享三大购票特权</view>
+                </view>
+                <button class="btn-get" wx:if="{{!isLogin}}" data-fixed='1' bindtap="loginAndReceiveRights" data-ubt-key="{{couponListWillCashBack.length && newCustomerRightInfo ? 'train_grab_hpnebiecashbtn' : (!newCustomerRightInfo ? 'train_grab_hpcashbtn' : 'train_grab_hpnewbiebtn')}}">限时免费领取</button>
+                <button class="btn-get" wx:else  data-fixed='1' bindtap="onClickGoToBuyTicket" data-ubt-key="{{couponListWillCashBack.length && newCustomerRightInfo ? 'train_grab_hpnebiecashbtn' : (!newCustomerRightInfo ? 'train_grab_hpcashbtn' : 'train_grab_hpnewbiebtn')}}">限时免费领取</button>
+            </view>
+            <view class="gifts-temp-bd">
+                <!-- 新客权益模块 -->
+                <view class="newcustomer">
+                    <view class="{{newCustomerRightInfo.RightList.length === 3 ? 'item-wrap item-wrap3' : 'item-wrap'}}">
+                        <view class="item" wx:for="{{newCustomerRightInfo.RightList}}" data-url="{{item.JumpUrl}}" bindtap="toDetailPage">
+                            <image src="{{item.IconUrl}}" class="icon" mode="widthFix"></image>
+                            <view class="txt-wrap">
+                              <view class="name">{{item.Name}}</view>
+                              <!-- <view class="name">{{item.Name}}<text class="ifont-detail"></text></view> -->
+                              <view class="desc">{{item.Desc}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+
+    <!-- 任意行 -->
+    <!-- <view class="anyGo" wx:if="{{ anyGoInfo.BoostPackageCount &&  anyGoInfo.TaskStatus == 0 && abtest.productAb != 'B' }}" bindtap="onClickGetBoostBtn">
+        <view class="anyGo-countdown">限时福利<text>{{ anyGoInfo.CountDownTime }}</text></view>
+        <view class="anyGo-container">
+            <view class="anyGo-title">{{ anyGoInfo.Desc }}<text class="ifont-qus" catchtap="showRuleCard"></text></view>
+            <view class="anyGo-buyText"></view>
+            <view class="anyGo-desc">{{ anyGoInfo.SubTitle }}</view>
+            <view class="anyGo-btn">{{ anyGoInfo.ButtonName }}</view>
+        </view>
+    </view> -->
+
+    <!-- 日历 -->
+    <view class="calendar" wx:if="{{ robCalendar.open && robCalendar.show && !robCalendar.newBanner}}" bind:tap="goCalendarPage">
+        <!-- 旧版暂时屏蔽 -->
+        <!-- <view class="hd">
+            <view class="tit">{{ robCalendar.title }}</view>
+            <view class="sub">{{ robCalendar.buttonName }}<view class="ifont-arr"></view></view>
+        </view>
+        <view class="bd">
+            <view class="cont after">
+                <view class="img"></view>
+                <view class="date-box">
+                    <view class="date">
+                        <view class="m">{{ robCalendar.month }}</view>
+                        月
+                        <view class="m">{{ robCalendar.day }}</view>
+                        日
+                    </view>
+                    <view class="lunar"  wx:if="{{ robCalendar.lunar }}">农历{{ robCalendar.lunar }}</view>
+                </view>
+            </view>
+            <view class="desc">
+                <view class="tit">{{ robCalendar.subTitle }}</view>
+                <view class="sub">{{ robCalendar.sellDayDesc }}</view>
+            </view>
+        </view> -->
+    </view>
+    <view class="calendar-new" wx:elif="{{ robCalendar.open && robCalendar.show && robCalendar.newBanner}}" bind:tap="goCalendarPage">
+        <view class="hd">
+            <view class="tit">{{ robCalendar.subTitle }}</view>
+            <view class="sub">{{ robCalendar.buttonName }}<view class="ifont-arr"></view></view>
+        </view>
+        <view class="bd">
+            <view class="cont">
+                <image class="img" src="{{robCalendar.leftImg1}}" mode="heightFix"/>
+                <view class="cont-box">
+                    <view class="date">
+                        <view class="m">{{ robCalendar.month }}</view>
+                        月
+                        <view class="m">{{ robCalendar.day }}</view>
+                        日
+                    </view>
+                </view>
+            </view>
+            <view class="cont" data-anchor="activityCenter">
+                <image class="img2" src="{{robCalendar.rightImg1}}" mode="heightFix"/>
+                <view class="cont-box">
+                    <view class="txt" wx:if="{{robCalendar.showDescList}}">
+                        <text class="calendar-desc {{calendarDescTrigger ? 'show' : 'fade'}}">{{ robCalendar.descList[0] }}</text>
+                        <text class="calendar-desc {{calendarDescTrigger ? 'fade' : 'show'}}">{{ robCalendar.descList[1] }}</text>
+                    </view>
+                    <view class="txt" wx:else>
+                        {{ robCalendar.activityCenterDesc }}
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+    <!-- 立减券包 -->
+    <view class="reduce-coupon" wx:if="{{ reduceCoupon && reduceCoupon.Status == 0 && abtest.productAb == 'B' }}">
+        <view class="tit">
+            {{ reduceCoupon.Title }}
+            <view class="sub">{{ reduceCoupon.Tag }}</view>
+        </view>
+        <view class="cont">
+            <view class="desc">
+                <image src="{{ reduceCoupon.IconUrl || 'https://images3.c-ctrip.com/train/2022/app/8.47/zengzhang/wechat_qpzlyhxklc/ic_taocan_hb.png' }}" />
+                <view class="text">
+                    <view class="sub">{{ reduceCoupon.SubTitle }}</view>
+                    <view class="price">￥<view class="b">{{ reduceCoupon.SalePrice }}</view><text>￥{{ reduceCoupon.DeletePrice }}</text></view>
+                </view>
+            </view>
+            <view class="btn">
+                <view class="tag">{{ reduceCoupon.Remark }}</view>
+                <button bind:tap="toReduceCouponPage">{{ reduceCoupon.ButtonName }}</button>
+            </view>
+        </view>
+    </view>
+
+    <!-- 福星榜 -->
+    <!-- 用户无法助力 订单正在抢票中 -->
+    <!-- <view class="fuxing-friend" wx:if="{{multidimensionalLuckyList.length && acceState !== 0 && isAccelerating}}">
+        <view class="tit">邀请以下福星好友，你得双倍助力包</view>
+        <swiper class="fuxing-friend-bd" next-margin="{{multidimensionalLuckyList.length < 2 ? '0' : '25px'}}" style="height: {{multidimensionalLuckyList.length < 2 ? 118 * LuckyStarList.length + (LuckyStarList.length - 1) * 22 + 'rpx' : '538rpx'}}">
+                <swiper-item wx:for="{{multidimensionalLuckyList}}">
+                    <view class="item" wx:for="{{item}}" wx:for-item="friend">
+                        <image class="avatar" src="{{friend.PhotoUrl}}"></image>
+                        <view class="conts">
+                        <view class="nickname">{{friend.NickName}}
+                        </view>
+                        <view class="tag" wx:if="{{friend.Tag}}">{{friend.Tag}}</view>
+                        <view class="desc" wx:if="{{friend.LuckyStarDesc}}">{{friend.LuckyStarDesc}}</view>
+                        </view>
+                        <button disabled="{{friend.Status == 1}}" open-type="{{hideShareFlag === 1 ? '' : 'share'}}" catchtap="copyText" data-text="{{friend.NickName}}">{{friend.ButtonName}}</button>
+                    </view>
+                </swiper-item>
+        </swiper>
+    </view> -->
+
+    <!-- 好友助力榜 旧版-->
+      <view class="jiaus-friend" id="friendList" wx:if="{{friendList.length && !newFeatureFlag}}">
+        <!-- <view class="tit">已有{{friendList.length}}名用户帮好友助力<text class="showall" bindtap="showAllFriendList">查看全部</text></view> -->
+        <view class="tit">好友助力榜</view>
+        <view class="jiaus-friend-bd">
+            <view class="item" wx:for="{{friendList}}">
+                <!-- top3 -->
+                <!-- <view wx:if="{{index < 3}}">
+                    <icon class="{{['first', 'second', 'third'][index]}}"></icon>
+                    <image src="{{item.PassagePhotoUrl || 'https://images3.c-ctrip.com/train/wechat/2018zhuli/img-avatar.png'}}"></image>
+                    <view class="num no{{index+1}}"></view>
+                </view> -->
+                <!-- other -->
+                <!-- <view wx:else> -->
+                    <image src="https://dimg04.c-ctrip.com/images/Z80o180000013ulo9C34A.jpg"></image>
+                <!-- </view> -->
+            </view>
+            <!-- <view class="more">
+            </view> -->
+        </view>
+    </view>
+
+    <!-- 好友助力榜 新版-->
+    <view class="jiaus-friend" id="friendList" wx:if="{{assistedFriendsList.length && newFeatureFlag}}">
+        <!-- <view class="tit">已有{{assistedFriendsList.length}}名用户帮好友助力<text class="showall" bindtap="showAllFriendList">查看全部</text></view> -->
+        <view class="tit">好友助力榜</view>
+        <view class="jiaus-friend-bd">
+            <view class="item" wx:for="{{assistedFriendsList}}">
+                <!-- top3 -->
+                <!-- <view wx:if="{{index < 3}}">
+                    <icon class="{{['first', 'second', 'third'][index]}}"></icon>
+                    <image src="{{item.photoUrl || 'https://images3.c-ctrip.com/train/wechat/2018zhuli/img-avatar.png'}}"></image>
+                    <view class="num no{{index+1}}"></view>
+                </view> -->
+                <!-- other -->
+                <!-- <view wx:else> -->
+                    <image src="https://dimg04.c-ctrip.com/images/Z80o180000013ulo9C34A.jpg"></image>
+                <!-- </view> -->
+            </view>
+            <!-- <view class="more">
+            </view> -->
+        </view>
+    </view>
+
+    <!-- 好友助力榜弹层 -->
+    <view class="pop-full pop-friend-box" wx:if="{{false && showType === 'allFriendList'}}">
+        <view class="tit">好友助力榜</view>
+        <view class="pop-friend-bd">
+            <block wx:if="{{!newFeatureFlag}}">
+                <view class="item" wx:for="{{friendList}}" wx:key="index" wx:for-item="item">
+                    <view class="num {{index < 3 ? 'tgold' : ''}}">{{index + 1}}</view><!--前三个用class="no1,no2,no3",不显示数字-->
+                    <view class="avatar num{{index+1}}"  wx:if="{{index < 3}}">
+                        <icon class="icon-crown"></icon>
+                        <image src="{{item.PassagePhotoUrl || 'https://images3.c-ctrip.com/train/wechat/2018zhuli/img-avatar.png'}}"></image>
+                    </view>
+                    <view class="avatar" wx:else>
+                        <image src="{{item.PassagePhotoUrl || 'https://images3.c-ctrip.com/train/wechat/2018zhuli/img-avatar.png'}}"></image>
+                    </view>
+                    <view class="cont">
+                        <text class="name">{{item.NickName || item.PassageName || '携程用户'}}</text>
+                        <view class="supmeb">{{item.PassageTag}}</view>
+                        <!-- <text class="supmeb">超级会员翻倍</text> -->
+                    </view>
+                    <view class="achieve {{item.PassageTag === '超级会员'? 'tgold' : ''}}"><text>{{item.FlowPacket}}</text>份</view>
+                </view>
+            </block>
+            <block wx:if="{{newFeatureFlag}}">
+                <view class="item" wx:for="{{assistedFriendsList}}" wx:key="index" wx:for-item="item">
+                    <view class="num {{index < 3 ? 'tgold' : ''}}">{{index + 1}}</view>
+                    <!-- 前三个用class="no1,no2,no3",不显示数字 -->
+                    <view class="avatar num{{index+1}}" wx:if="{{index < 3}}">
+                        <icon class="icon-crown"></icon>
+                        <image src="{{item.photoUrl || 'https://images3.c-ctrip.com/train/wechat/2018zhuli/img-avatar.png'}}"></image>
+                    </view>
+                    <view class="avatar" wx:else>
+                        <image src="{{item.photoUrl || 'https://images3.c-ctrip.com/train/wechat/2018zhuli/img-avatar.png'}}"></image>
+                    </view>
+                    <view class="cont">
+                        <text class="name">{{item.NickName || item.PassageName || '携程用户'}}</text>
+                        <view class="supmeb" wx:if="{{item.Tag}}">{{item.Tag}}</view>
+                        <!-- <text class="supmeb">超级会员翻倍</text> -->
+                    </view>
+                    <view class="achieve" wx:if="{{item.assistedNum}}">
+                        <text>{{item.assistedNum}}</text>
+                        个
+                    </view>
+                </view>
+            </block>
+        </view>
+
+        <icon class="icon-closed" bindtap="hideAllFriendList"></icon>
+    </view>
+
+
+    <!-- 学生锦鲤卡 -->
+    <template is="student-card" data="{{studentCardInfo, from: 'robshare'}}" wx:if="{{studentCardInfo && !(isAccelerating && acceState == 0)}}"></template>
+
+    <!-- 已经领取返现券引导去首页banner -->
+    <view class="cashback-coupon" wx:if="{{couponItemListCashBack[0].IsSend && !newCustomerRightInfo && !(isAccelerating && acceState == 0)}}">
+        <icon class="icon-cashback"></icon>
+        <view class="cont">
+            <view class="tit"><text class="price">您有{{couponItemListCashBack[0].Price}}元现金</text>待领取</view>
+            <view class="txt">出行成功后自动到账携程钱包</view>
+        </view>
+        <button class="btn-cashback" data-ubt-key="train_grab_hpcashusebtn" bindtap="toHomePage">购票并提现</button>
+    </view>
+    <!-- 旧版广告列表 -->
+    <!-- <view wx:if="{{bannerList.length}}" style="margin-top: 24rpx">
+        <view class="advs-box" wx:for="{{bannerList}}" wx:if="{{item.on}}">
+            <image src="{{item.bannerImg}}" data-url="{{item.bannerUrl}}" data-ubt-key="c_train_wx_robsharenew_ad_{{item.key}}" bindtap="adClick"  mode="widthFix"></image>
+        </view>
+    </view> -->
+    <view style="margin-top: 24rpx">
+        <view
+            style="margin:0 30rpx 24rpx"
+            wx:if="{{ bannerItemList.length && arrivedCitys.length && arrivedStations.length}}"
+        >
+            <swiper-banner
+                Width="690"
+                Height="181"
+                Radius="6"
+                bannerItemList="{{bannerItemList}}"
+                arrivedCity="{{arrivedCitys}}"
+                arrivedStation="{{arrivedStations}}"
+                clickUbtKey="208068"
+                exposureUbtKey="208067"
+                pageId="10320655842"
+            >
+            </swiper-banner>
+        </view>
+    </view>
+    <!-- 引导关注公众号 -->
+    <!-- <block>
+        <view class="robshare-follow-accounts" wx:if="{{isShowFollowAccount}}">
+            <view class="l-icon"></view>
+            <view class="txts">
+                <view class="tit">200元<text class="t-org">券包</text></view>
+                <view class="sub-tit">关注携程火车票公众号立享</view>
+            </view>
+            <view class="r-btn" bindtap="tapToFollowAcconut">立即领取</view>
+        </view>
+    </block> -->
+    <!-- 宫格入口 -->
+    <view class="jiasu-gongge" wx:if="{{buList}}">
+        <view class="tit" bindtap="goCHome" data-ubt-key="c_train_wx_robshare_bulist_home">在微信订旅行，用携程小程序就够了</view>
+        <view class="jiasu-gongge-bd">
+          <view class="item" wx:for="{{buList}}" wx:key="index" catchtap="goBu" data-url="{{item.url}}" data-ubt-key="c_train_wx_robshare_bulist_{{item.buName}}" data-bu-name="{{item.buName}}">
+            <image src="{{item.icon}}"></image>
+            <view class="txt">{{item.buName}}</view>
+            <view class="tag" wx:if="{{item.tagDesc}}">{{item.tagDesc}}</view>
+          </view>
+        </view>
+    </view>
+
+    <!-- 优惠券入口 -->
+    <view class="jiasu-coupon" wx:if="{{couponList.length}}" id="jiasu-coupon">
+        <view class="jiasu-coupon-hd">
+            <view class="cont">我的优惠券</view>
+            <button class="btn-used" bindtap="goCHome">立即使用</button>
+        </view>
+        <view class="jiasu-coupon-bd">
+            <view class="item" wx:for="{{couponListShow}}" data-url="{{item.JumpUrl}}" catchtap="goBu" data-ubt-key="c_train_wx_robshare_coupon_{{item.buName}}">
+                <view class="tag">{{item.BuName}}</view>
+                <view class="cont">
+                    <view class="tit">{{item.Tittle}}</view>
+                    <view class="txt">{{item.SubTittle}}</view>
+                </view>
+                <view class="rbox">
+                    <view class="price">{{item.Price}}</view>
+                    <button class="btn-used">去使用</button>
+                </view>
+            </view>
+        </view>
+        <view class="jiasu-coupon-more" wx:if="{{couponList.length > 4 && couponList.length !== couponListShow.length}}" bindtap="showAllCoupon">查看全部<text class="ifont-arr"></text></view>
+    </view>
+
+    <!-- <view class="jiasu-ad" wx:if="{{themeConfig && themeConfig.open && bannerImg && isCtripApp}}">
+        <image src="{{bannerImg}}" class="jiasu-adimg" data-ubt-key="c_train_wx_robsharenew_ad" bindtap="adClick" />
+    </view> -->
+
+    <!-- 活动规则 -->
+    <view class="rule-box" wx:if="{{ruleList.length && !newFeatureFlag}}">
+        <view class="tit">活动规则</view>
+        <view class="item" wx:for="{{ruleList}}">{{item}}</view>
+    </view>
+
+    <view class="rule-box" wx:if="{{newruleList.length && newFeatureFlag}}">
+        <view class="tit">活动规则</view>
+        <view class="item" wx:for="{{newruleList}}">{{item}}</view>
+    </view>
+
+    <view class="banner-box" wx:if="{{bottomBannerHandle && bottomBannerUrl}}" style="{{isAccelerating && acceState == 0 && calanderHandle ? 'padding-bottom: 160rpx' : ''}}" bindtap="toBottomBanner">
+      	<!-- <image src="https://images3.c-ctrip.com/train/wechat/jiasu/20180108robshare-bot-banner.jpg" mode="widthFix"></image> -->
+        <image src="{{bottomBannerImg}}" mode="widthFix"></image>
+     </view>
+
+    <view class="fixed-collect" wx:if="{{acceState !== 0 && !hasCollected && collectFlag}}" bindtap="showGuide" id="c_train_wx_robshare_collect"></view>
+
+    <!-- 登录状态 未订阅 打开开关 -->
+    <view class="subscribe-box" style="padding-bottom: {{isIphoneX ? '34rpx' : 0}}" wx:if="{{isLogin && !hasSubscribedTicket && subscribeTicketToggle && isShowSubsribeTemp && showOneTagToOpen}}">
+        <image class="subs-icon" src="https://images3.c-ctrip.com/train/2021/xiaochengxu/8.37.4/xiaoxidingyue/xiaoxi_bar_lingdang@3x.png" />
+        <view class="cont">
+            <view class="tit">高峰期火车购票提醒</view>
+            <view class="txt">及时获取火车购票动态，出行无忧</view>
+        </view>
+        <button class="subs-btn" bindtap="onClickSubscribeTicket">一键开启</button>
+        <text class="ifont-closed-line" bindtap="hideSubscribeTemp"></text>
+    </view>
+
+
+    <!--弹层-->
+    <!-- 助力成功后的活动引导弹窗 -->
+    <view class="pop-mid" wx:if="{{showMask === 'acitivityPop'}}" catchtap="hideBackdrop">
+        <view class="pop-mid-box">
+            <view class="pop-genadv" style="background-image: url({{activityConfig.popBg}})" bindtap="activityBtnHandler" data-ubt-key="c_wx_train_robshare_activity_{{activityConfig.key}}">
+                <button class="btn-gos" style="background-image: url({{activityConfig.btnBg}})"></button>
+            </view>
+        </view>
+    </view>
+
+    <form bindsubmit="hideBackdropSubmit" report-submit="true">
+        <button class="jiasu-mask" wx:if="{{showMask && showMask !== 'ticketPop'}}" formType="submit" bindtap="empty" id="c_train_wx_robsharenew_hidebackdrop"></button>
+    </form>
+
+    <!-- 跑马灯 -->
+    <view class="jiasu-pop-box" wx:if="{{showMask === 'lottery'}}">
+        <view class="beam"></view>
+        <image src="{{themeConfig.popHdSrc}}" class="img-bg" wx:if="{{themeConfig.open}}"></image>
+        <!-- 福星 2 号黄火箭背景 -->
+        <image src="{{ IsReceiveGiftPack ? 'https://images3.c-ctrip.com/train/dulujie/bg-4.png' : 'https://images3.c-ctrip.com/train/dulujie/bg-3.png'}}" class="img-bg {{ IsReceiveGiftPack ? 'nobtn' :'btn' }}" wx:elif="{{ LuckyStarType === 1 }}"></image>
+        <image src="http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-box.png" class="img-bg" wx:else></image>
+        <!-- 超级会员翻倍或者福星 && 抽中结果 -->
+        <view class="jiasu-pop-bd" wx:if="{{(isSuperVip || OrderUserIsSuperMember || IsLuckyStar) && lottery.hasResult && accePackages[curPkgIdx] !== '0'}}">
+            <view class="jiasu-tunetxt">翻倍成功，帮好友获得<text class="tgold">{{((isSuperVip || OrderUserIsSuperMember) && IsLuckyStar) ? accePackages[curPkgIdx] * 4 : accePackages[curPkgIdx] * 2}}</text>个助力包</view>
+            <!-- 春运 -->
+            <block>
+                <view class="jiasu-tunetable-block-vip">
+                    <image src="{{themeConfig.marqueeSrc}}" class="img-choujiang" wx:if="{{themeConfig.open}}"></image>
+                    <image src="http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-choujiang.png" class="img-choujiang" wx:else></image>
+                    <view class="jiasu-fanbei-suc">
+                        <!-- 超级会员 && 福星 -->
+                        <image src="https://images3.c-ctrip.com/train/2021/xiaochengxu/8.35/pop-jiasu-fanbei-card-3@3x.png" wx:if="{{(isSuperVip || OrderUserIsSuperMember) && IsLuckyStar}}" class="img-vip"></image>
+                        <!-- 超级会员翻倍 -->
+                        <image src="http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-fanbei-card.png" class="img-vip" wx:elif="{{isSuperVip || OrderUserIsSuperMember}}"></image><!--这个图不配置-->
+                        <!-- 福星翻倍 新客/召回用户 -->
+                        <image src="https://images3.c-ctrip.com/train/2021/xiaochengxu/8.35/pop-jiasu-fanbei-card-2@3x.png" class="img-vip" wx:else></image>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="jiasu-pop-bd" wx:else>
+            <view class="jiasu-tunetxt" wx:if="{{lottery.isRunning}}">- 正在帮TA抽取{{newFeatureFlag ? '火箭' : '助力包'}} -</view>
+            <view class="jiasu-tunetxt" wx:if="{{!lottery.isRunning &&(!lottery.hasResult || !(isSuperVip || OrderUserIsSuperMember))}}">
+                <view wx:if="{{accePackages[curPkgIdx] !== '0'}}">
+                    恭喜！帮好友获得
+                    <text class="tgold">{{accePackages[curPkgIdx]}}</text>个{{newFeatureFlag ? '火箭' : '助力包'}}
+                </view>
+                <view wx:else>
+                    很遗憾，您没有抽中{{newFeatureFlag ? '火箭' : '助力包'}}
+                </view>
+            </view>
+            <!-- 会员跑马灯 -->
+            <view class="jiasu-tunetable-block-vip" wx:if="{{(isSuperVip || OrderUserIsSuperMember || IsLuckyStar)}}">
+                <image src="{{themeConfig.marqueeSrc}}" class="img-choujiang" wx:if="{{themeConfig.open}}"></image>
+                <image src="http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-choujiang.png" class="img-choujiang" wx:else></image>
+                <view>
+                    <block wx:for="{{accePackages}}" wx:for-item="pkg" wx:key="index">
+                        <view class="item overturn {{index === curPkgIdx ? 'cur': ''}} {{lottery.isRunning ? '':'end'}} {{!lottery.isRunning && index === curPkgIdx ? 'active' : ''}}" style="color:{{themeConfig.open ? themeConfig.fontColor : '#fff'}}">
+                            <view class="overturn-item">
+                                <image src="{{themeConfig.itemSrc}}" class="img-item" wx:if="{{themeConfig.open}}"/>
+                                <image src="http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-choujiang-default.png" class="img-item" wx:else></image>
+                                <view class="tit">
+                                    <text class="strong">{{pkg}}</text>个
+                                </view>
+                                <view class="txt">助力包</view>
+                            </view>
+                            <view class="overturn-item">
+                                <view class="tit">
+                                    <text class="strong">{{pkg}}</text>个
+                                </view>
+                                <view class="txt">助力包</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+
+            <block wx:else>
+                <!--非会员跑马灯 -->
+                <view class="jiasu-tunetable-block">
+                    <image src="{{themeConfig.marqueeSrc}}" class="img-choujiang" wx:if="{{themeConfig.open}}"></image>
+                    <image src="http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-choujiang.png" class="img-choujiang" wx:else></image>
+                    <view>
+                        <block wx:for="{{accePackages}}" wx:for-item="pkg" wx:key="index" wx:if="{{!isSuperVip && !OrderUserIsSuperMember}}">
+                            <view class="item {{index == curPkgIdx ? 'cur':''}} {{lottery.isRunning ? '':'end'}}" style="color:{{themeConfig.open ? themeConfig.fontColor : '#fff'}}">
+                                <image src="{{themeConfig.itemSrc}}" class="img-item" wx:if="{{themeConfig.open}}"/>
+                                <image src="http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-choujiang-default.png" class="img-item" wx:else></image>
+                                <view class="tit">
+                                    <text class="strong">{{pkg}}</text>个
+                                </view>
+                                <view class="txt">{{newFeatureFlag ? '火箭' : '助力包'}}</view>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+
+            </block>
+        </view>
+        <block wx:if="{{ !lottery.isRunning && LuckyStarType === 1 }}">
+            <button wx:if="{{!IsReceiveGiftPack }}" class="btn yellow" bind:tap="toRecallPage"></button>
+            <view wx:else class="received-text" bind:tap="toRecallPage">
+                已领取助力奖励<text class="ifont-arr"></text>
+            </view>
+            <!-- 关闭 -->
+            <view class="ifont-closed" bind:tap="hideBackdrop"></view>
+        </block>
+        <!-- 动画 -->
+        <view class="fuxing-halo-shadow" wx:if="{{!lottery.isRunning && IsLuckyStar}}"></view>
+    </view>
+
+    <view class="pop-foot-friend" wx:if="{{showMask === 'share'}}">
+        <view class="tit">帮TA找更多人助力</view>
+        <view class="share-box">
+            <view class="item" bindtap="showPost" id="c_train_wx_robsharenew_sharefriends_icon">
+                <view class="icon icon-circle"></view>
+                <text class="">分享到朋友圈</text>
+            </view>
+            <view class="item">
+                <view class="icon icon-wechart">
+                    <button class="btn-share" catchtap="saveAndShowPost" id="c_train_wx_robsharenew_share_icon" open-type="{{hideShareFlag === 1 ? '' : 'share'}}">share</button>
+                </view>
+                <text class="">分享到微信</text>
+            </view>
+            <view class="item" bindtap="showPost" id="c_train_wx_robsharenew_shareface_icon">
+                <view class="icon icon-qrcode"></view>
+                <text class="">面对面扫一扫</text>
+            </view>
+        </view>
+        <button class="btn-cancel" hover-class="btn-cancel_hover" bindtap="hideBackdrop">取消</button>
+    </view>
+
+    <!-- 二维码海报 -->
+    <view class="jiasu-pop-box" wx:if="{{showMask === 'post'}}">
+        <image class="jiasu-post" src="{{sharePic}}"></image>
+        <button class="btn btn-primary btn-post" hover-class="btn-primary_hover" bindtap="savePost" data-url="{{sharePic}}" id="c_train_wx_robshare_savepost">保存抢票神器</button>
+    </view>
+
+    <!-- 授权头像询问弹窗 -->
+    <view class="pop-mid" wx:if="{{showMask == 'getInfoPop'}}" bindtap="hideBackdrop">
+        <view class="pop-jiasu-result {{isNationalActivityOpen ? 'chunyun' : ''}}" >
+          <image src="{{themeConfig.popHdSrc}}" class="img-bg" wx:if="{{themeConfig.open}}"></image>
+          <image src="{{'http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-box.png?v=23011220'}}" class="img-bg" wx:else></image>
+          <view class="jiasu-result-bd">
+            <view class="tit-liuming"></view>
+            <view class="txt">是否告知您的好友你是谁？</view>
+            <button class="btn-blue" hover-class="btn-hotel-share_hover" style="background-image:url({{themeConfig.open ? themeConfig.btnSrc : 'http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-btn.png'}});color:#fff" catchtap="getUserProfileAndAcce" wx:if="{{canIUseGetUserProfile}}">告诉TA</button>
+            <button class="btn-blue" hover-class="btn-hotel-share_hover" style="background-image:url({{themeConfig.open ? themeConfig.btnSrc : 'http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-btn.png'}});color:#fff" wx:else catchtap="empty" open-type="getUserInfo" bindgetuserinfo="getUserInfoAndAcce">告诉TA</button>
+          </view>
+        </view>
+    </view>
+</view>
+
+<!-- 收藏模块 -->
+<template is="favoriteModal" wx:if="{{showMask === 'guide'}}" />
+
+<!-- 抽中助力包及优惠券相关弹窗 -->
+<view class="pop-mid" wx:if="{{lottery.hasResult && showMask === 'success-pkg' && !isShowSuperPowerLottery}}" bindtap="hideBackdrop">
+    <view class="pop-mid-box">
+        <view class="pop-jiasu-result {{ CouponDesc ? 'pop-end' : '' }} {{isNationalActivityOpen ? 'chunyun' : ''}}" >
+          <image src="{{themeConfig.popHdSrc}}" class="img-bg" wx:if="{{themeConfig.open}}"></image>
+          <image src="{{'http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-box.png?v=23011220'}}" class="img-bg" wx:else></image>
+          <view class="jiasu-result-bd">
+            <!--用户领取过抢票券  -->
+            <view class="cont status" wx:if="{{showMask === 'success-pkg'}}">
+                <view class="slogan {{accePackages[curPkgIdx] !== '0' ? 'suc': 'fail'}}"></view>
+                <view class="tit" wx:if="{{accePackages[curPkgIdx] !== '0'}}">您的好友已获得
+                    <text class="tblue" wx:if="{{(isSuperVip || OrderUserIsSuperMember) && IsLuckyStar}}">{{accePackages[curPkgIdx] * 4}}个</text>
+                    <text class="tblue" wx:elif="{{isSuperVip || OrderUserIsSuperMember || IsLuckyStar}}">{{accePackages[curPkgIdx] * 2}}个</text>
+                    <text class="tblue" wx:else>{{accePackages[curPkgIdx]}}个</text>
+                    {{newFeatureFlag ? '火箭' : '助力包'}}</view>
+                <view class="tit" wx:else>很遗憾，没有抽中{{newFeatureFlag ? '火箭' : '助力包'}}</view>
+                <button class="btn-blue" catchtap="hideSuccessPkg" data-type="end" style="background-image:url({{themeConfig.btnSrc}});color:{{themeConfig.couponColor}}" wx:if="{{themeConfig.open}}">确定</button>
+                <button class="btn-blue" catchtap="hideSuccessPkg" data-type="end" style="background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-btn.png);color:#fff" wx:else>确定</button>
+                <!-- 送3元立减券 -->
+                <view class="gc" wx:if="{{ CouponDesc }}">
+                    <text>感谢助力送你一张{{ CouponDesc }}</text>
+                </view>
+            </view>
+          </view>
+        </view>
+    </view>
+</view>
+<!-- 抽中助力包及优惠券 超能力相关 新弹窗 -->
+
+<view class="pop-mid" wx:if="{{lottery.hasResult && showMask === 'success-pkg' && isShowSuperPowerLottery }}" bindtap="hideBackdrop">
+    <view class="pop-mid-box ">
+        <view class="pop-jiasu-super-box" >
+          <image src="{{'https://images3.c-ctrip.com/train/2023/zengzhang/v8.60/zhuli/img-top.png'}}" class="img-top" ></image>
+          <image src="{{superPowerInfo.imgUrl}}" class="img-middle" ></image>
+          <button class="img-botm" open-type="{{hideShareFlag === 1 ? '' : 'share'}}"  data-share="superpower" catchtap="saveAndShowPost"></button>
+          <view class="jiasu-super-txt" wx:if="{{showMask === 'success-pkg'}}">
+           <!-- 用户领取过抢票券  -->
+                 <view class="tit" wx:if="{{accePackages[curPkgIdx] !== '0'}}">
+                    <text class="super-subtit"> 助力成功！</text>
+                    <text>
+                    已为好友增加</text>
+                    <text class="tblue" wx:if="{{(isSuperVip || OrderUserIsSuperMember) && IsLuckyStar}}">{{accePackages[curPkgIdx] * 4}}个</text>
+                    <text class="tblue" wx:elif="{{isSuperVip || OrderUserIsSuperMember || IsLuckyStar}}">{{accePackages[curPkgIdx] * 2}}个</text>
+                    <text class="tblue" wx:else>{{accePackages[curPkgIdx]}}个</text>{{newFeatureFlag ? '火箭' : '助力包'}}</view>
+                <view class="tit" wx:else>
+                 <text> 很遗憾
+                 没有抽中{{newFeatureFlag ? '火箭' : '助力包'}}</text></view>
+          </view>
+        </view>
+    </view>
+</view>
+
+<view class="pop-mid pop-lottery" wx:if="{{showMask === 'special-arm-assist-pop'}}" style="width:330px;height:379px;">
+    <!-- 助力后特种兵旅行弹窗 -->
+    <view class="special-arm-background"></view>
+    <view class="assist-info" style="width:330px;">
+        <image mode="aspectFit" src="https://images3.c-ctrip.com/train/activity/20230724-ctrip-PointBlindBox/img-zlcg.png" />
+        <text>您的好友已获得{{GrabAccelNumber }}个助力包</text>
+    </view>
+    <view class="special-arm-btn" bindtap="onClickSpecialArmJumpBtn"></view>
+    <text class="icon-closed" bindtap="hideBackdrop"></text>
+</view>
+
+<view class="pop-mid pop-lottery" style="height:384.5px;" wx:if="{{showMask === 'replace-seat-assist-pop'}}">
+    <!-- 助力后在线换座旅行弹窗 -->
+    <view class="replace-seat-background"></view>
+    <view class="assist-info">
+        <image mode="aspectFit" src="https://images3.c-ctrip.com/train/activity/20230724-ctrip-PointBlindBox/img-zlcg.png" />
+        <text>您的好友已获得{{GrabAccelNumber }}个助力包</text>
+    </view>
+    <view class="replace-seat-btn" bindtap="onClickReplaceSeatJumpBtn"></view>
+    <text class="icon-closed" bindtap="hideBackdrop"></text>
+</view>
+
+<!-- 助力后流失弹窗 -->
+<template is="lostUserPop" data="{{lostUserPopType:'robshare',lostUserPopDetail,GrabAccelNumber}}" wx:if="{{showMask === 'lost-user-assist-pop'}}" />
+
+<view class="pop-mid pop-lottery" wx:if="{{showMask === 'blind-box-assist-pop'}}">
+    <view class="blind-box-background"></view>
+    <view class="assist-info">
+        <image mode="aspectFit" src="https://images3.c-ctrip.com/train/activity/20230724-ctrip-PointBlindBox/img-zlcg.png" />
+        <text>您的好友已获得{{GrabAccelNumber }}个助力包</text>
+    </view>
+    <view class="pop-mid-hd">
+        <view class="logo"></view>
+        <view class="tit">
+            <image 
+            mode="aspectFit"
+            src="https://images3.c-ctrip.com/train/activity/20230724-ctrip-PointBlindBox/img-bts.png"
+            />
+        </view>
+
+        <view class="txt">0元火车游全新体验 下一站「 远方 」</view>
+    </view>
+    <ul class="pop-lottery-city">
+
+    <swiper
+    class="pop-lottery-city-swiper-container"
+    autoplay
+    circular
+    interval="{{1500}}" 
+    duration="{{500}}" 
+    next-margin="-8px"
+    >
+    <!-- duration="{{1000}}"  -->
+      <swiper-item wx:for="{{[0, 3, 6]}}" wx:key="index">
+          <li>
+              <image src="{{blindBoxCityList[item].Image}}" class="img"/>
+                <view class="tag">
+                    <image src="{{blindBoxCityList[item].BgColor}}" class="img" />
+                    <view class="tit">{{blindBoxCityList[item].CityName}}</view>
+                    <view class="txt">{{blindBoxCityList[item].Desc}}</view>
+                </view>
+            </li>
+          <li>
+              <image src="{{blindBoxCityList[item + 1].Image}}" class="img"/>
+                <view class="tag">
+                    <image src="{{blindBoxCityList[item + 1].BgColor}}" class="img" />
+                    <view class="tit">{{blindBoxCityList[item + 1].CityName}}</view>
+                    <view class="txt">{{blindBoxCityList[item + 1].Desc}}</view>
+                </view>
+            </li>
+          <li>
+              <image src="{{blindBoxCityList[item + 2].Image}}" class="img"/>
+                <view class="tag">
+                    <image src="{{blindBoxCityList[item + 2].BgColor}}" class="img" />
+                    <view class="tit">{{blindBoxCityList[item + 2].CityName}}</view>
+                    <view class="txt">{{blindBoxCityList[item + 2].Desc}}</view>
+                </view>
+            </li>
+        </swiper-item >
+    </swiper>
+
+        <!-- {{}} -->
+        <!-- <li>
+            <image src="https://images3.c-ctrip.com/train/activity/20230724-ctrip-PointBlindBox/img-changsha.png" class="img" />
+            <view class="tag">
+                <image src="https://images3.c-ctrip.com/train/activity/20230724-ctrip-PointBlindBox/img-lanses.png" class="img" />
+                <view class="tit">长沙</view>
+                <view class="txt">特色有名小吃</view>
+            </view>
+        </li>
+        <li>
+            <image src="https://images3.c-ctrip.com/train/activity/20230724-ctrip-PointBlindBox/img-chengdu.png" class="img" />
+            <view class="tag">
+                <image src="https://images3.c-ctrip.com/train/activity/20230724-ctrip-PointBlindBox/img-chengses.png" class="img" />
+                <view class="tit">成都</view>
+                <view class="txt">看一看大熊猫</view>
+            </view>
+        </li>
+        <li>
+            <image src="https://images3.c-ctrip.com/train/activity/20230724-ctrip-PointBlindBox/img-wuhan.png" class="img" />
+            <view class="tag">
+                <image src="https://images3.c-ctrip.com/train/activity/20230724-ctrip-PointBlindBox/img-lvses.png" class="img" />
+                <view class="tit">武汉</view>
+                <view class="txt">百年经典味道</view>
+            </view>
+        </li> -->
+    </ul>
+    <view class="pop-mid-botm">
+        <button class="btn-submit" bindtap="onClickBlindBoxJumpBtn">
+            <view class="tit">            
+            <image 
+                mode="aspectFit"
+                src="https://images3.c-ctrip.com/train/activity/20230724-ctrip-PointBlindBox/img-an.png"
+            /></view>
+            <text class="icon-light"></text>
+        </button>
+        <view class="tag">12306积分兑免费车票</view>
+        <!-- <view class="lottie-hand" id="lottieHand"></view> -->
+    </view>
+    <text class="icon-closed" bindtap="hideBackdrop"></text>
+</view>
+<!-- 助力成功后领取优惠券弹窗 -->
+<view class="pop-mid" wx:if="{{showMask == 'coupon'}}">
+    <view class="pop-jiasu-result {{isNationalActivityOpen ? 'chunyun' : ''}}">
+        <image src="{{themeConfig.popCouponHdSrc}}" class="img-bg" wx:if="{{themeConfig.open}}"></image>
+        <image src="{{'http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-box.png?v=23011220'}}" class="img-bg" wx:else></image>
+        <view class="jiasu-fanbei-box">
+            <view class="tit">好友获得{{isSuperVip || OrderUserIsSuperMember? accePackages[curPkgIdx] * 2 : accePackages[curPkgIdx]}}个助力包，您的奖励可翻倍</view>
+            <view class="jiasu-fanbei-bd">
+                <view class="item star" style="background-image:url({{themeConfig.couponSrc ? themeConfig.couponSrc : 'https://pic.c-ctrip.com/train/wechat/robshare/pop-fanbei-star.png'}});">
+                    <!-- 翻倍前 -->
+                    <block wx:if="{{item.SubType == 1}}" wx:for="{{couponItemList}}">
+                        <view class="t"><text class="s">{{item.Price}}</text>元</view>
+                        <view class="x">{{item.Tittle}}</view>
+                    </block>
+                </view>
+                <view class="mid">面额翻倍</view>
+                <!-- 翻倍后 -->
+                <view class="item end">
+                    <block wx:if="{{item.SubType == 2}}" wx:for="{{couponItemList}}">
+                        <view class="t"><text class="s">{{item.Price}}</text>元</view>
+                        <view class="x">{{item.Tittle}}</view>
+                    </block>
+                </view>
+            </view>
+            <button class="btn-blue" wx:if="{{themeConfig.open}}" data-share="double" open-type="{{hideShareFlag === 1 ? '' : 'share'}}" catchtap="saveAndShowPost" data-ubt-key="c_train_wx_robshare_recievecoupon_double" hover-class="btn-hotel-share_hover" style="background-image:url({{themeConfig.btnSrc}});color:{{themeConfig.couponColor}}">分享立即翻倍</button>
+            <button class="btn-blue" wx:else data-share="double" open-type="{{hideShareFlag === 1 ? '' : 'share'}}" catchtap="saveAndShowPost" data-ubt-key="c_train_wx_robshare_recievecoupon_double" hover-class="btn-hotel-share_hover" style="background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-btn.png);color:#fff">分享立即翻倍</button>
+        </view>
+        <text class="ifont-closed" data-subtype="1"  data-activitycode="9103c8c82514f39d8360c7430c4ee557" data-ubt-key="c_train_wx_robshare_recievecoupon_single" catchtap="receiveAndSubcribe"></text>
+    </view>
+</view>
+
+<!-- 学生优惠券弹窗 -->
+<view class="jiasu-mask" wx:if="{{showMask == 'couponStu'}}"></view>
+<view class="pop-mid" wx:if="{{showMask == 'couponStu'}}">
+    <view class="pop-jiasu-result {{isNationalActivityOpen ? 'chunyun' : ''}}">
+        <image src="{{themeConfig.popHdSrc}}" class="img-bg" wx:if="{{themeConfig.open}}"></image><!--这里请换个接口,底图变了-->
+        <image src="{{'http://pic.c-ctrip.com/train/wechat/robshare/pop-xuesheng.png'}}" class="img-bg" wx:else></image>
+        <view class="jiasu-coupon-box" >
+            <view class="jiasu-coupon-list">
+                <view class="item"  wx:for="{{couponListWillStu}}" style="background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/pop-coupon2.png)">
+                    <view class="lbox" style="color:#0086F6"><text class="strong">{{item.Price}}</text>元</view>
+                    <view class="cont">
+                        <view class="strong" style="color:#0086F6">{{item.Tittle}}<text class="tag" style="background:#0086F6">{{item.Tag || '学生专享'}}</text></view>
+                        <view class="s">{{item.SubTittle}}</view>
+                    </view>
+                </view>
+            </view>
+
+            <view class="jiasu-coupon-after" style="background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/pop-xuesheng-after.png)"></view>
+
+            <button class="btn-blue"
+                hover-class="btn-hotel-share_hover"
+                style="background-image:url(http://pic.c-ctrip.com/train/wechat/robshare/pop-jiasu-btn.png);color:#fff"
+                bindtap="recieveNewCoupon"
+                data-subtype="0"
+                data-activitycode="e10adc3949ba59abbe56e057f20f883e">开心收下</button>
+
+        </view>
+        <text class="ifont-closed" bindtap="hideSuccessPkg"></text>
+    </view>
+</view>
+
+<!-- 新客未登录的红包弹窗 -->
+<block wx:if="{{showMask == 'newCustmerRightUnPop'}}">
+    <view class="pop-xinke-bag">
+        <view class="tit">购票权益礼包</view>
+        <view class="price">{{ newCustomerRightInfo.OriginPrice }}<text>元</text></view>
+        <button bindtap="loginAndReceiveRights"></button>
+        <text class="ifont-closed" bindtap="hideBackdrop"></text>
+    </view>
+</block>
+<!-- 新客权益弹窗 -->
+<!-- <block wx:if="{{showMask == 'newCustmerRightPop'}}">
+    <view class="pop-xinke-tequan">
+        <view class="pop-xinke-tequan-hd">
+            <view class="tit">送您 <text class="tgold">¥{{newCustomerRightInfo.OriginPrice}}</text> 特权礼包，请笑纳</view>
+        </view>
+        <view class="pop-xinke-tequan-bd">
+            <view class="card-equity-bd">
+                <view class="item" wx:for="{{newCustomerRightInfo.RightList}}" data-url="{{item.JumpUrl}}" bindtap="toDetailPage">
+                    <view class="tag">价值{{item.Price}}元</view>
+                    <image src="{{item.IconUrl}}" class="icon"></image>
+                    <view class="tit">{{item.Name}}</view>
+                    <view class="txt">{{item.Desc}}<text class="ifont-detail"></text></view>
+                </view>
+            </view>
+        </view>
+        <button class="btn-submit" bindtap="onClickSubscirbeAndtoTrainHome" data-ubt-key="{{(!(isAccelerating && acceState == 0) || !isLogin) ? 'train_grab_noaccnewbiebtn' : 'train_grab_newbiebtn'}}">我知道了</button>
+        <text class="ifont-closed" bindtap="hideSuccessPkg" data-type="end" wx:if="{{lottery.hasResult}}"></text>
+        <text class="ifont-closed" bindtap="hideBackdrop" wx:else></text>
+    </view>
+</block> -->
+
+<!-- 新客礼包送券的 ab v8.48 -->
+<block wx:if="{{ showMask == 'newCustomerPopAb' }}">
+    <view class="pop-xinke-ab">
+        <view class="box">
+            <view class="price">
+                {{newCustomerRightInfo.OriginPrice}}<view class='yuan'>元</view>
+            </view>
+            <view class="sub">{{ newCustomerRightInfo.RightList[0].desc1 }}</view>
+            <button class="btn" bindtap="loginAndReceiveRights" wx:if="{{ !isLogin }}">
+                <view class="img"></view>
+            </button>
+            <button class="btn" wx:else bind:tap="goNewCustomerPage">
+                <view class="img"></view>
+            </button>
+        </view>
+        <view class="ifont-closed" bindtap="hideBackdrop"></view>
+    </view>
+</block>
+
+<!-- 返现券 + 新客礼包 弹窗-->
+<block wx:if="{{showMask == 'combineGifts'}}">
+    <view class="pop-fanxian-xinke">
+        <view class="txt">好友已获得{{accePackages[curPkgIdx]}}份助力包</view>
+        <view class="bd {{!newCustomerRightInfo ? 'widen' : ''}}">
+            <view class="item fanxian {{!newCustomerRightInfo ? 'widen' : ''}}" wx:if="{{couponItemListCashBack.length}}">
+                <text class="price">{{couponItemListCashBack[0].Price}}</text>
+            </view>
+            <view class="item xinke" wx:if="{{newCustomerRightInfo}}">
+                <text class="price">{{newCustomerRightInfo.OriginPrice}}</text>
+            </view>
+        </view>
+        <button class="btn breathe {{!newCustomerRightInfo ? 'widen' : ''}}" data-issend="{{couponItemListCashBack[0].IsSend}}"
+        data-ubt-key="{{newCustomerRightInfo && couponListWillCashBack.length ? 'train_grab_nebiecashbtn' :  (newCustomerRightInfo && !couponItemListCashBack.length ? 'train_grab_newbiebtn' : (!newCustomerRightInfo && couponListWillCashBack.length ? 'train_grab_cashbtn' : 'train_grab_cashusebtn'))}}"
+        bindtap="receiveCombineGifts">{{couponItemListCashBack[0].IsSend && !newCustomerRightInfo? '购票并提现' : '立即领取'}}<text class="ifont-triangle"></text></button>
+        <text class="ifont-closed" bindtap="hideSuccessPkg" data-type="end"></text>
+    </view>
+</block>
+
+<!-- 返现券  弹窗-->
+<block wx:if="{{showMask == 'cashbackGuide'}}">
+    <view class="pop-fanxian-xinke new">
+    <view class="dialog-hd">
+        <view class="avatar" style="background: url({{selfAvatar || 'https://images3.c-ctrip.com/train/dulujie/img_photo_default@3x.png'}}) no-repeat;background-size: 100% 100%;"></view>
+        <view class="txt" wx:if="{{acceSuccess}}">我已在携程抢票成功，感谢支持</view>
+        <view class="txt" wx:elif="{{!isAccelerating}}">我已无需助力，感谢支持</view>
+        <view class="txt" wx:else>您已无法帮我助力，感谢支持</view>
+    </view>
+        <!-- <view class="txt">好友已获得{{accePackages[curPkgIdx]}}份助力包</view> -->
+        <view class="bd" style="margin-top: 378rpx;">
+            <view class="item fanxian widen">
+                <text class="price">{{couponItemListCashBack[0].Price}}</text>
+            </view>
+        </view>
+        <button class="btn breathe widen"
+        data-ubt-key="train_grab_noacccsharebtn"
+        bindtap="receiveCombineGifts">立即提现</button>
+        <text class="ifont-closed" bindtap="hideBackdrop"></text>
+    </view>
+</block>
+
+<block wx:if="{{showMask == 'shareGuide' && assistTaskStatus !== 5 && !needPopClose}}">
+    <view class="pop-share-guide {{ LuckyStarType === 1 ? !IsReceiveGiftPack ? 'luck' : 'luckReceived' : '' }}">
+        <view class="hd">您已经助力过了哦~</view>
+        <view class="bd">
+            <view class="avatar" style="background: url({{selfAvatar || 'https://images3.c-ctrip.com/train/dulujie/img_photo_default@3x.png'}}) no-repeat;background-size: 100% 100%;"></view>
+            <view class="tips">求帮忙转发，我只差一点就能抢到票了</view>
+        </view>
+        <view class="txt">转发到好友群，抢票成功率更高哦~</view>
+        <button class="btn" open-type="{{hideShareFlag === 1 ? '' : 'share'}}" data-ubt-key="train_grab_noacccsharebtn" catchtap="saveAndShowPost"></button>
+        <block wx:if="{{LuckyStarType === 1}}">
+            <button wx:if="{{!IsReceiveGiftPack }}" class="btn yellow" data-ubt-key="" bind:tap="toRecallPage"></button>
+            <view wx:else class="received-text" bind:tap="toRecallPage">
+                已领取助力奖励<text class="ifont-arr"></text>
+            </view>
+        </block>
+        <text class="ifont-closed" bindtap="hideBackdrop"></text>
+    </view>
+</block>
+
+<!-- 任意行规则弹窗 -->
+<!-- <view class="ruleCard backmask {{ isRuleCardShow ? 'active' : '' }}" bindtap="hideRuleCard">
+    <view class="ruleCard-main pop-botm {{ isRuleCardShow ? 'active' : '' }}">
+        <view class="ruleCard-main-head">
+            <view class="ifont-closed-line"></view>
+            <text class="ruleCard-main-title">活动规则</text>
+        </view>
+        <view class="ruleCard-main-body">
+            <view class="ruleCard-main-item" wx:for="{{ anyGoInfo.RuleList }}">{{ item }}</view>
+        </view>
+    </view>
+</view> -->
+
+<!-- reshare规则弹窗 -->
+<view class="ruleCard backmask {{ showMask === 'reshareRule' ? 'active' : '' }}" bindtap="hideBackdrop">
+    <view class="ruleCard-main pop-botm {{ showMask === 'reshareRule' ? 'active' : '' }}">
+        <view class="ruleCard-main-head">
+            <view class="ifont-closed-line"></view>
+            <text class="ruleCard-main-title">活动规则</text>
+        </view>
+        <view class="ruleCard-main-body scroll">
+            <view class="ruleCard-main-item" wx:for="{{ reshareRuleList }}">{{ item }}</view>
+        </view>
+    </view>
+</view>
+
+<!-- 助力任务领奖 -->
+<block wx:if="{{showMask === 'assistTaskSucceed'}}">
+  <template is="rob-coupon-pop" data="{{taskRwardInfo, showMask}}"></template>
+</block>
+
+<!-- 接受浏览任务 -->
+<block wx:if="{{showMask === 'assistTaskReceived'}}">
+  <template is="rob-coupon-pop" data="{{taskRwardInfo, taskCountDownText, showMask}}"></template>
+</block>
+
+<!-- 小红书助力领奖 -->
+<block wx:if="{{showMask === 'redBookAssistSucceed'}}">
+    <view class="pop-mid task-reward-pop">
+        <view class="pop-mid-box">
+            <view class="task-reward-background"></view>
+            <view class="task-reward-title">已为您的好友助力成功</view>
+            <view class="task-reward-tags">
+                <view class="tag-container tag-left">
+                    <image class="kuaisu" src="https://images3.c-ctrip.com/train/2022/app/8.47/zengzhang/xiaochengxu_zhulirenwu/icon_sudu.png" />
+                    <text class="speed">{{redBookAssistPackage.couponNum}}个助力包</text>
+                </view>
+                <view class="tag-container tag-right">
+                    <image class="sheng" src="https://images3.c-ctrip.com/train/2022/app/8.47/zengzhang/xiaochengxu_zhulirenwu/icon_yuan.png" />
+                    <text>省下￥{{redBookAssistPackage.Price}}</text>
+                </view>
+            </view>
+            <!-- <view class="split-line" />
+            <view class="task-reward-tip">送您一张酒店券，订酒店更优惠~</view>
+            <view class="task-reward-ticket">
+                <view class="ticket-left">
+                    <text class="discount">{{redBookAssistCoupons[0].Price}}</text>
+                    <text>元</text>
+                </view>
+                <view class="ticket-stick" />
+                <view class="ticket-right"></view>
+                <view class="ticket-info">
+                    <view class="ticket-title">{{redBookAssistCoupons[0].Title}}</view>
+                    <view class="ticket-desc">{{redBookAssistCoupons[0].Desc}}</view>
+                </view>
+            </view> -->
+            <button class="task-reward-btn" bindtap="onClickHideTaskPop">我知道了</button>
+        </view>
+    </view>
+</block>
+
+<!-- 新客10元券 未开启 -->
+<block wx:if="{{showMask === 'newGuestRightUpPop'}}">
+<!-- <block wx:if="{{showMask === '1'}}"> -->
+		<view class="backmask active"></view>
+		<view class="pop-xinke-bag">
+			<view class="tit">先领券后下单更优惠</view>
+			<view class="price">?<text>元</text></view>
+			<button bindtap="onClickLoginAndReceive"></button>
+			<text class="ifont-closed-line" bindtap="hideBackdrop"></text>
+		</view>
+</block>
+
+<!-- 新客10元券奖励 -->
+<!-- <block wx:if="{{showMask === 'newGuestRightPop'}}">
+  <view class="backmask active" bindtap="hideBackdrop"></view>
+  <view class="pop-new-guest-activity-coupon">
+    <view class="new-guest-bd-coupon">
+      <view class="new-guest-bd-top">
+      <view class="new-guest-bd-top-title">新客专享礼包</view>
+        <block wx:for="{{newCustomerRightInfo.RightList}}">
+          <view class="pop-result-normal-container {{item.Type === 3 ? 'new-user-type':''}}">
+            <view class="pop-result-bd-ticket">
+              <view class="price">
+                <text>{{item.Price}}</text>
+              </view>
+              <view class="reward-info">
+                <view class="reward-info-name">{{item.Name}}</view>
+                <view class="reward-info-tips">{{item.DescV2}}</view>
+              </view>
+              <button class="invite-btn" wx:if="{{item.Type === 3}}" bindtap="onClickGoToNewGuestActivity" data-type="pop-up" data-jumpurl="{{item.JumpUrl}}">邀请</button>
+            </view>
+            <view class="split-line"></view>
+            <view class="tag" wx:if="{{item.Type !== 3}}">已到账</view>
+          </view>
+        </block>
+      </view>
+      <view class="new-guest-bd-botm">
+      <button class="btn-submit" bindtap="onClickGoToBuyTicket">去购票</button>
+      </view>
+    </view>
+    <view class="new-guest-decoration-left"></view>
+    <view class="new-guest-decoration-right"></view>
+    <text class="ifont-closed" bindtap="hideBackdrop"></text>
+  </view>
+</block> -->
+<!-- 保存图片成功 COPY -->
+<view class="pop-share-qrcode" wx:if="{{showMask === 'showShareImage' || showMask === 'showShareImageWithoutSave'}}">
+    <view class="pop-share-qrcode-bd">
+      <image src="{{robSharePic}}" mode="widthFix"></image>
+    </view>
+    <view class="info" wx:if="{{showMask !== 'showShareImageWithoutSave'}}">图片已保存至手机，快去分享吧</view>
+    <text class="ifont-closed" bindtap="hideShareImage" style="{{ showMask === 'showShareImageWithoutSave' ? 'bottom: -60rpx;' : ''}}"></text>
+  </view>
+<view class="view-check" bindanimationend="viewReadyHandle"></view>
+
+<newGuestPop
+    visible="{{ showMask === 'newGuestRightPop' }}"
+    data="{{ newGuestReceivedPopData || newCustomerRightInfo }}"
+    bind:close="hideNewGuestRightPopBackDrop"
+>
+    <button wx:if="{{showMask === 'newGuestRightPop'}}" class="r-bg-btn-submit" bindtap="onClickGoToBuyTicket">我知道了</button>
+</newGuestPop>
+
+<subscribeGuide visible="{{subscribeGuideFlag}}" videoSrc="{{subVideoSource}}"/>
+
+</view>

@@ -1,0 +1,572 @@
+{
+  "pages": [
+    "pages/home/homepage",
+    "cwx/component/cwebview/cwebview",
+    "cwx/component/cwebview/scwebview",
+    "pages/implus/messageList/messageList",
+    "pages/lvpai/lvpaiHome/lvpaiHome",
+    "pages/market/coupon/index/index",
+    "pages/myctrip/index/index",
+    "pages/schedule/index/index"
+  ],
+  "permission": { "scope.userLocation": { "desc": "将根据您的位置信息查找适合的旅行信息" } },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#efefef"
+  },
+  "renderer": "skyline",
+  "rendererOptions": { "skyline": { "defaultDisplayBlock": true } },
+  "componentFramework": "glass-easel",
+  "navigationStyle": "custom",
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#19A0F0",
+    "borderStyle": "white",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/home/homepage",
+        "iconPath": "images/home/tabbar_home.png",
+        "selectedIconPath": "images/home/tabbar_home_hover.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/lvpai/lvpaiHome/lvpaiHome",
+        "iconPath": "images/home/tabbar_travelphoto.png",
+        "selectedIconPath": "images/home/tabbar_travelphoto_hover.png",
+        "text": "社区"
+      },
+      {
+        "pagePath": "pages/implus/messageList/messageList",
+        "iconPath": "images/home/tabbar_message.png",
+        "selectedIconPath": "images/home/tabbar_message_hover.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/schedule/index/index",
+        "iconPath": "images/home/tabbar_timeline.png",
+        "selectedIconPath": "images/home/tabbar_timeline_hover.png",
+        "text": "行程"
+      },
+      {
+        "pagePath": "pages/myctrip/index/index",
+        "iconPath": "images/home/tabbar_mine.png",
+        "selectedIconPath": "images/home/tabbar_mine_hover.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "subPackages": [
+    { "root": "cwx/component/perInfoProtectGuide", "pages": [ "index", "pwebview" ] },
+    { "root": "pages/testconfig", "pages": [ "testconfig" ] },
+    {
+      "root": "cwx/component/extraCweb",
+      "pages": [ "cweb1", "cweb2", "cweb3", "cweb4", "cweb5", "cweb6", "cweb7", "cweb8" ]
+    },
+    {
+      "root": "cwx/component/extraScweb",
+      "pages": [ "scweb1", "scweb2", "scweb3", "scweb4", "scweb5", "scweb6" ]
+    },
+    { "root": "cwx/component/messageRecommend", "pages": [ "index" ] },
+    { "root": "cwx/component/calendar", "pages": [ "calendar" ] },
+    { "root": "cwx/component/city", "pages": [ "city" ] },
+    { "root": "cwx/component/country", "pages": [ "country" ] },
+    { "root": "cwx/component/ocr", "pages": [ "ocr" ] },
+    {
+      "root": "pages/accounts",
+      "pages": [
+        "mplist/index",
+        "pages/silentlogin/index",
+        "pages/mobiledynamiclogin/index",
+        "pages/newlogin/index",
+        "pages/bindphone/index",
+        "pages/searchorder/index"
+      ]
+    },
+    {
+      "root": "pages/passenger",
+      "pages": [
+        "passengerlist",
+        "shark/editpage/index",
+        "shark/countrylist/countrylist",
+        "shark/countrylist/countrycodes",
+        "shark/success/index"
+      ]
+    },
+    { "root": "pages/favorite/", "pages": [ "middlepage" ] },
+    { "root": "pages/bnb/", "pages": [ "bnbwebview" ] },
+    {
+      "root": "pages/bus",
+      "pages": [
+        "index/index",
+        "list/list",
+        "router/index",
+        "obook/obook",
+        "passenger/passenger",
+        "book/book",
+        "book/x",
+        "orderdetail/orderdetail",
+        "share/index",
+        "web/index",
+        "webview/index",
+        "city/index",
+        "coupon/coupon",
+        "taro/list/index",
+        "taro/book/index",
+        "taro/passenger/index",
+        "taro/coffeebean/index"
+      ]
+    },
+    { "root": "pages/busnew/stand", "pages": [ "router/index" ], "independent": true },
+    {
+      "root": "pages/car/",
+      "pages": [ "index/index", "iday/pages/index/index", "misccar/pages/index/index" ]
+    },
+    { "root": "pages/cranking/", "pages": [] },
+    {
+      "root": "pages/destination/",
+      "pages": [ "guide/catalog/catalog", "guide/details/details" ]
+    },
+    {
+      "root": "pages/flightBargain/",
+      "pages": [ "componentsV2/index", "componentsV2/ruleDetail/index", "componentsV2/groupDetail/index" ]
+    },
+    {
+      "root": "pages/foods/",
+      "pages": [
+        "home/home",
+        "foodsList/foodsList",
+        "resDetail/resDetail",
+        "specialDishList/specialDishList",
+        "transit/transit"
+      ]
+    },
+    {
+      "root": "pages/gs/",
+      "pages": [
+        "common/error",
+        "comment/detail",
+        "sight/newList",
+        "travels/list",
+        "sight/newDetail",
+        "offline-shelf/index"
+      ]
+    },
+    {
+      "root": "pages/hotel/",
+      "pages": [
+        "ordercommit/index",
+        "orderfinish/index",
+        "booking/index",
+        "booking/thirdbook",
+        "city/index",
+        "newcomment/index",
+        "orderdetail/index",
+        "components/calendar/calendar",
+        "components/calendarHourroom/calendar",
+        "components/webview/webview",
+        "components/city/city",
+        "inquire/index",
+        "list/index",
+        "list/listmap/index",
+        "detail/index",
+        "detail/photolist/index",
+        "detail/sellingpoint/index",
+        "view/index",
+        "router/index",
+        "keywordsearch/index",
+        "market/funscore/index",
+        "market/funscore/raffle/index",
+        "unlimitQRCode/index",
+        "browsehotellist/index",
+        "cinvoice/index"
+      ]
+    },
+    {
+      "root": "pages/hotelplanning/",
+      "pages": [
+        "market/authorize/index",
+        "aggregate/index",
+        "location/index",
+        "guestservice/index",
+        "aggregate/wifiaggregate",
+        "market/wifi/index",
+        "guidelogin/index",
+        "autosall/login/index",
+        "autosall/buy/index",
+        "market/assistcutprice/index",
+        "cinvoice/index",
+        "roomorder/index",
+        "weworklanding/index",
+        "aggregate/main",
+        "feedback/index",
+        "router/index",
+        "activitysquare/index"
+      ]
+    },
+    {
+      "root": "pages/live",
+      "pages": [ "webcast/home" ],
+      "plugins": { "liveRoomPlugin": { "version": "1.3.7", "provider": "wx95a7d2b78cf30f98" } }
+    },
+    { "root": "pages/market/mwebview/", "pages": [ "index" ] },
+    { "root": "pages/market/cancelCoupon/", "pages": [ "cancelCoupon" ] },
+    { "root": "pages/market/unlimitQRCode/", "pages": [ "index" ] },
+    { "root": "pages/market/promocode/", "pages": [ "index/index", "collect/collect" ] },
+    { "root": "pages/market/voucher/", "pages": [ "index" ] },
+    { "root": "pages/market/web/", "pages": [ "index", "newindex" ] },
+    { "root": "pages/market/activity/", "pages": [ "activity", "result" ] },
+    { "root": "pages/market/signIn/", "pages": [ "index", "integral" ] },
+    { "root": "pages/market/midpage/", "pages": [ "midpage", "index", "bcode", "transfer" ] },
+    { "root": "pages/market/tempRelaySite/", "pages": [ "tempRelaySite" ] },
+    { "root": "pages/market/router/", "pages": [ "index" ] },
+    {
+      "root": "pages/market/directory/",
+      "pages": [
+        "liveMidpage/index",
+        "game/index",
+        "game/address",
+        "address/index",
+        "authMidpage/index",
+        "zzl/index",
+        "zzl/history",
+        "zzl/poster",
+        "boxAssist/index",
+        "assistNew/index",
+        "assistNew/poster",
+        "relayPage/index",
+        "videoTaskPage/index",
+        "inviteWithTask/index",
+        "taskPage/notesAudit",
+        "groupChatEntry/index",
+        "publicauthorize/index",
+        "duobao/index",
+        "duobao/rule",
+        "duobao/myyo",
+        "duobao/duobao",
+        "preview/poster",
+        "campuswechatgroup/index",
+        "inviteWithTaskNormal/index",
+        "vtmQrcode/vtmQrcode",
+        "mktProduct/index",
+        "mktProduct/list",
+        "videoTaskPage/skyline"
+      ],
+      "rendererOptions": { "skyline": { "defaultDisplayBlock": true } },
+      "plugins": {
+        "materialPlugin": { "version": "1.0.5", "provider": "wx4d2deeab3aed6e5a" },
+        "wxacommentplugin": { "version": "latest", "provider": "wx82e6ae1175f264fa" }
+      }
+    },
+    { "root": "pages/market/myprize/", "pages": [ "myprize" ] },
+    { "root": "pages/mytravels/", "pages": [ "webview/travels" ] },
+    {
+      "root": "pages/pay/",
+      "pages": [ "directback/index", "directpay/index", "realname/index", "holdpay/index", "refund/index" ]
+    },
+    {
+      "root": "pages/paynew/",
+      "pages": [ "directpay/index", "paywallet/paywallet", "holdpay/index", "holdpayDetail/index" ]
+    },
+    {
+      "root": "pages/schedule/pages",
+      "pages": [
+        "cardAdd/flight/flight",
+        "cardAdd/trainAdd/trainAdd",
+        "cardDetail/train/train",
+        "cardShare/trainShare/trainShare",
+        "cardShare/travelplanShare/travelplanShare",
+        "shareList/shareList",
+        "calendar/calendar",
+        "travelLineList/travelLineList"
+      ]
+    },
+    { "root": "pages/schedule/timelineComponent", "pages": [] },
+    { "root": "pages/search/", "pages": [ "search" ] },
+    { "root": "pages/ship", "pages": [ "index/index", "orderdetail/orderdetail" ] },
+    {
+      "root": "pages/tbnb",
+      "pages": [ "pages/main/detail/index", "pages/common/webview/index", "pages/common/message/index" ]
+    },
+    {
+      "root": "pages/ticket/",
+      "pages": [ "web/index", "list/list", "detail/index", "order/detail", "promotions/index" ]
+    },
+    { "root": "pages/tour/", "pages": [ "waken/index" ] },
+    {
+      "root": "pages/train/",
+      "pages": [
+        "index/index",
+        "index/components/city/city",
+        "face/face",
+        "list/list",
+        "booking/grab/grab",
+        "booking/ordinary/ordinary",
+        "orderdetail/orderdetail",
+        "orderdetail/ordinary/ordinary",
+        "inviterob/inviterob",
+        "robshare/robshare",
+        "robshare2/robshare2",
+        "webview/webview",
+        "share/share",
+        "shareCoupon/shareCoupon",
+        "unlimitQRCode/unlimitQRCode",
+        "journey/unlimitQRCode/unlimitQRCode",
+        "booking/unlimitQRCode/unlimitQRCode",
+        "chenggong/unlimitQRCode/unlimitQRCode",
+        "zhongzhuan/zhongzhuan",
+        "double/unlimitQRCode/unlimitQRCode",
+        "passenger/passenger",
+        "otherlist/otherlist",
+        "cancelrob/unlimitQRCode/unlimitQRCode",
+        "bupiaolist/unlimitQRCode/unlimitQRCode",
+        "invitefriends/unlimitQRCode/unlimitQRCode",
+        "login12306/unlimitQRCode/unlimitQRCode",
+        "addpasg/unlimitQRCode/unlimitQRCode",
+        "subpages/testpage/testpage",
+        "authorise/web/web",
+        "shareWebView/shareWebView",
+        "shareLanding2/shareLanding2",
+        "shareLanding3/shareLanding3",
+        "shareLanding4/shareLanding4",
+        "shareLanding5/shareLanding5",
+        "shareLanding6/shareLanding6",
+        "shareLanding7/shareLanding7",
+        "shareLanding8/shareLanding8",
+        "shareLanding9/shareLanding9",
+        "shareLanding10/shareLanding10",
+        "shareLanding11/shareLanding11",
+        "activation/index",
+        "subscribe/subscribe",
+        "midpages0/unlimitQRCode0/unlimitQRCode",
+        "midpages0/unlimitQRCode1/unlimitQRCode",
+        "midpages0/unlimitQRCode2/unlimitQRCode",
+        "midpages0/unlimitQRCode3/unlimitQRCode",
+        "midpages0/unlimitQRCode4/unlimitQRCode",
+        "midpages1/unlimitQRCode0/unlimitQRCode",
+        "midpages1/unlimitQRCode1/unlimitQRCode",
+        "midpages1/unlimitQRCode2/unlimitQRCode",
+        "midpages1/unlimitQRCode3/unlimitQRCode",
+        "midpages1/unlimitQRCode4/unlimitQRCode",
+        "awakeMidPage/awakeMidPage",
+        "offlinePage/offlinePage"
+      ]
+    },
+    {
+      "root": "pages/ugc",
+      "pages": [
+        "place/upload/upload",
+        "lvpai/webview/webview",
+        "lvpai/shareImage/shareImage",
+        "lvpaiHome/lvpaiHome",
+        "lvpai/comment/detail",
+        "lvpai/detail/detail",
+        "user/index",
+        "travels/list"
+      ]
+    },
+    { "root": "pages/vtm", "pages": [ "index/index", "mini_qrcode/mini_qrcode" ] },
+    {
+      "root": "pages/wallet/",
+      "pages": [ "setrealname/index", "adultInfo/index", "myWallet/index" ]
+    },
+    {
+      "root": "pages/you",
+      "pages": [
+        "active/addTrafficActivity/homePage",
+        "activity/addTrafficActivity/homePage",
+        "place/searchcity/searchcity",
+        "place/upload/upload",
+        "place/webcast/home",
+        "lvpai/webview/webview",
+        "lvpai/shareImage/shareImage",
+        "lvpaiHome/lvpaiHome",
+        "destinationpage/destinationpage",
+        "destination/destination",
+        "lvpai/detail/detail",
+        "user/index"
+      ]
+    },
+    {
+      "root": "pages/carNew",
+      "pages": [
+        "isd/indexNew/index",
+        "isd/subPages/list/index",
+        "isd/subPages/cityAndArea/city/index",
+        "isd/subPages/cityAndArea/area/index",
+        "isd/subPages/booking/index",
+        "isd/subPages/bookingNew/index",
+        "isd/subPages/driverList/index",
+        "isd/subPages/driverEdit/index",
+        "isd/subPages/coupon/index",
+        "isd/subPages/policy/index",
+        "isd/subPages/costDetail/index",
+        "isd/subPages/deposit/index",
+        "isd/subPages/tagsInfo/index",
+        "isd/subPages/vehicleImage/index",
+        "isd/subPages/extras/index",
+        "isd/subPages/vendorName/index",
+        "isd/subPages/addServices/index",
+        "isd/subPages/accident/index",
+        "isd/subPages/orderDetail/index",
+        "isd/subPages/product/index",
+        "isd/subPages/cancelOrder/index",
+        "isd/subPages/oldInsuranceDetail/index",
+        "isd/subPages/refundProgressList/index",
+        "isd/subPages/refundPolicy/index",
+        "isd/subPages/chineseService/index",
+        "isd/subPages/orderPolicy/index",
+        "isd/subPages/osdQA/index",
+        "isd/subPages/osdQADetail/index",
+        "isd/subPages/crossPlace/index",
+        "isd/subPages/driverRule/index",
+        "isd/subPages/materials/index",
+        "isd/subPages/map/index",
+        "isd/subPages/businessLicense/index"
+      ]
+    },
+    {
+      "root": "pages/flight",
+      "pages": [
+        "pages/home/index",
+        "pages/list/first",
+        "pages/list/second",
+        "pages/middle/index",
+        "pages/interList/interFirst",
+        "pages/interList/interSecond",
+        "pages/interMiddle/index",
+        "pages/lowestDatePicker/index",
+        "pages/cityPicker/index",
+        "webview",
+        "coffeebean",
+        "pages/shareEditPsg/index"
+      ]
+    },
+    {
+      "root": "pages/flightBooking",
+      "pages": [
+        "pages/booking/index",
+        "pages/interBooking/index",
+        "pages/booking/passengerList/index",
+        "pages/booking/passengerEdit/index",
+        "pages/booking/applicantList/index",
+        "pages/booking/applicantEdit/index",
+        "pages/shareEditPsg/index",
+        "pages/shareCompletePsg/index",
+        "pages/regionList/index",
+        "pages/cityList/index"
+      ]
+    },
+    { "root": "pages/flightLowPrice", "pages": [ "pages/list/index", "pages/detail/index" ] },
+    {
+      "root": "pages/flightschedule",
+      "pages": [ "pages/detail/detail", "pages/detail/coffeebean" ]
+    },
+    { "root": "pages/myctrip/list", "pages": [ "list" ] },
+    { "root": "pages/orderttd", "pages": [ "detail/index", "voucher/index" ] },
+    {
+      "root": "pages/shoppingcartflight",
+      "pages": [ "flight/flightlist/index", "flight/cabinList/index" ]
+    },
+    {
+      "root": "pages/shoppingcarthotel",
+      "pages": [ "hotel/hotelList/index", "hotel/hotelDetail/index" ]
+    },
+    {
+      "root": "pages/trainActivity",
+      "pages": [
+        "twebview/index",
+        "videotask/index",
+        "robshareMidPage/index",
+        "videoNumMidPage/index",
+        "share/index",
+        "taroLanding1/taroLanding1",
+        "taroLanding2/taroLanding2",
+        "taroLanding3/taroLanding3",
+        "taroLanding4/taroLanding4",
+        "taroLanding5/taroLanding5"
+      ]
+    },
+    {
+      "root": "pages/trainBooking",
+      "pages": [ "booking/grab/index", "booking/ordinary/index", "coupon/index", "coffeebean/coffeebean" ]
+    },
+    {
+      "root": "pages/trainOrder",
+      "pages": [ "orderdetail/grab/index", "orderdetail/splitorder/index" ]
+    },
+    {
+      "root": "pages/vacations",
+      "pages": [ "detail/index", "detailComplexRoute/index", "resource/index" ]
+    },
+    { "root": "pages/tourbooking", "pages": [ "order/index" ] },
+    { "root": "pages/video", "pages": [ "pages/home/index" ] },
+    {
+      "root": "pages/tnt",
+      "pages": [
+        "booking/index",
+        "booking/o2obooking/booking/index",
+        "booking/o2obooking/coupon/index",
+        "detail/product-sku/index",
+        "business/booking/index",
+        "business/booking/o2obooking/booking/index",
+        "business/booking/o2obooking/coupon/index",
+        "business/detail/product-sku/index",
+        "business/detail/resource-detail/index",
+        "business/detail/queue/index",
+        "business/detail/resource-detail/buy-notes/index",
+        "business/detail/ticket-detail/index"
+      ]
+    },
+    {
+      "root": "pages/xtnt",
+      "pages": [
+        "business/detail/resource-detail/index",
+        "business/detail/queue/index",
+        "business/detail/resource-detail/buy-notes/index",
+        "business/detail/ticket-detail/index",
+        "business/detail/sight-detail/ticket-shelf/index"
+      ]
+    },
+    {
+      "root": "pages/trainAbroad",
+      "pages": [
+        "euList/index",
+        "euDetail/index",
+        "euBook/index",
+        "policy/index",
+        "couponList/index",
+        "ticketMethod/index",
+        "order/index",
+        "payResult/index",
+        "refund/index"
+      ]
+    },
+    {
+      "root": "pages/xtaro-myapp",
+      "pages": [ "index", "subPackages/foo/index", "subPackages/bar/index" ]
+    }
+  ],
+  "lazyCodeLoading": "requiredComponents",
+  "functionalPages": { "independent": true },
+  "requiredPrivateInfos": [ "getLocation", "chooseLocation" ],
+  "embeddedAppIdList": [
+    "wx2d4bbccf6006b283",
+    "wxe4bc565cbbf5e289",
+    "wx6dbd75f7ad6d94bc",
+    "wx0a355dc515d9e0bc",
+    "wx637a5185157f1c60"
+  ],
+  "usingShopPlugin": true,
+  "usingComponents": { "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index" },
+  "preloadRule": {
+    "pages/flight/pages/home/index": { "network": "all", "packages": [ "pages/flightBooking" ] },
+    "pages/flight/pages/list/first": { "network": "all", "packages": [ "pages/flightBooking" ] },
+    "pages/flight/pages/middle/index": { "network": "all", "packages": [ "pages/flightBooking" ] },
+    "pages/flight/pages/interList/interFirst": { "network": "all", "packages": [ "pages/flightBooking" ] },
+    "pages/flight/pages/interMiddle/index": { "network": "all", "packages": [ "pages/flightBooking" ] },
+    "pages/home/homepage": { "network": "all", "packages": [ "pages/live" ] }
+  }
+}

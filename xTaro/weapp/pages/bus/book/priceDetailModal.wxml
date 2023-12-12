@@ -1,0 +1,77 @@
+<template name="price-detail-modal">
+    <view class="price-detail-modal" bindtap="empty" catchtouchmove="empty">
+        <view class="mask" bindtap="empty" catchtouchmove="empty"></view>
+        <view class="price-detail-content" bindtap="empty">
+            <view class="detail-content-title">
+                <view class="content-title">还在犹豫？对支付总额度有疑问？</view>
+                <view class="content-desc">总金额明细如下，附加产品如不需要可直接取消哦</view>
+            </view>
+            <view class="price-detail">
+                <view class="margin">
+                    <view class="flex-row nobr">
+                        <text class='left main-title'>支付总额</text>
+                        <view class='flex1 nobr'></view>
+                        <text class="price">
+                            <text class="unit">¥</text>
+                            <text>{{totalPrice}}</text>
+                        </text>
+                    </view>
+                </view>
+                <block wx:for='{{priceList}}' wx:key='{{index}}'>
+                    <view class='margin' wx:if="{{showHidden || !item.hidden}}">
+                        <view class='flex-row nobr'>
+                            <text class='left'>{{item.name}}</text>
+                            <view class='flex1 nobr'></view>
+                            <text wx:if="{{item.price < 0}}" class='{{item.decount ? "line-through" : ""}} torange'>¥{{item.price + (item.count >= 0 ? ' x ' + item.count + item.unit : '')}}</text>
+                            <text wx:else class='{{item.decount ? "line-through" : ""}}'>¥{{item.price + (item.count >= 0 ? ' x ' + item.count + item.unit : '')}}</text>
+                            <view class="cancelButton-placeholder nobr">
+                                <button disabled='{{!item.canModalCancel && !item.canCancel}}' class='cancelButton  {{(item.canModalCancel || item.canCancel) ?classConfig.mainColor : ""}}' data-id='{{item.id}}' catchtap='{{cancelSalePackage}}'>
+                                    {{item.tagModal || item.tag || ''}}
+                                </button>
+                            </view>
+                        </view>
+                        <view wx:if="{{item.discount > 0}}" class='discount flex-row'>
+                            <text class='left'>{{item.name}}立减</text>
+                            <view class='flex1 nobr'></view>
+                            <text class="torange">-¥{{item.discount + (item.count >= 0 ? ' x ' + item.count + item.unit : '')}}</text>
+                            <button disabled='{{!item.canModalCancel && !item.canCancel}}' class='cancelButton  {{(item.canModalCancel || item.canCancel) ?classConfig.mainColor : ""}}' data-id='{{item.id}}' catchtap='{{cancelSalePackage}}'>
+                                {{item.discountTag}}
+                            </button>
+                        </view>
+                        <view wx:if="{{item.hasGive}}" class='discount flex-row'>
+                            <text>{{item.giveProduct.title}}</text>
+                            <view class='flex1 nobr'></view>
+                            <text class="torange">¥{{item.giveProduct.price + (item.giveProduct.count >= 0 ? ' x ' + item.giveProduct.count + item.giveProduct.unit : '')}}</text>
+                        </view>
+                        <view wx:for="{{item.giveActivitys}}" class="discount flex-row" wx:for-item="giveItem">
+                            <text>{{giveItem.title}}</text>
+                            <view class='flex1 nobr'></view>
+                            <text class="line-through">¥{{giveItem.price + (giveItem.count >= 0 ? ' x ' + giveItem.count + giveItem.unit : '')}}</text>
+                        </view>
+                    </view>
+                </block>
+                <block wx:for='{{priceListExtra}}' wx:key='{{index}}' wx:for-item="priceItem">
+                    <view class='margin minlist' wx:if="{{showHidden || !item.hidden}}">
+                        <view class='flex-row nobr'>
+                            <text class='left'>{{priceItem.name}}</text>
+                            <text class="flex1"></text>
+                            <text>{{priceItem.symbol}}{{priceItem.price + (priceItem.count >= 0 ? ' x ' + priceItem.count : '')}}</text>
+                        </view>
+                    </view>
+                </block>
+                <view class='margin minlist'>
+                    <view class='nobr service' wx:if="{{showServiceInfo}}">
+                        <text>服务费包含供应商手续费，技术支持费等基础服务保障费用；如出票失败，自动退还至原支付账户 </text>
+                        <text class="desc" bindtap="onShowServiceFeeDesc">对服务费仍有疑问？</text>
+                    </view>
+                </view>
+            </view>
+            <view class="button-row">
+                <button class="button" bindtap="onBackConfirm">狠心离开</button>
+                <button class="button main-button" bindtap="onPayConfirm" data-method="normal">
+                    继续支付
+                </button>
+            </view>
+        </view>
+    </view>
+</template>

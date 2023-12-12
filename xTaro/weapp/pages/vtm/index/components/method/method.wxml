@@ -1,0 +1,22 @@
+<view class="gl_container" wx:if="{{methodSuccess}}">
+  <!-- 第一行 -->
+  <view class="gl_header">
+    <text class="wechat_vtm_font-gl gl_icon"></text>
+    <view class="gl_title">领队说攻略</view>
+    <view class="gl_subtitle">来自当地人的吃玩住行推荐</view>
+  </view>
+  <!-- 第二行 -->
+  <view class="gl_content">
+    <view class="gl_left autoExpose" data-expose="{{exposeBook}}" bindtap="bookJump" wx:if="{{methodInfo.bookInfo}}" style="background-image: url({{methodInfo.bookInfo.coverImage}})">
+      <image class="gl_left_bg" src="https://pages.c-ctrip.com/car_dcs/vtm/gonglv1.png"></image>
+    </view>
+    <view class="gl_right autoExpose {{!methodInfo.bookInfo ? 'gl_bg_one': ''}}"  data-expose="{{exposeRanking}}" bindtap="rankingJump"></view>
+  </view>
+</view>
+<!-- <view class="gj_gl_container" wx:elif="{{methodLoading}}">
+  <view class="gj_gl_row"></view>
+  <view class="gj_gl_block">
+    <view class="gj_gl_row"></view>
+    <view class="gj_gl_row"></view>
+  </view>
+</view> -->

@@ -1,0 +1,347 @@
+<template name="passengerInfoBox-passenger">
+    <view class="book-tips" wx:if="{{passengerInfoBoxData.addPassenger.PassengerType == 3 && passengerInfoBoxData.cardTypeText !== '护照'}}">请确保乘车区段与学生证上的优惠区间保持一致，否则无法取票，目前仅支持大学生购买线上学生票</view>
+    <view class="book-tips linear" wx:if="{{passengerInfoBoxData.cardTypeText == '护照'}}">护照姓名需严格按照要求填写，否则影响取票<text class="fr tblue" bindtap="toPassportInfo">填写说明</text></view>
+
+    <!-- 乘客类型 -->
+    <template is="passengerInfoBox-psgtype--actionsheet" data="{{passengerInfoBoxData}}"></template>
+
+    <!-- 乘客姓名-->
+    <block wx:if="{{passengerInfoBoxData.addPassenger.IsENName && !(passengerInfoBoxData.cardTypeText === '护照' && passengerInfoBoxData.addPassenger.Nationality === 'CN')}}">
+        <template is="passengerInfoBox-enname" data="{{passengerInfoBoxData}}"></template>
+    </block>
+    <block wx:else>
+        <template is="passengerInfoBox-fullname" data="{{passengerInfoBoxData}}"></template>
+    </block>
+
+    <!-- 证件类型 -->
+     <block>
+        <template is="passengerInfoBox-cardtype" data="{{passengerInfoBoxData}}"></template>
+    </block>
+
+    <!-- 证件号码 -->
+    <block>
+        <template is="passengerInfoBox-cardnum" data="{{passengerInfoBoxData}}"></template>
+    </block>
+
+    <!-- 国籍 -->
+    <block>
+        <template is="passengerInfoBox-nationality" data="{{passengerInfoBoxData}}" wx:if="{{passengerInfoBoxData.cardTypeText === '护照'}}"></template>
+    </block>
+
+    <!-- 出生日期 -->
+    <block wx:if="{{passengerInfoBoxData.cardTypeText == '护照' || passengerInfoBoxData.cardTypeText == '回乡证' || passengerInfoBoxData.cardTypeText == '台胞证' || passengerInfoBoxData.cardTypeText == '外国人永久居留身份证'}}">
+        <template is="passengerInfoBox-birth" data="{{passengerInfoBoxData}}"></template>
+    </block>
+
+    <!-- 有效期限 -->
+    <block wx:if="{{passengerInfoBoxData.cardTypeText == '外国人永久居留身份证' || passengerInfoBoxData.cardTypeText == '回乡证' || passengerInfoBoxData.cardTypeText == '台胞证' ||  passengerInfoBoxData.cardTypeText == '护照'}}">
+        <template is="passengerInfoBox-limitDate" data="{{passengerInfoBoxData}}"></template>
+    </block>
+
+    <!-- 手机号 -->
+    <block>
+        <template is="passengerInfoBox-mobile" data="{{passengerInfoBoxData, mobileTipsShow}}"></template>
+    </block>
+
+    <!-- 电子邮箱 -->
+    <block wx:if="{{ passengerInfoBoxData.cardTypeText !== '二代身份证' && passengerInfoBoxData.cardTypeText !== '外国人永久居留身份证' && passengerInfoBoxData.cardTypeText !== '港澳台居民居住证' && ( passengerInfoBoxData.cardTypeText !== '护照' || passengerInfoBoxData.addPassenger.Nationality !== 'CN')}}">
+        <template is="passengerInfoBox-email" data="{{passengerInfoBoxData}}"></template>
+    </block>
+</template>
+
+<template name="passengerInfoBox-booking-popup">
+    <template is="passengerInfoBox-psgtype--line-display" data="{{passengerInfoBoxData}}"></template>
+    <!-- 乘客姓名及证件信息及出生日期 -->
+    <block wx:if="{{passengerInfoBoxData.addPassenger.IsENName}}">
+        <template is="passengerInfoBox-enname" data="{{passengerInfoBoxData}}"></template>
+    </block>
+    <block wx:else>
+        <template is="passengerInfoBox-fullname" data="{{passengerInfoBoxData}}"></template>
+    </block>
+
+    <block wx:if="{{!passengerInfoBoxData.addPassenger.isChild}}">
+        <template is="passengerInfoBox-cardtype" data="{{passengerInfoBoxData}}"></template>
+        <template is="passengerInfoBox-cardnum" data="{{passengerInfoBoxData}}"></template>
+    </block>
+
+    <!-- 出生日期或有效期限 -->
+    <block wx:if="{{passengerInfoBoxData.addPassenger.isChild || passengerInfoBoxData.cardTypeText == '护照' || passengerInfoBoxData.cardTypeText == '回乡证' || passengerInfoBoxData.cardTypeText == '台胞证'}}">
+        <template is="passengerInfoBox-birth" data="{{passengerInfoBoxData}}"></template>
+    </block>
+    <view class="item btn-pasg" bindtap="confirmEditPsg">确定</view>
+</template>
+
+<template name="passengerInfoBox-booking-embed">
+    <template is="passengerInfoBox-psgtype--input" data="{{passengerInfoBoxData}}"></template>
+    <!-- 乘客姓名及证件信息及出生日期 -->
+    <block wx:if="{{passengerInfoBoxData.addPassenger.IsENName}}">
+        <template is="passengerInfoBox-enname" data="{{passengerInfoBoxData}}"></template>
+    </block>
+    <block wx:else>
+        <template is="passengerInfoBox-fullname" data="{{passengerInfoBoxData}}"></template>
+    </block>
+
+    <block wx:if="{{!passengerInfoBoxData.addPassenger.isChild}}">
+        <template is="passengerInfoBox-cardtype" data="{{passengerInfoBoxData}}"></template>
+        <template is="passengerInfoBox-cardnum" data="{{passengerInfoBoxData}}"></template>
+    </block>
+    <!-- 出生日期或有效期限 -->
+    <block wx:if="{{passengerInfoBoxData.addPassenger.isChild || passengerInfoBoxData.cardTypeText == '护照' || passengerInfoBoxData.cardTypeText == '回乡证' || passengerInfoBoxData.cardTypeText == '台胞证'}}">
+        <template is="passengerInfoBox-birth" data="{{passengerInfoBoxData}}"></template>
+    </block>
+</template>
+
+<template name="passengerInfoBox-invite">
+    <template is="passengerInfoBox-psgtype--input" data="{{passengerInfoBoxData}}"></template>
+    <!-- 乘客姓名及证件信息及出生日期 -->
+    <block wx:if="{{passengerInfoBoxData.addPassenger.IsENName}}">
+        <template is="passengerInfoBox-enname" data="{{passengerInfoBoxData}}"></template>
+    </block>
+    <block wx:else>
+        <template is="passengerInfoBox-fullname" data="{{passengerInfoBoxData}}"></template>
+    </block>
+
+    <block wx:if="{{!passengerInfoBoxData.addPassenger.isChild}}">
+        <template is="passengerInfoBox-cardtype" data="{{passengerInfoBoxData}}"></template>
+        <template is="passengerInfoBox-cardnum" data="{{passengerInfoBoxData}}"></template>
+    </block>
+    <!-- 出生日期或有效期限 -->
+    <block wx:if="{{passengerInfoBoxData.cardTypeText == '护照' || passengerInfoBoxData.cardTypeText == '回乡证' || passengerInfoBoxData.cardTypeText == '台胞证' || passengerInfoBoxData.cardTypeText == '外国人永久居留身份证'}}">
+        <!-- 出生日期 -->
+        <template is="passengerInfoBox-birth" data="{{passengerInfoBoxData}}"></template>
+        <!-- 有效期限 -->
+        <template is="passengerInfoBox-limitDate" data="{{passengerInfoBoxData}}"></template>
+    </block>
+</template>
+
+<!-- 使用该类型的时候要注意selectPasType的修改 -->
+<template name="passengerInfoBox-psgtype--line-select">
+    <!-- 选择乘客类型 平铺 -->
+    <view class="item add-box">
+        <text class="label">乘客类型</text>
+        <view class="add-type">
+            <text class="{{passengerInfoBoxData.addPassenger.PassengerType == 1 ? 'current' : ''}}" data-type="1" bindtap="selectPasType">成人</text>
+            <text class="{{passengerInfoBoxData.addPassenger.PassengerType == 3 ? 'current' : ''}}" data-type="3" bindtap="selectPasType">学生</text>
+            <text class="{{passengerInfoBoxData.addPassenger.PassengerType == 2 ? 'current' : ''}}" data-type="2" bindtap="selectPasType">儿童</text>
+        </view>
+    </view>
+</template>
+<template name="passengerInfoBox-psgtype--line-display">
+    <!-- 当前乘客类型 -->
+    <view class="item">
+        <text class="label">乘客类型</text>
+        <view class="cont">
+            <text wx:if="{{passengerInfoBoxData.addPassenger.PassengerType == 1}}" class="current">成人</text>
+            <text wx:if="{{passengerInfoBoxData.addPassenger.PassengerType == 3}}" class="current">学生</text>
+            <text wx:if="{{passengerInfoBoxData.addPassenger.PassengerType == 2}}" class="current">儿童</text>
+        </view>
+    </view>
+</template>
+<template name="passengerInfoBox-psgtype--actionsheet">
+    <!-- 已经有 PassengerID 表示是在编辑乘客，不可以改变乘客类型 -->
+    <!-- <view class="item {{!passengerInfoBoxData.addPassenger.PassengerID ? 'arr' : ''}}"
+        bindtap="{{!passengerInfoBoxData.addPassenger.PassengerID ? 'selectPasType' : ''}}">
+        <view class="label">乘客类型</view>
+        <view class="cont">
+          <text class="tblue" wx:if="{{passengerInfoBoxData.addPassenger.PassengerType == 1}}">成人票</text>
+          <text class="tblue" wx:if="{{passengerInfoBoxData.addPassenger.PassengerType == 2}}">儿童票</text>
+          <text class="tblue" wx:if="{{passengerInfoBoxData.addPassenger.PassengerType == 3}}">学生票</text>
+        </view>
+    </view> -->
+    <view class="item">
+        <view class="label">乘客类型</view>
+        <view class="cont pasg-type">
+          <view class="type {{index === passengerInfoBoxData.curPasgIndex ? 'cur' : ''}}" wx:for="{{passengerInfoBoxData.pasgTypes}}" data-index="{{index}}" bindtap="selectPasType">
+            <text class="ifont-radio"></text>{{item.name}}
+          </view>
+        </view>
+    </view>
+</template>
+
+<template name="passengerInfoBox-psgtype--input">
+    <view class="item arr" bindtap="selectPasTypeForInvite">
+        <!-- 选择乘客类型 actionSheet -->
+        <text class="label">乘客类型</text>
+        <view class="cont">{{ passengerInfoBoxData.addPassenger.PassengerType == 1 ? '成人' : passengerInfoBoxData.addPassenger.PassengerType == 3 ? '学生' : '儿童'}}</view>
+    </view>
+</template>
+
+<template name="passengerInfoBox-fullname">
+    <!-- 姓名输入框 中文(生僻字也可以输入英文)) -->
+    <view class="item">
+        <view class="label name" bindtap="showNameTips" wx:if="{{!passengerInfoBoxData.showEditPop}}">姓名<text class="ifont-detail"></text></view>
+        <view class="label" wx:else>姓名<text class="ifont-detail"></text></view>
+        <view class="cont">
+          <input class="input-txt" style="width: 75%" placeholder="与乘客证件姓名一致" placeholder-class="placeholder-color" type="text" value="{{passengerInfoBoxData.addPassenger.CNName}}"
+              bindblur="inputPsgName" />
+          <view  class="switch-country" bindtap="switchLanguage" wx:if="{{passengerInfoBoxData.cardTypeText !== '二代身份证' && !(passengerInfoBoxData.cardTypeText === '护照' && passengerInfoBoxData.addPassenger.Nationality === 'CN')}}" style="z-index: 100">
+              <text class="cn current">中</text>
+              <text class="en">英</text>
+          </view>
+        </view>
+    </view>
+    <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isNeedNameWarn}}">{{passengerInfoBoxData.passengerEditStatus.nameWarn}}</view>
+</template>
+<template name="passengerInfoBox-enname">
+    <!-- <block wx:if="{{(passengerInfoBoxData.cardTypeText == '外国人永久居留身份证' && !passengerInfoBoxData.addPassenger.isChild)}}">
+        <template is="passengerInfoBox-enname--noswitch" data="{{passengerInfoBoxData}}"></template>
+    </block> -->
+    <block>
+        <!-- 姓名输入框 中英文 -->
+        <view class="item">
+            <view class="label ename" bindtap="showNameTips" wx:if="{{!passengerInfoBoxData.showEditPop}}">姓 (英文)<text class="ifont-detail"></text><view class="s">Surname</view></view>
+            <view class="label" wx:else>姓 (英文)<view class="s">Surname</view></view>
+            <view class="cont">
+              <input style="width: 75%" class="input-txt" placeholder="如：Zhang" placeholder-class="placeholder-color" type="text" value="{{passengerInfoBoxData.addPassenger.ENLastName}}"
+              bindblur="inputPsgLastName" />
+              <view class="switch-country" bindtap="switchLanguage" style="z-index: 100">
+                  <text class="cn">中</text>
+                  <text class="en current">英</text>
+              </view>
+            </view>
+        </view>
+        <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isNeedLastNameWarn}}">{{passengerInfoBoxData.passengerEditStatus.enNameWarn}}</view>
+
+        <view class="item">
+            <view class="label ename" bindtap="showNameTips" wx:if="{{!passengerInfoBoxData.showEditPop}}">名 (英文)<view class="s">Given name</view></view>
+            <view class="label" wx:else>名 (英文)<view class="s">Given name</view></view>
+            <view class="cont">
+              <input class="input-txt" placeholder="如：San" placeholder-class="placeholder-color" type="text" value="{{passengerInfoBoxData.addPassenger.ENFirstName}}"
+            bindblur="inputPsgFirstName" />
+            </view>
+        </view>
+        <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isNeedFirstNameWarn}}">{{passengerInfoBoxData.passengerEditStatus.enNameWarn}}</view>
+    </block>
+</template>
+<template name="passengerInfoBox-enname--noswitch">
+    <!-- 姓名输入框 只英文 -->
+    <view class="item">
+        <view class="label ename" bindtap="showNameTips" wx:if="{{!passengerInfoBoxData.showEditPop}}">姓 (英文)<text class="ifont-detail"></text><view class="s">Surname</view></view>
+        <view class="label" wx:else>姓 (英文)<view class="s">Surname</view></view>
+        <view class="cont">
+          <input class="input-txt" placeholder="如：Zhang" placeholder-class="placeholder-color" type="text" value="{{passengerInfoBoxData.addPassenger.ENLastName}}"
+            bindblur="inputPsgLastName" />
+        </view>
+    </view>
+    <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isNeedLastNameWarn}}">{{passengerInfoBoxData.passengerEditStatus.enNameWarn}}</view>
+
+    <view class="item">
+        <view class="label ename" bindtap="showNameTips" wx:if="{{!passengerInfoBoxData.showEditPop}}">名 (英文)<view class="s">Given name</view></view>
+        <view class="label" wx:else>名 (英文)<view class="s">Given name</view></view>
+        <view class="cont">
+          <input class="input-txt" placeholder="如：San" placeholder-class="placeholder-color" type="text" value="{{passengerInfoBoxData.addPassenger.ENFirstName}}"
+            bindblur="inputPsgFirstName" />
+        </view>
+    </view>
+    <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isNeedFirstNameWarn}}">{{passengerInfoBoxData.passengerEditStatus.enNameWarn}}</view>
+</template>
+<!-- 证件类型选择暨输入框 -->
+<!-- <template name="passengerInfoBox-fullcard">
+    <view class="item add-box">
+        <text class="label cert" bindtap="showCardType">{{passengerInfoBoxData.cardTypeText}}</text>
+        <input placeholder="与乘客证件号码一致" placeholder-class="placeholder-color" style="height: 90rpx;font-size:15px;" type="text" value="{{passengerInfoBoxData.addPassenger.IdentityNo}}"
+            bindblur="inputPsgCardNum" />
+    </view>
+    <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isNeedIdWarn && !passengerInfoBoxData.addPassenger.isChild}}">{{passengerInfoBoxData.passengerEditStatus.idWarn}}</view>
+</template> -->
+
+<template name="passengerInfoBox-nationality">
+    <view class="item" bindtap="tapToSelectNation">
+        <view class="labels-wrap">
+            <view class="label">国籍</view>
+            <text class="label tiny">(国家/地区)</text>
+        </view>
+        <text class="tblue">{{passengerInfoBoxData.nationalityName}}</text>
+    </view>
+    <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isNeedNationalityWarn}}">{{passengerInfoBoxData.passengerEditStatus.nationalityWarn}}</view>
+</template>
+
+<template name="passengerInfoBox-cardnum">
+    <!-- 证件号码选择框 -->
+    <view class="item">
+        <view class="label">证件号码</view>
+        <!-- todo: future blur 事件在点击按钮的时候不会触发，所以又添加了 input 事件 -->
+        <view class="cont">
+          <input class="input-txt" placeholder="与乘客证件号码一致" placeholder-class="placeholder-color" type="text" value="{{passengerInfoBoxData.addPassenger.showNo}}"
+            bindblur="inputPsgCardNum" bindinput="inputPsgCardNumHandler" bindfocus="checkNumberNeedRest"/>
+        </view>
+        <view class="child-txt" wx:if="{{passengerInfoBoxData.addPassenger.isChild && passengerInfoBoxData.from}}" bindtap="showAddChildTips">没有儿童证件？</view>
+    </view>
+    <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isNeedIdWarn}}">{{passengerInfoBoxData.passengerEditStatus.idWarn}}</view>
+</template>
+
+
+<template name="passengerInfoBox-mobile">
+    <!-- 手机号码输入框 -->
+    <view class="item bder">
+        <view class="label">手机号码</view>
+        <view style="padding-right: 20rpx">(+86)</view>
+        <view class="cont">
+
+            <input class="input-txt" placeholder="乘客本人11位手机号" maxlength="11" type="number" placeholder-class="placeholder-color" type="text" value="{{passengerInfoBoxData.addPassenger.showMobile}}"
+            bindinput="inputMobileHandler" bindfocus="checkMobileNumberNeedRest"/>
+        </view>
+
+        <view class="book-tips tips-phone" wx:if="{{mobileTipsShow}}">根据12306要求，需提供每名乘客的手机号，手机号有误或填写他人手机号会导致购票失败。老人、未成年人等重点旅客，可填写亲友手机号。</view>
+    </view>
+
+    <!-- <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isNeedIdWarn}}">{{passengerInfoBoxData.passengerEditStatus.idWarn}}</view> -->
+</template>
+
+<template name="passengerInfoBox-email">
+    <!-- 邮箱输入框 -->
+    <view class="item">
+        <view class="label">电子邮箱</view>
+        <view class="cont">
+            <input class="input-txt" placeholder="请输入电子邮箱"  placeholder-class="placeholder-color" type="text" value="{{passengerInfoBoxData.addPassenger.Email}}"
+            bindblur="inputEmail" bindinput="inputEmailHandler" bindfocus="checkEmailNumberNeedRest"/>
+        </view>
+    </view>
+    <!-- <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isNeedIdWarn}}">{{passengerInfoBoxData.passengerEditStatus.idWarn}}</view> -->
+</template>
+
+<template name="passengerInfoBox-cardtype">
+    <!-- 证件类型选择框 -->
+    <view class="item arr" bindtap="showCardType">
+        <view class="label">证件类型</view>
+        <view class="cont">
+          <text class="tblue">{{passengerInfoBoxData.cardTypeText}}</text>
+        </view>
+    </view>
+</template>
+
+<template name="passengerInfoBox-birth">
+    <!-- 出生日期 -->
+    <view class="item">
+        <view class="label">出生日期</view>
+        <view class="cont">
+          <picker mode="date" value="{{passengerInfoBoxData.addPassenger.Birthday}}" start="1890-01-01" end="2030-12-31" bindchange="birthChange">
+              <text class="tblue" style="width: 250rpx; height: 48rpx; display: inline-block">{{passengerInfoBoxData.addPassenger.Birthday}}</text>
+          </picker>
+        </view>
+    </view>
+    <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isShowBirthWarn || passengerInfoBoxData.passengerEditStatus.isNeedBirthWarn}}">{{passengerInfoBoxData.passengerEditStatus.birthWarn}}</view>
+</template>
+
+<template name="passengerInfoBox-limitDate">
+    <!-- 有效期限 -->
+    <view class="item">
+        <view class="label">有效期限</view>
+        <view class="cont">
+
+          <picker mode="date" value="{{passengerInfoBoxData.addPassenger.IdentityLimitDate}}" start="{{passengerInfoBoxData.todayString}}" bindchange="limitDateChange">
+              <text class="tblue" style="width: 250rpx; height: 48rpx; display: inline-block">{{passengerInfoBoxData.addPassenger.IdentityLimitDate}}</text>
+          </picker>
+        </view>
+    </view>
+    <view class="warn" wx:if="{{passengerInfoBoxData.passengerEditStatus.isNeedLimitDateWarn}}">{{passengerInfoBoxData.passengerEditStatus.limitDateWarn}}</view>
+</template>
+
+<template name="identityName">
+    <text wx:if="{{IdentityType == 1}}">二代身份证</text>
+    <text wx:if="{{IdentityType == 2}}">护照</text>
+    <text wx:if="{{IdentityType == 7}}">回乡证</text>
+    <text wx:if="{{IdentityType == 8}}">台胞证</text>
+    <text wx:if="{{IdentityType == 28}}">外国人永久居留身份证</text>
+    <text wx:if="{{IdentityType == 32}}">港澳台居民居住证</text>
+</template>

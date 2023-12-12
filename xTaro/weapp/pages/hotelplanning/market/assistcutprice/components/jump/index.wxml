@@ -1,0 +1,5 @@
+<view wx:if="{{jumpLink.length}}" class="ast-jump">
+    <view bindtap="handleJump" data-id="{{item.id}}" data-h5jumpurl="{{item.h5JumpUrl}}" data-wxjumpurl="{{item.wxJumpUrl}}" wx:for="{{jumpLink}}" wx:key="idx" wx:for-index="idx" wx:for-item="item" class="item">
+        <image src="{{item.bannerUrl}}" class="img" />
+    </view>
+</view>

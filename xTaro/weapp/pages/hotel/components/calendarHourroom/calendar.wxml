@@ -1,0 +1,43 @@
+<view class="calendar-sticky">
+	<view class="calendar-tips black2" wx:if="{{morningBarInfo.showMorningBar || biz==2}}">
+		<text wx:if="{{morningBarInfo.showMorningBar}}">今晨6点前入住，请选择{{morningBarInfo.inDayText}}入住。</text>
+		<text wx:if="{{biz==2}}">您选的是酒店当地日期</text>
+	</view>
+	<view class="calendar-week black2 {{tips ? 'calendar-week_tips' : ''}}" >
+		<block wx:for="{{ DAY_NAMES }}">
+			<view class="calendar-week_item {{ index === 0 || index === 6  ? 'calendar-week_sun' : '' }}">{{item}}</view>
+		</block>
+    </view>
+	<view hidden="{{biz==1}}" class="calendar-tip black2" >您选的是酒店当地日期</view>
+</view>
+
+<view class="body" scroll-into-view="{{ scrollToID }}" scroll-y="true"  scroll-with-animation="true" style="{{biz==1 ? '' : 'top: 60px;'}}">
+	<block wx:for="{{ monthDates }}" wx:key="monthID">
+		<view class="calendar-month black1 {{tips ? 'calendar-month_tips' : ''}}" style="top:{{morningBarInfo.showMorningBar || biz==2 ? '58px' : '30px'}}" id="{{ item.monthID }}" >
+				{{ item.monthName }}
+			</view>
+
+		<view class="calendar-month_items black1">
+			<view wx:for="{{ item.dates }}"  wx:for-item="dateItem" class="calendar-day">
+				<view class="{{ dateItem.choose ? 'calendar-item_checkin' : ''}} calendar-bg {{ dateItem.stay ? 'calendar-item-range' : '' }}" > </view>
+				<view class="calendar-info_box">
+					<text class="{{dateItem.choose ? 'calendar-txt_checkin' : '' }} calendar-txt " wx:if="{{ dateItem.today }}">今天</text>
+					<text class="{{dateItem.choose ? 'calendar-txt_checkin' : '' }} calendar-txt {{ dateItem.stay ? 'calendar-txt_stay' : '' }}" wx:if="{{ dateItem.tomorrow }}">明天</text>
+					<block>
+						<text class="calendar-txt" wx:if="{{ !dateItem.date }}"></text>
+						<text wx:elif="{{ dateItem.outOfRange && !dateItem.today && !dateItem.tomorrow}}" class="calendar-txt out-of-range {{ dateItem.stay ? 'calendar-txt_stay' : '' }} {{dateItem.choose ? 'calendar-txt_checkin' : '' }} {{dateItem.holiday && (!dateItem.outOfRange) ? 'font-bule' : ''}}">{{ dateItem.date }}</text>
+						<text wx:elif="{{ !dateItem.today && !dateItem.tomorrow}}"  class="calendar-txt {{ dateItem.stay ? 'calendar-txt_stay' : '' }} {{dateItem.choose ? 'calendar-txt_checkin' : '' }}  {{((dateItem.holiday||dateItem.restday)&&!dateItem.choose) ? 'font-bule' : ''}}" >{{ dateItem.date }}</text>
+					</block>
+					<text wx:if="{{ dateItem.info.title }}" class=" calendar-price  {{dateItem.choose ? 'calendar-price_checkin' : '' }}" style='{{ dateItem.info.titleColor ? "color:" + dateItem.info.titleColor + ";" : "" }}' >{{ dateItem.info.title }}</text>
+					<text wx:if="{{ dateItem.info.subTitle }}" class=" calendar-title calendar-checkin" style='{{ dateItem.info.subTitleColor ? "color:" + dateItem.info.subTitleColor : "" }}'>{{ dateItem.info.subTitle }}</text>
+				</view>
+				<view wx:if="{{ dateItem.holiday }}" class="calendar-holiday {{ dateItem.outOfRange ? 'out-of-range' : '' }} {{dateItem.choose ? 'calendar-txt_checkin' : '' }} {{!dateItem.choose && (!dateItem.outOfRange) ? 'font-bule' : ''}}">{{ dateItem.holiday }}</view>
+				<view wx:if="{{ dateItem.workday }}" class="calendar-work {{dateItem.choose ? 'calendar-work_checkin' : '' }} {{ dateItem.outOfRange ? 'out-of-range' : '' }}">班</view>
+				<view wx:if="{{ dateItem.restday }}" class="calendar-rest black1 {{dateItem.choose ? 'calendar-rest_checkin' : '' }} {{ dateItem.outOfRange ? 'out-of-range' : '' }}">休</view>
+				<view wx:if="{{ dateItem && !dateItem.outOfRange && dateItem.value}}" class="calendar-bg" data-index="{{index}}" bindtap="onDateTap" data-date="{{ dateItem.value }}"></view>
+			</view>
+		</view>
+	</block>
+</view>
+<!--白屏检测-->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

@@ -1,0 +1,55 @@
+<import src="./liveMessageItem.wxml" />
+<import src="./liveMessageGift.wxml" />
+<import src="./livePushShopCard.wxml" />
+<!-- style="height:{{card.isBigCard ? '516rpx':'470rpx'}}" 这句话加的高度不是很懂 -->
+<view class="messageRoot" >
+   <!-- 顶部消息 -->
+   <block wx:if="{{topMessage}}">
+      <view class="topView {{topMessageShow?'on':'hide'}} ">
+         <template is="liveMessageItem" data="{{...topMessage}}" />
+      </view>
+   </block>
+   <!-- 顶部消息 -->
+   <!-- 顶部礼物消息 -->
+   <view class="topViewGift">
+      <template is="liveMessageGift" data="{{topMessageGift:topMessageGift}}" />
+   </view>
+   <!-- 顶部礼物消息 -->
+   <!-- 消息列表 -->
+   <view class="message-container {{ inAdjustMessageHeight || (showCard && card.goodsId > 0) ? 'on' :'hide'}}">
+      <scroll-view id="message-container-scroll" scroll-y="true" scroll-into-view="{{lastIndex}}" scroll-with-animation="false" enhanced="true" show-scrollbar="false" lower-threshold="10" bindscrolltolower="scrollChage" bindscroll="scrollChage" bindtouchstart="scrollChage" bindtouchend="scrollChage" bindtouchcancel="scrollChage">
+         <block wx:for="{{messageList}}" wx:key="id">
+            <block wx:if="{{item.liveMessage.messageType == 0 }}">
+               <view id="item-{{item.id}}-{{item.liveMessage.messageType}}" class="notice">{{item.liveMessage.message}}</view>
+            </block>
+            <block wx:else>
+               <view style="max-width: max-content" id="item-{{item.id}}-{{item.liveMessage.messageType}}">
+                  <template is="liveMessageItem" data="{{...item}}" />
+               </view>
+            </block>
+         </block>
+      </scroll-view>
+      <block wx:if="{{unReadCount > 0 }}">
+         <view class="tips" bindtap="tipsClick">
+            <image src="https://pages.c-ctrip.com/livestream/video/ic_live_message_drop.png" />
+            {{unReadCount}}条新评论
+         </view>
+      </block>
+   </view>
+   <!-- 消息列表 -->
+
+    <!-- 商品卡片动画 -->
+   <block wx:if="{{showCardAnimation}}">
+      <view class="card-animation-container">
+         <view class="card-item-animation">
+            <image class="card-item-img" src="https://pages.c-ctrip.com/livestream/video/live_shop_card_show_animation.webp" mode="aspectFill" webp="true" />
+         </view>
+      </view>
+   </block>
+   <!-- 商品卡片 -->
+   <block wx:if="{{pageType==3 && showCard && card && card.goodsId && commentKeybordBottom<=0}}">
+      <template is="livePushShopCard" data="{{env,card:card, showCard:showCard,renderData,formInfoObjectList,ABTestingManager}}" />
+   </block>
+   <!-- 商品卡片 -->
+</view>
+

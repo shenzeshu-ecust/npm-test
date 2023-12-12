@@ -1,0 +1,141 @@
+.mod {
+  margin: 0 32rpx 48rpx;
+}
+.mod-title {
+  text-align: center;
+}
+.img-title {
+  width: 350rpx;
+  height: 56rpx;
+}
+.mod-content {
+  position: relative;
+  margin-top: 24rpx;
+  border-radius: 16rpx;
+  background-color: #FFF;
+  box-shadow: 0 6rpx 16rpx 2rpx rgba(211, 0, 0, .24);
+}
+
+.glory-list {
+  max-height: 436rpx;
+  overflow: hidden;
+  padding-top: 16rpx;
+}
+.glory-list-open {
+    max-height: 648rpx;
+    overflow-y: auto;
+    padding-top: 16rpx;
+}
+.list-item {
+  display: flex;
+  height: 80rpx;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx 0;
+  margin: 0 32rpx;
+  border-bottom: 1rpx solid #eeeeee;
+}
+.list-top-item {
+  margin: 0;
+  padding: 32rpx;
+  border-bottom: 4rpx solid #F4F4F4;
+}
+.list-item:last-child {
+  border-bottom: none;
+}
+.ranking {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32rpx;
+}
+.ranking-num {
+  font-size: 20rpx;
+}
+.icon-ranking {
+  width: 32rpx;
+  height: 40rpx;
+}
+.avatar {
+  margin-left: 16rpx; 
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 100%;
+  background: url(//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/avatar.png) no-repeat 0 0;
+  background-size: 80rpx;
+}
+.user-info {
+  flex: 1;
+  margin-left: 24rpx;
+}
+.user {
+  display: flex;
+  align-items: center;
+}
+.username {
+    max-width: 180rpx;
+    font-size: 30rpx;
+    color: #333;
+    line-height: 30rpx;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.tag-crit {
+  display: inline-block;
+  height: 30rpx;
+  padding: 0 12rpx;
+  margin-left: 8rpx;
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 300;
+  background: #f60;
+  border-top-left-radius: 15rpx;
+  border-top-right-radius: 15rpx;
+  border-bottom-right-radius: 15rpx;
+}
+.icon-crit {
+  width: 64rpx;
+  height: 30rpx;
+}
+.basic-text {
+  color: #999;
+  font-size: 24rpx;
+  line-height: 30rpx;
+  font-weight: 300;
+}
+.amount {
+  font-size: 34rpx;
+  color: #f60;
+  font-weight: 500;
+}
+.amount .basic-text {
+  font-weight: 300;
+}
+.amount .dfn {
+  margin: 0 4rpx 0 8rpx;
+  font-size: 28rpx;
+  line-height: 36rpx;
+  font-weight: normal;
+}
+
+.open-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26rpx;
+    color: #999;
+    flex-direction: row;
+    height: 96rpx;
+    background-color: #FFF;
+}
+
+.container{
+    margin-left: 12rpx;
+    height: 10rpx;
+    width: 10rpx;
+    border: 1rpx solid #999;
+    border-width: 0 1rpx 1rpx 0;
+    transform: rotate(45deg);
+}

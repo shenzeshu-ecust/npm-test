@@ -1,0 +1,2 @@
+<import src="../common/components/unlimitQRCode/unlimitQRCode.wxml" />
+<template is="unlimitQRCode" />

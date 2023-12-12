@@ -1,0 +1,81 @@
+<view class="masonry-list" style="width: {{styleCfg.width || 720}}rpx;">
+  <view class="masonry-list-left" style="margin-right:{{styleCfg.marginRight}}rpx">
+    <view id="left-col-inner">
+      <block wx:for="{{masonryList}}" wx:key="index">
+        <view class='ad_item' wx:if="{{item.columnPosition === 'left'}}" item="{{item}}" bindtap='goTargetUrl' data-url="{{item.masonryJumpUrl}}">
+          <block wx:if="{{wxsdkVersionFlag && showCtripVideo}}">
+            <view class="ad_item_channel" wx:if="{{authResult && authResult.avatarUrl && authResult.nickName && canIUseGetChannelsLiveInfo}}">
+              <view class="img" data-item="{{item}}">
+                <channel-video binderror="videoLoadError" class="ad_item_video" object-fit="cover" feed-id="{{item.feedId}}" finder-user-name="{{item.finderUserName}}" />
+              </view>
+              <view class="content">
+                <view class="name info">{{item.masonryTitle}}</view>
+              </view>
+            </view>
+            <block wx:else>
+              <view class="img" data-item="{{item}}" bindtap="openDetail">
+                <image style="width: 100%; height: 100%;" mode="aspectFill" src="{{item.masonryImg}}"></image>
+                <image src="https://images3.c-ctrip.com/marketing/2021/09/task/play_icon.png" mode="widthFix" class="poster_img_icon"></image>
+              </view>
+              <view class="content">
+                <view class="name info">{{item.masonryTitle}}</view>
+              </view>
+            </block>
+          </block>
+          <block wx:else>
+            <view class="img" data-item="{{item}}" bindtap="openDetail">
+              <image style="width: 100%; height: 100%;" mode="aspectFill" src="{{item.masonryImg}}"></image>
+              <image src="https://images3.c-ctrip.com/marketing/2021/09/task/play_icon.png" mode="widthFix" class="poster_img_icon"></image>
+            </view>
+            <view class="content">
+              <view class="name info">{{item.masonryTitle}}</view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="masonry-list-right">
+    <view id="right-col-inner">
+      <block wx:for="{{masonryList}}" wx:key="index">
+        <view class='ad_item' wx:if="{{item.columnPosition === 'right'}}" item="{{item}}" bindtap='goTargetUrl' data-url="{{item.masonryJumpUrl}}">
+          <block wx:if="{{wxsdkVersionFlag && showCtripVideo}}">
+            <view class="ad_item_channel" wx:if="{{authResult && authResult.avatarUrl && authResult.nickName && canIUseGetChannelsLiveInfo}}">
+              <view class="img" data-item="{{item}}">
+                <channel-video binderror="videoLoadError" class="ad_item_video" object-fit="cover" feed-id="{{item.feedId}}" finder-user-name="{{item.finderUserName}}" />
+              </view>
+              <view class="content">
+                <view class="name info">{{item.masonryTitle}}</view>
+              </view>
+            </view>
+            <block wx:else>
+              <view class="img" wx:if="{{userInfo}}" data-item="{{item}}" bindtap="openDetail">
+                <image style="width: 100%; height: 100%;" mode="aspectFill" src="{{item.masonryImg}}"></image>
+                <image src="https://images3.c-ctrip.com/marketing/2021/09/task/play_icon.png" mode="widthFix" class="poster_img_icon"></image>
+              </view>
+              <view class="img" wx:if="{{!userInfo}}" data-item="{{item}}" bindtap="openDetail">
+                <image style="width: 100%; height: 100%;" mode="aspectFill" src="{{item.masonryImg}}"></image>
+                <image src="https://images3.c-ctrip.com/marketing/2021/09/task/play_icon.png" mode="widthFix" class="poster_img_icon"></image>
+              </view>
+              <view class="content">
+                <view class="name info">{{item.masonryTitle}}</view>
+              </view>
+            </block>
+          </block>
+          <block wx:else>
+            <view class="img" data-item="{{item}}" bindtap="openDetail">
+              <image style="width: 100%; height: 100%;" mode="aspectFill" src="{{item.masonryImg}}"></image>
+              <image src="https://images3.c-ctrip.com/marketing/2021/09/task/play_icon.png" mode="widthFix" class="poster_img_icon"></image>
+            </view>
+            <view class="content">
+              <view class="name info">{{item.masonryTitle}}</view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+
+
+

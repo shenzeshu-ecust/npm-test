@@ -1,0 +1,25 @@
+<view class="tasktu">
+  <view class="tasktu__list">
+    <view wx:if="{{taskList[0]}}" class="tasktu__item tasktu__item_0 {{buttonInfo.index > 0 ? 'active' :''}}" bindtap="handleTask0">
+      <image src="https://images3.c-ctrip.com/marketing/task_components/lol/jiandao.png" class="tasktu__item_img"></image>
+      <view class="tasktu__item_text">剪窗花</view>
+      <view class="tasktu__item_line"></view>
+    </view>
+    <image class="tasktu__jaintou" src="https://images3.c-ctrip.com/marketing/task_components/lol/right.png"></image>
+    <view wx:if="{{taskList[1]}}" class="tasktu__item tasktu__item_1 {{buttonInfo.index > 1 ? 'active' :''}}" bindtap="handleTask1">
+      <image wx:if="{{avatarInfo.headUrl}}" class="tasktu__item_headUrl" src="{{avatarInfo.headUrl}}"></image>
+      <image wx:else src="https://images3.c-ctrip.com/marketing/task_components/lol/plus.png" class="tasktu__item_img"></image>
+      <view  wx:if="{{avatarInfo.showReceive}}" class="tasktu__item_text" bindtap="receiveSmallCoupon">领券</view>
+      <view wx:else class="tasktu__item_text">送福气</view>
+      <view class="tasktu__item_line"></view>
+    </view>
+    <image class="tasktu__jaintou" src="https://images3.c-ctrip.com/marketing/task_components/lol/right.png"></image>
+    <view wx:if="{{taskList[0]}}" class="tasktu__item tasktu__item_2 {{buttonInfo.index == 2 ? 'active' :''}}" bindtap="handleTask2">
+      <image src="https://images3.c-ctrip.com/marketing/task_components/lol/icon2.png" class="tasktu__item_img"></image>
+      <view class="tasktu__item_text">得封面</view>
+    </view>
+  </view>
+  <view wx:if="{{taskList && taskList.length > 0}}" class="tasktu__footer tasktu__footer_btn_{{buttonInfo.index}}" bindtap="handleTask">
+    <!-- {{buttonInfo.text}} -->
+  </view>
+</view>

@@ -1,0 +1,8 @@
+<view>
+    <block wx:if="{{canWebView}}">
+        <web-view src="{{ruleUrl}}"></web-view>
+    </block>
+    <block wx:else>
+        <view>亲爱的用户，您的微信版本太低啦，快去升级微信吧</view>
+    </block>
+</view>

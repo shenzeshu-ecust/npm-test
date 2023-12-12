@@ -1,0 +1,61 @@
+<!--index.wxml-->
+<perinfo-protect-float></perinfo-protect-float>
+<authorizationFloat id="cwxAuthFloat"></authorizationFloat>
+
+<view>
+    <view wx:if="{{configLoading || wechatCheckFlag}}" class="check-box">
+        <block wx:if="{{wechatCheckFlag}}">
+            <text class="txt">
+                页面维护中...
+            </text>
+            <view class="kefu" bindtap="onClickKefu">联系客服</view>
+            客服热线：95010
+        </block>
+    </view>
+    <block wx:else>
+        <camera device-position="front" flash="off" frame-size="small" binderror="error" bindinitdone="onCameraInit"
+            style="height:{{cameraHeight}}px; width: {{cameraWidth}}px">
+            <cover-view class="wrap"><cover-image class="image-txt-avatar" src="https://images3.c-ctrip.com/train/dulujie/mengceng@3x.png"/></cover-view>
+
+            <cover-view class="image-txt">
+                <cover-view class="tit">拍摄时请确保：</cover-view>
+                <cover-view class="txt">1、光线充足。若光线过暗，请调整环境光线</cover-view>
+                <cover-view class="txt">2、面部无反光且清晰，无倾斜，切勿遮挡面部</cover-view>
+            </cover-view>
+        </camera>
+        <view class="image-avatar">
+            <image class="img" src="https://images3.c-ctrip.com/train/dulujie/paizhaoguifan%20@3x.png" />
+        </view>
+        <view class="btn" bindtap="takePhoto" hover-class="btn_hover" wx:if="{{!rejectAuth}}">
+            <image class="img" src="https://images3.c-ctrip.com/train/dulujie/btn_take%20photo@3x.png" />
+        </view>
+        <view class="reject-btn" hoverClass="btn-hover" wx:if="{{rejectAuth}}">
+            <button open-type="openSetting">
+                立即授权
+            </button>
+        </view>
+        <view class="security-tip" wx:if="{{securityTipVisible}}">
+            <image class="security-img" src="https://images3.c-ctrip.com/train/dulujie/security.png"></image>
+            <view class="notice">为保证您的账号安全，请拍摄您</view>
+            <view class="notice">本人的面部照片以完成核验</view>
+            <view class="countdown">
+                <view class="int">{{countdown}}</view>
+                <view>秒后开始验证</view>
+            </view>
+        </view>
+    </block>
+    <view class="pop-mask {{popMaskTransition ? 'active' : ''}}" wx:if="{{popMask}}"></view>
+    <view class="pop-submit" wx:if="{{submitLoadingVisible}}">
+        <view class="box">
+            <image class="head-img" src="https://images3.c-ctrip.com/train/dulujie/saolianjiance1.png"></image>
+            <image class="line-img" src="https://images3.c-ctrip.com/train/dulujie/line.png"></image>
+        </view>
+        <view class="row" wx:for="{{submitLoadingStatus}}" wx:for-item="item" wx:key="name">
+            <view >{{item.name}}</view>
+            <view class="loading" wx:if="{{item.status == 1}}"></view>
+            <view class="done" wx:if="{{item.status == 2}}"></view>
+        </view>
+    </view>
+</view>
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

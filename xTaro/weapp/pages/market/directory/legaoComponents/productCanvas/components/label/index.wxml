@@ -1,0 +1,535 @@
+<span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers" wx:if="{{!customNode}}">{{data.props.values.value}}</span>
+
+<!-- 活动标签 -->
+<!-- diyField_activityTag  -->
+<block wx:if="{{customNode=='diyField_activityTag' && data.props.values.value}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+</block>
+
+<!-- 左上角排序下标 -->
+<!-- diyField_index  -->
+<block wx:if="{{customNode=='diyField_index' && data.props.values.value}}">
+  <span data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers" class="diyField_index">{{data.props.values.value}}</span>
+  <!-- <span data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers" class="diyField_index">1</span> -->
+</block>
+
+<!-- 推荐状态 -->
+<!-- diyField_recommendStatus  -->
+<block wx:if="{{customNode=='diyField_recommendStatus' && data.props.values.value === true}}">
+  <image src="{{data.props.values.src}}" style="{{data.styles || data.props.styles}}" class="diyField_imageUrl" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" data-clickhandlersname="clickHandlers" bindtap="clickHandlers" lazy-load />
+</block>
+
+<!-- 产品销售状态 -->
+<!-- diyField_saleStatus  -->
+<block wx:if="{{customNode=='diyField_saleStatus' && data.props.values.value != 1}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers" class="diyField_saleStatus diyField_saleStatus_{{data.props.values.value}}">-{{data.props.values.value == 0 ? '' : data.props.values.value == 2 ? '待开抢' : data.props.values.value == 3 ? '已抢光' : data.props.values.value == 4 ? '已抢光' : ''}}-</span>
+</block>
+
+<!-- 直播状态 -->
+<!-- diyField_explainStatus 0无状态 1求讲解，2讲解中，3已申请  -->
+<block wx:if="{{customNode=='diyField_explainStatus' && data.props.values.value}}">
+  <!-- 求讲解 -->
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers" class="diyField_explainStatus" wx:if="{{ data.props.values.value == 1}}">
+    <image src="https://images3.c-ctrip.com/marketing/2022/11/npc/huatong_01.png" mode="widthFix" class="diyField_explainStatus_icon" lazy-load bindtap="clickHandlers" data-clickhandlersname="{{data.props.values.name}}" />
+    <span class="live_status_text">求讲解</span>
+  </span>
+
+  <!-- 讲解中 -->
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers" class="diyField_explainStatus" wx:if="{{ data.props.values.value == 2}}">
+    <image src="{{data.props.values.iconUrl || 'https://images3.c-ctrip.com/marketing/2022/12/sk/explaining.gif'}}" mode="widthFix" class="diyField_explainStatus_icon" lazy-load bindtap="clickHandlers" data-clickhandlersname="{{data.props.values.name}}" />
+    <span class="live_status_text">讲解中</span>
+
+  </span>
+
+  <!-- 已申请 -->
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers" class="diyField_explainStatus diyField_explainStatus_statue3" wx:if="{{ data.props.values.value == 3}}">
+    <image src="https://images3.c-ctrip.com/marketing/2022/11/npc/huatong_02.png" mode="widthFix" class="diyField_explainStatus_icon diyField_explainStatus_icon_three" />
+    <span class="live_status_text">已申请</span>
+
+  </span>
+</block>
+
+<!-- 点评分 -->
+<block wx:if="{{customNode=='diyField_score' && data.props.values.value * 1 > 0}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" class="diyField_score" data-clickhandlersname="clickHandlers" bindtap="clickHandlers">{{data.props.values.value}}分</span>
+</block>
+
+<!-- 无价格有文案 -->
+<block wx:if="{{customNode=='diyField_priceText' && data.props.values.value}}">
+  <block wx:if="{{data.props.values.value == '免费' || data.props.values.value == '免费预约'}}">
+    <span class="product_sale_off_priceText_detail" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" class="product_sale_off" bindtap="clickHandlers" data-clickhandlersname="clickHandlers">{{data.props.values.value || ''}}</span>
+  </block>
+  <block wx:else>
+    <span class="product_sale_off_priceText_detail" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers" data-clickhandlersname="clickHandlers">{{data.props.values.value || ''}}</span>
+  </block>
+</block>
+
+<!-- 产品名称 -->
+<block wx:if="{{customNode=='diyField_name' && data.props.values.value && data.props.values.value.content }}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers" class="{{data.props.values.value.wrap && data.props.values.value.wrap == 'two' ? 'diyField_name':'diyField_name_overflow'}}">{{data.props.values.value.content}}</span>
+</block>
+
+<!-- 产品图片 -->
+<block wx:if="{{customNode=='diyField_imageUrl' && data.props.values.value}}">
+  <image src="{{data.props.values.value || 'https://images3.c-ctrip.com/marketing/2022/11/sk/defalt_product.png'}}" style="{{data.styles || data.props.styles}}" bindload="checkImageLoad" binderror="checkImageLoadError" class="diyField_imageUrl" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers" />
+</block>
+
+<!-- 子标题 -->
+<block wx:if="{{customNode=='diyField_subTitle' && data.props.values.value}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+</block>
+
+<!-- 产品所在城市 -->
+<block wx:if="{{customNode=='diyField_arriveCityName' && data.props.values.value}}">
+  <view class="location-part">
+    <image src="https://dimg04.c-ctrip.com/images/0AS1n1200097kkhn7E062.png" mode="" class="location-icon" />
+    <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+  </view>
+</block>
+
+<!-- 价格 -->
+<block wx:if="{{customNode=='diyField_price' && data.props.values.value && data.props.values.value.count}}">
+  <block wx:if="{{data.props.values.value && data.props.values.value.count}}">
+    <block wx:if="{{data.props.values.value.unit == 'text' || data.props.values.value.count == '免费' || data.props.values.value.count == '免费预约'}}">
+      <span class="diyField_price product_sale_off_price {{data.props.values.value.count == '去看看' && 'product_sale_off_price_wait'}} {{data.props.values.value.count == '价格见商品页' && 'product_sale_off_price_detail'}}" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers"><span class="price_unit_icon" wx:if="{{data.props.values.value.showUnit}}">{{data.props.values.value.unit}}</span>
+      <span class="price_count">{{data.props.values.value.count}}</span>
+      <span class="price_unit_showqi" wx:if="{{data.props.values.value.unit == '¥' && data.props.values.isShowQi && data.props.values.value.isshowqi}}">起</span>
+      </span>
+    </block>
+    <block wx:else>
+      <span class="diyField_price" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers"><span class="price_unit_icon" wx:if="{{data.props.values.value.showUnit}}">{{data.props.values.value.unit}}</span>
+      <span class="price_count">{{data.props.values.value.count}}</span>
+      <span class="price_unit_showqi" wx:if="{{data.props.values.value.unit == '¥' && data.props.values.isShowQi && data.props.values.value.isshowqi}}">起</span></span>
+    </block>
+  </block>
+  <block wx:if="{{!data.props.values.value || !data.props.values.value.count}}">
+    <block wx:if="{{data.props.values.value.unit == 'text' || data.props.values.value.count == '免费' || data.props.values.value.count == '免费预约'}}">
+      <span class="diyField_price product_sale_off_price {{data.props.values.value.count == '去看看' && 'product_sale_off_price_wait'}} {{data.props.values.value.count == '价格见商品页' && 'product_sale_off_price_detail'}}" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value.count}}</span>
+    </block>
+    <block wx:else>
+      <span class="diyField_price" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value.count}}</span>
+    </block>
+  </block>
+</block>
+
+<!-- 产品划线价 -->
+<block wx:if="{{customNode=='diyField_marketPrice' && data.props.values.value}}">
+  <span class="custom_marketPrice" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">¥{{data.props.values.value}}</span>
+</block>
+
+<!-- 折扣 -->
+<block wx:if="{{customNode=='diyField_discount' && data.props.values.value &&  data.props.values.value.showMarketPrice}}">
+  <image src="{{data.props.values.iconUrl}}" mode="" class="product-diy-reduction-icon" wx:if="{{data.props.values.iconUrl}}" />
+  <span class="custom_discount" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">低至{{data.props.values.value.count}}折</span>
+</block>
+
+<!-- 立减 -->
+<block wx:if="{{customNode=='diyField_reduction' && data.props.values.value &&  data.props.values.value.showMarketPrice}}">
+  <view class="diyField_reduction_box">
+    <image src="{{data.props.values.iconUrl}}" mode="" class="product-diy-reduction-icon" wx:if="{{data.props.values.iconUrl}}" />
+    <span class="custom_reduction" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">已减¥{{data.props.values.value.count}}</span>
+  </view>
+</block>
+
+<!-- 产品标签 -->
+<block wx:if="{{customNode=='diyField_customerTags'}}">
+  <view class="custom_tags_list">
+    <span wx:for="{{data.props.values.value}}" wx:key="index" class="custom_tags_item" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{item}}</span>
+  </view>
+</block>
+
+<!-- 星钻 -->
+<block wx:if="{{customNode == 'diyField_star'}}">
+  <view class="product-diy-star-wrap" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">
+    <image wx:for="{{data.props.values.value}}" wx:key="index" src="{{'https://pages.c-ctrip.com/activitysetupapp/nfes_legao/components/AtomProductX/images/star.png'}}" mode="widthFix" class="diy-star" />
+  </view>
+</block>
+
+<!-- 所在商圈 -->
+<block wx:if="{{customNode=='diyField_zoneName' && data.props.values.value}}">
+  <view class="product-diy-module product-diy-zone-name">
+    <span wx:if="{{data.props.values.isShowVerticalLine}}" class="rankTag_verticalLine_line"></span>
+    <image src="{{data.props.values.iconUrl}}" mode="widthFix" class="product-diy-location-icon" wx:if="{{data.props.values.iconUrl}}" />
+    <span class="custom_zoneName" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+  </view>
+</block>
+
+<!-- 是否正在直播 -->
+<block wx:if="{{customNode=='diyField_liveStatus' && data.props.values.value}}">
+  <view class="product-diy-module product-diy-live-status" bindtap="clickHandlers" data-clickhandlersname="clickHandlers">
+    <image src="{{data.props.values.iconUrl}}" mode="widthFix" class="product-diy-live-icon" wx:if="{{data.props.values.iconUrl}}" />
+    <span class="diyField_liveStatus" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}">讲解中</span>
+  </view>
+</block>
+
+<!-- 精选评论 -->
+<block wx:if="{{customNode=='diyField_selectdComment'}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+</block>
+
+<!-- 推荐文案 -->
+<block wx:if="{{customNode=='diyField_recommendText'}}">
+  <view class="product-diy-module product-diy-module-recommend-text">
+    <span class="diy-recommend-text-quote">“</span>
+    <span class="diy-recommend-text-main">
+      <span class="text">{{data.props.values.value}}</span>
+      <span class="underline-bar"></span>
+    </span>
+    <span class="diy-recommend-text-quote">”</span>
+  </view>
+</block>
+
+<!-- 母酒店名称 -->
+<block wx:if="{{customNode=='diyField_packageName'}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+</block>
+
+<!-- 房型名称 -->
+<block wx:if="{{customNode=='diyField_roomName'}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+</block>
+
+<!-- X项 -->
+<block wx:if="{{customNode=='diyField_xItems'}}">
+  <view class="pnr-content">
+    <view wx:for="{{data.props.values.value}}" wx:key="index" class="col-wrap">
+      <span class="before-icon">{{item.type}}</span>
+      <span class="pnr-hs-subcontent">{{item.value}}</span>
+    </view>
+  </view>
+</block>
+
+<!-- 资源名称 -->
+<block wx:if="{{customNode=='diyField_resourceName'}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+</block>
+
+<!-- 推荐文案 -->
+<block wx:if="{{customNode=='diyField_pmRecommand'}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+</block>
+
+<!-- 按钮字段 -->
+<block wx:if="{{customNode=='diyField_btnClick'}}">
+  <view style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers" class="product-diy-module seckill-single-status-btn status-{{data.props.values.status}}">
+    <span class="">预约秒杀</span>
+    <span class="diyField_btnClick_time">2022-11-11</span>
+  </view>
+</block>
+
+<!-- 横幅文案 -->
+<block wx:if="{{customNode=='diyField_decorateData'}}">
+  <span class="product-diy-module" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value["text"] || data.props.values["decorateText"].text}}</span>
+</block>
+
+<!-- 左上角文案 -->
+<block wx:if="{{customNode=='diyField_leftCornerData'}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value.text}}</span>
+</block>
+
+<!-- 点评数 -->
+<!-- 暂时没有记录 -->
+<block wx:if="{{customNode=='diyField_showCommentsCount' && data.props.values.value}}">
+  <view class="product_showCommentsCount_box">
+    <span wx:if="{{data.props.values.isShowVerticalLine}}" class="rankTag_verticalLine_line"></span>
+    <span class="diyField_showCommentsCount" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}条点评</span>
+  </view>
+</block>
+
+<!-- 收藏数 -->
+<block wx:if="{{customNode=='diyField_favorityCount' && data.props.values.value}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}收藏</span>
+</block>
+
+<!-- 距离 -->
+<!-- 暂时没有记录 -->
+<block wx:if="{{customNode=='diyField_positionShowText' && data.props.values.value}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+</block>
+
+<!-- 周末不加价 -->
+<!-- 有点问题 -->
+<block wx:if="{{customNode=='diyField_holidayLabel'}}">
+  <block wx:if="{{data.props.values.type === 'array'}}">
+    <block wx:for="{{data.props.values.value}}" wx:key="index">
+      <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{item}}</span>
+    </block>
+  </block>
+  <block wx:else>
+    <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+  </block>
+</block>
+
+<!-- 周末不加价列表 -->
+<!-- 这是一个列表 -->
+<block wx:if="{{customNode=='diyField_holidayTagList' && data.props.values.value && data.props.values.value.length}}">
+  <block wx:for="{{data.props.values.value}}" wx:key="index">
+    <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{item}}</span>
+  </block>
+</block>
+
+<!-- 有限期至 -->
+<!-- diyField_useEnd -->
+<!-- 注意H5用的是 startSaleTime endSaleTime systemTime -->
+<block wx:if="{{customNode=='diyField_useEnd' && data.props.values.value}}">
+  <span style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value}}</span>
+</block>
+
+<!-- 酒店榜单 -->
+<block wx:if="{{customNode=='diyField_rankTag' && data.props.values.value}}">
+  <view class="product-diy-module product-diy-rank-box">
+    <span wx:if="{{data.props.values.isShowVerticalLine}}" class="rankTag_verticalLine_line"></span>
+    <view class="custom_rankTag_box">
+      <block wx:if="{{data.props.values.iconUrl && data.props.values.iconUrl == 'https://images3.c-ctrip.com/marketing/2023/07/gamepageidiom/live_icon.png'}}">
+        <image src="https://images3.c-ctrip.com/marketing/2023/07/gamepageidiom/live_icon.png" mode="widthFix" class="product_diy_rank_icon" style="padding-left: {{data.props.values.isShowVerticalLine ? 14 : 0}}rpx;" />
+      </block>
+      <block wx:else>
+        <image src="{{data.props.values.iconUrl || 'https://images3.c-ctrip.com/marketing/2023/07/gamepageidiom/live_icon.png'}}" mode="heightFix" class="product-diy-rank-icon" />
+      </block>
+      <span class="custom_zoneName custom_zoneName_content" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">
+        <span class="product-diy-rank_text">{{data.props.values.value}}</span>
+      </span>
+    </view>
+  </view>
+</block>
+
+<!-- 商品类型 -->
+<block wx:if="{{customNode=='diyField_businessType' && subData.props.values.typeObj.buName}}">
+  <view class="product-diy-businessType-box">
+    <image src="{{subData.props.values.typeObj.buSrc}}" mode="widthFix" class="product-diy-businessType-icon" />
+    <span class="custom_zoneName" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{subData.props.values.typeObj.buName}}</span>
+  </view>
+</block>
+
+<!-- 新开业 -->
+<!-- diyField_isNewOpening 是一个布尔值 -->
+<block wx:if="{{customNode=='diyField_isNewOpening' && data.props.values.value}}">
+  <span class="custom_isNewOpening" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">新开业</span>
+</block>
+
+<!-- 是否推荐 -->
+<block wx:if="{{customNode=='diyField_isShowThumbsUp' && subData.props.values.value}}">
+  <image src="{{subData.props.values.value}}" mode="widthFix" class=".product-diy-thumbsup" />
+</block>
+
+<!-- 晚 -->
+<block wx:if="{{customNode=='diyField_nights' && subData.props.values.value}}">
+  <span class="custom_nights'" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">/{{subData.props.values.value == 1 ? '' : subData.props.values.value}}晚</span>
+</block>
+
+<!-- 星球号-标签1 -->
+<block wx:if="{{customNode=='diyField_xingqiuhaoHotelTag1'}}">
+
+</block>
+
+<!-- 星球号-标签2 -->
+<block wx:if="{{customNode=='diyField_xingqiuhaoHotelTag2'}}">
+
+</block>
+
+
+<!-- 景区等级 -->
+<block wx:if="{{customNode=='diyField_levelInfo'}}">
+  <span class="custom_levelInfo'" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{subData.props.values.value}}</span>
+</block>
+
+<!-- 出发日期 -->
+<block wx:if="{{customNode=='diyField_departTime'}}">
+  <span class="custom_departTime'" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{subData.props.values.value}}</span>
+</block>
+
+<!-- BU类型名称 -->
+<block wx:if="{{customNode=='diyField_businessName'}}">
+  <span class="custom_businessName'" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{subData.props.values.value}}</span>
+</block>
+
+<!-- 按钮文案 -->
+<block wx:if="{{customNode=='diyField_btnText' && data.props.values.value && data.props.values.value.saleStatus }}">
+  <!-- <span class="custom_btnText product-diy-module-default-text custom_btnMenu {{data.props.values.value.saleStatus >= 3 ? 'btn_opactity':''}}" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{data.props.values.value.content}}</span> -->
+  <span class="custom_btnText product-diy-module-default-text custom_btnMenu" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers"> <view class="icon_mepty">
+  </view> 抢</span>
+</block>
+
+<!-- 售罄 -->
+<block wx:if="{{customNode=='diyField_sellout'}}">
+
+</block>
+
+<!-- 已售数量 -->
+<block wx:if="{{customNode=='diyField_saleCount'}}">
+
+</block>
+
+<!-- 订阅更新标签 -->
+<block wx:if="{{customNode=='diyField_subscriptionUpdate'}}">
+
+</block>
+
+<!-- BOSS推荐标签 -->
+<block wx:if="{{customNode=='diyField_bossLabel'}}">
+
+</block>
+
+<!-- 预售囤货标签 -->
+<block wx:if="{{customNode=='diyField_tuanTag'}}">
+  <span class="custom_btnText product-diy-module-default-text diyField_tuanTag" style="{{data.styles || data.props.styles}}" data-name="{{data.name}}" data-key="{{data.renderKey}}" data-clickhandlersname="{{data.props.values.name}}" bindtap="clickHandlers">{{subData.props.values.value}}</span>
+</block>
+
+<!-- 鹊桥营销标签 -->
+<block wx:if="{{customNode=='diyField_queqiaoSource'}}">
+
+</block>
+
+<!-- 口碑榜标签 -->
+<block wx:if="{{customNode=='diyField_rankingDesc'}}">
+
+</block>
+
+<!-- 倒计时 -->
+<block wx:if="{{customNode=='diyField_countdown'}}">
+
+</block>
+
+
+<!-- 酒店荣誉标签 -->
+<block wx:if="{{customNode=='diyField_honorTag'}}">
+
+</block>
+
+
+<!-- 入住时间 -->
+<block wx:if="{{customNode=='diyField_checkInDate'}}">
+
+</block>
+
+
+<!-- 优惠原因 -->
+<block wx:if="{{customNode=='diyField_discountDescList'}}">
+
+</block>
+
+<!-- 酒店卖点描述 -->
+<block wx:if="{{customNode=='diyField_salePoint'}}">
+
+</block>
+
+<!-- X项-住 -->
+<block wx:if="{{customNode=='diyField_structuredRoom'}}">
+
+</block>
+
+<!-- X项-食 -->
+<block wx:if="{{customNode=='diyField_structuredMeal'}}">
+
+</block>
+
+<!-- X项-享 -->
+<block wx:if="{{customNode=='diyField_structuredExtra'}}">
+
+</block>
+
+<!-- 直播推荐标签 -->
+<block wx:if="{{customNode=='diyField_recommendLabel'}}">
+
+</block>
+
+<!-- 榜单排行 -->
+<block wx:if="{{customNode=='diyField_rankIndex'}}">
+
+</block>
+
+<!-- 榜单排行数字 -->
+<block wx:if="{{customNode=='diyField_rankIndexNum'}}">
+
+</block>
+
+<!-- 金钻 -->
+<block wx:if="{{customNode=='diyField_superStar'}}">
+
+</block>
+
+<!-- 酒店荣誉-图标 -->
+<block wx:if="{{customNode=='diyField_honorTagIcon'}}">
+
+</block>
+
+<!-- 圆圈问号 -->
+<block wx:if="{{customNode=='diyField_isShowCurve'}}">
+
+</block>
+
+<!-- 星球号-今日低价 -->
+<block wx:if="{{customNode=='diyField_xingqiuhaoDiscountInfo'}}">
+
+</block>
+
+<!-- 比价标签 -->
+<block wx:if="{{customNode=='diyField_comparePriceInfo'}}">
+
+</block>
+
+<!-- 星球号-优惠券标签 -->
+<block wx:if="{{customNode=='diyField_starballCouponTag'}}">
+
+</block>
+
+<!-- 919背景氛围图 -->
+<block wx:if="{{customNode=='diyField_isShow919Background'}}">
+
+</block>
+
+<!-- 919标签 -->
+<block wx:if="{{customNode=='diyField_isShow919Tag'}}">
+
+</block>
+
+<!-- 星球号进店条 -->
+<block wx:if="{{customNode=='diyField_starballHotelBarInfo'}}">
+
+</block>
+
+<!-- 本期爆款标签 -->
+<block wx:if="{{customNode=='diyField_thisPeriodExplosiveModels'}}">
+
+</block>
+
+<!-- 凯悦标签 -->
+<block wx:if="{{customNode=='diyField_isShowHyattBar'}}">
+
+</block>
+
+<!-- 子模板 -->
+<!-- childModuleContainer -->
+<block wx:if="{{customNode=='diyField_childModuleContainer'}}">
+
+</block>
+
+<!-- 出发地 -->
+<!--  -->
+<block wx:if="{{customNode=='diyField_cityName'}}">
+
+</block>
+
+<!-- 人 -->
+<!-- persons -->
+<block wx:if="{{customNode=='diyField_persons'}}">
+
+</block>
+
+<!-- 菜系 -->
+<!-- cuisine -->
+<block wx:if="{{customNode=='diyField_cuisine'}}">
+
+</block>
+
+<!-- 美食林名称 -->
+<!-- gourmetListName -->
+<block wx:if="{{customNode=='diyField_gourmetListName'}}">
+
+</block>
+
+<!-- 美食产品亮点 -->
+<!-- foodFeature -->
+<block wx:if="{{customNode=='diyField_foodFeature'}}">
+
+</block>

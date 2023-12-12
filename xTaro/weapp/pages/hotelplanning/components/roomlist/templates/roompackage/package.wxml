@@ -1,0 +1,10 @@
+<template name="packageDesc">
+<block wx:if="{{roomPackageInfo && roomPackageInfo.packageInfoList}}">
+    <block wx:for="{{roomPackageInfo.packageInfoList}}">
+        <view wx:if="{{item.type === 2 || item.type === 3}}" class="txt-item cell-v">
+            <text class="pac-icon">{{item.icon}}</text>
+            <text class="single-ellipsis">{{item.name}}</text>
+        </view>
+    </block>
+</block>
+</template>

@@ -1,0 +1,37 @@
+page {
+    height: 100%;
+}
+
+.page-wrap {
+    position: relative;
+    height: 100%;
+}
+
+.login-box {
+    width: 300rpx;
+    height: 484rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: url("https://images4.c-ctrip.com/target/0zc0q120008ouesgn8D8C.png");
+    background-size: 300rpx auto;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+
+.login-tip {
+    margin-top: 332rpx;
+}
+
+.login-action {
+    border: 2rpx solid #0086F6;
+    border-radius: 8rpx;
+    width: 250rpx;
+    height: 72rpx;
+    margin: 32rpx auto 0;
+    line-height: 70rpx;
+    font-size: 30rpx;
+    text-align: center;
+    color: #0086F6;
+}

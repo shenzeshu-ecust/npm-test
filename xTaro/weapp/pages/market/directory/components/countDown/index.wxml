@@ -1,0 +1,25 @@
+<view class="wrap" 
+      wx:if="{{!!wxpopup}}" 
+      style="bottom:{{diyBottom || 300}}rpx"
+      bindtap="goTargetUrl">
+  <view class="main">
+    <view class="header"></view>
+    <view class="body">
+      <view class="count-down">
+        <view class="line-wrap">
+          <view class="line" style="width:{{lineWidth}}%"></view>
+        </view>
+      </view>
+      <view class="desc">
+        <view wx:if="{{timeCount < timeTotal}}">
+          浏览{{timeTotal - timeCount}}秒
+          <view>得奖励</view>
+        </view>
+        <view wx:else>
+          任务已完成
+          <view style="color:#FFED00">快去领奖吧</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

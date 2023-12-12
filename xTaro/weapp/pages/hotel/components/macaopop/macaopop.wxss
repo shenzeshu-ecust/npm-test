@@ -1,0 +1,13 @@
+@import "../../common/common.wxss";
+
+.mp-box .mp-img {
+  position: relative;
+  width: 652rpx;
+  height: 706rpx;
+}
+.mp-box .mp-close {
+  font-size: 60rpx;
+  margin-top: 72rpx;
+  color: #fff;
+  text-align: center;
+}

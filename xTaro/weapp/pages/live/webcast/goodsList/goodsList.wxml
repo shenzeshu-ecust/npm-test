@@ -1,0 +1,219 @@
+<!-- 货架icon -->
+<view wx:if="{{goodsCount}}" class="footer-item-goods shopping " bindtap="showShopWrapper">
+      <image class="scatter_flower_img" src="https://pages.c-ctrip.com/livestream/live/scatter_flower.webp" />
+      <image class="img" src="https://pages.c-ctrip.com/livestream/live/live_goods_base.png" />
+      <view class="goods-count">{{goodsCount > 99 ? '99+':goodsCount}}</view>
+</view>
+<block wx:if="{{pageType == 3 || pageType == 5}}">
+<!-- 货架弹框 -->
+  <view catchtouchmove="catchtouchmove" class="product-wrapper {{showGoodsListWrapper ? 'on' : ''}} ">
+    <!-- 产品列表 -->
+<view hidden="{{hasClickSearchIcon}}" class="inner"  style="height:{{proListHeight}}px">
+    <block wx:if="{{((functionSwitch&&functionSwitch.goodsSearch==1&&goodsCount&&goodsCount>=3) || couponPageUrl) && pageType==3}}">
+			<view class="goods-search-switch {{goodsShopInfo ? 'on':''}}">
+		  <view class="goods-shop-info" data-url="{{goodsShopInfo.shopUrl}}" bindtap="goJump" wx:if="{{goodsShopInfo}}">
+				<view class="pro-title">{{goodsShopInfo.shopName}}</view>
+				<view class="pro-icon" style="background-image: url({{goodsShopInfo.vIcon}})"></view>
+				<!-- 图标 -->
+			
+				<view class="pro-right-arrow"></view>
+			</view>
+			 <block wx:else>
+			  <view class="pro-title">推荐商品</view>
+			 </block>
+			 <view class="pro-icons">
+         <view wx:if="{{(functionSwitch&&functionSwitch.goodsSearch==1&&goodsCount&&goodsCount>=3)}}" class="pro-icons-item" bindtap="handleGoodsSearch">
+					<view class="search-icon"></view>
+					<text class="icon-text">搜索</text>
+					</view>
+			   	<view wx:if="{{couponPageUrl}}" data-type="coupon" data-url="{{couponPageUrl}}" bindtap="goJump"  class="pro-icons-item">
+					<view class="couple-icon"></view>
+					<text class="icon-text">优惠劵</text>
+					</view>
+				 
+			 </view>
+    </view>
+    </block >
+		<!-- 右边没有图标的情况下 -->
+    <block wx:else>
+    <view class="goods-close-switch {{goodsShopInfo ? 'on':''}}">
+		  <block wx:if="{{goodsShopInfo}}">
+			  <view class="goods-shop-info" data-url="{{goodsShopInfo.shopUrl}}" bindtap="goJump">
+				<view class="pro-title">{{goodsShopInfo.shopName}}</view>
+				<view class="pro-icon" style="background-image: url({{goodsShopInfo.vIcon}})"></view>
+				<view class="pro-right-arrow"></view>
+		  	</view>
+			</block>
+     <block wx:else>
+		  <view class="product-close" bindtap="hideShopWraper"></view>
+			<view class="pro-title">推荐商品</view>
+			<view class="pro-title"> </view>
+		 </block>
+    </view>
+     </block>
+   <scroll-view wx:if="{{goodsTabList && goodsTabList.length > 0}}" class="filter-view" scroll-x="true" >
+      <block wx:for="{{goodsTabList}}" wx:key="{{item.name}}">
+        <view class="filter-item {{activeIndex==index ? 'on':''}}" bindtap="filterGoodsTabClick" data-name="{{item.name}}" data-type="{{item.type}}" data-position="{{item.index}}" data-index="{{index}}">
+          <text class="filter-name">{{item.name}}</text>
+        </view>
+      </block>
+
+   </scroll-view>
+
+  <!-- 商品列表  scroll-view 需要设置flex:1 防止最后商品展示不出来-->
+    <scroll-view class="pro-list" scroll-y  show-scrollbar="{{false}}" 
+    lower-threshold="200"
+      scroll-top="{{scrollTop}}" enhanced bounces="{{false}}" bindscrolltolower="handleScrollLower"
+>
+      <block wx:if="{{filteredBannerGoodsList && filteredBannerGoodsList.length}}">
+          <shelvesBanner id="shelves_banenr" filteredGoodsList="{{filteredBannerGoodsList}}" 
+          bind:shelvesBannerScroll="shelvesBannerScroll"
+          bind:shelvesBannerClick="shelvesBannerClick"></shelvesBanner>
+      </block>
+
+      <block wx:if="{{loading==1}}">
+      <view class="product-loading">
+        <image class="product-loading-img" mode="aspectFill" src="https://pages.c-ctrip.com/livestream/live/earth_rotate_loading.gif" />
+      </view>
+     </block>
+    
+      <block wx:if="{{loading==2}}">
+        <block wx:if="{{!(filteredGoodsList&&filteredGoodsList.length)}}">
+        <!-- <view> -->
+          <view class="no-pro">
+            <view class="n-img"></view>
+            <view class="n-text">主播暂未上架商品哦</view>
+          </view>
+        <!-- </view> -->
+      </block>
+
+
+
+      <block wx:else>
+      
+     
+    <!-- 接入乐高组件 -->
+     
+          <product 
+           id="product_legao"
+            type="list"
+            updateType="{{updateType}}"
+            custom_scene_class="sk_scene_class"
+            sceneCode= "{{env=='prd'?'f_c7iueyj2':'f_0esl5k0e'}}"
+            renderDataList="{{filteredGoodsList}}"
+            incrementalUpdateProduct="{{incrementalUpdateProduct}}"
+            bind:clickHandlers="clickHandlersCallback"
+            bind:exposureTrace="exposureTrace"
+        ></product>
+        
+ 
+
+      </block>
+      </block>
+   
+    </scroll-view>
+ 
+   
+  </view>
+
+
+  <!-- --------------------------------------- -->
+
+<!-- 搜索列表 -->
+  <view wx:if="{{hasClickSearchIcon}}" class="inner" style="height:{{proListHeight}}px">
+  <!-- 悬浮 -->
+  <view class="head11">
+  <!-- 头部搜索框 -->
+      <view class="search-history-head">
+      <view class="search-back" bindtap="handleGoodsBack"></view>
+      <view class="search-input">
+            <input type="text" name="comment"  class="search-comment" placeholder-class="placeholder-comment" placeholder="搜索商品/序号" adjust-position="{{false}}" placeholder-style="color: rgb(153, 153, 153);"
+            focus="{{needFocus}}"
+            auto-focus="{{needFocus}}"
+            bindinput="commentSearchGoodsInput" 
+            value="{{inputSearchValue}}" bindconfirm="sendSearchGoodsComment" 
+            confirm-type="search" />
+            <view wx:if="{{inputSearchValue}}" class="search-close" catchtap="handleClearGoodsSearch"></view>
+      </view>
+      </view>
+   <!-- 展示垃圾图标 -->
+     <block wx:if="{{!hasSearchGoods}}">
+      <view wx:if="{{searchRecordsList&&searchRecordsList.length}}" class="search-title">
+      <text>历史搜索</text>
+      <view class="search-delete" bindtap="handleClearRecords"></view>
+      </view>
+     </block>
+
+      <!-- 展示共几条搜索结果 -->
+     <view wx:if="{{hasSearchGoods && (nonSearchGoodsList.length||searchGoodsList.length)}}" class="search-goods-result">
+        共{{nonSearchGoodsList.length + searchGoodsList.length}}个搜索结果
+      </view>
+  </view>
+
+<!-- 商品列表或者历史记录 -->
+   <block wx:if="{{!hasSearchGoods}}">
+    <view  class="search-history-record" style="overflow: hidden;height:{{barHeight}}px;">
+      <block wx:for="{{searchRecordsList}}" wx:key="{{index}}">
+      <view class="search-item-wrap">
+        <text bindtap="handleGoodsRecords" data-order="{{index+1}}" data-name="{{item.name}}" class="search-item">{{item.name}}</text>
+      </view>
+     
+    </block>
+    </view>
+   </block>
+   <!-- scroll-anchoring 太坑了 导致搜索时列表牟定到底部 -->
+    <block wx:else>
+      <scroll-view class="pro-list"  scroll-y  show-scrollbar="{{false}}" 
+      enable-back-to-top="{{true}}"
+      enhanced
+      bindscroll="goodsListScroll" scroll-top="0"
+      bindscrolltolower="handleScrollLower"
+      >
+
+      <block wx:if="{{nonSearchGoodsList && nonSearchGoodsList.length}}">
+          <shelvesBanner id="shelves_banenr" filteredGoodsList="{{nonSearchGoodsList}}"
+          bind:shelvesBannerScroll="shelvesBannerScroll" 
+          bind:shelvesBannerClick="shelvesBannerClick"></shelvesBanner>
+      </block>
+
+      <block wx:if="{{!(searchGoodsList.length && searchGoodsList.length)}}">
+        <!-- <view> -->
+          <view class="search-no-pro">
+            <view class="n-img"></view>
+            <view class="n-text">未找到符合条件的商品</view>
+            <view class="n-sub-text">请修改筛选条件后再试</view>
+          </view>
+        <!-- </view> -->
+      </block>
+      
+      <block wx:else>
+              <!-- 直播自己的 -->
+        <!-- 接入乐高组件 -->
+          <product 
+            id="product_legao"
+            type="list"
+            updateType="{{updateType}}"
+            custom_scene_class="sk_scene_class"
+            sceneCode= "{{env=='prd'?'f_c7iueyj2':'f_0esl5k0e'}}"
+            renderDataList="{{searchGoodsList}}"
+            incrementalUpdateProduct="{{incrementalUpdateProduct}}"
+            bind:clickHandlers="clickHandlersCallback"
+            bind:exposureTrace="exposureTrace"
+        ></product>
+       
+        
+
+     
+        
+        </block>
+      
+ 
+      </scroll-view>
+     </block>
+    
+  </view>
+  </view>
+  <block wx:if="{{showGoodsListWrapper}}">
+    <view catchtouchstart="hideShopWraper" class="product-wrapper-mask" bindtap="hideShopWraper"></view>
+  </block>
+</block>

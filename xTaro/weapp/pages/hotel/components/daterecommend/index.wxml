@@ -1,0 +1,17 @@
+<view class="recommend-date {{fromDetail ? 'detail' : ''}}" wx:if="{{recommendDateList.length}}">
+    <view class="rd-title">为您推荐该酒店可订日期</view>
+    <view class="rd-all-date">
+        <view wx:for="{{recommendDateList}}" wx:for-item="item" wx:for-index="idx"
+              class="recommend-item" data-idx="{{idx}}" catchtap="{{fromDetail ? 'updateDate' : 'toDetail'}}" >
+            <view class="recommend-date-info">
+                <text class="rdi-date">{{item.inDayText}}-{{item.outDayText}}</text>
+                <text class="rdi-days">{{item.night}}晚</text>
+            </view>
+            <text wx:if="{{item.night > 1}}" class="rp-avg blue">均</text>
+            <text class="rp-coin blue">￥</text>
+            <text class="rp-price blue">{{item.minPrice}}</text>
+            <text class="rp-start blue">起</text>
+            <text class="rp-tax" wx:if="{{item.minPriceBeforeTax}}">含税/费</text>
+        </view>
+    </view>
+</view>

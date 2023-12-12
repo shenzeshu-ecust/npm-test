@@ -1,0 +1,124 @@
+<view class="hpaybox {{nopayment? 'hideview':''}}">
+	<text class="hpaytip">{{payTitle}} </text>
+	<block wx:if="{{isWXHF}}">
+	<view class="hpayitem">
+		<text class="hpaytextwxf">{{descTxt}}</text>
+	</view>	
+	</block>
+    <block wx:else>
+	<view class="hpayitemwxf">
+		<text class="hpaytext">{{descTxt}}</text>
+		<text class="hpaysubtext">{{descSubTxt}}</text>
+	</view>	
+	</block>
+
+    <block wx:if="{{fromed}}">
+        <button class="hpaybtn" bindtap="submitPayhold">{{payTxt}}</button>
+    </block>
+    <block wx:else>
+        <block wx:if="{{loading}}">
+            <button loading="{{loading}}" disabled="{{loading}}" class="hpaybtn">{{payTxt}}</button>
+        </block>
+        <block wx:else>
+            <navigator hover-class="none" target="miniProgram" open-type="navigate" app-id="{{navigatorData.appId}}" path="{{navigatorData.pathUrl}}" extra-data="{{extData}}" version="release" bindsuccess="miniSuccess" bindfail="miniFail" bindcomplete="miniComplete">
+                <button class="hpaybtn">{{payTxt}}</button>
+            </navigator>
+        </block>
+    </block>
+	<view class="hpayamtw">同意<text class="hpayamt" bindtap="showamt">《代扣服务协议》</text></view>
+</view>
+<view class="hpaymask {{amt? 'active':''}}" bindtap="showamt">
+	<scroll-view scroll-y class="hpayamtp">
+		<view class="hpayamtbody">
+			<view class="hpayhead">
+			代扣服务协议
+			<view class="hpayhclose"></view>
+			</view>
+			<view class="hpayt">第一条 总则</view>
+			<view class="hpaytxt">
+				本服务协议（以下简称“本协议”）是上海华程西南国际旅行社有限公司（以下简称“携程”）与携程用户（以下简称“用户”或“您”)就代扣服务的使用等相关事项所订立的有效合约。用户通过网络页面点击确认或以其他方式选择接受本协议，即表示用户与携程已达成协议并同意接受本协议的全部约定内容。<text class="hpayimport">在接受本协议之前，请您仔细阅读本协议的全部内容，尤其是加粗加下划线部分的内容。如果您不同意本协议的任意内容，或者无法准确理解携程对条款的解释，请不要进行后续操作。</text>
+			</view>
+			<view class="hpaytxt">
+				携程代扣服务的定义：是指携程根据您的授权，执行您委托携程发起的扣款指令，从而为您提供的代扣服务。（以下简称“本服务”）。
+			</view>
+			<view class="hpayt">
+				第二条 用户的权利义务
+			</view>
+			<view class="hpaytxt">
+				（一）您确认在使用本服务的意思表示出自您的真实意愿；同时您对使用本服务过程中发出的指令的真实性及有效性承担全部责任，该指令视为您的真实意思表示且不可变更或撤销。您承诺，携程依照您的指令进行操作的一切风险均由您承担。
+			</view>
+			<view class="hpaytxt">
+				（二）您同意承诺不会利用本服务从事任何非法的或违反本协议目的或者侵犯其他第三方权益的行为，否则携程有权立即单方面终止提供本服务，并不承担任何责任；如果因您的行为给携程造成损失的，您应承担全部赔偿责任。
+			</view>
+			<view class="hpaytxt">
+				<text class="hpayimport">（三）您授权携程在您使用本服务期间或携程终止提供本服务后，有权保留您在使用本服务期间所形成的相关信息数据，同时该授权不可撤销。</text>
+			</view>
+			<view class="hpaytxt">
+				<text class="hpayimport">（四）您理解并同意，携程在接到您在携程旅行网站或携程应用程序上发起的代扣指令后，即视为您授权携程从您自行选定的扣款渠道中扣取指定款项。</text>
+			</view>
+			<view class="hpaytxt">
+				<text class="hpayimport">（五）您在使用本服务期间，携程可以自由选择扣款渠道，包括第三方支付渠道、携程账户余额、与携程账户中的礼品卡、已经开通快捷支付的银行卡，或其他携程实际支持的扣款渠道（包括但不限于返现、积分、拿去花等），且</text>携程有权根据实际情况决定扣款渠道的顺序。<text class="hpayimport">您同意，即使您在签订本协议时并未开通快捷支付或信用支付等的功能，后续您在向携程发起代扣指令时已经快捷支付、信用支付等功能的，携程有权将快捷支付、信用支付等作为您的扣款渠道。</text>
+			</view>
+			<view class="hpaytxt">
+				<text class="hpayimport">（六）您理解并同意，基于风险的防范与控制，携程会对您选择的不同扣款渠道的代扣额度作出不同的控制，日代扣额度及日代扣次数均以携程网站或APP向您具体公告的为准。若超过该限额的话，将会扣款失败，无法完成支付。</text>
+			</view>
+			<view class="hpaytxt">
+				（七）您应遵守本服务的相关使用规则及要求，具体以携程不时在页面提示的使用规则及限制为准。
+			</view>
+			<view class="hpaytxt">
+				（八）您对携程代扣服务如有疑问、建议或意见时，可拨打携程客服电话10106666或登录携程网站进行咨询和投诉。
+			</view>
+			<view class="hpayt">
+				第三条 携程的权利、义务
+			</view>
+			<view class="hpaytxt">
+				（一）携程对您的注册信息负有保密义务，但在必要时携程有权将相关信息提供给携程的监管机关。
+			</view>
+			<view class="hpaytxt">
+				（二）携程有义务在技术上确保代扣服务的安全、有效、正常运行，保证您的正常使用。
+			</view>
+			<view class="hpaytxt">
+				<text class="hpaysimpt">（三）携程可以在法律法规许可或您授权的范围内使用您在携程留存的资料或交易信息等。</text>
+			</view>
+			<view class="hpaytxt">
+				（四）除本协议另有规定外，携程在提前邮件通知您或在网站公告的情况下，可以单方面终止向您提供本服务，并不承担任何赔偿责任。携程在终止提供本服务后，若发现您之前存在违法或违反本协议目的的使用行为，给携程造成损失的，则携程仍可据此要求您承担相应赔偿责任并保留通过司法途径予以解决的权利。
+			</view>
+			<view class="hpaytxt">
+				（五）携程负责向您提供代扣业务咨询服务，并在携程网站公布功能介绍、使用规则等内容。
+			</view>
+			<view class="hpayt">
+				第四条 协议修改
+			</view>
+			<view class="hpaytxt">
+				<text class="hpaysimpt">（一）携程将有权随时修改本协议的有关条款，一旦相关内容发生变动，携程公司将会通过电子邮件或网站公告等方式向您提示修改内容。</text>
+			</view>
+			<view class="hpaytxt">
+				（二）如果您不同意携程对本协议相关条款所做的修改时，您应立即停止使用携程提供的本项服务。如果您继续使用携程提供的服务，则视为您接受并认可本协议相关条款的修改。
+			</view>
+			<view class="hpayt">
+				第五条争议的解决
+			</view>
+			<view class="hpaytxt">
+				双方在履行本协议的过程中，如发生争议，应协商解决。协商不成的，任何一方均可向协议签订地上海市长宁区<text class="hpaysimpt">人民法院</text>提起诉讼。
+			</view>
+			<view class="hpayt">
+				第六条协议的解释
+			</view>
+			<view class="hpaytxt">
+				本协议的成立、生效、履行和解释，均适用中华人民共和国法律；法律无明文规定的，应适用携程公司制定的业务规则和通行的商业惯例。
+			</view>
+		</view>
+	</scroll-view>
+</view>
+<view class="hnopay {{nopayment? '':'hideview'}}">
+	<view class="hpayeicon"></view>
+	<text class="hpayetext">
+	您预订的产品无法进行授权支付，请至携程应用程序订购或电话联系我们
+	</text>
+</view>
+<view class="wxf-test">
+<button class="hpaybtn" bindtap="submitPayhold66">支付测试</button>
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

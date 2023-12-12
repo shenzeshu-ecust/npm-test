@@ -1,0 +1,32 @@
+{
+    "navigationBarTitleText": "酒店详情",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "usingComponents": {
+        "travel-coupon-pack": "/pages/hotel/components/travalcouponpack/index",
+        "travel-coupons": "/pages/hotel/components/travelcoupons/index",
+        "common-layer": "/pages/hotel/components/layer/index",
+        "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index",
+        "date-recommend": "/pages/hotel/components/daterecommend/index",
+        "webp": "/pages/hotel/components/webp/webp",
+        "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar",
+        "collection-guide": "/pages/hotel/components/collectionguide/collectionguide",
+        "emegencynotice": "/pages/hotel/components/emegencynotice/emegencynotice",
+        "price-tag-new": "/pages/hotel/components/pricetagnew/pricetagnew",
+        "roomlayer": "/pages/hotel/components/roomlayer/roomlayer",
+        "memberpop": "/pages/hotel/components/memberpop/memberpop",
+        "newerpop": "/pages/hotel/components/newerpop/newerpop",
+        "screenshare": "/pages/hotel/components/screenshare/screenshare",
+        "share": "/pages/hotel/components/share/share",
+        "service": "/pages/hotel/components/service/service",
+        "realnamepop": "/pages/hotel/components/realnamepop/realnamepop",
+        "countdown": "/pages/hotel/components/countdown/countdown",
+        "loginbar": "/pages/hotel/components/loginbar/loginbar",
+        "loading-gif": "/pages/hotel/components/loadinggif/loadinggif",
+        "calendarbar": "./component/calendarbar/index",
+        "comment": "/pages/hotel/detail/component/comment/comment",
+        "specialroombanner": "/pages/hotel/components/specialroombanner/specialroombanner"
+    },
+    "disableScroll": true
+}

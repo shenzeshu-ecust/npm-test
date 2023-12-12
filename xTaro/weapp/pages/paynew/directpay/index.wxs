@@ -1,0 +1,14 @@
+
+function isNoEmptyObject(obj) {
+  if (obj === null || obj === undefined) {
+    return false;
+  }
+  if(JSON.stringify(obj) == '{}'){
+    return false
+  }
+  return true
+};
+
+module.exports = {
+  isNoEmptyObject:isNoEmptyObject
+}

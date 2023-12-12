@@ -1,0 +1,102 @@
+/* 新版优惠券banner样式 */
+.banner-info {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+.banner-title {
+    margin-right: 24rpx;
+    color: #111;
+    font-size: 24rpx;
+    font-family: PingFangSC-Medium;
+}
+.banner-content {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    height: 40rpx;
+}
+.banner-item {
+    overflow: hidden;
+    font-size: 22rpx;
+    margin-right: 12rpx;
+    border: 1rpx solid #FF7700;
+    height: 36rpx;
+    line-height: 36rpx;
+    background-color: #fff;
+    border-radius: 4rpx;
+    color: #ff5500;
+    font-family: PingFangSC-Semibold;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-bottom: 6rpx;
+    position: relative;
+    border-width: 0rpx !important;
+    z-index: 0;
+}
+/* 修复部分优惠券banner无边框问题 */
+.banner-item::after {
+    content: "";
+    border-style: inherit;
+    border-color: inherit;
+    border-radius: 8rpx;
+    box-sizing: border-box !important;
+    position: absolute;
+    border-width: 2rpx !important;
+    left: 0;
+    top: 0;
+    width: 200% !important;
+    height: 200% !important;
+    transform-origin: 0 0;
+    transform: scale(0.5) !important;
+    z-index: -1;
+}
+.left-text {
+    padding: 0 8rpx;
+    position: relative;
+}
+.left-text:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 2rpx dashed #FF7700;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 200%;
+    height: 200%;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+}
+.right-text {
+    padding: 7rpx 8rpx;
+}
+.full-text {
+    padding: 0 8rpx;
+}
+.banner-btn {
+    height: 48rpx;
+    font-size: 24rpx;
+    line-height: 48rpx;
+    font-weight: 500;
+    margin-left: 24rpx;
+}
+.receive-btn {
+    color: #555;
+}
+.normal-btn {
+    background-color: #ff7700;
+    border-radius: 8rpx;
+    color: #fff;
+    font-family: PingFangSC-Medium;
+    padding: 0rpx 16rpx;
+}
+.banner-arrow {
+    color: #555;
+    margin-left: 8rpx;
+    font-size: 24rpx;
+}

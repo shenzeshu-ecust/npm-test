@@ -1,0 +1,223 @@
+<import src="../common/components/TrainNotice/trainNotice.wxml" />
+
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+
+<view class="page">
+    <notice noticeContent="{{noticeShortTips}}"
+      wx:if="{{noticeShortTips}}"
+      bind:toNoticeDetailTrigger="toNoticePage"></notice>
+    <view class="wrap">
+        <view class="zh-tic-info">
+            <view class="date">{{departureDate}} {{departWeek}}出发</view>
+            <view class="haoshi">全程{{trainInfo.costalltime}}</view>
+        </view>
+        <view class="white-box zh-tic-box">
+            <view class="zh-tic-bd">
+                <view class="info">
+                    <text class="num">{{trainInfo.TrainTransferInfos[0].Sequence}}</text>
+                    <view class="cont">
+                        {{departureDate}}出发 {{trainInfo.TrainTransferInfos[0].TrainNumber}}
+                    </view>
+                    <!-- <view class="rbox">
+                <text class="ifont-local"></text>经停信息
+              </view> -->
+                </view>
+                <view class="detail">
+                    <view class="from">
+                        <text class="time">{{trainInfo.TrainTransferInfos[0].DepartTime}}</text>
+                        <text class="station">{{trainInfo.TrainTransferInfos[0].DepartStation}}</text>
+                    </view>
+                    <view class="to">
+                        <text class="time">{{trainInfo.TrainTransferInfos[0].ArriveTime}}<text class="em"
+                          wx:if="{{trainInfo.TrainTransferInfos[0].TakeDays > 0 }}">{{'+'+trainInfo.TrainTransferInfos[0].TakeDays}}</text></text>
+                        <text class="station">{{trainInfo.TrainTransferInfos[0].ArriveStation}}</text>
+                    </view>
+                </view>
+            </view>
+            <!-- <view class="zh-tic-trans" wx:if="{{trainInfo.TrainTransferInfos[0].ArriveStation != trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].DepartStation}}"> -->
+            <view class="zh-tic-trans"
+              wx:if="{{sameStation}}">
+                <!-- 异站换乘，请在{{trainInfo.transtimestr}}内前往<text>{{trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].DepartStation}}</text> -->
+                <view>同站换乘，请在{{trainInfo.transtimestr}}内<text>换乘</text></view>
+                <view bindtap="jumpToTransfer">换乘攻略<text class="ifont-arr" /></view>
+            </view>
+            <view class="zh-tic-trans"
+              wx:else>
+                <view><text>异站换乘</text>，请在{{trainInfo.transtimestr}}内<text>换乘</text></view>
+                <image bindtap="onClickGoWxMap"
+                  src="https://images3.c-ctrip.com/train/2022/app/8.58/zhuliucheng/wupiaozuoxi/img-dw.png"
+                  class="map-icon">
+                </image>
+            </view>
+            <view class="zh-tic-bd">
+                <view class="info">
+                    <text class="num">{{trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].Sequence}}</text>
+                    <view class="cont">
+                        {{transferDepatureDate}}出发 {{trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].TrainNumber}}
+                    </view>
+                    <!-- <view class="rbox">
+                <text class="ifont-local"></text>经停信息
+              </view> -->
+                </view>
+                <view class="detail">
+                    <view class="from">
+                        <text class="time">{{trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].DepartTime}}</text>
+                        <text class="station">{{trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].DepartStation}}</text>
+                    </view>
+                    <view class="to">
+                        <text class="time">{{trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].ArriveTime}}<text class="em"
+                          wx:if="{{trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].TakeDays > 0 }}">{{'+'+trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].TakeDays}}</text></text>
+                        <text class="station">{{trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].ArriveStation}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view class="white-box zh-seat-box">
+            <view class="tit">第{{trainInfo.TrainTransferInfos[0].Sequence}}程选座</view>
+            <view class="seat-bd">
+                <view class="item {{seatInfo.disabled ? ((supportMergePay && !transferRob) ? 'orange' : 'disabled') : ''}} {{ departureMinIndex == index  ? 'cur': ''}}"
+                  bindtap="selectSeat"
+                  wx:for="{{trainInfo.TrainTransferInfos[0].SeatList}}"
+                  wx:for-item="seatInfo"
+                  wx:key="{{index}}"
+                  data-index="{{index}}">
+                    <view class="seat">{{seatInfo.SeatName}}</view>
+                    <view class="price">{{seatInfo.SeatPrice}}</view>
+                    <view wx:if="{{transferRob}}"
+                      class="tick">{{seatInfo.SeatInventory + '张'}}</view>
+                    <view wx:else
+                      class="tick">{{seatInfo.SeatInventory === 0 ? '候补' : seatInfo.SeatInventory + '张'}}</view>
+                    <text class="ifont-gou2"></text>
+                </view>
+                <!-- <view class="item cur">
+              <view class="seat">二等座</view>
+              <view class="price">458.5</view>
+              <view class="tick">有票</view>
+              <text class="ifont-gou2"></text>
+            </view>
+            <view class="item">
+              <view class="seat">二等座</view>
+              <view class="price">458.5</view>
+              <view class="tick">有票</view>
+            </view>
+            <view class="item disabled">
+              <view class="seat">二等座</view>
+              <view class="price">458.5</view>
+              <view class="tick">有票</view>
+            </view>
+            <view class="item">
+              <view class="seat">二等座</view>
+              <view class="price">458.5</view>
+              <view class="tick">有票</view>
+            </view> -->
+            </view>
+
+            <view class="tit">第{{trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].Sequence}}程选座</view>
+            <view class="seat-bd">
+                <view class="item {{seatInfo.disabled ? ((supportMergePay && !departureRob) ? 'orange' : 'disabled') : ''}} {{ transferMinIndex == index  ? 'cur': ''}}"
+                  wx:for="{{trainInfo.TrainTransferInfos[trainInfo.TrainTransferInfos.length -1].SeatList}}"
+                  wx:for-item="seatInfo"
+                  wx:key="{{index}}"
+                  data-index="{{index}}"
+                  data-train="transfer"
+                  bindtap="selectSeat">
+                    <view class="seat">{{seatInfo.SeatName}}</view>
+                    <view class="price">{{seatInfo.SeatPrice}}</view>
+                    <view wx:if="{{departureRob}}"
+                      class="tick">{{seatInfo.SeatInventory + '张'}}</view>
+                    <view wx:else
+                      class="tick">{{seatInfo.SeatInventory === 0 ? '候补' : seatInfo.SeatInventory + '张'}}</view>
+
+                    <text class="ifont-gou2"></text>
+                </view>
+            </view>
+        </view>
+
+        <view class="notice"
+          data-type="7"
+          bindtap="showTransferTips">中转预订须知<text class="ifont-detail"></text></view>
+    </view>
+    <view class="pay-box">
+        <view class="cont">
+            <text class="label">单人票价</text>
+            <view class="price">{{totalPrice}}</view>
+        </view>
+        <button class="btn-pay"
+          hover-class="btn-primary_hover"
+          bindtap="nextStep">
+            <view>下一步</view>
+            <view class="rob-text"
+              wx:if="{{ departureRob || transferRob }}">含抢票</view>
+        </button>
+    </view>
+</view>
+
+<view class="tip-txt {{showType === 'transfer-tips' ? 'active':''}}"
+  bindtap="hideTips">
+    <view class="txt-blue">中转预订须知</view>
+    <view class="s">1.中转换乘即是联程票，需要在中转站点下车后再乘坐行程2的列车，为保证您准时上车，请您一次性将行程1和行程2的车票全部取出;</view>
+    <view class="s">2.若中转时间较长，在中转站台下车时，请询问车站服务人员是否有从车站直达候车厅的中转换乘通道，若没有请先出站后再进站检票;</view>
+    <view class="s">3.若中转时间较短，在中转站台下车后，请询问车站服务人员如何去下一个行程的站台;</view>
+    <view class="s">
+        4.若行程1的列车晚点，导致没赶上行程2的列车，您可以在中转站将行程2的车票改签，可改签到发车日期当天24点前有余票的车次，若余票不足，导致无法改签，可以在车站售票窗口讲明原因申请退票，一般窗口会免退票费(以窗口实际情况为准，携程不承担退票费用);
+    </view>
+    <view class="s">5.因不可抗力，携程无法为您承担相应损失，还请理解。</view>
+    <view class="s">6.因票量有限，若两个行程中有一个行程出票失败，影响您正常出行，需退掉已出车票，退票手续费携程无法为您承担，还请理解。</view>
+    <view class="s">7.若需异站中转(不同火车站或机场之间换乘)请您预留好足够的中转时间，若因不可抗力导致没赶上行程2的列车，携程不予赔付;</view>
+</view>
+<!-- 中转弹层 -->
+<view class="backmask {{showType == 'transitTip' ? 'active' : ''}}"
+  bindtap="hideTips"></view>
+<view class="pop-mid pop-mid--zhongzhuan {{showType == 'transitTip' ? 'active' : ''}}">
+    <view class="pop-mid-bd">
+        <view class="pop-white">
+            <view class="pop-zhongzhuan">
+                <view class="intro">{{trainInfo.intro}}<text class="haoshi">{{trainInfo.costalltime}}</text></view>
+                <block wx:for="{{trainInfo.TrainTransferInfos}}">
+                    <view class="pop-zhongzhuan-bd"
+                      style="display: flex;align-items: center;width: 100%;">
+                        <view class="info"
+                          style="flex: 1">
+                            <text class="num">{{index+1}}</text>
+                            <text>{{item.TrainNumber}}</text>
+                            <view class="cont"
+                              style="margin: 10rpx 0;">
+                                <view class="from">
+                                    <view class="time">{{item.DepartTime}}</view>
+                                    <view class="station">{{item.DepartStation}}站</view>
+                                </view>
+                                <view class="haoshi">
+                                    <text>{{item.runTimeHM}}</text>
+                                </view>
+                                <view class="to">
+                                    <view class="time">{{item.ArriveTime}}<text class="small">{{item.TakeDays ? '+' + item.TakeDays : ''}}</text></view>
+                                    <view class="station">{{item.ArriveStation}}站</view>
+                                </view>
+                            </view>
+                        </view>
+                        <view class="book-btn"
+                          data-index="{{index}}"
+                          catchtap="goToBooking">立即预订</view>
+                    </view>
+                    <view class="pop-zhongzhuan-info"
+                      wx:if="{{index == 0}}">{{'中转 ' + trainInfo.TransferStation + ' 停留' + trainInfo.transtimestr}}</view>
+                </block>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+<!-- 公告通知 -->
+<template is="train-notice"
+  wx:if="{{showType == 'noticeModalShow'}}"
+  data="{{noticeInfoList, trainNoticeTitle, noticeDesc, scrollView, activeIndex, jumpMoreUrl, hkticket}}">
+
+</template>
+
+<map id="myMap"
+  style="display: none;z-index:100"></map>
+
+<view class="view-check"
+  bindanimationend="viewReadyHandle"></view>

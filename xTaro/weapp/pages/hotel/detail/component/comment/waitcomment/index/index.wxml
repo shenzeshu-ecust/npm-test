@@ -1,0 +1,17 @@
+<view class="waitcomment-info autoExpose" wx:if="{{showWaitComment}}" data-expose="{{waitCommentExposeObj}}">
+    <view class="encourage-info">
+        <text>{{encourageInfo.writingCommentTip}}</text>
+        <view class="encourage-score">
+            <text>{{encourageInfo.writeEncourageTag}}</text>
+            <image class="encourage-icon" src="https://pages.c-ctrip.com/hotels/wechat/img/ordercomment-trip-coin.png"></image>
+        </view>
+    </view>
+    <view class="rating-box">
+        <text class="left-desc">{{ratingDesc.leftDesc}}</text>
+        <block wx:for="{{ratingIconList}}" wx:key="*this" wx:for-item="ratingIconItem">
+            <image class="rating-icon" src="{{ratingIconItem}}" class="rating-icon" data-index="{{index}}" wx:for-index="index" catchtap="goToComment"></image>
+        </block>
+        <text class="right-desc">{{ratingDesc.rightDesc}}</text>
+        <text class="wechat-font-close2 close-icon" catchtap="closeWaitComment"></text>
+    </view>
+</view>

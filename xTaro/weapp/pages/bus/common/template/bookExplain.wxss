@@ -1,0 +1,466 @@
+.explain-modal {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 102;
+}
+.explain-modal .explain-container {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+    justify-content: flex-end;
+
+    animation: transIn 250ms linear forwards;
+}
+
+.explain-modal .explain-container .explain-view {
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    overflow: hidden;
+}
+
+.explain-modal .bar {
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    position: relative;
+    pointer-events: auto;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: row;
+}
+.explain-modal .flex1 {
+    position: relative;
+}
+.explain-modal .explain-scroll {
+    position: relative;
+    background-color: #ffffff;
+    /* overflow: scroll; */
+    height: 65%;
+    z-index: 102;
+    pointer-events: auto;
+}
+
+.explain-modal .desc-scroll {
+    padding: 0;
+    height: 30%;
+}
+
+.explain-modal .contentTitle {
+    font-size: 30rpx;
+    font-weight: 700;
+    margin: 30rpx 30rpx;
+    position: relative;
+    padding: 0 0 0 30rpx;
+}
+
+.explain-modal .contentTitle .price {
+    color: #ff5e13;
+    margin-left: 30rpx;
+}
+.explain-modal .contentTitle:before {
+    display: inline-block;
+    position: absolute;
+    content: '';
+    background-color: #ff5e13;
+    height: 28rpx;
+    width: 10rpx;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-radius: 6rpx;
+}
+
+.explain-modal .desc-form {
+    margin: 0 30rpx;
+    border-radius: 8rpx;
+    border: 1px solid #dbdbdb;
+    color: #000000;
+}
+.explain-modal .desc-form .form-head {
+    border-top-left-radius: 8rpx;
+    border-top-right-radius: 8rpx;
+    line-height: 88rpx;
+    background-color: #f7f7f7;
+    color: #666666;
+    padding: 0 30rpx;
+}
+
+.explain-modal .desc-form .form-row {
+    padding: 20rpx 30rpx;
+    position: relative;
+}
+.explain-modal .desc-form .form-row .tag {
+    position: absolute;
+    background-color: #ff5e13;
+    border-radius: 16rpx 16rpx 16rpx 0rpx;
+    line-height: 32rpx;
+    right: -10rpx;
+    padding: 0 10rpx;
+    font-size: 20rpx;
+    color: #ffffff;
+    top: -10rpx;
+}
+.explain-modal .desc-form .title {
+    flex: 3;
+}
+.explain-modal .desc-form .price {
+    flex: 4;
+    text-align: center;
+}
+.explain-modal .desc-form .total-price {
+    flex: 2;
+    text-align: center;
+}
+
+.explain-modal .desc-content {
+    margin: 0 30rpx 30rpx;
+}
+
+.explain-modal .button-placeholder {
+    height: 111rpx;
+    background-color: #ff00ff;
+}
+.explain-modal .button-view {
+    pointer-events: auto;
+    height: 110rpx;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1rpx solid #eeeeee;
+}
+.explain-modal .button-view button {
+    margin: 10rpx 40rpx 14rpx;
+    line-height: 80rpx;
+    font-size: 32rpx;
+    color: #ffffff;
+    background-color: #ff9913;
+}
+.explain-modal .button-view button.button-hover {
+    filter: grayscale(0.2) brightness(0.8);
+}
+
+.explain-modal .desc-content .title {
+    font-size: 28rpx;
+    margin: 20rpx 0;
+}
+.explain-modal .desc-content .desc {
+    font-size: 24rpx;
+    color: #7e7e7e;
+    margin-bottom: 20rpx;
+}
+
+.explain-modal .explainTitle {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 20rpx;
+    text-overflow: ellipsis;
+
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+}
+
+.explain-modal .explainTitle .title {
+    line-height: 110rpx;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.explain-modal .explainTitle .selected {
+    border-bottom: 6rpx solid;
+}
+.explain-modal .descItem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 40rpx 32rpx 0 32rpx;
+}
+.explain-modal .descItem .title {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.explain-modal .descItem .descItem-content {
+    padding-bottom: 48rpx;
+}
+
+.explain-modal .descItem .descItem-content-title {
+    color: #333333;
+    font-size: 34rpx;
+    font-weight: 600;
+}
+
+.explain-modal .descItem .info-content .info-item {
+    padding-top: 24rpx;
+    color: #666666;
+    font-size: 26rpx;
+    font-weight: normal;
+    display: flex;
+    flex-direction: row;
+}
+
+.explain-modal .descItem .info-content .info-item .info-item-title {
+    color: #333333;
+    font-size: 26rpx;
+    font-weight: 600;
+    width: 136rpx;
+}
+
+.explain-modal .descItem .info-content .info-item .info-item-desc {
+    flex: 1;
+}
+
+.explain-modal .descItem .info-content .info-item .station-color {
+    color: #0086f6;
+}
+
+.explain-modal .descItem .info-content .info-item .info-item-desc .icon-location {
+    padding-bottom: 5rpx;
+    padding-right: 7rpx;
+}
+
+.explain-modal .descItem .info-content .info-item .info-item-desc .icon-location:before {
+    font-size: 24rpx;
+    vertical-align: text-bottom;
+}
+
+.explain-modal .descItem .info-content .info-item .table-content {
+    display: flex;
+    flex-direction: row;
+    color: #333333;
+    font-size: 24rpx;
+    font-weight: 500;
+    align-items: center;
+    border-top: 2rpx #dddddd solid;
+}
+
+.explain-modal .descItem .info-content .info-item .bgColor {
+    background-color: #f8f8f8;
+    color: #666666;
+    font-size: 28rpx;
+    font-weight: normal;
+    border-top: 0;
+}
+
+.explain-modal .descItem .info-content .info-item .textLine {
+    color: #999999;
+    text-decoration-line: line-through;
+}
+
+.explain-modal .descItem .info-content .info-item .table-content .item-time {
+    width: 340rpx;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 2rpx #dddddd solid;
+}
+
+.explain-modal .descItem .info-content .info-item .table-content .item-type {
+    width: 110rpx;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 2rpx #dddddd solid;
+}
+
+.explain-modal .descItem .info-content .info-item .table-content .item-desc {
+    flex: 1;
+    text-align: center;
+}
+
+.explain-modal .descItem .info-content .info-item .item-table {
+    width: 100%;
+    border: 2rpx #dddddd solid;
+    border-radius: 12rpx;
+    overflow: hidden;
+}
+
+.explain-modal .descItem .info-content .info-item .table-content .item-list-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+}
+
+.explain-modal .descItem .info-content .info-item .table-content .item-list-content .item-list {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+}
+
+.explain-modal .offer-info {
+    font-size: 24rpx;
+    color: #666666;
+    padding: 30rpx 30rpx 0;
+    position: relative;
+}
+
+.explain-modal .offer-info image {
+    width: 80%;
+    margin: 0 10%;
+}
+
+.explain-modal .offer-info .title {
+    font-size: 28rpx;
+    color: #222222;
+    font-weight: 700;
+}
+.explain-modal .offer-info .tips {
+    font-size: 20rpx;
+    color: #999999;
+    margin-top: 10rpx;
+}
+
+.explain-modal .tag-container {
+    margin: 0;
+    background-color: #ffffff;
+    border-radius: 4rpx;
+    color: #bababa;
+    padding: 0rpx 58rpx;
+    position: relative;
+}
+
+.explain-modal .tag-container:after {
+    display: none;
+}
+
+.explain-modal .tag-container .tag {
+    min-width: 33%;
+    font-weight: 400;
+    /* padding: 0 5rpx; */
+    /* line-height: 15px; */
+    font-size: 20rpx;
+    /* height: 25rpx; */
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    color: #666666;
+}
+
+.explain-modal .tag-container .tag .image {
+    height: 20rpx;
+    width: 20rpx;
+}
+
+.extraDescTag :active {
+    filter: brightness(0.8) grayscale(0.3);
+}
+
+.explain-modal .servicefee-container {
+    position: relative;
+    padding: 20rpx 0 0;
+    background-color: #ffffff;
+    /* overflow: scroll; */
+    height: 70%;
+    z-index: 102;
+    pointer-events: auto;
+}
+
+.explain-modal .servicefee-container {
+    border-top-left-radius: 20rpx;
+    border-top-right-radius: 20rpx;
+    overflow: hidden;
+}
+
+.servicefee-container .servicefee-head {
+    height: 98rpx;
+    text-align: center;
+    position: relative;
+}
+
+.servicefee-head .title {
+    line-height: 98rpx;
+    font-size: 36rpx;
+    color: #333333;
+    font-weight: 500;
+}
+
+.servicefee-head .close-tips {
+    background-color: transparent;
+    font-size: 40rpx;
+    color: #666666;
+    width: 80rpx;
+    line-height: 25px;
+    height: 50rpx;
+    padding: 0;
+    position: absolute;
+    left: 20rpx;
+    top: 25rpx;
+}
+
+.servicefee-container .servicefee-image {
+    width: 100%;
+    height: 200rpx;
+    display: inline-block;
+}
+
+.servicefee-container .servicefee-content {
+    border-radius: 25rpx 25rpx 0 0;
+    z-index: 101;
+    font-size: 0;
+    background: #ffffff;
+    height: 100%;
+    padding: 20rpx 40rpx 40rpx 40rpx;
+}
+
+.servicefee-content .text-content {
+    padding-bottom: 30rpx;
+    font-size: 30rpx;
+    color: #999999;
+}
+
+.servicefee-content .descTit {
+    font-size: 32rpx;
+    font-weight: 600;
+    color: #333333;
+    padding: 20rpx 0;
+}
+.servicefee-content .item-content {
+    font-size: 26rpx;
+    color: #666666;
+}
+
+.item-icon {
+    width: 10rpx;
+    height: 10rpx;
+    line-height: 10rpx;
+    border-radius: 50%;
+    border-color: #999999;
+    background-color: #999999;
+    display: inline-block;
+    margin: 7rpx 10rpx 7rpx 7rpx;
+}
+
+.servicefee-content .desc {
+    padding: 20rpx 0 40rpx 0;
+    font-size: 28rpx;
+    color: #333333;
+}
+
+.servicefee-content .button {
+    color: #0086f6;
+    background-color: #ffffff;
+    border: 1rpx solid #0086f6;
+    width: 260rpx;
+    font-size: 30rpx;
+    border-radius: 40rpx;
+}

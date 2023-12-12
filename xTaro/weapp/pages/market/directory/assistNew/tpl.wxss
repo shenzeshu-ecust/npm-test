@@ -1,0 +1,226 @@
+.assist-coupon {
+  position: relative;
+  display: flex;
+  height: 160rpx;
+  width: 560rpx;
+  /* border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx; */
+  /* overflow: hidden; */
+}
+
+.coupon-center-right-wraper {
+  display: flex;
+  flex: 1;
+  border-top-right-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+  overflow: hidden;
+  background: linear-gradient(-225.92deg, rgb(254, 226, 202) 0%, rgb(250, 243, 213) 44.61%, rgb(254, 219, 164) 100%);
+  box-shadow: inset 0px 4rpx 16rpx 0rpx rgba(0, 0, 0, 0.04), inset 0rpx 0rpx 8rpx 8rpx rgba(255, 140, 88, 0.08);
+}
+
+.assist-coupon .coupon-left {
+  border-top-left-radius: 10rpx;
+  border-bottom-left-radius: 10rpx;
+  overflow: hidden;
+  width: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-45deg, rgb(255, 66, 66) 0%, rgb(255, 155, 93) 100%);
+}
+
+.assist-coupon .yuan {
+  color: #ffffff;
+  font-family: PingFangSC-Semibold;
+  font-size: 30rpx;
+  font-weight: 600;
+  vertical-align: baseline;
+}
+
+.assist-coupon .price {
+  color: #ffffff;
+  font-family: PingFangSC-Semibold;
+  font-size: 70rpx;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.assist-coupon .type {
+  color: #ffffff;
+  font-family: PingFangSC-Regular;
+  font-size: 22rpx;
+}
+
+.assist-coupon .coupon-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 24rpx;
+  color: #963500;
+}
+
+.assist-coupon .coupon-title {
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  font-weight: 500;
+  text-align: left;
+  width: 290rpx;
+}
+
+.assist-coupon .last-date {
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  margin-top: 4rpx;
+  text-align: left;
+  width: 300rpx;
+}
+
+.assist-coupon .coupon-right {
+  display: flex;
+  align-items: flex-end;
+  width: 104rpx;
+  margin-right: 24rpx;
+  /* background: linear-gradient(-225.92deg, rgb(254, 226, 202) 0%, rgb(250, 243, 213) 44.61%, rgb(254, 219, 164) 100%); */
+}
+.coupon-right.get-btn {
+  position: relative;
+  left: -60rpx;
+}
+
+.assist-coupon .btn {
+  background: linear-gradient(-44.56deg, rgb(255, 66, 66) 0%, rgb(255, 155, 93) 100%);
+  border-radius: 24rpx;
+  height: 48rpx;
+  width: 104rpx;
+  color: #ffffff;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  line-height: 48rpx;
+  text-align: center;
+  margin-bottom: 16rpx;
+}
+
+.assist-coupon .circle {
+  position: absolute;
+  top: -10rpx;
+  left: 170rpx;
+  width: 20rpx;
+  height: 20rpx;
+  background-color: #fff;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/* 未获得 */
+.unget .coupon-left {
+  background: #FF8282;
+}
+
+.unget .coupon-center-right-wraper {
+  background: linear-gradient(-225.92deg, rgb(254, 226, 202) 0%, rgb(250, 243, 213) 44.61%, rgb(254, 219, 164) 100%);
+}
+
+.unget .coupon-center {
+  color: #999999;
+}
+
+.unget .coupon-title,
+.unget .last-date {
+  width: 200rpx;
+}
+
+.get-status-wraper {
+  width: 118rpx;
+}
+
+.get-status {
+  position: absolute;
+  right: 20rpx;
+  top: -10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3rpx solid #cccccc;
+  height: 94.29rpx;
+  width: 94.29rpx;
+  border-radius: 50%;
+}
+
+.get-status .inner {
+  border: 1rpx solid #cccccc;
+  height: 78.86rpx;
+  width: 78.86rpx;
+  border-radius: 50%;
+}
+
+.get-status .text {
+  background: #fbe7be;
+  position: absolute;
+  left: -14rpx;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10rpx;
+  border: 3rpx solid #cccccc;
+  height: 42.86rpx;
+  width: 115rpx;
+  color: #999999;
+  font-family: PingFangSC-Semibold;
+  font-size: 24rpx;
+  font-weight: 600;
+  transform: rotate(-15deg);
+}
+
+.haved .get-status {
+  border-color: #FF8A79;
+}
+
+.haved .inner {
+  border-color: #FF8A79;
+}
+
+.haved .text {
+  border-color: #FF8A79;
+  color: #FF644D;
+}
+
+.haved .coupon-title,
+.haved .last-date {
+  width: 200rpx;
+}
+
+.ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.only-text{
+  color: #fff;
+  font-size: 38rpx;
+}
+
+.get-status-icon {
+  position: absolute;
+  top: -15rpx;
+  right: 20rpx;
+  width: 116rpx;
+  height: 95rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2021/06/xcx_deductAmount/icon-get2.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}

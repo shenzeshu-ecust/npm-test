@@ -1,0 +1,10 @@
+<!-- 特色房banner -->
+<view class="spbanner-info {{hasCouponBanner ? 'sp-radius': 'normal-radius'}} autoExpose" data-expose="{{marketBannerExposeObj}}" catchtap="goStaticPage">
+    <view class="flex-box {{hasCouponBanner ? 'sp-border': ''}}">
+        <view class="banner-title">{{atmosphereBannerInfo.title}}
+            <text class="banner-desc">{{atmosphereBannerInfo.desc}}</text>
+        </view>
+        <view wx:if="{{atmosphereBannerInfo.staticPage}}" class="wechat-font-arrow-right icon-arrow"></view>
+    </view>
+    <image mode='heightFix' class="banner-image" src="{{atmosphereBannerInfo.backgroundUrl}}"></image>
+</view>

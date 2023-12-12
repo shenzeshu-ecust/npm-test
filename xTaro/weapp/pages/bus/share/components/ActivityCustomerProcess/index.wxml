@@ -1,0 +1,62 @@
+<view class='block-container'>
+    <view class="block-header-bg"></view>
+    <view class="title-line">
+        <view class='title'>
+            <text>
+                <block wx:for="{{activity.activityTitle}}" wx:for-key="index">
+                    <text class="{{item.highLight ? 'high-light' : ''}}">{{item.text}}</text>
+                </block>
+            </text>
+        </view>
+    </view>
+    <block wx:if="{{validActivity}}">
+        <view class='timer timer-bg'>
+            <view>还剩</view>
+            <view class='timer-section'>{{hours}}</view>
+            <view class="timer-section">:</view>
+            <view class='timer-section'>{{minutes}}</view>
+            <view class="timer-section flash">:</view>
+            <view class='timer-section'>{{seconds}}</view>
+            <view>失效</view>
+        </view>
+    </block>
+    <block wx:if="{{activity.status != 1 && activity.partSubTitle}}">
+        <view class="title-line">
+            <view class='sub-title'>
+                <text>
+                <block wx:for="{{activity.partSubTitle}}" wx:for-key="index">
+                     <text class="{{item.highLight ? 'high-light' : ''}}" >{{item.text}}</text>
+                </block>    
+            </text>
+            </view>
+        </view>
+    </block>
+    <view class="qrcode-container">
+        <view class="qrcode">
+            <image src="{{activity.wechatUrl || 'https://wework.qpic.cn/wwpic/208690_IhGzq9g6R3iqQLD_1657669082/0'}}" show-menu-by-longpress />
+        </view>
+        <view class="hand">
+            <image src="https://pages.c-ctrip.com/bus-images/order-axtrefund/hand.png" />
+        </view>
+    </view>
+    <view class="title-line">
+        <view class="line left"></view>
+        <view wx:if="{{activity.status == 1}}" class="title">助力后您可获得</view>
+        <view wx:else class="title">添加后您可获得</view>
+        <view class="line right"></view>
+    </view>
+    <view class="reward-contaienr">
+        <block wx:for="{{activity.rewardList}}">
+            <view class="reward-item">
+                <image class="image" src="{{item.imageUrl}}" />
+                <view class="reward-text">
+                    <view class="reward-title">{{item.title}}</view>
+                    <view class="reward-sub-title">{{item.subTitle}}</view>
+                </view>
+            </view>
+            <view wx:if="{{index % 2 == 0 && index != activity.rewardList.length - 1}}" class="reward-split">
+                <view class="icon-font icon-plus" />
+            </view>
+        </block>
+    </view>
+</view>

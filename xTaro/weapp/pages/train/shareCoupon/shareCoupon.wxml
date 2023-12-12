@@ -1,0 +1,111 @@
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+
+<view class="top-bar {{ scollMove ? 'fixed' : '' }}" style="padding-top: {{statusBarHeight}}px"><!--addclass="fixed"-->
+    <text class="{{ firstStack ? 'ifont-home' : 'ifont-back' }}" bind:tap="goBack"></text>
+    <!--ifont-home-->
+    <view class="tit">携程旅行</view>
+</view>
+
+<scroll-view scroll-y bindscroll="scrollMove" style="height: {{systemHeight}}px;" scroll-into-view="{{ scrollView }}" scroll-with-animation>
+    <view class="new-version">
+        <view class="top-box" style="margin-top: {{statusBarHeight + 60}}px">
+            <view class="slogan" style="background-image: url({{ sceneConfig.title2 }})"></view>
+            <!--
+                购票成功 goupiao
+                抢票成功 qiangpiao
+                智能改签抢 zhineng
+            -->
+            <view class="txt">{{ sceneConfig.subTitle }}</view>
+        </view>
+
+        <view class="wrap">
+            <image src="{{ sceneConfig.bg }}" class="detail-img" mode="widthFix" />
+
+            <view class="coupon-box" id="coupon-box">
+                <view class="title">{{ (!isLogin || !isReceived) ? "邀请您领取红包奖励" : "恭喜您，获得惊喜奖励"}}</view>
+                <block wx:if="{{isReceived}}">
+                    <view class="item" wx:for="{{ PackageInfoList }}" wx:for-item="item" wx:for-index="idx">
+                        <view class="lbox">
+                            <view class="price" wx:if="{{ item.Type === 1 }}">{{ item.Price }}</view>
+                            <image src="{{ item.Icon }}" class="icon" wx:if="{{ item.Type === 2 }}"></image>
+                        </view>
+                        <view class="cont">
+                            <view class="tit">{{ item.Name }}<text class="ifont-detail" data-idx="{{ idx }}" bind:tap="onClickGiftRuleShow"></text></view>
+                            <view class="txt">{{ item.Desc }}</view>
+                        </view>
+                        <view class="deco"></view>
+                    </view>
+                </block>
+                <button class="share-btn" bindtap="getUserPhoneAndAcce" wx:if="{{ !isLogin }}">登录领取红包</button>
+                <button class="share-btn" bindtap="onClickBagOpen" wx:elif="{{ !isReceived }}">领取红包</button>
+                <button class="share-btn" bind:tap="onClickBuyTicket" wx:else>去购票</button>
+                <view class="invite" wx:if="{{isReceived}}">
+                    <button class="share-btn" open-type="share">邀好友一起领</button>
+                </view>
+            </view>
+
+            <view class="rule-box {{ RuleList.length ? 'active': '' }}">
+                <view class="tit">红包使用规则</view>
+                <view class="txt" wx:for="{{RuleList}}" wx:for-item="item" wx:for-index="idx">{{ idx + 1 }}. {{ item }}</view>
+            </view>
+
+            <!-- 浮标 -->
+            <view class="float-box {{ floatBox ? '' : 'hide' }}" wx:if="{{ floatScene && isLogin }}" bind:tap="moveto"></view>
+        </view>
+    </view>
+
+    <view class="backmask {{ (showMask || isGiftRuleOpen) ? 'active' : '' }}" catchtouchmove="noop"></view>
+
+    <block wx:if="{{showMask == 'awaitOpenPop'}}">
+        <view class="pop-mid pop-hongbao-closed active">
+            <view class="logo-ctrip"></view>
+            <view class="slogan"></view>
+            <view class="txt">有惊喜，邀请你拆幸运红包</view>
+            <button class="btn-open" bindtap="getUserPhoneAndAcce" wx:if="{{ !isLogin }}"></button>
+            <button class="btn-open" bindtap="onClickBagOpen" wx:else></button>
+            <button class="icon-closed" bindtap="getUserPhoneAndAcceBack" wx:if="{{ !isLogin }}"></button>
+            <icon class="icon-closed" bind:tap="onClickBagHide" wx:else></icon>
+        </view>
+    </block>
+
+    <block wx:if="{{showMask == 'openPop'}}">
+        <view class="pop-mid pop-hongbao-open active">
+            <view class="pop-hongbao-open-bd">
+                <view class="htit">恭喜您，成功领取红包</view>
+                <view class="item" wx:for="{{ PackageInfoList }}" wx:for-item="item" wx:for-index="idx">
+                    <view class="lbox">
+                        <view class="price" wx:if="{{ item.Type === 1 }}">{{ item.Price }}</view>
+                        <image src="{{ item.Icon }}" class="icon" wx:if="{{ item.Type === 2 }}"></image>
+                    </view>
+                    <view class="cont">
+                        <view class="tit">{{ item.Name }}</view>
+                        <view class="txt">{{ item.Desc }}</view>
+                    </view>
+                    <view class="deco"></view>
+                </view>
+            </view>
+            <view class="pop-hongbao-open-botm">
+                <button class="btn-invite" bind:tap="onClickAlertShare">
+                    <text>知道了</text>
+                </button>
+                <view class="txt">奖品可在「我的权益」查看</view>
+            </view>
+            <icon class="icon-closed" bind:tap="onClickHideAndSubscribe"></icon>
+        </view>
+    </block>
+
+    <view class="pop-botm pop-rule {{ isGiftRuleOpen ? 'active' : '' }}">
+        <view class="pop-botm-hd">
+            <view class="lbox" bind:tap="onClickGiftRuleHide">
+                <text class="ifont-closed-line"></text>
+            </view>
+            <view class="tit">优惠券规则</view>
+            <view class="rbox"></view>
+        </view>
+        <view class="pop-botm-bd">
+            <view class="txt" wx:for="{{CouponRuleList}}" wx:for-index="idx" wx:for-item="item">{{ idx + 1 }}. {{ item }}</view>
+        </view>
+    </view>
+</scroll-view>
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

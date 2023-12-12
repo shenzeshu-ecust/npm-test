@@ -1,0 +1,82 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 28rpx;
+  margin-right: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.title-container {
+  /* height: 26rpx; */
+  margin-top: 24rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.status-name {
+  color: #999;
+  font-size: 24rpx;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.title {
+  margin-left: 14rpx;
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 26rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.share-card-icon-wrapper {
+  margin-left: 26rpx;
+  width: 44rpx;
+  height: 44rpx;
+  background-color: #f9f9f9;
+  border-radius: 22rpx;
+}
+.subTitle {
+  margin-left: 8rpx;
+  display: block;
+  font-size: 26rpx;
+  color: #666;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.carrier-container {
+  margin-top: 6rpx;
+  display: flex;
+  flex-direction: row;
+  margin-left: 42rpx;
+  align-items: center;
+}
+
+.carrier-icon {
+  width: 21rpx;
+  height: 21rpx;
+}
+
+.carrier-content {
+  padding-top: 6rpx;
+  display: block;
+  margin-left: 4rpx;
+  color: #aaa;
+  font-size: 22rpx;
+  line-height: 26rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

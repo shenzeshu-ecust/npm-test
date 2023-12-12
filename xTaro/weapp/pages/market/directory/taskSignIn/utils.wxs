@@ -1,0 +1,21 @@
+function resolveStyle(obj) {
+    var ret = ''
+    if (obj.backgroundColor) {
+      ret += 'background-color:' + obj.backgroundColor + ';'
+    }
+    if (obj.backgroundImage) {
+      ret += 'background-image:url(' + obj.backgroundImage + ');'
+    }
+    if (obj.backgroundSize) {
+      ret += 'background-size:' + obj.backgroundSize + ';'
+  
+    }
+    if (obj.color) {
+      ret += 'color:' + obj.color + ';'
+    }
+    return ret
+  }
+
+  module.exports = {
+    resolveStyle: resolveStyle
+  }

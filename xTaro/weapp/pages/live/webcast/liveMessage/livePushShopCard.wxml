@@ -1,0 +1,16 @@
+<template name="livePushShopCard">
+  <view class="card-container {{showCard && card.goodsId > 0 ? 'on':'hide'}}" data-id="{{card.goodsId}}"
+    data-cardtype="{{card.cardType}}" data-url="{{ card.wxUrl }}" data-coupon="{{card.couponInfo}}"
+    data-clickposition="goodscard"
+    >
+    <block wx:if="{{showCard && card.goodsId > 0}}">
+      <product 
+          idx="{{0}}"
+          custom_scene_class="sk_scene_class"
+          sceneCode= "{{env=='prd'?'f_s35u9skv':'f_948q7unl'}}"
+          renderData="{{card}}"
+          bind:clickHandlers="clickHandlersCallback"
+        ></product>
+    </block>
+  </view>
+</template>

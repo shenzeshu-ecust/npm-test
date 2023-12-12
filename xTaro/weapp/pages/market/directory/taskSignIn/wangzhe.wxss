@@ -1,0 +1,67 @@
+.signIn-wrapper .signIn-container-1{
+    box-sizing: border-box;
+    height: 457rpx;
+    padding-top: 78rpx;
+    background-color: transparent;
+}
+
+.signIn-wrapper .signIn-container-1 .sign-btn-1 {
+    width: 329rpx;
+    height: 89rpx;
+}
+
+.signIn-wrapper .signIn-container-1 .items-container-1 {
+    padding: 0 52rpx;
+    justify-content: space-between;
+}
+
+.signIn-wrapper  .sign-rule-btn1{
+    justify-content: center;
+    padding-bottom: 0;
+}
+
+.signIn-wrapper .signIn-title-1{
+    background-image: url("https://pages.c-ctrip.com/market/components/signIn/wangzhe-sign-title2.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 52rpx;
+    display: block;
+    margin: 0 auto;
+}
+
+.signIn-wrapper .sign-rule-btn1__tips{
+    margin-right: 9rpx;
+    background-color: transparent;
+    border: 1rpx solid #fff;
+    font-size: 20rpx;
+    font-family: PingFang SC;
+    font-weight: 500;
+}
+
+.signIn-wrapper .signIn-container-1 .items-container-1{
+    height: 120rpx;
+    margin-top: 30rpx;
+}
+
+.signIn-wrapper .signIn-container-1 .item-container-1{
+    width: 80rpx;
+    height: 120rpx;
+}
+.signIn-wrapper .sign-container-1 {
+    margin-top: 30rpx;
+}
+
+.signIn-wrapper .signIn-container-1 .point-1 {
+    font-size: 20rpx;
+    font-family: PingFang SC;
+    padding: 6rpx 0;
+}
+.signIn-wrapper .signIn-container-1 .text-1{
+    margin: 4rpx 0 0;
+}
+
+.signin-dingyue{
+    margin-left: 10rpx;
+}

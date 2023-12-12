@@ -1,0 +1,72 @@
+<template name="machine">
+  <view class="slotMachine1">
+    <view class="slotMachine__header">
+      <view class="slotMachine__title">福利中心</view>
+      <view class="slotMachine__prize_btn" bindtap="handleClickPrize">我的奖品
+        <view class="expand_icon">
+          <view class="more_expand_icon right"></view>
+        </view>
+      </view>
+    </view>
+    <view class="slotMachine__box_container">
+      <view class="machine_wp">
+        <view class="machine_item_wp">
+          <view class="machine_item_slide machine_item_slide0">
+            <view wx:for="{{slotOneList}}" wx:key="id" class="machine_item_ele">
+              <image class="machine_item_ele_img" src="{{item.url}}" mode="" />
+              <view class="machine_item_ele_text ellipsis">{{item.name}}</view>
+            </view>
+            <view wx:for="{{slotOneList}}" wx:key="id" class="machine_item_ele">
+              <image class="machine_item_ele_img" src="{{item.url}}" mode="" />
+              <view class="machine_item_ele_text ellipsis">{{item.name}}</view>
+            </view>
+            <view wx:for="{{slotOneList}}" wx:key="id" class="machine_item_ele">
+              <image class="machine_item_ele_img" src="{{item.url}}" mode="" />
+              <view class="machine_item_ele_text ellipsis">{{item.name}}</view>
+            </view>
+          </view>
+        </view>
+
+        <view class="machine_item_wp">
+          <view class="machine_item_slide machine_item_slide1">
+            <view wx:for="{{slotTwoList}}" wx:key="id" class="machine_item_ele">
+              <image class="machine_item_ele_img" src="{{item.url}}" mode="" />
+              <view class="machine_item_ele_text ellipsis">{{item.name}}</view>
+            </view>
+            <view wx:for="{{slotTwoList}}" wx:key="id" class="machine_item_ele">
+              <image class="machine_item_ele_img" src="{{item.url}}" mode="" />
+              <view class="machine_item_ele_text ellipsis">{{item.name}}</view>
+            </view>
+            <view wx:for="{{slotTwoList}}" wx:key="id" class="machine_item_ele">
+              <image class="machine_item_ele_img" src="{{item.url}}" mode="" />
+              <view class="machine_item_ele_text ellipsis">{{item.name}}</view>
+            </view>
+          </view>
+        </view>
+
+        <view class="machine_item_wp">
+          <view class="machine_item_slide machine_item_slide2">
+            <view wx:for="{{slotThreeList}}" wx:key="id" class="machine_item_ele">
+              <image class="machine_item_ele_img" src="{{item.url}}" mode="" />
+              <view class="machine_item_ele_text ellipsis">{{item.name}}</view>
+            </view>
+            <view wx:for="{{slotThreeList}}" wx:key="id" class="machine_item_ele">
+              <image class="machine_item_ele_img" src="{{item.url}}" mode="" />
+              <view class="machine_item_ele_text ellipsis">{{item.name}}</view>
+            </view>
+            <view wx:for="{{slotThreeList}}" wx:key="id" class="machine_item_ele">
+              <image class="machine_item_ele_img" src="{{item.url}}" mode="" />
+              <view class="machine_item_ele_text ellipsis">{{item.name}}</view>
+            </view>
+          </view>
+        </view>
+
+
+      </view>
+    </view>
+    <view class="slotMachine_submit_btn" bindtap="handleClickChoujiang">
+      <image class="slotMachine_submit_btn_img" src="https://dimg04.c-ctrip.com/images/0zg2p12000a5m49gs3FEC.png" mode="" />
+      <view class="slotMachine_submit_btn_text">{{remainChance}}次机会</view>
+    </view>
+  </view>
+</template>

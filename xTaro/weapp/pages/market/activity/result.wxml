@@ -1,0 +1,48 @@
+<!--pages/market/activity/result.wxml-->
+<image class="hd-bg" src="{{banner.img}}" mode="widthFix" data-url="{{banner.url}}" bindtap="jump"></image>
+<view class="title"></view>
+<view>
+  <view class="list" wx:for="{{dataList}}" wx:for-index="idx" wx:for-item="item" wx:key="{{idx}}">
+    <view class="item">
+      <view class="detail">
+        <image class="fig" src="{{item.imgurl}}"></image>
+        <view class="desc">
+          <text class="tt">{{item.title}}</text>
+          <text>{{item.date}}</text>
+        </view>
+      </view>
+      <view wx:if="{{item.isBtn}}" class="btn btn-addr" bindtap="jump" data-url="{{item.link}}">{{item.btn}}</view>
+      <view wx:if="{{item.isMore}}" bindtap="togglePromotion" class="icon-arrow {{item.isChildShow ? 'down' : ''}}" data-idx="{{idx}}" data-procode="{{item.proCode}}" data-url="{{item.link}}"></view>
+    </view>
+    <view class="child-wrap {{item.isChildShow ? '' : 'hidden'}}">
+      <view class="item child-cnt" wx:for="{{item.children}}" wx:for-index="cidx" wx:for-item="child" wx:key="{{cidx}}">
+        <view class="detail">
+          <image class="fig" src="{{child.fig}}"></image>
+          <view class="desc">
+            <text class="tt">{{child.name}}</text>
+          </view>
+        </view>
+        <view class="btn" bindtap="toggleModal" wx:if="{{child.isThirdCoupon}}" data-procode="{{child.proCode}}" data-code="{{child.code}}">去查看</view>
+        <view class="btn" bindtap="jump" data-url="{{child.link}}" wx:else>{{child.btn}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="ft" wx-if="{{!isHomeBtn}}">没有更多了</view>
+<view class="modal" wx:if="{{isModalShow}}">
+  <view class="mask" bindtap="toggleModal"></view>
+  <view class="bd">
+    <view class="tt"></view>
+    <view class="tc">
+      <view class="desc">如需用券，请向商家展示二维码</view>
+      <image class="qrcode" src="{{couponCode.qrcode}}"></image>
+
+    </view>
+    <view class="tc">
+      <view class="desc">如需用券，请向商家展示条形码</view>
+      <image class="barcode" mode="widthFix" src="{{couponCode.barcode}}"></image>
+    </view>
+    <view class="tc">{{couponCode.code}}</view>
+  </view>
+</view>
+<view class="btn-home" bindtap="jump" data-url="/pages/home/homepage" wx-if="{{isHomeBtn}}" style="margin-top: 80rpx">去携程旅行小程序 发现更多优惠</view>

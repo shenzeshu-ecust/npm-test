@@ -1,0 +1,11 @@
+<!-- 直播商卡的货架版本 -->
+<block scroll-y bindscrolltolower="handleScrollLower" style="height: 100vh;" lower-threshold="{{300}}" enhanced bounces="{{false}}">
+  <block wx:for="{{listProduct}}" wx:key="index">
+    <wechat-long-list-chunk chunkId="{{'_chunk_id_'+index}}" showLogInfo="{{true}}" style="min-height: 15100px;">
+      <block wx:for="{{item}}" wx:for-item="product" wx:for-index="productIndex" wx:key="{{item.goodsId || item.index}}">
+        <sk_newproduct filterProductProps="{{filterProductProps}}" renderData="{{product}}" item="{{product}}" index="{{productIndex}}" parentIndex="{{index}}" selfApiInfo="{{selfApiInfo}}" sceneCode="{{sceneCode}}" bind:clickHandlers="clickHandlers" bind:productExposure="productExposure" />
+      </block>
+    </wechat-long-list-chunk>
+  </block>
+  <view class="list_product_empty"></view>
+</block>

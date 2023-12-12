@@ -1,0 +1,13 @@
+<view wx:if="{{modalConfig.isShow}}" class="mask-layer">
+  <view class="modal-box">
+    <block wx:if="{{!modalConfig.userInfo.openId || modalConfig.userInfo.isUser}}">
+      <image class="modal-bg" src="{{modalConfig.pictureUrl}}" mode="aspectFit" catchtap="_handleRouteToWeb"></image>
+    </block>
+    <block wx:else>
+      <button class="modal-button" hover-class="none" open-type="getPhoneNumber" bindgetphonenumber="_handleGetPhoneNumber">
+        <image class="modal-bg" src="{{modalConfig.pictureUrl}}" mode="aspectFit"></image>
+      </button>
+    </block>
+    <image class="modal-close" src="{{HOST_STATIC}}icon_close.png" catchtap="_handleCloseModal"></image>
+  </view>
+</view>

@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "行程",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "card-item": "./cardItem/cardItem",
+    "traffic-item": "./trafficItem/trafficItem",
+    "daily-memo": "./dailyMemo/dailyMemo"
+  }
+}

@@ -1,0 +1,185 @@
+<view>
+
+  <view class="{{isFixTop ? 'input-box-fixed' : 'input-box'}}">
+    <view class='column-left'>
+      <view class="{{departBoxSelected ? 'view-left-up-selected' : 'view-left-up'}}">
+        <input class='input-left' focus="{{departBoxSelected}}" placeholder='出发' placeholder-class='placeholder' data-name='depart' bindinput='bindKeyInput' bindfocus='bindInputFocus' bindtap='bindInputLeftTap' value="{{departStation}}"></input>
+        <view class="{{departBoxSelected && departStation ? 'clean-icon-view-left-selected' : 'clean-icon-view-left'}}" bindtap='cleanIconTap' data-name='depart'>
+          <image class='clean-icon-left' src='../../images/icon-sousuox.png'></image>
+        </view>
+      </view>
+      <view class="{{dateBoxSelected ? 'view-left-down-selected' : 'view-left-down'}}" bindtap='bindDateBoxTap'>
+        <input focus="{{dateBoxSelected}}" disabled placeholder='选择出发日期' placeholder-class='placeholder' class='select-date' catchtap='showCalendar' value='{{departDateDisplay}}'></input>
+      </view>
+    </view>
+
+    <view class='column-middle'>
+      <image class='icon-reversal' src='https://pages.c-ctrip.com/schedule/pic/wxxcx/icon-qiehuan.png' bindtap='bindReversalTap'></image>
+    </view>
+
+    <view class='column-right'>
+      <view class="{{arrivalBoxSelected ? 'view-right-up-selected' : 'view-right-up'}}">
+        <input class='input-right' focus="{{arrivalBoxSelected}}" placeholder='到达' placeholder-class='placeholder' data-name='arrival' bindinput='bindKeyInput' bindfocus='bindInputFocus' bindtap='bindInputRightTap' value="{{arrivalStation}}"></input>
+        <view class="{{arrivalBoxSelected && arrivalStation ? 'clean-icon-view-left-selected' : 'clean-icon-view-left'}}" bindtap='cleanIconTap' data-name='arrival'>
+          <image class='clean-icon-left' src='../../images/icon-sousuox.png'></image>
+        </view>
+      </view>
+      <view class='view-right-down'>
+        <view class='gt-check-view' bindtap='gtCheckBoxChange'>
+          <image class='gt-check-icon' src="{{gtChecked ? '../../images/icon/icon-yixuan.png' : '../../images/icon/icon-weixuan.png'}}"></image>
+          <label class='g-label'>高铁动车</label>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- city -->
+  <block wx:if="{{!trainSearched && !stationSearched && !trainLoading && !reloadTrain && (departBoxSelected && !departStation || arrivalBoxSelected && !arrivalStation)}}">
+    <view class='city-view'>
+      <block wx:if="{{locateCity}}">
+        <view class='locate-view'>
+          <formid-button class='locate-city-button' formid-button-class='locate-formid-button' data-city='{{locateCity}}' bindtap='bindCityTap' data-type='locate'>
+            <image class='locate-icon' src='../../images/icon/icon-locate-blue.png' />
+            <text class='locate-text'>{{locateCity}}</text>
+            <label class='locate-label'>当前定位地</label>
+          </formid-button>
+        </view>
+        <view class='line-wrap'>
+          <view class='line' />
+        </view>
+      </block>
+
+      <block wx:if="{{historyCities && historyCities.length>0}}">
+        <view class='history-label-view'>
+          <label class='city-label'>搜索历史</label>
+        </view>
+        <view class='history-city-view'>
+          <formid-button class='city-button' data-city='{{historyCities[0]}}' bindtap='bindCityTap' data-type='history'>
+            <view wx:if="{{historyCities[0]}}" class='city-button-view'>
+              <text>{{historyCities[0]}}</text>
+            </view>
+          </formid-button>
+          <formid-button class='city-button' data-city='{{historyCities[1]}}' bindtap='bindCityTap' data-type='history'>
+            <view wx:if="{{historyCities[1]}}" class='city-button-view'>
+              <text>{{historyCities[1]}}</text>
+            </view>
+          </formid-button>
+          <formid-button class='city-button' data-city='{{historyCities[2]}}' bindtap='bindCityTap' data-type='history'>
+            <view wx:if="{{historyCities[2]}}" class='city-button-view'>
+              <text>{{historyCities[2]}}</text>
+            </view>
+          </formid-button>
+        </view>
+      </block>
+
+      <block wx:if="{{hotCities && hotCities.length>0}}">
+        <view class='history-label-view'>
+          <label class='city-label'>热门城市</label>
+        </view>
+        <view class='hot-city-view'>
+          <block wx:for="{{hotCities}}" wx:key='index' wx:for-item='cityGroup'>
+            <block wx:if="{{cityGroup && cityGroup.length > 0}}">
+              <view class='history-city-view'>
+                <formid-button class='city-button' data-city='{{cityGroup[0]}}' bindtap='bindCityTap' data-type='hot'>
+                  <view wx:if="{{cityGroup[0]}}" class='city-button-view'>
+                    <text>{{cityGroup[0]}}</text>
+                  </view>
+                </formid-button>
+                <formid-button class='city-button' data-city='{{cityGroup[1]}}' bindtap='bindCityTap' data-type='hot'>
+                  <view wx:if="{{cityGroup[1]}}" class='city-button-view'>
+                    <text>{{cityGroup[1]}}</text>
+                  </view>
+                </formid-button>
+                <formid-button class='city-button' data-city='{{cityGroup[2]}}' bindtap='bindCityTap' data-type='hot'>
+                  <view wx:if="{{cityGroup[2]}}" class='city-button-view'>
+                    <text>{{cityGroup[2]}}</text>
+                  </view>
+                </formid-button>
+              </view>
+            </block>
+          </block>
+        </view>
+      </block>
+    </view>
+  </block>
+
+  <!-- stationList -->
+
+  <block wx:if="{{stationSearched && (departBoxSelected || arrivalBoxSelected)}}" class='station-list-view'>
+    <scroll-view class='station-scroll-view' scroll-y style="height:{{stationScrollViewHeight}}px">
+      <view wx:for="{{stations}}" wx:key='item' class='station-view' data-city="{{item}}" bindtap='bindCityTap' data-type='search'>
+        <view>{{item}}</view>
+      </view>
+    </scroll-view>
+  </block>
+
+  <!-- trainList -->
+
+  <view wx:if="{{trainLoading}}" class='train-loading-view'>
+    <image class='train-loading-icon' src='https://pages.c-ctrip.com/schedule/pic/wxxcx/cts_loading_white.gif'></image>
+  </view>
+
+  <block wx:if="{{trainSearched}}" class='train-list-view'>
+    <scroll-view wx:if="{{trains && trains.length>0}}" class='train-scroll-view' scroll-y scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+      <view wx:if="{{isFixTop}}" class='train-view-blank-up'>
+      </view>
+      <view wx:for="{{trains}}" wx:key="trainName" class="{{selectedTrain === item.trainName ? 'train-view-selected' : 'train-view'}}" bindtap='trainClicked' data-trainname='{{item.trainName}}'>
+        <view class='train-column-1'>
+          <view class='train-name'>{{item.trainName}}</view>
+          <view class='train-duration'>{{item.duration}}</view>
+        </view>
+        <view class='train-column-2'>
+          <view class='train-depart-time'>{{item.departureTime}}</view>
+          <view class='train-depart-station'>{{item.departureStationName}}</view>
+        </view>
+        <view class='train-column-3'>
+          <view class='train-line-view'>
+            <image class='train-line-icon' src='../../images/icon/icon-lianjie.png' />
+          </view>
+        </view>
+        <view class='train-column-4'>
+          <view class='train-arrival-time'>{{item.arrivalTime}}</view>
+          <view class='train-arrival-station'>{{item.arrivalStationName}}</view>
+        </view>
+        <view class='train-column-5'>
+          <image class="{{selectedTrain === item.trainName ? 'train-check-icon-selected' : 'train-check-icon'}}" src='../../images/icon-gouxuan.png'></image>
+        </view>
+      </view>
+      <view class='train-view-blank'>
+      </view>
+    </scroll-view>
+
+    <view wx:if="{{!trains || trains.length == 0}}" class='noresult-view'>
+      <view wx:if="{{isFixTop}}" class='train-view-blank-up' />
+      <view>您搜索的结果来自火星，</view>
+      <view class='noresult-text'>请修改条件</view>
+    </view>
+  </block>
+
+  <view wx:if="{{reloadTrain}}" class='reload-view'>
+    <view wx:if="{{isFixTop}}" class='train-view-blank-up' />
+    <view class='reload-button' bindtap='bindReloadTap'>
+      <view>重新加载</view>
+    </view>
+  </view>
+
+  <view wx:if="{{selectedTrain && trainSearched}}" class='add-button-view'>
+    <formid-button wx:if="{{!trainAdding}}" class='add-button' formid-button-class='add-formid-button-class' formid-button-view-class='add-formid-button-view-class' bindtap='bindAddTap'>
+      <view class='add-text-view'>
+        <view>加入行程</view>
+      </view>
+    </formid-button>
+    <formid-button wx:if="{{trainAdding}}" class='add-button' formid-button-class='add-formid-button-class' formid-button-view-class='add-formid-button-view-class'>
+      <view class='adding-text-view'>
+        <view>提交中</view>
+        <image class="adding" src='../images/cts_adding.gif' />
+      </view>
+    </formid-button>
+    <!--image wx:if="{{trainAdding}}" class='train-loading-icon' src='/pages/images/loading-white.gif'></image-->
+  </view>
+  <view class="{{isShowTopShadow ? 'top-shadow show-top-shadow' : 'top-shadow'}}"></view>
+</view>
+
+<!-- 白屏检测 -->
+<!-- viewReadyHandle为框架提供、实现 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

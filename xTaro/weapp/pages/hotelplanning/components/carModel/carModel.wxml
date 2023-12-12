@@ -1,0 +1,27 @@
+<view class="car-model" wx:if="{{isShowCar}}">
+	<view class="car-title" wx:if="{{hotelName && hotelName.length > 0}}">欢迎入住{{hotelName}}！</view>
+	<block wx:if="{{isShowShuttle}}">
+		<view class="car-item-title">约车出行</view>
+		<view class="car-item wifi-label-exposure" bindtap="tabClick" data-type="2" data-text="用车模块">
+			<view class="car-item-left">
+				<view class="item-title"><view class="wechat-font-shuff-car  item-icon item-shuffle-car"></view>出门在外，叫车不便？</view>
+				<view class="item-subTitle">携程专车，首单88折起，免排队更方便！</view>
+			</view>
+			<view class="car-item-right">
+				<view class="item-jumpUrl"><text class="item-label">￥</text><text class="item-price">{{shuttleAccount}}</text>起订<view class="item-arrow wechat-font-arrow-right2"/></view>
+			</view>	
+		</view>
+	</block>
+	<block wx:if="{{ isShowBycity }}">
+		<view class="car-item-title">租车自驾</view>
+		<view class="car-item wifi-label-exposure" bindtap="tabClick" data-type="3" data-text="租车模块">
+			<view class="car-item-left">
+				<view class="item-title"><view class="wechat-font-rent-car item-icon item-rent-car"></view>出门游玩租车难？</view>
+				<view class="item-subTitle">酒店用户专享9折，省钱又省心！</view>
+			</view>
+			<view class="car-item-right">
+				<view class="item-jumpUrl">去看看<view class="item-arrow wechat-font-arrow-right2"/></view>
+			</view>	
+		</view>
+	</block>
+</view>

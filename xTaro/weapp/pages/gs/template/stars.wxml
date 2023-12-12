@@ -1,0 +1,24 @@
+<!--
+  评分星级模板, 星级规则:
+  3.3-3.7分用3星半
+  3.8-4.2分用4星
+  4.3-4.7分用4星半
+  4.8-5分用5星
+-->
+<!-- <template is="starsTml" data="{{score: 4.5,class:'customClass'}}"/> -->
+
+<template name="starsTml">
+  <view class="score-box">
+    <view class="score-text" >
+      <block wx:for="{{[1,2,3,4,5]}}" wx:for-index="i" wx:key="*this">
+        <text class="gs-iconfont gs-icon-score {{class}} {{i === 4 ? 'gs-icon-last' : ''}}"/>
+      </block>
+    </view>
+
+    <view class="score-fg" >
+      <block wx:for="{{[1,2,3,4,5]}}" wx:if="{{score > item - .7 - .0001}}" wx:for-index="j" wx:key="*this">
+        <text class="gs-iconfont score-active {{'gs-icon-score' + (score <= item - .3 ? '-half' : '')}} {{class}} {{j === 4 ? 'gs-icon-last' : ''}}"/>
+      </block>
+    </view>
+  </view>
+</template>

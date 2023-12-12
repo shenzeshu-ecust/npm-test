@@ -1,0 +1,13 @@
+<template name="mini-dialog">
+    <view class="pd-dialog-cmask cmask" catchtap="closeDialog" catchtouchmove="noop">
+        <view class="cmask-popbox">
+            <view class="popbox-thead">
+                <view class="tit">{{dialogTitle}}</view>
+                <view class="wechat-font-close close-icon" catchtap="closeDialog" catchtouchmove="noop"></view>
+            </view>
+            <scroll-view scroll-y class="popbox-tbody" wx:for="{{dialogContent}}" wx:for-item="content">
+                {{content}}
+            </scroll-view>
+        </view>
+    </view>
+</template>

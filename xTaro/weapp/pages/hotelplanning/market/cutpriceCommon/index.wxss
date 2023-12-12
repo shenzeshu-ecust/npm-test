@@ -1,0 +1,131 @@
+@charset "utf-8";
+page { font-family:-apple-system, Helvetica, 'Hiragino Sans GB W3', 'Microsoft YaHei', arial, sans-serif; font-size: 28rpx; line-height: 1.5; font-weight: 300; }
+a { color: #333; text-decoration: none }
+input { -webkit-appearance: none; border-radius: 0; -webkit-user-select: text; }
+
+.fl { float:left; }
+.fr { float:right; }
+.bold { font-weight: 600; }
+.light { font-weight: 100; }
+.hidden { display: none;}
+button:after {display: none}
+.ico {
+    display: block;
+    background-size: cover;
+}
+
+.color-1 {
+    color: #FFF;
+}
+.color-2 {
+    color: #FF4949;
+}
+.color-3 {
+    color: #F5A623;
+}
+.color-4 {
+    color: #FF9D59;
+}
+.color-5 {
+    color: #4289FF;
+}
+.color-6 {
+    color: #FFDB52;
+}
+.color-7 {
+    color: #FFF500;
+}
+.color-8 {
+    color: #67A0FF;
+}
+.color-9 {
+    color: #693FBE;
+}
+.color-10 {
+    color: #F8E71C
+}
+.color-11 {
+    color: #f40
+}
+.color-12{
+    color: #ff7100;
+}
+.main{
+    margin: 0 auto;
+    padding-top: 400rpx;
+}
+
+.star-1{
+    width: 8px;
+}
+.star-2{
+    width: 16px;
+}
+.star-3{
+    width: 24px;
+}
+.star-4{
+    width: 32px;
+}
+.star-5{
+    width: 40px;
+}
+
+/************* content *************/
+.content {
+    padding-bottom: 184rpx;
+}
+
+
+/************* masks *************/
+
+.mask{
+    z-index: 1000;
+    position: fixed;
+    background: rgba(0,0,0,0.6);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.close{
+    position: absolute;
+    right: 0;
+    top:0;
+    width: 44rpx;
+    height: 44rpx;
+    margin: 28rpx;
+    border:1px solid #333;
+    border-radius: 50%;
+}
+.close::after,.close::before{
+    content: "";
+    position: absolute;
+    right: 45%;
+    top: 50%;
+    width: 2rpx;
+    height: 30rpx;
+    background-color: #333;
+}
+.close::after{
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.close::before{
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.cutprice-page-error {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    background: #fff;
+}
+
+.cutprice-page-error image {
+    width: 277rpx;
+    height: 304rpx;
+    margin-bottom: 44rpx;
+}

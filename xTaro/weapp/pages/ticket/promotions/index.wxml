@@ -1,0 +1,287 @@
+<view style="height: 100%; {{showRecord || showCoupon ? 'overflow-y:hidden':''}}">
+<nav-bar navbar-data="{{navbarData}}"></nav-bar>
+<!--活动结束-->
+<block wx:if="{{status === 8 || activeOver}}">
+    <view class="act_offline_box">
+        <view class="act_offline">来晚啦，活动已下线</view>
+        <view class="shape_btn" bindtap="jumpToHome">
+            <text class="text">去携程首页</text>
+        </view>
+    </view>
+</block>
+<block wx:else>
+<scroll-view class="container"
+    scroll-top="{{scrollTop}}"
+    scroll-y="{{canScroll}}"
+    scroll-into-view="{{intoview}}"
+    bindscroll="scrollHandle"
+    style="background-color: {{activityBackColor}}; height: {{scrollHeight - 170}}rpx; min-height: calc(100% - {{titleHeight}}px);"
+>
+    <view class="tooltip-arrow {{showTips ? 'show' : ''}}">
+        <view class="tooltip-box"><text class="text">添加到我的小程序，旅行预订更方便</text></view>
+    </view>
+    <view class="bg_box">
+        <image src="{{activityHeadImg}}" class="pmt_header_bg" mode="widthFix"/>
+        <view class="right_item" bindtap="jumpToRule" id="tkt-10650025773-ticket-button-{{curId}}-{{orderId}}">
+          <text class="text">活动规则</text>
+        </view>
+        <view class="cutInfo" wx:if="{{cuts && cuts.length}}">
+            <swiper class="cutInfo_box" indicator-dots="{{false}}" autoplay="{{true}}" interval="{{2000}}" vertical="{{true}}" circular="{{true}}" >
+                <block wx:for="{{cuts}}" wx:key="cut">
+                    <swiper-item>
+                        <view class="cutInfo_item">
+                            <image src="{{item.avatarUrl}}" class="img" />
+                            <view class="text" wx:if="{{item.status === 1}}">
+                                <text class="name">{{item.nickName}}</text>发起了砍价
+                            </view>
+                            <view class="text" wx:else>
+                                <text class="name">{{item.nickName}}</text>砍掉了{{item.amount}}元
+                            </view>
+                        </view>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+    </view>
+
+    <view class="shape">
+
+        <view class="header" style="--activityBackColor:{{activityBackColor}}">
+            <view class='title'>好友购买了</view>
+            <view class='resources'>
+              <view class='resources_name_box'>
+                <text class='resources_name'>{{viewName}}</text>
+              </view>
+              <button wx:if="{{canBackApp}}" bind:tap="fakeAction" open-type="launchApp" data-spotid="{{viewId}}" app-parameter="{{appWakeSchemaDetail}}" bindlaunchapp="launchAppDetailSuccess" binderror="launchAppError" id="tkt-10650025773-concern-button-去APP发起砍价-{{curId}}">
+                  <view class="border_before">
+                      去看看
+                  </view>
+              </button>
+              <view class='go_detail_button' wx:else bind:tap="goToDetail" data-spotid="{{viewId}}" id="tkt-10650025773-concern-button-去看看-{{curId}}">
+                <text >去看看</text>
+              </view>
+            </view>
+            <view class='resources_extend_info'>
+              <text class='price' wx:if="{{viewPrice}}">¥{{viewPrice}}起</text>
+              <text class='score' wx:if="{{commentScore}}">{{commentScore}}分</text>
+              <text class='comment' wx:if="{{commentCount}}">{{commentCount}}人点评</text>
+            </view>
+        </view>
+        <!--砍价活动是否结束还需调整-->
+        <view class="desc" wx:if="{{status !== 2}}">
+            <text>本单砍价已结束</text>
+            <text>
+                共 {{cutDetails.length}} 位好友砍了<text class="amount">{{cutAmount}}</text>元
+            </text>
+        </view>
+        <view class="desc" wx:else>
+            本单可返现<text class="amount">{{maxCutAmount}}元</text>，已砍<text class="amount">{{cutAmount}}元</text>
+        </view>
+
+        <view class="pmt_log">
+            <text wx:if="{{helpCutAmount && helpCut && !startUser}}">你帮好友砍了{{helpCutAmount}}元，</text>
+            <text wx:if="{{!helpCut}}">{{statusSubDesc}}</text>
+            <text wx:if="{{!helpCut && cutDetails && cutDetails.length}}">，</text>
+            <text wx:if="{{cutDetails && cutDetails.length}}"
+                class="record" bind:tap="showRecord" id="tkt-10650025773-ticket-popout-{{curId}}-{{orderId}}"
+            >查看帮砍记录</text>
+        </view>
+
+        <block wx:if="{{status === 2}}">
+            <button class="shape_btn an_breath" open-type="share" wx:if="{{helpCut}}" id="tkt-10650025773-ticket-operator-{{curId}}-{{orderId}}">
+                <text class="text">找人帮TA砍</text>
+            </button>
+            <view wx:else class="shape_btn an_breath" bindtap="helpFriend" id="tkt-10650025773-ticket-book-{{curId}}-{{orderId}}">
+                <text class="text">帮好友砍一刀</text>
+            </view>
+        </block>
+        <view class="time_desc" wx:if="{{remainTime}}">
+            <text class="txt">距结束仅剩</text>
+            <block>
+                <view class="time" wx:if="{{remainTime[0] > 0}}"><text>{{remainTime[0]}}</text></view>
+                <view class="time"><text>{{remainTime[1]}}</text></view>
+                :
+                <view class="time"> <text>{{remainTime[2]}}</text></view>
+                :
+                <view class="time"> <text>{{remainTime[3]}}</text></view>
+            </block>
+        </view>
+    </view>
+    <!--优化 TODO-->
+    <block wx:if="{{promotions.length}}">
+        <view class="coupon_box">
+            <view class="title">感谢参与活动，赠你{{promotions.length}}张优惠券</view>
+        </view>
+        <view style="width: 100%;">
+            <scroll-view scroll-x="{{canScroll}}" class="coupon_slider">
+                <block wx:for="{{promotions}}" wx:key="coupon" wx:for-item="item">
+                    <view class="coupon">
+                        <view style="color: #FE483F; font-size: 14px; line-height: 12px;">¥<text style="font-size:27px; line-height: 23px;font-weight: bold;">{{item.bestDeduction}}</text></view>
+                        <view class="coupon_desc">{{item.desc}}</view>
+                        <view class="dot_line"/>
+                        <view class="coupon_type">{{item.displayName}}</view>
+                        <view>
+                            <block wx:if="{{item.promotionStatus === 2}}">
+                                <view class="use_coupon" style="border: 1px solid #FE483F;" bindtap="useCoupon" data-linkurl="{{item.promotionDescUrl}}">
+                                    <text style="color: #FE483F">去使用</text>
+                                </view>
+                            </block>
+                            <block wx:elif="{{item.promotionStatus === 1}}">
+                                <view class="use_coupon" style="background: #FE483F;"
+                                    data-secretid="{{item.promotionSecretId}}"
+                                    bindtap="receiveCoupon"
+                                >
+                                    <text style="color: #fff">领取</text>
+                                </view>
+                            </block>
+                            <block wx:elif="{{item.promotionStatus === 3 || item.promotionStatus === 4}}">
+                                <view class="use_coupon" style="background: #ddd;">
+                                    <text style="color: #fff">已领完</text>
+                                </view>
+                            </block>
+                            <block wx:elif="{{item.promotionStatus === 5}}">
+                                <view class="use_coupon" style="background: #ddd;">
+                                    <text style="color: #fff">已过期</text>
+                                </view>
+                            </block>
+                            <block wx:elif="{{item.promotionStatus === 6}}">
+                                <view class="use_coupon" style="background: #ddd;">
+                                    <text style="color: #fff">未开始</text>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+    </block>
+    <!--广告位-->
+    <block wx:if="{{adList && adList.length}}">
+        <swiper class="ad_box" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{2000}}" circular="{{true}}" indicator-active-color="#ffffff" >
+            <block wx:for="{{adList}}" wx:key="ads">
+                <swiper-item>
+                    <view id="tkt-10650025773-activity-discount-{{curId}}-{{index}}" data-linkurl="{{item.linkUrl}}" bind:tap="useCoupon">
+                        <image class="img_ad" src="{{item.pageUrl}}" />
+                    </view>
+                </swiper-item>
+            </block>
+        </swiper>
+    </block>
+    <!--好货推荐-->
+    <view class="rec_list tkt_tab_list" id="product-list-bottom"  wx:if="{{tabProducts && tabProducts.length}}">
+        <view class="tkt_tab fixed" id="flowheader" style="background-color: {{activityBackColor}}">
+            <view class="rec_title">
+                <view class="txt">
+                    <image class='rec_title_icon' src="https://pages.c-ctrip.com/ticket/promotions/icon_4.png"></image>
+                    好货推荐
+                </view>
+                <view class="btn_box" bind:tap="forwardCitylist" id="tkt-10650025773-activity-product-{{curId}}">
+                    <view class="icon-address"></view>
+                    <text class="city">{{districtname || cityname || '上海'}}</text>
+                </view>
+            </view>
+            <view class="tab_ul">
+                <block wx:for="{{tabProducts}}" wx:key="tabProduct">
+                    <view class="tab_li {{activeIndex === index ? 'cur' : ''}}"
+                          data-index="{{index}}" bind:tap="changeTab" id="tkt-10650025773-activity-coupon-{{curId}}-{{item.tabName}}"
+                    >
+                        <text class="tab_name">{{item.tabName}}</text>
+                        <text class="tab_bottom"></text>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="tab_holder"></view>
+        <view class="tab_content">
+            <block wx:for="{{tabProducts}}" wx:key="subProduct">
+                <!--门票-->
+                <view id="{{item.tabType}}">
+                    <view class="rec_category" wx:if="{{item.tabType !== 'ticket'}}">
+                        {{item.tabName}}
+                    </view>
+                    <view class="rec_ul" >
+                        <block wx:for="{{item.products}}" wx:key="product" wx:for-item="subItem">
+                            <view class="rec_li">
+                                <button class="item_box_button" bind:tap="fakeAction" data-spotid="{{subItem.id}}" wx:if="{{subItem.canCut && canBackApp}}" open-type="launchApp" app-parameter="{{subItem.shemaUrl}}" bindlaunchapp="launchAppProductSuccess" binderror="launchAppError">
+                                    <view class='departure' wx:if="{{subItem.setOutPlace && item.tabType === 'surrounding' || item.tabType === 'packageTour'}}">
+                                      <span class='departure_name'>{{subItem.setOutPlace}}出发</span>
+                                    </view>
+                                    <image src="{{subItem.imageUrl}}" class="rec_img" mode="widthFix"/>
+                                    <view>
+                                        <view class="rec_name_txt">
+                                            {{subItem.name}}
+                                        </view>
+                                        <view class="rec_price">
+                                            ¥<text class="price_num">{{subItem.price}}</text>
+                                            <text style="color: #999;">起</text>
+                                            <text class='canCutButton' wx:if="{{subItem.canCut}}">任性砍5折</text>
+                                        </view>
+
+                                    </view>
+                                </button>
+                                <view class="item_box" wx:if="{{!subItem.canCut || !canBackApp}}" bind:tap="jumpToDetail"
+                                  data-id="{{subItem.cityId}}" data-spotid="{{subItem.id}}" data-tabtype="{{item.tabType}}"
+                                  id="tkt-10650025773-activity-allspot-{{curId}}-{{item.tabName}}-{{subItem.id}}"
+                                >
+                                    <view class='departure' wx:if="{{subItem.setOutPlace && item.tabType === 'surrounding' || item.tabType === 'packageTour'}}">
+                                      <span class='departure_name'>{{subItem.setOutPlace}}出发</span>
+                                    </view>
+                                    <image src="{{subItem.imageUrl}}" class="rec_img" mode="widthFix"/>
+                                    <view>
+                                        <view class="rec_name_txt">
+                                            {{subItem.name}}
+                                        </view>
+                                        <view class="rec_price">
+                                            ¥<text class="price_num">{{subItem.price}}</text>
+                                            <text style="color: #999;">起</text>
+                                        </view>
+
+                                    </view>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                    <view class="rec_more" bind:tap="showMoreTicket" data-tabtype="{{item.tabType}}" id="tkt-10650025773-activity-transfer-{{curId}}-{{item.tabName}}">
+                        <text>更多{{item.tabName}}</text>
+                        <image src="https://pages.c-ctrip.com/ticket/promotions/arrow_r.png" class="arrow_r" mode="widthFix"/>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</scroll-view>
+
+<view class='fix_bottom_banner'>
+  <view class='bottom_button' bindtap="jumpToHome" id="tkt-10650025773-bottom-button-酒店·机票·火车票-{{curId}}">
+    <view class='button_icon'>
+      <image src="https://pages.c-ctrip.com/ticket/promotions/icon_1.png"></image>
+    </view>
+    <text>酒店·机票·火车票</text>
+  </view>
+  <view class='bottom_button' bindtap="jumpToActivity" id="tkt-10650025773-bottom-button-门票·玩乐-{{curId}}">
+    <view class='button_icon'>
+      <image src="https://pages.c-ctrip.com/ticket/promotions/icon_2.png"></image>
+    </view>
+    <text>门票·玩乐</text>
+  </view>
+</view>
+
+<view class='fix_icon_box' wx:if="{{tabProducts && tabProducts.length}}">
+
+  <image wx:if="{{rec_list_top < 100}}"  bindtap="backtoTop" src="https://pages.c-ctrip.com/ticket/promotions/btn_top.png"></image>
+  <image wx:else bindtap="goRecList" id="tkt-10650025773-mask-button-好货推荐-{{curId}}" src="https://pages.c-ctrip.com/ticket/promotions/btn_bottom.png"></image>
+
+</view>
+
+</block>
+</view>
+<import src="./layer.wxml"/>
+<block wx:if="{{showRecord}}">
+    <template is="cutRecordLayer" data="{{cutDetails: cutDetails}}"></template>
+</block>
+<block wx:if="{{showCoupon}}">
+    <template is="couponLayer" data="{{...showCouponData}}"></template>
+</block>
+<!--
+    // 广告埋点 tkt-pageid-activity-discount
+-->

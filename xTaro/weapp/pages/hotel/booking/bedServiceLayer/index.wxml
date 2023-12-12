@@ -1,0 +1,23 @@
+<template name="bedservice-layer">
+    <view class="cmask" bindtap="toggleBedServiceRule" catchtouchmove="noop"></view>
+    <view class="global-layer" catchtap="toggleBedServiceRule" catchtouchmove="noop">
+        <view class="thead">
+              <view class="tit">床型选择服务说明</view>
+              <view class="wechat-font-close"></view>
+        </view>
+        <view class="tbody bed-service-layer">
+             <view class="js_content bed-service-wrap">
+             <view class="item">床型由酒店随机安排，如选择床型，携程将帮助您与酒店进行沟通，但无法保证满足，请您谅解</view>
+
+             <view class="item">选择床型<view class="bule">大床</view>或<view class="bule">双床</view>还可能会导致：</view> 
+             <view class="item list"> 
+                  <image  src="https://pages.c-ctrip.com/hotels/wechat/img/icon-ans.png" ></image>
+                  <view class="large">订单确认时间延长</view>
+                  <image  src="https://pages.c-ctrip.com/hotels/wechat/img/icon-qa.png" ></image>
+                  <view class="large">拒单概率升高</view>
+            </view>
+             <view class="item">选择<view class="bule">无要求</view>不会影响订单确认时间和拒单率。</view>
+             </view>
+        </view>
+    </view>
+</template>

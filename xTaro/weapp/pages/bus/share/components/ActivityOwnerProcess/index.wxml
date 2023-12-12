@@ -1,0 +1,68 @@
+<view class='block-container '>
+    <view class="block-header-bg"></view>
+    <view class="title-line">
+        <view class='title'>
+            <text>
+                <block wx:for="{{activity.activityTitle}}" wx:for-key="index">
+                     <text class="{{item.highLight ? 'high-light' : ''}}" >{{item.text}}</text>
+                </block>    
+            </text>
+        </view>
+    </view>
+    <block wx:if="{{validActivity}}">
+        <view class='timer timer-bg'>
+            <view>还剩</view>
+            <view class='timer-section'>{{hours}}</view>
+            <view class="timer-section">:</view>
+            <view class='timer-section'>{{minutes}}</view>
+            <view class="timer-section flash">:</view>
+            <view class='timer-section'>{{seconds}}</view>
+            <view>失效</view>
+        </view>
+    </block>
+    <view class='process'>
+        <block wx:for="{{avatarArray}}" wx:for-item="user" wx:for-index="index" wx:key="letter">
+            <view class='process-user'>
+                <block wx:if="{{user.userIcon}}">
+                    <view class='process-no-user-icon process-user-icon'>
+                        <image class='image' src="{{user.userIcon}}" />
+                        <text class="tip-text">已助力</text>
+                    </view>
+                </block>
+                <block wx:elif="true">
+                    <view class='process-no-user-icon process-user-icon'></view>
+                </block>
+                <view wx:if="{{user.mock}}" class="userNick orange">待邀请</view>
+                <view wx:else class='userNick'>{{ user.userNick}}</view>
+            </view>
+        </block>
+    </view>
+    <block wx:if="{{ activity.status == 1}}">
+        <button open-type="share" hover-class="button-hover" bindtap="beforeSubscribe" class="{{'process-button'}}">
+            <view class="inner">邀请好友</view>
+        </button>
+    </block>
+    <block wx:elif="{{activity.status == 2}}">
+        <view class="share-awards-container">
+            <view class="share-awards">
+                <image class="award-icon" src="https://pages.c-ctrip.com/bus-images/order-axtrefund/easy-refund-logo.png" />
+                <view class="flex1">
+                    <text class="award-title">
+                        <text>安心退保障</text>
+                        <text class="plain">已到账</text>
+                    </text>
+                    <view class="award-desc">若退票，票价100%全退</view>
+                </view>
+                <view class="show-award-button" bindtap="goOrder">
+                    <view>去查看</view>
+                    <view class="icon-font icon-arrow-right"></view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <button hover-class="button-hover" class="{{'process-button disabled'}}">
+            <view class="inner">本次助力已结束，下次再来</view>
+        </button>
+    </block>
+</view>

@@ -1,0 +1,6 @@
+<view wx:if='{{historyAirportList && historyAirportList!=null && historyAirportList.length>0}}'>
+  <view class='history-title'>历史选择</view>
+  <view class='history-item-list'>
+    <text wx:for='{{historyAirportList}}' wx:key="" bindtap='selectAirport' data-airportName='{{item.name}}' data-airportCode='{{item.code}}' data-index='{{index}}'>{{item.name}}</text>
+  </view>
+</view>

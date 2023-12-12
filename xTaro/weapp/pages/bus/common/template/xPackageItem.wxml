@@ -1,0 +1,49 @@
+<template name="xlistitem">
+  <block>
+    <view class='xpackbox'>
+      <view class='item {{item.recommendTitle ? "item-background" : ""}}' style="color:{{item.channelLastColor}}">
+        <view class="label-content">
+            <view wx:if="{{item.recommendTitle}}" class="recommend">
+                <text class='recommend-scale'>{{item.recommendTitle}}</text>
+            </view>
+            <view wx:if="{{item.channelMainTitle}}" class="promotion" style="color:{{item.channelLastColor}};background:linear-gradient(left, {{item.channelColorArray[0]}}, {{item.channelColorArray[1]}});background:-webkit-linear-gradient(left, {{item.channelColorArray[0]}}, {{item.channelColorArray[1]}});">
+                <image wx:if="{{item.channelIcon}}" class="p-icon" mode="aspectFit" src="{{item.channelIcon}}"></image>
+                <text>{{item.channelMainTitle}}</text>
+                <text class="subtitle" style="color:{{item.channelLastColor}}">{{item.channelSubTitle}}</text>
+            </view>
+        </view>
+        <view class='item-row'>
+          <view class='itemleft'>
+            <view class='price orange'>
+              <text class='fontsize-normal'>¥</text>
+              <text wx:if="{{item.deductionTicketPrice}}">{{item.deductionTicketPrice}}</text>
+              <text wx:else>{{item.ticketShowPrice || item.ticketPrice }}</text>
+            </view>
+          </view>
+          <view class='info flex1'>
+            <view class=''>
+              <text class="price-text" wx:if="{{item.payShowPrice > 0}}">+¥{{item.payShowPrice}}</text>
+              <text class='marginright'>{{item.hallwayTitle}}</text>
+            </view>
+            <view class="tag-container" bindtap="{{showExplainDesc}}" data-type='x' data-item='{{item}}'>
+              <view wx:for="{{item.extraTags}}" class="tag" wx:for-item="tag">
+                <text>
+                  <text class="tag-icon icon-font {{tag.icon}} {{ tag.icon === 'icon-yes' ? 'green' : 'red' }}"></text>
+                  <block wx:for="{{tag.texts}}" wx:for-item="text" wx:for-key="index">
+                     <text class="{{text.highLight ? 'high-light' : ''}}" >{{text.text}}</text>
+                  </block>
+                </text>
+              </view>
+            </view>
+          </view>
+          <button class='buy-button' catchtap='{{bindTap}}' data-type='x' data-item='{{item}}' data-trace='onBook'>
+            <view class='top'>预订</view>
+            <view wx:if="{{item.rewardFee > 0}}" class='bottom orange'>
+              返¥{{ (item.rewardFee || 0) }}
+            </view>
+          </button>
+        </view>
+      </view>
+    </view>
+  </block>
+</template>

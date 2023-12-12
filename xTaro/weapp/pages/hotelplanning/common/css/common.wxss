@@ -1,0 +1,1412 @@
+@import "./theme.wxss";
+
+page {
+	font-family: -apple-system, Helvetica, "Hiragino Sans GB W3",
+		"Microsoft YaHei", arial, sans-serif;
+}
+.vm {
+	vertical-align: middle;
+}
+.color2 {
+	color: #999;
+}
+.color3 {
+	color: #666;
+}
+.color4 {
+	color: #ffe5c5;
+}
+.color5 {
+  color: #333;
+}
+.color6 {
+  color: #555;
+}
+.colorblue {
+	color: #0086f6;
+}
+.tr {
+	text-align: right;
+}
+.tc {
+	text-align: center;
+}
+.w-full {
+	width: 100%;
+}
+.w-1 {
+	width: 1rpx;
+}
+
+/*flex*/
+.d-flex,
+.cell {display: flex !important}
+.cell-v {display: flex;align-items: center}
+.cell-v-end {display: flex;align-items: center; justify-content: flex-end;}
+.flex-auto,
+.cell-star {flex: 1}
+.column {flex-direction: column;}
+.cell-column {display: flex; flex-direction: column;}
+.cell-self-end {align-self: flex-end;}
+.flex-between{ display: flex; justify-content: space-between; }
+.cell-self {align-self: baseline}
+.flex-column,
+.column {
+	flex-direction: column;
+}
+.flex-row {
+	flex-direction: row;
+}
+.flex-center {
+	justify-content: center;
+	align-items: center;
+}
+.flex-align-center { 
+	display: flex; align-items: center; 
+}
+.algn-start {
+	align-items: flex-start;
+}
+.algn-end {
+	align-items: flex-end;
+}
+.algn-center {
+	align-items: center;
+}
+.algn-baseline {
+	align-items: baseline;
+}
+.algn-stretch {
+	align-items: stretch;
+}
+.just-start {
+	justify-content: flex-start;
+}
+.just-end {
+	justify-content: flex-end;
+}
+.just-center {
+	justify-content: center;
+}
+.just-between {
+	justify-content: space-between;
+}
+.just-around {
+	justify-content: space-around;
+}
+.flex-wrap {
+	flex-wrap: wrap;
+}
+/* align-self */
+.self-auto {
+	align-self: auto;
+}
+.self-start {
+	align-self: flex-start;
+}
+.self-end {
+	align-self: flex-end;
+}
+.self-center {
+	align-self: center;
+}
+.self-baseline {
+	align-self: baseline;
+}
+.self-stretch {
+	align-self: stretch;
+}
+
+/* mask */
+.cmask {
+	position: fixed;
+	z-index: 1000;
+	background-color: rgba(0, 0, 0, 0.7);
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+.cmask-popbox {
+	position: fixed;
+	z-index: 1001;
+	top: 50%;
+	left: 50%;
+	transform: translate3d(-50%, -50%, 0);
+}
+.hidden {
+	display: none !important;
+}
+
+/* z-index */
+.z-index0 {
+	z-index: 0;
+}
+
+.z-index1 {
+	z-index: 1;
+}
+
+@font-face {
+	font-family: 'wechat-font';
+	src:  url('https://pic.c-ctrip.com/picaresonline/hotel/hotelplanning/fonts/icomoon.06817a2f.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="wechat-font"],
+[class*="wechat-font"] {
+	font-family: "wechat-font" !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/**font**/
+/* .wechat-font-coupon:before {
+  content: "\e900";
+} */
+/* .wechat-font-order:before {
+  content: "\e901";
+} */
+.wechat-font-ask-hotel:before {
+	content: "\e908";
+}
+.wechat-font-time:before {
+	content: "\e92a";
+}
+.wechat-font-calendar:before {
+	content: "\e925";
+}
+.wechat-font-collected:before {
+	content: "\e916";
+}
+.wechat-font-collect:before {
+	content: "\e917";
+}
+.wechat-font-qa:before {
+	content: "\e90d";
+}
+.wechat-font-fold-down:before {
+	content: "\e903";
+	color: var(--fold-down-color, #4293fe);
+}
+.wechat-font-fold-up:before {
+	content: "\e904";
+	color: var(--fold-down-color, #4293fe);
+}
+.wechat-font-g-arrow-down:before {
+	content: "\e90e";
+}
+.wechat-font-g-arrow-up:before {
+	content: "\e906";
+}
+.wechat-font-map:before {
+	content: "\e907";
+}
+.wechat-font-icon-photo:before {
+	content: "\e909";
+}
+.wechat-font-arrow-right:before {
+	content: "\e90a";
+}
+.wechat-font-close:before {
+	content: "\e90b";
+}
+.wechat-font-close2:before {
+	content: "\e914";
+}
+
+.wechat-font-close3:before {
+	content: "\f01ea";
+}
+
+.wechat-font-location:before {
+	content: "\e901";
+}
+/* .wechat-font-close3:before {
+  content: "\e921"; 
+} */
+/* .wechat-font-great:before {
+  content: "\e945";
+  color: #fff;
+} */
+.wechat-font-back::before {
+	content: "\e943";
+}
+
+.wechat-font-hotel-yoyoka::before {
+	content: "\f09e6";
+}
+
+.wechat-font-icon-totop::before {
+	content: "\e942";
+}
+
+.wechat-font-hotel-alert::before {
+	content: "\e60b";
+}
+
+.wechat-font-continuelive-calendar::before {
+	content: "\e4d1";
+}
+
+.wechat-font-continuelive-success::before {
+	content: "\ea28";
+}
+
+.wechat-font-continuelive-time::before {
+	content: "\e00f";
+}
+
+.wechat-font-continuelive-phone::before {
+	content: "\e016";
+}
+
+.wechat-font-continuelive-person::before {
+	content: "\e012";
+}
+
+.wechat-font-continuelive-house::before {
+	content: "\f0292";
+}
+
+.wechat-font-success1:before {
+	content: "\f0b2";
+}
+.wechat-font-star::before {
+	content: "\e278";
+}
+
+.wechat-font-more::before {
+	content: "\e07d";
+}
+
+.wechat-font-loading::before {
+	content: "\e365";
+}
+
+.wechat-font-success::before {
+	content: "\e98b";
+}
+
+.wechat-font-wifi::before {
+	content: "\eac5";
+}
+
+.wechat-font-video-play::before {
+	content: "\ef69";
+}
+
+.wechat-font-shop-car::before {
+	content: "\ea4b";
+}
+
+.wechat-font-arrow-right2::before {
+	content: "\e008";
+}
+.wechat-font-hotel-yoyoka2::before {
+	content: "\e90c";
+}
+
+.wechat-font-icon-up::before {
+	content: var(--content-up);
+	color: var(--icon-color);
+}
+
+.wechat-font-icon-down::before {
+	content: var(--content-down);
+	color: var(--icon-color);
+}
+
+.wechat-font-guest-hot::before {
+	content: "\e90f";
+}
+
+.wechat-font-shuff-car::before {
+  content: "\e212";
+}
+
+.wechat-font-rent-car::before {
+  content: "\e912";
+}
+.wechat-font-phone::before {
+	content: "\e915";
+  }
+
+.wechat-font-billboard::before {
+  content: "\e911";
+}
+
+.wechat-font-filter-arrow-full-down:before {
+  content: "\e910";
+}
+
+.wechat-font-share:before {
+	content: "\e913";
+}
+
+.wechat-font-tip-bulb:before {
+	content: "\e918";
+}
+.wechat-font-good:before {
+	content: "\e919";
+}
+[hidden] {
+	display: none !important;
+}
+
+/* 逐渐显示动画 */
+@keyframes showIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.show-animation {
+	animation: showIn 350ms linear both;
+}
+/* 逐渐消失动画 */
+@keyframes disappear {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+.disappear-animation {
+	animation: disappear 350ms linear both;
+}
+/*价格修改*/
+/*价格右侧展示*/
+.layout-reset { display: flex; flex-wrap: wrap;justify-content:flex-end;}
+.layout-reset .left-shrink {flex:1 1 auto; margin-right: 8rpx;}
+.layout-reset .right-shrink {text-align: right;}
+.layout-reset .nowrap {white-space: nowrap}
+.layout-reset .c1 {color: #A06E3F;font-size: 24rpx}
+.layout-reset .c2 {color: #666;font-size: 20rpx}
+.layout-reset .c3 {color: #FF4D1D; font-size: 20rpx;}
+.price-layout{display:flex;flex-flow:column nowrap;justify-content:center;align-items:flex-end;text-align: right;}
+
+.del {font-size: 22rpx;color: #666;font-weight:300;position: relative;margin:0 6rpx 0 8rpx}
+.del:after {position: absolute;left: 0;bottom:53%;width: 100%;content: "";height:2rpx;background-color: #666}
+.pl-text {color: #FF4D1D;font-size: 18rpx;padding: 4rpx 8rpx 4rpx 0; line-height: 1;border-radius:4rpx; background-color:#FEF4EC;}
+.pl-text2 {font-size: 22rpx;color: #FF4D1D;}
+.price2 {color: #ff4d1d;font-size:20rpx;font-weight: 500}
+.price2 .strong {font-size:40rpx;}
+.price2-detail{color: var(--price-detail-color);}
+.price3 {color: #999;}
+.price4 {color: #ff4d1d;font-size:28rpx;}
+.pl-text3 {color: #FF4D1D;font-size: 18rpx;padding: 4rpx 8rpx 4rpx 0; line-height: 1;background-color:#FEF4EC;}
+.pl-text4 {font-size: 22rpx; color: #999; margin-right: 6rpx}
+.pl-wx-25 {color: #fff;font-size: 20rpx;padding: 4rpx 8rpx; line-height: 1;border-radius:4rpx; margin-right:10rpx;background-image: linear-gradient(to right, #81d286 1%, #4cbf52 100%);}
+.countdown {font-size: 20rpx;padding: 4rpx 10rpx;border-radius: 6rpx;background-image: linear-gradient(to left, #FF3700 0%, #ff7112 100%);color: #fff;display: inline-block}
+
+/*标签统一改版*/
+.tags-wrap .wxtag {
+	color: #fff;
+	font-size: 18rpx;
+	background-color: var(--wxtag-bg-color);
+	padding: 0 8rpx;
+	border-radius: 4rpx;
+	margin-right: 8rpx;
+	height: 28rpx;
+	line-height: 28rpx;
+	display: inline-block;
+}
+.tags-wrap .ctag,
+.tags-wrap .c2tag {
+	font-size: 18rpx;
+	padding: 0 7rpx;
+	height: 28rpx;
+	line-height: 28rpx;
+	position: relative;
+	display: inline-block;
+}
+.tags-line .catgs {
+	display: inline-block;
+	margin: 1rpx 0rpx;
+}
+.tags-line .ctag:after {
+	content: "";
+	position: absolute;
+	width: 2rpx;
+	height: 16rpx;
+	top: 7rpx;
+	right: 0;
+}
+.tags-wrap .ctag {
+	color: var(--ctag-color);
+	background-color: var(--ctag-bg-color);
+	border: var(--ctag-border);
+	margin-right: var(--ctag-mr);
+}
+.tags-wrap .ctag + .c2tag:nth-of-type(-n + 1) {
+	margin-left: 8rpx;
+}
+.tags-wrap .c2tag {
+	color: #2681ff;
+	background-color: rgba(195, 220, 255, 0.4);
+}
+.tags-wrap .ctag:after {
+	background-color: rgba(255, 77, 29, 0.2);
+}
+.tags-wrap .c2tag:after {
+	background-color: rgba(46, 134, 255, 0.4);
+}
+.tags-line .ctag:first-of-type {
+	border-radius: 4rpx 0 0 4rpx;
+}
+.tags-line .ctag:last-of-type {
+	border-radius: 0 4rpx 4rpx 0;
+}
+.tags-line .ctag:last-of-type:after {
+	display: none;
+}
+.tags-line .ctag:first-of-type:last-of-type {
+	border-radius: 4rpx;
+}
+.tags-line .tag-after-none:after {
+	display: none;
+}
+
+/*阶梯取消*/
+.ladder-cancel {
+	margin: 20rpx 0;
+	border: 2rpx solid #e8e8e8;
+	font-size: 24rpx;
+	color: #333;
+}
+.ladder-cancel .jt-txt {
+	text-align: center;
+	padding: 12rpx 0;
+	flex: 1;
+	border-right: 2rpx solid #ebebeb;
+}
+.ladder-cancel .jt-txt:last-of-type {
+	border-right: 0;
+}
+.ladder-cancel .jt-thead {
+	display: flex;
+	background-color: #f4f4f6;
+}
+.ladder-cancel .jt-tbody .jt-free {
+	color: #52be1b;
+}
+.ladder-cancel .jt-tbody {
+	border-top: 2rpx solid #ebebeb;
+	display: flex;
+	background-color: #fff;
+}
+
+/*pop-up*/
+.global-layer {
+	position: fixed;
+	z-index: 1001;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-radius: 16rpx 16rpx 0 0;
+	background-color: #fff;
+	animation-duration: .2s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-out;
+    animation-name: fadeInBottom;
+    transform-origin: center bottom;
+}
+@keyframes fadeInBottom {
+	0% {
+	  transform: scale(1,0);
+	}
+	30% {
+	  transform: scale(1,0.5);
+	}
+	100% {
+	  transform: scale(1,1);
+	}
+}
+.global-layer .thead {
+	color: #333;
+	position: relative;
+}
+.global-layer .thead .tit {
+	font-size: 34rpx;
+	height: 88rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 700;
+}
+.global-layer .thead .tit .sub {
+	font-size: 24rpx;
+	color: #666;
+	font-weight: 300;
+}
+.global-layer .thead .wechat-font-close,
+.global-layer .thead .wechat-font-close2 {
+	font-size: 32rpx;
+	width: 88rpx;
+	height: 88rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.global-layer .tbody {
+	color: #333;
+	font-size: 28rpx;
+}
+.global-layer .des-list {
+	min-height: 600rpx;
+	padding: 32rpx;
+}
+.des-list .dd,
+.des-list .tl {
+	display: flex;
+	padding-bottom: 20rpx;
+}
+.des-list .del {
+	font-size: 28rpx;
+}
+.des-list .tl .first-tit {
+	order: 1;
+}
+.des-list .tl .last-tit {
+	order: 3;
+}
+.des-list .tl:after {
+	content: "";
+	height: 20rpx;
+	margin: 0 24rpx;
+	border-bottom: 1rpx #ccc dashed;
+	flex: 1;
+	order: 2;
+}
+.global-layer .tfoot {
+	display: flex;
+	padding: 0 48rpx;
+}
+.global-layer .tfoot .gbtn {
+	font-size: 32rpx;
+	padding: 25rpx;
+	border-radius: 100rpx;
+	text-align: center;
+	margin: 32rpx 0 60rpx;
+	flex: 1;
+}
+.global-layer .tfoot .gbtn:nth-of-type(2) {
+	margin-left: 24rpx;
+}
+.global-layer .tfoot .cancel {
+	background-color: #fff;
+	color: #333;
+	border: 2rpx solid #babdc1;
+}
+.global-layer .tfoot .confirm {
+	background-color: #ff6913;
+	color: #fff;
+}
+
+.global-pd-confirm-btn {
+	width: 686rpx;
+	background-image: linear-gradient(90deg, #ff9d0a 0%, #ff7700 100%);
+	padding: 28rpx 0;
+	color: #fff;
+	font-size: 34rpx;
+	text-align: center;
+	margin: 24rpx auto 70rpx;
+	border-radius: 12rpx;
+}
+
+/* global-btn */
+.gbtn-box {
+	display: flex;
+	padding: 16rpx 24rpx;
+	border-top: 4rpx solid #f1f1f1;
+	border-image: linear-gradient(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0)) 8;
+	background-color: #fff;
+}
+.gbtn-box .btn {
+	font-size: 30rpx;
+	padding: 14rpx;
+	border-radius: 12rpx;
+	text-align: center;
+	flex: 1;
+}
+.gbtn-box .reset {
+	background-color: #fff;
+	color: #333;
+	border: 2rpx solid #999;
+}
+.gbtn-box .confirm {
+	background-color: #0086f6;
+	color: #fff;
+	margin-left: 24rpx;
+}
+
+.fix-iphonex-border {
+	border-bottom: 66rpx solid #fff;
+}
+/* 灰色滤镜 */
+.gray-filter {
+	filter: grayscale(100%);
+}
+/* 展开收起 */
+.fold-btn {
+	color: #0086f6;
+	display: flex;
+	font-size: 24rpx;
+	align-items: center;
+}
+.ft20 {
+	font-size: 20rpx;
+}
+/*呼吸加载*/
+.fishbone-loading {
+	width: 100%;
+	height: 100%;
+	background-image: var(--skeleton);
+	background-size: 25vw 100%;
+	background-position: 0 0;
+	background-repeat: repeat-y;
+	animation: fishbone 750ms infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.back-icon {
+	font-size: 42rpx;
+	padding: 5rpx;
+	color: #fff;
+}
+.yoyo_icon {
+	font-size: 26rpx;
+	margin-top: -2rpx;
+}
+
+.yoyo_icon_v4 {
+	color: #fff;
+}
+.yoyo_icon_v3 {
+	color: #965f2c;
+}
+.unionvip_logo_gray {
+	font-size: 35rpx;
+	color: #333;
+}
+.icon-totop {
+	font-size: 50rpx;
+	font-weight: bold;
+	color: #cfcfcf;
+}
+
+.wifi-sprite {
+	background-image: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/wifi_css_sprites.png");
+	background-repeat: no-repeat;
+	background-size: 1545rpx;
+	width: 100%;
+	height: 100%;
+}
+@keyframes fishbone {
+	to {
+		background-position: 120% 0;
+	}
+}
+/* ellipsis */
+.single-ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.top-shadow {
+	box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.in-block {
+	display: inline-block !important;
+}
+.relative {
+	position: relative;
+}
+.of-hidden {
+	overflow: hidden;
+}
+
+.mr-4 {
+	margin-right: 4rpx;
+}
+
+.mr-8 {
+	margin-right: 8rpx;
+}
+.mr-12 {
+	margin-right: 12rpx;
+}
+.mr-16 {
+	margin-right: 16rpx;
+}
+.mr-18 {
+	margin-right: 18rpx;
+}
+.mr-20 {
+	margin-right: 20rpx;
+}
+
+.mr-24 {
+	margin-right: 24rpx;
+}
+
+.pt-16 {
+	padding-top: 16rpx;
+}
+
+.pt-32 {
+	padding-top: 32rpx;
+}
+
+.pt-40 {
+	padding-top: 40rpx;
+}
+
+.pb-10 {
+	padding-bottom: 10rpx;
+}
+
+.pb-24 {
+	padding-bottom: 24rpx;
+}
+.pb-40 {
+	padding-bottom: 40rpx;
+}
+
+.pr-8 {
+	padding-right: 8rpx;
+}
+.pl-20 {
+	padding-left: 20rpx;
+}
+.mt-5 {
+	margin-top: 5rpx;
+}
+
+.mt-8 {
+	margin-top: 8rpx;
+}
+.mt-12 {
+	margin-top: 12rpx;
+}
+
+.mt-16 {
+	margin-top: 16rpx;
+}
+
+.mt-20 {
+	margin-top: 20rpx;
+}
+
+.mt-24 {
+	margin-top: 24rpx;
+}
+
+.mt-28 {
+	margin-top: 28rpx;
+}
+.mt-30 {
+	margin-top: 30rpx;
+}
+
+.mt-32 {
+	margin-top: 32rpx;
+}
+
+.mt-40 {
+	margin-top: 40rpx;
+}
+.mt-50 {
+	margin-top: 50rpx;
+}
+.mt-52 {
+	margin-top: 52rpx;
+}
+.mt-56 {
+	margin-top: 56rpx;
+}
+.mt-210 {
+	margin-top: 210rpx;
+}
+
+.mt-180 {
+    margin-top: 180rpx;
+}
+
+.mt-350 {
+    margin-top: 350rpx;
+}
+
+.mt-300 {
+    margin-top: 300rpx;
+}
+
+.mt-312 {
+    margin-top: 312rpx;
+}
+
+.mb-4 {
+	margin-bottom: 4rpx;
+}
+
+.mb-8 {
+	margin-bottom: 8rpx;
+}
+
+.mb-12 {
+	margin-bottom: 12rpx;
+}
+
+.mb-16 {
+	margin-bottom: 16rpx;
+}
+.mb-20 {
+	margin-bottom: 20rpx;
+}
+.mb-24 {
+	margin-bottom: 24rpx;
+}
+.mb-28 {
+	margin-bottom: 28rpx;
+}
+.mb-30 {
+	margin-bottom: 30rpx;
+}
+.mb-32 {
+	margin-bottom: 32rpx;
+}
+.mb-48 {
+	margin-bottom: 48rpx;
+}
+.ml-4 {
+	margin-left: 4rpx;
+}
+.ml-8 {
+	margin-left: 8rpx;
+}
+.ml-12 {
+	margin-left: 12rpx;
+}
+.ml-16 {
+	margin-left: 16rpx;
+}
+.ml-24 {
+	margin-left: 24rpx;
+}
+.ml-32 {
+	margin-left: 32rpx;
+}
+.mr-36 {
+	margin-right: 36rpx;
+}
+
+.mb-36 {
+	margin-bottom: 36rpx;
+}
+.mb-40 {
+	margin-bottom: 40rpx;
+}
+
+.br-12 {
+	border-radius: 12rpx;
+}
+
+.fs-20 {
+    font-size: 20rpx;
+}
+.fs-22 {
+  	font-size: 22rpx;
+}
+.fs-24 {
+  	font-size: 24rpx;
+}
+.fs-36 {
+	font-size: 36rpx;
+  }
+.fs-28 {
+  	font-size: 28rpx;
+}
+.fs-30 {
+  	font-size: 30rpx;
+}
+.fs-34 {
+  	font-size: 34rpx;
+}
+.fs-40 {
+  	font-size: 40rpx;
+}
+.fs-48 {
+  	font-size: 48rpx;
+}
+
+.fw-500 {
+	font-weight: 500;
+}
+
+.one-line {
+	display: -webkit-box;
+	word-break: break-all;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+}
+
+.two-lines {
+	display: -webkit-box;
+	word-break: break-all;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+}
+
+.relative {
+	position: relative;
+}
+
+.lh1 {
+	line-height: 1;
+}
+
+.new-vip-card-modal {
+	position: fixed;
+	z-index: 99;
+	left: calc(50% + 8rpx);
+	top: 25%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+}
+.new-vip-header4 {
+	position: absolute;
+	z-index: 99;
+	background: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/vip-card-header-onlycard.png");
+	background-size: 100% 100%;
+	height: 235rpx;
+	left: 72rpx;
+	right: 77rpx;
+	top: 0;
+}
+.new-vip-body4 {
+	background: linear-gradient(
+		-222.9deg,
+		rgb(253, 165, 117) 0%,
+		rgb(255, 107, 86) 100%
+	);
+	border-radius: 16rpx;
+	height: 207rpx;
+	left: 80rpx;
+	right: 90rpx;
+	position: absolute;
+	z-index: 99;
+	top: 266rpx;
+}
+.new-vip-info4 {
+	background: linear-gradient(
+		-126.44deg,
+		rgb(250, 216, 170) 0%,
+		rgb(255, 246, 229) 100%
+	);
+	border-radius: 16rpx;
+	height: 198rpx;
+	position: absolute;
+	z-index: 99;
+	left: 112rpx;
+	right: 122rpx;
+	top: 186rpx;
+}
+
+.new-vip-footer {
+	background: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/vip-card-footer.png");
+	background-size: 100% 100%;
+	position: absolute;
+	z-index: 99;
+	left: 27rpx;
+	right: 28rpx;
+	height: 276rpx;
+}
+.foottop1 {
+	top: 735rpx;
+}
+.foottop2 {
+	top: 580rpx;
+}
+.foottop3 {
+	top: 523rpx;
+}
+.foottop4 {
+	top: 325rpx;
+}
+.new-vip-lace {
+	position: absolute;
+	left: 56rpx;
+	right: 638rpx;
+	height: 134rpx;
+	background: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/vip-card-lace.png");
+	z-index: 100;
+	background-size: 100% 100%;
+}
+
+.lacetop1 {
+	top: 446rpx;
+}
+.lacetop2 {
+	top: 291rpx;
+}
+.lacetop3 {
+	top: 321rpx;
+}
+.lacetop4 {
+	top: 235rpx;
+}
+.close {
+	position: absolute;
+	z-index: 99;
+	height: 59rpx;
+	left: 346rpx;
+	font-size: 59rpx;
+	color: #929292;
+	font-weight: 700;
+}
+.closetop1 {
+	top: 1054rpx;
+}
+.closetop2 {
+	top: 899rpx;
+}
+.closetop3 {
+	top: 842rpx;
+}
+.closetop4 {
+	top: 654rpx;
+}
+
+.new-vip-yoyocard {
+	margin: 61rpx 52rpx 93rpx;
+	background: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/vip-card-yoyocard.png");
+	background-size: 100% 100%;
+	height: 44rpx;
+}
+
+.new-vip-yoyocard1 {
+	margin: 61rpx 96rpx 93rpx;
+	background: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/vip-card-yoyocard1.png");
+	background-size: 100% 100%;
+	height: 44rpx;
+}
+
+.new-vip-btn {
+	position: absolute;
+	z-index: 99;
+	left: 157rpx;
+	right: 166rpx;
+	height: 81rpx;
+	background: linear-gradient(
+		-180deg,
+		rgb(255, 227, 153) 0%,
+		rgb(255, 196, 61) 100%
+	);
+	box-shadow: 0px 6px 20px 2px rgba(0, 0, 0, 0.11);
+	text-align: center;
+	border-radius: 41rpx;
+	line-height: 81rpx;
+}
+.btntop1 {
+	top: 753rpx;
+}
+.btntop2 {
+	top: 598rpx;
+}
+.btntop3 {
+	top: 541rpx;
+}
+.btntop4 {
+	top: 363rpx;
+}
+.message {
+	text-align: center;
+	margin-top: 130rpx;
+	color: #ff9c92;
+	font-size: 28rpx;
+}
+
+.text-close {
+	font-size: 40rpx;
+	color: #92451c;
+	font-weight: 600;
+}
+
+.new-vip-header3 {
+	position: absolute;
+	z-index: 99;
+	background: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/vip-card-header.png");
+	background-size: 100% 100%;
+	height: 293rpx;
+	left: 77rpx;
+	right: 82rpx;
+	top: 0;
+}
+
+.new-vip-body3 {
+	background: linear-gradient(
+		-222.9deg,
+		rgb(253, 165, 117) 0%,
+		rgb(255, 107, 86) 100%
+	);
+	border-radius: 16rpx;
+	height: 345rpx;
+	left: 80rpx;
+	right: 90rpx;
+	position: absolute;
+	z-index: 99;
+	top: 316rpx;
+}
+
+.new-vip-info3 {
+	background: linear-gradient(
+		-214.61deg,
+		rgb(255, 251, 234) 0%,
+		rgb(255, 149, 98) 100%
+	);
+	border-radius: 16rpx;
+	height: 356rpx;
+	left: 117rpx;
+	right: 123rpx;
+	position: absolute;
+	z-index: 99;
+	top: 252rpx;
+}
+.isnew {
+	position: absolute;
+	height: 144rpx;
+	background: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/vip-card-isnew.png);
+	width: 420rpx;
+	background-size: 100% 100%;
+	top: 69rpx;
+	left: 45rpx;
+}
+
+.new-card-coupon {
+	display: flex;
+	position: absolute;
+	height: 118rpx;
+	background: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/vip-card-coupon.png);
+	width: 422rpx;
+	background-size: 100% 100%;
+	top: 73rpx;
+	left: 44rpx;
+}
+
+.new-vip-body2 {
+	background: linear-gradient(
+		-222.9deg,
+		rgb(253, 165, 117) 0%,
+		rgb(255, 107, 86) 100%
+	);
+	border-radius: 16rpx;
+	height: 345rpx;
+	left: 81rpx;
+	right: 85rpx;
+	position: absolute;
+	z-index: 99;
+	top: 319rpx;
+}
+
+.new-vip-info2 {
+	background: linear-gradient(
+		-214.61deg,
+		rgb(255, 251, 234) 0%,
+		rgb(255, 149, 98) 100%
+	);
+	border-radius: 16rpx;
+	height: 412rpx;
+	left: 117rpx;
+	right: 123rpx;
+	position: absolute;
+	z-index: 99;
+	top: 245rpx;
+}
+
+.new-vip-body1 {
+	background: linear-gradient(
+		-222.9deg,
+		rgb(253, 165, 117) 0%,
+		rgb(255, 107, 86) 100%
+	);
+	border-radius: 16rpx;
+	height: 540rpx;
+	left: 81rpx;
+	right: 85rpx;
+	position: absolute;
+	z-index: 99;
+	top: 334rpx;
+}
+
+.new-vip-info1 {
+	background: linear-gradient(
+		-214.61deg,
+		rgb(255, 251, 234) 0%,
+		rgb(255, 149, 98) 100%
+	);
+	border-radius: 16rpx;
+	height: 558rpx;
+	left: 117rpx;
+	right: 123rpx;
+	position: absolute;
+	z-index: 99;
+	top: 234rpx;
+}
+
+.top32 {
+	top: 32rpx;
+}
+.top54 {
+	top: 54rpx;
+}
+.top196 {
+	top: 196rpx;
+}
+
+.top200 {
+	top: 200rpx;
+}
+
+.top342 {
+	top: 342rpx;
+}
+
+.subTitle {
+	position: absolute;
+	top: 24rpx;
+	left: 24rpx;
+	font-size: 36rpx;
+	color: #ffffe4;
+}
+
+.is-new-effect-time {
+	position: absolute;
+	top: 82rpx;
+	left: 24rpx;
+	font-size: 20rpx;
+	color: #ffffff;
+}
+
+.right-info {
+	width: 299rpx;
+	position: relative;
+	color: #666;
+}
+
+.new-coupon-title {
+	position: absolute;
+	top: 32rpx;
+	left: 32rpx;
+	font-size: 28rpx;
+}
+
+.new-coupon-effectTime {
+	position: absolute;
+	left: 32rpx;
+	top: 72rpx;
+	font-size: 20rpx;
+	font-weight: 300;
+}
+
+.left-price {
+	width: 123rpx;
+	position: relative;
+	color: #fff;
+}
+
+.left-price-num {
+	position: absolute;
+	font-size: 52rpx;
+	top: 21rpx;
+	left: 23rpx;
+}
+
+.left-price-tag {
+	font-size: 20rpx;
+	position: absolute;
+	top: 45rpx;
+	left: 85rpx;
+}
+
+.left-price-desc {
+	position: absolute;
+	left: 24rpx;
+	top: 74rpx;
+	font-weight: 300;
+	font-size: 20rpx;
+}
+
+.new-heigh-start-wifi-sprite {
+	background-image: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/newHeighStartWifiSprite.png");
+	background-repeat: no-repeat;
+	background-size: 302rpx 51rpx;
+}
+
+.mask {
+  	position: absolute;
+  	top:0;
+  	left: 0;
+  	opacity: 0.8;
+  	width: 100%;
+	height: 100%;
+	background-color: #000;
+}
+
+.wifi-success-sprite {
+	background-image: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/wifiSuccessSprites.png");
+	background-repeat: no-repeat;
+	background-size: 1714rpx 1211rpx;
+}
+.price-cell{ display: flex; align-items: flex-end; flex-wrap: wrap;justify-content:flex-end;}
+
+.vip-card-sprite {
+	background-image: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/coupon-sprite.png");
+	background-repeat: no-repeat;
+	background-size: 444rpx 306rpx;
+}
+.ls-vip-footer {
+	background-size: 666rpx 459rpx;
+	width: 650rpx;
+	height: 240rpx;
+	left: 57rpx;
+	background-position: -6rpx -6rpx;
+}
+.ls-vip-header3 {
+	height: 290rpx;
+    top: 12rpx;
+	background: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/ls-vip-card-header2.png") left top/cover no-repeat;
+}
+.ls-vip-header4 {
+	height: 268rpx;
+    top: -52rpx;
+	background: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/ls-vip-card-header.png") left top/cover no-repeat;
+}
+.ls-top {
+	top: 28%;
+}
+.layout-reset .price-bottom-txt, .price-layout .price-bottom-txt { font-size: 20rpx; color: #666; text-align: right; }
+.layout-reset .price-days { color: #666; margin-right: 6rpx; }
+.layout-reset .price-avg-date { color: #666; font-size: 22rpx; margin-top: 16rpx; }
+
+.continue-right-sprite {
+	background-image: url("https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/continue-right-sprite2.png");
+	background-repeat: no-repeat;
+	background-size: 507.3rpx 298rpx;
+}

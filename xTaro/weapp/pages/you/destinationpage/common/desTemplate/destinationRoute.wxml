@@ -1,0 +1,46 @@
+<import src="template/commonTitle.wxml"/>
+
+<template name="destinationRoute">
+    <view class="destination-section destination-route"  wx:if="{{routeData.itemList}}" data-modulename="{{routeData.title}}" id="itinerary">
+        <!-- Title -->
+        <template is="commonTitle" wx:if="{{routeData.title}}" data="{{title:routeData.title,moreurl:routeData.more.url,moretext:routeData.more.text,moreicon:routeData.more.icon}}"></template>
+        <!-- itemList -->
+        <scroll-view class="route_items_box" scroll-x="true">
+            <block wx:for="{{routeData.itemList}}">
+                <view class="route_item_box" style="{{index == 0 ? 'margin-left:24rpx' : ''}}" bindtap="_goToRouteDetail"
+                    data-itemid="{{item.itemId}}"
+                    data-itemindex="{{index}}"
+                    data-jumpurl="{{item.jumpUrl}}">
+                    <image class="route_item_img" src="{{item.coverImage}}"></image>
+                    <view class="route_item_contentbox">
+                        <!-- 标题 -->
+                        <view class="route_item_title_box">
+                            <view wx:if="{{item.titleTag}}" class="route_item_neartag">{{item.titleTag}}</view>
+                            <view class="route_item_title">{{item.title}}</view>
+                        </view>
+                        <!-- 标签 -->
+                        <view class="route_item_tags_box">
+                            <view class="route_item_hottag" wx:if="{{item.hotTag && item.hotTag != '0'}}">
+                                <image class="route_item_hottag_img" src="https://pages.c-ctrip.com/you/destination/dest_travel_plan_hot@3x.png"></image>
+                                <view class="route_item_hottag_text">{{item.hotTag}}%的人选择</view>
+                            </view>
+                            <view wx:if="{{item.hotTag && item.hotTag == '0'}}" class="route_item_newtag">new</view>
+                            <block wx:for="{{item.tagList}}" wx:for-item="tagItem" wx:if="{{item.tagList && item.tagList.length>0}}">
+                                <view class="route_item_tag_text">{{tagItem}}</view>
+                            </block>
+                        </view>
+                        <!-- 副标题 -->
+                        <view class="route_item_subtitle_box">
+                            <view class="route_item_subtitle" wx:if="{{item.subtitleList && item.subtitleList.length>0}}">
+                                <view wx:if="{{item.subtitleList[0] && item.subtitleList[0] != '0'}}">{{item.subtitleList[0]}}</view>
+                                <view style="padding: 0 4rpx;">·</view>
+                                <view wx:if="{{item.subtitleList[1] && item.subtitleList[1] != '0'}}">{{item.subtitleList[1]}}</view>
+                            </view>
+                            <view class="route_item_shortText">{{item.shortText}}</view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+</template>

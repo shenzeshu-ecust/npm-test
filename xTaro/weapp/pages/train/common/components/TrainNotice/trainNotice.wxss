@@ -1,0 +1,157 @@
+.pop-notice .btn-cancel {
+    position: absolute;
+    height: 40rpx;
+    width: 40rpx;
+    background-image: url(https://images3.c-ctrip.com/train/2023-3/app-maipiao/4.20/erweima/img-gb.png);
+    background-size: 100% 100%;
+    left: 22rpx;
+}
+.pop-notice .pop-botm-hd{
+  position: relative;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+.pop-notice {
+    max-height: 60%;
+}
+.pop-notice .btn-more {
+    height: 56rpx;
+    width: 164rpx;
+    background: #f6f8fa;
+    border-radius: 28rpx 0rpx 0rpx 28rpx;
+    color: #666666;
+    font-size: 26rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-more.float{
+  position: absolute;
+  right: 0;
+}
+.pop-notice .pop-notice-bd{
+  padding-top: 16rpx;
+}
+.pop-notice .pop-notice-bd .notice-title {
+    background: #ffffff;
+    height: 62rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.pop-notice .pop-notice-bd .notice-title .title-item {
+    color: #333333;
+    font-size: 30rpx;
+    position: relative;
+}
+
+.pop-notice .pop-notice-bd .notice-title .active {
+    color: #0086f6;
+}
+.pop-notice .pop-notice-bd .notice-title .active::after {
+    height: 4rpx;
+    background: #0086f6;
+    border-radius: 2rpx;
+    display: block;
+    vertical-align: middle;
+    content: "";
+    width: 100%;
+    position: absolute;
+    bottom: -20rpx;
+}
+.pop-notice .pop-notice-botm {
+    height: 120rpx;
+    background: #ffffff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 24rpx 0 28rpx;
+}
+.pop-notice .pop-notice-btn {
+    width: 686rpx;
+    height: 88rpx;
+    background: #0086f6;
+    border-radius: 12rpx;
+    font-weight: 600;
+    color: white;
+    margin: 0 auto;
+}
+.pop-notice .notice-content {
+    padding: 16rpx 22rpx;
+    height: 820rpx;
+    overflow-y: auto;
+    margin-bottom: 60rpx;
+}
+.pop-notice .notice-content-title {
+    color: #333333;
+    font-size: 30rpx;
+    margin-bottom: 20rpx;
+    font-weight: 500;
+}
+.pop-notice .notice-tags {
+    padding: 4rpx;
+    height: 32rpx;
+    background: #fff8f2;
+    border-radius: 4rpx;
+    color: #ff7700;
+    font-size: 22rpx;
+    display: inline;
+}
+.pop-notice .notice-box {
+    background: #f6f8fa;
+    border-radius: 16rpx;
+    padding: 28rpx;
+    color: #666666;
+    font-size: 26rpx;
+    margin-bottom: 20rpx;
+    white-space: pre-line;
+    line-height: 36rpx;
+}
+.pop-notice .notice-date {
+    color: #999999;
+    font-size: 26rpx;
+    line-height: 26rpx;
+    padding: 0 0 12rpx 0;
+}
+.pop-notice .notice-desc {
+    white-space: pre-line;
+    color: #ff7700;
+    font-size: 26rpx;
+    margin-bottom: 20rpx;
+}
+.pop-notice .notice-transfer-title {
+    color: #333333;
+    font-size: 26rpx;
+    margin-bottom: 20rpx;
+}
+.rich-text-box > rich-text {
+}
+.rich-text-box .overflowLine {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 14;
+    overflow: hidden;
+}
+.overflow-shadow {
+    width: 100%;
+    height: 16px;
+    background: linear-gradient(
+        -180deg,
+        rgb(246, 248, 250) 0%,
+        rgb(246, 248, 250) 100%
+    );
+    border-radius: 0px 0px 4px 4px;
+    position: absolute;
+    top: -16rpx;
+    opacity: .4;
+}
+.rich-text-overflow {
+    position: relative;
+    text-align: center;
+}
+.pop-notice .rich-text-overflow .ifont-arr{
+    transform: rotate(90deg);
+}
+.hk-pickup-wrap{
+  padding: 0 22rpx;
+}

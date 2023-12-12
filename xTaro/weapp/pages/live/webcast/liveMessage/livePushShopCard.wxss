@@ -1,0 +1,44 @@
+.card-container {
+  position: relative;
+  height: 0;
+  opacity: 0;
+}
+.card-container.on {
+  animation: showCardView 0.16s 0.16s 1 linear forwards;
+  -webkit-animation: showCardView 0.16s 0.16s 1 linear forwards;
+}
+@keyframes showCardView {
+  0% {
+    height: 100%;
+    opacity: 1;
+    transform: scale(0);
+  }
+  100% {
+    height: 100%;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.card-container.hide {
+  animation: hideCardView 0.16s 1 linear forwards;
+  -webkit-animation: hideCardView 0.16s 1 linear forwards;
+  overflow: hidden;
+}
+@keyframes hideCardView {
+  0% {
+    height: 100%;
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    height: 0;
+    opacity: 1;
+    transform: scale(0);
+  }
+}
+.card-container .sk_scene_class {
+  max-width: 482rpx !important;
+  min-width: 482rpx !important;
+  box-sizing: border-box !important;
+  padding: 8rpx !important;
+}

@@ -1,0 +1,13 @@
+@import "./utils/custom.wxss";
+.custom_simple_class_1{
+  width: 492rpx !important;
+  height: 164rpx !important;
+}
+.custom_simple_class_2{
+  width: 492rpx !important;
+  height: 223rpx !important;
+}
+.custom_simple_class_1 .component_row, .custom_simple_class_2 > .component_row{
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,11 @@
+{
+    "navigationBarTitleText": "安全收银台",
+     "backgroundTextStyle":"dark",
+
+  "usingComponents": {
+    "sms-comp": "../SmsComp/SmsComp",
+    "detail-comp": "../orderDetail/index",
+    "nav-bar": "/cwx/component/navbar/navbar"
+  },
+  "navigationStyle": "custom"
+}

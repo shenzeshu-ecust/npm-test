@@ -1,0 +1,10 @@
+<view class="touzhu {{clazz}}">
+    <block wx:for="{{numberListLocal}}" wx:key="item">
+        <input placeholder="{{fouceIndex == index ? '请输入' : '未输入'}}" placeholder-class="{{(item <= 0 && fouceIndex != index) ? 'touzhu__item_placeholder_error': 'touzhu__item_placeholder'}}" disabled="{{!enableEdit}}" class="touzhu__item {{winNumber == item ? 'active' : ''}} {{item <= 0 ? 'error': ''}} {{fouceIndex == index ? 'fouceItem' : ''}}" type="number" value="{{item}}" bindblur="handleChange" bindfocus="handleFocus" bindkeyboardheightchange="bindkeyboardheightchange" data-index="{{index}}"></input>
+        <!-- <text class="touzhu__item_error">未输入</text> -->
+    </block>
+    <block wx:for="{{noAddList}}" wx:key="item">
+        <view class="touzhu__item noadd" >{{item}}</view>
+        <!-- <text class="touzhu__item_error">未输入</text> -->
+    </block>
+</view>

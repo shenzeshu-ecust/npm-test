@@ -1,0 +1,31 @@
+/* {{component}}.wxss */
+.back-view {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.content-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 12rpx;
+    justify-content: center;
+}
+
+.map-navi-text {
+  color: #0086f6;
+  font-size: 18rpx;
+  font-weight: 500;
+}
+.map-img {
+  width: 98rpx;
+  height: 98rpx;
+}
+.map-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18rpx;
+}

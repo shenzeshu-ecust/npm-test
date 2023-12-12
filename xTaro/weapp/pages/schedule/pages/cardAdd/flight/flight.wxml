@@ -1,0 +1,147 @@
+<view class='container'>
+  <view class='{{isFixTop?"fixed-search-header":""}}'>
+    <view class='search-header'>
+      <view class='flight-no-search-title' catchtap='searchByFlightNo'>
+        <view class='search-title-container'>
+          <text class='{{isSearchedByFlightNo?"search-title-select":""}}'>按航班号</text>
+          <view class='{{isSearchedByFlightNo?"bottom-border-select":""}}'></view>
+        </view>
+      </view>
+      <view class='airport-name-search-title' catchtap='searchByAirportName'>
+        <view class='search-title-container'>
+          <text class='{{!isSearchedByFlightNo?"search-title-select":""}}'>按起降地</text>
+          <view class='{{!isSearchedByFlightNo?"bottom-border-select":""}}'></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 航班号搜索 -->
+  <view class='{{isSearchedByFlightNo?"search-by-flight-no":"search-by-flight-no hidden-search"}}'>
+    <view class='flight-no-search-condition'>
+      <view class='{{isFlightNoInputFocus?"select-flight-no-container condition-selected":"select-flight-no-container"}}'>
+        <input type='text' focus="{{isFlightNoInputFocus}}" bindinput='inputFlihtNo' bindfocus='focusFlightNoInput' bindtap='focusFlightNo' placeholder='例如MU123' class='select-flight-no' value='{{flightNo}}' placeholder-class='search-placeholder'>
+        </input>
+        <view wx:if='{{isShowDeleteFlihtNoButton}}' catchtap='deleteFlightNo' class='clear-flight-no-search-container'>
+          <image class='clear-flight-no-search' src='../../images/icon-sousuox.png'>
+          </image>
+        </view>
+      </view>
+      <input disabled placeholder='选择出发日期' class='select-date' catchtap='showCalendar' value='{{departDate}}' placeholder-class='search-placeholder'></input>
+    </view>
+
+    <searchLoading isShowLoading='{{isShowLoading}}'></searchLoading>
+
+    <view wx:if='{{flightSegmentList && flightSegmentList!=null && flightSegmentList.length>=1}}' class='segment-search-result'>
+      <view class='mul-segment-reminder' wx:if='{{flightSegmentList.length>1}}'>
+        "{{flightNo}}"包含多段航段，请选择起止地点
+      </view>
+      <view class='mul-segment' wx:if='{{flightSegmentList.length>0}}'>
+        <view wx:for="{{flightSegmentList}}" wx:key="" class='{{item.departCityName==departCityName && item.arriveCityName ==arriveCityName?"segment segment-selected":"segment"}}' catchtap='selectCityInfo' data-departCityName='{{item.departCityName}}' data-arriveCityName='{{item.arriveCityName}}'
+          data-departAirportCode='{{item.departAirportCode}}' data-arriveAirportCode='{{item.arriveAirportCode}}'>
+          <text>{{item.departCityName}}</text>
+          <text decode='{{true}}'>&nbsp;-&nbsp;</text>
+          <text>{{item.arriveCityName}}</text>
+          <image wx:if='{{item.departCityName==departCityName && item.arriveCityName ==arriveCityName}}' class='right' src='../../images/icon-gouxuan.png'></image>
+        </view>
+      </view>
+    </view>
+    <block wx:else>
+      <searchNoResult wx:if='{{isShowSearchNoResult}}'></searchNoResult>
+    </block>
+
+    <addFlightTravel wx:if='{{flightSegmentList && flightSegmentList!=null && flightSegmentList.length>=1}}' flightNo='{{flightNo}}' departAirportCode='{{departAirportCode}}' arriveAirportCode='{{arriveAirportCode}}' departDate='{{departDate}}' isSearchedByFlightNo="{{isSearchedByFlightNo}}" ></addFlightTravel>
+  </view>
+
+  <!-- 起降地搜搜 -->
+  <view class='{{!isSearchedByFlightNo?"search-by-airport-name":"search-by-airport-name hidden-search"}}'>
+    <view class='{{isFixTop?"fix-condition airport-name-search-condition":"airport-name-search-condition"}}'>
+      <view class='select-airport-name'>
+        <view class='{{isDepartAirportNameInputFocus?"select-depart-airport-name-container condition-selected":"select-depart-airport-name-container"}}'>
+          <input type='text' focus="{{isDepartAirportNameInputFocus}}" bindinput='inputDepartAirportKeyWord' bindfocus='focusDepartAirportNameInput' bindtap='focusDepartAirportName' placeholder='出发' class='select-depart-airport-name' value='{{departAirportKeyWord}}' placeholder-class='search-placeholder'>
+          </input>
+          <view wx:if='{{isShowDeleteDepartAirportNameButton}}' catchtap='deleteDepartAirportName' class='clear-depart-airport-name-search-container'>
+            <image class='clear-depart-airport-name-search' src='../../images/icon-sousuox.png'>
+            </image>
+          </view>
+        </view>
+
+        <image class='switch-airport-name' src='https://pages.c-ctrip.com/schedule/pic/wxxcx/icon-qiehuan.png' catchtap='switchSelectedAirport'></image>
+
+        <view class='{{isArriveAirportNameInputFocus?"select-arrive-airport-name-container condition-selected":"select-arrive-airport-name-container"}}'>
+          <input type='text' focus="{{isArriveAirportNameInputFocus}}" bindinput='inputArriveAirportKeyWord' bindfocus='focusArriveAirportNameInput' bindtap='focusArriveAirportName' placeholder='到达' class='select-arrive-airport-name'
+            value='{{arriveAirportKeyWord}}' placeholder-class='search-placeholder'>
+          </input>
+          <view wx:if='{{isShowDeleteArriveAirportNameButton}}' catchtap='deleteArriveAirportName' class='clear-arrive-airport-name-search-container'>
+            <image class='clear-arrive-airport-name-search' src='../../images/icon-sousuox.png'>
+            </image>
+          </view>
+        </view>
+      </view>
+      <view class='{{isDepartDateFoucs?"select-date-container condition-selected":"select-date-container"}}'>
+        <input disabled placeholder='选择出发日期' class='select-date' catchtap='showCalendarSearchedByAirportName' value='{{departDate}}' placeholder-class='search-placeholder'></input>
+      </view>
+    </view>
+
+    <selectAirportNameHistory wx:if='{{isShowHistory}}' bind:selectHistoryAirport='selectHistoryAirport'></selectAirportNameHistory>
+
+    <view class='airport-name-search-result' wx:if='{{isDepartAirportNameInputFocus && departAirportList && departAirportList!=null && departAirportList.length>0}}'>
+      <view class="search-result-title" >请选择机场</view>
+      <text wx:for="{{departAirportList}}" wx:key="" catchtap='selectDepartAirportInfo' data-departAirportName='{{item.name}}' data-departAirportCode='{{item.code}}'>{{item.name}}</text>
+    </view>
+    <view class='airport-name-search-result' wx:if='{{isArriveAirportNameInputFocus && arriveAirportList && arriveAirportList!=null && arriveAirportList.length>0}}'>
+      <view class="search-result-title" >请选择机场</view>
+      <text wx:for="{{arriveAirportList}}" wx:key="" catchtap='selectArriveAirportInfo' data-arriveAirportName='{{item.name}}' data-arriveAirportCode='{{item.code}}'>{{item.name}}</text>
+    </view>
+
+    <searchLoading isShowLoading='{{isShowLoading}}'></searchLoading>
+
+    <view class='{{isFixTop?"flight-search-result shift-for-fix-top":"flight-search-result"}}'>
+      <block wx:if='{{flightList && flightList!=null && flightList.length>0}}'>
+        <view wx:for='{{flightList}}' wx:key="" catchtap='selectFlightNo' data-flightNo='{{item.flightNo}}' class='{{flightNo==item.flightNo?"flight flight-selected":"flight"}}'>
+          <view class=' left-part '>
+            <view class='flight-first-part'>
+              <text class='first-line '>{{item.flightNo}}</text>
+              <text class='second-line '>{{item.airlineName}}</text>
+            </view>
+            <view class='flight-second-part'>
+              <text class='first-line '>{{item.formattedDepartDate}}</text>
+              <text class='second-line '>{{item.departAirportShortName}}</text>
+            </view>
+          </view>
+
+          <view class='right-part'>
+            <view class='flight-third-part '>
+              <view class='line-container '>
+                <view class='fill-blank-dot '>
+                  <view class="hollow-dot"></view>
+                  <view class="connect-line"></view>
+                  <view class="filled-dot"></view>
+                </view>
+              </view>
+            </view>
+            <view class='flight-forth-part'>
+              <text class='first-line '>{{item.formattedArriveDate}}</text>
+              <text class='second-line '>{{item.arriveAirportShortName}}</text>
+            </view>
+            <view class='flight-fifth-part'>
+              <image wx:if='{{flightNo==item.flightNo}}' class='flight-selected-img ' src='../../images/icon-gouxuan.png'></image>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <searchNoResult wx:if='{{isShowSearchNoResult}}'></searchNoResult>
+      </block>
+    </view>
+
+    <addFlightTravel wx:if='{{flightList && flightList!=null && flightList.length>=1}}' flightNo='{{flightNo}}' departAirportCode='{{departAirportCode}}' arriveAirportCode='{{arriveAirportCode}}' departDate='{{departDate}}' isSearchedByFlightNo="{{isSearchedByFlightNo}}" ></addFlightTravel>
+  </view>
+
+  <!-- 滑动后顶部阴影 -->
+  <view class='{{isShowTopShadow?"top-shadow show-top-shadow":"top-shadow"}}'></view>
+</view>
+
+<!-- 白屏检测 -->
+<!-- viewReadyHandle为框架提供、实现 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

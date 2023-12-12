@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "关注航班",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "searchNoResult": "components/searchNoResult/searchNoResult",
+    "addFlightTravel": "components/addFlightTravel/addFlightTravel",
+    "selectAirportNameHistory": "components/selectAirportNameHistory/selectAirportNameHistory",
+    "searchLoading": "components/searchLoading/searchLoading"
+  }
+}

@@ -1,0 +1,221 @@
+/* 搜索 icon */
+.ico-search:before {
+    font-family: 'ctrip_icon';
+    content: '\EC06';
+}
+
+.search-module {
+    position: relative;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #efefef;
+    z-index: 99;
+}
+.search-module_ico {
+    position: absolute;
+    top: 17rpx;
+    left: 50%;
+    width: 25rpx;
+    height: 25rpx;
+    transform: translateX(-440%);
+}
+.search-module_ico:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #b2b2b2;
+    font-size: 25rpx;
+    line-height: 1;
+    overflow: hidden;
+}
+.search-module_ico_focus {
+    left: 24rpx;
+    transform: translateX(0);
+}
+.search-module_input {
+    height: 56rpx;
+    font-size: 28rpx;
+    line-height: 60rpx;
+    background-color: #fff;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding-left: 50rpx;
+    margin: 16rpx;
+}
+.search-module_input_focus {
+    font-size: 26rpx;
+    color: #b2b2b2;
+    padding-left: 50%;
+    text-indent: -4em;
+    width: 300rpx;
+}
+.search-module_input-f {
+    margin-right: 100rpx;
+    border-right: 60rpx solid #fff;
+}
+.search-module_clear {
+    position: absolute;
+    top: 14rpx;
+    right: 120rpx;
+}
+.search-module_cancel {
+    position: absolute;
+    top: 10rpx;
+    right: 16rpx;
+    font-size: 32rpx;
+    color: #0086f6;
+}
+.search-list {
+    position: fixed;
+    z-index: 100;
+    top: 86rpx;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    color: #666;
+    background-color: #fff;
+    border-top: 1px solid #e5e5e5;
+}
+
+.search-list_item-head {
+    height: 88rpx;
+    font-size: 28rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /*border-bottom: 1rpx solid #e5e5e5;*/
+}
+
+.search-list_item {
+    /*border-bottom: 1rpx solid #e5e5e5;*/
+    display: flex;
+    /*padding: 14rpx 0rpx 14rpx 0rpx;*/
+    margin-left: 110rpx;
+    position: relative;
+    font-size: 28rpx;
+    /*flex-wrap: wrap;*/
+    /*border-bottom: 1px solid #e5e5e5; */
+}
+.search-list_item-head.expand {
+    color: #0086f6;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+.search-list_item-head .expand-text.close:after,
+.search-list_item-head .expand-text.open:after {
+    position: relative;
+    content: '';
+    display: inline-block;
+    width: 9rpx;
+    height: 9rpx;
+    border-top-width: 3rpx;
+    border-top-style: solid;
+    border-right-width: 3rpx;
+    border-right-style: solid;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    vertical-align: middle;
+    margin: -9rpx 0 0 15rpx;
+    transition: all 200ms ease-in-out;
+}
+.search-list_item-head .expand-text.close:after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin: 0rpx 0 0 15rpx;
+}
+
+.expand-text{
+    padding: 20rpx 0 20rpx 0;
+}
+
+.search-list_item .station-tag{
+    text-align: center;
+    word-wrap: none;
+    white-space: nowrap;
+    margin-right: 20rpx;
+    font-size: 22rpx;
+    box-sizing: border-box;
+    border-radius: 4rpx;
+    color: #5678a8;
+    background-color: #ffffff;
+    border: 1rpx solid;
+    min-width: 80rpx;
+    padding: 0;
+    margin-left: 0;
+}
+
+.search-list_item-head .city-tag {
+    color: #0086f6;
+    text-align: center;
+    word-wrap: none;
+    white-space: nowrap;
+    background-color: #bfe0fc;
+    min-width: 70rpx;
+    margin-right: 20rpx;
+    margin-left: 20rpx;
+    font-size: 22rpx;
+    box-sizing: border-box;
+    border-radius: 4rpx;
+    padding: 0 3rpx;
+}
+
+.search-list_item .station-tag-content {
+    margin-top: 5rpx;
+}
+
+.station-dis-content {
+    margin-right: 12rpx;
+}
+
+.city-text {
+    display: flex;
+    padding: 20rpx 0rpx 20rpx 0rpx;
+    border-bottom: 1rpx solid #e5e5e5;
+    width: 100%;
+}
+
+.city-name {
+    position: relative;
+    /*line-height: 40rpx;*/
+}
+.city-name.highlight {
+    color: #0086f6;
+}
+.province-name {
+    font-size: 24rpx;
+    margin: 3rpx 0 0 40rpx;
+    color: #999999;
+}
+.search-list_txt {
+    color: #0086f6;
+}
+
+.city-tagList {
+    overflow: hidden;
+    margin-right: 4rpx;
+    display: flex;
+    align-items: center;
+}
+
+.city-tagList-text {
+    color: #ff7700;
+    font-family: PingFangSC-Regular;
+    font-size: 18rpx;
+    font-weight: normal;
+    height: 19rpx;
+    line-height: 19rpx;
+    letter-spacing: 0rpx;
+    background: #fff8f2;
+    border-radius: 4rpx;
+    padding: 4rpx 6rpx;
+    margin-right: 12rpx;
+    text-align: center;
+}
+
+.station-dis {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 1;
+}

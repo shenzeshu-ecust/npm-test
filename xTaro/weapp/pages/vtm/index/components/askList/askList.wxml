@@ -1,0 +1,50 @@
+<view class="ask_container autoExpose" data-expose="{{exposeAsk}}" wx:if="{{askListSuccess}}">
+  <view class="ask_header">
+    <view class="ask_header_left">
+      <text class="wechat_vtm_font-qs ask_icon"></text>
+      <view class="ask_title">常见问答</view>
+      <view class="ask_subtitle">你想知道的问题都在这</view>
+    </view>
+    <view wx:if="{{askListAppUrl}}" class="ask_all_right" bindtap="askJumpAll">全部<text class="wechat_vtm_font-rigth3 ask_all_right_icon"></text></view>
+  </view>
+  <view data-index="0" bindtap="askJump" class="ask_content_1_card" wx:if="{{askList.length === 1}}">
+    <text class="ask_content_top_text">{{askList[0].Title}}</text>
+    <text class="ask_content_bottom_text">{{askList[0].ReplyCount}}个回答</text>
+  </view>
+  <view class="ask_content_2" wx:elif="{{askList.length  === 2}}">
+    <view data-index="0" bindtap="askJump" class="ask_content_2_bg">
+      <text class="ask_content_top_text">{{askList[0].Title}}</text>
+      <text class="ask_content_bottom_text">{{askList[0].ReplyCount}}个回答</text>
+    </view>
+    <view data-index="1" bindtap="askJump" class="ask_content_2_bg ask_mt16">
+      <text class="ask_content_top_text">{{askList[1].Title}}</text>
+      <text class="ask_content_bottom_text">{{askList[1].ReplyCount}}个回答</text>
+    </view>
+  </view>
+  <view wx:else class="ask_content_3">
+    <view data-index="0" bindtap="askJump" class="ask_content_3_card">
+      <text class="ask_content_top_text">{{askList[0].Title}}</text>
+      <text class="ask_content_bottom_text">{{askList[0].ReplyCount}}个回答</text>
+    </view>
+    <view class="ask_content_3_right">
+      <view data-index="1" bindtap="askJump" class="ask_content_3_right_bg">
+        <text class="ask_content_top_text">{{askList[1].Title}}</text>
+        <text class="ask_content_bottom_text">{{askList[1].ReplyCount}}个回答</text>
+      </view>
+      <view data-index="2" bindtap="askJump" class="ask_content_3_right_bg ask_mt16">
+        <text class="ask_content_top_text">{{askList[2].Title}}</text>
+        <text class="ask_content_bottom_text">{{askList[2].ReplyCount}}个回答</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="gj_ask_container" wx:elif="{{askListLoading}}">
+    <view class="gj_ask_row"></view>
+    <view class="gj_ask_column">
+      <view class="gj_ask_left"></view>
+      <view class="gj_ask_right">
+        <view class="gj_ask_card1"></view>
+        <view class="gj_ask_card2"></view>
+      </view>
+    </view>
+</view>

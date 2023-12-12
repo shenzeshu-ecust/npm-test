@@ -1,0 +1,84 @@
+<template name="price-detail">
+    <scroll-view scroll-y class="pd-body" slot="content">
+        <view wx:if="{{priceDetail.roomNo}}">
+            {{priceDetail.name}}
+            <text class="pd-room-num">编号:{{priceDetail.roomNo}}</text>
+        </view>
+        <template is="cost-detail" data="{{...priceDetail, showUnitText: dateInfo.days > 1 && !dateInfo.isLongRent}}"></template>
+    </scroll-view>
+</template>
+
+<template name="cost-detail">
+    <!-- 原价 -->
+    <view class="op-box">
+        <view class="price-item">
+            <text class="box-tit">{{priceFloatInfo.title}}</text>
+            <text wx:if="{{showUnitText}}" class="mr8 single-day">每间每晚</text>
+            <view wx:if="{{priceFloatInfo.price}}" class="price-constant-color price-color">
+                ¥<text class="strong">{{priceFloatInfo.price}}</text>
+            </view>
+        </view>
+        <view class="tax-desc" wx:if="{{priceFloatInfo.roomPrice.taxDesc.desc}}">
+            <text>{{priceFloatInfo.roomPrice.taxDesc.desc}}</text>
+        </view>
+    </view>
+    <!-- 每间每晚优惠 -->
+    <view class="detail-box" wx:if="{{priceCalcItems && priceCalcItems.length}}">
+        <view class="price-item sale-tit" wx:for="{{priceFloatInfo.roomPrice.priceSections}}" wx:for-item="priceDiscount" wx:for-index="index">
+            <block wx:if="{{index === 0}}">
+                <text class="box-tit">{{priceDiscount.title}}</text>
+                <text wx:if="{{showUnitText}}" class="mr8 single-day">每间每晚</text>
+                <text class="price-color">- ¥<text class="strong">{{priceDiscount.price}}</text></text>
+            </block>
+        </view>
+        <block wx:for="{{priceCalcItems}}">
+            <view class="price-item">
+                <text class="price-tag">{{item.title}}</text>
+                <text class="price-amount">{{item.amountDesc}}</text>
+            </view>
+            <view class="price-desc">{{item.desc}}</view>
+        </block>
+    </view>
+    <!-- 现价 -->
+    <view class="tr price-avg">
+        <text wx:if="{{priceFloatInfo.roomPrice.priceSum && priceFloatInfo.roomPrice.priceSum.extraTitle}}"
+            class="price-left-desc">{{priceFloatInfo.roomPrice.priceSum.extraTitle}}</text>
+        <text wx:if="{{priceFloatInfo.roomPrice.priceSum.beforeEqualPrice !== priceFloatInfo.roomPrice.priceSum.price}}" class="single-day price-before">
+            ¥<text>{{priceFloatInfo.roomPrice.priceSum.beforeEqualPrice}}</text>
+            <text decode="{{true}}">&nbsp;≈&nbsp;</text>
+        </text>
+        <view class="price-constant-color">¥<text class="price-strong">{{priceFloatInfo.roomPrice.priceSum.price}}</text></view>
+        <text wx:if="{{priceFloatInfo.roomPrice.priceSum.beforeEqualPrice !== priceFloatInfo.roomPrice.priceSum.price && priceFloatInfo.roomPrice.priceSum.tips}}" class="tips">
+            {{priceFloatInfo.roomPrice.priceSum.tips}}
+        </text>
+    </view>
+
+    <template is="tax-module" data="{{...priceFloatInfo, showUnitText}}"></template>
+</template>
+
+
+<template name="tax-module">
+<!-- 税费明细 -->
+<view wx:if="{{taxFee.priceSum}}" class="tax-box">
+    <view class="price-item">
+        <text class="tax-tit">{{taxFee.priceSum.title}}</text>
+        <text wx:if="{{showUnitText}}" class="mr8 single-day">每间每晚</text>
+        <text class="price-constant-color price-color">¥{{taxFee.priceSum.price}}</text>
+    </view>
+    <view wx:if="{{taxFee.priceSections}}" wx:for="{{taxFee.priceSections}}">
+        <block wx:if="{{item.priceItems}}">
+            <view wx:if="{{item.title}}" class="mt16">{{item.title}}</view>
+            <view wx:for="{{item.priceItems}}" wx:for-item="taxItem" class="price-item tax-item">
+                <text>{{taxItem.title}}</text>
+                <text>¥{{taxItem.price}}</text>
+            </view>
+        </block>
+    </view>
+</view>
+
+<!-- 含税总价 -->
+<view wx:if="{{priceSum}}" class="tr price-avg">
+    <text class="price-left-desc">{{priceSum.extraTitle}}</text>
+    <view class="price-constant-color">¥<text class="price-strong">{{priceSum.price}}</text></view>
+</view>
+</template>

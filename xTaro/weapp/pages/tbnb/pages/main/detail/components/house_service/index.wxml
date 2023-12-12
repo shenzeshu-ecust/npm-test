@@ -1,0 +1,63 @@
+<view class="house-service">
+  <view class="module-name">房屋设施</view>
+  <landlord-said wx:if="{{houseFacilityData.topScroll}}" topScroll="{{houseFacilityData.topScroll}}"></landlord-said>
+  <view class="house-service-content">
+    <view class="house-service-content-top">
+      <view class="house-service-content-top-item" wx:for="{{houseFacilityData.houseSummary}}" wx:key="item" wx:for-index="index">
+        <image class="big-icon" src="{{item.icon}}"></image>
+        <view class="desc" catchtap="_handleShowBubbleTips" data-id="desc-tips-icon-{{index}}" data-item="{{item.tips}}">
+          {{item.title}}
+          <view wx:if="{{item.tips && item.tips.length}}" class="desc-tips-container">
+            <image class="desc-tips" id="desc-tips-icon-{{index}}" src="https://pic.tujia.com/upload/festatic/mp/ndetail_tip_icon.png"></image>
+          </view>
+        </view>
+        <view class="sub-desc" wx:if="{{item.text}}">{{item.text}}</view>
+      </view>
+    </view>
+    <view class="house-service-content-middle">
+      <view class="house-service-content-middle-item" wx:for="{{houseFacilityData.houseFacility.specialFacilitys}}" wx:key="item">
+        <image class="big-icon" src="{{item.icon}}"></image>
+        <view>{{item.name}}</view>
+      </view>
+    </view>
+    <view class="house-service-content-body">
+      <view class="house-service-content-body-item" wx:for="{{houseFacilityData.houseFacility.warpHouseFacilitys}}" wx:key="item">
+        <view class="category">
+          <image class="big-icon" src="{{item.icon}}"></image>
+          <view class="text">{{item.groupName}}</view>
+        </view>
+        <view class="content">
+          <view class="content-item" wx:for="{{item.facilitys}}" wx:key="item">
+            <image wx:if="{{index<4}}" class="small-icon" src="{{'https://pic.tujia.com/upload/festatic/mp/' + (item.deleted ? 'ndetail_rclose.png' : 'ndetail_gright.png')}}"></image>
+            <view wx:if="{{index<4}}">{{item.name}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="house-service-content-bottom" bindtap='_handleOpenServiceAllPopup'>查看全部设施</view>
+  </view>
+</view>
+<!-- 全部设施 -->
+<bottom-popup id="bottomFrame" frameTitle="房屋设施" show="{{isShowServiceAll}}">
+  <view class="house-service-frame">
+    <view class="house-service-frame-item" wx:for="{{facilityModule.houseFacility.houseFacilitys}}" wx:key="item">
+      <view class="house-service-frame-item-title">
+        <image class="house-service-frame-item-icon" src="{{item.icon}}"></image>
+        <view>{{item.groupName}}</view>
+      </view>
+      <view class="house-service-frame-item-content">
+        <view class="service-item" wx:for="{{item.facilitys}}" wx:key="item" wx:for-index="index">
+          <image class="small-icon" src="{{'https://pic.tujia.com/upload/festatic/mp/' + (item.deleted ? 'ndetail_rclose.png' : 'ndetail_gright.png')}}"></image>
+          <view class="desc" catchtap="_handleShowBubbleTips" data-id="desc-tips-icon-inner-{{index}}" data-item="{{item.tip}}">
+            {{item.name}}
+            <view wx:if="{{item.tip}}" class="desc-tips-container">
+              <image class="desc-tips" id="desc-tips-icon-inner-{{index}}" src="https://pic.tujia.com/upload/festatic/mp/ndetail_tip_icon.png"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</bottom-popup>
+<!-- 气泡提示信息 -->
+<bubble-tips tipslist="{{tipsInfoItem}}" tipslocation="{{domObserverData}}"></bubble-tips>

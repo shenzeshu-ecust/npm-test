@@ -1,0 +1,34 @@
+<view wx:if="{{show}}" class="mp-wrapper">
+    <swiper class="mp-swiper" bindchange="handleSwipe">
+        <swiper-item wx:for="{{mediaList}}" class="mp-item">
+            <video wx:if="{{item.pictureType === 1}}" src="{{item.jumpUrl}}" object-fit="{{contain}}" controls="{{false}}" show-progress="{{true}}" show-fullscreen-btn="{{false}}" enable-progress-gesture="{{false}}" autoplay="{{true}}" enable-play-gesture="{{true}}" loop="{{true}}" />
+            <image wx:else src="{{item.pictureUrl}}" mode="aspectFit" />
+        </swiper-item>
+    </swiper>
+    <view class="mp-head">
+        <view class="wechat-font-close2 mp-close" bindtap="handleCloseSwiper"></view>
+        <view class="user-info">
+            <view class="avatar-group">
+                <image wx:if="{{authorInfo.authorVipIcon}}" class="vip-icon" src="{{authorInfo.authorVipIcon}}" />
+                <image class="user-avatar" src="{{authorInfo.avatarUrl}}" />
+            </view>
+            <view class="user-info-group">
+                <text wx:if="{{authorInfo.nickName}}" class="user-nickname one-line">{{authorInfo.nickName}}</text>
+                <view wx:if="{{authorInfo.authorTypeName}}" class="user-tag one-line {{ authorInfo.authorTypeClass }}">{{authorInfo.authorTypeName}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="mp-info">
+        <view class="mp-info-head">
+            <view class="mp-title one-line">
+                {{title}}
+            </view>
+            <view class="mp-page">
+                <Text>{{currentPage}}</Text> / {{mediaList.length}}
+            </view>
+        </view>
+        <view class="mp-desc">
+            {{content}}
+        </view>
+    </view>
+</view>

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "bottom-popup": "../bottom_popup/index",
+    "preview-license": "../preview_license/index"
+  }
+}

@@ -1,0 +1,4 @@
+<!--pages/market/legaoComponents/picture/picture.wxml-->
+<view style="margin-top: {{item.top}}">
+  <image style="width:100%;display:block;" src="{{item.background}}" mode="widthFix"></image>
+</view>

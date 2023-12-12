@@ -1,0 +1,18 @@
+{
+    "navigationBarTitleText": "订单填写",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "usingComponents": {
+        "travel-coupon-pack": "/pages/hotel/components/travalcouponpack/index",
+        "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar",
+        "common-layer": "/pages/hotel/components/layer/index",
+        "roomlayer": "/pages/hotel/components/roomlayer/roomlayer",
+        "gift-info": "/pages/hotel/components/giftinfo/giftinfo",
+        "emegencynotice": "/pages/hotel/components/emegencynotice/emegencynotice",
+        "loading-gif": "/pages/hotel/components/loadinggif/loadinggif",
+        "getPhoneNumBtn": "/cwx/component/getPhoneNumBtn/getPhoneNumBtn",
+        "slogan": "/pages/hotel/components/slogan/slogan",
+        "retain-pop": "/pages/hotel/components/retainpop/retainpop"
+    }
+}

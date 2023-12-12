@@ -1,0 +1,9 @@
+{
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index",
+    "cell": "plugin://materialPlugin/cell"
+  }
+}

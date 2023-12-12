@@ -1,0 +1,108 @@
+<!-- 唤醒 -->
+<WakeUpComponent wx:if="{{wakeUpData}}" class="wakeUpComponnet" id="wakeUpComponnet" data-wake-up-data="{{wakeUpData}}" ></WakeUpComponent>
+
+<perinfo-protect-float></perinfo-protect-float>
+<swiper class="container" vertical="true" current="{{commentDataIndex}}" bindchange="_swiperViewChange" >
+<block wx:for="{{commentData}}" wx:for-item="commentItem" wx:for-index="commentIndex" wx:key="{{commentItem.CommentId}}">
+<swiper-item class="s-view">
+  <scroll-view scroll-y class="container">
+      <!--视频-->
+      <block wx:if="{{commentItem.videoCount.length>0}}">
+        <view class='head-detail'>
+          <view class='head-video-box'>
+            <image mode='aspectFill' src='{{commentItem.videoCount[0].coverImageUrl}}' class='head-img'></image>
+            <image class="video-play-btn" src="https://pages.c-ctrip.com/you/wechat/category_btn_play.png" data-video-url="{{commentItem.videoCount[0].playUrl}}" data-ubt-key="c_miniapps_spotcomment_video" bindtap='_playVideo'></image>
+          </view>
+        </view>
+      </block>
+
+      <!--图片-->
+      <block wx:elif="{{commentItem.Images.length>0}}">
+        <view class='head-detail'>
+          <swiper class='head-img-box' autoplay="{{viewIndex === commentIndex || autoplay ? true: false}}" circular="" current="0" bindchange="_swiperImageChange" >
+            <block>
+              <swiper-item class='head-img-item' wx:for="{{commentItem.Images}}" wx:for-item="imgItem" wx:for-index="imgIndex" wx:key="{{imgItem.ImageId}}">
+                <image src='{{imgItem.PhotoPath}}' class='head-img' mode="aspectFill" data-current="{{imgItem.PhotoPath}}" data-image-data="{{commentItem.Images}}" data-ubt-key="c_miniapps_spotcomment_picture" bindtap='_showPreviewImg'></image>
+              </swiper-item>
+            </block>
+          </swiper>
+          <view wx:if="{{imgInit}}" class='img-num-show'>
+            <text class='img-num'>{{imgIndex}}/{{commentItem.Images.length}}</text>
+          </view>
+        </view>
+      </block>
+
+    
+      
+      <block wx:if="{{commentItem}}">
+        <view class="detail-info {{(commentItem.videoCount.length>0 || commentItem.Images.length>0) ? '':'top-flex'}}">
+          <view class='detail-user-detail'>
+            
+            <view class='detail-user-img'>
+              <text class='gs-iconfont gs-icon-c-logo detail-user-default'></text>
+              <image src='{{commentItem.UserImageSrc}}' class='user-img'></image>
+            </view>
+            <view class='detail-user-info'>
+              <view class='user-name'>{{commentItem.UserNick}}</view>
+              <view class='time'>{{commentItem.PublishTime}}</view>
+            </view>
+            <view class='detail-score'>
+              <text class='detail-score-cur'>{{commentItem.TotalStar}}</text>
+              <text class='detail-score-total'>/5分</text>
+            </view>
+          </view>
+
+
+
+          <view class="comment-detail-box">
+            <view wx:if="{{commentItem.Content}}">
+              <text class='comment-detail-text'>{{commentItem.Content}}</text>
+            </view>
+            <view wx:else class='comment-text-none'>
+              <text>{{commentItem.Images.length>0?'憋说话，看图片～': '' }}{{commentItem.videoCount.length>0?'憋说话，看视频～':''}}</text>
+            </view>
+            <!-- 查看poi 标签开始-->
+            <view wx:if="{{lookPOI}}" bindtap="goPoiDetail" class="lookPoi">
+               <view class="poi-img" style='background-image: url({{poiDetail.img}})'></view>
+               <view class="poi-detail">
+                  <view class="poi-detail-name">{{poiDetail.name}}</view>
+                  <view class="poi-datail-num">
+                     <!-- 查看poi评分对应的icon-->
+                     <image class="poi-datail-gradenum" src="https://pages.c-ctrip.com/you/livestream/gs-dianping-score-{{poiDetail.grade>=4.5 ? 5 : poiDetail.grade < 4.5 && poiDetail.grade >= 4 ? 4 : poiDetail.grade < 4 && poiDetail.grade >=3 ? 3 : poiDetail.grade < 3 && poiDetail.grade >=2 ? 2 : 1 }}b.png"></image>
+
+                     <text class="poi-datail-grade">{{poiDetail.grade}}</text>分 {{poiDetail.commentNum}}条点评
+                  </view>
+                  <view class="poi-detail-address">位于:{{poiDetail.address}}</view>
+               </view>
+            </view>
+            <!-- 查看poi 标签结束-->
+            <view class="liked-view" wx:if="{{!hideCommentLiked}}">
+              <view class="liked-button" data-is-voted="{{commentItem.IsVoted}}" data-useful-count="{{commentItem.UsefulCount}}" data-comment-index="{{commentIndex}}" data-comment-id="{{commentItem.CommentId}}" data-ubt-key="c_miniapps_spotcomment_bump" bindtap="{{commentItem.IsVoted?null:'_isVoted'}}">
+                <image class="comment-liked-img" src="{{commentItem.IsVoted?'http://pages.c-ctrip.com/you/wechat/poi_detail_blue_btn_good_ac.png':'http://pages.c-ctrip.com/you/wechat/poi_detail_blue_btn_good.png'}}" ></image>
+                <text>{{commentItem.UsefulCount}}</text>
+              </view>
+            </view>
+            <view class="comment-end-show">
+              <text class='comment-end-lt'></text>
+              <text class='comment-end-text'>{{commentIndex === commentData.length-1 ? 'END' : '下滑切换点评'}}</text>
+              <text class='comment-end-rt'></text>
+            </view>
+          </view>
+
+          
+
+        </view>
+      </block>
+  
+  </scroll-view>
+</swiper-item>
+</block>
+</swiper>
+
+<view wx:if="{{isIphoneX}}" class="iphoneX-fixed"></view>
+
+<!-- 视频 -->
+<VideoComponent class="videoComponnet" id="videoComponnet" ></VideoComponent>
+
+
+

@@ -1,0 +1,52 @@
+<import src="./pricestar.wxml"/>
+
+<view hidden="{{psStates.hidden}}" class="cmask" style="{{pageFrom === 'listmap' ? 'top: 160rpx;' : ''}}" catchtap="handleMaskClick" catchtouchmove="noop"></view>
+<view hidden="{{psStates.hidden}}" class="{{boxClass}}" catchtouchmove="noop" catchtap="noop">
+    <view wx:if="{{pageFrom === 'inquire'}}" class="ft34 black1 pf-inquire-head">
+        <view class="wechat-font-close4 ft40 close-icon" bindtap="handleMaskClick"></view>
+        <view class="tit">价格/{{psStates.psData.startitle}}</view>
+    </view>
+    <view class="price-star-dl">
+        <view class="price-star-dt black1">
+            <text class="price-star-tit ft-28">价格</text><text class="cur-price blue mr-16 ft-28">{{priceSilder.temp.text}}</text>
+        </view>
+        <view wx:if="{{priceSilder.max}}" class="price-slider">
+            <priceslider min="{{priceSilder.min}}" max="{{priceSilder.max}}" step="{{priceSilder.step}}" minValue="{{priceSilder.temp.minValue}}" maxValue="{{priceSilder.temp.maxValue}}" blockColor="#fff" selectedColor="#006FF6" bind:lowValueChange="onPriceLowValueChange" bind:highValueChange="onPriceHighValueChange"></priceslider>
+        </view>
+        <view class="star-type-box ft26 black1" wx:if="{{!isHourRoom}}">
+            <view wx:for="{{psStates.psData.price}}" data-index="{{index}}" data-type="price" class="price-star-dd {{ item.current ? 'page-area-current' : ''}}" bindtap="handlePriceChoose">
+                <view class="price-des">
+                    <view>{{item.text}}</view>
+                </view>
+                <view class="star-titsub black2 {{item.current ? 'starsub-current' : ''}}">{{item.percentage}}</view>
+            </view>
+        </view>
+        <view class="price-star-dt black1 flex-space">
+            <view>
+                <text class="price-star-tit ft-28">{{psStates.psData.startitle}}</text>
+            </view>
+            <view class="flex-align-center blue" bindtap="showStarLayer">
+                <text class="ft24">{{psStates.psData.discription}}</text>
+                <text class="wechat-font-arrow-right mr-8 ft-20"></text>
+            </view>
+        </view>
+        <view class="star-type-box ft26 black1">
+            <view bindtap="handlePriceChoose" wx:for="{{psStates.psData.star}}" data-type="star" data-index="{{index}}" class="price-star-dd {{item.current ? 'price-star-current' : ''}}" data-ubt-key="xcx_hotel_list_star_{{item.key}}" id="autotest_xcx_hotel_list_star_{{item.key}}">
+                <view class="price-des {{item.text.length > 7 ? 'ft20' : ''}}">
+                    <image wx:if="{{item.selectedIcon && item.unselectedIcon}}" class="diamond-icon" src="{{item.current ? item.selectedIcon : item.unselectedIcon}}"/>
+                    <view>{{item.text}}</view>
+                </view>
+                <view class="star-titsub ft20 black2 {{item.current ? 'starsub-current' : ''}}">{{item.textSub}}</view>
+            </view>
+        </view>
+        <view wx:if="{{!isOversea}}" class="star-tip black3 ft24">
+            钻级由携程评定，综合考虑酒店设置和服务水平得出，仅供参考
+        </view>
+    </view>
+    <view class="gbtn-box">
+        <view bindtap="handlePriceChoose" data-type="reset" class="btn reset">清空</view>
+        <view bindtap="handlePriceChoose" data-type="confirm" class="btn confirm">完成</view>
+    </view>
+</view>
+
+<template is="priceStarLayer" data="{{showCnStarLayer: showCnStarLayer, showOverseaStarLayer: showOverseaStarLayer, discBox: discBox}}"/>

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "luckyBag": "../luckyBag/luckyBag",
+    "liveLotteryWinnerList":"../liveLotteryWinnerList/liveLotteryWinnerList"
+  }
+}

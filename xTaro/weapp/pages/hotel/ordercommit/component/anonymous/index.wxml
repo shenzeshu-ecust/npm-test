@@ -1,0 +1,5 @@
+<view class="anonymous" bindtap="toggleSelect">
+    <text class="select-icon {{isSelected ? 'wechat-font-selected' : 'wechat-font-unselected'}}"></text>
+    <text class="title">匿名评价</text>
+    <text class="sub">隐藏头像和用户名，且不展示至社区</text>
+</view>

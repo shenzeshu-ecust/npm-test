@@ -1,0 +1,168 @@
+.signIn-wrapper-train{
+    position: relative;
+}
+
+.signIn-container-train {
+    position: relative;
+    width: 686rpx;
+    margin: 0 auto;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    /* margin: 0 9px; */
+    border-radius: 12rpx ;
+}
+.signIn-container-train .items-container-1-opcity {
+    overflow-x: scroll;
+    width: 720rpx;
+    mask-image: linear-gradient(rgba(0, 0, 0, 1), transparent); 
+    -webkit-mask-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 1) 65%, transparent 80%); 
+}
+.signIn-container-train .items-container-1-opcity::-webkit-scrollbar {
+  color: transparent;
+  width: 0;
+  height: 0;
+}
+.signIn-container-train .items-container-1 {
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: center;
+    height: 162rpx;
+    /* margin-right: 200rpx; */
+    /* mix-blend-mode: overlay; */
+}
+.signIn-container-train .items-container-1:nth-child(1){
+    margin-left: 30rpx;
+}
+
+.signIn-container-train .item-container-1 {
+   flex-shrink: 0;
+   margin-right: 16rpx;
+}
+
+.signIn-container-train .point-1 {
+    text-align: center;
+    margin: 0;
+    font-size: 22rpx;
+    font-family: PingFangSC-Semibold;
+    letter-spacing: 1rpx;
+    font-weight: 600;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.signIn-container-train .icon-1 {
+    width: 48rpx;
+    height: 48rpx;
+    vertical-align: middle;
+}
+
+.signIn-container-train .text-1 {
+    font-size: 20rpx;
+    font-family: PingFangSC-Regular;
+    margin: 10rpx 0;
+    letter-spacing: 0rpx;
+    line-height: 22rpx;
+}
+
+.signIn-container-train .item-container-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80rpx;
+    text-align: center;
+    border-radius: 8rpx;
+}
+.signIn-container-train .item-container-1.done {
+    opacity: 0.7;
+}
+
+.signIn-container-train .sign-container-1 {
+    position: absolute;
+    top: 100rpx;
+    right: 40rpx;
+    display: flex;
+    justify-content: center;
+}
+
+.signIn-container-train .sign-btn-1 {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    /* border-radius: 30rpx; */
+    height: 60rpx;
+    width: 144rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #ffffff;
+}
+.signIn-container-train .sign-btn-1.done{
+    background: #f4f4f4;
+    color: #cccccc;
+}
+
+.signIn-container-train .tip-1 {
+    display: block;
+    background: #f00;
+    border-radius: 50%;
+    width: 24rpx;
+    height: 24rpx;
+    border: 1rpx solid #ffffff;
+    position: absolute;
+    transform: translate(120rpx, -20rpx);
+}
+
+.signIn-container-train .sign-txt-1 {
+    font-family: PingFangSC-Medium;
+    font-size: 28rpx;
+    font-weight: 500;
+    height: 24rpx;
+    letter-spacing: 0px;
+    line-height: 24rpx;
+    width: 112rpx;
+    text-align: center;
+}
+.signIn-container-train .signIn-title-1{
+    height: 0;
+}
+.signIn-container-train .sign-rule-btn1{
+    display: flex;
+    align-items: center;
+    padding: 16rpx 0 12rpx 40rpx;
+}
+.signIn-container-train .sign-rule-btn1__text{
+    color: #333333;
+    font-family: PingFangSC-Medium;
+    font-size: 28rpx;
+    line-height: 1;
+}
+.signIn-container-train .sign-rule-btn1__tips{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background: url(https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/ic-wenhao.png) center / contain no-repeat;
+    height: 28rpx;
+    width: 28rpx;
+    font-size: 18rpx;
+    border-radius: 50%;
+    margin-left: 6rpx;
+}
+
+.signIn-container-train .rule-popup .rule-popup__content{
+    background: #f6f8fa;
+    width: 686rpx;
+    height: 300rpx;
+    margin: 0 auto;
+}
+.signIn-container-train .signin-dingyue {
+    position: absolute;
+    right: 0;
+    top: 10rpx;
+    width: 150rpx;
+    height: 46rpx;
+}
+.signIn-container-train .task_wrap_5 .task_btn{
+    height: 46rpx;
+}

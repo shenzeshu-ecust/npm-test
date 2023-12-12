@@ -1,0 +1,7 @@
+<view wx:if="{{showVideo}}" class="videoBody">
+  <video class="videoView" id="myDyVideo" src="{{videoUrl}}" show-fullscreen-btn="{{false}}" bindfullscreenchange="fullScreenChange"  bindended="_endedVideo" bindwaiting="_waitingVideo" binderror="_errorVideo">
+    <cover-view wx:if="{{showVideoControlsClose}}" class="v-controls-close" bindtap="_closeVideoFullScreen">
+      <cover-image class="v-close-img" src="https://pages.c-ctrip.com/you/wechat/ic_play_close@3x.png"/>
+    </cover-view>
+  </video>
+</view>

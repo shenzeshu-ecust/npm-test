@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "detail-header-compt": "../../components/train-compt/train-compt",
+    "detail-mapView-compt": "../../components/detail-mapView-compt/detail-mapView-compt"
+  }
+}

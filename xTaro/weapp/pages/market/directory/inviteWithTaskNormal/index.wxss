@@ -1,0 +1,46 @@
+/* pages/market/directory//inviteWithTask/index.wxss */
+.page-wraper{
+  min-height: 100vh;
+}
+.page-transform{
+  transform: scale(1);
+  transform-origin: left top;
+}
+.item-common{
+  position: fixed;
+}
+.task_list_page{
+  visibility: hidden;
+}
+
+.task_btn_text .task_wrap.task_wrap_5.module{
+  padding: 0;
+}
+
+.task_btn_text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+.task_btn_text button{
+  color: inherit;
+}
+
+.task_btn_text_inner{
+  font-size: 36rpx;
+}
+
+.task_btn_text_dynamic_inner{
+  font-size: 36rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%; 
+  text-align: center;
+}
+.page-wraper{
+  width: 100vw;
+  overflow: hidden;
+}

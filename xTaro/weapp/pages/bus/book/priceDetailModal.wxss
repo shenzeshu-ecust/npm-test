@@ -1,0 +1,109 @@
+.price-detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+    border-radius: 16rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    pointer-events: none;
+}
+.price-detail-modal .mask {
+    pointer-events: auto;
+}
+.price-detail-content {
+    margin-left: 50rpx;
+    margin-right: 50rpx;
+    border-radius: 16rpx;
+    font-weight: 300;
+    position: relative;
+    z-index: 11;
+    overflow: hidden;
+    transform: translate(0, 100%);
+    animation: transIn 300ms ease-in-out forwards;
+}
+.detail-content-title {
+    padding: 32rpx;
+    background-color: #f4f4f4;
+    margin-bottom: -16rpx;
+}
+.detail-content-title .content-title {
+    font-size: 34rpx;
+    font-weight: 600;
+    color: #333;
+}
+.detail-content-title .content-desc {
+    font-size: 24rpx;
+    color: #999;
+}
+.price-detail-modal .price {
+    color: #ff7700;
+    font-size: 44rpx;
+    font-weight: 600;
+}
+.price-detail-modal .main-title {
+    font-size: 32rpx;
+    font-weight: 600;
+}
+.price-detail-modal .price .unit {
+    font-size: 30rpx;
+}
+.price-detail-modal .price-detail {
+    line-height: 85rpx;
+    color: #333;
+    position: relative;
+    bottom: 0;
+    background-color: #fff;
+    width: 100%;
+    font-weight: 300;
+    animation: none;
+    padding-top: 16rpx;
+    border-radius: 16rpx 16rpx 0 0;
+}
+
+@keyframes transIn {
+    0% {
+        transform: translate(0, 100%);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.price-detail-modal .button-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 32rpx;
+    background-color: #fff;
+}
+
+.price-detail-modal .button-row .button {
+    border-radius: 12rpx;
+    margin: 0;
+    margin-right: 32rpx;
+    background-color: #f4f4f4;
+    color: #666666;
+    font-size: 30rpx;
+    line-height: 80rpx;
+    font-weight: 600;
+    flex: 1;
+    pointer-events: auto;
+}
+.price-detail-modal .button-row .button:last-child {
+    margin-right: 0;
+}
+.price-detail-modal .button-row .button:after {
+    display: none;
+}
+.price-detail-modal .button-row .button:after {
+    border-radius: 12rpx;
+}
+.price-detail-modal .button-row .main-button {
+    background: linear-gradient(-90deg, rgb(255, 119, 0) 0%, rgb(255, 165, 10) 100%);
+
+    color: #fff;
+}

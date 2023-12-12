@@ -1,0 +1,31 @@
+@import "../../common/common.wxss";
+
+.np-box .np-img {
+  width: 628rpx;
+  height: 580rpx;
+}
+.np-box .np-close, .newer-box .np-close{
+  font-size: 60rpx;
+  margin: 20rpx 240rpx 0 240rpx;
+  color: #fff;
+  text-align: center;
+}
+.newer-box {
+  width: 100%;
+  position: relative;
+}
+.newer-box .img {
+  width: 100%;
+}
+.newer-box .wechat-font-close.np-close {
+  margin-top: 0;
+}
+.newer-box .btn {
+  position: absolute;
+  bottom: 166rpx;
+  right: 50%;
+  width: 65%;
+  height: 100rpx;
+  font-size: 0;
+  transform: translateX(50%);
+}

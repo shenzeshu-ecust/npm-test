@@ -1,0 +1,71 @@
+page{
+  position: relative;
+  background-color: #fff;
+}
+image{
+  width: 100%;
+}
+.main-wrap{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.head{
+  width: 750rpx;
+}
+.content{
+  position: absolute;
+  top: 286rpx;
+  width: 630rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.content .logo{
+  width: 138rpx;
+}
+.content .name{
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+  margin: 18rpx auto 85rpx;
+}
+.content .title{
+  font-size: 28rpx;
+  color: #666;
+  align-self: flex-start;
+}
+.content .intro{
+  font-size: 28rpx;
+  color: #999;
+  padding-top: 34rpx;
+  margin-top: 28rpx;
+  border-top: 2rpx solid #eee;
+  width: 100%;
+  text-align: left;
+}
+.content .intro::before{
+  content: '';
+  display: inline-block;
+  width: 4rpx;
+  height: 4rpx;
+  border-radius: 50%;
+  background-color: #999;
+  vertical-align: middle;
+  margin-right: 6rpx;
+}
+.content .btn-confirm{
+  width: 100%;
+  height: 86rpx;
+  line-height: 86rpx;
+  font-size: 28rpx;
+  color: #fff;
+  text-align: center;
+  background-color: #0086F6;
+  margin: 85rpx 0 36rpx;
+  border-radius: 4rpx;
+}
+.content .btn-cancel{
+  font-size: 28rpx;
+  color: #0086f6;
+}

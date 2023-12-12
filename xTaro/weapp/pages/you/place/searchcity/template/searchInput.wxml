@@ -1,0 +1,9 @@
+<template name="searchInput">
+  <view class="searchinput-bar">
+    <view class="searchinput-wrap">
+      <view class="searchinput-icon" bindtap="searchConfirm"></view>
+      <input confirm-type="done" bindinput="searchInputClick" bindtap="searchInputTrace" placeholder="{{searchPlaceHolder}}" value="{{searchInputValue}}" placeholder-class="searchinput-input-holder" />
+    </view>
+    <text class="searchinput-btn" bindtap="searchCancel">取消</text>
+  </view>
+</template>

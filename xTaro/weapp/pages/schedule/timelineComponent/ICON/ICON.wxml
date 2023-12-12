@@ -1,0 +1,1 @@
+<text class="{{iconOptions.classes}}" style="--iconSize:{{iconOptions.size * 2 || 20 }}rpx;color:{{iconOptions.color}};"></text>

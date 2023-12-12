@@ -1,0 +1,24 @@
+<template name="destinationTheme">
+  <view class="destination-section destination-theme" wx:if="{{themeData.topRankInfoList}}" data-modulename="{{themeData.title}}">
+    <!-- destinationTheme -->
+    <view class="destination-title destination-title-padding1">
+		<view class="title-name">{{themeData.title}}</view>
+		<!-- <view class="title-sub" bindtap="toMoreTheme" wx:if="{{themeData.moreSchema}}" data-moreschema="{{themeData.moreSchema}}">更多<text></text></view> -->
+		<navigator class="title-sub" hover-class="none" target="miniProgram" open-type="navigate" app-id="{{themeData.appId}}" path="{{themeData.moreSchema}}" extra-data="" version="release">更多<text class="title-sub-more"></text></navigator>
+	</view>
+	<view class="destination-scroll-wrap">
+		<scroll-view class="destination-scroll-view theme-scroll" scroll-x scroll-left="{{themeData.scrollLeft}}">
+			<block wx:for="{{themeData.topRankInfoList}}" wx:key="*this" wx:index="index">
+				<navigator bindtap="toThemeDetail" data-ubttitle="{{themeData.title}}" data-ubtitemid="{{item.topRankId}}" data-ubtname="{{item.title}}" class="destination-scroll-item" hover-class="none" target="miniProgram" open-type="navigate" app-id="{{themeData.appId}}" path="{{item.topRankSchema}}" extra-data="" version="release">
+				<!-- <view class="destination-scroll-item" bindtap="toThemeDetail" data-themeschema="{{item.topRankSchema}}"> -->
+					<image src="{{item.imageUrl}}" />
+					<view class="theme-wrap">
+						<view>{{item.title}}</view>
+					</view>
+				<!-- </view> -->
+				</navigator>
+			</block>
+		</scroll-view>
+	</view>
+  </view>
+</template>

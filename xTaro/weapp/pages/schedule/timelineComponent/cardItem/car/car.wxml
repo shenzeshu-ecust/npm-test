@@ -1,0 +1,34 @@
+<!--pages/timeLine/flight/flight.wxml-->
+<view catchtap='gotoDetail'>
+  <card-header-compt iconUrl="{{processedCard.timelineHeaderIcon}}" title="{{processedCard.timelineHeaderTitle}}" subTitle="{{processedCard.timelineHeaderSubtitle }}" />
+
+  <view  wx:if="{{processedCard.originCard.carCard.type==5 || processedCard.originCard.carCard.type==10}}" class="chartered-container">
+    <view class="chartered-title_back">
+      <text class="chartered-title font-bold">{{processedCard.title}}</text>
+      <image src="{{processedCard.vendorLogo}}" class="chartered-vendorLogo" mode="aspectFit" />
+    </view>
+    <text class="chartered-tip">出发地点</text>
+    <text class="chartered-tip_content ellipsis-2">{{processedCard.originCard.carCard.pickupAddress}}</text>
+  </view>
+  <view  wx:else class='container'>
+    <view class='title-view row'>
+      <text class='text-color-333 font-bold font-size-36'>{{processedCard.title}}</text>
+      <image src="{{processedCard.originCard.carCard.vendorLogo}}" class='car-icon'></image>
+    </view>
+    <view class='car-info-view row vertical-center'>
+      <view wx:if="{{processedCard.originCard.carCard.carNumber}}" class='car-num'><text class='text-color-333 font-size-26 ellipsis'>{{processedCard.originCard.carCard.carNumber}}</text></view>
+      <text class='car-info text-color-333 font-size-26 ellipsis'>{{processedCard.carInfo}}</text>
+      <text class='driverName text-color-333 font-size-26 ellipsis'>{{processedCard.originCard.carCard.driverName}}</text>
+    </view>
+    <view wx:if="{{processedCard.originCard.carCard.pickupAddress}}" class='depart-view row vertical-center'>
+      <view class='hollow-circle'></view>
+      <text class='depart-address text-color-999 font-size-26 ellipsis'>{{processedCard.originCard.carCard.pickupAddress}}</text>
+    </view>
+    <view wx:if="{{processedCard.originCard.carCard.takeOffAddress}}" class='arrival-view row vertical-center'>
+      <view class='solid-circle'></view>
+      <text class='arrival-address text-color-999 font-size-26 ellipsis'>{{processedCard.originCard.carCard.takeOffAddress}}</text>
+    </view>
+  </view>
+
+</view>
+<card-operation-compt wx:if="{{processedCard.timelineOperations && !processedCard.originCard.sharedCard}}" card-operation-data="{{processedCard.timelineOperations}}" />

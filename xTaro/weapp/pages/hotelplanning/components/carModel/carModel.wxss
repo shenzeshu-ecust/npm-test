@@ -1,0 +1,81 @@
+@import "../../common/css/common.wxss";
+
+.car-model{
+    box-sizing: border-box;
+    width: 702rpx;
+    background: #ffffff;
+    border-radius: 20rpx;
+    box-shadow: 0rpx 4rpx 16rpx 1rpx rgba(0, 0, 0, 0.06);
+    margin: 0 24rpx 32rpx;
+    padding:24rpx 20rpx;
+    font-weight: 500;
+}
+
+.car-item-title{
+    color: #333333;
+    font-size: 32rpx;
+    line-height: 44rpx;
+    margin: 24rpx 0;
+}
+
+.car-item{
+    background: #f8fafd;
+    border-radius: 8rpx;
+    display: flex;
+    justify-content: space-between;
+    margin: 20rpx 0;
+    padding: 20rpx;
+  
+}
+.car-item-left{
+    font-size: 24rpx;
+    letter-spacing: 0rpx;
+    line-height: 32rpx;
+    width: 460rpx;
+    font-weight: normal;
+}
+
+.item-title{
+    color: #5678a8;
+    margin-bottom: 16rpx;
+    font-weight: 500;
+}
+
+.car-item-right{
+    display: flex;
+    align-items: center;
+    line-height: 32rpx;  
+    font-size: 24rpx;
+    color: #5678a8;
+}
+
+.item-price{
+    color: #ff6600;
+    font-size: 28rpx;
+    line-height: 36rpx;
+    margin-right:4rpx;
+}
+
+.item-label {
+    color: #ff6600;
+}
+
+.car-item .item-icon {
+    display: inline-block;
+    font-size: 21rpx;
+    color: white;
+    border-radius: 4em;
+    padding: 4rpx;
+    margin-right: 16rpx;
+}
+.item-rent-car {
+    background-color: #26c28d;
+}
+.item-shuffle-car {
+    background-color: #f98078;
+}
+
+.item-arrow {
+    display: inline-block;
+    vertical-align: middle;
+}

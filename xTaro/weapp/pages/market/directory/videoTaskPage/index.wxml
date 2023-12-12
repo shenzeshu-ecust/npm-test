@@ -1,0 +1,41 @@
+<perinfo-protect-float></perinfo-protect-float>
+
+<nav_bar title-color="#000000" bind:lefttap="backWebAct" home-page="{{pageConfig.pageJumpUrl || '/pages/home/homepage'}}" title="{{pageOption.pageTitle || pageConfig.pageTitle || ''}}"></nav_bar>
+<view class="layout">
+  <!-- 微信授权 -->
+  <view class="auth_content" wx:if="{{pageConfig && authConfig && authConfig.show}}">
+    <view class="auth_title">{{authConfig.guideTitle}}</view>
+    <view class="auth_result">
+      <view class="auth_result_avatar">
+        <image src="{{authResult.avatarUrl || 'https://images3.c-ctrip.com/marketing/2022/11/authorize/default.png'}}" mode="widthFix" class="auth_result_avatar_icon" />
+      </view>
+      <view class="auth_result_nick">{{authResult.nickName || '暂无用户信息'}}</view>
+    </view>
+    <view class="auth_update" bindtap="updateAuth">授权更新<span class="more_icon"></span> </view>
+  </view>
+  <!-- 任务说明 -->
+  <view class="page_warn_content" wx:if="{{pageConfig.pageContent}}">
+    <view class="title">
+      <image mode="widthFix" src="https://images3.c-ctrip.com/marketing/2021/09/task/task_icon.png" class="title_icon">
+      </image> 任务说明
+    </view>
+    <view class="content">{{pageOption.pageContent || pageConfig.pageContent}}</view>
+  </view>
+  <!-- 下面是瀑布流的视频号 -->
+  <loreal_waterfall class="waterfall-content" id="waterfall" bind:showAuthorizePopup="showAuthorizePopup" bind:updateUserInfoSuccess="updateUserInfoSuccess" wxsdkVersionFlag="{{wxsdkVersionFlag}}" masonryData="{{masonryList}}" keyCfg="{{keyCfg}}" styleCfg="{{styleCfg}}" authResult="{{authResult}}" authConfig="{{authConfig}}" pageOption="{{pageOption}}" />
+
+  <view class="guide_more" wx:if="{{bottomMoreButtonVisible}}">
+    <view class="guide_more_button" bindtap="openMoreVideo">进入主页 查看更多视频</view>
+  </view>
+
+  <view class="banner" wx:if="{{pageConfig.adShow == '开'}}">
+    <view class="slider-show">
+      <ad-sdk impId="{{pageConfig.adId || ''}}" width="{{AdvertiseDataWidth}}" height="{{AdvertiseDataHeight}}" slideVideo="{{slideVideo}}"></ad-sdk>
+    </view>
+  </view>
+</view>
+
+<authorizePopup show="{{showAuthorizePopupFlag}}" bind:authorizeAgree="authorizeAgree" />
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

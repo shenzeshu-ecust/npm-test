@@ -1,0 +1,8 @@
+<!-- 获取手机号 -->
+<button class="{{btnClassName}}" disabled="{{disableBtn}}" loading="{{showLoading}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
+  <slot name="left"></slot>
+  <text class="text">{{content}}</text>
+  <slot name="middle"></slot>
+  <text class="countdown" wx:if="{{isCountdown}}">({{countdown}}s)</text>  
+  <slot name="right"></slot>
+</button>

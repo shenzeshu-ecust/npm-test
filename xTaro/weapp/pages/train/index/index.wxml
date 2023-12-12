@@ -1,0 +1,641 @@
+<import src="../common/components/NewCustomerRight/newGuest.templates.wxml" />
+<import src="../common/components/NewCustomerRight/index.wxml" />
+<import src="../common/components/lostUserPop/lostUserPop.wxml" />
+<import src="../common/components/lostUserPopPro/lostUserPopPro.wxml" />
+
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+
+<view class="top-bar" style="padding-top: {{statusBarHeight}}px">
+  <text class="ifont-home" bindtap="goHome" wx:if="{{firstStack && isCtripApp}}"></text>
+  <view class="icon-back" bindtap="goBack" wx:elif="{{isCtripApp}}"></view>
+</view>
+
+<view class="main-swiper {{activeTabbarIndex === 1 && 'main-swiper-left'}}">
+  <!-- 顶部tabbar -->
+  <view class="top-tab-bar" bindtap="tabBarClickHandle" wx:if="{{abroadSwitchFlag}}">
+    <view class="bar-item {{activeTabbarIndex === 0 && 'active'}}" data-index="{{0}}">国内火车</view>
+    <view class="bar-item {{activeTabbarIndex === 1 && 'active'}}" data-index="{{1}}">国际火车</view>
+    <view class="bg {{activeTabbarIndex === 1 && 'bg-right'}}" ></view>
+  </view>
+  <view class="main-swiper-item {{activeTabbarIndex === 1 ? 'swiper-left' : ''}}" >
+    <view class="index-top">
+      <view class="swiper-box">
+        <view class="mask"></view>
+        <ad-sdk impId="05HCJNWF0588HCSMHT1121" width="{{newAdvertiseData.width}}" height="{{newAdvertiseData.width * 174/375}}" slideVideo="{{slideVideo}}" lonAndLat="{{lonAndLat}}"></ad-sdk>
+      </view>
+
+      <view class="tips-collect" wx:if="{{collectTagFlag}}" style="top: {{statusBarHeight + 50}}px;">
+        <block wx:if="{{isAndroid}}">
+            点击<text class="ifont-menu"></text>添加到桌面，下次买票更方便
+        </block>
+        <block wx:if="{{isIOS}}">
+            点击<text class="ifont-menu"></text>收藏小程序，下次买票更方便
+        </block>
+      </view>
+    </view>
+    <view class="index-box {{!abroadSwitchFlag ? 'noAbord' : ''}}" bindtap="testHandle">
+      <!-- 公告栏 -->
+      <view class="notice" wx:if="{{notice.Title}}" bindtap="noticeHandle">
+        <view class="tag">公告</view>
+        <view class="cont">{{notice.Title}}</view>
+        <text class="ifont-arr"></text>
+      </view>
+      <view class="sel-box {{ (!isTrainApp && CardInfoList.length) || (userCouponInfoFlag && userCouponInfo) && !notice.Title ? 'p-t-16' : '' }}">
+        <!-- 权益感知-->
+        <view class="equity-box" wx:if="{{!isTrainApp && CardInfoList.length && !notice.Title}}">
+          <view class="equity-wrapper">
+            <view
+              class="equity-ul {{isAnimated ? 'transitionClass' : ''}}"
+              style="top: -{{animateCount * 86}}rpx; "
+            >
+              <view class="equity-li" wx:for="{{CardInfoList}}">
+              {{item.ButtonName}}{{item.Title}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- 新客权益横条 -->
+        <!-- <view class="coupon-box" wx:elif="{{TopTips && !notice.Title}}" bindtap="showNewCustomerRight" data-ubt-key="train_inquire_hpnewbieht">
+            <image src="https://images3.c-ctrip.com/train/applets/8.16/ic_vip.png" class="icon-coupon"></image>
+            <view class="cont">{{TopTips}}</view>
+            <text class="ifont-arr"></text>
+        </view> -->
+
+        <!-- 个人优惠券展示 -->
+        <view class="coupon-box" wx:elif="{{userCouponInfoFlag && userCouponInfo && !notice.Title}}" bindtap="toCouponInfoPage">
+          <image src="https://images3.c-ctrip.com/train/2023-3/xiaochengxu/7.19/shouye/img-hb.png" class="icon-coupon"></image>
+          <view class="cont">{{userCouponInfo.Content}}</view>
+          <text class="arr" bindtap="hideUserCouponInfoBanner"></text>
+        </view>
+        <view class="sel-item first">
+          <view class="from {{exchange ? 'exchange' : ''}}" data-type="d" bindtap="chooseStation">
+            <view class="strong">{{dStationShow}}</view>
+          </view>
+          <view class="gap"></view>
+          <view class="to {{exchange ? 'exchange' : ''}}" data-type="a" bindtap="chooseStation">
+            <view class="strong">{{aStationShow}}</view>
+          </view>
+          <view class="icon-change" bindtap="exchangeStation"></view>
+        </view>
+        <view class="sel-item">
+          <view class="date" bindtap="chooseDate">
+            <view class="strong">{{monthDay}}</view>
+            <view class="week">{{dayInfo}}</view>
+          </view>
+          <view class="sel-switch">
+              <view class="item" bindtap="switchChange">高铁动车 <view class="{{isGaotieOnly ? 'icon icon-checked':'icon icon-checkbox'}}"></view></view>
+              <view class="item" bindtap="switchStu">学生票<view class="{{isStu ? 'icon icon-checked':'icon icon-checkbox'}}"></view></view>
+          </view>
+        </view>
+        <button class="btn-search" hover-class="btn-search_hover" bindtap="search">查询车票</button>
+        <view class="index-history" wx:if="{{historyPairs.length}}">
+            <text wx:for="{{historyPairs}}" bindtap="clickHistoryPair" data-index="{{index}}" wx:key="{{index}}" data-ubt-key="{{item}}">{{item}}</text>
+            <text class="clear" bindtap="clearHistory">清除全部</text>
+        </view>
+        <!-- <view class="coupon-box" wx:if="{{TopTips && notice.Title}}" bindtap="showNewCustomerRight">
+            <view class="cont">{{TopTips}}</view>
+            <text class="ifont-arr" bindtap="showNewCustomerRight"></text>
+        </view> -->
+        <view class="coupon-box margin" wx:if="{{userCouponInfoFlag && userCouponInfo && notice.Title}}" bindtap="toCouponInfoPage">
+            <image src="{{userCouponInfo.IconUrl}}" class="icon-coupon"></image>
+            <view class="cont">{{userCouponInfo.Content}}</view>
+            <text class="ifont-closed-line" bindtap="hideUserCouponInfoBanner"></text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 新客礼包固定展示 -->
+    <template is="new-guest-panel" data="{{ data: newGuestGiftInfo }}" wx:if="{{ newGuestGiftInfo.IsHaveRights || newGuestGiftInfo.needShow}}" />
+
+    <!-- 流失用户固定展示 -->
+    <view class="lost-user-swiper" wx:if="{{showLostUserSwiper}}">
+      <view class="slogan">{{lostUserSwiperDetail.EntranceTag}}</view>
+      <view class="title">
+        <text class="amount">{{lostUserSwiperDetail.Price}}</text>
+        <image src="https://images3.c-ctrip.com/train/2023-3/zengzhang/6yue/liushi/wenan2.png" alt="" mode="aspectFit" style="height:34rpx;width: 168rpx;" />
+        <text class="expire-time">{{lostUserSwiperDetail.EntranceSubTitle}}</text>
+        <image bindtap="onClickLostUserRuleBtn" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/6yue/liushi/wenhao.png" alt="" mode="aspectFit" style="height:29rpx;width:29rpx" data-url="{{lostUserSwiperDetail.RuleUrl}}"/>
+      </view>
+
+      <div class="swiper-container" wx:if="{{lostUserSwiperDetail.EntranceGiftList.length === 3}}">
+        <div class="swiper-item" wx:for="{{lostUserSwiperDetail.EntranceGiftList}}" wx:for-item="item">
+          <view class="{{item.Tag === '已抢光' ? 'disabled-style coupon' : 'coupon'}}">
+            <image src="{{item.Icon}}" mode="aspectFit" style="height:86rpx;width:86rpx;padding: 8rpx 0 4rpx;" />
+            <view class="tag" wx:if="{{item.Tag === '已抢光'}}">{{ item.Tag }}</view>
+            <view class="coupon-title">{{item.Title}}</view>
+            <view class="coupon-desc">{{item.SubTitle}}</view>
+          </view>
+        </div>
+      </div>
+      <div class="swiper-container" wx:elif="{{lostUserSwiperDetail.EntranceGiftList.length === 2}}">
+        <div class="swiper-item" wx:for="{{lostUserSwiperDetail.EntranceGiftList}}" wx:for-item="item">
+          <view class="{{item.Tag === '已抢光' ? 'disabled-style coupon2' : 'coupon2'}}">
+            <image src="{{item.Icon}}" mode="aspectFit" style="height:86rpx;width:86rpx;    padding: 0rpx 50rpx 4rpx 20rpx;" />
+            <view class="coupon-right-box">
+              <view class="tag" wx:if="{{item.Tag === '已抢光'}}">{{ item.Tag }}</view>
+              <view class="coupon-title">{{item.Title}}</view>
+              <view class="coupon-desc">{{item.SubTitle}}</view>
+            </view>
+          </view>
+        </div>
+      </div>
+      <div class="swiper-container" wx:else style="justify-content: normal;gap: 10rpx;padding: 0 20rpx;overflow-x: auto;">
+        <div class="swiper-item" wx:for="{{lostUserSwiperDetail.EntranceGiftList}}" wx:for-item="item">
+          <view class="{{item.Tag === '已抢光' ? 'disabled-style coupon-default' : 'coupon-default'}}">
+            <image src="{{item.Icon}}" mode="aspectFit" style="height:86rpx;width:86rpx;padding: 8rpx 0 4rpx;" />
+            <view class="tag" wx:if="{{item.Tag === '已抢光'}}">{{ item.Tag }}</view>
+            <view class="coupon-title">{{item.Title}}</view>
+            <view class="coupon-desc">{{item.SubTitle}}</view>
+          </view>
+        </div>
+      </div>
+    </view>
+
+    <!-- 工具箱入口 -->
+    <view class="kingkong" wx:if="{{ isToolsShow}}">
+        <view class="tools" wx:if="{{ toolsConfig.length }}">
+            <view class="item" wx:for="{{ toolsConfig }}" data-index="{{ index }}" bindtap="onClickTools">
+                <view class="icon-box">
+                    <view class="point" wx:if="{{ item.point }}"></view>
+                    <image class="icon" src="{{ item.icon }}" />
+                    <view class="tag" wx:if="{{ item.tag }}">
+                        <image class="frag" src="https://images3.c-ctrip.com/train/2023-3/app-jiaocha/8.66/cjmdyh/img_jiao.png" />
+                        <view class="tit">{{ item.tag }}</view>
+                    </view>
+                </view>
+                <view class="name">{{ item.name }}</view>
+            </view>
+        </view>
+        <view class="othertools" wx:if="{{ otherTools.length }}">
+            <view class="item" wx:for="{{ otherTools }}" data-index="{{ index }}" bindtap="onClickOtherTools">
+                <view class="icon-box">
+                    <image class="icon" src="{{ item.icon }}" />
+                    <view class="point" wx:if="{{ item.point }}"></view>
+                    <view class="tag" wx:if="{{ item.tag }}">
+                        <image class="frag" src="https://images3.c-ctrip.com/train/2023-3/app-jiaocha/8.66/cjmdyh/img_jiao.png" />
+                        <view class="tit">{{ item.tag }}</view>
+                    </view>
+                </view>
+                <view class="name">{{ item.name }}</view>
+            </view>
+            <view class="expand" bindtap="onClickToggleKingkong" wx:if="{{ !isKingkongExpand && allOtherTools.length > 4 }}">展开</view>
+        </view>
+        <view class="fold" bindtap="onClickToggleKingkong" wx:if="{{ isKingkongExpand }}">收起全部</view>
+    </view>
+
+    <view class="recommend-box" wx:if="{{mainRecommendList && mainRecommendList.length}}">
+        <view class="recommend-title">
+          当地推荐
+        </view>
+        <view class="recommend-content" wx:for="{{mainRecommendList}}">
+          <view class="recommend-item-hotel" wx:if="{{item.Type == 1}}">
+            <image class="recommend-icon" src="{{item.IconUrl}}" />
+            <view class="recommend-right">
+              <view class="recommend-txtTitle">
+                {{item.Title}}
+                <text wx:if="{{item.Tag}}" class="recommend-hotel-tag">{{item.Tag}}</text>
+              </view>
+              <view class="recommend-date-box">
+                <text class="recommend-date"data-url="{{item.JumpUrl}}" bindtap="toHomeRecommendPage" >{{today}}住</text>
+                <text class="day">1晚</text>
+                <text class="recommend-date" data-url="{{item.JumpUrl}}" bindtap="toHomeRecommendPage" >{{nextDay}}离</text>
+              </view>
+            </view>
+            <view  class="recommend-btn-box" >
+              <button class="recommend-btn" data-url="{{item.JumpUrl}}" data-pagetype="1" bindtap="toHomeRecommendPage" >{{item.ButtonName}}</button>
+            </view>
+          </view>
+          <view class="recommend-item-station" wx:if="{{item.Type == 2}}">
+            <image class="recommend-icon" src="{{item.IconUrl}}" />
+            <view class="recommend-right">
+              <view class="recommend-txtTitle">
+                {{item.Title}}
+                <text wx:if="{{item.Tag}}" class="recommend-station-tag">{{ item.Tag || '高铁专享最高减20' }}</text>
+              </view>
+              <view class="recommend-date-box">
+                <text class="recommend-subTitle">{{item.SubTitle}}</text>
+              </view>
+            </view>
+            <view  class="recommend-btn-box" >
+              <button class="recommend-btn" data-url="{{item.JumpUrl}}" data-pagetype="2" bindtap="toHomeRecommendPage" >{{item.ButtonName}}</button>
+            </view>
+          </view>
+        </view>
+    </view>
+
+    <bu-gird arriveCityName="{{arriveCtripCityName}}"
+          departCityName="{{departCtripCityName}}"
+          departDate="{{departDate}}"
+          wx:if="{{arriveCtripCityName && departCtripCityName && departDate && isCtripApp}}" />
+    <view class="task-list-wraper {{!showTaskListCmp ? 'hidden' : ''}}">
+      <taskList
+        tempid='train_guanzhu_xcxsy'
+        compid='170388'
+        hideUpdateAvatar="{{true}}"
+        bind:getTaskList="getTaskListCb"
+      />
+    </view>
+ 
+  </view>
+  <view wx:if="{{abroadSwitchFlag}}" class="main-swiper-item {{activeTabbarIndex === 1 ? 'swiper-left':''}}">
+    <oversea-train 
+      bind:onClickPassengerChoice="onClickPassengerChoice" 
+      overseaPassengerInfo="{{overseaPassengerInfo}}"
+      activeFlag="{{activeTabbarIndex === 1}}"
+      utmSource="{{overSeaUtmSource}}"
+    />
+  </view>
+
+</view>
+
+
+
+
+<!-- 关注公众号 -->
+<!-- <template is="follow-wx-accounts" wx:if="{{isShowFollowModal && followWXAccountsConfig.open}}"></template> -->
+
+
+	<!-- bind:triggerEvent="triggerFloat"
+	bind:userAcceptPrize="componentAcceptPrize"
+	bind:getTaskList="getTaskList"
+	bind:complateTask="complateTask"
+	bind:clickTodo="clickTodo" -->
+<block wx:if="{{isShowCoupon && activity}}">
+    <image src="https://images3.c-ctrip.com/train/wxapp/qplb.png" class="coupontag" wx:if="{{activity.activityCode == 1003}}" bindtap="showCoupon"></image>
+</block>
+
+<!-- 独立版需要展示服务协议与个人信息保护政策 -->
+<view class="train-app-index-agreements" wx:if="{{isTrainApp}}">
+  <view bindtap="onClickGoToAgreement1">服务协议</view>
+  <view bindtap="onClickGoToAgreement2">个人信息保护政策</view>
+</view>
+
+<view class="new-coupon" wx:if="{{isShowLayer}}" bindtap="hideLayer">
+  <view class="new-coupon-box">
+    <!-- 新手礼包  -->
+    <view class="new-coupon-show" wx:if="{{isShowCoup && activity && activity.activityCode == 1003}}">
+      <view class="new-coupon-top"><image src="http://images3.c-ctrip.com/train/wxapp/new-pop-top.png"></image></view>
+      <view class="new-coupon-bd">
+        <view class="coupon">
+          <view class="train-price"><dfn>￥</dfn><text class="strong">20</text></view>
+          <view class="tit">抢票助力优惠券</view>
+          <view class="txt">0元享高速抢票权益</view>
+        </view>
+        <button class="btn-sub" hover-class="btn-sub_hover" catchtap="getCoupon">领取</button>
+      </view>
+    </view>
+    <!-- 领取成功 -->
+    <view class="new-coupon-suc" wx:if="{{isShowCoupSuc}}">
+       <view class="new-coupon-bd">
+        <view class="tit">领取成功</view>
+        <view class="txt">已放至你的携程微信账户</view>
+        <button class="btn-sub" hover-class="btn-sub_hover">知道了</button>
+       </view>
+    </view>
+  </view>
+</view>
+
+<!-- 收藏小程序奖励弹框 -->
+<view class="pop-mid" wx:if="{{showType === 'collectedReward'}}">
+  <view class="pop-mid-box">
+    <view class="pop-mid-bd pop-collect">
+      <view class="pop-collect-head"></view>
+      <view class="tit">收藏小程序成功</view>
+      <view class="txt">20元抢票券已放至账户</view>
+      <button class="btn-confirm" hover-class="btn-confirm_hover" bindtap="hideBackDrop" id="c_train_wx_index_receiveCouponSuccess">确定</button>
+    </view>
+  </view>
+</view>
+
+<!-- botm bar -->
+<view class="index-bar" wx:if="{{!isTrainApp}}" style="{{isIphoneX ? 'padding-bottom: 44rpx' : ''}}">
+  <view class="item cur" wx:if="{{activeTabbarIndex === 0}}">
+    <view class="icon icon-ctrip"></view>
+    <view class="txt">火车首页</view>
+  </view>
+  <view class="item" bindtap="goToTrainList">
+    <view class="icon icon-order"></view>
+    <view class="txt">我的订单</view>
+  </view>
+</view>
+
+<!-- 未登录用户 提示领券  -->
+<view class="pop-mid" wx:if="{{showType === 'couponTip'}}">
+  <view class="pop-mid-box">
+    <view class="pop-mid-bd pop-coupon">
+      <icon class="icon-closed" bindtap="hideBackDrop"></icon>
+      <view class="tit">您有一份收藏奖励待领取</view>
+      <view class="pop-coupon-bd">
+        <view class="cont">
+          <view><text class="strong">抢票券</text>x1</view>
+          <view class="txt">抢票时使用, 免费享高速抢票</view>
+        </view>
+        <view class="rbox"><text class="dfn">￥</text><text class="strong">20</text></view>
+      </view>
+      <button class="btn-confirm" hover-class="btn-confirm_hover" bindtap="receiveCouponHandle" id="c_train_wx_index_receiveCoupon">领取</button>
+    </view>
+  </view>
+</view>
+
+<!-- 已领优惠券  -->
+<view class="pop-mid" wx:if="{{showType === 'hasReceived'}}">
+  <view class="pop-mid-box">
+      <view class="pop-mid-bd pop-coupon">
+        <icon class="icon-closed" bindtap="hideBackDrop"></icon>
+        <icon class="icon-tips"></icon>
+        <view class="tit">您已经领过该优惠券了</view>
+        <button class="btn-confirm" hover-class="btn-confirm_hover" bindtap="hideBackDrop">确定</button>
+      </view>
+  </view>
+</view>
+
+<!-- 在线换座弹窗 -->
+<view class="pop-mid" wx:if="{{showType === 'onlineChangeSeat'}}">
+  <view class="pop-mid-box">
+    <view class="pop-mid-bd pop-changeseat" style="background-image: url({{onlineChangeSeatPopBgImage}})">
+      <button class="btn-confirm" data-type="{{1}}" bindtap="handleChangeSeatPopClick"></button>
+      <icon class="icon-closed icon-pop-changeseat" data-type="{{0}}" bindtap="handleChangeSeatPopClick"></icon>
+    </view>
+  </view>
+</view>
+
+
+<view class="backmask {{showType == 'noticePop' ? 'active' : ''}}" catchtap="hideBackDrop"></view>
+<view class="pop-modal {{showType == 'noticePop' ? 'active' : ''}}">
+  <view class="pop-modal-bd">
+    <view class="txt"><rich-text nodes="{{notice.Content}}"></rich-text></view>
+  </view>
+  <button class="btn-know" bindtap="hideBackDrop">我知道了</button>
+</view>
+
+<!-- 新客未登录的红包弹窗 -->
+<block wx:if="{{showType == 'newCustomerRightUnPop'}}">
+    <view class="backmask active"></view>
+    <view class="pop-xinke-bag">
+        <view class="tit">购票权益礼包</view>
+        <view class="price">{{ newCustomerRightInfo.OriginPrice }}<text>元</text></view>
+        <button bindtap="loginAndReceiveRights"></button>
+        <text class="ifont-closed-line" bindtap="hideBackDrop"></text>
+    </view>
+</block>
+
+<newGuestPop
+    visible="{{ showType === 'newGuestRightPop' || showType === 'newCustomerUnloginPop'}}"
+    data="{{ newGuestReceivedPopData || newCustomerRightInfo }}"
+    unLoginShow="{{showType === 'newCustomerUnloginPop'}}"
+    bind:close="hideBackDrop"
+>
+    <button wx:if="{{ showType === 'newGuestRightPop' }}" class="r-bg-btn-submit" bindtap="onClickGoToBuyTicket">我知道了</button>
+    <button wx:if="{{ showType === 'newCustomerUnloginPop' }}" class="r-bg-btn-submit" bindtap="loginAndReceiveRights">立即登录</button>
+</newGuestPop>
+<!-- 新客权益弹窗 -->
+<!-- <block wx:if="{{showType == 'newCustomerRightPop'}}">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-xinke-tequan">
+        <view class="pop-xinke-tequan-hd">
+            <view class="tit">送您 <text class="tgold">¥{{newCustomerRightInfo.OriginPrice}}</text> 特权礼包，请笑纳</view>
+        </view>
+        <view class="pop-xinke-tequan-bd">
+            <view class="card-equity-bd">
+                <view class="item" wx:for="{{newCustomerRightInfo.RightList}}" data-url="{{item.JumpUrl}}" bindtap="toRightDetailPage">
+                    <view class="tag">价值{{item.Price}}元</view>
+                    <image src="{{item.IconUrl}}" class="icon"></image>
+                    <view class="tit">{{item.Name}}</view>
+                    <view class="txt">{{item.Desc}}<text class="ifont-detail"></text></view>
+                </view>
+            </view>
+        </view>
+        <button class="btn-submit" bindtap="hideBackDrop">我知道了</button>
+        <text class="ifont-closed" bindtap="hideBackDrop"></text>
+    </view>
+</block> -->
+
+<!-- 新客礼包和返现券 -->
+<block wx:if="{{showType == 'combineGifts'}}">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-xinke-fanxian">
+      <view class="bd">
+        <view class="item fanxian">
+          <view class="tit"><text class="pr">{{cashamount}}</text>现金</view>
+        </view>
+        <view class="add"></view>
+        <view class="item xinke">
+         <!-- <view class="tit"><text class="pr">{{newCustomerRightInfo.OriginPrice}}</text>权益大礼包</view> -->
+         <view class="tit">{{newCustomerRightInfo.Tiltle}}</view>
+          <view class="cont" wx:for="{{newCustomerRightInfo.RightList}}" data-url="{{item.JumpUrl}}" bindtap="toRightDetailPage">
+            <image src="{{item.IconUrl}}" mode="widthFix"></image>
+            <view class="txt">{{item.Name}}<text class="ifont-detail"></text></view>
+            <view class="price">{{item.Price}}</view>
+          </view>
+        </view>
+      </view>
+      <button class="btn-go" bindtap="hideBackDrop" data-ubt-key="train_inquire_hpnewbiebtn">开始购票</button>
+      <text class="ifont-closed" bindtap="hideBackDrop"></text>
+    </view>
+</block>
+
+<!-- 返现券领取成功 -->
+<block wx:if="{{showType == 'cashback'}}">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-cashback">
+      <image src="https://images3.c-ctrip.com/train/app/828/qiangpiao/xiaochengxu/pop_bg_xitong.png" class="hd"></image>
+      <image src="https://images3.c-ctrip.com/train/app/828/qiangpiao/xiaochengxu/pop_icon_check.png" class="icon"></image>
+      <view class="tit">返现领取成功</view>
+      <view class="txt">购票成功后可以提现哦~</view>
+      <button class="btn" bindtap="hideBackDrop">知道了</button>
+    </view>
+</block>
+
+<!-- 微信搜一搜进来发放的优惠券 -->
+<block wx:if="{{showType == 'searchCoupon'}}">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-search-coupon">
+      <view class="tit"><text class="pr">{{couponListWill[0].Price || 3}}</text>元</view>
+      <view class="txt">购票后可提现</view>
+      <button class="btn" wx:if="{{isLogin}}" data-type="{{couponListWill[0].SubType || 1}}" bindtap="clickRecieveSearchCoupon">开心收下</button>
+      <button class="btn" wx:else  data-type="{{couponListWill[0].SubType || 1}}" bindtap="loginAndReciveSearchCoupon">开心收下</button>
+      <text class="ifont-closed" bindtap="hideBackDrop"></text>
+    </view>
+</block>
+<!-- 推送进来的奖励金 -->
+<block wx:if="{{showType == 'bonus' && bonusPopHandle}}">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-bonus">
+      <button class="btn-submit" wx:if="{{isLogin}}" data-ubt-key="helpOthersPopupClick" bindtap="receiveBonus">领取奖励</button>
+      <button class="btn-submit" wx:else bindtap="loginAndReceiveBonus">领取奖励</button>
+      <button class="btn-cancel" bindtap="hideBackDrop">放弃奖励</button>
+    </view>
+</block>
+<!-- 奖励金领取成功 -->
+<block wx:if="{{showType == 'bonus-success'}}">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-bonus-success {{!doubleBonus ? 'single-reward' : ''}}">
+      <view class="tit">领取成功</view>
+      <block wx:if="{{doubleBonus}}">
+        <view class="add"></view>
+        <view class="cont left">
+          <view class="amount">{{couponListWill[0].Price}}</view>
+          <view class="name">返现券</view>
+          <view class="desc">购买火车票返现</view>
+        </view>
+        <view class="cont right">
+          <view class="amount">{{bonusVIPItem.Price}}</view>
+          <view class="name">{{bonusVIPItem.Name}}</view>
+          <view class="desc">抢票直升最高速</view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="price">
+          <text>{{couponListWill[0].Price}}</text>元
+        </view>
+        <view class="desc">
+          {{couponListWill[0].Tittle}}
+        </view>
+      </block>
+      <button class="btn-submit" bindtap="hideBackDrop">确定</button>
+      <text class="ifont-closed" bindtap="hideBackDrop"></text>
+    </view>
+</block>
+<!-- 引导订阅 -->
+<block wx:if="{{showType == 'subscribe'}}">
+  <view class="backmask active" bindtap="hideBackDrop"></view>
+  <view class="pop-subscribe">
+    <image src="https://images3.c-ctrip.com/train/2021/xiaochengxu/8.37.4/xiaoxidingyue/xiaoxidingyue@3x.png" alt="" class="slogan" />
+    <view class="tit">请求打开消息订阅</view>
+    <view class="txt">建议允许订阅消息通知，以便及时获取重要提醒，保障出行体验</view>
+    <view class="btn-box">
+      <button class="btn-cancel" bindtap="hideBackDrop">暂不开启</button>
+      <button class="btn-submit" bindtap="onClickSubscribeTicket">一键开启</button>
+    </view>
+    <text class="ifont-closed" bindtap="hideBackDrop"></text>
+  </view>
+</block>
+
+<!-- 消息通知发放优惠券 -->
+<block wx:if="{{showType == 'pushCouponType' && pushCouponInfo}}">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="pop-push-coupon-container">
+        <view class="pop-push-coupon-title">
+            <text class="tgold">{{pushCouponInfo.Tittle}}</text>
+        </view>
+        <view class="pop-push-coupon-content">
+          <view class="pop-push-coupon-content-left">
+            <view class="pop-push-coupon-content-left-top">
+              <text class="pop-push-coupon-content-left-top-text" wx:if="{{pushCouponInfo.CouponItemList[0].Tag}}">{{pushCouponInfo.CouponItemList[0].Tag}}</text>
+            </view>
+            <view class="pop-push-coupon-content-left-bottom">
+              <text class="pop-push-coupon-content-left-big">{{pushCouponInfo.CouponItemList[0].Price}}</text>
+              <text class="pop-push-coupon-content-left-small" wx:if="{{pushCouponInfo.CouponItemList[0].CouponType === 2}}">折</text>
+              <text class="pop-push-coupon-content-left-small" wx:else>元</text>
+            </view>
+          </view>
+          <view class="pop-push-coupon-content-right">
+            <image wx:if="{{pushCouponInfo.IsSend}}" class="pop-push-coupon-content-right-image" src="https://images3.c-ctrip.com/train/2022/xiaochengxv/v-8.47/hongbao/yilingqu@3x.png" alt="" />
+            <view class="pop-push-coupon-content-right-top">{{pushCouponInfo.CouponItemList[0].Tittle}}</view>
+            <view class="pop-push-coupon-content-right-middle">{{pushCouponInfo.CouponItemList[0].SubTittle}}</view>
+            <view class="pop-push-coupon-content-right-bottom">有效期至{{pushCouponInfo.expiredText}}</view>
+          </view>
+        </view>
+        <button wx:if="{{!pushCouponInfo.IsSend}}" class="btn-submit" bindtap="onClickReceivePushCouponButton">{{pushCouponInfo.ButtonName}}</button>
+        <button wx:else class="btn-submit" bindtap="onClickPushCouponSubscribeButton">{{pushCouponInfo.ButtonName}}</button>
+        <text class="ifont-closed" bindtap="hideBackDrop"></text>
+        <view class="pop-push-coupon-container-bottom-bg"></view>
+    </view>
+</block>
+
+
+<!-- v8.50 app企微入口领券弹窗 -->
+<block wx:if="{{showType === 'wecomGuestUpPop' || showType === 'newGuestRightUpPop'}}">
+		<view class="backmask active"></view>
+		<view class="pop-xinke-bag">
+			<!-- <image wx:if="{{source === 'wecom_apphome'}}" class="wecom-guest-title" src="https://images3.c-ctrip.com/train/2022/app/8.50/zengzhang/xinke/zhuanxiang@3x.png" mode="widthFix"></image> -->
+			<view class="tit">先领券后下单更优惠</view>
+			<view class="price">?<text>元</text></view>
+			<button bindtap="onClickLoginAndReceive"></button>
+			<text class="ifont-closed-line" bindtap="hideBackDrop"></text>
+		</view>
+</block>
+
+<!-- 新客 奖励 -->
+<!-- <block wx:if="{{showType === 'newGuestRightPop'}}">
+  <view class="backmask active" bindtap="hideBackDrop"></view>
+  <view class="pop-new-guest-activity-coupon">
+    <view class="new-guest-bd-coupon">
+      <view class="new-guest-bd-top">
+      <view class="new-guest-bd-top-title">新客专享礼包</view>
+        <block wx:for="{{newCustomerRightInfo.RightList}}">
+          <view class="pop-result-normal-container {{item.Type === 3 ? 'new-user-type':''}}">
+            <view class="pop-result-bd-ticket">
+              <view class="price">
+                <text>{{item.Price}}</text>
+              </view>
+              <view class="reward-info">
+                <view class="reward-info-name">{{item.Name}}</view>
+                <view class="reward-info-tips">{{item.DescV2}}</view>
+              </view>
+              <button class="invite-btn" wx:if="{{item.Type === 3}}" bindtap="onClickGoToNewGuestActivity" data-type="pop-up" data-jumpurl="{{item.JumpUrl}}">邀请</button>
+            </view>
+            <view class="split-line"></view>
+            <view class="tag" wx:if="{{item.Type !== 3}}">已到账</view>
+          </view>
+        </block>
+      </view>
+      <view class="new-guest-bd-botm">
+      <button class="btn-submit" bindtap="onClickGoToBuyTicket">去购票</button>
+      </view>
+    </view>
+    <view class="new-guest-decoration-left"></view>
+    <view class="new-guest-decoration-right"></view>
+    <text class="ifont-closed" bindtap="hideBackDrop"></text>
+  </view>
+</block> -->
+<!-- 流失用户推送弹窗 -->
+<template is="lostUserPop" data="{{lostUserPopType:'index',lostUserPopDetail,lostUserSwiperDetail}}" wx:if="{{showType === 'lostUserPop' && !lostUserPopProType}}" />
+<template is="lostUserPopPro" data="{{lostUserPopDetail,lostUserSwiperDetail}}" wx:if="{{showType === 'lostUserPop' && lostUserPopProType}}" />
+<!-- <block wx:if="{{showType === 'lostUserPop'}}">
+  <view class="backmask active" bindtap="hideBackDrop"></view>
+
+  <image class="coin-decoration" mode="widthFix"  style="width:100%" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/6yue/liushi/jinbi@3x.png" />
+  <view class="pop-lost-sec">
+    <view class="title">
+      <text>{{lostUserPopDetail.AlertTitle}}</text>
+      <image  bindtap="onClickLostUserRuleBtn" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/6yue/liushi/wenhao.png" alt="" mode="aspectFit" style="height:29rpx;width:29rpx" data-url="{{lostUserPopDetail.RuleUrl || lostUserSwiperDetail.RuleUrl}}"/>
+    </view>
+    <view class="subtitle">{{lostUserPopDetail.AlertSubTitle}}</view>
+    <view class="coupon-list">
+      <view class="coupon-container" wx:for="{{lostUserPopDetail.AlertGiftList}}" wx:for-item="item">
+        <view class="coupon-left">
+          <text class="num">{{item.Price}}</text>{{item.Unit}}
+          <view class="tag" wx:if="{{item.Tag}}">{{item.Tag}}</view>
+        </view>
+        <view class="coupon-right">
+          <view class="coupon-title">{{item.Title}}</view>
+          <view class="coupon-desc">{{item.SubTitle}}</view>
+        </view>
+
+        <view class="receive-tag" wx:if="{{item.IsSend}}">已领取</view>
+      </view>
+    </view>
+
+    <view class="pop-botm">
+      <button bindtap="onClickLosrUserSubscribeBtn">知道了</button>
+      <text class="tips">{{lostUserPopDetail.AlertTip}}</text>
+      </view>
+      <text class="ifont-closed" bindtap="hideBackDrop"></text>
+  </view>
+</block> -->
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>
+
+<!-- 国际火车乘客选择弹窗 -->
+<block wx:if="{{passengerChoiceVisible}}">
+    <passengerChoice 
+      bind:onClosePassengerChoice="onClosePassengerChoice" 
+      passengerChoiceVisible="{{passengerChoiceVisible}}" 
+      passengerInfo="{{overseaPassengerInfo}}" 
+      bind:onConfirmChoosePassenger="onConfirmChoosePassenger"
+    ></passengerChoice>
+</block>
+
+<subscribeGuide visible="{{subscribeGuideFlag}}" videoSrc="{{subVideoSource}}"/>
+

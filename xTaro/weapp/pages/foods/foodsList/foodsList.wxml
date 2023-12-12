@@ -1,0 +1,39 @@
+<view class="top-menu">
+  <block wx:if="{{Filter && Filter.DefaultSort}}">
+    <topFilterComponent isNewStyle="{{isNewStyle}}" id="topFilterComponent" filter="{{Filter}}" filter-name="{{filterName}}" order-type="{{_OrderType}}" sell-filter="{{sellFilter}}" district-id="{{districtId}}" bind:myevent="_getFilterData" ></topFilterComponent>
+  </block>
+</view>
+<block wx:if="{{nodata}}">
+  <view class="nodata_food">
+    <view class="nodata_notice">
+      <text class="text1">未找到符合条件的美食</text>
+      <text class="text2">请修改条件重新查询</text>
+    </view>
+  </view>
+</block>
+<block wx:if="{{nodata2}}">
+  <view class="nodata_food">
+    <view class="nodata_notice">
+      <text class="text1">当前城市暂无美食林榜单数据</text>
+    </view>
+  </view>
+</block>
+<scroll-view scroll-y="{{isScroll}}" class="l-modlist" bindscroll="_onScroll" scroll-into-view="{{scrollIntoView}}"
+scroll-with-animation="true" bindscrolltolower="_scrolltolower" scroll-top="0">
+  <block wx:for="{{Restaurants}}" wx:for-index="idx" wx:for-item="item" wx:key="item.RestaurantId">
+    <!-- 引用组件的页面模版 -->
+    <view>
+      <food-item fooditem="{{item}}" idx="{{idx}}" isNewStyle="{{isNewStyle}}" bindmyevent="_goDetail">
+      </food-item>
+    </view>
+  </block>
+  <loading-component wx:if="{{listLoading}}"></loading-component>
+  <view class="no-more" wx:if="{{nomore && !nodata && !listLoading}}">
+    <text>没有更多美食了</text>
+  </view>
+</scroll-view>
+
+<block wx:if="{{isIphoneX}}">
+    <view class="iphoneX-fixed"></view>
+</block>
+

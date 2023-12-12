@@ -1,0 +1,139 @@
+<view id="scene_box" class='scene_box custom_scene_class exposure_trace_{{item.index}}' data-item="{{item}}" bindtap="customClickHandle">
+  <view class="mkt_sk_card_layout list_scene_box_{{index}}">
+    <!-- 左侧布局 -->
+    <view class="mkt_sk_card_left">
+
+      <image src="{{ item.imageUrl }}" mode="aspectFill" class="mkt_sk_card_productimage" data-name="imageUrl" style="{{filterProductProps && filterProductProps.imageUrl}}" />
+
+      <view class="mkt_sk_card_position">
+        <view class="mkt_sk_card_position_text" data-name="index" style="{{filterProductProps && filterProductProps.index}}">{{ item.index }}</view>
+      </view>
+
+      <image wx:if="{{item.recommendStatus == 1}}" class="mkt_sk_recommendicon" src="https://images3.c-ctrip.com/marketing/2023/03/sk/recommand.png" mode="aspectFill" />
+
+      <block wx:if="{{item.explainStatus == 2 }}">
+        <view class="mkt_sk_explanationbox mkt_sk_explanation" data-name="explaining" style="{{filterProductProps && filterProductProps.explaining}}">
+          <image class="mkt_sk_explanationicon" src="https://images3.c-ctrip.com/marketing/2023/03/sk/explaining.gif" mode="widthFix">
+          </image>
+          <view class="mkt_sk_explanation_ing">讲解中</view>
+        </view>
+      </block>
+
+      <!-- 这里细分一下是否展示"提问"按钮 -->
+      <block wx:elif="{{(item.explainStatus == 1 || item.explainStatus == 3) && !item.saleStatusText}}">
+        <!-- 初版-货架求讲解状态 -->
+        <!-- <block wx:if="{{!toAskQuestions}}">
+          <view class="mkt_sk_explanation_item mkt_sk_explanation_askbox {{item.explainStatus == 3 ? 'mkt_sk_explanation_close' : ''}}" data-item="{{item}}" data-index="{{index}}" catchtap="refreshStatus">
+            <view class="ask_icon"></view>
+            <view class="ask_text" data-name="explainStatus" style="{{filterProductProps && filterProductProps.explainStatus}}">{{item.explainStatus == 3 ? '已申请':'求讲解'}}</view>
+          </view>
+        </block> -->
+        <!-- 20230713-求讲解新增 提问 按钮 -->
+        <block wx:if="{{true}}">
+          <view class="mkt_sk_explanation_item mkt_sk_explanation_askbox mkt_sk_explanation_askbox_addMessage {{item.explainStatus == 3 ? 'mkt_sk_explanation_close' : ''}}">
+            <view class="ask_textStatus" data-name="explainStatus" style="{{filterProductProps && filterProductProps.explainStatus}}" data-item="{{item}}" data-index="{{index}}" catchtap="refreshStatus">{{item.explainStatus == 3 ? '已申请':'求讲解'}}</view>
+            <view class="ask_message" data-name="explainStatus" style="{{filterProductProps && filterProductProps.explainStatus}}" data-index="{{index}}" catchtap="handleLiveAskMessage">提问</view>
+          </view>
+        </block>
+      </block>
+
+      <view wx:if="{{item.saleStatusText}}" class="mkt_sk_explanation_saleoff_box" data-name="explainStatus" style="{{filterProductProps && filterProductProps.explainStatus}}">
+        <view class="saleoff_text">{{item.saleStatusText}} </view>
+      </view>
+
+    </view>
+
+    <!-- 右侧布局 -->
+    <view class="mkt_sk_card_right">
+
+      <!-- 商品标题和活动标签 -->
+      <view class="mkt_sk_card_producttitle" data-name="name" style="{{filterProductProps && filterProductProps.name}}">
+        <text class="mkt_sk_card_productactivitytag" wx:if="{{item.activityTag}}">{{item.activityTag || '热门活动'}}</text>{{ item.title }}
+      </view>
+      <view class="mkt_sk_card_score_layout {{item.rankTag?'mkt_sk_card_rangtag':''}}" wx:if="{{ item.hasRankInfo || item.scoreBigThan45}}">
+
+        <!-- 评分 -->
+        <block wx:if="{{item.score}}">
+          <text data-name="score" style="{{filterProductProps && filterProductProps.score}}">
+            <text class="mkt_sk_card_score">{{item.score}}</text>
+            <text class="mkt_sk_card_score_unit">分</text>
+          </text>
+        </block>
+
+        <!-- 榜单 -->
+        <view class="mkt_sk_card_rangtag_box" wx:if="{{item.hasRankInfo}}">
+          <text wx:if="{{item.scoreBigThan45}}" class=" mkt_sk_card_rangtag_beforeicon"></text>
+          <view class="mkt_sk_card_rangtag_infobox" data-name="rankTag" style="{{filterProductProps && filterProductProps.rankTag}}">
+            <image class="mkt_sk_card_rangtag_icon" src="https://images3.c-ctrip.com/marketing/2023/03/sk/rank_tag_icon.png" mode="heightFix" />
+            <text class="mkt_sk_card_rangtag_text">{{item.rankTag}}</text>
+          </view>
+        </view>
+
+        <!-- 商圈 -->
+        <view class="mkt_sk_card_zoneName_box" wx:if="{{item.zoneName}}">
+          <view class="mkt_sk_card_zoneName_infobox" data-name="zoneName" style="{{filterProductProps && filterProductProps.zoneName}}">
+            <image class="mkt_sk_card_zoneName_icon" src="https://images3.c-ctrip.com/marketing/2023/03/sk/geoIcon3.png" mode="heightFix" />
+            <text class="mkt_sk_card_zoneName_text">{{item.zoneName || ''}}</text>
+          </view>
+        </view>
+
+        <!-- 点评 -->
+        <block wx:if="{{item.showCommentsCount}}">
+          <text class="line-v mkt_sk_card_commentsCount_icon"></text>
+          <text class="comment-count mkt_sk_card_commentsCount_count" data-name="showCommentsCount" style="{{filterProductProps && filterProductProps.showCommentsCount}}">{{item.showCommentsCount}}条点评</text>
+        </block>
+      </view>
+
+      <!-- 自定义标签组 -->
+      <view class="mkt_sk_card_taglist" wx:if="{{ (item.customerTags && item.customerTags.length) || item.tuanTag }}">
+        <!-- 团购标签 -->
+        <view class="mkt_sk_card_tuanTag" wx:if="{{item.tuanTag}}">
+          <view class="mkt_sk_card_tuanTagitem" data-name="customerTags" style="{{filterProductProps && filterProductProps.tuanTag}}">{{item.tuanTag || ""}}</view>
+        </view>
+        <block wx:if="{{ item.customerTags && item.customerTags.length }}">
+          <block wx:for="{{item.customerTags}}" wx:key="index">
+            <view class="mkt_sk_card_tagitem" data-name="customerTags" style="{{filterProductProps && filterProductProps.customerTags}}">{{item}}</view>
+          </block>
+        </block>
+      </view>
+
+      <view class="mkt_sk_card_price_layout">
+        <view class="mkt_sk_card_price_wrap">
+          <view class="mkt_sk_card_price_box">
+
+            <!-- 有返回价格 -->
+            <block wx:if="{{!item.priceText && item.price}}">
+              <text class="mkt_sk_card_price" data-name="price" style="{{filterProductProps && filterProductProps.price}}">
+                <text class="mkt_sk_card_price_unit">¥</text>
+                <text class="mkt_sk_card_price_priceText">{{ item.price.count || item.price }}</text>
+                <text class="mkt_sk_card_price_start">起</text>
+                <text class="mkt_sk_card_price_priceSuffix" wx:if="{{item.nights >= 2}}">/{{item.nights}}晚</text>
+                <text wx:if="{{item.marketPrice}}" class="mkt_sk_card_price_originPrice">¥{{item.marketPrice }}</text>
+              </text>
+            </block>
+
+            <!-- 没返回价格 -->
+            <block wx:if="{{item.priceText}}">
+              <view class="mkt_sk_card_priceText_empty" wx:if="{{item.priceText == '免费' || item.priceText == '免费预约' }}">{{item.priceText}}</view>
+              <view class="mkt_sk_card_price_priceText" wx:else>{{item.price}}</view>
+            </block>
+
+          </view>
+          <view class="mkt_sk_card_reducedPrice" wx:if="{{item.marketPrice && ((item.reduction && item.reduction.showMarketPrice) || (item.discount && item.discount.showMarketPrice))}}">
+            <view class="mkt_sk_card_reduced_text" wx:if="{{item.reduction.count}}" data-name="reduction" style="{{filterProductProps && filterProductProps.reduction}}">已减¥{{item.reduction.count}}</view>
+            <block wx:if="{{item.discount.count && item.discount.count != 'NaN'}}">
+              <view class="mkt_sk_card_discount_text" data-name="discount" style="{{filterProductProps && filterProductProps.discount}}">{{item.discount.count}}折</view>
+            </block>
+          </view>
+        </view>
+
+        <view class="mkt_sk_card_btn_box">
+          <view class="mkt_sk_card_btn_unit" data-name="btnText" style="{{filterProductProps && filterProductProps.btnText}}">{{item.saleStatus == 2 ? '待开抢' : '抢购'}}</view>
+          <view wx:if="{{item.disableShopCard}}" class="mkt_sk_card_btn_disabled">
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>

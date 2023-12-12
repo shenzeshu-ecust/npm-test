@@ -1,0 +1,19 @@
+<view class="price-calendar" catchtap="handleOpenCalendarPage">
+  <view class="price-calendar-item">
+    <text class="item-main">{{selectBegin}}</text>
+    <view class="item-main-txt">
+      <text class="week-txt">{{sWeekText}} 入住</text>
+      <image class="more-icon" src="https://pic.tujia.com/upload/festatic/mp/arrow_right2x.png"></image>
+    </view>
+  </view>
+  <view class="price-calendar-item">
+    <text class="item-main day-txt">共{{interval}}晚</text>
+  </view>
+  <view class="price-calendar-item price-calendar-item-end">
+    <text class="item-main">{{selectEnd}}</text>
+    <view class="item-main-txt">
+      <text class="week-txt">{{eWeekText}} 离开</text>
+      <image class="more-icon" src="https://pic.tujia.com/upload/festatic/mp/arrow_right2x.png"></image>
+    </view>
+  </view>
+</view>

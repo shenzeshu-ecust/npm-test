@@ -1,0 +1,13 @@
+{
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "disableScroll": true,
+    "usingComponents": {
+        "TrainCard": "../common/components/TrainCard/trainCard",
+        "notice": "../common/components/notice/notice",
+        "OmnipotentGrab": "../common/components/omnipotentGrab/omnipotentGrab",
+        "CombiSeatInfo": "../common/components/combiSeatInfo/combiSeatInfo",
+        "subscribeGuide": "/pages/train/common/components/SubscribeGuide/index",
+        "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+    }
+}

@@ -1,0 +1,10 @@
+<!--pages/bus/common/template/tipMask.wxml-->
+
+<template name="desktipmask">
+<view class='tipmask' >
+  <view class="flex-column">
+      <image class="tipMaskBtnImage" src='http://images3.c-ctrip.com/BUS/wechatapp/mask_tip_image2.png' ></image>
+      <button class='tipMaskBtn' hover-class='button-hover' bindtap='hideTipMask' ></button>
+  </view>
+</view>
+</template>

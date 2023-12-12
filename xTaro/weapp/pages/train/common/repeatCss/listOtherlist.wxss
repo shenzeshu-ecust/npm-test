@@ -1,0 +1,14 @@
+.filter-box{padding: 30rpx 30rpx 0;}
+.filter-box .tit{font-size: 30rpx;font-weight: 600;line-height: 38rpx;margin-bottom: 24rpx}
+.filter-list{overflow: hidden;font-size: 32rpx;margin-bottom: 48rpx}
+.filter-list .item{width: 334rpx;height: 68rpx;float: left;margin:0 22rpx 16rpx 0;display: flex;align-items: center;background: #F8F8F8;border-radius: 4px;text-align: center;font-size: 26rpx;color: #666;position: relative}
+.filter-list .item .ifont-filtercheck{font-size: 28rpx;position: absolute;bottom: -1px;right: 0;color: #0086F6;display: none}
+.filter-list .item:nth-child(2n){margin-right: 0}
+.filter-list .item .cont{flex: 1;}
+.filter-list .item.cur{color:#0086F6;background: #E6F3FE;border:1px solid #0086F6;box-sizing: border-box}
+.filter-list .item.cur .ifont-filtercheck{display: block}
+.filter-list .item .t{font-size: 24rpx;line-height: 26rpx;}
+.filter-list .item .time{font-size: 22rpx;line-height: 22rpx}
+.filter-list .item.station{width: 218rpx;margin-right: 16rpx;}
+.filter-list .item.station:nth-child(2n){margin-right: 16rpx}
+.filter-list .item.station:nth-child(3n){margin-right: 0}

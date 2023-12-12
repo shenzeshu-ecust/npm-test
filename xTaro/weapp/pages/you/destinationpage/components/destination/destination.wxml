@@ -1,0 +1,88 @@
+<!--pages/destination/destination.wxml-->
+<!-- <import src="template/destinationBanner.wxml"/> -->
+<import src="../../common/desTemplate/destinationBanner.wxml"/>
+<import src="../../common/desTemplate/destinationSquare.wxml"/>
+<import src="../../common/desTemplate/destinationTrainTicket.wxml"/>
+<import src="../../common/desTemplate/destinationHotel.wxml"/>
+<import src="../../common/desTemplate/localGuide.wxml"/>
+<import src="../../common/desTemplate/destinationStrategyBook.wxml"/>
+<import src="../../common/desTemplate/destinationGowhere.wxml"/>
+<import src="../../common/desTemplate/destinationTheme.wxml"/>
+<import src="../../common/desTemplate/destinationSpecialFoods.wxml"/>
+<import src="../../common/desTemplate/destinationRoute.wxml"/>
+<import src="../../common/desTemplate/destinationAsk.wxml"/>
+<import src="../../common/desTemplate/waterfall/waterfall.wxml"/>
+<import src="../../common/desTemplate/listCompilation.wxml"/>
+<import src="../../common/desTemplate/playLiveEatListComponent.wxml"/>
+<import src="../../common/desTemplate/template/commonTitle.wxml"/>
+<import src="../../common/desTemplate/compassGuideV2Component.wxml"/>
+<!-- zfMigrate -->
+
+<view class="{{iphonexFlag ? 'iphonex-bottom' : ''}}" style="width: 750rpx">
+	<scroll-view scroll-y='true' scroll-into-view="{{hrefId}}" style="height:{{windowHei}}px" bindscrolltolower='_scrolltolower'>
+		<!-- banner banner头模块 -->
+		<template is="destinationBanner" wx:if="{{bannerData}}" data="{{bannerData}}"/>
+
+		<!-- square 九宫格模块-->
+		<template is="destinationSquare" wx:if="{{squareData}}" data="{{squareData}}"/>
+
+		<!-- 当地指南模块 -->
+		<!--<template is="localGuide" wx:if="{{localGuideData}}" data="{{localGuideData}}"/>-->
+		<template is="compassGuideModuleV2Component" wx:if="{{compassGuideModuleV2}}" data="{{compassGuideModuleV2}}"/>
+
+		<!-- strategybook 口袋攻略书入口-快速了解当地-->
+		<template is="destinationStrategyBook" wx:if="{{strategyData}}" data="{{strategyData}}"/>
+
+		<!-- 广告位banner -->
+		<view class="adContainer">
+			<ad-sdk impId="05GLOYVA0581XQRAZRWXONXZ" site="{{siteObj}}" width="{{adWidth}}" wx:if="{{!!bannerData&& !!siteObj}}" height="{{adHeight}}"></ad-sdk>
+		</view>
+
+          <view class="adContainer-position">
+             <ad-sdk impId="05GLOYVA0581XQRAZRGLRAJM" site="{{siteObj}}" width="{{adWidth2}}" wx:if="{{!!bannerData && !!siteObj}}" height="{{adWidth2}}"></ad-sdk>
+         </view>
+		<!-- 榜单聚合模块 -->
+		<!-- <template is="listCompilation" wx:if="{{listCompData}}" data="{{listCompData}}"/> -->
+
+       <template is="playLiveEatListComponent" wx:if="{{playLiveEatList}}" data="{{playLiveEatList}}"/>
+
+		<!-- trainticket 火车票入口-高铁动车-->
+		<template is="destinationTrainTicket" wx:if="{{trainData}}" data="{{trainData}}"/>
+
+		<!-- hotel 酒店入口 -预定酒店-->
+		<template is="destinationHotel" wx:if="{{hotelData}}" data="{{hotelData}}"/>
+
+		<!-- gowhere 去哪儿玩模块-必玩top榜-->
+		<template is="destinationGowhere" wx:if="{{gowhereData}}" data="{{gowhereData}}"/>
+
+		<!-- theme 特色主题模块-->
+		<template is="destinationTheme" wx:if="{{themeData}}" data="{{themeData}}"/>
+
+		<!-- specialFoods 特色菜模块-->
+		<template is="destinationSpecialFoods" wx:if="{{specialFoods}}" data="{{specialFoods}}"/>
+
+		<!-- route 行程路线模快 -->
+		<template is="destinationRoute" wx:if="{{routeData}}" data="{{routeData}}"/>
+
+		<!-- 问答模块 -->
+		<template is="destinationAsk" wx:if="{{askData}}" data="{{askData}}"/>
+
+		<!-- waterfall 笔记瀑布流模块 -->
+	    <block wx:if="{{relevantList && relevantList.length && showRelevantList}}">
+	      <view id="lvpai">
+              <view class="relevant-list" id="relevant-list">
+                  <!-- <view class="title js_relevantTitle destination-title-padding2">热门笔记</view> -->
+                  <template is="commonTitle" data="{{title:'热门笔记'}}"></template>
+                  <view class="waterfall-content">
+                    <template is="waterfall" data="{{waterfallLeftList,waterfallRightList,adWidth3,isHasAd}}"></template>
+                  </view>
+                  <view class='js_loadingbox' style="visibility:{{showLoading?'visible':'hidden'}}" >
+                    <view class="load-more">
+                        <view class="load-more-center"><image animation="{{animation}}"  src="https://pages.c-ctrip.com/you/livestream/lvpai_loading.png"></image>加载中...</view>
+                    </view>
+                  </view>
+              </view>
+	      </view>
+	    </block>
+    </scroll-view>
+</view>

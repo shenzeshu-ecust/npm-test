@@ -1,0 +1,16 @@
+<template name="pointsRule">
+    <view class="cmask" catchtap="togglePointsRule" catchtouchmove="noop"></view>
+    <view class="cmask-popbox points-layer" catchtouchmove="noop">
+        <view class="popbox-thead">
+            <view class="tit">积分说明</view>
+            <view class="wechat-font-close close-icon" catchtap="togglePointsRule"></view>
+        </view>
+        <view class="popbox-tbody points-tbody">
+            <view class="points-item">积分将在订单成交后发放</view>
+            <view class="points-item">订单消费积分=订单房费成交金额*50%*会员系数</view>
+            <view class="points-item">会员积分系数：普通会员1，白银贵宾1.2，黄金贵宾1.5，铂金贵宾1.8，钻石贵宾2，金钻贵宾2.5，黑钻贵宾3</view>
+            <view class="points-item">商旅订单、使用积分兑换首晚房费权益支付的金额部分不计积分</view>
+            <view class="points-item">超时未入住订单将扣除对应金额或积分</view>
+        </view>
+    </view>
+</template>

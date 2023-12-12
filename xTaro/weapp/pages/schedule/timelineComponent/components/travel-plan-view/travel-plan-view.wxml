@@ -1,0 +1,19 @@
+<view class="container">
+    <text class="title">我的旅行线路</text>
+    <view class="card_container">
+        <view class="travel_item" bind:tap="onGoToDetails" data-cardmodel='{{itemData}}'>
+            <image class="travel_icon_bg" src='{{itemData.image}}' mode="aspectFill" />
+            <view class="travel_mask_bg"/>
+            <text class="card_title">{{itemData.title}}</text>
+        </view>
+        <view class="travel_item" bind:tap="onGoToTravelList">
+            <image class="travel_icon_bg" src='https://pages.c-ctrip.com/schedule/pic/wxxcx/image_lu.png' mode="aspectFill" />
+            <view class="see_more_content">
+                <view class="see_more_container">
+                    <image class="see_more_arrow" src='https://pages.c-ctrip.com/schedule/pic/wxxcx/right_arrow.png' />
+                    <text class="see_all_text">查看全部</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

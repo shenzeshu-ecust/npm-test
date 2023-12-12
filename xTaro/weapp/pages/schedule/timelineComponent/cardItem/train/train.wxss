@@ -1,0 +1,177 @@
+.schedule_container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.train-card-box{
+  width: 100%;
+}
+
+.train-card-body{
+  display: flex;
+  padding: 0 28rpx 28rpx;
+  color: #333;
+  flex-direction: column;
+}
+
+.train-card-info{
+  display: flex;
+  align-items: center;
+}
+
+.train-card-info-text{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top:8rpx;
+}
+.train-card-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.train-card-mid-time {
+  color: #999;
+}
+.train-card-mid-text {
+  color: #333;
+  border: 1rpx solid #eee;
+  border-radius: 4rpx;
+  padding: 3rpx 6rpx 0rpx;
+  margin-top: 5rpx;
+}
+.tran-card-grab{
+  padding: 10rpx 0;
+}
+.train-info-box{
+  color: #333333;
+  padding: 19rpx 16rpx;
+  margin: 0 16rpx;
+  background: #f8fafd;
+  border-radius: 12rpx;
+}
+.seat-position {
+  color: #999;
+  font-size: 20rpx;
+  vertical-align: 3rpx;
+  margin-right: 8rpx;
+  font-weight: normal;
+}
+.check-entry {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.margin-bottom12 {
+  margin-bottom: 12rpx;
+}
+.margin-top12 {
+  margin-top: 12rpx;
+}
+.train-info-box-check-entry{
+  color: #999;
+  margin-right: 3rpx;
+  /* margin-top: -3rpx; */
+}
+.train-info-box-check-icon {
+  margin-right: 25rpx;
+}
+.train-passenger-title{
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.train-passenger-item{
+  display: flex;
+  font-weight: 500;
+  /* justify-content: space-between; */
+}
+.more-people {
+  padding: 10rpx 0;
+}
+
+.train-passenger-item-name{
+  /* flex: 1; */
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.train-passenger-name{
+  padding-right: 10rpx;
+}
+
+.train-card-botton{
+  padding: 15rpx 38rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.train-card-botton-status{
+  display: flex;
+  align-items: center;
+  color: #666666;
+  opacity: 0.8;
+}
+
+.train-card-botton-status-icon{
+  width: 26rpx;
+  height: 26rpx;
+  padding-right: 13rpx;
+}
+
+.train-card-botton-status-arrows{
+  width: 14rpx;
+  height: 20rpx;
+  padding-left: 10rpx;
+}
+
+.train-card-botton-btns{
+  color: #1980FE;
+  font-weight: 700;
+  padding-bottom: 18rpx;
+}
+
+.cutting-line{
+  height: 2rpx;
+  background-color: #f5f5f5;
+}
+
+.left{
+  text-align: left;
+}
+
+.center{
+  text-align: center;
+}
+
+.right{
+  text-align: right;
+}
+
+.font-size20{
+  font-size: 20rpx;
+}
+.font-size22{
+  font-size: 22rpx;
+}
+.font-size26{
+  font-size: 26rpx;
+}
+
+.font-size48{
+  font-size: 48rpx;
+}
+
+.font-size56{
+  font-size: 56rpx;
+}
+
+.font-bold{
+  font-weight: bold;
+}
+
+.flex1{
+  flex: 1;
+}

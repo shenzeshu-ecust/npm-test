@@ -1,0 +1,118 @@
+<!--index.wxml-->
+<nav-bar navbar-data="{{navbarData}}" bindback="onBack"></nav-bar>
+
+<block wx:if='{{!realSuccess}}'>
+<view class="wrapbox">
+    <view class="box-header">
+        <text class="boxheader-h1">
+        请填写与您身份证一致的信息
+        </text>
+        <text class="boxheader-h2">
+        携程智能加密技术，实时保障您的信息安全
+        </text>
+    </view>
+    <view class="box-form">
+        <label class="inputitem" for="idNameInput">
+            <input id="idNameInput" value="{{inputKeys[1]}}" data-key="1" class="police-input {{(focusKey & 1) === 1 ? 'input-focused':''}}" disabled="{{weakAuthData ? true : false}}" type="text" maxlength="20" bindinput="bindKeyInput" bindfocus="focusAction" bindblur="blurAction" cursor-spacing="30" />
+            <view class="inputname-box">真实姓名</view>
+        </label>
+        <view class="labelitem">
+            <view class="inputname-title">证件类型</view>
+            <view class="inputname-value id_wrapper">
+            <text>身份证</text> 
+            <image  wx:if="{{showModifyRemind && referFrom ===0}}"  class="id_qa" bindtap="idQaHandler" src="https://pic.c-ctrip.com/picaresonline/fncmobilewallet/walletstatic/images/ctrip/pay_icon.101d8731.png" mode=""/>
+        </view>
+        </view>
+        <label class="inputitem {{(focusKey & 2) == 2 ? 'input-focused':''}}">
+            <input value="{{inputKeys[2]}}" disabled="{{weakAuthData ? true : false}}" 
+            bindfocus="focusAction" class="police-input" type="idcard" maxlength="20" bindblur="blurAction" cursor-spacing="30" data-key="2" bindinput="bindKeyInput" />
+            <view class="inputname-box">证件号</view>
+        </label>
+        <view wx:if="{{complianceText}}" class="agreement-wrap">
+            <view>
+                <radio value="agreement" bindtap="tapAgreementRadio" checked="{{agreementChecked}}" color="#0086F6" class="agreement-radio"/>
+                请仔细阅读并充分理解 
+                <text wx:for="{{agreementList}}" class='agreement' bindtap="tapAgreement" data-purl="{{item.protocolUrl}}"
+                data-ptitle="{{item.protocolTitle}}">{{item.protocolTitle}}</text>
+            </view>
+            <view style="margin-left: 50rpx;">{{complianceText}}</view>
+        </view>
+        
+        <view class="boxform-btnbox">
+            <block wx:if="{{submiting}}">
+                <block wx:if="{{modelSubmit}}">
+                  <button class="boxform-btn boxform-enbtn" bindtap="submitRealname">同意协议并提交</button>
+                </block>
+                <block wx:elif="{{realNamed}}">
+                    <button class="boxform-btn boxform-enbtn" bindtap="againSubmit">同意协议并提交</button>
+                </block>
+                <block wx:else>
+                    <button class="boxform-btn boxform-enbtn" bindtap="doSignGet">同意协议并提交</button>
+                </block>
+            </block>
+            <block wx:else>
+                <button class="boxform-btn">同意协议并提交</button>
+            </block>
+        </view>
+    </view>
+    <block wx:if="{{formApp&&hasBackBtn}}">
+    <view class="box-returnbtns">
+        <button class="box-returnbtn" data-senceId="realnaming" bindtap="toAppSence" open-type="launchApp" app-parameter="{{appReturnData}}" binderror="launchAppError" bindlaunchapp="launchAppSuccess">返回携程旅行应用</button>
+    </view>
+    </block>
+</view>
+</block>
+<block wx:else>
+    <block wx:if="{{formApp}}">
+        <block wx:if="{{conflicted}}">
+            <view class="realname-imgbox">
+                <image mode="aspectFit" class="realname-imgbox_img" src="http://pic.c-ctrip.com/picaresonline/h5paymentsdk/smallprogram/img/realname-conflicted.d7156e1f.png"></image>
+                <view class="realname-imgbox_txt">实名认证失败</view>
+            </view>
+            <view class="realname-desc">
+            {{conflictedTxt}}
+            </view>
+            <block wx:if="{{hasBackBtn}}">
+            <view class="realname-button">
+            <button class="fail-backbutton" data-senceId="realnamedFail" bindtap="toAppSence" open-type="launchApp" app-parameter="{{appReturnData}}" binderror="launchAppError" bindlaunchapp="launchAppSuccess">去抹除实名</button>
+            </view>
+            </block>
+        </block>
+        <block wx:else>
+            <icon class="wc_icon1"></icon>
+            <text class="wc_txt1">实名认证成功</text>
+            <view class="re_infobox">
+                <view>
+                    <text>您的帐号已实名：</text>{{weakAuthData.userNameMask}}
+                </view>
+                <view>
+                    <text>身份证：</text>{{weakAuthData.idNo}}
+                </view>
+            </view>
+            <block wx:if="{{hasBackBtn}}">
+            <button class="wc_btn1" data-senceId="realnamed" bindtap="toAppSence" open-type="launchApp" app-parameter="{{appReturnData}}" binderror="launchAppError" bindlaunchapp="launchAppSuccess">返回携程旅行应用</button>
+            </block>
+        </block>
+    </block>
+    <block wx:else>
+        <view class="re_tit1">
+        <i class="re_img1"></i>
+        <text>账户已实名认证</text>
+        </view>
+        <view class="re_list1">
+        <view>
+            <text>姓名</text>{{weakAuthData.userNameMask}}
+        </view>
+        <view>
+            <text>身份证</text>{{weakAuthData.idNo}}
+        </view>
+        </view>
+        <view class="re_list2">
+          <view><icon class="re_icon1"></icon><text>资金、账户安全再升级</text>可防止个人信息冒用，有效保障资金及账户安全</view>
+          <view><icon class="re_icon2"></icon><text>可尊享特权服务</text><text class="re_txt01">拿去花、闪住、信用抢票</text>等特权服务，仅实名用户可享</view>
+        </view>
+        <view  wx:if="{{showModifyRemind && referFrom ===0}}"  class="modify_realname_tips">
+          <text bindtap="modifyRealNameTipsHandler">如何修改实名</text>
+        </view>
+    </block>
+</block>

@@ -1,0 +1,281 @@
+/* pages/market/cancelCoupon/cancelCoupon.wxss */
+
+page {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-overflow-scrolling: touch;
+  background-color: #2577e3;
+}
+
+.title {
+  position: relative;
+  height: 6.4rem;
+  text-align: center;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  background: url(//pages.c-ctrip.com/amsweb/cancelCoupon/static/img/icons.aadaf70.png) no-repeat;
+  background-size: 21.33333rem 21.33333rem;
+}
+
+.icon-appLogo {
+  background-position: 0 -6.48rem;
+  width: 2.13333rem;
+  height: 2.24rem;
+}
+
+.icon-checked {
+  background-position: 0 -11.14667rem;
+  width: 2.66667rem;
+  height: 2.72rem;
+}
+
+.title-desc {
+  font-size: 0.96rem;
+  color: #fff;
+}
+
+.icon-shadowBg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  background-position: -6.4rem 0;
+  width: 13.54667rem;
+  height: 13.12rem;
+}
+
+.mainBody-userInfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0.26667rem 1.33333rem;
+}
+
+.bu-name {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  font-size: 0.74667rem;
+  color: #fff;
+}
+
+.bu-logout {
+  float: right;
+  font-size: 0.64rem;
+  color: #ccc;
+}
+
+.mainBody-con {
+  position: relative;
+  font-size: 0;
+  width: 100%;
+  height: 11.46667rem;
+}
+.btn-image{
+  width: 100%;
+  height:50px;
+}
+.mainBody-con>image,.result-content>image {
+  width: 100%;
+
+}
+
+.mc-inputContainer {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 8.66667rem;
+  text-align: center;
+}
+
+.mci-vendorInfo {
+  font-size: 0.64rem;
+  margin-top: 2.13333rem;
+  margin-bottom: 0.53333rem;
+}
+
+.mci-input {
+  position: relative;
+  display: inline-block;
+  height: 3.33333rem;
+  line-height: 3.33333rem;
+  width: 16rem;
+  background-color: #fff;
+}
+
+.mciv-name {
+  margin-left: 0.26667rem;
+}
+
+.mci-input>input {
+  height: 100%;
+  padding: 0 3.2rem 0 0.8rem;
+  font-size: 0.96rem;
+}
+
+.mci-input .icon-clear, .mci-input .icon-wxScan {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.mci-input .icon-wxScan {
+  right: 0.26667rem;
+}
+
+.icon-wxScan {
+  background-position: 0 -4rem;
+  width: 1.78667rem;
+  height: 1.68rem;
+}
+
+.result {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2577e3;
+  z-index: 2;
+  animation: zoomIn;
+  animation-duration: 0.3s;
+
+}
+
+.title {
+  height: 6.66667rem;
+}
+
+img {
+  width: 100%;
+}
+
+.result-content {
+  position: relative;
+  width:100%;
+  font-size: 0;
+}
+
+.rc-text {
+  position: absolute;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 9.01333rem;
+  padding: 0.53333rem 2.93333rem;
+}
+
+.icon-finished {
+  position: absolute;
+  top: 2.66667rem;
+  right: 2.66667rem;
+  background-position: 0 0;
+  width: 3.28rem;
+  height: 3.28rem;
+}
+
+.rc-title {
+  font-size: 0.64rem;
+  margin-top: 0.26667rem;
+  color: #666;
+}
+
+.rc-desc {
+  font-size: 0.85333rem;
+}
+
+.back {
+  margin: 0.8rem auto;
+  width: 16rem;
+  height: 2.4rem;
+  line-height: 2.4rem;
+  background-color: #ff9a14;
+  font-size: 0.85333rem;
+  text-align: center;
+  color: #fff;
+  border-radius: 2.66667rem;
+}
+
+.combineImg {
+  margin-top: -0.02667rem;
+}
+
+.animated {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale3d(0, 0, 0);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+    opacity: 1;
+  }
+}
+
+.zoomIn {
+  animation-name: zoomIn;
+}
+
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale3d(0, 0, 0);
+  }
+}
+
+.zoomOut {
+  animation-name: zoomOut;
+}
+.mci-input .icon-clear {
+    position: absolute;
+    top: 50%;
+    right: 2.66667rem;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+.icon-clear {
+    background-position: 0 -9.49333rem;
+    width: 0.85333rem;
+    height: 0.85333rem;
+}

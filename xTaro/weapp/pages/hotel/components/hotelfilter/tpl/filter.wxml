@@ -1,0 +1,80 @@
+<view hidden="{{hide}}" class="cmask" style="z-index: 999; {{filterFromMap ? 'top: 160rpx;' : ''}}" catchtap="handleClose" catchtouchmove="noop"></view>
+<view hidden="{{hide}}" class="g-filter-box animated fadeInDown {{filterFromMap ? 'ftop-map' : 'filter-topa'}} autoExpose" catchtap="noop" data-expose="{{filterExposeObj}}">
+    <view wx:if="{{loading}}" class="g-filter-base-v h-full">
+        <image src="https://pic.ctrip.com/h5/hotel/hotel-loading100x100.gif" style="width:100rpx;height:100rpx;" />
+    </view>
+    <block wx:else>
+        <view class="g-filter-menu flex h-full">
+            <scroll-view scroll-y class="first-menu ft-28 black1 scroll-y h-full" scroll-into-view="">
+                <block wx:for="{{filterItems}}" wx:for-item="module" wx:key="id">
+                    <view bindtap="handleModuleTap" class="item {{index === activeIndex_lv1 ? 'current' : ''}}" data-id="{{module.id}}" data-level="lv1" data-idx="{{index}}">
+                        {{module.title}}
+                        <text wx:if="{{module.extra.selected}}" class="elem"></text>
+                    </view>
+                </block>
+            </scroll-view>
+            <scroll-view scroll-y scroll-with-animation scroll-into-view="{{curView}}" class="second-menu flex star scroll-y h-full" bindscroll="filterScroll">
+                <view class="second-2-menu star">
+                    <view wx:for="{{filterItems}}" wx:for-item="module" wx:for-index="lv1idx" wx:key="title" class="module-view {{lv1idx === activeIndex_lv1 ? 'current' : ''}}" id="{{'SM_' + module.id}}">
+                        <!-- 多级筛选项 -->
+                        <block wx:if="{{module.subItems[0] && module.subItems[0].subItems}}">
+                            <view class="filter-tit-lv2 ft-28">{{module.title}}</view>
+                            <block wx:for="{{module.subItems}}" wx:for-item="category" wx:for-index="lv2idx" wx:key="title">
+                                <view class="second-menu-tit">
+                                    <view class="hd-txt2" id="{{category.id}}">{{category.title}}</view>
+                                    <view wx:if="{{category.subItems.length > 9}}" bindtap="handleExpand" data-id="{{category.id}}" data-mid="{{module.id}}" class="fold-btn mr30">
+                                        <block wx:if="{{expandedMap[category.id]}}">
+                                            <text>收起</text>
+                                            <view class="wechat-font-g-arrow-up ml5 ft20"></view>
+                                        </block>
+                                        <block wx:else>
+                                            <text>展开</text>
+                                            <view class="wechat-font-g-arrow-down ml5 ft20"></view>
+                                        </block>
+                                    </view>
+                                </view>
+                                <view class="menu-txt">
+                                    <block wx:for="{{category.subItems}}" wx:for-item="item" wx:for-index="lv3idx" wx:key="title">
+                                    <view wx:if="{{lv3idx < 9 || expandedMap[category.id]}}" class="item plr-2 {{item.title.length > 6 ? 'ptb-12' : ''}} {{itemSelectedMap[item.data.filterId] ? 'current' : ''}}"
+                                        data-filterid="{{item.data.filterId}}" bindtap="handleFilterItemTap">
+                                        {{item.title}}
+                                    </view>
+                                    </block>
+                                </view>
+                            </block>
+                        </block>
+                        <!-- 单级筛选项 -->
+                        <block wx:else>
+                            <view class="second-menu-tit">
+                                <view class="filter-tit-lv2 ft-28">{{module.title}}</view>
+                                <view wx:if="{{module.subItems.length > 9}}" bindtap="handleExpand" data-id="{{module.id}}" data-mid="{{module.id}}" class="fold-btn mr30">
+                                    <block wx:if="{{expandedMap[module.id]}}">
+                                        <text>收起</text>
+                                        <view class="wechat-font-g-arrow-up ml5 ft20"></view>
+                                    </block>
+                                    <block wx:else>
+                                        <text>展开</text>
+                                        <view class="wechat-font-g-arrow-down ml5 ft20"></view>
+                                    </block>
+                                </view>
+                            </view>
+                            <view class="menu-txt">
+                                <block wx:for="{{module.subItems}}" wx:for-item="item" wx:for-index="lv2idx" wx:key="title">
+                                <view wx:if="{{lv2idx < 9 || expandedMap[module.id]}}" class="item plr-2 {{item.title.length > 6 ? 'ptb-12' : ''}} {{itemSelectedMap[item.data.filterId] ? 'current' : ''}}"
+                                    data-filterid="{{item.data.filterId}}" bindtap="handleFilterItemTap">
+                                    {{item.title}}
+                                </view>
+                                </block>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <!--Star 底部btn-->
+        <view class="gbtn-box">
+            <view class="btn reset" data-ubt-key="xcx_hotel_list_select_clear" bindtap="reset" id="autotest_xcx_hotel_list_select_clear">清空</view>
+            <view class="btn confirm" data-ubt-key="xcx_hotel_list_select_submit" bindtap="confirm" id="autotest_xcx_hotel_list_select_submit">完成</view>
+        </view>
+    </block>
+</view>

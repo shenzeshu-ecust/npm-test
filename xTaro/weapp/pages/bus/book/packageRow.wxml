@@ -1,0 +1,41 @@
+<template name="salepackagerow">
+  <view class="packagerow-insurance">
+    <icon wx:if="{{type == 'left'}}" size="22" class='padding-margin select {{classConfig.mainColor}} {{item.open ? "icon-checked-round" : "icon-check-round"}} left' bindtap='{{onSelect}}' data-index="{{index}}" data-mutil='{{mutil}}'  >
+    </icon>
+    <view  class='flex1'>
+      <view class='flex-row big-hot' bindtap="{{onExplain}}" data-url="{{item.descUrl}}">
+        <rich-text wx:if="{{item.richTextTitle}}" class='title' nodes="{{item.richTextTitle}}"></rich-text>
+        <view wx:else class="title" >{{item.title}}</view>
+        <icon wx:if="{{item.descUrl}}" type="" size="32rpx" class="icon-info {{classConfig.mainColor}}" color="{{colorConfig.mainColor}}"/>
+        <view class="giveTag" wx:if="{{item.giveProduct && item.giveProduct.title }}" >{{item.giveProduct.title}}</view>
+        <text wx:if="{{item.tag && (item.id == '71020' || item.id == '71021')}}" class="tag new">{{item.tag}}</text>
+        <text wx:elif="{{item.tag}}" class="tag">{{item.tag}}</text>
+      </view>
+
+      <view wx:if="{{item.subTitleX && (item.id == '71020' || item.id == '71021' )}}" class="bus-ins-explain color-green">
+        <text class='flex1 subtitle' >{{item.subTitleX}}</text>
+      </view>
+      <view wx:elif="{{item.subTitleX}}" class="bus-ins-explain">
+        <text class='flex1 subtitle' >{{item.subTitleX}}</text>
+      </view>
+      <view wx:elif="{{item.subTitle}}" class="bus-ins-explain">
+        <text class='flex1 subtitle' >{{item.subTitle}}</text>
+      </view>
+    </view>
+    <block wx:if="{{item.price > 0 || item.showPrice > 0}}">
+      <view wx:if="{{item.sellType == 1}}" class="bus-b-m">
+        <text space="true" wx:if="{{item.showPrice > item.price && item.isDiscount}}" class='bus-discount' ><text class='bus-unit bus-discount'>¥</text>{{item.showPrice}} x {{number}}</text>  
+        <text>  <text decode="{{true}}" space="true" class='bus-unit'>{{'&nbsp;&nbsp;&nbsp;'}}¥</text>{{item.showPrice}} x {{number}}</text>
+      </view>
+      <view wx:else class="bus-b-m">
+        <text space="true">     
+          <text wx:if="{{item.showPrice > item.price && item.isDiscount}}" class='bus-discount' ><text class='bus-unit bus-discount'>¥</text>{{item.showPrice}}</text>
+          <text><text decode="{{true}}" space="true" class='bus-unit'>{{'&nbsp;&nbsp;&nbsp;'}}¥</text>{{item.showPrice}}</text>
+        </text>
+      </view>
+    </block>
+    <icon wx:if="{{type == 'right' && !item.hasOneFreeServiceFee}}" size="23" class='padding-margin select {{classConfig.mainColor}} {{item.open ? "icon-checked-round" : "icon-check-round"}} right' bindtap='{{onSelect}}' data-index="{{index}}" data-mutil='{{mutil}}' >
+    </icon>
+    <text wx:if="{{item.hasOneFreeServiceFee}}" class="free-text">免费</text>
+  </view>
+</template>

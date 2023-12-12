@@ -1,0 +1,22 @@
+<view class='header_wrap'>
+  <view class='integral_count'>
+    <view class='left'>积分总额</view>
+    <view class='right'>
+      <view class='count'>{{availablePoints}}</view>
+      <view class='mark'>分</view>
+    </view>
+  </view>
+</view>
+<view class='main_wrap'>
+  <view wx:for="{{integral_detail_list}}" class='integral_detail_item'>
+    <view class='left'>
+      <view class='earned_source'>{{item.earnedSource}}</view>
+      <view class='earned_time'>{{item.earnedTime}}</view>
+    </view>
+    <view class="right {{item.type > 0 ? 'grey' : 'red'}}">
+      <view class='earned_amount'>
+        {{item.type > 0 ? '-':'+'}}{{item.earnedAmount < 0 ? 0 - item.earnedAmount : item.earnedAmount}}分</view>
+      <view class='status'>{{item.mark}}</view>
+    </view>
+  </view>
+</view>

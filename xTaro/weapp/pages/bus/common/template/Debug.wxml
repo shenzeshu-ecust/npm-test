@@ -1,0 +1,11 @@
+<!--pages/bus/common/template/Coupon.wxml-->
+
+<template name='debugwindow'> 
+<!-- <movable-area class="debug-icon-move-area" bind:touchstart="handleTap1" > -->
+  <view class="debug-icon" out-of-bounds="true" x="1000" y="240"  inertia="true" friction="4"  direction="all" bindchange="debugIconMove" bindtap='debugIconClicked'  >
+  <navigator  >debug</navigator>
+  </view >
+<!-- <view  bindtouchmove='debugIconTouchMove' > -->
+<!-- </movable-area> -->
+
+</template>

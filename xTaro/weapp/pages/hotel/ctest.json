@@ -1,0 +1,11 @@
+[
+  {
+    "url": "http://mobile.test.ctripcorp.com/openApi/server/v1/triggerJob",
+    "params": {
+      "appId": "10000001",
+      "appUrl": "http://download2.ctripcorp.com/mcd/Ctrip_V8.43.6_SIT4.3_Product_9790101.apk",
+      "ctestJobId": 7554,
+      "extention": "{\"qrcodeUrl\":\"\"}"
+    }
+  }
+]

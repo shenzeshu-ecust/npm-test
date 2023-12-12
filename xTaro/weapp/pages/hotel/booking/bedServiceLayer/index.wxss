@@ -1,0 +1,19 @@
+/*订房必读*/
+.bed-service-layer {
+    max-height: 900rpx;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+    padding:40rpx;
+}
+.bed-service-wrap { margin-bottom: 80rpx;}
+.bed-service-wrap .item {
+    color: #111111;
+    font-size: 26rpx;
+    padding-bottom:40rpx;
+    line-height: 36rpx;
+    display: flex;
+}
+.bed-service-wrap .bule{ color:#006FF6; margin: 0 15rpx;}
+.bed-service-wrap .large{ margin-left: 10rpx; margin-right:30rpx; font-weight: 700}
+.bed-service-wrap .list{ height: 60rpx; align-itemc:center; line-height: 80rpx;}
+.bed-service-wrap .list image{ width: 80rpx; height:80rpx;}

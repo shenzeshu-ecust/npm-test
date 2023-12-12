@@ -1,0 +1,8 @@
+.wx_mdcp_tips_wrap{font-family: "Source Han Sans CN","Hiragino Sans GB","Microsoft Yahei",sans-serif;}
+.wx_mdcp_tips_wrap .tips{padding:55px 0 30px;color: #fff;font-size: 20px;text-align: center;background-color: #ee4e61;}
+.wx_mdcp_tips_wrap image{display: block;width: 100%;margin-top: -2px;}
+.wx_mdcp_tips_wrap .tips_bf{font-size: 1.4em;font-weight: bold;}
+.wx_mdcp_tips_wrap .btn_group{position: relative;width: 65%;margin: 20px auto;}
+.wx_mdcp_tips_wrap .btn_group:before{content: "";display: block;width: 50%;padding-bottom: 32%;margin:0 auto;background: url(https://images4.c-ctrip.com/img3/marketing/2017/06/wx_coupon_pop/yoyo.png) no-repeat;background-size: 100%;}
+.wx_mdcp_tips_wrap .btn_group .t_btn{height: 47px;line-height: 47px;box-sizing: border-box;border:1px #e4e4e4 solid;color: #666;font-size: 20px;background-color: #fff;border-radius: 5px;text-align: center;}
+.wx_mdcp_tips_wrap .btn_group .t_btn.red{border-color:#ee4e61;background-color: #ee4e61;color: #fff;margin-bottom: 10px;}

@@ -1,0 +1,36 @@
+<!-- 房型浮层 - 特色房模块 -->
+<view class="speacial-room {{subRoom.isCalendarSuite ? 'sp-live' : ''}}" style="{{bgColor}}">
+    <view class="head-line" style="background-image: url({{upPicture}})" catchtap="goStaticPage">
+        <image wx:if="{{subRoom.isCalendarSuite}}" class="pac-icon" src="{{'https://pages.c-ctrip.com/hotels/wechat/img/suite-icon1.png'}}"></image>
+        <view>
+            <text wx:if="{{name}}" class="black1 {{subRoom.isCalendarSuite ? 'title-small' : 'title' }}">{{name}}</text>
+            <image mode='heightFix' wx:if="{{proprietaryTag}}" class="tag" src="{{proprietaryTag}}"></image>
+        </view>
+    </view>
+    <view wx:if="{{subRoom.isCalendarSuite}}" class="r-num">编号:{{subRoom.roomNo}}</view>
+
+    <!-- 横向排列模式 -->
+    <scroll-view wx:if="{{showVertical}}" class="horizontal-box" scroll-x>
+        <block wx:for="{{roomAtmosphereFacilityInfos}}" wx:key="index" wx:for-item="item">
+            <view class="item">
+                <image mode='heightFix' class="icon" src="{{item.icon}}"></image>
+                <view class="desc">{{item.desc}}</view>
+                <text class="highlight">{{item.highLight}}</text>
+            </view>
+        </block>
+    </scroll-view>
+
+    <!-- 竖向排列模式 -->
+    <view wx:else class="vertical-box">
+        <block wx:for="{{roomAtmosphereFacilityInfos}}" wx:key="index" wx:for-item="item">
+            <view class="item">
+                <image mode='heightFix' class="left-icon" src="{{item.icon}}"></image>
+                <view class="right">
+                    <view class="title">{{item.title}}</view>
+                    <view class="desc">{{item.desc}}</view>
+                </view>
+            </view>
+        </block>
+        <image mode='heightFix' class="bottom-img" src="{{downPicture}}"></image>
+    </view>
+</view>

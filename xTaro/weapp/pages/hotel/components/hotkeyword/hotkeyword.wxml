@@ -1,0 +1,55 @@
+<scroll-view hidden="{{!display}}" scroll-y enhanced show-scrollbar="{{false}}" class="search-body {{from === 'city' ? 'city-height': ''}} {{isIPhoneX ? 'fix-iphonex-border' : ''}}">
+    <view class="content">
+        <block wx:if="{{enableHistory && historyItems.length}}">
+            <view class="title-bar">
+                <view class="title-icon wechat-font-search font-search-color"></view>
+                <view class="title">搜索历史</view>
+                <view bindtap="clearHistoryItems" class="icon-del">清空</view>
+            </view>
+            <view class="keywords">
+                <view wx:for="{{historyItems}}" bindtap="searchKeyword"
+                    class="item ft24 {{item.text.length > 6 ? 'lh14' : ''}}" data-val="{{item.text}}"
+                    data-id="{{item.id}}" data-key="{{item.key}}" id="autotest_xcx_cxy_ssdj">
+                    <text class="txt-ellipsis {{selectedKeyword === item.text ? 'highlight' : ''}}">{{item.text}}</text>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="content" wx:for="{{filterItems}}" wx:for-item="fItem" wx:key="id" wx:for-index="searchIdx">
+        <view class="title-bar">
+            <view class="title-icon {{fItem.icon}}"></view>
+            <view class="title">{{fItem.title}}</view>
+            <view wx:if="{{fItem.needFoldUp}}" bindtap="toggleSearchList" data-index="{{searchIdx}}" class="fold-btn">
+                <view>{{fItem.isFold ? '展开' : '收起'}}</view>
+                <view class="{{fItem.isFold ? 'wechat-font-g-arrow-down' : 'wechat-font-g-arrow-up'}} ft20 ml5">
+                </view>
+            </view>
+        </view>
+
+        <view class="keywords">
+            <view wx:for="{{fItem.subItems}}" wx:for-index="subIdx" wx:for-item="item" wx:key="id"
+                  bindtap="searchKeyword"
+                  hidden="{{subIdx > 7 && fItem.isFold}}"
+                  class="item ft24 {{item.title.length > 6 ? 'lh14' : ''}}" data-val="{{item.title}}"
+                  data-id="{{item.data.filterId}}">
+                <text class="txt-ellipsis">{{item.title}}</text>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+
+<block wx:if="{{showMoreKeyword}}">
+    <common-layer
+            title="选择{{filterLayer.title}}"
+            contentStyle="padding: 24rpx 0 0"
+            bind:closeLayer="closeFilterLayer">
+        <scroll-view class="keywords-layer" scroll-y slot="content">
+            <view wx:for="{{filterLayer.subItems}}" wx:for-index="subIdx" wx:for-item="item" wx:key="id"
+                  bindtap="searchKeyword"
+                  class="item ft24" data-val="{{item.title}}"
+                  data-id="{{item.data.filterId}}">
+                {{item.title}}
+            </view>
+        </scroll-view>
+    </common-layer>
+</block>

@@ -1,0 +1,65 @@
+@import '../common/common.wxss';
+
+@font-face {
+	font-family: 'wechat-font';
+	src: url('data:;base64,AAEAAAALAIAAAwAwT1MvMg97ACAAAAC8AAAAYGNtYXAfNMLLAAABHAAAAFRnYXNwAAAAEAAAAXAAAAAIZ2x5ZoxTz20AAAF4AAAA2GhlYWQb7WI/AAACUAAAADZoaGVhCKsEsAAAAogAAAAkaG10eAgAADcAAAKsAAAAFGxvY2EAKACAAAACwAAAAAxtYXhwAAkALwAAAswAAAAgbmFtZSR2llsAAALsAAABVnBvc3QAAwAAAAAERAAAACAAAwQAAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADhIgSqAKoAqgSq/1YAAAABAAAAAAAAAAAAAAAgAAAAAAADAAAAAwAAABwAAQADAAAAHAADAAEAAAAcAAQAOAAAAAoACAACAAIAAQAg4SL//f//AAAAAAAg4SL//f//AAH/4x7iAAMAAQAAAAAAAAAAAAAAAQAB//8ADwABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAADADcA4QQABKAAFAAfACwAABMBPgE3JTIWFQM0BgcBBiInASY2NwUXJzcvAQ8BFwc3ATI2NTQmIyIGFRQWM00BXREnGAHGGiYTCx/+pEGCQf7UQRZBAZ6KDWKSTU6SYw2KATUjMjIjIzIyIwMCAWEREwIXJhr+UgVWH/6fQUEBND9tQfs6lXEigIAicZU6AV0yIyMzMyMjMgAAAAABAAAAAQAAJaj7118PPPUACwQAAAAAANxnjlEAAAAA3GeOUQAAAAAEAASgAAAACAACAAAAAAAAAAEAAASqAKoAAAQAAAAAAAQAAAEAAAAAAAAAAAAAAAAAAAAFBAAAAAAAAAAAAAAAAAAAAAQAADcAAAAAAAoAFAAeAGwAAQAAAAUALQADAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA4ArgABAAAAAAABAAMAAAABAAAAAAACAAcAPAABAAAAAAADAAMAKgABAAAAAAAEAAMAUQABAAAAAAAFAAsACQABAAAAAAAGAAMAMwABAAAAAAAKABoAWgADAAEECQABAAYAAwADAAEECQACAA4AQwADAAEECQADAAYALQADAAEECQAEAAYAVAADAAEECQAFABYAFAADAAEECQAGAAYANgADAAEECQAKADQAdHRhZwB0AGEAZ1ZlcnNpb24gMS4wAFYAZQByAHMAaQBvAG4AIAAxAC4AMHRhZwB0AGEAZ3RhZwB0AGEAZ1JlZ3VsYXIAUgBlAGcAdQBsAGEAcnRhZwB0AGEAZ0ZvbnQgZ2VuZXJhdGVkIGJ5IEljb01vb24uAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+.wechat-font-tag:before {
+	content: "\e122";
+}
+
+/*---------------筛选---------------*/
+.ml5 { margin-left: 9.96rpx }
+.h-full { height: 100% }
+.filter-bg-fff { background-color: #fff }
+.filter-color { color: #808080 }
+.filter-color2 { color: #2b2b2b }
+.filter-color3 { color: #4289ff }
+.filter-fn12 { font-size: 24rpx }
+.filter-tc { text-align: center; }
+.suite-class { vertical-align: middle; margin-right: 5rpx; }
+
+/*快筛banner*/
+.more-filters-hidden { flex-wrap: nowrap; justify-content: flex-start; overflow: scroll;-webkit-overflow-scrolling: touch; padding-bottom:24rpx;margin-bottom: -14rpx;}
+.more-filters-hidden .item { flex-shrink: 0; border-radius: 8rpx; margin: 16rpx 10rpx 16rpx 0; display: inline-block; font-size: 24rpx; }
+.more-filters-hidden .filterDis { display: flex; align-items: center; }
+.more-filters-hidden .item .filterName { display:inline-block; max-width: 138rpx; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+.more-filters-hidden .item.price-range { display: flex; align-items: center; font-family: PingFang-SC-light; }
+
+/*筛选浮层*/
+.g-filter-base-v { display: flex; align-items: center; justify-content: center; width: 100%; }
+.g-filter-box { width: 100%; position: fixed; top: 0; z-index: 1000; }
+.g-filter-box .flex { display: flex; }
+.g-filter-box .star { flex: 1; }
+.g-filter-body { padding: 40rpx 30rpx 0; overflow-y: scroll; max-height: 318rpx; border-top: 1rpx solid #E5E5E5; background-color: #fff; display: flex; flex-wrap: wrap }
+.g-filter-body .item {
+	display: flex;
+	width: 30.8%;
+	min-height: 80rpx;
+	margin: 0 26rpx 30rpx 0;
+	padding: 4rpx 2rpx 0;
+	font-size: 24rpx;
+	color: #111111;
+	background-color: #F5F5FA;
+	border-radius: 8rpx;
+	box-sizing: border-box;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+}
+.g-filter-body .item:nth-child(3n) {
+	margin-right: 0;
+}
+.g-filter-body .item.current { color: #006FF6; border-radius: 8rpx; background:#e7f3ff url(https://pages.c-ctrip.com/hotels/wechat/img/filter-arrow.png) right bottom no-repeat; background-size: 28rpx; }
+.g-filter-btn { height: 120rpx; margin-top: 8rpx; display: flex; text-align: center; padding: 19rpx 30rpx; background: #FFFFFF; box-shadow: 0 0 4px 0 rgba(86, 91, 101, 0.18); box-sizing: border-box; }
+.g-filter-btn .filter-btn-reset { color: #111111; border: 1px solid #ccc; }
+.g-filter-btn .filter-btn-ok { background-color: #006FF6; color: #fff; margin-left: 24rpx; }
+.g-filter-btn .star { height: 72rpx; line-height: 72rpx; font-size: 30rpx; font-family: PingFangSC-Medium; flex: 1; border-radius: 8rpx; box-sizing: border-box; }
+
+.filter-animated {
+	background-color: #fff;
+	transform-origin: 50% 0;
+	animation: fadeInDown .2s linear;
+}

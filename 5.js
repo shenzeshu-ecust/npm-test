@@ -21,17 +21,70 @@ function quickSort(arr, left, right) {
   }
   let t1 = performance.now()
   let arr = [9,8,7,6,5,4,3,2,1,0]
-  quickSort(arr, 0 , arr.length - 1)
-  console.log(arr, performance.now() - t1)
+  // quickSort(arr, 0 , arr.length - 1)
+  // console.log(arr, performance.now() - t1)
 
-  let s = 'https://account-center.boomingtech.com/api/v1/user/username/?token=a-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjQzLCJ1c2VybmFtZSI6InRlc3QiLCJ0b2tlbnR5cGUiOiJhY2Nlc3MiLCJjcmVhdGVfdGltZSI6MTY5Mzg4NDEzMiwiYXVkIjoiYm9vbWluZ19hY2NvdW50X2NlbnRlcl91c2VyIiwiZXhwIjoxNjkzOTcwNTMyLCJqdGkiOiI0MyIsImlhdCI6MTY5Mzg4NDEzMiwiaXNzIjoiYm9vbWluZ19hY2NvdW50X2NlbnRlciJ9.13o49FV12nUnmsghZlhrNaW96Gv66CxA6zw2O7C2pro'
+// const tag = (strings, ...values) => ({strings, values})
+// const f = (x) => tag`hello ${x} how are you`
 
-  const regex = /token=([^\&]+)/;
-  const matches = s.match(regex)
-  if (matches && matches.length > 1) {
-    const token = matches[1];
-    console.log(token);
-  } else {
-    console.log("未找到 token 值");
+// console.log(f('world'))
+// console.log(f(3))
+
+// console.log(f('world').strings === f(1 + 2).strings)
+
+
+
+let person = {
+  _name: 'szs',
+  get name() {
+    return this._name
   }
+}
 
+
+let p = new Proxy(person, {
+  get(target, property, receiver) {
+    return target[property]
+    // return Reflect.get(...arguments)
+  }
+})
+
+let person2 = {
+  __proto__: p,
+  _name: 'sss'
+}
+
+
+
+console.log(person2.name)
+
+
+
+
+
+
+
+let toA = [
+  {name: 'szs', age: 28}, 
+  {name: 'dlf', age: 29}
+]
+// console.log(toA.slice())
+
+
+ function changeKey(list, fromKey, toKey) {
+  if (!list || list.length === 0) return [];
+  const nextList = [...list]
+  return nextList.map((v) => {
+    v[toKey] = v[fromKey];
+    delete v[fromKey];
+    return v;
+  });
+}
+
+ const toB = changeKey(toA, 'age', 'money')
+console.log(toA, toB)
+
+let ss1 = [{name: 1},2]
+let ss2 = ss1.slice()
+ss2[0].name = 2
+console.log(ss1, ss2)

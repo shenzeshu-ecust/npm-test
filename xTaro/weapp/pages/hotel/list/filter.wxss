@@ -1,0 +1,70 @@
+@import '../common/common.wxss';
+/*---------------筛选---------------*/
+.h-full {height: 100%}
+.filter-ft14 {font-size: 28rpx;}
+.mr30 {margin-right: 30rpx;}
+
+/* 筛选bar */
+.g-filter-container {display: flex; height: 72rpx; line-height: 34rpx; padding: 19rpx 24rpx; box-sizing: border-box; background:#fff; font-size: 26rpx; z-index: 1100; color:#111; font-family: 'PingFangSC-Medium'; justify-content: space-between; }
+.g-filter-container .item {position: relative; white-space: nowrap; overflow: hidden; font-weight: 500; display: flex; text-align: center; flex-direction: row; align-items: center;}
+.g-filter-container .item.current {color: #006FF6;}
+.g-filter-container .item .i { font-size: 24rpx; }
+.g-filter-container .item .item-text { letter-spacing: 0px; max-width: 166rpx; text-overflow: ellipsis; overflow: hidden;}
+.g-filter-container .item .item-num { width: 24rpx; height: 24rpx; font-size: 18rpx; line-height: 24rpx; border-radius: 50%; color: #fff; background-color: #006FF6; margin-left: 4rpx;}
+
+/*flex*/
+.g-filter-base-v { display: flex; align-items: center; justify-content: center; width: 100%; }
+.g-filter-v .item{ display: flex; -webkit-box-align: center; align-items: center;}
+.g-filter-column{display: flex;-webkit-box-orient: vertical;flex-direction: column;}
+
+.g-filter-box .g-menu-2-1 .item,.g-filter-box .g-menu-2-1,.g-filter-box .g-menu-2-2 .item,.g-filter-panel .item{ border-style: solid; border-color: #ddd; border-image: url(data:image/gif;base64,R0lGODlhBQAFAIABAN3d3f///yH5BAEAAAEALAAAAAAFAAUAAAIHhB9pGatnCgA7) 2 stretch; }
+
+.scroll-y {overflow-y:scroll;-webkit-overflow-scrolling: touch; }
+
+/*筛选弹层  C版*/
+.g-filter-box {height: 60%; width:100%; position: absolute; z-index: 1100;background-color: #efefef;}
+.g-filter-box .module-view.current .filter-tit-lv2 {color:#4289ff;}
+.g-filter-box .hd-txt2 {font-size: 28rpx;color: #111111;font-weight: 500;padding: 24rpx 0 16rpx; line-height: 1; display: block;}
+.g-filter-box-shadow {box-shadow: 0 800rpx 0 800rpx rgba(0,0,0,.5);transform:translateZ(0);}
+.g-filter-box .flex { display: flex;}
+.g-filter-box .star {flex: 1;}
+.g-filter-box .elem { width: 6rpx; height: 6rpx; border-radius: 50%; background: #f70; position: absolute; top: 50%; left: 32rpx; }
+.g-filter-menu .first-menu {width: 188rpx;background-color: #f5f5fa;font-size: 26rpx;color: #111111;}
+.g-filter-menu .first-menu .item {padding:30rpx 10rpx 30rpx 46rpx;position: relative;will-change: background-color; }
+.g-filter-menu .first-menu .item.current {background-color: #fff;color: #006FF6;font-weight: 500; line-height: 36rpx; padding: 30rpx 0 30rpx 32rpx;}
+.g-filter-menu .second-menu {padding-left:30rpx;background-color: #fff}
+.g-filter-menu .second-1-menu {width: 220rpx}
+.g-filter-menu .second-menu .second-2-menu h3 {padding: 20rpx 0;line-height: 1;font-size: 24rpx;color: #111111;font-weight: 500}
+.g-filter-menu .second-menu-tit {display: flex; justify-content: space-between;}
+.g-filter-menu .filter-tit-lv2 {font-weight: 500; letter-spacing: -0.45rpx; line-height: 36rpx; margin: 32rpx 0 24rpx;transition:color 200ms linear;}
+.g-filter-menu .second-menu .menu-txt { display: flex; flex-wrap: wrap; text-align: center;}
+.g-filter-menu .second-menu .menu-txt:not(:last-child) { border-width: 0;}
+.g-filter-menu .second-menu .menu-txt .item { min-height:64rpx; width: 163rpx; box-sizing: border-box; font-size: 26rpx; color: #111; line-height: 34rpx; background-color: #f5f5fa; border-radius: 8rpx; margin: 0 16rpx 16rpx 0; display: flex; align-items: center; justify-content: center;}
+.g-filter-menu .second-menu .menu-txt .item:nth-child(3n) { margin-right: 0; }
+.g-filter-menu .second-menu .menu-txt .item.current {color:#006FF6;font-weight: 500;background:#e7f3ff url(https://pages.c-ctrip.com/hotels/wechat/img/checkbox-icon_new@2x.png) right bottom no-repeat;background-size: 22rpx}
+.g-filter-menu .second-menu .menu-txt .item.current-sigle {color:#006FF6;font-weight: 500; background-color: #e7f3ff;}
+
+/* 筛选弹层 Area版 */
+.g-filter-box .g-menu-1 {width:180rpx;background-color: #f5f5fa;font-size: 28rpx; line-height: 36rpx;}
+.g-filter-box .g-menu-1 .item{padding: 30rpx 36rpx 30rpx 32rpx;color: #333333;position: relative;}
+.g-filter-box .g-menu-1 .item.current { background-color: #fff;color: #006FF6;font-weight: 500;}
+.g-filter-box .g-menu-2 { background-color: #fff; color: #111111; height: 100%; font-size: 26rpx; line-height: 34rpx; padding-left: 24rpx}
+.g-filter-box .g-menu-2-1 { width: 143rpx; padding:0 24rpx; border-width: 0 2rpx 0 0; line-height: 34rpx; letter-spacing: -0.16rpx;}
+.g-filter-box .g-menu-2-1 .item { width: 158rpx; height: 96rpx; position: relative; border-width:0 0 2rpx 0; box-sizing: border-box; white-space:normal; word-break:break-all;overflow:hidden;}
+.g-filter-box .g-menu-2-1 .item.current {color: #006FF6;font-weight: 500;}
+.g-filter-box .g-menu-2-1 .item.current .elem {left: 24rpx}
+.g-filter-box .g-menu-2-2 {padding: 9 24rpx;font-size: 26rpx; line-height: 34rpx; letter-spacing: -0.16rpx;}
+.g-filter-box .g-menu-2-2 .item {padding: 31rpx 0; background: #fff; color: #111111; border-width: 0 0 2rpx 0;}
+.g-filter-box .g-menu-2-2 .item .choose-text {font-size: 20rpx; color: #999; margin-top: 4rpx; font-weight: normal; line-height: 24rpx;}
+.g-filter-box .g-menu-2-2 .item .choose-text .choose-top {color: #FF5500;}
+.g-filter-box .g-menu-2-2 .item .wechat-font-checkbox-none {color: #999;}
+.g-filter-box .g-menu-2-2 .item .sn {color: #111111;font-size: 22rpx}
+.g-filter-box .g-menu-2-2 .item.current {color: #006FF6;font-weight: 500;}
+.g-filter-box .g-menu-2-2 .wechat-font-filter-yes{font-size: 36rpx;opacity: 0;}
+.g-filter-box .g-menu-2-2 .item.current .wechat-font-filter-yes{opacity: 1;}
+.g-filter-box .g-menu-2-2 .item.sub-item {margin-left: 25rpx;}
+
+/***h5适配小程序修复***/
+.i{display: inline;}
+
+.quick-filter-fixed{position: fixed;top:0;width:100%;z-index: 100;}

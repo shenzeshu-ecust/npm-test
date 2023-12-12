@@ -1,0 +1,36 @@
+w<!--pages/bus/share/template/shareMenu.wxml-->
+<template name="share-menu">
+<view wx:if="{{showShare}}" class='FixShareContainer' catchtouchmove='empty'>
+    <!--阴影-->
+    <view class="shadow {{inHidden ? 'fadeOut' : 'fadeIn'}}" catchtap="closeShare" />
+      <!--二维码分享-->
+      <view wx:if="{{showQrcode}}" class='share'>
+        <view class='shareTop'>
+          <image mode='widthFix' src='{{share_info && share_info.share_img}}'></image>
+        </view>
+        <button form-type='submit' class='save' bindtap="onSaveImg" data-url="{{share_info && share_info.share_img}}">保存图片后分享到朋友圈</button>
+      </view>
+
+      <!--底部分享-->
+      <view class='FixShare {{inHidden ? "slideOut" : "slideIn"}}' wx:if="{{showDownShare}}">
+        <text class='shareTop'>邀请好友</text>
+        <view class='center'>
+          <view class='left'>
+            <button open-type="share" bindtap='closeShare'>
+              <image src='http://images3.c-ctrip.com/train/201801/Icon14.png' mode='widthFix'></image>
+              <text>分享给好友/群</text>
+            </button>
+          </view>
+          <view wx:if="{{share_info && share_info.share_img}}" class='left'>
+            <image bindtap="onShareQrcode" src='http://images3.c-ctrip.com/train/201801/Icon13.png' mode='widthFix'></image>
+            <text>分享到朋友圈</text>
+          </view>
+        </view>
+        <view class='bottom'>
+           <button form-type='submit' bindtap="closeShare">
+           <text>取消</text></button> 
+          <view wx:if="{{isIPhoneX}}" style="padding-top: 68rpx;"/>
+          </view>
+      </view>
+    </view>
+  </template>

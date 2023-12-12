@@ -1,0 +1,62 @@
+<template name="searchResult">
+  <view class="searchresult-bar" wx:if="{{searchResultLocationList || searchResultPoiList}}">
+    <scroll-view class="searchresult-scroll" scroll-y>
+      <view class="searchresult-more" wx:if="{{!searchResultLocationList.length}}">
+        {{fromHomePage ? '抱歉，该目的地暂未开通高铁' : '抱歉，暂无搜索结果' }}</view>
+        <view class="iphoneX-bottom">
+          <block wx:for="{{searchResultLocationList}}" wx:for-index="index"  wx:key="{{key}}">
+            <view>
+                <view class="searchresult-item" bindtap="searchResultJump"
+                data-cityname="{{item.cityName}}"
+                data-districtid="{{item.districtId}}">
+
+                  <view class="searchresult-icon">{{item.typeName}}</view>
+                  <view class="searchresult-info">
+                    <view class="searchresult-top searchresult-poiname">
+                      <block wx:for="{{item.highlight}}" data-index="{{index}}" wx:key="{{key}}" wx:for-item="highlight_item">
+                        <text class="{{highlight_item===item.keyword ? 'searchresult-poiname-light' : ''}}">{{highlight_item}}</text>
+                      </block>
+                      <text class="searchresult-counname">{{item.parentName}}</text>
+                    </view>
+                     <view class="searchresult-top searchresult-poiname-english">
+                          <block wx:for="{{item.ehighlight}}" data-index="{{index}}" wx:key="{{key}}" wx:for-item="highlight_item">
+                            <text class="{{highlight_item===item.keyword ? 'searchresult-poiname-light' : ''}}">{{highlight_item}}</text>
+                          </block>
+                     </view>
+                  </view>
+                </view>
+                 <block wx:for="{{item.subLocations}}" wx:for-item="tagItem" wx:for-index="tagIndex">
+                     <view wx:if="{{item.showRows || (!item.showRows && tagIndex === 0)}}"
+                     class="searchresult-item" bindtap="searchResultJump"
+                     data-cityname="{{tagItem.unionName}}"
+                      data-districtid="{{tagItem.districtId}}">
+                           <view class="searchresult-icon-hidden">{{item.typeName}}</view>
+                           <view class="searchresult-icon-child">{{tagItem.geocategoryName}}</view>
+                            <view class="searchresult-info">
+                              <view class="searchresult-top searchresult-poiname">
+                                <text class="searchresult-counname-child">{{tagItem.unionName}}</text>
+                              </view>
+                               <view wx:if="{{tagItem.isOverSeas}}" class="searchresult-top searchresult-poiname searchresult-counname-e-child">
+                                 <text class="searchresult-counname-e-child">{{tagItem.eunionName}}</text>
+                              </view>
+                            </view>
+                        </view>
+                 </block>
+                 <view wx:if="{{item.subLocations && item.subLocations.length > 1}}"
+                    bindtap="openOrClosed"
+                   class="searchresult-item" data-index="{{index}}">
+                       <view class="bottom-arrow" wx:if="{{!item.showRows}}">
+                           <view class="bottom-arrow1"></view>
+                           <view class="bottom-arrow2"></view>
+                       </view>
+                       <view class="top-arrow" wx:if="{{!!item.showRows}}">
+                          <view class="top-arrow1"></view>
+                          <view class="top-arrow2"></view>
+                      </view>
+                 </view>
+             </view>
+          </block>
+      </view>
+    </scroll-view>
+  </view>
+</template>

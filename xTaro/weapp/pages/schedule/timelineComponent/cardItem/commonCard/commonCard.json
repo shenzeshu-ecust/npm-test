@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "card-header-compt": "../../components/card-header-compt/card-header-compt",
+    "card-operation-compt": "../../components/card-operation-compt/card-operation-compt"
+  }
+}

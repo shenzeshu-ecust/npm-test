@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "账户实名认证",
+	"navigationBarTextStyle": "white",
+    "backgroundTextStyle": "dark",
+    "navigationStyle": "custom",
+	"usingComponents": {
+      "nav-bar": "/cwx/component/navbar/navbar"
+    }
+}

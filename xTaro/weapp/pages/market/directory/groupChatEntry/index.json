@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "携程旅行",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "cell": "plugin://materialPlugin/cell",
+    "timelineFloat": "/cwx/component/timelineFloat/timelineFloat"
+  }
+}

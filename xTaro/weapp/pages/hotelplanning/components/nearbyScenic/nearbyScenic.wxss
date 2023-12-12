@@ -1,0 +1,178 @@
+@import "../../common/css/common.wxss";
+
+.nearby-scenic-model{
+  box-sizing: border-box;
+  width: 702rpx;
+  margin: 0 24rpx 32rpx;
+  padding:24rpx 20rpx;
+  background: #ffffff;
+  border-radius: 20rpx;
+  box-shadow: 0rpx 4rpx 16rpx 1rpx rgba(0, 0, 0, 0.06);
+  font-weight: 500;
+  letter-spacing: 0rpx;
+}
+
+.nearby-title{
+  color: #000000;
+  font-size: 32rpx;
+}
+
+.nearby-item{
+  margin-top: 24rpx;
+  display: flex;
+}
+
+.nearby-item .nearby-item-image {
+	width: 212rpx;
+  height: 208rpx;
+  margin-right: 16rpx;
+  background: #f2f2f2 url(https://pic.c-ctrip.com/h5/hotel/hotel-loading-default.png) center center no-repeat;
+  background-size: 58rpx 58rpx;
+}
+
+.nearby-item image{
+  height: 208rpx;
+  width: 212rpx;
+  border-radius: 10rpx;
+}
+
+.nearby-item-url{
+  margin-right:16rpx;
+}
+
+.nearby-item-content {
+  width: 100%;
+}
+
+.nearby-item-content .nearby-item-title{
+  margin-top: -5rpx;
+}
+
+.nearby-item-title .item-name {
+  color: #333333;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.nearby-item-title .item-level {
+  vertical-align: middle;
+  font-size: 20rpx;
+  background: #eef1f6;
+  border-radius: 4rpx;
+  padding: 6rpx 8rpx;
+  margin-left:8rpx;
+  color: #5678a8;
+}
+
+.nearby-item-content .nearby-item-ranking{
+  margin-top: 4rpx;
+}
+
+.nearby-item-ranking .item-ranking {
+  display: inline-block;
+  line-height: 1;
+  font-size: 22rpx;
+  color: #c9804c;
+  border-radius: 4rpx;
+  padding: 8rpx 16rpx;
+  background: #f9f0e4;
+}
+
+.item-ranking .item-billboard {
+  margin-right: 4rpx;
+  font-size: 20rpx;
+}
+
+.nearby-item-content .nearby-item-comment{
+  margin-top: 6rpx;
+}
+
+.nearby-item-comment .item-score {
+  font-size: 26rpx;
+  color: #ffffff;
+  border-radius:4rpx;
+  padding:  4rpx 13rpx 4rpx 8rpx;
+  background: #0086f6;
+  margin-right:16rpx;
+  position:relative;
+}
+
+.nearby-item-comment .item-score::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	right: -5rpx;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 10rpx;
+	border-color: transparent transparent #0086f6;
+}
+
+.nearby-item-comment  .item-count {
+  color: #333333;
+  font-size: 24rpx;
+}
+
+
+.nearby-item-content .nearby-item-desc{
+  margin-top: 4rpx;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.nearby-desc-left {
+  flex: 1 1 0;
+}
+
+.nearby-desc-left .item-distance {
+  font-size: 24rpx;
+  color: #666666;
+}
+.nearby-desc-left  .item-tags {
+  margin-top:4rpx;
+}
+.nearby-desc-left  .item-tag {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 20rpx;
+  color:  #5678a8;
+  border-radius:4rpx;
+  padding: 2rpx 4rpx;
+  background: #ffffff;
+  margin-right:16rpx;
+  border: 1px solid #dde4ed;
+}
+
+.nearby-desc-right {
+  display: flex;
+  align-items: flex-end;
+}
+
+.nearby-desc-right .item-price {
+  font-size: 24rpx;
+  color: #666666;
+}
+
+.nearby-desc-right .item-price .item-label {
+  color: #FF6600;
+}
+
+.nearby-desc-right .item-price .item-money {
+  font-size: 40rpx;
+}
+.nearby-desc-right .item-free {
+  font-size: 32rpx;
+  color: #FF6600;
+}
+.nearby-more{
+  text-align: center;
+  margin:32rpx 0 8rpx 0;
+  color: #0086F6;
+  font-size: 26rpx;
+  font-weight: normal;
+}
+.item-arrow {
+  display: inline-block;
+  vertical-align: middle;
+}

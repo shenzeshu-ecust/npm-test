@@ -1,0 +1,22 @@
+<view class="inner" >
+  <!-- <view wx:if="{{show}}">显示</view> -->
+  <!-- 写一个微信小程序浮层，在页面下方展示，标题用title，内容为n个年龄选择框，n的数量为传入参数min和max的差，默认选中的年龄框为传入参数default的值。
+  比如说传入参数min=10，max = 25，default=15,那么页面上展示16个年龄的选择框，默认选中的为15岁的年龄框。用户选择年龄框时，数据和default变量的值进行绑定 -->
+    <view class="container" wx:show="{{visible}}" animation="{{animationData}}">
+    <view class="title">
+      <view bindtap="onClose" class="close">
+        <image src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/Close@3x.png" class="closeIcon" />
+      </view>
+      {{title}}
+    </view>
+    <view class="subtitle">
+      <image src="https://images3.c-ctrip.com/train/overseas_train_home/passenger_choice/Kirby-Yicon-Information_%E4%BF%A1%E6%81%AF@3x.png" class="iconImg"/>
+      <view class="subtitleTxt">{{subtitle}}</view>
+    </view>
+    <view class="content">
+      <block wx:for="{{ages}}" wx:key="index" >
+        <button value="{{item}}" bindtap="selectAge" data-value="{{item}}" class="ageButton {{item == value ? 'selected' : ''}}">{{item}}岁</button>
+      </block>
+    </view>
+  </view>
+</view>

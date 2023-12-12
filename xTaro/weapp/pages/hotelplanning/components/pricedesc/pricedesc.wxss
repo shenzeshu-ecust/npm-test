@@ -1,0 +1,43 @@
+@import '../../common/css/common.wxss';
+/* 价格说明 */
+.price-description{
+    margin: 20rpx;
+    background: #fff;
+    border-radius: 24rpx;
+    padding: 20rpx;
+}
+.price-title{
+    color: #333;
+    font-family: PingFangSC-Medium;
+    font-weight: bold;
+    margin-bottom: 16rpx;
+}
+.price-detail{
+    font-size: 24rpx;
+    letter-spacing: 0rpx;
+    color: #555;
+}
+.price-btn{
+    width: 130rpx;
+    margin: 32rpx auto 0;
+    font-size: 24rpx;
+    display: flex;
+    justify-content: center;
+}
+.item-arrow{
+    margin-top: 8rpx;
+    margin-left: 4rpx;
+    font-size: 18rpx;
+}
+.shrink{
+    max-height: 94rpx;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    overflow: hidden;
+}
+.detail-item{
+    margin-bottom: 10rpx;
+}

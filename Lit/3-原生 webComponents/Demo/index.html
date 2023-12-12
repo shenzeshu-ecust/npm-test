@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <template id="caiBtn">
+        <style>
+            .cai-button {
+              display: inline-block;
+              padding: 4px 20px;
+              font-size: 14px;
+              line-height: 1.5715;
+              font-weight: 400;
+              border: 1px solid #1890ff;
+              border-radius: 2px;
+              background-color: #1890ff;
+              color: #fff;
+              box-shadow: 0 2px #00000004;
+            }
+            .cai-button-warning {
+              border: 1px solid #faad14;
+              background-color: #faad14;
+            }
+            .cai-button-danger {
+              border: 1px solid #ff4d4f;
+              background-color: #ff4d4f;
+            }
+        </style>
+        
+        <div class="cai-button"> <slot name="btnText"></slot> </div>
+    </template>
+
+    <cai-button type="danger"> 
+        <span slot="btnText">
+          按钮
+        </span>
+    </cai-button>
+
+    <button class="change-btn">change</button>
+    <script src="./index.js" defer></script>
+
+    <script>
+      const colorList = ['primary', 'warning', 'danger']
+      const button = document.querySelector('.change-btn')
+      const targetButton = document.querySelector('cai-button')
+      button.addEventListener('click', () => {
+        const index = Math.floor((Math.random() * 3))
+        console.log(index)
+        targetButton.setAttribute('type', colorList[index])
+      })
+    </script>
+</body>
+</html>

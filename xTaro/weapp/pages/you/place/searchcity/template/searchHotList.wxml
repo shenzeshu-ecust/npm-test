@@ -1,0 +1,10 @@
+<template name="searchHotList" wx-if="{{searchHotCityList}}">
+  <view class="search-city-title searchcity-item" id="Hot">热门城市</view>
+  <view class="searchhotlist-con maxHeight">
+    <block wx:for="{{searchHotCityList}}" wx:key="{{key}}">
+      <view class="searchhotlist-item" data-citydata="{{item}}" bindtap="searchCityJump">
+        <text>{{item.cityName}}</text>
+      </view>
+    </block>
+  </view>
+</template>

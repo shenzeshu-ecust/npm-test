@@ -1,0 +1,125 @@
+<wxs src="./tool.wxs" module="tool" />
+<!-- 非空态 -->
+<block wx:if="{{isLoadCompleted}}">
+    <view wx:if="{{loadSuccess}}" class='content'>
+        <view class='city-map-back'>
+            <image class='destination-image' mode="aspectFill" src='{{travelPlanInfo.image}}'></image>
+            <view class='image-cover' />
+            <canvas wx:if='{{showCanvas}}' hidden='{{canvasTempImg}}' style="width: 100%; height: 292px; margin-top: -290rpx" canvas-id='image-canvas' />
+            <image wx:if='{{showCanvas}}' hidden='{{!canvasTempImg}}' style="width: 100%; height: 292px; margin-top: -290rpx" src="{{canvasTempImg}}" />
+        </view>
+        <scroll-view scroll-y='true' style='height: 100%' >
+            <view class='header-back' >
+                <text class='destination-title'>{{travelPlanInfo.title}}</text>
+                <view class='header-sub-back'>
+                    <view>
+                        <text class='header-sub-number'>{{travelPlanInfo.daysCount}}</text>
+                        <text class='header-sub-text'> 天 ｜ </text>
+                        <text class='header-sub-number'>{{travelPlanInfo.poiNum}}</text>
+                        <text class='header-sub-text'> 个游玩点</text>
+                    </view>
+                    <text class='header-sub-date'>{{travelPlanInfo.startEndDate}}</text>
+                </view>
+                <view class='overview-back'>
+                    <text class='overview-title'>行程概览</text>
+                    <view style="max-height: {{showAllOverview ? 'none' : '250rpx'}}">
+                        <view wx:for='{{travelPlanInfo.dailyList}}' class='row-view' style="align-items: flex-start; margin-bottom: 8rpx;">
+                            <text class='overview-day-tag'>D{{index + 1}}</text>
+                            <view class="overview-day-back">
+                                <view wx:for='{{item.overList}}' wx:for-item='poiName' class='row-view' style="margin-bottom: 16rpx;">
+                                    <text class='overview-poi-name'>{{poiName}}</text>
+                                    <view wx:if='{{index < item.overList.length - 1}}' class="overview-connect-line"/>
+                                </view>
+                                <text wx:if='{{item.overList.length === 0}}' class='overview-no-poi'>待安排</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view wx:if='{{!showAllOverview}}' class='overview-show-all'>
+                        <text class='overview-show-text' bindtouchend="showAllOverview">完整概览</text>
+                    </view>
+                </view>
+            </view>
+
+            <view class='list'>
+                <image class='daily-back-image' mode="scaleToFill" src='https://pages.c-ctrip.com/schedule/pic/wxxcx/cts_travelline_daily.png' />
+                <view style="margin-top: -106rpx">
+                    <view wx:for="{{travelPlanInfo.dailyList}}">
+                        <view style="margin: 24rpx 0 0 24rpx">
+                            <text class='daily-title'>{{item.dailyTitle}}</text>
+                        </view>
+                        <!-- 备忘录 -->
+                        <daily-memo wx:if="{{item.memo}}" memoText="{{item.memo}}" />
+                        <text wx:if='{{!item.elementList || item.elementList.length === 0}}' class='daily-no-data'>暂无游玩点</text>
+                        <view wx:for="{{item.elementList}}" class='card-row-view-poi'>
+                            <!-- 卡片左边轴线 + 类型icon -->
+                            <view class='column-view' style="margin-left: 24rpx; align-items: center;">
+                                <view wx:if='{{item.showUpLine}}' class='line-up {{item.type === 4001 || item.type === 4002 ? "line-up_4001" : ""}}' />
+                                <view wx:if="{{item.type === 4001 || item.type === 4002}}" class="line-icon-point_wrapper">
+                                  <view class="line-icon-point"></view>
+                                </view>
+                                <image wx:else class='line-icon-poi' style="margin-top: {{item.showUpLine ? 0 : 65}}rpx" src='{{tool.getTypeIcon(item)}}'></image>
+                                <view wx:if='{{item.showDownLine}}' class='line-down' />
+                            </view>
+                            <view style="align-items: flex-start; flex-grow: 1; margin-left: 16rpx;">
+                                <!-- 卡片内容 -->
+                                <view wx:if="{{item.type === 4001 || item.type === 4002}}" class="card-rank-route-card">
+                                  {{item.itemName}}
+                                </view>
+                                <view wx:else class='card-content-view' >
+                                    <traffic-item wx:if='{{item.type===3}}' itemData='{{item}}' />
+                                    <card-item wx:else itemData='{{item}}'/>
+                                </view>
+                                <!--距离-->
+                                <view class='distance-view' wx:if="{{item.distance}}">
+                                    <image wx:if="{{item.distance.type !== 0}}" class='distance-cion' mode="scaleToFill" src="{{item.distance.type === 2 ? 'https://pages.c-ctrip.com/schedule/pic/wxxcx/cts_traffic_car.png' : 'https://pages.c-ctrip.com/schedule/pic/wxxcx/cts_traffic_walk.png'}}"></image>
+                                    <text class='distance-text'>{{item.distance.distanceText}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <tex class='travel-bottom'>- 行程结束 -</tex>
+            </view>
+        </scroll-view>
+        <!-- </view> -->
+        <!-- <view wx:if="{{travelPlanInfo.dailyList.length > 0}}" class='content'>
+
+        <view class="no-poi-view" wx:else>
+            <image class='destination-image' mode="aspectFill" src='{{travelPlanInfo.image}}'></image>
+            <view class="no-poi-line-view">
+                <view class="no-poi-line"/>
+                <text class='no-poi-line-text'>暂未添加路线信息</text>
+                <view class="no-poi-line"/>
+            </view>
+        </view> -->
+        <view class="save-route" wx:if="{{travelStatus !== 1}}">
+            <view wx:if="{{travelStatus === 2}}" class="save-route-container" catch:tap="saveRoute">
+                <text class="save-text">保存为我的路线</text>
+            </view>
+            <view wx:if="{{travelStatus === 3}}" class="go-to-details" catch:tap="goToDetails">
+                <text class="go-to-details-text">查看我的路线</text>
+            </view>
+            <view wx:if="{{travelStatus === 4}}" class="go-to-details" catch:tap="orderSimilarRoute">
+                <text class="go-to-details-text">预订同款线路</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 失败页面 -->
+    <view wx:else class="fail-view" style="height:{{screenHeight - 200}}px">
+        <image class='fail-icon' mode="aspectFit" src='https://pages.c-ctrip.com/schedule/pic/wxxcx/cts_travelplan_nonresult.png'></image>
+        <text class='fail-text'>{{failText}}</text>
+        <view class='try-agin' bindtouchend="tryLoadAgin">
+            <text class='try-agin-text'>再试一次</text>
+        </view>
+    </view>
+
+</block>
+<!-- 空态页面 -->
+<block wx:else >
+    <view/>
+</block>
+
+<!-- 白屏检测 -->
+<!-- viewReadyHandle为框架提供、实现 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

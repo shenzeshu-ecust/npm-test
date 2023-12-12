@@ -1,0 +1,9 @@
+<block wx:if="{{canWebView}}">
+  <block wx:if="{{showPage}}">
+    <web-view src="{{webviewUrl}}" bindmessage="webPostMessage" bindload="onPageLoadDone" binderror="onPageLoadDone">
+    </web-view>
+  </block>
+</block>
+<block wx:else>
+  <view>亲爱的用户，您的微信版本太低啦，快去升级微信吧</view>
+</block>

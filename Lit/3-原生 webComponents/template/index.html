@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./main.js" defer></script>
+</head>
+<body>
+
+    <!-- 
+        当你必须在网页上重复使用相同的标记结构时，使用某种模板而不是一遍又一遍地重复相同的结构是有意义的。
+        以前这是可行的，但 HTML <template> 元素使它更容易实现 (这在现代浏览器中得到了很好的支持)。
+        此元素及其内容不会在 DOM 中呈现，但仍可使用 JavaScript 去引用它。
+     -->
+    <template id="my-paragraph">
+        <style>
+            p {
+              color: white;
+              background-color: #666;
+              padding: 5px;
+            }
+          </style>
+        <p>My paragraph</p>
+    </template>
+    <!-- 
+        上面的代码不会展示在你的页面中，
+        直到你用 JavaScript 获取它的引用，然后添加到 DOM 中，如下面的代码：
+     -->
+     <script>
+        // let template = document.getElementById('my-paragraph')
+        // let templateContent = template.content
+        // document.body.append(templateContent)
+        // console.log(templateContent)
+     </script>
+
+    <my-paragraph></my-paragraph>
+
+</body>
+</html>

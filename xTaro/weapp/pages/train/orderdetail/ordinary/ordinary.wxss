@@ -1,0 +1,5 @@
+@import '../orderdetail.wxss';
+@import '../components/IntelligentSegmentOrderDetail/intelligentSegmentOrderDetail.wxss';
+@import '../components/intelligentSegment/intelligentSegment.wxss';
+@import '../../common/components/thenByTicket/thenByTicket.wxss';
+@import '../components/secondTicketBox/secondTicketBox.wxss';

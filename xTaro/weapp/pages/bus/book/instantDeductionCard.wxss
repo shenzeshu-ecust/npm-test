@@ -1,0 +1,253 @@
+.instantDeductionCard {
+    background: linear-gradient(90deg, rgb(229, 250, 243) 0%, rgb(248, 255, 252) 100%);
+    border-radius: 16rpx 16rpx 0rpx 0rpx;
+    box-shadow: 0rpx 5rpx 10rpx 0rpx rgba(92, 92, 92, 0.12);
+    width: 750rpx;
+    z-index: 20;
+    position: relative;
+}
+.instantDeductionCard .head {
+    display: flex;
+    justify-content: space-between;
+}
+.instantDeductionCard .deduction-content{
+    display: flex;
+    align-items: center;
+}
+.instantDeductionCard .deduction-content image{
+    height: 42rpx;
+    width: 176rpx;
+}
+.instantDeductionCard .deduction-content .text{
+    color: #333333;
+    font-size: 24rpx;
+    font-weight: normal;
+    height: 32rpx;
+    letter-spacing: 0px;
+    padding-left: 16rpx;
+}
+.instantDeductionCard .deduction-content .orange{
+    color: #FF7700;
+}
+.instantDeductionCard .deduction-button {
+    padding-right: 32rpx;
+}
+
+.icon-arrow-up, .icon-arrow-down{
+    color: #999999;
+    padding-left: 8rpx;
+    padding-bottom: 14rpx;
+}
+
+.icon-check-round{
+    color: #999999;
+    padding-left: 8rpx;
+}
+.icon-checked-round {
+    color: #0086f6;
+    padding-left: 8rpx;
+}
+
+.icon-arrow-up:before, .icon-arrow-down:before {
+    font-size: 28rpx;
+    vertical-align: middle;
+}
+
+.deduction-button .icon-checked-round:before,
+.deduction-button .icon-check-round:before {
+    font-size: 44rpx;
+    /* vertical-align: middle; */
+}
+
+.instantDeductionCard .deduction-button .green{
+    color: #00b87a;
+    font-size: 24rpx;
+    font-weight: 500;
+    line-height: 68rpx;
+}
+.instantDeductionCard .deduction-button .grey{
+    color: #666666;
+    font-size: 24rpx;
+    font-weight: 500;
+    line-height: 68rpx;
+}
+
+@keyframes transIn {
+    0% {
+        transform: translate(0, 100%);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes transOut {
+    0% {
+        transform: translate(70%, 0);
+    }
+    100% {
+        transform: translate(0, 70%);
+    }
+}
+.instantDeductionCardAnimationShow{
+    animation: transIn 250ms linear forwards;
+    border: 1px solid #d6f4ea;
+
+}
+.instantDeductionCardAnimationHide{
+    animation: transOut 250ms linear forwards;
+}
+.instantDeductionCard .deduction-modal-content{
+    background: #ffffff;
+    padding: 40rpx;
+}
+.instantDeductionCard .deduction-modal-content .deduction-ad{
+    border-radius: 24rpx;
+    border: 2rpx solid #c1e9d9;
+    height: 262rpx;
+    padding-bottom: 50rpx;
+}
+.instantDeductionCard .deduction-modal-content .deduction-ad .deduction-head-box{
+    background: linear-gradient(90deg, rgb(229, 250, 243) 0%, rgb(248, 255, 252) 75%);
+    height: 170rpx;
+    border-radius: 24rpx 24rpx 0rpx 0rpx ;
+}
+
+.instantDeductionCard .deduction-head-box .head-row{
+    display: flex;
+    flex-direction: column;
+}
+.instantDeductionCard .deduction-head-box .head-row .pic{
+    height: 44rpx;
+    width: 228rpx;
+}
+.instantDeductionCard .deduction-head-box .head-row .text{
+    color: #666666;
+    font-size: 24rpx;
+    font-weight: normal;
+    line-height: 30rpx;
+    padding-top: 10rpx;
+}
+.instantDeductionCard .deduction-head-box {
+    padding: 20rpx 0rpx 20rpx 24rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+.instantDeductionCard .deduction-head-box  .car{
+    height: 141rpx;
+    width: 264rpx;
+}
+.instantDeductionCard .head-box-tag {
+    position: absolute;
+    bottom: -26rpx;
+    right: 25rpx;
+    background: #ffead9;
+    border-radius: 100rpx 50px 2rpx 100rpx;
+    height: 32rpx;
+    width: 228rpx;
+    color: #ff6600;
+    font-size: 20rpx;
+    font-weight: 500;
+    line-height: 32rpx;
+    text-align: center;
+}
+.instantDeductionCard .deduction-coupou-box {
+    padding: 20rpx 26rpx 0 26rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.instantDeductionCard .deduction-coupou-box .coupon {
+    background: url(https://pages.c-ctrip.com/bus-images/instant-deduction/coupon.png) no-repeat;
+    background-size: contain;
+    height: 60rpx;
+    width: 345rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.instantDeductionCard .deduction-coupou-box .value text {
+    color: #ffffff;
+    font-size: 24rpx;
+    letter-spacing: 4px;
+}
+.instantDeductionCard .deduction-coupou-box .value{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 188rpx;
+}
+.instantDeductionCard .deduction-coupou-box .coupon .spec {
+    font-size: 40rpx;
+    font-weight: bold;
+    letter-spacing: normal;
+        padding: 0 4px;
+}
+.instantDeductionCard .deduction-coupou-box .tag{
+    width: 155rpx;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.instantDeductionCard .deduction-coupou-box .tag text {
+    color: #ffffff;
+    font-size: 24rpx;
+}
+.instantDeductionCard .deduction-coupou-box .price{
+    display: inline-flex;
+    align-items: baseline;
+}
+.instantDeductionCard .deduction-coupou-box .green{
+    color: #00B87A;
+    font-size: 24rpx;
+}
+.instantDeductionCard .deduction-coupou-box .price .old {
+    color: #999999;
+    font-size: 24rpx;
+    font-weight: normal;
+    letter-spacing: -1rpx;
+}
+.instantDeductionCard .deduction-coupou-box .price .old  text{
+    text-decoration: line-through
+}
+.instantDeductionCard .deduction-coupou-box .price .now {
+    color: #333333;
+    font-size:24rpx;
+    padding-left: 16rpx;
+    letter-spacing: -1rpx;
+}
+.instantDeductionCard .deduction-coupou-box .price .now .spec{
+    font-size: 32rpx
+}
+
+.deduction-modal-content .deduction-desc {
+    display: flex;
+    justify-content: space-between;
+    color: #666666;
+    font-size: 24rpx;
+    font-weight: normal;
+    line-height: 30rpx;
+    padding-top: 32rpx;
+    align-items: center;
+}
+/* .deduction-modal-content .deduction-desc .icon-arrow-right:before{
+    font-size: 24rpx;
+} */
+
+.deduction-modal-content .deduction-desc image{
+    width: 26rpx;
+    height: 26rpx;
+    line-height: 30rpx;
+    vertical-align: middle;
+    margin-right: 8rpx;
+}
+.deduction-modal-content .deduction-rule {
+    color: #999999;
+    font-size: 22rpx;
+    font-weight: normal;
+    padding-top: 20rpx;
+}

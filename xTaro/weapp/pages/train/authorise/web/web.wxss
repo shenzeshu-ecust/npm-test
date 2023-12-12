@@ -1,0 +1,16 @@
+
+.error {
+    padding: 20rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.error__img {
+    height: 300rpx;
+    width: 300rpx;
+}
+.error__msg {
+    width: 600rpx;
+    text-align: center;
+    font-size: 30rpx;
+}

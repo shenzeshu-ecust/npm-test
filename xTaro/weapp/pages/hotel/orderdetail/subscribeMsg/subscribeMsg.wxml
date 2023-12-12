@@ -1,0 +1,14 @@
+<view class="subscribe-wrap {{state === 1 ? 'done':''}}" wx:if="{{ disable && ( state === 0 || state === 1) }}" >
+  <text class="icon-clock {{ state === 1 ? 'notice-font-oka':'wechat-font-book-notice' }}"></text>
+  <block wx:if="{{notSubscribedList.length > 0}}">
+      <view class="tips">
+        您可订阅：<text wx:for="{{notSubscribedList}}">{{item.templateName}}{{index==notSubscribedList.length-1?'。':'、'}}</text>
+      </view>
+      <view class="btn-subscribe" bindtap="subscribe" data-ubt-key="wx_hotel_confrimordermsg" >立即订阅</view>
+  </block>
+  <block wx:else>
+   <view class="tips" wx:if="{{subscribedList.length>0}}">
+        您已订阅本次<text wx:for="{{subscribedList}}">{{item.templateName}}{{index==subscribedList.length-1?'。':'、'}}</text>
+   </view>
+  </block>
+</view>

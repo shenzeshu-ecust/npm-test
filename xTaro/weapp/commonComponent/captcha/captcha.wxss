@@ -1,0 +1,373 @@
+.verification-code {
+  position: relative;
+  display: block;
+  background: #f7f9fa;
+  border-radius: 4px;
+  border: 1px solid #e4e7eb;
+}
+
+.verification-code view {
+  float: none;
+  width: auto;
+  height: auto;
+  display: block;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  line-height: 1.428571429;
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+
+.verification-code .cpt-loading-box {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 100%;
+  z-index: 10;
+  font-size: 12px;
+  text-align: center;
+  -moz-user-select: none;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  border-radius: 4px;
+  font-weight: bold;
+  display: block;
+}
+
+.verification-code .cpt-loading-info-box {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.verification-code .cpt-loading-icon-content {
+  height: 17px;
+  width: 17px;
+  overflow: hidden;
+  margin-right: 5px;
+}
+
+.verification-code .cpt-loading-right {
+  line-height: 38px;
+  background-position: -111px 0px !important;
+}
+
+.verification-code .cpt-loading-error {
+  line-height: 38px;
+  background-position: -129px 0px !important;
+}
+
+.verification-code .cpt-loading-text {
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.verification-code .cpt-loading-img {
+  width: 30px;
+  height: 30px;
+  min-width: 20px;
+  min-height: 10px;
+}
+
+.verification-code .cpt-drop-btn {
+  display: block;
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  z-index: 2;
+  font-size: 14px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+
+.verification-code .cpt-img-outer {
+  position: relative;
+  border-radius: 50%;
+  margin: 2px 1px;
+  overflow: hidden;
+  transition: background 0.2s linear, box-shadow 0.2s linear, transform 0.5s;
+}
+
+.verification-code .outer-rotation {
+  transform: rotate(360deg);
+  animation: rotation 0.5s linear infinite;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.verification-code .cpt-img {
+  position: absolute;
+  width: 26px !important;
+  height: 26px !important;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.verification-code .cpt-logo {
+  width: 100%;
+  height: 100%;
+  background: url(https://webresource.c-ctrip.com/ares2/infosec/WechatCaptcha/~1.0.0/default/img/WechatCaptcha.png?expires=1d) no-repeat;
+}
+
+.verification-code .cpt-drop-bg-default {
+  position: absolute;
+  z-index: 1;
+  height: 38px;
+  left: -1px;
+  top: -1px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.verification-code .cpt-drop-bg {
+  position: absolute;
+  z-index: 1;
+  height: 38px;
+  left: -1px;
+  top: -1px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.verification-code .cpt-drop-bg-finish {
+  position: absolute;
+  z-index: 1;
+  height: 38px;
+  left: -1px;
+  top: -1px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.verification-code .cpt-drop-bg::before, .verification-code .cpt-drop-bg::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  top: -150px;
+  left: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 45%;
+  transform: translate(-50%, -70%) rotate(0);
+  animation: rotate 6s linear infinite;
+  z-index: 10;
+}
+
+.verification-code .cpt-drop-bg::after {
+  border-radius: 47%;
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -70%) rotate(0);
+  animation: rotate 10s linear -5s infinite;
+  z-index: 20;
+}
+
+@keyframes rotate {
+  50% {
+    transform: translate(-50%, -73%) rotate(180deg);
+  }
+
+  100% {
+    transform: translate(-50%, -70%) rotate(360deg);
+  }
+}
+
+.verification-code .cpt-bg-bar {
+  width: 100%;
+  background: transparent;
+  font-size: 12px;
+  text-align: center;
+  overflow: hidden;
+  user-select: none;
+  position: absolute;
+  z-index: 1;
+  border-radius: 4px;
+  transition: opacity 0.2s linear;
+}
+
+.verification-code .cpt-info-board {
+  display: inline-block;
+  width: auto;
+  white-space: nowrap;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.verification-code-choose .cpt-choose-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1900;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.verification-code-choose .cpt-choose-box {
+  top: 50%;
+  left: 50%;
+  border-radius: 8px;
+  background: #fff;
+  z-index: 2000;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.verification-code-choose .cpt-logo {
+  width: 100%;
+  height: 100%;
+  background: url(https://webresource.c-ctrip.com/ares2/infosec/WechatCaptcha/~1.0.0/default/img/WechatCaptcha.png?expires=1d) no-repeat;
+}
+
+.verification-code-choose i.cpt-choose-delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 23px;
+  height: 23px;
+  background-position: -146px 0px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.verification-code-choose .cpt-choose-top {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 0 0 0;
+  height: 60px;
+}
+
+.verification-code-choose .cpt-choose-msg-box {
+  height: 50px;
+  float: left;
+  margin: 10px 0 0 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.verification-code-choose .cpt-choose-msg {
+  left: 0;
+  height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  margin: 0 5px;
+  font-size: 14px;
+  color: 0.566980;
+  line-height: 40px;
+  vertical-align: sub;
+  z-index: -10;
+}
+
+.verification-code-choose .cpt-small-img {
+  position: relative;
+  float: right;
+  margin: 10px 10px 10px 0;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.verification-code-choose .cpt-big-box {
+  position: relative;
+  overflow: hidden;
+  margin: 0 10px;
+}
+
+.verification-code-choose .cpt-big-img {
+  display: block;
+  border-radius: 4px;
+}
+
+.verification-code-choose .cpt-sub-box {
+  margin: 10px auto;
+}
+
+.verification-code-choose .cpt-choose-refresh-outer {
+  float: left;
+  height: 18px;
+  width: 18px;
+  overflow: hidden;
+  margin: 0;
+  padding: 9px 10px;
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+
+.verification-code-choose .cpt-choose-refresh {
+  width: 100%;
+  height: 100%;
+  background-position: -190px 0px;
+}
+
+.verification-code-choose .cpt-choose-loading {
+  width: 100%;
+  height: 100%;
+}
+
+.verification-code-choose .cpt-choose-submit {
+  float: right;
+  width: 100px;
+  height: 36px;
+  line-height: 36px;
+  overflow: hidden;
+  text-align: center;
+  margin-right: 10px;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  vertical-align: text-bottom;
+  z-index: 0;
+  color: #fff;
+  background: #2c6fb7;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.verification-code-choose .cpt-submit-text {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  height: 36px;
+  font-size: 18px;
+}
+
+.verification-code-choose .cpt-img-sign {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  text-align: center;
+  line-height: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  background-position: -168px 0px;
+  cursor: pointer;
+}

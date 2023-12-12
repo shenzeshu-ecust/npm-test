@@ -1,0 +1,124 @@
+
+/* 其它弹窗 */
+.mt30 {margin-top: 30rpx;}
+.mt60 {margin-top: 60rpx;}
+.mb30 {margin-bottom: 30rpx;}
+.mb10 {margin-bottom: 10rpx;}
+.score-val {
+	font-size: 28rpx;
+	color: #111111;
+	max-height: 800rpx;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch
+}
+.score-val .tit {
+	font-size: 32rpx;
+	font-weight: 500;
+	line-height: 1;
+	padding: 40rpx 0 14rpx;
+}
+.score-text {
+	width: 650rpx;
+	max-height: 800rpx;
+	border-radius: 42rpx;
+	background: #FFF;
+	overflow-y: scroll;
+	padding: 60rpx 24rpx;
+	-webkit-overflow-scrolling: touch
+}
+.score-text .tit {
+	font-size: 40rpx;
+	font-weight: 500;
+	line-height: 1;
+	color: #111111;
+	padding: 38rpx 0 14rpx;
+}
+.score-text .content {
+	color: #555555;
+	font-size: 28rpx;
+	font-weight: 400;
+	line-height: 40rpx;
+  	padding: 0 24rpx;
+}
+.score-text .img {
+	width: 150rpx;
+	height: 150rpx;
+}
+.score-text .coefficient {
+	padding: 0 24rpx;
+	font-size: 24rpx;
+	border-radius: 4rpx;
+  	margin-top: 24rpx;
+}
+.score-text .coef-title {
+	text-align: left;
+}
+.score-text .coef-table {
+	margin-top: 10rpx;
+}
+.score-text .coef-table .item {
+	display: flex;
+}
+.score-text .coef-table .th,.score-text .coef-table .td {
+	flex: 1;
+	text-align: center;
+	padding: 12rpx 3rpx;
+	margin: 0 5rpx 5rpx 0;
+}
+.score-text .coef-table .td:last-of-type{
+	margin-right: 0
+}
+.score-text .coef-table .th {
+	color: #fff;
+	background-image: linear-gradient(to right, #FFC649 0%, #FFA000 99%);
+}
+.score-text .coef-table .td {
+	background-color: #EDEFF2;
+}
+.score-close {
+	font-size: 60rpx;
+	text-align: center;
+	margin-top: 40rpx;
+	color: #fff;
+}
+.score-sign {
+	width: 460rpx;
+	max-height: 400rpx;
+	border-radius: 30rpx;
+	background-image: linear-gradient(180deg, #FD3758 0%, #FD3359 0%, #FD564D 98%);
+	padding: 60rpx 20rpx;
+	color: #FFF;
+	text-align: center;
+}
+.score-sign .tit {
+	height: 65rpx;
+	font-size: 46rpx;
+	line-height: 65rpx;
+	font-weight: 600;
+}
+.score-sign .content {
+	font-size: 28rpx;
+	line-height: 40rpx;
+	font-weight: 400;
+	padding: 10rpx;
+}
+.score-sign .img {	width: 88rpx;height: 88rpx; }
+.score-sign .img-small { width: 58rpx;height: 58rpx; }
+.score-sign .font-big {
+	font-size: 46rpx;
+	color: #FFEE74;
+	font-weight: 500;
+}
+.score-sign .layer-button {
+	margin: 15rpx auto;
+	width: 237rpx;
+	height: 72rpx;
+	background: #FFDB4D;
+	border-radius: 36rpx;
+	box-shadow: 16rpx #FF5210;
+	line-height: 72rpx;
+	text-align: center;
+	color: #FE4110;
+	font-weight: 600;
+	font-size: 28rpx;
+}

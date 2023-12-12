@@ -1,0 +1,47 @@
+<template name="priceStarLayer">
+    <scroll-view scroll-y hidden="{{!showCnStarLayer}}" class="{{discBox}}" bindtap="closeStarlayer">
+        <view class="disc-layer-tit">国内酒店星级、钻级说明</view>
+        <view class="star-layer-item">“五星级”、“四星级”、“三星级”等为挂牌星级酒店，即通过国家旅游局的星级评定并获得相应称号的酒店。</view>
+        <view class="star-layer-item">若酒店未参加星级评定但酒店各项设施和服务等达到相应水平，则使用“五钻（豪华）”、“四钻（高档）”、“三钻（舒适）”、“二钻（经济）”等进行分类，仅供参考：</view>
+        <view class="star-type">五钻(豪华型酒店)：</view>
+        <view>酒店装修豪华，可提供优质的服务。</view>
+        <view class="star-type">四钻(高档型酒店)：</view>
+        <view>酒店布置典雅，可提供优良的服务。</view>
+        <view class="star-type">三钻(舒适型酒店)：</view>
+        <view>舒适型酒店，酒店设施齐备，可提供良好的服务。</view>
+        <view class="star-type">二钻(经济型酒店)：</view>
+        <view>酒店可提供基础的设施及服务</view>
+        <view class="star-layer-item">未评星级的酒店在硬件设施方面与国家旅游局星级标准相比可能存在某些差异。</view>
+        <template is="minsuIntro"></template>
+    </scroll-view>
+    <scroll-view scroll-y hidden="{{!showOverseaStarLayer}}" class="{{discBox}}" bindtap="closeStarlayer">
+        <view class="disc-layer-tit">海外酒店钻级说明</view>
+        <view class="star-layer-item">海外酒店的钻级一般为非官方的酒店自评，携程在此基础上参考客户评价给予钻级划分，供预订酒店时参考。（友情提示：正常情况下海外酒店的设施标准可能低于同星级的国内酒店，请在预定前详细参考酒店各方面信息。）</view>
+        <view class="star-type">五钻(豪华型酒店)：</view>
+        <view>五钻酒店将提供最舒适、最贴心的服务。酒店装修豪华典雅，除提供必须设施，还可提供其它增值服务。</view>
+        <view class="star-type">四钻(高档型酒店)：</view>
+        <view>四钻酒店客房精心设计、装修豪华、布置典雅。部分酒店可提供全面的商务服务和先进的会议设施</view>
+        <view class="star-type">三钻(舒适型酒店)：</view>
+        <view>三钻酒店提供舒适、贴心和人性化的服务，酒店内设施齐备。相比二钻酒店提供更多的生活必需品，客房装饰也更舒适考究</view>
+        <view class="star-type">二钻(经济型酒店)：</view>
+        <view>除一钻酒店提供的服务以外，部分二钻酒店还可提供商务服务。但一般不提供会议服务、行李寄存以及健身娱乐设施。</view>
+        <view class="star-type">一钻(经济型酒店)：</view>
+        <view>提供背包族最基本的食宿条件。客房多数面积较小，简单装修，且大部分房间不提供独立的洗手间和电话。</view>
+        <template is="minsuIntro"></template>
+    </scroll-view>
+</template>
+
+<template name="minsuIntro">
+    <view class="disc-layer-tit">民宿钻级说明</view>
+    <view class="star-layer-item">民宿评级体系是携程对平台上所售卖的民宿，基于其掌握的综合信息，进行整体评估的评价体系。</view>
+    <view class="star-type">五钻(豪华型民宿)：</view>
+    <view>装修豪华，设施用品完备且品质高档，具有高水平的服务接待能力。</view>
+    <view class="star-type">四钻(高档型民宿)：</view>
+    <view>布置典雅，设施用品齐全且品质较好，具有良好的服务接待能力。</view>
+    <view class="star-type">三钻(舒适型民宿)：</view>
+    <view>温馨舒适，设施用品基本齐全且美观实用，可提供规范化服务。</view>
+    <view class="star-type">二钻(经济型民宿)：</view>
+    <view>整洁干净，配备必要设施和基本生活用品，有接待服务人员。</view>
+    <view class="star-type">一钻(平价型民宿)：</view>
+    <view style="padding-bottom: 300rpx">装修简单，提供经营接待的最基本设施，可能无服务接待人员。</view>
+</template>

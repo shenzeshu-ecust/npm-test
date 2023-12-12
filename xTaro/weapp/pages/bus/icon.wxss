@@ -1,0 +1,230 @@
+@font-face {
+    font-family: 'bus_wechat_icon';
+    src: url('https://pic.c-ctrip.com/bus/resource/bus_wechat.ttf?version=1.1.4');
+
+    src: url('https://pic.c-ctrip.com/bus/resource/bus_wechat.woff2?version=1.1.4')
+            format('woff2'),
+        url('https://pic.c-ctrip.com/bus/resource/bus_wechat.woff?version=1.1.4')
+            format('woff'),
+        url('https://pic.c-ctrip.com/bus/resource/bus_wechat.ttf?version=1.1.4')
+            format('truetype'); /* iOS 4.1- */
+}
+.icon-font {
+    font-family: 'bus_wechat_icon';
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    vertical-align: middle;
+}
+icon {
+    text-align: center;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 32rpx;
+    line-height: 32rpx;
+}
+icon:before {
+    font-family: 'bus_wechat_icon';
+}
+
+/* 增加符号 */
+.icon-add:before {
+    content: '\E000';
+}
+/* 复选框 */
+.icon-checkedbox:before {
+    content: '\E001';
+}
+/* 复选框未选中 */
+.icon-checkbox:before {
+    content: '\E002';
+}
+/* 清除 */
+.icon-clear:before {
+    content: '\E003';
+}
+/* 关闭 */
+.icon-close:before {
+    content: '\E004';
+}
+/* 编辑—框 */
+.icon-edit:before {
+    content: '\E006';
+}
+/* 编辑—框 */
+.icon-edit-line:before {
+    content: '\F07C6';
+}
+/* 编辑 */
+.icon-edit-noborder:before {
+    content: '\E007';
+}
+/* 右边箭头 */
+.icon-arrow-right:before {
+    content: '\E008';
+}
+/* 筛选 */
+.icon-filter:before {
+    content: '\E009';
+}
+/* 坐标 */
+.icon-map:before {
+    content: '\E00a';
+}
+/* 时间 */
+.icon-time:before {
+    content: '\E00f';
+}
+/* 信息 */
+.icon-info:before {
+    content: '\E010';
+}
+/* 定位 */
+.icon-position:before {
+    content: '\E011';
+}
+/* 问号 */
+.icon-question:before {
+    content: '\E013';
+}
+/* 对号 */
+.icon-check:before {
+    content: '\E014';
+}
+/* 返回 */
+.icon-arrow-back:before {
+    content: '\E015';
+}
+/* 电话 */
+.icon-favor:before {
+    content: '\E016';
+}
+/* 收藏-未选中 */
+.icon-favor-no:before {
+    content: '\E017';
+}
+/* 收藏 */
+.icon-favor:before {
+    content: '\E019';
+}
+/* 更多 */
+.icon-more:before {
+    content: '\E01b';
+}
+/* 更多 */
+.icon-more:before {
+    content: '\E01c';
+}
+/* 刷新 */
+.icon-refresh:before {
+    content: '\E01d';
+}
+/* 搜索 */
+.icon-search:before {
+    content: '\E01e';
+}
+/* 客服 */
+.icon-service:before {
+    content: '\E01f';
+}
+/* 警告 */
+.icon-warn:before {
+    content: '\E022';
+}
+
+/* 箭头-下 */
+.icon-arrow-down:before {
+    content: '\E0b2';
+}
+/* 箭头-上 */
+.icon-arrow-up:before {
+    content: '\E0b3';
+}
+/* icon-bus */
+.icon-bus:before {
+    content: '\E0ce';
+}
+/* 选择圆形 */
+.icon-checked-round:before {
+    content: '\E176';
+}
+/* 未选中圆形 */
+.icon-check-round:before {
+    content: '\E177';
+}
+/* 箭头-返回 */
+.icon-arrow-back-new:before {
+    content: '\E28b';
+}
+
+/* 出发到达 */
+.icon-arrow-to:before {
+    content: '\E4f1';
+}
+/* 定位 */
+.icon-location:before {
+    content: '\E37d';
+}
+/* 二维码 */
+.icon-qrcode::before {
+    content: '\E4CF';
+}
+/* 删除乘客 */
+.icon-del:before {
+    content: '\E696';
+}
+/* 信息强 */
+.icon-info-strong:before {
+    content: '\e6fa';
+}
+/* 带边框关闭 */
+.icon-close-border:before {
+    content: '\E706';
+}
+/* 出发到达箭头-长 */
+.icon-arrow-to-long:before {
+    content: '\E8E2';
+}
+/* 乘客选择勾选 */
+
+.icon-check-triangle:before {
+    content: '\E9fb';
+}
+
+/* 样式独特的对勾 */
+.icon-check-image:before {
+    content: '\E8A6';
+}
+
+/* 红包 */
+.icon-red-package:before {
+    content: '\f452';
+}
+
+/* 对勾 */
+.icon-yes:before {
+    content: '\e8a6';
+}
+
+/* 叉 */
+.icon-no:before {
+    content: '\e004';
+}
+
+/* 加号 */
+.icon-plus:before {
+    content: '\e332';
+}
+/* 扫码 */
+.icon-scan:before {
+    content: '\e0c4';
+}
+/* 相机 */
+.icon-camera:before {
+    content: '\ef87';
+}
+/* 铃铛 */
+.icon-bell:before {
+    content: '\f0cee';
+}

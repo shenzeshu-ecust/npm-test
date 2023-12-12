@@ -1,0 +1,220 @@
+/* pages/bus/share/components/ShareModal/index.wxss */
+.share-modal,
+.share-modal .share-modal-mask,
+.share-modal .share-modal-container {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.share-modal .share-modal-container {
+    pointer-events: none;
+    z-index: 102;
+}
+
+.share-modal .share-modal-mask {
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+}
+
+.fadeIn {
+    animation: fadeIn 220ms linear;
+}
+
+.fadeOut {
+    animation: fadeOut 220ms linear;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.share-modal .box {
+    border-radius: 20rpx;
+    margin: 0 12%;
+    min-width: 60%;
+    padding: 40rpx;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    box-sizing: border-box;
+    pointer-events: auto;
+    position: relative;
+    z-index: 0;
+}
+.share-modal .box .title {
+    font-size: 40rpx;
+    font-weight: 500;
+    letter-spacing: 0px;
+    max-width: 80%;
+}
+.share-modal .box .message {
+    text-align: center;
+    margin-top: 30rpx;
+    font-size: 32rpx;
+    color: #333;
+    font-weight: 500;
+}
+
+.share-modal .box .button_hover {
+    filter: grayscale(0.3);
+}
+
+.share-modal .line {
+    width: 3rpx;
+    height: 50rpx;
+    position: relative;
+}
+
+.share-modal .line .trans {
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+}
+
+.lineTransIn {
+    animation: lineTransIn 440ms linear;
+}
+
+.lineTransOut {
+    animation: lineTransOut 220ms linear;
+}
+
+@keyframes lineTransIn {
+    0% {
+        height: 0;
+    }
+    50% {
+        height: 100%;
+    }
+    100% {
+        height: 100%;
+    }
+}
+@keyframes lineTransOut {
+    0% {
+        height: 100%;
+    }
+    100% {
+        height: 0;
+    }
+}
+.share-modal .close-modal {
+    margin: -2rpx 0;
+}
+
+.closeTransOut {
+    animation: closeTransOut 220ms linear;
+}
+
+.closeTransIn {
+    animation: closeTransIn 440ms linear;
+}
+
+@keyframes closeTransIn {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes closeTransOut {
+    0% {
+        opacity: 1;
+    }
+    0.01% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.share-modal .rules {
+    box-sizing: border-box;
+    width: 655rpx;
+    border-radius: 25rpx;
+    background-color: white;
+    padding: 43rpx;
+    margin-top: 64rpx;
+    max-height: 60%;
+    overflow: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+}
+.share-modal .rules strong {
+    color: #333;
+    font-size: 36rpx;
+    font-weight: 600;
+}
+.share-modal .rules p {
+    color: #333;
+    font-size: 28rpx;
+    font-weight: 400;
+}
+.share-modal .rules .rules-line {
+    background-color: #ff6833;
+    height: 6rpx;
+    width: 62rpx;
+    margin-top: 10rpx;
+}
+.share-modal .rules .rules-ul {
+    flex: 1;
+    margin-top: 46rpx;
+    color: #727272;
+    font-size: 24rpx;
+    letter-spacing: 0.35rpx;
+    overflow: auto;
+}
+.share-modal .rules .rules-ul::-webkit-scrollbar {
+    display: none;
+}
+.share-modal .rules .rules-ul .rules-li {
+    padding-bottom: 25rpx;
+    display: flex;
+}
+.share-modal .rules .rules-ul .rules-li .rules-circle {
+    flex: 0 0 20rpx;
+    margin-top: 8rpx;
+    margin-right: 8rpx;
+    background-image: url('https://s.qunarzz.com/nnc_module_qunar_bus/share_model_circle.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.share-modal .close-modal-btn {
+    width: 52rpx;
+    height: 52rpx;
+    margin-top: 34rpx;
+    background-image: url('https://s.qunarzz.com/nnc_module_qunar_bus/share_modal_close.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    pointer-events: auto;
+}

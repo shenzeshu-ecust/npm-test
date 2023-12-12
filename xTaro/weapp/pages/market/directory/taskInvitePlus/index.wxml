@@ -1,0 +1,11 @@
+<view>
+  <normal 
+    taskList="{{taskList}}"
+    legaoInfo="{{legaoInfo}}"
+    bind:onReceiveTask="handleReceiveTask"
+    bind:onReceiveAward="handleReceiveAward"
+    bind:clickSmallAward="handleClickSmallAward"
+  />
+
+  <sharePanel show="{{showSharePanel}}" shareConfig="{{shareConfig}}" bind:close="handleCloseSharePanel"></sharePanel>
+</view>

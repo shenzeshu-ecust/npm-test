@@ -1,0 +1,2 @@
+.inner-box .img { width: 295rpx; height: 99rpx; margin: auto;}
+.inner-box { width: 100%; text-align: center; padding: 40rpx 0 60rpx 0; }

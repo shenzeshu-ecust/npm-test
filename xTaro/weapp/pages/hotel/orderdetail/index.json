@@ -1,0 +1,20 @@
+{
+  "navigationBarTitleText": "订单详情",
+  "enablePullDownRefresh": true,
+  "navigationBarBackgroundColor": "#0088F6",
+  "navigationBarTextStyle": "white",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "common-layer": "/pages/hotel/components/layer/index",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index",
+    "roomlayer": "/pages/hotel/components/roomlayer/roomlayer",
+    "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar",
+    "loading-gif": "/pages/hotel/components/loadinggif/loadinggif",
+    "barginbanner": "/pages/hotel/components/barginbanner/barginbanner",
+    "emegencynotice": "/pages/hotel/components/emegencynotice/emegencynotice",
+    "subscribeMsg": "/pages/hotel/orderdetail/subscribeMsg/subscribeMsg",
+    "slogan": "/pages/hotel/components/slogan/slogan",
+    "price-detail": "/pages/hotel/components/pricedetail/index",
+    "loadinggif": "/pages/hotel/components/loadinggif/loadinggif"
+  }
+}

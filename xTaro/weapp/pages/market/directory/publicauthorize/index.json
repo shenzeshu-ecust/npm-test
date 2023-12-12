@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "头像昵称授权",
+  "usingComponents": {
+    "returnApp": "../components/returnApp/index",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  }
+}

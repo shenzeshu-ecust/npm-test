@@ -1,0 +1,29 @@
+<!--pages/wallet/myWallet/index.wxml-->
+<!-- <scroll-view class="explain-scroll" scroll-y="{{true}}" catchtouchmove="empty"></scroll-view> -->
+<wxs module="filter" src="./index.wxs"></wxs>
+<view class="my_wallet_page_container">
+  <scroll-view   scroll-y="{{true}}" >
+  <view wx:if="{{returnLinkUrl}}" class="item_container cashback_container" data-jumpurl="{{returnLinkUrl}}" data-type="{{'wallet'}}" bindtap="jumpToH5">
+    <view class="left">
+      <view class="title">返现余额<view class="arrow"></view></view>
+      <view class="content"><text class="currency">¥</text><text class="money">{{filter.formatMoney(returnCash)}}</text></view>
+    </view>
+  <view class="right cashback"></view>
+  </view>
+  <view wx:if="{{cashLinkUrl}}" class="item_container cash_container" data-jumpurl="{{cashLinkUrl}}" data-type="{{'wallet'}}" bindtap="jumpToH5">
+    <view class="left">
+      <view class="title">现金余额<view class="arrow"></view></view>
+      <view class="content"><text class="currency">¥</text><text class="money">{{filter.formatMoney(cashTotal)}}</text></view>
+    </view>
+  <view class="right cash"></view>
+  </view>
+  <view wx:if="{{giftcardLinkUrl}}" class="item_container gift_card_container" data-jumpurl="{{giftcardLinkUrl}}" data-type="{{'gift'}}" bindtap="jumpToH5">
+    <view class="left">
+      <view class="title">礼品卡余额<view class="arrow"></view></view>
+      <view class="content"><text class="currency">¥</text><text class="money">{{filter.formatMoney(giftCard)}}</text></view>
+    </view>
+  <view class="right gift_card_cash"></view>
+  </view>
+</scroll-view >
+</view>
+

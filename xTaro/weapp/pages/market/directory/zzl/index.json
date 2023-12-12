@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "",
+  "navigationBarTextStyle": "white",
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "nav-bar": "/cwx/component/navbar/navbar",
+    "ad-sdk":"/pages/market/advertiseNew/ad-sdk",
+    "taskList": "../task/index",
+    "count-down": "/pages/market/directory/components/countDown/index",
+    "task-count-down": "/pages/market/directory/components/taskCountDown/index"
+  }
+}   

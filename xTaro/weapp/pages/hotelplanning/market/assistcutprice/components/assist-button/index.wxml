@@ -1,0 +1,9 @@
+<view>
+    <view wx:if="{{subTitle}}" class="sub-title">{{subTitle}}</view>
+    <button bind:tap="onTap" open-type="{{isSponsor && assistStatus === 1 && !isTop || !isSponsor && assistStatus === 12 ? 'share' : ''}}"  class="cut-btn d-flex just-center" plain="true" hover-class="none">
+        <view class="ast-icon ast-btn-large d-flex flex-center {{ assistStatus === 1 || assistStatus === 11 ? 'shake' : '' }}">
+            <text class="btn-txt">{{title}}</text>
+        </view>
+        <view wx:if="{{assistBubbleText}}" class="assist-bubble">{{assistBubbleText}}</view>
+    </button>
+</view>

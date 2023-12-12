@@ -1,0 +1,103 @@
+<view class="l-modlist__item {{((fooditem.TagNameList && fooditem.TagNameList[0]) || fooditem.KoubeiAmount||  fooditem.SecondName) ? 'four-line' : 'three-line'}}" id="{{'listItem'+idx}}" data-id="{{fooditem.RestaurantId}}" data-position="{{idx}}" data-poi-id="{{fooditem.PoiId}}" data-poi-name="{{fooditem.Name}}" bindtap="goDetail">
+  <view class="c-listinnerwrap">
+    <view class="c-imgbox">
+      <image mode="aspectFill " src="{{fooditem.ImageUrl}}" class="{{isSpecialDetail?'specialStyle':''}}"></image>
+      <view class="top_number {{idx>9 ? 'current' : ''}}" wx:if="{{isSpecialDetail}}">
+        {{idx+1}}
+      </view>
+      <block wx:if="{{fooditem.OpenStatus}}">
+        <view class="business_time">
+          <text class="business_time--text">{{fooditem.OpenStatus}}</text>
+        </view>
+      </block>
+    </view>
+    <view class="c-textview">
+      <view class="c-textview__title">
+        <text class="c-textview__title--text">{{fooditem.Name}}</text>
+      </view>
+      <block wx:if="{{fooditem.SecondName}}">
+        <view class="c-textview__ename">
+          <text class="c-textview__ename--text">{{fooditem.SecondName}}</text>
+        </view>
+      </block>
+      <view class="c-textview__comment">
+        <block wx:if="{{fooditem.ShiMeiLinName && !isNewStyle}}">
+          <view class="c-textview__comment--msltip">
+            <text>{{fooditem.ShiMeiLinName}}</text>
+          </view>
+        </block>
+        <block wx:if="{{fooditem.CommentScore}}">
+          <view class="c-textview__comment--score">
+            <text>{{fooditem.CommentScore}}分</text>
+          </view>
+        </block>
+        <block wx:if="{{fooditem.AveragePrice}}">
+          <view class="c-textview__comment--price">
+            <text>人均¥{{fooditem.AveragePrice}}</text>
+          </view>
+        </block>
+      </view>
+      <block wx:if="{{fooditem.TagNameList && fooditem.TagNameList.length>0 || fooditem.KoubeiAmount || (isNewStyle && fooditem.ShiMeiLinType>0)}}">
+        <view class="c-textview__tagbox">
+          <block wx:if="{{isNewStyle && fooditem.ShiMeiLinType>0}}">
+            <text class="food-rank-text">2021美食林榜单</text>
+            <!-- 1、黑钻2、钻石3、铂金4、金牌5、银牌 -->
+            <text class="food-level-text" wx:if="{{fooditem.ShiMeiLinType==1}}">黑钻餐厅</text>
+            <text class="food-level-text" wx:if="{{fooditem.ShiMeiLinType==2}}">钻石餐厅</text>
+            <text class="food-level-text" wx:if="{{fooditem.ShiMeiLinType==3}}">铂金餐厅</text>
+            <text class="food-level-text" wx:if="{{fooditem.ShiMeiLinType==4}}">金牌餐厅</text>
+            <text class="food-level-text" wx:if="{{fooditem.ShiMeiLinType==5}}">银牌餐厅</text>
+          </block>
+          <block wx:for="{{fooditem.TagNameList}}" wx:for-index="j" wx:for-item="tagNameItem" wx:key="j">
+            <view class="c-textview__tagbox--item">
+              <text>{{tagNameItem}}</text>
+            </view>
+          </block>
+          <block wx:if="{{fooditem.KoubeiAmount}}">
+            <view class="c-textview__tagbox--item">
+              <text>口碑人气{{fooditem.KoubeiAmount}}</text>
+            </view>
+          </block>
+        </view>
+      </block>
+      <view class="c-textview__bottom">
+        <view class="c-textview__bottom--distance">
+          <block wx:if="{{fooditem.CuisineName}}">
+            <view class="landmark_outbox0">
+              <text>{{fooditem.CuisineName}}</text>
+            </view>
+          </block>
+          <block wx:if="{{fooditem.ZoneName}}">
+            <view class="landmark_outbox">
+              <text>{{fooditem.ZoneName}}</text>
+            </view>
+          </block>
+          <block wx:if="{{fooditem.LandmarkName}}">
+            <view class="landmark_outbox">
+              <text>{{fooditem.LandmarkName}}</text>
+            </view>
+          </block>
+        </view>
+        <block>
+          <view class="c-textview__bottom--position">
+            <text wx:if="{{fooditem.DistanceDesc}}">{{fooditem.DistanceDesc}}</text>
+            <text wx:elif="{{fooditem.Distance}}">{{"距地标"+fooditem.Distance}}</text>
+            <text wx:elif="{{fooditem.DistrictCentreDistance}}">
+              {{"距市中心"+fooditem.DistrictCentreDistance}}
+            </text>
+          </view>
+        </block>
+      </view>
+      <block wx:if="{{fooditem.BookingText}}">
+        <view class="c-recommend">
+          <view class="c-recommend-ding">
+            <i>订</i>
+          </view>
+          <view class="c-recommend-text">
+            <text>{{fooditem.BookingText}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

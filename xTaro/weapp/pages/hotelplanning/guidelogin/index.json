@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "navigationStyle": "custom",
+  "usingComponents": {
+      "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar"
+  }
+}
+

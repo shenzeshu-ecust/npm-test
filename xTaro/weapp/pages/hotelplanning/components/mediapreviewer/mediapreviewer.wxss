@@ -1,0 +1,153 @@
+@import "../../common/css/common.wxss";
+
+.mp-wrapper {
+	position: fixed;
+	background: #000;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 9999;
+	padding-bottom: constant(safe-area-inset-bottom);
+	padding-bottom: env(safe-area-inset-bottom);
+}
+
+.mp-head {
+	position: absolute;
+	left: 24rpx;
+	top: 100rpx;
+	display: flex;
+	align-items: center;
+}
+
+.mp-close {
+	color: #fff;
+	font-size: 34rpx;
+	margin-right: 24rpx;
+	padding: 8rpx;
+}
+
+.user-info {
+	display: flex;
+}
+
+.user-info-group {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.user-nickname {
+	color: #fff;
+	font-size: 24rpx;
+}
+
+.user-tag {
+	font-size: 20rpx;
+	border-radius: 16rpx 2rpx 16rpx 2rpx;
+	padding: 4rpx 8rpx;
+	margin-top: 4rpx;
+	width: fit-content;
+}
+
+.user-tag-blue {
+	background-color: rgba(0, 134, 246, 0.25);
+	color: #0086f6;
+}
+
+.user-tag-orange {
+	background-color: rgba(255, 119, 0, 0.25);
+	color: #ff7700;
+}
+
+.user-tag-red {
+	background-color: rgba(246, 59, 46, 0.25);
+	color: #f63b2e;
+}
+.avatar-group {
+	position: relative;
+	margin-right: 12rpx;
+	align-items: center;
+	display: flex;
+}
+
+.vip-icon {
+	position: absolute;
+	width: 24rpx;
+	height: 24rpx;
+	bottom: 0;
+	right: 0;
+}
+
+.user-avatar {
+	width: 64rpx;
+	height: 64rpx;
+	border-radius: 50%;
+	flex-shrink: 0;
+}
+
+.vip-icon {
+	position: absolute;
+	width: 24rpx;
+	height: 24rpx;
+	bottom: 0;
+	right: 0;
+}
+
+.mp-swiper {
+	width: 100%;
+	height: 100%;
+}
+
+.mp-item image {
+	width: 100%;
+	height: 100%;
+}
+
+.mp-item video {
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 100%;
+}
+
+.mp-title {
+	font-size: 34rpx;
+	margin-bottom: 8rpx;
+}
+
+.mp-info {
+	font-size: 26rpx;
+	padding: 20rpx 28rpx;
+	background: #000;
+	backdrop-filter: blur(20rpx);
+	opacity: 0.7;
+	position: absolute;
+	bottom: constant(safe-area-inset-bottom);
+	bottom: env(safe-area-inset-bottom);
+	width: 100%;
+	color: #fff;
+	box-sizing: border-box;
+}
+
+.mp-info-head {
+	display: flex;
+	justify-content: space-between;
+}
+
+.mp-page {
+	font-weight: 300;
+	font-size: 24rpx;
+	flex-shrink: 0;
+}
+
+.mp-page text {
+	font-size: 34rpx;
+	font-weight: 600;
+}
+
+.mp-desc {
+	max-height: 200rpx;
+	overflow-y: scroll;
+}

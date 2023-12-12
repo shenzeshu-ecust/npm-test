@@ -1,0 +1,16 @@
+<view class="canvas-box">
+  <canvas
+    class="canvas"
+    canvas-id="myImage"
+    catchtap="noop"
+    style="width: {{backgroundWidth}}px;height: {{backgroundHeight}}px">
+  </canvas>
+</view>
+
+<button
+  class="btn"
+  style="background: url({{btnUrl}}) no-repeat;background-size: 100% 100%;"
+  hidden="{{!showBtn}}"
+  catchtap="handleSave">
+    {{btnText}}
+</button>

@@ -1,0 +1,8 @@
+@font-face {font-family: "train-number-font";
+    src:
+      url('https://images3.c-ctrip.com/train/train-wechat/number_zx_2.ttf') format('truetype');
+}
+
+.number-zx2 {
+    font-family: 'train-number-font';
+}

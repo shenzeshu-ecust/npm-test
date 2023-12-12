@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "我的收藏",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "usingComponents": {
+        "common-layer": "/pages/hotel/components/layer/index",
+        "price-tag-new": "/pages/hotel/components/pricetagnew/pricetagnew",
+        "toolbar": "/pages/hotel/components/toolbar/toolbar"
+    }
+}

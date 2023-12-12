@@ -1,0 +1,35 @@
+<block wx:if="{{isShowCurrentComponent}}">
+  <view class="unit-promise-wrapper">
+    <view wx:if="{{globalVariable.platformName === 'tujia' || globalVariable.platformName === 'qunar'}}" class="ensure-item" catchtap="handlePopup" catchlongpress="handlePreventPopup">
+      <view class="item-desc-flex">
+        <view class="item-desc">{{peaceLiveData.title || ''}}</view>
+      </view>
+      <view class="item-title space-top" catchlongpress="handleTouchLongClick">
+        <image class="peace-live-sign-{{globalVariable.platformName}}" src="{{peaceLiveData.icon}}"></image>
+      </view>
+    </view>
+    <view wx:if="{{globalVariable.platformName === 'ctrip'}}" class="ensure-item" catchtap="handlePopup" catchlongpress="handlePreventPopup">
+      <view class="item-title space-bottom" catchlongpress="handleTouchLongClick">
+        <image class="peace-live-sign-ctrip" src="{{peaceLiveData.icon}}"></image>
+      </view>
+      <view class="item-desc-flex">
+        <view class="item-desc">{{peaceLiveData.title || ''}}</view>
+        <image class="arrow-right" src="https://pic.tujia.com/upload/festatic/mp/arrow_right2x.png" />
+      </view>
+    </view>
+    <view class="promise-wrapper-bottom">
+      <text wx:if="{{isShowHouseNumber}}">房屋编号{{houseNumber || ''}}</text>
+      <text wx:if="{{globalVariable.platformName === 'tujia' || globalVariable.platformName === 'qunar'}}" class="business-license" bindtap="handlePreviewLicense">查看营业执照</text>
+      <text wx:if="{{globalVariable.platformName === 'ctrip'}}" class="business-license" bindtap="handlePreviewLicense">查看住宿预订方营业执照</text>
+    </view>
+  </view>
+  <bottom-popup id="bottomFrame" isShowTitleIcon="true" titleIconPath="{{peaceLiveData.subIcon}}" show="{{isShowPopup}}">
+    <view wx:for="{{peaceLiveData.titleTips}}" wx:for-item="liveItem" wx:for-index="liveIndex" wx:key="liveIndex">
+      <view class="live-ensure">{{liveItem.title}}</view>
+      <view class="live-ensure-cont">
+        <text class="live-ensure-cont-text">{{liveItem.introduction}}</text>
+      </view>
+    </view>
+  </bottom-popup>
+  <preview-license isShowLicense="{{isShowLicense}}" licenseImageList="{{businessLicenseList}}" bindcloseLicense="handlePreviewLicense"></preview-license>
+</block>

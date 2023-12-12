@@ -1,0 +1,4 @@
+<view class="save-task-pop-shadow" wx-if="{{visible}}"></view>
+<view class="save-task-pop" wx-if="{{visible && showVideo}}">
+  <video class="save-task-pop-body {{showClass}}" id="video" src="{{videoSrc}}" show-fullscreen-btn="{{false}}" fullscr autoplay loop controls="{{false}}" muted />
+</view>

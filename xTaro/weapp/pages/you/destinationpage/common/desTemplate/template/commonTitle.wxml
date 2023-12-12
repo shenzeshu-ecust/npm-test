@@ -1,0 +1,19 @@
+<!-- 参数：
+title moreurl moretext moreicon weatherNo,nightTemperature,dayTemperature,jumpTemperatureUrl-->
+
+<template name="commonTitle">
+    <view class="route_title_box">
+        <view class="route_title">
+            <view class="route_title_underline"></view>
+            <text class="route_title_text">{{title}}</text>
+        </view>
+        <view class="route_more_box" wx:if="{{!jumpTemperatureUrl}}"  bindtap="_goToRouteMore" data-moreurl="{{moreurl}}" wx:if="{{moretext}}">
+            <text class="route_more_text">{{moretext}}</text>
+            <image class="route_more_icon" src="{{moreicon}}"></image>
+        </view>
+        <view wx:if="{{jumpTemperatureUrl}}" class="weather" data-url="{{jumpTemperatureUrl}}">
+            <image style="width:44rpx;height:44rpx;z-index: 99;" src="{{weatherNo >= 0 ? 'https://pages.c-ctrip.com/you/weather/ctriphomepageicon/'+( weatherNo>9 ? weatherNo : '0'+ weatherNo)+'.png':''}}" />
+            <div class="weather_text">{{nightTemperature}}~{{dayTemperature}}℃</div>
+        </view>
+    </view>
+</template>

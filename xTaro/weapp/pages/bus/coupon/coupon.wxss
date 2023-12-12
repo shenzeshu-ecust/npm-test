@@ -1,0 +1,246 @@
+@import '../bus.wxss';
+
+.container {
+    flex: 1;
+    height: 100%;
+    font-size: 30rpx;
+    overflow: hidden;
+}
+
+.disabled {
+    color: #999;
+}
+
+.coupon-unused {
+    height: 106rpx;
+    margin: 16rpx 24rpx;
+    background: #ffffff;
+    border-radius: 16rpx;
+    padding: 32rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.coupon-unused .unused-title {
+    color: #333333;
+    font-size: 32rpx;
+    font-weight: 500;
+}
+
+
+.coupon-list-content .coupon-item {
+    margin: 16rpx 24rpx;
+    background: #ffffff;
+    border-radius: 16rpx;
+    padding: 32rpx 32rpx 0rpx 32rpx;
+}
+
+.coupon-select {
+    width: 44rpx;
+    height: 44rpx;
+    background-repeat: no-repeat;
+    background-size: 44rpx 44rpx;
+    font-size: 44rpx;
+    color: #CCCCCC;
+}
+
+.icon-checked-round {
+    margin-top: 10rpx;
+    color: #0086F6;
+}
+
+.icon-check-round {
+    margin-top: 10rpx;
+}
+
+.icon-checked-round:before,
+.icon-check-round:before {
+    font-size: 44rpx;
+    vertical-align: top;
+}
+
+.right {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.coupon-item-top {
+    display: flex;
+    flex: 1;
+    min-height: 60rpx;
+    border-radius: 2rpx;
+    background: #fff;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 32rpx;
+}
+
+.disabled .price-container {
+    color: #999;
+}
+
+.price-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex: 2;
+    color: #FF6600;
+    width: 66rpx;
+    padding-left: 24rpx;
+}
+
+.price-container .symbol {
+    font-size: 34rpx;
+    padding-top: 20rpx;
+    padding-right: 8rpx;
+}
+
+.price-container .price {
+    font-size: 60rpx;
+}
+
+.disabled .title-container .display-name,
+.disabled .title-container .use-time {
+    color: #999;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    flex: 6;
+}
+
+
+.title-container .display-name {
+    color: #333333;
+    font-size: 32rpx;
+    font-weight: 500;
+    padding-bottom: 16rpx;
+}
+
+.title-container .use-time {
+    color: #666666;
+    font-size: 24rpx;
+    font-weight: normal;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.separator-line {
+    background: #eeeeee;
+    height: 1rpx;
+}
+
+.coupon-item-bottom {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+.remark-max {
+    height: 100%;
+}
+
+.coupon-item-bottom .coupon-remark {
+    padding: 16rpx 0;
+    color: #999999;
+    font-size: 24rpx;
+    font-weight: normal;
+    height: 30rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 638rpx;
+}
+
+.coupon-item-bottom .min-coupon-remark {
+    width: 586rpx;
+}
+
+.coupon-remark-max {
+    padding: 16rpx 0;
+    color: #999999;
+    font-size: 24rpx;
+    font-weight: normal;
+    text-align: justify;
+    overflow: hidden;
+    width: 586rpx;
+}
+
+.arrow-down-content {
+    position: absolute;
+    right: 0;
+}
+
+.icon-arrow-down,
+.icon-arrow-up {
+    margin-top: 15rpx;
+    width: 40rpx;
+    height: 40rpx;
+    background-repeat: no-repeat;
+    background-size: 40rpx 40rpx;
+    font-size: 40rpx;
+    color: #999999;
+}
+
+.icon-arrow-down:before,
+.icon-arrow-up:before {
+    font-size: 40rpx;
+    vertical-align: top;
+}
+
+.coupon-unused-message {
+    padding: 16rpx 0;
+    color: #999999;
+    font-size: 24rpx;
+    font-weight: normal;
+    height: 30rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 638rpx;
+}
+
+.coupon-unused-message-max {
+    padding: 16rpx 0;
+    text-align: justify;
+    overflow: hidden;
+    width: 586rpx;
+    font-size: 24rpx;
+}
+
+.coupon-unused-message-max .icon-info,
+.coupon-unused-message .icon-info {
+    color: #FF7700;
+    margin-right: 7rpx;
+    margin-top: 2rpx;
+}
+
+.coupon-unused-message-max .icon-info,
+.coupon-unused-message-max .icon-info:before,
+.coupon-unused-message .icon-info,
+.coupon-unused-message .icon-info:before {
+    width: 28rpx;
+    height: 28rpx;
+    font-size: 28rpx;
+    vertical-align: top;
+}
+
+.coupon-unused-message-max .title,
+.coupon-unused-message .title {
+    color: #FF7700;
+}
+
+.coupon-unused-message-max .message,
+.coupon-unused-message .message {
+    color: #999999;
+}

@@ -1,0 +1,208 @@
+<view class="wf-wrap {{className}}" style="{{cStyle}}">
+  <scroll-view wx:if="{{tabs.length > 1}}" id="cwaterfall-tab-container" class="waterfall-tab-container {{tabFixed ? 'tab-container-fixed' : ''}}" scroll-x="true" style="background-color: {{tabThemeConfig.backgroundColor}};padding-left: {{tabGapConfig.titleLeftGap}}rpx;padding-right: {{tabGapConfig.titleRightGap}}rpx;">
+    <block wx:for="{{tabs}}" wx:key="tabItem">
+      <view wx:if="{{!!item.name}}" class="wf-tab-item {{selectedTabIndex==index ? 'active' : ''}}" data-index="{{index}}" bindtap="handleTabClick" style="padding-left: {{tabGapConfig.titleMiddleGap}}rpx;padding-right: {{tabGapConfig.titleMiddleGap}}rpx;">
+        <view class="tab-item-title">
+          <image wx:if="{{!!item.picIcon}}" class="tab-item-title_icon" src="{{selectedTabIndex==index ? item.picIcon2 : item.picIcon}}"></image>
+          <text class="tab-item-title_text" style="color: {{selectedTabIndex==index ? tabThemeConfig.activeTitleFontColor : tabThemeConfig.titleFontColor}};">{{item.name}}</text>
+        </view>
+        <view wx:if="{{!!item.subName}}" class="tab-item-subtitle" style="color: {{selectedTabIndex==index ? tabThemeConfig.activeSubtitleFontColor : tabThemeConfig.subtitleFontColor}};background: {{selectedTabIndex==index ? tabThemeConfig.activeSubtitleBackgroundColor : ''}};">{{item.subName}}</view>
+      </view>
+    </block>
+  </scroll-view>
+
+  <view wx:if="{{waterfallLeftList.length || waterfallRightList.length}}" class="wf-container">
+    <view wx:for="{{[1,2]}}" wx:for-item="itemName" wx:key="itemName" class="wf-item wf-item-2" id="{{itemName == 1 ? 'c-waterfallList-left' : 'c-waterfallList-right'}}">
+
+      <block wx:for="{{itemName == 1 ? waterfallLeftList : waterfallRightList}}" wx:key="itemName">
+        <view wx:if="{{item.type == 'pictxt'}}"  wx:key="id" class="wf-item-inner wf-item-left" bindtap="jumpToDetail"
+      data-jump="{{item.jumpUrl}}" data-biztype="{{item.biztype}}" data-id="{{item.id}}" data-title="{{item.title}}" data-location="{{itemName == 1 ? 'left-' : 'right-'}}{{index}}">
+        <view class="itemimg">
+          <view wx:if="{{item.protag}}" class="protag">{{item.protag}}</view>
+          <view class="itemimg-wapper" style="background-color:{{defaultImgBgColor}};">
+            <image class="img" src="{{item.image.url}}"
+              style="width:{{item.image.picWidth}}rpx;height: {{item.image.picHeight}}rpx" lazy-load="true"
+              mode="aspectFill"></image>
+          </view>
+          <view wx:if="{{item.poiName}}" class="itemimg-wapper-bg"></view>
+          <view wx:if="{{item.poiName}}" class="poiTag">{{item.poiName}}</view>
+          <view wx:if="{{item.isVideo}}" class="isvideo"></view>
+          <view wx:if="{{item.isadvert == '1'}}" class="isadvert"></view>
+        </view>
+        <view class="infotext">
+          <view class="infotitle">{{item.title}}</view>
+          <view wx:if="{{!!item.itag || !!item.stag || !!item.tag}}" class="tagView">
+            <view wx:if="{{!!item.itag}}" class="tag itag-view">{{item.itag}}</view>
+            <view wx:if="{{!!item.stag}}" class="tag stag-view">{{item.stag}}</view>
+            <view wx:if="{{!!item.tag}}" class="tag tag-view">{{item.tag}}</view>
+          </view>
+          <view wx:if="{{item.subtitle1}}" class="subtitle">{{item.subtitle1}}</view>
+          <view wx:if="{{item.price !== undefined}}" class="price-num">
+            <text class="price-mini" wx:if="{{item.price > 0}}">￥</text>
+            <text wx:if="{{item.price > 0}}"
+              class="price {{item.price.length > 5 ? 'small' : ''}}">{{item.price}}</text>
+            <!-- <text wx:else class="price small">实时计价</text> -->
+            <text class="price-text" wx:if="{{item.price > 0}}">起</text>
+            <text class="text">{{item.text}}</text>
+          </view>
+          <view class="linewrap"
+            wx:if="{{item.price === undefined && item.author && item.author.avatUrl && item.author.nickName}}">
+            <view class="userhead">
+              <image class="userhead-img" src="{{item.author.avatUrl}}"></image>
+              <image wx:if="{{item.author.vicon}}" class="userhead-vicon" src="{{item.author.vicon}}"></image>
+            </view>
+            <view class="usertext">
+              <view class="usertext-username">{{item.author.nickName}}</view>
+              <view wx:if="{{item.author.identitycomment}}"
+                class="usertext-hasvip {{item.author.isbusinessuser === '0' ? 'C-user' : item.author.isbusinessuser === '1' ? 'B-user' : ''}}">
+                {{item.author.identitycomment}}</view>
+            </view>
+          </view>
+        </view>
+        </view>
+        <view wx:elif="{{item.type == 'destcard'}}" wx:key="id" class="wf-item-inner wf-item-left wf-item-inner_local" bindtap="jumpToDetail"
+      data-jump="{{item.jumpUrl}}" data-biztype="{{item.biztype}}" data-id="{{item.id}}" data-title="{{item.title}}" data-location="{{itemName == 1 ? 'left-' : 'right-'}}{{index}}">
+        <view class="itemimg">
+          <view class="itemimg-wapper" style="background-color:{{defaultImgBgColor}};">
+            <video wx:if="{{item.videoUrl.length}}" class="video" src="{{item.videoUrl}}" controls="{{false}}" autoplay="{{true}}"
+              object-fit="cover" loop="{{true}}" muted="{{true}}" show-progress="{{false}}"
+              show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" show-center-play-btn="{{false}}"
+              enable-progress-gesture="{{false}}"
+              style="width:{{item.image.picWidth}}rpx;height: {{item.image.picHeight}}rpx"></video>
+            <image wx:else class="img" src="{{item.image.url}}"
+              style="width:{{item.image.picWidth}}rpx;height: {{item.image.picHeight}}rpx" lazy-load="true"
+              mode="aspectFill"></image>
+          </view>
+        </view>
+        <view class="infotext">
+          <view class="infotitle">{{item.title}}</view>
+          <view wx:if="{{!!item.itag || !!item.stag || !!item.tag}}" class="tagView">
+            <view wx:if="{{!!item.itag}}" class="tag itag-view">{{item.itag}}</view>
+            <view wx:if="{{!!item.stag}}" class="tag stag-view">{{item.stag}}</view>
+            <view wx:if="{{!!item.tag}}" class="tag tag-view">{{item.tag}}</view>
+          </view>
+          <view wx:if="{{item.subtitle1}}" class="subtitle">{{item.subtitle1}}</view>
+        </view>
+        </view>
+        <view wx:elif="{{item.type == 'simplepic'}}" wx:key="id" class="wf-item-inner wf-item-left    wf-item-inner_simplepic" bindtap="jumpToDetail"
+      data-jump="{{item.jumpUrl}}" data-biztype="{{item.biztype}}" data-id="{{item.id}}" data-title="{{item.title}}" data-location="{{itemName == 1 ? 'left-' : 'right-'}}{{index}}">
+          <view class="itemimg">
+            <view class="itemimg-wapper" style="background-color:{{defaultImgBgColor}};">
+            <video wx:if="{{item.videoUrl.length}}" class="video" src="{{item.videoUrl}}" controls="{{false}}" autoplay="{{true}}"
+              object-fit="cover" loop="{{true}}" muted="{{true}}" show-progress="{{false}}"
+              show-fullscreen-btn="{{false}}" show-play-btn="{{false}}" show-center-play-btn="{{false}}"
+              enable-progress-gesture="{{false}}"
+              style="width:{{item.image.picWidth}}rpx;height: {{item.image.picHeight}}rpx"></video>
+            <image wx:else class="img" src="{{item.image.url}}"
+              style="width:{{item.image.picWidth}}rpx;height: {{item.image.picHeight}}rpx" lazy-load="true"
+              mode="aspectFill"></image>
+            </view>
+            <view wx:if="{{item.isadvert == '1'}}" class="isadvert"></view>
+          </view>
+        </view>
+        <view wx:elif="{{item.type == 'channel'}}" wx:key="id" class="wf-item-inner wf-item-left wf-item-channel" bindtap="jumpToDetail"
+      data-jump="{{item.jumpUrl}}" data-biztype="{{item.biztype}}" data-id="{{item.id}}" data-title="{{item.title}}" data-location="{{itemName == 1 ? 'left-' : 'right-'}}{{index}}">
+        <view class="itemimg">
+          <view class="itemimg-wapper" style="background-color:{{defaultImgBgColor}};">
+            <view wx:if="{{item.showLive}}" class="info-flow-tag-topLive">
+              <view class="wf-live-icon-wrap {{item.liveStatus === 0?'wf-live-icon-ing':''}}">
+                <view wx:if="{{item.liveStatus===12}}" class="wf-icon live-notice"></view>
+                <text wx:elif="{{item.liveStatus===0}}" class="wf-icon icon-living"></text>
+                <view wx:else class="wf-icon icon-replay"></view>
+              </view>
+              <text class="live-status">{{item.liveStatusText}}</text>
+            </view>
+            <image class="img" src="{{item.image.url}}"
+              style="width:{{item.image.picWidth}}rpx;height: {{item.image.picHeight}}rpx" lazy-load="true"
+              mode="aspectFill">
+            </image>
+            <view class="info-flow_bottom-label">
+              <view class="info-flow_label-list">
+                <view wx:if="{{item.showUser}}" class="info-flow_label-item left {{item.liveStatus === 0&&item.icon?'margin':''}}">
+                  <view class="avator">
+                    <image src="{{item.user.icon}}" class="avator_icon"></image>
+                    <view wx:if="{{item.user.vIcon}}" class="user_level"></view>
+                  </view>
+                  <text class="info-flow_label-text">{{item.user.nickname}}</text>
+                </view>
+                <view wx:if="{{item.liveStatus === 0&&item.icon}}" class="info-flow_label-item right">
+                  <image src="{{item.icon}}" class="info-flow_label-live-img"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="infotext">
+            <view class="infotitle">
+              {{item.title}}
+              <view wx:if="{{item.shouldAddItagToTitle && item.itag&&item.itag.text}}" class="itag-wrap">
+                <image wx:if="{{!!item.itag.icon}}" src="{{item.itag.icon}}" class="itag-icon"></image>
+                <text class="itag-text">{{item.itag.text}}</text>
+            </view>
+            </view>
+            <view wx:if="{{!item.shouldAddItagToTitle && item.itag&&item.itag.text}}" class="itag-wrap">
+                <image wx:if="{{!!item.itag.icon}}" src="{{item.itag.icon}}" class="itag-icon"></image>
+                <text class="itag-text">{{item.itag.text}}</text>
+            </view>
+        </view>
+        <view wx:if="{{item.showChannelInfo}}" class="channel-info-wrap" style="background-image: linear-gradient(180deg, {{'#'+item.channelView.startcolor}} 0%, {{'#'+item.channelView.endcolor}} 99%)">
+            <view class="gap-line"></view>
+            <view wx:if="{{item.channelInfo.jumpurl}}" class="info-wrap-content" catchtap="jumpToDetail" data-jumptype="channelInfo" data-jump="{{item.channelInfo.jumpurl}}" data-location="{{itemName == 1 ? 'left-' : 'right-'}}{{index}}">
+              <view class="info-left">
+                <view class="info-icon-wrap">
+                  <image wx:if="{{item.channelInfo.iconUrl}}" class="left-icon" src="{{item.channelInfo.iconUrl}}">
+                  </image>
+                  <image wx:if="{{item.channelInfo.image1}}" src="{{item.channelInfo.image1.url}}" class="left-icon-name" style="width:{{item.channelInfo.image1.realWidth}};"></image>
+                  <view wx:if="{{!item.channelInfo.image1}}" class="left-icon-name">
+                    {{item.channelInfo.name}}
+                  </view>
+                </view>
+                <view wx:if="{{item.channelInfo.text}}" style="color:{{item.channelInfo.fontColor}};" class="channel-info-text">
+                  {{item.channelInfo.text}}
+                </view>
+              </view>
+              <image wx:if="{{item.channelView.url}}" class="info-right" src="{{item.channelView.url}}"></image>
+              <view class="wf-icon icon-forward channel-info-forward" style="color:{{item.channelInfo.fontColor}};"></view>
+            </view>
+
+            <view wx:else class="info-wrap-content">
+              <view class="info-left">
+                <view class="info-icon-wrap">
+                  <image wx:if="{{item.channelInfo.iconUrl}}" class="left-icon" src="{{item.channelInfo.iconUrl}}">
+                  </image>
+                  <image wx:if="{{item.channelInfo.image1}}" src="{{item.channelInfo.image1.url}}" class="left-icon-name" style="width:{{item.channelInfo.image1.realWidth}};"></image>
+                  <view wx:if="{{!item.channelInfo.image1}}" class="left-icon-name">
+                    {{item.channelInfo.name}}
+                  </view>
+                </view>
+                <view wx:if="{{item.channelInfo.text}}" style="color:{{item.channelInfo.fontColor}};" class="channel-info-text">
+                  {{item.channelInfo.text}}
+                </view>
+              </view>
+              <image wx:if="{{item.channelView.url}}" class="info-right" src="{{item.channelView.url}}"></image>
+            </view>
+        </view>
+        </view>
+        <view wx:elif="{{item.type == 'wxsdk' && !hideItemIds[item.innerId]}}" wx:key="id" class="wf-item-inner wf-item-left wf-item-inner_wxsdk" data-biztype="{{item.biztype}}" data-id="{{item.id}}" data-title="{{item.title}}" data-location="{{itemName == 1 ? 'left-' : 'right-'}}{{index}}">
+          <view class="itemimg">
+            <view class="itemimg-wapper wxsdk-adWrapper" style="background-color:{{defaultImgBgColor}};">
+              <ad-sdk impId="{{item.id}}" extension="{{item.extension}}" sequence="{{item.pageIndex}}" width="100%" height="100%" bindgetExtensionAdData ='getWXAdData'></ad-sdk>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view wx:if="{{loadingState == 1}}" class="loading-state">
+    <image mode="aspectFit" class="loading-img"></image>
+    <view class="loading-txt">加载中...</view>
+  </view>
+  <view wx:elif="{{loadingState == 2}}" class="loading-state">
+    <view class="loading-line"></view>
+    <view class="loading-txt all">已经到底了</view>
+  </view>
+  <view wx:else="{{loadingState == 3}}" class="loading-state" bindtap="refreshList">
+    <image mode="aspectFit" class="loading-fail-img"></image>
+    <view class="loading-txt">加载失败，点击重试</view>
+  </view>
+</view>

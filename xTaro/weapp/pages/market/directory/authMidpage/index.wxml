@@ -1,0 +1,12 @@
+<view class="main-wrap">
+  <image class="head" src="https://images3.c-ctrip.com/marketing/2020/12/single_pic/head.png" mode="widthFix"></image>
+  <view class="content">
+    <image class="logo" src="https://images3.c-ctrip.com/marketing/2020/12/single_pic/logo.png" mode="widthFix"></image>
+    <view class="name">携程旅行网</view>
+    <view class="title">携程旅行网申请获取一下权限</view>
+    <view class="intro">获取您的公开信息（昵称、头像、地区及性别）</view>
+    <button class="btn-confirm"  bindtap="getUserProfile">确认授权</button>
+    <!-- <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="btn-confirm" wx:else>确认授权</button> -->
+    <view class="btn-cancel" bindtap="showTips">暂不授权</view>
+  </view>
+</view>

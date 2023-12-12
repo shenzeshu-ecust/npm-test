@@ -1,0 +1,228 @@
+page {
+  padding-bottom: 50rpx;
+  padding-top: 120rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/history-top.jpg') 0 0 / contain no-repeat #B16348;
+}
+.history_item{
+  margin-bottom: 60rpx;
+}
+.point_btn {
+  position: fixed;
+  top: 87rpx;
+  right: 0;
+  width: 121rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+  background: #FF9955;
+  font-size: 20rpx;
+  font-family: FZLanTingHeiS-R-GB;
+  color: #FFFFFF;
+  text-align: center;
+  border-radius: 20rpx 0 0 20rpx;
+  z-index: 10000;
+}
+
+.period {
+  width: 246rpx;
+  font-size: 24rpx;
+  font-family: FZLanTingHeiS-R-GB;
+  font-weight: 400;
+  line-height: 47rpx;
+  color: #FFFFFF;
+  text-align: center;
+  margin: 30rpx auto 0;
+  border: 1rpx solid #FFFFFF;
+  border-radius: 24rpx;
+}
+.card_wrap {
+  width: 710rpx;
+  height: auto;
+  margin: 26rpx auto 0;
+}
+.card_wrap .card_wrap_top {
+  width: 100%;
+  height: 95rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/bg_card_top.png');
+  background-size: 100% 100%;
+}
+.card_wrap .card_wrap_middle {
+  width: 100%;
+  height: auto;
+  /* max-height: 700rpx; */
+  /* overflow-y: scroll; */
+  /* padding-bottom: 60rpx; */
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/bg_card_middle.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.card_wrap .card_wrap_middle.card-prize-result {
+  height: 484rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/history-prize-result.png');
+}
+.card_wrap .card_wrap_middle.card-prize-result .place-holder-top{
+  height: 100rpx;
+}
+.place-holder-top{
+  height: 85rpx;
+}
+/* .card_wrap .card_wrap_bottom {
+  width: 100%;
+  height: 66rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/bg_card_bottom.png');
+  background-size: 100% 100%;
+  text-align: center;
+  padding-bottom: 70rpx;
+} */
+.card_wrap_middle.my-card-middle{
+  height: 425rpx;
+  background-image: url(https://images3.c-ctrip.com/marketing/2021/02/zzl2/my-card-1.png);
+}
+.card_wrap_middle.my-card-middle .overscroll{
+  overflow-y: scroll;
+  max-height: 576rpx;
+}
+.card_wrap_middle.my-card-middle2{
+  height: 725rpx;
+  overflow: hidden;
+  background-image: url(https://images3.c-ctrip.com/marketing/2021/02/zzl2/my-card-2.png);
+}
+.card_wrap .card_wrap_bottom.my_card {
+  padding-bottom: 20rpx;
+}
+.card_wrap .card_wrap_top .title {
+  margin: 0 auto;
+  width: auto;
+  height: 27rpx;
+  text-align: center;
+  position: relative;
+  font-size: 26rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #B89558;
+  line-height: 36rpx;
+  top: 30rpx;
+}
+.card_wrap .card_wrap_top .title:before, .card_wrap .card_wrap_top .title:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 128rpx;
+  height: 28rpx;
+  top: 3rpx;
+}
+.card_wrap .card_wrap_top .title:before {
+  left: 150rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/bg_subtitle_icon_left.png');
+  background-size: 100% 100%;
+}
+.card_wrap .card_wrap_top .title:after {
+  right: 150rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/bg_subtitle_icon_right.png');
+  background-size: 100% 100%;
+}
+
+.card_wrap.my_card .card_wrap_top .title:before {
+  left: 120rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/bg_subtitle_icon_left.png');
+  background-size: 100% 100%;
+}
+.card_wrap.my_card .card_wrap_top .title:after {
+  right: 120rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/bg_subtitle_icon_right.png');
+  background-size: 100% 100%;
+}
+.card_wrap_middle .award_cards, .award_desc {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 17rpx;
+}
+.card_wrap_middle .award_cards .card {
+  width: 158rpx;
+  height: 217rpx;
+  border-radius: 10rpx 0 10rpx 0;
+  position: relative;
+}
+.card_wrap_middle .award_cards .card.mask::after {
+  display: block;
+  content: '';
+  width: 158rpx;
+  height: 217rpx;
+  position: relative;
+  border-radius: 10rpx;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, .6);
+}
+.card_wrap_middle .line {
+  background: #e0d2c8;
+  height: 1rpx;
+  width: 680rpx;
+  margin: 30rpx auto 0;
+}
+.card_wrap_bottom .desc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20rpx;
+  font-family: FZLanTingHeiS-DB-GB;
+}
+.card_wrap_bottom .desc .award_level {
+  color: #9A7B70;
+  font-size: 26rpx;
+}
+.card_wrap_bottom .desc .award_desc, .card_wrap_bottom .desc .award_count {
+  color: #D92D2E;
+  font-size: 22rpx;
+  margin-top: 4rpx;
+}
+.card_wrap_bottom .desc .award_count {
+  color: #D92D2E;
+  font-size: 22rpx;  
+  margin-top: 4rpx;
+}
+.item_cards_title {
+  color: #b89558;
+  font-family: "PingFang SC";
+  font-size: 22rpx;
+  font-weight: normal;
+  height: 30rpx;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 22rpx;
+  padding-top: 22rpx;
+}
+.card_wrap.my_card .card_wrap_middle {
+  /* padding-bottom: 0; */
+}
+.no_history {
+  color: #9c7530;
+  font-family: "PingFang SC";
+  font-size: 36rpx;
+  font-weight: normal;
+  height: 50rpx;
+  width: 100%;
+  text-align: center;
+  margin-top: 500rpx;
+}
+
+
+
+
+.card_wrap .card_wrap_middle .card .card_color.left_top {
+  position: absolute;
+  left: 2rpx;
+  top: 0;
+  width: 26rpx;
+  text-align: center;
+}
+.card_wrap .card_wrap_middle .card .card_color.right_bottom {
+  position: absolute;
+  right: 2rpx;
+  bottom: 0;
+  transform: rotate(180deg);
+  width: 26rpx;
+  text-align: center;
+}
+.card_wrap .card_wrap_middle .card .card_color .color{
+  font-size: 18rpx;
+}

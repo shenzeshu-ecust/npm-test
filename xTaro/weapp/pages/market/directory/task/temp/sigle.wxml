@@ -1,0 +1,23 @@
+<template name="sigleTaskItem">
+  <view class="">
+    <view class="task_btn ellipsis task_btn_{{item.taskStatus}}" wx:if="{{item.taskStatus == 0 || item.taskStatus == 1}}"
+        style="background-image:url({{item.extendObj.todoImage||taskInfo.singleConfig.todoImage}});">
+        <button hover-class="button-hover" style="color:{{taskInfo.taskTodo}}"
+          bindtap="handleTask"
+          data-taskid="{{item.taskId}}"><slot name="btn_text"></slot></button>
+    </view>
+
+    <view class="task_btn ellipsis task_btn_{{item.taskStatus}}" wx:elif="{{item.taskStatus == 2}}"
+      style="background-image:url({{item.extendObj.receiveAwardImage||taskInfo.singleConfig.receiveAwardImage}});">
+      <button hover-class="button-hover" style="color:{{taskInfo.taskDone}}" bindtap="handleUserAcceptPrize"
+        data-taskid="{{item.taskId}}"><slot name="btn_text"></slot></button>
+    </view>
+
+    <view class="task_btn ellipsis task_btn_{{item.taskStatus}}" wx:else
+      style="background-image:url({{item.extendObj.doneImage||taskInfo.singleConfig.doneImage}});">
+      <button hover-class="button-hover" style="color:{{taskInfo.rewardDone||taskInfo.singleConfig.rewardDone}}" data-taskid="{{item.taskId}}"
+        bindtap="handleWithoutTask"><slot name="btn_text"></slot></button>
+    </view>
+  </view>
+  
+</template>

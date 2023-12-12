@@ -1,0 +1,78 @@
+<view class="point_btn" bindtap="goTargetUrl" data-url="pages/market/signIn/integral?innersid=1">我的积分</view>
+<view wx:for="{{historyList}}" class="history_item">
+  <view class="period">第{{item.periodNum}}期</view>
+  <view class="card_wrap">
+		<view class="card_wrap_middle card-prize-result">
+      <view class="place-holder-top"></view>
+      <view class="award_cards">
+        <view class="card" wx:for="{{item.cardConfigs}}" wx:key="index" wx:for-item="card" style="background:url({{card.cardFrontImg}});background-size:100% 100%">
+          <view class="card_color left_top">
+            <view style="color: {{(card.cardColor =='heart' || card.cardColor == 'diamond') ? 'red' : 'black'}}">{{card.cardName}}</view>
+            <view class="color">{{cardColor[card.cardColor]}}</view>
+          </view>
+          <view class="card_color right_bottom">
+            <view style="color: {{(card.cardColor =='heart' || card.cardColor == 'diamond') ? 'red' : 'black'}}">{{card.cardName}}</view>
+            <view class="color">{{cardColor[card.cardColor]}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="card_wrap_bottom">
+        <view class="award_desc">
+          <view class="desc">
+            <view class="award_level">一等奖</view>
+            <view class="award_desc">{{item.firstPrize}}积分</view>
+            <view class="award_count">{{item.firstLevelCount}}人</view>
+          </view>
+          <view class="desc">
+            <view class="award_level">二等奖</view>
+            <view class="award_desc">{{item.secondPrize}}积分</view>
+            <view class="award_count">{{item.secondLevelCount}}人</view>
+          </view>
+          <view class="desc">
+            <view class="award_level">三等奖</view>
+            <view class="award_desc">{{item.thirdPrize}}积分</view>
+            <view class="award_count">{{item.thirdLevelCount}}人</view>
+          </view>
+          <view class="desc">
+            <view class="award_level">四等奖</view>
+            <view class="award_desc">{{item.fourPrize}}组周周乐</view>
+            <view class="award_count">{{item.fourLevelCount}}人</view>
+          </view>
+        </view>
+      </view>
+    </view>
+		
+	</view>
+
+  <view class="card_wrap my_card" wx:if="{{item.userCards.length > 0}}">
+		<view class="card_wrap_middle my-card-middle {{item.userCards.length > 1 ? 'my-card-middle2' : ''}}">
+      <view class="place-holder-top"></view>
+     <view class="overscroll">
+      <view wx:for="{{item.userOrderCards}}" wx:for-item="subItem" wx:for-index="idx">
+        <view class="item_cards_title">
+          第 {{ subItem.batchNo }} 组 ｜ {{subItem.channelName}}  {{subItem.prizeLevel != 0 ? prizeLevelCfg[subItem.prizeLevel] + '等' : '未中'}}奖
+        </view>
+        <view class="award_cards">
+          <view wx:for="{{subItem.cardConfigs}}" 
+                wx:for-item="card" 
+                style="background:url({{card.cardFrontImg}});background-size:100% 100%"
+                class="card {{card.cardNo == item.cardA || card.cardNo == item.cardB || card.cardNo == item.cardC || card.cardNo == item.cardD ? '' : 'mask' }}" >
+                  <view class="card_color left_top">
+                    <view style="color: {{(card.cardColor =='heart' || card.cardColor == 'diamond') ? 'red' : 'black'}}">{{card.cardName}}</view>
+                    <view class="color">{{cardColor[card.cardColor]}}</view>
+                  </view>
+                  <view class="card_color right_bottom">
+                    <view style="color: {{(card.cardColor =='heart' || card.cardColor == 'diamond') ? 'red' : 'black'}}">{{card.cardName}}</view>
+                    <view class="color">{{cardColor[card.cardColor]}}</view>
+                  </view>
+                </view>
+        </view>
+      </view>
+     </view>
+    </view>
+	</view>
+</view>
+
+<view wx:if="{{historyList.length == 0}}" class="no_history">
+  亲，暂无开奖信息哦。
+</view>

@@ -1,0 +1,198 @@
+<view wx:if="{{groupVipInfo.isShown}}" class="card-common gvip-box" id="groupVip">
+    <view class="gvip-name black2">
+        <view class="tit black1">{{groupVipInfo.registerTip}}</view>
+        <view>{{groupVipInfo.registerRemark}}</view>
+    </view>
+
+    <!-- 中文名 -->
+    <view wx:if="{{groupVipInfo.cnName}}" class="li-item">
+        <view class="m-label" bindtap="toggleGuestTips" data-ubt-key="xcx_txy_xmtx">
+            <text class="{{groupVipInfo.cnName.isFocus ? 'color-focus' : ''}} {{groupVipInfo.cnName.errMsg ? 'color-error' : ''}}">会员姓名</text>
+            <text class="wechat-font-qa ml12"></text>
+        </view>
+        <view class="m-txt">
+            <view class="input-box">
+                <view wx:if="{{groupVipInfo.hasTripAuth}}" class="m-input" bindtap="showGroupAuthTip">{{groupVipInfo.cnName.val}}</view>
+                <input wx:else class="m-input" placeholder-class="placeholder" placeholder="与证件姓名一致"
+                    value="{{groupVipInfo.cnName.val}}" bindinput="groupCnNameInput"
+                    bindfocus="groupCnNameFocus" bindblur="groupCnNameBlur" bindtap="noop" />
+                <!-- <view wx:if="{{email.showClose}}" class="cleararea" data-id="email" catchtap="emailClear">
+                    <icon type="clear" size="16" color="#bbb"/>
+                </view> -->
+            </view>
+            <view wx:if="{{groupVipInfo.cnName.errMsg}}" class="flex-center color-error input-error-msg">
+                <icon type="warn" size="11" color="#F5190A" />
+                <text class="ml12">{{groupVipInfo.cnName.errMsg}}</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 英文姓 -->
+    <view wx:if="{{groupVipInfo.eLastName}}" class="li-item">
+        <label class="m-label group-ename">
+            <text class="{{groupVipInfo.eLastName.errMsg ? 'color-error' : ''}}">英文姓</text>
+            <text class="en-name">Surname</text>
+        </label>
+        <view class="m-txt">
+            <view class="input-box">
+                <input class="m-input" placeholder-class="placeholder" placeholder="如张小白填写为“ZHANG”"
+                    value="{{groupVipInfo.eLastName.val}}" bindinput="groupLastNameInput"
+                    bindfocus="groupLastNameFocus" bindblur="groupLastNameBlur" bindtap="noop" />
+                <!-- <view wx:if="{{email.showClose}}" class="cleararea" data-id="email" catchtap="emailClear">
+                    <icon type="clear" size="16" color="#bbb"/>
+                </view> -->
+            </view>
+            <view wx:if="{{groupVipInfo.eLastName.errMsg}}" class="flex-center color-error input-error-msg">
+                <icon type="warn" size="11" color="#F5190A" />
+                <text class="ml12">{{groupVipInfo.eLastName.errMsg}}</text>
+            </view>
+        </view>
+    </view>
+    <!-- 英文名 -->
+    <view wx:if="{{groupVipInfo.eFirstName}}" class="li-item">
+        <label class="m-label group-ename">
+            <text class="{{groupVipInfo.eFirstName.errMsg ? 'color-error' : ''}}">英文名</text>
+            <text class="en-name">Given Name</text>
+        </label>
+        <view class="m-txt">
+            <view class="input-box">
+                <input class="m-input" placeholder-class="placeholder" placeholder="如张小白填写为“XIAOBAI”"
+                    value="{{groupVipInfo.eFirstName.val}}" bindinput="groupFirstNameInput"
+                    bindfocus="groupFirstNameFocus" bindblur="groupFirstNameBlur" bindtap="noop" />
+                <!-- <view wx:if="{{email.showClose}}" class="cleararea" data-id="email" catchtap="emailClear">
+                    <icon type="clear" size="16" color="#bbb"/>
+                </view> -->
+            </view>
+            <view wx:if="{{groupVipInfo.eFirstName.errMsg}}" class="flex-center color-error input-error-msg">
+                <icon type="warn" size="11" color="#F5190A" />
+                <text class="ml12">{{groupVipInfo.eFirstName.errMsg}}</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 手机号 -->
+    <view wx:if="{{groupVipInfo.phone}}" class="li-item">
+        <view class="m-label" bindtap="groupPhonecode" data-ubt-key="xcx_hotel_order_callnum">
+            <text class="{{groupVipInfo.phone.isFocus ? 'color-focus' : ''}}{{groupVipInfo.phone.errMsg ? 'color-error' : ''}}">+{{groupVipInfo.phone.ccode}}</text>
+            <text class="wechat-font-g-arrow-down ml12 fn20"></text>
+        </view>
+        <view class="m-txt">
+            <view class="input-box">
+                <input name="handlePhone" type="number" class="m-input bold"
+                    placeholder-class="placeholder" placeholder="用于注册酒店会员" value="{{groupVipInfo.phone.phoneNum}}"
+                    bindinput="groupPhoneInput" bindfocus="groupPhoneFocus" bindblur="groupPhoneBlur" bindtap="noop"
+                    data-ubt-key="xcx_hotel_order_callnum" />
+                <!-- <view wx:if="{{contact.showClose}}" class="clear-area" catchtap="phoneClear" data-event-source="clear">
+                    <icon type="clear" size="16" color="#bbb" />
+                </view> -->
+            </view>
+            <view wx:if="{{groupVipInfo.phone.errMsg}}" class="flex-center color-error input-error-msg">
+                <icon type="warn" size="11" color="#F5190A" />
+                <text class="ml12">{{groupVipInfo.phone.errMsg}}</text>
+            </view>
+        </view>
+        <view wx:if="{{isWechat && showGetPhoneBtn && showGetPhoneNumberIcon}}" bindtap="phoneAuthTap" data-type="groupvipphone">
+            <getPhoneNumBtn
+                limitTriggerCGP="{{phoneNumberParams.limitTriggerCGP}}"
+                sourceKey="{{phoneNumberParams.sourceKey}}"
+                limitFrequency="{{phoneNumberParams.limitFrequency}}"
+                bind:cgetphonenumber="onGetPhoneNumber"
+                bind:clistenbtnstatus="onPhoneNumberStatusChange"
+                btnReadyText="{{phoneNumberParams.btnReadyText}}"
+                btnErrorText="{{phoneNumberParams.btnErrorText}}"
+                btnLoadingText="{{phoneNumberParams.btnLoadingText}}"
+                btnLoadingClassName="{{phoneNumberParams.className}} phone-btn-gvip"
+                btnReadyClassName="{{phoneNumberParams.className}} phone-btn-gvip"
+                btnErrorClassName="{{phoneNumberParams.className}} phone-btn-gvip"
+            >
+                <text slot="middle" class="wechat-font-tel-book icon-style"></text>
+            </getPhoneNumBtn>
+        </view>
+    </view>
+
+    <!-- email -->
+    <view wx:if="{{groupVipInfo.email}}" class="li-item">
+        <label class="m-label">
+            <text class="{{groupVipInfo.email.isFocus ? 'color-focus' : ''}} {{groupVipInfo.email.errMsg ? 'color-error' : ''}}">Email</text>
+        </label>
+        <view class="m-txt">
+            <view class="input-box">
+                <input class="m-input" placeholder-class="placeholder" placeholder="用于注册酒店会员"
+                    value="{{groupVipInfo.email.val}}" bindinput="groupEmailInput"
+                    bindfocus="groupEmailFocus" bindblur="groupEmailBlur" bindtap="noop" />
+                <!-- <view wx:if="{{email.showClose}}" class="cleararea" data-id="email" catchtap="emailClear">
+                    <icon type="clear" size="16" color="#bbb"/>
+                </view> -->
+            </view>
+            <view wx:if="{{groupVipInfo.email.errMsg}}" class="flex-center color-error input-error-msg">
+                <icon type="warn" size="11" color="#F5190A" />
+                <text class="ml12">{{groupVipInfo.email.errMsg}}</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 证件 -->
+    <view wx:if="{{groupVipInfo.card}}" class="li-item">
+        <label class="m-label">
+            <text class="{{groupVipInfo.card.isFocus ? 'color-focus' : ''}}{{groupVipInfo.card.errMsg ? 'color-error' : ''}}">证件号</text>
+        </label>
+        <view class="m-txt">
+            <view class="input-box">
+                <view class="title" bindtap="{{groupVipInfo.hasTripAuth ? 'showGroupAuthTip' : 'groupCardSelect'}}">
+                    <text class="text">{{groupVipInfo.card.cardName}}</text>
+                    <text wx:if="{{groupVipInfo.certificateInfoList && groupVipInfo.certificateInfoList.length > 1}}" class="wechat-font-g-arrow-down fn20"></text>
+                </view>
+                <view wx:if="{{groupVipInfo.hasTripAuth}}" class="card-input" bindtap="showGroupAuthTip">{{groupVipInfo.card.cardNo}}</view>
+                <block wx:else>
+                    <!-- input不支持键盘类型切换，用两个input标签来实现键盘类型切换的功能 -->
+                    <block wx:if="{{groupVipInfo.card.cardType === 1}}">
+                    <input type="idcard" class="card-input" placeholder-class="placeholder"
+                        placeholder="用于注册酒店会员" maxlength="18" value="{{groupVipInfo.card.cardNo}}"
+                        bindinput="groupCardInput" bindfocus="groupCardFocus" bindblur="groupCardBlur" />
+                    </block>
+                    <block wx:else>
+                    <input class="card-input" placeholder-class="placeholder"
+                        placeholder="用于注册酒店会员" maxlength="18" value="{{groupVipInfo.card.cardNo}}"
+                        bindinput="groupCardInput" bindfocus="groupCardFocus" bindblur="groupCardBlur" />
+                    </block>
+                </block>
+            </view>
+
+            <view wx:if="{{groupVipInfo.card.errMsg}}" class="flex-center color-error input-error-msg">
+                <icon type="warn" size="11" color="#F5190A" />
+                <text class="ml12">{{groupVipInfo.card.errMsg}}</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 性别 -->
+    <view wx:if="{{groupVipInfo.gender}}" class="li-item">
+        <label class="m-label"><text>性别</text></label>
+        <view class="m-txt">
+            <view class="gender-btns" bindtap="groupGenderSelect">
+                <text class="gender-item {{groupVipInfo.gender.type === 'M' ? 'current' : ''}}" data-type="M">男</text>
+                <text class="gender-item {{groupVipInfo.gender.type === 'F' ? 'current' : ''}}" data-type="F">女</text>
+            </view>
+            <view wx:if="{{groupVipInfo.gender.errMsg}}" class="flex-center color-error input-error-msg">
+                <icon type="warn" size="11" color="#F5190A" />
+                <text class="ml12">{{groupVipInfo.gender.errMsg}}</text>
+            </view>
+        </view>
+    </view>
+
+    <!-- 隐私条款 -->
+    <view wx:if="{{groupVipInfo.privacyTerms.length}}" class="li-item">
+        <radio color="#006FF6" data-type="0" checked="{{groupVipInfo.isPrivacyCheckd}}" bindtap="toggleGroupPrivacy"></radio>
+        <view class="read-agree">
+            <text class="mr12 {{groupVipInfo.hasCheckErr ? 'color-error' : ''}}" bindtap="toggleGroupPrivacy">我已阅读并同意</text>
+            <block wx:for="{{groupVipInfo.privacyTerms}}" wx:key="item.id">
+                <text class="active-txt" data-url="{{item.privacyTermUrl}}" catchtap="toGroupPrivacy">{{item.privacyTermName}}</text>
+                <text wx:if="{{index < groupVipInfo.privacyTerms.length - 1}}" class="gp-mark">、</text>
+            </block>
+        </view>
+    </view>
+    <view wx:if="{{groupVipInfo.hasCheckErr}}" class="flex-center color-error error-msg">
+        <icon type="warn" size="11" color="#F5190A" />
+        <text class="ml12">请先同意注册条款</text>
+    </view>
+</view>

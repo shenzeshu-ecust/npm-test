@@ -1,0 +1,10 @@
+<template name="destinationStrategyBook">
+  <view class="destination-section destination-strategybook" wx:if="{{strategyData.hasGuide}}" data-modulename="快速了解当地">
+    <!-- destinationStrategyBook -->
+    <view class="destination-title destination-title-padding3" bindtap="toViewStrategyBook" data-ubttitle="快速了解当地" data-ubtname="携程官方攻略">
+    <view class="title-name">快速了解当地</view>
+    <view class="title-sub" hover-class="none" bindtap="toguideBook" extra-data="" version="release">携程官方攻略<text></text></view>
+		<!-- <navigator class="title-sub" hover-class="none" open-type="navigate"  url="{{strategyData.guideSchema}}" extra-data="" >携程官方攻略<text></text></navigator> -->
+	</view>
+  </view>
+</template>

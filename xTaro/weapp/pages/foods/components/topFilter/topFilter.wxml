@@ -1,0 +1,237 @@
+<block wx:if="{{isOpenFilter}}">
+  <view class="bg_mask" catchtouchmove="_myCatchTouch" bindtap="_onMaskView"></view>
+</block>
+
+
+<view class="version_f_filter {{noMenu1 ? 'version_f_filter--nofull': ''}}">
+  <block wx:for="{{newFilterName}}" wx:for-index="idx" wx:for-item="item" wx:key="item.name">
+    <view class="version_f_item" data-index="{{idx}}" bindtap="_onFilterMenu">
+      <view class="version_f_itemview">
+        <text class="version_f_item--text {{item.current===1 && isOpenFilter? 'current': ''}}">{{item.name}}</text>
+      </view>
+      <block wx:if="{{(!noMenu1 && idx ===1 && showDot) || (!noMenu1 && idx ===2 && showDot2) ||(noMenu1 && idx ===0 && showDot) || (noMenu1 && idx ===1 && showDot2)}}">
+        <view class="dot"></view>
+      </block>
+      <view class="{{item.current===1 && isOpenFilter? 'arrow-current': 'arrow-default'}}"></view>
+    </view>
+  </block>
+    
+  <block wx:if="{{showFilter1}}">
+    <template is="filter1" data="{{filterFirstItem1:filterFirstItem1, filterSecondItem1:filterSecondItem1, filterThirdItem1:filterThirdItem1, showFilter1Col3:showFilter1Col3, isfilter1SelectTap1:isfilter1SelectTap1, isfilter1SelectTap2:isfilter1SelectTap2, filter1SelectTap1Index:filter1SelectTap1Index, filter1SelectTap2Index: filter1SelectTap2Index, active1Index: active1Index}}"/>
+  </block>
+  <block wx:if="{{showFilter2}}">
+    <template is="filter2" data="{{filterFirstItem2: filterFirstItem2, filterSecondItem2:filterSecondItem2, filterThirdItem2: filterThirdItem2,showFilter2Col3:showFilter2Col3, isfilter2SelectTap1:isfilter2SelectTap1, isfilter2SelectTap2:isfilter2SelectTap2, filter2SelectTap1Index:filter2SelectTap1Index, filter2SelectTap2Index: filter2SelectTap2Index, active1Index2: active1Index2}}"/>
+  </block>
+  <block wx:if="{{showFilter3}}">
+    <template is="filter3" data="{{ShiMeiLin: ShiMeiLin, PriceSort: PriceSort , SellSort: SellSort,isNewStyle:isNewStyle}}" />
+  </block>
+  <block wx:if="{{showFilter4}}">
+    <template is="filter4" data="{{defaultSort: defaultSort}}" />
+  </block>
+</view>
+
+
+
+
+
+
+
+<template name="filter1" >
+  <view class="filter_box">
+    <!-- col1 -->
+    <scroll-view scroll-y class="filter-col-1" catchtouchmove="_myCatchTouch">
+      <block wx:for="{{filterFirstItem1}}" wx:for-index="idx" wx:for-item="item" wx:key="item.tab">
+        <view class="filter-col-1-item {{item.current === 1 ? 'current':''}}" data-index="{{idx}}" data-tab="{{item.tab}}" bindtap="_filter1SelectTap1">
+          <text class="{{item.current === 1 ? 'current':''}} {{filter1SelectTap1Index === idx && isfilter1SelectTap1?'current-red':''}}">{{item.tab}}</text>
+          <block wx:if="{{filter1SelectTap1Index === idx && isfilter1SelectTap1}}">
+            <view class="icon-dot"></view>
+          </block>
+        </view>
+      </block>
+    </scroll-view>
+
+    <!-- col2 -->
+    <scroll-view scroll-y class="filter-col-2 {{showFilter1Col3 ? '' :'filter-col-2-bg'}}" catchtouchmove="_myCatchTouch">
+      <block wx:for="{{filterSecondItem1}}" wx:for-index="idx" wx:for-item="item" wx:key="item.Id">
+        <view class="filter-col-2-item" data-index="{{idx}}" bindtap="_filter1SelectTap2">
+          <view class="filter-col-2-itemview {{showFilter1Col3? 'menu2':''}} {{showFilter1Col3 ? 'current-fixed2':''}}  {{item.current2 ===2 ? 'current2' : ''}}">
+            <view class="filter-col-2-item-textview ">
+              <view wx:if="{{item.Name}}">
+                <text class="name {{item.current2 ===2 ? 'current2' : ''}} {{ filter1SelectTap2Index === idx && isfilter1SelectTap2 && showFilter1Col3 || item.current===1? 'current':''}}">{{item.Name}}</text>     
+              </view>
+              <view wx:if="{{item.ZoneName}}">
+                <text class="ZoneName {{ filter1SelectTap2Index === idx && isfilter1SelectTap2 && showFilter1Col3 || item.current===1? 'current':''}}">{{item.ZoneName}}</text>     
+              </view>
+              <view wx:if="{{item.EName}}" >
+                <text class="ename">{{item.EName}}</text>
+              </view>
+            </view>
+            <block wx:if="{{!showFilter1Col3 && item.current === 1}}">
+              <view class="icon-current"></view>
+            </block>
+            <block wx:if="{{active1Index===3 && filter1SelectTap2Index === idx && isfilter1SelectTap2 && showFilter1Col3}}">
+              <view class="icon-dot"></view>
+            </block>
+            
+          </view>
+          <view class="space-line"></view>
+        </view>
+
+      </block>
+    </scroll-view>
+
+    <!-- col3 -->
+    <scroll-view wx:if="{{filterThirdItem1 && filterThirdItem1.length>0 &&showFilter1Col3}}" scroll-y class="filter-col-3" catchtouchmove="_myCatchTouch">
+      <block wx:for="{{filterThirdItem1}}" wx:for-index="idx" wx:for-item="item" wx:key="item.Id">
+        <view class="filter-col-2-item" data-index="{{idx}}" data-id="{{item.Id}}" data-name="{{item.Name}}" bindtap="_filter1SelectTap3">
+          <view class="filter-col-2-itemview">
+            <view class="filter-col-2-item-textview ">
+              <view class="filter-col-2-item-col">
+                <text class="name {{item.current === 1 ? 'current' : ''}}">{{item.Name}}</text>                  <block wx:if="{{item.EName}}">
+                  <text class="ename {{item.current === 1 ? 'current' : ''}}">{{item.EName}}</text>
+                </block>
+              </view>
+            </view>
+            <block wx:if="{{item.current === 1}}">
+              <view class="icon-current"></view>
+            </block>
+          </view>
+          <view class="space-line"></view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</template>
+
+
+<template name="filter2">
+  <view class="filter_box">
+    <!-- col1 -->
+    <scroll-view scroll-y class="filter-col-1" catchtouchmove="_myCatchTouch">
+      <block wx:for="{{filterFirstItem2}}" wx:for-index="idx" wx:for-item="item" wx:key="item.tab">
+        <view class="filter-col-1-item {{item.current === 1 ? 'current':''}}" data-index="{{idx}}" bindtap="_filter2SelectTap1">
+          <text class="{{item.current === 1 ? 'current':''}} {{filter2SelectTap1Index === idx &&isfilter2SelectTap1?'current-red':''}}">{{item.tab}} </text>
+          <block wx:if="{{filter2SelectTap1Index === idx && isfilter2SelectTap1}}">
+            <view class="icon-dot"></view>
+          </block>
+        </view>
+      </block>
+    </scroll-view>
+
+    <!-- col2 -->
+    <scroll-view scroll-y class="filter-col-2 {{showFilter2Col3 ? '' :'filter-col-2-bg'}}" catchtouchmove="_myCatchTouch">
+      <block wx:for="{{filterSecondItem2}}" wx:for-index="idx" wx:for-item="item" wx:key="item.Id">
+        <view class="filter-col-2-item" data-index="{{idx}}" bindtap="_filter2SelectTap2">
+          <view class="filter-col-2-itemview menu2 {{filter2SelectTap2Index === idx && isfilter2SelectTap2 && showFilter2Col3 ? 'current-fixed' :''}} {{showFilter2Col3 ? 'current-fixed2':''}}  {{item.current2 ===2 ? 'current2' : ''}}">
+            <view class="filter-col-2-item-textview ">
+              <view wx:if="{{item.Name}}">
+                <text class="name {{active1Index2===0 && filter2SelectTap2Index === idx && isfilter2SelectTap2 && showFilter2Col3?'current':''}}">{{item.Name}}</text>     
+              </view>
+            </view>
+            <block wx:if="{{active1Index2===0 && filter2SelectTap2Index === idx && isfilter2SelectTap2 && showFilter2Col3}}">
+              <view class="icon-dot"></view>
+            </block>
+            
+          </view>
+          <view class="space-line"></view>
+        </view>
+
+      </block>
+    </scroll-view>
+
+    <!-- col3 -->
+    <scroll-view wx:if="{{ showFilter2Col3}}" scroll-y class="filter-col-3" catchtouchmove="_myCatchTouch">
+      <block wx:for="{{filterThirdItem2}}" wx:for-index="idx" wx:for-item="item" wx:key="item.Id">
+        <view class="filter-col-2-item" data-index="{{idx}}" data-id="{{item.Id}}" bindtap="_filter2SelectTap3">
+          <view class="filter-col-2-itemview">
+            <view class="filter-col-2-item-textview ">
+              <view class="filter-col-2-item-col">
+                <text class="name {{item.current === 1 ? 'current' : ''}}">{{item.Name}}</text>     
+              </view>
+            </view>
+            <block wx:if="{{item.current === 1}}">
+              <view class="icon-current"></view>
+            </block>
+          </view>
+          <view class="space-line"></view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</template>
+
+<template name="filter3">
+  <view class="l-filterbox">
+    <scroll-view  scroll-y class="l-filterbox-scroll" catchtouchmove="_myCatchTouch">
+      <view wx:if="{{ShiMeiLin && ShiMeiLin.length>0}}" class="filter-tab-line" >
+        <view class="filter-tab-line-title">
+          <text>{{isNewStyle?'等级':'星级'}}</text>
+        </view>
+        <view class="label-box">
+          <view class="label-box-item" wx:for="{{ShiMeiLin}}" wx:for-index="idx" wx:for-item="item" wx:key="item.Id">
+            <view class="filter-tab-line-label-bd {{item.active===1 ? 'active': ''}}" data-index="{{idx}}" data-id="{{item.Id}}" bindtap="_filter3item1">
+              <text>{{item.Name}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="filter-tab-line">
+        <view class="filter-tab-line-title">
+          <text>价格</text>
+        </view>
+        <view class="label-box">
+          <view class="label-box-item" wx:for="{{PriceSort}}" wx:for-index="idx" wx:for-item="item" wx:key="item.Id">
+            <view class="filter-tab-line-label-bd {{item.active===1 ? 'active': ''}}"  data-index="{{idx}}" data-id="{{item.Id}}" bindtap="_filter3item2">
+              <text>{{item.Name}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="filter-tab-line" wx:if="{{SellSort && SellSort.length>0}}">
+        <view class="filter-tab-line-title">
+          <text>订座与优惠</text>
+        </view>
+        <view class="label-box">
+          <view class="label-box-item" wx:for="{{SellSort}}" wx:for-index="idx" wx:for-item="item" wx:key="item.Id">
+            <view class="filter-tab-line-label-bd {{item.active===1 ? 'active': ''}}"  data-index="{{idx}}" data-id="{{item.Id}}" bindtap="_filter3item3">
+              <text>{{item.Name}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="filter_btn">
+      <view class="c_filter_clear" bindtap="_filter3Reset">
+        <text>重置</text>
+      </view>
+      <view class="c_filter_confirm" bindtap="_filter3Submit">
+        <text>确定</text>
+      </view>
+    </view>
+  </view>
+  
+</template>
+
+<template name="filter4">
+  <view class="l-filterline">
+
+    <scroll-view  scroll-y class="filter-col-2 filter-col-2-bg" catchtouchmove="_myCatchTouch">
+      <block wx:for="{{defaultSort}}" wx:for-index="idx" wx:for-item="item" wx:key="item.Id">
+        <view class="filter-col-2-item" data-index="{{idx}}" data-id="{{item.Id}}" bindtap="_filter4">
+          <view class="filter-col-2-itemview">
+            <view class="filter-col-2-item-textview ">
+              <view class="filter-col-2-item-col">
+                <text class="name {{item.current === 1 ? 'current' : ''}}">{{item.Name}}</text>     
+                
+              </view>
+            </view>
+            <block wx:if="{{item.current === 1}}">
+              <view class="icon-current"></view>
+            </block>
+          </view>
+          <view class="space-line"></view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</template>

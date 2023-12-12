@@ -1,0 +1,41 @@
+<view class="landlord-introduction">
+  <view class="module-name">房东介绍</view>
+  <view class="landlord-introduction-head" wx:if="{{landlordModuleData.topScroll}}" style="background-image:url({{landlordModuleData.topScroll}})"></view>
+  <view class="landlord-introduction-content" bindtap="_handleToLandlordPage">
+    <view class="landlord-introduction-content-top">
+      <view class="landlord-image">
+        <image class="head-portrait {{isErrorLondingImg?'img-londing-error':''}}" src="{{landlordModuleData.hotelLogo}}" binderror="onImageError"></image>
+        <image class="head-badge" src="{{landlordModuleData.landlordLevelUrl}}"></image>
+      </view>
+      <view class="landlord-info">
+        <view class="landlord-info-name">{{landlordModuleData.hotelName}}</view>
+        <view class="landlord-info-tag">
+          <view class="landlord-info-tag-item" wx:for="{{landlordModuleData.hotelTags}}" wx:key="item">
+            <text style="color:{{item.tagText.color}}">{{item.tagText.text}}</text>
+          </view>
+        </view>
+        <view class="landlord-info-desc">
+          <view class="item" wx:for="{{landlordModuleData.landlordTag}}" wx:key="item" style="color:{{item.tagText.color}};{{item.tagText._background}};">
+            {{item.tagText.text}}
+          </view>
+        </view>
+      </view>
+      <view class="landlord-contact" catchtap="_handleOpenChat" wx:if="{{!isQunar && (contractModule.contactFlag&4) == 4 && contractModule.imSummary &&  contractModule.imSummary.enableIm}}">
+        联系房东
+      </view>
+    </view>
+    <view class="landlord-introduction-content-evaluate" wx:if="{{landlordModuleData.hotelSummary}}">
+      <view class="evaluate-item" wx:for="{{landlordModuleData.hotelSummary}}" wx:key="item">
+        <view class="evaluate-item-rate">{{item.title}}</view>
+        <view class="evaluate-item-percentage">{{item.introduction}}</view>
+        <view class="evaluate-item-desc" wx:if="{{item.highLight}}">
+          {{item.tip[0]}}
+          <text class="hight-light">{{item.highLight}}</text>
+          {{item.tip[1]}}
+        </view>
+        <view class="evaluate-item-desc" wx:else>{{item.tip}}</view>
+      </view>
+    </view>
+    <view class="landlord-introduction-content-bottom">查看房东主页</view>
+  </view>
+</view>

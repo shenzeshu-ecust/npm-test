@@ -1,0 +1,50 @@
+<!-- 好友助力榜 -->
+<view wx:if="{{gloryList.sortList.length >= 1}}" class="mod">
+  <view class="mod-title">
+    <image class="img-title" src="https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/title_bg1.png"/>
+  </view>
+  <view class="mod-content">
+    <view class="{{isOpen || gloryList.topList.length + gloryList.sortList.length <= 3 ? 'glory-list-open' : 'glory-list'}}">
+      <view class="list-item list-top-item" wx:for="{{gloryList.topList}}" wx:key="{{index}}" wx:for-item="item">
+        <view class="ranking"></view>
+        <image class="avatar" src="{{item.icon && item.icon.length ? item.icon: 'https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/user_icon.png'}}"/>
+        <view class="user-info">
+          <view class="user">
+            <view class="username">{{item.name && item.name.length ? item.name : '匿名用户'}}</view>
+            <view class="tag-crit" wx:if="{{item.taglist.length >= 1}}">{{item.taglist[0]}}</view>
+            <view class="tag-crit" wx:if="{{item.taglist.length >= 2}}">{{item.taglist[1]}}</view>
+          </view>
+          <text class="basic-text">{{item.slogan}}</text>
+        </view>
+        <text class="amount">
+          <text class="basic-text">已砍</text>
+          <text class="dfn">¥</text>{{item.bgprice}}
+        </text>
+      </view>
+      <view class="list-item" wx:for="{{gloryList.sortList}}" wx:key="{{index}}" wx:for-item="item">
+        <view class="ranking">
+          <image class="icon-ranking" wx:if="{{index < 3}}" src="{{'https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/' + (index === 0 ? 'gold' : (index === 1 ? 'silver' : 'bronze')) + '.png'}}"/>       
+          <text class="ranking-num" wx:if="{{index >= 3}}">{{index + 1}}</text>
+        </view>
+        <image class="avatar" src="{{item.icon && item.icon.length ? item.icon: 'https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/user_icon.png'}}"/>
+        <view class="user-info">
+          <view class="user">
+            <view class="username">{{item.name && item.name.length ? item.name : '匿名用户'}}</view>
+            <view class="tag-crit" wx:if="{{item.taglist.length >= 1}}">{{item.taglist[0]}}</view>
+            <view class="tag-crit" wx:if="{{item.taglist.length >= 2}}">{{item.taglist[1]}}</view>
+          </view>
+          <text class="basic-text">{{item.slogan}}</text>
+        </view>
+        <text class="amount">
+          <text class="basic-text">已砍</text>
+          <text class="dfn">¥</text>{{item.bgprice}}
+        </text>
+      </view>
+    </view>
+    <view wx:if="{{!isOpen && gloryList.topList.length + gloryList.sortList.length > 3}}">
+        <button class="open-btn" catchtap="openList">展开
+            <view class="container"></view>
+        </button>
+    </view>
+  </view>
+</view>

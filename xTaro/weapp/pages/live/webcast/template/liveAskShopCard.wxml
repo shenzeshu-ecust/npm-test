@@ -1,0 +1,17 @@
+<template name="liveAskShopCard">
+<block wx:if="{{askCardHeight>0}}">
+  <view class="askCardWrapper"  style="bottom: {{commentKeybordBottom + inputHeight}}px">
+ <view class="askCardImage">
+  <image class="image"  mode="aspectFill" src="{{toAskQuestionsData.imageUrl||'https://images3.c-ctrip.com/marketing/2023/03/sk/default.png'}}"></image>
+  <text class="order">{{toAskQuestionsData.index}}</text>
+ </view>
+ <View class="askCardContent">
+  <text class="title">{{toAskQuestionsData.title}}</text>
+  <View wx:if="{{toAskQuestionsData.price}}" class="price"><text class="t1">￥</text><text wx:if="{{toAskQuestionsData.price}}" class="t2">{{toAskQuestionsData.price}}</text><text wx:if="{{toAskQuestionsData.isStartPrice}}" class="t3">起</text><text wx:if="{{toAskQuestionsData.nights>=2}}" class="t3">/{{toAskQuestionsData.nights}}晚</text></View>
+  <View class="priceText" wx:if="{{toAskQuestionsData.priceText}}">
+  <text>{{toAskQuestionsData.priceText}}</text>
+  </View>
+ </View>
+</view>
+</block>
+</template>

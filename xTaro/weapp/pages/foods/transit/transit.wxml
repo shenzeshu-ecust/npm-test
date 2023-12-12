@@ -1,0 +1,24 @@
+<!--pages/index/index.wxml-->
+<view class="page">
+  <view class="page-image" style="background-image: url({{backgroundImage}});"></view>
+  <view class="mask"></view>
+  <view class="wrapper">
+    <view class="top">
+      <image src="https://pages.c-ctrip.com/you/livestream/gs-dianping-jingdian.png" class="poi-image" />
+      <image src="https://pages.c-ctrip.com/you/livestream/gs-dianping-meishi.png" class="food-image" />
+    </view>
+    <view class="middle">
+      <text class="desc">发表景点或者餐厅点评</text>
+      <text class="desc">即可获得红包!</text>
+    </view>
+    <view class="foot">
+      <view class="btn" data-ubt-key="c_writeComments" bindtap="jumpToCtrip">
+        <text class="btn-desc">立即写点评</text>
+        <block wx:if="{{showCountDown}}">
+        <text class="btn-desc">({{countDown}}秒)</text>
+      </block>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

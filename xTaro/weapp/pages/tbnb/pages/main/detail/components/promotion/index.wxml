@@ -1,0 +1,78 @@
+<view class="promotion-container">
+  <view wx:if="{{promotionInfo.urgencyPromotion}}" class="promotion-hot" catchtap="handlePromotionJump">
+    <image class="promotion-hot-icon" src="{{promotionInfo.urgencyPromotion.icon}}"></image>
+    <text class="promotion-hot-txt red-color">{{promotionInfo.urgencyPromotion.title}}</text>
+    <text class="promotion-hot-txt overflow-hidden">{{promotionInfo.urgencyPromotion.text}}</text>
+  </view>
+  <block wx:if="{{isTujia && promotionInfo.loginGuidance}}">
+    <login-discount siteType="{{1}}" loginGuidance="{{promotionInfo.loginGuidance}}" hotelId="{{hotelId}}" landlordId="{{landlordId}}"></login-discount>
+  </block>
+  <block wx:else>
+    <view wx:if="{{promotionInfo.redPacketTagData}}" class="promotion-redpackage" catchtap="handleReceiveRedpackage">
+      <image class="redpackage-icon" src="{{promotionInfo.redPacketTagData.icon}}"></image>
+      <view class="redpackage-list">
+        <view class="redpackage-list-item item-no-shrink" wx:for="{{promotionInfo.redPacketTagData.text}}" wx:for-item="item" wx:for-index="index" wx:key="item">
+          <text class="item-txt" style="color:{{fontColor}};">{{item}}</text>
+        </view>
+      </view>
+      <view class="redpackage-more">
+        <text class="redpackage-more-txt">{{promotionInfo.redPacketTagData.partakeText}}</text>
+        <image class="redpackage-more-icon" src="https://pic.tujia.com/upload/festatic/mp/arrow_right2x.png"></image>
+      </view>
+    </view>
+  </block>
+</view>
+<!-- 红包弹窗 -->
+<bottom-popup frameTitle="红包" show="{{isShowBottomPopup}}">
+  <view class="redpackage-popup">
+    <!-- 房东红包、平台红包列表 dom -->
+    <view class="redpackage-container" wx:for="{{redpacketList}}" wx:for-item="item" wx:for-index="index" wx:key="title">
+      <view class="redpackage-container-header">
+        <text class="header-txt">{{item.title}}</text>
+        <text wx:if="{{item.desc}}" class="header-subtxt">{{item.desc}}</text>
+      </view>
+      <view class="redpackage-container-item" wx:for="{{item.items}}" wx:for-item="infoItem" wx:for-index="infoIndex" wx:key="code">
+        <view class="item-info">
+          <view class="item-info-list">
+            <view class="redpackage-price">
+              <text class="price-icon">{{infoItem.currency}}</text>
+              <text class="price-txt">{{infoItem.amount}}</text>
+            </view>
+            <text class="redpackage-desc">{{infoItem.content}}</text>
+            <view class="redpackage-validity">
+              <text class="validity-date">{{infoItem.validPeriod}}</text>
+              <text wx:if="{{infoItem.tip}}" class="validity-tips">{{infoItem.tip}}</text>
+            </view>
+          </view>
+          <view class="item-info-operate {{infoItem.isOut || (infoItem.gray && !infoItem.goLink) ? 'receive-btn-def' : ''}}">
+            <!-- gray 为true 则判断有无goLink，有则取golink中的text；无则取link中的text -->
+            <view wx:if="{{infoItem.isOut}}" class="operate-txt">已抢光</view>
+            <block wx:else>
+              <block wx:if="{{infoItem.gray}}">
+                <view wx:if="{{infoItem.goLink}}" class="operate-txt" data-item="{{infoItem}}" catchtap="handleGoLinkList">
+                  {{infoItem.goLink.text}}
+                </view>
+                <view wx:else class="operate-txt">{{infoItem.link.text}}</view>
+              </block>
+              <block wx:else>
+                <view class="operate-txt" catchtap="handleTapReceive" data-index="{{infoIndex}}" data-code="{{infoItem.code}}">
+                  {{infoItem.link.text}}
+                </view>
+              </block>
+            </block>
+          </view>
+        </view>
+        <view wx:if="{{infoItem.limitRules && infoItem.limitRules.length}}" class="item-desc" data-parindex="{{index}}" data-index="{{infoIndex}}" catchtap="handleToggleDescription">
+          <view class="item-desc-txt {{infoItem.isOpenDesc ? 'auto-height' : ''}}">
+            <block wx:for="{{infoItem.limitRules}}" wx:for-item="rulesItem" wx:for-index="rulesIndex" wx:key="*this">
+              <text class="txt-info {{infoItem.isOpenDesc ? '' : 'overflow-hide'}}">{{rulesItem}}</text>
+            </block>
+          </view>
+          <view class="item-desc-icon">
+            <image class="icon-info {{infoItem.isOpenDesc ? 'icon-info-rotate' : ''}}" src="https://pic.tujia.com/upload/festatic/mp/ndetail_arr_down.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</bottom-popup>

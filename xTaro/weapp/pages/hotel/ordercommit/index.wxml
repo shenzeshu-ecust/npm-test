@@ -1,0 +1,54 @@
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+<authorizationFloat id="cwxAuthFloat"></authorizationFloat>
+<view wx:if="{{!canComment}}" class="jump-box">
+    <view wx:if="{{errorMessage}}">{{errorMessage}}</view>
+    <view class="back-btn" bindtap='goBack'>返回上页</view>
+</view>
+<block wx:elif="{{pointStep && commentPoints}}">
+    <processBar
+        rated="{{rated}}"
+        tripPurposeSelected="{{tripPurposeSelected}}"
+        inputCommentLength="{{inputCommentLength}}"
+        uploadImageLength="{{uploadImageLength}}"
+        uploadVideoTime="{{uploadVideoTime}}"
+        pointStep="{{pointStep}}"
+        commentPoints="{{commentPoints}}"
+        wellThreshold="{{wellCommentThreshold}}"
+    >
+    </processBar>
+    <view class="comment-con">
+        <view class="comment-rating" wx:for="{{ratingItems}}" wx:key="{{ratingTitleItem.type}}" wx:for-item="ratingTitleItem">
+            <view class="rating-title">{{ratingTitleItem.title}}</view>
+            <rating bind:handleRatingIcon="handleRatingIcon" bind:acceptTraceType="acceptTraceType" ratingDescList="{{ratingDescList}}" ratingType="{{ratingTitleItem.type}}"> </rating>
+        </view>
+        <view class="main-comment">
+            <inputComment
+                bind:acceptTraceType="acceptTraceType"
+                bind:acceptInputComment="acceptInputComment"
+                wellCommentThreshold="{{wellCommentThreshold}}"
+                commentPoints="{{commentPoints}}"
+                imageLength="{{uploadImageLength}}"
+                videoTime="{{uploadVideoTime}}"
+                placeholderText="{{placeholderText}}">
+            </inputComment>
+            <uploadImage
+                token="{{token}}"
+                orderId="{{orderId}}"
+                bind:acceptTraceType="acceptTraceType"
+                bind:conveyImages="acceptImages" />
+            <anonymous bind:selectAnonymous="selectAnonymous" />
+        </view>
+        <tripPurpose bind:acceptTraceType="acceptTraceType" bind:handleTravelType="handleTravelType"></tripPurpose>
+    </view>
+    <submitBtn enableSubmit="{{enableSubmit}}" bind:submitComment="submitComment" />
+</block>
+
+<!--登录弹窗-->
+<loginLayer
+    hidden="{{isLogin}}"
+    bind:initComment="initComment"
+></loginLayer>
+<!-- loading-layer -->
+<loading-gif isShown="{{showLoading}}"></loading-gif>
+<!-- 白屏检测及上报 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

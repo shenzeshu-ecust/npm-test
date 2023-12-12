@@ -1,0 +1,18 @@
+.order-x-box.car{position: relative;padding: 28rpx 24rpx 24rpx 24rpx;}
+.order-x-box.car .icon{position: absolute;right: 0;top: 0;width: 100%;height: 94rpx;}
+.order-x-box.car .conts{display: flex;align-items: center;}
+.order-x-box.car .mid{flex: 1;margin-left: 20rpx;}
+.order-x-box.car .mid .tit{font-size: 30rpx;margin-bottom: 14rpx;}
+.order-x-box.car .mid .txt{font-size: 22rpx;color: #999999;margin-bottom: 16rpx;display: flex;}
+.order-x-box.car .mid .txt .item{border-right: 1px solid #DDDDDD;padding: 0 14rpx;line-height: 22rpx;}
+.order-x-box.car .mid .txt .item:first-child{padding-left: 0;}
+.order-x-box.car .mid .txt .item:last-child{padding-right: 0;border: none;}
+.order-x-box.car .avatar{width: 130rpx;height: 150rpx;}
+.order-x-box.car .mid .price{color: #0086F6;font-size: 34rpx;font-weight: bold;vertical-align: bottom;}
+.order-x-box.car .mid .price::before{font-size: 22rpx;content: '￥';font-weight: normal;}
+.order-x-box.car .mid .price::after{font-size: 22rpx;content: '起';font-weight: normal;margin-left: 4rpx;}
+.order-x-box.car .mid .tag{background: #FF7700;font-size: 20rpx;height: 34rpx;padding: 0 10rpx;line-height: 32rpx;color: #FFFFFF;border-radius: 6rpx;display: inline-flex;margin-left: 11rpx;align-items: center;}
+.order-x-box.car .mid .tag .envelope{width: 22rpx;height: 22rpx;margin-right: 8rpx;}
+.order-x-box.car .reserve{width: 152rpx;height: 60rpx;background: linear-gradient(90deg, #00AAFF 0%, #006FFF 100%);color: #FFFFFF;font-size: 26rpx;text-align: center;line-height: 60rpx;padding: 0;
+align-self: flex-end;}
+button::after{border:0}

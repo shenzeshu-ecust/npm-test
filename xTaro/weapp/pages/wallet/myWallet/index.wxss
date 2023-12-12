@@ -1,0 +1,77 @@
+/* pages/wallet/myWallet/index.wxss */
+
+page{
+  background-color: #FFF;
+}
+.my_wallet_page_container{
+  position: relative;
+  padding: 50rpx 48rpx 60rpx;
+  pointer-events: auto;
+}
+.my_wallet_page_container .item_container{
+    box-sizing:border-box;
+    height:245rpx;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-self: center;
+    align-items: stretch;
+   
+    border-radius:24rpx;
+    color:#fff;
+    margin-bottom: 32rpx;
+}
+.left{
+  padding: 54rpx  0 43rpx 59rpx;
+}
+.title{
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular;
+  padding-bottom:38rpx;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:flex-start;
+}
+.arrow{
+  width:24rpx;
+  height:25rpx;
+  background:url('https://pages.c-ctrip.com/Finance/miniprogram/wallet_arrow.png');
+  background-size:100% 100%; 
+  margin-left:8rpx;
+}
+.currency{
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular;
+}
+.money{
+  font-size: 54rpx;
+  font-family: 20TH_bold;
+  font-weight: bold;
+  margin-left:5rpx;
+}
+.right{
+  width: 291.8rpx;
+  height: 231rpx;
+}
+.cashback{
+  background:url('https://pages.c-ctrip.com/Finance/miniprogram/wallet_cashbackbg.png');
+  background-size:100% 100%; 
+}
+.cash{
+  background:url('https://pages.c-ctrip.com/Finance/miniprogram/wallet_cashbg.png');
+  background-size:100% 100%; 
+}
+.gift_card_cash{
+  background:url('https://pages.c-ctrip.com/Finance/miniprogram/wallet_gift.png');
+  background-size:100% 100%; 
+}
+.cashback_container{
+  background: linear-gradient(-270deg,#2b8aff 0%,#72afff 100%);
+}
+.cash_container{
+  background: linear-gradient(-270deg,#28cbec 0%,#3bdbff 100%);
+}
+.gift_card_container{
+  background: linear-gradient(90deg, rgb(100, 129, 223) 0%, rgb(140, 167, 255) 100%);
+}

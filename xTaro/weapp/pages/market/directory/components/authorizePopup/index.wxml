@@ -1,0 +1,41 @@
+<view
+  class='container-popup {{ show ? "popup-show" : "" }}   {{ "l-popup-" + direction===null?contentAlign:direction }} l-class'
+  style="z-index:{{zIndex}}; " catchtouchmove="doNothingMove">
+  <view class='container-bg l-bg-class'></view>
+  <view wx:if="{{show}}"
+    class="popup-content {{ show ? ((direction===null)?contentAlign:direction) : ''}} popup-fade-{{direction===null?contentAlign:direction}}-active-{{(transition===null?animation:transition) ? status:''}} l-panel-class"
+    catchtap='onPopupTap'>
+    <view catchtap="doNothingTap">
+      <slot></slot>
+      <view class="mkt_warp_bottom">
+        <view class="mkt_miniapp_title">
+          <view class="title ">
+            <image class="icon" src="https://pages.c-ctrip.com/miniapp/basicprofile.png"></image>
+            <view class="appName big">携程旅行订酒店机票火车汽车门票</view>
+            <view class="access middle">申请</view>
+          </view>
+        </view>
+        <view class="content">
+          <view class="action big mkt_miniapp_question">获取你的昵称头像</view>
+          <view class="mkt_ask_avatal"> 
+            <view class="auth_content">
+              <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+                <image class="avatar" src="{{avatarUrl || defaultAvatarUrl}}"></image>
+              </button>
+              <view class="avatar_desc" wx:if="{{!avatarUrl}}">请使用微信头像</view>
+            </view>
+            <button class="avatar-wrapper-desc" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">请选择头像</button>
+          </view>
+          <view class="mkt_ask_nickName"> 
+             <input type="nickname" class="nick_input desc small" bind:change="changeUserNick" placeholder="请使用微信昵称" />
+          </view>
+        </view>
+        <view class="selectors small">
+          <view class="reject" bindtap="reject" >跳过</view>
+          <view class="allow" bindtap="agree" >确定</view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+</view>

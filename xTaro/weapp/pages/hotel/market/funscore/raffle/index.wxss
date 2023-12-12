@@ -1,0 +1,363 @@
+/* 抽奖活动页css */
+@import '../../../common/common.wxss';
+@import '../login.wxss';
+
+.tbody {
+    width: 750rpx;
+    background:#fe7e0c url(https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-bg.png);
+    background-repeat: no-repeat;
+    background-size: 750rpx 1488rpx;
+}
+.trun-title {
+    padding-top: 45rpx;
+    text-align: center;
+}
+.trun-title .title-img {
+    width: 332rpx;
+    height: 56rpx;
+}
+.trun-score {
+    padding-top: 10rpx;
+    text-align: center;
+    color: #FFEA4C;
+    font-size: 32rpx;
+    line-height: 45rpx;
+    height: 45rpx;
+    font-weight: 500;
+}
+.trun-tips {
+    height: 42rpx;
+    font-size: 30rpx;
+    color: #FFFFFF;
+    font-weight: 600;
+    line-height: 42rpx;
+    text-align: center;
+}
+.trun-share {
+    margin: 30rpx auto 0;
+    width: 460rpx;
+    height: 66rpx;
+    border-radius: 38rpx;
+    font-size: 28rpx;
+    font-weight: 500;
+    line-height: 66rpx;
+    color: #FE4110;
+    background: #FFEB4D;
+    text-align: center;
+}
+.trun-share:before,.trun-share:after {display: none;}
+.ture-share-light {
+    color: #FE4110;
+    background: #FFEB4D;
+}
+.trun-share .img {
+    width: 26rpx;
+    height: 26rpx;
+    padding: 10rpx;
+    color: #FE4110;
+}
+/* 活动规则 */
+.rules-bg {
+    padding-bottom: 1rpx;
+}
+.activity-rules {
+    margin: 60rpx 34rpx 60rpx;
+    border-radius: 16rpx;
+    background: #FFFFFF;
+    padding: 32rpx 36rpx 26rpx;
+    color: #555555;
+}
+.activity-rules .rules-title {
+    margin: 0rpx auto;
+    font-size: 32rpx;
+    font-weight: 600;
+    line-height: 45rpx;
+    height: 45rpx;
+    text-align: center;
+}
+.activity-rules .rules-text {
+    padding-bottom: 24rpx;
+    font-size: 24rpx;
+    font-weight: 300;
+    line-height: 32rpx;
+    text-align: left;
+    color: #555555;
+}
+.activity-rules .mt15{
+    margin-top: 15rpx;
+}
+/* 大转盘 start */
+.turntable {
+    position: relative;
+    height: 540rpx;
+    width: 540rpx;
+    padding: 24rpx;
+    margin: 80rpx auto 60rpx;
+    background-color: #FAE292;
+    box-shadow: 0px 12rpx 0 #F5B33B;
+    border-radius: 50%;
+}
+.light {
+  position: absolute;
+  height: 20rpx;
+  width: 20rpx;
+  border-radius: 50%;
+  top: 4rpx;
+  left: 284rpx;
+  transform-origin: 10rpx 290rpx;
+}
+.light-twinkling {
+  animation: 1s twinkling 6;
+}
+.light:nth-child(2n) {
+  background-color: #f5af38;
+}
+.light:nth-child(2n+1) {
+  background-color: #fff;
+}
+.light:nth-child(1) {
+  transform: rotate(0deg);
+}
+.light:nth-child(2) {
+  transform: rotate(30deg);
+}
+.light:nth-child(3) {
+  transform: rotate(60deg);
+}
+.light:nth-child(4) {
+  transform: rotate(90deg);
+}
+.light:nth-child(5) {
+  transform: rotate(120deg);
+}
+.light:nth-child(6) {
+  transform: rotate(150deg);
+}
+.light:nth-child(7) {
+  transform: rotate(180deg);
+}
+.light:nth-child(8) {
+  transform: rotate(210deg);
+}
+.light:nth-child(9) {
+  transform: rotate(240deg);
+}
+.light:nth-child(10) {
+  transform: rotate(270deg);
+}
+.light:nth-child(11) {
+  transform: rotate(300deg);
+}
+.light:nth-child(12) {
+  transform: rotate(330deg);
+}
+.panel {
+  position: relative;
+  height: 540rpx;
+  width: 540rpx;
+  background-color: #fff;
+  border-radius: 50%;
+
+  overflow: hidden;
+}
+.panel-tran3 { transition: transform 3s;}
+.panel-tran1 { transition: transform 100ms;}
+.sector {
+  position: absolute;
+  left: 270rpx;
+  top: 0;
+  width: 270rpx;
+  height: 540rpx;
+  font-size: 28rpx;
+  border-radius: 0px 270rpx 270rpx 0;
+  overflow: hidden;
+  transform-origin: left center;
+}
+.sector:nth-child(1) {
+  transform: rotate(-30deg);
+  border-left: 2rpx solid #FFEFBA;
+}
+.sector:nth-child(2) {
+  transform: rotate(30deg);
+}
+.sector:nth-child(3) {
+  transform: rotate(90deg);
+  border-left: 2rpx solid #FFEFBA;
+}
+.sector:nth-child(4) {
+  transform: rotate(150deg);
+}
+.sector:nth-child(5) {
+  transform: rotate(210deg);
+  border-left: 2rpx solid #FFEFBA;
+}
+.sector:nth-child(6) {
+  transform: rotate(270deg);
+}
+.sector:nth-child(1) .sector-img {
+    width: 56rpx;
+    height: 56rpx;
+}
+.sector:nth-child(2) .sector-img {
+    width: 50rpx;
+    height: 50rpx;
+}
+.sector:nth-child(3) .sector-img {
+    width: 56rpx;
+    height: 56rpx;
+}
+.sector:nth-child(4) .sector-img {
+    width: 56rpx;
+    height: 56rpx;
+}
+.sector:nth-child(5) .sector-img {
+    width: 56rpx;
+    height: 56rpx;
+}
+.sector:nth-child(6) .sector-img {
+    width: 56rpx;
+    height: 56rpx;
+}
+.sector-inner {
+    text-align: center;
+    display: block;
+    width: 250rpx;
+    height: 540rpx;
+    padding: 40rpx 0 0 100rpx;
+    transform: translateX(-270rpx) rotate(60deg);
+    transform-origin: right center;
+    border-radius: 270rpx 0 0 270rpx;
+    box-sizing: border-box;
+}
+@keyframes bgColor{
+	0% {
+		background-color: #FFF2C8;
+    box-shadow: 8rpx -32rpx 0 #FFF2C8;
+	}
+	25% {
+		background-color: #fff;
+    box-shadow: 8rpx -32rpx 0 #fff;
+	}
+	50% {
+		background-color: #FFF2C8;
+    box-shadow: 8rpx -32rpx 0 #FFF2C8;
+	}
+	75% {
+		background-color: #fff;
+    box-shadow: 8rpx -32rpx 0 #fff;
+	}
+	100% {
+		background-color: #FFF2C8;
+    box-shadow: 8rpx -32rpx 0 #FFF2C8;
+	}
+}
+.sector.current .sector-inner {
+    animation: bgColor 3s linear 3;
+    background-color: #FFF2C8;
+    box-shadow: 8rpx -32rpx 0 #FFF2C8;
+}
+.sector-inner .text-mode {
+    display: block;
+    transform-origin: center;
+    transform: rotate(-30deg);
+    color: #d46854;
+}
+.sector-inner .sector-img {
+    margin-top: 26rpx;
+}
+.pointer {
+    position: absolute;
+    background-size: 167rpx 195rpx;
+    left: 50%;
+    top: 50%;
+    z-index: 10;
+    height: 195rpx;
+    width: 167rpx;
+    text-align: center;
+    font-weight: 500;
+    transform: translate3d(-50%,-50%,0);
+    margin-top: -5rpx;
+}
+.bg-light {background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/funscore/point-red.png); color: #F04A38;}
+.bg-gray {background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/funscore/point-gray.png); color: #FFFFFF;}
+.pointer .center {
+    padding-top: 75rpx;
+    font-size: 24rpx;
+}
+.pointer .bigft {
+    font-size: 52rpx;
+}
+
+@keyframes twinkling {
+50% { background: transparent; }
+}
+
+@keyframes mymove {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.08);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+.heartbeat {
+	animation: mymove 2s linear 3;
+}
+
+/*分享路径悬浮球*/
+.none {display: none;}
+.block {display: block;}
+.floating-ball{
+  width: 100rpx;
+  position: fixed;
+  bottom: 180rpx;
+  right: 32rpx;
+  background-color:rgba(255,255,255,.8);
+  border: 1rpx solid #DDDDDD;
+  box-shadow: 0 8rpx 16rpx 0 rgba(0,0,0,0.16);
+  border-radius: 80rpx;
+  padding: 15rpx 0 0;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+  transition: height 200ms linear;
+  will-change:height;
+}
+.floating-ball.noscorebox {
+  height: 310rpx
+}
+.floating-ball.transpond {
+  height: 330rpx
+}
+.floating-ball.transpond-noscore {
+  height: 210rpx
+}
+.floating-ball.iphonex-ball {
+  bottom: 246rpx
+}
+.border-bottom {
+  border-bottom: 1rpx solid #111111;
+  margin: 0 24rpx 20rpx;
+}
+.floating-ball .item{
+  padding:8rpx 0 30rpx;
+  background-color: transparent;
+  font-size: 22rpx;
+  color: #111111;
+  line-height: normal;
+}
+.floating-ball .item{
+  padding:8rpx 0 30rpx;
+  position: relative;
+}
+.floating-ball .item:first-child{
+  padding-top: 23rpx;
+}
+.floating-ball.ball-packup {
+  width: 100rpx;
+  height: 100rpx;
+}

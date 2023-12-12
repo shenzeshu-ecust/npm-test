@@ -1,0 +1,1043 @@
+<import src="../common/template/CustomModal.wxml" />
+<import src="list.skeleton.wxml" />
+<import src="../common/template/busNotice.wxml" />
+<import src="../common/template/newUserCoupon.wxml" />
+<!-- <import src="../common/template/Coupon.wxml"/> -->
+<nav-bar navbar-data="{{navbarData}}"></nav-bar>
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+<authorizationFloat id="cwxAuthFloat"></authorizationFloat>
+<view class="list-container"
+  wx:scope-data="{{...scopeData}}"
+  bindtap="{{expandPage >= 0 && expandIndex >=0 ? 'onTouchExpand' : ''}}">
+    <view class="tips_top"
+      style="display:{{errorMsgShow || 'none'}}">{{errorMsg}}</view>
+    <view class="bus-listdate {{classConfig.headerBgColor}}">
+        <view class="flex">
+            <view class="prev flex-i2 {{curDateNum > minDateNum ? '' : 'disabled'}}"
+              bindtap="changeDay"
+              data-day="-1">
+                前一天
+            </view>
+            <view class="flex-i3 taday {{classConfig.mainColor}}"
+              bindtap="dateAction">
+                <text>{{showDate}} {{displayDate}}</text>
+            </view>
+            <view class="next flex-i2 {{curDateNum < maxDateNum ? '' : 'disabled'}}"
+              bindtap="changeDay"
+              data-day="1">
+                后一天
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{isShowSwiper}}"
+      class="bus-notice-wrap">
+        <view class="swiper-container">
+            <swiper class='banner'
+              indicator-dots="{{false}}"
+              autoplay="{{true}}"
+              current="{{0}}"
+              interval="{{3000}}"
+              duration="{{500}}"
+              vertical="{{true}}"
+              circular="{{true}}"
+              display-multiple-items="{{1}}">
+                <swiper-item wx:if="{{hasBusNotice}}">
+                    <template is="busnotice"
+                      data="{{busNoticeData}}" />
+                </swiper-item>
+                <swiper-item wx:if="{{isShowExpireCoupon}}">
+                    <expiration-coupon expireCouponDate="{{expireCouponDate}}" />
+                </swiper-item>
+                <swiper-item wx:if="{{isShowNewUseBanner}}">
+                    <template is="newUserBanner"
+                      data="{{isNewActivity: true, bannerDesc: newUseBannerDesc, isShowBgColor, openNewUserCoupon: 'showNewUserCoupon'}}" />
+                </swiper-item>
+                <swiper-item wx:if="{{isShowOldUseBanner}}">
+                    <template is="newUserBanner"
+                      data="{{isNewActivity: false, bannerDesc: oldUseBannerDesc, isShowBgColor, openNewUserCoupon: 'showOldUserCoupon'}}" />
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+    <block wx:if="{{showBusNoticeModal}}">
+        <template data="{{busNoticeData}}"
+          is="busnoticemodal" />
+    </block>
+    <template is="skeleton"
+      wx-if="{{inLoading}}" />
+    <block wx:else>
+        <scroll-view scroll-y="true"
+          wx:if="{{loadFailed}}"
+          class="bus-list {{isShowSwiper ? 'bus-list-new' : ''}}"
+          bindtouchstart="onTouchScroll"
+          bindtouchend="endTouchScroll"
+          bindscrolltolower="reachPageBottom"
+          bindscrolltoupper="reachPageTop"
+          scroll-into-view="{{scrollToView}}"
+          scroll-with-animation="{{scrollWithAnimation}}"
+          bindscroll="onListScroll"
+          enable-back-to-top="true"
+          upper-threshold="100"
+          lower-threshold="100"
+          scroll-top="{{scrollTo}}">
+            <!-- <view class="bus-placeholder" ></view> -->
+            <view wx:if="{{showRecovery && anotherDates.length === 0 && recommendA.length === 0}}"
+              class="recovery-container">
+                <view class="icon-container">
+                    <text class="icon-font icon-bell {{classConfig.mainColor}}"></text>
+                </view>
+                <view class="flex1">
+                    <view class="title-line">
+                        <text>车站已关闭，您可订阅</text>
+                        <text class="color-orange">开售提醒</text>
+                    </view>
+                    <view class="desc-line">线路恢复可售时，将立即通过短信和携程消息通知！</view>
+                </view>
+                <view class="button-container">
+                    <view wx:if="{{recoverSubscribeStatus == 1 }}"
+                      class="subscribe-button did">
+                        {{"已订阅"}}
+                    </view>
+                    <view wx:else
+                      class="subscribe-button"
+                      bindtap="subscribeLineRecover">
+                        {{"免费订阅"}}
+                    </view>
+                </view>
+            </view>
+            <view wx:if="{{resultType === 2 || resultType === 3 && !extraInfo.descUrl}}"
+              class="noResult-tip-content {{resultType === 3 && anotherDates.length === 0 && recommendA.length === 0 && !extraInfo.descUrl ? 'noResult-center' : ''}}">
+                <view class="noResult-image"></view>
+                <text class="tip-text"
+                  wx:if="{{anotherDates.length > 0 || recommendA.length > 0}}">暂未查询到您搜索的班次，为您推荐如下出行方案：</text>
+                <text class="tip-text"
+                  wx:elif="{{anotherDates.length === 0 && recommendA.length === 0}}">很抱歉，暂未查到您搜索的班次</text>
+            </view>
+            <view class="extraInfo"
+              wx:if="{{extraInfo.descUrl}}">
+                <image src="{{extraInfo.descUrl}}"
+                  mode="widthFix">
+                </image>
+                <button class="buttontip"
+                  form-type="submit"
+                  bindtap="toExtrapage"
+                  data-url="{{extraInfo.linkUrl}}">
+                    不知道怎么操作看这里
+                </button>
+                <button class="buttonimage"
+                  form-type="submit"
+                  bindtap="toSaveImage"
+                  data-url="{{extraInfo.descUrl}}">
+                    <image src="https://pages.c-ctrip.com/bus-images/busapp/rnbus/jsNoData/jsDownloadImg.png">
+                    </image>
+                    <text class="{{classConfig.mainColor}}">点击保存二维码</text>
+                </button>
+            </view>
+            <block wx:if="{{listLength > 0}}">
+                <view wx:for="{{list}}"
+                  wx:for-item="subList"
+                  wx:for-index="page"
+                  id="listpage-{{page}}">
+                    <block wx:if="{{page - currentPage >= -1 && page - currentPage <= 1}}">
+                        <template is="buslistitem"
+                          wx:for="{{subList}}"
+                          data="{{item:item, page,index,classConfig, colorConfig,isLogin, showExpand: expandPage == page && expandIndex == index, expandXList, selectedExpandTab, selectedExpandItem, isShowUnableList, busXAbVersion}}" />
+                    </block>
+                    <view wx:else
+                      style="height:{{pageFrame[page].height}}px;"></view>
+                </view>
+                <view class="list-end"
+                  wx:if="{{listLength > 0 && isShowUnableList}}">
+                    <view class="line"></view>
+                    <text wx:if="{{pageEnd}}">以上共{{listLength || 0}}个班次</text>
+                    <button wx:else
+                      loading="true"
+                      disabled="true"
+                      bindtap="empty"
+                      class="button-noborder"
+                      style="font-size: 26rpx; background-color:transparent">
+                        正在加载更多...
+                    </button>
+                    <view class="line"></view>
+                </view>
+            </block>
+            <view wx:if="{{anotherDates.length > 0}}"
+              class="anotherDates-recommend">
+                <view class="list-tip-title">
+                    <image src="https://pic.c-ctrip.com/bus/resource/list/near_data.png"
+                      class="near-icon">
+                    </image>
+                    <text>汽车近期有票推荐</text>
+                </view>
+                <view class="flex-row another-date-content">
+                    <button wx:for="{{anotherDates}}"
+                      class="another-date {{item.cnt ==='无票' ? 'disabled' : ''}}"
+                      bindtap="onSwitchDate"
+                      data-date="{{item.fromDate}}"
+                      data-price="{{item.price}}">
+                        <view class="another-date-top">
+                            <text class="data">{{item.date}}</text>
+                            <view class="price-content">
+                                <text class="unit">¥</text>
+                                <text class="price">{{item.price}}</text>
+                                <text>起</text>
+                            </view>
+                        </view>
+                        <view class="another-date-bottom">
+                            <text>{{item.day}}</text>
+                            <text>{{item.busCountDesc}}</text>
+                        </view>
+                    </button>
+                </view>
+            </view>
+            <view wx:if="{{recommendA.length}}"
+              class="planA-recommend">
+                <view class="list-tip-title">
+                    <image src="https://pic.c-ctrip.com/bus/resource/list/near_bus.png"
+                      class="near-icon">
+                    </image>
+                    <text>临近到达推荐</text>
+                </view>
+                <view wx:for="{{recommendA}}"
+                  wx:key="buslistitem"
+                  form-type="submit"
+                  class="button-noborder plain"
+                  data-index="{{index}}"
+                  bindtap="toRecommendLine"
+                  data-from="{{item.from}}"
+                  data-to="{{item.to}}"
+                  data-price="{{item.price}}">
+                    <view class="plain-item-content">
+                        <view class="top">
+                            <view class="title">
+                                <text>{{item.from}}</text>
+                                <icon class="icon-arrow-to color-gray margin-horizontal" />
+                                <text class="to">{{item.to}}</text>
+                            </view>
+                            <view class="price-content"
+                              wx:if="{{item.price}}">
+                                <text class="unit">¥</text>
+                                <text class="price">{{item.price}}</text>
+                                <text>起</text>
+                            </view>
+                        </view>
+                        <view class="bottom">
+                            <text class="desc">{{item.desc}}</text>
+                            <view class="">
+                                <text>查看更多班次</text>
+                                <text class="icon-font icon-arrow-right"></text>
+                            </view>
+                        </view>
+                    </view>
+                    <view wx:if="{{recommendA.length > 1 && index !== recommendA.length - 1}}"
+                      class="split-line"></view>
+                </view>
+            </view>
+            <view class="bottom-placeholder"
+              style="{{isIPhoneX ? 'margin-bottom:228rpx' : ''}}"></view>
+        </scroll-view>
+        <view wx:elif="{{(selectFromList.length > 0 || selectToList.length > 0) && listLength === 0}}"
+          class="bus-list {{isShowSwiper ? 'bus-list-new' : ''}}">
+            <view class="bus-placeholder"></view>
+            <view class="list-tip">此筛选条件下无结果，清除筛选以查看更多结果</view>
+            <button class="noresult-button"
+              bindtap="clearAllFilter">清除筛选</button>
+        </view>
+        <scroll-view wx:else
+          scroll-with-animation="{{scrollWithAnimation}}"
+          bindtouchstart="onTouchScroll"
+          bindtouchend="endTouchScroll"
+          class="bus-list {{isShowSwiper ? 'bus-list-new' : ''}}"
+          style=''
+          scroll-y="true"
+          bindscrolltolower="reachPageBottom"
+          bindscrolltoupper="reachPageTop"
+          scroll-into-view="{{scrollToView}}"
+          bindscroll="onListScroll"
+          enable-back-to-top="true"
+          upper-threshold="100"
+          lower-threshold="100"
+          scroll-top="{{scrollTo}}">
+            <!-- <view class="bus-placeholder" ></view> -->
+            <view class="notes"
+              wx:if="{{notes && notes.title && listLength > 0}}"
+              catchtap="showNotes">
+                提示：{{notes.title}}
+            </view>
+            <view wx:if="{{message}}"
+              class="noResult-tip-content">
+                <view class="noResult-image"></view>
+                <view class="tip-text">
+                    <text>{{message}}</text>
+                </view>
+            </view>
+            <view wx:for="{{list}}"
+              wx:for-item="subList"
+              wx:for-index="page"
+              id="listpage-{{page}}">
+                <block wx:if="{{page - currentPage >= -1 && page - currentPage <= 1}}">
+                    <template is="buslistitem"
+                      wx:for="{{subList}}"
+                      data-skeleton-list
+                      data="{{item:item, page,index,classConfig, colorConfig,isLogin, showExpand: expandPage == page && expandIndex == index, expandXList, selectedExpandTab, selectedExpandItem, isShowUnableList, busXAbVersion}}" />
+                </block>
+                <view wx:else
+                  style="height:{{pageFrame[page].height}}px;"></view>
+            </view>
+            <view class="list-end"
+              wx:if="{{listLength > 0 && isShowUnableList}}">
+                <view class="line"></view>
+                <text wx:if="{{pageEnd}}">以上共{{listLength || 0}}个班次</text>
+                <button wx:else
+                  loading="true"
+                  disabled="true"
+                  bindtap="empty"
+                  class="button-noborder"
+                  style="font-size: 26rpx; background-color:transparent">
+                    正在加载更多...
+                </button>
+                <view class="line"></view>
+            </view>
+            <view class="slogan-container">
+                <view wx:if="{{showSlogan}}"
+                  class="slogan {{classConfig.sloganImage}}"></view>
+            </view>
+            <view class="bottom-placeholder"
+              style="{{isIPhoneX ? 'margin-bottom:68rpx' : ''}}"></view>
+        </scroll-view>
+    </block>
+    <coupon-float />
+    <template wx:if="{{!showMask && (fromStationList.length > 1 || toStationList.length > 1)}}"
+      is="filterbutton"
+      data="{{showFilter:fromStationList.length > 1 || toStationList.length > 1, hasFilter: selectFromList.length > 0 || selectToList.length > 0 || selectTimeList.length > 0, hasSort: sortType ? true : false ,isIPhoneX, classConfig, colorConfig}}" />
+    <!-- <templ> -->
+    <template wx:if="{{showMask}}"
+      is="filtercomponent"
+      data="{{isIPhoneX , fromStationList, toStationList, timePeroidListMap, selectTimeList, filterType, selectFromList, selectToList, currentListMap, hiddenAnimation, classConfig, colorConfig}}" />
+    <!-- <template is='couponearner'/> -->
+    <template wx:if="{{showTagdesc}}"
+      is="flowcomponent"
+      data="{{...tagDescInfo, classConfig, colorConfig}}" />
+    <!-- 自定义弹框 -->
+    <template is="custommodal"
+      data="{{...customModalData}}" />
+    <template wx:if="{{showInsuranceModal}}"
+      is="insuranceModal"
+      data="{{selectedExpandItem, selectedExpandIndex, page, index, insuranceText, hiddenInsuranceAnimation }}" />
+    <view class="view-check"
+      bindanimationend="viewReadyHandle"></view>
+</view>
+<block wx:if="{{isShowNewUserCoupon}}">
+    <template is="newUserCoupon"
+      data="{{coupon: newUserCoupon, showPolicy: 'showPolicy', onUseCoupon: 'onNewUserCoupon', onHide: 'closeNewUserCoupon'}}" />
+</block>
+<block wx:if="{{isShowOldUserCoupon}}">
+    <template is="newUserCoupon"
+      data="{{coupon: oldUserCoupon, showPolicy: 'showOldPolicy', onUseCoupon: 'onOldUserCoupon', onHide: 'closeOldUserCoupon'}}" />
+</block>
+<template name="filterbutton">
+    <view class="filter-button {{classConfig.mainColor}}"
+      style="{{isIPhoneX ? 'bottom:98rpx' : ''}}">
+        <button class="{{classConfig.mainColor}}"
+          wx:if="{{showFilter}}"
+          form-type="submit"
+          bindtap="onShowFilter">
+            <icon class="icon-filter"
+              size="40rpx">
+                <view wx:if="{{hasFilter}}"
+                  class="dot"></view>
+            </icon>
+            <text>筛选</text>
+        </button>
+        <button class="{{classConfig.mainColor}}"
+          form-type="submit"
+          bindtap="onSortType">
+            <icon class="icon-time"
+              size="40rpx">
+                <view wx:if="{{hasSort}}"
+                  class="dot"></view>
+            </icon>
+            <text wx:if="{{hasSort}}">耗时:少→多</text>
+            <text wx:else>耗时排序</text>
+        </button>
+    </view>
+</template>
+<template name="buslistitem">
+    <!-- //事件和视图分离 -->
+    <block wx:if="{{item.isShowExpendunable && !item.isBookable}}">
+        <view class="expend-unable-button"
+          bindtap="onShowUnableList">
+            <text wx:if="{{!isShowUnableList}}">点击展开不可预订班次</text>
+            <text wx:else>点击收起不可预订班次</text>
+            <view class="arrow-down-content">
+                <icon wx:if="{{!isShowUnableList}}"
+                  size="23"
+                  class="icon-arrow-down right" />
+                <icon wx:else
+                  size="23"
+                  class="icon-arrow-up right" />
+            </view>
+        </view>
+    </block>
+    <view wx:if="{{item.isBookable || isShowUnableList}}"
+      disabled="{{mock}}"
+      wx:key="buslistitembutton"
+      class="button-noborder item {{item.isBookable ? '': 'disabled'}} {{mock ? 'mock' : ''}}"
+      hover-class="item-hover"
+      id="{{'buslist_item_' + page + '_' +index}}"
+      form-type="submit"
+      data-page="{{page}}"
+      data-item="{{item}}"
+      data-index="{{index}}"
+      catchtap="checkBook">
+        <template is="buslistitemview"
+          data="{{item, page, index, classConfig, colorConfig, showExpand, mock, expandXList, selectedExpandTab, selectedExpandItem, busXAbVersion}}" />
+    </view>
+    <block wx:if="{{item.isShowExpendunable && item.isBookable}}">
+        <view class="expend-unable-button"
+          bindtap="onShowUnableList">
+            <text wx:if="{{!isShowUnableList}}">点击展开不可预订班次</text>
+            <text wx:else>点击收起不可预订班次</text>
+            <view class="arrow-down-content">
+                <icon wx:if="{{!isShowUnableList}}"
+                  size="23"
+                  class="icon-arrow-down right" />
+                <icon wx:else
+                  size="23"
+                  class="icon-arrow-up right" />
+            </view>
+        </view>
+    </block>
+</template>
+<template name="buslistitemview">
+    <block>
+        <view class="item-view">
+            <view class="flex-row ">
+                <view class="item-left">
+                    <text wx:if="{{item.isFloatTime}}"
+                      class="textTitle">用户决定</text>
+                    <text wx:elif="{{item.startTime}}"
+                      class="time">
+                        <text class="time-tip">首</text>{{item.startTime}}</text>
+                    <text wx:else
+                      class="time">
+                        <text wx:if="{{item.shiftType == 1}}" class="time-tip">末</text>{{item.fromTime}}</text>
+                    <text wx:if="{{mock}}"
+                      class="time"></text>
+                </view>
+                <view class="from station">
+                    <view class="bustypeImg">
+                        <view class="bustypeContainer">
+                            <view class="icon-shi"></view>
+                        </view>
+                    </view>
+                    <view class="stationText">{{item.fromStation}}</view>
+                </view>
+                <view wx:if="{{!showExpand}}"
+                  class="flex1 reduce-price">
+                    <view wx:if="{{item.reducePrice}}">
+                        <text class="base">1</text>
+                        <text wx:if="{{item}}"
+                          class="dfn torange">¥</text>
+                        <text class="strong torange">{{item.showPrice}}</text>
+                    </view>
+                </view>
+                <view wx:if="{{!showExpand}}"
+                  class="price">
+                    <text class="tag-orange"
+                      style="font-size:.65rem;"
+                      wx:if="{{item.cashBack || item.scenicCashBack}}">返{{item.cashBack || item.scenicCashBack}}元</text>
+                    <text class="tag-orange"
+                      style="font-size:.65rem;"
+                      wx:if="{{item.offsetActivityType*1 == 3}}">减</text>
+                    <text wx:if="{{item}}"
+                      class="dfn torange">¥</text>
+                    <text class="strong torange"
+                      wx:if="{{item.reducePrice}}">{{item.reducePrice}}</text>
+                    <text class="strong torange"
+                      wx:else>{{item.showPrice}}</text>
+                </view>
+            </view>
+            <view class="flex-row">
+                <view class="item-left">
+                    <text wx:if="{{item.isFloatTime}}"
+                      class="textTitle">发车时间</text>
+                    <text wx:elif="{{item.endTime}}"
+                      class="time">
+                        <text class="time-tip">末</text>{{item.endTime}}</text>
+                    <text wx:else
+                      class="cost tgrey">{{item.costTime}}</text>
+                    <text wx:if="{{mock}}"
+                      class="cost tgrey">{{item.costTime}}</text>
+                </view>
+                <view class="station">
+                    <view class="bustypeImg">
+                        <view class="line"></view>
+                        <view class="bustypeContainer">
+                            <view class="icon-zhong">
+                                <view wx:if="{{item.isWayStation}}"
+                                  class="zhong-white"></view>
+                                <view wx:if="{{item.isWayStation}}"
+                                  class="zhong-way"></view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="stationText">{{item.toStation}}</view>
+                </view>
+                <view class="flex1">
+                    <view class="discountPrice"
+                      wx:if="{{!showExpand && item.discountTagList}}">
+                        <text class="{{item.isBookable ? 'discountPrice-content' : 'discountPrice-content-disabled'}}">{{item.discountTagList}}</text>
+                    </view>
+                </view>
+                <view wx:if="{{!showExpand && item.rewardFee > 0}}"
+                  class="tag-back">
+                    <view class="tagView">返</view>
+                    <view class="tagText">¥{{item.rewardFee}}</view>
+                </view>
+            </view>
+            <view class="flex-row">
+                <view class="item-left">
+                    <view wx:if="{{item._tagName}}"
+                      class='{{classConfig.lightBorder + " tag-blue " + classConfig.mainColor}} line30'
+                      catchtap="showTagdesc"
+                      data-page="{{page}}"
+                      data-item="{{item}}"
+                      data-index="{{index}}">
+                        {{item._tagName}}
+                    </view>
+                </view>
+                <view class="station tgrey">
+                    <view class="bustypeImg">
+                        <view class="bustypeContainer">
+                            <icon class="icon-bus"
+                              size="24rpx"></icon>
+                        </view>
+                    </view>
+                    <text class="ttag">{{item.busType}}</text>
+                </view>
+                <view class="flex1"></view>
+                <text wx:if="{{!showExpand}}"
+                  class="tstock {{item.ticketStockStyle == 1 || item.ticketStockStyle == 0 ? 'tgrey':(item.ticketStockStyle == 2 ? 'torange' : 'tred')}}">{{item.ticketStock}}</text>
+            </view>
+            <view wx:if="{{item.extraTag}}"
+              class="flex-row">
+                <view class="item-left"></view>
+                <view wx:if="{{item.extraTag}}"
+                  class="station">
+                    <view class="bustypeImg">
+                        <icon class="ico-xiang"
+                          type="none"
+                          size="15"></icon>
+                    </view>
+                    <view class="descLine break}}"
+                      catchtap='{{(item.breakLine || !item.passStationDesc) ? "checkBook" : "breakDesc"}}'
+                      data-page="{{page}}"
+                      data-index="{{index}}">
+                        {{item.extraTag}}
+                    </view>
+                </view>
+            </view>
+            <view wx:if="{{item.passStationDesc}}"
+              class="flex-row">
+                <view class="item-left"></view>
+                <view wx:if="{{item.passStationDesc}}"
+                  class="stationright">
+                    <view class="bustypeImg">
+                        <view class="bustypeContainer">
+                            <icon class="ico-coordimg tgrey"
+                              type="none"
+                              size="15"></icon>
+                        </view>
+                    </view>
+                    <view class="flexContainer">
+                        <view class='descLine {{item.breakLine ? "break" : ""}}'
+                          catchtap='{{item.breakLine ? "checkBook" : "breakDesc"}}'
+                          data-page="{{page}}"
+                          data-index="{{index}}">
+                            途经: {{item.passStationDesc}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <template is="expand-xview"
+          wx:if="{{showExpand}}"
+          data="{{item, page, index, expandXList, colorConfig, classConfig, selectedExpandTab, selectedExpandItem, busXAbVersion}}"></template>
+    </block>
+</template>
+<template name="filtercomponent">
+    <view class="filter-container">
+        <view class="filter-mask {{hiddenAnimation}}"
+          bindtap="onCancelFilter"></view>
+        <view class="filter-view {{hiddenAnimation}}"
+          bindtap="empty">
+            <view class="top-bar">
+                <button class="{{filterType == 'from' ? '' : 'noshow'}}"
+                  wx:if="{{fromStationList.length > 0}}"
+                  form-type="submit"
+                  bindtap="showFromCityFilter">
+                    <text class='{{filterType == "from" ? classConfig.borderColor : classConfig.whiteColor}}'>出发车站<text wx:if="{{selectFromList.length}}" class="dot"></text></text>
+                </button>
+                <button class="{{filterType == 'to' ? '' : 'noshow'}}"
+                  wx:if="{{toStationList.length > 0}}"
+                  form-type="submit"
+                  bindtap="showToCityFilter">
+                    <text class='{{filterType == "to" ? classConfig.borderColor : classConfig.whiteColor}}'>到达车站<text wx:if="{{selectToList.length}}" class="dot"></text></text>
+                </button>
+                <button class="{{filterType == 'time' ? '' : 'noshow'}}"
+                  form-type="submit"
+                  bindtap="showTimeFilter">
+                    <text class='{{filterType == "time" ? classConfig.borderColor : classConfig.whiteColor}}'>出发时间<text wx:if="{{selectTimeList.length}}" class="dot"></text></text>
+                </button>
+            </view>
+            <button class="list-item"
+              form-type="submit"
+              bindtap="clearCurrentChoose"
+              data-type="{{filterType}}">
+                <text>不限</text>
+                <icon wx:if="{{filterType == 'from'}}"
+                  class="{{selectFromList.length > 0 ? 'icon-checkbox color-gray' : 'icon-checkedbox ' + classConfig.mainColor }}"
+                  size="23"></icon>
+                <icon wx:elif="{{filterType == 'to'}}"
+                  class="{{selectToList.length > 0 ? 'icon-checkbox color-gray' : 'icon-checkedbox ' + classConfig.mainColor  }}"></icon>
+                <icon wx:elif="{{filterType == 'time'}}"
+                  class="{{selectTimeList.length > 0 ? 'icon-checkbox color-gray' : 'icon-checkedbox ' + classConfig.mainColor  }}"></icon>
+            </button>
+            <block wx:if="{{filterType == 'time'}}">
+                <view class="list">
+                    <button wx:for="{{timePeroidListMap}}"
+                      class="list-item"
+                      form-type="submit"
+                      data-type="{{filterType}}"
+                      data-item="{{item}}"
+                      data-index="{{index}}"
+                      bindtap="selectFilterItem">
+                        <text>{{item.name}}</text>
+                        <icon class="{{item.selected  ? 'icon-checkedbox ' + classConfig.mainColor : 'icon-checkbox color-gray'}}"></icon>
+                    </button>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="list">
+                    <button wx:for="{{currentListMap}}"
+                      class="list-item"
+                      form-type="submit"
+                      data-type="{{filterType}}"
+                      data-item="{{item}}"
+                      data-index="{{index}}"
+                      bindtap="selectFilterItem">
+                        <text>{{item.name}}</text>
+                        <icon class="{{item.selected ? 'icon-checkedbox ' + classConfig.mainColor : 'icon-checkbox color-gray'}}"></icon>
+                    </button>
+                </view>
+            </block>
+            <view class="placeholder"
+              style="{{isIPhoneX ? 'padding-bottom:68rpx' : ''}}"></view>
+            <view class="bottom-bar"
+              style="{{isIPhoneX ? 'padding-bottom:68rpx' : ''}}">
+                <button class="noshow {{classConfig.mainColor}}"
+                  form-type="submit"
+                  bindtap="onCancelFilter">
+                    取消
+                </button>
+                <button class="done {{classConfig.mainBackColor}}"
+                  form-type="submit"
+                  bindtap="confirmFilter">
+                    筛选
+                </button>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="flowcomponent">
+    <view class="filter-container">
+        <view class="filter-mask {{hiddenAnimation}}"
+          bindtap="onCancelTagDesc"></view>
+        <view class="filter-view {{hiddenAnimation}}"
+          bindtap="empty">
+            <view class="top-bar">
+                <button class="{{checkIndex == 0 ? '' : 'noshow ' + classConfig.mainColor}}"
+                  wx:if="{{isWayStation}}"
+                  form-type="submit"
+                  bindtap="changeTagIndex"
+                  data-index="{{0}}">
+                    <text class="{{checkIndex == 0 ? classConfig.borderColor : classConfig.whiteColor}}">过路车</text>
+                </button>
+                <button class="{{checkIndex == 1 ? '' : 'noshow'}}"
+                  wx:if="{{isShitBus}}"
+                  form-type="submit"
+                  bindtap="changeTagIndex"
+                  data-index="{{1}}">
+                    <text class="{{checkIndex == 1 ? classConfig.borderColor : classConfig.whiteColor}}">流水班</text>
+                </button>
+            </view>
+            <view class="list">
+                <block wx:if="{{checkIndex == 0}}">
+                    <view class="flex-column flowDescRow">
+                        <text class="desc margin-top">班次为过路车，下车点可能不在车站内</text>
+                        <text class="desc">具体以实际车站信息为准</text>
+                    </view>
+                    <view wx:for="{{wayStationList}}"
+                      class="flex-row flowDescRow ">
+                        <view class="type left">
+                            <text class="padding-horizontal">{{item.type}}</text>
+                        </view>
+                        <view class="lineDot {{item.isWay ? classConfig.mainBackColor : ''}}"></view>
+                        <view wx:if="{{index !== 0}}"
+                          class='lineLine {{item.lastWay ? classConfig.lightBakColor : ""}}'></view>
+                        <view class="right">
+                            <text class="padding-horizontal {{item.isWay ? '' : 'noway'}}">{{item.name}}</text>
+                        </view>
+                    </view>
+                </block>
+                <view wx:else
+                  class="padding">
+                    <text>{{shiftDesc}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="expand-xview">
+    <block>
+        <view class="expand-mask"
+          catchtap="onTouchExpand"
+          hover-stop-propagation>
+            <view wx:if="{{busXAbVersion != 'I'}}"
+              class="price x-price">
+                <text class="tag-orange"
+                  style="font-size:.65rem;"
+                  wx:if="{{item.cashBack || item.scenicCashBack}}">返{{item.cashBack || item.scenicCashBack}}元</text>
+                <text class="tag-orange"
+                  style="font-size:.65rem;"
+                  wx:if="{{item.offsetActivityType*1 == 3}}">减</text>
+                <text wx:if="{{item}}"
+                  class="dfn torange">¥</text>
+                <text class="strong torange"
+                  wx:if="{{item.reducePrice}}">{{item.reducePrice}}</text>
+                <text class="strong torange"
+                  wx:else>{{item.showPrice}}</text>
+            </view>
+            <view class="button-close-expand">收起</view>
+        </view>
+        <view class="expand-view"
+          catchtap="empty"
+          hover-stop-propagation>
+            <view wx:if="{{busXAbVersion === 'E' || busXAbVersion === 'F'}}"
+              class="expand-content">
+                <view class="switchbar">
+                    <block wx:for="{{expandXList}}"
+                      wx:for-key="index">
+                        <view class='switchtab {{selectedExpandTab === index ? classConfig.mainColor : "gray-back"}}'
+                          catchtap="tapSwitchTab"
+                          data-index="{{index}}">
+                            {{item.channelMainTitle || '普通预订'}}
+                            <text wx:if="{{selectedExpandItem.payShowPrice > 0 && selectedExpandTab === index && busXAbVersion === 'F'}}"
+                              class="price-text {{classConfig.mainColor}}">+¥{{selectedExpandItem.payShowPrice}}</text>
+                            <view wx:if="{{item.recommendTitle}}"
+                              class="item-recommendTitle">
+                                {{item.recommendTitle}}
+                            </view>
+                        </view>
+                    </block>
+                    <view class="back-container">
+                        <view class="left"
+                          style="flex:{{selectedExpandTab}}"></view>
+                        <view class='selectedTag'
+                          style="{{selectedExpandTab === 0 ? 'margin-left:-55rpx;' : ((selectedExpandTab === expandXList.length - 1) && selectedExpandTab >=2)  ? 'margin-right:-55rpx;' :'' }}">
+                            <view class="dash {{classConfig.mainBackColor}}"
+                              style=""></view>
+                        </view>
+                        <view class="right"
+                          style="flex:{{expandXList.length >= 3 ? (expandXList.length - selectedExpandTab - 1) : (3 - selectedExpandTab - 1)}}"></view>
+                    </view>
+                </view>
+                <view class="expand">
+                    <view class="expand-tag-content">
+                        <view wx:if="{{selectedExpandItem.payShowPrice > 0 && busXAbVersion === 'E'}}"
+                          class="tag">
+                            <text>
+                                <text class="tag-icon icon-font icon-plus {{classConfig.mainColor}}" />
+                                <text class="price-text {{classConfig.mainColor}}" style="font-weight: 500;">{{selectedExpandItem.payShowPrice}}元/份 </text>
+                            <text class='marginright'>{{selectedExpandItem.hallwayTitle}}</text>
+                            </text>
+                        </view>
+                        <view wx:for="{{selectedExpandItem.extraTags}}"
+                          class="tag"
+                          wx:for-item="tag"
+                          wx:for-index="index">
+                            <text>
+                                <text class="tag-icon icon-font {{tag.icon}} {{ tag.icon === 'icon-yes' ? classConfig.mainColor : 'red' }}" />
+                                <text  wx:for="{{tag.texts}}" wx:for-item="text" wx:for-key="index" class="{{text.highLight ? classConfig.mainColor : ''}}" style="{{text.highLight ? 'font-weight: 500;' : ''}}">{{text.text}}</text>
+                            </text>
+                        </view>
+                    </view>
+                    <view class="button-row">
+                        <view class="button-next-step"
+                          hover-class="button-next-step-hover"
+                          catchtap="onBook"
+                          data-page="{{page}}"
+                          data-index="{{index}}"
+                          data-xindex="{{selectedExpandTab}}"
+                          hover-stop-propagation>
+                            订
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view wx:elif="{{busXAbVersion === 'G' || busXAbVersion === 'H' || busXAbVersion === 'I'}}"
+              class="expand-content gVersion-expand-content">
+                <block wx:for="{{expandXList}}"
+                  wx:for-key="index"
+                  wx:for-item="selectedExpandItem"
+                  wx:for-index="selectedExpandIndex">
+                    <template wx:if="{{busXAbVersion === 'G'}}"
+                      is="xitemg"
+                      data="{{selectedExpandIndex, selectedExpandItem, busXAbVersion, page, index, item }}"></template>
+                    <template wx:elif="{{busXAbVersion === 'H'}}"
+                      is="xitemh"
+                      data="{{selectedExpandIndex, selectedExpandItem, busXAbVersion,  page, index, item}}"></template>
+                    <template wx:elif="{{busXAbVersion === 'I'}}"
+                      is="xitemi"
+                      data="{{selectedExpandIndex, selectedExpandItem, busXAbVersion,  page, index, item}}"></template>
+                </block>
+            </view>
+        </view>
+    </block>
+</template>
+<template name="xitemg">
+    <view wx:if="{{selectedExpandItem.type !== 'fiveMin'}}">
+        <view class="expand gVersion-expand {{selectedExpandItem.type === 'insurance' ? 'insurance-color' : ''}}">
+            <view class="expand-tag-content">
+                <view data-index="{{selectedExpandIndex}}"
+                  class="main-title">
+                    <image class="main-title-icon"
+                      src="{{selectedExpandItem.iconImageSrc}}" />
+                    <text>{{selectedExpandItem.channelMainTitle || '普通预订'}}</text>
+                    <text wx:if="{{selectedExpandItem.payShowPrice > 0}}"
+                      class="price-text">+¥{{selectedExpandItem.payShowPrice}}</text>
+                </view>
+                <view wx:if="{{selectedExpandItem.payShowPrice > 0 && busXAbVersion === 'E'}}"
+                  class="tag">
+                    <text>
+                        <text class="tag-icon icon-font icon-plus insurance-font-color" />
+                        <text class="price-text {{classConfig.mainColor}}">{{selectedExpandItem.payShowPrice}}元/份 </text>
+                    <text class='marginright'>{{selectedExpandItem.hallwayTitle}}</text>
+                    </text>
+                </view>
+                <view wx:for="{{selectedExpandItem.extraTags}}"
+                  class="tag"
+                  wx:for-item="tag"
+                  wx:for-index="index">
+                    <text>
+                        <text class="tag-icon icon-font {{tag.icon}} {{ tag.icon === 'icon-yes' ? 'insurance-font-color' : 'red' }}" />
+                        <text  wx:for="{{tag.texts}}" wx:for-item="text" wx:for-key="index" class="{{text.highLight ? 'insurance-font-color' : ''}}" >{{text.text}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="button-row">
+                <view class="button-next-step"
+                  hover-class="button-next-step-hover"
+                  catchtap="onBook"
+                  data-page="{{page}}"
+                  data-index="{{index}}"
+                  data-xindex="{{selectedExpandIndex}}"
+                  hover-stop-propagation>
+                    订
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="xitemh">
+    <view wx:if="{{selectedExpandItem.type !== 'fiveMin'}}"
+      class="h-version">
+        <view wx:if="{{selectedExpandItem.type === 'insurance'}}"
+          class="header-view">
+            <!-- <view class="header-text">超值优惠·多重保障</view> -->
+        </view>
+
+        <view class="expand gVersion-expand hVersion-expand {{selectedExpandItem.type === 'insurance' ? 'insurance-color' : ''}}">
+            <view class="expand-content-tip-column">
+                <image class="main-title-icon"
+                  src="{{selectedExpandItem.extraMap && selectedExpandItem.extraMap.iconImageH || selectedExpandItem.aisleIcon || selectedExpandItem.originalImage}}" />
+                <text wx:if="{{selectedExpandItem.payShowPrice > 0}}"
+                  class="price-text">+¥{{selectedExpandItem.payShowPrice}}</text>
+            </view>
+            <view class="expand-tag-content">
+                <view data-index="{{selectedExpandIndex}}"
+                  class="main-title">
+                    <text>{{selectedExpandItem.channelMainTitle || '普通预订'}}</text>
+                    <view wx:if="{{selectedExpandItem.extraMap && selectedExpandItem.extraMap.tagH}}"
+                      class="color-tag h">
+                        <view>{{selectedExpandItem.extraMap.tagH}}</view>
+                        <view wx:if="{{selectedExpandItem.extraMap && selectedExpandItem.extraMap.tagDescH}}"
+                          class="subtitle">
+                            {{selectedExpandItem.extraMap.tagDescH}}
+                        </view>
+                    </view>
+                </view>
+                <view wx:if="{{selectedExpandItem.payShowPrice > 0 && busXAbVersion === 'E'}}"
+                  class="tag">
+                    <text>
+                        <text class="tag-icon icon-font icon-plus insurance-font-color" />
+                        <text class="price-text {{classConfig.mainColor}}">{{selectedExpandItem.payShowPrice}}元/份 </text>
+                    <text class='marginright'>{{selectedExpandItem.hallwayTitle}}</text>
+                    </text>
+                </view>
+                <view wx:for="{{selectedExpandItem.extraTags}}"
+                  class="tag"
+                  wx:for-item="tag"
+                  wx:for-index="index">
+                    <text>
+                        <text class="tag-icon icon-font {{tag.icon}} {{ tag.icon === 'icon-yes' ? 'insurance-font-color' : 'red' }}" />
+                        <text  wx:for="{{tag.texts}}" wx:for-item="text" wx:for-key="index" class="{{text.highLight ? 'insurance-font-color' : ''}}" >{{text.text}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="button-row">
+                <view class="button-next-step"
+                  hover-class="button-next-step-hover"
+                  catchtap="onBook"
+                  data-page="{{page}}"
+                  data-index="{{index}}"
+                  data-xindex="{{selectedExpandIndex}}"
+                  hover-stop-propagation>
+                    订
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="xitemi">
+    <view wx:if="{{selectedExpandItem.type !== 'fiveMin'}}"
+      class="h-version">
+        <view wx:if="{{selectedExpandItem.type === 'insurance'}}"
+          class="header-view">
+            <!-- <view class="header-text">超值优惠·多重保障</view> -->
+        </view>
+
+        <view class="expand gVersion-expand hVersion-expand {{selectedExpandItem.type === 'insurance' ? 'insurance-color' : ''}}">
+            <view class="expand-content-tip-column">
+                <view class="price i-price">
+                    <text wx:if="{{item}}"
+                      class="dfn torange">¥</text>
+                    <text class="strong torange"
+                      wx:if="{{item.reducePrice}}">{{item.reducePrice}}</text>
+                    <text class="strong torange"
+                      wx:else>{{item.showPrice}}</text>
+                </view>
+            </view>
+            <view class="expand-tag-content"
+              bindtap="onShowInsuranceModal"
+              data-type="{{selectedExpandItem.type === 'insurance'}}"
+              data-page="{{page}}"
+              data-index="{{index}}"
+              data-xindex="{{selectedExpandIndex}}">
+                <view data-index="{{selectedExpandIndex}}"
+                  class="main-title">
+                    <text>
+                        <text wx:if="{{selectedExpandItem.payShowPrice > 0}}" class="price-text">+¥{{selectedExpandItem.payShowPrice}}</text>
+                    <text>{{selectedExpandItem.channelMainTitle || '普通预订'}}</text>
+                    </text>
+                    <view wx:if="{{selectedExpandItem.extraMap && selectedExpandItem.extraMap.tagI}}"
+                      class="color-tag">
+                        <view>{{selectedExpandItem.extraMap.tagI}}</view>
+                        <view wx:if="{{selectedExpandItem.extraMap && selectedExpandItem.extraMap.tagDescI}}"
+                          class="subtitle">
+                            {{selectedExpandItem.extraMap.tagDescI}}
+                        </view>
+                    </view>
+                </view>
+                <view wx:if="{{selectedExpandItem.payShowPrice > 0 && busXAbVersion === 'E'}}"
+                  class="tag">
+                    <text>
+                        <text class="tag-icon icon-font icon-plus insurance-font-color" />
+                        <text class="price-text {{classConfig.mainColor}}">{{selectedExpandItem.payShowPrice}}元/份 </text>
+                    <text class='marginright'>{{selectedExpandItem.hallwayTitle}}</text>
+                    </text>
+                </view>
+                <view wx:for="{{selectedExpandItem.extraTags}}"
+                  class="tag"
+                  wx:for-item="tag"
+                  wx:for-index="index">
+                    <text>
+                        <text class="tag-icon icon-font {{tag.icon}} {{ tag.icon === 'icon-yes' ? 'insurance-font-color' : 'red' }}" />
+                        <text  wx:for="{{tag.texts}}" wx:for-item="text" wx:for-key="index" class="{{text.highLight ? 'insurance-font-color' : ''}}" >{{text.text}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="button-row">
+                <view class="button-next-step"
+                  hover-class="button-next-step-hover"
+                  catchtap="onBook"
+                  data-page="{{page}}"
+                  data-index="{{index}}"
+                  data-xindex="{{selectedExpandIndex}}"
+                  hover-stop-propagation>
+                    订
+                </view>
+            </view>
+        </view>
+    </view>
+
+</template>
+<template name="insuranceModal">
+    <!--  -->
+    <view class="filter-container"
+      catchtap="empty">
+        <view class="filter-mask {{hiddenInsuranceAnimation}}"
+          bindtap="onCancelInsuranceModal"></view>
+        <view class="insurance-view {{hiddenInsuranceAnimation}} filter-view "
+          catchtap="empty">
+            <view class="icon-font icon-no insurance-icon"
+              bindtap="onCancelInsuranceModal"></view>
+            <view class="insurance-head">
+                <view class="head-title">
+                    <text class="head-title-text">{{selectedExpandItem.title}}</text>
+                    <text class="head-subtitle-text">{{selectedExpandItem.extraMap.subModalTitle }} ￥{{selectedExpandItem.payShowPrice}}/份 </text>
+                </view>
+                <image src="{{selectedExpandItem.extraMap.modalHeadImg || 'https://pages.c-ctrip.com/bus-images/insurancebox/insurance-modal.png'}}">
+                </image>
+            </view>
+            <view class="insurance-content">
+                <view wx:for="{{selectedExpandItem.modalTags}}"
+                  class="tag"
+                  wx:for-item="tag"
+                  wx:for-index="index">
+                    <text>
+                        <text class="tag-icon icon-font {{tag.icon}} {{ tag.icon === 'icon-yes' ? 'insurance-font-color' : 'red' }}" />
+                        <text  wx:for="{{tag.texts}}" wx:for-item="text" wx:for-key="index" class="{{text.highLight ? 'insurance-font-color' : ''}}" style="{{text.highLight ? 'font-weight: 500;' : text.fontWeight ? 'font-weight: 600; padding-right:24rpx;font-size:28rpx':''}}">{{text.text}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="insurance-desc">
+                <view>
+                    <image src="https://pages.c-ctrip.com/bus-images/insurancebox/logo-white.png" />
+                    <text>官方合作·保障出行</text>
+                </view>
+                <view bindtap="onGoDesc"
+                  data-url="{{selectedExpandItem.descUrl }}">
+                    <text>投保须知</text>
+                    <icon class="icon-arrow-right"
+                      size="12rpx" />
+                </view>
+            </view>
+            <view class="insurance-text">
+                {{selectedExpandItem.channelDesc}}
+            </view>
+            <view class="insurance-ctrip">
+                <image src="https://pages.c-ctrip.com/bus-images/insurancebox/logo-blue.png" />
+                <text>携程旗下保险代理自营平台</text>
+            </view>
+            <view class="insurance-btn"
+              hover-class="button-next-step-hover"
+              catchtap="onBook"
+              hover-stop-propagation
+              data-type="insuranceModal">
+                预订
+            </view>
+        </view>
+    </view>
+</template>

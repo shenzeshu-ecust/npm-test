@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'wechat_vtm_font';
+  src: url('https://webresource.c-ctrip.com/NFES/nfes-iconfont/project-wechat_vtm_font-0.0.5/wechat_vtm_font.ttf') format('woff'),
+      url('wechat_vtm_font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+[class^="wechat_vtm_font-"], [class*=" wechat_vtm_font-"] {
+  font-family: 'wechat_vtm_font' !important;
+  font-size: 16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wechat_vtm_font-DropDown:before { font-family: 'wechat_vtm_font';content: "\e945"; }
+.wechat_vtm_font-DropUp:before { font-family: 'wechat_vtm_font';content: "\e946"; }
+.wechat_vtm_font-rigth3:before { font-family: 'wechat_vtm_font';content: "\e917"; }
+.wechat_vtm_font-cx:before { font-family: 'wechat_vtm_font';content: "\f015d"; }
+.wechat_vtm_font-gl:before { font-family: 'wechat_vtm_font';content: "\f0d25"; }
+.wechat_vtm_font-qs:before { font-family: 'wechat_vtm_font';content: "\f11ce"; }
+.wechat_vtm_font-Discover:before { font-family: 'wechat_vtm_font';content: "\f11cf"; }
+.wechat_vtm_font-travel-list:before { font-family: 'wechat_vtm_font';content: "\f11d0"; }
+.wechat_vtm_font-emergency-support:before { font-family: 'wechat_vtm_font';content: "\f11d1"; }
+.wechat_vtm_font-tiny-home:before { font-family: 'wechat_vtm_font';content: "\f11d2"; }
+

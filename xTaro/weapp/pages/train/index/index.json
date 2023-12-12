@@ -1,0 +1,20 @@
+{
+    "navigationBarTitleText": "火车票",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationStyle":"custom",
+    "usingComponents": {
+        "ad-sdk":"/pages/market/advertiseNew/ad-sdk",
+        "bu-gird": "/pages/train/common/components/BuGird/BuGird",
+        "taskList": "/pages/market/directory/task",
+        "newGuestPop": "../common/components/NewCustomerRight/index",
+        "oversea-train": "components/overseaTrain/index",
+        "passengerChoice": "components/passengerChoice/passengerChoice",
+        "subscribeGuide": "/pages/train/common/components/SubscribeGuide/index",
+        "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+    },
+    "componentPlaceholder": {
+      "taskList": "view"
+    },
+    "initialRenderingCache": "static"
+}

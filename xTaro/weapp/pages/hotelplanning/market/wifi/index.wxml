@@ -1,0 +1,541 @@
+<mp-navigation-bar
+    id="mp-navigation"
+    back="{{false}}"
+    color="{{showServiceComponent && connectedIndex != -1 && uninonVipType === 'unionvip' || showFailPage ? '#fff' : '#000'}}"
+    background="{{showServiceComponent && connectedIndex != -1 && uninonVipType === 'unionvip' || showFailPage ? '' : '#fff'}}"
+    title="{{showServiceComponent && connectedIndex != -1 && uninonVipType === 'unionvip' || showFailPage ? '' : '一键连WiFi'}}">
+    <view slot="left" class="custom-navigation-left" bindtap="handleBack">
+        <view class="wechat-font-back back-icon"></view>
+    </view>
+</mp-navigation-bar>
+
+<!-- 个保指引浮层 -->
+<perinfo-protect-float forceExitMiniapp="{{false}}"></perinfo-protect-float>
+
+<template is="qr-code-model" data="{{isShowModal, communityQRCode}}"></template>
+<template is="wifi-password-toast" data="{{showPasswordToast, wifiList, handlePasswordToast, connectedIndex, isShowNearByWifi, commonPassword}}"></template>
+
+<scroll-view class="sm-wifi {{showServiceComponent && connectedIndex != -1 && uninonVipType === 'unionvip' || showFailPage ? 'dt' : ''}}" scroll-y="true" scroll-top="{{scrollTop}}" scroll-with-animation="{{true}}" bindscroll="onScroll" enable-back-to-top="{{true}}" style="height: 100%">
+    <!-- WiFi教程页面 -->
+    <view class="signal-guide" wx:if="{{showIosWifiGuide}}">
+        <view class="close-btn" bindtap="closeSignalGuide"></view>
+        <view class="text">按照以下三步连接WiFi</view>
+        <view class="card">
+            <view class="left">
+                <view class="title">第1步：</view>
+                <view class="text">点击左上角“设置”</view>
+                <view class="text">返回设置列表</view>
+            </view>
+            <view class="right" style="background-image: url('https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/newstep1.png')"></view>
+        </view>
+        <view class="card" wx:if="{{showStep > 1}}">
+            <view class="left">
+                <view class="title">第2步：</view>
+                <view class="text">点击“无线局域网”</view>
+                <view class="text">打开无线局域网开关</view>
+                <view class="text">等待WiFi列表刷新</view>
+            </view>
+            <view class="right" style="background-image: url('https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/newstep2.png')"></view>
+        </view>
+        <view class="card" wx:if="{{showStep > 2}}">
+            <view class="left">
+                <view class="title">第3步：</view>
+                <view class="text">点击左上角返回微信</view>
+                <view class="text">即可连接成功</view>
+            </view>
+            <view class="right" style="background-image: url('https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/newstep3.png')"></view>
+        </view>
+        <view class="footer" style="{{isIPhoneX ? 'height: 186rpx;' : ''}}">
+            <view bindtap="getIosSignal" class="btn">知道了，去连接</view>
+        </view>
+    </view>
+
+    <!-- start wifi fail -->
+    <view class="sm-wifi-nowifi" wx:elif="{{showInitFail}}">
+        <view wx:if="{{showFirstLoading}}"></view>
+        <block wx:else>
+            <view class="sm-wifi-img no-info-pic"></view>
+            <view class="sm-wifi-title">哎呀，服务出错啦，请重新点击进入~</view>
+        </block>
+    </view>
+
+    <!-- Android 无法获取到信号 其他原因 -->
+    <!-- <view class="sm-wifi-nowifi" wx:elif="{{!isIOS && showOpenWifiGPSConfirm && getWifiListErrCode !== 12005 && getWifiListErrCode !== 12006}}">
+        <view wx:if="{{showFirstLoading}}"></view>
+        <block wx:else>
+            <view class="sm-wifi-img no-info-pic"></view>
+            <view class="sm-wifi-title">系统原因，无法获取到WiFi信号</view>
+        </block>
+    </view> -->
+
+    <!--- Android no wifi -->
+    <view class="sm-wifi-loading" wx:elif="{{!isIOS && wifiList.length + addList.length == 0 && !showOpenWifiGPSConfirm}}">
+        <view wx:if="{{showFirstLoading}}"></view>
+        <block wx:else>
+            <image class="stone-image" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/stoneScreen.png" />
+        </block>
+    </view>
+
+    <block wx:else>
+        <!-- 未获取到附近WiFi信号，页面提示开启WiFi、GPS才能连接，不展示WiFi列表 -->
+        <view class="sm-head" wx:if="{{(showOpenWifiGPSConfirm && (getWifiListErrCode === 12005 || getWifiListErrCode === 12006) || (connectedIndex === -1 && showIOSGetSignal)) && needSignal !== 'load'}}">
+            <view class="info-wrapper col-center">
+                <view class="title2">携程为您提供一键连WiFi服务</view>
+            </view>
+            <view class="head-icon init-icon icon-btn"></view>
+        </view>
+        <!-- head -->
+        <view wx:elif="{{connectedIndex === -1 && (needSignal == '' || needSignal == 'init') && !showFailPage}}" class="relative">
+            <block wx:if="{{isIOS}}">
+                <image class="new-header-image absolute" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/linearWifiConnectBg.png"></image>
+                <view wx:if="{{isWifiMoreThen10}}">
+                    <view class="head-info-more cell-column just-center">
+                        <view class="head-text">检测到酒店WIFI数量较多，</view>
+                        <view class="head-text mt8">请搜索连接本房间WIFI，网络更稳定</view>
+                    </view>
+                    <template is="search-input-box" data="{{wifi_search_keyword, isFocus}}"></template>
+                </view>
+                <view wx:else class="head-info cell-column algn-center" >
+                    <view class="head-title"><view class="wechat-font-tip-bulb tip-bulb-icon"></view>温馨提示：</view>
+                    <view class="head-text mt24">连接本房间WI-FI，网络更稳定哦～</view>
+                </view>
+            </block>
+            <view wx:else class="sm-head">
+                <view class="head-info-android">
+                    <image class="wifi-head-text" src="http://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/wifi_head_text.png"></image>
+                    <view class="text" wx:if="{{isIntersection && !isShowNearByWifi}}">请复制密码，手动连接WIFI哦~</view>
+                    <view class="text" wx:else>为你发现WiFi点击即可连接</view>
+                </view>
+            </view>
+        </view>
+        <!-- wifi连接成功 && 已领卡 出新版YOYO卡样式 || wifi连接失败页头部 -->
+        <view wx:elif="{{showServiceComponent && connectedIndex != -1 && uninonVipType === 'unionvip' || showFailPage}}">
+            <view class="new-header">
+                <image class="new-header-image {{(showPassword || showFailPage) && 'new-height'}}" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/linearWifiConnectBg.png"></image>
+            </view>
+        </view>
+        <!-- 切换wifi || 未领卡 头部 -->
+        <view wx:elif="{{connectedIndex != -1}}" class="relative">
+            <image class="new-header-image absolute" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/linearWifiConnectBg.png"></image>
+            <view class="head-info cell-column algn-center suc-head-info">
+                <view class="suc-head-text d-flex flex-center">
+                    <view class="wechat-font-success change-success-font-icon"></view>成功连接WiFi
+                </view>
+                <view class="suc-head-wifi mt24">当前连接WI-FI：{{wifiList[connectedIndex].SSID}}</view>
+            </view>
+            <view wx:if="{{isWifiMoreThen10}}">
+                <template is="search-input-box" data="{{wifi_search_keyword, isFocus}}"></template>
+            </view>
+        </view>
+        <!-- ios signal head -->
+        <view class="sm-head" wx:else  style="{{needSignal != 'load' && needSignal != 'success' && 'height: 376rpx'}}">
+            <block wx:if="{{needSignal == 'need'}}">
+                <view class="info-wrapper">
+                    <view class="title">WiFi连接失败</view>
+                    <view class="text">试试获取附近WiFi后再连接哦</view>
+                    <view class="btn" bindtap="handleGetSignal">获取附近WiFi</view>
+                </view>
+                <view class="head-icon fail-icon icon-btn"></view>
+            </block>
+            <block wx:elif="{{needSignal == 'load'}}">
+                <view class="info-wrapper">
+                    <view class="title">WiFi信号寻找中 {{loadStr}}</view>
+                </view>
+                <view class="head-icon init-icon"></view>
+            </block>
+            <block wx:elif="{{needSignal == 'success'}}">
+                <view class="info-wrapper">
+                    <image class="wifi-head-text" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/wifi_head_text.png" />
+                    <view class="text" wx:if="{{isIntersection && !isShowNearByWifi}}">请复制密码，手动连接WIFI哦~</view>
+                    <view class="text" wx:else>为你发现WiFi点击即可连接</view>
+                </view>
+                <view class="head-icon signal-icon"></view>
+            </block>
+             <block wx:elif="{{needSignal == 'fail'}}">
+                <view class="info-wrapper">
+                    <view class="title">WiFi获取失败</view>
+                    <view class="text">请稍后重新点击获取</view>
+                    <view class="btn" bindtap="handleGetSignal">获取附近WiFi</view>
+                </view>
+                <view class="head-icon non-signal-icon icon-btn"></view>
+             </block>
+             <block wx:elif="{{needSignal == 'stay'}}">
+                 <view class="info-wrapper">
+                     <view class="title">停留时间较长</view>
+                     <view class="text">点此获取最新WiFi信号</view>
+                     <view class="btn" bindtap="handleGetSignal">{{ isIOS ? '获取附近WiFi' : '刷新WiFi' }}</view>
+                 </view>
+                 <view class="head-icon fail-icon icon-btn"></view>
+             </block>
+        </view>
+        
+        <!-- 如果wifi连接成功，展示YOYO卡+信息流模块 || wifi连接失败页 -->
+        <view class="{{uninonVipType === 'unionvip' ? 'component-group-yoyo' : 'component-group'}}" wx:if="{{connectedIndex !== -1 && showServiceComponent && wifiPageComponentSwitch || showFailPage}}">
+            <!-- （wifi连接成功 || wifi连接失败页） && 已领卡 出新版YOYO卡样式 -->
+            <block wx:if="{{uninonVipType === 'unionvip'}}">
+                <block>
+                    <view class="title-btn-wrapper">
+                        <view wx:if="{{isNetSupervisorHotel}}">
+                            <view class="new-netSupervisor">
+                                <view>请打开手机浏览器</view>
+                                <view>点击任意网址跳转到WiFi验证页面</view>
+                            </view>
+                            <view class="serviceList">
+                                <view class="new-success-service-btn mr-60" bindtap="onClickShowPassword">查看密码</view>
+                                <view wx:if="{{isShowSwitchWifi}}" class="new-success-service-btn mr-20" bindtap="onClickShowWifiList">切换WiFi</view>
+                            </view>
+                        </view>
+                        <view wx:else class="mb24">
+                            <view class="new-success-info">
+                                <view class="not_net_supervisor_wrapper">
+                                    <view class="wechat-font-success new-success-font-icon {{showFailPage && 'wifi-connect-failure'}}"></view>
+                                    <view class="not_net_supervisor_title">
+                                        <block wx:if="{{showFailPage}}">
+                                            请复制密码手动连接
+                                        </block>
+                                        <block wx:else>
+                                            成功连接WiFi
+                                        </block>
+                                    </view>
+                                </view>
+                                <view class="serviceList">
+                                    <block wx:if="{{showFailPage}}">
+                                        <view wx:if="{{isShowSwitchWifi}}" class="new-success-service-btn mr-20" bindtap="onClickShowWifiList">切换WiFi</view>
+                                        <view class="new-success-service-btn mr-20 copy-password-btn" bindtap="handleCopyPassword">复制密码
+                                            <view wx:if="{{showCopyToast}}" class="password-copy"></view>
+                                        </view>
+                                    </block>
+                                    <block wx:else>
+                                        <view class="new-success-service-btn mr-20" bindtap="handlePasswordToast">查看密码</view>
+                                        <view wx:if="{{isShowSwitchWifi}}" class="new-success-service-btn mr-20" bindtap="onClickShowWifiList">切换WiFi</view>
+                                        <view class="relative">
+                                            <button class="new-success-service-btn mr-20" open-type="share">分享WIFI</button>
+                                            <view class="share-recommend">
+                                                <text class="wechat-font-good good-icon"></text>
+                                                <text>推荐</text>
+                                                <image class="flow-image" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/ebkpc/reward-right.png" />
+                                            </view>
+                                        </view>
+                                    </block>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="new-wifi-show" wx:if="{{showPassword || showFailPage && !isNetSupervisorHotel}}">
+                        <view class="new-wifi-item">
+                            <view class="wifi-name-value wifi-show-name">WIFI名称</view>
+                            <view class="wifi-name-value wifi-show-info">{{showFailPage ? curWifi.SSID : wifiList[connectedIndex].SSID}}</view>
+                        </view>
+                        <view class="new-wifi-item" style="margin-top:24rpx;">
+                            <view class="wifi-name-value wifi-show-name">WIFI密码</view>
+                            <view class="wifi-name-value wifi-show-info">{{(showFailPage ? curWifi.password : wifiList[connectedIndex].password) || '此WIFI无需密码'}}</view>
+                        </view>
+                    </view>
+                    <!--兜底情况 如果未领卡-->
+                    <yoyocard wx:if="{{uninonVipType}}" 
+                        id="yoyocard"
+                        sid="{{sid}}" 
+                        allianceid="{{allianceid}}" 
+                        hotelId="{{hotelID}}" 
+                        unionVipType="{{uninonVipType}}" 
+                        unionVipFunc="{{unionVipFunc}}" 
+                        source="wifi-connect" 
+                        autoGetVipCard="{{false}}"
+                        bind:onGetVipCardSuccess="onGetVipCardSuccess"
+                    />
+                    <view wx:for="{{sequence}}" wx:for-item="seqItem" class="cell just-center">
+                        <template is="{{seqItem}}" data="{{lowDiscount, hotelId: hotelID, hotelBaseInfo, nucleicImageUrl, pageId, discountValue, rightsTag, communityQRCode, uninonVipType, allianceid, sid, scanPriceTag, disablePlatformDiscount, calendarLimitChooseDay}}"></template>
+                    </view>
+                 </block>
+            </block>
+            <!-- wifi连接成功 && 未领卡 出老样式 -->
+            <view wx:elif="{{functions.length}}" class="service-group">
+                <storeservice 
+                    functionList="{{functions}}" 
+                    hotelTel="{{hotelTel}}" 
+                    hotelId="{{hotelID}}" 
+                    bind:showWifiList="onClickShowWifiList" 
+                    sourceFrom="wifi-connect" 
+                    allianceid="{{allianceid}}" 
+                    sid="{{sid}}"
+                    pageId="10650022492"
+                ></storeservice>
+            </view>
+        </view>
+        <view wx:else class="content-wrapper {{topStyle}}">
+            <!-- 未获取到附近WiFi信号，页面提示开启WiFi、GPS才能连接，不展示WiFi列表 -->
+            <view class="wifi-gps-confirm" wx:if="{{!isIOS && showOpenWifiGPSConfirm}}">
+                <block wx:if="{{getWifiListErrCode === 12005}}">
+                    <view class="text">请打开WiFi开关</view>
+                    <view class="btn" bindtap="checkWifiGPSOpened" data-ubt-key="xcx_smz_wifi_opened_wifigps">我已打开，去连接</view>
+                </block>
+                <block wx:elif="{{getWifiListErrCode === 12006}}">
+                    <view class="text">请打开位置授权</view>
+                    <view class="btn" bindtap="openSetting" data-ubt-key="xcx_smz_wifi_opened_wifigps">去打开</view>
+                </block>
+                
+            </view>
+            <view class="wifi-gps-confirm" wx:elif="{{isIOS && showOpenWifiGPSConfirm}}">
+                <view class="text">您尚未打开WiFi，请打开后连接</view>
+                <view class="btn" bindtap="getIosWifiOpenCheck" data-ubt-key="xcx_smz_wifi_opened_wifigps">我已打开，去连接</view>
+            </view>
+
+            <!-- ios获取信号前，未连接WiFi且酒店有WiFi信息时，提示去系统获取信号 || ios未获取信号且已连接WiFi时，原WiFi列表展示去获取信号 -->
+            <view class="wifi-gps-confirm" wx:elif="{{showIOSGetSignal}}">
+                <view class="text">{{connectedIndex === -1 ? '进入系统WiFi列表' : '如需更换，请进入系统'}}</view>
+                <view class="text">{{connectedIndex === -1 ? '立刻为你识别附近WiFi' : 'WiFi列表识别附近WiFi'}}</view>
+                <view class="btn" bindtap="goWifiGuide" data-ubt-key="{{connectedIndex === -1 ? 'xcx_smz_get_nearby_wifi_noconn' : 'xcx_smz_get_nearby_wifi_conn'}}">{{connectedIndex === -1 ? '识别附近WiFi' : '换个WiFi'}}</view>
+            </view>
+
+            <!-- wifi list for others-->
+            <block wx:else>
+                <view class="wifi-std-wrapper scroll-wrapper" wx:if="{{(connectedIndex > -1 && wifiList.length + addList.length > 1) || (connectedIndex == -1 && wifiList.length + addList.length > 0 )}}">
+                    <scroll-view scroll-y class="wifi-list-wrapper">
+                        <view class="wifi-wrapper {{wifi.isShowPassword && 'pb51'}}" 
+                            wx:for="{{searchWifiList}}" wx:for-item="wifi" wx:key="index" data-wifi="{{wifi}}"
+                            wx:if="{{index != connectedIndex || (index == connectedIndex && isIntersection)}}" id="{{index}}" bindtap="bindConnectWifi">
+                            <view class="wifi-main-wrapper">
+                                <view class="name-wrapper">
+                                        <view class="cell-v">
+                                            <view class="ssid limit-text limit-width">{{wifi.SSID}}</view>
+                                            <view class="publicWiFi" wx:if="{{whiteList && wifi.publicFlag}}">公共</view>
+                                        </view>
+                                </view>
+                                <view class="info-wrapper">
+                                    <view class="tag" wx:if="{{isIOS && wifi.status != 2}}">连接</view>
+                                    <view class="tag1" wx:elif="{{(isIntersection && !isShowNearByWifi) || wifi.status == 2}}" data-wifi="{{wifi}}" catchtap="copyWifiPassword">复制密码</view>
+                                    <view class="tag1" wx:else>可直接连接</view>
+                                    <view class="sm-wifi-{{wifi.secure ? '' : 'un'}}lockSignal{{wifi.signalStrength}} sm-wifi-signal" wx:if="{{wifi.signalStrength >= 0}}"></view>
+                                </view>
+                                <view class="password-wrapper" wx:if="{{wifi.isShowPassword}}">密码：{{wifi.password || '无密码'}}</view>
+                            </view>
+                            <view class="room-no single-ellipsis" wx:if="{{wifi.roomId}}">{{wifi.roomId}}</view>
+                        </view>
+                    </scroll-view>
+                </view>
+                <view class="scroll-bottom shadow-bottom" wx:if="{{scrollViewHeight == 300 && !showOpenWifiGPSConfirm && !showIOSGetSignal}}"></view>
+            </block>
+        </view>
+    </block>
+
+    <!-- 超时时间变为30s，自动刷新出蒙层+刷新按钮：
+     （1）超时时间更改为获取到WiFi信号后30s，时间可配置
+     （2）超时后，自动刷新出蒙层+刷新按钮，点击刷新重新获取WiFi信号 -->
+    <block wx:if="{{needSignal === 'stay' && !isAlertShow && !neverShowStay && (isHotelWhiteList && !isCopyWifiAlertShow)}}">
+        <view class="mask"></view>
+        <view class="reload-wifi-confirm">
+            <view class="pic"></view>
+            <view class="title">停留时间超时</view>
+            <view class="text">由于停留时间较长，WiFi信号可能发生变化，请刷新重新识别</view>
+            <view class="btn" bindtap="handleReloadWifi" data-ubt-key="xcx_smz_wifi_reload">刷新WiFi</view>
+        </view>
+    </block>
+    <!-- post float-->
+    <view class="mask" wx:if="{{isAlertShow}}"></view>
+    <!-- android -->
+    <view class="sm-wifi-alert-pwd" wx:if="{{isAlertShow && !isIOS}}" catchtouchmove="true">
+        <view class="title">请输入加入“{{postSSID}}”的密码</view>
+        <form bindsubmit="connectLocalSecure" bindreset="closeAlert">
+            <input id="input-pwd" name="pwd" type="text" value="" bindinput="checkPwdInput" placeholder="请咨询酒店服务人员密码，安全上网" focus="true"/>
+            <button class="btn {{isJoinWifiAble ? 'join' : 'join-unable'}}" form-type="submit" disabled="{{!isJoinWifiAble}}" plain="true" hover-class="none">一键连接</button>
+        </form>
+        <view class="sm-wifi-close close" bindtap="closeAlert"></view>
+    </view>
+
+    <!-- copy wifi post float-->
+    <view class="mask" wx:if="{{isCopyWifiAlertShow && !showFailPage}}"></view>
+    <!-- android / ios -->
+    <view class="sm-wifi-alert-pwd wifi-copy {{curWifi.password || curWifi.status === 3 ?'':isIOS?'wifi-ios-nopwd':'wifi-nopwd'}}" wx:if="{{isCopyWifiAlertShow && curWifi && !showFailPage}}" catchtouchmove="true">
+        <form bindsubmit="copyOrConnectWifi" bindreset="closeCopyWifiAlert" class="sm-ft">
+            <view class="title">{{curWifi.status === 3 ? '该WIFI密码异常' : 'WIFI连接失败'}}</view>
+            <view wx:if="{{curWifi.status === 3}}" class="subtitle">请联系前台获取正确密码</view>
+            <view wx:else class="subtitle">{{isPwdErr?"请输入正确的WiFi密码": curWifi.password && isIOS ? "请复制密码，并打开“无线局域网”手动连接" : curWifi.password ?"复制密码尝试手动连接": isIOS? "此WIFI无需输入密码，请打开“无线局域网”手动连接" : "此WIFI无需输入密码,尝试手动连接"}}</view>
+            <view class="sm-wifi sm-wifi-name">
+                <view class="txt">名称</view>
+                <input id="input-wifiname" name="wifiname" type="text" value="{{curWifi.SSID}}" disabled="true" focus="true"/>
+            </view>
+            <view class="sm-wifi sm-wifi-pwd" wx:if="{{curWifi.password || isShowNearByWifi || curWifi.status === 3}}">
+                <view class="txt">密码</view>
+                <input id="input-wifipwd" name="pwd" type="text" value="{{curWifi.status === 3 ? '' : (isShowNearByWifi ? commonPassword : curWifi.password)}}" bindinput="{{isPwdErr?'checkCopyPwdInput':''}}" placeholder="{{curWifi.status === 3 ? '':'请咨询酒店服务人员密码，安全上网'}}" disabled="{{!isPwdErr}}" focus="true"/>
+            </view>
+            <view wx:if="{{curWifi.status === 3}}" class="pwd-toast-btn-wrapper">
+                <button wx:if="{{isShowConnectBtn && hotelTel}}" bindtap="callHotelPhone" class="pws-err-btn btn">联系前台</button>
+                <button form-type="submit" disabled="{{!isCopyJoinWifiAble}}" plain="{{!curWifi.password}}" class="pws-err-btn btn">一键连接</button>
+            </view>
+            <button wx:elif="{{!(isIOS && !curWifi.password)}}" class="btn sm-btn" form-type="submit" disabled="{{!isCopyJoinWifiAble}}" plain="{{!curWifi.password}}">{{isPwdErr? "一键连接" : curWifi.password && isIOS ? "复制密码" :curWifi.password?"复制密码并连接":"去连接"}}</button>
+        </form>
+        <view class="sm-wifi-close close" bindtap="closeCopyWifiAlert"></view>
+    </view>
+
+
+    
+    <!-- IOS -->
+    <view class="sm-ios-postwifi sm-ios-postwifi-alert" wx:if="{{isAlertShow && isIOS}}" catchtouchmove="true">
+        <template is="post-wifi" data="{{postSSID}}"/>
+        <view class="sm-wifi-close close" bindtap="closeAlert"></view>
+    </view>
+
+    <!-- ios signal alert-->
+    <view class="mask" wx:if="{{showSignalAlert}}"></view>
+    <view class="sm-ios-fail-alert" wx:if="{{showSignalAlert}}" catchtouchmove="true">
+        <view class="ios-fail-banner"></view>
+        <view class="title">WiFi连接失败</view>
+        <view class="sub-title">此WiFi不在可连接范围内，试试获取附近WiFi后再连接哦~</view>
+        <view class="btn" bindtap="handleGetSignal">获取附近WiFi</view>
+        <view class="close" bindtap="closeSignalAlert"></view>
+    </view>
+
+    <!-- connect float -->
+    <view class="mask" wx:if="{{isDoingConnect}}"></view>
+    <view class="sm-connect-alert" wx:if="{{isDoingConnect}}" catchtouchmove="true">
+        <block wx:if="{{connectState === 'error'}}">
+            <view class="icon warn"></view>
+            <view class="title">连接失败</view>
+            <view class="sub-title"></view>
+        </block>
+        <block wx:elif="{{connectState === 'connected'}}">
+            <view class="icon success"></view>
+            <view class="title">连接成功</view>
+            <view class="sub-title">{{connectText}}</view>
+        </block>
+        <block wx:elif="{{connectState === 'loading'}}">
+            <view class="icon load"></view>
+            <view class="title">加载中...</view>
+        </block>
+        <block wx:else>
+            <view class="icon load"></view>
+            <view class="sub-title">{{connectName}}</view>
+            <view class="title">连接中...</view>
+        </block>
+    </view>
+
+    <!-- get signal float -->
+    <view class="sm-signal-alert" wx:if="{{showSignalTip}}" catchtouchmove="true">
+        <view class="tip-close" bindtap="closeTip"></view>
+        <view class="text">完成以下4步，即可获取WiFi信号强度</view>
+        <view class="tip-wrapper" wx:for="{{tipInfo.tipList}}" wx:for-item="tip" wx:key="index" wx:if="{{tipIndex >= index}}">
+            <view class="tip-text">
+                <view class="tip-title">第{{index + 1}}步：</view>
+                <view class="tip-content"><text>{{tip.text}}</text></view>
+            </view>
+            <view class="tip-img"  style="background-image: url('{{tipInfo.baseUrl + tip.imgUrl}}');"></view>
+        </view>
+
+        <view class="btn-wrapper">
+            <view class="btn" bindtap="handleReload">看懂了，去获取</view>
+        </view>
+    </view>
+
+    <!-- 搜索框提示浮层-->
+    <view class="search-mask" wx:if="{{isShowSearchMask}}" bindtap="closeSearchMask">
+        <view class="search-mask-content">
+            <view class="search-line-guide">
+                <image class="search-line" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/tip-line.png" />
+            </view>
+            <view class="search-mask-tip">
+                Wi-Fi较多时，直接搜索房间号连接Wi-Fi，网络更稳定哦
+            </view>
+            <view class="search-i-know">我知道了</view>
+        </view>
+    </view>
+
+</scroll-view>
+
+<!-- templates -->
+
+<template name="post-wifi">
+    <view class="post-wifi-form">
+        <form bindsubmit="connectIOSWiFi" bindreset="closeAlert">
+            <input class="input-ssid" name="ssid" type="text"  value="{{!!postSSID ? postSSID : ''}}" placeholder="请输入酒店WiFi账户"/>
+            <input class="input-pwd" name="pwd" type="text" value="" placeholder="请输入酒店WiFi密码（无密码可不填）"/>
+            <button class="post-wifi-btn" form-type="submit" plain="true" hover-class="none"></button>
+        </form>
+    </view>
+</template>
+
+<!-- 原房续住资源位 -->
+<template name="continue-live">
+    <view class="wifi-label-exposure mb-32" data-text="立即续住模块" data-type="1">
+       <coupon
+            couponType="3"
+            source="front-desk"
+            hotelBaseInfo="{{hotelBaseInfo}}"
+            hotelId="{{hotelId}}"
+            pageId="{{pageId}}"
+            discountValue="{{discountValue}}"
+            rightsTag="{{rightsTag}}"
+            unionVipType="{{uninonVipType}}"
+            allianceid="{{allianceid}}"
+            sid="{{sid}}"
+            scanPriceTag="{{scanPriceTag}}"
+            bind:setVipLayerShow="setVipLayerShow"
+            disablePlatformDiscount="{{disablePlatformDiscount}}"
+            calendarLimitChooseDay="{{calendarLimitChooseDay}}"
+        />
+    </view>
+</template>
+
+<!-- 景点门票资源位 -->
+<template name="scenic-ticket">
+    <view class="wifi-label-exposure" data-text="附近景点门票" data-type="5">
+      <nearbyScenic hotelId="{{hotelId}}" pageId="{{pageId}}"></nearbyScenic>
+    </view>
+</template>
+
+<!-- 接送车推荐资源位 -->
+<template name="shuttle-car">
+    <div id="shuttle-car">
+    <carModel hotelId="{{hotelId}}" pageId="{{pageId}}" hotelName="{{hotelBaseInfo? hotelBaseInfo.name : ''}}" coordinate="{{hotelBaseInfo? hotelBaseInfo.coordinate : ''}}" isOversea="{{hotelBaseInfo? hotelBaseInfo.isOversea : 0}}"></carModel>
+    </div>
+</template>
+
+<!-- 入群banner -->
+<template name="group">
+    <view wx:if="{{communityQRCode && communityQRCode.title}}" class="wifi-label-exposure group-banner mb-32" data-text="社群模块" data-type="7" bind:tap="openModal">
+        <view class="group-title">{{communityQRCode.title}}</view>
+        <view class="cell-v flex-row mt-8 relative z-index1">
+            <view class="group-sub-title">{{communityQRCode.shortTitle}}</view>
+            <view class="group-experience cell flex-row flex-center">{{communityQRCode.buttonText}}<text class="wechat-font-arrow-right2 common-arrow"></text></view>
+        </view>
+        <view class="wifi-success-sprite group-bg-image {{communityQRCode.qrCodeType ? 'little-blue-star' : 'little-red-gift'}}" ></view>
+    </view>
+</template>
+
+<!-- 入群二维码弹窗 -->
+<template name="qr-code-model">
+    <qrCodeToast isShowModal="{{isShowModal}}" communityQRCode="{{communityQRCode}}"></qrCodeToast>
+</template>
+
+<!-- wifi密码弹窗 -->
+<template name="wifi-password-toast">
+    <view class="password-toast-wrapper" wx:if="{{showPasswordToast}}">
+        <view class="mask" bindtap="handlePasswordToast"></view>
+        <view class="password-toast">
+            <view class="password-toast-title">密码已复制</view>
+            <view>
+                <view class="password-toast-wifi-info">
+                    <view class="password-toast-common password-toast-key">WIFI名称</view>
+                    <view class="password-toast-common password-toast-value">{{wifiList[connectedIndex].SSID}}</view>
+                </view>
+                <view class="password-toast-wifi-info mt-20">
+                    <view class="password-toast-common password-toast-key">WIFI密码</view>
+                    <view class="password-toast-common password-toast-value">{{isShowNearByWifi ? commonPassword :(wifiList[connectedIndex].password || '此WIFI无需密码')}}</view>
+                </view>
+            </view>
+            <view class="wechat-font-close close-icon" bindtap="handlePasswordToast"></view>
+        </view>
+    </view>
+</template>
+
+<!-- 搜索框 -->
+<template name="search-input-box">
+    <view class="search-header">
+        <view class="search-box" style="width:90%">
+            <input focus="{{isFocus}}" id="search_input" bindinput="bindKeyWordInput" bindfocus="closeSearchMask" bindblur="closeFocus" value="{{wifi_search_keyword}}" placeholder="输入wifi名或房间号" placeholder-class="placeholder-text" />
+            <view wx:if="{{wifi_search_keyword}}"  class="i-clear" id="search_button_gs_clear" bindtap="bindClearKeyWordInput"></view>
+            <view class="search-btn" bindtap="closeSearchMask">搜索</view>
+        </view>
+    </view>
+</template>
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

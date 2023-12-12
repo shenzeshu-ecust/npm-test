@@ -1,0 +1,31 @@
+<template name="bookingnotice-entry">
+<view class="bk-notice">
+    <view class="thead cell-v line-height">
+        <view class="left-text">
+            <view class="notice-info" wx:for="{{topNoticeTips}}" wx:for-item="topNoticeItem">
+                  <text class="notice-title" wx:if="{{topNoticeItem.title}}">{{topNoticeItem.title}}: </text>
+                  <text class="notice-content" wx:if="{{topNoticeItem.content}}">{{topNoticeItem.content}}</text>  
+            </view>
+        </view>
+        <view class="checkall">{{noticeTitle}}</view>
+    </view>
+</view>
+</template>
+
+<template name="bookingnotice-layer">
+    <scroll-view scroll-y scroll-with-animation enhanced show-scrollbar="{{false}}"
+                 slot="content"
+                 class="scroll-y" enable-back-to-top="true" catchtouchmove="noop">
+        <view class="notice-layer" wx:if="{{noticeTips}}">
+            <view wx:for="{{noticeTips}}" wx:for-item="noticeItem" wx:key="noticeItem.category">
+                <block wx:if="{{showBottomTips ? noticeItem.category === 3 : noticeItem.category !== 3}}">
+                    <view class="notice-title" wx:if="{{noticeItem.title}}">{{noticeItem.title}}</view>
+                    <view class="sub-info" wx:for="{{noticeItem.items}}" wx:for-item="subItem">
+                        <view class="sub-title" wx:if="{{subItem.title}}">{{subItem.title}}</view>
+                        <rich-text class="sub-content" nodes="{{subItem.content}}"></rich-text>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </scroll-view>
+</template>

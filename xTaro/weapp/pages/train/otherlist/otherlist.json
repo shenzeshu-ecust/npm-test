@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "选择车次",
+  "backgroundColorTop": "#0086F6",
+  "backgroundColorBottom": "#EEF1F6",
+  "navigationBarBackgroundColor": "#0086F6",
+  "disableScroll": true,
+  "usingComponents": {
+    "success-rate": "../common/components/success-rate/success-rate"
+}
+}

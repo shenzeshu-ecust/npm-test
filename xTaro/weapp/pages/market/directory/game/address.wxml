@@ -1,0 +1,58 @@
+<!-- <view class="head-wrap">
+  <view class="icon"></view>
+  <view class="tips">请于2020-06-20 20:50之前填写地址，过期奖品将作废</view>
+</view> -->
+<view class="content-wrap">
+  <view class="m-item">
+    <view class="m-pic">
+      <image src="{{imageUrl}}"></image>
+    </view>
+    <view class="m-detail">
+      <view class="m-name">{{awardName}}</view>
+    </view>
+  </view>
+  <view class="info">
+      <view class="info-name">收货人姓名</view>
+      <input class="info-input {{!receiveId ? 'disabled': ''}}" 
+        placeholder-class="holder" 
+        bindinput="handleAddressInfo"
+        data-type="realName"
+        placeholder="请输入收货人姓名"
+        type="text" 
+        disabled="{{!receiveId}}"
+        value="{{realName}}"/>
+  </view>
+  <view class="info">
+      <view class="info-name">联系电话</view>
+      <input class="info-input {{!receiveId ? 'disabled': ''}}" 
+              placeholder-class="holder" 
+              placeholder="请输入联系电话"
+              bindinput="handleAddressInfo"
+              data-type="phone" 
+              type="text" 
+              disabled="{{!receiveId}}"
+              value="{{phone}}"/>
+  </view>
+  <view class="info textarea">
+      <view class="info-name">收货地址</view>
+      <textarea class="info-input {{!receiveId ? 'disabled': ''}}" placeholder-class="holder" 
+                auto-height="{{true}}"
+                placeholder="请输入详细地址"
+                bindinput="handleAddressInfo"
+                data-type="userAddress"
+                type="text"
+                maxlength="{{-1}}" 
+                disabled="{{!receiveId}}"
+                value="{{userAddress}}"/>
+  </view>
+</view>
+<view class="btn-save" bindtap="saveAddress" wx:if="{{receiveId}}">提交收货信息</view>
+<!-- <view class="service">
+  <view class="btn-service"></view>
+  <view class="service-txt">联系客服</view>
+</view> -->
+
+
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

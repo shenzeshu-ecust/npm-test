@@ -1,0 +1,680 @@
+page{
+    height: 100%
+}
+
+.pay-index-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: rgb(239,239,239);
+}
+
+.pay-order-detail {
+  margin: 0 0 40rpx;
+  padding: 34rpx 0;
+  background-color: rgb(255,255,255);
+  border-bottom: 1px solid rgb(223,223,223);
+  box-shadow: 0 0 5px rgba(223, 223, 223, .5);
+}
+
+.detail-titlebox{
+    padding: 0 30rpx 34rpx;
+    border-bottom: 1rpx solid #F3F3F3;
+}
+
+.pay-order-detail .title {
+  font-size: 36rpx;
+  color: rgb(0,0,0);
+}
+
+.title-mainbox {
+    max-height: 112rpx;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.title-moreopen{
+    max-height: none;
+    overflow: visible;
+}
+
+.title-maintxt{
+    line-height: 56rpx;
+    word-break: break-all;
+    white-space: normal;
+}
+
+.detail-moretitle{
+    position: absolute;
+    line-height: 60rpx;
+    padding: 0 6rpx 0 32rpx;
+    background: linear-gradient(to right, rgba(135,224,253,0) 0%,rgba(255,255,255,1) 20%,rgba(255,255,255,1) 50%);
+    color: #000;
+    font-size: 36rpx;
+    right: 0;
+    bottom: -8rpx;
+}
+
+.title-moreopen .detail-moretitle {
+    line-height: 30rpx;
+}
+
+.title-moreopen .detail-moretitle{
+    bottom: -26rpx;
+}
+
+.moretitle-txt{
+    font-size: 28rpx;
+    color: #42B3FF;
+}
+
+.pay-order-detail .other {
+  margin: 26rpx 0 0;
+  font-size: 32rpx;
+  color: rgb(153,153,153);
+}
+
+.pay-order-detail .price {
+  margin: 0;
+  padding: 26rpx 30rpx 0;
+}
+
+.pay-order-detail .price-title {
+  font-size: 32rpx;
+  color: rgb(51,51,51);
+  width: 150rpx;
+}
+
+.pay-order-detail .price-content {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: rgb(255,125,19);
+}
+
+.pay-order-method {
+  padding: 34rpx 30rpx;
+  background-color: rgb(255,255,255);
+  border: 1px solid rgb(223,223,223);
+  box-shadow: 0 0 5px rgba(223, 223, 223, .5);
+}
+
+.pay-order-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+}
+.pay-order-item:active {
+  background-color: rgba(0,0,0,.6);
+}
+
+.pay-order-item .icon {
+  display: flex;
+  width: 88rpx;
+  height: 88rpx;
+  max-width: 88rpx;
+  max-height: 88rpx;
+  margin: 0 40rpx 0 0;
+  background: url(https://webresource.c-ctrip.com/resh5paymentcommononline/R9/dest/res/h5/webchatprogram/icon-wechatPay.png) no-repeat;
+  background-size: 100% 100%;
+}
+
+.pay-order-item .info {
+  display: flex;
+  flex-direction: column;
+  color: rgb(51,51,51);
+}
+
+.pay-order-item .name {
+  color: rgb(0,0,0);
+}
+
+.pay-order-item .marketing {
+  margin: 20rpx 0 0 0;
+  font-size: 26rpx;
+}
+
+.pay-order-item .name {
+  font-size: 40rpx;
+}
+
+.pay-order-item1 .icon {
+  opacity: .6;
+  color: rgb(187,187,187);
+}
+
+.pay-button-full {
+  margin: 80rpx 30rpx 0;
+}
+.pay-button-full button {
+  height: 94rpx;
+  width: 100%;
+  background-color: rgb(229,138,17);
+  font-size: 36rpx;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+.pay-button-full button[loading] {
+  background-color: rgb(229,138,17);
+  color: rgba(255, 255, 255, .6);
+}
+.pay-button-full .hover {
+  background-color: rgba(229,138,17,.6);
+  color: rgba(255, 255, 255, .6);
+}
+.pay-button-bottom {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10rpx 30rpx 100rpx;
+}
+.pay-intro-link {
+  margin:28rpx 0 0;
+  font-size:28rpx;
+  color: rgb(9, 159, 222);
+  padding: 0 10rpx;
+}
+
+.modalview {
+  text-align: center
+}
+
+.hnopay{
+	background: #F3F5F8;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center
+}
+
+.hpayeicon{
+	width:124px;
+	height:124px;
+	background: url("https://pic.c-ctrip.com/picaresonline/h5paymentsdk/smallprogram/img/holderr.86ab12be.png") no-repeat 0 0;
+	background-size: 124px 124px;
+	margin-top: 125px;
+}
+
+.hpayetext{
+	font-size: 20px;
+	color: #474747;
+	padding: 0 30px;
+	line-height: 30px;
+	text-align: center;
+}
+
+.price-ncy{
+	font-size: 12px;
+	color: #ff8c00;
+}
+
+.hideview{
+	display:none;
+}
+
+.pay-modal-mask {
+  position: fixed;
+  left:0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.6);
+  z-index: 1000;
+}
+
+.pay-modal {
+  box-sizing: border-box;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  padding: 0 40rpx;
+  z-index: 1001;
+}
+
+.pay-modal-content {
+  position: relative;
+  padding: 40rpx 70rpx;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  word-wrap:break-word;
+  word-break: break-all;
+  color: rgb(153,153,153);
+  background-color: rgb(255,255,255);
+}
+
+.pay-modal-header {
+  padding: 0 0 30rpx;
+  color: rgb(0,0,0);
+  text-align: center;
+}
+.pay-modal-title {
+  font-size: 48rpx;
+}
+.pay-modal-close {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+}
+.pay-modal-body {
+  
+}
+
+/**
+*cardPay css
+**/
+.title-props{
+    font-size: 24rpx;
+    color:#748dae;
+}
+
+.tprops-tag{
+    color:#32465b;
+    font-size: 36rpx;
+}
+
+.tag-space{
+    padding-left: 48rpx;
+}
+
+.cny-pricebox{
+    font-size:24rpx;
+    color:#748dae;
+    padding-left: 152rpx;
+}
+
+
+.cny-pricebox .price-ncy{
+    color:#32465b;
+}
+
+.cny-price{
+    color:#32465b;
+    font-size:48rpx;
+}
+
+.cardpay-tips{
+    background:#FFFBCF url('https://webresource.c-ctrip.com/ares2/h5paymentsdk/smallprogram/1.0.11/default/img/cardcss-icon/pay-yinhangqiaf0fa-f.svg?v=201912101651') 24rpx 50% no-repeat;
+    background-size: 32rpx 32rpx;
+    color: #333;
+    font-size: 24rpx;
+    height: 60rpx;
+    line-height: 64rpx;
+    overflow: hidden;
+    margin: 0 12rpx;
+    z-index: 22;
+    display: block;
+    box-sizing: content-box;
+    padding: 0 24rpx 0 68rpx;
+    border-radius: 10rpx 10rpx 0 0;
+}
+
+.cardpay-box{
+    background-color: #fff;
+    padding: 0 30rpx;
+}
+
+.cardpay-item{
+    border-bottom: 1rpx solid #F2F5F8;
+    height:88rpx;
+    line-height: 88rpx;
+    padding:24rpx 0;
+}
+
+.cardpay-item:last-child{
+    border-bottom: none;
+}
+
+.cardpay-icon{
+    float: left;
+    height: 88rpx;
+    width: 88rpx;
+    background-position:  no-repeat;
+    background-size: 100% 100%;
+}
+
+.bankicon-56{
+    background-image: url(https://webresource.c-ctrip.com/resh5paymentcommononline/R1/dest/res/bankico/pay_ico_bank_56.png?v=1576480381132);
+}
+
+.bankicon-57{
+    background-image: url(https://webresource.c-ctrip.com/resh5paymentcommononline/R1/dest/res/bankico/pay_ico_bank_57.png?v=1576480381133);
+}
+
+.bankicon-58{
+    background-image: url(https://webresource.c-ctrip.com/resh5paymentcommononline/R1/dest/res/bankico/pay_ico_bank_58.png?v=1576480381133);
+}
+
+.bankicon-59{
+    background-image: url(https://webresource.c-ctrip.com/resh5paymentcommononline/R1/dest/res/bankico/pay_ico_bank_59.png?v=1576480381133);
+}
+
+.bankicon-60{
+    background-image: url(https://webresource.c-ctrip.com/resh5paymentcommononline/R1/dest/res/bankico/pay_ico_bank_60.png?v=1576480381133);
+}
+
+.bankicon-5600000{
+    background-image: url(https://webresource.c-ctrip.com/resh5paymentonline/R3/dest/res/res/img/i-card1.svg?v=202001091027);
+}
+
+.cardpay-name{
+    font-size: 42rpx;
+    padding-left: 128rpx;
+    color: #425569;
+}
+
+.cardpay-inputswrap{
+    background-color: #fff;
+    padding-bottom: 20rpx;
+    overflow: hidden;
+}
+
+.cardpay-head{
+    padding: 24rpx 30rpx;
+    overflow: hidden;
+    border-bottom: 1rpx solid #F2F5F8;
+    position: relative;
+}
+
+.cardpay-head .cardpay-name{
+    font-size: 36rpx;
+}
+
+.card-number{
+    display: block;
+    font-size: 32rpx;
+    color: #000;
+    font-family: 'PingFangSC-Medium', 'Source Han Sans CN Medium', "Helvetica Neue";
+    letter-spacing: 0.2rpx;
+    font-weight: bold;
+}
+
+.cardpay-change{
+    position: absolute;
+    font-size: 36rpx;
+    color: #6EB7FF;
+    height: 46rpx;
+    line-height: 46rpx;
+    right: 42rpx;
+    top: 50%;
+    margin-top: -23rpx;
+    background: url(https://webresource.c-ctrip.com/ares2/h5paymentsdk/smallprogram/1.0.11/default/img/cardcss-icon/changeicon.png?v=201912101651) 0 50% no-repeat;
+    background-size: 30rpx 30rpx;
+    padding-left: 36rpx;
+}
+
+.cardpay-inputsbox{
+    padding: 56rpx 30rpx 0 30rpx;
+}
+
+.inputitem{
+    height: 76rpx;
+    margin-bottom: 56rpx;
+    display: block;
+    width: 100%;
+    position: relative;
+    border: none!important;
+}
+
+.inputitem:last-child{
+    margin-bottom: 20rpx;
+}
+
+.inputname-box{
+    font-size: 48rpx;
+    color: #9DA5AD;
+    position: absolute;
+    left: 0;
+    top: 8rpx;
+    transition: all .15s ease-in-out;
+}
+
+.input-tiptxt{
+    font-size: 28rpx;
+    padding-left: 12rpx;
+}
+
+.police-input{
+    border-bottom: 1rpx solid #F2F5F8;
+    height: 26rpx;
+    padding: 12rpx 0;
+    font-size: 42rpx;
+}
+
+.input-focused, .input-focused .police-input{
+    border-bottom: 3rpx solid #dadada;
+}
+
+.input-focused + .inputname-box, .input-focused>.inputname-box{
+    top: -30rpx;
+    font-size: 28rpx;
+    color: #BDCDE0
+}
+
+.cardpay-overdue{
+    margin: 0 12rpx;
+    padding: 10rpx 18rpx;
+    background-color: #ECF6FF;
+    font-size: 28rpx;
+    color: #6B82A1;
+    border-radius: 10rpx;
+}
+
+.overdue-txt{
+    color: #6EB7FF
+}
+
+.cardpay-qicon{
+    position: absolute;
+    width: 64rpx;
+    height: 64rpx;
+    background: url('https://webresource.c-ctrip.com/ares2/h5paymentsdk/smallprogram/1.0.11/default/img/cardcss-icon/i-qa.svg?v=201912101651') 0 0 no-repeat;
+    background-size: 100% 100%;
+    top: 10rpx;
+    right: 0;
+    z-index: 29;
+}
+
+.cpop-modal{
+    padding: 0;
+    top: auto;
+    transform: translate(-50%, -100%);
+    margin-top: 30rpx;
+}
+
+.cardbin-wrap{
+    background-color: #fff;
+    min-height: 880rpx;
+}
+
+.cpop-head{
+    height: 56rpx;
+    line-height: 56rpx;
+    padding: 16rpx 0;
+    background-color: #fff;
+    border-radius: 16rpx 16rpx 0 0;
+    font-size: 36rpx;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    position: relative;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.cpop-close{
+    position: absolute;
+    top: 16rpx;
+    left: 20rpx;
+    width: 60rpx;
+    height: 60rpx;
+    color: #425363;
+    font-size: 32rpx;
+}
+
+.cpop-tipbox{
+    background-color: #F3F4F7;
+    height: 96rpx;
+    line-height: 96rpx;
+    font-size: 38rpx;
+    color: #333;
+    padding: 16rpx 24rpx;
+    font-weight: 400;
+}
+
+.cpop-tiptxt{
+    padding: 0 16rpx;
+    color: #FF6600;
+}
+
+.cpop-form{
+    padding: 24rpx;    
+}
+
+.cardbin-label{
+    border-bottom: 1px solid #E5EDF6;
+    display: block;
+    height: 66rpx;
+    padding-top: 26rpx;
+    position: relative;
+}
+
+.cbinput-css{
+    height: 56rpx;
+    line-height: 56rpx;
+    font-family: Courier, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 46rpx;
+}
+
+.active-input{
+    padding-top: 26rpx;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 19;
+    overflow: hidden;
+}
+
+.cbinput-active{
+    opacity: 0;
+    z-index: -1;
+    width: 10rpx;
+    margin-left: -100rpx;
+}
+
+.cbinput-holder{
+    font-size: 36rpx;
+    color: #ccc;
+    font-weight: 400;
+}
+
+.cpop-stip{
+    display: block;
+    padding: 36rpx 0;
+    font-size: 32rpx;
+    color: #74716D;
+}
+
+.cinput-clearbox{
+    position: absolute;
+    width: 46rpx;
+    height: 46rpx;
+    padding: 10rpx 20rpx;
+    top: 30rpx;
+    right: 0rpx;
+    background-color: #fff;
+}
+
+.cinput-clear{
+    position: absolute;
+    width: 46rpx;
+    height: 46rpx;
+    background-color: #C2CDE8;
+    border-radius: 50% 50%;
+    z-index: 69;
+    overflow: hidden;
+}
+
+.cinput-clear::before{
+    display: block;
+    content: 'X';
+    width: 46rpx;
+    height: 46rpx;
+    line-height: 46rpx;
+    position: absolute;
+    top: 0rpx;
+    left: 0rpx;
+    color: #fff;
+    font-size: 30rpx;
+    text-align: center;
+}
+
+.cardpay-submitbtn{
+    margin: 25rpx 12rpx 0;
+}
+
+
+/**oneself*/
+.pay-oneself-tip{
+    font-size: 24rpx;
+    line-height: 36rpx;
+    padding: 0 30rpx 8rpx;
+}
+
+.selfinfo-icon{
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    background: url('https://webresource.c-ctrip.com/ares2/h5paymentsdk/smallprogram/1.0.14/default/img/card/i-account_810.png?v=202005221355') 50% 50% no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+}
+
+.selfinfo-name{
+    font-size: 36rpx;
+    color: #242424;
+    line-height: 26rxp;
+    text-align: center;
+    padding: 10rpx;
+    font-weight: 700;
+}
+
+.selfinfo-desc{
+    font-size: 28rpx;
+    line-height: 40rpx;
+    color: #6B717A;
+    text-align: center;
+    padding-bottom: 20rpx;
+}
+
+.selfinfo-box{
+    background-color: #ECF5FD;
+    color: #999;
+    font-size: 32rpx;
+    padding: 40rpx 30rpx 20rpx;
+    margin-bottom: 20rpx;
+}
+
+.selfinfo-boxtr{
+    margin-bottom: 20rpx;
+}
+
+.boxtr-tdval{
+    color: #242424;
+    font-weight: 700;
+}
+
+.selfname-label{
+    padding-top: 0;
+    font-size: 44rpx;
+}
+
+.txt-orange{
+    color: #F60;
+}

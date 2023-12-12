@@ -1,0 +1,50 @@
+<template name="compassGuideModuleV2Component">
+    <view wx:if="{{compassGuideModuleV2}}" class="compass-guide-module-v2" id="guide">
+        <view class="compass-guide-module-v2-tab">
+             <image src="{{compassGuideModuleV2.titleImage && compassGuideModuleV2.titleImage.url}}" class="tab_image" />
+             <view
+                bindtap="tabGuideClickGo"
+                data-h5url="{{compassGuideModuleV2.guideDetail.more.url}}" data-appurl="{{compassGuideModuleV2.guideDetail.more.url}}"
+                wx:if="{{compassGuideModuleV2.guideDetail && compassGuideModuleV2.guideDetail.more && compassGuideModuleV2.guideDetail.more.url}}" class="compass-guide-module-v2-tab-more">
+                <text>全部攻略</text>
+                <image src="https://dimg04.c-ctrip.com/images/0103l12000a06g0bh4EB7.png"/>
+             </view>
+
+        </view>
+        <view class="compass-guide-module-v2-guide-detail">
+            <block wx:if="{{compassGuideModuleV2.guideDetail}}" wx:for="{{compassGuideModuleV2.guideDetail.guideListBig}}">
+                  <view
+                      bindtap="tabGuideClickGo"
+                      data-h5url="{{item.jumpUrl}}" data-appurl="{{item.jumpUrl}}"
+                      style="background-image:url('{{item.imageUrl}}')"
+                      class="compass-guide-module-v2-guide-detail-image">
+
+                      <image wx:if="{{item.tag && item.tag.url}}"
+                       style="width : {{item.tag.width / 1.5}}rpx;height:{{item.tag.height / 1.5}}rpx"
+                       src="{{item.tag.url}}" class="compass-guide-module-v2-guide-detail-image-tag"/>
+
+                      <view class="compass-guide-module-v2-guide-detail-image-linear">
+                          <view class="compass-guide-module-v2-guide-detail-image-linear-title">{{item.title}}</view>
+                          <view class="compass-guide-module-v2-guide-detail-image-linear-subtitle">{{item.subTitle}}</view>
+                      </view>
+                  </view>
+            </block>
+        </view>
+        <block wx:if="{{compassGuideModuleV2.guideDetail && compassGuideModuleV2.guideDetail.guideListSmall && compassGuideModuleV2.guideDetail.guideListSmall.length > 0}}">
+            <scroll-view  scroll-x="true" class="compass-guide-module-v2-guide-detail-small">
+                <block wx:if="{{compassGuideModuleV2.guideDetail}}" wx:for="{{compassGuideModuleV2.guideDetail.guideListSmall}}">
+                      <view
+                      bindtap="tabGuideClickGo"
+                      data-h5url="{{item.jumpUrl}}" data-appurl="{{item.jumpUrl}}"
+                      class="{{'compass-guide-module-v2-guide-detail-small-box-color-' + index % 4 }} {{compassGuideModuleV2.guideDetail.guideListSmall.length <= 2 && 'compass-guide-module-v2-guide-detail-small-box-less-than-2' || ''}} compass-guide-module-v2-guide-detail-small-box {{compassGuideModuleV2.guideDetail.guideListSmall.length > 2 && index === compassGuideModuleV2.guideDetail.guideListSmall.length - 1 && 'compass-guide-module-v2-guide-detail-small-box-end' || ''}} {{index === 0 && 'compass-guide-module-v2-guide-detail-small-box-0' || ''}}">
+                             <view class="text_view">
+                                 <text>{{item.title}}</text>
+                                 <view class="{{'compass-guide-module-v2-guide-detail-small-box-color-view-' + index % 4 }}"/>
+                             </view>
+
+                      </view>
+                </block>
+            </scroll-view>
+        </block>
+    </view>
+</template>

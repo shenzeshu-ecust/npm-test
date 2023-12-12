@@ -1,0 +1,24 @@
+{
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor":"#FAFAFC",
+    "navigationStyle": "custom",
+    "singlePage": {
+      "navigationBarFit": "squeezed"
+    },
+    "usingComponents": {
+      "redcom": "/cwx/component/redirect/redirect",
+      "ad-sdk":"/pages/market/advertiseNew/ad-sdk",
+      "collection": "/pages/market/components/collection/collection",
+      "search": "./component/search/globalSearchHeader",
+      "equity": "./component/equity/equity",
+      "waterfall": "/commonComponent/cwaterfall/cwaterfall",
+      "waterfall-placeholder": "/cwx/component/cwaterfall/cwaterfall",
+      "timelineFloat": "/cwx/component/timelineFloat/timelineFloat",
+      "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+    },
+    "componentPlaceholder": {
+      "waterfall": "waterfall-placeholder"
+    }
+}

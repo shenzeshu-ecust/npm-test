@@ -1,0 +1,42 @@
+<view class="mask-wraper {{showBg ? 'showBg' : ''}}" style="transition:{{maskTransition}}" wx:if="{{isShow}}" catchtouchmove="return">
+  <view class="image-box">
+  <image class="image-box-bg-top" src="https://pic.c-ctrip.com/AssetCatalog/biz/flightNewUserCoupon/modal_bg_top_new.png" />
+  <image class="image-box-bg-icon" src="https://pic.c-ctrip.com/AssetCatalog/biz/flightNewUserCoupon/modal_bg_icon.png" />
+    <view class="coupons-box">
+      <view wx:for="{{coupons}}" class="coupon-item">
+        <image class="coupon-icon" src="{{item.icon}}"></image>
+        <view class="coupon-content">
+          <text class="coupon-title">
+            <text class="coupon-title-high-rmb" wx:if="{{item.amout}}">¥</text>
+            <text class="coupon-title-high" wx:if="{{item.amout}}">{{item.amout}}</text>{{item.title}}
+          </text>
+          <view class="coupon-desc">{{item.desc}}</view>
+        </view>
+      </view>
+    </view>
+    <image class="image-box-bg-btm" src="https://pic.c-ctrip.com/AssetCatalog/biz/flightNewUserCoupon/modal_bg_btm_new.png" />
+    <view class="tips-rule">
+      <text class="tips-entry" bindtap="showTipsDetail">活动说明</text>
+      <icon class="comment-icon" bindtap="showTipsDetail"></icon>
+    </view>
+    <view class="coupon-btn" bindtap="sendCoupon"></view>
+  </view>
+  <icon class="icon-close" type="cancel" size="30" color="rgba(255,255,255,0.5)" bindtap="close"></icon>
+</view>
+<view class="tips-detail" wx:if="{{isShowTipsDetail}}" catchtouchmove="return">
+  <view class="tip-mask" bindtap="hideTipsDetail"></view>
+  <view class="tip-items">
+      <view class="tip-title">
+        <icon class="rule-close" bindtap="hideTipsDetail"></icon>
+        <text class="tip-title-text">活动说明</text>
+      </view>
+      <scroll-view scroll-y class="tip-scroll">
+        <view class="tip-container">
+          <view wx:for="{{tips}}" class="tip-item">
+            <view class="tip-subtitle">{{item.title}}</view>
+            <text class="tip-content">{{item.content}}</text>
+          </view>
+        </view>
+      </scroll-view>
+  </view>
+</view>

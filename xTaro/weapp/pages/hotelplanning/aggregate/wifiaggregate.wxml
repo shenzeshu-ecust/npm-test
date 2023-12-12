@@ -1,0 +1,2 @@
+<import src="./revealPage/index" />
+<template is="landing" />

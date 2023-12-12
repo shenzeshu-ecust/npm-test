@@ -1,0 +1,9 @@
+.loading-container {
+  display: flex;
+}
+
+.loading-container image {
+  width: 108rpx;
+  height: 44rpx;
+  margin: 238rpx auto 0rpx auto;
+}

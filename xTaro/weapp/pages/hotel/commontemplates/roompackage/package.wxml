@@ -1,0 +1,48 @@
+<template name="packageDesc">
+<block wx:if="{{roomPackageInfo && roomPackageInfo.packageInfoList}}">
+    <block wx:for="{{roomPackageInfo.packageInfoList}}">
+        <view wx:if="{{item.type === 3 || item.type === 2 && item.extension && item.extension.meal}}" class="txt-item cell-v">
+            <image class="pac-icon" src="{{'https://pages.c-ctrip.com/hotels/wechat/img/suite-icons/suite-icon-' + isGray + '28-' + item.type + '.png'}}"/>
+            <text class="single-ellipsis">{{item.type === 2 ? item.extension.meal : item.name}}</text>
+        </view>
+    </block>
+</block>
+</template>
+<!--浮层中套餐详细信息，不含图片-->
+<template name="packageDetailLayer">
+    <view wx:if="{{xItem.menuTitle && xItem.menuInfos && xItem.menuInfos.length}}"
+          class="pac-menu {{showMoreMenu ? 'pac-menu-border' : ''}}">
+        <view class="pac-menu-tit" data-index="{{index}}" data-type="{{packageItem.type}}" catchtap="toggleMoreMenu">
+            <text class="title">{{xItem.menuTitle}}</text>
+            <view class="fold-up">
+                <text class="mr8">{{showMoreMenu ? '收起' : '查看'}}</text>
+                <text class="{{showMoreMenu ? 'wechat-font-g-arrow-up' : 'wechat-font-g-arrow-down'}}"></text>
+            </view>
+        </view>
+        <block wx:for="{{xItem.menuInfos}}" wx:for-item="menu" wx:for-index="midx">
+            <view class="pac-menu-con" wx:if="{{showMoreMenu}}">
+                <view class="pac-menu-subtit black1">
+                    {{menu.categoryName}}
+                    <text wx:if="{{menu.limitTips}}">（{{menu.limitTips}}）</text>
+                </view>
+                <view class="pac-menu-single" wx:for="{{menu.details}}" wx:for-item="singeMenu">
+                    <view class="menu-name">{{singeMenu.name}}（{{singeMenu.numDesc}}）</view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view wx:for="{{xItem.elements}}" wx:for-item="xElement" class="x-item mr24 pl24" wx:for-index="idx">
+        <!--特殊说明文案长度超过26时出展开/收起按钮-->
+        <view class="cell {{xElement.type === '7' && xElement.value.length > 26 && !showMoreInfo ? 'hide-height' : ''}}">
+            <text class="mr10 name">{{xElement.key}}</text>
+            <text class="desc">{{xElement.value}}</text>
+        </view>
+        <view wx:if="{{xElement.type === '7' && xElement.value.length > 26 && showToggleBtn}}" class="base-more-fold"
+              catchtap="toggleMoreSuite"
+              data-index="{{index}}"
+              data-type="{{packageItem.type}}">
+            <text class="mr8">{{showMoreInfo ? '收起' : '展开全部'}}</text>
+            <text class="{{showMoreInfo ? 'wechat-font-g-arrow-up' : 'wechat-font-g-arrow-down'}}"></text>
+        </view>
+    </view>
+</template>

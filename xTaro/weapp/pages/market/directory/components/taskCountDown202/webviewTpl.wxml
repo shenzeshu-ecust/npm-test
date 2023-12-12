@@ -1,0 +1,39 @@
+<template name="webviewTpl202">
+  <cover-view class="coverview-taskcountdown" style="top:{{top}}" bindtap="handleClick">
+    <cover-image class="coverview-taskcountdown__image" src="https://images3.c-ctrip.com/marketing/2021/popup/djs.png"></cover-image>
+    <cover-view class="coverview-taskcountdown__process">
+      <cover-view class="coverview-taskcountdown__process-inner" style="width:{{scale}}"></cover-view>
+    </cover-view>
+    <cover-view class="coverview-taskcountdown__text">
+      <cover-view hidden="{{isLogin}}">
+        <cover-view class="coverview-fn-color-yellow">登录做任务</cover-view>
+        <cover-view>可领取奖励</cover-view>
+      </cover-view>
+      <!-- 进行中 -->
+      <cover-view hidden="{{!isLogin}}">
+        <cover-view hidden="{{status !== START_ING}}">
+          <cover-view hidden="{{!clicked}}">
+            <cover-view class="coverview-fn-color-yellow">继续浏览</cover-view>
+            <cover-view>即可得奖励</cover-view>
+          </cover-view>
+          <cover-view hidden="{{clicked}}">
+            <cover-view class="coverview-row">
+              <cover-view>浏览</cover-view>
+              <cover-view class="coverview-fn-color-yellow">{{timesAcount}}秒</cover-view>
+              <cover-view>即</cover-view>
+            </cover-view>
+            <cover-view>可得奖励</cover-view>
+          </cover-view>
+        </cover-view>
+        <cover-view hidden="{{status !== END}}">
+          <cover-view>任务已完成</cover-view>
+          <cover-view class="coverview-fn-color-yellow">查看奖励</cover-view>
+        </cover-view>
+        <cover-view hidden="{{status !== FINAL}}">
+          <cover-view class="coverview-fn-color-yellow">查看更多</cover-view>
+          <cover-view>领奖励</cover-view>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+</template>

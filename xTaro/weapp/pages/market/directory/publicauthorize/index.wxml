@@ -1,0 +1,38 @@
+<perinfo-protect-float></perinfo-protect-float>
+
+<returnApp clazz="db_return_app">
+</returnApp>
+
+<view class="auth_layout">
+  <view class="auth_top">
+    <view class="top_title">授权头像昵称</view>
+    <view class="top_guide">{{authConfig && authConfig.guideTitle ? authConfig.guideTitle : '为了确保您顺利领取奖励，请确认头像和昵称'}}</view>
+  </view>
+  <view class="auth_box_layout auth_avatar_layout">
+    <view class="step step_one">第一步</view>
+    <view class="auth_guide">👇点击下方头像框 选择授权微信头像</view>
+    <view class="auth_content">
+      <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image class="avatar" src="{{avatarUrl || defaultAvatarUrl}}"></image>
+      </button>
+    </view>
+  </view>
+
+  <view class="auth_box_layout auth_nick_layout">
+    <view class="step step_two">第二步</view>
+    <view class="auth_guide">👇点击下方输入框 选择授权微信昵称</view>
+    <view class="auth_content nick_input_box">
+      <span class="nick_input_label">昵称</span>
+      <input type="nickname" class="nick_input" bind:change="changeUserNick" placeholder="请输入昵称" />
+    </view>
+  </view>
+
+  <view class="auth_submit_box">
+    <view class="auth_submit_button {{(!avatarUrl || !nickName) ? 'submit_opacty': ''}}" bindtap="submit">确认提交</view>
+  </view>
+
+  <view class="auth_guide auth_guide_bottom" wx:if="{{authConfig && authConfig.guideWord}}">{{authConfig.guideWord}}</view>
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

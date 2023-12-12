@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "城市选择",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "usingComponents": {
+        "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index",
+        "hotkeyword": "/pages/hotel/components/hotkeyword/hotkeyword"
+    }
+}

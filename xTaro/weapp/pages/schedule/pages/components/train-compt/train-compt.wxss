@@ -1,0 +1,332 @@
+.train-detail-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 0 50rpx 170rpx 50rpx;
+}
+
+.station-info {
+  margin-top: 20rpx;
+  color: #333;
+}
+
+.station-info-for-nonorder {
+  margin-top: 40rpx;
+  color: #333;
+}
+
+.common-line-view {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10rpx;
+}
+
+.station-text {
+  flex: 1;
+  font-size: 26rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.right {
+  text-align: right;
+}
+
+.time-quantum {
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.time-quantum-text {
+  flex: 1;
+  font-size: 64rpx;
+  font-weight: 700;
+  color: #333;
+}
+
+.train-icon {
+  width: 44rpx;
+  height: 50rpx;
+  margin-top: 5rpx;
+  margin-left: 2rpx;
+}
+
+.date-quantum {
+  display: flex;
+}
+
+.date-quantum-text {
+  flex: 1;
+  font-size: 22rpx;
+  color: #999;
+  font-family: PingFangSC-Regular;
+}
+
+.middle {
+  text-align: center;
+}
+
+.cutting-line {
+  margin: 40rpx 0;
+  height: 2rpx;
+  background-color: #f5f5f5;
+}
+
+.check-port, .grab-time, .grab-train-date-no-grab-time {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-code, .grab-train-date-after-grab-time, .grab-train-number, .grab-seats {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40rpx;
+}
+
+.check-port-label, .ticket-code-label, .grab-time-label, .grab-train-date-label,
+.grab-train-number-label, .grab-seats-label {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.check-port-text, .ticket-code-text, .grab-time-text, .grab-train-date-text,
+.grab-train-number-text, .grab-seats-text {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+  padding-top: 10rpx;
+}
+
+.passenger-list {
+  font-size: 28rpx;
+  color: #333;
+  display: flex;
+}
+
+.train-passenger-icon {
+  width: 40rpx;
+  height: 36rpx;
+  margin: 4rpx 20rpx 0 5rpx;
+}
+
+.grab-train-passenger-icon-box{
+  width: 36rpx;
+  height: 36rpx;
+  margin: 4rpx 20rpx 0 5rpx;
+}
+
+.grab-train-passenger-icon {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.passenger-info {
+  margin: 5rpx 0;
+  display: flex;
+}
+
+.grab-passenger-info {
+  margin: 5rpx 0;
+}
+
+.passenger-info-box {
+  width: 100%;
+}
+
+.passenger-name {
+  flex: 1;
+  margin-right: 30rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.passenger-seat {
+  flex: 3;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.stop-station {
+  display: flex;
+  flex-direction: column;
+}
+
+.stop-station-text {
+  font-size: 24rpx;
+  color: #888;
+}
+
+.stop-station-map {
+  margin: 20rpx 0;
+  display: flex;
+  align-items: center;
+}
+
+.stop-station-map-pole {
+  flex: 0.53;
+  display: flex;
+  align-items: center;
+}
+
+.stop-station-map-blank {
+  flex: 1;
+  background-color: #ccc;
+  height: 6rpx;
+}
+
+.depart-station-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 10rpx;
+  background-color: #7eaff4;
+}
+
+.stop-station-map-fill {
+  flex: 1;
+  background-color: #7eaff4;
+  height: 6rpx;
+}
+
+.depart-station-blank-dot {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 15rpx;
+  border: 4rpx solid #7eaff4;
+}
+
+.fill-blank-dot {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mini-dot-group {
+  display: flex;
+  align-items: center;
+}
+
+.depart-station-mini-dot {
+  margin: 0 5rpx;
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 5rpx;
+  background-color: #7eaff4;
+}
+
+.stop-station-route {
+  margin: 10rpx 0 5rpx 0;
+  display: flex;
+  align-items: center;
+}
+
+.stop-station-route-text {
+  flex: 1;
+  color: #353535;
+  text-align: center;
+  font-size: 24rpx;
+}
+
+.stop-station-route-time {
+  flex: 1;
+  color: #353535;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.stop-station-route-middle {
+  color: #888;
+}
+
+.omit {
+  flex: 1.5;
+  color: #1980fe;
+}
+
+.stop-station-detail-box {
+  position: fixed;
+  top: 0rpx;
+  left: 0rpx;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 101;
+}
+
+.stop-station-detail {
+  width: 70%;
+  height: 70%;
+  z-index: 999;
+  opacity: 1;
+  background-color: #fff;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.stop-station-start-end-color {
+  color: #1980fe;
+}
+
+.stop-station-color {
+  color: #000;
+}
+
+.stop-station-others-color {
+  color: #999;
+}
+
+.detail-header {
+  padding: 25rpx 0;
+  color: #888;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+}
+
+.detail-body {
+  height: 85%;
+  overflow: scroll;
+}
+
+.detail-underline-row {
+  color: #353535;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid rgba(240, 240, 240, 0.5);
+  display: flex;
+  font-size: 24rpx;
+}
+
+.detail-row {
+  color: #353535;
+  padding: 20rpx 0;
+  display: flex;
+  font-size: 24rpx;
+}
+
+.detail-herder-text {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 28rpx;
+}
+
+.detail-text {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 24rpx;
+}
+
+.train-map {
+  margin: 50rpx -50rpx 0rpx -50rpx;
+}

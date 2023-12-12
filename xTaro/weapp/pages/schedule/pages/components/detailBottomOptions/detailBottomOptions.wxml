@@ -1,0 +1,50 @@
+<view class='flight-bottom' wx:if="{{theme==0}}">
+  <view class='add-sucess-view' animation="{{animationData}}">
+    <formid-button formid-button-class='custom-button-for-compt' class='custom-button private-button' bindtap="gotoTimeline">
+      <view class='add-view'>
+        <text class='add-sucess-text'>已添加，查看行程</text>
+        <image class="white-arrow-icon" src='../../images/flight/icon_arrow_white.png'></image>
+      </view>
+    </formid-button>
+  </view>
+  <view class='horizon-bottom '></view>
+  <view class='vertical-bottom '></view>
+  <view class='flight-bottom-wrap '>
+    <formid-button formid-button-class='custom-button-for-compt' class='custom-button' open-type='share'>
+      <view class='add-view'>
+        <image class="share-icon" src='../../images/common/cts_icon_found.png '></image>
+        <text class='add-btn '>分享</text>
+      </view>
+    </formid-button>
+    <formid-button formid-button-class='add-view' class='custom-button' catchtap='onAddClick'>
+      <image class="ctrip-icon " src='../../images/common/icon_add.png '></image>
+      <text class='add-btn '>添加至我的行程</text>
+    </formid-button>
+  </view>
+  <view class='{{isiPhoneX?"iPhoneXStyle":""}}'></view>
+</view>
+
+<view class='flight-bottom' wx:if="{{theme==1}}">
+  <view class='horizon-bottom '></view>
+  <view class='flight-bottom-wrap'>
+    <formid-button class='custom-button' open-type='share'>
+      <view class='add-view'>
+        <image class="share-icon" src='../../images/common/cts_icon_found.png '></image>
+        <text class='add-btn'>分享</text>
+      </view>
+    </formid-button>
+  </view>
+  <view class='{{isiPhoneX?"iPhoneXStyle":""}}'></view>
+</view>
+
+<view class="flight-bottom share-list-bottom-wrapper" wx:if="{{theme==3}}">
+  <view class="bottom-realname" wx:if="{{isShowRealnameEntry}}">
+    <image src='../../images/icon/realname-icon.png' mode='aspectFit' class='realname-icon'></image>
+    <text>实名认证可同步他人帮您购买的订单</text>
+    <text class="realname-link" catchtap='onGoToRealname'>去实名</text>
+    <Icon className="Forward" color='#037FE9' size='13' class="relname-forward-icon" />
+  </view>
+  <formid-button wx:if="{{addBtnStatus !== -1}}" catchtap='onAddClick' disabled="{{addBtnStatus === 2}}">
+      <view class="add-btn share-list-add-btn {{addBtnStatus === 2 ? 'btn-disable' : ''}}">{{['添加并加入我的行程', '查看我的行程', '已失效'][addBtnStatus]}}</view>
+  </formid-button>
+</view>

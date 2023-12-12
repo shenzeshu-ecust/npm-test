@@ -1,0 +1,43 @@
+function resolveStyle(obj) {
+  var ret = ''
+  if (obj.backgroundColor) {
+    ret += 'background-color:' + obj.backgroundColor + ';'
+  }
+  if (obj.backgroundImage) {
+    ret += 'background-image:url(' + obj.backgroundImage + ');'
+  }
+  if (obj.backgroundSize) {
+    ret += 'background-size:' + obj.backgroundSize + ';'
+
+  }
+  if (obj.color) {
+    ret += 'color:' + obj.color + ';'
+  }
+  return ret
+}
+
+function stringSlice(str, start, end) {
+  return str.slice(start, end)
+}
+
+function arrSlice(arr, acount) {
+    console.log(arr.slice(0, acount).length)
+  return arr.slice(0, acount)
+}
+
+function calcHeight(type) {
+  var height = '90rpx'
+
+  if (type === 'INVITE_HELP') {
+    height = '160rpx'
+  }
+
+  return height
+}
+
+module.exports = {
+  stringSlice: stringSlice,
+  arrSlice: arrSlice,
+  calcHeight: calcHeight,
+  resolveStyle: resolveStyle
+}

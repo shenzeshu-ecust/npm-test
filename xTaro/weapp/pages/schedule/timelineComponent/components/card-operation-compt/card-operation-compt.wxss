@@ -1,0 +1,88 @@
+.hr {
+  height: 1px;
+  background-color: #f2f2f2;
+  margin-left: 16rpx;
+  margin-right: 16rpx;
+}
+
+.container {
+  height: 72rpx;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* padding-right: 36rpx;
+  padding-left: 36rpx; */
+}
+
+.status-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.status-name {
+  color: #666;
+  font-size: 26rpx;
+}
+
+.status-icon {
+  margin-top: 3rpx;
+}
+
+.card-source {
+  font-size: 26rpx;
+}
+.left-container {
+  margin-left: -24rpx;
+  flex: 1;
+}
+.right-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.status-btn {
+  font-weight: 500;
+  margin-left: 30rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #1980fe;
+  font-size: 26rpx;
+  padding: 0 10rpx;
+}
+.share-icon {
+  margin-right: -36rpx;
+}
+
+.share-btn {
+  font-weight: 500;
+  margin-left: 36rpx;
+  padding: 0 16rpx;
+  background-color: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #1980fe;
+  font-size: 26rpx;
+  border: none;
+}
+
+.share-btn::after {
+  border: none;
+}
+.line {
+  position: relative;
+}
+.line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -14rpx;
+  height: 28rpx;
+  width: 1rpx;
+  background: #e8e8e8;
+}

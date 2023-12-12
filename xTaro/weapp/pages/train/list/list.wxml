@@ -1,0 +1,512 @@
+<import src="../common/components/SearchCoupon/searchcoupon.wxml" />
+<import src="../common/components/TrainNotice/trainNotice.wxml" />
+<import src="../common/components/omnipotentGrab/omnipotentGrab.wxml"></import>
+<import src="../common/components/arrPromoPop/arrPromoPop.wxml"></import>
+<import src="../common/components/NewCustomerRight/newGuest.templates.wxml" />
+
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+
+<view class="top-bar"
+  style="padding-top: {{statusBarHeight}}px">
+    <text class="ifont-home"
+      bindtap="goHome"
+      wx:if="{{firstStack}}"></text>
+    <text class="ifont-back"
+      bindtap="goBackAndSubscribe"
+      wx:else></text>
+    <view class="tit">{{dStation}} ⇀ {{ aStationArea || aStation}}</view>
+</view>
+<view wx:scope-data="{{...scopeData}}"></view>
+<view class="page"
+  style="top: {{statusBarHeight + 40}}px">
+    <view class="list-gaqian"
+      wx:if="{{isReschedule && isOpenChangeArrival}}">
+        <view class="station">{{dStation + '站'}} - {{aStation + '站'}}</view>
+        <view class="chage"
+          wx:if="{{!isDisableChangeArrival && !hkticket}}"
+          bindtap="changeArrivalsHandle">变更到站</view>
+    </view>
+
+    <import src="../common/components/TransitCard/transitCard.wxml" />
+    <view class="date">
+        <view class="date-bd">
+            <view class="prev {{isPrevDisable ? 'disabled' : ''}}"
+              data-type="prev"
+              bindtap="chooseDate">
+                <view class="left-icon"></view>前一天
+            </view>
+            <!-- <view class="now" data-type="calendar" bindtap="chooseDate">
+                <view>
+                    <view class="wrap">{{selectDateStr}}</view>
+                </view>
+            </view> -->
+            <view class="now"
+              data-type="calendar"
+              bindtap="chooseDate">{{selectDateStr}}
+                <view class="more-icon"></view>
+            </view><!--日期格式修改-->
+            <view class="next {{isNextDisable ? 'disabled' : ''}}"
+              data-type="next"
+              bindtap="chooseDate">
+                后一天
+                <view class="right-icon"></view>
+            </view>
+        </view>
+    </view>
+    <view wx:if="{{showSkeleton}}"
+      catchtouchmove="noop">
+        <block wx:for="{{[0, 1, 2, 3, 4, 5, 6]}}"
+          wx:key="{{index}}"
+          wx:if="{{showSkeleton}}">
+            <view class="skeleton-item">
+                <view class="bd">
+                    <view class="from">
+                        <view class="title"></view>
+                        <view class="desc"></view>
+                    </view>
+                    <view class="checi">
+                        <view class="time"></view>
+                        <view class="arrow"></view>
+                        <view class="tno"></view>
+
+                    </view>
+                    <view class="to">
+                        <view class="title"></view>
+                        <view class="desc"></view>
+                    </view>
+                    <view class="price">
+                        <view class="title"></view>
+                        <view class="desc"></view>
+                    </view>
+                </view>
+                <view class="hd">
+                    <view class="info" />
+                </view>
+            </view>
+        </block>
+    </view>
+    <!-- 目的地发券弹窗 -->
+    <template is="arr-promo-pop"
+      data="{{arrPromoPopVisible, arrPromoPopInfo}}"></template>
+    <scroll-view scroll-y
+      class="wrap"
+      style="height: {{systemHeight}}px;"
+      bindscrolltolower="scrollToLower"
+      scroll-top="{{scrollTopHeight}}"
+      id="train_scroll"
+      hidden="{{showSkeleton}}"
+      enhanced
+      enable-passive
+      scroll-with-animation
+      scroll-into-view="{{scrollToView}}"
+      bindscroll="onTrainListScroll"
+      binddragend="onTrainListScroll">
+        <!-- 新客固定 -->
+        <template is="new-guest-panel-mini"
+          data="{{ data: newGuestCardInfo }}"
+          wx:if="{{ newGuestCardInfo }}" />
+        <view class="float-area-container"
+          wx:if="{{noticeShortTips || hkticket || (quickFilterTags && quickFilterTags.length)}}"
+          style="min-height: {{(noticeShortTips || hkticket) && quickFilterTags && quickFilterTags.length ? '90': (noticeShortTips || hkticket) ? '44' : '46'}}px">
+            <view class="float-area {{ areaFlaot ? 'float':'inner'}}"
+              style="top: {{statusBarHeight + 40 + 58}}px">
+                <notice wx:if="{{noticeShortTips || hkticket}}"
+                  noticeContent="{{noticeShortTips}}"
+                  hideNotice="{{hideNotice}}"
+                  quickFilterTags="{{quickFilterTags}}"
+                  hkticket="{{hkticket}}"
+                  bind:toNoticeDetailTrigger="toNoticePage"></notice>
+                <view class="quickly-field-wrap"
+                  wx:if="{{quickFilterTags && quickFilterTags.length}}">
+                    <view class="quickly-filter-field">
+                        <view class="cont">
+                            <view class="filter-item {{tag.isSelected ? 'cur' : ''}}"
+                              wx:for="{{quickFilterTags}}"
+                              wx:for-item="tag"
+                              wx:for-index="tagIndex"
+                              wx:key="{{tag.name}}"
+                              data-tag-type="{{tag.tagType}}"
+                              data-name="{{tag.name}}"
+                              bindtap="onClickQuickTag">
+                                <image wx:if="{{tag.tagType === 'pointTag'}}"
+                                  src="{{tag.isSelected ? 'https://images3.c-ctrip.com/train/2023-3/xiaochengxu/6.15/img-jf-yx.png' : 'https://images3.c-ctrip.com/train/2023-3/xiaochengxu/6.15/img-jf-wx.png'}}"
+                                  class="point-img" />
+                                <view wx:else>{{tag.name}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 搜一搜 -->
+        <template is="search-coupon"
+          wx:if="{{ isFromAwakenH5 && searchcouponHandle}}"
+          data="{{isLogin, searchCouponInfo, activityCode, isFromAwakenH5}}"></template>
+
+        <!-- pc 导流新客提示 -->
+        <!-- <view class="newCustomer-tip" wx:if="{{ showNewCustomerTip }}">
+            <view class="newCustomer-tip-desc">
+                <view class="newCustomer-tip-tit">
+                    新客免费领取
+                    <text>￥120元大礼包</text>
+                </view>
+                <view class="newCustomer-tip-sub">下单享优惠，旅途更舒适</view>
+            </view>
+            <button class="btn" wx:if="{{ !isLogin }}" bind:tap="onClickReceiveRights">立即领取</button>
+            <button class="btn disabled" wx:else>{{ '已领取' }}</button>
+        </view> -->
+
+        <view class="list-box">
+            <view wx:for="{{trainList}}"
+              wx:key="TrainNumber"
+              wx:for-item="train"
+              wx:for-index="keyIndex"
+              wx:if="{{ keyIndex < displayLength}}">
+                <!-- 智慧中转车次样式 -->
+                <block wx:if="{{train.TransferLineTip}}">
+                    <view bindtap="toRecommandTrainsitDetail"
+                      data-index="{{keyIndex}}"
+                      data-from="fromMainTrainList"
+                      data-is-transfer-recommed-line="true">
+                        <template is="transitCard"
+                          data="{{...train}}" />
+                    </view>
+                </block>
+                <!-- 普通直达车次样式 -->
+                <block wx:else>
+                    <view class="sel-box"
+                      id="{{'train_item_' + keyIndex}}"
+                      data-index="{{keyIndex}}"
+                      bindtap="clickTrainItem">
+                        <TrainCard train="{{train}}"
+                          keyIndex="{{keyIndex}}"
+                          seatCardIndex="{{seatCardIndex}}"
+                          bind:itemhandle="trainItemHandle"
+                          bind:openOmniPop="getOmnipotentData"
+                          bind:openWiseSeatPop="openWiseSeatPop"
+                          bind:combiDetailClick="combiDetailClick"
+                          from="fromMainTrainList"
+                          isXpageNew="{{!isReschedule}}"
+                          isCannotGrabTicket="{{!oldOrderInfo.IsCanGrabTicket && isReschedule}}"></TrainCard>
+                    </view>
+                </block>
+            </view>
+            <view class="sel-nomore"
+              wx:if="{{otherTrainList.length}}">
+                <text>{{selectedQuickFilterTags && !trainList.length ? '精确搜索无结果，以下是其他方案的列车':'以下是其他方案的列车'}}</text>
+            </view>
+            <view wx:for="{{otherTrainList}}"
+              wx:key="TrainNumber"
+              wx:for-item="train"
+              wx:for-index="keyIndex"
+              wx:if="{{keyIndex < displayLength - trainList.length}}">
+                <!-- 智慧中转车次样式 -->
+                <block wx:if="{{train.TransferLineTip}}">
+                    <view bindtap="toRecommandTrainsitDetail"
+                      data-index="{{keyIndex}}"
+                      data-from="fromOtherTrainList"
+                      data-is-transfer-recommed-line="true">
+                        <template is="transitCard"
+                          data="{{...train}}" />
+                    </view>
+                </block>
+                <!-- 普通直达车次样式 -->
+                <block wx:else>
+                    <view class="sel-box"
+                      id="{{'other_train_item_' + keyIndex}}"
+                      data-index="{{keyIndex}}"
+                      data-isfromOtherList="{{true}}"
+                      bindtap="clickTrainItem">
+                        <TrainCard train="{{train}}"
+                          keyIndex="{{keyIndex}}"
+                          seatCardIndex="{{otherSeatCardIndex}}"
+                          bind:itemhandle="trainItemHandle"
+                          bind:openOmniPop="getOmnipotentData"
+                          bind:openWiseSeatPop="openWiseSeatPop"
+                          bind:combiDetailClick="combiDetailClick"
+                          from="fromOtherTrainList"
+                          isXpageNew="{{!isReschedule}}"
+                          isCannotGrabTicket="{{!oldOrderInfo.IsCanGrabTicket && isReschedule}}"></TrainCard>
+                    </view>
+                </block>
+            </view>
+
+            <view class="sel-nomore"
+              wx:if="{{trainTransferGroupInfos.length}}"
+              id="train_transfer_list">
+                <text wx:if="{{!trainList.length && !otherTrainList.length }}">该线路无直达火车，为您推荐中转方案</text>
+                <text wx:elif="{{displayLength >= trainList.length + otherTrainList.length}}">中转方案推荐</text>
+            </view>
+
+            <!-- 中转 -->
+            <view wx:if="{{displayLength >= trainList.length + otherTrainList.length}}"
+              wx:for="{{trainTransferGroupInfos}}"
+              wx:key="{{index}}"
+              data-index="{{index}}"
+              bindtap="toTransitDetail">
+                <template is="transitCard"
+                  data="{{...item}}" />
+            </view>
+            <view wx:if="{{!trainTransferGroupInfos.length && !trainList.length && !otherTrainList.length}}"
+              class="sel-noresult">
+                <view class="icon i-yoyo"></view>
+                <view class="cpinkgray">没有找到符合筛选条件的火车</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<view class="train-ftbar"
+  wx:if="{{!isGetOnView && !showSkeleton}}"
+  id="ftbar">
+    <view class="item {{!(filterTrainType==1&&filterTrainTime==1) ? 'selected' : '' }} "
+      bindtap="showFilterView">
+        <view class="dot-byfilter"
+          hidden="{{filterTrainType==1&&filterTrainTime==1 && selectedStations.length <=0 }}"></view>
+        <view class="txt {{!trainList.length && !otherTrainList.length && trainTransferGroupInfos.length && filterTrainType==1 && filterTrainTime==1 ? 'grey-txt' : ''}}">筛选</view>
+    </view>
+    <view data-type="DepartTimeStamp"
+      bindtap="sortBy"
+      class="item {{sortType == 'DepartTimeStamp' ? 'selected' : ''}}">
+        <view class="txt"
+          wx:if="{{sortType !== 'DepartTimeStamp'}}">时间</view>
+        <view class="txt"
+          wx:else>出发 {{sortAscending ? '早-晚' : '晚-早'}}</view>
+    </view>
+    <view data-type="RunTime"
+      bindtap="sortBy"
+      class="item {{sortType == 'RunTime' ? 'selected' : ''}}">
+        <view class="txt">耗时 {{(sortType == 'RunTime') ? (sortAscending ? '短-长' : '长-短') : ''}}</view>
+    </view>
+    <view data-type="Price"
+      bindtap="sortBy"
+      class="item {{sortType == 'Price' ? 'selected' : ''}}">
+        <view class="txt">价格 {{(sortType == 'Price') ? (sortAscending ? '低-高' : '高-低') : ''}}</view>
+    </view>
+</view>
+<view class="backmask {{isFilterViewAnimation ? 'active' : ''}}"
+  bindtap="hideFilterView"
+  catchtouchmove="preventBackMove">
+</view>
+<view class="pop-botm {{isFilterViewAnimation ? 'active' : ''}}"
+  catchtouchmove="preventBackMove">
+    <view class="pop-botm-hd">
+        <view class="btn-cancel"
+          bindtap="resetFilter">清空</view>
+        <view class="tit">
+            筛选
+        </view>
+        <view class="btn-submit"
+          bindtap="confirmFilter">确定</view>
+    </view>
+    <view class="pop-botm-bd filter-box">
+        <view class="tit">车型选择</view>
+        <view class="filter-list">
+            <view bindtap="selectType"
+              data-type="2"
+              class="item {{filterTrainConditions.Train_GC ? 'cur' : ''}}">
+                <view class="cont">高铁（G/C）</view>
+                <text class="ifont-filtercheck"></text>
+            </view>
+            <view bindtap="selectType"
+              data-type="4"
+              class="item {{filterTrainConditions.Train_D ? 'cur' : ''}}">
+                <view class="cont">动车（D）</view>
+                <text class="ifont-filtercheck"></text>
+            </view>
+            <view bindtap="selectType"
+              data-type="8"
+              class="item {{filterTrainConditions.Train_ZTK ? 'cur' : ''}}">
+                <view class="cont">普通（Z/T/K）</view>
+                <text class="ifont-filtercheck"></text>
+            </view>
+            <view bindtap="selectType"
+              data-type="16"
+              class="item {{filterTrainConditions.Train_YL ? 'cur' : ''}}">
+                <view class="cont">其他（Y/L等）</view>
+                <text class="ifont-filtercheck"></text>
+            </view>
+        </view>
+        <view class="tit">
+            <text>出发时间</text>
+        </view>
+
+        <view class="filter-list">
+            <view catchtap="selectTime"
+              data-time="2"
+              class="item {{filterTimeConditions.TIME_0_6 ? 'cur' : ''}}">
+                <view class="cont">
+                    <view class="t">早上</view>
+                    <view class="time">00:00 - 06:00</view>
+                </view>
+                <text class="ifont-filtercheck"></text>
+            </view>
+            <view catchtap="selectTime"
+              data-time="4"
+              class="item {{filterTimeConditions.TIME_6_12 ? 'cur' : ''}}">
+                <view class="cont">
+                    <view class="t">上午</view>
+                    <view class="time">06:00 - 12:00</view>
+                </view>
+                <text class="ifont-filtercheck"></text>
+            </view>
+            <view catchtap="selectTime"
+              data-time="8"
+              class="item {{filterTimeConditions.TIME_12_18 ? 'cur' : ''}}">
+                <view class="cont">
+                    <view class="t">下午</view>
+                    <view class="time">12:00 - 18:00</view>
+                </view>
+                <text class="ifont-filtercheck"></text>
+            </view>
+            <view catchtap="selectTime"
+              data-time="16"
+              class="item {{filterTimeConditions.TIME_18_24 ? 'cur' : ''}}">
+                <view class="cont">
+                    <view class="t">晚上</view>
+                    <view class="time">18:00 - 24:00</view>
+                </view>
+                <text class="ifont-filtercheck"></text>
+            </view>
+        </view>
+        <view class="tit">
+            <text>出发/到达车站</text>
+        </view>
+        <view class="filter-list">
+            <view bindtap="selectStation"
+              data-type="{{s.isDepart ? 'depart':'arrive'}}"
+              data-index="{{index}}"
+              class="item station {{s.isSelected ? 'cur' : ''}}"
+              wx:for="{{stations}}"
+              wx:for-item="s"
+              wx:key="index">
+                <view class="cont">{{s.name}}</view>
+                <text class="ifont-filtercheck"></text>
+            </view>
+        </view>
+
+    </view>
+</view>
+<block wx:if="{{showType == 'argentTip'}}">
+    <view class="backmask active"
+      bindtap="hideFilterView"
+      catchtouchmove="preventBackMove"></view>
+    <view class="pop-urgent">
+        <image src="https://images3.c-ctrip.com/train/2021/xiaochengxu/8.37.4/image_daigou@3x.png"
+          alt="" />
+        <view class="tit">请务必确认以下信息</view>
+        <view class="txt">购票前请先确认您已到达检票口，出票后您有足够的时间检票进站乘车 (支付后5分钟内出结果）</view>
+        <view class="txt">若出票失败，订单自动取消并全额退款</view>
+        <view class="txt">若出票成功请尽快检票进站，携程不承担误车造成的损失</view>
+        <view class="btn-box">
+            <button class="cancel"
+              bindtap="hideBackDrop">我来不及检票乘车，暂不预订</button>
+            <button class="sumbit"
+              bindtap="submitArgentTicket">出票后我能检票乘车，立即预订</button>
+        </view>
+    </view>
+</block>
+
+<!-- 引导订阅 -->
+<block wx:if="{{showType == 'subscribe'}}">
+    <view class="backmask active"
+      bindtap="onCloseSubscribeDialog"></view>
+    <view class="pop-subscribe">
+        <image src="https://images3.c-ctrip.com/train/2021/xiaochengxu/8.37.4/xiaoxidingyue/xiaoxidingyue@3x.png"
+          alt=""
+          class="slogan" />
+        <view class="tit">请求打开消息订阅</view>
+        <view class="txt">建议允许订阅消息通知，以便及时获取重要提醒，保障出行体验</view>
+        <view class="btn-box">
+            <button class="btn-cancel"
+              bindtap="onCloseSubscribeDialog">暂不开启</button>
+            <button class="btn-submit"
+              bindtap="onClickSubscribeTicket">一键开启</button>
+        </view>
+        <text class="ifont-closed"
+          bindtap="onCloseSubscribeDialog"></text>
+    </view>
+</block>
+
+<!-- 引导订阅 -->
+<block wx:if="{{showType == 'subscribeForRecieveCoupon'}}">
+    <view class="backmask active"
+      bindtap="hideBackDrop"></view>
+    <view class="pop-subscribe">
+        <image src="https://images3.c-ctrip.com/train/2021/xiaochengxu/8.37.4/xiaoxidingyue/xiaoxidingyue@3x.png"
+          alt=""
+          class="slogan" />
+        <view class="tit">请求打开消息订阅</view>
+        <view class="txt">建议允许订阅消息通知，以便及时获取重要提醒，保障出行体验</view>
+        <view class="btn-box">
+            <button class="btn-cancel"
+              bindtap="hideBackDrop">暂不开启</button>
+            <button class="btn-submit"
+              bindtap="onClickSubscribeTicketForRecieveCoupon">一键开启</button>
+        </view>
+        <text class="ifont-closed"
+          bindtap="hideBackDrop"></text>
+    </view>
+</block>
+
+<!-- 公告通知 -->
+<template is="train-notice"
+  wx:if="{{showType == 'noticeModalShow'}}"
+  data="{{noticeInfoList, trainNoticeTitle, noticeDesc, scrollView, activeIndex, jumpMoreUrl, hkticket }}">
+
+</template>
+
+<view class="view-check"
+  bindanimationend="viewReadyHandle"></view>
+<OmnipotentGrab visible="{{ showType === 'omniShow' }}"
+  info="{{ omnipotentInfo }}"
+  bind:itemhandle="trainItemHandle"
+  bind:hideBackDrop="hideBackDrop"
+  isPay />
+
+<!-- 组合座、上车补、跨站底部弹窗坐席弹窗 -->
+<CombiSeatInfo wx:if="{{ showType === 'combiPopShow' || showType === 'thenByPopShow'}}"
+  trainCombiInfo="{{ trainCombiInfo }}"
+  showType="{{showType}}"
+  curThenByTicketInfo="{{curThenByTicketInfo}}"
+  bind:hideBackDrop="hideBackDrop"
+  bind:goCombiBuy="goCombiBuy"
+  bind:goThenByBuy="goThenByBuy"
+  bind:goTimeTable="goTimeTable" />
+
+<!-- 换座说明 -->
+<block wx:if="{{showType == 'combiDetailPopShow'}}">
+    <view class="backmask active"
+      bindtap="hideBackDrop"
+      catchtouchmove="preventBackMove"></view>
+    <view class="pop-subscribe chang-seat-pop">
+        <image src="https://images3.c-ctrip.com/train/2022/app/8.58/zhuliucheng/cheneihuanzuo/img-cnhz-news.png"
+          class="chang-seat-info" />
+        <text class="ifont-closed"
+          bindtap="hideBackDrop"></text>
+    </view>
+</block>
+
+<!-- 新客礼包信息浮层 -->
+<template is="new-guest-slideup"
+  data="{{ data: newGuestGiftInfo }}"
+  wx:if="{{ showType === 'newGuestInfoPop' }}" />
+
+<!-- 购票临近发车时间提醒弹窗 -->
+<block wx:if="{{showType == 'departureTimeTipPopShow'}}">
+    <view class="backmask active"
+      bindtap="departureTimeTipPopClick"
+      catchtouchmove="preventBackMove"></view>
+    <view class="pop-subscribe departure-time-tip">
+        <view class="text"
+          hover-class="none"
+          hover-stop-propagation="false">
+            <view class="title">距离发车时间提示</view>
+            <view class="content">您选择的列车距发车时间<text style="color: #006FF6">仅剩{{remainingTime}}分钟</text>，请确保有足够的时间进站安检和检票乘车，以免耽误您的行程</view>
+        </view>
+        <button class="btn"
+          bindtap="departureTimeTipPopClick">我知道了</button>
+    </view>
+</block>
+
+<!-- <subscribeGuide wx-if="{{subscribeGuideFlag}}" /> -->
+<subscribeGuide visible="{{subscribeGuideFlag}}" />

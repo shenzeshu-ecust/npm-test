@@ -1,0 +1,60 @@
+@import '../../common/common.wxss';
+.count-down-pendant {
+    position: fixed;
+    bottom: 228rpx;
+    left: 24rpx;
+    color: #fff;
+    font-size: 20rpx;
+    width: 108rpx;
+    display: flex;
+    flex-direction: column;
+}
+.task-finish {
+    animation: taskFinish 15s linear forwards;
+}
+@keyframes taskFinish {
+    100% {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
+}
+.count-down-pendant .img {
+    height: 80rpx;
+    width: 108rpx;
+}
+.count-down-pendant .content {
+    background: rgba(51, 51, 51, 0.75);
+    border-radius: 8rpx;
+    height: 80rpx;
+    width: 108rpx;
+}
+.count-down-pendant .process {
+    height: 16rpx;
+    border-radius: 8rpx;
+    padding: 2rpx;
+    box-sizing: border-box;
+    background: #111111;
+}
+.count-down-pendant .process .inner {
+    height: 12rpx;
+    background: #ffe479;
+    border-radius: 8rpx;
+}
+.count-down-pendant .process .start-animation {
+    animation-name: processLine;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+@keyframes processLine {
+    100% { width: 104rpx; }
+}
+.count-down-pendant .arrow{
+    display: inline-block;
+    color: #FFE479;
+    font-size: 20rpx;
+}
+.count-down-pendant .desc {
+    padding: 0 13rpx 10rpx;
+    text-align: center;
+}

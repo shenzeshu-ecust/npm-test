@@ -1,0 +1,301 @@
+<!-- 低星WiFi落地页强化续住感知（去除房型浮层） -->
+<import src="../roompackage/package.wxml" />
+<template name="tilingroom">
+    <view class="room-item {{isGuessLike && 'guess-like-room'}}" bindtap="{{fromLS && subRoom.status === 1 ? 'toBooking' : 'showRoomLayer'}}" data-key="{{keyMap.key}}" data-skey="{{keyMap.skey}}" data-type="{{type}}" 
+        data-index="{{index}}" data-ubt-key="xcx_hotel_detail_sellroomdetail" id="autotest_xcx_hotel_detail_sellroomdetail">
+        <view class="room-img" catchtap="showRoomImgLayer" data-key="{{keyMap.key}}">
+            <!--'/default.jpg'作用: 防止src为空或undefined时不触发binderror-->
+            <image src="{{room.logo || '/default.jpg'}}" model="scaleToFill" lazy-load binderror="noImageTrace" data-id="{{room.id}}" data-type="baseroom"></image>
+            <text wx:if="{{isGuessLike}}" class="room-like">猜您喜欢</text>
+            <text wx:if="{{subRoom.roomNo}}" class="r-num num-base">编号:{{subRoom.roomNo}}</text>
+            <text wx:if="{{room.pictureList && room.pictureList.length}}" class='num'>{{room.pictureList.length}}</text>
+        </view>
+        <view class="c multi {{subRoom.status !== 1 ? 'gray-filter' : ''}}">
+            <view class="h3">
+                <text>{{subRoom.name}}</text>
+                <text class="wechat-font-arrow-right dt-color4 dt-fn12"></text>
+                <text wx:if="{{subRoom.isFriendRecommendRoom && isShareShow}}" class="recommend k" >好友推荐</text>
+                <text wx:if="{{subRoom.isCalendarSuite}}" class="room-h1-tag">套餐</text>
+                <text wx:if="{{subRoom.headTag}}" class="head-tag"
+                      style="color:{{subRoom.headTag.fntColor}}; background:{{subRoom.headTag.frmColor}}">{{subRoom.headTag.title}}</text>
+            </view>
+            <view wx:if="{{subRoom.hourInfoName}}" class="txt-item">{{subRoom.hourInfoName}}</view>
+            <!-- 套餐 -->
+            <template is="packageDesc" data="{{roomPackageInfo: subRoom.roomPackageInfo}}"></template>
+            <view class="txt-item dt-cell-v f-wrap">
+                <text wx:if="{{room.houseTypeDesc}}" class="baseinfo-item tag-better">{{room.houseTypeDesc}}</text>
+                <template is="breakfast" data="{{breakfast: subRoom.breakfast}}"></template>
+                <text wx:if="{{subRoom.bed}}" class="baseinfo-item">{{subRoom.bed}}</text>
+                <text wx:if="{{subRoom.maxNum}}" class="baseinfo-item">{{subRoom.maxNum}}人入住</text>
+                <text wx:if="{{room.area}}" class="baseinfo-item">{{room.area}}</text>
+            </view>
+            <!-- 取消政策 -->
+            <template is="cancelDesc" data="{{cancelPolicyInfo: subRoom.cancelPolicyInfo}}"></template>
+            <!-- 礼 -->
+            <template is="giftTitle" data="{{giftInfoList: subRoom.giftInfo.packageInfoList}}"></template>
+            <!-- 标签 -->
+            <view wx:if="{{subRoom.featureTags.length || showPresalePackage || showPlanetStyle}}" class="tags-wrap tags-line">
+                <text wx:if="{{showPlanetStyle}}" class="ftag-item">旗舰店直营</text>
+                <view wx:if="{{showPresalePackage}}" class="presale-tag">特卖频道限时专享</view>
+                <text wx:for="{{subRoom.featureTags}}" wx:for-item="ftag" class="ftag-item">{{ftag.title}}</text>
+            </view>
+
+            <!-- layout -->
+            <view class="layout-reset f-nowrap">
+                <!-- Layout Left -->
+                <view class="left-shrink cell-column ft-0">
+                    <view class="cell cell-star f-wrap">
+                    <!-- 激励话术 -->
+                    <view class="dt-flexs">
+                        <template is="roomExtraDesc" data="{{room: subRoom}}" />
+                        <template is="limitedTime" data="{{limitedTimePromotionTip: subRoom.roomInspireInfo && subRoom.roomInspireInfo.limitedTimePromotionTip}}"></template>
+                        <view class="tags-wrap" wx:if="{{subRoom.fromBooking}}">
+                            <image src="https://pages.c-ctrip.com/hotels/wechat/img/booking-icon.png" class="booking-img"></image>
+                        </view>
+                        <view wx:if="{{subRoom.canUseMacaoCoupon}}" class="tag-03 sptb">{{macaoCouponTag}}</view>
+                    </view>
+                        <view wx:if="{{!hasLogin}}">
+                            <template is="notLoginPriceTxt" data="{{status: subRoom.status}}" />
+                        </view>
+                        <!-- 价格数字 -->
+                        <view wx:else class="price-layout ln cell-self-end dt-flexs">
+                            <view wx:if="{{subRoom.hourRoomDuration}}" class="hour-duration">{{subRoom.hourRoomDuration}}小时</view>
+                            <view class="price2 price2-detail price-cell f-nowrap">
+                                <view wx:if="{{dateInfo.isLongRent}}" class="price-days">{{dateInfo.days}}晚</view>
+                                <view wx:if="{{subRoom.priceLabelDesc}}" class="c2 w-nowrap">{{subRoom.priceLabelDesc}}</view>
+                                <view wx:if="{{subRoom.originPrice > 0}}" class="lnum del">
+                                    <text>￥{{subRoom.originPrice}}</text>
+                                </view>
+                                <view class="lnum dt-flexs">
+                                    <text wx:if="{{dateInfo.days > 1 && !dateInfo.isLongRent}}" class="dt-fn12 pl-8 lnumb">均</text>
+                                    <text class="yen blue-color">￥</text><text class="strong blue-color">{{subRoom.price}}</text>
+                                </view>
+                            </view>
+                            <template is="taxExtraDesc" data="{{priceLabelExtraDesc: subRoom.priceLabelExtraDesc, keyMap, fromLS}}"></template>
+                            <view wx:if="{{dateInfo.isLongRent && subRoom.priceAvg}}" class="price-avg-date">￥{{subRoom.priceAvg}}/晚</view>
+                        </view>
+                    </view>
+
+                    <!-- 价格标签单独行 -->
+                    <view wx:if="{{hasLogin && subRoom.priceTags && subRoom.priceTags.length}}" class="cell-v-end pt12"
+                        catchtap="{{fromLS ? '' : 'starPriceDetailInfo'}}" data-key="{{keyMap.key}}" data-skey="{{keyMap.skey}}"
+                        data-type="hotelRoom" data-ubt-key="xcx_xqy_jgdj" id="autotest_xcx_xqy_jgdj">
+                        <price-tag-new priceCalcItems="{{subRoom.priceTags}}" fromLS="{{subRoom.isHourRoom ? false : fromLS}}" scanPriceTag="{{scanPriceTag}}"></price-tag-new>
+                    </view>
+                </view>
+                <!--Layout Right-->
+                <view wx:if="{{hasLogin}}" class="right-shrink cell-self-end">
+                    <template is="toBookingBtn" data="{{subRoom: subRoom, keyMap, type, index, fromLS}}"></template>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<template name="baseroom">
+<view class="room-item room-top no-shadow" style="top: {{mpNavHeight}}px" id="b{{keyMap.key}}">
+    <view class="room-img" catchtap="showRoomImgLayer" data-key="{{keyMap.key}}" data-ubt-key="xcx_jdxq_wlfc" data-type="{{type}}" data-index="{{index}}" >
+        <!--'/default.jpg'作用: 防止src为空或undefined时不触发binderror-->
+        <image src="{{room.logo || '/default.jpg'}}" model="scaleToFill" lazy-load binderror="noImageTrace" data-id="{{room.id}}" data-type="baseroom"></image>
+        <text wx:if="{{room.lowPriceIncentive}}" class="low-price">{{room.lowPriceIncentive}}</text>
+        <text wx:if="{{room.pictureList && room.pictureList.length}}" class="num">{{room.pictureList.length}}</text>
+    </view>
+    <view class="c multi {{minPriceRoom.status !== 1 && 'gray-filter'}}" catchtap="toggleSubRoom" data-key="{{keyMap.key}}" data-ubt-key="xcx_hotel_detail_masterroom">
+        <view class="h3 base-title">
+            <text>{{room.name}}</text>
+            <text class="{{room.hiddenSub ? 'wechat-font-icon-down' : 'wechat-font-icon-up'}} colorblue"></text>
+        </view>
+        <view class="txt-item">
+            <text wx:if="{{room.bed}}" class="mr10">{{room.bed}}</text>
+            <text wx:if="{{room.guestDesc}}" class="mr10">{{room.guestDesc}}</text>
+            <text wx:if="{{room.area}}" class="mr10">{{room.area}}</text>
+        </view>
+        <view class="layout-reset">
+            <!--Layout Left-->
+            <view class="left-shrink">
+                <view class="tags-wrap tags-line ft-0">
+                    <text wx:if="{{showPlanetStyle}}" class="ftag-item">旗舰店直营</text>
+                    <view wx:if="{{showPresalePackage}}" class="presale-tag">特卖频道限时专享</view>
+                </view>
+            </view>
+            <!-- 起价 -->
+            <view wx:if="{{!hasLogin}}">
+                <template is="notLoginPriceTxt" data="{{status: minPriceRoom.status}}" />
+            </view>
+            <view wx:else class="price-layout ln">
+                <view wx:if="{{minPriceRoom.status !== 1}}" class="dt-sw">已订完</view>
+                    <view class="price2 price2-detail price-cell" >
+                        <view wx:if="{{dateInfo.isLongRent}}" class="price-days">{{dateInfo.days}}晚</view>
+                        <view wx:if="{{minPriceRoom.priceLabelDesc}}" class="c2">{{minPriceRoom.priceLabelDesc}}</view>
+                        <view class="lnum del" wx:if="{{minPriceRoom.originPrice > 0}}">
+                            <text class="yen">￥</text><text class="lnum">{{minPriceRoom.originPrice}}</text>
+                        </view>
+                        <view class="lnum">
+                            <text wx:if="{{dateInfo.days > 1 && !dateInfo.isLongRent}}" class="dt-fn12">均</text>
+                            <text class="yen blue-color">￥</text>
+                            <text class="strong blue-color">{{minPriceRoom.price}}</text>
+                            <text class="pricestar blue-color">起</text>
+                        </view>
+                    </view>
+                <template is="taxExtraDesc" data="{{priceLabelExtraDesc: minPriceRoom.priceLabelExtraDesc, fromLS}}"></template>
+                <view wx:if="{{dateInfo.isLongRent && minPriceRoom.priceAvg}}" class="price-avg-date">￥{{minPriceRoom.priceAvg}}/晚</view>
+            </view>
+        </view>
+        <!-- baseroom价格标签单独行 -->
+        <view wx:if="{{minPriceRoom.priceTags && minPriceRoom.priceTags.length}}" class="cell-v-end mt8">
+            <price-tag-new priceCalcItems="{{minPriceRoom.priceTags}}" hideIcon="{{true}}" fromLS="{{fromLS}}" scanPriceTag="{{scanPriceTag}}"></price-tag-new>
+        </view>
+    </view>
+</view>
+</template>
+
+<template name="subroom">
+    <!--房型可订且是低星落地页 直接跳订单填写页-->
+    <view class="room-item {{item.status !== 1 ? 'gray-filter' : ''}}"
+        catchtap="{{fromLS && item.status === 1 ? 'toBooking' : 'showRoomLayer'}}" data-key="{{keyMap.key}}" data-skey="{{keyMap.skey}}" data-type="{{type}}" data-index="{{index}}" 
+        data-ubt-key="xcx_hotel_detail_sellroomdetail" id="autotest_detailpage_sonroom" data-sub="true">
+        <!--Star 房型名称-->
+        <view wx:if="{{item.isRecommend}}" class="room-like head-tag">猜您喜欢</view>
+        <view class="subroom-title">
+            <view class="flex-align-center f-wrap">
+                <template is="breakfast" data="{{breakfast: item.breakfast}}"></template>
+                <text wx:if="{{item.bed}}" class="baseinfo-item">{{item.bed}}</text>
+                <text wx:if="{{item.guestDesc}}" class="baseinfo-item">{{item.guestDesc}}</text>
+                <text class="wechat-font-arrow-right dt-color4 dt-fn12"></text>
+                <text wx:if="{{item.isFriendRecommendRoom && isShareShow}}" class="recommend ml10">好友推荐</text>
+                <text wx:if="{{item.isCalendarSuite}}" class="room-h1-tag">套餐</text>
+                <text wx:if="{{item.headTag}}" class="head-tag"
+                    style="color:{{item.headTag.fntColor}}; background:{{item.headTag.frmColor}}">{{item.headTag.title}}</text>
+            </view>
+            <view wx:if="{{item.roomNo}}"><text class="r-num num-sub pd-0">编号:{{item.roomNo}}</text></view>
+        </view>
+        <!--End 房型名称-->
+
+        <view wx:if="{{item.hourInfoName}}" class="s"><text>入住时间: {{item.hourInfoName}}</text></view>
+        <view wx:if="{{item.rateCode}}" class="txt-item">{{item.rateCode}}</view>
+        <template is="packageDesc" data="{{roomPackageInfo: item.roomPackageInfo}}"></template>
+        <template is="cancelDesc" data="{{cancelPolicyInfo: item.cancelPolicyInfo}}"></template>
+        <!-- 礼 -->
+        <template is="giftTitle" data="{{giftInfoList: item.giftInfo.packageInfoList}}"></template>
+        <view wx:if="{{item.featureTags.length || showPresalePackage || showPlanetStyle}}" class="tags-wrap tags-line">
+            <text wx:if="{{showPlanetStyle}}" class="ftag-item">旗舰店直营</text>
+            <view wx:if="{{showPresalePackage}}" class="presale-tag">特卖频道限时专享</view>
+            <text wx:for="{{item.featureTags}}" wx:for-item="ftag" class="ftag-item">{{ftag.title}}</text>
+        </view>
+
+        <!-- layout区域 -->
+        <view class="layout-reset">
+            <!-- Layout Left -->
+            <view class="left-shrink ft-0">
+                <template is="roomExtraDesc" data="{{room: item}}" />
+                <!-- 限时抢购 -->
+                <template is="limitedTime" data="{{limitedTimePromotionTip: item.roomInspireInfo && item.roomInspireInfo.limitedTimePromotionTip}}"></template>
+                <view class="tags-wrap lb" wx:if="{{item.fromBooking}}">
+                    <image src="https://pages.c-ctrip.com/hotels/wechat/img/booking-icon.png" class="booking-img" ></image>
+                </view>
+                <view wx:if="{{item.canUseMacaoCoupon}}" class="tag-03 lb">{{macaoCouponTag}}</view>
+            </view>
+            <!--Star Layout Right-->
+            <view class="right-shrink cell-v {{item.status !== 1 ? 'dt-disabled' : ''}}">
+                <view class="star multi cell-self-end mr8">
+                    <view class="price2 price2-detail price-cell">
+                        <view wx:if="{{dateInfo.isLongRent}}" class="price-days">{{dateInfo.days}}晚</view>
+                        <view wx:if="{{item.priceLabelDesc}}" class="c2">{{item.priceLabelDesc}}</view>
+                        <view class="lnum del" wx:if="{{ item.originPrice > 0}}">
+                            <text class="yen">￥</text><text class="lnum">{{item.originPrice}}</text>
+                        </view>
+                        <view class="lnum">
+                            <text wx:if="{{dateInfo.days > 1 && !dateInfo.isLongRent}}" class="dt-fn12 lnum pl-8">均</text>
+                            <text class="yen blue-color">￥</text>
+                            <text class="strong blue-color">{{item.price}}</text>
+                        </view>
+                    </view>
+                    <template is="taxExtraDesc" data="{{priceLabelExtraDesc: item.priceLabelExtraDesc, keyMap, fromLS}}"></template>
+                    <view wx:if="{{dateInfo.isLongRent && item.priceAvg}}" class="price-avg-date">￥{{item.priceAvg}}/晚</view>
+                    <view wx:if="{{item.priceTags && item.priceTags.length}}" class="cell-v-end pt12"
+                        catchtap="{{fromLS ? '' : 'starPriceDetailInfo'}}" data-key="{{keyMap.key}}"
+                        data-skey="{{keyMap.skey}}" data-type="hotelRoom" data-ubt-key="xcx_xqy_jgdj" id="autotest_xcx_xqy_jgdj">
+                        <price-tag-new priceCalcItems="{{item.priceTags}}" fromLS="{{fromLS}}" scanPriceTag="{{scanPriceTag}}"></price-tag-new>
+                    </view>
+                </view>
+                <!-- 预订按钮 -->
+                <view class="cell-self-end">
+                    <template is="toBookingBtn" data="{{subRoom: item, keyMap, type, index, fromLS}}"></template>
+                </view>
+            </view>
+            <!--End Layout Right-->
+        </view>
+    </view>
+</template>
+
+<!-- 早餐描述 -->
+<template name="breakfast">
+    <text wx:if="{{breakfast}}" class="baseinfo-item {{breakfast[0] === '无' ? '' : 'tag-better'}}">{{breakfast}}</text>
+</template>
+
+<!-- 取消政策 -->
+<template name="cancelDesc">
+    <view class="txt-item {{cancelPolicyInfo.adType === 1 ? 'tag-better' : ''}}">{{cancelPolicyInfo.cardTitle}}</view>
+</template>
+
+<!-- 限时抢购 -->
+<template name="limitedTime">
+    <view wx:if="{{limitedTimePromotionTip && limitedTimePromotionTip.countdown}}" class="ctag flash-sale">
+        {{limitedTimePromotionTip.textStr}} {{limitedTimePromotionTip.countdown}}
+    </view>
+</template>
+
+<!-- 礼盒 -->
+<template name="giftTitle">
+    <view wx:if="{{giftInfoList && giftInfoList[0]}}" class="txt-item flex-align-center">
+        <text class="gift-icon">礼</text>
+        <text class="single-ellipsis">{{giftInfoList[0].name}}</text>
+    </view>
+</template>
+
+<!-- 价格底部税费描述 -->
+<template name="taxExtraDesc">
+    <view wx:if="{{priceLabelExtraDesc}}" class="price-bottom-txt pt12"
+        catchtap="{{fromLS ? '' : 'starPriceDetailInfo'}}" data-key="{{keyMap.key}}"
+        data-skey="{{keyMap.skey}}" data-type="hotelRoom" data-ubt-key="xcx_xqy_jgdj" id="autotest_xcx_xqy_jgdj">
+        <text class="wechat-font-qa"></text>
+        {{priceLabelExtraDesc}}
+    </view>
+</template>
+
+<!--去预定按钮-->
+<template name="toBookingBtn">
+    <view catchtap="{{ subRoom.status === 1 && !fromLS ? 'toBooking' : '' }}" class="{{subRoom.status !== 1 ? 'dt-disabled' : ''}}"
+          data-skey="{{keyMap.skey}}" data-key="{{keyMap.key}}" data-type="{{type}}" data-index="{{index}}">
+        <view class="panicbuy-text {{subRoom.isFullRoomCanApply && 'full-room'}}" wx:if="{{subRoom.incentiveText && !comeFrom}}">{{subRoom.incentiveText}}</view>
+        <button class="default-btn booking-btn {{subRoom.showContinueLive ? 'r-lc-btn' : (subRoom.incentiveText ? 'panicbuy-btn' : '')}}" id="{{autoTestKey && autoTestKey}}">
+            <view class="button btn-t {{subRoom.customSaleTextCls}}">{{subRoom.status !== 1 && '订完' || subRoom.saleBtnText}}</view>
+            <view wx:if="{{!subRoom.showContinueLive}}" class="button btn-paytxt">{{subRoom.paymentInfo.title}}</view>
+        </button>
+        <block wx:if="{{subRoom.status === 1}}">
+            <view wx:if="{{subRoom.isGuarantee}}" class="button btn-db">需担保</view>
+        </block>
+    </view>
+</template>
+
+<!--需担保/优势/劣势文案-->
+<template name="roomExtraDesc">
+    <view class="room-extra-desc">
+        <view wx:if="{{room.paymentInfo.guaranteeTip}}" class="guarantee-info desc">
+            <text class="wechat-font-hotel-alert icon"></text>{{room.paymentInfo.guaranteeTip}}
+        </view>
+        <view wx:if="{{room.longRentText}}" class="desc">{{room.longRentText}}</view>
+        <view wx:if="{{room.defectText}}" class="desc"><text class="wechat-font-hotel-alert icon"></text>{{room.defectText}}</view>
+        <view wx:elif="{{room.inspireText}}" class="desc highlight">{{room.inspireText}}</view>
+    </view>
+</template>
+
+<!--未登录时 价格区域兜底展示-->
+<template name="notLoginPriceTxt">
+    <view wx:if="{{status === 1}}" class="not-login-price blue-color">
+        <view>登录后</view><view>查看价格</view>
+    </view>
+    <view wx:else class="not-login-soldout">
+        已订完
+    </view>
+</template>

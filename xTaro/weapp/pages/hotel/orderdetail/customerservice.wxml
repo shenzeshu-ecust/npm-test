@@ -1,0 +1,36 @@
+<common-layer wx:if="{{concatInfo.showCustomerLayer}}"
+              title="{{concatInfo.layerTitle}}"
+              contentStyle="padding: 12rpx 0 0"
+              bind:closeLayer="toggleCustomerLayer">
+    <view class="customer-layer" slot="content">
+        <view class="ask-hotel">
+            <view class="tit">
+                <view class="name">咨询店家（设施、早餐等问题）</view>
+            </view>
+            <view class="item" data-type="askhotel" catchtap="handleAskService">
+                <view class="content">
+                    <view class="title">店家在线客服</view>
+                    <view class="desc">线上会话将被安全保护，推荐使用</view>
+                </view>
+                <view class="icon-im icon-im-font-message wechat-font-message"></view>
+            </view>
+            <view class="item" wx:if="{{hotelTelInfo}}" data-tel="{{hotelTelInfo.call}}" data-from="layer" catchtap="callPhone">
+                <view class="content">
+                    <view class="title">店家电话</view>
+                    <view class="desc">
+                        <text>{{hotelTelInfo.display}}</text>
+                        <text class="copy" catchtap="handleCopyTelephone" data-text="{{hotelTelInfo.call}}">复制</text>
+                    </view>
+                </view>
+                <view class="icon-im icon-im-font-telephone wechat-font-phone"></view>
+            </view>
+        </view>
+        <view class="ask-ctrip" wx:if="{{concatInfo.type === 'askctrip'}}" data-type="askctrip" catchtap="handleAskService">
+            <view class="tit">
+                <view class="name">咨询携程（订单、支付等问题）</view>
+                <view class="title">携程在线客服</view>
+            </view>
+            <view class="icon-im icon-im-font-message wechat-font-message"></view>
+        </view>
+    </view>
+</common-layer>

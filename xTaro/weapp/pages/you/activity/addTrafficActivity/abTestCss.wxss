@@ -1,0 +1,411 @@
+/* 20230327新的AB实验 新增的css改动, 历史逻辑不动 */
+@font-face {
+  font-family: FZZDHJW--GB1-0;
+  src: url('https://images3.c-ctrip.com/marketing/2023/03/cash/fzzdht.TTF');
+}
+
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.managerB_topInfo {
+  padding-top: 40rpx !important;
+}
+
+.inviteFriendsBox_B {
+  background-image: url("https://images3.c-ctrip.com/marketing/2023/03/cash/envelope.png") !important;
+  background-size: 100% 100%;
+  padding-top: 32rpx;
+  min-height: 640rpx !important;
+  height: auto !important;
+}
+
+.swiper_wrap_B {
+  position: absolute;
+  top: 128rpx;
+  left: 50rpx;
+  width: 528rpx;
+  height: 64rpx;
+  background: none !important;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.rulesAndSubscribeBox_B {
+  margin-bottom: 0 !important;
+  background-size: 100% 100%;
+  align-items: center;
+}
+
+.wu_tag_B {
+  background-image: url("https://images3.c-ctrip.com/marketing/2023/03/cash/nothreshold.png") !important;
+  left: 34rpx !important;
+  top: 81rpx !important;
+}
+
+.inviteFriendFirstLine_B {
+  display: inline-flex;
+  /* margin-top: 70rpx; */
+  padding-top: 80rpx;
+  font-family: FZZDHJW--GB1-0;
+  font-size: 34rpx;
+  color: #D5290C;
+  letter-spacing: 0;
+  text-align: center;
+
+  height: auto;
+  width: 126rpx;
+  max-width: 126rpx;
+  height: 35rpx;
+  object-fit: contain;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  margin-bottom: 5rpx;
+}
+
+.inviteFriendSecLine_must_B {
+  display: inline-flex;
+  width: 148rpx;
+  height: 75rpx;
+  padding-right: 12rpx;
+}
+
+.inviteFriendSecLine_unit_B {
+  display: inline-flex;
+  width: 74rpx;
+  height: 75rpx;
+}
+
+.inviteFriendImgBox_B {
+  margin-top: 30rpx;
+  min-height: 116rpx;
+  width: 520rpx !important;
+}
+
+.subscribeBox_B {
+  margin-left: 26rpx !important;
+
+}
+
+.rulesBox_B {
+  font-size: 24rpx;
+  background: rgba(0, 0, 0, 0.30);
+}
+.no_border{
+  border-color: transparent !important;
+}
+.userHeadImg{
+  width: 88rpx !important;
+  height: 88rpx !important;
+}
+.inviteFriendSecLine_B {
+  /* font-family: FZZDHJW--GB1-0; */
+  font-size: 74rpx;
+  color: #D5290C;
+  /* background-image: -webkit-linear-gradient(bottom, #FF0088, #F3053B, #EE122B, #F96410, #D5290C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
+  font-weight: bolder;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rpx;
+  min-height: 110rpx;
+}
+
+.twentyCashNum_count_B {
+  display: inline-flex !important;
+  padding-top: 4rpx;
+  margin-bottom: -3rpx;
+  font-size: 90rpx !important;
+  color: #F81135 !important;
+}
+
+.inviteFriendThridLine_B {
+  color: #DA3737 !important;
+  text-align: center;
+  letter-spacing: 2rpx;
+  font-size: 26rpx !important;
+  padding: 0rpx 0 7rpx;
+}
+
+.go_start_buoy {
+  position: absolute;
+  right: 4rpx;
+  top: 225rpx;
+  width: 120rpx;
+  height: 140rpx;
+  background-image: url("https://images3.c-ctrip.com/marketing/2023/05/cash180/withdraw_icon_06.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  z-index: 1;
+}
+
+.go_start_buoy_no {
+  position: absolute;
+  right: 4rpx;
+  top: 225rpx;
+  width: 120rpx;
+  height: 140rpx;
+  background-image: url("https://images3.c-ctrip.com/marketing/2023/03/cash/withdraw_icon_04.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  z-index: 1;
+}
+
+.task_wrapper_B {
+  background: transparent !important;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: none !important;
+  border-radius: 28rpx;
+  box-shadow: none;
+  margin: 10rpx auto 0;
+  width: 100%;
+  min-height: 450rpx;
+  padding-bottom: 2rpx;
+
+}
+.browseNote_B {
+  width: 702rpx;
+  margin: 0 auto; 
+  padding-top: 35rpx;
+}
+.browseNote_B .task_item .tap_wrap .task_btn button, .browseNote_B .tap_wrap .task_btn button{
+  font-size: 26rpx;
+  font-weight: normal;
+}
+.browseNote_B .task_item{
+  padding: 0 32rpx;
+  margin-top: 0;
+}
+.browseNote_B .task-main{
+  padding: 28rpx 0;
+  border-top: 1px solid #EEEEEE;
+}
+.task_wrapper_B .task_item:nth-child(1) .task-main{
+  border: none;
+}
+.task_wrapper_B .task_list_wrap {
+}
+.task_wrapper_B_bg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.task_wrapper_B .task_wrap {
+  background: transparent !important;
+}
+.task_wrapper_B_android {
+  height: auto !important;
+  min-height: 465rpx !important;
+}
+.task_wrapper_B_ios {
+  height: auto !important;
+  min-height: 465rpx !important;
+}
+.moreTasks_empty_B{
+  width: 100%;
+  height: 40rpx;
+}
+.moreTasks_empty_B_ios{
+  width: 100%;
+  height: 80rpx;
+}
+.rulesAndSubscribeBox_B .task_btn_2{
+  background-image: url("https://images3.c-ctrip.com/marketing/2023/04/treasure/subsribe_open.png") !important;
+}
+.rulesAndSubscribeBox_B .task_btn_3{
+  background-image: url("https://images3.c-ctrip.com/marketing/2023/04/treasure/subsribe_open.png") !important;
+}
+
+
+.coinLeft_B {
+  top: 600rpx !important;
+  left: -20rpx !important;
+  width: 100rpx;
+  height: 100rpx;
+  z-index: 1;
+}
+
+.inviteFriendUnit_B {
+  color: #DA3737;
+  font-size: 74rpx;
+  font-family: FZZDHJW--GB1-0;
+}
+
+.twentyCashNum_B {
+  font-family: FZZDHJW--GB1-0 !important;
+  display: flex !important;
+  align-items: center;
+  letter-spacing: 12rpx;
+}
+
+.countdown_B {
+  min-height: 70rpx;
+  margin-top: 0;
+}
+
+.inviteFriendCoupon_B {
+  background-image: linear-gradient(270deg, #FF1A47 0%, #FF793F 100%);
+}
+
+.inviteFriendCircle_B {
+  border: 2rpx dashed rgba(255, 56, 67, 0.70);
+  background: rgba(255, 56, 67, 0.10);
+  width: 88rpx !important;
+  height: 88rpx !important;
+}
+
+.swiper_wrap_B .swiper {
+  line-height: 59rpx;
+}
+
+.inviteFriendBtn_B {
+  background-image: none !important;
+  background: #FCE9B9;
+  box-shadow: 0 -4rpx 16rpx 0 rgba(237, 2, 15, 0.33);
+  border-radius: 86rpx;
+  width: 430rpx;
+  height: 86rpx;
+  margin-top: 76rpx !important;
+  line-height: inherit;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #DC140D;
+  letter-spacing: 0.64rpx;
+}
+
+.inviteFriendBtn_subscribe_B {
+  width: 420rpx;
+  background: #CCCCCC;
+  color: #FFFFFF;
+}
+
+.inviteFriendSecLine_must_coin {
+  display: inline-flex;
+  height: 90rpx;
+  padding-right: 12rpx;
+}
+
+.isSubscription_1 {
+  background: #FCE9B9 !important;
+  color: #DC140D !important;
+}
+
+.isSubscription_0 {
+  background: #BBBBBB !important;
+  color: #FFFFFF !important;
+}
+.inviteFriendImgAdd_B{
+  width: 29rpx !important;
+  height: 29rpx !important;
+
+}
+.moreTasks_B {
+  background: rgba(255, 199, 199, 0.4);
+  border-radius: 27rpx;
+  width: 222rpx;
+  height: 54rpx;
+  margin: 15rpx auto 0;
+}
+.moreTasks_B::after{
+  display: none !important;
+}
+.c-yellow-B{
+  color: #FEFFC3 !important;
+}
+.moreTasksText_B {
+  font-size: 26rpx !important;
+}
+
+.balanceText_box {
+  position: relative;
+  bottom: 30rpx;
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+}
+
+.balanceText_count,
+.balanceText_unit {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1);
+  letter-spacing: 0;
+  display: inline-flex;
+  overflow: hidden;
+
+  position: relative;
+  
+}
+
+.taskDialog_B {
+  height: 100% !important;
+}
+.cashBalanceNow{
+  animation: moveCoinMoveActionFadeIn 0.8s ease-in-out forwards;
+
+}
+.cashBalanceCoinPro {
+  animation: moveCoinMoveAction 0.8s ease-in-out forwards;
+  margin-bottom: 8rpx;
+
+  position: absolute;
+  bottom: -6rpx;
+  left: 0;
+  right: 0;
+}
+
+.inviteFriendImgText_empty{
+  width: 100%;
+  height: 28rpx;
+}
+
+.B_ios_bold {
+  font-weight: bold !important;
+}
+.downIcon_B{
+  margin-left: 4rpx;
+}
+.waterfallBox_B{
+  margin-top: 5rpx !important;
+}
+@keyframes moveCoinMoveActionFadeIn {
+  0% {
+    margin-bottom: -20rpx;
+  }
+  100% {
+    margin-bottom: 0rpx;
+  }
+}
+@keyframes moveCoinMoveAction {
+  0% {
+    bottom: -6rpx;
+  }
+  100% {
+    bottom: 40rpx;
+  }
+}
+
+

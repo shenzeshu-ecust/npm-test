@@ -1,0 +1,388 @@
+@import '../../common/css/common.wxss';
+@import '../roomlist/templates/pricedetail/pricedetail.wxss';
+
+.modal {width: 100%; height: 80%; background-color: #f4f4f6; overflow-y: scroll; -webkit-overflow-scrolling: touch; }
+.modal .h {background-color: #f7f7f7; color: #333; display: flex; align-items: center; position: -webkit-sticky; position: sticky; top: 0; z-index: 2;}
+.modal .bd {background-color: #fff;}
+.modal .suite-title { background-image: url(https://pages.c-ctrip.com/hotels/wechat/img/suite-layer-title.png); background-size: cover; justify-content: flex-end; }
+.modal .h .tit {flex: 1; padding: 20rpx 0 20rpx 24rpx; font-weight: 700;}
+.modal .h .wechat-font-close {color: #333; font-size: 36rpx; padding: 20rpx;font-weight: bold;}
+.modal .h .r-num {font-size: 18rpx; color: #ccc; white-space: nowrap;}
+.modal .bottom-blank { height: 140rpx; }
+.modal .bottom-iphonex { height: 206rpx; }
+.modal .layer-detail {height: calc(100% - 228rpx);}
+.modal .layer-booking {height: calc(100% - 88rpx);}
+
+.base-info { overflow: hidden; padding: 20rpx 0 36rpx; background-color: #fff; }
+.base-info.pb0 { padding-bottom: 0; }
+.tag-better { color: #009c67; }
+.flex1 { flex: 1; }
+.mr8 { margin-right: 8rpx; }
+.mr24 { margin-right: 24rpx; }
+.pr24 { padding-right: 24rpx; }
+.pl24 { padding-left: 24rpx !important; }
+.pr34 { padding-right: 34rpx !important; }
+.pt12 { padding-top: 12rpx; }
+.base-more-fold {
+    font-size: 24rpx;
+    color: #666;
+    padding: 8rpx 0 32rpx;
+    margin-top: 16rpx;
+    text-align: center;
+}
+
+/* 图片滚动 */
+.modal .slider { position: relative; margin-bottom: 36rpx; }
+.modal .live { margin-bottom: 0; }
+.modal .live .slide-image{ border-radius: unset; }
+.modal .swiper { width: 100%; height: 340rpx; }
+.modal .suite-swiper {
+    border-radius: 8rpx;
+    box-sizing: border-box;
+}
+.modal .suite-swiper .single-swiper:first-child {
+    padding-left: 24rpx;
+}
+.modal .suite-swiper .single-swiper {
+    padding-right: 16rpx;
+    box-sizing: border-box;
+}
+.modal .swiper-num {
+    padding: 4rpx 12rpx;
+    color: #fff;
+    font-size: 24rpx;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20rpx;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 40rpx;
+}
+.modal .slide-image { width: 100%; height: 100%; border-radius: 8rpx; }
+
+/* 套餐 */
+.pac-info {
+    margin: 20rpx 24rpx 40rpx;
+    padding: 28rpx 20rpx;
+    border-radius: 4rpx;
+    font-size: 24rpx;
+    background-color: #f8fafd;
+    line-height: 2;
+    font-weight: 500;
+}
+.pac-info .item-subtit {
+    font-size: 24rpx;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: justify;
+    display: flex;
+}
+.pac-info .item-subtit:not(:last-child) {
+    margin-bottom: 24rpx;
+}
+.pac-info .icon {
+    height: 28rpx;
+    min-width: 28rpx;
+    border-radius: 50%;
+    border: #ffa04d 1px solid;
+    color: #f70;
+    font-size: 18rpx;
+    text-align: center;
+    margin: 4rpx 16rpx 0 0;
+    box-sizing: border-box;
+}
+.pac-item {
+    padding-bottom: 44rpx;
+    background-color: #fff;
+    font-size: 24rpx;
+    border-top: 8rpx solid #f8f8f8;
+}
+.pac-item .pac-title {
+    padding: 40rpx 24rpx 0 0;
+}
+.pac-item .pac-content {
+    font-size: 24rpx;
+    color: #666;
+    padding-top: 36rpx;
+}
+.pac-item .pac-content:not(:last-child) .x-item:last-child {
+    border-bottom: 1px solid #eee;
+}
+.pac-content .x-item {
+    color: #666666;
+    font-size: 24rpx;
+    font-weight: normal;
+    padding-bottom: 12rpx;
+}
+.pac-content .x-item .name {
+    min-width: 120rpx;
+}
+.pac-content .x-item .desc {
+    display: inline-block;
+    max-width: calc(100% - 120rpx);
+}
+.pac-content .slider .suite-swiper {
+    padding-left: 0;
+}
+.pac-content .x-item .hide-height {
+    height: 34rpx;
+    overflow: hidden;
+}
+.pac-item .pac-subtit-box {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8rpx;
+}
+.pac-item .pac-subtit {
+    font-size: 28rpx;
+    font-weight: 500;
+    color: #333;
+}
+.pac-item .pac-imgs {
+    display: flex;
+    overflow-x: auto;
+}
+.pac-item .pac-imgs::-webkit-scrollbar { display: none; }
+.pac-item .pac-imgs .slide-img {
+    width: 600rpx;
+    margin-right: 16px;
+    border-radius: 8rpx;
+    flex-shrink: 0;
+}
+.pac-item .pac-imgs .sigle-img {
+    width: 100%;
+    border-radius: 8rpx;
+}
+.pac-title.live {
+    display: block;
+    padding-bottom: 12rpx;
+    border-top: 8rpx solid #f8f8f8;
+}
+.pac-title {
+    align-items: center;
+    padding: 40rpx 24rpx;
+    background: #fff;
+    font-size: 32rpx;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+}
+.pac-title .name {
+    display: flex;
+}
+.pac-title .pac-icon {
+    height: 48rpx;
+    min-width: 48rpx;
+    max-width: 48rpx;
+    margin-right: 16rpx;
+    background: unset;
+    color: unset;
+}
+.pac-title .r-num {
+    color: #999;
+    font-size: 20rpx;
+    text-align: right;
+}
+.base-info .base-detail-box {
+    margin: 0 24rpx;
+    border-top: 1rpx solid #eee;
+}
+
+/*钟点房*/
+.hourroom-info {
+    font-size: 24rpx;
+    padding: 12rpx 24rpx;
+    background-color: #fff;
+}
+.hourroom-info .hourroom-title {
+    display: flex;
+    align-items: center;
+}
+.hourroom-info .desc {
+    margin-top: 16rpx;
+}
+
+/* 面积楼层等 */
+.base-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16rpx 0 24rpx;
+}
+.base-box .base-item {
+    color: #333;
+    font-size: 24rpx;
+    font-weight: 500;
+    text-align: center;
+    flex: 1;
+    box-sizing: border-box;
+    max-width: 20%;
+}
+.base-box .base-item:first-child, .base-box .base-item:last-child {
+    padding: 0 24rpx;
+}
+.base-box .base-item .tit {
+    color: #999;
+    margin-bottom: 4rpx;
+}
+
+/* 床型+餐食 */
+.bed-info, .meal-info {
+    width: 100%;
+    margin: 32rpx 0;
+    display: flex;
+    align-items: center;
+    font-size: 24rpx;
+    font-weight: 500;
+}
+.meal-info .meal-details {
+    display: flex;
+    flex-wrap: wrap;
+}
+.meal-info .meal-details .meal-item {
+    flex: 1;
+    margin-right: 16rpx;
+}
+.meal-info .meal-details .meal-txt {
+    margin-left: 8rpx;
+    color: #009c67;
+    white-space: nowrap;
+}
+
+/* 基础设施 */
+.fac-item {
+    width: 100%;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    border-top: 1rpx solid #eee;
+    padding: 32rpx 0;
+}
+.meal-info .meal-title, .bed-info .bed-title, .fac-item .fac-title {
+    width: 130rpx;
+    font-weight: 600;
+    box-sizing: border-box;
+    padding: 0 54rpx 0 24rpx;
+    text-align: center;
+    flex-shrink: 0;
+}
+.fac-item .txt-box {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+}
+.fac-item .fac-txt {
+    width: 46%;
+    margin-right: 4%;
+    line-height: 1.5;
+}
+.fac-item .fac-txt .fac-pay, .fac-item .fac-txt .fac-free {
+    display: inline-block;
+    height: 24rpx;
+    line-height: 24rpx;
+    vertical-align: 2rpx;
+    border-radius: 4rpx;
+    font-weight: 500;
+    font-size: 20rpx;
+}
+.fac-item .fac-txt .fac-pay {
+    color: #f70;
+    background-color: #fff1e6;
+}
+.fac-item .fac-txt .fac-free {
+    color: #009c67;
+    background-color: #e6f8f1;
+}
+
+/* 礼盒 */
+.gift-info .gift-title {
+    font-weight: 600;
+    margin-top: 24rpx;
+}
+.gift-info .base-more-fold{
+    padding-bottom: 8rpx;
+}
+
+/* 公共卡片 */
+.common-card {
+    padding: 24rpx;
+    font-size: 24rpx;
+    background-color: #fff;
+    border-top: 16rpx solid #f8f8f8;
+}
+.common-card .tit {
+    color: #121212;
+    font-size: 36rpx;
+    font-weight: 600;
+}
+/* 会员权益 & 政策与服务 */
+.benefits-info .benefits-item {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 16rpx;
+}
+.benefits-info .benefits-tit {
+    flex-shrink: 0;
+    margin-right: 16rpx;
+    padding: 2rpx 4rpx;
+    border-radius: 4rpx;
+    color: #f70;
+    background-color: #fff1e6;
+}
+.policy-info .item-title {
+    font-size: 28rpx;
+    font-weight: 500;
+    margin: 28rpx 0 10rpx;
+}
+.policy-info .item-desc {
+    line-height: 1.5;
+    text-align: justify;
+}
+.benefits-info .desc {
+    height: 72rpx;
+    color: #666;
+    font-size: 20rpx;
+    margin-top: 12rpx;
+    line-height: 58rpx;
+    padding-top: 14rpx;
+    box-sizing: border-box;
+    background-size: 100%;
+    background-image: url(https://pages.c-ctrip.com/hotels/wechat/img/layer-right-bg.png);
+}
+.benefits-info .desc .prime-icon {
+    display: inline-block;
+    width: 32rpx;
+    height: 32rpx;
+    border-radius: 50%;
+    background-color: #fff1e6;
+    text-align: center;
+    margin-top: 14rpx;
+    line-height: 37rpx;
+}
+.benefits-info .desc .prime-icon image {
+    width: 20rpx;
+    height: 14rpx;
+}
+
+/*转发按钮*/
+.modal .h .subroom-share {
+    background: unset;
+    font-size: 40rpx;
+    color: #333;
+}
+
+/*底部预订按钮*/
+.des-bottom {
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+    box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    padding: 28rpx 20rpx;
+    text-align: right;
+    width: 100%;
+    box-sizing: border-box;
+    height: 140rpx;
+}
+.iphonx-bottom { height: 206rpx; }
+.no-facility { text-decoration: line-through; }

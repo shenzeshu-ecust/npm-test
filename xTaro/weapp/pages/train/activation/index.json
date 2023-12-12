@@ -1,0 +1,10 @@
+{
+  "backgroundColorTop": "#1F2B64",
+  "backgroundColorBottom": "#141D52",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh":true,
+  "usingComponents": {
+    "canvas-image": "../2020cashback/canvas-image/canvas-image",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "sk_simple": "./components/template/simple",
+    "sk_newproduct": "./components/template/custom",
+    "wechat-long-list-chunk": "./components/chunk/index"
+  }
+}

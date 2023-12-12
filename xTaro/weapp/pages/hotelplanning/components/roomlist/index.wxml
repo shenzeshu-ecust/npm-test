@@ -1,0 +1,217 @@
+<import src="./templates/roompackage/package.wxml" />
+<import src="./templates/rooms/rooms.wxml" />
+<import src="./templates/filter/filter.wxml" />
+<import src="./templates/pricedetail/pricedetail.wxml" />
+
+<!-- ls-wifi: 低星落地页卡片样式，ls-benefit-wifi：低星落地页无优惠券卡片样式 -->
+<view class="room-mod {{pageId === '10650054742' && 'ls-wifi'}} {{!isWifi && 'new-main-wifi'}} {{hasLogin && noBenefit && 'ls-benefit-wifi'}}" id="room_mod">
+    <!-- 入离日期 wifi连接页日历样式与其他落地页不同-->
+    <view class="dt-date dt-date-wifi" id="calendar_bar" wx:if="{{showCalender && source === 'wifi-connect'}}">
+        <view bindtap="showCalender" class="date-box-wifi" data-ubt-key="xcx_hotel_detail_date" id="autotest_xcx_hotel_detail_date">
+            <view class="date-left">
+                <view class="wifi-in-day">
+                    <text class="times">{{dateInfo.inDayText}}</text>
+                    <text class="cust">{{dateInfo.inDayDesc}}</text>
+                </view>
+                <view class="time-line-wrapper">
+                    <view class="date-line"></view>
+                </view>
+                <view class="wifi-out-day">
+                    <text class="times">{{dateInfo.outDayText}}</text>
+                    <text class="cust">{{dateInfo.outDayDesc}}</text>
+                </view>
+            </view>
+            <view wx:if="{{dateInfo.wifiDays > 0}}" class="flex-align-center cl-nights wifi-calendar">
+                <text>续住</text>
+                <view class="count-str">
+                    {{dateInfo.wifiDays}}
+                </view>
+                <text>晚</text>
+            </view>
+            <view class="dt-font wechat-font-arrow-right2"></view>
+        </view>
+        <view wx:if="{{dateInfo.showMorningOutTips}}" class="moning-out-tips">如您不是今天离店，请点击修改</view>
+        <view wx:if="{{dateInfo.showMorningTips}}" class="moning-tips">当前已过0点，如需今天凌晨6点前入住，请选择“今天凌晨”入住</view>
+    </view>
+    <!-- 入离日期 -->
+    <view class="dt-date" id="calendar_bar" wx:elif="{{showCalender}}">
+        <view bindtap="showCalender" class="date-box" data-ubt-key="xcx_hotel_detail_date" id="autotest_xcx_hotel_detail_date">
+            <block wx:if="{{isHourroomModule}}">
+                <view>
+                    <text class="times">{{dateInfo.inDayText}}</text>
+                    <text class="cust">{{dateInfo.inDayDesc}}入住</text>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="date-left">
+                    <view>
+                        <text class="times">{{dateInfo.inDayText}}</text>
+                        <text class="cust">{{dateInfo.inDayDesc}}</text>
+                    </view>
+                    <view class="time-line-wrapper">
+                        <view class="date-line"></view>
+                    </view>
+                    <view>
+                        <text class="times">{{dateInfo.outDayText}}</text>
+                        <text class="cust">{{dateInfo.outDayDesc}}</text>
+                    </view>
+                </view>
+                <view wx:if="{{dateInfo.days >= 0}}" class="flex-align-center mr8 room-nights"><text>共</text><view class="count-str">{{dateInfo.days}}晚</view></view>
+                <view class="dt-font wechat-font-arrow-right2 room-nights room-nights"></view>
+            </block>
+        </view>
+        <view wx:if="{{dateInfo.showMorningOutTips}}" class="moning-out-tips">如您不是今天离店，请点击修改</view>
+        <view wx:if="{{dateInfo.showMorningTips}}" class="moning-tips">当前已过0点，如需今天凌晨6点前入住，请选择“今天凌晨”入住</view>
+    </view>
+    <!-- 快筛 -->
+    <template wx:if="{{showFilter && !dateInfo.isLongRent && quickFilterIds.length}}" is="quick-filter" data="{{quickFilterIds, priceFilter, filterSummary, filterSelectedMap, hasSelectedItem, cancelPriceFilter, filterSelect, showFilterLayer}}"></template>
+    <!--筛选浮层-->
+    <template is="filter-layer" data="{{showFilterLayer, closeFilterLayer, isIphoneX, filterInfo, filterSelectedMap, filterSelect, handleFilterReset}}"></template>
+    <!-- 房型列表 -->
+    <view class="dt-room transz0 {{pageId === '10650054742' && 'ls-wifi-border'}}" id="roomList">
+
+        <view wx:if="{{noRoomRes}}" class="no-room">
+            没有找到符合条件的房型信息，请选择其他酒店进行预订或者修改日期间数重新查询。
+        </view>
+
+        <!--鱼骨-->
+        <view wx:if="{{isRoomLoading}}" class="fishbone-module06"><view class="fishbone-loading"></view></view>
+        <block wx:else>
+
+        <!-- type-房型类型 1-好友分享房型 2-猜你喜欢房型 3-平铺/基础房型 4-钟点房 -->
+        <view wx:if="{{friendShareRoom.id}}" class="friend_share_room">
+            <image class="friend_share_title" src="https://pages.c-ctrip.com/hotels/wechat/img/detail-shareroom.png"/>
+            <template is="tilingroom"
+                data="{{keyMap: friendShareRoom, isShareShow: false, room: baseRoomMap[friendShareRoom.key], subRoom: subRoomMap[friendShareRoom.skey], dateInfo, showPlanetStyle, showPresalePackage, type: 1, fromLS, hasLogin, scanPriceTag}}">
+            </template>
+        </view>
+
+        <block wx:if="{{guessLikeRoom.id}}">
+        <template is="tilingroom"
+            data="{{keyMap: guessLikeRoom, room: baseRoomMap[guessLikeRoom.key], subRoom: subRoomMap[guessLikeRoom.skey], dateInfo, showPlanetStyle, showPresalePackage, isGuessLike: true, isShareShow, type: 2, fromLS, hasLogin, scanPriceTag}}">
+        </template>
+        </block>
+
+        <block wx:if="{{tilingRoomList.length}}">
+        <block wx:for="{{tilingRoomList}}" wx:key="id" wx:for-index="tIndex">
+            <template is="tilingroom" wx:if="{{item.skey !== guessLikeRoom.skey}}"
+                data="{{keyMap: item, room: baseRoomMap[item.key], subRoom: subRoomMap[item.skey], dateInfo, showPlanetStyle, showPresalePackage, isShareShow, type: 3, index: tIndex, fromLS, hasLogin, scanPriceTag}}">
+            </template>
+        </block>
+        <!-- 更多房型按钮todo -->
+        </block>
+        <block wx:elif="{{baseRoomList.length}}">
+            <block wx:for="{{baseRoomList}}" wx:key="id" wx:for-index="bIndex">
+            <view class="m-room">
+                <template is="baseroom"
+                    data="{{keyMap: {key: item.key}, room: baseRoomMap[item.key], minPriceRoom: subRoomMap[baseRoomMap[item.key].minPriceSkey], dateInfo, showPlanetStyle, showPresalePackage, fromLS, mpNavHeight, hasLogin, scanPriceTag}}">
+                </template>
+                <view class="sub" hidden="{{baseRoomMap[item.key].hiddenSub}}">
+                    <block wx:for="{{item.subRoomList}}" wx:for-item="sub" wx:key="sub.id">
+                        <template is="subroom"
+                            data="{{keyMap: sub, room: baseRoomMap[item.key], item: subRoomMap[sub.skey], dateInfo, showPlanetStyle, showPresalePackage, isShareShow, type: 3, index: bIndex, fromLS, scanPriceTag}}">
+                        </template>
+                    </block>
+                    <!-- 展开更多子房型 -->
+                    <view wx:if="{{baseRoomMap[item.key].moreSubRoomTxt}}" class="jump-box more-room-btn"
+                        catchtap="moreSubRoomShow" data-base-key="{{item.key}}" data-base-index="{{bIndex}}">
+                        <view class="cbtn">{{baseRoomMap[item.key].moreSubRoomTxt}}</view>
+                    </view>
+                </view>
+            </view>
+            </block>
+            <view wx:if="{{moreBaseRoomTxt}}" class="jump-box more-room-btn" catchtap="moreBaseRoomShow">
+                <view class="cbtn">{{moreBaseRoomTxt}}</view>
+            </view>
+        </block>
+
+        <!-- wifi连接页续住场景不展示钟点房 -->
+        <view wx:if="{{hourRoomList.length && source !== 'wifi-connect'}}" class="hour-room" id="hour_room">
+            <view class="room-title">钟点房</view>
+            <block wx:for="{{hourRoomList}}" wx:key="id" wx:for-index="hIndex">
+                <template is="tilingroom"
+                    data="{{keyMap: item, room: baseRoomMap[item.key], subRoom: subRoomMap[item.skey], dateInfo, isShareShow, type: 4, index: hIndex, hasLogin, scanPriceTag}}">
+                </template>
+            </block>
+        </view>
+        </block>
+    </view>
+</view>
+<view wx:if="{{!noRoomRes}}" style="border-top:{{source==='wifi-connect' ? '1rpx solid #ebebeb' : ''}}" ><pricedesc isWifi="{{source==='wifi-connect'}}"></pricedesc></view>
+
+<!-- pricedetail -->
+<template is="price-detail" data="{{showPriceDetail, dateInfo, priceDetail, priceDetailSkey, confirmBtnText, cofirmFunc: priceDetailConfirmFuc}}"></template>
+
+<!-- 房型浮层 -->
+<roomlayer
+    isShown="{{roomLayer.isShown}}"
+    isIphoneX="{{isIphoneX}}"
+    totalDays="{{dateInfo.days}}"
+    room="{{baseRoomMap[roomLayer.key]}}"
+    subRoom="{{subRoomMap[roomLayer.skey]}}"
+    priceId="{{priceId}}"
+    from="detail"
+    isQuickApp="{{isQuickApp}}"
+    data-id="{{subRoomMap[roomLayer.skey].id}}"
+    data-type="room"
+    bind:noImageTrace="noImageTrace"
+    bind:hiddenLayer="hiddenRoomLayer"
+>
+    <template is="room-layer-bottom" data="{{subRoom: subRoomMap[roomLayer.skey], isIphoneX, roomLayer, fromLS}}"></template>
+</roomlayer>
+
+<!-- 澳门券实名认证弹窗 -->
+<real-name-pop 
+    enable="{{realNamePop.enable}}" 
+    message="{{realNamePop.message}}" 
+    skey="{{realNamePop.skey}}" 
+    promotionID="{{realNamePop.promotionID}}" 
+    bind:authRealNameCallback="onAuthRealNameCallback" 
+    bind:closeRealName="onCloseRealName">
+</real-name-pop>
+
+<!-- 房型浮层底部预订按钮&&价格展示 -->
+<template name="room-layer-bottom">
+    <view class="des-bottom {{isIphoneX ? 'iphonx-bottom' : ''}}">
+        <view wx:if="{{subRoom.isFullRoomCanApply}}" class="desc-pop">{{subRoom.incentiveText}}</view>
+        <view class="justify-flex-end dt-cell-v {{subRoom.status !== 1 ? 'gray-filter dt-disabled' : ''}}">
+            <view class="cell-v">
+                <!--价格展示-->
+                <view class="price-layout pr10 relative">
+                    <view class="lnumb">
+                        <text wx:if="{{subRoom.veilInfo && subRoom.veilInfo.tagName}}"
+                            class="pl-text4">{{subRoom.veilInfo.tagName}}</text>
+                        <block wx:if="{{subRoom.minusAmount || subRoom.refundAmount}}">
+                            <text class="del">
+                                <text class='yen'>￥</text>
+                                <text class='strong'>{{subRoom.originPrice}}</text>
+                            </text>
+                        </block>
+                        <text class="price2">
+                            <text wx:if="{{displayAvgTxt}}" class="dt-fn12">均</text>
+                            <text class='yen'>￥</text>
+                            <text class='strong'>{{subRoom.price}}</text>
+                        </text>
+                    </view>
+                    <view wx:if="{{subRoom.taxAmount}}" class="pl-text2">另付税/费¥{{subRoom.taxAmount}}</view>
+                    <view wx:if="{{subRoom.priceTags && subRoom.priceTags.length}}" class=""
+                        catchtap="scrollPriceDetail" data-ubt-key="xcx_xqy_jgdj" id="autotest_xcx_xqy_jgdj">
+                        <price-tag-new priceCalcItems="{{subRoom.priceTags}}" fromLS="{{subRoom.isHourRoom ? false : fromLS}}" scanPriceTag="{{scanPriceTag}}"></price-tag-new>
+                    </view>
+                </view>
+                <view bindtap="noop" data-ubt-key="xcx_hotel_detail_sellroomdetailbutton">
+                    <!--预订按钮-->
+                    <template is="toBookingBtn" data="{{subRoom, keyMap: roomLayer, autoTestKey: 'autotest_detailpage_likebookbutton', comeFrom: 'roomLayer'}}"></template>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 去呼呼匹配房型预订浮层 -->
+<order-modal wx:if="{{showPmsLayer}}"
+    isShown="{{isOrderShown}}"
+    roomInfo="{{matchedRoomInfo}}"
+    bind:closeOrderLayer="closeOrderLayer"
+    bind:goBooking="goBooking">
+</order-modal>

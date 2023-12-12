@@ -1,0 +1,3 @@
+<view class="countdown" style="color: {{color}}">
+    {{clock}}
+</view>

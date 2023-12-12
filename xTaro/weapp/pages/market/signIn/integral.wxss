@@ -1,0 +1,148 @@
+.header_wrap {
+  width: 100%;
+  height: 140rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2019/01/signInPage/point_title.png');
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0;
+}
+.header_wrap .integral_count {
+  width: 691rpx;
+  height: 100rpx;
+  border-radius: 16rpx;
+  background: #fff; 
+  margin: 50rpx auto;
+  padding: 20rpx 0;
+  box-shadow:0 12rpx 8rpx 0 rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: space-between;
+}
+.header_wrap .integral_count .left {
+  line-height: 100rpx;
+  text-indent: 30rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  color: #666666;
+}
+.header_wrap .integral_count .right {
+  padding-right: 30rpx;
+}
+.header_wrap .integral_count .right .count{
+  display: inline-block;
+  line-height: 100rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 56rpx;
+  color: #222222;
+  margin-right: 10rpx;
+}
+.header_wrap .integral_count .right .mark{
+  display: inline-block;
+}
+.integral_count_total,.integral_count_income,.integral_count_expend {
+  display: inline-block;
+  width: 230rpx;
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #666666;
+  position: relative;
+}
+.integral_count_total .red,.integral_count_income .red,.integral_count_expend .red {
+  width: 120rpx;
+  height: 6rpx;
+  background: red;
+  position: absolute;
+  left: 50%;
+  bottom: -24rpx;
+  margin-left: -60rpx;
+}
+.integral_count_total {
+  border-right: 1px dashed #999999;
+  width: 229rpx;
+}
+.integral_count_num {
+  font-family: PingFangSC-Medium;
+  font-size: 48rpx;
+  color: #222222;
+}
+
+.main_wrap {
+  width: 690rpx;
+  margin: 100rpx auto;
+  padding: 120rpx 0;
+}
+.main_wrap .integral_detail_item {
+  padding: 30rpx;
+  height: 64rpx;
+  box-shadow: 0 1px 0 0 #F0F0F0;
+  display: flex;
+  justify-content: space-between;
+}
+.main_wrap .integral_detail_item .left .earned_source {
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  color: #222222;
+}
+.main_wrap .integral_detail_item .left .earned_time {
+  font-family: PingFangSC-Regular;
+  font-size: 20rpx;
+  color: #999999;
+  padding-top: 11rpx;
+}
+.main_wrap .integral_detail_item .right.red {
+  color: #FF5C43;
+}
+.main_wrap .integral_detail_item .right.grey {
+  color: #999999;
+}
+/* .main_wrap .integral_detail_item .right .mark {
+  display: inline-block;
+  font-family: PingFangSC-Semibold;
+  font-size: 32rpx;
+} */
+.main_wrap .integral_detail_item .right .earned_amount {
+  font-family: PingFangSC-Semibold;
+  font-size: 32rpx;
+  float: right;
+}
+/* .main_wrap .integral_detail_item .right .unit {
+  display: inline-block;
+  font-family: PingFangSC-Regular;
+  font-size: 28rpx;
+} */
+.main_wrap .integral_detail_item .right .status {
+  display: block;
+  font-size: 20rpx;
+  color: #999999;
+  clear: both;
+  text-align: right;
+}
+
+.footer {
+  width: 100%;
+  bottom: 0;
+  padding-bottom: 50rpx;
+  text-align: center;
+}
+.footer .tip {
+  opacity: 0.8;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #666666;
+}
+.footer .more {
+  width: 400rpx;
+  height: 72rpx;
+  margin: 30rpx auto;
+  background: #FE6634;
+  border-radius: 40rpx;
+  line-height: 72rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 32rpx;
+  color: #FFFFFF;
+}
+/* 微信读书卡介绍浮层 */
+.wechat_book_gift {
+  background: url('https://images3.c-ctrip.com/marketing/2019/01/signInPage/wechat_book.png');
+  background-size: 100% 100%;
+}

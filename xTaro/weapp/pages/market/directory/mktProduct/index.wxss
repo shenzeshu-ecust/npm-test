@@ -1,0 +1,16 @@
+@import "./../../float/float.wxss";
+@import "./../taskSignIn/wangzhe.wxss";
+view {
+  box-sizing: border-box;
+}
+page{
+  background-color: #FFFFFF;
+}
+.coupon_float{
+  display: none;
+}
+.sk_layout{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

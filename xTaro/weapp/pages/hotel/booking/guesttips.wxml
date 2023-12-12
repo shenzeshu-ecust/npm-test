@@ -1,0 +1,53 @@
+<template name="guestTips">
+    <view class="cmask" catchtap="toggleGuestTips" catchtouchmove="noop"></view>
+    <view class="cmask-popbox" catchtouchmove="noop">
+        <view class="popbox-thead">
+            <view class="tit">{{(isYanZhuChannel && roomQuantity > 1) ? '住客姓名&房间号 ' : '住客姓名'}}填写说明</view>
+            <view class="wechat-font-close close-icon" catchtap="toggleGuestTips"></view>
+        </view>
+        <scroll-view class="popbox-tbody" scroll-y="{{true}}">
+            <view wx:if="{{showForeignName}}" class="guest-list black1">
+                <view class="p-8">预订港澳台地区或海外酒店，需按住客办理入住时所持的身份证件，使用拼音/英文姓名填写住客姓名。</view>
+                <view class="list-tit">拼音姓名填写方法：</view>
+                <view class="list-content"><text class="list-dot">·</text>中文姓名使用拼音填写，姓在前，名在后。</view>
+                <view class="pl-8">例如：“诸葛孔明”，姓填写“Zhuge”，名填写“Kongming”。</view>
+                <view class="list-tit">英文姓名填写方法：</view>
+                <view class="list-content"><text class="list-dot">·</text>英文姓名中不能包含数字或特殊符号。</view>
+                <view class="list-content"><text class="list-dot">·</text>姓在前，名在后，如有中间名则空一格紧随名之后。</view>
+                <view class="pl-8">例如：Surname填写“Green”，Given name填写“Jim Stephanie”</view>
+            </view>
+            <view wx:else class="guest-list black1">
+                <view class="p-8">预订国内酒店需按住客办理入住时所持的身份证件，正确填写住客姓名。</view>
+                <view class="list-tit">中文姓名填写方法：</view>
+                <view class="list-content"><text class="list-dot">·</text>姓名中有生僻字，须全名用拼音代替。</view>
+                <view class="pl-8">例如：“王鬳军”填写为“Wang/Yanjun"。</view>
+                <view class="list-content"><text class="list-dot">·</text>姓名中有特殊符号，可省略输入。</view>
+                <view class="pl-8">例如：“汉祖然·买买提”填写为“汉祖然买买提”。</view>
+                <view class="list-tit">英文姓名填写方法：</view>
+                <view class="list-content"><text class="list-dot">·</text>英文姓名中不能包含数字或特殊符号。</view>
+                <view class="list-content"><text class="list-dot">·</text>姓在前，姓和名之间用/隔开，如有中间名则空一格紧随名之后。</view>
+                <view class="pl-8">格式：Surname(姓)/Given name(名) Middle name(中间名)</view>
+                <view class="pl-8">例如：Green/Jim Stephanie</view>
+            </view>
+            <view wx:if="{{isYanZhuChannel && roomQuantity > 1}}" class="guest-list black1">
+                <view class="list-tit">房间号填写说明：</view>
+                <view class="list-content">·请您确准填写所住房间号信息，便于酒店优先为您安排原房续住。</view>
+                <view class="list-content">·如遇部分高峰日期酒店客房库存有限，具体续住房型以酒店安排为准。</view>
+            </view>
+        </scroll-view>
+    </view>
+</template>
+
+<template name="yanZhuSingleTips">
+    <view class="cmask" catchtap="showRoomNoTips" catchtouchmove="noop"></view>
+    <view class="cmask-popbox" catchtouchmove="noop">
+        <view class="popbox-thead">
+            <view class="tit">房间号填写说明</view>
+            <view class="wechat-font-close close-icon" catchtap="showRoomNoTips"></view>
+        </view>
+        <view class="popbox-tbody">
+            <view class="p-8">1.请您确准填写所住房间号信息，便于酒店优先为您安排原房续住。</view>
+            <view class="p-8">2.如遇部分高峰日期酒店客房库存有限，具体续住房型以酒店安排为准。</view>
+        </view>
+    </view>
+</template>

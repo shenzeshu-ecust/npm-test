@@ -1,0 +1,69 @@
+//数据判断，超过10000转文字单位，保留1位小数,四舍五入; 小于10000时，按实际展示
+function formateNum(num) {
+  var result;
+  if (num == 0 || num == undefined) {
+    return 0;
+  }
+  if (num >= 10000000) {
+    num = (num / 10000000).toFixed(1);
+    result = num + "kw";
+  } else if (num >= 10000) {
+    num = (num / 10000).toFixed(1);
+    result = num + "w";
+  } else {
+    result = num;
+  }
+  return result;
+}
+
+// 倒计时转化
+function countDownTime (leftTime) {
+   //d,h,m,s保存倒计时的时间  
+   var d = 0,
+   h = 0,
+   m = 0,
+   s = 0,
+   countDownStr = '';
+  if(leftTime > 0) {
+    m = Math.floor(leftTime/1.0/60);  
+    s = Math.floor(leftTime/1.0%60);
+    
+    if(m > 0) {
+        if(m < 10){
+            m = "0" + m;
+        }
+        countDownStr += m + ":";
+    }else if(m == 0){
+        countDownStr = '00' + ":";
+    }
+    if(s > 0) {
+        if(s < 10){
+            s = "0" + s;
+        }
+        countDownStr += s ;
+    } if(s == 0){
+        countDownStr += '00';
+    }
+    
+  } else {
+    countDownStr = '00:00'
+  }
+  return countDownStr
+};
+
+function handleDrawBagTitle(title) {
+    //1、13个字符以内，单行显示 2、超出13个字符，双行显示，超出打点
+    if(title && title.length > 13){
+        title =  title.slice(0, 13) + "\n" + title.slice(13);
+        if(title.length > 27){
+            title = title.slice(0,26) + "...";
+        }
+    }
+  return title;
+}
+
+module.exports = {
+  formateNum: formateNum,
+  countDownTime: countDownTime,
+  handleDrawBagTitle:  handleDrawBagTitle
+}

@@ -1,0 +1,113 @@
+page {
+    background-color:#ffffff;
+    height: 100%;
+}
+
+.empty-view-bg{
+    width: 344rpx;
+    height: 314rpx;
+}
+
+.view-hidden {
+    display: none;
+}
+
+.empty-view{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 140rpx;
+}
+
+.empty_title{
+    color: #333333;
+    font-size: 34rpx;
+    font-weight: 500;
+    line-height: 42rpx;
+    margin-top: 40rpx;
+}
+
+.finishedTitle{
+    margin: 28rpx 0rpx -8rpx 24rpx;
+    font-weight: bold;
+    font-size: 36rpx;
+    color: #333333;
+}
+
+.padding-view{
+    height: 30rpx;
+}
+
+.list-container{
+    position: relative;
+    width: 100vw;
+    height: 100%;
+    z-index: 999;
+}
+
+.item-container{
+    position: relative;
+    width: 100vw;
+    height: 200rpx;
+    z-index: 999;
+}
+
+.travel-list .travel-item {
+    position: relative;
+    width: 100vw;
+    z-index: 999;
+}
+
+.travel-list .travel-item movable-area {
+    height: calc((100vw - 48rpx) / 2 + 48rpx);
+    width: calc(100vw - 140rpx);
+}
+
+.travel-list .travel-item movable-view {
+    height: calc((100vw - 48rpx) / 2 + 48rpx);
+    width: 100vw;
+    z-index: 999;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 8rpx;
+    margin-top: 20rpx;
+    bottom: 0;
+    right: 10rpx;
+    width: 140rpx;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.with-title-item{
+    margin-top: 58rpx;
+}
+
+.last-one-item{
+    margin-top: 20rpx;
+    margin-bottom: 30rpx;
+}
+
+.normal-item{
+    margin-top: 20rpx;
+}
+
+.option-title{
+    font-size: 22rpx;
+    color: #999999;
+    margin-top: 8rpx;
+}

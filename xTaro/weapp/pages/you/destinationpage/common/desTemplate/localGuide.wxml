@@ -1,0 +1,108 @@
+<import src="template/commonTitle.wxml"/>
+
+<template name="localGuide">
+    <view class="localGuide_box" wx:if="{{localGuideData}}">
+        <!-- Title -->
+        <template is="commonTitle" data="{{title:localGuideData.subTemplate.title,weatherNo:localGuideData.weather.weatherInfo.weatherNo,nightTemperature:localGuideData.weather.weatherInfo.nightTemperature,dayTemperature:localGuideData.weather.weatherInfo.dayTemperature,jumpTemperatureUrl:localGuideData.weather.weatherInfo.jumpUrl?localGuideData.weather.weatherInfo.jumpUrl:false}}" wx:if="{{localGuideData.subTemplateType == 2}}"></template>
+
+        <!-- ********** 版本B **********-->
+        <!-- 攻略 -->
+        <view class="gsBox" wx:if="{{localGuideData.subTemplateType == 2}}">
+            <image src="https://pages.c-ctrip.com/you/destination/shadow_more_gs@3x.png" class="moreShadow" />
+            <scroll-view class="scrollBox" scroll-x="true">
+                <block wx:for="{{localGuideData.subTemplate.section1.itemList}}" >
+                    <view class="itemBox" key="{{index}}">
+                        <view class="itemContentBox" bindtap="goToLgBSection1Deatil"
+                            data-subtemplatetype="{{localGuideData.subTemplateType}}"
+                            data-idx="{{index}}"
+                            data-itemid="{{item.itemId}}"
+                            data-url="{{item.jumpUrl}}">
+                            <view class="itemContent">
+                                <view class="itemTitle">{{item.title}}</view>
+                                <image src="https://pages.c-ctrip.com/you/destination/more_icon@3x.png" style="width: 20rpx;height: 20rpx;"></image>
+                            </view>
+                            <view class="itemSubTitle">{{item.subTitle}}</view>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+            <view class="moreTextIcon" bindtap="goToLgBMore" data-subtemplatetype="{{localGuideData.subTemplateType}}" data-url="{{localGuideData.subTemplate.section1.jumpUrl}}">
+                <image src="https://pages.c-ctrip.com/you/destination/more_gs@3x.png" class="moreImg"></image>
+            </view>
+        </view>
+        <!-- 主题榜单 -->
+        <scroll-view class="themeBox" scroll-x="true" wx:if="{{localGuideData.subTemplateType == 2 && !!localGuideData.subTemplate &&  !!localGuideData.subTemplate.section2 && !!localGuideData.subTemplate.section2.itemList && localGuideData.subTemplate.section2.itemList.length > 0}}">
+            <block wx:for="{{localGuideData.subTemplate.section2.itemList}}">
+                <view class="themeInlineBox">
+                    <view class="themeItemBox" bindtap="goToLgBSection2Deatil"
+                        data-subtemplatetype="{{localGuideData.subTemplateType}}"
+                        data-idx="{{index + (localGuideData.subTemplate.section1.itemList && localGuideData.subTemplate.section1.itemList.length || 0)}}"
+                        data-itemid="{{item.itemId}}"
+                        data-url="{{item.jumpUrl}}" key="{{index}}" style="margin-left: {{index == 0 ? 16 : 8}}rpx; margin-right: {{index == localGuideData.subTemplate.section1.itemList.length-1 ? 16: 0}}rpx">
+                        <view class="shadowBox1"></view>
+                        <view class="shadowBox2"></view>
+                        <view class="shadowBox3">
+                            <view class="contentBox">
+                                <image src="{{item.coverImage}}" class="themeItemBgImg"/>
+                                <view style="position: absolute;width: 290rpx;height: 110rpx;left: 0;bottom: 0;background-color: #fff;"></view>
+                                <view class="themeItemTitle">
+                                    <text style="font-size: 32rpx;color: #fff;font-weight: bold;max-width: 245rpx;" class="oneLineOverflowNew">{{item.title}}</text>
+                                </view>
+                                <view class="themeItemSubTitle">
+                                    <text style="font-size: 28rpx;color: #333;font-weight: bold;max-width: 245rpx;" class="oneLineOverflowNew">{{item.subTitle}}</text>
+                                </view>
+                                <view class="talentStrategy">
+                                    <view class="portraitBox" style="width: {{item.portraitList && item.portraitList.length>0 ? (item.portraitList.length-1)*12+30 : 0}}rpx;">
+                                        <block wx:if="{{item.portraitList && item.portraitList.length>0}}" wx:for="{{item.portraitList}}" wx:for-item="portrait">
+                                            <image src="{{portrait}}" key="{{index}}" style="left: {{index*6}}rpx;" class="portrait" />
+                                        </block>
+                                    </view>
+                                    <view class="participate" wx:if="{{item.participate && item.participate.length>0}}">{{item.participate}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+        <!-- ********** 版本B end **********-->
+
+        <!-- ********** 版本A **********-->
+        <view class="lgA_box" wx:if="{{localGuideData && localGuideData.subTemplateType == 1 && localGuideData.subTemplate && localGuideData.subTemplate.itemList}}">
+            <view class="lgA_background"></view>
+            <image class="lgA_background_text" src="https://pages.c-ctrip.com/you/destination/ic_bg_text@3x.png" />
+            <scroll-view  class="content_box" scroll-x="true">
+                <view class="left_touch_box" wx:if="{{localGuideData.subTemplate.jumpUrl}}" bindtap="goToLgAMore"
+                    data-subtemplatetype="{{localGuideData.subTemplateType}}"
+                    data-jumpUrl="{{localGuideData.subTemplate.jumpUrl}}">
+                    <view class="left_box">
+                        <image src="https://pages.c-ctrip.com/you/destination/local_guide_bg@3x.png" class="extra_img" />
+                        <image src="https://pages.c-ctrip.com/you/destination/local_guide_text@3x.png" class="mainTitle" />
+                        <image src="https://pages.c-ctrip.com/you/destination/ic_more@3x.png" class="ic_oval" />
+                    </view>
+                </view>
+                <block wx:for="{{localGuideData.subTemplate.itemList}}">
+                    <view class="two_cards_box_outer" key="{{index}}" wx:if="{{index%2 === 0}}">
+                        <view class="two_cards_box"
+                          >
+                            <view class="one_card_box" style="margin-bottom: 16rpx;" bindtap="goToLgADetail"  data-idx="{{index}}"
+                                    data-subtemplatetype="{{localGuideData.subTemplateType}}"
+                                    data-url="{{localGuideData.subTemplate.itemList[index].jumpUrl}}" data-itemid="{{localGuideData.subTemplate.itemList[index].itemId}}">
+                                <view class="card_text oneLineOverflowNew">{{item.title}}</view>
+                            </view>
+                            <image src="{{item.icon}}" wx:if="{{item.icon}}" class="icon_top"></image>
+                            <view class="one_card_box" bindtap="goToLgADetail"
+                                 data-idx="{{index}}"
+                                 data-subtemplatetype="{{localGuideData.subTemplateType}}"
+                                 data-url="{{localGuideData.subTemplate.itemList[index+1].jumpUrl}}" data-itemid="{{localGuideData.subTemplate.itemList[index+1].itemId}}">
+                                <view class="card_text oneLineOverflowNew">{{localGuideData.subTemplate.itemList[index+1].title}}</view>
+                            </view>
+                            <image src="{{localGuideData.subTemplate.itemList[index+1].icon}}" wx:if="{{localGuideData.subTemplate.itemList[index+1].icon}}" class="icon_bottom"></image>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+        <!-- ********** 版本A end **********-->
+    </view>
+</template>

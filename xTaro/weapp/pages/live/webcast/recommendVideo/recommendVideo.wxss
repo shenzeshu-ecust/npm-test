@@ -1,0 +1,509 @@
+/* pages/you/place/webcast/recommendVideo/recommendVideo.wxss */
+.recommend-bg{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 128;
+	background:rgba(0,0,0,0.1);
+}
+.recommend-list{
+	width: 83%;
+	height: 100%;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: 129;
+	/*background:rgba(0,0,0,0.7);*/
+	transform: translateX(100%);
+}
+
+.recommend-list.on{
+	animation: showVideo 300ms 1 linear forwards;
+}
+
+@keyframes showVideo {
+	0%{
+		transform: translateX(100%);
+	}
+	100%{
+		transform: translateX(0);
+	}
+}
+
+.recommendVideo-tag{
+	position: fixed;
+	top: 0;
+	width: 148rpx;
+	height: 40rpx;
+	right: 0;
+	z-index: 102;
+	font-family: PingFangSC-Regular;
+	font-size: 22rpx;
+	color: #FFFFFF;
+	line-height: 40rpx;
+	background:rgba(0,0,0,0.3);
+	border-radius: 36rpx 0 0 36rpx;
+	margin-top: 92rpx;
+}
+
+.recommendVideo-tag .recommendVideo-tagtext{
+    position: relative;
+    padding-left: 16rpx;
+}
+
+.recommendVideo-tag .recommendVideo-tagtext::after{
+	content:'';
+	position: absolute;
+	top:  50%;
+	transform: translateY(-50%);
+	right: 16rpx;
+	width: 24rpx;
+	height: 24rpx;
+	background: url('https://pages.c-ctrip.com/livestream/video/white-arrow.png') no-repeat;
+	background-size: 24rpx;
+}
+
+.reclist-inner{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	background:rgba(0,0,0,0.7);
+}
+
+.reclist-inner-blur{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	//background-image:url('https://dimg04.c-ctrip.com/images/0106g120008iflhz19829_R_360_640_Q80.jpg');
+	background-size: cover;
+	background-position: top right;
+	filter: blur(5px) brightness(0.5) contrast(0.8);
+	-webkit-filter: blur(5px) brightness(0.5) contrast(0.8);
+}
+
+.recommend-list .rec-title{
+	line-height: 90rpx;
+	padding-left: 24rpx;
+	font-family: PingFangSC-Medium;
+	font-size: 34rpx;
+	color: #FFFFFF;
+	height: 90rpx;
+}
+
+.recommend-list .rec-list{
+	width: 100%;
+	padding: 0 0 0 16rpx;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+.rec-list .list-itemwrapper{
+	width: 50%;
+	height: 382rpx;
+	float: left;
+	padding-right: 16rpx;
+	box-sizing: border-box;
+	margin-bottom: 16rpx;
+}
+
+.rec-list .list-item{
+	width: 100%;
+	height: 100%;
+	border-radius: 16rpx;
+	margin-right: 16rpx;
+	background: #fff;
+	position: relative;
+	background: #d8d8d8 url('https://pages.c-ctrip.com/you/livestream/lvpai_logo_youyou.png') no-repeat center;
+	background-size: 50%;
+}
+
+.list-item .item-cover{
+	width: 100%;
+	height: 100%;
+	border-radius: 16rpx;
+}
+
+.list-item .item-tag{
+	position: absolute;
+	top: 16rpx;
+	left: 16rpx;
+	padding:0 12rpx;
+	border-radius: 17rpx;
+	background:rgba(34,34,34,.8);
+	text-align: center;
+	display: flex;
+	font-family: PingFangSC-Regular;
+	font-size: 20rpx;
+	color: #FFFFFF;
+	line-height: 34rpx;
+	align-items: center;
+}
+
+.item-tag .live{
+	width: 24rpx;
+	height: 24rpx;
+	margin: 0 8rpx 0 -6rpx;
+	border-radius: 24rpx;
+	background-image: linear-gradient(270deg, #0086F6 0%, #2DCCC1 100%);
+	position: relative;
+}
+.item-tag .live::before{
+	content: '';
+	width: 24rpx;
+	height: 24rpx;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-image: url('https://pages.c-ctrip.com/livestream/video/playing.gif');
+	background-size: 14rpx;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.item-tag .live.prize, .item-tag .live.point{
+	background:none;
+}
+
+.item-tag .live.prize::before{
+	background-image: url('https://pages.c-ctrip.com/livestream/video/home-playing-prize.png');
+	background-size: 24rpx;
+}
+
+.item-tag .live.point::before{
+	background-image: url('https://pages.c-ctrip.com/livestream/video/home-playing-prize.png');
+	background-size: 24rpx;
+}
+
+.item-info{
+	position: absolute;
+	left: 0;
+	bottom:0;
+	width: 100%;
+	height: 260rpx;
+	background-image: linear-gradient(180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.60) 100%);
+ 	border-radius: 0 0 16rpx 16rpx;
+ 	display: flex;
+ 	flex-direction: column;
+ 	justify-content: flex-end;
+}
+
+.item-info .location{
+	width: 88.9%;
+	margin:0 16rpx 0; 
+	font-family: PingFangSC-Regular;
+	font-size: 20rpx;
+	height: 24rpx;
+	color: #FFFFFF;
+	line-height: normal;
+	padding-left: 28rpx;
+	position: relative;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+}
+
+.item-info .location text{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.item-info .location::before{
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 24rpx;
+	height: 24rpx;
+	background:url('https://pages.c-ctrip.com/livestream/video/white-location.png') no-repeat center;
+	background-size: 22rpx;
+	
+}
+
+.item-info .location.nopoi::before{
+	width: 0;
+}
+
+.item-info .item-title{
+	width: 88.9%;
+	padding: 4rpx 16rpx 0;
+	font-family: PingFangSC-Medium;
+	font-size: 28rpx;
+	color: #FFFFFF;
+	line-height: 36rpx;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-sizing: border-box;
+}
+
+.item-info .item-user{
+	margin: 14rpx 16rpx 16rpx;
+	display: flex;
+	height: 54rpx;
+}
+
+.item-info .item-user .avat{
+	width: 48rpx;
+	height: 48rpx;
+	border-radius: 50%;
+	box-sizing: border-box;
+	background:red;
+	position: relative;
+	align-self: center;
+	background:url('https://pages.c-ctrip.com/you/lvpai-home-defaultavat.jpg') no-repeat;
+	background-size: 100%;
+	position: relative;
+}
+
+.item-info .item-user .avat::before{
+	content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    left: 0;
+    top: 0;
+    border: 1rpx solid #EEEEEE;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scale(0.5, 0.5);
+    transform: scale(0.5, 0.5);
+    box-sizing: border-box; 
+    border-radius: 50%;
+}
+
+.item-info .item-user .avat image{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.item-info .item-user .avat .vip{
+	position: absolute;
+    right: -2rpx;
+    bottom: -2rpx;
+    width: 16rpx;
+    height: 16rpx;
+    z-index: 2;
+    border-radius: 16rpx;
+}
+
+.item-info .item-user .name-info{
+	margin-left: 6rpx;
+	height: 54rpx;
+	width: 0;
+	flex:1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.name-info .row1{
+	font-family: PingFangSC-Regular;
+	font-size: 20rpx;
+	color: #FFFFFF;
+	line-height: 22rpx;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.name-info .row2{
+	margin-top: 4rpx;
+	font-family: PingFangSC-Regular;
+	font-size: 20rpx;
+	color: #fff;
+	height: 28rpx;
+ 	width: fit-content;
+ 	line-height: normal;
+ 	display: flex;
+ 	align-items: center;
+ 	max-width:100%;
+}
+
+.name-info .row2 .yellow{
+	padding: 0 6rpx;
+	color: #FFC054;
+	background: rgba(79,49,0,0.50);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border-radius: 16rpx 2rpx 16rpx 2rpx;
+}
+
+.name-info .row2 .blue{
+	padding: 0 6rpx;
+	color: #99CEFB;
+	background: rgba(0,47,85,0.50);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border-radius: 16rpx 2rpx 16rpx 2rpx;
+}
+
+
+.item-info .item-user .bubble{
+	width: 38rpx;
+	height: 54rpx;
+	position: relative;
+	align-self: flex-end;
+
+}
+
+.item-info .item-user .bubble image{
+	width: 38rpx;
+	height: auto;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+
+}
+
+.recommend-list .hidelist-tag{
+	position: absolute;
+	top: 0;
+	left: -39rpx;
+	width: 40rpx;
+	height: 46rpx;
+	background:rgba(0,0,0,0.5);
+	border-radius: 36rpx 0 0 36rpx;
+	background-image: url('https://pages.c-ctrip.com/livestream/video/white-arrow.png');
+	background-size: 28rpx;
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: 10;
+	display: none;
+}
+
+.recommend-list.on .hidelist-tag{
+	display: block;
+}
+
+
+.loading .inner-div {
+	padding: 30rpx 0px;
+	color: #fff;
+	font-size: 26rpx;
+	line-height: 32rpx;
+	text-align: center;
+	
+}
+
+.loading .inner-div text{
+	display: inline-block;
+	padding-left: 44rpx;
+	position: relative;
+}
+
+.loading .inner-div text::before{
+	content: '';
+	width: 32rpx;
+	height: 32rpx;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0px;
+	background: url(https://pages.c-ctrip.com/you/livestream/lvpai_loading.png);
+	background-size: 32rpx;
+	-webkit-animation: gs-cui-loading 1.58s linear infinite;
+}
+
+@keyframes gs-cui-loading {
+	from{
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.no-more{
+	float: left;
+	width: 100%;
+	padding: 32rpx 0 100rpx;
+	font-family: PingFangSC-Regular;
+	font-size: 24rpx;
+	color: #EEEEEE;
+	line-height: 30rpx;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.nodata{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left:30rpx;
+	right: 30rpx;
+	height: 580rpx;
+	background: #FFFFFF;
+	border-radius: 12rpx;
+}
+
+.nodata .nodata-img{
+	width: 300rpx;
+	height: 300rpx;
+	margin: 0 auto;
+	background-size: 300rpx;
+}
+
+.nodata .nodata-img.no{
+	background-image: url('https://pages.c-ctrip.com/livestream/video/webcast-nodata.png');
+	 
+}
+
+.nodata .nodata-img.err{
+	background-image: url('https://pages.c-ctrip.com/livestream/video/webcast-err.png');
+	 
+}
+
+.nodata .no-title{
+	margin-top: 26rpx;
+	font-family: PingFangSC-Medium;
+	font-size: 34rpx;
+	color: #333333;
+	text-align: center;
+	line-height: 46rpx;
+}
+
+.nodata  .no-subtitle{
+	margin-top: 16rpx;
+	font-family: PingFangSC-Regular;
+	font-size: 28rpx;
+	color: #333333;
+	text-align: center;
+	line-height: 40rpx;
+}
+
+.no-btn{
+	margin: 48rpx auto 0;
+	width: 498rpx;
+	height: 72rpx;
+	background:#0086F6;
+	border-radius: 10rpx;
+	font-family: PingFangSC-Regular;
+	font-size: 30rpx;
+	color: #FFFFFF;
+	text-align: center;
+	line-height: 72rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

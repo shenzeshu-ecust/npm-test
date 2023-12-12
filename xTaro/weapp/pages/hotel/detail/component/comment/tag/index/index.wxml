@@ -1,0 +1,10 @@
+<view wx:if="{{commentTags.length}}" class="tag-box">
+    <view class="tag-item"
+        wx:for="{{commentTags}}"
+        wx:for-item="tag"
+        data-id="{{tag.id}}"
+        data-value="{{tag.name}}"
+        catchtap="clickCommentTags">
+        {{tag.name}} {{tag.count}} 
+    </view>
+</view>

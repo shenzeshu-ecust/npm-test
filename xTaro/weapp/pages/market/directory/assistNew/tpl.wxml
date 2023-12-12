@@ -1,0 +1,140 @@
+<!-- 助力页面的模板 -->
+<wxs src="./utils.wxs" module="utils"></wxs>
+
+<template name="couponLeft">
+  <view class="coupon-left">
+      <block wx:if="{{item.deductionType==1 && item.deductionItemList.length > 1}}">
+        <block wx:if="{{utils.calcDiscount(item.discountAmount) == '0.0'}}">
+          <view class="only-text">超值</view>
+          <view class="only-text">优惠</view>
+        </block>
+        <block wx:else>
+          <view>
+            <text class="price">{{utils.calcDiscount(item.discountAmount)}}</text>
+            <text class="yuan" wx:if="{{item.deductionType == 1}}">折</text>
+          </view>
+          <view class="type">最高享</view>
+        </block>
+      </block>
+      <block wx:if="{{item.deductionType==1 && item.deductionItemList.length == 1}}">
+        <block wx:if="{{utils.calcDiscount(item.discountAmount) == '0.0'}}">
+          <view class="only-text">超值</view>
+          <view class="only-text">优惠</view>
+        </block>
+        <block wx:else>
+          <view>
+          <text class="price">{{utils.calcDiscount(item.discountAmount)}}</text>
+          <text class="yuan" wx:if="{{item.deductionType == 1}}">折</text>
+        </view>
+        <view class="type" wx:if="{{item.startAmount > 0}}">满{{item.startAmount}}可用</view>
+        </block>
+      </block>
+      <block wx:if="{{item.deductionType==0 && item.deductionItemList.length > 1}}">
+        <view>
+          <text class="yuan">¥</text>
+          <text class="price">{{utils.calcPrice(item.discountAmount)}}</text>
+        </view>
+        <view class="type">最高减</view>
+      </block>
+      <block wx:if="{{item.deductionType==0 && item.deductionItemList.length == 1}}">
+        <view>
+          <text class="yuan">¥</text>
+          <text class="price">{{utils.calcPrice(item.discountAmount)}}</text>
+        </view>
+        <view class="type"  wx:if="{{item.startAmount > 0}}">满{{item.startAmount}}元可用</view>
+      </block>
+      <block wx:if="{{item.deductionType==2}}">
+        <view>
+          <text class="yuan">¥</text>
+          <text class="price">{{utils.calcPrice(item.discountAmount)}}</text>
+        </view>
+        <view class="type">最高减</view>
+      </block>
+      <block wx:if="{{item.deductionType==3}}">
+        <block wx:if="{{utils.calcDiscount(item.discountAmount) == '0.0'}}">
+          <view class="only-text">超值</view>
+          <view class="only-text">优惠</view>
+        </block>
+        <block wx:else>
+          <view>
+            <text class="price">{{utils.calcDiscount(item.discountAmount)}}</text>
+            <text class="yuan" wx:if="{{item.deductionType == 3}}">折</text>
+          </view>
+          <view class="type">限额</view>
+        </block>
+      </block>
+    </view>
+</template>
+<!-- 
+  优惠券
+  状态: status: 1.未参与 2.未获得 3.可使用
+ -->
+<template name="assistCoupon">
+  <!-- 1. 未参与 -->
+  <view class="assist-coupon" wx:if="{{item.status == 1}}">
+    <template is="couponLeft" data="{{item}}" />
+    <view class="coupon-center-right-wraper">
+      <view class="coupon-center">
+        <view class="coupon-title ellipsis-2">{{item.couponName}}</view>
+        <view class="last-date ellipsis" wx:if="{{item.limitTimeTypeId == 2}}">领取当日有效</view>
+        <view class="last-date ellipsis" wx:if="{{item.limitTimeTypeId == 1}}">{{item.couponEndDate}}前有效</view>
+        <block  wx:if="{{item.limitTimeTypeId == 0}}">
+          <view class="last-date ellipsis" wx:if="{{item.dynamicEffectiveMAXValueUnit == 'd'}}">领取后{{item.dynamicEffectiveMAXValue}}天有效</view>
+          <view class="last-date ellipsis" wx:else>领取后{{item.dynamicEffectiveMAXValue}}{{item.dynamicEffectiveMAXValueUnit}}有效</view>
+        </block>
+      </view>
+      <view class="coupon-right get-btn" wx:if="{{item.jump && showBtn && showBtn !='false'}}">
+        <view class="btn" bindtap="jump" data-formatext="{{item.formatExt}}">去使用</view>
+      </view>
+    </view>
+    <view class="get-status-icon" wx:if="{{showBtn && showBtn !='false'}}"></view>
+    <view class="circle"></view>
+  </view>
+  <!-- 2.未获得 -->
+  <view class="assist-coupon unget" wx:elif="{{item.status == 2}}">
+    <template is="couponLeft" data="{{item}}" />
+    <view class="coupon-center-right-wraper">
+      <view class="coupon-center">
+        <view class="coupon-title ellipsis-2">{{item.couponName}}</view>
+        <view class="last-date ellipsis" wx:if="{{item.limitTimeTypeId == 2}}">领取当日有效</view>
+        <view class="last-date ellipsis" wx:if="{{item.limitTimeTypeId == 1}}">{{item.couponEndDate}}前有效</view>
+        <block  wx:if="{{item.limitTimeTypeId == 0}}">
+          <view class="last-date ellipsis" wx:if="{{item.dynamicEffectiveMAXValueUnit == 'd'}}">领取后{{item.dynamicEffectiveMAXValue}}天有效</view>
+          <view class="last-date ellipsis" wx:else>领取后{{item.dynamicEffectiveMAXValue}}{{item.dynamicEffectiveMAXValueUnit}}有效</view>
+        </block>
+      </view>
+      <view class="circle"></view>
+      <view class="get-status">
+        <view class="inner">
+          <view class="text">未获得</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 3.可使用 -->
+  <view class="assist-coupon haved" wx:else>
+    <template is="couponLeft" data="{{item}}" />
+    <view class="coupon-center-right-wraper">
+      <view class="coupon-center">
+        <view class="coupon-title ellipsis-2">{{item.couponName}}</view>
+        <view class="last-date ellipsis" wx:if="{{item.limitTimeTypeId == 2}}">领取当日有效</view>
+        <view class="last-date ellipsis" wx:if="{{item.limitTimeTypeId == 1}}">{{item.couponEndDate}}前有效</view>
+        <block  wx:if="{{item.limitTimeTypeId == 0}}">
+          <view class="last-date ellipsis" wx:if="{{item.dynamicEffectiveMAXValueUnit == 'd'}}">领取后{{item.dynamicEffectiveMAXValue}}天有效</view>
+          <view class="last-date ellipsis" wx:else>领取后{{item.dynamicEffectiveMAXValue}}{{item.dynamicEffectiveMAXValueUnit}}有效</view>
+        </block>
+      </view>
+      <view class="coupon-right" wx:if="{{showBtn && (showBtn + '') == 'true'}}">
+        <view class="btn">去使用</view>
+      </view>
+    </view>
+    <view class="get-status">
+      <view class="inner">
+        <view class="text">已获得</view>
+      </view>
+    </view>
+    <view class="circle"></view>
+  </view>
+</template>
+
+

@@ -1,5 +1,5 @@
-import Format from "./src/format";
-import Validate from "./src/validate";
+import Format from "../../npm 包发布/src/format";
+import Validate from "../../npm 包发布/src/validate";
 
 export { Format, Validate };
 

@@ -1,0 +1,39 @@
+.campus-wrap{
+  width: 100%;
+  height: 1446rpx;
+  background:rgb(135,215,255) url('https://images3.c-ctrip.com/marketing/2023/09/single_pic/campus.png') 0 0/100% no-repeat;
+}
+
+.group-btn1{
+  position: absolute;
+  top: 665rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320rpx;
+  height: 81rpx;
+  background: url("https://images3.c-ctrip.com/marketing/2023/09/single_pic/btn1.png") 0 0/100% no-repeat;
+  background-size: contain;
+}
+.group-btn2{
+  position: absolute;
+  top: 1135rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320rpx;
+  height: 81rpx;
+  background: url("https://images3.c-ctrip.com/marketing/2023/09/single_pic/btn2.png") 0 0/100% no-repeat;
+  background-size: contain;
+}
+
+.group-chat__groupCell {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 99;
+  /* 进入群码页面返回后会滚动 */
+  overflow: hidden;
+  border: 1px solid red;
+}

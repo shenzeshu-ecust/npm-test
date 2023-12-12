@@ -1,0 +1,160 @@
+<template name="playLiveEatListComponent">
+    <view class="play-live-eat-list" id="sight">
+        <!-- 一级标签 -->
+         <view class="tab">
+            <block wx:for="{{playLiveEatList.data}}" key="{{index}}">
+                 <view class="{{ playLiveEatList.tabIndex == index && 'tab_index_choose' || ''}} tab_index"
+                                bindtap="tabPlayClick"  data-idx="{{index}}" data-_data="{{item}}"  data-itemtype="{{item.tabType}}">
+                     <image style="display : {{playLiveEatList.tabIndex == index ? 'block' : 'none'}}" src="{{ item.tabType === 'SIGHT' ? 'https://dimg04.c-ctrip.com/images/0104j120008qi4ffwF1BD.png' : item.tabType === 'HOTEL' ? 'https://dimg04.c-ctrip.com/images/01016120008qi47foA0F7.png' : item.tabType === 'RESTAURANT' ? 'https://dimg04.c-ctrip.com/images/01045120008qi4umk8BA4.png' : ''}}" class="tab_image"/>
+                     {{item.title}}
+                      <view wx:if="{{playLiveEatList.tabIndex == index}}" class="bold_bottom"/>
+                 </view>
+            </block>
+            <view wx:if="{{playLiveEatList.data.length < 3}}" class="tagItemOneOff"></view>
+        </view>
+        <view class="tab_list">
+
+             <view class="loadingContainer" wx:if="{{playLiveEatList.loading}}">
+                 <view class="loading">
+                     <image class="loadingImg" src="https://dimg02.c-ctrip.com/images/1008170000012pqy49C5D.png"></image>
+                     <view class="loadingText">加载中...</view>
+                 </view>
+             </view>
+             <block wx:for="{{playLiveEatList.data[playLiveEatList.tabIndex].hotRecommendItemList}}" key="{{index}}">
+                  <view
+                         bindtap="tabPlayClickGo"
+                         class="tab_data_list"
+                         data-h5url="{{item.jumpUrl}}" data-appurl="{{item.jumpUrl}}">
+
+                           <view class="tab_data_image"
+                                       style="background-image : url({{item.coverImage}})">
+                                 <view
+                                     wx:if="{{item.bossRecommendTagText}}"
+                                     class="tab_data_boss_text">
+                                     <image wx:if="{{!!item.bossRecommendTagIcon}}" src="{{item.bossRecommendTagIcon}}"/>
+                                     {{item.bossRecommendTagText}}
+                                 </view>
+                                  <view
+                                      wx:if="{{!!item.aroundTag}}"
+                                      class="aroundTag">
+                                        {{item.aroundTag}}
+                                     </view>
+
+                             </view>
+
+
+                          <view class="tab_data_body">
+                                <view class="tab_data_body_title">
+                                    <view
+                                        class="title_name {{!!item.level ? 'title_name_level' : 'title_name_level_100'}}"
+                                    >{{item.name}}</view>
+                                     <view wx:if="{{!!item.level}}" class="level">
+                                           {{item.level}}
+                                     </view>
+                                </view>
+                                <view class="tab_data_body_grade">
+                                    <view wx:if="{{!!item.hotScore}}" class="hotScore">
+                                        <image class="hotScoreFire" src="https://dimg04.c-ctrip.com/images/01015120009wh706zFEF8.png"/>
+                                       {{(item.hotScore)}}</view>
+                                    <view wx:if="{{!!item.hotScore && !!item.commentScore}}" class="tab_data_body_grade_line"/>
+                                    {{item.commentScore}}
+                                    <view wx:if="{{!!item.commentScore && !!item.commentCount}}" class="tab_data_body_grade_line"/>
+                                    <view wx:if="{{!!item.commentScore && !!item.hotScore && !item.commentCount}}" class="tab_data_body_grade_line"/>
+                                    {{item.commentCount}}
+                                </view>
+                                <view class="tab_data_body_label">
+                                    <view
+                                            catchtap="tabPlayClickGo"
+                                            hover-stop-propagation="true"
+                                            data-h5url="{{item.ranking.rankJumpUrl}}"
+                                            wx:if="{{!!item.ranking &&  JSON.stringify(item.ranking) !== '{}'}}"
+                                            style="background-color : {{playLiveEatList.data[playLiveEatList.tabIndex].tabType ==='RESTAURANT'  ? '#C82C2C10' : '#ffeedf'}};color:{{playLiveEatList.data[playLiveEatList.tabIndex].tabType ==='RESTAURANT'  ? '#C82C2C' : '#673114'}}"
+                                            class="tab_data_body_label_first {{playLiveEatList.data[playLiveEatList.tabIndex].tabType ==='RESTAURANT' ? 'tab_data_body_label_first_res' : ''}}">
+                                            <image wx:if="{{item.ranking.rankIcon}}"  src="{{item.ranking.rankIcon}}" class="image1"/>
+                                            <view class="tab_data_body_label_text">{{item.ranking.rankDesc || ""}}</view>
+                                            <image class="image2" wx:if="{{playLiveEatList.data[playLiveEatList.tabIndex].tabType ==='RESTAURANT'}}"
+                                            src="{{playLiveEatList.data[playLiveEatList.tabIndex].tabType ==='RESTAURANT' ? 'https://pages.c-ctrip.com/you/destination/more_red@3x.png' : item.ranking.rankMoreIcon}}"/>
+                                    </view>
+
+                                    <view wx:if="{{!item.ranking && !!item.shortFeature}}" class="shortFeature_line">
+                                            <view class="shortFeature_line_text">“
+                                                <view class="shortFeature_line_bottom shortFeature_line_bottom_left"/>
+                                            </view>
+                                            <view class="shortFeature_line_text">
+                                                {{item.shortFeature}}
+                                                <view class="shortFeature_line_bottom"/>
+                                            </view>
+                                            <view class="shortFeature_line_text">”
+                                                <view class="shortFeature_line_bottom shortFeature_line_bottom_right"/>
+                                            </view>
+                                        <view class="clearBoth"/>
+                                    </view>
+                                     <view
+                                          wx:if="{{ !item.ranking && !item.shortFeature && !!item.tagList }}"
+                                          class="shortFeature_line">
+                                            <block wx:for="{{item.tagList}}" wx:for-item="tag" wx:for-index="index1">
+                                                <view class="shortFeature_line_text {{item.tagList.length - 1 > index1 ? 'shortFeature_line_text_right' : 'shortFeature_line_text_0'}}">
+                                                    {{tag}}
+                                                    <view class="shortFeature_line_bottom"/>
+                                                </view>
+                                            </block>
+                                            <view class="clearBoth"/>
+                                        </view>
+                                </view>
+                                <view wx:if="{{item.recommendContent}}" class="tab_data_body_vips">
+                                    <view wx:if="{{!!item.recommendAuthor}}" class="tab_data_body_vips_recommendAuthor">
+                                            <image class="avatar" src="{{item.recommendAuthor.avatar}}"/>
+                                            <image class="vIcon" src="{{item.recommendAuthor.vIcon}}"/>
+                                     </view>
+
+                                    <view class="shortFeature_line">
+                                        <view class="shortFeature_line_text_left">"
+                                        </view>
+                                        <view class="shortFeature_line_text">
+                                            {{item.recommendContent}}
+                                        </view>
+                                        <view class="shortFeature_line_text_right">"
+                                        </view>
+                                        <view class="clearBoth"/>
+                                    </view>
+                                    <view class="clearBoth"/>
+                                </view>
+
+
+                                <view wx:if="{{!item.recommendContent && !!item.packageName}}" class="tab_data_body_discount">
+                                    <view class="tab_data_body_discount_mean">
+                                        惠
+                                    </view>
+                                    <view class="tab_data_body_discount_packageName">
+                                       {{item.packageName}}
+                                    </view>
+                                    <view class="clearBoth"/>
+                                </view>
+
+                                <view
+                                wx:if="{{!item.recommendContent && !item.packageName}}"
+                                class="tab_data_body_address">
+                                     <text>{{item.distance || ""}}</text>
+                                     <text wx:if="{{!!item.zoneName && !!item.distance}}" class="tab_data_body_address_circle">·</text>
+                                    <text>{{item.zoneName || ""}}</text>
+                                </view>
+                            </view>
+                  </view>
+             </block>
+             <view
+               bindtap="tabPlayClickGo"
+
+               data-h5url="{{playLiveEatList.data[playLiveEatList.tabIndex].more.url}}"
+                wx:if="{{!!playLiveEatList.data[playLiveEatList.tabIndex].more}}"
+                class="lookMore">
+                 {{playLiveEatList.data[playLiveEatList.tabIndex].more.text}}
+                 <view class="right-b">
+                     <view class="right-arrow1"/>
+                     <view class="right-arrow2"/>
+
+                 </view>
+             </view>
+
+        </view>
+    </view>
+</template>

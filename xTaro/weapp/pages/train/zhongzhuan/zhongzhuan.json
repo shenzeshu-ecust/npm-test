@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "中转车次",
+  "navigationBarBackgroundColor": "#0086F6",
+  "navigationBarTextStyle": "white",
+  "backgroundTextStyle": "light",
+  "disableScroll": true,
+  "usingComponents": {
+    "notice": "../common/components/notice/notice",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  }
+}

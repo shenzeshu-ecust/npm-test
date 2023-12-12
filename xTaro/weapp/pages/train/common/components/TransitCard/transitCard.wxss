@@ -1,0 +1,195 @@
+@import "../../repeatCss/ortherlistTransitCard.wxss";
+.sel-box {
+    margin: 0 16rpx 16rpx;
+    background: #fff;
+    border-radius: 24rpx;
+    padding: 24rpx;
+    overflow: hidden;
+    position: relative;z-index: 10
+}
+.sel-hd {
+    height: 72rpx;
+    width: 100%;
+    background-color: #fff;
+}
+.toptip{
+    position: absolute;
+    width:calc(100% - 48rpx);
+    margin: 4rpx 4rpx 0;
+    border-radius: 6px 6px 0px 0px;
+    padding:24rpx 20rpx;
+    top:0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(-180deg, rgb(231, 248, 241) 0%, rgb(255, 255, 255) 100%);
+}
+.toptip .icon{
+    width: 112rpx;
+    height: 28rpx;
+    margin-right: 12rpx;
+    background: url(https://images3.c-ctrip.com/train/2021/app/V8.43/xiaochengxu/zhuliucheng/img-text.png);
+    background-size: 100% 100%;
+}
+.toptip{
+    color: rgb(38, 194, 141);
+    font-size: 22rpx;
+    line-height: 28rpx;
+}
+.toptip .l-txt{
+    display: flex;
+}
+.toptip .r-box{
+    width: 76rpx;
+    height: 24rpx;
+    position: relative;
+    line-height: 24rpx;
+    font-size: 22rpx;
+    flex-shrink: 0;
+}
+.toptip .arr{
+    width: 24rpx;
+    height: 24rpx;
+    background: url(https://images3.c-ctrip.com/train/2021/app/V8.43/xiaochengxu/zhuliucheng/img-more.png);
+    background-size: contain;
+    position: absolute;
+    right:0;
+    top:0
+}
+
+.sel-bd {
+    display: flex;
+}
+.sel-from, .sel-to {
+    flex: 1;
+    position: relative;
+}
+.sel-from{
+  justify-content: flex-start;
+}
+.sel-to {
+    justify-content: flex-end;
+    text-align: right;
+}
+.sel-to .small {
+    font-size: 20rpx;
+    position:absolute;
+    right:-28rpx;top:8rpx;line-height: 20rpx
+}
+.sel-to .small .em{font-size: 16rpx}
+.dstation, .astation {
+    font-size: 26rpx;
+    position: relative;line-height: 34rpx;
+}
+.sel-from .dtime,.sel-to .dtime {
+    font-size: 48rpx;line-height: 56rpx;margin-bottom: 4rpx
+}
+.sel-from .dtime{color: #0086F6;}
+.sel-checi {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    padding-top: 4rpx;
+}
+.sel-checi::after{width:112rpx;height: 6rpx;position: absolute;content: "";background: url(https://pic.c-ctrip.com/train/wechat/icon-list-0620.png) no-repeat;background-size: 112rpx 30rpx;bottom:48rpx;left: 50%;transform: translateX(-50%);}
+.sel-checi .text {
+    white-space: nowrap;
+    font-size: 22rpx;
+    color: #666;
+    line-height: 42rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sel-checi .cert{
+  height: 22rpx;
+  width: 24rpx;
+  background-size: 100% 100%;
+  background-image: url(https://images3.c-ctrip.com/train/2023-3/xiaochengxu/6.15/img-sfz.png);
+  margin-left: 6rpx;
+}
+.sel-checi .icon-img {
+    height: 22rpx;
+    width: 22rpx;
+    background-size: 100% 100%;
+    margin-left: 4rpx;
+}
+.sel-checi .fuxing{
+  background-image: url(https://images3.c-ctrip.com/train/2023-3/xiaochengxu/6.15/img-fxh.png);
+}
+.sel-checi .point{
+    background-image: url(https://images3.c-ctrip.com/train/2023-3/xiaochengxu/6.15/img-dcp.png);
+}
+.sel-checi .silent {
+    background-image: url(https://images3.c-ctrip.com/train/2023-3/xiaochengxu/6.15/img-jcx.png);
+}
+
+
+.sel-checi .bed { 
+  background-image: url(https://images3.c-ctrip.com/train/2023-3/xiaochengxu/3.23/shaixuan/img-pw.png);
+}
+
+.sel-trans{flex: 1;text-align: center;position: relative;padding-top: 4rpx;}
+.sel-trans .txt{font-size: 20rpx;color: #666;line-height: 22rpx;}
+.sel-trans .trans{display: inline-block;border:1px solid #0086F6;color: #0086F6;font-size: 20rpx;line-height: 28rpx;padding: 0 10rpx;margin: 2rpx 0 6rpx;border-radius: 28rpx;position: relative;vertical-align: middle}
+.sel-trans .trans::before,.sel-trans .trans::after{width: 28rpx;height: 2rpx;position: absolute;content: "";top:50%;transform: translateY(-50%);}
+.sel-trans .trans::before{background: -webkit-linear-gradient(left,#fff,#3AA2F8);left: -28rpx;}
+.sel-trans .trans::after{background: -webkit-linear-gradient(left,#3AA2F8,#fff);right:-28rpx; }
+
+.sel-price {
+    text-align: right;
+    justify-content: right;
+    /* width: 180rpx; */
+    flex: 1;
+    color: #999;
+    position: relative;
+}
+.sel-price .train-price {
+    line-height: 54rpx;font-size: 48rpx;color: #f60;
+}
+.sel-price .train-price::before{
+    content: "\00A5";
+    font-size: 24rpx;margin-right: 2rpx
+}
+.sel-price .train-price .em{font-size: 20rpx;margin-left: 4rpx}
+.sel-price .tag-blue,.sel-price .tag-orage{
+    color: #fff;
+    font-size: 22rpx;
+    line-height:32rpx;
+    height: 32rpx;
+    position: absolute;
+    padding: 0 12rpx;
+    text-align: center;
+    border-radius: 16px;
+    right: 0;
+    top: 58rpx;
+    box-sizing: border-box;
+}
+.sel-price .tag-blue{
+  background: #0086F6;
+}
+.sel-price .tag-orage{
+    background: #F70;
+}
+.sel-price .txt-orage{
+    color: rgb(255, 119, 0);
+    font-size: 26rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+}
+
+.sel-trans-info .item{ color: #666;flex: 1}
+.sel-trans-info .item:last-child{text-align: right}
+.sel-info .icon-jing{width: 22rpx;height: 22rpx;border:1px solid #00B87A;border-radius: 2px;color:#00B87A;font-size: 18rpx;line-height: 22rpx;text-align: center;margin-right: 6rpx;}
+
+.local-title {
+    line-height: 22rpx;
+    font-size: 20rpx;
+}
+.orange {
+    color: #D96500;
+}
+.text-empty {
+    height: 40rpx;
+}

@@ -1,0 +1,20 @@
+<view class="process-bar">
+    <view class="pb-title">
+        <view class="pb-left">
+            <image class="icon" src="https://pages.c-ctrip.com/hotels/wechat/img/ordercomment-trip-coin.png"></image>
+            <text wx:for="{{leftTipList}}" wx:for-item="tip" wx:key="*this"
+                  class="desc {{tip.highLight ? 'high-light' : ''}}">{{tip.content}}</text>
+            <text class="wechat-font-qa" bindtap="toCommentRule"></text>
+        </view>
+        <view wx:if="{{maxTotalPoints}}" class="pb-right {{rightTipHighLight ? 'high-light' : ''}}">{{rightTip}}</view>
+    </view>
+    <view class="process-line">
+        <view class="pl-highlight" style="width: {{currentStepWidth}}"></view>
+        <view wx:for="{{processStep}}" wx:for-index="index"
+              class="dot" style="left: {{index/totalStepCount*100}}%"></view>
+        <image wx:for="{{processBarIcon}}" wx:for-item="icon" wx:key="url"
+               src="{{icon.url}}"
+               style="left: {{icon.left}}"
+               class="process-img"></image>
+    </view>
+</view>

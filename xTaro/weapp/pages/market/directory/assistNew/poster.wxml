@@ -1,0 +1,13 @@
+<view class="share_wrap">
+   <image src="{{img}}" mode="widthFix"></image> 
+   <view class="foot">
+      <view class="btn" bindtap="savePic">
+         <view class="inner">保存图片到相册</view>
+      </view>
+   </view>
+</view>
+
+<canvas canvas-id="mycanvas" class="post_canvas"></canvas> 
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

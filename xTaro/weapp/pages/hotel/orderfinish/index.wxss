@@ -1,0 +1,206 @@
+@import "../common/common.wxss";
+.comment-success {
+    height: 100%;
+    background-color: #ebeff5;
+}
+.comment-success .success-header {
+    background-color: #fff;
+    border-radius: 0 0 32rpx 32rpx;
+    padding: 60rpx 80rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1rpx solid #eee;
+}
+
+.comment-success .title-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16rpx;
+}
+
+.comment-success .success-title {
+    font-size: 40rpx;
+    line-height: 44rpx;
+    font-weight: 700;
+}
+
+.comment-success .success-subtitle {
+    font-size: 28rpx;
+    text-align: center;
+}
+
+.success-body {
+    padding: 48rpx 24rpx;
+}
+
+.success-body .comment-list-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 28rpx;
+}
+
+.comment-list-header .total-count {
+    font-size: 32rpx;
+    line-height: 32rpx;
+    font-weight: 500;
+    margin-right: 8rpx;
+}
+
+.comment-list-header .encourage-text {
+    font-size: 22rpx;
+    font-weight: 500;
+    color: #ff5500
+}
+
+.wait-comment-list .wait-comment-item {
+    background-color: #fff;
+    border-radius: 16rpx;
+    box-shadow: 0 0 10rpx 0 rgba(0, 0, 0, 0.1);
+    padding-top: 24rpx;
+    padding-left: 24rpx;
+    padding-right: 24rpx;
+    position: relative;
+    margin-bottom: 16rpx;
+}
+
+.wait-comment-item .item-encourage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(-90deg, rgb(255, 255, 255) 0%, rgb(255, 244, 235) 100%);
+    font-size: 24rpx;
+    line-height: 28rpx;
+    padding: 16rpx 24rpx;
+    box-sizing: border-box;
+    border-radius: 0 0 16rpx 16rpx;
+}
+
+.wait-comment-list .item-body {
+    height: 108rpx;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-body .comment-btn {
+    width: 120rpx;
+    height: 60rpx;
+    background: #0066f6;
+    border-radius: 8rpx;
+    color: #fff;
+    font-size: 26rpx;
+    font-weight: 700;
+    margin-left: 42rpx;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.wait-comment-list .hotel-info {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+.hotel-info .hotel-img {
+    width: 108rpx;
+    height: 108rpx;
+    border-radius: 8rpx;
+    margin-right: 16rpx;
+    flex-shrink: 0;
+    background-image: url('https://pages.c-ctrip.com/hotels/wechat/img/no-photo.jpg');
+    background-size: 100% 100%;
+}
+
+.title-group .wechat-font-tick {
+    font-size: 44rpx;
+    color: #08a66f;
+    margin-right: 12rpx;
+}
+
+.hotel-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hotel-wrapper .hotel-name {
+    font-size: 28rpx;
+    font-weight: 500;
+    line-height: 36rpx;
+    margin-bottom: 4rpx;
+    display: -webkit-box;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.no-comment {
+    padding: 40rpx 167rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.no-comment image {
+    width: 300rpx;
+    height: 300rpx;
+    margin-bottom: 12rpx;
+}
+
+.no-comment text {
+    font-size: 24rpx;
+    color: #555;
+    text-align: center;
+}
+
+.hotel-wrapper .check-date {
+    color: #888;
+    font-size: 24rpx;
+}
+
+.orange-txt {
+    color: #FF7700
+}
+
+/* 加载状态 */
+.loading-state {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 120rpx;
+}
+
+.loading-state .loading-txt {
+    font-size: 28rpx;
+    line-height: 28rpx;
+    color: #888888;
+    margin-left: 12rpx;
+}
+
+.loading-state .loading-img {
+    flex: none;
+    height: 32rpx;
+    width: 32rpx;
+    background: url(https://pic.c-ctrip.com/platform/h5/mini_programe/v2021.1.7/home/loading.png) no-repeat;
+    background-size: 100%;
+    animation: loading .8s linear 0s infinite;
+}
+
+@keyframes loading {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}

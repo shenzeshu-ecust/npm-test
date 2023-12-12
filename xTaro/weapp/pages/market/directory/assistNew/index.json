@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "邀请好友赢立减",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "assist": "../components/assist/assist",
+    "modal": "./components/modal/index",
+    "bullets": "./components/bullets/index",
+    "countDown": "./components/countDown/index",
+    "count-down": "/pages/market/directory/components/countDown/index",
+    "task-count-down": "/pages/market/directory/components/taskCountDown/index"
+  }
+}

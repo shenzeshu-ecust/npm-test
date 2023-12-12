@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "行程",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "travel-card-view": "../components/travel-card-view/travel-card-view",
+    "Icon": "../../timelineComponent/ICON/ICON"
+  },
+  "componentPlaceholder": {
+    "Icon": "view"
+  }
+}

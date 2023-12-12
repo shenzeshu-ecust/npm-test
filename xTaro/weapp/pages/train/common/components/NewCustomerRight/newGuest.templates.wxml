@@ -1,0 +1,77 @@
+<!-- 首页固定入口新客礼包 -->
+<template name="new-guest-panel">
+    <view class="new-guest-panel'{{ data.IsHaveRights ? '' : 'no-rights'}}" >
+        <button wx:if="{{data.needShow }}" class="btn-get" bindtap="onClickReceiveNewGuestBtn">
+            限时免费领
+        </button>
+        <view class="tit">
+            <view class="price">{{ data.OriginPrice }}</view>
+            <image src="{{ data.TitleUrl }}" />
+            <view class="ifont-qus" wx:if="{{ data.JumpUrl }}" bindtap="onClickGoNewGuestRule"></view>
+        </view>
+        <view class="list">
+            <view class="item" wx:for="{{ data.RightList }}">
+                <image src="{{ item.IconUrl }}" />
+                <view class="title">{{ item.Name }}</view>
+                <view class="desc">{{ item.Desc }}</view>
+            </view>
+        </view>
+    </view>
+</template>
+
+<!-- 列表页顶部固定新客模块 -->
+<template name="new-guest-panel-mini">
+    <view class="new-guest-panel-mini" style="background-image: url('{{ data.bgImg }}');">
+        <view class="tit">
+            <image mode="aspectFit" class="img1" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/7yue/xinke/wenan-liebiao1.png" />
+            <text class="price number-zx2">{{ data.price }}</text>
+            <image mode="aspectFit" class="img2" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/7yue/xinke/wenan-liebiao2.png" />
+        </view>
+        <view class="list">
+            <view class="tag" wx:for="{{ data.descList }}">{{ item.content }}</view>
+        </view>
+        <view class="check" bindtap="onClickOpenNewGuestPop">查看</view>
+    </view>
+</template>
+
+<!-- 列表页礼包信息弹窗浮层 -->
+<template name="new-guest-slideup">
+    <view class="backmask active" bindtap="hideBackDrop"></view>
+    <view class="new-guest-slideup">
+        <view class="ifont-closed-line" bindtap="hideBackDrop"></view>
+        <view class="tit">
+            <view class="p">{{ data.OriginPrice }}</view>
+            <image src="{{ data.TitleUrl }}" />
+        </view>
+        <view class="expire">{{ data.ExpireTimeDesc }}</view>
+        <view class="return-cash-card" wx:if="{{ data.RightListType2.length > 0 }}">
+            <block wx:for="{{ data.RightListType2 }}">
+                <view class="left">
+                    <text class="amount">{{ item.Price}}</text>元
+                </view>
+                <view class="cont">
+                    <view class="title">{{ item.Name }}</view>
+                    <view class="desc">{{ item.Desc }}</view>
+                </view>
+            </block>
+        </view>
+        <view class="box">
+            <view class="sub">另享{{ data.RightListType1.length }}项免费权益</view>
+            <view class="list">
+                <block wx:for="{{ data.RightListType1 }}">
+                    <view class="item">
+                        <image class="icon" src="{{ item.IconUrl }}" />
+                        <view class="cont">
+                            <view class="title">{{ item.Name }}</view>
+                            <view class="desc">{{ item.Desc }}</view>
+                        </view>
+                        <view class="value">
+                            <text>价值</text>
+                            <text>{{ item.Price }}元</text>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,148 @@
+
+.share-modal {
+
+}
+.share-modal .share-modal-mask, .share-modal .share-modal-container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.share-modal .share-modal-mask {
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  
+}
+
+.fadeIn {
+  animation: fadeIn 220ms linear;
+}
+.fadeOut {
+  animation: fadeOut 220ms linear;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.share-modal .box {
+  background: #ffffff;
+  border-radius: 20rpx;
+  /* min-height: 200rpx; */
+  margin: 0 12%;
+  min-width: 60%;
+  padding: 60rpx;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+}
+.share-modal .box .message {
+  text-align: center;
+}
+
+.share-modal .box .button {
+  margin-top: 30rpx;
+  height: 90rpx;
+  border-radius: 90rpx;
+  background-color: #f84123;
+  color: #fee8d1;
+  width: 100%;
+}
+
+.share-modal .box .button::after {
+  display: none;
+}
+
+.share-modal .box .button_hover {
+  filter: grayscale(0.3);
+}
+
+.share-modal .line {
+  width: 3rpx;
+  height: 100rpx;
+  position: relative;
+}
+
+.share-modal .line .trans{
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+}
+
+.lineTransIn {
+    animation:lineTransIn 440ms linear;
+}
+.lineTransOut {
+    animation:lineTransOut 220ms linear;
+}
+@keyframes lineTransIn {
+  0% {
+    height: 0;
+  }
+  50% {
+    height:100%;
+  }
+  100% {
+    height:100%;
+  }
+}
+@keyframes lineTransOut {
+  0% {
+    height: 100%;
+  }
+  100% {height:0}
+}
+
+.share-modal .close-modal {
+  margin: -2rpx 0;
+}
+
+.closeTransOut {
+   animation:closeTransOut 220ms linear;
+}
+
+.closeTransIn {
+   animation:closeTransIn 440ms linear;
+}
+@keyframes closeTransIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes closeTransOut {
+  0% {
+    opacity: 1;
+  }
+  0.01% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,12 @@
+.add-phone .label{width: 180rpx;font-size: 32rpx}
+.add-phone .ifont-triangle{color: #ccc;font-size: 16rpx;margin: -2px 0 0 8rpx}
+.add-phone .ifont-clean{font-size: 28rpx;color: #ddd;margin-top: 2px}
+.add-phone .area-code{padding-right: 16rpx;margin-right: 16rpx;font-size: 28rpx;color: #999;position: relative;line-height: 96rpx;}
+.add-phone .area-code::after{width: 1px;height: 32rpx;background: #eee;position: absolute;content: "";right:0;top:50%;transform: translateY(-50%)}
+
+.add-box .switchbox{width: 92rpx;}
+.add-box .wx-switch-input{width: 92rpx;height: 56rpx;border:#EBECF0!important;background: #EBECF0!important;border-radius: 56rpx!important;}
+.add-box .wx-switch-input::before{background: #EBECF0!important;width: 92rpx;height: 56rpx;border:#EBECF0!important;}
+.add-box .wx-switch-input::after{width:48rpx;height: 48rpx;box-shadow: none!important;top:4rpx!important;left: 4rpx;bottom: 4rpx!important;right:auto;}
+.add-box .wx-switch-input-checked{width: 92rpx;height: 56rpx;background: #0086F6!important;border-radius: 56rpx!important; }
+.add-box .wx-switch-input-checked::after{top:4rpx!important;right: 44rpx!important;bottom: 4rpx!important;left:auto;}

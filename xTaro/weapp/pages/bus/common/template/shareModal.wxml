@@ -1,0 +1,25 @@
+<!--pages/bus/share/template/share.wxml-->
+<template name="share-modal">
+<view wx:if='{{visible}}' class='share-modal'>
+  <view class="share-modal-mask {{inHidden ? 'fadeOut' : 'fadeIn'}}" catchtouchmove='empty' catchlongtap='empty'/>
+  <view class="share-modal-container" catchtouchmove='empty' catchlongtap='empty'>
+    <view class="box" >
+    <text class="message" style='color:{{color || "#703f38"}}'>{{message}}</text>
+    <button form-type='submit' open-type="{{openType}}" 
+    bindgetphonenumber="{{openType == 'getPhoneNumber' ? 'onShareModalButton' : ''}}" 
+    app-parameter="{{launchAppParams}}"
+    binderror="{{openType == 'launchApp' ? 'onShareModalButton' : ''}}"
+    openSetting="{{openType == 'openSetting' ? 'onShareModalButton' : ''}}"
+    bindgetuserinfo="{{openType == 'getUserInfo' ? 'onShareModalButton' : ''}}" 
+    bindtap='{{openType ? "" : "onShareModalButton"}}' 
+    class='button' hover-class='button_hover' 
+    style="background-color:{{buttonColor || '#f84123'}};color:{{buttonTextColor || '#fee8d1'}}" >{{buttonTitle || '去分享'}}</button>
+    </view> 
+    <view class="line">
+      <view class="trans {{inHidden ? 'lineTransOut' : 'lineTransIn'}}"></view>
+    </view>
+    <icon class="close-modal {{inHidden ? 'closeTransOut' : 'closeTransIn'}}" size='40'  type="cancel" color="#ffffff" bindtap='hiddenShareModal'/>
+  </view>
+</view>
+
+</template>

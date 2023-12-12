@@ -1,0 +1,11 @@
+<!--pages/schedule/index/cardItem/commonCard.wxml-->
+
+<view catchtap='gotoDetail'>
+  <card-header-compt iconUrl="{{bizModel.icon}}" title="{{bizModel.headerTitle}}"/>
+  <view class='container'>
+    <text class="title">{{bizModel.title}}</text>
+    <text wx:if="{{bizModel.summary}}" class="summary">{{bizModel.summary}}</text>
+    <text wx:if="{{bizModel.summary2}}" class="summary">{{bizModel.summary2}}</text>
+  </view>
+  <card-operation-compt wx:if="{{bizModel.operationData}}" card-operation-data="{{bizModel.operationData}}"/>
+</view>

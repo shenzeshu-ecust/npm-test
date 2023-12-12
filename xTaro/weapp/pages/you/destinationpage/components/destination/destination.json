@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "ad-sdk":"/pages/market/advertiseNew/ad-sdk",
+    "cemoji-converter": "/cwx/component/cemojiConverter/cemojiConverter"
+  },
+  "component": true
+}

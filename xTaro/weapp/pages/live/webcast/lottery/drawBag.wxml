@@ -1,0 +1,47 @@
+<wxs src="../home.wxs" module="homeFunction" />
+<template name="drawBag">
+    <view class="drawbag-innder">
+        <view class="prizeinfo">
+            <view class="left-countdown">
+                <view class="counttime">{{homeFunction.countDownTime(bagCountDown)}}</view>
+                <view class="countext">倒计时</view>
+            </view>
+            <view class="right-info">
+                <text class="prize-title {{bagResult && bagResult.name.length > 13 ? 'line2' :'line1'}}" >{{homeFunction.handleDrawBagTitle(bagResult && bagResult.name)}}</text>
+                <view class="prize-join {{bagResult && bagResult.name.length > 13 ? 'mtop10' :''}}">
+                    共{{bagResult.prizeStock}}个奖品丨{{bagResult.hasJoinNum || 0}}人参与
+                </view>
+            </view>
+        </view>
+        <view class="currentinfo">
+            <view class="curtitle">参与条件</view>
+            <block wx:for="{{bagResult.taskStatus}}" wx:key="{{item.title}}">
+                <view class="curcondition {{item.status == 1 ? 'on' : ''}}">
+                    <text class="condtitle">{{item.title}}</text>
+                    <view class="condtext">{{item.status == 1 ? '已达成' : '未达成'}}</view>
+                </view>
+            </block>
+        </view>
+        <block wx:if="{{bagBtn && bagBtn.type}}">
+            <block wx:if="{{bagBtn.type == 'share'}}">
+                <button class="prizebtn" open-type="share" bindtap="handleBagTaskAction">
+                    {{bagBtn.title || "参与抽奖"}}
+                </button>
+            </block>
+            <block wx:else>
+                <view class="prizebtn" bindtap="handleBagTaskAction">
+                    {{bagBtn.title || "参与抽奖"}}
+                </view>
+            </block>
+        </block>
+        <block wx:else>
+            <view class="prizebtn on" bindtap="handleBagTaskAction">
+                {{bagCountDown > 0 ? "即将开奖": '开奖中，请稍后...'}}
+            </view>
+        </block>
+        <view catchtap="jumpToBagInfo" data-type="rule" class="accept-rule">
+            参与抽奖即代表同意
+            <view>《抽奖规则》</view>
+        </view>
+    </view>
+</template>

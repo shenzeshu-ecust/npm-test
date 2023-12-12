@@ -1,0 +1,17 @@
+<block wx:if="{{showPopBox}}">
+<view class="popBox-mask"></view>
+<view class="popBox-wrapper">
+    <view class="popBox-inner">
+        <view class="popBox-title">
+           {{popBoxContent.title}}
+        </view>
+        <view class="popBox-btns">
+            <view class="btn-item cancel" bindtap="_cancelAction">取消</view>
+            <view class="btn-item confirm"  bindtap="_confirmAction">{{popBoxContent.confirmBtn}}</view>
+        </view>
+    </view>
+</view>
+</block>
+
+
+

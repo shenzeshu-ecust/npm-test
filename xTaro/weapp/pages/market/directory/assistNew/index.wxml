@@ -1,0 +1,204 @@
+<import src="../../components/share/share.wxml" />
+<import src="./tpl.wxml" />
+
+<view class="market-assist-new" style="background-color: {{activityStatus.isMaster ? activityCustomfields.masterColour : activityCustomfields.guestColour}}">
+  <!-- 活动规则按钮 -->
+  <view class="rule-btn" bindtap="showRule">
+    <view class="rule-content">规则</view>
+  </view>
+  <!-- 头图 + 弹幕 -->
+  <view class="market-assist-new__banner {{activityStatus.isMaster ? 'master-banner' : ''}}">
+    <image bindtap="clickBanner" mode="scaleToFill" src="{{activityStatus.isMaster ? activityCustomfields.masterBg : activityCustomfields.guestBg}}"></image>
+  </view>
+  <!-- 助力 -->
+  <view class="market-assist-new__assist" wx:if="{{activityStatus}}">
+    <!-- 主人态 -->
+    <view class="master" wx:if="{{activityStatus.isMaster}}">
+      <!-- 奖励模板 -->
+      <template is="prize" data="{{prizeType, couponList, isShowGetBtn,activityCustomfields}}"></template>
+
+      <view class="main-wraper {{prizeType == 1 ? 'shadow' : ''}}">
+        <view class="count" wx:if="{{activityCustomfields.isShowDailyLimit === 'T'}}">今日限量<text class="number">{{activityCustomfields.dailyStartAssistNum}}</text>份
+          <block wx:if="{{activityStatus.activityProcess != 1}}">｜已抢<text class="number">{{receivedNum}}</text>份</block>
+        </view>
+        <view class="tips">{{masterRenderData.title}}</view>
+        <view class="timer" wx:if="{{activityCustomfields.isShowEndtime === 'T'}}">
+          <view class="desc-left" wx:if="{{activityStatus.activityProcess == 2 || activityStatus.activityProcess == 3}}">剩余时间</view>
+          <countDown remainTime="{{remainTime}}" bind:timeup="initPage"></countDown>
+          <view class="desc-right" wx:if="{{activityStatus.activityProcess == 1}}">后开始</view>
+        </view>
+        <assist  activityId="{{activityId}}" assistActivityId="{{assistActivityId}}" activityConf="{{activityConf}}" identityId="{{identityId}}" showOwnerBtn="{{false}}" bind:toindex="toIndex"
+        bind:afterGetAssist="afterGetAssist" wx:if="{{assistActivityId}}"></assist>
+        <view class="btns {{masterRenderData.btns.length == 2 ? 'btns-double' : ''}}">
+          <block wx:for="{{masterRenderData.btns}}" wx:for-item="item" wx:key="type">
+            <view wx:if="{{item.type === 'login'}}" class="assist-btn" style="background-image: url('{{item.bg}}')">
+              <button class="button-login clear-btn" bindtap="toLogin">{{item.text}}</button>
+            </view>
+            <view wx:if="{{item.type === 'startAssist'}}" class="assist-btn" style="background-image: url('{{item.bg}}')">
+              <button class="button-login clear-btn" bindtap="handleClickInvite" data-type="{{item.type}}">{{item.text}}</button>
+            </view>
+            <view wx:if="{{item.type === 'assist'}}" class="assist-btn" style="background-image: url('{{item.bg}}')">
+              <button class="button-login clear-btn" bindtap="handleClickInvite" data-type="{{item.type}}">{{item.text}}</button>
+            </view>
+            <view wx:if="{{item.type === 'shareActivity'}}" class="assist-btn" style="background-image: url('{{item.bg}}')">
+              <button class="button-login clear-btn" bindtap="handleClickInvite" data-type="{{item.type}}">{{item.text}}</button>
+            </view>
+            <view wx:if="{{item.type === 'more'}}" class="assist-btn" style="background-image: url('{{item.bg}}')">
+              <button class="button-login clear-btn" bindtap="handleClickMore">{{item.text}}</button>
+            </view>
+            <view wx:if="{{item.type === 'address'}}" class="assist-btn" style="background-image: url('{{item.bg}}')">
+              <button class="button-login clear-btn" bindtap="handleClickAddress">{{item.text}}</button>
+            </view>
+            <view wx:if="{{item.type === 'void'}}" class="assist-btn" style="background-image: url('{{item.bg}}')">
+              <button class="button-login clear-btn">{{item.text}}</button>
+            </view>
+          </block>
+        </view>
+        <view class="prize-tips" wx:if="{{activityStatus.isLogin && activityStatus.receiveResult == 1 && prizeType == 1}}">奖励已发放至{{receivePhone}}</view>
+      </view>
+    </view>
+    <!-- 客人态 -->
+    <view wx:else class="guests">
+        <assist activityId="{{activityId}}" assistActivityId="{{assistActivityId}}" activityConf="{{activityConf}}" identityId="{{identityId}}" 
+      bind:afterGetAssist="afterGetAssist" bind:afterAssist="afterAssist" authOpen="{{activityConf.authRule !== 0}}" bind:assistToRedirectBefore="assistToRedirectBefore" wx:if="{{assistActivityId}}">
+          <view class="guests-slot">
+            <view class="timer" wx:if="{{activityCustomfields.isShowEndtime === 'T'}}">
+              <view class="desc-left" wx:if="{{activityStatus.activityProcess == 2 || activityStatus.activityProcess == 3}}">剩余时间</view>
+              <countDown remainTime="{{remainTime}}" bind:timeup="initPage"></countDown>
+              <view class="desc-right" wx:if="{{activityStatus.activityProcess == 1}}">后开始</view>
+            </view>
+            <!-- 奖励模板 -->
+            <template is="prize" data="{{prizeType, couponList,activityCustomfields}}"></template>
+          </view>
+        </assist>
+      </view>
+    </view>
+  <!-- 使用规则 -->
+  <view wx:if="{{activityCustomfields && activityCustomfields.useIntroArr.length > 0}}" class="market-assist-new__coupon-rule">
+    <view class="rule-title title-block two-line">{{activityCustomfields.useDescTitle}}
+    </view>
+    <view class="coupon-rule-content"  style="height: {{ruleExpand ? 'auto' : ruleHeightLimit + 'rpx'}}">
+      <view wx:for="{{activityCustomfields.useIntroArr}}" wx:key="index" wx:for-item="item">{{item}}</view>
+    </view>
+    <view class="more" bindtap="toggleExpandRule" wx:if="{{ruleHeight > ruleHeightLimit}}">
+      <text>{{ruleExpand ? '收起' : '查看更多'}}</text>
+      <View class="arrow-top {{ruleExpand ? 'arrow-down' : ''}}"></View>
+    </view>
+  </view>
+  <!-- 推荐使用 -->
+  <view class="market-assist-new__recommend" id="ad_recommand"
+    wx:if="{{activityCustomfields.recommendArr && activityCustomfields.recommendArr.length > 0}}">
+    <view class="title-block two-line">
+      <text>推荐使用</text>
+    </view>
+    <view class="content">
+      <view class="item" wx:for="{{activityCustomfields.recommendArr}}" wx:key="id" data-item="{{item}}" data-url="{{item.pageUrl}}"
+        bindtap="toBUPage" data-action="{{'toBUPage_' + item.id}}" style="background-image: url({{item.bgImg}});">
+      </view>
+    </view>
+  </view>
+  <!-- 活动专区 -->
+  <view class="market-assist-new__area" id="ad_area" wx:if="{{activityCustomfields.bannerArr.length > 0}}">
+    <view class="title-block two-line">活动专区</view>
+    <view class="content">
+      <view class="item" wx:for="{{activityCustomfields.bannerArr}}" wx:key="index" bindtap="toAds" data-item="{{item}}"
+        data-action="{{'toAds_' + (index+1)}}" data-url="{{item.pageUrl}}">
+        <image src="{{item.bgImg}}"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 弹窗 -->
+<modal show="{{!!modalType}}" maskClosable="{{false}}" bind:close="closeModal">
+  <!--  主态-再次发起-有库存但未通过风控 -->
+  <view class="pop_wrap coupon-pop" wx:if="{{modalType === 'masterStartAssistFail'}}">
+    <view class="pop_wrap-content relative">
+      <!-- wx:if="{{masterStartAssistFail.showClose}}" -->
+      <view class="pop-close" bindtap="closeModal"></view>
+      <view class="title title2">{{masterStartAssistFail.title}}</view>
+      <view class="content">
+        <view class="desc" wx:for="{{masterStartAssistFail.content}}" wx:key="index" wx:for-item="item">{{item}}</view>
+      </view>
+      <view class="btn_wrap">
+        <view class="assist-btn" wx:if="{{masterStartAssistFail.btnType=='realName'}}" style="background-image: url('{{activityConf.customerBrowseButtonImg}}')"><button bindtap="toRealName"  class="clear-btn">去认证</button></view>
+        <view class="assist-btn" style="background-image: url('{{activityConf.customerBrowseButtonImg}}')" wx:else><button bindtap="routerUrl" data-url="{{activityConf.customerBrowseButtonUrl}}" class="clear-btn">{{activityConf.customerBrowseButtonText}}</button></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 助力成功展示优惠券 -->
+  <view class="pop_wrap coupon-pop" wx:if="{{modalType === 'assistSuccess'}}">
+    <view class="pop-close" bindtap="closeModal"></view>
+    <view class="pop_wrap-content">
+      <view class="avatar">
+        <image src="{{masterInfo.headImage}}"></image>
+      </view>
+      <view class="title">
+        {{prizeModalRenderData.title}}
+        <view class="tips">{{prizeModalRenderData.subTitle}}</view>
+      </view>
+      <view class="content">
+        <scroll-view scroll-y="true" style="width: 100%" class="coupon-pop-scroll">
+          <block wx:for="{{assistCouponList}}" wx:for-item="item" wx:key="awardId">
+            <template is="assistCoupon" data="{{ showBtn: false, item }}"></template>
+          </block>
+        </scroll-view>
+      </view>
+      <view class="btn_wrap">
+        <block wx:for="{{prizeModalRenderData.btns}}" wx:for-item="item" wx:key="type">
+          <view class="assist-btn" style="background-image: url('{{activityConf.customerBrowseButtonImg}}')"  wx:if="{{item.type == 'receivePrize'}}"><button bindtap="receivePrize" class="clear-btn"
+             >{{item.text}}</button></view>
+          <view class="assist-btn" style="background-image: url('{{activityConf.customerBrowseButtonImg}}')" wx:if="{{item.type == 'startAssist'}}"><button bindtap="assistToRedirectBefore" class="clear-btn"
+            >{{item.text}}</button></view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 活动规则弹窗 -->
+  <view class="pop_wrap rule" wx:if="{{modalType === 'rule'}}">
+    <view class="content">
+      <view class='title'>活动规则</view>
+      <view class="list">
+        <view wx:for="{{activityConfig.activityRule}}" wx:key="index" wx:for-item="item" class="item">{{item}}</view>
+      </view>
+    </view>
+    <view class="btn_wrap2" bindtap="closeModal"></view>
+  </view>
+</modal>
+
+<!------------------------ 分享组件 ------------------------>
+<template is="showShare" data="{{showShare : showShare}}" />
+<bullets class="bullets" 
+  wx:if="{{activityStatus.isMaster}}" 
+  intervalTime="{{1500}}"
+  lanes="{{[{ duration: 4 }, { duration: 7 }, { duration: 6 }]}}"
+></bullets>
+
+<template name="prize">
+  
+  <image class="goods-image" wx:if="{{activityCustomfields && activityCustomfields.activityMode == 2}}" src="{{activityCustomfields.startAssistCouponImg}}" mode="widthFix"></image>
+  <!-- 单张 -->
+  <view class="coupon-warper" wx:elif="{{prizeType == 1 && couponList.length == 1}}">
+    <view class="single-coupon">
+      <template is="assistCoupon"  data="{{ showBtn: isShowGetBtn, item: {...couponList[0], status:1} }}" />
+    </view>
+  </view> 
+  <!-- 多张 -->
+  <view wx:elif="{{prizeType == 1 && couponList.length > 1}}" class="scroll-view_H coupon-list-master">
+    <block wx:for="{{couponList}}" wx:key="index" wx:for-item="item">
+      <template is="assistCoupon" data="{{ showBtn: isShowGetBtn, item: {...item, status: 1} }}" />
+    </block>
+  </view>
+  <!-- 实体商品 -->
+  <image class="goods-image" wx:elif="{{prizeType == 2}}" src="{{couponList[0].imageUrl}}" mode="widthFix"></image>
+</template>
+
+<!-- 倒计时组件 -->
+<count-down />
+<task-count-down/>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>
+

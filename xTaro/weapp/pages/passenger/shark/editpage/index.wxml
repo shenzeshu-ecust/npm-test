@@ -1,0 +1,132 @@
+<!--editpage.wxml-->
+<block  wx:if="{{c1 != '' }}">
+<view  class="passengerWrap">
+  <view class="'passengerCon_tip" id="passengertip">
+    请填写真实信息，以免为预定带来不便，我们会保证您的信息安全。保存后，信息会出现在您朋友的携程账户中。
+  </view>
+  <view class="passengerCon_block">
+    <view class="passengerCon_wrap" id="passengercnnameblock">
+      <view class="passengerCon_inputName"><text  class="passengerCon_inputName_cn">中文姓名</text></view>
+      <view class="passengerCon_inputWrap {{isClearTap.isCnNameClearTap == 1?'isClear':'' }}">
+        <input type="text" bindchange="cnnameChange" bindinput="cnnameChange" bindblur="cnnameBindBlur" value="{{oPassenger.cnName}}" placeholder="与证件姓名一致" />
+        <view class="formIcon" bindtap="cnNameClearTap"><view class="icon-clear"></view></view>
+      </view>
+      <view class="passengerCon_doute" bindtap="passengernameinfotap"><view class="passengerCon_douteIcon"></view></view>
+      <view class="passengerCon_inputError" wx:if="{{isShowError.isShowCNName == 1 }}">{{isShowError.cnNameMsg}}</view>
+    </view>
+    <view class="passengerCon_wrap" id="passengerenlastnameblock">
+      <view class="passengerCon_inputName">
+        <text class="passengerCon_inputName_cn">英文姓</text>
+        <text class="passengerCon_inputName_en">Surname</text>
+      </view>
+      <view class="passengerCon_inputWrap {{isClearTap.isEnLastNameClearTap == 1?'isClear':'' }}">
+        <input type="text" bindchange="enlastnameChange" bindinput="enlastnameChange" bindblur="enlastnameBindBlur" value="{{oPassenger.enLastName}}" placeholder="如张小白填写为“ZHANG”" />
+        <view class="formIcon" bindtap="enLastNameClearTap"><view class="icon-clear"></view></view>
+      </view>
+      <view class="passengerCon_inputError" wx:if="{{isShowError.isShowSurname == 1 }}">{{isShowError.enLastNameMsg}}</view>
+    </view>
+    <view class="passengerCon_wrap"  id="passengerenfirstnameblock">
+      <view class="passengerCon_inputName">
+        <text class="passengerCon_inputName_cn">英文名</text>
+        <text class="passengerCon_inputName_en" >Given names</text>
+      </view>
+      <view class="passengerCon_inputWrap {{isClearTap.isEnFirstNameClearTap == 1?'isClear':'' }}">
+        <input type="text" bindchange="enfirstnameChange" bindinput="enfirstnameChange" bindblur="enfirstnameBindBlur" value="{{oPassenger.enFirstName}}" placeholder="如张小白填写为“XIAOBAI”" />
+        <view class="formIcon" bindtap="enFirstNameClearTap"><view class="icon-clear"></view></view>
+      </view>
+      <view class="passengerCon_inputError" wx:if="{{isShowError.isShowGivenname == 1 }}">{{isShowError.enFirstNameMsg}}</view>
+    </view>
+  </view>
+  <view class="passengerCon_block" id="passengercardblock">
+    <block wx:for="{{passengerCards}}" wx:key="cardTypeCode">
+      <view class="passengerCon_wrap" wx:if="{{item.isselected == 1 }}">
+        <view class='passengerCon_certificates'>
+          <text>{{item.cNName}}</text>
+          <view class='passengerCon_cer_delete' data-idx="{{index}}" data-cardtypeid="{{item.cardTypeCode}}" bindtap="removeCard"><view class='passengerCon_cer_deleteIcon'></view></view>
+        </view>
+      </view>
+      <view class="passengerCon_wrap" wx:if="{{item.isselected == 1 }}">
+        <view class="passengerCon_inputName"><text class="passengerCon_inputName_cn">证件号码</text></view>
+        <view class="passengerCon_inputWrap">
+          <input type="{{item.cardNoKeyBoard}}" bindchange="changeCardNo"  bindinput="changeCardNo" data-cardid="{{item.cardTypeCode}}"  value="{{item.cardNo}}" placeholder="请保持与证件一致" />
+          <view class="formIcon"><view class="icon-clear"></view></view>
+        </view>
+        <view class="passengerCon_inputError" wx:if="{{item.isShowCardNo == 1 }}">{{item.showCardNoMessage}}</view>
+      </view>
+
+      <view class="passengerCon_wrap" wx:if="{{item.isCardTimelimitSelected == 1 }}">
+        <view class="passengerCon_inputName"><text class="passengerCon_inputName_cn">有效期至</text></view>
+        <picker mode="date" data-cardid="{{item.cardTypeCode}}" value="{{item.viewCardTimelimit}}" bindchange="cardTimelimitChange" class="passengerCon_inputWrap">
+        <view class="passengerCon_inputWrap">
+          <view>{{item.cardTimelimit==""?'请选择':item.cardTimelimit}}</view>
+          </view>
+        </picker>
+        <picker mode="date" value="{{item.viewCardTimelimit}}" bindchange="cardTimelimitChange" data-cardid="{{item.cardTypeCode}}" class="passengerCon_dropdown">
+        <view class="passengerCon_dropdown"><view class="passengerCon_dropdownIcon"></view></view>
+        </picker>
+        <view class="passengerCon_inputError" wx:if="{{item.isShowCardTimelimit == 1 }}">请选择有效期</view>
+      </view>
+    </block>
+    <view class="passengerCon_wrap">
+    <picker mode="selector" value="0" range="{{allCardName}}" bindchange="selectedCard" class="passengerCon_add">
+      <view class="passengerCon_add"><view class="passengerCon_addIcon"></view><text>添加证件</text></view>
+      </picker>
+      <view wx:if="{{isShowError.isShowCard==1}}" class="passengerCon_inputError">{{isShowError.cardMsg}}</view>
+    </view>
+  </view>
+  <view class="passengerCon_block">
+    <view class="passengerCon_wrap">
+      <view class="passengerCon_inputName"><text class="passengerCon_inputName_cn">出生日期</text></view>
+      <picker mode="date" class="" value="" start="1890-01-01" end="2030-12-31" bindchange="birthdayChange" class="passengerCon_inputWrap">
+      <view class="passengerCon_inputWrap">
+        {{oPassenger.birthday==""?"请选择":oPassenger.birthday}}
+      </view>
+      </picker>
+      <picker mode="date" class="" value="" start="1890-01-01" end="2030-12-31" bindchange="birthdayChange" class="passengerCon_dropdown">
+      <view class="passengerCon_dropdown"><view class="passengerCon_dropdownIcon"></view></view>
+      </picker>
+      <view class="passengerCon_inputError" wx:if="{{isShowError.isShowBirthday == 1 }}">{{isShowError.birthdayMsg}}</view>
+    </view>
+    <view class="passengerCon_wrap">
+      <view class="passengerCon_inputName"><text class="passengerCon_inputName_cn">性别</text></view>
+      <view class="passengerCon_sezWrap">
+        <view class="passengerCon_sex {{oPassenger.gender == 'M' ? 'active' : ''}}" bindtap='genderMale'>
+          <view class="passengerCon_sexPic male"></view><text>男</text>
+        </view>
+        <view class="passengerCon_sex {{oPassenger.gender == 'F' ? 'active' : ''}}" bindtap='genderFemale'>
+          <view class="passengerCon_sexPic female"></view><text>女</text>
+        </view>
+      </view>
+    </view>
+    <view class="passengerCon_wrap" bindtap="nationChange">
+      <view class="passengerCon_inputName">
+        <text class="passengerCon_inputName_cn">国籍</text>
+        <text class="passengerCon_inputName_en">国家/地区</text>
+      </view>
+      <view class="passengerCon_inputWrap">
+        <view>{{oPassenger.viewNationality}}</view>
+      </view>
+      <view class="passengerCon_dropdown"><view class="passengerCon_dropdownIcon"></view></view>
+      <view class="passengerCon_inputError" wx:if="{{isShowError.isShowNationality == 1 }}">{{isShowError.nationalityMsg}}</view>
+    </view>
+    <view class="passengerCon_wrap">
+      <view class="passengerCon_inputName"><text class="passengerCon_inputName_cn">手机号码</text></view>
+      <view class="passengerCon_inputWrap">
+        <view class='passengerCon_inputExtra' bindtap="counrtyCodeChange">
+          <view>{{oPassenger.countryCode}}</view>
+          <view class="passengerCon_dropdown"><view class="passengerCon_dropdownIcon"></view></view>
+        </view>
+        <view class="passengerCon_inputWrap">
+          <input type="number"  value="{{oPassenger.mobilePhone}}" bindchange="mobliePhoneChange" placeholder="常用手机号，选填" readonly="true" />
+
+        </view>
+      </view>
+      <view class="passengerCon_inputError" wx:if="{{isShowError.isShowMobile == 1 }}">{{isShowError.mobilePhoneMsg}}</view>
+    </view>
+  </view>
+  <view class='passengerBtn_wrap' bindtap="savepassengertap"><button>保存</button></view>
+</view>
+</block>
+
+<!-- 白屏检测节点&框架提供 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

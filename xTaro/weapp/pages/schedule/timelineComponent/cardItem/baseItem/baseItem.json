@@ -1,0 +1,13 @@
+{
+  "component": true,
+  "usingComponents": {
+    "flight-card": "../flight/flight",
+    "hotel-card": "../hotel/hotel",
+    "poi-card": "../poi/poi",
+    "train-card": "../train/train",
+    "car-card":"../car/car",
+    "chartered-car": "../charteredCar/charteredCar",
+    "common-card": "../commonCard/commonCard",
+    "Icon": "../../ICON/ICON"
+  }
+}

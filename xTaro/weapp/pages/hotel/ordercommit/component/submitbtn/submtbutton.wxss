@@ -1,0 +1,29 @@
+.comment-submit-placeholder {
+    height: 180rpx;
+}
+.comment-submit {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    background: #fff;
+    padding: 24rpx 24rpx 68rpx;
+    box-shadow: 0 -1rpx 13rpx 0 rgba(196, 196, 196, 0.5);
+}
+.comment-submit-btn {
+    font-size: 32rpx;
+    border-radius: 12rpx;
+    border: unset;
+    color: #fff;
+    padding: 22rpx 0;
+    text-align: center;
+    font-family: PingFangSC-Medium;
+    font-weight: bold;
+}
+.enable-submit {
+    background: #006FF6;
+}
+.disable-submit {
+    background: #c5c5c5;
+}

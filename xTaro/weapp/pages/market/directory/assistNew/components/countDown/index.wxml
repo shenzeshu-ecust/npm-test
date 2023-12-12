@@ -1,0 +1,13 @@
+<view class="mkt-timer">
+    <block wx:if="{{remainTimer.day >= 3}}">
+        <view class="timer-num-day">{{remainTimer.day || ''}}</view>
+        <text class="symbol-text">天</text>
+    </block>
+    <block wx:elif="{{remainTimer.hour||remainTimer.minute||remainTimer.second}}">
+        <view class="timer-num">{{remainTimer.hour || ''}}</view> 
+        <text class="symbol">:</text>
+        <view class="timer-num">{{remainTimer.minute || ''}}</view>
+        <text class="symbol">:</text>
+        <view class="timer-num">{{remainTimer.second || ''}}</view>
+    </block>
+</view>

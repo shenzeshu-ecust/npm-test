@@ -1,0 +1,48 @@
+<view class="backmask {{ visible ? 'active' : '' }}" bindtap="hide" data-type="1"></view>
+<view class="omn-pop pop-botm {{ visible ? 'active' : '' }}">
+    <view class="omn-pop-hd" style="background-image: url({{ popData.Image }})">
+        <view class="ifont-closed-line" bindtap="hide"></view>
+        <image class="tit" src="{{ popData.TitleImage }}" />
+        <view class="sub">{{ popData.SubTitle }}</view>
+    </view>
+    <view class="omn-pop-bd">
+        <view class="{{ isPay && 'bottom' }}" style="background-image: url({{ popData.Image }})">
+            <view class="swiper-wrapper">
+                <view class="mask" catchtouchstart="onDragstart" catchtouchend="onDragend" />
+                <scroll-view class="swiper-box" scroll-x scroll-left="{{ offsetX }}" enhanced>
+                    <view class="swiper" id="swiper">
+                        <view class="swiper-item {{ index === currIdx ? 'active' : '' }}"
+                            style="background-image: url({{ item.ImageV2 }})" wx:for="{{carouselList}}" wx:key="index">
+                            <image class="tag" mode="aspectFit" src="{{ item.ImageV2Tag }}" />
+                            <view class="tit">{{ item.Title }}</view>
+                            <view class="sub">{{ item.Slogan }}</view>
+                            <view class="value">{{ item.SubTitle }}</view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+            <view class="omn-pop-right">
+                <block wx:if="{{ !carouselList[currIdx].expand }}">
+                    <view class="item" wx:for="{{ carouselList[currIdx].lessDesc }}">{{ item }}</view>
+                </block>
+                <block wx:if="{{ carouselList[currIdx].expand }}">
+                    <view class="item" wx:for="{{ carouselList[currIdx].Desc }}">{{ item }}</view>
+                </block>
+                <view class="more" wx:if="{{ !carouselList[currIdx].expand }}" bindtap="onClickExpand">
+                    展开更多
+                    <view class="ifont-arr"></view>
+                </view>
+            </view>
+            <view class="omn-pop-desc">
+                <view class="tit">套餐描述</view>
+                <view class="item" wx:for="{{ popData.PackageDesc }}">{{ item }}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="omn-pop-pay" wx:if="{{ isPay && visible }}">
+    <view class="price">{{ info.price }}</view>
+    <view class="sub">+￥{{ info.vendorInfo.TrainTicketSeatVendorInfo.VendorPrice }}携程全能抢票</view>
+    <view class="btn" data-vendorid="{{74}}" data-isxpagenew="{{true}}" data-jumpdirect="{{true}}"
+        data-vendoridtype="{{info.vendorInfo.VendorIdType}}" bindtap="itemHandle">开始抢票</view>
+</view>

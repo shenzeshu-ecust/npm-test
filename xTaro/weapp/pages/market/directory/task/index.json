@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "Modal": "./comps/modal/index",
+    "sharePanel": "../components/sharePanel/index",
+    "taskLol": "./comps/taskLol/index"
+  }
+}

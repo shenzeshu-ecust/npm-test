@@ -1,0 +1,69 @@
+<view class="mod" wx:if="{{couponList.length >= 1}}">
+  <view wx:if="{{couponMsg}}" class="mod-sub-title">{{couponMsg}}</view>
+  <view class="coupon-list">
+    <button class="coupon-box" wx:for="{{couponList}}"
+        wx:if="{{!isExpand && couponList.length > 2 ? index < 2 : true}}"
+        wx:key="{{index}}" wx:for-item="item" data-index="{{index}}" bindtap="onClickCoupon">
+        <image class="counpon-bg" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/new_coupon.png"/>
+      <view class="coupon">
+        <view class="coupon-price">
+            <text class="basic-text">{{item.ctype}}</text>
+            <text class="price"><text class="dfn">¥</text>{{item.price}}</text>
+        </view>
+        <view class="coupon-info">
+            <view class="title-container">
+                <view data-index="{{index}}" class="title">
+                    <view class="title-text">{{item.title}}</view>
+                    <image wx:if="{{item.remark}}" class="icon-info" src="//pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/icon_info.png"/>
+                </view>
+                <text class="validity">{{item.effect}}</text>
+            </view>
+            <!-- 先去掉唤起app -->
+            <!-- <view class="goto-use">去使用</view> -->
+        </view>
+        <view class="coupon-status" wx:if="{{!hasBargained}}">
+            <button class="status-button">未获得</button>    
+        </view>
+        <view wx:else class="gouse-status">
+            <button class="gouse-button" catchtap="onClickGoUse">去使用</button>
+        </view>
+      </view>
+    </button>
+    <view wx:if="{{!isExpand && couponList.length > 2}}">
+        <view class="showMore" catchtap="onExpandCouponList">查看更多<view class="arrow"></view></view>
+    </view>
+  </view>
+  <view wx:if="{{showCouponDetail}}" class="modal" catchtouchmove="disableScroll">
+      <view class="mask" bindtap="onCloseCouponModal" />
+      <view class="modal-content">
+          <text class="modal-title">{{couponTitle}}</text>
+          <scroll-view scroll-y class="modal-detail-list">
+              <view class="modal-list-item" wx:for="{{couponDetailList}}" wx:key="{{index}}" wx:for-item="item">{{item}}</view>
+          </scroll-view>
+          <view class="modal-btn-box">
+              <button class="modal-btn" bindtap="onCloseCouponModal">关闭</button>
+          </view>
+      </view>
+  </view>
+</view>
+<view class="mod1" wx:if="{{weixinGroup.subTitle}}">
+    <view class="coupon-list">
+        <view class= "{{!isExpand && couponList.length > 2 ? 'group-entry' : 'group-normal-entry'}}">
+            <view class='group-background'>
+                <image class="weixin-icon" src="//pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/weixinIcon.png" />
+            </view>
+            <view class='group-main-title'>
+                <text class='group-title-text'>{{weixinGroup.normalText}}</text>
+                <text class='group-title-highlight'>{{weixinGroup.highlightText}}</text>
+            </view>
+            <view class='group-subtitle'>
+                <text class='group-subtitle-text'>{{weixinGroup.subTitle}}</text>
+            </view>
+            <view class='group-button-container'>
+                <button class='group-button' bindtap="onClickGroupEntry">
+                    <text class='button-text'>{{weixinGroup.buttonText}}</text>
+                </button>
+            </view>     
+        </view>
+    </view>
+</view>

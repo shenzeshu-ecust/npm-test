@@ -1,0 +1,24 @@
+<view class="my-active cell-v {{isIphoneX ? 'iphonex' : ''}}">
+    <view class="cell-star {{currentPage === 'homepage' ? 'current' : ''}}"
+        data-type="homepage" bindtap="switchTap" id="autotest_xcx_cxy_firstpage">
+        <view class="icon-home" id="autotest_homepage_homelabel">
+            <view class="down" style="margin-top: {{secondScreen ? '-72rpx': '0'}}"></view>
+            <view class="up"></view>
+        </view>
+    </view>
+    <view class="cell-star {{currentPage === 'collection' ? 'current' : ''}}"
+        data-type="collection" data-login-required="1" bindtap="switchTap" id="autotest_xcx_cxy_wdsc">
+        <text class="icon-bg icon-history-collected" id="autotest_homepage_collectlabel"></text>
+        <view>我的收藏</view>
+    </view>
+    <view wx:if="{{isWechat}}" class="cell-star {{currentPage === 'score' ? 'current' : ''}}" data-type="score"
+        data-login-required="1" bindtap="switchTap" id="autotest_xcx_cxy_wdjf">
+        <text class="icon-bg icon-score" id="autotest_homepage_pointlabel"></text>
+        <view>我的积分</view>
+    </view>
+    <view class="cell-star {{currentPage === 'order' ? 'current' : ''}}" data-type="order"
+        data-login-required="1" bindtap="switchTap" id="autotest_xcx_cxy_wddd">
+        <text class="icon-bg {{isQuickApp ? 'icon-order-quick' : 'icon-order'}}" id="autotest_homepage_orderlabel"></text>
+        <view>我的订单</view>
+    </view>
+</view>

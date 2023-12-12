@@ -1,0 +1,13 @@
+<!--{{component}}.wxml-->
+<InviteHelp wx:if="{{inviteHelpInfo}}" userInfo="{{userInfo}}" inviteBtn="{{inviteBtn}}" isLogin="{{isLogin}}" isOpen="{{invitePopupOpen}}" data="{{inviteHelpInfo}}" bind:inviteHelp="handleClickInvite" bind:popupClose="handleInvitePopupClose" bind:loginPhone="loginPhone" bind:toLogin="toLogin" bind:setUserProfile="setUserProfile" />
+
+<Modal show="{{showSuccessModal}}" maskClosable="{{false}}">
+	<view class='assist-success-wrap'>
+		<view class="assist-success-wrap__close-btn" bindtap="closeSuccessModal"></view>
+		<view class='assist-success-wrap__title'>助力成功</view>
+		<image wx-if="{{awardPic}}" class="assist-success-wrap__coupon-img" src="{{awardPic}}"></image>
+		<view class='assist-success-wrap__brn-wrap'>
+			<button class='assist-success-wrap__assist-btn' bindtap="closeSuccessModal">我知道了</button>
+		</view>
+	</view>
+</Modal>

@@ -1,0 +1,29 @@
+@import "../common/base.wxss";
+.container {
+  margin: 234rpx 30rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #555;
+}
+
+.error-icon {
+  width: 204rpx;
+  height: 215rpx;
+  background: url(https://pages.c-ctrip.com/you/common/youyou-cry.png) no-repeat;
+  background-size: contain;
+  margin-bottom: 90rpx;
+}
+
+.retry-btn {
+  width: 70%;
+  height: 90rpx;
+  background-color: #52BCE8;
+  color: #FFF;
+  font-size: 18px;
+  border-radius: 8rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 120rpx;
+}

@@ -1,0 +1,822 @@
+@import "icon.wxss";
+@import "../../common/css/common.wxss";
+@import "./components/checkpoint-swiper/index.wxss";
+
+.wrapper {
+	position: relative;
+	padding: 0 24rpx 24rpx 24rpx;
+	background: linear-gradient(
+		to bottom,
+		rgb(76, 170, 248) 0%,
+		rgb(0, 134, 246) 100%
+	);
+}
+
+
+.assist-wrapper {
+	background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/assistcutprice_bg.png);
+	background-size: cover;
+	height: 892rpx;
+	line-height: 56rpx;
+	text-align: center;
+	position: relative;
+}
+
+.assist-guest-wrapper {
+	height: 100vh;
+	width: 100vw;
+}
+
+.activity-rules {
+	color: #fff;
+	font-size: 24rpx;
+	font-weight: 500;
+	position: fixed;
+	top: 16rpx;
+	right: 0;
+	padding: 0 15rpx 0 24rpx;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 100rpx 0 0 100rpx;
+	line-height: 51rpx;
+}
+.rule-content {
+	font-size: 28rpx;
+	color: #222;
+}
+.rule-content .item {
+	padding-bottom: 20rpx;
+}
+.rule-content .h2 {
+	font-size: 32rpx;
+}
+.regular {
+	width: 14rpx;
+	height: 14rpx;
+	border-right: 2rpx solid #fff;
+	border-bottom: 2rpx solid #fff;
+	transform: rotate(-45deg);
+	display: inline-block;
+	vertical-align: 2rpx;
+}
+
+.most-money {
+	position: absolute;
+	top: 220rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	color: #fff;
+	font-size: 45rpx;
+	display: flex;
+	justify-content: center;
+	line-height: 75rpx;
+	font-weight: 700;
+}
+
+.money-num {
+	font-size: 58rpx;
+	line-height: 60rpx;
+	color: #fffa4e;
+	font-weight: 500;
+	margin: auto 4rpx;
+}
+
+.left-arrow {
+	position: absolute;
+	transform: rotate(180deg);
+	bottom: 216rpx;
+	left: 0;
+	transition: 0.3s;
+}
+
+.right-arrow {
+	position: absolute;
+	bottom: 216rpx;
+	right: 0;
+	transition: all 0.3s;
+	opacity: 1;
+}
+
+.ctrip-logo {
+	padding: 58rpx 0;
+}
+
+.ctrip-logo view {
+	margin: auto;
+}
+
+.invite-assist-wrapper {
+	margin: 0 auto 16rpx;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.invite-assist-wrapper .invite-text {
+	color: #fff;
+	font-size: 28rpx;
+	margin-left: 16rpx;
+	line-height: 34rpx;
+	font-weight: 600;
+}
+
+.invite-assist-wrapper .show-hotel {
+	margin-bottom: 24rpx;
+	display: flex;
+	align-items: center;
+	padding: 12rpx 0;
+}
+
+.invite-assist-wrapper .share-circle {
+	margin-top: 16rpx;
+	display: flex;
+	align-items: center;
+	padding: 12rpx;
+}
+
+.popup-invite-group button {
+	border: none !important;
+	padding: 0 !important;
+}
+
+/*半浮层样式*/
+.ast-layer {
+	position: fixed;
+	z-index: 20;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #fff;
+	border-radius: 16rpx 16rpx 0 0;
+}
+.ast-layer .thead {
+	height: 88rpx;
+	line-height: 88rpx;
+	display: flex;
+	text-align: center;
+}
+.ast-layer .thead-l {
+	width: 110rpx;
+	line-height: 88rpx;
+	color: #666;
+}
+.ast-layer .thead-m {
+	flex: 1;
+	color: #333;
+	font-size: 32rpx;
+}
+.ast-layer .thead-r {
+	width: 110rpx;
+	color: #0086f6;
+	font-size: 28rpx;
+}
+.ast-layer .tbody {
+	padding: 32rpx;
+	max-height: 800rpx;
+	box-sizing: border-box;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	-webkit-overflow-scrolling: touch;
+	padding-bottom: calc(constant(safe-area-inset-bottom) + 10rpx);
+	padding-bottom: calc(env(safe-area-inset-bottom) + 10rpx);
+}
+.ast-mask {
+	z-index: 10;
+	position: fixed;
+	background: rgba(0, 0, 0, 0.6);
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.assist-result-size {
+	width: 600rpx;
+	height: 700rpx;
+	padding: 32rpx;
+}
+
+.assist-cancel-wrapper {
+	width: 562rpx;
+	font-size: 30rpx;
+	text-align: center;
+	padding: 48rpx 32rpx 32rpx;
+	top: 45%;
+}
+
+.assist-cancel-btn {
+	background-color: #0086f6;
+	border-radius: 8rpx;
+	height: 72rpx;
+	width: 100%;
+	color: #fff;
+	line-height: 72rpx;
+	margin-top: 48rpx;
+}
+
+.assist-result-wrapper {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	border-radius: 16rpx;
+	box-sizing: border-box;
+}
+
+.assist-result-wrapper .header-image {
+	position: absolute;
+	top: -100%;
+}
+
+.assist-result-wrapper .checkpoint-title {
+	background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/checkpoint_title.png);
+	background-size: 100% 100%;
+	position: absolute;
+	top: -10rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 150rpx;
+	height: 44rpx;
+	line-height: 44rpx;
+	text-align: center;
+	letter-spacing: 1px;
+	color: #ac6800;
+	font-weight: 600;
+	font-size: 28rpx;
+}
+
+.assist-result-wrapper .wechat-font-close {
+	position: absolute;
+	bottom: -140rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	color: #fff;
+	font-weight: 700;
+	font-size: 60rpx;
+	padding: 20rpx;
+}
+
+.assist-result-wrapper .btn-wrapper {
+	background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/assist-result-pop-up.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 280rpx;
+	border-radius: 0 0 16rpx 16rpx;
+}
+
+.assist-result-wrapper .btn-wrapper button {
+	border: none;
+}
+
+.assist-result-wrapper .btn-bg {
+	background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/popup_button.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 494rpx;
+	height: 97rpx;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 62rpx;
+}
+
+.assist-result-wrapper .btn-txt {
+	color: #aa4c00;
+	font-size: 43rpx;
+	font-weight: 700;
+	margin-bottom: 4rpx;
+}
+
+.assist-result-wrapper .title-left {
+	transform: rotateY(180deg);
+}
+.assist-result-wrapper .title {
+	color: #333;
+	font-size: 40rpx;
+	font-weight: 700;
+	margin: 0 32rpx;
+}
+
+.assist-result-wrapper .assist-desc {
+	font-size: 32rpx;
+	color: #000;
+	text-align: center;
+	line-height: 1.3;
+}
+
+.assist-result-content {
+	height: 282rpx;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	padding: 0 38rpx;
+}
+
+.cutprice-level-wrapper .popup-invite-group {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0 32rpx;
+	color: #333;
+}
+
+.popup-invite-group .invite-image {
+	filter: grayscale(1);
+}
+
+.cut-verification {
+	width: 100%;
+}
+
+.dialog {
+	width: 454rpx;
+	min-height: 376rpx;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1010;
+}
+
+.dialog .dialog-head {
+	height: 92rpx;
+	border-radius: 16rpx 16rpx 0 0;
+	background: url(https://pages.c-ctrip.com/hotels/wechat/market/cutprice/2.0/theme-1-friends.png)
+		top left no-repeat;
+	background-size: cover;
+}
+
+.dialog .dialog-content {
+	min-height: 284rpx;
+	border-radius: 0 0 16rpx 16rpx;
+	background: #fff;
+	text-align: center;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.dialog .dialog-content .js-text {
+	width: 374rpx;
+	font-size: 24rpx;
+	color: #4a4a4a;
+}
+
+.dialog .mask-close {
+	position: absolute;
+	left: 50%;
+	margin-left: -32rpx;
+	bottom: -96rpx;
+}
+
+.sponsor-wrapper {
+	width: 100vw;
+	height: 100vh;
+}
+
+.page-loading,
+.page-error {
+	background-color: #fff;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10001;
+	flex-direction: column;
+}
+
+.page-error {
+	align-items: center;
+	padding-top: 248rpx;
+}
+
+.page-loading-gif {
+	width: 100rpx;
+	height: 100rpx;
+	margin-bottom: 20rpx;
+}
+
+.page-error image {
+	width: 277rpx;
+	height: 304rpx;
+	margin-bottom: 44rpx;
+}
+
+.page-error button {
+	background: linear-gradient(
+		-90deg,
+		rgb(0, 118, 245) 0%,
+		rgb(0, 167, 250) 100%
+	);
+	border-radius: 42rpx;
+	height: 84rpx;
+	width: 228rpx;
+	color: #fff;
+	font-weight: 500;
+	font-size: 32rpx;
+	margin-top: 40rpx;
+	line-height: 84rpx;
+}
+
+/* 修改单弹窗 */
+.enable-loginInfo {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: 1011;
+	background: #fff;
+	border-radius: 17rpx 17rpx 0 0;
+	padding: 38rpx;
+}
+.enable-loginInfo .lc-icon {
+	background: url(https://pages.c-ctrip.com/hotels/wechat/market/cutprice/2.0/coupon-lc-icon.png);
+	background-size: contain;
+	height: 52rpx;
+	width: 52rpx;
+}
+.enable-loginInfo .lc-title {
+	color: #333;
+	font-size: 40rpx;
+	margin-bottom: 32rpx;
+}
+
+.enable-loginInfo .lc-flex {
+	display: flex;
+	align-items: center;
+}
+.enable-loginInfo .lc-tips {
+	color: #000;
+	font-size: 46rpx;
+	font-weight: bold;
+	padding: 30rpx 0 60rpx;
+}
+.lc-btns {
+	justify-content: space-between;
+	padding: 48rpx 0 20rpx;
+}
+.lc-btns .lc-btn-reject,
+.lc-btns .lc-btn-allow {
+	width: 320rpx;
+	height: 84rpx;
+	font-size: 36rpx;
+	font-weight: bold;
+	padding: 0;
+}
+.lc-btns .lc-btn-reject {
+	background: #ededed;
+	color: #02bf02;
+}
+.lc-btns .lc-btn-allow {
+	background: #02bf02;
+	color: #fff;
+}
+
+.assist-result-wrapper .assist-pass-header {
+	width: 640rpx;
+	height: 272rpx;
+	position: absolute;
+	top: -280rpx;
+	left: -20rpx;
+}
+
+.assist-result-wrapper .assist-pass-header image {
+	width: 100%;
+	height: 100%;
+}
+
+.assist-float-gift {
+	position: fixed;
+	width: 117rpx;
+	height: 140rpx;
+	right: 0;
+	top: 800rpx;
+}
+
+.assist-float-gift image {
+	width: 100%;
+	height: 100%;
+}
+
+.to-invite-bg {
+	background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/assist-gift.png);
+}
+
+.invite-success-bg {
+	background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/assist-success-gift.png);
+}
+
+.gift-countdown {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 20rpx;
+	width: 100%;
+	text-align: center;
+}
+
+.header-tip .title-left {
+	transform: rotateY(180deg);
+}
+.header-tip .title {
+	font-weight: 700;
+	font-size: 32rpx;
+	color: #333;
+}
+
+.gift-coupon-value {
+	display: flex;
+	align-items: center;
+	color: #ff6600;
+	width: 164rpx;
+    justify-content: center;
+}
+
+.gift-coupon-value .amount {
+	font-size: 70rpx;
+	font-weight: 500;
+	margin-right: 8rpx;
+}
+
+.gift-coupon-value .unit {
+	font-size: 24rpx;
+}
+.gift-coupon-name {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 312rpx;
+	padding-left: 16rpx;
+    box-sizing: border-box;
+}
+.gift-coupon-name .name {
+	font-size: 28rpx;
+	font-weight: 700;
+	line-height: 1;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 288rpx;
+}
+
+.gift-coupon-name .expiry-date {
+	color: #666;
+	font-size: 24rpx;
+	margin-top: 12rpx;
+	line-height: 1;
+}
+
+.gift-countdown .desc {
+	color: #fff9f0;
+	font-size: 28rpx;
+}
+.assist-invite-header {
+	width: 656rpx;
+	height: 263rpx;
+	position: absolute;
+	left: -28rpx;
+	top: -160rpx;
+}
+
+.assist-invite-header image {
+	height: 100%;
+	width: 100%;
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+
+.common-mask {
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+}
+.modify-mask {
+    z-index: 1010;
+}
+.sys-modal {
+    z-index: 9999;
+}
+.sys-mask {
+    z-index: 9998;
+}
+.gift-modal {
+    z-index: 1010;
+}
+.gift-mask {
+    z-index: 1009;
+}
+.cp-modal {
+    z-index: 1006;
+}
+.cp-mask {
+    z-index: 1005;
+}
+
+.need-count {
+	color: #FF6600;
+	margin: 0 8rpx;
+	font-size: 44rpx;
+}
+.wework-desc {
+	font-size: 38rpx;
+	font-weight: 500;
+	color: #111111;
+}
+
+.wework-btn-wrapper {
+	background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/wework_redpackage_v1.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 409rpx;
+}
+
+.wework-result-wrapper {
+	background-color: #fffaf0;
+}
+
+.wework-result-wrapper .btn-bg {
+	background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/wework_popup_btn.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 494rpx;
+	height: 111rpx;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 160rpx;
+	border: none;
+}
+
+.wework-result-wrapper .wework-btn {
+	background: rgba(255,253,182,0.24);
+	border-radius: 52rpx;
+	width: 492rpx;
+	height: 80rpx;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 55rpx;
+	border: 1px solid #ff8846;
+}
+
+.invite-btn-text {
+	color: #aa4c00;
+	font-size: 38rpx;
+	font-weight: 700;
+	margin-bottom: 4rpx;
+}
+
+.wework-result-wrapper .wework-btn-text {
+	color: #ffe744;
+	font-size: 30rpx;
+	font-weight: 500;
+}
+
+.wework-result-wrapper .wework-btn image {
+	width: 44rpx;
+	height: 44rpx;
+	margin-right: 12rpx;
+}
+
+.wework-result-size {
+	width: 600rpx;
+	height: 790rpx;
+	padding: 32rpx;
+	border-radius: 16rpx 16rpx 24rpx 24rpx;
+}
+
+.wework-avatar-group {
+	position: relative;
+	height: 48rpx;
+}
+
+.wework-avatar-group image{
+	width: 48rpx;
+	height: 48rpx;
+	border-radius: 50%;
+	position: absolute;
+}
+
+.wework-assist-count {
+	font-weight: 500;
+	font-size: 36rpx;
+	color: #111;
+    line-height: 36rpx;
+}
+
+.wework-assist-desc {
+	font-size: 30rpx;
+	line-height: 36rpx;
+	color: #111;
+}
+
+.task-banner {
+	height: 124rpx;
+	border-radius: 16rpx;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 22rpx 24rpx;
+	box-sizing: border-box;
+}
+
+.task-banner-bg {
+    background: linear-gradient(90deg, rgb(255, 244, 202) 0.04%, rgb(255, 228, 252) 100%);
+}
+
+.mb24 {
+    margin-bottom: 24rpx;
+}
+
+.task-banner image {
+	width: 80rpx;
+	height: 80rpx;
+}
+
+.task-body {
+	display: flex;
+}
+
+.task-title {
+	color: #4f2c11;
+	font-size: 30rpx;
+	font-weight: 700;
+}
+
+.task-desc {
+	color: #754e2e;
+	font-size: 24rpx;
+}
+
+.task-btn {
+	border-radius: 32rpx;
+	color: #fff;
+	width: 152rpx;
+	height: 60rpx;
+	font-size: 30rpx;
+	margin: 0;
+    line-height: 60rpx;
+}
+
+.task-btn-active {
+	background-color: #ff9c0e;
+}
+
+.task-btn-inactive {
+	background-color: #CABFBA;
+}
+
+.task-btn-tolook {
+    background: #ffe2b8;
+    color: #f77e00;
+}
+
+.ranklist {
+    background: radial-gradient(ellipse 100% 0% at 52.62% 15.31%, rgb(255, 253, 248) 0%, rgb(255, 248, 237) 100%);
+    border-radius: 24rpx;
+    box-shadow: 0 0 36rpx 0 rgba(0, 0, 0, 0.08);
+    padding: 0 16rpx 16rpx;
+    margin-bottom: 32rpx;
+}
+
+.rank-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 304rpx;
+    height: 57rpx;
+    padding: 0 0 4rpx;
+    box-sizing: border-box;
+    color: #ac6800;
+    font-size: 32rpx;
+    font-weight: 600;
+    text-align: center;
+    margin-left: calc(50% - 153rpx);
+    margin-bottom: 24rpx;
+    background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/task-linear-bg.png);
+    background-repeat: no-repeat;
+    background-size: 304rpx 57rpx
+
+}

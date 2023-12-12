@@ -1,0 +1,90 @@
+<!-- 标签模块 -->
+<!-- <view class="recommendVideo-tag"  bindtap="_showRecommentList" style="top: {{headerTop}}px">
+  <view class="recommendVideo-tagtext">更多直播</view>
+</view> -->
+<!-- 背景遮罩 -->
+<block wx:if="{{showRecommendVideo}}">
+<view catchtouchstart="catchtouchstart" class="recommend-bg" catchtap="_hideRecommendList"></view>
+</block>
+<!-- 数据列表 -->
+<view  catchtouchmove="catchtouchmove"  class="recommend-list {{showRecommendVideo ? 'on': ''}}" >
+	<view class="hidelist-tag" style="top: {{headerTop + 68}}px" catchtap="_hideRecommendList"></view>
+	<view class="reclist-inner">
+		<view class="reclist-inner-blur" style="background-image: url({{liveCoverImageUrl}})"></view>
+		<view class="rec-title" style="padding-top: {{headerTop}}px">{{videoList && videoList.length ? '更多直播' : ''}}</view>
+		<block wx:if="{{videoList && videoList.length}}">
+		<scroll-view class="rec-list" scroll-y scroll-anchoring enhanced show-scrollbar="{{false}}" lower-threshold="100" style="height: {{windowHeight - headerTop - 45}}px" bindscrolltolower="_scrolltolower">
+			<block wx:for="{{videoList}}" wx:key="videoList{{index}}">
+				<view class="list-itemwrapper" bindtap="_jumpToNext" data-url="{{item.jumpUrl}}" data-liveid="{{item.liveId}}" data-livestatus="{{item.liveStatus}}">
+					<view class="list-item">
+						<image class="item-cover" mode="aspectFill" src="{{item.imageUrl}}" />
+						<block wx:if="{{item.playingStr}}">
+						<view class="item-tag">
+							<block wx:if="{{item.liveStatus == 0}}">
+							<view class="live {{item.playingClass}}"></view>
+							</block>
+							<view>{{item.playingStr}}</view>
+						</view>
+						</block>
+						<view class="item-info">
+							<view class="location {{item.poiInfo && item.poiInfo.showName ? '' : 'nopoi'}}"><text>{{item.poiInfo.showName ? item.poiInfo.showName : ''}}</text></view>
+							<view class="item-title">{{item.title ? item.title : ''}}</view>
+							<view class="item-user">
+								<block wx:if="{{item.userInfo}}">
+								<view class="avat">
+									<block wx:if="{{item.userInfo.headPhoto}}">
+										<image mode="aspectFill" src="{{item.userInfo.headPhoto}}"/>
+									</block> 
+									<block wx:if="{{item.userInfo.vIcon}}">
+									<image class="vip" mode="aspectFill" src="{{item.userInfo.vIcon}}"></image>
+									</block>
+								</view>
+								<view class="name-info">
+									<view class="row1">{{item.userInfo.nickName}}</view>
+									<block wx:if="{{item.userInfo.showTagList && item.userInfo.showTagList[0] && item.userInfo.showTagList[0].tagShortName}}">
+									<view class="row2 ">
+										<text class="{{item.userInfo.showTagList[0].tagStyle == 1 ? 'yellow' :'blue'}}">{{item.userInfo.showTagList[0].tagShortName}}</text>
+									</view>
+									</block>
+								</view>
+								<block wx:if="{{item.liveStatus == 0}}">
+									<view class="bubble">
+										<image mode="widthFix" src="https://pages.c-ctrip.com/livestream/video/webcast-home-praise1.png" />
+								</view>
+								</block>
+								</block>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+			
+			<block wx:if="{{listLoadingState == 4}}">
+				<view class="no-more">没有更多了</view>
+			</block>
+			<block wx:if="{{listLoadingState == 1}}">
+				<view class="loading">
+					<view class="inner-div">
+						<text>加载中</text>
+					</view>
+				</view>
+			</block>
+		</scroll-view>
+		</block>
+		<block wx:elif="{{listLoadingState != 0}}">
+			<view class="nodata">
+				<view class="nodata-img {{listLoadingState == 2 ? 'err' :'no'}}" ></view>
+				<view class="no-title">{{loadResult.title}}</view>
+				<view class="no-subtitle">{{loadResult.subtitle}}</view>
+				<view class="no-btn" bindtap="_getVideoList">{{loadResult.btnText}}</view>
+			</view>
+		</block>
+		<block wx:if="{{listLoadingState == 0}}">
+			<view class="loading">
+				<view class="inner-div">
+					<text>加载中</text>
+				</view>
+			</view>
+		</block>
+	</view>
+</view>

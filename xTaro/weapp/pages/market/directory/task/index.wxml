@@ -1,0 +1,176 @@
+<import src='./temp/base.wxml' />
+<import src='./temp/expand.wxml' />
+<import src='./temp/sigle.wxml' />
+<import src='./temp/noIcon.wxml' />
+<import src='./temp/xhs.wxml' />
+<import src='./temp/train.wxml' />
+
+<wxs src="./utils.wxs" module="tools"></wxs>
+<!-- 蒙层 -->
+<view class="mask" wx:if="{{taskInfo.taskModule == 2 && isShow && noMask == false}}" catchtouchmove="true" bindtap="closeFloat"></view>
+<!-- taskModule 1平铺样式 2弹窗 -->
+<view wx:if="{{taskInfo.taskModule}}" class="task_wrap task_wrap_{{taskInfo.taskStyle}} {{taskInfo.taskModule == 1 ? 'module' : 'float'}} {{isShow ? '': ''}} {{clazz}} compid_{{compid}}" style="background:{{taskInfo.jobBackgroudColor}};background-image:url({{taskInfo.jobBackgroudImg}});">
+  <view wx:if="{{combData.type == 3 && taskList.length > 1}}" class="task-comb-title">{{combData.name}}({{taskList.length}}选1)</view>
+  <view class="header" wx:if="{{taskInfo.jobHeadBackgroundImg}}" style="background:transparent;background-image:url({{taskInfo.jobHeadBackgroundImg}});background-size: 100% 100%;">
+  </view>
+  <block wx:if="{{taskInfo.taskStyle == 5}}">
+    <view wx:for="{{taskInfo.taskModule == 1 && !expand ? tools.arrSlice(taskList, taskInfo.maxDisplayNum) : taskList}}" wx:key="taskId" class="task_item_5 task_item_exposure" data-taskId="{{item.taskId}}" data-status="{{item.status}}" style="background:{{taskInfo.taskBackgroudColor}};background-image:url({{taskInfo.taskBackgroudImg}});background-size:100% 100%;">
+      <template is="sigleTaskItem" data="{{item, taskInfo, isLogin, name:tools.stringSlice(item.taskName, 0, item.taskTarget > 1 ? 9 : 11)}}"> </template>
+    </view>
+  </block>
+  <block wx:if="{{taskInfo.taskStyle == 11}}">
+    <view wx:for="{{taskInfo.taskModule == 1 && !expand ? tools.arrSlice(taskList, taskInfo.maxDisplayNum) : taskList}}" wx:key="taskId" class="task_item_5 task_item_exposure" data-taskId="{{item.taskId}}" data-status="{{item.status}}" style="background:{{taskInfo.taskBackgroudColor}};background-image:url({{taskInfo.taskBackgroudImg}});background-size:100% 100%;">
+      <template is="xhsTaskItem" data="{{item, taskInfo, isLogin, name:tools.stringSlice(item.taskName, 0, item.taskTarget > 1 ? 9 : 11)}}"> </template>
+    </view>
+  </block>
+  <scroll-view wx:else class="task_list_wrap" scroll-y>
+    <block wx:if="{{taskInfo.taskStyle == 1}}">
+      <view wx:for="{{taskInfo.taskModule == 1 && !expand ? tools.arrSlice(taskList, taskInfo.maxDisplayNum) : taskList}}" wx:key="taskId" class="task_item task_item_exposure" data-taskId="{{item.taskId}}" data-status="{{item.status}}" style="{{tools.resolveStyle({ backgroundColor:taskInfo.taskBackgroudColor, backgroundImage: taskInfo.taskBackgroudImg, backgroundSize:'100% 100%' })}}">
+        <template is="baseTaskItem" data="{{item, taskInfo, isLogin, name:tools.stringSlice(item.taskName, 0, item.taskTarget > 1 ? 9 : 11)}}">
+        </template>
+      </view>
+    </block>
+    <block wx:if="{{taskInfo.taskStyle == 2}}">
+      <view wx:for="{{taskInfo.taskModule == 1 && !expand ? tools.arrSlice(taskList, taskInfo.maxDisplayNum) : taskList}}" wx:key="taskId" class="task_item task_item_exposure" data-taskId="{{item.taskId}}" data-status="{{item.status}}" style="background:{{taskInfo.taskBackgroudColor}};background-image:url({{taskInfo.taskBackgroudImg}});background-size:100% 100%;">
+        <template is="expandTaskItem" data="{{item, taskInfo, isLogin, name:tools.stringSlice(item.taskName, 0, item.taskTarget > 1 ? 9 : 11)}}"></template>
+      </view>
+    </block>
+    <block wx:if="{{taskInfo.taskStyle == 3}}">
+      <view wx:for="{{taskInfo.taskModule == 1 && !expand ? tools.arrSlice(taskList, taskInfo.maxDisplayNum) : taskList}}" wx:key="taskId" class="task_item task_item_exposure" data-taskId="{{item.taskId}}" data-status="{{item.status}}" style="background:{{taskInfo.taskBackgroudColor}};background-image:url({{taskInfo.taskBackgroudImg}});background-size:100% 100%;">
+        <template is="onIconTaskItem" data="{{item, taskInfo, isLogin, name:tools.stringSlice(item.taskName, 0, item.taskTarget > 1 ? 9 : 11)}}"></template>
+      </view>
+    </block>
+    <!-- 火车票 -->
+    <block wx:if="{{taskInfo.taskStyle == 17}}">
+      <view class="train_head">
+        <view class="train_head_left" wx:if="{{!trainMaster}}">更多助力方式</view>
+        <view class="train_head_right" wx:if="{{taskAwardData && taskAwardData.choujiang && taskAwardData.choujiang.totalCount > 0}}">
+          <text class="train_head_right_highlight">已领{{taskAwardData.choujiang.receivedCount}}次</text>/{{taskAwardData.choujiang.totalCount}}次机会
+        </view>
+      </view>
+      <view wx:for="{{taskInfo.taskModule == 1 && !expand ? tools.arrSlice(taskList, taskInfo.maxDisplayNum) : taskList}}" wx:key="taskId" class="task_item train_task_item task_item_exposure" data-taskId="{{item.taskId}}" data-status="{{item.status}}">
+        <template is="taskTrain" data="{{item, taskInfo, isLogin, name:tools.stringSlice(item.taskName, 0, item.taskTarget > 1 ? 9 : 11)}}">
+        </template>
+      </view>
+    </block>
+    <block wx:if="{{taskInfo.taskStyle == 28}}">
+      <taskLol taskList="{{taskList}}" taskInfo="{{taskInfo}}" isLogin="{{isLogin}}" bind:handleTask="handleTask" bind:handleWithoutTask="handleWithoutTask" bind:clickAvatar="clickAvatar" />
+    </block>
+
+    <view class="show_more" wx:if="{{taskInfo.taskModule == 1 && !expand && taskList.length > taskInfo.maxDisplayNum}}" bindtap="showMore" style="font-size:{{taskInfo.showMoreBtnSize}}rpx;color:{{taskInfo.showMoreBtnColor}};">
+      <!-- 火车票 -->
+      <block wx:if="{{taskInfo.taskStyle == 17}}">
+        <View wx:if="{{taskAwardData.zhuli}}">
+          <Text class="train_more_text">尚有{{taskAwardData.zhuli.totalCount - taskAwardData.zhuli.receivedCount}}助力包待领取，点击查看更多</Text>
+          <view class="expand_icon">
+            <view class="more_expand_icon down"></view>
+          </view>
+        </View>
+      </block>
+      <block wx:else>查看更多</block>
+    </view>
+  </scroll-view>
+
+  <Modal show="{{showSignModal}}" maskClosable="{{false}}">
+    <view class='signin-success'>
+      <image class='signin-success__headImage' src="https://images3.c-ctrip.com/marketing/static/ic_popup_sign.png"></image>
+      <view class="signin-success__close-btn" bindtap="signinModalClose"></view>
+      <view class='signin-success__title'>今日签到成功</view>
+      <view class='signin-success__tips'>{{signInModalData.tips}}</view>
+      <image class="signin-success__coupon-img" src="{{signInModalData.picture}}"></image>
+      <view class='signin-success__brn-wrap'>
+        <button class='signin-success__assist-btn' bindtap="handleClickSigninReceive" data-taskid="{{signInModalData.taskId}}">立即领取</button>
+      </view>
+    </view>
+  </Modal>
+</view>
+
+<!-- 火车票温馨提示 -->
+<Modal show="{{!!trainShowTipsContent}}" maskClosable="{{false}}">
+  <view class='train_tips'>
+    <view class='train_tips__title'>温馨提示</view>
+    <view class='train_tips__tips'>{{trainShowTipsContent}}</view>
+    <view class='train_tips__brn-wrap'>
+      <button class='train_tips__assist-btn' bindtap="handleCloseTrainTips">知道了</button>
+    </view>
+  </view>
+</Modal>
+
+<!-- 火车票规则 -->
+<Modal show="{{showRulePanel}}" popupType="{{2}}" maskClosable="{{true}}" bind:close="handleCloseRule">
+  <view class='train_rule'>
+    <image bind:tap="handleCloseRule" class="train_rule__close" src="https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/close-btn2.png"></image>
+    <view class='train_rule__title'>任务说明</view>
+    <view class='train_rule__tips'>
+      <view><text>{{ruleDesc}}</text></view>
+    </view>
+  </view>
+</Modal>
+
+<!-- 火车票领取奖励成功提示 -->
+<Modal show="{{trainAwardData}}" maskClosable="{{false}}" >
+  <view class='train_success'>
+    <image class='train_success__headImage' src="https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/pop_pic_blue.png"></image>
+    <!-- <view class="train_success__close-btn" bindtap="signinModalClose"></view> -->
+    <view class='train_success__title'>恭喜您，奖励领取成功!</view>
+    <view class='train_success__tips' wx:if="{{trainAwardData && trainAwardData.showType == 2}}">已为你增加{{trainAwardData.zhuliCount}}个助力包</view>
+    <!-- <image class="train_success__coupon-img" src="{{signInModalData.picture}}"></image> -->
+    <view class="train_success_prize" wx:if="{{trainAwardData && trainAwardData.showType == 1}}">
+      <view class="train_success_prize_item prize_zhuli">
+        <image class="train_success_prize_item_img " src="https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/icon_sudu.png"></image>
+        <text>{{trainAwardData.zhuliCount}}个助力包</text>
+      </view>
+      <view class="train_success_prize_item prize_sudu">
+        <image class="train_success_prize_item_img" src="https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/icon_sudu.png"></image>
+        <text>省下¥{{trainAwardData.price}}</text>
+      </view>
+    </view>
+    <view class="train_success_prize" wx:if="{{trainAwardData && trainAwardData.showType == 2}}">
+      <view class="train_success_prize_item prize_zhuli">
+        <image class="train_success_prize_item_img " src="https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/icon_sudu.png"></image>
+        <text>{{trainAwardData.zhuliCount}}个助力包</text>
+      </view>
+      <view class="train_success_prize_item prize_sudu">
+        <image class="train_success_prize_item_img" src="https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/icon_choujiang.png"></image>
+        <text>抽奖机会+{{trainAwardData.choujiangCount}}</text>
+      </view>
+    </view>
+    <view class='train_success__brn-wrap'>
+      <button class='train_success__assist-btn' bindtap="handleCloseTrainReceiveAwardModal">我知道了</button>
+    </view>
+    <view class="train_success_bottomtips" wx:if="{{taskAwardData && taskAwardData.zhuli && taskAwardData.zhuli.remaindCount > 0}}">你还有<Text class="train_success_bottomtips_count">{{taskAwardData.zhuli.remaindCount}}个助力包</Text>可以领取</view>
+  </view>
+</Modal>
+
+<!-- 火车票领任务得奖励成功提示 -->
+<Modal show="{{receiveTaskAwardData}}" maskClosable="{{false}}" >
+  <view class='train_success'>
+    <image class='train_success__headImage' src="{{receiveTaskAwardData.topImage}}"></image>
+    <!-- <view class="train_success__close-btn" bindtap="signinModalClose"></view> -->
+    <view class='train_success__title'>{{receiveTaskAwardData.title}}</view>
+    <view class='train_success__tips'>{{receiveTaskAwardData.subTitle}}</view>
+    <image class="train_success__coupon-img" src="{{receiveTaskAwardData.picture}}"></image>
+    <view class='train_success__brn-wrap'>
+      <button class='train_success__assist-btn' bindtap="handleCloseTrainReceiveTaskAwardModal">我知道了</button>
+    </view>
+    <view class="train_success_bottomtips" wx:if="{{taskAwardData && taskAwardData.remaindCount > 0}}">你还有<Text class="train_success_bottomtips_count">{{taskAwardData.remaindCount}}助力包</Text>可以领取</view>
+  </view>
+</Modal>
+<!-- 火车票视频号任务弹窗 -->
+<Modal show="{{!!trainWxVideoModal}}" maskClosable="{{false}}" extClass="train_wxvideo" bg="transparent">
+  <view class="train_wxvideo_content">
+    <view wx:if="{{trainWxVideoModal.zlbCount > 0}}" class="train_wxvideo_content_text1">您的好友已获得 <text>{{trainWxVideoModal.zlbCount}}个 助力包</text> </view>
+    <view class="train_wxvideo_content_text2">
+      <view>去官方视频号<text>点赞❤️视频</text>，可为好友</view>
+      <view>再助力<text>{{trainWxVideoModal.zlbMoreCount}}个助力包</text></view>
+    </view>
+    <view class="train_wxvideo_content_card" style="background-image: url({{trainWxVideoModal.cardImg}});" >
+      <image class="train_wxvideo_content_video_cover" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/7yue/zhuli/ic.png" alt=""/>
+    </view>
+    <view class="train_wxvideo_content_btn" bindtap="handleTrainWxVideoTask">去视频号 点赞</view>
+    <view wx:if="{{trainWxVideoModal.awardText}}" class="train_wxvideo_content_award">{{trainWxVideoModal.awardText}}</view>
+  </view>
+  <image class="train_wxvideo_close" bindtap="handleCloseTrainVideoModal" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/7yue/xinke/Cancel.png" mode=""/>
+</Modal>
+
+<sharePanel show="{{showSharePanel}}" shareConfig="{{shareConfig}}" bind:close="handleCloseSharePanel"></sharePanel>

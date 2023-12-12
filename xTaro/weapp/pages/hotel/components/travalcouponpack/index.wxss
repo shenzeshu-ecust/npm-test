@@ -1,0 +1,33 @@
+.travel-coupon-pack {
+    background: #fff;
+    border-radius: 16rpx;
+    padding: 24rpx 24rpx 0;
+}
+.travel-coupon-rules {
+    color: #333;
+    border-radius: 16rpx;
+    margin-top: 24rpx;
+    padding: 24rpx;
+    background: #fff;
+}
+.trc-title {
+    font-size: 30rpx;
+    font-weight: bold;
+    margin-bottom: 16rpx;
+}
+.trc-content {
+    font-size: 26rpx;
+    line-height: 1.5;
+}
+.tcr-item {
+    margin-bottom: 16rpx;
+}
+.tcr-item:last-child {
+    margin-bottom: 0;
+}
+.tcr-item:first-child .trc-title {
+    margin-top: 0;
+}
+.trc-title {
+    margin-top: 48rpx;
+}

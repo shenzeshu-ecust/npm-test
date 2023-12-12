@@ -1,0 +1,175 @@
+/* @import './wangzhe.wxss'; */
+.signIn-wrapper{
+    position: relative;
+}
+
+.signIn-container-1 {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
+    /* margin: 0 9px; */
+    border-radius: 12rpx ;
+}
+
+.signIn-container-1 .items-container-1 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 162rpx;
+}
+
+.signIn-container-1 .point-1 {
+    text-align: center;
+    margin: 0;
+    font-size: 22rpx;
+    font-family: PingFangSC-Semibold;
+    letter-spacing: 1rpx;
+    font-weight: 600;
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.signIn-container-1 .icon-1 {
+    width: 48rpx;
+    height: 48rpx;
+    vertical-align: middle;
+}
+
+.signIn-container-1 .text-1 {
+    font-size: 20rpx;
+    font-family: PingFangSC-Regular;
+    margin: 10rpx 0;
+    letter-spacing: 0rpx;
+    line-height: 22rpx;
+}
+
+.signIn-container-1 .item-container-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80rpx;
+    text-align: center;
+    border-radius: 8rpx;
+}
+.signIn-container-1 .item-container-1.done {
+    opacity: 1;
+}
+
+.signIn-container-1 .sign-container-1 {
+    display: flex;
+    justify-content: center;
+    padding: 0 0 18rpx 0;
+}
+
+.signIn-container-1 .sign-btn-1 {
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border-radius: 30rpx;
+    height: 60rpx;
+    width: 260rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #ffffff;
+}
+.signIn-container-1 .sign-btn-1.done{
+    background: #f4f4f4;
+    color: #cccccc;
+}
+
+.signIn-container-1 .tip-1 {
+    display: block;
+    background: #f00;
+    border-radius: 50%;
+    width: 24rpx;
+    height: 24rpx;
+    border: 1rpx solid #ffffff;
+    position: absolute;
+    transform: translate(120rpx, -20rpx);
+}
+
+.signIn-container-1 .sign-txt-1 {
+    font-family: PingFangSC-Medium;
+    font-size: 28rpx;
+    font-weight: 500;
+    height: 24rpx;
+    letter-spacing: 0px;
+    line-height: 24rpx;
+    width: 112rpx;
+    text-align: center;
+}
+.signIn-title-1{
+    height: 0;
+}
+.sign-rule-btn1{
+    display: flex;
+    align-items: center;
+    padding: 16rpx 0 12rpx 12rpx;
+}
+.sign-rule-btn1__text{
+    color: #f70;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    line-height: 1;
+}
+.sign-rule-btn1__tips{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background: #f70;
+    height: 18rpx;
+    width: 18rpx;
+    font-size: 18rpx;
+    border-radius: 50%;
+}
+
+.rule-popup .rule-popup__content{
+    background: #f6f8fa;
+    width: 686rpx;
+    height: 300rpx;
+    margin: 0 auto;
+}
+
+/* 火车票的规则 */
+
+.train_rule{
+    position: relative;
+}
+
+.train_rule__close{
+    position: absolute;
+    top: 20rpx;
+    left: 20rpx;
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.train_rule__title{
+    color: #333333;
+    font-size: 34rpx;
+    font-family: PingFangSC-Medium;
+    line-height: 1;
+    padding: 24rpx 0;
+    text-align: center;
+}
+
+.train_rule__tips{
+    color: #333333;
+    font-size: 28rpx;
+    font-family: PingFangSC-Regular;
+    padding: 0 32rpx 30rpx;
+    overflow-y: scroll;
+    max-height: 600rpx;
+    text-align: left;
+}
+
+.train_rule__tips_h1{
+    text-align: left;
+    color: #333333;
+    font-size: 30rpx;
+    font-family: PingFangSC-Medium;
+    line-height: 1;
+    margin-bottom: 20rpx;
+}

@@ -1,0 +1,7 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "shareFloat": "/cwx/component/shareFloat/shareFloat"
+  }
+}

@@ -1,0 +1,39 @@
+/*截屏分享*/
+.cmask {
+  position: fixed;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+@font-face {
+  font-family: 'hotel-wechat-components';
+  src:url('https://pic.c-ctrip.com/picaresonline/hotel/wechatMiniProgram/wechat-font.484250b7.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.components-font {
+  font-family: 'hotel-wechat-components' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+.components-font-wechat:before {
+  content: "\e909";
+}
+.components-font-close:before {
+  content: "\e90b";
+}
+.cp-screen-share {position:fixed;bottom:0;left:0;right:0;z-index:1100;background-color: #fff;box-shadow:0 -1rpx 10rpx rgba(0,0,0,.15);padding: 80rpx 46px 40rpx 46px}
+.cp-screen-share .cp-tips {color: #555555;font-size: 26rpx;border:1rpx dashed #4a90e2;text-align: center;border-radius: 10rpx;position: relative;margin-bottom: 40rpx;padding: 40rpx 0}
+.cp-screen-share .cp-tips:after {width:20rpx;height:20rpx;position: absolute;left:50%;transform: translateX(-50%) rotate(45deg);bottom:-12rpx;border-right:1rpx dashed #4a90e2;border-bottom:1rpx dashed #4a90e2;content: "";background-color: #fff}
+.cp-screen-share .cp-close {position: absolute;right: 16rpx;top:16rpx;color: #888888;font-size:44rpx;}
+.cp-screen-share .cp-color {color: #4a90e2;}
+.cp-screen-share .cp-btn {height: 80rpx; line-height: 80rpx;background-color: #006FF6;color: #fff;font-size: 34rpx;border-radius: 8rpx; text-align: center}
+.cp-screen-share .components-font-wechat {font-size: 38rpx;vertical-align: middle;}

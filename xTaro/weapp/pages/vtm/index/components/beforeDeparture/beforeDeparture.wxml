@@ -1,0 +1,34 @@
+<view class="xqs_container {{noGuideInfo ? 'no_guide_xqs_container' : ''}}" wx:if="{{weatherSuccess || beforeDepartureSuccess}}">
+  <view class="xqs_header">
+    <text class="wechat_vtm_font-cx xqs_icon"></text>
+    <view class="xqs_title">领队说行前</view>
+  </view>
+  <view class="xqs_content autoExpose" data-expose="{{exposeWeather}}" wx:if="{{weatherSuccess}}">
+    <view class="xqs_weather_content" bindtap="weatherJump">
+      <view class="xqs_weather_tag">天气</view>
+      <view class="xqs_weather_icon x_w_i_p_{{weatherInfo.wNo}}"></view>
+      <view class="xqs_weather_tip">
+        <text class="xqs_weather_text" wx:if="{{weatherInfo.nTem || weatherInfo.dTem}}">{{weatherInfo.nTem}}-{{weatherInfo.dTem}}°</text>
+        <text wx:if="{{weatherInfo.wName}}">{{weatherInfo.wName}}</text>
+        <text wx:if="{{weatherInfo.alarmDesciption}}">，{{weatherInfo.alarmDesciption}}预警</text>
+        <text wx:if="{{weatherInfo.tripTips}}">，{{weatherInfo.tripTips}}</text>
+      </view>
+    </view>
+    <text class="wechat_vtm_font-rigth3 xqs_weather_right"></text>
+  </view>
+  <view class="xqs_tags"  wx:if="{{beforeDepartureSuccess}}">
+    <scroll-view scroll-x class="xqs_scroll_view">
+      <view bindtap="toVtmMini" data-expose="{{exposeTravel}}" class="xqs_tag autoExpose" >出行清单</view>
+      <view bindtap="travelJump" data-code="{{item.moduleCode}}" data-expose="{{exposeData[item.moduleCode]}}" wx:key="index" data-url="{{item.jumpUrl}}" class="xqs_tag autoExpose" wx:for="{{beforeDepartureList}}">{{item.moduleName}}</view>
+    </scroll-view>
+  </view>
+</view>
+<view class="gj_xqs_container" wx:elif="{{beforeDepartureLoading || weatherLoading}}">
+    <view class="gj_xqs_row"></view>
+    <view class="gj_xqs_row"></view>
+    <view class="gj_xqs_tags">
+      <view class="gj_xqs_tag"></view>
+      <view class="gj_xqs_tag"></view>
+      <view class="gj_xqs_tag"></view>
+    </view>
+</view>

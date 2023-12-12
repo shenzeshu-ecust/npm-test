@@ -1,0 +1,8 @@
+<mp-navigation-bar wx:if="{{!isQuickApp}}" id="mp-navigation" back="{{false}}" background="#fff">
+    <view slot="left" class="custom-navigation-back" bindtap="handleCustomBack">
+        <text class="navback-arrow wechat-font-g-arrow-down"></text>
+    </view>
+    <view slot="center" class="custom-navigation-center">
+        <text class="title">订单填写</text>
+    </view>
+</mp-navigation-bar>

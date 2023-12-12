@@ -1,0 +1,83 @@
+<wxs src="../home.wxs" module="homeFunction" />
+<block wx:if="{{pageType == 3 || pageType == 5}}">
+  <view class="header" style="padding-top: {{headerTop}}px">
+    <block wx:if="{{commentKeybordBottom <= 0}}">
+      <view class="master">
+        <view class="img-area" bindtap="jumpToMasterHome">
+          <image src="{{ master && master.imageUrl ? master.imageUrl : 'https://pages.c-ctrip.com/you/livestream/ic_zero_420_420.png' }}" />
+          <block wx:if="{{master && master.vIcon}}">
+            <view class="addv" style="background-image:url({{master.vIcon}});"></view>
+          </block>
+        </view>
+        <view class="name-area" bindtap="jumpToMasterHome">
+          <view class="name">{{master.masterName}}</view>
+          <view class="num">{{homeFunction.formateNum(totalUserCount)}}热度</view>
+        </view>
+        <block wx:if="{{!master.isFollow}}">
+          <view class="button-area" bindtap="doMasterFollow">关注</view>
+        </block>
+        <block wx:if="{{ master.isFollow && master.canGroupChat}}">
+          <view class="group-chat" bindtap="doJumpGroupChatForUserIcon">粉丝群</view>
+        </block>
+      </view>
+      <block wx:if="{{master.poiName}}">
+        <view class="poi-info" data-url="{{master.poiUrl}}" data-id="{{master.poiID}}" data-did="{{master.districtID}}" bindtap="jumptoPoi">
+          {{master.poiName}}
+        </view>
+      </block>
+      <block wx:if="{{noticeList && noticeList.length > 0}}">
+        <view class="live-notice {{noticeState == 1 ? 'show' :''}} {{noticeState == 2 ? 'hide' :''}}">
+          <view class="notice-title" bindtap="showNotice">
+            <view class="not-text">公告</view>
+            <view class="not-arrow"></view>
+          </view>
+          <view class="notice-list-wrapperp">
+            <view class="notice-list-wrapper">
+              <block wx:for="{{noticeList}}">
+                <view class="notice-list {{item.configType == 1 ? 'white' :''}}" wx:key="noticeItem{{item.id}}">
+                  <block wx:if="{{item.imageUrl}}">
+                    <image class="notice-list-img" mode="widthFix" src="{{item.imageUrl}}" />
+                  </block>
+                  <block wx:else>
+                    <view class="notice-list-text ">{{ item.announcement}}</view>
+                  </block>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
+    </block>
+    <block wx:if="{{pageType == 5 && preVideoInfo && preVideoInfo.videoUrl}}">
+      <view class="live-mute" style="padding-top: {{headerTop}}px" bindtap="openVoice">
+        <image src="{{preVideMuted ? 'https://pages.c-ctrip.com/livestream/video/webcast-muted.png' : 'https://pages.c-ctrip.com/livestream/video/webcast-voiced.png'}}" />
+      </view>
+    </block>
+  </view>
+</block>
+
+<block wx:if="{{(pageType == 3 || pageType == 5) && hotBanners && hotBanners.length }}">
+  <view class="hot-banner">
+    <block wx:for="{{hotBanners}}" wx:key="hotBanners{{index}}">
+      <block wx:if="{{item && item.name == 'topic'}}">
+        <swiper class="hot-banner-swiper" indicator-dots="{{false}}" autoplay="{{true}}" interval="3000" circular="{{true}}" style="top: {{headerTop}}px; margin-top: 88rpx; right: 24rpx;width: 240rpx; height: 48rpx; " bindchange="swiperChange" data-name="{{item.name}}" data-swpierindex="{{index}}">
+          <block wx:for="{{item.items}}" wx:key="*this" wx:for-item="bannerItem" wx:for-index="bannerIndex">
+            <swiper-item style="display: flex; justify-content: flex-end;" bindtap="jumpToHotBanner" data-info="{{bannerItem}}" data-index="{{bannerIndex}}" data-swpierindex="{{index}}">
+              <!-- style="width:{{bannerItem.wxUrl=='liveMore'?'192rpx':'240rpx'}}" -->
+              <image class="banner-img" src="{{bannerItem.imageUrl}}" mode='aspectFill' />
+            </swiper-item>
+          </block>
+        </swiper>
+      </block>
+      <block wx:else>
+        <swiper indicator-dots="{{false}}" autoplay="{{true}}" interval="3000" circular="{{true}}" style="top: {{ item.positionY }}px; left: {{item.positionX}}px;width: {{item.bannerWidth}}px; height: {{item.bannerHeight}}px " class="hot-banner-swiper" bindchange="swiperChange" data-name="{{item.name}}" data-swpierindex="{{index}}">
+          <block wx:for="{{item.items}}" wx:key="*this" wx:for-item="bannerItem" wx:for-index="bannerIndex">
+            <swiper-item style="width: {{item.bannerWidth}}px; height: {{item.bannerHeight}}px " bindtap="jumpToHotBanner" data-info="{{bannerItem}}" data-index="{{bannerIndex}}" data-swpierindex="{{index}}">
+              <image class="banner-img" src="{{bannerItem.imageUrl}}" mode='aspectFill' />
+            </swiper-item>
+          </block>
+        </swiper>
+      </block>
+    </block>
+  </view>
+</block>

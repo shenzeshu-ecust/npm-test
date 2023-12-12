@@ -1,0 +1,13 @@
+<!-- 列表页加载更多模板 -->
+<!-- <template is="loadingMore" data="{{loadMoreFailed: false, hasNextPage: true}}"/> -->
+
+<template name="loadingMore">
+  <view wx:if="{{!loadMoreFailed}}" class="loading-more">
+    <icon class="loading-more-icon" hidden="{{!hasNextPage}}" type="waiting" color="#999" size="18"/>
+    <text>{{hasNextPage ? '加载中...' : '没有更多结果了'}}</text>
+  </view>
+  <view wx:else bindtap="loadingRetryTaped" class="loading-more" data-events="{{retrySongthing}}">
+    <icon class="loading-more-icon" type="warn" color="#999" size="18"/>
+    <text>加载失败, 请点击重试</text>
+  </view>
+</template>

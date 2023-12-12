@@ -1,0 +1,13 @@
+<view style="display:{{isLoading ? 'block' : 'none'}};">
+  <view class="loading-wrapper {{isShowPlatformIcon ? 'loading-wrapper-fixed' : ''}}">
+    <view wx:if="{{isShowPlatformIcon}}" class="loading-logo">
+      <image class="logo" src="{{loadingLogoImg}}" />
+    </view>
+    <view class="circular-list">
+      <view class="circular circular1" style="background-color:{{color}};"></view>
+      <view class="circular circular2" style="background-color:{{color}};"></view>
+      <view class="circular circular3" style="background-color:{{color}};"></view>
+    </view>
+  </view>
+  <view wx:if="{{isShowPlatformIcon && isMask}}" class="loading-wrapper-fixed-mask"></view>
+</view>

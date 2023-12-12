@@ -1,0 +1,51 @@
+<perinfo-protect-float></perinfo-protect-float>
+<view>
+  <scroll-view class="country-lists" scroll-into-view="{{toHash}}" scroll-y="true" style="height:100vh" bindscroll="bindScroll" scroll-with-animation="true">
+    <view id="hash_hot" class="country-list-hd">
+      <text>热门</text>
+    </view>
+    <ul class="country-list">
+      <block wx:for="{{hotAreas}}">
+        <li bindtap="chooseArea" data-area="{{item.code}}" class="{{selectedCode == item.code?'active':''}}">
+          <text class="country-name">{{item.cn}}</text>
+          <text class="country-num">{{item.code}}</text>
+          <text class="icon-selected-area"></text>
+        </li>
+      </block>
+    </ul>
+    <block wx:for="{{letterArray}}">
+      <view id="{{'hash_'+item}}" class="country-list-hd">
+        <text>{{item}}</text>
+      </view>
+      <ul class="country-list">
+        <block wx:if="{{letterDict[item].length}}">
+          <block wx:for="{{letterDict[item]}}">
+            <li bindtap="chooseArea" data-area="{{item.code}}" class="{{selectedCode == item.code?'active':''}}">
+              <text class="country-name">{{item.cn}}</text>
+              <text class="country-num">{{item.code}}</text>
+              <text class="icon-selected-area"></text>
+            </li>
+          </block>
+        </block>
+        <block wx:else>
+          <li>
+            <text class="country-name">无</text>
+            <text class="country-num"></text>
+            <text class="icon-selected-area"></text>
+          </li>
+        </block>
+      </ul>
+    </block>
+    <view id="hash_end" class="country-end"></view>
+  </scroll-view>
+  <view class="sel_num_wrap">
+    <text bindtap="onHashChangeToHot">热门</text>
+    <block wx:for="{{letterArray}}">
+      <text bindtap="onHashChange" class="{{currentLetter==item?'seleted':''}}" data-letter="{{item}}">{{item}}</text>
+    </block>
+    <text bindtap="onHashChangeToBottom">#</text>
+    <block wx:if="{{currentLetter}}">
+      <text class="bigChart" style="top:{{currentLetterTop}}px;">{{currentLetter}}</text>
+    </block>
+  </view>
+</view>

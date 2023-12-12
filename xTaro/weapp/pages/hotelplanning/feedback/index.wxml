@@ -1,0 +1,39 @@
+<mp-navigation-bar 
+    wx:if="{{showCustomNav}}" 
+    id="mp-navigation" 
+    title="吐槽建议"
+    back="{{true}}" 
+    color="#000" 
+    background="#fff"
+    bindback="backTo"
+>
+</mp-navigation-bar>
+<view class="feedback-wrapper">
+    <view class="feedback-content">
+        <view class="feedback-title">写下您的吐槽和建议吧！</view>
+        <view class="feedback-subtitle">您的心声我们将反馈给酒店，请文明表达哦 </view>
+        <textarea 
+            class="feedback-input" 
+            placeholder="请输入吐槽和建议"
+            maxlength="{{300}}"
+            placeholder-style="color: #c5c5c5;font-size: 24rpx;font-weight: 500;"
+            auto-height="{{true}}"
+            bindinput="handleFeedbackInput"
+        >
+        </textarea>
+    </view>
+    <view class="room-content">
+        <view class="room-tip">房间号</view>
+        <input 
+            placeholder="请输入所在房间号，以便问题处理"
+            maxlength="{{10}}"
+            placeholder-style="color: #c5c5c5;font-size: 22rpx;"
+            class="room-input"
+            bindinput="handleRoomIdInput"
+        >
+        </input>
+    </view>
+    <view class="submit-content">
+        <button class="submit-button {{feedBackValue && !lockSubmitBtn? 'submit-button-active' : 'submit-button-grey'}}" catchtap="handleSubmit">提交</button>
+    </view>
+</view>

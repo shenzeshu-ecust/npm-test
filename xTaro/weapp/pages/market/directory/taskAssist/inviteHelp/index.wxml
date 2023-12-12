@@ -1,0 +1,30 @@
+<!--{{component}}.wxml-->
+<Modal show="{{isOpen}}" maskClosable="{{false}}">
+	<view class='assist-wrap'>
+		<view class="close-btn" bindtap="onClickClose">×</view>
+		<view class='avatar-box'>
+			<image class="main-avatar-img" src="{{data.headUrl}}"></image>
+		</view>
+		<view>
+			<view class='nickname ellipsis'>{{data.nickName}}</view>
+			<view class='title ellipsis'>{{data.infoMap.activityName}}</view>
+			<view class='sub-title ellipsis'>{{data.infoMap.tips}}</view>
+		</view>
+		<view class='avatar-wrap'>
+			<view class='avatar-list'>
+				<view class='avatar' wx:for="{{data.itemList}}" wx:for-item="item" wx:key="index">
+					<image class="avatar-img" src="{{item.avatarUrl}}"></image>
+					<view class='text ellipsis'>{{item.nickName}}</view>
+				</view>
+			</view>
+		</view>
+		<view class='brn-wrap'>
+			<button wx:if="{{!isLogin}}" class='assist-btn' bindtap="toLogin">助力</button>
+			<block wx:elif="{{!userInfo}}">
+				<button wx:if="{{canIUse}}" class='assist-btn' bindtap="setUserProfile">助力</button>
+				<button wx:else class='assist-btn' open-type="getUserInfo" bindgetuserinfo="setUserProfile" >助力</button>
+			</block>
+			<button wx:else class='assist-btn'  bindtap="onClickInviteHelp">{{inviteBtn.btnText}}</button>
+		</view>
+	</view>
+</Modal>

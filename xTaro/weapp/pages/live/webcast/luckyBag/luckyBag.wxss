@@ -1,0 +1,310 @@
+/* pages/you/place/webcast/userPanel/userPanel.wxss */
+
+
+.userpanel-mask{
+	background: rgba(0,0,0, 0);
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 111;
+}
+
+.userpanel-wrapper{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 654rpx;
+	z-index: 112;
+}
+
+.head-image{
+	width:100%;
+	height: 144rpx;
+	z-index: 1;
+	position: relative;
+}
+
+.content-view{
+	background: rgb(255, 255, 255);
+	border-radius: 16rpx 16rpx 0rpx 0rpx;
+	height: 510rpx;
+	margin-top: -16rpx;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	z-index: 2;
+	position: relative;
+}
+
+.prize-name-bg{
+	background-color:rgba(255,119,0,0.05);
+	height: 120rpx;
+	width: 702rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 80rpx;
+	border-radius: 16rpx;
+}
+
+.prize-name{
+	color: rgb(255, 119, 0);
+	font-family: PingFangSC-Medium;
+	font-size: 32rpx;
+	font-weight: 500;
+	height: 40rpx;
+}
+
+.panel-brief{
+	margin-top: 16rpx;
+	color: #999999;
+	font-family: PingFangSC-Regular;
+	font-size: 26rpx;
+	height: 34rpx;
+	text-align: center;
+    white-space: pre-wrap;
+}
+
+.panel-thing-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.panel-thing-brief{
+  justify-content: flex-start;
+  font-family: PingFangSC-Regular;
+	font-size: 22rpx;
+  text-align: left;
+  color: #999;
+}
+.panel-thing-brief.other{
+  justify-content: flex-start;
+  font-family: PingFangSC-Regular;
+	font-size: 22rpx;
+  text-align: left;
+  color: #FF7700;
+  width: 350rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space:nowrap;
+  -webkit-line-clamp:1;
+  -webkit-box-orient: vertical; 
+}
+
+.panel-thing-brief.thing{
+  justify-content: flex-start;
+  font-family: PingFangSC-Regular;
+	font-size: 22rpx;
+  text-align: left;
+  width: 480rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space:nowrap;
+  -webkit-line-clamp:1;
+  -webkit-box-orient: vertical; 
+}
+
+
+
+.panel-thing-title-text{
+  color: #333;
+  font-family: PingFangSC-Medium;
+  font-size: 32rpx;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space:nowrap;
+  width: 480rpx;
+  margin-bottom: 12rpx;
+  -webkit-line-clamp:1;
+  -webkit-box-orient: vertical; 
+}
+
+.not-prize{
+	margin-top: 231rpx;
+
+}
+
+.look-user-list{
+	width: 100%;
+	margin-top: 100rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgb(0, 134, 246);
+	font-family: PingFangSC-Regular;
+	font-size: 26rpx;
+	font-weight: normal;
+	height: 34rpx;
+	line-height: 34rpx;
+	flex-direction: row;
+}
+
+.look-user-list2{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: rgb(0, 134, 246);
+	font-family: PingFangSC-Regular;
+	font-size: 26rpx;
+	font-weight: normal;
+	height: 34rpx;
+	line-height: 34rpx;
+	flex-direction: row;
+}
+.look-user-list.other{
+  margin-top: 30rpx;
+}
+.notprize-look{
+	margin-top: 177rpx;
+}
+
+.arrow-icon {
+	width:32rpx;
+	height: 32rpx;
+	margin-left: 4rpx;
+	position:relative;
+}
+
+.panel-buttons{
+	margin-top: 16rpx;
+	display: flex;
+	width: 100%;
+}
+
+.panel-btnitem{
+	flex:1;
+	margin: 0 24rpx;
+	color: rgb(255, 255, 255);
+	font-family: PingFangSC-Medium;
+	font-size: 34rpx;
+	font-weight: 500;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	background: linear-gradient(-90deg, rgb(77, 170, 248) 0%, rgb(45, 204, 193) 100%);
+	border-radius: 44rpx;
+	height: 88rpx;
+}
+
+.panel-btnitem.focus-btn{
+	background: linear-gradient(-90deg, rgb(0, 134, 246) 0%, rgb(45, 204, 193) 100%);
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.my-prize{
+	background: linear-gradient(90deg, rgba(199, 255, 243,33%) 0%, rgba(139, 201, 255,33%) 100%);
+	border-radius: 0rpx 16rpx 0rpx 24rpx;
+	height: 43rpx;
+	width: 150rpx;
+	color: #0086f6;
+	font-family: PingFangSC-Regular;
+	font-size: 22rpx;
+	font-weight: normal;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.my-arrow-icon{
+	width: 24rpx;
+	height: 24rpx;
+}
+.loading{
+	margin-top: 223rpx;
+	width: 64rpx;
+	height: 64rpx;
+	-webkit-animation: gs-lottery-loading 1.58s linear infinite;
+}
+
+.panel-thing-title{
+  display: flex;
+  width: 100%;
+}
+
+.panel-thing-des{
+  display: flex;
+  flex-direction: column;
+  margin-left: 40rpx;
+  margin-top: 64rpx;
+  margin-bottom: 34rpx;
+}
+
+.panel-thing-title-view{
+  display: flex;
+  justify-content: stretch;
+  align-items: flex-start;
+  width: 480rpx;
+}
+
+.panel-title-buttons{
+  display: flex;
+  margin-top: 16rpx;
+  margin-right: 40rpx;
+  justify-content: center;
+  align-items: center;
+  width: 176rpx;
+}
+
+.panel-title-btnitem{
+	flex:1;
+  margin: 12 32rpx;
+	color: rgb(255, 255, 255);
+	font-family: PingFangSC-Medium;
+	font-size: 28rpx;
+	font-weight: 500;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	background: linear-gradient(-90deg, rgb(0, 134, 246) 0%, rgb(45, 204, 193) 100%);
+	border-radius: 44rpx;
+	height: 60rpx;
+}
+
+
+.panel-title-thing-img{
+  width: 94%;
+
+} 
+.panel-thing-img{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes gs-lottery-loading {
+	from{
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

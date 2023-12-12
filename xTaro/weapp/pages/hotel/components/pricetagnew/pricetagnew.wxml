@@ -1,0 +1,15 @@
+<view class="pc-box">
+    <view class="pc-text">
+        <block wx:for="{{tagList}}" wx:for-item="tag" wx:key="text">
+            <text wx:if="{{index > 0}}" class="slim-line"></text>
+            <text class="vm">{{tag.text}}</text>
+        </block>
+    </view>
+    <block wx:if="{{discountText || !hideIcon}}">
+        <text class="slim-line pc-discount-line"></text>
+        <view class="pc-discount">
+            <text>{{discountText}}</text>
+            <text hidden="{{hideIcon}}" class="pc-icon wechat-font-arrow-right"></text>
+        </view>
+    </block>
+</view>

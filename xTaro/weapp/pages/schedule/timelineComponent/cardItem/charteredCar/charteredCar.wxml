@@ -1,0 +1,58 @@
+<!--pages/timeLine/flight/flight.wxml-->
+<view catchtap='gotoDetail'>
+    <card-header-compt iconUrl="{{processedCard.timelineHeaderIcon}}" title="{{processedCard.timelineHeaderTitle}}" subTitle="{{processedCard.timelineHeaderSubtitle }}" card-operation-data="{{processedCard.timelineOperations}}" />
+    <view class="{{processedCard.isShowTopLine ? 'wrapper' : ''}}">
+        <view class="wrapper-main">
+            <view class="chartered-container">
+                <view class="chartered-title">
+                    <text class="chartered-title__text">{{processedCard.title}}</text>
+                    <text wx:if="{{processedCard.showSubTitle}}" class="chartered-title__text ellipsis">
+                      <text wx:if="{{!processedCard.isBusCard}}" class="margin-left__small">·</text>
+                      <text>{{processedCard.titleSub}}</text>
+                    </text>
+                    <text wx:if="{{processedCard.isTakeTaxi}}" class="take-taxi-title__text">
+                      <text class="margin-left__small">·</text>
+                      <text>{{processedCard.titleSub}}</text>
+                    </text>
+                    <view wx:if="{{processedCard.isCharteredBus && processedCard.carNumber}}" class="car-number-common car-number-bc">{{processedCard.carNumber}}</view>
+                    <text wx:if="{{processedCard.isShowSmallTitle}}" class="small-title">{{processedCard.smallTitle}}</text>
+                </view>
+                <view wx:if="{{!processedCard.isCharteredBus && processedCard.carNumber}}" class="car-number-common car-number-others">{{processedCard.carNumber}}</view>
+                <view class="chartered-content">
+                    <view class="chartered-content__Left {{processedCard.departureSub ? 'margin-top-img' : ''}}">
+                        <image src='https://pages.c-ctrip.com/schedule/pic/wxxcx/car-schedule-icon.png' mode='aspectFit' class="cts_icon_arrow_line"></image>
+                    </view>
+                    <view class="chartered-content__right">
+                        <view class="chartered-departure__main row vertical-center">
+                            <view class="circle start-color"></view>
+                            <text class="chartered-text__main ellipsis">{{processedCard.departureMain}}</text>
+                        </view>
+                        <!-- <view wx:if="{{processedCard.departureSub}}" class="chartered-departure__sub row">
+                            <text class="chartered-tip_content ellipsis">{{processedCard.departureSub}}</text>
+                        </view> -->
+                        <view class="chartered-arrive__main row vertical-center {{!processedCard.departureSub ? 'margin-top10' : ''}}">
+                            <view class="circle end-color"></view>
+                            <text class="chartered-text__main ellipsis">{{processedCard.arriveMain}}</text>
+                        </view>
+                        <!-- <view wx:if="{{processedCard.arriveSub}}" class="chartered-departure__sub row">
+                            <text class="chartered-tip_content ellipsis">{{processedCard.arriveSub}}</text>
+                        </view> -->
+                    </view>
+                </view>
+            </view>
+            <card-map-compt wx:if="{{processedCard.isShowNavigation}}" url="{{processedCard.locationUrl}}"  mapText="{{processedCard.mapText}}" address="{{processedCard.address}}" coordinate='{{processedCard.location}}' isCanTouch='{{!processedCard.originCard.sharedCard}}' class="car-map" />
+        </view>
+        <view wx:if="{{processedCard.tips}}" class="appointment-tips {{processedCard.isCharteredBus ? 'margin-top11' : 'margin-top16'}}">{{processedCard.tips}}</view>
+        <view wx:if="{{processedCard.isBusCard}}" class="passenger">
+          <view wx:if="{{processedCard.carCard.ticketCheck}}" class="passenger-check">
+            <text class="passenger-label">检票口</text>
+            <text class="passenger-value">{{processedCard.carCard.ticketCheck}}</text>
+          </view>
+          <view  wx:if="{{processedCard.carCard.passengerList}}" class="passenger-name">
+            <text class="passenger-label">出行人</text>
+            <text wx:for="{{processedCard.carCard.passengerList}}" wx:key="passengerName" class="passenger-value">{{item.passengerName}}{{item.seatNo ? '/' + item.seatNo : ''}}</text>
+          </view>
+        </view>
+    </view>
+</view>
+<card-operation-compt wx:if="{{processedCard.timelineOperations && !processedCard.originCard.sharedCard}}" card-operation-data="{{processedCard.timelineOperations}}" isShowTopLine="{{processedCard.isShowTopLine}}" />

@@ -1,0 +1,35 @@
+<block wx:if="{{data.props.values.rowData}}">
+  <block wx:for="{{data.props.values.rowData}}" wx:key="index">
+    <block wx:if="{{item.componentData.type == 'image'}}">
+      <sk_image class="component_image" data="{{item.componentData}}" />
+    </block>
+    <block wx:if="{{item.componentData.type == 'label'}}">
+      <block wx:if="{{item.componentData.props.values.typeName === 'explainStatus'}}">
+        <sk_label data="{{item.componentData}}" class="component_label" style="display: flex !important;" />
+      </block>
+      <block wx:else>
+        <block wx:if="{{item.childNodeType == 'explainStatus'}}">
+          <sk_label data="{{item.componentData}}" class="component_label" />
+        </block>
+        <block wx:else>
+          <sk_label data="{{item.componentData}}" class="component_label" />
+        </block>
+      </block>
+    </block>
+    <block wx:if="{{item.componentData.type == 'row'}}">
+      <sk_row class="component_row" data="{{item.componentData}}" style="{{item.componentData.styles || item.componentData.props.styles}};{{item.wrapStyle}}" />
+    </block>
+    <block wx:if="{{item.componentData.type == 'column'}}">
+      <sk_column data="{{item.componentData}}" style="{{item.componentData.styles || item.componentData.props.styles}};{{item.wrapStyle}};{{(data.props.values.value == '产品画布容器' && item.componentData.props.values.value == '产品画布右侧' && isIphone) ?'max-width:100%;' :''}}" class="component_column {{(data.props.values.value == '产品画布容器' && item.componentData.props.values.value == '产品画布右侧' && isIphone) ?  'component_column_right' : ''}}" />
+    </block>
+    <block wx:if="{{item.componentData.type == 'box'}}">
+      <sk_box data="{{item.componentData}}" style="{{item.componentData.styles || item.componentData.props.styles}};{{item.wrapStyle}}" class="component_box" />
+    </block>
+    <block wx:if="{{item.componentData.type == 'container'}}">
+      <sk_container data="{{item.componentData}}" style="{{item.componentData.styles || item.componentData.props.styles}};{{item.wrapStyle}};display: flex; flex-direction: column;" class="component_container component_row_container product-diy-container-wrapper {{(data.props.values.value == '产品画布容器' && item.componentData.props.values.value == '产品画布左侧') ? 'component_column_left' : ''}}" />
+    </block>
+    <block wx:if="{{item.componentData.type == 'inline'}}">
+      <sk_inline data="{{item.componentData}}" style="{{item.componentData.styles || item.componentData.props.styles}};{{item.wrapStyle}}" class="inline_class" />
+    </block>
+  </block>
+</block>

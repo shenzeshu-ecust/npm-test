@@ -1,0 +1,35 @@
+<block wx:if="{{(pageType == 3 || pageType == 5 ) && moreToolsState != 0}}">
+  <view class="more-tools-sbg" bindtap="changeToolPanel" bindtap="hideToolPanel" catchtouchstart="hideToolPanel"></view>
+  <view class="more-tools" style="padding-bottom: {{isIphoneX ? '64rpx' :'0'}}"
+	catchtouchmove="catchtouchmove"
+	>
+    <view class="more-title">
+        <text>{{moreToolsState == 2 ? '清晰度' : '更多工具'}}</text>
+        <view class="more-close" bindtap="hideToolPanel"></view>
+    </view>
+    <block wx:if="{{moreToolsState == 1}}">
+        <view class="more-panel">
+            <view class="more-item" bindtap="changeToolPanel">
+                <view class="more-icon" style="background-image: url('https://pages.c-ctrip.com/livestream/video/webcast-quality.png');"></view>
+                <view class="more-text">清晰度</view>
+            </view> 
+            <view class="more-item" catchtap="jumpToBagInfo" data-type="prize">
+                <view class="more-icon" style="background-image: url('https://pages.c-ctrip.com/livestream/video/white-gift2.png');"></view>
+                <view class="more-text">我的奖品</view>
+            </view>
+        </view>
+    </block>
+    <block wx:if="{{moreToolsState == 2}}">
+        <view class="more-quality">
+            <block wx:for="{{qualityList}}">
+                <view class="quality-item {{currentQuality == index ? 'on' :''}}" wx:key="{{item.quality}}" data-url="{{item.rtmpPullUrl}}" bindtap="{{currentQuality == index ? '': 'changePullQuality'}}" data-index="{{index}}" style="width: {{(windowWidth-20)/3}}px">
+                    <view class="q-inner">
+                        <view class="tnum">{{item.pixels}}</view>
+                        <view class="tbri">{{item.name}}</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </block>
+  </view>
+</block>

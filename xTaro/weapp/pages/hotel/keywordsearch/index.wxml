@@ -1,0 +1,70 @@
+<view class="searchbar">
+    <icon class="ico-search search-module_ico search-module_ico_focus" type="ctripIcon" />
+    <input maxlength="60" data-ubt-key="{{ubtKey1}}" id="autotest_keywordpage_keywordinput3"
+        class="search-module_input" placeholder-class="placeholder-focus"
+        placeholder="关键字/位置/品牌/酒店名" value="{{inputingKeyword}}" type="text" confirm-type="search"
+        bindconfirm="searchInputValue" bindinput="inputKeyword" focus />
+    <icon hidden="{{!inputingKeyword}}" type="clear" class="search-module_clear color-gray_666" size="16" bindtap="clearKeyword" />
+</view>
+
+<!-- 搜索结果 -->
+<scroll-view wx:if="{{showSearchResult}}" scroll-y class="search-body" bindscroll="onScroll">
+    <view class="search-result">
+        <block wx:if="{{suggestingResult.hasResult}}">
+            <view wx:if="{{!suggestingResult.items[0].length}}" class="city-nores">
+                <text>{{cityName}}没有找到符合条件的结果\n为您推荐其他城市查询结果（酒店起价为参考价）：</text></view>
+            <view wx:for="{{suggestingResult.items}}" wx:for-index="cityIdx" wx:for-item="cityRes">
+                <view wx:if="{{suggestingResult.items[0].length}}" class="search-tit">
+                    {{cityIdx === 0 ? '当前城市及周边查询结果（酒店起价为参考价）：' : '其他城市查询结果（酒店起价为参考价）：'}}</view>
+                <view wx:for="{{cityRes}}" wx:for-index="index"
+                    data-val="{{item.text}}"
+                    data-hotelid="{{item.id}}"
+                    data-key="{{item.key}}"
+                    data-cityname="{{item.city}}"
+                    data-cityid="{{item.cityID}}"
+                    data-oversea="{{item.overSea}}"
+                    data-did="{{item.did}}"
+                    data-dtype="{{item.type}}"
+                    data-idx="{{index}}"
+                    data-cityidx="{{cityIdx}}"
+                    data-filter="{{item.filter}}"
+                    bindtap="handleSearchKeyword"
+                    data-ubt-key="{{cityIdx === 1 ? 'xcx_hotel_search_differentcity' : 'xcx_hotel_search_samecity'}}"
+                    class="sres-item">
+                    <view class="res-icon {{item.iconc}}"></view>
+                    <view class="word">
+                        <view class="word-text res-text-ellipsis">
+                            <text wx:for="{{item.parts}}" wx:for-item="part"
+                                class="{{part.isValueEqual ? 'highlight' : ''}}">{{part.name}}</text>
+                        </view>
+                        <view class="res-text-ellipsis">{{item.displayTexts[1]}}</view>
+                        <view class="res-text-ellipsis">{{item.displayTexts[2]}}</view>
+                    </view>
+                    <view wx:if="{{item.price.price && !isHourroomModule}}" class="res-price-box">
+                        <view>¥<text class="res-price-num">{{item.price.price}}</text><text
+                                class="res-price-qi">起</text></view>
+                        <view class="res-price-tax">{{item.price.tax}}</view>
+                    </view>
+                    <view wx:else class="catg">{{item.catg}}</view>
+                </view>
+            </view>
+        </block>
+        <block wx:elif="{{suggestingResult.hasResult == false}}">
+            <view class="no-result">抱歉，没有帮您找到符合条件的结果</view>
+        </block>
+    </view>
+</scroll-view>
+<block wx:else>
+<!-- 热门搜索 -->
+<hotkeyword
+    display="{{!showSearchResult}}"
+    cityId="{{ cityID }}"
+    did="{{ did }}"
+    inday="{{inday}}"
+    outday="{{outday}}"
+    selectedKeyword="{{ keyword }}"
+    bind:searchKeyword="onSearchHotKeyword">
+</hotkeyword>
+</block>
+<!--白屏检测-->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

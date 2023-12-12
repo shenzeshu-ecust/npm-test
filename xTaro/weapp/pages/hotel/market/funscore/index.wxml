@@ -1,0 +1,377 @@
+<page-meta page-style="overflow: {{showMask ? 'hidden' : 'visible'}}" />
+<view class="page-container {{isIphoneX ? 'iphonex' : ''}} {{equityLayer.hidden ? 'fixed' : ''}}">
+	<!--Start Thead-->
+	<view class="thead cell">
+		<view class="head">
+			<view class="score-entry" data-ubt-key="xcx_jfym_jfmx" bindtap="showPointView" id="autotest_xcx_jfym_jfmx" >
+				<view><text class="score">{{totalAvailable}}</text><text class="jftxt">积分</text></view>
+				<text class="check">查看明细</text>
+			</view>
+		</view>
+	</view>
+	<!-- 签到模块 -->
+	<view class="sign-content" wx:if="{{signInfo.canShowSignIn}}">
+		<view class="sign-title">
+			<view class="title" bindtap="showExchangePoint">持续签到有惊喜，最高<text class="red">{{signInfo.maxPoints}}</text>积分 <text class="wechat-font-qa"  data-ubt-key="xcx_jfym_jfdh" id="autotest_xcx_jfym_jfdh"></text></view>
+			<view class="right-but {{signInfo.canSignIn ? 'but-cheng' : 'but-hui'}}" bindtap="{{signInfo.canSignIn ? 'goSignIn' : ''}}" data-ubt-key="xcx_cxy_point_sign" id="autotest_xcx_cxy_point_sign" >{{signInfo.canSignIn ? '签到' : '已签到，明天再来'}}</view>
+		</view>
+		<view class="sign-line">
+			<view class="sign-line-bg"><view class="step" style="{{signInfo.stepStyle}}"></view></view>	
+			<view wx:for="{{signInfo.signInInfoList}}" wx:for-item="item" wx:for-index="idx" class="sign-item-wrap">
+				<view class="date {{item.isSignIn ? 'date-success' : 'date-pending'}}">{{item.date}}</view>
+				<view wx:if="{{item.giftType}}" class="gift-item {{item.isSignIn ? 'gift-open' : 'gift-close'}}"></view>
+				<view wx:else class="sign-item {{item.isSignIn ? 'sign-item-success' : 'sign-item-pending'}}">
+					<view wx:if="{{item.isSignIn}}" class="wechat-font-filter-yes"></view>
+					<view wx:else class="sign-item-txt">+{{item.points}}</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	
+	<!--Start Tbody-->
+	
+	<view class="tbody">
+	    <!--我的0积分权益-->
+		<view class="items" wx:if="{{exchangeData && exchangeData.freeRewardList.length}}">
+			  <view class="h2">我的0积分权益</view>
+			  <view class="h4">您可用<text class="fs-color1">0积分</text>兑换以下酒店权益，具体明细如下：</view>
+			  <view class="my-equity">
+				    <!--Tab-->
+					<view class="tab g-box">
+						  <view class="item {{tab.rewardId == selectTabInfo.tab ? 'current':''}}" wx:for-item="tab" wx:for-index="idx" wx:for="{{exchangeData.freeRewardList}}" data-id="{{tab.rewardId}}" data-idx="{{idx}}" data-ubt-key="{{tab.ubtKey}}" bindtap="tabExchange">
+							    <view class="jf-icon icon-rid{{tab.rewardId}}"></view>
+								<view class="h">{{tab.title}}</view>
+								<view class="s">
+									<text wx:if="{{exchangeData.goldOrBlackDiamond}}" class="fs-color1">不限次</text>
+									<block wx:else>
+										<text class="fs-color1">剩{{tab.totalNum - tab.usedNum}}份</text>/共{{tab.totalNum}}份
+									</block>
+								</view>
+						  </view>
+					</view>
+					<!--Tab content-->
+					<!--TODO: 金钻/黑钻屏蔽-->
+					<view class="content" wx:if="{{!exchangeData.goldOrBlackDiamond}}">
+						<view class="item {{(s.status === 3 || s.status === 4) ? 'disable' : ''}}" wx:for="{{exchangeData.freeRewardList[selectTabInfo.idx].items}}" wx:for-item="s" bindtap="showEquityLayer" data-id="{{s.memberType}}">
+								<view class="jf-icon {{s.iconCls}}"></view>
+								<view class="cell-star">
+									<view class="h">
+											<text class="t">{{s.desc}}</text>
+											<block wx:if="{{s.status}}">
+													<text class="status" wx:if="{{s.status === 1}}">未使用</text>
+													<text class="status" wx:if="{{s.status === 2}}">已使用{{s.usedNum}}份</text>
+													<text class="status" wx:if="{{s.status === 3}}">已使用</text>
+													<text class="status" wx:if="{{s.status === 4}}">已失效</text>
+											</block>
+									</view>
+									<view class="s">有效期至：{{s.expiryDate}}日前</view>
+								</view>
+								<view class="wechat-font-arrow-right fs-color2"></view>
+						</view>
+					</view>
+			  </view>
+		</view>
+
+		<!--积分兑换-->
+		<view class="items" wx:if="{{exchangeData && exchangeData.memberPointRewards.length}}">
+			<view class="h2">积分兑换 <text class="ck-details" data-type="jfExchange" data-ubt-key="xcx_cxy_point_viewmore" bindtap="showEquityLayer">查看详情<text class="wechat-font-arrow-right"></text></text></view>
+			<view class="h4">
+				  <block wx:if="{{exchangeData.userGradeLevel === 0}}">最低仅需<text class="fs-color3">90积分</text>可享受以下酒店权益</block>
+				  <block wx:if="{{exchangeData.userGradeLevel > 0}}">
+					 	 <block wx:if="{{exchangeData.userGradeLevel === 96}}">白银会员</block>
+						 <block wx:if="{{exchangeData.userGradeLevel === 12}}">黄金会员</block>
+						 <block wx:if="{{exchangeData.userGradeLevel === 13}}">铂金会员</block>
+						 <block wx:if="{{exchangeData.userGradeLevel === 14}}">钻石会员</block>
+						 <block wx:if="{{exchangeData.userGradeLevel === 28}}">黑钻会员</block>
+						 <block wx:if="{{exchangeData.userGradeLevel === 80}}">金钻会员</block>
+						 <text class="fs-color3">{{exchangeData.memberPointRewards[0].discount}}折</text>兑换早餐、免费取消、延迟退房、首晚房费
+				  </block>
+			</view>
+
+			<!--Gbox-->
+			<view class="exchange-box g-box cell">
+				  <view class="item {{item.rewardId === 5 && (exchangeData.userGradeLevel === 0 || exchangeData.userGradeLevel === 96 || exchangeData.userGradeLevel === 12) ? 'disable' : ''}}" wx:for="{{exchangeData.memberPointRewards}}" bindtap="{{item.rewardId === 5 && (exchangeData.userGradeLevel === 0 || exchangeData.userGradeLevel === 12) ? '' : 'showEquityLayer'}}" data-type="jfExchange" data-ubt-key="{{item.ubtKey}}">
+						<view class="jf-icon icon-rid{{item.rewardId}}">
+							  <text class="sale" wx:if="{{item.discount}}">{{item.discount}}折</text>
+						</view>
+						<view class="h">{{item.name}}</view>
+						<view class="s" wx:if="{{item.points > 0}}"><text class="fs-color3">{{item.points}}</text><text class="fs-color1">积分起</text></view>
+				  </view>
+			</view>
+
+			<!--权益-->
+		</view>
+		<!--天天赚积分-->
+		<view class="items" id="js_getscore">
+			<view class="h2">天天赚积分</view>
+			<!--Start DoTask-->
+			<view class="dotask">
+				<view class="item" wx:if="{{shareHotelData}}">
+					<view class="basis"><text class="jf-icon icon-3"></text></view>
+					<view class="shrink">
+						<view class="middle">
+							<view class="h3">{{shareHotelData.name}} <text class="tip">积分+{{shareHotelData.points}}</text></view>
+							<view class="tip2">{{shareHotelData.ruleDesc}}</view>
+						</view>
+						<view wx:if="{{shareHotelData.buttonType === 4}}" class="donescore task-btn">已领积分</view>
+						<view wx:if="{{shareHotelData.buttonType === 3}}" class="getscore task-btn"bindtap="getRecievePoint" data-points="{{shareHotelData.points}}"data-id="{{shareHotelData.id}}" data-type="share_hotel" data-ubt-key="xcx_jfym_fxlq" id="autotest_xcx_jfym_fxlq" >领取积分</view>
+						<view wx:if="{{shareHotelData.buttonType === 2}}" class="gotask task-btn" bindtap="goHotelList" data-id="{{shareHotelData.id}}" data-type="share_hotel" data-ubt-key="xcx_jfym_fxlj" id="autotest_xcx_jfym_fxlj" >立即前往</view>
+						<view wx:if="{{shareHotelData.buttonType === 1}}" class="gettask task-btn" bindtap="getTaskStory" data-id="{{shareHotelData.id}}" data-type="share_hotel" data-ubt-key="xcx_jfym_fxlqrw" id="autotest_xcx_jfym_fxlqrw" >领取任务</view>
+					</view>
+				</view>
+				<view class="item" id="js_answer" wx:if="{{dailyTaskData && dailyTaskData.questionData}}">
+					<view class="basis"><text class="jf-icon icon-4"></text></view>
+					<view class="shrink">
+						<view class="middle">
+							<view class="h3">{{dailyTaskData.name}} <text class="tip">积分+{{dailyTaskData.points}}</text></view>
+							<view class="tip2">{{dailyTaskData.ruleDesc}}</view>
+							<!--题目-->
+							<view class="qa">
+								<view class="h4">{{dailyTaskData.questionData.content}}</view>	
+								<block wx:for="{{dailyTaskData.questionData.optionIdList}}" wx:for-item="item" wx:for-index="idx">
+									<view class="list {{item.className}}" data-taskId="{{dailyTaskData.id}}" data-questionId="{{dailyTaskData.questionData.id}}" data-optionId="{{item.id}}" data-right="{{item.isRight?1:0}}" data-ubt-key="xcx_jfym_dtxx" bindtap="{{ dailyTaskData.isComplete ? '' : 'answerQuestion' }}" id="autotest_xcx_jfym_dtxx" >{{item.content}}</view>
+								</block>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="item" wx:if="{{shareQuestionData && !shareQuestionData.isHidden && dailyTaskData && dailyTaskData.questionData}}">
+					<view class="basis"><text class="jf-icon icon-5"></text></view>
+					<view class="shrink">
+						<view class="middle">
+							<view class="h3">{{shareQuestionData.name}} <text class="tip">积分+{{shareQuestionData.points}}</text></view>
+							<view class="tip2">{{shareQuestionData.ruleDesc}}</view>
+						</view>
+						<view wx:if="{{shareQuestionData.buttonType === 4}}" class="donescore task-btn">已领积分</view>
+						<view wx:if="{{shareQuestionData.buttonType === 3}}" class="getscore task-btn"bindtap="getRecievePoint" data-points="{{shareQuestionData.points}}" data-id="{{shareQuestionData.id}}" data-type="share_question" data-ubt-key="xcx_jfym_yqlq" id="autotest_xcx_jfym_yqlq" >领取积分</view>
+						<button wx:if="{{shareQuestionData.buttonType === 2}}" class="gotask task-btn" data-id="{{shareQuestionData.id}}" data-type="share_question" open-type="share" type="share" data-ubt-key="xcx_jfym_yqlj" bindtap="noop">立即邀请</button>
+						<view wx:if="{{shareQuestionData.buttonType === 1}}" class="gettask task-btn" bindtap="getTaskStory" data-id="{{shareQuestionData.id}}" data-type="share_question" data-ubt-key="xcx_jfym_yqdtlq" id="autotest_xcx_jfym_yqdtlq" >领取任务</view>
+					</view>
+				</view>
+				<!-- 抽奖入口 -->
+				<view class="item" wx:if="{{signInfo.canShowLottery}}">
+					<view class="basis"><text class="jf-icon icon-9"></text></view>
+					<view class="shrink">
+						<view class="middle">
+							<view class="h3">积分抽奖</view>
+							<view class="tip2">5积分赢大礼，分享好友送免费抽1次</view>
+						</view>
+						<view class="gotask task-btn" bindtap="goRafflePage" data-type="share_hotel" data-ubt-key="xcx_cxy_point_lottery" id="autotest_xcx_cxy_point_lottery" >立即前往</view>
+					</view>
+				</view>	
+			</view>
+		</view>
+		<!--更多任务-->
+		<view class="items" data-ubt-key="xcx_jfym_zqgz" id="autotest_xcx_jfym_zqgz" >
+			<view class="h2">更多任务</view>
+			<view class="c-layout no-mbottom">
+				<view class="item" data-type="jdyd" bindtap="showLayer">
+					<view class="basic"><text class="jf-icon icon-6"></text></view>
+					<view>酒店预订</view>
+				</view>
+				<view class="item" data-type="dpjd" bindtap="showLayer">
+					<view class="basic"><text class="jf-icon icon-8"></text></view>
+					<view>点评酒店</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<!--预订btn-->
+	<view class="tobooking {{isIphoneX ? 'iphonex' : ''}}" data-ubt-key="xcx_cxy_point_order" bindtap="goToBooking"><view class="btn constant-bgc">立即预订酒店</view></view>
+</view>
+
+
+
+<!--积分明细弹窗-->
+<common-layer wx:if="{{!hiddenPointView}}" title="积分明细" bind:closeLayer="showPointView">
+	<scroll-view scroll-y bindscrolltolower="loadMore" lower-threshold="550" enable-back-to-top="true" class="scroll-y" catchtouchmove="noop" slot="content">
+		<view class="score-list">
+			<view class="item" wx:for="{{userPointListData}}" wx:for-item="item" wx:for-index="idx">
+				<view class="cell">
+					<view class="tit">{{item.reason}}</view>
+					<view>
+						<text class="value-added" wx:if="{{item.earnedAmount > 0}}">+{{item.earnedAmount}}</text>
+						<text class="value-minus" wx:else>{{item.earnedAmount}}</text>
+					</view>
+				</view>
+				<view class="get-time">{{item.earnedTime}}</view>
+			</view>
+			<view class="item text">- 仅为您展示最近一年的积分明细 -</view>
+		</view>
+	</scroll-view>
+</common-layer>
+
+<!--签到规则弹窗-->
+<common-layer wx:if="{{!hiddenExchangePoint}}" title="签到规则" bind:closeLayer="showExchangePoint">
+	<view class="score-val" catchtouchmove="noop" slot="content">
+		<view class="content">
+			<view>1）用户可每日前往积分活动页面进行点击签到，每日签到可领1个积分，连签3天、5天与7天将获得惊喜礼盒，若签到中断将重新计算。</view>
+			<view>2）同一用户每日仅有一次签到机会，签到成功奖励自动发放到账。</view>
+		</view>
+	</view>
+</common-layer>
+
+<!-- 更多任务说明弹窗 -->
+<view hidden="{{layerData.hidden}}" class="cmask" catchtap="closeLayer" catchtouchmove="noop">
+	<view class="cmask-popbox txt-center">
+		<view class="score-text">
+			<image class="img" src="{{layerData.imageUrl}}"></image>
+			<view class="tit">{{layerData.title}}</view>
+			<view class="content">{{layerData.text}}</view>
+			<view wx:if="{{layerData.showForm}}" class="coefficient">
+				<view class="coef-title">积分系数</view>
+				<view class="coef-table">
+					<view class="item">
+						<view class="th">普通会员</view>
+						<view class="td">白银贵宾</view>
+						<view class="td">黄金贵宾</view>
+						<view class="td">铂金贵宾</view>
+						<view class="td">钻石贵宾</view>
+						<view class="td">金钻贵宾</view>
+						<view class="td">黑钻贵宾</view>
+					</view>
+					<view class="item">
+						<view class="th">1</view>
+						<view class="td">1.2</view>
+						<view class="td">1.5</view>
+						<view class="td">1.8</view>
+						<view class="td">2</view>
+						<view class="td">2.5</view>
+						<view class="td">3</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="score-close wechat-font-close" catchtap="closeLayer"></view>
+	</view>
+</view>
+
+<!-- 签到结果弹窗 -->
+<block wx:if="{{!signLayer.hidden}}">
+	<view class="cmask" catchtap="closeSignLayer" catchtouchmove="noop"></view>
+	<view class="cmask-popbox txt-center" catchtouchmove="noop">
+		<view class="score-sign">
+			<view class="tit">签到成功</view>
+			<view class="content">{{signLayer.remark}}</view>			
+			<image class="img-small" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/turn-score-big.png"></image>
+			<view class="content"><text class="font-big">+{{signLayer.points}}</text> 积分</view>
+		</view>
+		<view class="score-close wechat-font-close" catchtap="closeSignLayer"></view>
+	</view>
+</block>
+
+<!--积分兑换详情浮层-->
+<common-layer wx:if="{{equityLayer.hidden}}"
+			  confirmButtonText="立即预订酒店"
+			  useTitleSlot="{{true}}"
+			  needHeadShadow="{{true}}"
+			  headStyle="background: linear-gradient(to right, #fff 0%, #FFF0D3 100%)"
+			  bind:confirm="goToBooking" bind:closeLayer="showEquityLayer">
+	<view slot="title" class="equity-layer-title">
+		<block wx:if="{{equityLayer.exchange}}">
+			{{equityLayer.title}}<text class="fs-color4" wx:if="{{exchangeData.memberPointRewards[0].discount}}">{{exchangeData.memberPointRewards[0].discount}}折</text>积分兑换
+		</block>
+		<block wx:else>{{equityLayer.title}}权益说明</block>
+	</view>
+	<view class="equity-des" slot="content">
+		<view class="items">
+			<view class="h2">权益享用攻略</view>
+			<view class="step">
+				<view class="item">
+					<view class="cell-v">
+						<view class="n">1</view>
+						<view>选择有【积分兑换】标识的酒店</view>
+					</view>
+					<view class="image">
+						<image class="i1" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/equity-layer-step1.png"></image>
+					</view>
+				</view>
+				<view class="item">
+					<view class="cell-v">
+						<view class="n">2</view>
+						<view>选择有【积分兑换】标识的酒店</view>
+					</view>
+					<view class="image">
+						<image class="i2" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/equity-layer-step2.png"></image>
+					</view>
+				</view>
+				<view class="item">
+					<view class="cell-v">
+						<view class="n">3</view>
+						<view wx:if="{{equityLayer.desc}}">{{equityLayer.desc}}</view>
+					</view>
+					<view class="image">
+						<image class="{{equityLayer.exchange ? 'i4' : 'i3'}}" src="{{equityLayer.image}}"></image>
+					</view>
+				</view>
+			</view>
+
+		</view>
+		<view class="items" wx:if="{{equityLayer.memberType > 0}}">
+			<view class="h2">
+				<block wx:if="{{equityLayer.memberType == 1}}">携程{{equityLayer.title}}可享</block>
+				<block wx:if="{{equityLayer.memberType == 2}}">国内酒店{{equityLayer.title}}可享</block>
+				<block wx:if="{{equityLayer.isPrimeMember}}">{{equityLayer.title}}权益可享</block>
+			</view>
+			<view class="member-text">
+				<view class="c1" wx:if="{{ !equityLayer.isSilverMember }}">0积分兑换{{equityLayer.number}}份早餐</view>
+				<view class="c1" wx:if="{{ !equityLayer.isSilverMember }}">0积分兑换{{equityLayer.number}}次整单房型升级</view>
+				<view class="c1">0积分兑换{{equityLayer.number}}次整单延迟退房</view>
+				<view class="c1" wx:if="{{equityLayer.isPrimeMember}}">0积分兑换{{equityLayer.number}}次整单当日入住20点前免费取消</view>
+				<view class="c2"> </view>
+				<view class="c2">此权益数量有限，以所订酒店可提供权益数量为限，先订先得。</view>
+			</view>
+		</view>
+		<block wx:if="{{equityLayer.exchange}}">
+			<view class="items">
+				<view class="h2">积分兑换预订规则</view>
+				<view class="member-text">
+					<view class="c2">预订活动期间带有”积分兑换”标签的酒店产品；您可使用携程积分兑换以下权益：</view>
+					<view class="c1">早餐</view>
+					<view class="c2">积分兑换早餐，入住时与酒店确认后即可享早餐。</view>
+					<view class="c1">房型升级</view>
+					<view class="c2">积分兑换房型升级，入住时与酒店确认后即可享免费房型升级。</view>
+					<view class="c1">延迟退房</view>
+					<view class="c2">积分兑换延迟退房，入住时与酒店确认后即可享延迟退房。</view>
+					<view class="c1">免费取消</view>
+					<view class="c2">积分兑换免费取消，入住当天20点前可免费取消订单。</view>
+					<view class="c1">欢迎水果</view>
+					<view class="c2">积分兑换欢迎水果，入住当天和酒店确认即可享免费欢迎水果。</view>
+					<view class="c1">提前入住</view>
+					<view class="c2">积分兑换提前入住，入住时与酒店确认后即可享酒店规定入住时间提前4小时入住服务。</view>
+					<view class="c1">首晚房费(铂金、钻石会员可享)</view>
+					<view class="c2">订单可享首晚一间免房费优惠</view>
+					<view class="c2"> </view>
+					<view class="c1"><image style="width:24rpx;height:24rpx" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/equity-layer-membertype0-02.png"></image> 快速选择您需要积分兑换的酒店</view>
+				</view>
+				<view class="tc">
+					<image class="i2" src="https://pages.c-ctrip.com/hotels/wechat/market/funscore/equity-layer-membertype0-01.png"></image>
+				</view>
+			</view>
+			<view class="items">
+				<view class="h2">权益退订规则</view>
+				<view class="member-text">
+					<view class="c1">1</view>
+					<view class="c2">用积分兑换的权益不可单独取消，如需取消兑换，需取消订单后重新预订，积分将原路退还。</view>
+					<view class="c1">2</view>
+					<view class="c2">免费取消、首晚房费权益下单后恕无法取消；已到店入住后，房型升级、延迟退房权益也无法取消。</view>
+					<view class="c1">3</view>
+					<view class="c2">所享权益根据酒店房间实际情况而定；如酒店因故无法提供权益或实际未使用早餐权益，可联系携程核实后，原路退回积分。</view>
+				</view>
+			</view>
+			<view class="items">
+				<view class="h2">更多规则</view>
+				<view class="member-text">
+					<view class="c1">1</view>
+					<view class="c2">积分兑换权益仅供携程会员用户享有，如代理商/旅行社等存在恶意刷单下单套现，利用程序漏洞等作弊行为，携程有权取消订单并收回权益。</view>
+					<view class="c1">2</view>
+					<view wx:if="{{enableMoreScoreDetail}}" class="c2" bindtap="toViewMoreScore">了解积分更多使用说明<text class="wechat-font-qa ml6"></text></view>
+					<view wx:else class="c2">产品相关信息按照产品实际购买页面展示为准，如发生订单修改时优惠政策发生变动，请以最新的优惠政策为准。</view>
+				</view>
+			</view>
+		</block>
+	</view>
+</common-layer>
+<!--白屏检测-->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

@@ -1,0 +1,305 @@
+.search-module {
+	position: relative;
+	display: block;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	background-color: #EFEFEF;
+	z-index: 99;
+}
+.search-module_ico {
+	position: absolute;
+	top: 17rpx;
+	left: 50%;
+	width: 25rpx;
+	height: 25rpx;
+	transform: translateX(-440%);
+}
+.search-module_ico:before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: #B2B2B2;
+	font-size: 25rpx;
+	line-height: 1;
+	overflow: hidden;
+}
+.search-module_ico_focus {
+	left: 24rpx;
+	transform: translateX(0);
+}
+.search-module_input {
+	height: 56rpx;
+	font-size: 28rpx;
+	line-height: 60rpx;
+	background-color: #fff;
+	box-sizing: border-box;
+	border-radius: 5px;
+	padding-left: 50rpx;
+	margin: 16rpx;
+}
+.search-module_input_focus {
+	font-size: 26rpx;
+	color: #B2B2B2;
+	padding-left: 50%;
+	text-indent: -4em;
+	width:300rpx;
+}
+.search-module_input-f {
+	margin-right: 100rpx;
+	border-right: 60rpx solid #fff;
+}
+.search-module_clear {
+	position: absolute;
+	top: 14rpx;
+	right: 120rpx;
+}
+.search-module_cancel {
+	position: absolute;
+	top: 14rpx;
+	right: 16rpx;
+	font-size: 32rpx;
+	color: #099FDE;
+}
+.search-list {
+	display: block;
+	overflow: hidden;
+	margin-bottom: -1px;
+	padding-left: 32rpx;
+	color: #666;
+	background-color: #fff;
+	border-top: 1px solid #E5E5E5;
+}
+.search-list_item {
+	height: 88rpx;
+	font-size: 28rpx;
+	line-height: 98rpx;
+	text-indent: 34rpx;
+	border-bottom: 1px solid #E5E5E5;
+}
+.search-list_txt {
+	color: #099FDE;
+}
+
+/* tab 选项卡与公共部分不同的部分 */
+.tab-item {
+    line-height: 70rpx;
+    background-color: #FAFAFA;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.city-module_letter {
+	position: fixed;
+	top: 74rpx;
+	right: 0;
+	bottom: 0;
+	width: 40rpx;
+	padding-top: 130rpx;
+	background-color: #fff;
+	z-index: 10;
+	box-sizing: border-box;
+}
+.city-module_letter-item1,
+.city-module_letter-item {
+	display: block;
+	height: 28rpx;
+	overflow: hidden;
+	line-height: 28rpx;
+	white-space: nowrap;
+	font-size: 22rpx;
+	color: #099FDE;
+	text-align: center;
+}
+.city-module_letter-item1 {
+	font-size: 18rpx;
+}
+.city-module_list {
+	position:fixed;
+	top:182rpx;
+	left:0;
+	right:40rpx;
+	bottom:0;
+	background-color: #fff;
+}
+.city-module_type {
+	clear: both;
+	position: relative;
+	z-index: 5;
+	height: 56rpx;
+	overflow: hidden;
+	line-height: 60rpx;
+	text-indent: 30rpx;
+	font-size: 26rpx;
+	color: #666;
+	background-color: #EFEFEF;
+}
+.city-module_items {
+	display: block;
+	margin-bottom: -1px;
+	overflow: hidden;
+	padding: 20rpx 0 0 30rpx;
+}
+
+.city-module_items .city-module_name-road.selected{
+	color:#099FDE;
+	border-color:#099FDE;
+}
+
+.city-module_items .icon {
+  display:none;
+	position: absolute;
+	top: 50%;
+	right: 60rpx;
+}
+
+.city-module_name1,
+.city-module_name-road {
+	float: left;
+	width: 150rpx;
+	height: 60rpx;
+	overflow: hidden;
+	margin: 0 20rpx 20rpx 0;
+	text-align: center;
+	line-height: 60rpx;
+	font-size: 28rpx;
+	color: #666;
+	border: 1px solid #DBDBDB;
+	border-radius: 8rpx;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.city-module_name {
+	display: block;
+	width: 100%;
+	height: 88rpx;
+	box-sizing: border-box;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	line-height: 88rpx;
+	font-size: 32rpx;
+	color: #333;
+	border-bottom: 1px solid #E5E5E5;
+}
+
+.city-module_items icon {
+  display:none;
+	position: absolute;
+	top: 50%;
+	right: 60rpx;
+	transform:translateY(-50%);
+}
+
+.city-module_items.selected .city-module_name {
+  color: #099FDE;
+}
+
+.city-module_items.selected icon {
+  display:block;
+} 
+
+.letter-select_tips {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 160rpx;
+	height: 160rpx;
+	overflow: hidden;
+	transform: translate(-50%,-50%);
+	text-align: center;
+	line-height: 160rpx;
+	border-radius: 50%;
+	font-size: 72rpx;
+	color: #fff;
+	background-color: rgba(82,188,232,0.8);
+}
+
+/*****我的定位相关****/
+
+.city-module_item-list{
+	position: relative;
+	padding:28rpx 0 28rpx 50rpx;
+	border-bottom:1px solid #E5E5E5;
+}
+.city-module_item-list icon{
+	display:none;
+	position: absolute;
+	top: 50%;
+	right: 60rpx;
+	transform:translateY(-50%);
+}
+.city-module_item-list.selected .title{
+	color:#099FDE;
+}
+.city-module_item-list.selected icon{
+	display: block;
+}
+.city-module_item-list:first-of-type{
+	margin-top:-20rpx;
+}
+.city-module_item-list .icon{
+	position: absolute;
+	left:10rpx;
+	top: 30rpx;
+}
+.city-module_item-list .title,
+.city-module_item-list .detail{
+	display:block;
+	line-height:1;
+}
+.city-module_item-list .title{
+	color:#333;
+	font-size:32rpx;
+}
+.city-module_item-list .detail{
+	margin-top:20rpx;
+	color: #999;
+}
+
+.city-module_item-list .icon-locate{
+	display: inline-block;
+  position: absolute;
+  margin-left: -50rpx;
+	width: 24rpx;
+	height: 30rpx;
+  background:url(//pic.c-ctrip.com/platform/h5/miniapp/component/icon-locate.png) 0 0 no-repeat;  
+	-webkit-background-size:24rpx 30rpx;
+	background-size:24rpx 30rpx;
+}
+.city-module_item-list.selected .icon-locate{
+	background:url(//pic.c-ctrip.com/platform/h5/miniapp/component/icon-locateC.png) 0 0 no-repeat;
+	-webkit-background-size:24rpx 30rpx;
+	background-size:24rpx 30rpx;
+}
+.icon-loading{
+	display: inline-block;
+  position: absolute;
+  margin-left: -50rpx;
+	width: 26rpx;
+	height: 26rpx;
+	background:url(//pic.c-ctrip.com/platform/h5/miniapp/component/icon-loading.png) 0 0 no-repeat;
+	-webkit-background-size: 26rpx 26rpx;
+	background-size: 26rpx 26rpx;
+}
+.icon-fail{
+  display: inline-block;
+  position: absolute;
+  margin-left: -50rpx;
+	width: 26rpx;
+	height: 26rpx;
+  background:url(//pic.c-ctrip.com/platform/h5/miniapp/component/icon-fail.png) 0 0 no-repeat;
+	-webkit-background-size: 26rpx 26rpx;
+	background-size: 26rpx 26rpx;
+}
+
+#history {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+#history .icon-delete {
+	padding-left: 60rpx;
+    height: 28rpx;
+    width: 25.33rpx;
+    background: url(//images3.c-ctrip.com/marketing/2020/02/hw_quickapp_card/miniapp/icon_delete_666.png) 60rpx 0 no-repeat;
+    -webkit-background-size: 28rpx 25.33rpx;
+    margin-right: 58rpx;
+}

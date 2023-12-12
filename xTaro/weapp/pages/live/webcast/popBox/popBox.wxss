@@ -1,0 +1,61 @@
+.popBox-mask{
+	background: rgba(0,0,0, 0.7);
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 145;
+}
+
+.popBox-wrapper{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #ffffff;
+    border-radius: 16rpx;
+    width: 562rpx;
+    z-index: 150;
+}
+.popBox-inner{
+    padding: 52rpx 32rpx 32rpx;
+    text-align: center;
+}
+.popBox-title{
+    color: #333333;
+    font-family: PingFangSC-Medium;
+    font-size: 34rpx;
+    font-weight: 500;
+    line-height: 46rpx;
+}
+.popBox-btns{
+    margin-top: 52rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.popBox-btns .btn-item{
+    border-radius: 36rpx;
+    height: 72rpx;
+    width: 237rpx;
+    color: #0086f6;
+    font-family: PingFangSC-Regular;
+    font-size: 30rpx;
+    line-height: 72rpx;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.popBox-btns .cancel{
+    color: #0086f6;
+    border: 2rpx solid #2698f7;
+}
+
+.popBox-btns .confirm{
+    color: #fff;
+    background: linear-gradient(-90deg, rgb(0, 134, 246) 0%, rgb(45, 204, 193) 100%);
+}
+    
+

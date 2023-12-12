@@ -1,0 +1,30 @@
+<view class="dt-date {{showCalendarBar ? 'blue' : 'black1 border'}}">
+    <view bindtap="showCalender" class="date-box" data-ubt-key="xcx_hotel_detail_date" id="autotest_xcx_hotel_detail_date">
+        <block wx:if="{{isHourroom}}">
+            <text class="ft40 bold">{{dateInfo.inDayNumber.month}}</text>
+            <text class="ft32 bold">月</text>
+            <text class="ft40 bold">{{dateInfo.inDayNumber.day}}</text>
+            <text class="ft32 bold mr8">日</text>
+            <text class="cust black1">{{dateInfo.inDayDesc}}入住</text>
+        </block>
+        <block wx:else>
+            <view class="date-left">
+                <text class="ft40 bold">{{dateInfo.inDayNumber.month}}</text>
+                <text class="ft32 bold">月</text>
+                <text class="ft40 bold">{{dateInfo.inDayNumber.day}}</text>
+                <text class="ft32 bold mr8">日</text>
+                <text class="cust black1">{{dateInfo.inDayDesc}}</text>
+                <text class="date-line"></text>
+                <text class="ft40 bold">{{dateInfo.outDayNumber.month}}</text>
+                <text class="ft32 bold">月</text>
+                <text class="ft40 bold">{{dateInfo.outDayNumber.day}}</text>
+                <text class="ft32 bold mr8">日</text>
+                <text class="cust black1">{{dateInfo.outDayDesc}}</text>
+            </view>
+            <view wx:if="{{dateInfo.days >= 0}}" class="dt-date-days black1">
+                共{{dateInfo.days}}晚
+            </view>
+        </block>
+    </view>
+    <view wx:if="{{dateInfo.showMorningOutTips}}" class="moning-out-tips">如您不是今天离店，请点击修改</view>
+</view>

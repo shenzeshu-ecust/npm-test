@@ -1,0 +1,11 @@
+<view class="wx_mdcp_tips_wrap" wx:if="{{showTips}}">
+  <view class="tips">
+    <view class="tips_bf">{{title}}</view>
+    <view>{{msg}}</view>
+  </view>
+  <image src="https://images4.c-ctrip.com/img3/marketing/2017/06/wx_coupon_pop/bg.png" mode="widthFix"></image>
+  <view class="btn_group">
+    <button class="t_btn red" wx:if="{{fButtonText}}" bindtap="{{fButtonAction}}">{{fButtonText}}</button>
+    <button class="t_btn" wx:if="{{sButtonText}}" bindtap="{{sButtonAction}}">{{sButtonText}}</button>
+  </view>
+</view>

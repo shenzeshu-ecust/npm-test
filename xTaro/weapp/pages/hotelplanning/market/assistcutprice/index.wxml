@@ -1,0 +1,316 @@
+<!-- 个保指引浮层 -->
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+
+<!-- 主态 -->
+<block wx:if="{{homeInfo.isMine}}">
+    <view class="assist-wrapper">
+        <!--Star Rules-->
+        <view class="activity-rules" bindtap="showLayer">规则 <text class="regular"></text></view>
+
+        <view wx:if="{{homeInfo.totalAmount}}" class="ast-icon ast-grident-title most-money">
+            本单最高返现 <text class="money-num">{{homeInfo.totalAmount}}</text> 元
+        </view>
+
+        <!--Star ranking-->
+        <ranking user="{{user}}"></ranking>
+
+        <checkpoint-swiper bindoninvite="onInvite" bindhandleswiper="handleSwiper" swiperCurrent="{{swiperCurrent}}" checkpointList="{{checkpointData.checkpointList}}" assistStatus="{{homeInfo.assistStatus}}"></checkpoint-swiper>
+
+        <block wx:if="{{checkpointData.checkpointList && checkpointData.checkpointList.length}}">
+            <view hidden="{{ swiperCurrent === 0 }}" bindtap="handleSwiper" data-type="left" class="ast-icon ast-arrow left-arrow"></view>
+            <view hidden="{{ swiperCurrent === checkpointData.checkpointList.length - 1 }}" data-type="right" bindtap="handleSwiper" class="ast-icon ast-arrow right-arrow"></view>
+        </block>
+    </view>
+
+    <!--Wrapper-->
+    <view class="wrapper">
+        <!--邀请助力模块-->
+        <view class="invite-assist-wrapper">
+             <!-- 倒计时 -->
+            <countdown  wx:if="{{homeInfo.assistStatus === 1 && !isAssistTop}}"  color="#fff" countdown="{{countdown}}" assistStatus="{{homeInfo.assistStatus}}" bindinitpage="loadPage" />
+            <component-assist-button isTop="{{isAssistTop}}" isSponsor="{{homeInfo.isMine}}" assistStatus="{{homeInfo.assistStatus}}" helperCount="{{homeInfo.helperCount}}" assistCashbackAmount="{{homeInfo.assistCashbackAmount}}" 
+            orderId="{{orderId}}" hotel="{{homeInfo.hotel}}"
+            bindshareCutMessage="shareCutMessage"
+            assistBubbleText="{{bubbleText}}"
+            current="{{checkpointData.current}}"
+            showSubMessage="{{showSubMessage}}"
+            ></component-assist-button>
+            <view wx:if="{{homeInfo.assistStatus === 1 && !isAssistTop}}" bindtap="showPoster" class="share-circle">
+                <view class="ast-icon ast-friends"></view>
+                <text class="invite-text">分享朋友圈</text>
+            </view>
+        </view>
+        <template 
+            is="task-wrapper" 
+            data="{{weworkInfo, isShowFreeTask, prizeStatus: homeInfo.prizeStatus, freeTaskUser}}"
+        />
+        <!--Star jump-->
+        <jump wx:if="{{!weworkInfo.status || weworkInfo.status <= 0}}" jumpLink="{{sponsorJumpLink}}" isSponsor="{{homeInfo.isMine}}"></jump>
+
+        <view class="ctrip-logo">
+            <view class="ast-icon ast-logo"></view>
+        </view>
+    </view>
+
+    <!--主态弹窗-->
+    <template is="assist-result-pop-up" data="{{...assistPopup, type: 'common'}}"></template>
+
+    <!--主态企微弹窗-->
+    <template is="wework-pop-up" data="{{...weworkInfo}}"></template>
+
+    <!-- 抽免单弹窗流量引导 -->
+    <template is="free-pop-up" data="{{...freeInfo, helperCount: homeInfo.helperCount}}"></template>
+
+    <template is="modify-alert" data="{{ modifyOrderInfo, showModifyAlert }}"></template>
+</block>
+
+<!-- 客态 -->
+<block wx:else>
+    <scroll-view class="assist-guest-wrapper" scroll-y enhanced bindscrolltolower="onGuestLoadMore" lower-threshold="100" enable-back-to-top="true" scroll-with-animation="true">
+        <guest id="com-guest" showHotellistSwitch="{{showHotellistSwitch}}" homeInfo="{{homeInfo}}" orderId="{{orderId}}" showHotel="{{showHotel}}" jumpLink="{{guestJumpLink}}" bind:InitFatherPage="loadPage" bind:onTapGuestAssist="onTapGuestAssist" bind:showMessage="onGuestShowMessage" bind:getAssistStatus="onGetAssistStatus" current="{{checkpointData.current}}"></guest>
+    </scroll-view>
+</block>
+
+<block wx:if="{{showLayer}}">
+    <view class="ast-mask" bindtap="showLayer"></view>
+    <view class="ast-layer">
+        <view class="thead">
+            <view class="thead-l wechat-font-close2" bindtap="showLayer"></view>
+            <view class="thead-m">活动规则</view>
+            <view class="thead-r" bindtap="showLayer">完成</view>
+        </view>
+        <view class="tbody">
+            <rich-text class="rule-content" nodes="{{rule}}"></rich-text>
+        </view>
+    </view>
+</block>
+
+<!--信安滑块-->
+<block>
+    <view class="cut-verification" wx:if="{{showVerify}}">
+        <captcha id="captcha" settings="{{settings}}"></captcha>
+    </view>
+</block>
+
+<block wx:if="{{errorModal.show}}">
+    <view catchtouchmove="noop" class="sys-mask common-mask"></view>
+    <view class="sys-modal assist-result-wrapper assist-cancel-wrapper">
+        <view bindtap="closeErrorPopup" class="wechat-font-close"></view>
+        <rich-text nodes="{{errorModal.msg}}"></rich-text>
+        <button bindtap="closeErrorPopup" class="assist-cancel-btn">{{errorModal.btn}}</button>
+    </view>
+</block>
+
+<friends-poster imageUrl="{{poster.image}}" showPoster="{{poster.showPoster}}" bind:hidePoster="hidePoster" />
+
+<!-- 主态闯关成功后出弹窗提示 -->
+<template name="assist-result-pop-up">
+    <block wx:if="{{isAssistPopupShow}}">
+        <view wx:if="{{status !== 2}}" catchtouchmove="noop" class="cp-mask common-mask"></view>
+        <view wx:else catchtouchmove="noop" class="sys-mask common-mask"></view>
+        <view catchtouchmove="noop" wx:if="{{status !== 2}}" style="{{showHeaderImg ? 'top: 50%' : 'top: 45%'}}" class="cp-modal assist-result-wrapper assist-result-size cutprice-level-wrapper">
+            <view wx:if="{{showHeaderImg}}" class="assist-pass-header">
+                <image src="https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/pass-cp-header.png"></image>
+            </view>
+            <view wx:if="{{current}}" class="checkpoint-title">第{{current}}关</view>
+            <view bindtap="closeAssistPopup" data-needreload="{{needReload}}" data-modaltype="{{type}}" data-btntype="{{btnType}}" data-close="true" class="wechat-font-close"></view>
+            <template is="header-tip" data="{{title, mt: 'mt-30'}}"></template>
+            <view class="assist-result-content">
+                <view class="assist-desc">
+                    {{desc}}
+                </view>
+                <view wx:if="{{assistCashbackAmount}}" class="cp-reward">
+                    <view class="reward-num">
+                        {{assistCashbackAmount}}
+                    </view>
+                    <view class="reward-unit">元</view>
+                </view>
+                <view wx:if="{{assistingUserList.length}}" class="popup-invite-group">
+                    <view wx:for="{{assistingUserList}}" wx:key="id" wx:for-item="assistUser" class="invite-item">
+                        <button data-status="{{status}}" wx:if="{{assistUser.toBeInvited}}" open-type="{{status === 1 ? 'share' : ''}}" plain="{{true}}">
+                            <view class="ast-icon ast-invite invite-image"></view>
+                        </button>
+                        <image wx:else src="{{assistUser.user.avatar}}"></image>
+                        <text>{{assistUser.toBeInvited ? '未邀请' : assistUser.user.nick}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="btn-wrapper">
+                <button open-type="{{btnType === 'share' ? 'share' : ''}}" plain bindtap="closeAssistPopup" data-needreload="{{needReload}}" data-modaltype="{{type}}" data-btntype="{{btnType}}" class="btn-bg d-flex flex-center">
+                    <text class="btn-txt">{{btnTxt}}</text>
+                </button>
+            </view>
+        </view>
+        <view wx:else>
+            <view class="sys-modal assist-result-wrapper assist-cancel-wrapper">
+                <view bindtap="closeAssistPopup" data-needreload="{{needReload}}" class="wechat-font-close"></view>
+                <text>{{title}}</text>
+                <button bindtap="closeAssistPopup" data-needreload="{{needReload}}" class="assist-cancel-btn">{{btnTxt}}</button>
+            </view>
+        </view>
+    </block>
+</template>
+
+<!-- 主态加抽免单流量引导弹窗 -->
+<template name="free-pop-up">
+    <block wx:if="{{isFreePopupShow}}">
+        <view wx:if="{{isFreePopupShow}}" catchtouchmove="noop" class="cp-mask common-mask"></view>
+        <view wx:else catchtouchmove="noop" class="sys-mask common-mask"></view>
+        <view catchtouchmove="noop" wx:if="{{isFreePopupShow}}" style="{{showHeaderImg ? 'top: 50%' : 'top: 45%'}}" class="cp-modal assist-result-wrapper assist-result-size cutprice-level-wrapper">
+            <view bindtap="closeFreePopup" class="wechat-font-close"></view>
+            <view class="template_title mt-32 d-flex flex-center">
+                <view class="ast-icon ast-title title-left mr-16"></view>
+                <view wx:if="{{assistedUserAvatar.length}}" class="wework-avatar-group mr-16" style="width: {{assistedUserAvatar.length * 32 + 16}}rpx">
+                    <image wx:for="{{assistedUserAvatar}}" src="{{item}}" style="left: {{index * 32}}rpx" />
+                </view>
+                <text class="wework-assist-count">{{helperCount}}</text><text class="wework-assist-desc">位好友已为你助力</text>
+                <view class="ast-icon ast-title ml-16"></view>
+            </view>
+            <view class="assist-result-content" style="height: 320rpx">
+                <view class="wework-desc">
+                    再邀<text class="need-count">{{needUserCount}}</text>人，有机会得
+                </view>
+                <view wx:if="{{orderFreeAmount}}" class="cp-reward">
+                    <view class="reward-num">
+                        {{orderFreeAmount}}
+                    </view>
+                    <view class="reward-unit">元</view>
+                </view>
+            </view>
+            <view class="btn-wrapper">
+                <button open-type="share" plain class="btn-bg d-flex flex-center">
+                    <text class="invite-btn-text">邀请好友助力</text>
+                </button>
+            </view>
+        </view>
+    </block>
+</template>
+
+<!-- 主态加企微任务弹窗 -->
+<template name="wework-pop-up">
+    <block wx:if="{{isWeworkPopupShow}}">
+        <view wx:if="{{isWeworkPopupShow}}" catchtouchmove="noop" class="cp-mask common-mask"></view>
+        <view wx:else catchtouchmove="noop" class="sys-mask common-mask"></view>
+        <view catchtouchmove="noop" wx:if="{{isWeworkPopupShow}}" style="{{showHeaderImg ? 'top: 50%' : 'top: 45%'}}" class="cp-modal wework-result-wrapper assist-result-wrapper wework-result-size cutprice-level-wrapper">
+            <view bindtap="closeWeworkPopup" data-needreload="{{needReload}}" data-modaltype="{{type}}" data-btntype="{{btnType}}" data-close="true" class="wechat-font-close"></view>
+            <view class="template_title mt-32 d-flex flex-center">
+                <view class="ast-icon ast-title title-left mr-16"></view>
+                <view wx:if="{{assistedUserAvatar.length}}" class="wework-avatar-group mr-16" style="width: {{assistedUserAvatar.length * 32 + 16}}rpx">
+                    <image wx:for="{{assistedUserAvatar}}" src="{{item}}" style="left: {{index * 32}}rpx" />
+                </view>
+                <text class="wework-assist-count">{{assistedUserAvatar.length}}</text><text class="wework-assist-desc">位好友已为你助力</text>
+                <view class="ast-icon ast-title ml-16"></view>
+            </view>
+            <view class="assist-result-content">
+                <view class="wework-desc">
+                    再邀<text class="need-count">{{needUserCount}}</text>人，累计可返
+                </view>
+                <view wx:if="{{assistCashbackAmount}}" class="cp-reward">
+                    <view class="reward-num">
+                        {{assistCashbackAmount}}
+                    </view>
+                    <view class="reward-unit">元</view>
+                </view>
+            </view>
+            <view class="wework-btn-wrapper">
+                <button open-type="share" plain class="btn-bg d-flex flex-center">
+                    <text class="invite-btn-text">邀请好友助力</text>
+                </button>
+                <button plain bindtap="gotoAddWework" class="wework-btn d-flex flex-center">
+                    <image src="https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/wework_avatar.png" />
+                    <text class="wework-btn-text">添加福利小助理获助力</text>
+                </button>
+            </view>
+        </view>
+    </block>
+</template>
+
+<template name="header-tip">
+    <view class="template_title {{mt}} mb-30 d-flex flex-center">
+        <view class="ast-icon ast-title title-left"></view>
+        <text class="title ml-16 mr-16">{{title}}</text>
+        <view class="ast-icon ast-title"></view>
+    </view>
+</template>
+
+<!--全局loading-->
+<view wx:if="{{showPageLoading}}" class="page-loading d-flex flex-center" catchtouchmove="noop">
+    <image class="page-loading-gif" src="https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/loading.gif"></image>
+    页面加载中，请耐心等待...
+</view>
+
+<!--异常页面-->
+<view wx:if="{{showErrorPage}}" class="page-error d-flex" catchtouchmove="noop">
+    <image src="https://pages.c-ctrip.com/hotels/wechat/market/assistcutprice/error-status.png"></image>
+    <text>
+        页面显示遇到问题，请刷新后重试
+    </text>
+    <button bindtap="initPage">刷新</button> 
+</view>
+
+<template name="modify-alert">
+    <view class="modify-mask common-mask" wx:if="{{showModifyAlert}}"></view>
+    <!-- 修改单提示浮层 -->
+    <view class="enable-loginInfo" wx:if="{{showModifyAlert}}">
+        <view class="lc-flex">
+            <view class="lc-title">订单修改提醒</view>
+        </view>
+        <view class="lc-phoneInfo lc-flex">
+            <view class="lc-desc">因订单修改，最高可返金额由{{modifyOrderInfo.oldTotalAmount}}元变至{{modifyOrderInfo.newTotalAmount}}元，您可在新订单页面查看最新进度哦</view>
+        </view>
+        <view class="lc-btns lc-flex">
+            <button class="lc-btn-reject" bindtap="hideModifyAlert">关闭</button>
+            <button class="lc-btn-allow" bindtap="hideModifyAlert">我知道了</button>
+        </view>
+    </view>
+</template>
+
+<template name="wework-task-banner">
+    <view class="task-banner task-banner-bg"  wx:if="{{status > 0}}">
+        <view class="task-body">
+            <image class="mr-16" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/wework_avatar.png" />
+            <view>
+                <view class="task-title">添加福利小助理</view>
+                <view class="task-desc">完成后免费获得一次助力</view>
+            </view>
+        </view>
+        <button wx:if="{{status === 1}}" bindtap="gotoAddWework" class="task-btn task-btn-active">去添加</button>
+        <button wx:elif="{{status === 2}}" bindtap="receiveWeWorkWelfare" class="task-btn task-btn-active">领取</button>
+        <button wx:elif="{{status === 3}}" class="task-btn task-btn-inactive">已领取</button>
+        <button wx:elif="{{status === 4}}" class="task-btn task-btn-inactive">已结束</button>
+    </view>
+</template>
+
+<template name="free-task-banner">
+    <view class="task-banner {{hasBg && 'task-banner-bg'}}" wx:if="{{isShowFreeTask}}">
+        <view class="task-body">
+            <image class="mr-16" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/free-task.png" />
+            <view>
+                <view class="task-title">邀满5位好友抽免单（{{freeTaskUser}}/5）</view>
+                <view class="task-desc">完成后可参与抽免单</view>
+            </view>
+        </view>
+        <button wx:if="{{prizeStatus === 0}}" open-type="share" class="task-btn task-btn-active" bindtap="handleFinish">去完成</button>
+        <button wx:elif="{{prizeStatus === 1}}" bindtap="gotoLottery" class="task-btn task-btn-active">去抽奖</button>
+        <button wx:elif="{{prizeStatus === 2}}" bindtap="gotoLottery" class="task-btn task-btn-tolook">去查看</button>
+        <button wx:elif="{{prizeStatus === 3}}" class="task-btn task-btn-inactive">已结束</button>
+    </view>
+</template>
+
+<template name="task-wrapper">
+    <view>
+        <view wx:if="{{weworkInfo.status > 0 && isShowFreeTask}}">
+            <view class="ranklist">
+                <view class="rank-title">做任务 领奖励</view>
+                <template is="wework-task-banner" data="{{status: weworkInfo.status}}"/>
+                <template is="free-task-banner" data="{{isShowFreeTask, prizeStatus, freeTaskUser, hasBg: false}}" />
+            </view>
+        </view>
+        <view wx:else class="mb24">
+            <template is="wework-task-banner" data="{{status: weworkInfo.status}}"/>
+            <template is="free-task-banner" data="{{isShowFreeTask, prizeStatus, freeTaskUser, hasBg: true}}" />
+        </view>
+    </view>
+</template>
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

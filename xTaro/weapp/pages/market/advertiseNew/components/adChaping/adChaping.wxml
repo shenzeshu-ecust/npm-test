@@ -1,0 +1,7 @@
+<!-- 组件模板 -->
+<view class="flt_bg_mask" style='display:{{maskhide?"none":"block"}}' bindtap="closeAd">  
+</view>
+<view class="flt_dyninfo_wrap {{showClass}}" style='{{wrapStyle}}'>
+ <ad-background adType="{{adType}}" adData="{{adData}}" whObj="{{whObj}}" trackingid="{{trackingid}}" header="{{header}}" screenRatio="{{screenRatio}}" showSign="{{showSign}}"></ad-background>
+  <view class="flt_close_btn" bindtap="closeAd"></view>
+</view>

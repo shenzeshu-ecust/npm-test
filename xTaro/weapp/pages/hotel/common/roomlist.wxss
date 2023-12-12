@@ -1,0 +1,461 @@
+/* 新版房型浮层样式 */
+.room-list .mr-16 { margin-right: 16rpx; }
+.room-list .mr-24 { margin-right: 24rpx; }
+.room-list .pt-4 { padding-top: 4rpx; }
+.room-list .mt-4 { margin-top: 4rpx; }
+.room-list .width-95 { width: 95%; }
+.room-list .max-width88 { max-width: 88%; }
+.room-list .min-h160 { min-height: 160rpx; }
+
+.room-list {  position: relative; padding: 0rpx 16rpx; }
+.room-list .no-room { color: #808080; padding: 30rpx; font-size: 28rpx; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 16rpx; }
+.room-list .no-room .no-bottom-border { border-radius: 16rpx 16rpx 0 0; }
+.room-list .tip-color { color: #0f4999; }
+.room-list .space { padding: 16rpx 0 16rpx 24rpx; }
+.room-list .space2 { padding: 0 20rpx 0 0; }
+.room-list .more-room-btn {
+    margin-top: 18rpx;
+    padding-bottom: 24rpx;
+}
+
+.room-list .room-item {
+    overflow: hidden;
+    padding: 24rpx;
+    background: #fff;
+    border-radius: 16rpx;
+    min-height: 208rpx;
+    box-sizing: border-box
+}
+
+.room-list .sub .room-item {
+    min-height: 158rpx;
+}
+
+.room-list .room-item .clamp2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+}
+.room-list .tilling-room {
+    position: relative;
+    background: #fff;
+    border-radius: 16rpx;
+    margin-bottom: 12rpx;
+}
+.friend_share_room .room-item, .room-list .room-item.guess-like-room, .room-list .m-room:first-child .room-item {
+    border: unset;
+}
+/* room-img */
+.room-list .room-img {
+    position: absolute;
+    width: 160rpx;
+    min-height: 160rpx;
+    max-height: 220rpx;
+    background-size: cover;
+    background: url(https://pic.c-ctrip.com/h5/hotel/hotel-loading-default.png) center center no-repeat;
+}
+.room-mod .room-list .room-img {
+    height: calc(100% - 48rpx);
+}
+.room-mod .room-list .room-img image {
+    border-radius: 8rpx 8rpx 24rpx 8rpx;
+    height: 100%;
+}
+.room-list .room-img image { width: 160rpx; height: 160rpx; display: block; border-radius: 8rpx; }
+.room-list .room-top {
+    position: sticky;
+    -webkit-position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #fff;
+    transition: top 200ms linear;
+    will-change:top;
+    box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+.room-list .room-img .room-like {
+    position: absolute;
+    top: 8rpx;
+    left: -8rpx;
+    border-radius: 4rpx;
+    padding:  8rpx !important;
+    background: #f70 !important;
+    text-align: center;
+    width: 50rpx;
+}
+
+.room-list .room-img .num{
+    height:24rpx;
+    line-height: 24rpx;
+    text-align:center;
+    position: absolute;
+    bottom: 12rpx;
+    right: 12rpx;
+    width: 24rpx;
+    background-color: #fff;
+    border-radius: 14rpx;
+    color: #111111;
+    font-size: 16rpx;
+    padding: 0;
+    font-weight: 500;
+    margin-right: 0rpx;
+}
+
+/* card-txt */
+.room-list .multi {
+    color: #111111;
+}
+.room-list .multi .h3 {
+    font-size: 28rpx;
+    color: #111111;
+    font-weight: 500;
+    margin-bottom: 12rpx;
+    line-height: 40rpx;
+    word-break: break-all;
+    align-items: center;
+    position: relative;
+}
+.room-list .room-item .txt-item {
+    line-height: 32rpx;
+    margin-bottom: 12rpx;
+    font-size: 24rpx;
+}
+.room-list .room-item .baseinfo-item {
+    margin-right: 10rpx;
+    white-space: nowrap;
+}
+
+.room-list .gift-icon, .room-list .pac-icon {
+    font-size: 20rpx;
+    margin-right: 8rpx;
+    display: inline-block;
+}
+
+.room-list .pac-icon {
+    width:28rpx;
+    height: 28rpx;
+    flex-shrink: 0;  /* 防止被压缩 */
+}
+
+.room-list .multi .s { font-size: 24rpx; }
+.room-list .multi .s.l-name{ line-height: 32rpx; margin-bottom: 15rpx; }
+/* 标签 */
+.room-list .tags-wrap {overflow: hidden;max-height: 32rpx}
+.room-list .tags-wrap.nowrap {max-height: none}
+.room-list .tags-wrap .ftag-item {
+    position: relative;
+    display: inline-block;
+    height: 32rpx;
+    line-height: 20rpx;
+    vertical-align: 6rpx;
+    font-size: 20rpx;
+    margin-right: 8rpx;
+    padding: 6rpx;
+    border-radius: 4rpx;
+    color: #555555;
+    border: 1rpx solid #c5c5c5;
+    box-sizing: border-box;
+}
+.room-list .star.multi { text-align: right; padding: 0 20rpx 0 10rpx; box-sizing: border-box; line-height: 1; align-items: flex-end; }
+.room-list .cell .multi.pr0 {padding-right: 0;}
+.room-list .cell-v .star.multi {padding: 0;}
+.room-list .multi .price { font-size: 40rpx; line-height: 40rpx; font-weight: 700; }
+.room-list .multi .price-tax { font-size: 22rpx; color: #f40; }
+.room-list .multi .price-star { font-size: 24rpx; color: #555555; padding: 12rpx 0 0 6rpx; }
+.room-list .multi .price-star.sub-price-star { padding: 0 0 0 6rpx; }
+.room-list .multi .surplus-room { text-align: center; color: #ff3950; font-size: 20rpx; }
+.room-list .multi .tags-wrap { margin-bottom: 12rpx; }
+
+.room-list .base-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.room-list .base-room-price {align-self: flex-end;}
+.room-list .title-box {
+    display: flex;
+    justify-items: center;
+}
+.room-list .title-icon {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 8rpx;
+    margin-bottom: -6rpx;
+    margin-top: -4rpx;
+}
+
+/* 子房型 */
+.room-list .sub { padding: 0  }
+.room-list .sub .room-item { padding: 16rpx 24rpx 4rpx 24rpx;  }
+.room-list .sub .room-item:first-child { border: unset; }
+.room-list .sub .room-item:last-child .room-divider { height: 0rpx !important;}
+.room-list .sub .like {font-size: 18rpx;height: 28rpx;line-height: 28rpx;padding: 0 8rpx;display: inline-block;vertical-align: 6rpx;margin-right: 10rpx;}
+.room-list .sub .item { margin-left: 30rpx; word-break: break-all; }
+.room-list .c { position: relative; }
+
+.room-list .sub .subroom-title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 28rpx;
+    font-weight: 500;
+    margin-bottom: 12rpx;
+    margin-top: 8rpx;
+}
+.room-list .sub .guest-desc { margin-left: 15rpx; }
+.room-list .sub .space { padding: 20rpx 24rpx 20rpx 0; }
+.room-list .sub .space2 { padding-bottom: 20rpx; }
+.room-list .sub .s { color: #555555; font-size: 24rpx;}
+
+.room-list .head-tag {
+    font-size: 18rpx;
+    height: 28rpx;
+    line-height: 28rpx;
+    padding: 0 8rpx;
+    display: inline-block;
+    vertical-align: 4rpx;
+    margin: 0 4rpx;
+    border-radius: 4rpx;
+}
+.room-list .k{ margin-left: 10rpx;}
+.room-list .sub .tags-wrap { margin-bottom: 12rpx; }
+
+.room-list .inspire-tag {
+    font-size: 20rpx;
+    line-height: 28rpx;
+}
+
+.room-list .room-title-tag {
+    height: 28rpx;
+    background: #0f4999;
+    color: #fff;
+    border-radius: 4rpx 4rpx 4rpx 4rpx;
+    font-size: 20rpx;
+    font-weight: 500;
+    padding: 2rpx 6rpx;
+    display: inline-block;
+    margin-right: 8rpx;
+    line-height: 28rpx;
+    text-align: center;
+    vertical-align: text-bottom;
+}
+
+.need-login .booking-btn {
+    padding: 0 !important;
+}
+.need-login .booking-btn .btn-t {
+    line-height: 84rpx;
+    font-size: 28rpx;
+}
+
+/* 支付按钮 */
+button:after {display: none}
+.room-list .booking-btn {
+    width: 84rpx;
+    height: 84rpx;
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: center;
+    border: 2rpx solid #006ff6;
+    border-radius: 8rpx;
+}
+.room-list .booking-btn .btn-t {
+    line-height: 53rpx;
+    font-size: 36rpx;
+    font-weight: 500;
+    color: #fff;
+    flex: 1;
+    padding: 0 !important;
+    border-radius: 4rpx 4rpx 16rpx 0rpx;
+    background-size: 48rpx;
+    background: #006FF6;
+    --color: #006FF6;
+    background: url(https://pages.c-ctrip.com/hotels/wechat/img/icons/btn-wave.png) right bottom no-repeat, var(--color);
+}
+.room-list .booking-btn .btn-paytxt {
+    background: #FFF;
+    border-radius: 6rpx;
+    line-height: 28rpx;
+    font-size: 20rpx;
+    font-weight: 400;
+}
+/* 订完 */
+.room-list .dt-disabled .booking-btn { border:2rpx solid #aaaaaa; }
+.room-list .dt-disabled .booking-btn .btn-t{
+    --color: #aaaaaa;
+    background: url(https://pages.c-ctrip.com/hotels/wechat/img/icons/btn-gray.png) right bottom no-repeat, var(--color);
+}
+
+/* X折 */
+.room-list .panicbuy-text {
+    font-size: 18rpx;
+    margin-bottom: 4rpx;
+    background: #ff7700;
+    border-radius: 17rpx 12rpx 0rpx 17rpx;
+    display: inline-block;
+    color: #fff;
+    padding: 6rpx 10rpx 4rpx;
+    text-align: center;
+    line-height: 1;
+}
+
+/* 钟点房 */
+.room-list .hour-room.border-t {
+    border-top: 14rpx solid #EBEFF5;
+}
+.room-list .hour-room .room-title{
+    font-size: 34rpx;
+    color: #111111;
+    line-height: 40rpx;
+    font-weight: 600;
+    padding: 20rpx 0 20rpx 30rpx;
+}
+
+.room-list .hour-room .item:not(:last-child) {
+    border-width: 0 0 1rpx 0;
+    border-style: solid;
+    border-color: #ddd;
+    border-image: url(data:image/gif;base64,R0lGODlhBQAFAIABAN3d3f///yH5BAEAAAEALAAAAAAFAAUAAAIHhB9pGatnCgA7) 2 stretch;
+}
+.room-list .hour-room .hour-info {
+    font-size: 24rpx;
+    color: #111111;
+    font-weight: 500;
+}
+.room-list .hour-room .room-item:nth-child(2) {
+    border-top: unset;
+}
+.room-list .hour-room .hour-duration {
+    font-size: 24rpx;
+    color: #111111;
+    line-height: 24rpx;
+    font-weight: 400;
+}
+
+/* 优势标签样式 */
+.room-list .room-advantage {
+    font-weight: normal;
+}
+.room-list .room-advantage .mt24 {
+    margin: -24rpx 24rpx 24rpx -24rpx;
+}
+.room-list .room-advantage .horn {
+    position: absolute;
+    width: 8rpx;
+    height: 8rpx;
+}
+.room-list .room-advantage .base-rd {
+    display: inline-block;
+    border-radius: 16rpx 0rpx;
+    font-size: 24rpx;
+    line-height: 44rpx;
+    padding: 0rpx 16rpx;
+}
+.room-list .room-advantage .sub-rd {
+    line-height: 28rpx;
+    padding: 2rpx 12rpx;
+    font-size: 22rpx;
+    border-radius: 32rpx 32rpx 32rpx 0rpx;
+    white-space: nowrap;
+    display: inline-block;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    overflow: hidden;
+}
+.room-list .room-advantage .desc {
+    max-width: 326rpx;
+}
+.room-list .room-advantage .advantage {
+    background: linear-gradient(-90deg, rgb(255, 235, 204) -0%, rgb(255, 223, 212) 100%);
+}
+.room-list .room-advantage .advantage-red {
+    color: #331100;
+}
+.room-list .room-advantage .flash-sale {
+    color: #f5190a;
+    background: linear-gradient(-90deg, rgb(255, 235, 204) -0%, rgb(255, 223, 212) 100%);
+}
+.room-list .room-advantage .room-like {
+    color: #ffffff;
+    background: #ff7700;
+}
+/* 房型编号 */
+.room-list .room-no {
+    position: absolute;
+    right: 24rpx;
+    top: -8rpx !important;
+}
+
+.room-list .r-base-num {
+    position: absolute;
+    display: inline-block;
+    padding: 8rpx 0rpx 0rpx 0rpx;
+    white-space: unset;
+    word-break: break-all;
+    font-size: 16rpx;
+    line-height: 20rpx;
+    color: #d5d5d5;
+    white-space: nowrap;
+}
+
+/* 猜你喜欢 */
+.g-like{
+    background-image: url('https://pages.c-ctrip.com/hotels/wechat/img/guess-like.png');
+    position: absolute;
+    top: 8rpx;
+    left: -8rpx;
+    width: 54rpx;
+    height: 52rpx;
+    background-size: 100% 100%;
+    border-radius: 4rpx;
+}
+
+/* 平铺房型 */
+.room-list .layout-reset .left-shrink {
+    flex:1 1 auto; margin-right: 0rpx;
+}
+
+/* 子房型 */
+.room-list .sub-room-box {
+    display: flex;
+    justify-content: flex-end;
+}
+.room-list .sub-room-left {
+    flex: 1;
+}
+
+.room-list .booking-btn .btn-t.fs24 { font-size: 24rpx; }
+.room-list .booking-btn .fs28 { font-size: 28rpx; }
+.room-list .room-extra-desc .desc { font-size: 22rpx; }
+
+/* 箭头颜色 */
+.room-list .wechat-font-r-fold-down, .wechat-font-r-fold-up { color: #111111 }
+
+/* 订完 灰态 */
+.room-list .gray-a {
+    font-size: 24rpx;
+    font-weight: 600;
+    line-height: 30rpx;
+    padding-top: 35rpx;
+    color: #aaaaaa !important;
+}
+.room-list .gray-filter .black1,
+.room-list .gray-filter .baseinfo-item,
+.room-list .gray-filter .txt-item,
+.room-list .gray-filter .ftag-item,
+.room-list .gray-filter .btn-paytxt,
+.room-list .gray-filter .desc {
+    color: #aaaaaa !important;
+}
+
+.room-list .gray-filter .room-title-tag {
+    background: #aaaaaa !important;
+}
+
+.gray-filter .wechat-font-r-fold-down,.gray-filter .wechat-font-r-fold-up { color: #aaaaaa !important; }
+
+/* 房型End */

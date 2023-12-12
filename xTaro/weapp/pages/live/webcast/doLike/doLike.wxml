@@ -1,0 +1,26 @@
+<wxs src="../home.wxs" module="homeFunction" />
+<block> 
+   <view class="footer-item like" bindtap="doLike">
+      <block wx:if="{{likeCount}}">
+        <text class="like-count">{{homeFunction.formateNum(likeCount)}}</text>
+      </block>
+      <image class="svg {{showLikeAnimation ? 'on' : ''}}" src="https://pages.c-ctrip.com/livestream/video/wechat-home-like1.png" />
+    </view>
+  </block>
+<!-- 点赞气泡 -->
+  <view class="favor-wrapper" style="bottom: {{commentKeybordBottom ? (commentKeybordBottom + inputHeight) : (bottomSafe+90+8)}}{{commentKeybordBottom?'px':'rpx'}}; pointer-events:none;">
+      <block wx:if="{{comboLikeCount > 0}}">
+        <view class="praise-count">
+          <view class="count-num">{{comboLikeCount}}{{comboLikeCount == 99 ? '+' : ''}}</view>
+          <view class="count-pic"></view>
+        </view>
+      </block>
+      <view class="praise_bubble" id="praise_bubble">
+        <block wx:for="{{bubbleList}}" wx:key="bubbleList{{item.datat}}">
+          <view class="{{item.className }}" data-t="{{item.datat}}"></view>
+        </block>
+        <block wx:for="{{messageBubbleList}}" wx:key="mbubbleList{{item.datat}}">
+          <view class="{{item.className }}" data-t="{{item.datat}}"></view>
+        </block>
+      </view>
+    </view>

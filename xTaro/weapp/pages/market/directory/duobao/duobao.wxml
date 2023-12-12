@@ -1,0 +1,208 @@
+<view class="db_db">
+    <nav-bar navbar-data="{{navbarData}}"></nav-bar>
+    <image wx:if="{{kanbanStatus == 3}}" class="db_db__head" src="https://pages.c-ctrip.com/market/components/static/duobao/img_db_after2.png"></image>
+    <image wx:else class="db_db__head" src="https://pages.c-ctrip.com/market/components/static/duobao/img_db_before2.png">
+    </image>
+    <image class="db_db__head_prize" src="{{activityInfo.activityImg}}"></image>
+
+    <modal extClass="duobao_modal" type="2" maskClosable="{{enableMaskclose}}" show="{{showDuobaoModal}}" bind:close="handleCloseModal">
+        <view class="duobao_modal__top_bg">
+          <image class="duobao_modal__close" bindtap="handleCloseModal" src="https://pages.c-ctrip.com/market/components/static/qichepiao-home_closee1fe-f.png"></image>
+            <view class="duobao_modal__head">
+            <view class="duobao_modal__head_title">我要夺宝</view>
+            <view class="duobao_modal__head_line"></view>
+            <view class="duobao_modal__head_myyo">我YO票:
+</view>
+            <view class="duobao_modal__head_count">{{yoTicketNum}}</view>
+        </view>
+        <view class="duobao_modal__handler {{showGuideModal == 1 ? 'light-force' : ''}}">
+            <image bindtap="handleMinus" class="duobao_modal__handler_plus {{voteInputNum <= 1 ? 'disabeld' : ''}}" src="https://pages.c-ctrip.com/market/components/static/duobao/img_halfdailog_plus.png"></image>
+            <view class="duobao_modal__handler_box">
+                <input class="duobao_modal__handler_ipt" type="number" bindkeyboardheightchange="handlekeyboardheightchange" bindblur="handleChangeVoteNum" cursor-spacing="150" bindfocus="handleInpitFocus" value="{{voteInputNum}}"></input>
+            </view>
+            <image bindtap="handlePlus" class="duobao_modal__handler_minus {{plusDisabled ? 'disabeld' : ''}}" src="https://pages.c-ctrip.com/market/components/static/duobao/img_halfdailog_minus.png"></image>
+            <!-- guide1 -->
+            <view wx:if="{{showGuideModal == 1}}" class="duobao_modal_guide_step1">
+              <image src="https://pages.c-ctrip.com/market/components/static/duobao/arrow-dynic-1.gif"></image>
+              <view>
+                  <text class="duobao_modal_guide_text1">点这里选择</text><text class="duobao_modal_guide_text2">夺宝号数量</text>
+              </view>
+              <view class="duobao_modal_guide_btn">下一步</view>
+          </view>
+        </view>
+        <view class="duobao_modal__kanban {{showGuideModal == 2 ? 'light-force' : ''}}">
+            <view class="duobao_modal__kanban_arrow"></view>
+            <view class="duobao_modal__kanban_head">
+                <text class="duobao_modal__kanban_head_text1">您的夺宝号</text>
+                <text class="duobao_modal__kanban_head_text2">数字不喜欢?</text>
+                <image class="duobao_modal__kanban_change" bindtap="handleRefreshNumber" src="https://pages.c-ctrip.com/market/components/static/duobao/icn_cahnge.png"></image>
+            </view>
+            <touzhu class="db_db__touzhu_modal" enableEdit="{{true}}" numberList="{{voteInfo.generateNumberList}}" bind:change="handleTouZhuChange" bind:focus="touzhuFocus" bind:keyboardheightchange="handlekeyboardheightchange"></touzhu>
+            <!-- guide2 -->
+            <view wx:if="{{showGuideModal == 2}}"  class="duobao_modal_guide_step2" >
+              <image src="https://pages.c-ctrip.com/market/components/static/duobao/arrow-dynic-2.gif"></image>
+              <view>
+                  <text class="duobao_modal_guide_text1">确认夺宝号，可</text><text class="duobao_modal_guide_text2">点击修改</text><text class="duobao_modal_guide_text1">哦</text>
+              </view>
+              <view class="duobao_modal_guide_btn">我知道啦</view>
+          </view>
+        </view>
+        </view>
+        <view class="duobao_modal__footer_bg">
+            <view class="duobao_modal__tips">
+            <view class="duobao_modal__dot" wx:if="{{voteInfo.votedNum > 0}}">您已投{{voteInfo.votedNumberStr}}</view>
+            <view class="duobao_modal__dot"><text class="duobao_modal__light_text">可点击夺宝号数值进行修改</text>，数值不可重复或为连续值</view>
+            <!-- <view class="duobao_modal__dot">一次投5注以上，有机会排除1个重复数哦！</view> -->
+        </view>
+        <view class="duobao_modal__footer">
+            <text class="duobao_modal__footer_text1">每个号消耗</text>
+            <text class="duobao_modal__footer_text2">{{yoTicketNumPerVote}}YO票</text>
+            <view class="duobao_modal__footer_btn" bindtap="handleSubmit">
+                <text class="duobao_modal__footer_btn_text1">确认消耗</text>
+                <text class="duobao_modal__footer_btn_text2">{{voteInputNum * yoTicketNumPerVote}}</text>
+                <text class="duobao_modal__footer_btn_text1">YO票</text>
+            </view>
+        </view>
+        </view>
+    </modal>
+
+    <!-- 新手引导 -->
+    <view wx:if="{{kanbanStatus == 1}}" class="db_db__content">
+        <view class="db_db__title ellipsis ">{{activityInfo.activityName}}</view>
+        <template is="process" data="{{...processInfo}}"></template>
+        <view class="db_db__line">
+            <view class="db_db__line_circle1"></view>
+            <view class="db_db__line_circle2"></view>
+        </view>
+        <image class="db_db__guide" src="https://pages.c-ctrip.com/market/components/static/duobao/img_db_guide3.png"></image>
+        <!-- <view class="db_db__tips">夺宝号为 <text class="db_db__tips_light">唯一</text> 且 <text class="db_db__tips_light">最小值</text> 即可中奖</view> -->
+        <image class="db_db__tips" src="https://pages.c-ctrip.com/market/components/static/duobao/img_db_guide5.png"></image>
+        <view class="db_db__btn" bindtap="handleClickKanbanDuobao">立即夺宝</view>
+    </view>
+    <!-- 未投满 或 投满待开奖 -->
+    <view wx:if="{{kanbanStatus == 2 || kanbanStatus == 4}}" class="db_db__content">
+        <view class="db_db__title ellipsis">{{activityInfo.activityName}}</view>
+        <template is="process" data="{{...processInfo}}"></template>
+        <view class="db_db__time_tips">达标后次日 10:00 开奖</view>
+        <view class="db_db__line">
+            <view class="db_db__line_circle1"></view>
+            <view class="db_db__line_circle2"></view>
+        </view>
+        <view class="db_db__doing">
+          <block wx:if="{{kanbanStatus == 2}}">
+            <text class="db_db__doing_text1">已投{{voteInfo.votedNum}}个 最多可投{{voteInfo.maxVoteTotal}}个</text>
+              <view class="db_db__doing_line"></view>
+              <text class="db_db__doing_text2">夺宝号越多越幸运</text>
+          </block>
+            <text wx:if="{{kanbanStatus == 4}}" class="db_db__doing_text1">已投{{voteInfo.votedNum}}个 等待开奖</text>
+        </view>
+        <touzhu class="db_db__touzhu" numberList="{{voteInfo.votedNumberList}}" maxNumber="{{voteInfo.maxVoteTotal}}"></touzhu>
+        <view hidden="{{kanbanStatus == 4}}" class="db_db__btn" bindtap="handleClickKanbanDuobao">继续加投更幸运</view>
+    </view>
+    <!-- 开奖-失败 总数未达标 -->
+    <view wx:if="{{kanbanStatus == 6 || kanbanStatus == 7}}" class="db_db__content db_db__content_fail">
+        <view class="db_db__title ellipsis">{{activityInfo.activityName}}</view>
+        <template wx:if="{{kanbanStatus == 6}}" is="process" data="{{...processInfo}}"></template>
+        <view class="db_db__fail">
+            <image class="db_db__fail_img" src="https://pages.c-ctrip.com/market/components/static/duobao/img_fail.png"></image>
+            <text wx:if="{{kanbanStatus == 6}}" class="db_db__fail_text">参与总YO票数未达标</text>
+            <text wx:if="{{kanbanStatus == 7}}" class="db_db__fail_text">本次活动的所有夺宝号均为重复数</text>
+        </view>
+        <view class="db_db__line">
+            <view class="db_db__line_circle1"></view>
+            <view class="db_db__line_circle2"></view>
+        </view>
+        <view class="db_db__doing">
+            <text class="db_db__doing_text1">投注记录</text>
+        </view>
+        <touzhu class="db_db__touzhu" numberList="{{voteInfo.votedNumberList}}"></touzhu>
+        <view class="db_db__fail_tips" bindtap="jumpDetail">YO票已退还至账户 去查看<view class="db_db__arrow"></view></view>
+    </view>
+    <!-- 开奖-未中奖 -->
+    <view wx:if="{{kanbanStatus == 5}}" class="db_db__content">
+        <view class="db_db__title ellipsis">{{activityInfo.activityName}}</view>
+        <view class="db_db__open_time">开奖时间：{{activityInfo.announceTime}}</view>
+        <view class="db_db__win_announcement">
+            <image class="db_db__win_announcemen_avatar" src="{{activityInfo.winUserHeadImg}}"></image>
+            <text class="db_db__win_announcement_text">恭喜{{activityInfo.winUserName}}中奖，中奖号：{{activityInfo.winNumber}}</text>
+            <image class="db_db__win_announcement_icon" src="https://pages.c-ctrip.com/market/components/static/duobao/img_congrats.png"></image>
+        </view>
+        <view class="db_db__line">
+            <view class="db_db__line_circle1"></view>
+            <view class="db_db__line_circle2"></view>
+        </view>
+        <view class="db_db__avatar_box">
+            <image class="db_db__avatar" src="{{activityInfo.selfHeadImg}}"></image>
+        </view>
+        <text class="db_db__lost_text">不好意思，您未中奖，下次再努力～</text>
+        <touzhu class="db_db__touzhu" numberList="{{voteInfo.votedNumberList}}"></touzhu>
+    </view>
+    <!-- 开奖-中奖 -->
+    <view wx:if="{{kanbanStatus == 3}}" class="db_db__content">
+        <view class="db_db__title ellipsis">{{activityInfo.activityName}}</view>
+        <view class="db_db__open_time">开奖时间：{{activityInfo.announceTime}}</view>
+        <view class="db_db__line">
+            <view class="db_db__line_circle1"></view>
+            <view class="db_db__line_circle2"></view>
+        </view>
+        <view class="db_db__avatar_box">
+            <image class="db_db__avatar" src="{{activityInfo.winUserHeadImg}}"></image>
+        </view>
+        <image class="db_db__win_text" src="https://pages.c-ctrip.com/market/components/static/duobao/img_db_win.png"></image>
+        <text class="db_db__win_number">中奖夺宝号：{{activityInfo.winNumber}}</text>
+        <touzhu class="db_db__touzhu" numberList="{{voteInfo.votedNumberList}}" winNumber="{{activityInfo.winNumber}}"></touzhu>
+        <view class="db_db__btn" bindtap="seePrize">查看奖品</view>
+    </view>
+    
+    <modal extClass="duobao_modal_touzhu_success" type="1" show="{{showTouzhuSuccessModal}}" bind:close="handleCloseSuccessModal">
+         <view class="duobao_modal_touzhu_success_content">
+         <image class="duobao_modal_touzhu_success_img" mode="widthFix" src="https://pages.c-ctrip.com/market/components/static/duobao/img_dbdialog_happyyo.png"></image>
+            <view class="duobao_modal_touzhu_success_text1">成功参与夺宝！</view>
+            <view class="duobao_modal_touzhu_success_text2">达标后次日10:00开奖, 请及时兑奖</view>
+            <view class="duobao_modal_touzhu_success_btns">
+              <view wx:if="{{scribeStatus == 0}}" class="duobao_modal_touzhu_success_btn duobao_modal_touzhu_success_btn1" bindtap="openSub">订阅开奖提醒</view>
+              <view wx:else class="duobao_modal_touzhu_success_btn duobao_modal_touzhu_success_btn1 scribed">已订阅({{subCountdown}}s)</view>
+              <!-- <view class="duobao_modal_touzhu_success_btn" bindtap="handleContinue">继续加投</view> -->
+            </view>
+            <image class="db__modal_close" src="https://pages.c-ctrip.com/market/components/static/duobao/icn_dialog_cancel.png" bindtap="handleCloseSuccessModal"></image>
+         </view>
+    </modal>
+
+    <!-- yo票不足 -->
+    <modal show="{{tipsModal}}" bind:close="handleCloseTipsMpdal">
+        <view class="db__modal_notworth">
+            <image class="db__modal_notworth_head" mode="widthFix" src="https://pages.c-ctrip.com/market/components/static/duobao/img_faildialog_head.png"></image>
+            <view class="db__modal_notworth_title">您的YO票不足</view>
+            <view class="db__modal_notworth_text">快去做任务攒票子吧～</view>
+            <view class="db__modal_btn" bindtap="jumpIndex">去攒YO票</view>
+            <image class="db__modal_close" src="https://pages.c-ctrip.com/market/components/static/duobao/icn_dialog_cancel.png" bindtap="handleCloseTipsMpdal"></image>
+        </view>
+    </modal>
+
+    <modal show="{{showGuideModal === 0}}">
+        <view class="db__modal_guide">
+            <image class="db__modal_guide_head" src="https://pages.c-ctrip.com/market/components/static/duobao/img_guidedialog_head.png"></image>
+            <image class="db__modal_guide_content" src="https://pages.c-ctrip.com/market/components/static/duobao/img_guidedialog_win2.png"></image>
+            <view class="db__modal_btn db__modal_guide_btn" bindtap="handleCloseGuideModal">我知道啦</view>
+        </view>
+    </modal>
+</view>
+<!-- 用于新手引导的点击禁止 -->
+<view class="db_modal__mask" wx:if="{{showGuideModal == 1 || showGuideModal == 2}}" bindtap="handleClickGuideMask">
+</view>
+
+<template name="process">
+    <view class="db_db__process_wraper">
+            <text class="db_db__process_sub">开奖进度：</text>
+            <view class="db_db__process">
+                <view class="db_db__process_inner" style="width: {{width}}"></view>
+            </view>
+            <text class="db_db__process_text1">{{process}}</text>
+            <text class="db_db__process_text2">/</text>
+            <text class="db_db__process_text2">{{target}}</text>
+            <text class="db_db__process_text2"> YO票</text>
+        </view>
+</template>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

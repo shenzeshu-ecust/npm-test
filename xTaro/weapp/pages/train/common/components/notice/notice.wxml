@@ -1,0 +1,12 @@
+<view class="notice-comp {{hideNotice && quickFilterTags && quickFilterTags.length ? 'hide' : ''}}">
+    <view class="top-tips"  bindtap="toNoticeDetail">
+            <view class="horn"></view>
+            <view class="txt">
+                <view class="cont {{hkticket && noticeContent ? 'animation' : ''}}">
+                  <view class="notice-cont" wx:if="{{hkticket}}"><rich-text nodes="<span style='color:#ff7700; font-weight: bold'>取票提醒：</span>线上购买跨境车票，需在内地车站取票后上车"></rich-text></view>
+                  <view class="notice-cont" wx:if="{{noticeContent}}"><rich-text nodes="{{noticeContent}}"></rich-text></view>
+                </view>
+            </view>
+            <text class="ifont-arr"></text>
+    </view>
+</view>

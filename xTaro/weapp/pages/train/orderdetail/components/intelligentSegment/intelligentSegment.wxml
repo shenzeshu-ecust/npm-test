@@ -1,0 +1,231 @@
+<import src="../orderdetail.templates.wxml"/>
+
+<template name="intelligent-segment">
+	<view class="intelligent-order-detail">
+		<view class="order-linear">
+			<view class="order-status">
+				<view class="status">
+					<icon class="icon-status-fail" wx:if="{{orderInfo.AlertInfo.AlertType == 25 || (orderInfo.AlertInfo.AlertType == 23 && extendValues.ETicketUser12306Process.guideCode == 2)}}" />
+					<icon class="icon-status-suc" wx:elif="{{isSuccess || paidSuccess}}" />
+					<icon class="icon-status-refund" wx:elif="{{orderInfo.EnablePayOrder}}" />
+					<block wx:elif="{{orderInfo.IsPreHoldSeat && orderInfo.OrderStatus == 1 && !orderInfo.EnablePayOrder}}">
+						<view class="status">
+							<icon class="icon-status-loading" />
+							<icon class="icon-seat" />
+						</view>
+					</block>
+					<icon class="icon-status-fail" wx:elif="{{!orderInfo.EnablePayOrder && !isSuccess}}" />
+				</view>
+
+				<view class="cont">
+					<view class="tit">{{
+                        orderInfo.IsPreHoldSeat && orderInfo.OrderStatus == 1 && !orderInfo.EnablePayOrder
+                        ? orderInfo.OrderStatusName + ' ' + preHoldPercent + '%'
+                        : segmentationOrderStatusName || orderInfo.OrderStatusBarInfo.StatusName}}</view>
+					<view class="txt" wx:if="{{countdownOrderTips}}">座位已成功锁定！请在
+						<text class="orange">{{bookTips}}</text>
+						内完成支付。
+					</view>
+
+					<view class="txt" wx:elif="{{ZLTopMessage}}">{{ZLTopMessage}}</view>
+
+					<view class="txt" wx:elif="{{isPreHolding}}">{{preHoldingMesssage}}</view>
+
+					<view class="txt" wx:elif="{{!isShowRobSame}}">
+						<rich-text nodes="{{orderInfo.OrderStatusBarInfo.StatusNameDesc}}" />
+					</view>
+
+					<view class="txt" wx:elif="{{isShowRobSame}}">
+						<text class="qiangpiao-txt">{{orderInfo.FailReason}}</text>
+					</view>
+				</view>
+				<view class="fixed-dashang" wx:if="{{orderInfo.IsCanReward && rewardInfo}}" bindtap="showRewardPop" />
+			</view>
+		</view>
+
+        <!-- 关怀金 手续费 -->
+		<view class="countdown-container login-12306-new" wx:if="{{orderMessageInfo}}">
+			<view class="background" />
+			<icon class="icon-pop-tishi" />
+			<view>
+				<view class="cont">
+					<view class="tit">
+						<view class="content" style="display: inline-block">
+							<text class="" wx:for="{{ orderMessageInfo.messageList }}">{{ item }}</text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+        <view class="white-panel order-notice-white" wx:if="{{ orderInfo.SectionTicketTips }}">
+            <view class="txt section"><rich-text nodes="{{orderInfo.SectionTicketTips}}"></rich-text></view>
+        </view>
+
+        <template is="journey-line" data="{{tripAxis}}"/>
+
+        <!-- 同车、中转 全部出票成功才展示 -->
+        <!-- <view class="white-panel trip-axis" wx:if="{{tripAxis && !tripAxis.isCross}}">
+            <view class="tit">
+                <rich-text nodes="{{tripAxis.tit}}"></rich-text>
+            </view>
+            <view class="axis">
+                <view class="axis-line"></view>
+                <view class="real">
+                    <view class="train">{{ tripAxis.isSameTrain ? tripAxis.fSeat : '第1程 ' + tripAxis.fNumber }}<text class="ifont-arr" wx:if="{{ !tripAxis.isSameTrain }}"></text></view>
+                    <view class="mid">{{ (tripAxis.isSameTrain || extendValues.GrabTicketSegmentation.segmentationType === 2)  ? '车内换座' : '中转' }}</view>
+                    <view class="train">{{ tripAxis.isSameTrain ? tripAxis.sSeat : '第2程 ' + tripAxis.sNumber }}<text class="ifont-arr" wx:if="{{ !tripAxis.isSameTrain }}"></text></view>
+                </view>
+            </view>
+            <view class="stations">
+                <view class="txt" wx:for="{{tripAxis.stations}}" wx:for-item="name">{{ name }}</view>
+            </view>
+        </view> -->
+        <!-- 分段跨站 -->
+        <!-- <view class="white-panel trip-axis" wx:if="{{tripAxis && tripAxis.isCross}}">
+            <view class="tit">
+                <rich-text nodes="{{tripAxis.tit}}"></rich-text>
+            </view>
+            <view class="axis">
+                <view class="axis-line"></view>
+                <view wx:if="{{tripAxis.crossType === 1}}" class="cross">
+                    <view class="axis-dotted"></view>
+                    <text>多抢{{tripAxis.crossOffset}}站</text>
+                </view>
+                <view class="real">
+                    <view class="train">第一程</view>
+                    <view class="mid">{{ tripAxis.isSameTrain ? '车内换座' : '中转' }}</view>
+                    <view class="train">第二程</view>
+                </view>
+                <view wx:if="{{tripAxis.crossType === 2}}" class="cross">
+                    <view class="axis-dotted after"></view>
+                    <text>多抢{{tripAxis.crossOffset}}站</text>
+                </view>
+            </view>
+            <view class="stations">
+                <view
+                    class="txt {{ ((tripAxis.crossType === 1 && !index) || (tripAxis.crossType === 2 && index === tripAxis.stations.length - 1)) && 'cross'  }}"
+                    wx:for="{{tripAxis.stations}}"
+                    wx:for-item="name"
+                >{{ name }}</view>
+            </view>
+        </view> -->
+
+        <!-- 车票详情卡片 第一程-->
+        <view class="white-panel ticket-card {{ tInfo.isTicketFail ? 'fail' : '' }}" wx:for="{{ intelligentInfo }}" wx:for-item="tInfo" wx:for-index="index">
+            <!-- <view class="tag">改签</view> -->
+            <view class="ticket-card-hd">
+                <view class="title">
+                    <text class="tit">第{{ tInfo.RouteSequence }}程</text>
+                    <text class="green" wx:if="{{tInfo.TicketEntrance}}">{{ tInfo.TicketEntrance }}</text>
+                </view>
+                <view class="no" wx:if="{{tInfo.ElectronicNumber}}">取票号：{{ tInfo.ElectronicNumber }}</view>
+                <view class="err" wx:if="{{ tInfo.isTicketFail }}"><text class="ifont-detail" />{{ tInfo.issueFailDesc }}</view>
+            </view>
+            <view class="ticket-card-bd">
+                <view class="info from">
+                    <view class="date">{{ tInfo._DepartDate }} {{ tInfo._DepartWeek }}</view>
+                    <view class="time">{{ tInfo._DepartTime }}</view>
+                    <view class="area">{{ tInfo.DepartStation }}站</view>
+                </view>
+                <view class="mid">
+                    <view class="checi">
+                        {{ tInfo.TrainNumber }}
+                        <!-- 同车不同车次号 -->
+                        <view
+                            class="change"
+                            wx:if="{{ tInfo.RouteSequence === 2 && extendValues.GrabTicketSegmentation.segmentationType === 2 && extendValues.GrabTicketSegmentation.isSameTrain }}"
+                            bindtap="onClickCheciTip"
+                        >
+                            （变更）<text class="ifont-qus"></text>
+                        </view>
+                    </view>
+                    <view class="transit" data-type="{{ index }}" bind:tap="goTicketTT">经停信息</view>
+                </view>
+                <view class="info to">
+                    <view class="date">{{ tInfo._ArriveWeek }} {{ tInfo._ArriveDate }}</view>
+                    <view class="time">{{ tInfo._ArriveTime }}</view>
+                    <view class="area">{{ tInfo.ArriveStation }}站</view>
+                </view>
+            </view>
+
+            <!-- 出票失败提示去抢票 -->
+            <view class="ticket-card-fd" wx:if="{{tInfo.isTicketFail}}">
+                <view class="fail-grab-tip">
+                    <view class="icon"/>
+                    <view class="context">
+                        <view class="title">
+                            建议去抢票，第{{ tInfo.RouteSequence }}程抢票成功率较高
+                        </view>
+                        <view class="sub-title">
+                            建议保留第{{ tInfo.RouteSequence == 1 ? 2 : 1 }}程，继续抢第{{ tInfo.RouteSequence }}程
+                        </view>
+                    </view>
+                    <button class="btn" data-type="{{index}}" bindtap="onClickGoGrabPage">去抢票</button>
+                </view>
+            </view>
+            <!-- 乘客们 -->
+            <view class="ticket-card-fd" wx:else>
+                <view class="pasg-box" wx:for="{{tInfo._PassengerInfos}}" wx:for-item="pInfo" wx:for-index="idx">
+                    <view class="between pasg-box-hd">
+                        <view class="name">{{ pInfo.PassengerName }}</view>
+                        <view class="carriage">{{ pInfo.DealSeatNo }}</view>
+                    </view>
+                    <view class="between pasg-box-bd">
+                        <view class="id">{{ pInfo.IdentityTypeName }} {{ pInfo.IdentityNo }}</view>
+                        <view class="seat">{{ pInfo.SeatName }} ￥{{ pInfo.DealTicketPrice }}</view>
+                    </view>
+                    <view class="between pasg-box-fd">
+                        <view class="status">{{ pInfo.TicketStatus }}</view>
+                        <view class="btns">
+                            <view class="child-declare-view" wx:if="{{(pInfo.CanAddFreeChild || pInfo.FreePassengerInfo) && isIssueTicketSuccess }}">
+                                <view class="child-declare-box" wx:if="{{showChildTip && pInfo.CanAddFreeChild }}">携带6岁以下儿童需申报哦~<view class="separate-box"/><text class="ifont-closed-line" bind:tap="closeChildTip"/></view>
+                                <image src='https://images3.c-ctrip.com/train/2023/app/8.60/xiaochengxv/ertongshenbao/img-triggle.png' class="child-triangle" wx:if="{{showChildTip && pInfo.CanAddFreeChild}}"/>
+                                <button class="btn-grey btn {{pInfo.FreePassengerInfo ? 'disabled' : ''}}" data-index="{{idx}}" data-tickindex="{{tInfo._idx}}" data-canaddfreechild="{{pInfo.CanAddFreeChild}}"  bind:tap="goChildrenDeclare" >儿童申报</button>
+                            </view>
+                            <view
+                                class="btn"
+                                data-index="{{ idx }}"
+                                data-tickindex="{{ tInfo._idx }}"
+                                wx:if="{{pInfo.ChangeButtonDisplay}}"
+                                bind:tap="rescheduleTicket"
+                            >改签</view>
+                            <view
+                                class="btn"
+                                data-index="{{ idx }}"
+                                data-tickindex="{{ tInfo._idx }}"
+                                wx:if="{{pInfo.ReturnButtonDisplay}}"
+                                bind:tap="refundTicket"
+                            >退票</view>
+                            <button
+                                wx:if="{{isShareEntranceOpen && isSuccess && !orderInfo.RescheduleTicketList.length && orderInfo.TicketInfos.length === 1}}"
+                                class="btn"
+                                bind:tap="shareTripPage"
+                                data-ubt-key="c_train_wx_orderdetail_sharejourney"
+                            >分享</button>
+                            <button
+                                wx:if="{{isSuccess && !orderInfo.RescheduleTicketList.length && orderInfo.TicketInfos.length === 1}}"
+                                class="btn"
+                                open-type="share"
+                                bindtap="noop"
+                                data-ubt-key="c_train_wx_orderdetail_sharejourney"
+                            >分享</button>
+                        </view>
+                    </view>
+
+                    <view class="free-child-view" wx:if="{{pInfo.FreePassengerInfo}}">
+                        <view class="free-child-line"/>
+                        <view class="free-child-box">
+                            <view class="free-child-left">
+                                <view class="free-child-up">{{pInfo.FreePassengerInfo.PassportName}}<view class="free-child-tag">免费乘车儿童</view></view>
+                                <view class="free-child-down">{{pInfo.FreePassengerInfo.PassportTypeName}} {{pInfo.FreePassengerInfo.PassportNo}}</view>
+                            </view>
+                            <i wx:if="{{isIssueTicketSuccess}}" class="ifont-del" data-index="{{idx}}" data-tickindex="{{tInfo._idx}}" data-freepassenger="{{pInfo.FreePassengerInfo}}" bindtap="handleFreeChild"></i>
+                        </view>
+                    </view>
+
+                </view>
+            </view>
+        </view>
+	</view>
+</template>
+

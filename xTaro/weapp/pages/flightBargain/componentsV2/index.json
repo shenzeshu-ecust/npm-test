@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "机票砍价返现",
+  "navigationBarBackgroundColor": "#F7F7F7",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#3EC3FF",
+  "enablePullDownRefresh":false,
+  "usingComponents": {
+    "banner-module": "./bannerModule/index",
+    "order-info-module": "./orderInfoModule/index",
+    "barrage-module": "./barrageModule/index",
+    "coupon-module": "./couponModule/index",
+    "leader-board-module": "./leaderBoardModule/index",
+    "recommend-module": "./recommendModule/index"
+  }
+}

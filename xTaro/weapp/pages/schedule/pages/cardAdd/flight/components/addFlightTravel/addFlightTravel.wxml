@@ -1,0 +1,16 @@
+<block wx:if='{{flightNo!=undefined && flightNo!=null && flightNo.length>0 && departAirportCode!=undefined && departAirportCode!=null && departAirportCode.length>0 && arriveAirportCode!=undefined && arriveAirportCode!=null && arriveAirportCode.length>0 && departDate!=undefined && departDate!=null && departDate.length>0}}'>
+
+  <view wx:if='{{allowAdd && !isSubmitting}}' class='add-travel'>
+    <formid-button catchtap='addTravel'>
+        <view class="add-text-view ">
+            <text>加入行程</text>
+        </view>
+    </formid-button>
+  </view>
+  <view wx:if='{{isSubmitting}}' class='add-submitting'>
+    <view class='add-submitting-btn'>
+      <text>提交中</text>
+      <image class='submitting-image' src='../../../images/cts_adding.gif ' />
+    </view>
+  </view>
+</block>

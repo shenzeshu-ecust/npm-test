@@ -1,0 +1,108 @@
+@import "../../css/common.wxss";
+
+.modal-wrapper {
+  position: fixed;
+	z-index: 1001;
+	top: 50%;
+	left: 50%;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 16rpx;
+  width: 562rpx;
+  padding: 32rpx;
+  transform: translate(-50%, -50%);
+}
+
+.modal-header__close-wrapper {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20rpx;
+}
+
+.modal-body__title {
+  font-size: 30rpx; 
+  font-weight: 500;
+  color: #333;
+  line-height: 48rpx;
+  text-align: center;
+  padding: 0 48rpx;
+  letter-spacing: 0.53px;
+  margin: 12rpx 0;
+}
+
+.modal-body__content {
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.modal-footer {
+  display: flex;
+  margin-top: 32rpx;
+  gap: 32rpx;
+  padding: 0 3rpx;
+  justify-content: space-between;
+}
+
+.col {
+  flex-direction: column-reverse;
+}
+
+.modal-footer__button {
+  border-radius: 8rpx;
+  height: 72rpx;
+  flex: 1;
+  font-size: 32rpx;
+  margin: 0;
+}
+
+.modal-footer__button::after {
+  border: none;
+}
+
+.modal-footer__button.cancel {
+  background: #fff;
+  border: 2rpx solid;
+  color: #0086f6;
+}
+
+.modal-footer__button.confirm {
+  background: #0086f6;
+  color: #fff;
+}
+
+.modal-header__inner-icon {
+  font-size: 40rpx;
+}
+
+
+.modal-animation {
+  animation: modalExpand 0.2s ease-in-out both;
+}
+
+@keyframes modalExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(1, 0.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1, 1);
+  }
+}
+
+@keyframes modalFadeIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+  

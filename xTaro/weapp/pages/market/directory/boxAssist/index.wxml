@@ -1,0 +1,48 @@
+<import src="../../components/unlimitQRCode/qrcode.wxml" />
+
+<view class="main-wrap" style="background-image:url('{{backgroundImg}}')">
+  <view class="recommend-wrap">
+    <view class="recommend-title">{{title}}</view>
+    <popping list="{{list}}" wx:if="{{list.length>0}}"></popping>
+  </view>
+  <view class="assist-content">
+    <assist assistActivityId="{{activityId}}" activityConf="{{activityConf}}" identityId="{{identityId}}" bind:afterGetAssist="afterGetAssist" bind:afterAssist="afterAssist"></assist>
+  </view>
+</view>
+
+
+<view class="rule-wrap">
+  <view class="rule-title">活动规则</view>
+  <view class="rule-list">
+    <view class="rule-item" wx:for="{{activityConf.activityRule}}">{{item}}</view>
+  </view>
+</view>
+
+<view class="ctrip-logo"></view>
+
+
+<view class="p-absolute" wx:if="{{loading}}">
+  <template is="qrcode" />
+</view>
+
+
+
+<view class="pop-result" wx:if="{{showResult}}">
+  <view class="pop-mask"></view>
+  <view class="pop-wrap">
+    <view class="pop-title">助力成功！</view>
+    <view class="pop-tips">恭喜你获得：</view>
+    <view class="coupon-list" style="overflow-y:{{prizeList.length>2?'auto':'hidden'}}">
+      <view class="coupon-item" wx:for="{{prizeList}}">
+        <view class="c-name">{{item.name}}</view>
+        <view class="c-tips">请在“我的-我的奖品”中查看</view>
+      </view>
+    </view>
+    <view class="pop-btn">
+      <view class="btn" bindtap="triggerMask">我知道了</view>
+    </view>
+  </view>
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

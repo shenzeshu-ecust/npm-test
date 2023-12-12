@@ -1,0 +1,46 @@
+<template name="rob-coupon-pop">
+  <view class="rob-pop-shadow"></view>
+  <view class="{{showMask === 'assistTaskSucceed' ? 'task-reward-pop' : 'task-reward-pop task-receive-pop'}}">
+    <view class="pop-mid-box">
+      <view class="task-reward-background"></view>
+      <view class="task-reward-title">{{taskRwardInfo.Title}}</view>
+      <view class="task-reward-tip" wx:if="{{showMask === 'assistTaskSucceed'}}">
+        {{taskRwardInfo.Content}}
+      </view>
+      <view class="task-reward-tags" wx:if="{{showMask === 'assistTaskSucceed'}}">
+        <view class="tag-container tag-left">
+          <image class="kuaisu" src="https://images3.c-ctrip.com/train/2022/app/8.47/zengzhang/xiaochengxu_zhulirenwu/icon_sudu.png" />
+          <text class="speed">{{taskRwardInfo.TrainRewardInfoList[0].Content}}</text>
+        </view>
+        <view class="tag-container tag-right">
+          <image class="sheng" src="https://images3.c-ctrip.com/train/2022/app/8.47/zengzhang/xiaochengxu_zhulirenwu/icon_yuan.png" />
+          <text>{{taskRwardInfo.TrainRewardInfoList[1].Content}}</text>
+        </view>
+      </view>
+      <view class="task-reward-tip" wx:if="{{showMask === 'assistTaskReceived'}}">
+        {{taskRwardInfo.SubTitle}}
+      </view>
+      <view class="task-reward-ticket" wx:if="{{showMask === 'assistTaskReceived'}}">
+        <view class="ticket-left">
+          <text class="discount">{{taskRwardInfo.CouponList[0].Amount}}</text>
+          <text>{{taskRwardInfo.CouponList[0].Unit}}</text>
+        </view>
+        <view class="ticket-stick" />
+        <view class="ticket-right"></view>
+        <view class="ticket-info">
+          <view class="ticket-title">{{taskRwardInfo.CouponList[0].Title}}</view>
+          <view class="ticket-desc">{{taskRwardInfo.CouponList[0].SubTitle}}</view>
+        </view>
+      </view>
+      <button class="task-reward-btn" bindtap="onClickGoToTaskPage" wx:if="{{showMask === 'assistTaskReceived'}}">
+        立即浏览
+      </button>
+      <view class="countdown" wx:if="{{showMask === 'assistTaskReceived'}}">
+        {{taskCountDownText}}
+      </view>
+      <button class="task-reward-btn" bindtap="onClickHideTaskPop" wx:if="{{showMask === 'assistTaskSucceed'}}">
+        我知道了
+      </button>
+    </view>
+  </view>
+</template>

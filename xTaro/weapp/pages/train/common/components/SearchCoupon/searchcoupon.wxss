@@ -1,0 +1,9 @@
+.search-coupon-bd {height: 110rpx;width: 718rpx;border-radius: 8px;padding: 24rpx 24rpx;box-sizing: border-box;display: flex;background: #FFFFFF;margin: 8rpx auto 8rpx auto;}
+.search-coupon-bd .bd-cont {flex: 1;}
+.search-coupon-bd .bd-cont .tit{font-size: 26rpx;line-height: 36rpx;color: #333333;font-weight: bold;text-align: left;}
+.search-coupon-bd .bd-cont .tit .green{color: #3DB034;}
+.search-coupon-bd .bd-cont .txt{font-size: 22rpx;line-height: 24rpx;color: #999999;text-align: left;margin-top: 4rpx;}
+.search-coupon-bd .bd-btn {width: 154rpx;height: 60rpx;text-align: center;line-height: 60rpx;color: #FFFFFF;font-size: 26rpx;background: -webkit-linear-gradient(left, #FFA50A 0%, #FF7700 100%);border-radius: 4px;}
+.search-coupon-bd .bd-btn.disable{background: #999;}
+.bd-btn{padding:0;border: 0;}
+button::after{border: 0;}

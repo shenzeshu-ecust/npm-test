@@ -1,0 +1,22 @@
+
+ <view wx:if="{{moreLine && moreLine.length > 0}}" class="book-modal" bindtap="onCancel" catchtouchmove='empty' catchlongtap='empty'>
+            <view class="book-modal-content" catchtap="empty" style='{{isIPhoneX ?"padding-bottom:68rpx;" : ""}}'>
+                    <block wx:for="{{moreLine}}" wx:key="moreline">
+                        <view class="more-line-item flex-row-center">
+                            <view class="line">
+                                <text class="from-city">{{item.fromCity}}</text>
+                                <image class="icon"  src="https://pages.c-ctrip.com/bus-images/ship_index_line.png"/>
+                                <text class="to-city">{{item.toCity}}</text>
+                            </view>
+                            <view class="flex-row-center">
+                                <view class="price">
+                                    <text class="rmb">¥</text>
+                                    <text class="num">{{item.price}}</text>
+                                    <text class="txt">起</text>
+                                </view>
+                                <view class="book-btn flex-row-center" bindtap="onBook" data-item="{{item}}">预订</view>
+                            </view>
+                        </view>
+                    </block>
+            </view>
+</view>

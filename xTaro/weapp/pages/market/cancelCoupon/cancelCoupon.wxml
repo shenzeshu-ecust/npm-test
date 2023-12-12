@@ -1,0 +1,54 @@
+<!--pages/market/cancelCoupon/cancelCoupon.wxml-->
+<view class='cancelCoupon'>
+  <view class='title'>
+    <i class="icon icon-appLogo"></i>
+    <view class='title-desc'>携程券码核销系统</view>
+    <i class="icon icon-shadowBg"></i>
+  </view>
+</view>
+<view class="mainBody">
+  <view class="mainBody-userInfo">
+    <span class="bu-name">供应商：{{supplierName}}</span>
+    <span wx:if="{{isLogined}}" class="bu-logout" bindtap="logout">退出登录</span>
+  </view>
+  <view class="mainBody-con">
+    <image mode="widthFix" src="//images3.c-ctrip.com/marketing/2018/05/wxCancelCoupon/cancelCouponBg01.png" alt="" />
+    <block wx:if="{{currCouponCode!==''}}">
+      <image class="btn-image" bindtap='doCancel' src="https://images3.c-ctrip.com/marketing/2018/05/wxCancelCoupon/cancelCouponBg03.png" />
+    </block>
+    <block wx:else>
+      <image class="btn-image" src="https://images3.c-ctrip.com/marketing/2018/05/wxCancelCoupon/cancelCouponBg02.png" />
+    </block>
+    <view class="mc-inputContainer">
+      <view class="mci-vendorInfo">供应商Code：
+        <span class="mciv-name" style="color: rgb(204, 204, 204);">
+          {{supplierCode?supplierCode:'未读到供应商信息'}}
+        </span>
+      </view>
+      <view class="mci-input">
+        <input type="text" value='{{currCouponCode}}' bindinput="doInputCode" placeholder="请输入要核销的券码" placeholder-style="color:#ccc;text-align: left;" />
+        <i class="icon icon-wxScan" bindtap='scanQR'></i>
+        <i class="icon icon-clear" wx:if="{{currCouponCode!==''}}" bindtap="clearCouponCode"></i>
+      </view>
+    </view>
+  </view>
+  <view class="result" wx:if="{{isSuccess===true}}">
+    <view class="title">
+      <i class="icon icon-checked"></i>
+      <view class="title-desc">核销成功</view>
+      <i class="icon icon-shadowBg"></i>
+    </view>
+    <view class="result-content">
+      <image mode="widthFix" src="//images3.c-ctrip.com/marketing/2018/05/wxCancelCoupon/cancelCouponBg04.png" />
+      <image mode="widthFix" src="//images3.c-ctrip.com/marketing/2018/05/wxCancelCoupon/cancelCouponBg05.png" class="combineImg" />
+      <view class="rc-text">
+        <view class="rc-title">核销券码</view>
+        <view class="rc-desc">{{successCode}}</view>
+        <view class="rc-title">供应商</view>
+        <view class="rc-desc">{{successVendor}}</view>
+      </view>
+      <i class="icon icon-finished"></i>
+    </view>
+    <button class="back" bindtap="back">返回</button>
+  </view>
+</view>

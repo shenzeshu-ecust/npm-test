@@ -1,0 +1,77 @@
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/** 两行省略号 **/
+.ellipsis-2 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.poi-row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 24rpx 0 28rpx;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+}
+
+.left-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-right: 12rpx;
+  padding-bottom: 16rpx;
+}
+
+.poi-name-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 12rpx;
+}
+.poi-name {
+  color: #333;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.poi-name_forward {
+  margin-top: 10rpx;
+  font-weight: bold;
+  margin-left: 3rpx;
+}
+
+.poi-info {
+  font-size: 26rpx;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+.poi-tip {
+  font-size: 26rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+
+.flex-center-radius{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center;
+  border-radius: 4rpx;
+}
+
+.poi-background{
+  height: 33rpx;
+  width: 33rpx;
+  background: #FF7F6E;
+}

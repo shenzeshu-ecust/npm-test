@@ -1,0 +1,374 @@
+.modal {width: 100%; max-height: 80%; position: fixed; bottom: 0; left: 0; background-color: #f4f4f6; z-index: 1002; overflow-y: scroll; -webkit-overflow-scrolling: touch;}
+.modal .h {background-color: #f7f7f7; color: #333; display: flex; align-items: center; position: -webkit-sticky; position: sticky; top: 0; z-index: 2;}
+.modal .h .tit {flex: 1; padding: 20rpx 0 20rpx 30rpx;}
+.modal .h .wechat-font-close {color: #333; font-size: 40rpx; padding: 20rpx;}
+.r-num {font-size: 18rpx; line-height: 18rpx; padding: 8rpx; color: #ccc; white-space: nowrap;}
+/* 图片滚动 */
+.modal .slider { position: relative; }
+.modal .swiper { width: 100%; height: 340rpx; }
+.modal .swiper-num { padding: 4rpx 26rpx; color: #fff; font-size: 24rpx; position: absolute; left: 50%; transform: translateX(-50%); bottom: 20rpx; background: rgba(0, 0, 0, 0.4); border-radius: 40rpx; }
+.modal .slide-image { width: 100%; height: 100%; }
+/* 面积、楼层等*/
+.base-info { overflow: hidden; padding: 20rpx; background-color: #fff; }
+.base-info .item { width: 50%; color: #333; font-size: 28rpx; float: left; padding: 10rpx 0; }
+.base-info .item .tit { color: #999; float: left; padding-right: 20rpx;width:120rpx  }
+.base-info .item .txt { overflow: hidden; }
+/* 餐食表格 */
+.base-info .item.w-full {width: 100%;}
+.base-info .cs-scroll-box {width: 100%; float: left; overflow-x: scroll; margin-bottom: 14rpx; -webkit-overflow-scrolling: touch;}
+.base-info .cs-table {float: left; display: flex; font-size: 24rpx; color: #333;}
+.base-info .table-nomal {width:100%;}
+.base-info .cs-col {flex: 1;}
+.base-info .cs-col-more {width: 206rpx;}
+.base-info .cs-col:not(:last-child) {border-right: 3rpx solid #fff;}
+.base-info .cs-thead, .cs-row {height: 60rpx; line-height: 60rpx; text-align: center;}
+.base-info .cs-thead {background-color: #F5F5F5;}
+.base-info .cs-row {background-color: #FBFBFB;}
+.base-info .cs-row:not(:last-child) {border-bottom: 3rpx solid #fff;}
+/* 房型政策 */
+.des-info { padding: 20rpx; background-color: #fff; margin-top: 10rpx; }
+.des-info:empty {display: none;}
+.des-info .item { padding-bottom: 20rpx; }
+.des-info .tit { font-size: 28rpx; color: #333; padding-bottom: 10rpx; font-weight: 700; }
+.des-info .only-hide:only-child {display: none;}
+.des-info .txt-c1 { font-size: 24rpx; color: #4CBF52;font-weight: 600 }
+.des-info .txt-c2 { font-size: 26rpx; color: #333;font-weight:300; }
+.des-info .txt-c3 { font-size: 24rpx; color: #ff6913;font-weight: 600 }
+.des-info .txt-c4 { font-size: 24rpx; color: #333;font-weight: 600 }
+.des-info .txt-c5 { font-size: 24rpx; color: #6D87AB;font-weight: 600 }
+.des-info .cost .t { float: left; padding-right: 10rpx;width:90rpx}
+.des-info .cost .b { overflow: hidden;}
+.des-info.des-no-padding { padding: 0 20rpx;}
+.des-no-padding .tit {padding-top: 20rpx;}
+
+/* 套餐 */
+.pac-info {
+    margin: 32rpx 24rpx;
+    padding: 20rpx 32rpx;
+    border-radius: 4rpx;
+    font-size: 24rpx;
+    background-color: #eee;
+    line-height: 2;
+    font-weight: 500;
+}
+.pac-item {
+    margin: 16rpx 0;
+    padding: 24rpx;
+    background-color: #fff;
+    font-size: 24rpx;
+}
+.pac-item .pac-title {
+    font-size: 32rpx;
+    font-weight: 600;
+}
+.pac-item .pac-content {
+    font-size: 24rpx;
+    color: #666;
+    padding: 40rpx 0;
+}
+.pac-item .pac-content:not(:last-child) {
+    border-bottom: 1px solid #eee;
+}
+.pac-item .pac-subtit-box {
+    display: flex;
+    justify-content: space-between;
+    margin: 36rpx 0 24rpx;
+}
+.pac-item .pac-subtit {
+    font-size: 28rpx;
+    font-weight: 600;
+    color: #333;
+}
+.pac-item .pac-imgs {
+    display: flex;
+    overflow-x: auto;
+}
+.pac-item .pac-imgs::-webkit-scrollbar { display: none; }
+.pac-item .pac-imgs .slide-img {
+    width: 600rpx;
+    margin-right: 16px;
+    border-radius: 8rpx;
+    flex-shrink: 0;
+}
+.pac-item .pac-imgs .sigle-img {
+    width: 100%;
+    border-radius: 8rpx;
+}
+/* 礼盒 */
+.gift-info, .hourroom-info {
+    font-size: 24rpx;
+    padding: 12rpx 24rpx;
+    background-color: #fff;
+}
+.gift-info .gift-title {
+    display: flex;
+}
+.gift-info .gift-title .gift-icon, .pac-item .pac-icon {
+    line-height: 1;
+    background: #fff1e6;
+    color: #f70;
+    font-weight: 600;
+    margin-right: 16rpx;
+    padding: 4rpx;
+}
+.gift-info .desc-tit {
+    font-weight: 500;
+    margin: 24rpx 0 16rpx;
+}
+.gift-info .desc-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+.gift-info .desc-box .desc-item {
+    width: 48%;
+    margin-right: 2%;
+}
+.gift-info .gift-sp  {
+    font-weight: 300;
+    text-align: justify;
+}
+/*钟点房*/
+.hourroom-info .hourroom-title {
+    display: flex;
+    align-items: center;
+}
+/* 面积楼层等 */
+.base-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1rpx solid #eee;
+    padding: 16rpx 0 24rpx;
+}
+.base-box .base-item {
+    color: #333;
+    font-size: 24rpx;
+    font-weight: 500;
+    text-align: center;
+}
+.base-box .base-item .tit {
+    color: #999;
+}
+/* 床型+餐食 */
+.bed-info, .meal-info {
+    width: 100%;
+    margin: 32rpx 0;
+    display: flex;
+    align-items: center;
+    font-size: 24rpx;
+    font-weight: 500;
+}
+.meal-info .meal-title, .bed-info .bed-title {
+    width: 130rpx;
+}
+.meal-info .meal-details {
+    display: flex;
+    flex-wrap: wrap;
+}
+.meal-info .meal-details .meal-item {
+    flex: 1;
+    margin-right: 16rpx;
+}
+.meal-info .meal-details .meal-txt {
+    margin-left: 8rpx;
+    color: #009c67;
+}
+/* 基础设施 */
+.fac-item {
+    width: 100%;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    border-top: 1rpx solid #eee;
+    padding: 32rpx 0;
+}
+.fac-item .fac-title {
+    width: 130rpx;
+    font-weight: 600;
+}
+.fac-item .txt-box {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+}
+.txt-box { color: #808080; font-size: 30rpx; line-height: 1.5; padding: 20rpx; }
+.fac-item .fac-txt {
+    width: 46%;
+    margin-right: 4%;
+    line-height: 1.5;
+}
+.fac-item .fac-txt .fac-pay, .fac-item .fac-txt .fac-free {
+    display: inline-block;
+    height: 24rpx;
+    vertical-align: 2rpx;
+    border-radius: 4rpx;
+    font-weight: 500;
+    font-size: 20rpx;
+}
+.fac-item .fac-txt .fac-pay {
+    color: #f70;
+    background-color: #fff1e6;
+}
+.fac-item .fac-txt .fac-free {
+    color: #009c67;
+    background-color: #e6f8f1;
+}
+/* 会员权益 & 政策与服务 */
+.benefits-info, .policy-info, .price-info {
+    margin-top: 16rpx;
+    padding: 24rpx;
+    font-size: 24rpx;
+    background-color: #fff;
+}
+.benefits-info .tit, .policy-info .tit, .price-info .tit {
+    color: #121212;
+    font-size: 36rpx;
+    font-weight: 600;
+}
+.benefits-info .benefits-item {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 16rpx;
+}
+.benefits-info .benefits-tit {
+    flex-shrink: 0;
+    margin-right: 16rpx;
+    padding: 2rpx 4rpx;
+    border-radius: 4rpx;
+    color: #f70;
+    background-color: #fff1e6;
+}
+.policy-info .item-title {
+    font-size: 28rpx;
+    font-weight: 500;
+    margin: 32rpx 0 16rpx;
+}
+.policy-info .item-desc {
+    /* font-size: 24rpx; */
+}
+
+.price-info .op-box {
+    padding: 24rpx;
+    background-color: #f8fafd;
+    border-radius: 8rpx;
+}
+.price-info .detail-box {
+    margin-top: 24rpx;
+    padding: 24rpx;
+    background: linear-gradient(90deg, rgba(255, 246, 232, 0.2) 0%, rgba(255, 233, 196, 0.3) 100%);
+    border-radius: 8rpx;
+}
+.price-info .box-tit {
+    flex: 1;
+    font-size: 36rpx;
+    font-weight: 600;
+    color: #333;
+}
+.price-info .price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16rpx 0;
+    font-size: 24rpx;
+    color: #666;
+}
+.price-info .sale-tit {
+    border-bottom: 1rpx solid #eee;
+    padding-bottom: 24rpx;
+}
+.price-info .price-tag {
+    color: #f70;
+    border: 1rpx solid #ffa04d;
+    border-radius: 4rpx;
+    font-size: 20rpx;
+    padding: 4rpx;
+    line-height: 1;
+}
+.price-info .price-desc {
+    font-size: 20rpx;
+    color: #999;
+}
+.price-info .price-avg {
+    margin-top: 48rpx;
+    color: #f70;
+    font-size: 20rpx;
+    font-weight: 500;
+}
+.price-info .price-color {
+    color: #f70;
+}
+.price-info .price-strong {
+    font-size: 40rpx;
+    font-weight: 600;
+}
+
+/*母房型浮层*/
+.baseroom-layer.modal { height: unset; max-height: 80%; }
+.baseroom-layer .bd { padding-bottom: 98rpx; }
+/*设置母房型浮层最大高度*/
+.baseroom-layer.modal { height: unset; max-height: 80%; }
+
+/*展开收起*/
+.base-more-fold {
+    clear: both;
+    padding: 24rpx 32rpx;
+    text-align: center;
+    font-size:24rpx;
+    font-weight:700;
+    color: #0086F6;
+}
+.base-more-fold .dh .txt:not(:last-of-type):after {
+    content: "、"
+}
+.show-policy-btn {
+    display: inline-block;
+    border: 2px solid #E7F0FF;
+    border-radius: 200rpx;
+    padding: 14rpx 24rpx;
+    line-height: 1;
+}
+
+/*底部预订按钮*/
+.des-bottom {position: fixed; bottom: 0; z-index: 2; box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.3); background-color: #fff; padding: 28rpx 20rpx; text-align: right;width: 100%; box-sizing: border-box; height: 140rpx;}
+.iphonx-bottom {height: 206rpx;}
+
+/*母房型浮层*/
+.base-room-layer {
+    height: 100% !important;
+    background: #000;
+    position: fixed;
+    z-index: 1002;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+
+}
+.base-room-layer .baseroom-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.base-room-layer .bd{flex: 2;}
+.baseroom-title .tit {font-size: 34rpx; color: #fff; font-weight: 700;}
+.base-room-layer .swiper { width: 100%; height: 450rpx; }
+.base-room-layer .base-info{background: #000; padding-top: 100rpx; margin-left: 90rpx;}
+.base-room-layer .item {width: 50%; color: #fff; font-size: 24rpx; font-weight: bold; float: left; padding: 6rpx 0; }
+.base-room-layer .item .txt {color: #fff;}
+.base-room-layer .slider { position: relative; }
+.base-room-layer .swiper-num { padding: 4rpx 26rpx; color: #fff; font-size: 24rpx; position: absolute; left: 50%; transform: translateX(-50%); bottom: 20rpx; background: rgba(0, 0, 0, 0.4); border-radius: 40rpx; }
+.base-room-layer .slide-image { width: 100%; height: 100%; }
+.base-room-layer .item .tit { color: #fff; float: left; padding-right: 8rpx;width:110rpx  }
+.base-close {position: absolute; right: 10rpx; color: #fff; }
+.pb-200 {padding-bottom: 200rpx;}
+
+/*限时抢购倒计时*/
+.timelimt {
+    background-image: linear-gradient(to right, #FF7700 0%, #FFB114 100%);
+    padding: 16rpx 24rpx;
+    color: #fff;
+    font-size: 24rpx;
+}

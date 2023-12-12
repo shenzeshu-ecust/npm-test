@@ -1,0 +1,15 @@
+/* pages/bus/router/index.wxss */
+@import '../bus.wxss';
+
+page {
+  height: 100%;
+  font-size: .75rem;
+  background-color: #efefef;
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  flex: 1;
+  padding: 2rem;
+  position: relative;
+}

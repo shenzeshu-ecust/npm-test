@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "headinfo": "/pages/hotel/detail/component/comment/headinfo/index",
+    "tag": "/pages/hotel/detail/component/comment/tag/index",
+    "wait-comment": "/pages/hotel/detail/component/comment/waitcomment/index"
+  }
+}

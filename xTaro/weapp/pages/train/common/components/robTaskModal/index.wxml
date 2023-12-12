@@ -1,0 +1,16 @@
+<block wx:if="{{popupType == 1}}">
+    <view bindtap="close" catchtouchmove="stopEvent" class="mkt-mask {{!show ? 'mkt-mask_hidden' : '' }}" wx:if="{{mask}}"></view>
+    <view wx:if="{{show}}" bindtap="close" class="mkt-dialog__wrp {{extClass}}">
+        <view class="mkt-dialog" catchtap="stopEvent">
+            <slot></slot>
+        </view>
+    </view>
+</block>
+<block wx:if="{{popupType == 2}}">
+    <view bindtap="close" catchtouchmove="stopEvent" class="mkt-mask {{!show ? 'mkt-mask_hidden' : '' }}" wx:if="{{mask}}"></view>
+    <view wx:if="{{show}}" bindtap="close" class="mkt-dialog__wrp {{extClass}}">
+        <view class="mkt-dialog-2" catchtap="stopEvent">
+            <slot></slot>
+        </view>
+    </view>
+</block>

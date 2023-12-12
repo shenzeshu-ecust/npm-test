@@ -1,0 +1,467 @@
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+
+<view class="top-bar {{scollMove ? 'fixed' : ''}}" style="padding-top: {{statusBarHeight}}px"><!--addclass="fixed"-->
+    <text class="ifont-back" bindtap="goBack" wx:if="{{!firstStack}}"></text>
+    <view class="tit">携程抢票</view>
+</view>
+<scroll-view class="index-box" scroll-y='true' bindscroll="scrollMove" style="height: {{systemHeight}}px;">
+    <view class="owner-top" style="padding-top: {{statusBarHeight}}px" wx:if="{{IsSelf}}">
+        <view class="owner-top-bd">
+            <view class="lbox">
+                <icon class="icon-rock"></icon>
+                <icon class="icon-light"></icon>
+            </view>
+            <view class="cont">
+                <view class="tit {{GrabOrderStatus == 0 ? '' : 'suc'}}"></view>
+                <view class="txt" wx:if="{{ArriveStation}}">开往「{{ArriveStation}}」的火车票</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="guest-top {{RightsInfo.Type == 2 ? 'stu' : ''}}" style="padding-top: {{statusBarHeight}}px" wx:else>
+        <view class="guest-top-bd">
+            <view class="slogan"></view>
+            <view class="txt">{{RightsInfo.Type == 2 ? '学生' : '新客'}}专享· 直升最高速抢票 · 价值{{RightsInfo.OriginPrice}}元</view>
+        </view>
+    </view>
+
+    <view class="wrap">
+        <view class="notice-box" wx:if="{{!IsSelf}}">
+            <image src="{{Avatar || 'https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/avatar.png'}}" class="avatar">
+            </image>
+            <view class="cont" wx:if="{{NotCanAssistedReason}}">{{NotCanAssistedReason}}</view>
+            <view class="cont" wx:elif="{{ArriveStation}}">我正在抢去<text class="strong">「{{ArriveStation}}」</text>的火车票，急需您的支援！</view>
+        </view>
+
+        <!-- 待激活状态 -->
+        <view class="card-box without-side-margin" wx:if="{{(!IsSelf && IsCanAssisted) || (IsSelf && RightsInfo.Status == 0) && GrabOrderStatus == 0}}">
+            <block wx:if="{{showWecom && wecomQRCode}}">
+                <view class="qrcode-container">
+                    <view class="title">
+                        长按扫码添加好友
+                    </view>
+                    <view class="subtitle">
+                        可立即为好友助力
+                    </view>
+                    <image
+                    class="qrcode"
+                    bindtouchstart="onTouchStart"
+                    bindtouchmove="onTouchMove"
+                    bindtouchend="onTouchEnd" src="{{wecomQRCode}}" show-menu-by-longpress="{{true}}" mode="widthFix"></image>
+                    <view class="tips">
+                        添加后可领旅行优惠券
+                    </view>
+
+                    <image class="hand-illustration" src="https://images3.c-ctrip.com/train/2022/app/8.56/zengzhang/zhuli/shou.png" mode="widthFix">
+
+                    </image>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="card-xinke">
+                    <view class="card-xinke-hd">
+                        <image src="https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/icon-vip.png"
+                            class="icon"></image>
+                        <view class="cont">
+                            <view class="tit" wx:if="{{RightsInfo.Type == 1}}">新客专享{{RightsInfo.Name}}<view class="tag"><text class="ifont-lock"></text>{{RightsInfo.Status == 1 ? '已激活' : (RightsInfo.Status == 0 ? '待激活' : '已结束')}}</view></view>
+                            <view class="tit" wx:if="{{RightsInfo.Type == 2}}">学生专享{{RightsInfo.Name}}<view class="tag"><text class="ifont-lock"></text>{{RightsInfo.Status == 1 ? '已激活' : (RightsInfo.Status == 0 ? '待激活' : '已结束')}}</view></view>
+                            <view class="txt">价值{{RightsInfo.OriginPrice}}元权益，限时免费</view>
+                        </view>
+                    </view>
+                    <view class="card-xinke-add">
+                        <view class="tit">满{{FreeActivateFriendsNumber}}人助力，即可激活</view>
+                        <view class="item" wx:for="{{AssistedFriendsList}}">
+                            <image src="{{item.PhotoUrl || 'https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/avatar.png'}}" class="avatar"></image>
+                            <view class="txt">{{item.NickName}}</view>
+                        </view>
+                        <button class="item"
+                            wx:for="{{AssistedFriendsList ? FreeActivateFriendsNumber - AssistedFriendsList.length : FreeActivateFriendsNumber}}"
+                            data-ubt-key=""
+                            bindtap="showShareBoard">
+                            <view class="add"></view>
+                            <view class="txt">等待邀请</view>
+                        </button>
+                    </view>
+                </view>
+                <view class="card-btn">
+                    <button class="btn-submit" wx:if="{{IsSelf}}" bindtap="showShareBoard">分享激活</button>
+                    <block wx:else >
+                    <button
+                            wx:if="{{loginFlag && userInfo}}"
+                            bindtap="assistActivateButton"
+                            data-bindtype="1"
+                            data-ubt-key="train_activevip_actbtn"
+                            class="btn-submit">
+                            <view bindtap="testubt">一键帮TA激活</view></button>
+                        <button
+                            wx:elif="{{!loginFlag}}"
+                            bindtap="loginAndAssist"
+                            data-ubt-key="train_activevip_actbtn"
+                            class="btn-submit"><view bindtap="testubt">一键帮TA激活</view></button>
+                        <button
+                            wx:elif="{{!userInfo}}"
+                            bindtap="assistActivateButton"
+                            data-bindtype="3"
+                            data-ubt-key="train_activevip_actbtn"
+                            class="btn-submit"><view bindtap="testubt">一键帮TA激活</view></button>
+                    </block>
+                    <view wx:if="{{prizeDesc}}" class="coupon-desc-text">
+                        <text>{{ prizeDesc }}</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+
+        <!-- 不能激活 本人 -->
+        <view class="card-box" wx:elif="{{IsSelf}}">
+            <view class="card-xinke">
+                <view class="card-xinke-hd">
+                    <image src="https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/icon-vip.png"
+                        class="icon"></image>
+                    <view class="cont">
+                        <view class="tit">{{RightsInfo.Name}}
+                            <view class="tag"><text class="ifont-radio" wx:if="{{RightsInfo.Status == 1}}"></text>{{RightsInfo.Status == 1 ? '已激活' : (RightsInfo.Status == 0 ? '待激活' : '已结束')}}</view>
+                        </view>
+                        <view class="txt">价值{{RightsInfo.OriginPrice}}元权益，限时免费</view>
+                    </view>
+                </view>
+                <view class="card-xinke-frd" wx:if="{{RightsInfo.Status == 1}}">
+                    <view class="item" wx:for="{{AssistedFriendsList}}">
+                        <image src="{{item.PhotoUrl || 'https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/avatar.png'}}"
+                            class="avatar"></image>
+                    </view>
+                    <view class="txt" wx:if="{{AssistedFriendsList.length}}">确认过眼神，是帮我激活的人</view>
+                </view>
+                <!-- 已激活 -->
+                <view class="card-xinke-info" wx:if="{{RightsInfo.Status == 1}}">
+                    <view class="tit">本单已升至 <text class="tgold">VIP</text> 抢票</view>
+                    <view class="txt">点击按钮，可继续分享特权给好友哦</view>
+                </view>
+                <!-- 已结束 -->
+                <view class="card-xinke-info" wx:elif="{{RightsInfo.Status == 2 || GrabOrderStatus !== 0 }}">
+                    <view class="tit">本轮抢票已结束</view>
+                    <view class="txt">点击按钮，可继续分享特权给好友哦</view>
+                </view>
+            </view>
+            <view class="card-btn">
+                <button class="btn-submit" bindtap="buyTicket" data-ubt-key="train_buyticket_hpbtn">去购票</button>
+                <button class="btn-share" open-type="share" data-ubt-key="" id="right">分享特权给好友</button>
+            </view>
+        </view>
+
+        <!-- 新客礼包已领取 b版  -->
+        <view class="card-box new-user-card-box" wx:elif="{{newUserFlag && newCustomerRightInfo.RightType === 1 && newCustomerRightInfo.IsHaveRights && newCustomerRightInfo.RightList.length}}">
+            <view class="card-equity">
+                <view class="ticket-container">
+                    <view class="ticket-box" wx:for="{{newCustomerRightInfo.RightList}}" bindtap="onClickGoToTrainActivity" data-right-info="{{item}}">
+                        <view class="ticket-box-left">
+                            <view class="ticket-tip">
+                                {{ item.Type === 3 ? '需助力解锁' : '已到账'}}
+                            </view>
+                            <view class="ticket-price">
+                                <text class="num">{{item.Price}}</text>
+                                <text>元</text>
+                            </view>
+                        </view>
+                        <view class="ticket-box-right">
+                            <view class="ticket-name">{{item.Name}}<text wx:if="{{item.Type === 3}}" class="ifont-arr"></text></view>
+                            <view class="ticket-desc">{{item.DescV2}}</view>
+                        </view>
+                    </view>
+                </view>
+                <!-- <view class="card-equity-hd">
+                    <view class="htit">您有bbbbbbbbb
+                        <text class="tgold">¥{{newCustomerRightInfo.OriginPrice}}</text> 特权礼包待领取</view>
+                </view>
+                <view class="card-equity-bd">
+                    <view class="item" wx:for="{{newCustomerRightInfo.RightList}}" data-url="{{item.JumpUrl}}" bindtap="toRightDetailPage">
+                        <view class="tag">价值{{item.Price}}元</view>
+                        <image src="{{item.IconUrl}}"
+                            class="icon"></image>
+                        <view class="tit">{{item.Name}}</view>
+                        <view class="txt">{{item.Desc}}<text class="ifont-detail"></text></view>
+                    </view>
+                </view> -->
+            </view>
+            <view class="card-btn">
+                <button class="btn-submit" bindtap="buyTicket" data-ubt-key="train_activevip_hptbtn">去购票</button>
+            </view>
+        </view>
+
+        <!-- 新客礼包已领取 a版  -->
+        <view class="card-box" wx:elif="{{newUserFlag && newCustomerRightInfo.RightType === 0 && newCustomerRightInfo.IsHaveRights && newCustomerRightInfo.RightList.length}}">
+            <view class="card-equity">
+                <view class="card-equity-hd">
+                    <view class="htit">您已领取
+                        <text class="tgold">¥{{newCustomerRightInfo.OriginPrice}}</text> 特权礼包</view>
+                </view>
+                <view class="card-equity-bd">
+                    <view class="item" wx:for="{{newCustomerRightInfo.RightList}}" data-url="{{item.JumpUrl}}" bindtap="toRightDetailPage">
+                        <view class="tag">价值{{item.Price}}元</view>
+                        <image src="{{item.IconUrl}}"
+                            class="icon"></image>
+                        <view class="tit">{{item.Name}}</view>
+                        <view class="txt">{{item.Desc}}<text class="ifont-detail"></text></view>
+                    </view>
+                </view>
+            </view>
+            <view class="card-btn">
+                <button class="btn-submit" bindtap="buyTicket" data-ubt-key="train_activevip_hptbtn">去购票</button>
+            </view>
+        </view>
+                <!-- 不能激活 客人 新客权益模块  -->
+        <!-- <view class="card-box" wx:elif="{{(canReceiveNewCustomerRight || !loginFlag) && newCustomerRightInfo}}">
+            <view class="card-equity">
+                <view class="card-equity-hd">
+                    <view class="htit">您有
+                        <text class="tgold">¥{{newCustomerRightInfo.OriginPrice}}</text> 特权礼包待领取</view>
+                </view>
+                <view class="card-equity-bd">
+                    <view class="item" wx:for="{{newCustomerRightInfo.RightList}}" data-url="{{item.JumpUrl}}" bindtap="toRightDetailPage">
+                        <view class="tag">价值{{item.Price}}元</view>
+                        <image src="{{item.IconUrl}}"
+                            class="icon"></image>
+                        <view class="tit">{{item.Name}}</view>
+                        <view class="txt">{{item.Desc}}<text class="ifont-detail"></text></view>
+                    </view>
+                </view>
+            </view>
+            <view class="card-btn">
+                <button class="btn-submit" wx:if="{{loginFlag}}" bindtap="buyTicket" data-ubt-key="train_activevip_hptbtn">限时免费领取</button>
+                <button
+                    class="btn-submit"
+                    wx:else
+                    bindtap="loginAndReceiveNewCustomerRight"
+                    data-ubt-key="train_activevip_hptbtn">限时免费领取</button>
+            </view>
+        </view> -->
+
+        <!-- 优惠券模块 -->
+        <view class="card-box" wx:elif="{{otherRightsInfoForCoupon && otherRightsInfoForCoupon.Type == 1}}">
+           <view class="card-book">
+                <view class="tit">恭喜您！获得一张优惠券</view>
+                <view class="card-coupon-desc">
+                 <view class="coupon-bd">
+                    <view class="coupon-left">
+                        <view class="coupon-left-price">
+                        {{otherRightsInfoForCoupon.OriginPrice }}<text>元</text>
+                        </view>
+                    </view>
+                    <view class="coupon-right">
+                        <view class="coupon-right-txts">
+                            <view class="txts-title">{{otherRightsInfoForCoupon.Name}}
+                                <image bindtap="showCouponDoc" class="icon-doc" src="https://images3.c-ctrip.com/train/2021/app/V8.44/xiaochengxu/quanyifenxiang/ic-tubiao.png" />
+                            </view>
+                            <view class="txts-date">{{expiredTime}}前有效</view>
+                        </view>
+                    </view>
+                    </view>
+                </view>
+            </view>
+            <view class="card-btn">
+                <button class="btn-submit" bindtap="vipRightToBuy" data-buytype="1" data-ubt-key="train_buyticket_hpbtn">去购票</button>
+            </view>
+        </view>
+
+        <!-- 广告模块 -->
+        <view class="card-box" wx:else>
+            <view class="card-book">
+                <view class="tit">轻松订旅行 就用携程小程序</view>
+                <view class="txt">买完票分享，还能领现金哦</view>
+            </view>
+            <view class="card-btn">
+                <button class="btn-submit" bindtap="vipRightToBuy" data-buytype="2" data-ubt-key="train_buyticket_hpbtn">去购票</button>
+            </view>
+        </view>
+
+        <!-- 学生卡权益模块
+        <block wx:if="{{IsSelf || (!IsSelf && !IsCanAssisted)}}">
+            <view class="white-box jinli-box" wx:if="{{studentsCardsInfo && (studentsCardsInfo.IsReceived || studentsCardsInfo.IsCanReceive) && IsHaveStudentPassenage}}">
+                <view class="jinli-hd"></view>
+                <view class="jinli-bd">
+                    <view class="jinli-get">
+                        <view class="cont">携程火车学生锦鲤卡</view>
+                        <button class="btn-get" data-url="{{studentsCardsInfo.IsReceived ? studentsCardsInfo.CardDetailUrl : studentsCardsInfo.ReceiveCardUrl}}" bindtap="toStudentCardPage" data-ubt-key="train_student_hptbtn">{{studentsCardsInfo.IsReceived ? '查看权益' : '免费领取'}}</button>
+                    </view>
+                    <view class="jinli-info">
+                        <view class="item" wx:for="{{studentsCardsInfo.TrainRightsList}}">
+                            <image src="{{item.IconUrl}}"
+                                class="icon"></image>
+                            <view class="txt">{{item.RightsName}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </block>-->
+
+        <view class="white-box rule-box" wx:if="{{rules.length}}">
+            <view class="tit">活动规则</view>
+            <view class="txt" wx:for="{{rules}}">{{index+1}}.{{item}}</view>
+        </view>
+    </view>
+</scroll-view>
+
+<view class="blackmask" wx:if="{{showType}}" bindtap="hideBackDrop"></view>
+<view class="pop-botm pop-share" hidden>
+    <view class="item">
+        <image src="https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/icon-wechat.png" class="logo">
+        </image>
+        <view class="txt">微信好友</view>
+    </view>
+    <view class="item">
+        <image src="https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/icon-pyq.png" class="logo">
+        </image>
+        <view class="txt">朋友圈</view>
+    </view>
+</view>
+
+<!-- 学生卡弹窗
+<view class="pop-mid pop-jinli" wx:if="{{showType == 'studentCard'}}">
+    <view class="pop-jinli-cont">
+        <view class="jinli-hd"></view>
+        <view class="jinli-bd">
+            <view class="jinli-get">
+                <view class="cont">携程火车学生锦鲤卡</view>
+                <view class="rbox">限时免费</view>
+            </view>
+            <view class="jinli-info">
+                <view class="item" wx:for="{{studentsCardsInfo.TrainRightsList}}">
+                    <image src="{{item.IconUrl}}"
+                        class="icon"></image>
+                    <view class="txt">{{item.RightsName}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="card-btn">
+        <button class="btn-submit breathe" data-url="{{studentsCardsInfo.ReceiveCardUrl}}" data-ubt-key="train_student_newbiebtn" bindtap="toStudentCardPage">立即领取</button>
+    </view>
+    <view class="ifont-closed" bindtap="hideBackDrop"></view>
+</view>-->
+
+
+<!-- 新客权益弹窗 -->
+<view class="pop-mid pop-equity" wx:if="{{showType == 'newCustomerRight'}}">
+    <view class="card-equity">
+        <view class="card-equity-hd">
+            <view class="top"></view>
+            <view class="txt">助力成功</view>
+            <view class="tit">送您 <text class="tgold">¥{{newCustomerRightInfo.OriginPrice}}</text> 特权礼包，请笑纳</view>
+        </view>
+        <view class="card-equity-bd">
+            <view class="item" wx:for="{{newCustomerRightInfo.RightList}}" data-url="{{item.JumpUrl}}" bindtap="toRightDetailPage">
+                <view class="tag">价值{{item.Price}}元</view>
+                <image src="{{item.IconUrl}}"
+                    class="icon"></image>
+                <view class="tit">{{item.Name}}</view>
+                <view class="txt">{{item.Desc}}<text class="ifont-detail"></text></view>
+            </view>
+        </view>
+    </view>
+    <view class="card-btn">
+        <button class="btn-submit breathe" bindtap="buyTicket" data-ubt-key="train_activevip_newbiebtn">限时免费领取</button>
+    </view>
+    <view class="ifont-closed" bindtap="hideBackDrop"></view>
+</view>
+
+
+<!-- 助力成功 -->
+<view class="pop-mid pop-suc" wx:if="{{showType == 'assistSuccess'}}">
+    <view class="card-suc">
+        <view class="tit">助力成功</view>
+        <view class="card-suc-coupon">
+            <image src="https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/icon-ctrip.png" class="icon">
+            </image>
+            <view class="cont">
+                <view class="strong">轻松订旅行 就用携程小程序</view>
+                <view class="txt">买完票分享，还能领现金哦</view>
+            </view>
+        </view>
+    </view>
+    <view class="card-btn">
+        <button class="btn-submit breathe" bindtap="buyTicket" data-ubt-key="train_buyticket_hpbtn">去购票</button>
+    </view>
+    <view class="ifont-closed" bindtap="hideBackDrop"></view>
+</view>
+
+
+<!-- 领取失败 -->
+<view class="pop-mid pop-suc" wx:if="{{showType == 'receiveFail'}}">
+    <view class="card-suc">
+        <view class="tit">您已是火车票老用户，无法领取新客特权哦</view>
+        <view class="card-suc-coupon">
+            <image src="https://images3.c-ctrip.com/train/activity/20200714-vip-qiangpiao/icon-ctrip.png" class="icon">
+            </image>
+            <view class="cont">
+                <view class="strong">轻松订旅行 就用携程小程序</view>
+                <view class="txt">买完票分享，还能领现金哦</view>
+            </view>
+        </view>
+    </view>
+    <view class="card-btn">
+        <button class="btn-submit breathe" bindtap="buyTicket" data-ubt-key="train_buyticket_hpbtn">去购票</button>
+    </view>
+    <view class="ifont-closed" bindtap="hideBackDrop"></view>
+</view>
+
+<view class="pop-mid pop-liuming active" wx:if="{{showType == 'userInfo'}}">
+    <view class="card-book">
+        <view class="tit">做好事要留名</view>
+        <view class="txt">是否告诉好友你是谁?</view>
+    </view>
+    <view class="card-btn">
+        <button
+        bindtap="getUserProfileAndAssist"
+        data-ubt-key=""
+        class="btn-submit">告诉TA</button>
+    </view>
+    <view class="ifont-closed" bindtap="doAssist"></view>
+</view>
+
+<!-- 邀请好友底部浮层-->
+<view class="share-box {{showType == 'shareBoard' ? 'active' : ''}}">
+    <view class="title">
+        <text>邀请好友帮助力</text>
+    </view>
+    <view class="share-btn">
+        <button class="wx" open-type="share" data-ubt-key="c_train_wx_activation_share2group" bindtap="noop"></button>
+        <button class="pyqs" catchtap="shareMoments" data-ubt-key="c_train_wx_activation_share2moments"></button>
+    </view>
+</view>
+
+<!-- 开奖页邀请好友分享图片-->
+<block wx:if="{{showType == 'momentsPost'}}">
+    <view class="share-image" catchtap="hideBackDrop" catchtouchmove="noop">
+        <canvas-image
+            background-url="{{canvasBg}}"
+            background-width="300"
+            background-height="354"
+            qrcode-x="191" qrcode-y="252"
+            qrcode-width="88"
+            page-path="{{qrcodePath}}"
+            btn-url="https://images3.c-ctrip.com/train/app/827/qiangpiao/xcx/BT_baocun.png"
+            bind:savesuccess="onSharePictureSaveAward"
+            bind:success="onSharePictureSuccessAward"
+            bind:fail="onSharePictureFailAward">
+        </canvas-image>
+    </view>
+</block>
+
+<!-- 邀请好友底部浮层-->
+<view class="coupon-box {{showType == 'couponDialog' ? 'active' : ''}}">
+    <view class="title">
+     <text class="ifont-closed-line" bindtap="hideBackDrop"></text>
+        <text>优惠券规则</text>
+    </view>
+    <view class="coupon-rule">
+        <text class="item">此优惠券可用于抵扣携程预订国内火车票代购订单（12306预订除外）；</text>
+        <text class="item">优惠券仅限购买套餐的用户使用，仅抵扣套餐金额部分，最高抵扣3元；</text>
+        <text class="item">购买保险不可使用此券；</text>
+        <text class="item">有效期内每张优惠券仅限使用一次，不能与其他优惠同享；</text>
+        <text class="item">使用优惠券的订单超时未支付或购票失败，优惠券将作废；若产生退票或改签，手续费将从实际支付金额中扣减，优惠券不予退回；</text>
+        <text class="item">优惠券自领取之日起30天有效；</text>
+        <text class="item">如发现恶意盗刷优惠券等行为，携程有权收回该行为涉及的优惠券。</text>
+    </view>
+</view>
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

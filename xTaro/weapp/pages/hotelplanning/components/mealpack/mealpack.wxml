@@ -1,0 +1,62 @@
+<import src="./meal_templates.wxml" />
+<import src="./pack_templates.wxml" />
+<import src="./card_templates.wxml" />
+
+<!-- 次卡 -->
+<template is="multiple-card" data="{{multipleCardList, cardDesc, multipleCardLen}}" wx:if="{{cikaSwitch && multipleCardLen > 0}}"></template>
+
+<!-- tab -->
+<view class="mealpack-wrapper" wx:elif="{{highStarData.mealProductList.length > 0 && highStarData.packProductList.length > 0}}">
+    <view class="tab-header">
+        <view class="title-wrapper" bindtap="selectTab" data-tabtype="1">
+            <view class="meal-title {{isMealActive && 'title-selected'}}">酒店美食</view>
+            <view class="underline {{isPackActive && 'transform-right'}}"></view>
+        </view>
+        <view class="segmentation"></view>
+        <view class="title-wrapper" bindtap="selectTab" data-tabtype="2">
+            <view class="pack-title {{isPackActive && 'title-selected'}}">预售套餐</view>
+        </view>
+    </view>
+    <!-- 酒店美食 -->
+    <view wx:if="{{isMealActive}}">
+        <template is="meal-modal" data="{{highStarData}}" />
+        <view wx:if="{{highStarData.mealProductTotal > 2}}" class="goto-more-wrapper">
+            <view catchtap="gotoProductList" data-producttype="1" class="show-more-btn">
+                查看全部酒店美食
+            </view>
+            <view class="wechat-font-arrow-right arrow-right-icon"></view>
+        </view>
+    </view>
+    <!-- 预售套餐 -->
+    <view wx:else>
+        <template is="pack-modal" data="{{highStarData}}" />
+        <view wx:if="{{highStarData.packProductTotal > 2}}" class="goto-more-wrapper">
+            <view catchtap="gotoProductList" data-producttype="2" class="show-more-btn">
+                查看全部预售套餐
+            </view>
+            <view class="wechat-font-arrow-right arrow-right-icon"></view>
+        </view>
+    </view>
+</view>
+<!-- 酒店美食平铺展示 -->
+<view wx:elif="{{highStarData.mealProductList.length > 0}}" class="mealpack-wrapper">
+    <view class="single-header">
+        <view class="product-name-wrapper">酒店美食</view>
+        <view wx:if="{{highStarData.mealProductTotal > 2}}" catchtap="gotoProductList" data-producttype="1" class="find-more-wrapper">
+            <view class="find-more">查看全部酒店美食</view>
+            <view class="wechat-font-arrow-right arrow-right-icon"></view>
+        </view>
+    </view>
+    <template is="meal-modal" data="{{highStarData}}" />
+</view>
+<!-- 预售套餐平铺展示 -->
+<view wx:elif="{{highStarData.packProductList.length > 0}}" class="mealpack-wrapper" >
+    <view class="single-header " >
+        <view class="product-name-wrapper">预售套餐</view>
+        <view wx:if="{{highStarData.packProductTotal > 2}}" catchtap="gotoProductList" data-producttype="2" class="find-more-wrapper">
+            <view class="find-more">查看全部预售套餐</view>
+            <view class="wechat-font-arrow-right arrow-right-icon"></view>
+        </view>
+    </view>
+    <template is="pack-modal" data="{{highStarData}}" />
+</view>

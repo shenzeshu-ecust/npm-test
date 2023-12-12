@@ -1,0 +1,48 @@
+<wxs src="../../utils.wxs" module="tools"></wxs>
+
+<view class="signIn-wrapper-train">
+    <view class="signIn-container-train" style="{{tools.resolveStyle({ backgroundImage: legaoInfo.wraperBgImage })}}">
+        <view class="signIn-title-1"></view>
+        <view class='sign-rule-btn1'>
+            <view class='sign-rule-btn1__text'>每日签到领抽奖机会</view>
+            <view wx:if="{{showTips}}" bindtap="showRuleModal" class='sign-rule-btn1__tips'></view>
+            <view class="signin-dingyue" wx:if="{{legaoInfo.taskComponentId}}">
+                <taskList tempid="{{tempid}}" compid="{{legaoInfo.taskComponentId}}" />
+            </view>
+        </view>
+
+        <view class="items-container-1-opcity">
+            <view class="items-container-1">
+                <block wx:for="{{signList}}" wx:key="day">
+                    <view class="item-container-1 {{item.done ? 'done' : ''}}" style="{{ tools.resolveStyle({ color: legaoInfo.itemColor, backgroundColor: legaoInfo.itemBgColor, backgroundImage: legaoInfo.itemBgImage }) }}">
+                        <text class="point-1">{{item.showName}}</text>
+                        <image wx:if="{{item.done}}" class="icon-1" src="{{legaoInfo.doenGoldIcon}}" alt="" />
+                        <image wx:else class="icon-1" src="{{item.showGift ? legaoInfo.giftImage : legaoInfo.goldIcon}}" alt="" />
+                        <text wx:if="{{item.done}}" class="text-1">已完成</text>
+                        <text wx:else class="text-1">第{{item.day}}天</text>
+                    </view>
+                </block>
+                <view style="flex-shrink: 0;margin-left: 200rpx;width: 2rpx;height: 2rpx;"></view>
+            </view>
+        </view>
+
+        <View class='sign-container-1' wx:if="{{signDetail.signDay == signDetail.totalDay}}">
+            <View class="sign-btn-1" style="{{tools.resolveStyle({ backgroundImage: legaoInfo.totalSignInDoneBtnBgImage, color: legaoInfo.signInDoneBtnColor })}}">
+                <!-- <Text class="tip-1" style=""></Text> -->
+                <View class="sign-txt-1"></View>
+            </View>
+        </View>
+        <View class='sign-container-1' wx:elif="{{signDetail.isSign}}">
+            <View class="sign-btn-1" style="{{tools.resolveStyle({ backgroundImage: legaoInfo.signInDoneBtnBgImage, color: legaoInfo.signInDoneBtnColor })}}">
+                <!-- <Text class="tip-1" style=""></Text> -->
+                <View class="sign-txt-1"></View>
+            </View>
+        </View>
+        <View class='sign-container-1' wx:else>
+            <View class="sign-btn-1" bindtap="signToday" style="{{tools.resolveStyle({ backgroundImage: legaoInfo.signInBtnBgImage, color: legaoInfo.signInDoneBtnBgColor })}}">
+                <!-- <Text class="tip-1" style=""></Text> -->
+                <View class="sign-txt-1"></View>
+            </View>
+        </View>
+    </view>
+</view>

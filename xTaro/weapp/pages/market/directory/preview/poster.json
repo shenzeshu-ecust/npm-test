@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  }
+}

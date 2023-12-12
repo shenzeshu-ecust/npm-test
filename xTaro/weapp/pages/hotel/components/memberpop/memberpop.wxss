@@ -1,0 +1,28 @@
+@import "../../common/common.wxss";
+.mp-box {
+  /*width: 610rpx;*/
+}
+.mp-box .mp-img {
+  position: relative;
+  width: 628rpx;
+  height: 754rpx;
+}
+
+.mp-box .mp-act {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 38rpx;
+}
+.mp-box .mp-act .mp-getbtn {
+  width: 468rpx;
+  height: 90rpx;
+  border-radius: 80rpx;
+  margin: 0 auto;
+}
+.mp-box .mp-close {
+  font-size: 60rpx;
+  margin: 20rpx 240rpx 0 240rpx;
+  color: #fff;
+  text-align: center;
+}

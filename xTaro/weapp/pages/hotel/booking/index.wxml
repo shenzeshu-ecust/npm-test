@@ -1,0 +1,792 @@
+<import src="../commontemplates/bookingnotice/bookingnotice.wxml" />
+<import src="../commontemplates/roompackage/package.wxml"/>
+<import src="./guesttips.wxml" />
+<import src="./pointsrule.wxml"></import>
+<import src="../booking/bedServiceLayer/index.wxml"></import>
+<import src="../commontemplates/forcelogin/forcelogin.wxml"/>
+<import src="../commontemplates/minidialog/dialog.wxml" />
+<page-meta page-style="overflow: {{showMask ? 'hidden' : 'visible'}}" />
+<!-- fishBone -->
+<view wx:if="{{!showHalfFishBone && showFishBone}}" class="bk-fishbone"><view class="fishbone-loading"></view></view>
+
+<view catchtouchmove="{{showHalfFishBone ? 'noop' : ''}}">
+    <mp-navigation-bar wx:if="{{!isQuickApp}}" id="mp-navigation" back="{{false}}" background="#fff">
+        <view slot="left" class="custom-navigation-back" bindtap="handleCustomBack" wx:if="{{!showForceLogin}}">
+            <text class="navback-arrow wechat-font-g-arrow-down"></text>
+        </view>
+        <view slot="center" class="custom-navigation-center">
+            <text class="title">{{hotelName}}</text>
+        </view>
+    </mp-navigation-bar>
+
+    <!-- 顶部房型信息 -->
+    <view class="bk-head autoExpose" data-expose="{{roomInfoExposeObj}}">
+        <view bindtap="toggleRoomLayer">
+        <view class="date-box" wx:if="{{!isYanZhuChannel}}">
+            <view class="date-info">
+                <block wx:if="{{subRoomInfo.isHourRoom}}">
+                    {{dateInfo.inDayText}} {{dateInfo.inDayDesc}}
+                </block>
+                <block wx:else >
+                    {{dateInfo.inDayText}}<text decode="{{true}}">&nbsp;{{dateInfo.inDayDesc}}</text>
+                    <text class="h-line">-</text>
+                    {{dateInfo.outDayText}}<text decode="{{true}}">&nbsp;{{dateInfo.outDayDesc}}</text>
+                    <text class="v-line">|</text>
+                    <text>{{dateInfo.days}}晚</text>
+                </block>
+            </view>
+            <view class="blue fn24 {{canToggleLayerBtn ? '' : 'disabled'}}">房型详情</view>
+        </view>
+        <view class="room-name">
+            <text>{{subRoomInfo.name}}</text>
+            <block wx:if="{{subRoomInfo.bed}}">
+                <text class="v-line">|</text><text>{{subRoomInfo.bed}}</text>
+            </block>
+            <text wx:if="{{subRoomInfo.hourInfoName}}" class="hourroom-desc">{{subRoomInfo.hourInfoName}}</text>
+            <block wx:else>
+                <text class="v-line">|</text>
+                <text>{{subRoomInfo.isShowReward && subRoomInfo.rewardMealInfo.mealSummaryDesc || subRoomInfo.mealInfo.title}}</text>
+            </block>
+        </view>
+        <!-- 套餐 -->
+        <template is="packageDesc" data="{{roomPackageInfo: subRoomInfo.roomPackageInfo, isGray: ''}}"></template>
+        <!-- 取消确认标签 -->
+        <view class="head-tags">
+            <view wx:if="{{cancelPolicy.cardTitle}}"
+                class="tag-item {{cancelPolicy.adType === 1 ? 'constant-tip-color constant-bdcolor' : ''}}">{{mpInfo.freeCancelInfo.isShowFreeCancel ?  mpInfo.freeCancelInfo.priceValueSummary : cancelPolicy.cardTitle}}</view>
+            <view wx:if="{{confirmPolicy.policy}}"
+                class="tag-item {{ confirmPolicy.style === 1 ? 'confirm-better' : ''}}">{{confirmPolicy.policy}}</view>
+        </view>
+        </view>
+        <!-- 订房必读 -->
+        <view wx:if="{{showHalfFishBone}}" class="head-notice">
+            <view class="fishbone-notice"><view class="fishbone-loading"></view></view>
+        </view>
+        <view wx:elif="{{topNoticeTips.length}}" class="head-notice autoExpose" bindtap="toggleNoticeLayer" data-id="top-tips" data-expose="{{noticeInfoExposeObj}}">
+            <template is="bookingnotice-entry" data="{{topNoticeTips: topNoticeTips, noticeTitle: noticeTitle}}" />
+        </view>
+    </view>
+    <view wx:if="{{showHalfFishBone}}" class="bk-fishbone-half"><view class="fishbone-loading"></view></view>
+
+    <!-- 滚动激励 -->
+    <view wx:if="{{newCustomerInfo.isNewMember && newCustomerInfo.deductionAmount > 0}}" class="inspire-swiper">
+        <view class="inspire-item new-customer-inspire cell-v">
+            <image class="new-customer-icon" src="https://pages.c-ctrip.com/hotels/wechat/img/new_customer_present.png" />
+            <text class="new-customer-inspire-txt">您是酒店新人，本单已减最高{{newCustomerInfo.deductionAmount}}元</text>
+        </view>
+    </view>
+    <swiper wx:elif="{{inspireTips.length}}" circular autoplay vertical class="inspire-swiper">
+        <block wx:for="{{inspireTips}}">
+            <swiper-item class="inspire-item style{{item.style}} cell-v">
+                <image wx:if="{{item.icon}}" class="inspire-icon" src="{{item.icon}}" />
+                <text class="inspire-text">{{item.message}}</text>
+            </swiper-item>
+        </block>
+    </swiper>
+
+    <!-- 订房信息 -->
+    <view class="card-common reservation-info autoExpose" id="reservationModule" data-expose="{{reInfoExposeObj}}">
+        <!-- 联合会员延住 日期 -->
+        <view wx:if="{{isYanZhuChannel}}" class="bk-head" style="padding-left:0">
+            <view class="date-box">
+                <view class="date-info ml-32">
+                    <text>续住{{dateInfo.days}}晚</text>
+                    <text class="v-line">|</text>
+                    {{dateInfo.inDayText}}<text decode="{{true}}">&nbsp;{{dateInfo.inDayDesc}}</text>
+                    <text class="h-line">-</text>
+                    {{dateInfo.outDayText}}<text decode="{{true}}">&nbsp;{{dateInfo.outDayDesc}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="reservation-tit">
+            <view class="card-title ml-32">订房信息</view>
+            <view class="flex-center">
+                <view class="wechat-font-minus icon-style {{roomQuantity <= (quantityArr[0] || 1) ? 'icon-disabled' : ''}}" bindtap="roomMinus"></view>
+                <view class="room-quan" bindtap="toggleQuantityLayer">{{roomQuantity}}间</view>
+                <view class="wechat-font-add icon-style {{roomQuantity >= quantityArr.length ? 'icon-disabled' : ''}} mr-32" bindtap="roomPlus"></view>
+            </view>
+        </view>
+
+        <!-- 延住单间房 房间号 -->
+        <view class="li-item" wx:if="{{isYanZhuChannel && roomQuantity === 1}}">
+            <view class="m-label ml-32" bindtap="showRoomNoTips">
+                <text class="{{yanZhuRoomFocus ? 'color-focus' : ''}}">房间号</text>
+                <text class="wechat-font-qa ml12"></text>
+            </view>
+            <view class="m-txt">
+                <view class="input-box">
+                    <input
+                        maxlength="20"
+                        type="text"
+                        class="m-input bold"
+                        placeholder-class="placeholder"
+                        placeholder="携程可为您争取原房间入住（选填）"
+                        data-idx="0"
+                        bindinput="handleRoomIdInput"
+                        bindfocus="handleYanZhuRoomIdFocus"
+                        bindblur="handleYanZhuRoomIdBlur"
+                        value="{{yanZhuRoomIdList[0]}}"/>
+                </view>
+            </view>
+        </view>
+
+        <!-- 海外姓名 -->
+        <view wx:if="{{showForeignName}}" class="client-info">
+        <view class="li-item {{touristTaxTipInfo.tip ? '' : 'add-bb'}}" wx:for="{{foreignPassengerList}}" wx:for-item="itemPerRoom" wx:for-index="idxm">
+            <view wx:if="{{idxm === 0}}" class="m-label ml-32" bindtap="toggleGuestTips" data-ubt-key="xcx_txy_xmtx">
+                <text>{{roomQuantity > 1 ? '房间1' : '住客姓名'}}</text>
+                <text class="wechat-font-qa ml12"></text>
+            </view>
+            <view wx:else class="m-label ml-32">
+                <text>房间{{idxm + 1}}</text>
+            </view>
+            <!-- 中间输入模块 -->
+            <view class="m-txt">
+                <view class="enname-item" wx:for="{{itemPerRoom}}" wx:for-item="ennameItem" wx:for-index="idxn">
+                    <view class="input-info {{showCountryInfo && idxm === 0 && idxn === 0 ? 'add-bb': ''}}">
+                    <view class="lastname">
+                        <view class="input-box">
+                            <input type="text" class="ipt-outland" placeholder-class="placeholder" placeholder="例:HAN"
+                            data-idxm="{{idxm}}" data-idxn="{{idxn}}" data-value="{{ennameItem.lastName.value}}"
+                            value="{{ennameItem.lastName.value}}"
+                            bindinput="lastNameInput" bindblur="lastNameBlur" bindfocus="lastNameFocus" bindtap="noop"
+                            data-ubt-key="xcx_hotel_order_guest" id="autotest_hotelbookpage_usefirstname" />
+                        </view>
+                        <view wx:if="{{ennameItem.lastName.errMsg}}" class="flex-center color-error input-error-msg">
+                            <icon type="warn" size="11" color="#F5190A" />
+                            <text class="input-error-text">{{ennameItem.lastName.errMsg}}</text>
+                        </view>
+                    </view>
+                    <view class="fisrtname">
+                        <view class="input-box">
+                            <input type="text" class="ipt-outland" placeholder-class="placeholder" placeholder="例:MEIMEI"
+                            data-idxm="{{idxm}}" data-idxn="{{idxn}}" data-id="firstName{{idxm}}{{idxn}}" data-idp="firstName{{idxm}}" data-value="{{ennameItem.firstName.value}}"
+                            value="{{ennameItem.firstName.value}}"
+                            bindinput="firstNameInput" bindblur="firstNameBlur" bindfocus="firstNameFocus" bindtap="noop"
+                            data-ubt-key="xcx_hotel_order_guest" id="autotest_hotelbookpage_usefirstname" />
+                        </view>
+                        <view wx:if="{{ennameItem.firstName.errMsg}}" class="flex-center color-error input-error-msg">
+                            <icon type="warn" size="11" color="#F5190A" />
+                            <text class="input-error-text">{{ennameItem.firstName.errMsg}}</text>
+                        </view>
+                    </view>
+                    </view>
+                    <view wx:if="{{showCountryInfo && idxm === 0 && idxn === 0}}" class="m-label country-info" bindtap="selectCountryCode" data-ubt-key="xcx_hotel_order_country_code">
+                        <block wx:if="{{clientCountryCode.errMsg}}">
+                            <icon type="warn" size="11" color="#F5190A" class="mr10" />
+                        </block>
+                        <text class="country-content {{clientCountryCode.errMsg ? 'color-err' : ''}} {{clientCountryCode.countryName ? 'black1' : 'black2'}}">{{clientCountryCode.countryName || '请选择证件签发国家/地区'}}</text>
+                        <text class="wechat-font-arrow-right icon-arrow icon-pos"></text>
+                    </view>
+                </view>
+            </view>
+            <!-- 常旅选择icon -->
+            <text wx:if="{{!isQuickApp}}" class="wechat-font-guest guest-icon mr-11" bindtap="choosePassenger" data-idxm="{{idxm}}" data-ubt-key="xcx_txy_clxx"></text>
+        </view>
+        <!-- 税费提示 -->
+        <view class="li-item tax-info" wx:if="{{touristTaxTipInfo.tip}}">
+            <view class="tax-content" catchtap="showTaxTipInfo">
+                {{touristTaxTipInfo.tip}}<text class="wechat-font-qa color"></text>
+            </view>
+        </view>
+        <view wx:if="{{macaoRealNameTip}}" class="action-tips-box ml-32">
+            <view class="action-tips">{{macaoRealNameTip}}</view>
+        </view>
+        </view>
+        <!-- 国内姓名 -->
+        <view wx:else class="li-item {{showNameWarning ? 'input-warning' : ''}}">
+            <!-- 延住多间房场景，姓名房间号label合成一行 -->
+            <view wx:if="{{isYanZhuChannel && roomQuantity > 1}}" class="m-yanzhu-label ml-32" bindtap="toggleGuestTips">
+                <text class="{{yanZhuRoomFocus ? 'color-focus' : ''}}">住客姓名\n&房间号</text>
+                <text class="wechat-font-qa ml12"></text>
+            </view>
+            <view class="name-box">
+                <block wx:for="{{passengerList}}" wx:for-item="pItem">
+                <!-- 延住多间房，展示房间号 -->
+                <view class="name-item" wx:if="{{isYanZhuChannel && roomQuantity > 1}}">
+                    <view class="input-box m-txt">
+                        <input
+                            maxlength="20"
+                            type="text"
+                            class="m-input bold"
+                            placeholder-class="placeholder"
+                            data-idx="{{index}}"
+                            placeholder="房间号 选填房号，争取原房入住"
+                            bindinput="handleRoomIdInput"
+                            bindfocus="handleYanZhuRoomIdFocus"
+                            bindblur="handleYanZhuRoomIdBlur"
+                            value="{{yanZhuRoomIdList[index]}}" />
+                    </view>
+                </view>
+                <view class="name-item">
+                    <!-- 一般场景和延住单间房场景 -->
+                    <block wx:if="{{!(isYanZhuChannel && roomQuantity > 1)}}">
+                        <view wx:if="{{index === 0}}" class="m-label ml-32" bindtap="toggleGuestTips" data-ubt-key="xcx_txy_xmtx">
+                            <text class="{{pItem.isFocus ? 'color-focus' : ''}}">{{roomQuantity > 1 ? '房间1' : '住客姓名'}}</text>
+                            <text class="wechat-font-qa ml12"></text>
+                        </view>
+                        <view wx:else class="m-label ml-32">
+                            <text class="{{pItem.isFocus ? 'color-focus' : ''}}">房间{{index + 1}}</text>
+                        </view>
+                    </block>
+                    <view class="m-txt">
+                        <view class="input-box">
+                            <input type="text" class="m-input bold" placeholder-class="placeholder"
+                            placeholder="{{(isYanZhuChannel && roomQuantity > 1) ? '每间只需填一人' : '请输入姓名'}}"
+                            data-idx="{{index}}" data-id="person{{index}}" data-idp="nameip" data-value="{{pItem.fullName}}" value="{{pItem.fullName}}"
+                            bindinput="nameInput" bindfocus="nameFocus" bindblur="nameBlur" bindtap="noop"
+                            data-ubt-key="xcx_hotel_order_guest" id="autotest_hotelbookpage_usenameinput"/>
+                        </view>
+                        <!-- 错误信息 -->
+                        <view wx:if="{{pItem.errMsg}}" class="flex-center color-error input-error-msg">
+                            <icon type="warn" size="11" color="#F5190A" />
+                            <text class="input-error-text">{{pItem.errMsg}}</text>
+                        </view>
+                        <!-- 身份证等证件 -->
+                        <view wx:if="{{requiredInfo.requireCertificate}}" class="card-box">
+                            <view class="title" data-index="{{index}}" bindtap="cardTypeSelect">
+                                <text class="text">{{pItem.cardInfo.cardName}}</text>
+                                <text wx:if="{{requiredInfo.certificateTypes && requiredInfo.certificateTypes.length > 1}}"
+                                    class="wechat-font-g-arrow-down icon-arrow"></text>
+                            </view>
+                            <view class="">
+                                <!-- input不支持键盘类型切换，用两个input标签来实现键盘类型切换的功能 -->
+                                <block wx:if="{{pItem.cardInfo.cardType === 1}}">
+                                    <input type="idcard" class="pn-cn" placeholder-class="placeholder"
+                                        placeholder="酒店预订需证件号" maxlength="18" value="{{pItem.cardInfo.cardNo}}"
+                                        data-index="{{index}}" data-type="{{pItem.cardInfo.cardType}}"
+                                        bindinput="cardInput" bindfocus="cardFocus" bindblur="cardBlur" />
+                                </block>
+                                <block wx:else>
+                                    <input class="pn-cn" placeholder-class="placeholder"
+                                        placeholder="酒店预订需证件号" maxlength="18" value="{{pItem.cardInfo.cardNo}}"
+                                        data-index="{{index}}" data-type="{{pItem.cardInfo.cardType}}"
+                                        bindinput="cardInput" bindfocus="cardFocus" bindblur="cardBlur" />
+                                </block>
+                            </view>
+                        </view>
+                        <!-- 证件错误提示 -->
+                        <view wx:if="{{pItem.cardInfo.errMsg}}" class="flex-center color-error input-error-msg">
+                            <icon type="warn" size="11" color="#F5190A" />
+                            <text class="input-error-text">{{pItem.cardInfo.errMsg}}</text>
+                        </view>
+                    </view>
+                </view>
+                </block>
+                <view wx:if="{{macaoRealNameTip}}" class="action-tips-box ml-32">
+                    <view class="action-tips">{{macaoRealNameTip}}</view>
+                </view>
+                <!-- 姓名空提示 -->
+                <view wx:elif="{{showNameBlankTips}}" class="action-tips-box">
+                    <view class="action-tips {{isYanZhuChannel ? '' : 'ml-32'}}">请输入住客姓名，每间仅需填1人，{{passengerList.length > 1 ? '姓名不可重复' : '可住'+subRoomInfo.maxNum+'人'}}</view>
+                </view>
+                <view wx:if="{{groupVipInfo.isCheckName}}" class="vipname-tips ml-32">仅限会员本人（或携亲友）预订入住</view>
+            </view>
+            <!-- 常旅icon -->
+            <text wx:if="{{!isQuickApp}}" class="wechat-font-guest guest-icon mr-11" bindtap="choosePassenger" data-ubt-key="xcx_txy_clxx"></text>
+        </view>
+
+        <!-- 证件信息授权勾选 -->
+        <view wx:if="{{requiredInfo.requireCertificate}}" class="id-card-flex ml-32">
+            <radio color="#006FF6" data-type="0" checked="{{agreeIdCard}}" bindtap="toggleIdCardAuth"></radio>
+            <view class="id-card-txt">
+                <text class="{{hasAgreeIdCardErr ? 'color-error' : ''}}" bindtap="toggleIdCardAuth">我同意将证件信息用于该酒店预订</text>
+                <text class="active-txt" catchtap="toAuthorizationText">携程信息授权协议</text>
+            </view>
+        </view>
+
+        <!-- 手机号 -->
+        <view class="li-item  {{isShowReplace ? 'phone-label-container' : ''}}  {{contact.showWarning ? 'input-warning' : ''}}">
+            <view class="m-label ml-32" bindtap="selectPhonecode" data-ubt-key="xcx_hotel_order_callnum">
+                <text class="{{contact.isFocus ? 'color-focus' : ''}}{{contact.errMsg ? 'color-error' : ''}}">+{{contact.ccode}}</text>
+                <text class="wechat-font-g-arrow-down ml12 icon-arrow"></text>
+            </view>
+            <view class="fl">
+            <view class="m-txt phone-label-item">
+                <view class="phone-item" >
+                <view class="input-box fl">
+                    <input name="handlePhone" type="number" class="m-input bold"
+                        placeholder-class="placeholder" placeholder="用于接收通知" value="{{contact.phoneNum}}" data-value="{{contact.phoneNum}}"
+                        bindinput="phoneInput" bindfocus="phoneFocus" bindblur="phoneBlur" bindtap="noop"
+                        data-ubt-key="xcx_hotel_order_callnum" id="autotest_hotelbookpage_phonenumberinput"/>
+                    <view wx:if="{{contact.showClose}}" class="clear-area" catchtap="phoneClear" data-event-source="clear">
+                        <icon type="clear" size="16" color="#bbb" />
+                    </view>
+                </view>
+                <view wx:if="{{contact.errMsg}}" class="flex-center color-error input-error-msg">
+                    <icon type="warn" size="11" color="#F5190A" />
+                    <text class="input-error-text">{{contact.errMsg}}</text>
+                </view>
+                </view>
+            <view wx:if="{{isWechat && showGetPhoneBtn && showGetPhoneNumberIcon}}" bindtap="phoneAuthTap" data-type="userphone">
+                <getPhoneNumBtn
+                    limitTriggerCGP="{{phoneNumberParams.limitTriggerCGP}}"
+                    sourceKey="{{phoneNumberParams.sourceKey}}"
+                    limitFrequency="{{phoneNumberParams.limitFrequency}}"
+                    bind:cgetphonenumber="onGetPhoneNumber"
+                    bind:clistenbtnstatus="onPhoneNumberStatusChange"
+                    btnReadyText="{{phoneNumberParams.btnReadyText}}"
+                    btnErrorText="{{phoneNumberParams.btnErrorText}}"
+                    btnLoadingText="{{phoneNumberParams.btnLoadingText}}"
+                    btnLoadingClassName="{{phoneNumberParams.className}}"
+                    btnReadyClassName="{{phoneNumberParams.className}}"
+                    btnErrorClassName="{{phoneNumberParams.className}}"
+                >
+                    <text slot="middle" class="wechat-font-tel-book icon-style"></text>
+                </getPhoneNumBtn>
+            </view>
+            </view>
+            <view hidden="{{!isShowReplace}}" class="phone-replace-container" bindtap="{{isReplace ? 'replacePsgPhone' : 'closeReplaceContainer'}}">
+                <text class="{{isReplace ? 'tip-replace' : 'tip-attention'}}">{{replaceText}}</text>
+                <view wx:if="{{isReplace}}" class="tip-replace-phone">
+                    <text class="tip-replace-phone-number black1" >{{psgReplaceText}}</text>
+                </view>
+                <view class="close black1 wechat-font-close2 close-btn" catchtap="closeReplaceContainer"></view>
+            </view>
+            </view>
+        </view>
+
+        <!-- 到店时间 延住单不展示预计到店-->
+        <view wx:if="{{!isYanZhuChannel && arrivalInfo.arrivalTimeList.length && !isOutland}}" class="li-item" catchtap="showArrivalLayer">
+            <view class="m-label ml-32">{{subRoomInfo.isHourRoom ? '入住时段' : '预计到店'}}</view>
+            <view class="m-txt">
+                <text >{{arrivalInfo.arrivalTimeList[arrivalInfo.currentIndex].arrivalTimeText}}</text>
+                <text class="fn24 ml12">{{arrivalInfo.arrivalTimeList[arrivalInfo.currentIndex].subTitle}}</text>
+            </view>
+            <text class="wechat-font-arrow-right icon-arrow mr-32"></text>
+        </view>
+        <view wx:if="{{arrivalInfo.policyTips}}" class="action-tips-box ml-32">
+            <view class="action-tips">{{arrivalInfo.policyTips}}</view>
+        </view>
+
+        <!-- email -->
+        <view wx:if="{{isOutland || contact.ccode !== '86'}}" class="li-item">
+            <label class="m-label ml-32"><text class="{{email.isFocus ? 'color-focus' : ''}}{{email.errMsg ? 'color-error' : ''}}">E-mail</text></label>
+            <view class="m-txt">
+                <view class="input-box">
+                    <input class="m-input" placeholder-class="placeholder" placeholder="用于接收通知"
+                        data-id="email" data-value="{{email.value}}" value="{{email.value}}" bindinput="emailInput"
+                        bindfocus="emailFocus" bindblur="emailBlur" bindtap="noop"
+                        data-ubt-key="HTL_c_WeChatAPP_order_email_click_c" id="autotest_hotelbookpage_emailinput" />
+                    <view wx:if="{{email.showClose}}" class="cleararea" data-id="email" catchtap="emailClear">
+                        <icon type="clear" size="16" color="#bbb"/>
+                    </view>
+                </view>
+                <view wx:if="{{email.errMsg}}" class="flex-center color-error input-error-msg">
+                    <icon type="warn" size="11" color="#F5190A" />
+                    <text class="input-error-text">{{email.errMsg}}</text>
+                </view>
+            </view>
+        </view>
+
+        <!-- 床型要求 -->
+        <block wx:if="{{customRemark.bedSpecialRemark || customRemark.bedOptionItems && customRemark.bedOptionItems.length}}">
+            <view class="li-item complex-bed-tip {{customRemark.complexBedErr ? 'input-warning' : ''}}">
+                <view class="m-label ml-32">床型要求</view>
+                <view class="m-txt">
+                    <view wx:if="{{customRemark.bedSpecialRemark}}">{{customRemark.bedSpecialRemark}}</view>
+                    <radio-group wx:if="{{customRemark.bedOptionItems && customRemark.bedOptionItems.length}}"
+                                 bindchange="chooseBedRadio" class="bed-type">
+                        <label wx:for="{{customRemark.bedOptionItems}}" wx:for-item="bed" wx:for-index="index" class="c-bed-tips">
+                            <radio color="#006FF6" data-type="0" value="{{index}}"></radio>
+                            <text class="c-single-bed">{{bed.title}}</text>
+                        </label>
+                    </radio-group>
+                    <view wx:if="{{customRemark.complexBedErr}}" class="flex-center color-error input-error-msg">
+                        <icon type="warn" size="11" color="#F5190A" />
+                        <text class="input-error-text">{{customRemark.complexBedErr}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="action-tips-box ml-32" wx:if="{{customRemark.bedConfirmMsg}}">
+                <view class="action-tips">{{customRemark.bedConfirmMsg}}</view>
+            </view>
+        </block>
+        <block wx:elif="{{customRemark.outerRemarkList && customRemark.outerRemarkList.length}}">
+            <view class="li-item ml-32">
+                <view class="m-label">床型要求</view>
+                <view class="m-txt flex-center">
+                    <view wx:for="{{customRemark.outerRemarkList}}" class="bed-mark {{customRemark.bedId === item.remarkId ? 'current' : ''}}"
+                        bindtap="bedMark" data-id="{{item.remarkId}}">{{item.hotelDescription}}</view>
+                </view>
+            </view>
+            <view class="action-tips-box ml-32">
+                <view class="action-tips">{{customRemark.bedConfirmDesc || customRemark.bedConfirmMsg}}
+                    <text class="active-txt" bindtap="toggleBedServiceRule">服务说明</text>
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <!-- 会员互通 -->
+    <include src="./groupmember.wxml"></include>
+
+    <!-- 礼盒 -->
+    <view wx:if="{{subRoomInfo.giftInfo && subRoomInfo.giftInfo.packageInfoList && subRoomInfo.giftInfo.packageInfoList[0].name}}" class="card-common">
+        <view class="li-item" bindtap="toggleGiftLayer">
+            <view class="m-label">礼赠</view>
+            <view class="cell-star single-ellipsis">{{subRoomInfo.giftInfo.packageInfoList[0].name}}</view>
+            <view class="wechat-font-arrow-right icon-arrow"></view>
+        </view>
+    </view>
+
+    <view class="card-common discount-box">
+        <view wx:if="{{newCustomerInfo.isNewMember}}" class="prime-banner prime-booking prime-banner-new-customer">
+            <view class="prime-banner-left mr8">
+                <text class="prime-font fn32">新人首单可享</text>
+            </view>
+            <view class="new-customer-cheap-tag cell-v">超便宜</view>
+            <view wx:if="{{mpInfo.remainingPoints > 0}}" class="pro-icon-box black2">
+                <view>剩余{{mpInfo.remainingPoints}}积分</view>
+            </view>
+        </view>
+        <!--会员等级banner-->
+        <view wx:elif="{{!isOutland}}" class="prime-banner prime-booking prime-color-{{userLevelInfo.userLevelType}} prime-banner-bg-{{userLevelInfo.userLevelType}}">
+            <view class="prime-banner-left">
+                <view class="prime-icon prime-bg-{{userLevelInfo.userLevelType}} icon-gradient-c wechat-font-prime fn36"></view>
+                <text class="prime-font fn32">{{userLevelInfo.userLevelName}}</text>
+            </view>
+            <view wx:if="{{reducedPrice > 0}}" class="ft24">
+                本单已享价值￥{{reducedPrice}}权益
+            </view>
+            <view class="pro-icon-box black2">
+                <view>剩余{{mpInfo.remainingPoints}}积分</view>
+            </view>
+        </view>
+        <!-- 促销优惠 -->
+        <view class="li-item" bindtap="toggleDiscountDetail">
+            <view class="m-label">促销优惠</view>
+            <view class="m-txt tags-box">
+                <view wx:for="{{priceInfo.priceTags}}" class="discount-tag">{{item.title}}¥{{item.amount}}</view>
+                <view wx:if="{{pointsGetInfo.calculationPoint}}" class="discount-tag">{{pointsGetInfo.subTitle}}{{pointsGetInfo.calculationPoint}}积分</view>
+                <view wx:if="{{couponData.isBestSelect}}" class="max-discount">{{couponData.incentiveText || '已享最大优惠'}}</view>
+            </view>
+            <view class="{{showDiscountDetail ? 'wechat-font-g-arrow-up' : 'wechat-font-g-arrow-down'}} icon-arrow"></view>
+        </view>
+        <view wx:if="{{showDiscountDetail}}" class="discount-info">
+            <block wx:for="{{priceInfo.deductionItems}}">
+                <!-- 优惠券此处排除，下面单独展示 -->
+                <view wx:if="{{!item.isCoupon}}" class="li-item">
+                    <view class="discount-text black1">
+                        {{item.title}}
+                        <text class="discount-price">立减¥{{item.amount}}</text>
+                    </view>
+                </view>
+            </block>
+            <view wx:for="{{priceInfo.backItems}}" class="li-item">
+                <view class="discount-text black1">
+                    {{item.title}}
+                    <text class="discount-price">返¥{{item.amount}}</text>
+                </view>
+            </view>
+            <!-- 优惠券 -->
+            <view class="li-item" bindtap="showCouponLayer">
+                <block wx:if="{{availCouponLen}}">
+                    <view class="cell-star discount-text black1">
+                        优惠券
+                        <text wx:if="{{couponData.selectedAmountText}}" class="discount-price">{{couponData.selectedAmountText}}</text>
+                        <text wx:else>未使用优惠券</text>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="cell-star discount-text black1">优惠券</view>
+                    <view class="conpon-use">暂无可用优惠券</view>
+                </block>
+                <view class="wechat-font-arrow-right icon-arrow"></view>
+            </view>
+            <!-- 积分赠送 -->
+            <view wx:if="{{pointsGetInfo.calculationPoint}}" class="li-item" bindtap="togglePointsRule">
+                <view class="discount-text black1">
+                    {{pointsGetInfo.subTitle}}
+                    <text class="discount-price">{{pointsGetInfo.calculationPoint}}积分</text>
+                    <text class="wechat-font-qa ml12"></text>
+                </view>
+            </view>
+        </view>
+
+        <!-- 积分权益 -->
+        <include src="./memberrights.wxml"></include>
+    </view>
+
+    <!--超值旅行家-->
+    <block wx:for="{{superTravellerInfos}}" wx:for-item="travelCoupon" wx:key="id" wx:for-index="index">
+        <view wx:if="{{travelCoupon.items.length}}" class="card-common autoExpose" bindtap="toggleTravelCouponLayer" data-idx="{{index}}" data-expose="{{travelCoupon.exposeData}}">
+            <view class="travel-coupon-bubble {{isIOS ? '' : 'mt18'}}">
+                <view class="tcb-text orange-bgc" wx:if="{{travelCoupon.popDesc}}">
+                    <text>{{travelCoupon.popDesc}}</text>
+                    <image class="tcb-triangle" src="https://pages.c-ctrip.com/hotels/wechat/img/travel-coupon-bubble-triangle.png"></image>
+                </view>
+                <text data-id="{{travelCoupon.id}}"
+                      catchtap="toggleTravelCouponSelect"
+                      class="{{travelCoupon.selected ? 'wechat-font-selected' : 'wechat-font-unselected'}} icon-style"></text>
+            </view>
+            <view wx:if="{{travelCoupon.name}}" class="card-title">
+                {{travelCoupon.name}}<block wx:if="{{travelCoupon.salePrice}}">·¥{{travelCoupon.salePrice}}/份</block>
+            </view>
+
+            <view class="tc-content black1 ft28">
+                <text>{{travelCoupon.desc}}</text>
+                <text class="wechat-font-qa tc-qa black3"></text>
+            </view>
+            <view class="tc-condition black3 ft24" wx:if="{{travelCoupon.useRule.length}}">
+                <text wx:for="{{travelCoupon.useRule}}" wx:for-item="rule" class="tc-rule">{{rule}}</text>
+            </view>
+        </view>
+    </block>
+
+    <!-- 特别要求与发票 -->
+    <view class="card-common more-service-box">
+        <view class="card-title">安心服务</view>
+        <view class="invoice-box">
+            <view class="invoice-tit">发票</view>
+            <view class="invoice-desc black3">{{invoiceInfo.description}}</view>
+        </view>
+        <view wx:if="{{customRemark.isCanUserRemark}}" class="li-item sp-remark-li" bindtap="showSpecialRemark">
+            <view class="cell-star single-ellipsis">特别要求 · {{customRemark.remarkText || '无要求'}}</view>
+            <view class="wechat-font-arrow-right icon-arrow"></view>
+        </view>
+        <view wx:if="{{customRemark.remarkText && customRemark.justifyConfirmDesc}}" class="action-tips-box">
+            <view class="action-tips">{{customRemark.justifyConfirmDesc}}</view>
+        </view>
+    </view>
+
+    <!-- 闪住 -->
+    <view wx:if="{{quickCheckin.isShown}}" class="card-common">
+        <view class="card-title">支付方式</view>
+        <view class="pay-type-box">
+            <view class="pt-item {{quickCheckin.isSelected ? 'current' : ''}}" bindtap="toggleQuickCheckin" data-type="quickCheckin">
+                <view class="pt-left black2">
+                    <view class="pt-title black1">先住后付</view>
+                    <view class="pt-desc">{{quickCheckin.specialCopy}}</view>
+                </view>
+                <view class="icon-style {{quickCheckin.isSelected ? 'wechat-font-selected' : 'wechat-font-unselected'}}"></view>
+            </view>
+            <view class="pt-item {{quickCheckin.isSelected ? '' : 'current'}}" bindtap="toggleQuickCheckin">
+                <view class="pt-left black2">
+                    <view class="pt-title black1">{{uiInfo.basePaymentTitle}}</view>
+                    <view class="pt-desc">放弃先住后付</view>
+                </view>
+                <view class="icon-style {{quickCheckin.isSelected ? 'wechat-font-unselected' : 'wechat-font-selected'}}"></view>
+            </view>
+        </view>
+        <view class="pay-type-desc black2">{{quickCheckin.specialDescription}}</view>
+    </view>
+
+    <!-- 底部说明 -->
+    <view class="bk-tips black3">
+        <view class="gdpr" wx:if="{{enableBookSeaPersonalAuth && (isOutland || isHMT)}}">
+            <view class="gdpr-row">
+                <view class="{{agreeGDPR ? 'wechat-font-selected' : 'wechat-font-unselected'}} icon-style" bindtap="toggleGdprAgree"></view>
+                <view>我已阅读并同意</view>
+                <view class="active-txt" bindtap="toOverseaPersonAuth">
+                    个人信息出境授权声明
+                </view>
+            </view>
+            <view class="gdpr-row">
+                <view>请您在提交订单前仔细阅读</view>
+                <view class="active-txt" bindtap="toOrderRule">
+                    携程预订条款
+                </view>
+            </view>
+        </view>
+        <view wx:for="{{noticeTips}}" wx:for-item="noticeItem" bindtap="toggleNoticeLayer" data-id="bottom-tips">
+            <view class="notice-info" wx:if="{{noticeItem.category === 3}}">
+                <view class="tips-title">温馨提示:</view>
+                <block wx:for="{{noticeItem.items}}" wx:for-item="subItem">
+                    <text class="left-text">{{subItem.content}}</text>
+                </block>
+                <text class="right-text">更多</text>
+            </view>
+        </view>
+        <block wx:for="{{remarkTips}}">
+            <view class="tips-title">{{item.title}}</view>
+            <view class="tips-content">{{item.content}}</view>
+        </block>
+        <view wx:if="{{!enableBookSeaPersonalAuth || (!isOutland && !isHMT)}}">请您在提交订单前仔细阅读
+            <text class="active-txt" bindtap="toOrderRule">携程预订条款</text>和<text class="active-txt" bindtap="toPersonAuth">个人信息授权声明</text>
+        </view>
+        <view wx:if="{{quickCheckin.isShown}}">请您在提交订单前仔细阅读<text class="active-txt" bindtap="toCreditTxt">闪住服务协议</text></view>
+    </view>
+    <slogan></slogan>
+</view>
+
+<!-- 底部支付bar -->
+<include src="./pricebar.wxml" />
+
+<!-- 费用明细浮层 -->
+<common-layer wx:if="{{showPriceDetailLayer}}"
+              maskZIndex="10"
+              layerStyle="z-index: 11"
+              title="{{dateInfo.days > 1 ? (dateInfo.days + '晚明细') : '费用明细'}}"
+              needBlurredMask="{{true}}"
+              bind:closeLayer="togglePriceDetail">
+    <include src="./pricedetail.wxml"></include>
+</common-layer>
+
+<!-- 房型浮层 -->
+<roomlayer
+    wx:if="{{showRoomLayer}}"
+    isShown="{{showRoomLayer}}"
+    isIphoneX="{{isIphoneX}}"
+    room="{{baseRoomInfo}}"
+    subRoom="{{subRoomInfo}}"
+    from="booking"
+    bind:hiddenLayer="toggleRoomLayer"
+></roomlayer>
+
+<!-- 订房必读浮层 -->
+<common-layer wx:if="{{showNoticeLayer}}"
+              class="book-notice-icon"
+              titleIconClass="{{!showBottomTips ? 'wechat-font-book-notice' : ''}}"
+              title="{{showBottomTips ? '温馨提示' : noticeTitle}}"
+              bind:closeLayer="toggleNoticeLayer">
+    <template is="bookingnotice-layer" data="{{noticeTips: noticeTips, noticeTitle, showBottomTips}}" />
+</common-layer>
+<!-- 房间数选择浮层 -->
+<common-layer wx:if="{{showQuantityLayer}}"
+              title="选择间数"
+              bind:closeLayer="toggleQuantityLayer">
+    <scroll-view scroll-y class="quantity-box" enable-flex slot="content">
+        <view wx:for="{{quantityArr}}" class="quantity-item {{item === roomQuantity ? 'current' : ''}}"
+              catchtap="selectQuantity" data-quantity="{{item}}">{{item}}</view>
+    </scroll-view>
+</common-layer>
+
+<!-- 到店浮层 -->
+<common-layer wx:if="{{arrivalInfo.showLayer}}"
+              title="{{arrivalInfo.title}}"
+              subTitle="{{arrivalInfo.subTitle}}"
+              bind:closeLayer="closeArrivalLayer">
+    <scroll-view scroll-y enhanced show-scrollbar="{{false}}" class="tbody layer-bd" catchtouchmove="noop" slot="content">
+        <view class="item black1 {{arrivalInfo.currentIndex === index ? 'current' : '' }}"
+              wx:for="{{arrivalInfo.arrivalTimeList}}"
+              catchtap="selectArrivalTime" data-index="{{index}}">
+            <view class="cell-v">
+                <view class="cell-star">{{item.arrivalTimeText}}<text wx:if="{{item.subArrivalTimeText}}">{{item.subArrivalTimeText}}</text></view>
+                <view class="wechat-font-filter-yes"></view>
+            </view>
+        </view>
+        <view class="bottom-blank"></view>
+    </scroll-view>
+</common-layer>
+
+<!-- 姓名说明浮层 -->
+<template wx:if="{{showGuestTips}}" is="guestTips" data="{{showForeignName: showForeignName, isYanZhuChannel, roomQuantity}}"></template>
+
+<!-- 房间号说明浮层 -->
+<template wx:if="{{isRoomNoTipsShow}}" is="yanZhuSingleTips"></template>
+
+
+<!-- 手机icon点击后弹出透明浮层，防止input标签获得焦点后唤起键盘 -->
+<view hidden="{{!showPhoneLoadingMask}}" class="cmask transparency" bindtap="hidePhoneLoadingMask"></view>
+
+<!-- 礼盒浮层 -->
+<common-layer wx:if="{{showGiftLayer}}"
+              title="礼赠"
+              bind:closeLayer="toggleGiftLayer">
+    <scroll-view scroll-y class="gift-layer" catchtouchmove="noop" enhanced show-scrollbar="{{false}}" slot="content">
+        <gift-info giftInfo="{{subRoomInfo.giftInfo}}"></gift-info>
+        <view class="bottom-blank"></view>
+    </scroll-view>
+</common-layer>
+
+<!-- 优惠券选择浮层 -->
+<include src="./couponpop.wxml" />
+
+<!-- 大双床要求说明浮层 -->
+<template wx:if="{{showBedServiceLayer}}" is="bedservice-layer"></template>
+
+<!-- 特别要求浮层 -->
+<common-layer wx:if="{{customRemark.showLayer}}"
+              title="特别要求"
+              confirmButtonText="完成"
+              contentStyle="background: #f6f8fa"
+              bind:confirm="submitSpecialRemark"
+              bind:closeLayer="closeSpecialRemark">
+        <scroll-view scroll-y class="remark-layer" catchtouchmove="noop" slot="content">
+            <view class="tip black1">若您对酒店有特别要求，携程会尽力与酒店协调，可能会存在不能满足的情况，但不会影响酒店房间的确认。</view>
+            <textarea class="remark-input" name="otherRemarkText" maxlength="100"
+                placeholder="如果有其他要求请填写，携程需要和酒店联系，确认时间会较长，请您耐心等待。"
+                value="{{customRemark.otherRemarkText}}" confirm-type="done" bindinput="remarkInputAction">
+                <view class="current-len black1">{{currentLen||0}}/100</view>
+              </textarea>
+        </scroll-view>
+</common-layer>
+
+<!--超值旅行家浮层-->
+<travel-coupon-pack
+        wx:if="{{showTravelCouponLayer}}"
+        confirmButtonText="{{travelCouponBtn}}"
+        couponInfo="{{travelCouponLayerInfo}}"
+        bind:confirm="changeTravelCouponSelected"
+        bind:closeLayer="toggleTravelCouponLayer"></travel-coupon-pack>
+
+<!-- 积分说明浮层 -->
+<template wx:if="{{showPointsRule}}" is="pointsRule"></template>
+
+<!-- GDPR确认浮层 -->
+<common-layer wx:if="{{showGdprLayer}}"
+              class="wechat-font-close4 layer-close black1"
+              title="我已阅读并同意"
+              content=""
+              confirmButtonText="同意并继续"
+              limitMinHeight="{{false}}"
+              bind:closeLayer="toggleGdprLayer"
+              bind:confirm="toggleGdprAgreeAndPay"
+>
+    <view class="gdpr-active-txt" bindtap="toOverseaPersonAuth" slot="content">
+        个人信息出境授权声明
+    </view>
+</common-layer>
+
+<!-- loading-layer -->
+<loading-gif isShown="{{showLoading}}"></loading-gif>
+
+<!--积分抵房费弹窗-->
+<view class="part-free-banner iphonex" wx:if="{{showPartFreeBanner}}">
+    <image src="https://pages.c-ctrip.com/hotels/wechat/img/part-free-icon.png"></image>
+    <view class="desc">
+        积分<text class="high-light">已抵¥{{maxPartFreePrice}}房费</text>，快去下单吧
+    </view>
+</view>
+<!-- 会员免费兑弹窗 -->
+<view wx:if="{{!showPartFreeBanner && freeRewardPic}}" class="free-exchange-banner">
+    <image src="{{freeRewardPic}}" mode="widthFix" />
+</view>
+
+<!--强制登录-->
+<template wx:if="{{showForceLogin}}" is="force-login"></template>
+<!--白屏检测-->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>
+<!-- 税费说明浮层 -->
+<template wx:if="{{showDialog}}" is="mini-dialog" data="{{dialogTitle, dialogContent}}"></template>
+<!-- 税费说明浮层 todo: 与上面对比可以删除一个 -->
+<block wx:if="{{priceInfo.extraTax.showDesc}}">
+    <view class="cmask" catchtap="toggleExtraTaxDesc" catchtouchmove="noop">
+        <view class="cmask-popbox">
+            <view class="popbox-thead">
+                <view class="tit">{{priceInfo.extraTax.descTitle}}</view>
+                <view class="wechat-font-close close-icon" catchtap="toggleExtraTaxDesc"></view>
+            </view>
+            <view class="popbox-tbody">
+                {{priceInfo.extraTax.desc}}
+            </view>
+        </view>
+    </view>
+</block>
+
+<!-- 挽留弹窗 -->
+<retain-pop
+    wx:if="{{showRetainPop}}"
+    type="{{retainPopInfo.type}}"
+    title="{{retainPopInfo.title}}"
+    subDesc="{{retainPopInfo.subDesc}}"
+    content="{{retainPopInfo.content}}"
+    leftBtnStyle="{{retainPopInfo.btnStyles.leftBtn}}"
+    rightBtnStyle="{{retainPopInfo.btnStyles.rightBtn}}"
+    bubble="{{retainPopInfo.bubble}}"
+    bkgUrl="{{retainPopInfo.bkgUrl}}"
+    retainPopExposeObj="{{retainPopInfo.retainPopExposeObj}}"
+    bind:confirm="backDetail"
+    bind:cancel="handleRetainPop"
+></retain-pop>

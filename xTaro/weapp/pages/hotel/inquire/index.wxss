@@ -1,0 +1,693 @@
+@import '../common/common.wxss';
+@import '../../market/float/float.wxss';
+@import '../components/pricestarfilter/pricestarfilter.wxss';
+@import '../commontemplates/forcelogin/forcelogin.wxss';
+page {
+    font-size: 24rpx;
+    color: #111111;
+    background-color: #fff;
+}
+.body-container {
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    padding-bottom: 108rpx;
+}
+.mt-12 {
+    margin-top: 12rpx;
+}
+.right-16 {
+    right: 16rpx;
+}
+.width-94 {
+    width: 94%;
+}
+/* icon雪碧图 */
+.home-icon {
+    width: 102rpx;
+    height: 102rpx;
+    display:inline-block;
+    background-image:url(https://pages.c-ctrip.com/hotels/wechat/img/home-midicon.png);
+    background-repeat: no-repeat;
+    background-size: 462rpx 102rpx;
+    vertical-align: middle;
+}
+.icon-enter-hourroom {
+    background-position: 0 0
+}
+.icon-enter-hot {
+    background-position: -120rpx 0
+}
+.icon-enter-discount {
+    background-position: -240rpx 0
+}
+
+.em-notic-style {
+    margin: 24rpx 16rpx;
+}
+.em-query-inner {
+    border-radius: 8rpx;
+    background: #ffeeed;
+    padding: 20rpx 0 20rpx 20rpx;
+    position: relative;
+    display: flex;
+    align-items:center;
+    font-size: 24rpx;
+    color: #F5190A;
+}
+.em-query-lmask {
+    position: absolute;
+    right: 56rpx;
+    height: 100%;
+    width: 32rpx;
+    background: linear-gradient(90deg, rgba(255,238,237, 0) 0%, rgba(255,238,237, 1) 100%);
+}
+.service-txt {
+    width: 100%;
+    height: 358rpx;
+}
+
+.bottom-space {
+    height: 100rpx;
+    width: 100%;
+}
+.bottom-space.iphonex {
+    height: 166rpx;
+    width: 100%;
+}
+.page-background {
+    background: #EBEFF5
+}
+.page-domestic {
+    background: #fff url(https://pages.c-ctrip.com/hotels/wechat/img/home-bg-domestic.jpg) center top no-repeat;
+    background-size: contain
+}
+.page-overseas {
+     background: #fff url(https://pages.c-ctrip.com/hotels/wechat/img/home-bg-overseas.jpg) center top no-repeat;
+    background-size: contain
+}
+.page-hourroom {
+   background: #fff url(https://pages.c-ctrip.com/hotels/wechat/img/home-bg-hourroom.jpg) center top no-repeat;
+   background-size: contain
+}
+.color {
+    color: #111111;
+}
+.color3 {
+    color: #edd900
+}
+.cell-v {
+    display: flex;
+    align-items: center
+}
+.fn32 {
+    font-size: 32rpx;
+}
+.ml10 {
+    margin-left: 10rpx;
+}
+.home {
+    width: 100%;
+    overflow-x:hidden;
+}
+/*Thead*/
+.home .thead {
+    padding: 0rpx 24rpx 28rpx;
+}
+.home .thead .head-box {
+    margin-top: -88rpx;
+}
+.compindex {
+    position: relative;
+    z-index: 3;
+}
+/*------------Tab-view----------*/
+.tab-box {
+    background: #EEF1F6;
+    border-radius: 16rpx 16rpx 0 0;
+    display: flex;
+    position: relative;
+    font-size: 34rpx;
+    font-weight: 400;
+    color: #111111;
+    text-align: center;
+    z-index: 1;
+    bottom: -1rpx;
+}
+.tab-bnb {
+    padding: 20rpx 0;
+    flex:1;
+}
+.tab-view {
+    display: flex;
+    align-items: end;
+    flex: 3;
+    position: relative;
+}
+.tab-view .pd {
+    padding: 23rpx 0;
+}
+.tab-view .item {
+    flex: 1;
+    position: relative;
+    z-index: 2;
+    transition: color 350ms ease-out;
+    will-change: color;
+}
+.tab-view .sub.current {
+    font-weight: 500;
+    color: #0066f6;
+}
+.tab-view .both {
+    left: 2%;
+}
+.tab-view .sc-left {
+    border-radius: 16rpx 0px 0px 0px;
+    width: 50%;
+}
+.tab-view .sc-right {
+    width: 38%;
+    left: 18%;
+}
+.tab-view .scrollbar {
+    height: 96rpx;
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+    transition: transform 350ms ease-out;
+    will-change: transform;
+}
+.tab-view .scrollbar .line {
+    position: absolute;
+    bottom: 6rpx;
+    height: 8rpx;
+    border-radius: 4rpx;
+    background: linear-gradient(to right, #00A8FB 0%, #006FF6 100%);
+    transform: translateX(-50%);
+    transition: width 1000ms ease-out;
+    will-change: width;
+}
+.tab-view .scrollbar .long {
+    width: 100rpx;
+    left: 50%;
+}
+@keyframes toLeft {
+    0% {
+        left: 78%;
+    }
+    100% {
+        left: 28%;
+    }
+}
+@keyframes toRight {
+    0% {
+        left: 28%;
+    }
+    100% {
+        left: 78%;
+    }
+}
+.tab-view .scrollbar .left-short {
+    width: 50rpx;
+    left: 28%;
+    animation: toLeft 350ms;
+}
+.tab-view .scrollbar .right-short {
+    width: 50rpx;
+    left: 78%;
+    animation: toRight 350ms;
+}
+
+.tab-view .scrollbar::before {
+    width: 72rpx;
+    height: 96rpx;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -70rpx;
+    background-image: url('https://pages.c-ctrip.com/hotels/wechat/img/icons/tab-right-arc.png');
+    transform: rotateY(180deg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.tab-view .scrollbar::after {
+    width: 72rpx;
+    height: 96rpx;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: -70rpx;
+    background-image: url('https://pages.c-ctrip.com/hotels/wechat/img/icons/tab-right-arc.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.tab-view .item:nth-of-type(1).current ~ .scrollbar:before,.tab-view .item:nth-of-type(4).current ~ .scrollbar:after {
+    display: none
+}
+.tab-view .item:nth-of-type(1).current ~ .scrollbar {
+    transform: translate3d(0,0,0);
+}
+.tab-view .item:nth-of-type(2).current ~ .scrollbar {
+    transform: translate3d(100%,0,0);
+}
+.tab-view .item:nth-of-type(3).current ~ .scrollbar {
+    transform: translate3d(200%,0,0);
+}
+
+.tab-view .item:nth-of-type(3).current ~ .scrollbar .line{
+    width: 58%
+}
+
+/*------------Search-view----------*/
+.search-view {
+    background-color: #fff;
+    border-radius: 0 0 16rpx 16rpx;
+    padding: 2rpx 40rpx 30rpx 40rpx;
+    box-shadow: 0 8rpx 16rpx 0 rgba(204,204,204,0.3);
+}
+.search-view .item {
+    height: 109rpx;
+    line-height: 109rpx;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-color: #fff;
+}
+.search-view .item {
+    border-bottom: 1rpx solid #eeeeee;
+}
+.cell-start {
+    display: flex;
+    align-items: flex-start;
+}
+.search-view .item.check-wrap {
+    line-height: 34rpx;
+    box-sizing: border-box;
+    align-items: center;
+}
+.search-view .item.check-wrap .date-box {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+.search-view .item.check-wrap .check-text {
+    margin-left: 8rpx;
+    font-size: 28rpx;
+}
+.search-view .item .star {
+    flex: 1;
+}
+.search-view .check-tips {
+    padding: 0 16rpx;
+    background: #006FF6;
+    border-radius: 4rpx;
+    font-size: 24rpx;
+    line-height: 56rpx;
+    color: #fff;
+    margin-left: 16rpx;
+    position: relative;
+    display: inline-block;
+}
+.search-view .moning-out-tips{ margin-left: 270rpx; }
+.search-view .check-tips:before {
+    top: -10rpx;
+    left: 80rpx;
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-bottom: 10rpx solid #006FF6;
+    border-left: 10rpx solid #fff;
+    border-right: 10rpx solid #fff;
+}
+.search-view .moning-out-tips:before{ left: 160rpx; }
+
+.search-view .item.hover-active {
+    background-color: #f5f5f5
+}
+
+.search-view .item .wechat-font-close {
+    font-weight: 600;
+    color: #006FF6;
+    line-height: 88rpx;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    text-align: center;
+    font-size: 32rpx;
+}
+.search-view .item.fe--active .wechat-font-close {
+    right: 0;
+}
+.search-icon {
+    vertical-align: bottom;
+    height: 32rpx;
+}
+.default-text {
+    color: #ccc;
+    font-size: 34rpx;
+    font-weight: 600;
+}
+.minw{
+    min-width: 150rpx;
+    min-height: 40rpx;
+}
+.star-text {
+    font-size: 32rpx;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0;
+    line-height: 1.2;
+}
+.current-text {
+    font-size: 32rpx;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0;
+    line-height: 1.2;
+}
+.current-text2 {
+    font-size: 36rpx;
+    font-weight: 500;
+    line-height: 44rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: 530rpx;
+}
+.current-text3{
+    font-size: 36rpx;
+    font-weight: 500;
+}
+.rspace {
+    margin-right: 60rpx;
+    display: inline-flex;
+}
+.rspace .placeholder {
+    color:#ccc;
+}
+.location-height {
+    line-height: 1.2;
+}
+.location-info {
+    height: 98rpx !important;
+}
+.location-text {
+    font-size: 34rpx !important;
+}
+.location-hidden .current-text {
+    font-size: 24rpx;
+}
+.icon-text {
+    font-size: 30rpx;
+}
+.lbs {
+    font-weight: 500;
+    text-align: center;
+    line-height: 40rpx;
+}
+.lbs .wechat-font-position {
+    color: #0066f6;
+    font-size: 40rpx;
+}
+.lbs .loc-text {
+    font-size: 22rpx;
+    line-height: 30rpx;
+}
+.to-x {
+    width: 60rpx;
+    text-align: center;
+    font-weight: 400;
+}
+.to-x .line {
+    width: 16rpx;
+    border-bottom: 2rpx solid #c5c5c5;
+    margin: 20rpx auto;
+}
+.num-late {
+    width: 80rpx;
+    font-weight: 500;
+    text-align: right;
+}
+.search-btn {
+    font-size: 36rpx;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1;
+    padding: 28rpx;
+    margin-top: 16rpx;
+    height: 88rpx;
+    transition: all 100ms linear;
+    border-radius: 12rpx 12rpx 36rpx 12rpx;
+    background: #006FF6;
+    background-image: url(https://pages.c-ctrip.com/hotels/wechat/img/icons/btn-wave.png);
+    background-position: right;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.search-btn.button-hover {
+    opacity: .85;
+    transform: scale(.97) translateY(4rpx)
+}
+.search-btn::after {border: 0;}
+
+
+/* 金刚位 */
+.hot-sales{
+    display: flex;
+    margin: 0 16rpx;
+}
+.hot-sales.pt20 { padding-top: 20rpx;}
+.hot-sales .item {
+    margin: 0 8rpx;
+    box-shadow: 0px 4rpx 16rpx 1rpx rgba(0, 0, 0, 0.06);
+    border-radius: 12rpx;
+    min-height: 96rpx;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding: 16rpx;
+    background-color: #fff;
+    background-size: 128rpx 128rpx;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+}
+.hot-sales .rank {
+    background-image: url("https://pages.c-ctrip.com/hotels/wechat/img/icons/bg-rank.png");
+}
+.hot-sales .rank .sub-title {
+    color: #bb714f;
+}
+.hot-sales .nearby {
+    color: #f57064;
+    background-image: url("https://pages.c-ctrip.com/hotels/wechat/img/icons/bg-nearby.png");
+}
+.hot-sales .nearby .sub-title{
+    color: #f57064;
+}
+.hot-sales .lowprice {
+    color: #257cf5;
+    background-image: url("https://pages.c-ctrip.com/hotels/wechat/img/icons/bg-lowprice.png");
+}
+.hot-sales .lowprice .sub-title{
+    color: #257cf5;
+}
+.hot-sales .item .title {
+    color: #111111;
+    font-size: 32rpx;
+    line-height: 40rpx;
+    font-weight: 600;
+}
+.hot-sales .item .sub-title {
+    font-size: 24rpx;
+    font-weight: 500;
+    line-height: 32rpx;
+    margin-top: 8rpx;
+}
+
+/*助力活动banner*/
+.nch-banner {
+    width: 750rpx;
+    height: 100rpx;
+    display: block;
+    margin: -20rpx 0 20rpx;
+}
+
+/*保障话术*/
+.server-box {
+    background-color:#DAE5F3;
+    height: 2rpx;
+    text-align: center;
+    margin:70rpx 16rpx 46rpx;
+}
+.server-box .text {
+    font-size: 24rpx;
+    color: #C2D1E4;
+    padding: 0 20rpx;
+    background-color: #fff;
+    position: relative;
+    top: -16rpx;
+}
+.serviceguarantee-wrap {
+    width: 750rpx;
+    height: 160rpx;
+    margin:0 auto 40rpx;
+    background-repeat: no-repeat;
+    background-size: 750rpx 160rpx;
+}
+
+.official-account {
+    border-radius:8rpx;
+    box-shadow: 0 8rpx 16rpx #F7F7F7;
+    margin: 12rpx 32rpx 0 32rpx;
+}
+
+/* 头部导航栏 */
+.custom-navigation-back {
+    display: flex;
+    margin-left: 8rpx;
+    background: rgba(255, 255, 255, 0.8);
+    height: 64rpx;
+    width: 64rpx;
+    color: #000000;
+    font-size: 48rpx;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.ad-slider {
+    background-color: #EBEFF5;
+    background-image: url('https://webresource.c-ctrip.com/ResH5HotelOnline/R1/hotel_pic_ad@2x.png');
+    background-size: 750rpx 408rpx;
+    width: 750rpx;
+    height: 408rpx;
+    overflow: hidden;
+    z-index: 1;
+}
+.ad-slider.visible {
+    position: relative;
+    top: 0;
+}
+.ad-shadow {
+    width: 100%;
+    height: 96rpx;
+    position: absolute;
+    bottom: 0rpx;
+    background: linear-gradient(-180deg, rgba(244, 244, 244, 0) 0.03%, rgb(235, 239, 245) 99.7%);
+}
+.float-ad {
+    position: fixed;
+    right: 10rpx;
+    bottom: 230rpx;
+    height: 120rpx;
+    width: 120rpx;
+    z-index: 5;
+}
+.enterprise-wechat {
+    width: 100%;
+    margin: 0 auto;
+}
+.enterprise-wechat .task_btn {
+    height: 140rpx !important;
+    margin: 22rpx 24rpx 19rpx 24rpx;
+    border-radius: 16rpx !important;
+}
+.newer-coupon-box {
+    width: 702rpx;
+    height: 200rpx;
+    border-radius: 16rpx;
+    margin: 0 auto 32rpx;
+    background-image: url('https://pages.c-ctrip.com/hotels/wechat/img/inquire-newer-coupon.png?11');
+    background-size: cover;
+}
+.newer-coupon-box .coupon-right-expired {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 24rpx 24rpx 56rpx;
+    color: #fff;
+}
+.newer-coupon-box .coupon-expired-text {
+    font-weight: 500;
+    margin-right: 16rpx;
+}
+.newer-coupon-box .coupon-right-detail {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 40rpx 24rpx;
+    color: #fff;
+}
+.newer-coupon-box .coupon-detail-text {
+    font-weight: 600;
+    margin-right: 4rpx;
+}
+.newer-coupon-box .coupon-box {
+    display: flex;
+    justify-content: space-evenly;
+}
+.newer-coupon-box .coupon-bg {
+    width: 208rpx;
+    height: 80rpx;
+    background-image: url('https://pages.c-ctrip.com/hotels/wechat/img/inquire-newer-coupon-box.png');
+    background-size: cover;
+    color: #f60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8rpx;
+}
+.newer-coupon-box .c-left-text {
+    display: flex;
+    align-items: baseline;
+}
+.newer-coupon-box .c-normal-text {
+    font-size: 20rpx;
+}
+.newer-coupon-box .c-bold-text {
+    font-size: 44rpx;
+    font-weight: 700;
+}
+.newer-coupon-box .reward-type-bg {
+    width: 68rpx;
+    height: 68rpx;
+    background-image: url('https://pages.c-ctrip.com/hotels/wechat/img/inquire-newer-rewards.png');
+    background-size: 136rpx 136rpx;
+}
+.newer-coupon-box .reward-type-11 {
+    background-position: 0rpx 0rpx;
+}
+.newer-coupon-box .reward-type-86 {
+    background-position: -68rpx 0rpx;
+}
+.newer-coupon-box .reward-type-10 {
+    background-position: 0rpx -68rpx;
+}
+.newer-coupon-box .reward-type-12 {
+    background-position: -68rpx -68rpx;
+}
+.newer-coupon-box .c-right-text {
+    font-size: 24rpx;
+    font-weight: 600;
+    margin-left: 12rpx;
+}
+/* 兼容自定义头部导航栏 */
+.custom-navigation-back .wechat-font-g-arrow-down {
+  padding: 6rpx 0 0 0 !important;
+}
+.weui-navigation-bar {
+    width: 100%;
+    background-color: #fff;
+    top: 0;
+    z-index: 1000;
+    will-change: animation;
+    box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, .08);
+}

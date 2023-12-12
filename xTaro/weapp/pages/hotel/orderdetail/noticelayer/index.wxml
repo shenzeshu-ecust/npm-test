@@ -1,0 +1,35 @@
+<template name="notice-layer">
+        <view slot="title" class="notice-layer-tit ft34"><icon type="warn" color="#ff5500" class="layer-notice-icon" size="32rpx"></icon>入住必读</view>
+
+        <scroll-view scroll-y class="scroll-y" slot="content">
+            <view class="tbody notice-layer">
+                <view class="item" wx:for="{{notice}}" wx:for-item="item" wx:key="object">
+                        <view class="title">{{item.title}}</view>
+                        <view class="content">
+                            <block wx:for="{{item.subs}}" wx:for-item="subs">
+                                <view class="sub-info" wx:for="{{subs.items}}" wx:for-item="items">
+                                    <view class="sub-title" wx:if="{{items.title}}">{{items.title}}</view>
+                                    <rich-text class="sub-content" nodes="{{items.content}}"></rich-text>
+                                </view>
+                            </block>
+                        </view>
+                </view>
+            </view>
+        </scroll-view>
+</template>
+<template name="notice-card">
+    <view class="content notice-detail" catchtap="handleOrderCardClick" data-operate="toggleNoticeLayer">
+        <view class="left single-ellipsis">
+            <view class="title-num">
+                <text wx:for="{{detail.titleList}}" wx:for-item="title"
+                      class="oc-title {{title.color}}">{{title.name}}</text>
+                <text class="oc-notice-num">共{{noticeNum}}条</text>
+            </view>
+            <view class="single-ellipsis">
+                <text wx:for="{{detail.subTitleInfoList}}" wx:for-item="subtitle"
+                      class="oc-subtitle">{{subtitle.title}}</text>
+            </view>
+        </view>
+        <view class="wechat-font-arrow-right oc-arrow"></view>
+    </view>
+</template>

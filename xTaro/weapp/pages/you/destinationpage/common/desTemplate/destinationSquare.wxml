@@ -1,0 +1,36 @@
+<template name="destinationSquare">
+  	<view class="destination-square" wx:if="{{squareData.list}}" data-modulename="九宫格">
+		<view style="position: absolute;top: -30rpx;left: 0;height: 32rpx;width: 750rpx;background-color: #fff;border-radius: 40rpx 40rpx 0 0;"></view>
+	    <!-- destinationSquare -->
+	    <swiper
+	        indicator-dots="{{squareData.indicatorDots}}" autoplay="{{squareData.autoplay}}" circular="{{squareData.circular}}" vertical="{{squareData.vertical}}"
+	        interval="{{squareData.interval}}" duration="{{squareData.duration}}" previous-margin="{{squareData.previousMargin}}px" next-margin="{{squareData.nextMargin}}px" display-multiple-items="{{squareData.displayitem}}" indicator-color="{{squareData.indicatorColor}}" indicator-active-color="{{squareData.indicatorActiveColor}}" current="{{squareData.current}}">
+	        <block wx:for="{{squareData.list.length/5}}" wx:key="*this" wx:for-item="outerindex">
+	          	<swiper-item>
+		          	<block wx:for="{{5}}" wx:key="*this" wx:for-item="innerindex">
+		          		<view class="square-swiper-item" wx:if="{{outerindex === 0}}" bindtap="toDifferChannel" data-channelinfo="{{squareData.list[innerindex]}}" data-ubttitle="宫格" data-ubtindex="{{innerindex + 5*outerindex}}" data-ubtname="{{squareData.list[innerindex].title}}">
+		          			<navigator wx:if="{{squareData.list[innerindex].appId}}" hover-class="none" target="miniProgram" open-type="navigate" app-id="{{squareData.list[innerindex].appId}}" path="{{squareData.list[innerindex].jumpUrl}}" extra-data="" version="release">
+				            	<image class="entry-icon-img" src="{{squareData.list[innerindex].icon}}" />
+				            	<view class="entry-name">{{squareData.list[innerindex].title}}</view>
+			            	</navigator>
+			            	<view class="entry-navigator-replace" wx:else>
+			            		<image class="entry-icon-img" src="{{squareData.list[innerindex].icon}}" />
+			            		<view class="entry-name">{{squareData.list[innerindex].title}}</view>
+			            	</view>
+			            </view>
+			            <view class="square-swiper-item" wx:else bindtap="toDifferChannel" data-channelinfo="{{squareData.list[innerindex + 5*outerindex]}}" data-ubttitle="宫格" data-ubtindex="{{innerindex + 5*outerindex}}" data-ubtname="{{squareData.list[innerindex + 5*outerindex].title}}">
+			            	<navigator wx:if="{{squareData.list[[innerindex + 5*outerindex]].appId}}" hover-class="none" target="miniProgram" open-type="navigate" app-id="{{squareData.list[[innerindex + 5*outerindex]].appId}}" path="{{squareData.list[[innerindex + 5*outerindex]].jumpUrl}}" extra-data="" version="release">
+				            	<image class="entry-icon-img" src="{{squareData.list[innerindex + 5*outerindex].icon}}" />
+				            	<view class="entry-name">{{squareData.list[innerindex + 5*outerindex].title}}</view>
+			            	</navigator>
+			            	<view class="entry-navigator-replace" wx:else>
+				            	<image class="entry-icon-img" src="{{squareData.list[innerindex + 5*outerindex].icon}}" />
+				            	<view class="entry-name">{{squareData.list[innerindex + 5*outerindex].title}}</view>
+			            	</view>
+			            </view>
+		          	</block>
+	          	</swiper-item>
+	        </block>
+	      </swiper>
+  	</view>
+</template>

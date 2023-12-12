@@ -1,0 +1,74 @@
+.recommend-date {
+    background: #fff;
+    padding-bottom: 32rpx;
+    color: #111111;
+    font-size: 24rpx;
+    font-family: PingFangSC-Medium;
+}
+.recommend-date.detail {
+    border-radius: 0 0 16rpx 16rpx;
+    overflow: hidden;
+    margin-bottom: 6rpx;
+}
+.detail .rd-title {
+    padding-top: 24rpx;
+    margin-right: 24rpx;
+    border-top: 0.5rpx solid #e5e5e5;
+}
+.rd-title {
+    font-weight: bold;
+    margin: 0 0 12rpx 24rpx;
+}
+.rd-all-date {
+    white-space: nowrap;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+.rd-all-date::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+    height: 0 !important;
+    -webkit-appearance: none;
+    background: transparent;
+}
+.recommend-item:first-child {
+    margin-left: 24rpx;
+}
+.recommend-item:last-child {
+    margin-right: 24rpx;
+}
+.recommend-item {
+    display: inline-block;
+    padding: 24rpx 16rpx;
+    background: #f5f7fa;
+    border-radius: 8rpx;
+    margin-right: 16rpx;
+}
+/* 日期部分 */
+.recommend-date-info {
+    margin-bottom: 8rpx;
+}
+.rdi-date {
+    font-weight: bold;
+    font-family: PingFangSC-Medium;
+    margin-right: 12rpx;
+}
+/* 价格部分 */
+.blue {
+    color: #0066f6;
+}
+.rp-avg {
+    margin-right: 4rpx;
+}
+.rp-coin {
+    font-size: 20rpx;
+}
+.rp-price {
+    font-weight: bold;
+    font-size: 32rpx;
+}
+.rp-tax {
+    margin-left: 8rpx;
+    color: #888;
+    font-size: 20rpx;
+}

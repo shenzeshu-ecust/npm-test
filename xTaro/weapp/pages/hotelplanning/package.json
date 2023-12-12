@@ -1,0 +1,38 @@
+{
+  "name": "hotelplanning",
+  "version": "1.0.0",
+  "description": "ReadME",
+  "main": "index.js",
+  "scripts": {
+    "build": "",
+    "test": "jest --silent --coverage --json --outputFile=./coverage/output.json",
+    "lint": "eslint -c .eslintrc.js ./",
+    "prettier": "prettier --config .prettierrc.js --write './*/*.js'",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.dev.sh.ctripcorp.com:tinyapp/weixin-pages-hotelplanning.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^26.3.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "7.32.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "3.1.4",
+    "husky": "^8.0.1",
+    "jest": "^26.6.3",
+    "miniprogram-automator": "^0.10.0",
+    "miniprogram-simulate": "^1.4.2",
+    "prettier": "2.6.0",
+    "regenerator-runtime": "^0.13.9"
+  }
+}

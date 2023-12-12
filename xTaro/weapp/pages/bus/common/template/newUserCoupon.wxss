@@ -1,0 +1,470 @@
+.newUserCoupon {
+    position: fixed;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.newUserCoupon .newUserCoupon-mask {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: newUserCouponIn 250ms ease-in-out forwards;
+    z-index: 100;
+}
+
+@keyframes newUserCouponIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.newUserCoupon .couponwindow .header {
+    background-image: url('https://pages.c-ctrip.com/bus-images/busH5/offlineOrderCouponHeader.png');
+    height: 180rpx;
+    width: 580rpx;
+    z-index: 100;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.newUserCoupon .couponwindow .couponContentContainer {
+    margin-top: -1px;
+    width: 580rpx;
+    background: linear-gradient(-180deg, rgb(255, 32, 66) 0%, rgb(255, 230, 196) 100%);
+    border-radius: 0 0 32rpx 32rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+}
+
+.newUserCoupon .couponwindow {
+    width: 580rpx;
+    z-index: 100;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.newUserCoupon .hide-icon {
+    z-index: 100;
+}
+
+.newUserCoupon .couponwindow .rule {
+    font-size: 24rpx;
+    color: #ffffff;
+    font-weight: normal;
+    position: absolute;
+    right: 0;
+    top: -10rpx;
+}
+
+.newUserCoupon .couponwindow .rule .icon-question {
+    padding-left: 5rpx;
+}
+
+.newUserCoupon .couponwindow .couponList {
+    max-height: 498rpx;
+    box-sizing: border-box;
+    border-radius: 16rpx;
+}
+
+.newUserCoupon .couponwindow .couponItem {
+    background-image: url('https://pic.c-ctrip.com/bus/resource/index/coupon-item-bg.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 132rpx;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 12rpx;
+    color: #ffffff;
+}
+.newUserCoupon .couponwindow .couponItem .left {
+    width: 140rpx;
+    height: 132rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.newUserCoupon .couponwindow .couponItem .couponMoney {
+    font-size: 58rpx;
+    font-weight: 600;
+    text-align: center;
+    color: #f5190a;
+    font-family: "PingFang SC";
+}
+
+.newUserCoupon .couponwindow .couponItem .unit {
+    font-size: 24rpx;
+    color: #f5190a;
+    font-family: "PingFang SC";
+    padding-left: 5rpx;
+}
+
+.newUserCoupon .couponwindow .couponItem .middle {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20rpx 0rpx 20rpx 24rpx;
+    height: 132rpx;
+    box-sizing: border-box;
+}
+
+.newUserCoupon .couponwindow .couponItem .right {
+    padding-right: 16rpx;
+}
+
+
+.newUserCoupon .couponwindow .couponItem .couponItemTitle {
+    font-size: 30rpx;
+    font-weight: 600;
+    color: #333333;
+    padding-bottom: 8rpx;
+}
+
+.newUserCoupon .couponwindow .couponItem .useCouponButton {
+    height: 50rpx;
+    line-height: 50rpx;
+    background-color: #ff8522;
+    border-radius: 50rpx;
+    font-size: 22rpx;
+    padding: 0 20rpx;
+    color: #ffffff;
+}
+
+.newUserCoupon .couponwindow .couponItem .useCouponButton:after {
+    border-radius: 50rpx;
+}
+
+.newUserCoupon .couponwindow .couponItem .useCouponButton.disabled {
+    background-color: #ffffff;
+    color: #999999;
+}
+
+.newUserCoupon .couponwindow .couponItem .desc {
+    font-size: 22rpx;
+    font-weight: normal;
+    line-height: 24rpx;
+    color: #999999;
+    font-family: "PingFang SC";
+}
+
+.newUserCoupon .couponwindow .couponItem .state {
+    color: #999999;
+    font-size: 22rpx;
+    font-weight: normal;
+}
+
+
+.newUserCoupon .couponwindow .couponItem .button {
+    background: #FD2543;
+    border-radius: 25rpx 25rpx 25rpx 25rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    color: #ffffff;
+    font-family: "PingFang SC";
+    font-size: 22rpx;
+    font-weight: normal;
+    letter-spacing: 0rpx;
+}
+
+.newUserCoupon .couponwindow .couponItem .descContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.newUserCoupon .iconContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+
+    margin: 0 0 30rpx;
+}
+
+.newUserCoupon .iconContainer .logoIcon {
+    background-image: url('https://pic.c-ctrip.com/bus/resource/index/ctrip-logo.png');
+    height: 32rpx;
+    width: 196rpx;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.newUserCoupon .buttonContainer {
+    bottom: 60rpx;
+    width: 540rpx;
+    overflow: visible;
+    margin: 40rpx auto 30rpx;
+}
+
+.newUserCoupon .titleContainer {
+    color: #ffffff;
+    font-size: 40rpx;
+    letter-spacing: 0rpx;
+    font-weight: 600;
+    line-height: 56rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 18rpx 0rpx 16rpx 0rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.newUserCoupon .titleContainer .subTitle {
+    color: #ffffff;
+    font-size: 30rpx;
+    font-weight: 500;
+    margin-bottom: -15rpx;
+    opacity: 0.8;
+}
+
+.newUserCoupon .titleContainer .subTitle::after,
+.newUserCoupon .titleContainer .subTitle::before {
+    content: '';
+    display: inline-block;
+    background: #fff2ce;
+    height: 2rpx;
+    width: 50rpx;
+    margin: 0 16rpx 8rpx 16rpx;
+    white-space: nowrap;
+    align-self: center;
+    vertical-align: middle;
+    opacity: 0.6;
+}
+
+
+.newUserCoupon .couponPrice {
+    color: #fff8cb;
+    font-weight: 700;
+    font-size: 64rpx;
+    margin-left: 20rpx;
+}
+
+.newUserCoupon .couponPrice .unit {
+    font-size: 32rpx;
+}
+
+.newUserCoupon .couponTitle {
+    font-size: 32rpx;
+    margin-left: 10rpx;
+    color: #ff6650;
+    font-weight: 700;
+    margin-right: 20rpx;
+    margin-top: 10rpx;
+}
+
+.newUserCoupon .okButton {
+    background: url("https://pages.c-ctrip.com/bus-images/busH5/offlineOrderCouponButton.png") no-repeat;
+    background-size: 100% 100%;
+    font-weight: 600;
+    height: 90rpx;
+    color: #ffffff;
+    line-height: 90rpx;
+    font-size: 34rpx;
+}
+
+.newUserCoupon .okButton:after {
+    border: none;
+}
+
+.newUserCoupon .okButton.button-hover {
+    filter: grayscale(0.3);
+}
+
+
+
+
+.newuserbanner-container {
+    position: relative;
+    border-radius: 12rpx;
+    height: 68rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container-bg-color {
+    background: linear-gradient(-90deg, rgb(255, 244, 234) 0%, rgb(255, 255, 255) 100%);
+}
+
+.old-container-bg-color {
+    background: linear-gradient(90deg, rgb(255, 249, 246) 0%, rgba(255, 238, 239, 0.7) 100%);
+}
+
+.newuserbanner-container .new-exclusive {
+    width: 178rpx;
+    height: 68rpx;
+}
+
+.newuserbanner-container .old-exclusive {
+    width: 218rpx;
+    height: 68rpx;
+}
+
+.newuserbanner-container .new-exclusive-item {
+    font-size: 22rpx;
+    font-weight: 500;
+    margin-left: 18rpx;
+    height: 34rpx;
+    line-height: 34rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newuserbanner-container .old-exclusive-item {
+    font-size: 22rpx;
+    font-weight: 500;
+    margin-right: 18rpx;
+    height: 34rpx;
+    line-height: 34rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.new-exclusive-item .title{
+    width: 59rpx;
+    color: #ff7700;
+    background-image: url('https://pic.c-ctrip.com/bus/resource/index/new-exclusive-left.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.new-exclusive-item .desc {
+    width: 107rpx;
+    color: #ffffff;
+    background-image: url('https://pic.c-ctrip.com/bus/resource/index/new-exclusive-right.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.old-exclusive-item .title{
+    width: 59rpx;
+    color: #FF605E;
+    background-image: url('https://pic.c-ctrip.com/bus/resource/index/old-exclusive-left.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.old-exclusive-item .desc{
+    width: 107rpx;
+    color: #ffffff;
+    background-image: url('https://pic.c-ctrip.com/bus/resource/index/old-exclusive-right.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newuserbanner-container .new-guide-container {
+    position: absolute;
+    right: 20rpx;
+    color: #ff6600;
+    font-size: 24rpx;
+    font-weight: 500;
+}
+
+.newuserbanner-container .old-guide-container {
+    position: absolute;
+    right: 20rpx;
+    color: #FF605E;
+    font-size: 24rpx;
+    font-weight: 500;
+}
+
+
+.new-guide-container .icon-arrow-right,
+.old-guide-container .icon-arrow-right{
+    font-size: 24rpx;
+}
+
+.from-book .container-bg-color {
+    background: linear-gradient(90deg, rgb(255, 244, 232) 0%, rgb(255, 255, 255) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.from-book .container-bg-color .left {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.from-book .old-container-bg-color {
+    background: linear-gradient(-90deg, rgb(255, 255, 255) 0%, rgb(255, 234, 235) 100%);
+}
+
+.from-book .newuserbanner-container .gift-bag {
+    width: 32rpx;
+    height: 32rpx;
+    padding-left: 22rpx;
+    padding-right: 12rpx;
+}
+
+.from-book .newuserbanner-container .old-gift-bag {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.from-book .newuserbanner-container .text-item {
+    font-size: 24rpx;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333333;
+}
+
+.text-item .desc {
+    color: #ff6600;
+}
+
+.old-text-item .desc {
+    color: #FD4E4C;
+}
+
+.from-book .newuserbanner-container .coin {
+    width: 136rpx;
+    height: 64rpx;
+    justify-content: flex-end;
+}

@@ -1,0 +1,147 @@
+/* pages/you/place/webcast/userPanel/userPanel.wxss */
+
+
+.userpanel-mask{
+	background: rgba(0,0,0, 0);
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 112;
+}
+
+.userpanel-wrapper{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 744rpx;
+	z-index: 112;
+	background: white;
+	border-radius: 24rpx 24rpx 0rpx 0rpx;
+}
+
+.head-view{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 88rpx;
+	padding-left: 24rpx;
+	padding-right: 24rpx;
+}
+
+.back-arrow{
+	width: 40rpx;
+	height: 40rpx;
+	background: url(https://pages.c-ctrip.com/livestream/live/live_arrow_right.png);
+	background-size: 40rpx;
+	background-repeat: no-repeat;
+	background-position: center;
+	padding: 10rpx;
+}
+
+.head-title{
+	color: #333333;
+	font-family: PingFangSC-Medium;
+	font-size: 34rpx;
+	font-weight: 500;
+}
+.head-right{
+	width: 44rpx;
+	height: 44rpx;
+	padding: 10rpx;
+}
+
+.content-view{
+	background: rgb(255, 255, 255);
+	border-radius: 16rpx 16rpx 0rpx 0rpx;
+	height: 510rpx;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	z-index: 2;
+	position: relative;
+}
+
+.loading{
+	margin-top: 280rpx;
+	width: 64rpx;
+	height: 64rpx;
+	-webkit-animation: gs-lottery-loading 1.58s linear infinite;
+}
+
+@keyframes gs-lottery-loading {
+	from{
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.empty-view{
+	margin-top: 140rpx;
+	height: 300rpx;
+	width: 300rpx;
+}
+
+.empty-text{
+	margin-top: 24rpx;
+	color: #333333;
+	font-family: PingFangSC-Regular;
+	font-size: 32rpx;
+}
+
+.user-item{
+	padding-left:32rpx;
+	padding-right: 32rpx;
+	height: 96rpx;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	position: relative;
+}
+
+.user-avart{
+	border: 0.8rpx solid #eeeeee;
+	height: 56rpx;
+	width: 56rpx;
+	box-sizing: border-box;
+	border-radius: 28rpx;
+	flex-shrink: 0;
+	background-image: url(https://pages.c-ctrip.com/you/livestream/lvpai_logo_youyou.png);
+  background-position: 50%;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-color: #d8d8d8;
+}
+
+.username{
+	color: #333333;
+	font-family: PingFangSC-Regular;
+	font-size: 32rpx;
+	margin-left: 16rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.vip{
+	width:18rpx;
+	height:18rpx;
+	position:absolute;
+	left:70rpx;
+	bottom:20rpx;
+}
+.line{
+	position: absolute;
+	bottom: 0;
+	left: 32rpx;
+	right: 32rpx;
+	height: 1rpx;
+	background: #eeeeee;
+}

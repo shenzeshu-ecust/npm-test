@@ -1,0 +1,43 @@
+<swiper class="level-scroll-view" current="{{swiperCurrent}}" bindchange="handleSwiper" previous-margin="165rpx" next-margin="165rpx">
+    <swiper-item wx:for="{{checkpointList}}" wx:key="index">
+        <template is="checkpoint-item" data="{{...item, isActive: index === swiperCurrent,assistStatus}}"></template>
+    </swiper-item>
+</swiper>
+
+ <template name="checkpoint-item">
+     <view class="cutprice-level cutprice-level-wrapper {{status === 10 ? 'no-title-background' : ''}} {{ isActive ? 'cutprice-level-active' : 'cutprice-level-inactive' }}">
+        <view wx:if="{{status === 1}}" class="ast-icon ast-checkpoint-success checkpoint-stamp"></view>
+        <view wx:if="{{status === 3 || status === 4}}" class="ast-icon ast-checkpoint-fail checkpoint-stamp"></view>
+        <view class="cp-current" wx:if="{{status !== 10}}">
+            第{{current}}关
+        </view>
+        <view class="cp-info-wrapper">
+            <view wx:if="{{checkpointTitle}}" class="cp-subtitle">
+                {{checkpointTitle}}
+            </view>
+            <view wx:if="{{cancelTitle}}" class="cp-cancel-title">
+                {{cancelTitle}}
+            </view>
+            <view wx:if="{{totalCashBackAmount}}" class="cp-reward">
+                <view class="reward-num">
+                    {{totalCashBackAmount}}
+                </view>
+                <view wx:if="{{totalCashBackAmount !== '?'}}" class="reward-unit">元</view>
+            </view>
+        </view>
+        <!--已过关或进行中或闯关失败或闯关取消 展示头像/邀请按钮-->
+        <view wx:if="{{status === 0 || status === 1 || status === 3 || status === 4 || status === 10}}" class="invite-group">
+            <view wx:for="{{assistingUserList}}" wx:key="id" wx:for-item="assistUser" class="invite-item">
+                <button bindtap="onInvite" data-status="{{assistStatus}}" wx:if="{{assistUser.toBeInvited}}" open-type="{{assistStatus === 1 ? 'share' : ''}}" plain="{{true}}">
+                    <view class="ast-icon ast-invite invite-image"></view>
+                </button>
+                <image wx:else src="{{assistUser.user.avatar}}"></image>
+                <text>{{assistUser.toBeInvited ? (assistStatus === 1 ? '待邀请' : '未邀请') : assistUser.user.nick}}</text>
+            </view>
+        </view>
+        <!--未开始-->
+        <view wx:if="{{status === 2 || status === 9}}" class="invite-group">
+            <view class="ast-icon ast-lock"></view>
+        </view>
+    </view>
+ </template>

@@ -1,0 +1,672 @@
+.pop-mask{position: fixed;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,.8);z-index: 800;}
+.fullscreen{position:fixed;top:0;right:0;bottom:0;left:0;width:100%;height:100%;}
+.float {
+  position: fixed;
+  left: 50%;
+  top: 15%;
+  z-index: 1000;
+  text-align: center;
+  transform: translateX(-50%);
+  z-index: 801;
+}
+.float.short_screen {
+  top: 10%;
+}
+.card_tip {
+  background: #ffffff;
+  border-radius: 38rpx 38rpx 0rpx 38rpx;
+  height: 76rpx;
+  width: 460rpx;
+  line-height: 76rpx;
+  color: #a26228;
+  font-family: "PingFang SC";
+  font-size: 30rpx;
+  margin: 0 auto 37rpx;
+}
+.flip_container .flipper.tap {
+  transform: rotateY(180deg);
+}
+.flip_container, .front, .back {
+	width: 600rpx;
+	height: 827rpx;
+}
+.flip_container .btn_share {
+  position: absolute;
+  bottom: -120rpx;
+  left: 50%;
+  transform: translate(-50%);
+}
+.flipper {
+	transition: 0.6s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+.front, .back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility:hidden; /* Chrome 、Safari */ 
+  -moz-backface-visibility:hidden; /* Firefox */ 
+  -ms-backface-visibility:hidden; /* Internet Explorer */
+	position: absolute;
+	top: 0;
+  left: 0;
+}
+.front {
+  z-index: 2;
+  background-color: red;
+}
+.back {
+  transform: rotateY(180deg);
+  background-color: orange;
+}
+.btn_reverse {
+  position: absolute;
+  width: 120rpx;
+  height: 48rpx;
+  right: 0;
+  top: 50rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/revert_icon.png');
+  background-size: 100% 100%;
+  border-radius: 24rpx 0rpx 0rpx 24rpx;
+  font-size: 24rpx;
+  color: #A45511;
+  font-family: PingFang SC;
+  line-height: 48rpx;
+}
+
+.float .btn_share {
+  width: 240rpx;
+  height: 78rpx;
+  line-height: 78rpx;
+  border-radius: 39rpx;
+  border: 2rpx solid #ffffff;
+  color: #ffffff;
+  font-family: "PingFang SC";
+  font-size: 34rpx;
+  margin: 53rpx auto 0;
+}
+.btn_card_jump {
+  margin: 18rpx auto 0;
+  color: #d2d2d2;
+  font-family: "PingFang SC";
+  font-size: 28rpx;
+  font-weight: normal;
+  height: 40rpx;
+  width: 130rpx;
+  text-decoration: underline;
+  margin-top: 45rpx;
+}
+.award.float .title .tips {
+  font-size: 70rpx;
+  font-family: FZLanTingHeiS-R-GB;
+  font-weight: 400;
+  color: #FFFAE6;
+  margin-bottom: 37rpx;
+}
+.award.float .title .period {
+  border-radius: 23rpx 23rpx 23rpx 23rpx;
+  border: 1rpx solid #ffffff;
+  width: 240rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  font-size: 24rpx;
+  font-family: FZLanTingHeiS-R-GB;
+  color: #FFFFFF;
+  margin: 0 auto;
+}
+.award.float .award_cards {
+  width: 710rpx;
+  height: auto;
+  margin: 20rpx auto;
+}
+
+.award.float .award_cards .float_bg_top{
+  width: 100%;
+  height: 88rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/float_bg_top.png');
+  background-size: 100% 100%;
+}
+.award.float .award_cards .float_bg_top .title,  .award.float .award_cards .float_bg_middle .title{
+  color: #b89558;
+  font-family: "PingFang SC";
+  font-size: 26rpx;
+  font-weight: normal;
+  height: 37rpx;
+  line-height: 37rpx;
+  width: 180rpx;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 30rpx;
+  position: relative;
+}
+.award.float .award_cards .float_bg_middle .title {
+  width: 100%;
+}
+.award.float .award_cards .float_bg_top .title:before, .award.float .award_cards .float_bg_top .title:after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 128rpx;
+  height: 28rpx;
+  top: 34rpx;
+}
+.award.float .award_cards .float_bg_top .title:before {
+  left: 180rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/bg_subtitle_icon_right.png');
+  background-size: 100% 100%;
+}
+.award.float .award_cards .float_bg_top .title:after {
+  right: 180rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/bg_subtitle_icon_left.png');
+  background-size: 100% 100%;
+}
+/* 开奖结果 */
+.award.float .float_bg_middle.award {
+  width: 100%;
+  height: 382rpx;
+  padding-top: 90rpx;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/open-prize-result-popup.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+ .award.float .float_bg_middle {
+  width: 100%;
+  height: auto;
+  max-height: 385rpx;
+  overflow-y: scroll;
+  /* background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/float_bg_middle.png'); */
+  background-size: 100% 100%;
+  background-repeat: repeat;
+}
+.card_wrap.award_cards.award_cards_mycards_bg{
+  background-image: url(https://images3.c-ctrip.com/marketing/2021/02/zzl2/float-my-card.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 529rpx;
+}
+
+.place-holder-mycards{
+  padding-top: 0 17rpx;
+  height: 100rpx;
+}
+.award.float .award_cards .float_bg_middle.my_cards {
+  height: 475rpx;
+  /* box-sizing: border-box; */
+  /* padding-top: 90rpx; */
+  /* background-image: url(https://images3.c-ctrip.com/marketing/2021/02/zzl2/float-my-card.png); */
+}
+.award.float .award_cards .float_bg_middle.my_cards .title {
+  padding-top: 0;
+  color: #A94E2F;
+  font-size: 22rpx;
+}
+.award.float .award_cards .float_bg_bottom {
+  width: 100%;
+  height: 40rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/float_bg_bottom.png');
+  background-size: 100% 100%;
+}
+.award.float .award_cards .float_bg_middle.award, .award.float .award_cards .float_bg_middle .custom_card_list_item{
+  display: flex;
+  width: 710rpx;
+  margin: 0 auto;
+  justify-content: space-around;
+}
+.award.float .award_cards .float_bg_middle .custom_card_list_item {
+  width: 710rpx;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 20rpx;
+  padding-top: 40rpx;
+  position: relative;
+}
+.award.float .award_cards .float_bg_middle.fixed_height {
+  height: 470rpx;
+  overflow-y: scroll;
+}
+.award.float .award_cards .float_bg_middle .custom_card_list_item .sub_title {
+  position: absolute;
+  top: 0;
+  color: #b89558;
+  font-family: "PingFang SC";
+  font-size: 22rpx;
+  font-weight: normal;
+  height: 30rpx;
+  line-height: 30rpx;
+}
+.award.float .award_cards .float_bg_middle .card {
+  width: 156rpx;
+  height: 217rpx;
+  border-top-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+  background: red;
+  position: relative;
+}
+.award.float .award_cards.period {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 17rpx;
+  width: 676rpx;
+}
+.award.float .float_bg_middle .award_cards {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 17rpx;
+  width: 676rpx;
+}
+.float_bg_middle .award_cards .card.mask::after {
+  display: block;
+  content: '';
+  width: 158rpx;
+  height: 217rpx;
+  position: relative;
+  border-radius: 10rpx;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, .6);
+}
+.float .complete {
+  width: 387rpx;
+  height: 100rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/complete.png');
+  background-size: 100% 100%;
+  text-align: center;
+  line-height: 112rpx;
+  font-size: 36rpx;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #8B452A;
+  margin: 30rpx auto 0;
+}
+
+.float .click-to-see{
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/click-to-see.png');
+}
+
+.float .dust {
+  width: 600rpx;
+  height: 827rpx;
+  position: relative;
+}
+.float .dust .dust_bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.float .dust .dust_bg.dust0 {
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/dust/dust0.png');
+  background-size: 100%;
+}
+.float .dust .dust_bg.dust1 {
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/dust/dust1.png');
+  background-size: 100%;
+}
+.float .dust .dust_bg.dust2 {
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/dust/dust2.png');
+  background-size: 100%;
+}.float .dust .dust_bg.dust3 {
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/dust/dust3.png');
+  background-size: 100%;
+}
+.float .dust .dust_bg.dust4 {
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/dust/dust4.png');
+  background-size: 100%;
+}.float .dust .dust_bg.dust5 {
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/dust/dust5.png');
+  background-size: 100%;
+}
+.float .dust .dust_bg.dust6 {
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/dust/dust6.png');
+  background-size: 100%;
+}
+.float .dust .dust_bg.dust7 {
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/dust/dust7.png');
+  background-size: 100%;
+}
+.float .dust .dust_bg.dust8 {
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/dust/dust8.png');
+  background-size: 100%;
+}
+.float.rule {
+  width: 666rpx;
+  height: 739rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/rule_bg.png') 0 0 / 100% 100% no-repeat;
+}
+.rule-close{
+  width: 351rpx;
+  height: 88rpx;
+  margin-top: 115rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/rule_close.png')  0 0 / 100% 100% no-repeat;
+}
+.float.rule .title {
+  width: 386rpx;
+  height: 28rpx;
+  margin: 40rpx auto;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/lottery/rule_title.png');
+  background-size: 100%;
+}
+.float.rule .content {
+  width: 560rpx;
+  height: 580rpx;
+  margin: 96rpx auto 50rpx;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  text-align: left;
+  color: #482F22;
+  font-family: "PingFang SC";
+  font-size: 20rpx;
+}
+.float.rule .content .item {
+  margin-bottom: 10rpx;
+}
+
+.card .card_color.left_top {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 26rpx;
+  text-align: center;
+}
+.preview.card .card_color.left_top, .preview.card .card_color.right_bottom, .card .flipper .card_color{
+  width: 80rpx;
+}
+.preview.card .card_color.left_top {
+  left: 20rpx;
+}
+.preview.card .card_color.right_bottom {
+  right: 20rpx;
+}
+ .card .card_color.right_bottom {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: rotate(180deg);
+  width: 26rpx;
+  text-align: center;
+}
+.card .card_color .color{
+  font-size: 18rpx;
+}
+.preview.card .card_color .color, .card .flipper .card_color .color{
+  font-size: 50rpx;
+}
+.card .flipper .card_color .right_bottom{
+  right: 10rpx;
+}
+
+
+.round {
+  position: fixed;
+  left: 0;
+  bottom: -500rpx;
+  width: 100vw;
+  height: 500rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/xuanzhuan.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  animation: zhuan 3s;
+  transform-origin: top center;
+  animation-fill-mode: forwards;
+  transform: rotate(0deg);
+  opacity: 0;
+  z-index: 9999;
+}
+@keyframes zhuan {
+  /* 0% {transform:rotate(0deg);}
+  30% {opacity: .3;}
+  60% {opacity: .6;}
+  80% {opacity: .8;}
+  90% {transform:rotate(-180deg) scale(2,2);opacity: 1;}
+  100% {transform:rotate(-180deg) scale(2,2);opacity: 0;} */
+  0% {
+    transform: rotate(0deg);
+    opacity: 0;
+  }
+  60% {
+    opacity: .6;
+  }
+  80% {
+    opacity: .8;
+  }
+  90% {
+    transform: rotate(-180deg);
+    opacity: 1;
+  }
+  100% {
+      transform: rotate(-180deg);
+      opacity: 0;
+  }
+}
+
+.book_short {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 217rpx;
+  display: flex;
+  justify-content: space-around;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  z-index: 999;
+}
+.book-hide{
+  display: none;
+}
+.book {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 217rpx;
+  display: flex;
+  justify-content: space-around;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  z-index: 999;
+  animation: big 1.5s  2s;
+}
+.book-item{
+  width: 156rpx;
+  height: 217rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/default_bg.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+@keyframes big {
+  0% {
+    bottom: 0;
+  }
+  30% {
+    bottom: 50%;
+    transform: translateY(50%);
+    opacity: .5;
+  }
+  60% {
+    bottom: 50%;
+    transform: translateY(50%);
+    opacity: 1;
+  }
+  90% {
+    bottom: 50%;
+    transform: translateY(50%);
+    opacity: 1;
+  }
+  100% {
+    bottom: 50%;
+    transform: translateY(50%);
+    opacity: 1;
+  }
+}
+
+.book_short {
+  animation: big2 1.5s 3s;
+}
+@keyframes big2 {
+  0% {
+    transform:translateY(0rpx);
+  }
+  30% {
+    transform: translateY(-35%);
+    opacity: .5;
+  }
+  60% {
+    transform: translateY(-35%);
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(-35%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-35%);
+    opacity: 0;
+  }
+}
+.welcome_float {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+.welcome_float .welcome_cover {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/welcome-cover.jpg');
+  background-size: 100% 100%;
+  left: 0;
+  width: 100%;
+}
+
+.welcome_float .welcome_btn {
+  position: absolute;
+  top: 71%;
+  left: 50%;
+  width: 544rpx;
+  height: 121rpx;
+  transform: translateX(-50%);
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/welcome-button.png');
+  background-size: 100% 100%;
+  z-index: 1000;
+}
+.welcome_float .welcome_btn.hide {
+  opacity: 0;
+}
+.welcome_float .welcome_cover.toBottom {
+  animation: toBottom 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes toBottom {
+  0%{}
+  100%{
+    transform: translateY(1000px);
+    opacity: 0.45;
+  }
+}
+/* 新手引导1 */
+.guide_float.guide1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 600rpx;
+  background: transparent;
+  border-top: 740rpx solid rgba(0, 0, 0, .5);
+  border-bottom: 1000px solid rgba(0, 0, 0, .5);
+}
+.guide-hand{
+  position: absolute;
+  width: 111rpx;
+  height: 135rpx;
+  left: 500rpx;
+  bottom: 0;
+  background: url(https://images3.c-ctrip.com/marketing/2021/02/zzl2/guide-hand.png) 0 0 / 100% 100% no-repeat;
+}
+.guide_float.guide1 .tip1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -100rpx;
+  width: 424rpx;
+  height: 95rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/guide1-text.png');
+  background-size: 100% 100%;
+}
+.guide_float.guide1 .know {
+  position: absolute;
+  left: 410rpx;
+  bottom: -180rpx;
+  width: 170rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  border-radius: 39rpx;
+  border: 2rpx solid #ffffff;
+  color: #ffffff;
+  font-family: "PingFang SC";
+  font-size: 24rpx;
+  text-align: center;
+}
+/* 新手引导2 */
+.guide_float.guide2 {
+  position: fixed;
+  top: -55px;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 625rpx;
+  background: transparent;
+  border-top: 100px solid rgba(0, 0, 0, .5);
+  border-bottom: 3000px solid rgba(0, 0, 0, .5);
+}
+.guide_float.guide2 .tip2 {
+  position: absolute;
+  left:50%;
+  transform: translateX(-50%);
+  bottom: -100rpx;
+  width: 537rpx;
+  height: 95rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2021/02/zzl2/guide2-text.png');
+  background-size: 100% 100%;
+}
+.guide_float.guide2 .know {
+  position: absolute;
+  bottom: -180rpx;
+  left: 470rpx;
+  width: 170rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  border-radius: 39rpx;
+  border: 2rpx solid #ffffff;
+  color: #ffffff;
+  font-family: "PingFang SC";
+  font-size: 24rpx;
+  text-align: center;
+}
+.guide2 .guide-hand{
+  left: 590rpx;
+}
+
+.float-card-result{
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100000;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.float-card-result-item{
+  position: relative;
+  width: 156rpx;
+  height: 217rpx;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "product":"/pages/market/directory/legaoComponents/productCanvas/index",
+    "shelvesBanner":"../liveShelvesBanner/shelvesBanner"
+  },
+  "componentPlaceholder": {
+    "product": "view"
+  }
+}

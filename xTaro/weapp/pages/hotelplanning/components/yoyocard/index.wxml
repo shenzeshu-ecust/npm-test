@@ -1,0 +1,31 @@
+<import src="./vipcard_templates.wxml" />
+
+<!--领卡弹窗-->
+<block>
+    <template is="new-right-vip-card" data="{{closeVipCardModal, vipcardToastMsg, showGetVipCardModal, isGroupMode: unionVipFunc.isGroupMode, group: unionVipFunc.group, couponsReceivedAfterGetCard, isOrderCode}}"/>
+</block>
+
+<!--兜底弹窗 未领卡时点下单触发领卡弹窗-->
+<block wx:if="{{showVipLayer && unionVipType === 'pendingVip'}}">
+    <view class="mask" style="z-index: 1100;"></view>
+    <view class="vip-card-layer">
+        <view class="g-vip-card">
+                <view class="title">
+                    <image class="icon" src="{{unionVipFunc.title.icon}}"/>
+                    <view class="title-text">{{unionVipFunc.title.text}}</view>
+                </view>
+                <block wx:for="{{unionVipFunc.functions}}" wx:for-item="item" wx:key="id">
+                    <view class="function">
+                        <image class="icon" src="{{item.icon}}"/>
+                        <view class="text">{{item.text}}</view>
+                    </view>
+                </block>
+                <view class="abtn" catchtap="handleGetVip" data-id="{{func.id}}" data-ubt-key="c_tinyapp_lhhy_receive">
+                    {{unionVipFunc.btn}}
+                </view>
+                <view class="desc">领卡后才可享受订房服务</view>
+        </view>
+        <view class="wechat-font-close" catchtap="closeVipLayer"></view>
+    </view>
+</block>
+

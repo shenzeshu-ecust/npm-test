@@ -1,0 +1,22 @@
+<view wx:if="{{wakeUpData.wakeUpIsShow}}" data-type="{{wakeUpData.canBackApp}}" class="wakeup-go-back {{wakeUpData.wakeUpIsPull?'wakeup-go-back-pull':''}}" style="right:{{wakeUpData.canBackApp?'-252rpx':'-156rpx'}}; {{wakeUpData.resetToptStyle}}">
+  <view class="wakeup-go-back-icon" bindtap='_wakeUpBackBtns'>
+    <image class="wakeup-go-back-icon-img" src="http://pages.c-ctrip.com/you/wechat/poi_icon_pull.png"></image>
+  </view>
+  <view id="backBtns" class="wakeup-go-back-btns">
+    <block wx:for="{{wakeUpData.list}}" wx:key="{{index}}">
+        <block wx:if="{{item.callback === '_goHome'}}">
+          <button class="wakeup-go-back-btn" bindtap="{{item.callback}}">
+            <image class="wakeup-go-back-btn-img" src="{{item.imgurl}}"/>
+            <text class="wakeup-go-back-btn-text">{{item.title}}</text>
+          </button>
+        </block>
+        <block wx:else>
+          <button class="wakeup-go-back-btn" open-type="launchApp" app-parameter="{{item.url}}">
+            <image class="wakeup-go-back-btn-img" src="{{item.imgurl}}"/>
+            <text class="wakeup-go-back-btn-text">{{item.title}}</text>
+          </button>
+        </block>
+        
+    </block>
+  </view>
+</view>

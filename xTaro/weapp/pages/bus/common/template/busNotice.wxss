@@ -1,0 +1,109 @@
+.bus-notice-container {
+    height: 68rpx;
+    background: #FFF8F2;
+    border-radius: 16rpx;
+    color: #FF7700;
+    font-size: 24rpx;
+}
+
+.bus-notice-container .banner {
+    height: 68rpx;
+}
+
+.bus-notice-item {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    justify-content: space-between;
+    height: 68rpx;
+    padding-left: 16rpx;
+    padding-right: 16rpx;
+}
+
+.bus-notice-item .icon{
+    width: 28rpx;
+    height: 28rpx;
+}
+
+.bus-notice-item .info {
+    display: flex;
+    align-items: center;
+}
+
+.bus-notice-item .info .content {
+    padding-left: 8rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 540rpx;
+}
+
+.bus-notice-modal {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.bus-notice-modal-container {
+    border-radius: 20rpx 20rpx 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    animation: slideUp 300ms;
+    font-size: 0;
+    background: #ffffff;
+}
+
+.bus-notice-modal-container  .bus-notice-title-content {
+    height: 98rpx;
+    text-align: center;
+    position: relative;
+}
+
+.bus-notice-modal-container  .bus-notice-title-content .title {
+    line-height: 98rpx;
+    font-size: 40rpx;
+    color: #333333;
+    font-weight: 500;
+}
+
+
+.bus-notice-modal-container .content {
+    color: #666666;
+    font-size: 28rpx;
+    line-height: 1.4;
+    margin: 20rpx 40rpx 80rpx 40rpx;
+    max-height: 500rpx;
+    text-align:justify;
+}
+
+.bus-notice-scroll {
+    max-height: 500rpx;
+}
+
+.bus-notice-modal-container .close-tips {
+    background-color: transparent;
+    font-size: 40rpx;
+    color: #666666;
+    width: 80rpx;
+    line-height: 25px;
+    height: 50rpx;
+    padding: 0;
+    position: absolute;
+    left: 20rpx;
+    top: 25rpx;
+}
+
+
+.phoneNumber-icon {
+    color: #FF7700;
+    padding-left: 15rpx;
+    padding-top: 10rpx;
+    padding-right: 5rpx;
+}

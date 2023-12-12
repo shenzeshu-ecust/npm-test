@@ -1,0 +1,28 @@
+<import src="utils/machine.wxml" />
+
+<block wx:if="{{isShow}}">
+  <!-- 火车票 -->
+  <template is="machine" data="{{...machine, slotOneList, slotTwoList, slotThreeList, remainChance }}"></template>
+</block>
+
+
+<!-- 火车票得奖励成功提示 -->
+<Modal show="{{showPrizeModal.show}}" maskClosable="{{false}}">
+  <view class='train_success {{showPrizeModal.type == 1 ? "" : "train_success__noaward" }}'>
+    <image  wx:if="{{showPrizeModal.type==1}}" class='train_success__headImage' src="https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/pop_pic_blue.png"></image>
+    <!-- <view class="train_success__close-btn" bindtap="signinModalClose"></view> -->
+    <block wx:if="{{showPrizeModal.type == 3}}">
+      <view class='train_success__tips'>请重试</view>
+    </block>
+    <block wx:elif="{{showPrizeModal.type == 1}}">
+      <view class='train_success__title'>恭喜您</view>
+      <view class='train_success__tips'>抽中礼物：{{showPrizeModal.prizeName}}</view>
+    </block>
+    <block wx:else>
+      <view class='train_success__title'>很遗憾，您没有中奖</view>
+    </block>
+    <view class='train_success__brn-wrap'>
+      <button class='train_success__assist-btn' bindtap="handleCloseTrainAwardModal">我知道了</button>
+    </view>
+  </view>
+</Modal>

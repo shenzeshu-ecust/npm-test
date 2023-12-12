@@ -1,0 +1,43 @@
+<import src="../commontemplates/roompackage/package.wxml" />
+<!--套餐/保险/超旅券包平铺信息-->
+<template name="suite-tiling-content">
+    <view class="meal-suite-content {{suiteInfo.hasToggleBtn && suiteInfo.showMore ? 'pb40' : ''}}" data-type="{{suiteInfo.type}}"
+          bindtap="toggleSuiteLayer">
+        <view wx:for="{{suiteInfo.xItems}}" wx:for-item="xItem" wx:key="xProID" class="mealsuite-item"
+              wx:if="{{index > 3 ? !suiteInfo.showMore : true}}">
+            <text class="mealsuite-name single-ellipsis">{{xItem.name || xItem.itemName}}</text>
+            <text wx:if="{{xItem.appointDesc}}" class="ms-appoint {{xItem.appointHighLight ? 'highlight' : ''}}">{{xItem.appointDesc}}</text>
+            <text class="item wechat-font-arrow-right"></text>
+        </view>
+        <block wx:if="{{superTravellerInfo && (suiteInfo.hasToggleBtn && !suiteInfo.showMore || !suiteInfo.hasToggleBtn || suiteInfo.xItems.length === 3)}}">
+            <view class="mealsuite-item" data-url="{{superTravellerInfo.url}}" catchtap="toTravelCouponDetail">
+                <text class="mealsuite-name single-ellipsis">{{superTravellerInfo.title}}</text>
+                <text wx:if="{{superTravellerInfo.showDetail}}" class="item wechat-font-arrow-right"></text>
+            </view>
+        </block>
+        <view wx:if="{{suiteInfo.hasToggleBtn}}" catchtap="{{clickEvent}}"
+              class="toggle-btn {{suiteInfo.showMore ? 'breakfast-fold' : 'pb29'}}">
+            <text>{{suiteInfo.showMore ? '展开' : '收起'}}</text>
+            <text class="{{suiteInfo.showMore ? 'wechat-font-g-arrow-down' : 'wechat-font-g-arrow-up'}}"></text>
+        </view>
+    </view>
+</template>
+<!--套餐/保险浮层信息-->
+<template name="suite-layer">
+            <scroll-view scroll-y class="sl-content" slot="content">
+                <view wx:for="{{suiteInfo.xItems}}" wx:for-item="xItem" wx:key="xProID" class="suite-item" wx:for-index="index">
+                    <view class="suite-header pr24 pl24">
+                        <view class="suite-header-desc">
+                            <text class="name">{{xItem.itemName || xItem.name}}</text>
+                            <text wx:if="{{xItem.appointDesc}}" class="{{xItem.appointType !== 0 ? 'highlight' : ''}}">{{xItem.appointDesc}}</text>
+                        </view>
+                        <view class="suite-appoint-btn" wx:if="{{xItem.showAppoint && xItem.telephone}}" data-tel="{{xItem.telephone}}" catchtap="callPhone">立即预约</view>
+                    </view>
+                    <view class="suite-content">
+                        <template is="packageDetailLayer"
+                                  data="{{ xItem, packageItem: suiteInfo, index, showMoreMenu: suiteLayer.moreMenu[index], showMoreInfo: xItem.highValueTicket ? true : suiteLayer.moreSuite[index], showToggleBtn: !xItem.highValueTicket}}">
+                        </template>
+                    </view>
+                </view>
+            </scroll-view>
+</template>

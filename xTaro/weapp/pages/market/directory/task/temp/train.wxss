@@ -1,0 +1,382 @@
+.task_item.train_task_item .icon {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.task_item.train_task_item .info .title {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  font-family: PingFangSC-Medium;
+  font-weight: normal;
+}
+
+.task_item.train_task_item .info .desc {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular;
+  color: #999;
+  opacity: 1;
+}
+
+.task_item.train_task_item .tap_wrap .point {
+  display: none;
+}
+
+.task_item.train_task_item .tap_wrap .task_btn {
+  width: 144rpx;
+  height: 60rpx;
+}
+
+.task_item.train_task_item .tap_wrap .task_btn button {
+  width: 144rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  font-family: PingFangSC-Medium;
+}
+
+.task_item.train_task_item .train_wenhao_image {
+  width: 28rpx;
+  height: 28rpx;
+  margin: 0 6rpx;
+}
+
+.task_item.train_task_item .train_done_tips_image {
+  width: 102rpx;
+  height: 32rpx;
+  margin-left: 5rpx;
+}
+
+/************************** 温馨提示弹窗 ***************************************************/
+.train_tips {
+  position: relative;
+  width: 600rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  padding-top: 40rpx;
+  padding-bottom: 40rpx;
+}
+
+.train_tips__title {
+  color: #333333;
+  font-family: PingFangSC-Medium;
+  font-size: 40rpx;
+  font-weight: 600;
+  margin-top: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.train_tips__tips {
+  color: #666666;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  margin-bottom: 48rpx;
+  padding: 0 30px;
+}
+
+.train_tips__brn-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.train_tips__assist-btn {
+  height: 80rpx;
+  width: 520rpx;
+  background: rgb(77, 132, 228);
+  color: #ffffff;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  padding-bottom: 8rpx;
+  border-radius: 10rpx;
+}
+
+.train_tips__assist-btn.gray {
+  background: #33333340;
+}
+
+
+
+/************************** 温馨提示弹窗 ***************************************************/
+.train_success {
+  position: relative;
+  width: 600rpx;
+  border-radius: 16rpx;
+  text-align: center;
+  padding-top: 110rpx;
+  padding-bottom: 40rpx;
+  background: url(https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/BG.png) center top / contain no-repeat;
+}
+
+.train_success__headImage {
+  position: absolute;
+  top: -90rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300rpx;
+  height: 223rpx;
+}
+
+.train_success__title {
+  color: #1f3c64;
+  font-family: PingFangSC-Semibold;
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-top: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.train_success__tips {
+  color: #666666;
+  font-family: PingFangSC-Regular;
+  font-size: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.train_success_prize {
+  display: flex;
+  justify-content: center;
+  /* margin-bottom: 50rpx; */
+}
+
+.train_success_prize_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14rpx 24rpx 14rpx 18rpx;
+  color: #ffffff;
+  font-size: 30rpx;
+  font-family: PingFangSC-Semibold;
+  line-height: 1;
+}
+
+.train_success_prize_item_img {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 10rpx;
+}
+
+.prize_zhuli {
+  background: linear-gradient(-90deg, rgb(255, 104, 70) -6.59%, rgb(255, 181, 32) 100%);
+  border-radius: 24rpx 6rpx;
+  margin-right: 26rpx;
+}
+
+.prize_sudu {
+  background: linear-gradient(-90deg, rgb(23, 200, 142) -6.59%, rgb(59, 230, 173) 100%);
+  border-radius: 24rpx 6rpx;
+}
+
+.train_success__coupon-img {
+  height: 138rpx;
+  width: 520rpx;
+  margin-bottom: 48rpx;
+}
+
+.train_success__brn-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 26rpx;
+}
+
+.train_success__assist-btn {
+  width: 520rpx;
+  height: 88rpx;
+  background: linear-gradient(-90deg, rgb(0, 118, 245) 0%, rgb(0, 167, 250) 97.42%);
+  border-radius: 12rpx;
+  color: #ffffff;
+  font-size: 34rpx;
+  font-family: PingFangSC-Regular;
+  padding-bottom: 8rpx;
+}
+
+.train_success__assist-btn.gray {
+  background: #33333340;
+}
+
+.train_success__close-btn {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  width: 50rpx;
+  height: 50rpx;
+  background: url("https://images3.c-ctrip.com/marketing/static/wangzhe_ic_popup_close.png") center / 32rpx 32rpx no-repeat;
+}
+
+.train_success_bottomtips {
+  color: #999999;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular;
+  margin-top: 20rpx;
+}
+
+.train_success_bottomtips_count {
+  color: #1F3C64;
+}
+
+.train_more_text {
+  color: #666666;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular;
+}
+
+/* toubu */
+.train_head {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 32rpx;
+}
+
+.train_head_left {
+  color: #333333;
+  font-size: 14px;
+  font-family: PingFangSC-Medium;
+}
+
+.train_head_right {
+  color: #333;
+  font-size: 12px;
+  font-family: PingFangSC-Regular;
+}
+
+.train_head_right_highlight {
+  color: #0086f6;
+  font-size: 12px;
+  font-family: PingFangSC-Regular;
+}
+
+.task_wrap_17 {
+  border-radius: 12rpx;
+}
+
+.train_rule {
+  position: relative;
+}
+
+.train_rule__close {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.train_rule__title {
+  color: #333333;
+  font-size: 34rpx;
+  font-family: PingFangSC-Medium;
+  line-height: 1;
+  padding: 24rpx 0;
+  text-align: center;
+}
+
+.train_rule__tips {
+  color: #333333;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  padding: 0 32rpx 30rpx;
+  overflow-y: scroll;
+  max-height: 600rpx;
+  text-align: left;
+}
+
+.train_rule__tips_h1 {
+  text-align: left;
+  color: #333333;
+  font-size: 30rpx;
+  font-family: PingFangSC-Medium;
+  line-height: 1;
+  margin-bottom: 20rpx;
+}
+
+/* 火车票视频号弹窗 */
+.train_wxvideo_content {
+  position: relative;
+  width: 600rpx;
+  height: 820rpx;
+  overflow: hidden;
+  background: url(https://images3.c-ctrip.com/train/2023-3/zengzhang/7yue/zhuli/BJ.png) 0 0 / contain no-repeat;
+}
+
+.train_wxvideo_content_text1 {
+  position: absolute;
+  left: 50rpx;
+  top: 110rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: bold;
+}
+
+.train_wxvideo_content_text1 text {
+  color: #FFE28D;
+}
+
+.train_wxvideo_content_text2 {
+  position: absolute;
+  bottom: 170rpx;
+  right: 66rpx;
+  color: #111111;
+  font-size: 26rpx;
+  text-align: left;
+  font-family: PingFangSC-Regular;
+  font-weight: bold;
+  transform: rotateZ(7deg);
+}
+
+.train_wxvideo_content_text2 text {
+  color: #FB6C36;
+}
+
+.train_wxvideo_content_btn {
+  position: absolute;
+  bottom: 50rpx;
+  left: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 442rpx;
+  height: 95rpx;
+  color: #ffffff;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular;
+  font-weight: bold;
+}
+
+.train_wxvideo_content_card {
+  position: absolute;
+  width: 506rpx;
+  height: 358rpx;
+  top: 203rpx;
+  right: -8rpx;
+  transform: rotateZ(7deg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 32rpx;
+}
+
+.train_wxvideo_content_video_cover {
+  position: absolute;
+  width: 116rpx;
+  height: 116rpx;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.train_wxvideo_content_award{
+  position: absolute;
+  bottom: 10rpx;
+  left: 50%;
+  color: #ffffff;
+  font-size: 20rpx;
+  font-family: PingFangSC-Regular;
+  transform: translateX(-50%);
+}
+.train_wxvideo_close {
+  position: absolute;
+  width: 64rpx;
+  height: 64rpx;
+  bottom: -100rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}

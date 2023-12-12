@@ -1,0 +1,2288 @@
+@import '../common/common.wxss';
+@import '../common/hotellist.wxss';
+@import '../common/hotellistCommon.wxss';
+@import '../common/couponlayer.wxss';
+@import '../common/fac.wxss';
+@import '../detail/filter.wxss';
+@import '../commontemplates/forcelogin/forcelogin.wxss';
+@import '../common/style/prime.wxss';
+@import '../commontemplates/pricedetail/pricedetail.wxss';
+@import '../commontemplates/promotionbanner/promotionbanner.wxss';
+@import '../common/roomlist.wxss';
+
+.dt { height: 100%; background-color: #EBEFF5; position: absolute; top: 0; transition: top 200ms linear; will-change:top; }
+/* common */
+.dt-font { display: inline; }
+.ml4 { margin-left: 4rpx; }
+.ml5 { margin-left: 10rpx; }
+.ml05 { margin-left: 5rpx; }
+.ml10 { margin-left:10rpx; }
+.ml12 {margin-left: 12rpx; }
+.ml20 {margin-left: 20rpx;}
+.mr0 { margin-right: 0; }
+.mr10 { margin-right: 10rpx; }
+.mr8 { margin-right: 8rpx; }
+.mr4 { margin-right: 4rpx;}
+.mr5 { margin-right: 5rpx;}
+.mt10 { margin-top: 20rpx; }
+.mt8 { margin-top: 8rpx; }
+.mb7 { margin-bottom: 7rpx; }
+.mb8 { margin-bottom: 8rpx; }
+.mb10 { margin-bottom: 10rpx; }
+.mb12 { margin-bottom: 12rpx; }
+.ml30 { margin-left: 60rpx; }
+.ml176 { margin-left: 176rpx }
+.ml16 { margin-left: 16rpx; }
+.mar0 {margin: 0;}
+.p10 { padding: 20rpx; }
+.pt12 {padding-top: 12rpx}
+.sptb {padding: 10rpx 0 8rpx}
+.pl10 { padding-left: 20rpx; }
+.pr10 { padding-right: 20rpx; }
+.pr12 { padding-right: 24rpx; }
+.fb { font-weight: 700; }
+.dt-fn10 { font-size: 20rpx; }
+.dt-fn11 { font-size: 22rpx !important ;}
+.dt-fn12 { font-size: 24rpx; font-weight:300;}
+.dt-fn13 { font-size: 26rpx;}
+.dt-fn14 { font-size: 28rpx;}
+.dt-fn16 { font-size: 32rpx;}
+.fn18 { font-size: 36rpx; }
+.dt-fn20 { font-size: 40rpx; }
+.price { color: #f40; font-weight: 400; display: inline; }
+.pricestar {font-weight: 300;font-size: 24rpx;}
+.dt-color0 { color: #fff; }
+.dt-color1 {color: #2EB000}
+.dt-color4 {color: #A7ACB7}
+.ft36 { font-size: 36rpx; }
+/* .tag05 { color: #00B87A; } */
+.tc { text-align: center; }
+.none{display: none}
+.block{display: none}
+.overflow {overflow: hidden;}
+.small { font-size: 22rpx; padding-right: 6rpx; font-weight: 400; }
+.dt-t .c .li, .dt-cell-v { display: flex; }
+.star, .dt-flex1 { flex: 1; }
+.dt-flexs { flex: 1 0 auto; }
+.dt-t .c .li { align-items: center; }
+.multi, .btn { justify-content: center; -webkit-box-orient: vertical; flex-direction: column; display: flex; }
+.justify-flex-end { justify-content: flex-end; }
+.flex-center { display: flex; align-items: center;}
+.f-wrap { flex-wrap: wrap; }
+.f-nowrap { flex-wrap: nowrap; }
+.w-nowrap { white-space: nowrap; }
+.width100{ width: 100%;}
+.normal-font { color: #111111; font-size: 24rpx; }
+.ft40 { font-size: 40rpx; }
+.relative{position: relative;}
+/* 导航 */
+.custom-navigation-back .navback-arrow.white {
+    color: #fff;
+    text-shadow: 0 0 20rpx rgba(0,0,0,0.9);
+}
+.custom-navigation-back .navback-more {
+    position: relative;
+    height: 60rpx;
+    box-sizing: border-box;
+    background-color: rgba(255,255,255,0.6);
+    border-radius: 30rpx;
+    line-height: 20rpx;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.custom-navigation-back .navback-more::after {
+    content: '';
+    position: absolute;
+    border-radius: 64rpx;
+    width: 202%;
+    height: 206%;
+    box-sizing: border-box;
+    border: 2rpx solid rgba(151, 151, 151, .3);
+    transform-origin: 0;
+    transform: scale(0.5);
+    z-index: -1;
+}
+.navback-arrow-share {transform: rotate(90deg); width: 76rpx;}
+.navback-more .navback-more-text {
+    font-size: 20rpx;
+    width: 78rpx;
+    border-width: 0 0 0 1rpx;
+    border-style: solid;
+    border-color: #ddd;
+    border-image: url(data:image/gif;base64,R0lGODlhBQAFAIABAN3d3f///yH5BAEAAAEALAAAAAAFAAUAAAIHhB9pGatnCgA7) 2 stretch;
+    font-weight: 600;
+}
+
+/* head-img */
+.dt-header .head-img {
+    position: relative;
+    min-height: 375rpx;
+}
+.head-img .img-slider { height: 100%; }
+.head-img .bg { display: block; width: 100%; height: auto; margin-top: -1px; }
+.head-img .phone-num {
+    position: absolute;
+    left: 16rpx;
+    bottom: 44rpx;
+    background-color: rgba(0, 0, 0, .4);
+    color: #fff;
+    font-size: 20rpx;
+    display: flex;
+    align-items: center;
+    border-radius: 28rpx;
+    padding: 10rpx 16rpx;
+}
+
+/* head-card */
+.wechat-font-collected {color: #f00}
+.dt-header .dt-icon-box {
+    position: absolute;
+    top: -28rpx;
+    right: 40rpx;
+    display: flex;
+    color: #111111;
+    font-size: 32rpx;
+    z-index: 100;
+}
+.dt-header .dt-icon-box .dt-icon-bg {
+    height: 60rpx;
+    width: 60rpx;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 6px 16px 2px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dt-header .card {
+    background-color: #FFF;
+    border-radius: 24rpx;
+    margin: -24rpx 0 16rpx 0;
+    position: relative;
+    font-size: 24rpx;
+}
+.dt-header .card.card-transparent {
+    background-color:transparent;
+}
+.dt-header .card .item {
+    display: flex;
+}
+.dt-header .card .item.col {
+    flex-direction: column;
+}
+.dt-header .head-info-row {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.dt-header .card .hotel-title-box {
+    margin: 34rpx 0rpx 16rpx 24rpx;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+}
+.dt-header .card .hotel-title-box .copy-btn {
+    position: absolute;
+    border-radius: 8rpx;
+    background-color: rgba(0, 0, 0, .6);
+    color: #fff;
+    padding: 12rpx 34rpx;
+    top: -76rpx;
+    left: 12%;
+    font-size: 26rpx;
+}
+.dt-header .card .hotel-title-box .copy-btn::after {
+    content: "";
+    position: absolute;
+    left: 50rpx;
+    top: 100%;
+    width: 0; height: 0;
+    border-top: 10rpx solid rgba(0, 0, 0, .6); border-left: 10rpx solid transparent; border-right: 10rpx solid transparent;
+}
+.dt-header .card .hotel-title-box .hotel-title.copy-bg {background-color: rgba(0, 0, 0, .08);}
+.hotel-title {
+    font-size: 40rpx;
+    line-height: 42rpx;
+    font-weight: 600;
+    margin-right: 10rpx;
+    font-family: PingFangSC-Medium;
+}
+.hotel-title.ft36 { font-size: 36rpx; }
+.dt-header .card .item .fac {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16rpx 24rpx 24rpx;
+}
+.dt-header .card .item .fac .l {
+    height: 30rpx;
+    padding-right: 30rpx;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+.dt-header .card .item .fac .r {
+    flex: 0 0 auto;
+}
+.dt-header .card .item .hotel-title-box .li {
+    font-size: 20rpx;
+    height: 30rpx;
+    line-height: 30rpx;
+    flex: 0 0 auto;
+}
+.dt-header .card .rank-icon {
+    line-height: 24rpx;
+    font-size: 20rpx;
+    margin: 9rpx 6rpx 9rpx 0rpx;
+}
+.dt-header .card .item .li:not(:last-child) {
+    margin-right: 10rpx;
+}
+.dt-header .dstar {
+    width: 70rpx;
+    height: 24rpx;
+    margin-bottom: 3rpx;
+    vertical-align: middle;
+}
+.dt-header .medal {
+    width: 28rpx;
+    height: 28rpx;
+    vertical-align: middle;
+}
+.dt-header .star-diamond {
+    height: 10px;
+}
+
+/* 头部榜单勋章 */
+.dt-header .rank-medal {
+    margin-right: 24rpx;
+    transform: translateY(-64rpx);
+    margin-left: 32rpx;
+}
+.dt-header .rank-medal image {
+    width: auto;
+    height: 136rpx;
+}
+.dt-header .card .hotel-type {
+    font-size: 24rpx;
+    color: #555;
+    height: 32rpx;
+    line-height: 32rpx;
+    margin: 6rpx 8rpx 0rpx 0rpx;
+}
+.dt-header .tag-img {
+    height: 24rpx;
+    line-height: 24rpx;
+    width: auto;
+    margin-right: 8rpx;
+    margin-top: 6rpx;
+}
+.dt-header .prime-img {
+    height: 24rpx;
+    line-height: 24rpx;
+    width: auto;
+    background: #feefcf;
+    border-radius: 4rpx;
+    margin-right: 8rpx;
+    margin-top: 6rpx;
+}
+.dt-header .card .rank-label {
+    background:#ffeedf;
+    border-radius: 4rpx;
+    color: #673114;
+    font-size: 22rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    height: 32rpx;
+    line-height: 32rpx;
+    padding-left: 6rpx;
+    box-sizing: border-box;
+    margin-top: 6rpx;
+}
+.dt-header .card .annual-label {
+    color: #352216 !important;
+    background: #fee4bf !important;
+}
+.dt-header .card .item .fac .fac-tag {
+    height: 32rpx;
+    line-height: 32rpx;
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0;
+}
+.dt-header .center-line {
+    background: #aaa;
+    height: 20rpx;
+    line-height: 20rpx;
+    width: 1rpx;
+    margin-left: 10rpx;
+    display: inline-block;
+}
+.dt-header .card .item .li:last-child .center-line {
+    display: none;
+}
+.dt-header .detail-fac {
+    color: #111;
+    font-size: 24rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+}
+.dt-header .dt-color {
+    color: #111;
+}
+.dt-header .fl {
+    display: flex;
+    align-items: center;
+}
+
+/* 收藏与分享样式*/
+.collect-share-box {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 215rpx;
+    left: 20rpx;
+    color: #111111;
+    font-size: 40rpx;
+    z-index: 100;
+}
+.bt {
+    bottom: 320rpx;
+}
+.collect-share-box .collect-share-item {
+    height: 80rpx;
+    width: 80rpx;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 6px 16px 2px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24rpx;
+    border: 1rpx solid #e5e5e5;
+}
+.comment-address {
+    display: flex;
+    align-items: stretch;
+    padding: 0 24rpx 28rpx;
+    box-sizing: border-box;
+}
+
+/* 点评 */
+.comment-brief-info {
+    display: flex;
+    padding: 20rpx 17rpx;
+    font-size: 24rpx;
+    background: #F3F8FF;
+    border-radius: 8rpx;
+    width: 270rpx;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    align-content: center;
+    box-sizing: border-box;
+}
+.comment-brief-info .fen {
+    font-size: 30rpx;
+    border-radius: 8rpx 8rpx 20rpx 8rpx;
+    display: inline-block;
+    font-weight: 600;
+    line-height: 1;
+    padding: 6rpx 13rpx 6rpx 8rpx;
+    box-sizing: border-box;
+    color: #fff;
+    background: url("https://pages.c-ctrip.com/hotels/wechat/img/icons/detail-comment-wave.png") right bottom/40rpx 40rpx no-repeat, var(--color);
+}
+.comment-brief-info .dt-font {
+    font-size: 24rpx;
+}
+.comment-brief-info .num {
+    font-size: 24rpx;
+    font-weight: normal;
+}
+.comment-brief-info .fen-desc {
+    margin: 0 7rpx;
+    font-weight: 500;
+}
+.comment-brief-info .cust {
+    color: #111111;
+    font-weight: 500;
+}
+.comment-brief-info .desc {
+    color: #555;
+    text-align: left;
+}
+.comment-brief-info .desc + .desc {
+    margin-left: 11rpx;
+}
+.comment-brief-info .no-comment {
+    word-break: break-all;
+    text-align: justify;
+    font-weight: bold;
+}
+
+/* 地图 */
+.dt-header .card .map {
+    justify-content: space-between;
+    border-radius: 8rpx;
+    background: #F2FCF9 url(https://pages.c-ctrip.com/hotels/wechat/img/detail-map-mark.png) no-repeat right / contain;
+    padding: 24rpx 20rpx;
+    margin-left: 12rpx;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    box-sizing: border-box;
+    width: calc(100% - 330rpx);
+}
+.dt-header .card .map .txt {
+    width: calc(100% - 88rpx);
+}
+.dt-header .card .map .clamp2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* 只要超过宽度就换行，不论中文还是英文 */
+    word-break: break-all;
+    /* 最多展示两行 */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+.dt-header .card .map .map-loc {
+    font-weight: normal;
+    padding-bottom: 4rpx;
+    color: #555555;
+}
+.dt-header .card .map .map-loc .vl {
+    line-height: 36rpx;
+    color: #888888;
+    margin: 0 12rpx 0 8rpx;
+}
+.dt-header .card .map .round {
+    font-family: PingFangSC-Medium;
+    font-weight: bold;
+    margin-bottom: 8rpx;
+    color: #111111;
+}
+.dt-header .dt-map-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 24rpx;
+}
+.dt-header .dt-map-box .wechat-font-locate-fill {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    background: linear-gradient(-180deg, rgb(85, 85, 85) 0%, rgb(68, 68, 68) 100%);
+    color: #fff;
+    text-align: center;
+    line-height: 40rpx;
+    font-size: 20rpx;
+    box-shadow: 0 4rpx 6rpx 0 rgba(154, 206, 251, 0.2);
+
+}
+.dt-header .card .map .mark {
+    color: #555555;
+    margin-top: 8rpx;
+    width: 58rpx;
+    text-align: center;
+}
+
+/* 星球号 */
+.from-planet-banner {
+    height: 88rpx;
+    margin: 0 24rpx 16rpx 24rpx;
+    border-radius: 8rpx;
+    overflow: hidden;
+}
+.from-planet-banner .planet-img {
+    height: 100%;
+    width: 100%;
+}
+/*爆款预售氛围包装*/
+.presale-banner { width: calc(100% - 48rpx); height: 88rpx; margin: 16rpx 24rpx; border-radius: 8rpx; }
+.presale-tag { display: inline-block; background-color: #f5190A; color: #fff; font-size: 20rpx; padding: 4rpx; border-radius: 4rpx; vertical-align: 8rpx; margin-right: 4rpx;}
+.from-planet{display: inline-block; border: 1rpx solid #bbc9dc; color: #5679a8; font-size: 20rpx; padding: 4rpx; border-radius: 4rpx; vertical-align: 8rpx; margin-right: 4rpx;}
+
+/* 重要通知 */
+.detail-emerge {
+    position: relative;
+    z-index: 1000;
+}
+.detail-emerge::after {
+    position: absolute;
+    background: #FFFFFF;
+    height: 24rpx;
+    width: 100%;
+    content: '';
+}
+.em-detail-notice {
+    background: linear-gradient(90deg, rgb(255, 238, 237) 50%, rgb(255, 255, 255));
+    border-radius: 24rpx 24rpx 0 0;
+    border: 1rpx solid #ffffff;
+}
+.em-detail-inner {
+    padding-left: 24rpx;
+    line-height: 80rpx;
+    position: relative;
+    display: flex;
+    align-items:center;
+    font-size: 24rpx;
+    color: #F5190A;
+}
+.em-detail-lmask {
+    position: absolute;
+    right: 48rpx;
+    height: 100%;
+    width: 32rpx;
+    background: linear-gradient(90deg, rgb(255, 255, 255, 0) 0%, rgb(255, 255, 255, 1) 100%);
+}
+
+/* 底部点评设施等common part */
+.dt-fs-box { background-color: #fff; font-size: 26rpx; color:#111111; margin-top: 8rpx; padding: 0 30rpx 32rpx; }
+.dt-fs-box .h2 { font-size: 36rpx; padding: 32rpx 0 24rpx 0;font-weight: bold; }
+.dt-fs-box .label { font-size: 28rpx; padding-bottom: 10rpx; clear: both; font-weight:bold; }
+.jump-box {
+    text-align: center;
+    font-size: 24rpx;
+    color: #2698F7;
+    margin-top: 32rpx;
+}
+.jump-box .cbtn {
+    color: #111;
+    border: 1rpx solid #c5c5c5;
+    padding: 10rpx 16rpx;
+    border-radius: 8rpx;
+    display: inline-block;
+    position: relative;
+    border-width: 0rpx !important;
+    z-index: 0;
+}
+/* 修复部分iphone手机无边框 */
+.cbtn::after {
+    content: "";
+    border-style: inherit;
+    border-color: inherit;
+    border-radius: 16rpx;
+    box-sizing: border-box !important;
+    position: absolute;
+    border-width: 2rpx !important;
+    left: 0;
+    top: 0;
+    width: 200% !important;
+    height: 200% !important;
+    transform-origin: 0 0;
+    transform: scale(0.5) !important;
+    z-index: -1;
+}
+/* 固定日历bar */
+.calendar-top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* 优惠bar */
+.promotion-bar { border-radius: 16rpx 16rpx 0 0; padding: 24rpx 24rpx 12rpx 24rpx; background-color: #fff; display: flex; }
+.promotion-bar .pro-img { width: 56rpx; height: 26rpx; margin-top: 4rpx; }
+.promotion-bar .pro-tag-box { flex: 1; display: flex; flex-wrap: wrap; margin: 0 12rpx; }
+.promotion-bar .pro-tag-box .pro-tag { margin: 0 8rpx 12rpx 0; }
+.pro-icon-box { color: #f70; font-size: 24rpx; display: flex; line-height: 1; padding-top: 5rpx; font-weight: 500; }
+/* 优惠common */
+.promotion-cicon { color: #888888; margin-left: 6rpx; }
+.promotion-ctag {
+    border: 1rpx solid #FFDCBF;
+    border-radius: 6rpx;
+    color: #FF6913;
+    font-size: 20rpx;
+    line-height: 1;
+    padding: 6rpx 8rpx;
+    align-self: flex-start;
+    font-weight: 500;
+    transform: rotateZ(360deg);
+}
+/* 优惠浮层 */
+.promotion-layer .pro-item { display: flex; margin-bottom: 26rpx; }
+.promotion-layer .pro-item .pro-text { flex: 1; font-size: 26rpx; margin: 0 20rpx; }
+.room-mod {
+    position: relative;
+    border-radius: 24rpx 24rpx 0 0;
+}
+/* 筛选 */
+.dt-filter {
+    display: flex;
+    font-size: 24rpx;
+    padding: 0 24rpx;
+    background: #fff;
+}
+.dt-filter .qs-box {
+    flex: 1;
+    white-space: nowrap;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+}
+.dt-filter .qs-box::-webkit-scrollbar {
+    display: none;
+    width: 0 !important;
+    height: 0 !important;
+    -webkit-appearance: none;
+    background: transparent;
+    color: transparent;
+}
+.dt-filter .filter-btn {
+    height: auto;
+    width: 100rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: -17rpx 0rpx 15rpx -13rpx rgba(0, 0, 0, .1);
+    position: relative;
+}
+.dt-filter .qs-box .qs-item {
+    display: inline-block;
+    text-align: center;
+    border-radius: 8rpx;
+    white-space: nowrap;
+    margin-right: 10rpx;
+    padding: 14rpx 16rpx;
+}
+.dt-filter .filter-btn .arrow-down {
+    display: inline;
+    font-size: 16rpx;
+    margin-left: 8rpx;
+}
+.dt-filter .filter-btn .filtered-sign {
+    position: absolute;
+    color: red;
+    top: 0;
+    right: 2rpx;
+    font-size: 44rpx;
+    font-weight: 700;
+}
+/* 筛选浮层 */
+.filter-layer .filter-tit {
+    font-size: 32rpx;
+    font-weight: 700;
+}
+.filter-layer .filter-box {
+    display: flex;
+    margin: 30rpx 0;
+    flex-wrap: wrap;
+}
+.filter-layer .filter-box .filter-item {
+    flex: 0 0 32%;
+    margin: 0 2% 2% 0;
+    font-size: 26rpx;
+    text-align: center;
+    border-radius: 8rpx;
+    background-color: #f5f5fa;
+    box-sizing: border-box;
+    padding: 19rpx 4rpx 14rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.filter-layer .filter-box .filter-item:nth-child(3n+3) {
+    margin-right: 0;
+}
+.filter-layer .filter-box .filter-s {
+    background: #e7f3ff url(https://pages.c-ctrip.com/hotels/wechat/img/checkbox-icon_new@2x.png) right bottom no-repeat;
+    background-size: 22rpx;
+}
+.filter-layer .filter-box .filter-s, .qs-box .filter-s {
+    color: #006FF6;
+}
+
+/* 房型Start */
+.transz0 { transform: translateZ(0); }
+.dt-room {  position: relative; padding: 0rpx 16rpx; }
+.dt-room .no-room { color: #808080; padding: 30rpx; font-size: 28rpx; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 16rpx; }
+.dt-room .no-room.no-bottom-border { border-radius: 16rpx 16rpx 0 0; }
+.no-room-img {
+    width: 166rpx;
+    height: 186rpx;
+    margin-right: 16rpx;
+    flex: 0 0 auto;
+}
+.no-room-reason {
+    font-size: 26rpx;
+}
+.no-room-tit {
+    margin-bottom: 7rpx;
+    font-weight: bold;
+    color: #111111;
+    font-family: PingFangSC-Medium;
+}
+.no-room-subtit {
+    color: #555555;
+    font-family: PingFangSC-Regular;
+}
+
+.num-base {
+    white-space: unset;
+    word-break: break-all;
+    display: inline-block;
+}
+
+.dt-room .space { padding: 16rpx 0 16rpx 24rpx; }
+.dt-room .space2 { padding: 0 20rpx 0 0; }
+.dt-room .more-room-btn {
+    margin-top: 18rpx;
+    padding-bottom: 24rpx;
+}
+
+.dt-room .room-item {
+    overflow: hidden;
+    padding: 24rpx;
+    background: #fff;
+    border-radius: 16rpx;
+    margin-bottom: 6rpx;
+    min-height: 208rpx;
+    box-sizing: border-box
+}
+.friend_share_room .room-item, .dt-room .room-item.guess-like-room, .dt-room .m-room:first-child .room-item {
+    border: unset;
+}
+.dt-sw {
+    position: absolute;
+    right: 24rpx;
+    bottom: 24rpx;
+    color: #555555;
+}
+/* room-img */
+.dt-room .room-img {
+    position: absolute;
+    width: 160rpx;
+    min-height: 160rpx;
+    max-height: 220rpx;
+    background-size: cover;
+    background: url(https://pic.c-ctrip.com/h5/hotel/hotel-loading-default.png) center center no-repeat;
+}
+.room-mod .dt-room .room-img {
+    height: calc(100% - 48rpx);
+}
+.room-mod .dt-room .room-img image {
+    border-radius: 8rpx 8rpx 24rpx 8rpx;
+    height: 100%;
+}
+.dt-room .room-img image { width: 160rpx; height: 160rpx; display: block; border-radius: 8rpx; }
+.room-top {
+    position: sticky;
+    -webkit-position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #fff;
+    transition: top 200ms linear;
+    will-change:top;
+    box-shadow: 0px 4px 20px 4px rgba(0, 0, 0, 0.06);
+}
+.dt-room .room-img .room-like {
+    position: absolute;
+    top: 8rpx;
+    left: -8rpx;
+    border-radius: 4rpx ;
+    padding:  8rpx !important;
+    background: #f70 !important;
+    text-align: center;
+    width: 50rpx;
+}
+.dt-room .room-like {
+    font-size:20rpx;
+    font-weight:500;
+    color: #fff;
+    padding: 8rpx 12rpx;
+    background:linear-gradient(to right,#FF8100 0%,#FF7100 100%);
+    border-radius: 4rpx;
+}
+.dt-room .room-img .num{
+    height:24rpx;
+    line-height: 24rpx;
+    text-align:center;
+    position: absolute;
+    bottom: 12rpx;
+    right: 12rpx;
+    width: 24rpx;
+    background-color: #fff;
+    border-radius: 14rpx;
+    color: #111111;
+    font-size: 16rpx;
+    padding: 0;
+    font-weight: 500;
+}
+.tilling-room {
+    position: relative;
+}
+/* card-txt */
+.dt-room .multi {
+    color: #555555;
+}
+.dt-room .multi .h3 {
+    font-size: 28rpx;
+    color: #111111;
+    font-weight: 500;
+    margin-bottom: 12rpx;
+    line-height: 32rpx;
+    word-break: break-all;
+}
+.dt-room .room-item .txt-item {
+    line-height: 32rpx;
+    margin-bottom: 12rpx;
+    font-size: 24rpx;
+}
+.dt-room .room-item .baseinfo-item {
+    margin-right: 10rpx;
+    white-space: nowrap;
+}
+
+.dt-room .gift-icon, .dt-room .pac-icon {
+    font-size: 20rpx;
+    margin-right: 8rpx;
+    display: inline-block;
+}
+
+.dt-room .gift-icon {
+    background: #fff1e6;
+    color: #f70;
+    padding: 2rpx;
+    line-height: 1;
+    border-radius: 4rpx;
+}
+.dt-room .pac-icon {
+    width: 28rpx;
+    height: 28rpx;
+    flex-shrink: 0;
+}
+
+.dt-room .multi .s { font-size: 24rpx; }
+.dt-room .multi .s.l-name{ line-height: 32rpx; margin-bottom: 15rpx; }
+/* 标签 */
+.dt-room .tags-wrap {overflow: hidden;max-height: 32rpx}
+.dt-room .tags-wrap.nowrap {max-height: none}
+.dt-room .tags-wrap .ftag-item {
+    position: relative;
+    display: inline-block;
+    height: 30rpx;
+    line-height: 28rpx;
+    vertical-align: 6rpx;
+    font-size: 20rpx;
+    margin-right: 4rpx;
+    padding: 0 4rpx;
+    border-radius: 4rpx;
+    color: #5678a8;
+    border: 1rpx solid #bbc9dc;
+    box-sizing: border-box;
+}
+.dt-room .star.multi { text-align: right; padding: 0 20rpx 0 10rpx; box-sizing: border-box; line-height: 1; align-items: flex-end; }
+.dt-room .cell .multi.pr0 {padding-right: 0;}
+.dt-room .cell-v .star.multi {padding: 0;}
+.dt-room .multi .price { font-size: 40rpx; line-height: 40rpx; font-weight: 700; }
+.dt-room .multi .price-tax { font-size: 22rpx; color: #f40; }
+.dt-room .multi .price-star { font-size: 24rpx; color: #555555; padding: 12rpx 0 0 6rpx; }
+.dt-room .multi .price-star.sub-price-star { padding: 0 0 0 6rpx; }
+.dt-room .multi .surplus-room { text-align: center; color: #ff3950; font-size: 20rpx; }
+.dt-room .multi .tags-wrap { margin-bottom: 16rpx; }
+
+.dt-room .base-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dt-room .base-room-price {align-self: flex-end;}
+.dt-room .title-box {
+    display: flex;
+    justify-items: center;
+}
+.dt-room .title-icon {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 8rpx;
+    margin-bottom: -6rpx;
+    margin-top: -4rpx;
+}
+
+/* 子房型 */
+.dt-room .sub { padding: 0  }
+.dt-room .sub .room-item { padding: 6rpx 24rpx ;  }
+.dt-room .sub .room-item:first-child { border: unset; }
+.dt-room .sub .room-item:last-child .room-divider { height: 0rpx !important;}
+.dt-room .sub .like {font-size: 18rpx;height: 28rpx;line-height: 28rpx;padding: 0 8rpx;display: inline-block;vertical-align: 6rpx;margin-right: 10rpx;}
+.dt-room .sub .item { margin-left: 30rpx; word-break: break-all; }
+.dt-room .sub .c { position: relative; }
+/* .dt-room .sub .c.title-bar { display: flex; justify-content: space-between; align-items: center;} */
+.dt-room .sub .subroom-title {
+    display: flex;
+    justify-content: space-between;
+    font-size: 28rpx;
+    font-weight: 500;
+    margin-bottom: 12rpx;
+    margin-top: 8rpx
+}
+.dt-room .sub .guest-desc { margin-left: 15rpx; }
+.dt-room .sub .space { padding: 20rpx 24rpx 20rpx 0; }
+.dt-room .sub .space2 { padding-bottom: 20rpx; }
+.dt-room .sub .s { color: #555555; font-size: 24rpx;}
+.dt-room .dt-kf { color: #555555; font-size: 24rpx; }
+
+.dt-room .head-tag {
+    font-size: 18rpx;
+    height: 28rpx;
+    line-height: 28rpx;
+    padding: 0 8rpx;
+    display: inline-block;
+    vertical-align: 4rpx;
+    margin: 0 4rpx;
+    border-radius: 4rpx;
+}
+.dt-room .k{ margin-left: 10rpx;}
+.dt-room .sub .tags-wrap { margin-bottom: 16rpx; }
+
+
+.dt-room .orange-text {font-size: 20rpx; color: #f70;}
+.dt-room .flash-sale {
+    display: inline-block;
+    color: #fff;
+    height: unset;
+    font-size: 20rpx;
+    padding: 4rpx 8rpx;
+    line-height: 1;
+    border-radius: 4rpx;
+    background-image: linear-gradient(to right, #FF7F5C 6%, #FB4F21 100%);
+}
+.room-h1-tag {
+    background: #f70;
+    border-radius: 4rpx;
+    font-size: 22rpx;
+    color: #fff;
+    padding: 5rpx 8rpx;
+    vertical-align: 2rpx;
+    display: inline-block;
+    margin-right: 10rpx;
+    line-height: 1;
+}
+.sub .room-like {
+    border: unset;
+    background: #f70;
+    border-radius: 14rpx 0;
+    padding: 2rpx 12rpx;
+}
+
+.need-login .booking-btn {
+    padding: 0 !important;
+}
+.need-login .booking-btn .btn-t {
+    line-height: 84rpx;
+    font-size: 28rpx;
+}
+
+/* 支付按钮 */
+button:after {display: none}
+.booking-btn {
+    width: 80rpx;
+    height: 84rpx;
+    border-radius: 8rpx;
+    display: flex;
+    flex-direction: column;
+    padding: 2rpx !important;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: center;
+}
+.booking-btn .btn-t {
+    line-height: 53rpx;
+    font-size: 36rpx;
+    font-weight: 500;
+    color: #fff;
+    flex: 1;
+}
+.booking-btn .btn-t.fs24 { font-size: 24rpx; }
+.booking-btn .btn-paytxt {
+    background: #FFF;
+    border-radius: 6rpx;
+    line-height: 28rpx;
+    font-size: 20rpx;
+    font-weight: 400;
+}
+/*订改抢*/
+.panicbuy-text {
+    font-size: 18rpx;
+    margin-bottom: 4rpx;
+    background: #ff7700;
+    border-radius: 17rpx 12rpx 0rpx 17rpx;
+    display: inline-block;
+    color: #fff;
+    padding: 5rpx 10rpx;
+    text-align: center;
+    line-height: 1;
+}
+
+
+.friend-share-room {
+    background: linear-gradient(90deg, rgb(255, 247, 239) 0%, rgb(255, 237, 222) 50.21%, rgb(255, 247, 239) 100%);
+    padding: 0 0 16rpx;
+}
+.friend-share-room .friend-share-title {
+    display: block;
+    width: 100%;
+    height: 64rpx;
+}
+/* 钟点房 */
+.hour-room. border-t {
+    border-top: 14rpx solid #EBEFF5;
+}
+.hour-room .room-title, .product-box .hd {
+    font-size: 32rpx;
+    color: #111111;
+    line-height: 32rpx;
+    font-weight: 400;
+    padding: 30rpx 0 0 30rpx;
+}
+
+.hour-room .room-title{
+  padding: 20rpx 0 20rpx 30rpx;
+}
+
+.hour-room .item:not(:last-child) {
+    border-width: 0 0 1rpx 0;
+    border-style: solid;
+    border-color: #ddd;
+    border-image: url(data:image/gif;base64,R0lGODlhBQAFAIABAN3d3f///yH5BAEAAAEALAAAAAAFAAUAAAIHhB9pGatnCgA7) 2 stretch;
+}
+.hour-room .hour-info {
+    font-size: 24rpx;
+    color: #111111;
+    font-weight: 500;
+}
+.hour-room .room-item:nth-child(2) {
+    border-top: unset;
+}
+.hour-room .hour-duration {
+    font-size: 24rpx;
+    color: #111111;
+    line-height: 24rpx;
+    font-weight: 400;
+}
+/* 房型End */
+
+/* 酒店商城 */
+.product-box {
+    margin: 10rpx 0;
+    padding: 0 24rpx;
+    background-color: #fff;
+}
+.product-box .pac-box .item { overflow: hidden; padding: 16rpx 0; display: flex;}
+.product-box .pac-box .item:not(:first-child) {
+    border-width: 1rpx 0 0 0;
+    border-style: solid;
+    border-color: #ddd;
+    border-image: url(data:image/gif;base64,R0lGODlhBQAFAIABAN3d3f///yH5BAEAAAEALAAAAAAFAAUAAAIHhB9pGatnCgA7) 2 stretch;
+}
+.product-box .item:nth-of-type(1) {
+    border-width: 0;
+}
+.product-box .pac-img-container {
+    border-radius: 8rpx 8rpx 24rpx 8rpx;
+    width: 160rpx;
+    max-height: 320rpx;
+    min-height: 160rpx;
+    background: url(https://pic.c-ctrip.com/h5/hotel/hotel-loading-default.png) center center no-repeat;
+}
+.product-box .pac-info-box {
+    flex: 1;
+    min-width: 0;   /* 限制该部分的宽度完全由flex: 1来分配 */
+    display: flex;
+    flex-direction: column;
+}
+.product-box .hd {
+    color: #111;
+    display: flex;
+    align-items: center;
+    padding: 32rpx 0 0 0;
+}
+.product-box .hd .hd-title{
+    font-size: 34rpx;
+    font-weight: 500;
+    line-height: 42rpx;
+    margin-right: 24rpx;
+}
+.product-box .hd .hd-tags{
+    font-size: 24rpx;
+    color: #333;
+    line-height: 32rpx;
+}
+.product-box .h3 {
+    font-size: 28rpx;
+    color: #222;
+    font-weight: 500;
+    line-height: 36rpx;
+    margin-bottom: 12rpx;
+}
+.product-box .product-info-wapper {
+    line-height: 32rpx;
+    font-size: 24rpx;
+    color: #333;
+}
+.product-box .product-info-wapper .product-info-item{
+    margin-bottom: 12rpx;
+}
+.product-box .sellnum {
+    font-size: 24rpx;
+    color: #555555;
+    line-height: 32rpx;
+    margin-bottom: 12rpx;
+}
+.product-box .sold-flex { 
+    display: flex; 
+    align-items: flex-end; 
+    justify-content: flex-end; 
+    margin-top: auto;   /* flex布局中 最后一个元素通过margin-top调节靠底部 */
+}
+.product-box .tags-wrap {
+    text-align: right;
+}
+.product-box .gobuy-button {
+    background: linear-gradient(90deg, #FF7700 0%, #FF5500 100%);
+    font-size: 28rpx;
+    color: #fff;
+    border-radius: 12rpx;
+    text-align: center;
+    height: 64rpx;
+    width: 88rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 16rpx;
+}
+.product-box .click-btn { text-align: center; padding-bottom: 32rpx; padding-top: 8rpx;}
+.product-box .dt-circle-btn { color: #111; font-size: 26rpx; padding: 12rpx 20rpx; display: inline-block; border: 1rpx solid #888; border-radius: 8rpx;}
+
+/* 点评模块 */
+.comment-info {line-height: 36rpx; display:flex;align-items: baseline; color: #555555; color:#006FF6;margin-bottom:20rpx; }
+.comment-info .fen {font-size: 44rpx; line-height: 36rpx; font-weight: 700; }
+.cutting-line { background-color:#E5E5E5; width: 1rpx; height: 24rpx; margin:0 16rpx;}
+.gray-txt-small {color: #555555; font-size: 24rpx; }
+.dp-tags { line-height:58rpx;height:58rpx; overflow:hidden; display:flex;flex-wrap:wrap}
+.dp-tags .item {border-radius: 8rpx; margin-right:20rpx ;background-color: #F4F4F4; padding:0 20rpx;  }
+.cd{ margin-top: 20rpx }
+.cdh {
+    display: flex;
+    align-items: center;
+    margin-bottom:20rpx;
+    word-break: break-all;
+}
+.cd .cun {
+    font-size: 28rpx;
+    color:#000;
+    display: inline;
+}
+.cd .source-txt {
+    font-size: 20rpx;
+    color: #888;
+    display: inline;
+}
+.cd .center-line {
+    background: #e0e0e0;
+    height: 22rpx;
+    line-height: 22rpx;
+    width: 1rpx;
+    margin: 0rpx 8rpx;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.cd .cdct {
+    font-size: 24rpx; color: #111111; letter-spacing: 0; line-height: 36rpx;
+    display: -webkit-box; overflow: hidden; text-overflow: ellipsis;
+    word-wrap: break-word; white-space: normal !important;
+    -webkit-line-clamp:3; -webkit-box-orient: vertical;
+}
+.cdh .user-photo {height:48rpx;width:48rpx;border-radius:50%;margin-right:16rpx;}
+
+/* 问答模块 */
+.ask-tit-box{
+    justify-content: space-between;
+}
+.ques-desc{
+    max-width: 540rpx;
+}
+.ques-item{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20rpx;
+}
+.ques-item-icon{
+    min-width: 70rpx;
+    padding: 8rpx;
+    line-height: 1;
+    background-color: #006FF6;
+    border-radius: 8rpx;
+    margin-right: 16rpx;
+    font-size: 20rpx;
+    color: #fff;
+    text-align: center;
+}
+.ans-num{
+    font-size: 24rpx;
+}
+.ask-eliipsis-box{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 28rpx;
+}
+
+/* 订房必读与政策 */
+.dt-fs-box .wechat-font-book-notice {
+    color:#FF444E;
+    margin-right: 16rpx;
+    font-size: 28rpx;
+}
+.dt-fs-box .notice { /*用px 是因为微信rpx 在不同终端max-height 不精准, 导致文本被显示*/
+    font-size: 12px;
+    max-height: 190px;
+    overflow: hidden;
+    line-height: 18px;
+}
+.dt-fs-box .notice .type {
+    color: #111;
+    padding-left: 40rpx;
+    position: relative;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden
+}
+.dt-fs-box .notice .type:before {
+    font-size: 36rpx;
+    content: "•";
+    position: absolute;
+    left:0;
+    top: 0;
+}
+.dt-fs-box .title {
+    font-size: 28rpx;
+    color: #000;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 16rpx;
+}
+.dt-fs-box .title.checkinout {
+    margin-bottom: 16rpx;
+}
+.dt-fs-box .policy {
+    font-size: 13px;
+    padding-left: 40rpx;
+    line-height: 18px;
+}
+.dt-fs-box .policy .fontClass {
+    position: absolute;
+    left: -40rpx;
+    top:4rpx;
+}
+.dt-fs-box .policy .fac-font-fac18 {
+    font-size: 44rpx;
+    left:-48rpx;
+    top:-4rpx;
+}
+.dt-fs-box .policy-title {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    margin-bottom: 16rpx;
+    font-size: 28rpx;
+    color: #000;
+    font-weight: 500;
+}
+.dt-fs-box .policy-title.not-first {
+    margin-top: 32rpx;
+}
+.dt-fs-box .policy-title .policy-icon {
+    width: 28rpx;
+    height: 28rpx;
+    margin-right: 12rpx;
+}
+.dt-fs-box .policy-content {
+    margin: 8rpx 0 0 40rpx;
+}
+
+/* 美食交通等周边 */
+.traffic {
+    margin-top: 8rpx;
+    background-color: #fff;
+    position: relative;
+}
+.traffic .title, .nearby-box .title {
+    font-size: 36rpx;
+    font-weight: bold;
+    padding: 32rpx 32rpx 32rpx 24rpx;
+    line-height: 1;
+}
+.traffic .items {
+    padding: 0 16rpx 0 24rpx;
+    white-space: nowrap;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch
+}
+.traffic .items .item {
+    width: 200rpx;
+    box-sizing: border-box;
+    padding: 16rpx 0 40rpx;
+    margin-right: 16rpx;
+    display: inline-block;
+    vertical-align: top;
+}
+.traffic .items .thead {
+    width: 200rpx;
+    height: 200rpx;
+    overflow: hidden;
+    position: relative;
+    background: #f2f2f2 url(https://pages.c-ctrip.com/hotels/wechat/img/default.png) center center no-repeat;
+    background-size:cover;
+}
+.traffic .items .thead .pic {
+    width: 200rpx;
+    height: 200rpx;
+    display: block;
+}
+.traffic .items .thead .distance {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 20rpx;
+    font-weight: 300;
+    color: #fff;
+    padding: 4rpx 8rpx;
+    background-color: rgba(0,0,0,.6);
+    border-radius: 0 16rpx 0 0;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.traffic .items .item .dpfen{
+    font-size: 24rpx;
+    color: #006FF6;
+}
+.traffic .items .item .tit {
+    color: #111111;
+    line-height: 28rpx;
+    font-size: 28rpx;
+    font-weight: 500;
+    padding: 24rpx 0 16rpx;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.traffic .items .item .desc .it {
+    font-size: 24rpx;
+}
+.traffic .items .item .cnyprice {
+    color: #111111;
+    font-size: 24rpx;
+    font-weight: 300;
+}
+.dt-tabs .item {
+    font-size:28rpx;
+    color: #111111;
+    position: relative;
+    display: inline-block;
+    margin:0 0 16rpx 24rpx;
+    padding-bottom: 20rpx;
+    line-height: 1;
+}
+.dt-tabs .item.current:after{
+    content: "";
+    position: absolute;
+    left:0;
+    right: 0;
+    bottom: 0;
+    height: 8rpx;
+    background: #0066F6;
+}
+.dt-tabs .item.current {
+    color: #006FF6;
+    font-weight: 500;
+}
+
+/* 附近同类型 */
+.nearby-box {
+    margin-top: 8rpx;
+    background-color: #fff;
+}
+.nearby-box .nearby-item {
+    padding-left: 24rpx;
+}
+
+/* 服务保障 */
+.serv-wrap{ margin-top: 8rpx;}
+.btm-space{ height: 200rpx; background-color: #fff; }
+/* 价格说明 */
+.price-desc-box{ padding: 32rpx 24rpx; background-color: #fff; margin-top: 4rpx; text-align: justify; }
+.price-desc-box .price-desc-tit{ font-size: 34rpx; font-weight: #111111; font-weight: 600; }
+.price-desc-box .price-desc-item{ font-size: 24rpx; color: #444; margin-top: 24rpx; }
+
+
+/* 查看房型bar */
+.more-room-container {
+    width: 100%;
+    position: fixed;
+    display: flex;
+    z-index: 2;
+    bottom: 0;
+    flex-direction: column;
+    transform: translate3d(0,0,0)
+}
+.more-room-container .btns {
+    display: flex;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    z-index: 998;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 16rpx 24rpx 32rpx;
+}
+.more-room-container .store-icon {
+    font-size: 42rpx;
+    margin-bottom: 7rpx;
+    font-weight: 600;
+    color: #000;
+}
+.more-room-container .more-view-box {
+    height: 88rpx;
+    line-height: 88rpx;
+    padding: 0;
+    width: 230rpx;
+    flex: 0 0 auto;
+    margin: 0 0 0 12rpx;
+    box-sizing: border-box;
+    border-radius: 12rpx 12rpx 36rpx 12rpx;
+    background: url("https://pages.c-ctrip.com/hotels/wechat/img/icons/detail-comment-wave.png") right bottom no-repeat, var(--color);
+}
+.more-room-container .askhotel-box {
+    flex: 0 0 auto;
+}
+.min-price {
+    flex: 1;
+    text-align: right;
+    font-size: 42rpx;
+    font-weight: bold;
+}
+.min-price .price-type {
+    font-size: 24rpx;
+}
+
+/* 鱼骨加载 */
+.fishbone-module01 {
+    width: 560rpx;
+    height: 40rpx;
+    background-color: #F3F2F7;
+    border-radius: 4rpx;
+    margin: 34rpx 16rpx 16rpx 24rpx;
+}
+.fishbone-module02 {
+    width: 118rpx;
+    height: 30rpx;
+    background-color: #F3F2F7;
+    border-radius: 16rpx;
+    margin-right: 6rpx;
+}
+.fishbone-module03 {
+    width: 428rpx;
+    height: 28rpx;
+    background-color: #F3F2F7;
+    border-radius: 4rpx;
+}
+.fishbone-module04 {
+    width: 472rpx;
+    height: 128rpx;
+    background-color: #F3F2F7;
+    border-radius: 4rpx;
+}
+.fishbone-module05 {
+    height: 84rpx;
+    box-sizing: border-box;
+    background:#fff url(https://pages.c-ctrip.com/hotels/wechat/img/list-banner-fishbone.png) left center no-repeat;
+    background-size: 96%;
+    border-radius: 8rpx;
+}
+.fishbone-module06 {
+    height: 848rpx;
+    background: url(https://pages.c-ctrip.com/hotels/wechat/img/detail-room-fishbone.png) left top repeat-y;
+    background-size: 750rpx 212rpx;
+}
+
+/*分享路径悬浮球*/
+.floating-ball{
+    z-index: 1;
+    width: 100rpx;
+    height: 330rpx;
+    position: fixed;
+    bottom: 240rpx;
+    right: 24rpx;
+    background-color:rgba(255,255,255,.8);
+    border: 1rpx solid #DDDDDD;
+    box-shadow: 0 8rpx 16rpx 0 rgba(0,0,0,0.16);
+    border-radius: 80rpx;
+    padding: 10rpx 0 0;
+    box-sizing: border-box;
+    text-align: center;
+    overflow: hidden;
+    transition: height 200ms linear;
+    will-change:height;
+}
+.floating-ball.iphonex-ball {
+    bottom: 276rpx
+}
+.floating-ball .itemapp{
+    padding: 13rpx 0;
+    background-color: transparent;
+    font-size: 22rpx;
+    color: #111111;
+    line-height: normal;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.floating-ball.ball-zero-packup {width: 88rpx;height: 120rpx;}
+.gozero {font-size: 35rpx;}
+.trans-right {
+    transform: translateX(70rpx);
+    opacity: 0.5;
+}
+.floating-logo {width: 36rpx; height: 36rpx}
+
+/*好友分享房型*/
+.friend_share_room {
+    background: linear-gradient(90deg, rgb(255, 247, 239) 0%, rgb(255, 237, 222) 50.21%, rgb(255, 247, 239) 100%);
+    padding: 0 0 16rpx;
+}
+.friend_share_room .room-item {
+    background-color: #fff;
+}
+.friend_share_title {
+    display: block;
+    width: 100%;
+    height: 64rpx;
+}
+.recommend {
+    font-size: 18rpx;
+    height: 28rpx;
+    line-height: 28rpx;
+    padding: 0 8rpx;
+    display: inline-block;
+    vertical-align: 6rpx;
+    margin-right: 10rpx;
+    font-weight:500;
+    color: #fff;
+    border-radius: 4rpx;
+    background:#26c28d;
+}
+/*一起选酒店入口浮层--*/
+.share-list-bar, .share-list-btn{
+    position: fixed;
+    bottom: 198rpx;
+    z-index: 3;
+}
+.share-list-bar.iphonex, .share-list-btn.iphonex{
+    bottom: 264rpx;
+}
+.share-list-bg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+}
+.share-list-bar {
+    height: 152rpx;
+    border: 2rpx solid #006FF6;
+    box-sizing: border-box;
+    border-radius: 25rpx;
+    width: calc(100% - 56rpx);
+    transition: all 0.5s ease;
+    right: 28rpx;
+}
+.share-list-bar .con {
+    position: relative;
+    display: flex;
+    background: #fff;
+    padding-left: 15rpx;
+    box-sizing: border-box;
+    border-radius: 25rpx;
+    height: 100%;
+}
+.share-list-bar .title {
+    position: absolute;
+    z-index: -1;
+    top: -46rpx;
+    left: -2rpx;
+    width: 368rpx;
+    height: 65rpx;
+    background-size: cover;
+    background-image: url("https://pages.c-ctrip.com/hotels/wechat/img/share-title.png");
+}
+
+.bar-close-animation {
+    overflow: hidden;
+    animation: close-transition 0.5s linear forwards;
+}
+@keyframes close-transition {
+    0%, 87.5% {
+        border-radius: 25rpx;
+    }
+    100% {
+        border-radius: 50%;
+    }
+}
+
+.share-list-bar .imgs {
+    display: flex;
+    width: calc(100% - 174rpx);
+    overflow-x: scroll;
+    padding: 16rpx 0;
+}
+.share-list-bar .imgs::-webkit-scrollbar {
+    display: none;
+}
+.share-list-bar .imgs .single-img {
+    margin-right: 16rpx;
+    width: 160rpx !important;
+    flex-shrink: 0;
+    height: auto;
+    border-radius: 8rpx;
+}
+.share-list-bar .desc {
+    text-align: center;
+    background: #ffffff;
+    font-weight: 500;
+    color: #0086f5;
+    font-size: 28rpx;
+    display: inline-block;
+    height: calc(100% - 24rpx);
+    margin: 12rpx 0;
+    width: 160rpx;
+    box-sizing: border-box;
+    box-shadow: 0 6rpx 16rpx 2rpx rgba(0, 0, 0, 0.08);
+    padding: 0 0 0 8rpx;
+    line-height: 118rpx;
+    border-radius: 0 8rpx 8rpx 0;
+}
+.share-list-bar .desc .wechat-font-arrow-right {
+    margin-left: -8rpx;
+}
+.share-list-btn {
+    width: 88rpx;
+    height: 88rpx;
+    right: 76rpx;
+}
+
+.share-total {
+    height: 28rpx;
+    width: 28rpx;
+    position: absolute;
+    right: -4rpx;
+    top: -4rpx;
+    background: #0086f5;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    font-size: 23rpx;
+    font-weight: 500;
+    text-align: center;
+}
+.icon-open-animation {
+    animation: open-animation 0.5s linear;
+}
+@keyframes open-animation {
+    0%, 50% {
+        opacity: 0;
+    }
+    75% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.share-list-icon {
+    width: 88rpx;
+    height: 88rpx;
+    overflow: hidden;
+    right: 80rpx;
+    border-radius: 50%;
+    border: 2rpx solid #006FF6;
+    background: #FFFFFF;
+}
+.share-list-icon .share-img {
+    width: 78rpx;
+    height: 78rpx;
+    border-radius: 50%;
+    margin: 6rpx auto;
+}
+.share-list-icon .img {
+    width: 78rpx;
+    height: 78rpx;
+    border-radius: 50%;
+    background: url("https://pages.c-ctrip.com/hotels/wechat/img/share-hbg.png");
+    background-size: cover;
+}
+/*优势/劣势文案/担保文案*/
+.room-extra-desc {
+    font-size: 0;
+}
+.room-extra-desc .highlight {
+    color: #FF5500 !important;
+}
+.room-extra-desc .desc {
+    line-height: 1;
+    font-size: 24rpx;
+    color: #555555;
+    margin-bottom: 12rpx;
+}
+.room-extra-desc .icon {
+    font-size: 20rpx;
+    margin-right: 5rpx;
+}
+.planet-ad {
+    display: flex;
+    margin-top: 8rpx;
+    padding: 24rpx;
+    font-size: 24rpx;
+    background-color: #fff;
+}
+.planet-ad .pa-live {
+    position: relative;
+    height: 98rpx;
+    width: 98rpx;
+    border: 2rpx solid #d5925a;
+    border-radius: 50%;
+    padding: 6rpx;
+}
+.planet-ad .pal-logo {
+    width: 100%;
+    height: 100%;
+    border: 1rpx solid #d5925a;
+    border-radius: 50%;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+}
+.planet-ad .palc-logo {
+    width: 100%;
+    height: 100%;
+}
+.planet-ad .pal-status {
+    position: absolute;
+    bottom: -2rpx;
+    right: -2rpx;
+    background: #FF5500;
+    border-radius: 13rpx;
+    height: 29rpx;
+    width: 66rpx;
+    line-height: 29rpx;
+    font-size: 18rpx;
+    color: #fff;
+    text-align: center;
+}
+.planet-ad .pa-content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-left: 42rpx;
+}
+.planet-ad .pac-header {
+    display: flex;
+    align-items: center;
+    height: 45rpx;
+    line-height: 1;
+    padding-top: 8rpx;
+}
+.planet-ad .pach-title {
+    max-width: 360rpx;
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #000;
+}
+.planet-ad .pach-fansnum {
+    flex: 1;
+    margin-left: 16rpx;
+    font-size: 21rpx;
+    color: #111111;
+}
+.planet-ad .pach-entry {
+    display: flex;
+    align-items: center;
+}
+.planet-ad .pache-txt {
+    color: #006FF6;
+}
+.planet-ad .pac-right{
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 9rpx;
+    color: #D5925A;
+}
+.planet-ad .pac-right-text {
+    display: flex;
+    align-items: center;
+}
+.planet-ad .prt-img {
+    display: inline-block;
+    width: 24rpx;
+    height: 24rpx;
+    background: center center no-repeat;
+    background-size: 100% 100%;
+}
+.planet-ad .prt-desc {
+    display: inline-block;
+    max-width: 180rpx;
+    padding: 0 16rpx 0 4rpx;
+}
+.pac-vendor-text {
+    max-width: 410rpx;
+}
+
+/*优惠券弹窗*/
+.share-coupon {
+    height: 435rpx;
+    width: 562rpx;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.share-coupon .top {
+    height: 170rpx;
+    background-image: url("https://pages.c-ctrip.com/hotels/wechat/img/detail-share-coupon.png");
+    background-size: cover;
+}
+.share-coupon .content {
+    height: 309rpx;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 4rpx 32rpx 32rpx;
+    border-radius: 0 0 24rpx 24rpx;
+    position: relative;
+}
+.share-coupon .title {
+    color: #555555;
+    font-family: PingFangSC-Regular;
+    font-size: 32rpx;
+    text-align: center;
+}
+.share-coupon .desc {
+    font-style: PingFangSC-Regular;
+    font-size: 36rpx;
+    text-align: center;
+    margin-top: 10rpx;
+}
+.share-coupon .btns {
+    display: flex;
+    position: absolute;
+    width: calc(100% - 64rpx);
+    bottom: 32rpx;
+    margin-top: 80rpx;
+}
+.share-coupon .btns .btn {
+    flex: 1;
+    font-size: 28rpx;
+    border-radius: 8rpx;
+    text-align: center;
+    padding: 19rpx 0;
+    display: inline-block;
+    box-sizing: border-box;
+}
+.share-coupon .btns .btn:first-child {
+    color: #f50;
+    border: 2rpx solid #f70;
+    margin-right: 4%;
+}
+.share-coupon .btns .btn:last-child {
+    color: #fff;
+    background: #FF7700;
+}
+.room-like-head {
+    position: absolute;
+    top: 8rpx;
+    left: -8rpx;
+    border-radius: 4rpx;
+    padding: 4rpx;
+    background-color: #f70;
+    font-size: 20rpx;
+    color: #fff;
+    width: 54rpx;
+    text-align: center;
+}
+
+.room-like-tag {
+    position: absolute;
+    top: -4rpx;
+    left: 28rpx;
+    background-color: #f70;
+    font-size: 20rpx;
+    padding: 0 8rpx;
+    height: 28rpx;
+    line-height: 28rpx;
+    color: #fff;
+}
+
+.sub .cancel-info  {
+    margin-bottom: 0rpx !important;
+    font-size: 28rpx !important;
+}
+
+.m-room {
+    background-color: #fff;
+    margin-bottom: 12rpx;
+    border-radius: 16rpx;
+}
+
+.jump-box .more-btn{
+    color: #111;
+    font-size: 26rpx;
+}
+
+.room-divider{
+    height: 1rpx;
+    background: #E5E5E5;
+    margin-top: 24rpx
+}
+
+.guess-like{
+    background-image: url('https://pages.c-ctrip.com/hotels/wechat/img/guess_like.png');
+    position: absolute;
+    top: 8rpx;
+    left: -8rpx;
+    width: 54rpx;
+    height: 52rpx;
+    background-size: 100% 100%;
+    border-radius: 4rpx;
+}
+
+.baseroom-more{
+    background: #fff;
+    color: #111111;
+    padding: 18rpx 0;
+    border-radius: 16rpx;
+}
+
+.benefits image {
+    padding: 6rpx 4rpx 6rpx 0;
+}
+
+.benefits text {
+    padding: 6rpx 8rpx 6rpx 0;
+    border-radius: 0 4rpx 4rpx 0;
+}
+
+.tag-icon{
+    height: 20rpx;
+    width: auto;
+    margin-right: 4rpx;
+    vertical-align: -4rpx;
+}
+
+.roomlist-divider{
+    height: 24rpx;
+    background: linear-gradient(-180deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0.3) 100%);
+}
+
+.center-divider{
+    width: 1rpx;
+    height: 24rpx;
+    background: #bbbbbb;
+    margin-right: 10rpx;
+}
+
+.breakfast-area{
+    line-height: 32rpx;
+    margin-bottom: 0rpx;
+    font-size: 24rpx;
+}
+
+.text-over{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 90%;
+}
+
+.room-no{
+    position: absolute;
+    right: 24rpx;
+    top: -12rpx
+}
+/* 达人晒图 */
+.blog-article-module {
+    margin: 16rpx 0;
+    background: #fff;
+    border-radius: 32rpx;
+    padding: 43rpx 0 32rpx 24rpx;
+}
+.ba-title {
+    font-size: 36rpx;
+    color: #111;
+    font-weight: bold;
+    font-family: PingFangSC-Medium;
+    line-height: 1;
+    margin-bottom: 40rpx;
+}
+.ba-item {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 327rpx;
+}
+.ba-item .single-article {
+    margin: 16rpx 16rpx 0 0;
+    flex: 0 0 auto;
+    position: relative;
+    height: 295rpx;
+    width: calc(100% - 76rpx);
+    border-radius: 16rpx;
+    box-shadow: 0rpx 3rpx 16rpx 0rpx rgba(0, 0, 0, 0.1);
+}
+.ba-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 280rpx;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 16rpx 16rpx 48rpx 16rpx;
+}
+.ba-image-bottom {
+    background: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70rpx;
+    color: #fff;
+    display: flex;
+    padding: 0 16rpx;
+    font-size: 24rpx;
+}
+.ba-image-bottom .left {
+    flex: 1;
+}
+.ba-image-bottom .left,
+.ba-image-bottom .right {
+    margin-top: 29rpx;
+}
+.ba-content {
+    margin-left: 280rpx;
+    position: relative;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 32rpx 24rpx 24rpx;
+}
+.blog-title {
+    color: #111111;
+    font-size: 28rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: bold;
+    margin-bottom: 16rpx;
+}
+.blog-content {
+    color: #555555;
+    font-size: 24rpx;
+}
+.blog-author {
+    display: flex;
+    position: absolute;
+    bottom: 26rpx;
+}
+.blog-author .profile {
+    width: 50rpx;
+    height: 50rpx;
+    position: relative;
+}
+.blog-author .user-level-1,
+.blog-author .user-level-2 {
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.blog-author .user-level-1 {
+    background: url("https://pages.c-ctrip.com/wireless-app/icons/comment/hotel_album_v_yellow.png") no-repeat center;
+    background-size: 100% 100%;
+}
+.blog-author .user-level-2 {
+    background: url("https://pages.c-ctrip.com/wireless-app/icons/comment/hotel_album_v_blue.png") no-repeat center;
+    background-size: 100% 100%;
+}
+.blog-author .avatar {
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+}
+.private-info {
+    font-size: 20rpx;
+    line-height: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.private-info .name {
+    display: block;
+    margin-bottom: 4rpx;
+}
+.private-info .label {
+    width: fit-content;
+    display: inline-block;
+    padding: 4rpx 6rpx;
+    border-radius: 14rpx 2rpx 14rpx 2rpx;
+}
+.private-info .label-2 {
+    color: #006FF6;
+    background-color: rgba(0, 134, 246, 0.08);
+}
+.private-info .label-1 {
+    color: #CC8408;
+    background-color: rgba(204, 132, 8, 0.08);
+}
+.ba-all-article {
+    text-align: center;
+}
+.ba-all-article .btn{
+    text-align: center;
+    margin-top: 16rpx;
+    color: #111111;
+    font-size: 24rpx;
+    border: 1rpx solid #c5c5c5;
+    border-radius: 8rpx;
+    padding: 13rpx 24rpx;
+    display: inline-block;
+}
+.ba-space {
+    width: 60rpx;
+    height: 100%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+.ba-space .wechat-font-view-more {
+    font-size: 28rpx;
+}
+.ba-view-more {
+    font-size: 22rpx;
+    color: #111;
+    writing-mode: vertical-lr;
+}
+/* 新版优惠券banner样式 */
+.banner-info {
+    padding: 20rpx 24rpx;
+    margin-bottom: 16rpx;
+    background-color: #fff;
+}
+/* 特色房型场景banner样式 */
+.special-border {
+    border-radius: 0 0 24rpx 24rpx;
+}
+/* 非特色房型场景banner样式 */
+.normal-border {
+    border-radius: 24rpx;
+}
+/* 超值旅行家 */
+.travel-coupon-info {
+    position: relative;
+    padding: 24rpx 24rpx;
+    box-sizing: content-box;
+    background: #fff;
+    border-radius: 16rpx;
+}
+.tci-book-mask {
+    padding: 0 24rpx 0 40rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 80rpx;
+    bottom: 88rpx;
+    right: 0;
+    z-index: 2;
+    transform: translateZ(0);
+    background: #fff;
+    font-size: 24rpx;
+    text-align: center;
+    box-shadow: -17rpx 0rpx 15rpx -13rpx rgba(0, 0, 0, .1);
+}
+.tci-book-btn {
+    border-radius: 8rpx;
+    height: 44rpx;
+    width: 128rpx;
+    box-sizing: border-box;
+    line-height: 44rpx;
+    color: #fff;
+    margin-top: 16rpx;
+}
+.tci-rules {
+    font-size: 22rpx;
+    padding-top: 16rpx;
+    border-top: 1rpx solid #f0f0f0;
+    display: flex;
+    align-items: center;
+}
+.tci-rule {
+    flex: 0 0 auto;
+    padding: 0 8rpx;
+    position: relative;
+}
+.tci-rule:after {
+    content: '';
+    position: absolute;
+    height: 20rpx;
+    width: 1rpx;
+    background: #aaaaaa;
+    right: 0;
+    bottom: 4rpx;
+}
+.tci-rule:first-child {
+    padding-left: 0;
+}
+.tci-rule.last {
+    padding-right: 0;
+}
+.tci-rule.last:after {
+    width: 0;
+}
+.tci-qa {
+    flex: 0 0 auto;
+    color: #5C7080;
+    font-size: 24rpx;
+    margin-left: 4rpx;
+}
+.r-num {font-size: 18rpx; line-height: 18rpx; padding: 8rpx; color: #ccc; white-space: nowrap;}
+/*底部预订按钮*/
+.des-bottom {
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+    box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    text-align: right;
+    width: 100%;
+    box-sizing: border-box;
+}
+.des-bottom .mr16 {
+    margin: 16rpx 24rpx;
+}
+.des-bottom .lnumb{margin-bottom: unset;}
+.des-bottom .price-layout .price-bottom-txt { padding-top: 0; }

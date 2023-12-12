@@ -1,0 +1,16 @@
+<view class="page">
+  <view class="float-wrapper">
+    <view class="title">个人信息保护指引</view>
+    <view class="content" bindtap="navToUrl">
+      <view class="paragraph" wx:for="{{descList}}" wx:for-item="pItem">
+        <block wx:for="{{pItem}}" wx:for-item="tItem">
+          <text class="{{tItem.url ? 'link' : ''}}" data-url="{{tItem.url}}">{{tItem.text}}</text>
+        </block>
+      </view>
+    </view>
+    <view class="btns">
+      <button class="agree" bindtap="handleAgree">同意并继续</button>
+      <button class="reject" bindtap="handleReject">{{rejectBtnText}}</button>
+    </view>
+  </view>
+</view>

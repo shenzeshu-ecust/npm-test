@@ -1,0 +1,20 @@
+<template name="showShare">
+  <view class="share-wrap {{showShare?'open':''}}">
+    <view class="close" bindtap="triggerShare"></view>
+    <view class="title">请选择分享方式</view>
+    <view class="share-list">
+      <view class="s-item" bindtap="generateQrcode">
+        <view class="white">
+          <view class="icon i-quan"></view>
+        </view>
+        <view class="text">分享到朋友圈</view>
+      </view>
+      <button class="btn s-item" open-type="share">
+        <view class="white friend">
+          <view class="icon i-friend"></view>
+        </view>
+        <view class="text">发送给好友</view>
+      </button>
+    </view>
+  </view>
+</template>

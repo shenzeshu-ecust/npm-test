@@ -1,0 +1,11 @@
+<template name="deposit-policy-table">
+    <view class="item-desc mb12" wx:for="{{desc}}">{{item}}</view>
+    <view class="deposit-policy-table" wx:if="{{depositPolicyTable.rows}}">
+        <block wx:for="{{depositPolicyTable.rows}}" >
+            <view class="{{item.headFlag ? 'deposit-head': 'deposit-desc'}}">
+                <view class="{{item.headFlag ? 'deposit-policy-head': 'deposit-policy-desc'}}">{{item.cells[0].context}}</view>
+                <view class="{{item.headFlag ? 'deposit-policy-head': 'deposit-policy-desc'}}">{{item.cells[1].context}}</view>
+            </view>
+        </block>
+    </view>    
+</template>

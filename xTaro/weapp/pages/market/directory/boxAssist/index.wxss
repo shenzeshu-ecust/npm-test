@@ -1,0 +1,175 @@
+@import '../../components/unlimitQRCode/qrcode.wxss';
+image {
+  width: 100%;
+  height: 100%;
+}
+page {
+  background-color: rgb(76, 69, 255);
+  padding: 66rpx 0;
+}
+/* .main-wrap.fullscreen{
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:100%;
+} */
+::-webkit-scrollbar { 
+  display: none; 
+} 
+.p-absolute{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #efefef;
+}
+.main-wrap {
+  position: relative;
+  width: 712rpx;
+  height: 1239rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background-color: rgb(76, 69, 255);
+  background-position: 0 0;
+  background-size: 712rpx;
+  background-repeat: no-repeat;
+  margin-left: 19rpx;
+}
+.recommend-wrap {
+  position: absolute;
+  top: 355rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 606rpx;
+  text-align: center;
+}
+.recommend-wrap .recommend-title {
+  font-size: 20rpx;
+  color: #fff;
+  margin-bottom: 16rpx;
+}
+.assist-content {
+  position: absolute;
+  top: 606rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 646rpx;
+  height: 613rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+}
+.rule-wrap{
+  color: #fff;
+  margin: 42rpx 32rpx 0 32rpx;
+}
+.rule-title{
+  font-size: 28rpx;
+}
+.rule-list{
+  font-size: 20rpx;
+  padding-top: 37rpx;
+}
+.rule-list .rule-item{
+  min-height: 28rpx;
+  text-align:justify;
+  text-justify:distribute-all-lines; 
+}
+.ctrip-logo{
+  width: 234rpx;
+  height: 40rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2021/06/xcx_assist/ctrip.png') 0 0/234rpx no-repeat;
+  margin: 66rpx auto 0;
+}
+
+.pop-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .7);
+  z-index: 3;
+}
+.pop-wrap {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border-radius: 20rpx;
+  width: 654rpx;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff;
+  z-index: 3;
+  animation: scalein .3s forwards;
+}
+@keyframes scalein{
+  0%{
+    transform: translate(-50%,-50%) scale(.5);
+  }
+  100%{
+    transform: translate(-50%,-50%) scale(1);
+  }
+}
+.pop-wrap .pop-title{
+  font-size: 34rpx;
+  color: #333;
+  font-weight: bold;
+  margin-top: 40rpx;
+}
+.pop-wrap .pop-tips{
+  font-size: 28rpx;
+  color: #333;
+  margin-top: 30rpx;
+  align-self: flex-start;
+  margin-left: 52rpx;
+}
+.pop-wrap .coupon-list{
+  max-height: 450rpx;
+}
+.pop-wrap .coupon-list .coupon-item{
+  width: 584rpx;
+  height: 184rpx;
+  padding: 30rpx 0 0 50rpx;
+  box-sizing: border-box;
+  margin: 8rpx 0 -18rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2021/06/xcx_assist/coupon2.png') 0 0/584rpx no-repeat;
+}
+.pop-wrap .coupon-list .coupon-item .c-name{
+  font-size: 28rpx;
+  color:#222;
+  margin: 20rpx 0 5rpx;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow-x:hidden;
+  max-width: 500rpx;
+}
+.pop-wrap .coupon-list .coupon-item .c-tips{
+  font-size: 22rpx;
+  color:#999;
+}
+.pop-btn{
+  width: 100%;
+  height: 160rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pop-btn .btn{
+  color: #fff;
+  width: 580rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  text-align: center;
+  background: url('https://images3.c-ctrip.com/marketing/2021/06/xcx_assist/pop-btn.png') 0 0/580rpx no-repeat;
+}

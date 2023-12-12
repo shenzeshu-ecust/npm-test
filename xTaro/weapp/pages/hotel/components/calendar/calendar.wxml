@@ -1,0 +1,82 @@
+<view class="calendar-sticky">
+    <view class="calendar-tips black2" wx:if="{{morningBarInfo.showMorningBar || biz==2}}">
+        <text wx:if="{{morningBarInfo.showMorningBar}}">今晨6点前入住，请选“今天凌晨”入住。</text>
+        <text wx:if="{{biz==2}}">您选的是酒店当地日期</text>
+    </view>
+
+    <view class="calendar-week black2 {{tips ? 'calendar-week_tips' : ''}}">
+        <view wx:if="{{tips}}" class="calendar-module_tips-show">{{tips}}</view>
+        <block wx:for="{{DAY_NAMES}}">
+            <view class="calendar-week_item {{index === 0 || index === 6 ? 'calendar-week_sun' : ''}}">{{item}}</view>
+        </block>
+    </view>
+</view>
+
+<view class="body">
+<block wx:for="{{monthDates}}" wx:key="monthID">
+    <view class="calendar-month black1 {{tips ? 'calendar-month_tips' : ''}}" style="top:{{morningBarInfo.showMorningBar || biz==2 ? '58px' : '30px'}}" id="{{item.monthID}}">
+        {{item.monthName}}
+    </view>
+
+    <view class="calendar-month_items black1">
+        <view wx:for="{{item.dates}}" wx:for-item="dateItem" class="calendar-day" id="autotest_{{dateItem.formattedValue}}">
+            <view class="{{dateItem.choose ? 'calendar-item_checkin' : ''}} calendar-bg {{dateItem.stay ? 'calendar-item-range' : ''}}"></view>
+
+            <view class="calendar-info_box">
+                <!-- 日期数字 -->
+                <block>
+                <view wx:if="{{!dateItem.date}}" class="calendar-txt"></view>
+                <view wx:elif="{{dateItem.outOfRange}}"
+                    class="calendar-txt out-of-range {{dateItem.stay ? 'calendar-txt_stay' : ''}} {{dateItem.choose ? 'calendar-txt_checkin' : '' }}">
+                    {{dateItem.date}}
+                </view>
+                <view wx:else
+                    class="calendar-txt {{dateItem.stay ? 'calendar-txt_stay' : ''}} {{dateItem.choose ? 'calendar-txt_checkin' : ''}} {{((!dateItem.holiday && !dateItem.restday) || dateItem.today || dateItem.tomorrow || dateItem.choose) ? '' : 'font-bule'}}">
+                    {{dateItem.todayDateForMorning || dateItem.date}}
+                </view>
+                </block>
+
+                <view wx:if="{{dateItem.info && dateItem.info.title}}"
+                    class="calendar-price {{dateItem.choose ? 'calendar-price_checkin' : ''}}"
+                    style='{{dateItem.info.titleColor ? "color:" + dateItem.info.titleColor + ";" : ""}}'>
+                    {{dateItem.info.title}}
+                </view>
+                <view wx:if="{{dateItem.info && dateItem.info.subTitle}}"
+                    class="calendar-title calendar-checkin"
+                    style='{{dateItem.info.subTitleColor ? "color:" + dateItem.info.subTitleColor : ""}}'>
+                    {{dateItem.info.subTitle}}
+                </view>
+            </view>
+
+            <block wx:if="{{dateItem.todayTomorrowText}}">
+                <view class="cal-today-tomorrow black1 {{dateItem.choose ? 'cal-checkin-text' : ''}} {{dateItem.outOfRange ? 'out-of-range' : ''}}">
+                    {{dateItem.todayTomorrowText}}
+                </view>
+            </block>
+            <block wx:else>
+            <view wx:if="{{dateItem.holiday}}"
+                class="calendar-holiday {{dateItem.outOfRange ? 'out-of-range' : ''}} {{dateItem.choose ? 'calendar-txt_checkin' : '' }} {{!dateItem.choose && (!dateItem.outOfRange) ? 'font-bule' : ''}}">
+                {{dateItem.holiday}}
+            </view>
+            <view wx:if="{{dateItem.workday}}" class="calendar-work {{dateItem.choose ? 'calendar-work_checkin' : ''}} {{dateItem.outOfRange ? 'out-of-range' : ''}}">班</view>
+            <view wx:if="{{dateItem.restday}}" class="calendar-rest black1 {{dateItem.choose ? 'calendar-rest_checkin' : ''}} {{dateItem.outOfRange ? 'out-of-range' : ''}}">休</view>
+            </block>
+
+            <block wx:if="{{dateItem.inDay && inDay && !outDay}}">
+                <view wx:if="{{canSameDay}}" class="calendar-day-tips tips-wrap"><text>请选择离店日期\n如需当日离店，请再次点击入住日期</text></view>
+                <view wx:else class="calendar-day-tips tips1">请选择离店日期</view>
+            </block>
+
+            <view wx:if="{{dateItem && !dateItem.outOfRange && dateItem.value}}" class="calendar-bg" bindtap="onDateTap" data-date="{{dateItem.value}}" data-yester-today="{{dateItem.today || dateItem.yesterday}}"></view>
+        </view>
+    </view>
+</block>
+</view>
+
+<view wx:if="{{showHourroomGif}}" class="cmask hourroom-gif-box" catchtouchmove="noop">
+    <view class="hourroom-gif"></view>
+    <view><text>如果需要入住当日离店\n请重复点击入住日期</text></view>
+    <view class="hourroom-btn" catchtap="closeHourroomGif">我知道了</view>
+</view>
+<!--白屏检测-->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

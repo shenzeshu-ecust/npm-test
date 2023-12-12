@@ -1,0 +1,89 @@
+@import "../../common/css/common.wxss";
+
+.qr-code-toast-wrapper{
+    position: absolute;
+    top:0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 395rpx;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+.qr-code-toast{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 580rpx;
+    height: 756rpx;
+    border-radius: 16rpx;
+    background-color: #fff;
+}
+
+.qr-code-toast-image{
+    height: 342rpx;
+    width: 344rpx;
+    margin-top: 46rpx;
+    z-index: 1;
+}
+
+.qr-code-close{
+    position: absolute;
+    bottom: -95rpx;
+    color: #fff;
+    font-size: 59rpx;
+}
+
+.qr-code-bg-image{
+    height: 335rpx;
+    width: 335rpx;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.transparent-blue-star{
+    background-size: 929rpx 727rpx !important;
+    background-position: -590rpx -6rpx;
+}
+
+.transparent-red-gift{
+    background-size: 929rpx 715rpx !important;
+    background-position: -6rpx -228rpx;
+}
+
+.popup-title-wrapper {
+    width: 100%;
+    padding: 40rpx 0 36rpx 0;
+    text-align: center;
+    color: #fff;
+    border-radius: 16rpx 16rpx 2rpx 2rpx;
+}
+
+.red-bg {
+    background: linear-gradient(-225deg, rgb(255, 111, 156) 0%, rgb(255, 174, 156) 100%);
+}
+
+.blue-bg {
+    background: linear-gradient(-221.25deg, rgb(102, 145, 255) 0.06%, rgb(103, 205, 255) 100%);
+}
+
+.blue-tip-bg {
+    background:  linear-gradient(-236.38deg, rgb(97, 142, 255) 0.06%, rgb(39, 152, 207) 100%);
+}
+
+.red-tip-bg {
+    background: linear-gradient(-225deg, rgb(255, 125, 175) 0%, rgb(255, 174, 156) 100%);
+}
+
+.qr-code-toast-tip {
+    height: 41rpx;
+    border-radius: 22rpx;
+    margin-top: 40rpx;
+    color: #fff;
+    font-size: 24rpx;
+    padding: 4rpx 28rpx;
+}

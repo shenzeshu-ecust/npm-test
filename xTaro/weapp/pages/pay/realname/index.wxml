@@ -1,0 +1,48 @@
+<nav-bar navbar-data="{{navbarData}}"></nav-bar>
+<view class="realname-box">
+	<view class="rn-paytext">
+		<text class="rn-paystate">支付已成功提交</text>
+    </view>
+    <view class="rn-cbox">
+        <block wx:if="{{!realNamed}}">
+        <view class="rn-cbar">
+            <view class="rn-cimg"></view>
+        </view>
+        <view class="rn-cinfos">
+            <view class="rn-realtip">
+                <text>通过微信进行账户实名认证?</text>
+            </view>
+            <view class="rn-mrealtip">
+              实名认证后，可有效保障携程账户的资金安全，更尊享“拿去花、闪住、信用抢票”等特权服务。
+            </view>
+            <view class="rn-cbuttons">
+                <button class="rn-cbutton" bindtap="cancelBack">暂不认证</button>
+                <button class="rn-cbutton rn-cdbutton" bindtap="goRealNamed">立即认证</button>
+            </view>
+            <view class="rn-canceltip">请放心，跳过实名认证不会影响任何预订或支付</view>
+        </view>
+        </block>
+        
+        <block wx:else>
+            <view class="rn-cbar rn-csbar">
+              <view class="rn-csimg"></view>
+            </view>
+            <view class="rn-succeedtxt">您的账户实名认证已成功!</view>
+            <view class="rn-succeedbtn">
+                <button class="rn-cbutton rn-sbutton" bindtap="succeedBack">完成</button>
+            </view>
+        </block> 
+    </view>
+</view>
+
+<block wx:if="{{toastShow}}">
+<view class="g-toastbox">
+    <view class="g-toastmain">
+        <text class="g-toastxt">{{toastTxt}}</text>
+    </view>
+</view>
+</block>
+
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

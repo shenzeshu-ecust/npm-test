@@ -1,0 +1,294 @@
+<mp-navigation-bar
+    wx:if="{{!visible}}"
+    id="mp-navigation"
+    color="#333"
+    background="#fff"
+    >
+    <view slot="center" class="custom-navigation-center">
+        <text class="title" style="font-size: 30rpx">携程发票</text>
+    </view>
+</mp-navigation-bar>
+
+<mp-navigation-bar
+    wx:else
+    id="mp-navigation"
+    back="{{navigationBar.back}}"
+    color="{{navigationBar.color}}"
+    background="{{navigationBar.background}}"
+    show="{{true}}"
+    >
+    <view slot="left" class="custom-navigation-left" bindtap="backToHotelSearchPage">
+        <view class="wechat-font-back back-icon"></view>
+    </view>
+</mp-navigation-bar>
+
+<!-- 个保指引浮层 -->
+<perinfo-protect-float forceExitMiniapp="{{false}}"></perinfo-protect-float>
+
+<view class="c-invoice" wx:if="{{!visible}}" bindtap="handleCloseSearchList" style="{{isShowSearchList ? 'position:fixed' : ''}}">
+    <view class="c-invo-header">
+        <text class="desc">快速开票，即开即领</text>
+        <icon class="ico-invoice"></icon>
+    </view>
+    <view class="c-invo-wrap">
+        <view class="item">
+            <view class="c-start tabs">
+                <block wx:for="{{tabs}}" wx:key="index">
+                    <view class="card {{item.type === currentTab.type? 'current':''}}" data-ubt-key="smkp_{{item.keyName}}"data-id="{{item.type}}" bindtap="handleChangeTag">{{item.text}}</view>
+                </block>
+            </view>
+        </view>
+        <view class="item title-item" id="invoiceTitle">
+            <text class="subitem-title">抬头</text>
+            <view class="c-start" data-ubt-key="smkp_fptt">
+                <input class="txt {{clearIcon.invoiceTitle ? '' : 'icon-empty'}}"
+                    placeholder-style="color: #ddd"
+                    data-name="invoiceTitle" placeholder="{{placeholderText[currentTab.type].title}}"
+                    value="{{defaultTitle.invoiceTitle}}" bindinput="handleTextChange"
+                    bindfocus="handleinputFocus" focus="{{focus.invoiceTitle}}"
+                    bindblur="handleinputBlur"
+                />
+                <view class="error-icon" wx:if="{{errorInfo.errorinvoTitle}}">
+                    <text class="iconfont icon-warn"></text>
+                    <text class="c-invo-warning">请选择您的发票抬头</text>
+                </view>
+            </view>
+            <icon class="iconfont icon-closed pd1" wx:if="{{clearIcon.invoiceTitle && focus.invoiceTitle}}" data-name="invoiceTitle" catchtap="clearText"></icon>
+            <icon class="iconfont icon-forword" wx:if="{{isShowWxTitle}}" bindtap="getWxTitle" data-ubt-key="smkp_wx_title"></icon>
+        </view>
+        <view class="c-search-wrap" wx:if="{{isShowSearchList}}">
+            <block wx:if="{{defaultTitle.invoiceTitle.length > 0}}">
+                <view class="item" wx:for="{{searchTitleList}}" wx:key="index" data-index="{{index}}" catchtap="handleChangeTitle">
+                    <text class="c-start ft24">
+                        <block wx:for="{{item.parts}}" wx:key="index">
+                                <text wx:if="{{item == searchResult}}" class="c1">{{item}}</text>
+                                <text wx:elif="{{item != searchResult}}">{{item}}</text>
+                        </block>
+                    </text>
+                    <text class="end" wx:if="{{item.type}}">{{item.type}}</text>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="item item-history" wx:for="{{historyTitleList[currentTab.historyKey]}}" wx:key="index">
+                    <text class="c-start ft24" catchtap="handleChangeTitle" data-type="history" data-index="{{index}}">{{item.buyerTitle}}</text>
+                    <text class="end end-close" bindtap="handleDeleteHistory" data-index="{{index}}" data-name="delete">X</text>
+                </view>
+            </block>
+            <view class="c-invo-mask"></view>
+        </view>
+        
+
+        <view class="item" wx:if="{{currentTab.type != 0}}" id="taxPayNumber">
+            <text class="subitem-title">税号</text>
+            <view class="c-start" data-ubt-key="smkp_sh">
+                <input class="txt {{clearIcon.taxPayNumber ? '' : 'icon-empty'}}"
+                    placeholder="{{placeholderText[currentTab.type].taxPayNum}}" placeholder-style="color: #ddd"
+                    data-name="taxPayNumber" 
+                    value="{{defaultTitle.taxPayNumber}}" bindinput="HandleInputInfo"
+                    bindfocus="handleinputFocus" focus="{{focus.taxPayNumber}}"
+                    bindblur="handleinputBlur"
+                />
+                <view class="error-icon" wx:if="{{errorInfo.errortaxNum}}">
+                    <text class="iconfont icon-warn"></text>
+                    <text class="c-invo-warning">请选择企业税号</text>
+                </view>
+            </view>
+            <icon class="iconfont icon-closed pd1" wx:if="{{clearIcon.taxPayNumber && focus.taxPayNumber}}" data-name="taxPayNumber" catchtap="clearText"></icon>
+        </view>
+        <view class="item" id="personalPhone">
+            <text class="subitem-title">手机</text>
+            <view class="c-start" data-ubt-key="smkp_sjh">
+                <input class="txt" data-name="personalPhone" data-type="special"
+                    placeholder="{{placeholderText[currentTab.type].tele}}" placeholder-style="color: #ddd"
+                    value="{{personalPhone}}" bindinput="HandleInputInfo"
+                    bindfocus="handleinputFocus" focus="{{focus.personalPhone}}"
+                    bindblur="handleinputBlur"
+                />
+                <view class="error-icon"  wx:if="{{errorInfo.errorphone}}">
+                    <text class="iconfont icon-warn"></text>
+                    <text class="c-invo-warning">请输入您的手机号，用于接收开票信息!</text>
+                </view>
+                <view class="error-icon"  wx:if="{{errorInfo.errorRightPhone}}">
+                    <text class="iconfont icon-warn"></text>
+                    <text class="c-invo-warning">请输入正确的手机号，用于接收开票信息!</text>
+                </view> 
+            </view>
+            <icon class="iconfont icon-closed pd1" wx:if="{{clearIcon.personalPhone && focus.personalPhone}}" data-name="personalPhone" data-type="special" catchtap="clearText"></icon>
+        </view>
+        <view class="item" id="personalEmail">
+            <text class="subitem-title">邮箱</text>
+            <view class="c-start">
+                <input class="txt" data-name="personalEmail" data-type="special"
+                    placeholder="{{placeholderText[currentTab.type].email}}" placeholder-style="color: #ddd"
+                    value="{{personalEmail}}" bindinput="HandleInputInfo"
+                    bindfocus="handleinputFocus" focus="{{focus.personalEmail}}"
+                    bindblur="handleinputBlur"
+                />
+                <view class="error-icon"  wx:if="{{errorInfo.errorRightEmail}}">
+                        <text class="iconfont icon-warn"></text>
+                        <text class="c-invo-warning">请输入正确的Email地址!</text>
+                    </view>
+            </view>
+            <icon class="iconfont icon-closed pd1" wx:if="{{clearIcon.personalEmail && focus.personalEmail}}" data-name="personalEmail" data-type="special" catchtap="clearText"></icon>
+        </view>
+        <view wx:if="{{roomNoSwitch}}" class="item" id="personalRoomNo">
+            <text class="subitem-title">房间号</text>
+            <view class="c-start">
+                <input class="txt" data-name="personalRoomNo" data-type="special"
+                    placeholder="{{placeholderText[currentTab.type].roomNo}}" placeholder-style="color: #ddd"
+                    value="{{personalRoomNo}}" bindinput="HandleInputInfo"
+                    bindfocus="handleinputFocus" focus="{{focus.personalRoomNo}}"
+                    bindblur="handleinputBlur" maxlength="15"
+                />
+            </view>
+            <icon class="iconfont icon-closed pd1" wx:if="{{clearIcon.personalRoomNo && focus.personalRoomNo}}" data-name="personalRoomNo" data-type="special" catchtap="clearText"></icon>
+        </view>
+        <block wx:if="{{isShowMore  && currentTab.type != 0}}">
+            <view class="item">
+                <text class="subitem-title">地址</text>
+                <view class="c-start">
+                    <input class="txt {{clearIcon.address ? '' : 'icon-empty'}}" data-name="address"
+                        placeholder="{{placeholderText[currentTab.type].addr}}" placeholder-style="color: #ddd"
+                        value="{{defaultTitle.address}}" bindinput="HandleInputInfo"
+                        bindfocus="handleinputFocus" focus="{{focus.address}}"
+                        bindblur="handleinputBlur"
+                    />
+                </view>
+                <icon class="iconfont icon-closed pd1" wx:if="{{clearIcon.address && focus.address}}" data-name="address" catchtap="clearText"></icon>
+            </view>
+            <view class="item">
+                <text class="subitem-title">电话</text>
+                <view class="c-start">
+                    <input class="txt {{clearIcon.phone ? '' : 'icon-empty'}}"  data-name="phone"
+                    placeholder="{{placeholderText[currentTab.type].phone}}" placeholder-style="color: #ddd"
+                    value="{{defaultTitle.phone}}" bindinput="HandleInputInfo"
+                    bindfocus="handleinputFocus" focus="{{focus.phone}}"
+                    bindblur="handleinputBlur"
+                />
+                </view>
+                <icon class="iconfont icon-closed pd1" wx:if="{{clearIcon.phone && focus.phone}}" data-name="phone" catchtap="clearText"></icon>
+            </view>
+            <view class="item">
+                <text class="subitem-title">开户行</text>
+                <view class="c-start">
+                    <input class="txt {{clearIcon.bank ? '' : 'icon-empty'}}" data-name="bank"
+                        placeholder="{{placeholderText[currentTab.type].bank}}" placeholder-style="color: #ddd"
+                        value="{{defaultTitle.bank}}" bindinput="HandleInputInfo"
+                        bindfocus="handleinputFocus" focus="{{focus.bank}}"
+                        bindblur="handleinputBlur"
+                    />
+                </view>
+                <icon class="iconfont icon-closed pd1" wx:if="{{clearIcon.bank && focus.bank}}" data-name="bank" catchtap="clearText"></icon>
+            </view>
+            <view class="item">
+                <text class="subitem-title">银行账号</text>
+                <view class="c-start">
+                    <input class="txt {{clearIcon.bankAccount ? '' : 'icon-empty'}}" data-name="bankAccount"
+                        placeholder="{{placeholderText[currentTab.type].bankAccount}}" placeholder-style="color: #ddd"
+                        value="{{defaultTitle.bankAccount}}" bindinput="HandleInputInfo"
+                        bindfocus="handleinputFocus" focus="{{focus.bankAccount}}"
+                        bindblur="handleinputBlur"
+                    />
+                </view>
+                <icon class="iconfont icon-closed pd1" wx:if="{{clearIcon.bankAccount && focus.bankAccount}}" data-name="bankAccount" catchtap="clearText"></icon>
+            </view>
+        </block>
+        <view class="more-cinvo-info" wx:if="{{!isShowMore && currentTab.type != 0}}" bindtap="handleShowMore">
+            <text>地址，电话，开户行，银行账号</text>
+            <icon class="iconfont icon-drop-down"></icon>
+        </view>
+        <view class="more-cinvo-info" wx:if="{{isShowMore  && currentTab.type != 0}}" bindtap="handleShowMore">
+                <text>收起</text>
+                <icon class="iconfont icon-drop-up"></icon>
+        </view>
+    </view>
+    <view class="c-invo-support" style="margin-top:{{footMargin}}rpx"></view>
+    <view class="c-invo-btn" catchtap="handleOnSubmit">
+        <view class="c-invo-btndesc">立即申请</view>
+    </view>
+</view>
+
+<!-- 发票完成页 -->
+<view wx:if="{{visible}}">
+    <view class="invoice-bg">
+        <view class="c-succ-header-new-yoyo">
+            <view style="display: flex; align-items: center">
+                <icon class="wechat-font-success"></icon>
+                <text class="success-desc">开票申请已提交，请通知酒店前台开票</text>
+            </view>
+            <text bindtap="clickInvoiceDetail" class="invoice-btn">发票详情</text>
+        </view>
+        <view wx:if="{{unionVip.communityQrCodeUrl && unionVip.telephone}}" class="reserve-wrapper">
+            <view>
+                <text class="reserve-title">如需预约取票，请通过以下方式联系酒店哦！</text>
+            </view>
+            <view class="reserve-item wechat-reserve">
+                <view>
+                    <view class="reserve-way mb-4">
+                        方式一：
+                    </view>
+                    <view class="reserve-item-title mb-4">
+                        添加酒店企业微信预约
+                    </view>
+                    <view class="reserve-remark mb-4">
+                        长按右图识别二维码
+                    </view>
+                </view>
+                <view class="reserve-qrcode">
+                    <image bindlongpress="handleClickQrcode" show-menu-by-longpress="true" src="{{unionVip.communityQrCodeUrl}}" />
+                </view>
+            </view>
+            <view class="reserve-item phone-reserve">
+                <view>
+                    <view class="reserve-way">
+                        方式二：
+                    </view>
+                    <view class="reserve-item-title">
+                        电话快捷预约
+                    </view>
+                </view>
+                <view class="reserve-call mr-4">
+                    <button bindtap="calltoreserve">点击拨打</button>
+                </view>
+            </view>
+        </view>
+        <view wx:elif="{{unionVip.telephone}}" class="only-phone-wrapper">
+            <view>
+                <view class="reserve-title">如需预约取票，请联系酒店沟通</view>
+                <view class="reserve-remark">电话预约，省心又便捷</view>
+            </view>
+
+            <view class="reserve-call">
+                <button bindtap="calltoreserve">点击拨打</button>
+            </view>
+        </view>
+        <view class="yoyo-card-wrapper">
+            <view class="yoyo-card-bg" bindtap="handleClickYoyo" style="background-image: url({{unionVip.yoyocardBg}})">
+                <view class="yoyocard-rights-wrapper">
+                    <view wx:for="{{unionVip.yoyoRights}}" wx:for-item="yoyoRight" class="yoyocard-rights">
+                        <image class="yoyocard-rights-icon" src="{{yoyoRight.icon}}" />
+                        <text class="yoyocard-rights-text">{{yoyoRight.title}}</text>
+                    </view>
+                </view>
+            </view>
+            <button wx:if="{{unionVip.hasNextTrip}}" bindtap="handleClickYoyoBtns" data-functionid="16"
+                class="yoyo-card-btn">会员价订下一程</button>
+        </view>
+    </view>
+    <!-- 查看发票信息 -->
+    <block wx:if="{{invoiceAlert}}">
+        <view class="mask"></view>
+        <view class="invoice-alert" catchtouchmove="true">
+            <view class="title">发票信息</view>
+            <view class="invoice-body">
+                <view class="detail-wrap"><text class="invoice-title">抬头</text><text class="invoice-detail">{{successInfo.invoiceTitle}}</text></view>
+                <view class="detail-wrap"><text class="invoice-title">税号</text><text class="invoice-detail">{{successInfo.taxPayNumber}}</text></view>
+                <view wx:if="{{successInfo.phoneNumber}}" class="detail-wrap"><text class="invoice-title">手机</text><text class="invoice-detail">{{successInfo.phoneNumber}}</text></view>
+                <view wx:if="{{successInfo.email}}" class="detail-wrap"><text class="invoice-title">邮箱</text><text class="invoice-detail">{{successInfo.email}}</text></view>
+            </view>
+            <view class="invoice-close close" bindtap="closeDialog"></view>
+        </view>
+    </block>
+</view>
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

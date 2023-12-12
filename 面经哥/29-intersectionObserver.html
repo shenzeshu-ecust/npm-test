@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        img {
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        
+        const arr = new Array(100).fill(0)
+        arr.forEach((v, i) => {
+            const pic = document.createElement('img')
+
+            if(i < 1) {
+                pic.src = 'https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1b987104c03d43f79d29e4835eae1753~tplv-k3u1fbpfcp-watermark.image?'
+            } 
+            pic.setAttribute('data-src', 'https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1b987104c03d43f79d29e4835eae1753~tplv-k3u1fbpfcp-watermark.image?')
+            document.body.append(pic)
+        })
+       
+
+        const imgList = [...document.querySelectorAll('img')]
+        const options = {
+            root: null, // 所监听对象的具体祖先元素。如果未传入值或值为null，则默认使用顶级文档的视窗(一般为html)。
+            rootMargin: "0px 0px 0px 0px", // 计算交叉时添加到根(root)边界盒bounding box的矩形偏移量， 可以有效的缩小或扩大根的判定范围从而满足计算需要。所有的偏移量均可用像素(px)或百分比(%)来表达, 默认值为"0px 0px 0px 0px"。
+            thresholds: 0, // 个包含阈值的列表, 按升序排列, 列表中的每个阈值都是监听对象的交叉区域与边界区域的比率。当监听对象的任何阈值被越过时，都会触发callback。默认值为0。
+        }
+        var io = new IntersectionObserver((entries) => {
+            console.log(entries)
+            entries.forEach(item => {
+                // isIntersecting是一个Boolean值，判断目标元素当前是否可见
+                if (item.isIntersecting) {
+                    console.log('出现了')
+                    item.target.src = item.target.dataset.src
+                    // 图片加载后即停止监听该元素
+                    io.unobserve(item.target)
+                }
+            })
+        }, options)
+
+        // observe遍历监听所有img节点
+        imgList.forEach(img => io.observe(img))
+
+    </script>
+</body>
+
+</html>

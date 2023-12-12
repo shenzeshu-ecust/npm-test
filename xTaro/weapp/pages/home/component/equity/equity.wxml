@@ -1,0 +1,51 @@
+<view class="equity-wrap {{ equityFlag ? equityData.level : 'hidden' }}" animation="{{ animationData }}" bindtransitionend="equityHidden">
+  <view class="equity-box" bindtouchstart="touchStart" bindtouchend="touchEnd">
+    <view class="equity-info">
+      <view class="equity-img">
+        <image v-if="{{equityData.avatar}}" mode="aspectFit" class="equity-img-detail" src="{{equityData.avatar}}"></image>
+      </view>
+      <view class="equity-user">
+        <view class="equity-name">
+          <view class="equity-name-txt">{{equityData.nickname}}</view>
+          <view class="equity-tag"></view>
+        </view>
+        <view class="equity-progress">
+          <view class="equity-progress-completed" style="width: {{equityData.levelUpPercent}}%;"></view>
+        </view>
+        <view class="equity-grade">{{equityData.nextLevelDescription}}</view>
+      </view>
+    </view>
+    <view class="equity-discount">
+      <view class="equity-discount-hotel">
+        <view class="equity-discount-txt">优享会</view>
+        <view class="equity-discount-detail">
+          <view class="equity-discount-num">{{equityData.hotelDiscount}}</view>
+          <view class="equity-discount-unit">折</view>
+          <view class="equity-discount-sort">酒店</view>
+        </view>
+      </view>
+      <view class="equity-discount-coupon">
+        <view class="equity-discount-txt">优惠券</view>
+        <view class="equity-discount-detail">
+          <view class="equity-discount-num">{{equityData.couponCount}}</view>
+          <view class="equity-discount-unit">张</view>
+        </view>
+      </view>
+      <view class="equity-discount-integral">
+        <view class="equity-discount-txt">积分加速</view>
+        <view class="equity-discount-detail">
+          <view class="equity-discount-num">{{equityData.pointsFactor}}</view>
+          <view class="equity-discount-unit">倍</view>
+        </view>
+      </view>
+    </view>
+    <view class="equity-project">
+      <view class="equity-project-item" wx:for="{{equityData.equityTitles}}" wx:key="description">
+        <image v-if="{{item.icon}}" mode="aspectFit" class="equity-project-img" src="{{item.icon}}"></image>
+        <view class="equity-project-txt">{{item.description}}</view>
+      </view>
+      <view class="equity-project-more">等<text class="equity-project-more-txt">{{equityData.equityCount}}</text>项特权</view>
+    </view>
+    <view class="equity-message">会员您好，欢迎来到携程</view>
+  </view>
+</view>

@@ -1,0 +1,26 @@
+<nav-bar navbar-data="{{navbarData}}" bindback="onBack"></nav-bar>
+<!--index.wxml-->
+<block>
+<view class="wrapbox">
+    <view class="box-form">
+        <label class="inputitem" for="idNameInput">
+            <input id="idNameInput" value="{{inputKeys[1]}}" data-key="1" class="police-input {{(focusKey & 1) === 1 ? 'input-focused':''}}" disabled="{{weakAuthData ? true : false}}" type="text" maxlength="20" bindinput="bindKeyInput" bindfocus="focusAction" bindblur="blurAction" cursor-spacing="30" />
+            <view class="inputname-box">姓名</view>
+        </label>
+        <label class="inputitem {{(focusKey & 2) == 2 ? 'input-focused':''}}">
+            <view class="inputname-box">身份证</view>
+            <input value="{{inputKeys[2]}}" disabled="{{weakAuthData ? true : false}}" 
+            bindfocus="focusAction" class="police-input" type="idcard" maxlength="20" bindblur="blurAction" cursor-spacing="30" data-key="2" bindinput="bindKeyInput" />
+        </label>
+        
+        <view class="boxform-btnbox">
+            <block wx:if="{{submiting}}">
+                <button class="boxform-btn boxform-enbtn" bindtap="doSubmit">确定</button>
+            </block>
+            <block wx:else>
+                <button class="boxform-btn">确定</button>
+            </block>
+        </view>
+    </view>
+</view>
+</block>

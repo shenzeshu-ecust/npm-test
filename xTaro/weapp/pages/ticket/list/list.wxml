@@ -1,0 +1,98 @@
+<view class="page">
+<import src="./template/float.wxml"/>
+<template is="floatTest" data="{{...marketFloatData}}"/>
+<view class="main">
+    <view class="serchbar-container">
+        <form bindsubmit="searchAction">
+            <view class="wx-s-h">
+                <view class="city-s" bindtap="forwardCitylist">
+                    <view class="city-name-box ellipsis" >{{searchBar.districtname}}</view>
+                    <view class="city-arrow ttd-icon-arrow" >
+                    </view>
+                </view>
+                <view class="wx-search_wrap ttd-list-box">
+                    <view class="search_box clear-input-box">
+                        <input class="search_input search_input2 abs_size" name="input" type="text" confirm-type="search" placeholder="景点名称 / 目的地" placeholder-style="color:#b2b2b2;"
+                               bindinput="inputAction" bindblur="blurAction" bindconfirm="searchAction" value="{{searchBar.inputValue}}"/>
+                        <view class="cui-focus-close" hidden="{{searchBar.closeIconHidden}}" bindtap="clearInputAction">×</view>
+                    </view>
+                </view>
+                <button formType="submit" class="wx-s-b" plain>搜索</button>
+            </view>
+        </form>
+    </view>
+    <view class="l-con" hidden="{{containerData.listloopHidden}}">
+        <scroll-view  class="s-v"  scroll-y="true" lower-threshold="200" bindscrolltolower="lower" scroll-top="{{scrollTop}}">
+            <view class="container" data-id="{{item.id}}" bindtap="gotoList" wx:for="{{containerData.viewspots}}" wx:key="" wx:for-item="item">
+                <view class="g-pro-list_pl5 border-item">
+                    <view class="g-pro-list-img">
+                        <image src="{{item.cimgurl}}" class="g-pro-list-image fade-in"></image>
+                    </view>
+                    <view class="g-p-l-i">
+                        <text class="g-title">{{item.name}}</text>
+                        <view class="g-list-info">
+                            <view class="flex-left">
+                                <view class="g-area ellips"><text>{{item.cityname}}</text> <block wx:if="{{item.star}}"><text class="startext">{{item.star}}</text></block></view>
+
+                            </view>
+
+                            <view wx:if="{{item.minPriceType===0&&item._promotionInfo.reducedAmountText}}" class="g-old-price" style="text-decoration:none;">
+                                <text>{{item._promotionInfo.reducedAmountText}}</text>
+                            </view>
+                            <view wx:elif="{{item.minPriceType===2}}" class="g-old-price" style="text-decoration:none;">
+                                <text>参考价格</text>
+                            </view>
+                            <view wx:elif="{{item.minPriceType===3}}" class="g-old-price" style="text-decoration:none;">
+                                <text>参考价格</text>
+                            </view>
+                        </view>
+                        <view class="g-list-grade">
+                            <view class="g-score"><block wx:if="{{item.cmtscore}}">{{item.cmtscore}}</block></view>
+
+                            <view wx:if="{{item.minPriceType===0}}" class="u-pro-price">
+                                <text class="u-pro-price u-pro-price-icon">¥</text>
+                                <text class="u-pro-price u-pro-price-text">{{item._promotionInfo.price}}</text>
+                                <text class="u-start">起</text>
+                            </view>
+                            <view wx:elif="{{item.minPriceType===1}}" class="u-pro-price">
+                                <text class="u-start">免费</text>
+                            </view>
+                            <view wx:elif="{{item.minPriceType===2}}" class="u-pro-price">
+                                <text class="u-pro-price u-pro-price-icon">¥</text>
+                                <text class="u-pro-price u-pro-price-text">{{item._promotionInfo.price}}</text>
+                                <text wx:if="{{!item.sameReferencePrice}}" class="u-start">起</text>
+                            </view>
+                            <view wx:elif="{{item.minPriceType===3}}" class="u-pro-price">
+                                <text class="u-pro-price u-pro-price-icon">¥</text>
+                                <text class="u-pro-price u-pro-price-text">{{item._promotionInfo.price}}</text>
+                                <text wx:if="{{!item.sameReferencePrice}}" class="u-start">起</text>
+                            </view>
+                            <!--minPriceType为4时啥都不展-->
+                            <view wx:elif="{{item.minPriceType===5}}" class="u-pro-price">
+                                <text class="u-start">免费</text>
+                            </view>
+                        </view>
+                        <view class="view-tags">
+                            <view class="u-theme-tag">
+                                <view wx:for="{{item._tags}}" wx:for-item="tag" wx:key=""
+                                      class="view-wxtags u-theme-tag">
+                                    <text class="ttd-tag {{tag.orange?'ttd-tag-orange':'ttd-tag-blue'}}">{{tag.tname}}</text>
+                                </view>
+                            </view>
+                            <view class="view-wxtags u-theme-tag" wx:for="{{item.tagwxs}}" wx:key="" wx:for-item="innerItem">
+                                <text class="ttd-tag wxtags">{{innerItem.name}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view wx:if="{{showBtn}}" bindtap="goRedirect"><view class="icon_fixed pt_list_icon"></view></view>
+    <view class="no-result" hidden="{{containerData.noresultHidden}}">
+        <view class="no-result-warn">!</view>
+        <text class="no-result-text">抱歉，没有找到符合条件的结果</text>
+        <text class="no-result-text">请修改条件重新查询</text>
+    </view>
+</view>
+</view>

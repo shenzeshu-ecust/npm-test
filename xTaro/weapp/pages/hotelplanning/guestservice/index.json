@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "客房送物",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar"
+  },
+  "disableScroll": true,
+  "enablePullDownRefresh": false,
+  "initialRenderingCache": "static"
+}

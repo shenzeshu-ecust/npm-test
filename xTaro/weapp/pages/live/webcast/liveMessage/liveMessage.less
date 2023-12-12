@@ -1,0 +1,397 @@
+@import "../common.less";
+@import "./livePushShopCard.less";
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+  background: transparent;
+  display: none;
+}
+
+//  根节点
+.messageRoot {
+  width: 500rpx;
+  display: flex;
+  flex-direction: column;
+  margin-left: 24rpx;
+  position: relative;
+}
+
+// 消息模块
+.message-container {
+  position: relative;
+  // margin-bottom: 10rpx;
+  scroll-view {
+    max-height: 298rpx;
+    width: 480rpx;
+    overflow: hidden;
+  }
+  // &.on {
+  //   scroll-view {
+  //     animation: smallCardView 0.1s 1 linear forwards;
+  //     -webkit-animation: smallCardView 0.1s 1 linear forwards;
+  //     @keyframes smallCardView {
+  //       0% {
+  //         height: 448rpx;
+  //       }
+
+  //       100% {
+  //         height: 298rpx;
+  //       }
+  //     }
+  //   }
+  // }
+  // &.hide {
+  //   scroll-view {
+  //   height: 298rpx;
+  //     animation: largeCardView 0.4s 0.2s 1 linear forwards;
+  //     -webkit-animation: largeCardView 0.4s 0.2s 1 linear forwards;
+  //     @keyframes largeCardView {
+  //       0% {
+  //         height: 298rpx;
+  //       }
+
+  //       100% {
+  //         height: 448rpx;
+  //       }
+  //     }
+  //   }
+  // }
+  .notice {
+    background-color: rgba(0, 0, 0, 0.3);
+    font-size: 28rpx;
+    border-radius: 12rpx;
+    padding: 20rpx;
+    color: #99cefb;
+    margin-bottom: 12rpx;
+  }
+  .tips {
+    position: absolute;
+    bottom: 0;
+    opacity: 0.96;
+    background-color: #ffffff;
+    border-radius: 24rpx;
+    color: #0086f6;
+    font-size: 22rpx;
+    padding: 8rpx 16rpx 8rpx 24rpx;
+    align-items: center;
+
+    image {
+      height: 24rpx;
+      width: 24rpx;
+      vertical-align: middle;
+    }
+  }
+}
+// 消息item
+
+.message-item {
+  // background-color: red;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 30rpx;
+  margin: 0 0 12rpx 0;
+  line-height: 36rpx;
+  word-break: break-all;
+  font-size: 26rpx;
+  padding: 7rpx 24rpx 7rpx 24rpx;
+  overflow: hidden;
+  .headView {
+    float: left;
+    height: 36rpx;
+    width: 36rpx;
+    border-radius: 50%;
+    vertical-align: middle;
+    background-image: url(https://pages.c-ctrip.com/livestream/video/userAvat-default.png);
+   // background-position: 50%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+   // background-color: #d8d8d8;
+  }
+  .user-level {
+    float: left;
+    height: 32rpx;
+    width: 86rpx;
+    vertical-align: middle;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    padding-right: 8rpx;
+  }
+  
+  .userName1 {
+    display: inline;
+    color: #bfe0fc;
+    font-size: 28rpx;
+    line-height: 36rpx;
+    &.replay{
+      color: rgb(255, 169, 95);
+      max-width: 100%;
+    }
+    .userNameMark1 {
+      color: #bfe0fc;
+      font-size: 28rpx;
+      // float: left;
+      line-height: 36rpx;
+      height: 36rpx;
+      display: inline;
+      &.replay{
+        color: rgb(255, 169, 95);
+      }
+    }
+  
+    .message1 {
+      display: inline;
+      color: #ffffff;
+      font-size: 28rpx;
+      word-break: break-all;
+    }
+  }
+
+  .userName {
+    color: #bfe0fc;
+    font-size: 28rpx;
+    float: left;
+    line-height: 36rpx;
+    height: 36rpx;
+    max-width: 75%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &.replay{
+      color: rgb(255, 169, 95);
+    }
+  }
+
+  .userNameMark {
+    color: #bfe0fc;
+    font-size: 28rpx;
+    float: left;
+    line-height: 36rpx;
+    height: 36rpx;
+    &.replay{
+      color: rgb(255, 169, 95);
+    }
+  }
+
+  .message {
+    display: inline;
+    color: #ffffff;
+    font-size: 28rpx;
+    word-break: break-all;
+  }
+ 
+  .message-giftinfo {
+    display: inline-block;
+    height: 36rpx;
+    font-size: 0;
+    vertical-align: middle;
+  }
+  .message-gift {
+    margin-left: 4rpx;
+    width: 36rpx;
+    height: 36rpx;
+    vertical-align: middle;
+    float: left;
+  }
+  .message-giftcount {
+    margin-left: 12rpx;
+    font-family: PingFangSC-Medium;
+    font-size: 26rpx;
+    color: #ffffff;
+    line-height: 34rpx;
+  }
+}
+
+// 顶部消息
+.topView {
+  position: absolute;
+  z-index: 1;
+  top: -70rpx;
+  &.on {
+    animation: showTopView 0.3s 1 linear forwards;
+    -webkit-animation: showTopView 0.3s 1 linear forwards;
+
+    @keyframes showTopView {
+      0% {
+        transform: translateX(-100%);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &.hide {
+    animation: hideTopView 0.3s 1 linear forwards;
+    -webkit-animation: hideTopView 0.3s 1 linear forwards;
+
+    @keyframes hideTopView {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+    }
+  }
+  .message-item {
+    padding: 8rpx 16prx !important;
+    line-height: 32rpx !important;
+    font-size: 24rpx !important;
+    background-image: linear-gradient(
+      270deg,
+      #ff8b41 0%,
+      #ff6633 100%,
+      #ff6633 100%
+    ) !important;
+    margin-bottom: 0 !important;
+    .userName {
+      float: left;
+      max-width: 120rpx;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+    .message {
+      padding-left: 4rpx;
+    }
+  }
+}
+
+//顶部礼物消息
+.topViewGift {
+  position: absolute;
+  z-index: 1;
+  top: -262rpx;
+  width: 420rpx;
+  height: 192rpx;
+  .gift-messageitem {
+    display: flex;
+    align-items: flex-end;
+    position: absolute;
+    left: 0;
+    margin-bottom: 8rpx;
+    &.on {
+      animation: showTopView 0.3s 1 linear forwards;
+      -webkit-animation: showTopView 0.3s 1 linear forwards;
+
+      @keyframes showTopView {
+        0% {
+          transform: translateX(-100%);
+          opacity: 1;
+        }
+
+        100% {
+          transform: translateX(0);
+        }
+      }
+    }
+
+    &.hide {
+      animation: hideTopView 0.3s 1 linear forwards;
+      -webkit-animation: hideTopView 0.3s 1 linear forwards;
+
+      @keyframes hideTopView {
+        0% {
+          transform: translateX(0%);
+        }
+
+        100% {
+          transform: translateX(100rpx);
+          opacity: 0;
+        }
+      }
+    }
+    .gift-messageLeft {
+      padding: 8rpx;
+      background-image: linear-gradient(
+        90deg,
+        rgba(51, 51, 51, 0.6) 0%,
+        rgba(51, 51, 51, 0.3) 100%
+      );
+      border-radius: 42rpx;
+      display: flex;
+      flex-direction: row;
+      .gift-headView {
+        width: 68rpx;
+        height: 68rpx;
+        border-radius: 50%;
+      }
+      .gift-userinfo {
+        margin-left: 12rpx;
+        max-width: 120rpx;
+        height: 68rpx;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        .g-name {
+          font-family: PingFangSC-Medium;
+          font-size: 24rpx;
+          color: #ffffff;
+          line-height: 30rpx;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .g-giftname {
+          margin-top: 4rpx;
+          font-family: PingFangSC-Medium;
+          font-size: 18rpx;
+          color: rgba(255, 255, 255, 0.6);
+          line-height: 20rpx;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      .gift-pic {
+        width: 64rpx;
+        height: 64rpx;
+        margin-right: 8rpx;
+        margin-left: 12rpx;
+      }
+    }
+    .gift-combox {
+      margin-left: 8rpx;
+      font-family: 20th_bold;
+      font-size: 30rpx;
+      color: #ffffff;
+      text-align: center;
+      line-height: 38rpx;
+      text-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+    }
+    .gift-combonumber {
+      margin-left: 8rpx;
+      font-family: 20th_bold1102;
+      font-size: 60rpx;
+      color: #ffffff;
+      text-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+      line-height: 1;
+    }
+  }
+}
+
+
+
+.card-animation-container {
+  margin-top: 12rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-animation-container .card-item-animation .card-item-img{
+  width: 386rpx;
+  height: 210rpx;
+  position: relative;
+  padding: 16rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+

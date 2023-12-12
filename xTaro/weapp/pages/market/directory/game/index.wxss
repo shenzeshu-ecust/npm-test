@@ -1,0 +1,723 @@
+
+@import './tpl/float.wxss';
+@import './dynamic.wxss';
+image{
+  width: 100%;
+  height: 100%;
+}
+.f-bolder{
+  font-weight: bolder;
+}
+.ellipsis{
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow-x:hidden;
+}
+.index-wrap{
+  position: relative;
+}
+.index-wrap.fullscreen{
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+.main{
+  position: relative;
+  width: 100%;
+  height: 1049rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/index_bg6.png') 0 0/750rpx no-repeat;
+}
+.main .btn-icon{
+  position: absolute;
+  bottom: 90rpx;
+  width: 98rpx;
+  height:106rpx;
+}
+.main .btn-icon.rule{
+  left: 12rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/btn-rule.png') 0 0/98rpx no-repeat;
+}
+.main .btn-icon.notice{
+  left: 128rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/bell-bg2.png') 0 0/98rpx no-repeat;
+}
+.main .btn-icon.notice .bell-big{
+  position: absolute;
+  top: 2rpx;
+  left: 16rpx;
+  width: 65rpx;
+  height: 67rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/bell-big.png') 0 0/65rpx no-repeat;
+  animation:bellBig 4s linear infinite;
+  transform-origin:top;
+}
+@keyframes bellBig{
+  0%,8%,16%,24%,100%{
+    transform:rotate(0deg);
+  }
+  4%,20%{
+    transform:rotate(-10deg);
+  }
+  12%{
+    transform:rotate(10deg);
+  }
+}
+.main .btn-icon.notice .bell-small{
+  position: absolute;
+  bottom: 26rpx;
+  left: 36rpx;
+  width: 26rpx;
+  height: 26rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/bell-small.png') 0 0/26rpx no-repeat;
+  animation:bellSmall 4s linear infinite;
+  transform-origin:50% -50rpx;
+}
+@keyframes bellSmall{
+  0%,8%,16%,24%,100%{
+    transform:rotate(0deg);
+  }
+  4%,20%{
+    transform:rotate(-20deg);
+  }
+  12%{
+    transform:rotate(20deg);
+  }
+}
+.main .btn-icon.notice .bell-tips{
+  position: absolute;
+  top: 0rpx;
+  right: 16rpx;
+  width: 28rpx;
+  height: 28rpx;
+  background: url(' https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/bell-tips.png') 0 0/28rpx no-repeat;
+  animation:bellScale 1.5s linear forwards;
+  transform:scale(0);
+}
+@keyframes bellScale{
+  0%,50%{
+    transform:scale(0);
+  }
+  55%,100% {  
+	  transform:scale(1);
+  }
+}
+/* .scroll-wrap{
+  position: absolute;
+  top: 166rpx;
+  left: 30rpx;
+  width: 330rpx;
+  height: 50rpx;
+}
+.scroll-wrap .scroll-item{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.scroll-item .s-pic{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 42rpx;
+  height: 42rpx;
+  border-radius: 50%;
+  overflow:hidden;
+  border: 4rpx solid #fff;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/default.png') 0 0/42rpx no-repeat;
+}
+.scroll-item .s-log{
+  font-size: 20rpx;
+  color: #fff;
+  width: 100%;
+  height: 42rpx;
+  padding-left: 60rpx;
+  border-radius: 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0,0,0,0.5);
+}
+.scroll-item .s-log .s-prize{
+  max-width: 160rpx;
+} */
+.content{
+  position: absolute;
+  /* top: 990rpx; */
+  left: 0;
+  width: 100%;
+  border-radius: 30rpx;
+  background-color: #f7f7f7;
+  padding-bottom: 160rpx;
+}
+.content .my-energy{
+  width: 100%;
+  height: 166rpx;
+  display: flex;
+  align-items: center;
+}
+.content .my-energy .my-head{
+  width: 100rpx;
+  height: 100rpx;
+  padding: 0;
+  margin: 0 20rpx 0 40rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/default.png') 0 0/100rpx no-repeat;
+}
+.content .my-energy .my-head:after{
+  display: none;
+}
+.content .my-energy .energy{
+  flex: 1;
+  
+}
+.row-center{
+  display: flex;
+  align-items: center;
+}
+.row-between{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 38rpx;
+  font-weight: bold;
+  color: #000;
+  margin: 0 30rpx;
+}
+.row-between .row-title{
+  font-weight: bolder;
+  flex: 1;
+}
+.content .my-energy .energy .e-num{
+  font-family: PingFangSC-Medium;
+  font-size: 46rpx;
+  color: #333;
+  line-height: 1.2;
+}
+.content .my-energy .energy .e-num.e-login{
+  font-size: 30rpx;
+  line-height: 1.4;
+  font-weight: bold;
+}
+.content .my-energy .energy .e-txt{
+  font-family: PingFangSC-Regular;
+  font-size: 22rpx;
+  color: #333;
+  margin: 8rpx 0 4rpx;
+}
+.content .my-energy .energy .e-detail{
+  font-size: 22rpx;
+  color: #666;
+  width: 60rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  text-align:center;
+  border: 1px solid #666;
+  border-radius: 16rpx;
+  margin-left: 8rpx;
+}
+/* .num-list{
+  position: relative;
+  width: 100%;
+  height: 12rpx;
+}
+.num-list.one{
+  border-radius: 0 6rpx 6rpx 0;
+  background-image: linear-gradient(270deg, #FFDF40 0%, #FF7C2B 100%);
+}
+.num-list .n-item{
+  position: absolute;
+  top: -18rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #B0B0B0;
+  width: 80rpx;
+  height: 36rpx;
+  text-align: center;
+  background: #E7E7E7;
+  border: 1rpx solid #D8D8D8;
+  border-radius: 17rpx;
+}
+.num-list .n-item.one{
+  left: 87rpx;
+}
+.num-list .n-item.two{
+  left: 307rpx;
+}
+.num-list .n-item.three{
+  left: 527rpx;
+} */
+
+.prize-list{
+  width: 100%;
+  height: 440rpx;
+  overflow-x: auto;
+  display: flex;
+}
+.prize-list .p-item-wrap{
+  flex-shrink: 0;
+  width: 100%;
+  height: 440rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx 0 30rpx;
+  box-sizing: border-box;
+  overflow: visible;
+}
+.prize-list .p-item{
+  position: relative;
+  width: 223rpx;
+  height: 390rpx;
+  box-shadow: 0 8rpx 20rpx 0 rgba(36,84,159,0.10);
+  border-radius: 10rpx;
+  background-color: #fff;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  margin-right: 12rpx;
+  overflow: hidden;
+}
+.prize-list .p-item .p-tag{
+  position: absolute;
+  top: 0;
+  left: 15rpx;
+  width: 48rpx;
+  height: 40rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/prize-tag.png') 0 0/48rpx no-repeat;
+}
+/* .prize-list .p-item-margin{
+  width:20rpx;
+  height:330rpx;
+  flex-shrink:0;
+} */
+.prize-list .p-item .p-pic{
+  width: 100%;
+  height: 223rpx;
+  background-color: #f8f8f8;
+}
+.prize-list .p-item .p-name{
+  font-size: 26rpx;
+  color: #333333;
+  margin: 12rpx 14rpx 10rpx 14rpx;
+  max-width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;  
+  -webkit-box-orient: vertical;
+}
+.prize-list .p-item .p-del{
+  font-size: 20rpx;
+  color: #aaa;
+  font-weight: 300;
+  text-decoration: line-through;
+  margin-left: 14rpx;
+}
+.prize-list .p-item .p-num{
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  height: 60rpx;
+  margin-left:14rpx;
+}
+.prize-list .p-item .p-num .p-icon{
+  width: 33rpx;
+  height: 33rpx;
+  margin-right: 4rpx;
+  margin-bottom: 4rpx;
+  border-radius: 50%;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/icon-point.png') 0 0/33rpx no-repeat;
+}
+.prize-list .p-item .p-num .p-txt{
+  font-size: 22rpx;
+  color: #FF7F44;
+  font-weight: bold;
+}
+.prize-list .p-item .p-num .p-txt-big{
+  font-size: 34rpx;
+  color: #FF7F44;
+  font-weight: 600;
+  margin-right: 4rpx;
+}
+.prize-list .p-item .btn-change{
+  font-size: 24rpx;
+  width: 154rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border-radius: 30rpx;
+  margin: 12rpx auto 0;
+}
+.prize-list .p-item .btn-change.blue{
+  color: #fff;
+  width: 174rpx;
+  height: 60rpx;
+  line-height: 52rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/btn-exchange.png') 0 0/174rpx no-repeat;
+}
+.prize-list .p-item .btn-change.white{
+  color: #7B7B7B;
+  border: 1px solid #B5B5B5;
+}
+.prize-list .p-item .btn-change.grey{
+  color: #fff;
+  background-color: #C7C7C7;
+  margin-top: 18rpx;
+}
+/* .prize-list .p-item .pic-more{
+  width: 99rpx;
+  height: 91rpx;
+  margin: 75rpx auto 20rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/more.png') 0 0/99rpx no-repeat;
+}
+.prize-list .p-item .more-prize{
+  font-size: 20rpx;
+  color: #999999;
+  text-align: center;
+}
+.prize-list .p-item .see-more{
+  font-size: 24rpx;
+  color: #333333;
+  text-align: center;
+}
+.prize-list .p-item .see-more .icon-more{
+  display: inline-block;
+  width: 22rpx;
+  height: 22rpx;
+  line-height: 22rpx;
+  border-radius: 50%;
+  margin-left: 4rpx;
+  background: #49BAFF;
+}
+.prize-list .p-item .see-more .icon-more::before{
+  content: "";
+  display: inline-block;
+  width: 8rpx;
+  height: 8rpx;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  margin: 0 4rpx 2rpx 0;
+  transform: rotate(135deg);
+} */
+.bar-list{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -6rpx;
+}
+.bar-list .bar-item{
+  width:8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background: #ccc;
+  margin-right: 8rpx;
+}
+.bar-list .bar-item.active{
+  width: 20rpx;
+  background: #FE901B;
+  border-radius: 4rpx;
+}
+.ad-list{
+  width: 690rpx;
+  margin: 50rpx auto 0;
+  height: 140rpx;
+  box-sizing: border-box;
+}
+.topic-title{
+  font-size: 38rpx;
+  font-weight: bolder;
+  color: #000;
+  margin: 40rpx 30rpx 22rpx;
+}
+.topic-more{
+  font-size: 26rpx;
+  color: #999;
+}
+.topic-arrow{
+  width: 12rpx;
+  height: 12rpx;
+  border-top: 1px solid #999;
+  border-left: 1px solid #999;
+  margin-left: 4rpx;
+  margin-top: 1px;
+  transform: rotate(135deg);
+}
+/* .task-list{
+  padding: 0 30rpx;
+  margin: 0 30rpx;
+  width: 690rpx;
+  background: #FFF;
+  box-shadow: 0 8rpx 20rpx 0 rgba(36,84,159,0.10);
+  border-radius: 14rpx;
+  box-sizing: border-box;
+}
+.task-item{
+  height: 190rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #EFEFEF;
+}
+.task-item .t-pic{
+  flex-shrink:0;
+  width: 90rpx;
+  height: 90rpx;
+  margin-right: 25rpx;
+  overflow: hidden;
+}
+.task-item .t-data{
+  flex: 1;
+
+}
+.task-item .t-data .t-name{
+  font-size: 34rpx;
+  color: #333;
+  font-weight: bold;
+  max-width: 350rpx;
+  margin-bottom: 10rpx;
+}
+.task-item .t-data .t-intro{
+  font-size: 26rpx;
+  color: #999;
+  max-width: 350rpx;
+}
+.task-item .t-info{
+  flex-shrink:0;
+  width: 160rpx;
+  text-align: center;
+}
+.task-item .t-info .t-tips{
+  font-size: 24rpx;
+  color: #FF7F44;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14rpx;
+}
+.task-item .t-info .t-tips .f-big{
+  font-size: 30rpx;
+}
+.task-item .t-info .t-tips .t-icon{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/icon-point.png') 0 0/30rpx no-repeat;
+}
+.task-item .t-info .t-btn{
+  font-size: 26rpx;
+  color: #FFF;
+  width: 160rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  box-shadow: 0 5rpx 10rpx 0 rgba(54,171,255,0.30);
+  border-radius: 31rpx;
+}
+.task-item .t-info .t-btn.todo{
+  background: linear-gradient(270deg, #4CBCFF 0%, #1590FF 100%);
+}
+.task-item .t-info .t-btn.doing{
+  background: linear-gradient(270deg, #FFB13D 0%, #FF6F29 100%);
+}
+.task-item .t-info .t-btn.done{
+  color: #B7B7B7;
+  background-color: #E7E7E7;
+  box-shadow: none;
+}
+.task-more{
+  font-size: 26rpx;
+  color: #999;
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  text-align: center;
+}
+.task-more::after{
+  content: "";
+  display: inline-block;
+  width: 15rpx;
+  height: 15rpx;
+  border-top: 1px solid #999;
+  border-left: 1px solid #999;
+  margin: 0 0 4rpx 4rpx;
+  transform: rotate(135deg);
+} */
+.recommend-list{
+  width: 100%;
+  padding: 0 18rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.r-item{
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  flex-shrink:0;
+  display: flex;
+  align-items: center;
+  width: 214rpx;
+  height: 116rpx;
+  margin: 0 12rpx 25rpx;
+  background: #FFF;
+  box-shadow: 0 8rpx 20rpx 0 rgba(36,84,159,0.10);
+  border-radius: 8rpx;
+}
+.r-item .bu-icon{
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 34rpx;
+  margin-right: 22rpx;
+}
+.r-item .bu-icon.m-r-15{
+  margin-right: 12rpx;
+}
+.banner{
+  width: 690rpx;
+  height: 184rpx;
+  margin: 24rpx auto 0;
+  border-radius: 10rpx;
+  overflow:hidden;
+}
+/* .pop-task-wrap{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 20rpx;
+  box-sizing: border-box;
+  background: #F7F7F7;
+  border-radius: 30rpx 30rpx 0 0;
+  z-index: 5;
+  transform: translateY(200%);
+  transition: transform .5s linear;
+}
+.pop-mask.open .pop-task-wrap{transform: translateY(0);}
+.pop-mask.close .pop-task-wrap{transform: translateY(200%);}
+.task-light{
+  position: fixed;
+  left: 68rpx;
+  bottom: -960rpx;
+  width: 614rpx;
+  height: 613rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/float/pop_light.png') 0 0/614rpx no-repeat;
+  z-index: 4;
+  transition: bottom .5s linear;
+  animation:light_rotate 5s linear infinite;
+}
+.pop-task-wrap .task-head{
+  position: absolute;
+  left: 107.5rpx;
+  top: -90rpx;
+  width: 535rpx;
+  height: 158rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/top-task.png') 0 0/535rpx no-repeat;
+}
+.pop-task-wrap .task-title{
+  font-size: 26rpx;
+  color: #CE9F64;
+  text-align: center;
+  margin: 43rpx auto 33rpx;
+}
+.pop-task-wrap .pop-close{
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  width: 50rpx;
+  height: 50rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/icon-close.png') 0 0/50rpx no-repeat;
+}
+
+.pop-task-wrap .pop-task-list{
+  width: 100%;
+  max-height: 680rpx; 
+  -webkit-overflow-scrolling: touch;
+}
+.pop-task-wrap .task-item{
+  margin-bottom: 20rpx;
+  padding: 0 30rpx;
+  height: 180rpx;
+  background: #FFFFFF;
+  border-radius: 16rpx;
+}*/
+/* .score-wrap{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  overflow-x: auto;
+  padding:0 12rpx 25rpx;
+}
+.score-wrap .s-item{
+  font-size: 28rpx;
+  color: #b5b5b5;
+  flex-shrink: 0;
+  padding: 0 28rpx;
+  border-right: 1rpx solid #D8D8D8;
+  box-sizing: border-box;
+}
+.score-wrap .s-item:last-of-type{
+  border-right: none;
+}
+.score-wrap .s-item.active{
+  font-size: 36rpx;
+  color: #168FFF;
+} */
+.dice-loading{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 750rpx;
+  height: 1334rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/diceLoading.gif') 0 0/750rpx no-repeat;
+  z-index: 3;
+}
+.dice-result{
+  position: absolute;
+  top:462rpx;
+  left:280rpx;
+  width: 169rpx;
+  height: 185rpx;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: 169rpx;
+  transform:scale(0);
+  z-index: 3;
+}
+.dice-result.number-1{
+  animation:dice_scale 0.6s ease forwards;
+  background-image: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/1.png');
+}
+.dice-result.number-2{
+  animation:dice_scale 0.6s ease forwards;
+  background-image: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/2.png');
+}
+.dice-result.number-3{
+  animation:dice_scale 0.6s ease forwards;
+  background-image: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/3.png');
+}
+.dice-result.number-4{
+  animation:dice_scale 0.6s ease forwards;
+  background-image: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/4.png');
+}
+.dice-result.number-5{
+  animation:dice_scale 0.6s ease forwards;
+  background-image: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/5.png');
+}
+.dice-result.number-6{
+  animation:dice_scale 0.6s ease forwards;
+  background-image: url('https://images3.c-ctrip.com/marketing/2020/08/xcx_energy/index/6.png');
+}
+@keyframes dice_scale{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.4);}
+  100%{transform:scale(1);}
+}
+@keyframes light_rotate_open{
+  0%{bottom: -330rpx;transform:rotate(0);}
+  100%{bottom: 320rpx;transform:rotate(360deg);}
+}

@@ -1,0 +1,15 @@
+<view class="container" hidden="{{hideOption}}">
+    <view class="desc">
+        <view class="val min {{min === minValue ? 'cur' : ''}}" style="width:{{sliderLength / 2 + 16}}rpx;">¥{{min}}</view>
+        <view class="val max {{0 === maxValue ? 'cur' : ''}}">¥{{max}}以上</view>
+    </view>
+    <view class="silder-area">
+        <view class="slider-item min" style="transform:translate3d({{16 + leftValue}}rpx,0,0);background-color:{{blockColor}};" data-type="L" catchtouchstart="_showBubble" catchtouchmove="_minMove" catchtouchend="_minMoveEnd" id="autotest_pricepage_startbutton"><view class="slider-shadow"/></view>
+        <view class="slider-item max" style="transform:translate3d({{sliderLength + rightValue - 24}}rpx,0,0);background-color:{{blockColor}};" data-type="R" catchtouchstart="_showBubble" catchtouchmove="_maxMove" catchtouchend="_maxMoveEnd" id="autotest_pricepage_endbutton"><view class="slider-shadow"/></view>
+        <view class="slider-body left" style="transform:translate3d({{ 16 + sliderLength / 2 }}rpx,0,0); width:{{leftValue}}rpx;background-color:{{backgroundColor}};"></view>
+        <view class="slider-body body" style="transform:translate3d({{leftValue + sliderLength / 2 + 16}}rpx,0,0); width:{{rightValue-leftValue}}rpx;background-color:{{selectedColor}};"></view>
+        <view class="slider-body right" style="transform:translate3d({{ rightValue + sliderLength / 2 + 16}}rpx,0,0); width:{{totalLength - rightValue}}rpx;background-color:{{backgroundColor}};"></view>
+        <view class="slider-body bubble" hidden="{{hideBubble}}" style="float:{{bubbleProp}};{{bubbleProp}}:{{bubbleValue}}rpx;">{{'¥' + activeValue}}</view>
+        <slot></slot>
+    </view>
+</view>

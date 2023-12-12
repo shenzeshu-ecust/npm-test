@@ -1,0 +1,786 @@
+.intelligent-order-detail {
+    /* height: 100vh; */
+    /* background: linear-gradient(90deg, rgb(0, 170, 255) 0%, rgb(0, 111, 255) 100%); */
+    background: -webkit-linear-gradient(top, #0086f6 20%, #eef1f6 80%);
+}
+
+.intelligent-order-detail .order-linear {
+    background: none;
+    margin-bottom: 0;
+}
+
+.intelligent-order-detail .order-ticbox {
+    background-color: #fff;
+    margin: 0 16rpx 22rpx;
+    position: relative;
+    border-radius: 6px;
+}
+
+.intelligent-order-detail .order-ticbox-hd {
+    background: #fff;
+
+    border-radius: 6px;
+}
+
+.intelligent-order-detail .order-ticbox-hd .top {
+    border-bottom: none;
+    display: block;
+    background: linear-gradient(
+        -180deg,
+        rgb(241, 247, 253) 0%,
+        rgb(255, 255, 255) 100%
+    );
+    border-radius: 6px;
+}
+
+.intelligent-order-detail .top-detail {
+    color: #0086f6;
+    font-family: PingFangSC-Regular;
+    font-size: 30rpx;
+    font-weight: normal;
+    position: absolute;
+    right: 40rpx;
+    top: 26rpx;
+}
+
+.intelligent-order-detail .top-detail .decoration {
+    border-radius: 0px 0px;
+    border-left: 0.5px solid #979797;
+    height: 20rpx;
+    /* width: 2rpx; */
+    margin: 0 16rpx;
+    display: inline-block;
+}
+
+.intelligent-order-detail .decoration-cord {
+    background: linear-gradient(
+        -180deg,
+        rgb(243, 248, 255) 0%,
+        rgb(227, 233, 242) 100%
+    );
+    border-radius: 4px 4px 4px 4px;
+    height: 44rpx;
+    width: 12rpx;
+    position: absolute;
+    bottom: 0;
+    transform: translate(0, 75%);
+    left: 40rpx;
+    z-index: 1;
+}
+
+.intelligent-order-detail .decoration-cord:last-child {
+    left: unset;
+    right: 40rpx;
+}
+
+.intelligent-order-detail .show-more-btn {
+    margin: 20rpx auto;
+    color: #999999;
+    width: 100%;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    font-weight: normal;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intelligent-order-detail .show-more-btn .ifont-arr {
+    transform: rotate(-90deg);
+    height: 18rpx;
+    margin-left: 2rpx;
+}
+
+.intelligent-order-detail .ifont-arr.unfold {
+    transform: rotate(90deg);
+}
+
+.intelligent-order-detail .order-ticbox-bd {
+    background-color: #f8fafd;
+    border-radius: 4px;
+    margin: 0 16rpx 16rpx;
+}
+
+.intelligent-order-detail .order-ticbox-bd .btn-grey {
+    background: #ffffff;
+    border-radius: 4px;
+    border: 0.5px solid #edeff0;
+    height: 60rpx;
+    width: 120rpx;
+    color: #0086f6;
+    font-family: PingFangSC-Medium;
+    font-size: 13px;
+    font-weight: 500;
+    /* height: 17px;
+line-height: 17px;
+width: 26px; */
+}
+
+.intelligent-order-detail .second-trip-tip {
+    background: #2698f7;
+    border-radius: 3px;
+    height: 30rpx;
+    line-height: 30rpx;
+    /* width: 58px; */
+    color: #ffffff;
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4rpx 10rpx;
+    margin-left: 10rpx;
+}
+
+.intelligent-order-detail .cross-route-container {
+    /* background: rgba(0, 61, 202, 0.2); */
+    border-radius: 8px;
+    height: 132rpx;
+    /* width: 359px; */
+    margin: 0 auto;
+    position: relative;
+    /* margin-bottom: 10px; */
+    padding: 10rpx 40rpx 26rpx;
+    box-sizing: border-box;
+}
+
+.intelligent-order-detail .router-top {
+    height: 44rpx;
+    color: #89a0c2;
+    font-family: PingFangSC-Semibold;
+    font-size: 22rpx;
+    font-weight: 600;
+    line-height: 22rpx;
+    display: flex;
+    align-items: center;
+}
+
+.intelligent-order-detail .decoration-stick {
+    background: #bbc9dc;
+    height: 1px;
+    width: 100%;
+    /* transform: translate(0, -50%); */
+    width: 100%;
+}
+
+.intelligent-order-detail .decoration-stick.left-stick {
+    height: 3px;
+    width: 100%;
+}
+
+.intelligent-order-detail .decoration-dot {
+    border-radius: 50%;
+    background: #bbc9dc;
+    height: 12rpx;
+    width: 12rpx;
+}
+
+.intelligent-order-detail .decoration-dot:first-of-type {
+    position: absolute;
+    left: 40rpx;
+}
+
+.intelligent-order-detail .decoration-dot:nth-of-type(2) {
+    position: absolute;
+    right: 40rpx;
+}
+
+.intelligent-order-detail .router-top text {
+    display: inline-block;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #89a0c2;
+    border-radius: 10px;
+    height: 24rpx;
+    line-height: 24rpx;
+    padding: 8rpx 12rpx;
+
+    position: absolute;
+}
+
+.intelligent-order-detail .router-top text.mid-tip {
+    /* background-color: #2078f4; */
+    border: 1px solid #89a0c2;
+    color: #89a0c2;
+
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.intelligent-order-detail .router-top text.from-tip {
+
+  left: 25%;
+  transform: translateX(-50%);
+}
+
+.intelligent-order-detail .router-top text.focus {
+    background: #99aeca;
+    color: #fff;
+    border-color: #99aeca;
+}
+
+.intelligent-order-detail .router-top text.to-tip {
+
+  right: 25%;
+  transform: translateX(50%);
+}
+
+.intelligent-order-detail .router-bottom {
+    top: 4rpx;
+    position: relative;
+
+    color: #333333;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    font-weight: normal;
+    line-height: 34rpx;
+}
+
+.intelligent-order-detail .router-bottom .from-station {
+    float: left;
+}
+
+.intelligent-order-detail .router-bottom .mid-station {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.intelligent-order-detail .router-bottom .to-station {
+    float: right;
+}
+
+.intelligent-order-detail .order-ticbox-bd .item {
+    padding: 24rpx 0 0;
+}
+.intelligent-order-detail .red-top {
+    background: linear-gradient(
+        -180deg,
+        rgb(255, 232, 232) 0%,
+        rgb(255, 255, 255) 100%
+    ) !important;
+}
+
+.intelligent-order-detail .failure-tips {
+    margin-top: 14rpx;
+    color: #999999;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.intelligent-order-detail .failure-tips .ifont-detail {
+    color: #f85e53;
+    font-size: 11px;
+    padding-right: 2px;
+}
+
+.intelligent-order-detail .failure-tips .ifont-detail::before {
+    display: block;
+    transform: rotate(180deg);
+}
+
+
+.countdown-container {
+    height: auto;
+    background: #fff;
+    padding: 24rpx;
+    position: relative;
+    z-index: 1;
+    margin: 0 16rpx 20rpx;
+    padding-right: 44rpx;
+}
+
+.countdown-container .background {
+    border-radius: 6px;
+    background: url("https://images3.c-ctrip.com/train/app/827/qiangpiao/bg_tishi.png")
+        no-repeat;
+    background-size: contain;
+    /* width: 100%; */
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: -1;
+}
+
+.countdown-container .cont .tit {
+    color: #333333;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    font-weight: normal;
+    /* line-height: 1.25; */
+    display: inline-block;
+}
+
+/* .countdown-container .cont .circle {
+    width: 2px;
+    height: 2px;
+    background: #eef1f6;
+    display: inline-block;
+} */
+
+.countdown-container .cont .tit .time {
+    color: #333333;
+}
+
+.countdown-container .icon-pop-tishi {
+    width: 64rpx;
+    height: 64rpx;
+    background: url("https://images3.c-ctrip.com/train/app/827/qiangpiao/icon_tishi.png")
+        no-repeat;
+    background-size: cover;
+    margin-right: 40rpx;
+    flex-shrink: 0;
+}
+
+.white-panel {
+    box-sizing: border-box;
+    margin: 0 16rpx 16rpx;
+    border-radius: 16rpx;
+    background: #fff;
+    overflow: hidden;
+}
+
+/* 行程轴 */
+.trip-axis {
+    position: relative;
+    padding: 24rpx;
+    background: linear-gradient(-180deg, rgb(241, 247, 253) 4.73%, rgb(255, 255, 255) 100%);
+}
+.trip-axis .combi-tit {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.order-linear .trip-axis .combi-txt {
+  line-height: normal;
+}
+.trip-axis .combi-tit .img{
+    width: 94rpx;
+    height: 36rpx;
+}
+.trip-axis .combi-tit .txt{
+    color: #192964;
+    font-size: 24rpx;
+    background-color: #DFEDFF;
+}
+.trip-axis .combi-tit .img-after {
+    width: 20rpx;
+    height: 36rpx;
+}
+.trip-axis .tit{
+    font-size: 30rpx;
+    color: #333;
+    line-height: 34rpx;
+    font-weight: 600;
+}
+.trip-axis .tit .blue {
+    color: #0086f6;
+}
+.trip-axis .axis {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 24rpx 0 12rpx;
+}
+.trip-axis .axis .real {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.trip-axis .axis .axis-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 4rpx;
+    background: #AABBD3;
+}
+.axis-line::before,.axis-line::after {
+    position: absolute;
+    content: '';
+    width: 12rpx;
+    height: 12rpx;
+    background: #AABBD3;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.axis-line::before {
+    left: 0;
+}
+.axis-line::after {
+    right: 0;
+}
+.trip-axis .axis .train {
+    box-sizing: border-box;
+    padding: 6rpx;
+    border: 2rpx solid #ccd6e5;
+    background: #fff;
+    border-radius: 20rpx;
+    color: #111;
+    font-size: 24rpx;
+    line-height: 30rpx;
+    position: relative;
+    z-index: 1;
+}
+.trip-axis .axis .train .ifont-arr {
+    margin-left: 2rpx;
+    font-size: 16rpx;
+}
+.trip-axis .axis .mid {
+    background: #E2E9F2;
+    border-radius: 20rpx;
+    padding: 6rpx 16rpx;
+    font-size: 24rpx;
+    font-weight: 600;
+    color: #111;
+    line-height: 30rpx;
+    position: relative;
+    z-index: 1;
+}
+.trip-axis .axis .combi-train {
+    display: flex;
+    height: 40rpx;
+    padding: 0 16rpx;
+    justify-content: center;
+    align-items: center;
+}
+.trip-axis .axis .cross {
+    width: 172rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #999;
+    position: relative;
+    background: #fff;
+}
+.trip-axis .axis .cross text{
+    position: relative;
+    padding: 0 4rpx;
+    background: #fff;
+}
+.trip-axis .axis .axis-dotted {
+    width: 100%;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 0px;
+    border-top: 4rpx dotted #AABBD3;
+    transform: translateY(-50%);
+}
+.axis-dotted::before,
+.axis-dotted::after {
+    content: "";
+    position: absolute;
+    width: 12rpx;
+    height: 12rpx;
+    border-radius: 50%;
+    top: 0;
+    transform: translateY(-8rpx);
+}
+.axis-dotted::before {
+    left: -6rpx;
+    background: #CCD6E5;
+}
+.axis-dotted::after {
+    right: -6rpx;
+    background: #AABBD3;
+}
+.axis-dotted.after::before {
+    background: #AABBD3;
+}
+.axis-dotted.after::after {
+    background: #CCD6E5;
+}
+
+.trip-axis .stations {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #333;
+    line-height: 34rpx;
+    font-size: 26rpx;
+}
+.trip-axis .stations .txt.cross {
+    color: #999999;
+}
+
+/* 车次卡片 */
+.ticket-card {
+    padding: 32rpx 24rpx 16rpx;
+    position: relative;
+}
+.ticket-card.fail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120rpx;
+    background: linear-gradient(-180deg, rgb(255, 232, 232) 4.73%, rgb(255, 255, 255) 100%);
+}
+.ticket-card .tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 4rpx 8rpx;
+    background: #FF7700;
+    border-radius: 16rpx 0 12rpx 0;
+    font-size: 22rpx;
+    color: #fff;
+    line-height: 24rpx;
+    letter-spacing: .14rpx;
+}
+.ticket-card-hd {
+    position: relative;
+    margin-bottom: 24rpx;
+}
+.ticket-card-hd .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12rpx;
+}
+.ticket-card-hd .title .tit{
+    font-size: 38rpx;
+    font-weight: 600;
+    line-height: 42rpx;
+    color: #333333;
+}
+.ticket-card-hd .title .green{
+    font-size: 30rpx;
+    font-weight: 500;
+    line-height: 34rpx;
+    color: #00B87A;
+}
+.ticket-card-hd .no,.ticket-card-hd .err{
+    font-size: 24rpx;
+    color: #999;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+.ticket-card-hd .err .ifont-detail {
+    color: #f85e53;
+    font-size: 22rpx;
+    padding-right: 4rpx;
+}
+
+.ticket-card-bd {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    text-align: center;
+    margin-bottom: 32rpx;
+}
+.ticket-card-bd .info {
+    color: #333;
+}
+.ticket-card-bd .info .date {
+    font-size: 24rpx;
+    line-height: 30rpx;
+    margin-bottom: 4rpx;
+}
+.ticket-card-bd .info .time{
+    font-size: 48rpx;
+    font-weight: 600;
+    line-height: 56rpx;
+    margin-bottom: 4rpx;
+}
+.ticket-card-bd .info .area {
+    font-size: 28rpx;
+    font-weight: 500;
+    line-height: 36rpx;
+}
+.ticket-card-bd .from {
+    text-align: left;
+}
+.ticket-card-bd .to {
+    text-align: right;
+}
+.ticket-card-bd .mid .checi {
+    font-size: 24rpx;
+    color: #999;
+    line-height: 1;
+    margin-bottom: 6rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ticket-card-bd .mid .checi .change {
+    color: #0086f6;
+}
+.ticket-card-bd .mid .transit {
+    border-radius: 24rpx;
+    border: 1px solid #cccccc;
+    height: 38rpx;
+    width: 140rpx;
+    margin: 10rpx 0 26rpx;
+    color: #5678a8;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    line-height: 36rpx;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.ticket-card-bd .mid .transit::before,
+.ticket-card-bd .mid .transit::after {
+    content: '';
+    background: #cccccc;
+    position: absolute;
+    top: 50%;
+    width: 38rpx;
+    height: 4rpx;
+}
+.ticket-card-bd .mid .transit::before {
+    left: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(-90deg, #ccc 0%, #fff 100%);
+}
+.ticket-card-bd .mid .transit::after {
+    right: 0;
+    transform: translateX(100%);
+    background: linear-gradient(90deg, #ccc 0%, #fff 100%);
+}
+.ticket-card-bd.disabled .info,
+.ticket-card-bd.disabled .checi,
+.ticket-card-bd.disabled .transit {
+    color: #ccc !important;
+    border-color: #ccc !important;
+}
+
+.ticket-card-fd .pasg-box {
+    box-sizing: border-box;
+    padding: 24rpx;
+    border-radius: 8rpx;
+    background: #F8FAFD;
+    margin-bottom: 16rpx;
+}
+.ticket-card-fd .pasg-box:last-child {
+    margin-bottom: 0;
+}
+.ticket-card-fd .between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+
+}
+.ticket-card-fd .pasg-box-hd {
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 8rpx;
+}
+.ticket-card-fd .pasg-box-hd .name {
+    font-size: 32rpx;
+}
+.ticket-card-fd .pasg-box-hd .carriage {
+    font-size: 28rpx;
+}
+.ticket-card-fd .pasg-box-bd {
+    color: #999999;
+    font-size: 24rpx;
+    line-height: 30rpx;
+    margin-bottom: 22rpx;
+}
+.ticket-card-fd .pasg-box-fd .status {
+    font-size: 26rpx;
+    color: #F5190A;
+    font-weight: 500;
+    line-height: 34rpx;
+}
+.ticket-card-fd .pasg-box-fd .btns {
+    display: flex;
+    align-items: center;
+}
+.ticket-card-fd .pasg-box-fd .btn {
+    padding: 12rpx 34rpx;
+    border: 1rpx solid #edeff0;
+    box-sizing: border-box;
+    background: #fff;
+    font-size: 26rpx;
+    font-weight: 500;
+    line-height: 34rpx;
+    color: #0086f6;
+    margin-left: 16rpx;
+}
+.ticket-card-fd .pasg-box-fd .btn.disabled {
+    color: #ccc !important;
+}
+/* 去抢票 */
+.ticket-card-fd .fail-grab-tip {
+    display: flex;
+    background: #f2f8fe;
+    border-radius: 4px;
+    padding: 26rpx 22rpx;
+    align-items: center;
+    justify-content: space-between;
+}
+.ticket-card-fd .fail-grab-tip .title {
+    color: #222222;
+    font-family: PingFangSC-Medium;
+    font-size: 13px;
+    font-weight: 500;
+}
+.ticket-card-fd .fail-grab-tip .sub-title {
+    color: #999999;
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 15px;
+}
+.ticket-card-fd .fail-grab-tip .btn {
+    background: #0086f6;
+    border-radius: 4px;
+    height: 60rpx;
+    color: #ffffff;
+    font-family: PingFangSC-Medium;
+    font-size: 13px;
+    line-height: 60rpx;
+    margin: 0;
+}
+.ticket-card-fd .fail-grab-tip .icon {
+    background: url("https://images3.c-ctrip.com/train/2021/app/V8.39.6/qiangpiao/icon_qiangpiao.png")
+        no-repeat;
+    height: 60rpx;
+    width: 60rpx;
+    background-size: contain;
+}
+.ticket-card-fd .child-declare-view {
+    white-space: nowrap;
+}
+.ticket-card-fd .child-declare-box .ifont-closed-line {
+    line-height: 52rpx;
+    padding: 6rpx 18rpx 0 14rpx;
+    width: auto;
+}
+.ticket-card-fd .free-child-view {
+    margin-top: 20rpx;
+}
+.combi-white-panel {
+    margin: 0 0 16rpx 0;
+    padding-top: 56rpx;
+}
+.combi-white-panel .combi-stations {
+    font-size: 28rpx;
+    font-weight: 500;
+    color: #111;
+}
+.combi-white-panel .combi-stations  .combi-middle-station {
+    color: #8F9FB5;
+    font-weight: 400;
+}

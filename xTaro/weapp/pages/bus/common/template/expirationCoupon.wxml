@@ -1,0 +1,20 @@
+<view class="coupon-container">
+    <view class="tip-content">
+        <image class="index-coupon-redbag" src="https://pic.c-ctrip.com/bus/resource/index/redbag-icon.png" />
+        <view class="point-text">您有一张<text class="price">{{price}}元</text>优惠券，快去购票吧~</view>
+    </view>
+    <view class="interval-content">
+        <view class="interval-time-wrap">
+            <text class="interval-time">{{interval.h}}</text>
+        </view>
+        <text class="interval-colon">:</text>
+        <view class="interval-time-wrap">
+            <text class="interval-time">{{interval.m}}</text>
+        </view>
+        <text class="interval-colon">:</text>
+        <view class="interval-time-wrap">
+            <text class="interval-time">{{interval.s}}</text>
+        </view>
+        <text class="interval-time-tip">后失效</text>
+    </view>
+</view>

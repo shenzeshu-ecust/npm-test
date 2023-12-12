@@ -1,0 +1,54 @@
+@import '../../common/common.wxss';
+
+/* 特色房banner css */
+.spbanner-info {
+    font-weight: 600;
+    align-items: center;
+    padding: 0 24rpx;
+    background-color: #fff;
+    position: relative;
+}
+.spbanner-info .flex-box {
+    display: flex;
+    padding: 25rpx 0;
+    justify-content: space-between;
+}
+.normal-radius {
+    border-radius: 24rpx;
+    margin-bottom: 16rpx;
+}
+.sp-radius {
+    border-radius: 24rpx 24rpx 0 0;
+    margin-bottom: 0rpx;
+}
+.spbanner-info .sp-border {
+    border-bottom: 1rpx solid #f0f0f0;
+}
+.spbanner-info .banner-title {
+    margin-right: 24rpx;
+    color: #111;
+    font-size: 24rpx;
+    z-index: 1;
+}
+.spbanner-info .banner-desc {
+    color: #111111;
+    font-size: 24rpx;
+    font-weight: 400;
+    margin-left: 16rpx;
+}
+.spbanner-info .icon-arrow {
+    z-index: 1;
+    width: 24rpx;
+    height: 24rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #555555;
+}
+.spbanner-info .banner-image {
+    width: 331rpx;
+    height: 80rpx;
+    position: absolute;
+    right: 0rpx;
+    top: 0rpx;
+    background-size: auto;
+}

@@ -1,0 +1,71 @@
+<import src='./webviewTpl.wxml' />
+<block wx:if="{{isInWebView}}">
+    <template is="webviewTpl202" data="{{isLogin, status, scale, clicked, timesAcount, START_ING, END, FINAL, top, handleClick}}"></template>
+</block>
+<block wx:else>
+    <movable-area class="task-count-down__movable-area">
+        <movable-view y="200" direction="vertical" style="width: 1PX;">
+            <view class="se-popup" bindtap="handleClick">
+                <view class="popup202" id="opentag_ele">
+                    <view class="popup202_head">
+                        <image class="popup202_head_bg" src="https://pages.c-ctrip.com/market/activity-h5/img/popup202bg2.png" />
+                        <view wx:if="{{!isLogin || status == FINAL}}" class="popup202_head_icon_dongxiao_wraper">
+                            <image class="popup202_head_icon" src="https://pages.c-ctrip.com/market/activity-h5/img/big-goldicon.png" />
+                        </view>
+                        <view wx:if="{{status == START_ING}}" class="popup202_head_icon_dongxiao_wraper pingyi">
+                            <image class="popup202_head_icon" src="https://pages.c-ctrip.com/market/components/static/taskcountdown-gold.gif" />
+                            <!-- <image class="popup202_head_icon dongxiao" src="https://pages.c-ctrip.com/market/activity-h5/img/big-goldicon.png" /> -->
+                        </view>
+                        <block wx:if="{{status == END}}">
+                            <view class='mkt_popup202-2'>
+                                <image class="mkt_popup202-2-img {{start1 ? 'start-donghua show' : '' }}" src='https://pages.c-ctrip.com/market/activity-h5/img/goldicon3.png' />
+                                <image class="mkt_popup202-2-img {{start2 ? ' start-donghua show' : '' }}" src='https://pages.c-ctrip.com/market/activity-h5/img/goldicon3.png' />
+                                <image class="mkt_popup202-2-img {{start3 ? ' start-donghua show' : '' }}" src='https://pages.c-ctrip.com/market/activity-h5/img/goldicon3.png' />
+                            </view>
+                            <view class="popup202_head_icon_dongxiao_wraper">
+                                <image class="popup202_head_icon popup202_head_icon_dong" src="https://pages.c-ctrip.com/market/activity-h5/img/big-goldicon.png" />
+                            </view>
+                        </block>
+                    </view>
+                    <view class="popup202_content_wraper">
+                        <view class="light"></view>
+                        <view class="popup202_process">
+                            <view class="loader-container">
+                                <view class="loader-inner" style="width:{{scale}}"></view>
+                            </view>
+                        </view>
+                        <view class="process-finish">
+                            <block wx:if="{{!isLogin}}">
+                                <view class="fn-color-yellow">登录做任务</view>
+                                <view>可领取奖励</view>
+                            </block>
+                            <!-- 进行中 -->
+                            <block wx:elif="{{status == START_ING}}">
+                                <block wx:if="{{clicked}}">
+                                    <view class="fn-color-yellow">继续浏览</view>
+                                    <view>即可得奖励</view>
+                                </block>
+                                <block wx:else>
+                                    <view>
+                                        浏览
+                                        <text class="fn-color-yellow">{{timesAcount}}秒</text>
+                                        即
+                                    </view>
+                                    <view>可得奖励</view>
+                                </block>
+                            </block>
+                            <block wx:elif="{{status == END}}">
+                                <view>任务已完成</view>
+                                <view class="fn-color-yellow">查看奖励</view>
+                            </block>
+                            <block wx:elif="{{status == FINAL}}">
+                                <view class="fn-color-yellow">查看更多</view>
+                                <view>领奖励</view>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </movable-view>
+    </movable-area>
+</block>

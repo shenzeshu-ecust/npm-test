@@ -1,0 +1,82 @@
+<!-- 已登陆样式 -->
+<perinfo-protect-float></perinfo-protect-float>
+<block wx:if="{{isLogin}}">
+  <!-- 无行程 -->
+  <block wx:if="{{cardList.length == 0}}">
+    <block wx:if="{{travelPlanList.length == 0}}">
+      <view class="no_schedule_back">
+        <view class="{{isLoading? 'view_hidden' : 'no_schedule_view'}}">
+          <image class="no_schedule_icon" src='https://pages.c-ctrip.com/schedule/pic/icon/wxctc.png' />
+          <text class="no_schedule_maintext">您暂时还没有行程</text>
+          <!--      <text class="no_schedule_subtext">可添加景点/机票/火车/酒店等行程</text>-->
+          <view class='noschedule-add-content-view'>
+            <formid-button formid-button-class='custom-button-for-compt' catchtap="showScheduleLayer">
+              <view class='add-view'>
+                <view class="add-btn">
+                  <text>关注航班/火车动态</text>
+                </view>
+              </view>
+            </formid-button>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="only_travel_plan">
+      <view class="empty-schedule-container">
+        <image class="empty_schedule_icon" src='https://pages.c-ctrip.com/schedule/pic/wxxcx/image_sousuo.png' />
+        <text class="empty_schedule_title">您暂时还没有行程</text>
+      </view>
+      <travel-plan-view itemData="{{travelPlanList[0]}}"/>
+      <view class='concern-train-view'>
+        <formid-button formid-button-class='custom-button-for-compt' catchtap="showScheduleLayer">
+          <view class='add-view'>
+            <view class="add-btn">
+              <text>关注航班/火车动态</text>
+            </view>
+          </view>
+        </formid-button>
+      </view>
+    </view>
+  </block>
+  <!-- 有行程 -->
+  <block wx:else>
+    <view wx:if="{{travelPlanList.length === 0}}" class='vertical_line' />
+    <scroll-view scroll-y class="scroll_login" scroll-into-view="{{positionId}}">
+      <view class='vertical_line' />
+      <view wx:for="{{cardList}}" wx:key="smartTripId" id="{{item.positionId}}">
+          <card-item card-data="{{item}}" activity="{{index === 0 ? activity : null}}"
+          bindCardDelete='deleteCard'
+          bindCardTouchStart='touchStart'
+          bindCardTouchMove='touchMove'
+          bindCardTouchEnd='touchEnd'
+          bindCardTouchCancel='touchCancel'
+          />
+      </view>
+      <text class='timeline-tips'>暂时只能查看火车、汽车、飞机、酒店、景点门票相关行程</text>
+      <view wx:if="{{travelPlanList.length > 0}}" class="travel-list-container">
+        <travel-plan-view itemData="{{travelPlanList[0]}}"/>
+      </view>
+      <view wx:else class="empty-space"/>
+    </scroll-view>
+
+    <view class='add-content-view'>
+      <formid-button formid-button-class='custom-button-for-compt' catchtap="showScheduleLayer">
+        <view class='add-view'>
+          <view class="add-btn">
+            <text>关注航班/火车动态</text>
+          </view>
+        </view>
+      </formid-button>
+    </view>
+  </block>
+
+  <include src='addScheduleLayer.wxml' />
+</block>
+<!-- 未登陆 -->
+<block wx:else>
+  <include src='./noLogin/noLogin.wxml' />
+</block>
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>
+
+<!-- <view catchtap='switchEnv' style='position:absolute;right:20rpx;top:20rpx;border-radius:40rpx;width:80rpx;height:80rpx;background-color:#1980fe;color:white;font-weight:bolder;text-align:center;padding-top:40rpx;'>{{env || 'prd'}}</view> -->

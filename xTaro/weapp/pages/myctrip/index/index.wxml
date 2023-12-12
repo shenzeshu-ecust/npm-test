@@ -1,0 +1,170 @@
+<view>
+    <!--  头部 - 已登录  -->
+    <view wx:if="{{isLogin}}" class="login-header-bg relative" style="height: {{headHeight}};">
+        <view class="{{loginHeadIconStyle}}" style="padding-top: {{headIconTop}};">
+            <!-- 20210512 去掉客服按钮，设置和签到替换位置 -->
+            <image class="icon" src="{{images.img_setting_black}}" bindtap="handleEntryJump" data-ubt-key="{{settingData.id}}" data-item="{{settingData}}"></image>
+            <image class="icon" src="{{images.img_signin_black}}" bindtap="handleEntryJump" data-ubt-key="{{signInData.id}}" data-item="{{signInData}}"></image>
+        </view>
+        <view class="login-header-wrapper" style="top: {{headContentTop}};">
+            <view class="userinfo-wrapper">
+                <image
+                    class="avatar"
+                    src="{{userAvatar}}"
+                    bindtap="handleEntryJump"
+                    data-ubt-key="{{avatarData.id}}"
+                    data-item="{{avatarData}}"
+                    binderror="avatarErrorHandler"
+                ></image>
+                <view class="userinfo">
+                    <text class="user-name font-weight-FZYOUHS ellipsis">{{userName}}</text>
+                    <view class="user-tag-wrapper">
+                        <view class="user-tag" wx:if="{{vipLevelData.isShow && userGrade}}" bindtap="handleEntryJump" data-ubt-key="{{vipLevelData.id}}" data-item="{{vipLevelData}}">
+                            <text class="user-tag-text">{{userGrade}}</text>
+                        </view>
+                        <view class="user-tag" wx:if="{{toVerifyData.isShow && isShowUserVerify}}" bindtap="handleEntryJump" data-ubt-key="{{toVerifyData.id}}" data-item="{{toVerifyData}}">
+                            <text class="user-tag-text">去实名</text>
+                        </view>
+                        <view class="user-tag" wx:elif="{{toVerifyData.isShow}}" bindtap="handleEntryJump" data-ubt-key="{{toVerifyData.id}}" data-item="{{toVerifyData}}">
+                            <text class="user-tag-text">已认证</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="user-home" bindtap="handleEntryJump" data-ubt-key="{{userHomeData.id}}" data-item="{{userHomeData}}">
+                    <text class="user-home-txt">个人主页</text>
+                    <text class="iconfont icon-forward" />
+                </view>
+            </view>
+            <!-- 收藏 积分 优惠券 入口 -->
+            <view class="user-center">
+                <view class="user-entry" wx:if="{{isLogin && favoriteData.isShow}}" bindtap="handleEntryJump" data-ubt-key="{{favoriteData.id}}" data-item="{{favoriteData}}">
+                    <text class="entry-name">我的收藏</text>
+                    <text class="entry-number font-weight-semibold">{{favoriteCount}}</text>
+                    <text class="iconfont icon-forward" />
+                </view>
+                <view class="user-entry" bindtap="handleEntryJump" wx:if="{{pointData.isShow}}" data-ubt-key="{{pointData.id}}" data-item="{{pointData}}">
+                    <text class="entry-name">积分</text>
+                    <text class="entry-number font-weight-semibold">{{pointCount}}</text>
+                    <text class="iconfont icon-forward" />
+                </view>
+                <view class="user-entry" bindtap="handleEntryJump" wx:if="{{couponData.isShow}}" data-ubt-key="{{couponData.id}}" data-item="{{couponData}}">
+                    <text class="entry-name">优惠券</text>
+                    <text class="entry-number font-weight-semibold">{{couponCount}}</text>
+                    <text class="iconfont icon-forward" />
+                </view>
+            </view>
+            <!-- 会员中心 & 超会 -->
+        </view>
+    </view>
+    <!--  未登录  -->
+    <view wx:else class="unlogin-header-bg relative">
+        <view class="head-icon" style="padding-top: {{headIconTop}};">
+            <image class="icon" src="{{images.img_setting_white}}" bindtap="handleEntryJump" data-ubt-key="{{settingData.id}}" data-item="{{settingData}}"></image>
+            <image class="icon" src="{{images.img_signin_white}}" bindtap="handleEntryJump" data-ubt-key="{{signInData.id}}" data-item="{{signInData}}"></image>
+        </view>
+        <view class="unlogin-header-wrapper">
+            <view class="unlogin-header-content">
+                <text class="unlogin-slogan font-weight-medium">登录携程，开启旅程</text>
+                <view class="unlogin-btn-wrapper">
+                    <button class="unlogin-btn login font-weight-regular" bindtap="loginHandler" data-ubt-key="c_click_login">登录/注册</button>
+                    <button plain="true" class="unlogin-btn font-weight-regular" id="mobile-search" bindtap="jumpToMobileList" data-ubt-key="{{mobileSearchListData.id}}">手机号查单</button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="home-body">
+        <!--  订单入口  -->
+        <view class="module-container order">
+            <view class="module-body">
+                <view
+                    class="entry"
+                    wx:for="{{orderEntryData}}"
+                    wx:key="id"
+                    data-ubt-key="{{'c_click_list_' + item.id}}"
+                    data-item="{{item}}"
+                    bindtap="jumpToList"
+                >
+                    <image src="{{item.iconUrl}}"></image>
+                    <text class="entry-title font-weight-medium">{{item.title}}</text>
+                </view>
+            </view>
+        </view>
+        <!--  活动中心  -->
+        <!-- 活动中心不提供保底数据，如果数据拿不到就不展示此模块 -->
+        <!-- 文案长度如何限制 - 最多5个字 -->
+        <view wx:if="{{isShowActivityCenter}}" class="module-container">
+            <view class="module-header">
+                <text class="header-title font-weight-medium">{{activityCenterTitleData}}</text>
+                <text class="header-more font-weight-regular" bindtap="handleEntryJump" data-item="{{activityCenterMoreData}}">{{activityCenterMoreData.title}}</text>
+            </view>
+            <view class="module-body">
+                <view
+                    class="entry"
+                    wx:for="{{activityCenterData}}"
+                    wx:key="title"
+                    data-item="{{item}}"
+                    bindtap="handleEntryJump"
+                >
+                    <image src="{{item.iconUrl}}"></image>
+                    <text class="entry-title">{{item.title}}</text>
+                    <text class="entry-description">{{item.description}}</text>
+                </view>
+            </view>
+        </view>
+        <!--  我的工具  -->
+        <view class="module-container">
+            <view class="module-header">
+                <text class="header-title font-weight-medium">我的工具</text>
+            </view>
+            <view class="module-body">
+                <view
+                    class="entry"
+                    wx:for="{{toolsData}}"
+                    wx:key="id"
+                    data-item="{{item}}"
+                    bindtap="handleEntryJump"
+                >
+                    <image src="{{item.iconUrl}}"></image>
+                    <text class="entry-title">{{item.title}}</text>
+                </view>
+                <view
+                        wx:if="{{useOldCustomerEntry}}"
+                        class="entry"
+                        bindtap="jumpToCustomer"
+                >
+                    <button class="btn-im" open-type="contact" show-message-card="true" send-message-path="pages/market/signIn/index?activityid=wechat_signin_activity" send-message-title='关注公众号，客服在线咨询' send-message-img='https://images3.c-ctrip.com/marketing/2019/10/wechatContactImg.png'>
+                        <image src="{{images.img_consult}}"></image>
+                        <text class="entry-title">咨询客服</text>
+                    </button>
+                </view>
+                <view
+                        wx:else
+                        class="entry"
+                        bindtap="jumpToCustomer"
+                >
+                    <image src="{{images.img_consult}}"></image>
+                    <text class="entry-title">咨询客服</text>
+                </view>
+
+
+
+            </view>
+        </view>
+        <view class="logout-wrap">
+            <button wx:if="{{isLogin}}" class="logout" bindtap="logoutHandler">
+                退出登录
+            </button>
+        </view>
+        <view data-item="{{businessLicense}}"
+            bindtap="handleEntryJump"
+            class="businesslicense"
+            wx:if="{{businessLicense.isShow}}"
+        >
+            <text>携程旅行营业执照</text>
+        </view>
+    </view>
+</view>
+
+<!-- 白屏检测 -->
+<!-- viewReadyHandle为框架提供、实现 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

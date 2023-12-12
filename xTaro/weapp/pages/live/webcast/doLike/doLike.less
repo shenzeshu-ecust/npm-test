@@ -1,0 +1,71 @@
+// @import "../common.less";
+ @import "../bubble.less";
+ .footer-item {
+    margin-right: 24rpx;
+    width: 72rpx;
+    height: 72rpx;
+    border-radius: 72rpx;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .svg {
+      width: 48rpx;
+      height: 48rpx;
+    }
+  }
+  .like {
+    position: relative;
+    .like-count {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: -16rpx;
+      height: 26rpx;
+      line-height: 26rpx;
+      background: #666666;
+      border-radius: 14rpx;
+      font-family: PingFangSC-Medium;
+      font-size: 18rpx;
+      color: #ffffff;
+      padding: 0 8rpx;
+    }
+    .svg.on {
+      animation: pulse 600ms 1 linear forwards;
+    }
+  }
+  .favor-wrapper {
+    width: 150rpx;
+    height: 404rpx;
+    //background:red;
+    z-index: 103;
+    position: absolute;
+    right: 8rpx;
+    bottom: 128rpx;
+  }
+  //点赞气泡区
+.praise-count {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 8rpx;
+    z-index: 1;
+    .count-num {
+      //font-family: 20TH_bold;
+      font-size: 44rpx;
+      color: #ffffff;
+      line-height: 53rpx;
+      font-weight: bold;
+      font-family: PingFangSC-Regular;
+      -webkit-text-stroke: 3rpx #ff655b;
+    }
+    .count-pic {
+      width: 96rpx;
+      height: 68rpx;
+      background: url("https://pages.c-ctrip.com/livestream/video/live_icon_like.png")
+        no-repeat;
+      background-size: 100%;
+    }
+  }

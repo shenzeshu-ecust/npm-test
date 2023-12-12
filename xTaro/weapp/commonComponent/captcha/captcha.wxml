@@ -1,0 +1,49 @@
+<view class='verification-code' style='width:{{width}};height:{{height}};margin:{{margin}};'>
+  <view class='cpt-drop-box'>
+    <view class='cpt-loading-box' style='height:{{loadingBoxHeight}}px;background:{{loadingBoxBgColor}};border:{{loadingBoxBorder}};display:{{loadingBoxShow}};'>
+      <image class='cpt-loading-img' src='https://webresource.c-ctrip.com/ares2/infosec/WechatCaptcha/~1.0.0/default/img/loading.gif?expires=1d' style='margin-top:{{loadingImgMarginTop}}px;display:{{loadingImgShow}};'></image>
+      <span class='cpt-loading-info-box' style='height:{{loadingInfoBoxHeight}}px;left:{{loadingInfoBoxLeft}}px;position:{{loadingInfoBoxPos}};display:{{loadingInfoBoxShow}};'>
+        <span class='cpt-loading-icon-content' style='margin-top:{{loadingContentMarginTop}}px;display:{{loadingIconContentShow}};'>
+          <i class='cpt-logo cpt-loading-right' style='display:{{loadingRightShow}};'></i>
+          <i class='cpt-logo cpt-loading-error' style='display:{{loadingErrorShow}};'></i>
+        </span>
+        <span class='cpt-loading-text' style='line-height:{{loadingTextLineHeight}}px;color:{{loadingTextColor}};'>{{loadingInfo}}</span>
+      </span>
+    </view>
+    <view class='cpt-drop-btn' bindtouchstart='moveSlideBtnStart' bindtouchend='moveSlideBtnEnd' bindtouchmove='moveSlideBtn' style='width:{{moveSlideBtnWidth}}px;height:{{moveSlideBtnHeight}}px;left:{{moveSlideBtnLeft}}px;transition:{{moveSlideBtnTrans}};'>
+      <view class='{{cptImgClass}}' style='width:{{slideBtnWidth}}px;height:{{slideBtnHeight}}px;background:{{slideBtnBgColor}};box-shadow:{{slideBtnShadow}};transform:{{logoOuterTransform}};'>
+        <i class='cpt-logo cpt-img' style='transform:{{logoTransform}};background-position:{{logoBgPosition}};'></i>
+      </view>
+    </view>
+    <view class='{{cptDropBgClass}}' style='width:{{moveSlideBgWidth}}px;height:{{moveSlideBgHeight}}px;background:{{slideBgColor}};border:{{slideBgBorder}};transition:{{slideBgTrans}};'></view>
+    <view class='cpt-bg-bar' style='height:{{bgBarHeight}}px;line-height:{{bgBarLineHeight}}px;opacity:{{bgBarOpacity}};'>
+      <span class='cpt-info-board' style='height:{{infoBoardHeight}}px;color:{{infoBoardColor}};left:{{infoBoardLeft}}px;position:{{infoBoardPosition}};background:{{infoBoardBg}};-webkit-text-fill-color:{{infoBoardFillColor}};-webkit-background-clip: text;'>{{cptInfo}}</span>
+    </view>
+  </view>
+</view>
+
+<view class='verification-code-choose'>
+  <view class='cpt-choose-bg' style='display:{{selectBgShow}}'></view>
+  <view class='cpt-choose-box' style='width:{{selectBoxWidth}}px;height:{{selectBoxHeight}}px;margin-left:{{selectBoxLeft}}px;margin-top:{{selectBoxTop}}px;display:{{selectShow}};position:{{selectPosition}};'>
+    <i class='cpt-logo cpt-choose-delete' bindtap='closeChoose'></i>
+    <view class='cpt-choose-top'>
+      <view class='cpt-choose-msg-box' style='width:{{selectMsgBoxWidth}}px;'>
+        <span class='cpt-choose-msg' style='left:{{selectMsgLeft}}px;position:{{selectMsgPosition}};'>{{selectChooseMsg}}</span>
+      </view>
+      <image class='cpt-small-img' src='{{smallImgSrc}}' style='width:{{smallImgWidth}}px;height:{{smallImgHeight}}px;'></image>
+    </view>
+    <view class='cpt-big-box' bindtap='clickImg'>
+      <view class="cpt-logo cpt-img-sign" wx:for="{{signList}}" wx:key="signCount" catchtap='clickSign' data-index='{{item.signCount}}' style='left:{{item.coordinate[0] - 10}}px;top:{{item.coordinate[1] - 10}}px;'>{{item.signCount}}</view>
+      <image class='cpt-big-img' mode='aspectFit' src='{{bigImgSrc}}' style='width:{{bigImgWidth}}px;height:{{bigImgHeight}}px;'></image>
+    </view>
+    <view class='cpt-sub-box'>
+      <view class='cpt-choose-refresh-outer' bindtap='refreshVerify'>
+        <a class='cpt-logo cpt-choose-refresh' style='display:{{selectRefreshShow}};'></a>
+        <image class='cpt-choose-loading' mode='aspectFit' src='https://webresource.c-ctrip.com/ares2/infosec/WechatCaptcha/~1.0.0/default/img/loading.gif?expires=1d' style='display:{{selectLoadingShow}};'></image>
+      </view>
+      <a class='cpt-choose-submit' bindtap='submitChoose'>
+        <span class='cpt-submit-text'>{{submitText}}</span>
+      </a>
+    </view>
+  </view>
+</view>

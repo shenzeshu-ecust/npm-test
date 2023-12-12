@@ -1,0 +1,129 @@
+<view>
+    <view class="page_title"><text class="ifont-back" bindtap="onClickBackBtn"></text><text>小程序测试页</text></view>
+    <view class="block">
+        <view class="frow">
+            <text>{{(hasLogin ? '已登录' : '未登录')}}</text>
+        </view>
+        <view class="frow">
+            <block wx:if="{{!hasLogin}}">
+                <button class="btn-primary" bindtap="toLogin" style="background-color: #cc99ff">去登录</button>
+            </block>
+        </view>
+        <view class="frow" wx:if="{{hasLogin}}">
+            <text>mobile: {{userBindedPhoneNumber || '未绑定手机号 or 测试拿不到'}}</text>
+        </view>
+        <view class="frow" wx:if="{{uid}}">
+            <text>uid: {{uid}}</text>
+            <text bindtap="copyToClipboard" data-clip-data="{{uid}}">复制</text>
+        </view>
+        <view class="frow">
+            <text>cid: {{clientID}}</text>
+            <text bindtap="copyToClipboard" data-clip-data="{{clientID}}">复制</text>
+        </view>
+        <view class="frow">
+            <text>auth: {{auth}}</text>
+            <text bindtap="copyToClipboard" data-clip-data="{{auth}}">复制</text>
+        </view>
+        <view class="frow" wx:if="{{duid}}">
+            <text>duid: {{duid}}</text>
+            <text bindtap="copyToClipboard" data-clip-data="{{duid}}">复制</text>
+        </view>
+        <view class="frow">
+            <text style="width: 80%;">openid: {{openid}}</text>
+            <text bindtap="copyToClipboard" data-clip-data="{{openid}}">复制</text>
+        </view>
+        <view class="frow" wx:if="{{abtest.cashbackAbTest}}">
+            <text style="width: 80%;">abtest: {{abtest.cashbackAbTest }}</text>
+            <text bindtap="copyToClipboard" data-clip-data="{{openid}}">复制</text>
+        </view>
+    </view>
+    <view class="block">
+        <view class="frow">
+            <text>网络环境</text>
+            <view>
+                <radio-group class="radio-group" bindchange="envChange">
+                    <label class="radio" wx:for="{{itemsEnv}}">
+                        <radio value="{{item.value}}" checked="{{item.checked}}"/>{{item.name}}
+                    </label>
+                </radio-group>
+            </view>
+        </view>
+
+        <view class="frow">
+            <text>是否开启mock调试</text>
+            <switch checked="{{enableProxyMock}}" bindchange="onProxyMockChange"/>
+        </view>
+    </view>
+
+    <!-- <view class="block">
+        <view>注意重新启动小程序，或者是扫码跳转，会重新读取ab实验的值</view>
+        <view class="frow" wx:for="{{abs}}">
+            <view class="frow">{{item.expCode + ':'}}</view>
+            <input class="frow" bindinput="onAbChange" value="{{item.abValue}}" data-index="{{index}}" />
+        </view>
+        <view class="frow" style="margin: 20rpx 0;">
+            <button class="btn-primary" bindtap="showAbValues">读取ab实验值</button>
+            <button class="btn-default" bindtap="setAbValues">保存ab实验值</button>
+        </view>
+    </view> -->
+    <!-- <view class="frow">
+        <button class="btn-primary" bindtap="noop" open-type="share">share</button>
+    </view> -->
+    <view class="block url-box">
+        <view class='hd'>跳转工具</view>
+        <view class="url-input">
+            <input value="{{url}}" placeholder="url或小程序path" bindinput="onInputUrl" style="height: 88rpx;padding:0 88rpx 0 10rpx;" maxlength="-1"></input>
+            <view class="scan-code" bindtap="scanCode">码</view>
+        </view>
+        <view class="frow" style="margin-top: 20rpx;">
+            <button class="btn-primary" bindtap="routeToPage">navigate</button>
+            <button class="btn-primary" bindtap="relaunchToPage" style="margin-left: 20rpx">relaunch</button>
+        </view>
+    
+        <view class="block url-record {{openUrlList ? 'open' : ''}}" wx:if="{{urlList.length}}">
+            <view class="frow">全部跳转记录<switch checked="{{openUrlList}}" bindchange="onUrlListSwitchChange"/></view>
+            <view wx:for="{{urlList}}" class="url-item" wx:for-item="item" wx:key="index">
+                <view class="url"  bindtap="onClickUrl" data-url="{{item}}">{{item}}</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="block store-box">
+        <view class='hd'>本地缓存</view>
+        <view>
+            <input class="store-input" value="{{storageKey}}" placeholder="storage key" bindinput="onInputStoreKey"></input>
+            <view class="store-common">
+                <text wx:for="{{commonStoreKey}}" wx:key="index" bindtap="onClickCommonStoreKey" data-key="{{item}}">{{item}}</text>
+            </view>
+            <textarea class="store-textarea" value="{{storageValue}}" maxlength="-1" placeholder="storage value" bindinput="onInputStoreValue"></textarea>
+        </view>
+    
+        <view class="frow">
+            <button class="btn-primary" bindtap="getStorage">查询</button>
+            <button class="btn-primary" bindtap="setStorage" style="margin-left: 20rpx">设置</button>
+        </view>
+
+        <view class="store-res" bindtap="copyToClipboard" data-clip-data="{{storageRes}}">
+            {{storageRes}}
+        </view>
+
+        <button class="btn-primary" bindtap="clearStorage">清空全部缓存</button>
+    </view>
+
+    <view class="block">
+        <block wx:if="{{nickName || avatarUrl}}">
+            <view style="display: flex">
+                <!-- <open-data type="userAvatarUrl"  class="frow"  style="width: 60rpx; height: 60rpx;"></open-data> -->
+                <!-- <open-data type="userNickName"  class="frow"  style="margin-left: 20rpx"></open-data> -->
+                <view class="frow" style="border-radius: 50%"><image style="width: 60rpx; height: 60rpx;" src="{{avatarUrl}}"></image></view>
+                <view class="frow" style="margin-left: 20rpx">{{nickName}}</view>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="frow">没有头像和昵称</view>
+            <view class="frow">
+                <button class="btn-primary" bindtap="getUserProfile">获得昵称和头像</button>
+            </view>
+        </block>
+    </view>
+</view>

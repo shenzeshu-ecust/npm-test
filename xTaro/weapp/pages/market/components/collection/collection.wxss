@@ -1,0 +1,149 @@
+.mkt-collect-wrap{
+  position: fixed;
+  top: 0;
+  right: 48rpx;
+  margin-top: 5px;
+  max-width: 700rpx;
+  height: 58rpx;
+  border-radius: 10rpx;
+  background: rgba(0,0,0,.7);
+  font-size: 22rpx;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  z-index: 200;
+  transform: scale(0);
+  opacity: 0;
+  overflow: visible;
+}
+.mkt-collect-wrap-default{
+  position: fixed;
+  right: 48rpx;
+  margin-top: 10rpx;
+  max-width: 700rpx;
+  height: 58rpx;
+  border-radius: 10rpx;
+  background: rgba(0,0,0,.7);
+  font-size: 22rpx;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  z-index: 200;
+  /* opacity: 0; */
+  overflow: visible;
+}
+.mkt-collect-wrap-default.show{
+  animation: customcollectScaleIn .3s ease-in-out 1s forwards;
+}
+.mkt-collect-wrap-default.hide{
+  animation: collectScaleOut .2s linear forwards;
+}
+
+.mkt-collect-wrap.show{
+  animation: collectScaleIn .3s ease-in-out 1s forwards;
+}
+.mkt-collect-wrap.hide{
+  animation: collectScaleOut .2s linear forwards;
+}
+@keyframes customcollectScaleIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes collectScaleIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes collectScaleOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+.mkt-collect-wrap::before,.mkt-collect-wrap-default::before{
+  content: "";
+  position: absolute;
+  top: -8rpx;
+  right: 84rpx;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-bottom: 10rpx solid rgba(0,0,0,.7);
+  border-left: 12rpx solid transparent;
+  border-right: 12rpx solid transparent;
+}
+.mkt-collect-close {
+  position: relative;
+  width: 30rpx;
+  height: 30rpx;
+  margin: 0 18rpx 0 6rpx;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.mkt-collect-icon-close{
+  display: inline-flex;
+  width: 100%;
+}
+
+.mkt-collect-icon{
+  width: 28rpx;
+  height: 28rpx;
+  margin: 0 14rpx 0 18rpx;
+}
+.mkt-collect-flex{
+  flex:1
+}
+/*  */
+
+  /* 首次小程序组件 */
+  .collection_comp_layout{
+    position: fixed !important;
+    width: 100vw !important;
+    border-radius: 10rpx;
+    font-size: 22rpx;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    opacity: 99999999;
+    position: fixed;
+    height: 80rpx;
+    top: 0;
+    z-index: 100000000000000;
+  }
+  .collection_comp_layout .comp_box {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999999;
+  }
+  .collection_virtual_button {
+    min-width: 100vw;
+    max-width: 100vw !important;
+    height: 82rpx;
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    bottom: 0;
+    left: 0rpx;
+    right: 0;
+    z-index: 1100;
+    text-align: center;
+    padding: 10rpx 6rpx 10rpx 0;
+    display: inline-flex;
+    /* overflow: hidden; */
+  }

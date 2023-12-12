@@ -1,0 +1,396 @@
+/* iconfont */
+@font-face {
+  font-family: "wx_font_ctrip_ocr";
+  src: url('https://pic.c-ctrip.com/platform/h5/miniapp/ocr/wx_font_ctrip_ocr.ttf') format('truetype'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "wx_font_ctrip_ocr" !important;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  color: #999;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.icon-help:before {
+  content: "\e013";
+  color: #FFFFFF;
+  font-size: 22px;
+}
+
+.icon-image:before {
+  content: "\e94a";
+  color: #FFFFFF;
+  font-size: 24px;
+}
+
+.icon-loading:before {
+  content: "\f63f";
+  color: #0086F6;
+  font-size: 38px;
+}
+
+.icon-flash-on:before {
+  content: "\ed9f";
+  color: #FFFFFF;
+  font-size: 24px;
+}
+
+.icon-flash-off:before {
+  content: "\ed9e";
+  color: #FFFFFF;
+  font-size: 24px;
+}
+
+.content-box {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #333333;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 20vh;
+}
+
+.camera-box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin-top: 40px;
+}
+
+.photo-box {
+  position: absolute;
+  margin-top: 40px;
+}
+
+.box-border {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+
+.camera-box .lt{
+  border-top: 3px solid #FFFFFF;
+  border-left: 3px solid #FFFFFF;
+  left: -1px;
+  top: -1px;
+  z-index: 88;
+}
+.camera-box .rt{
+  border-top: 3px solid #FFFFFF;
+  border-right: 3px solid #FFFFFF;
+  right: -1px;
+  top: -1px;
+  z-index: 88;
+}
+.camera-box .rb{
+  border-bottom:3px solid #FFFFFF;
+  border-right: 3px solid #FFFFFF;
+  right: -1px;
+  bottom: -1px;
+  z-index: 88;
+}
+.camera-box .lb{
+  border-bottom:3px solid #FFFFFF;
+  border-left: 3px solid #FFFFFF;
+  left: -1px;
+  bottom: -1px;
+  z-index: 88;
+}
+
+.content-tip-text {
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+.content-tip {
+  color: #FFFFFF;
+}
+
+.button-box {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-inner-box {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.box-image {
+  margin-left: 40px;
+}
+
+.box-flash {
+  margin-right: 40px;
+}
+
+.button-inner-text {
+  color: #FFFFFF;
+  font-size: 11px;
+}
+
+.take-photo {
+  height: 54px;
+  width: 54px;
+  border-radius: 50%;
+  background-image:  linear-gradient(270deg, #0076F5 0%, #00A7FA 98%);
+  background-clip: padding-box;
+  border: 10px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  opacity: 1;
+}
+
+.take-photo-hover {
+  background-image:  linear-gradient(270deg, #0076F5 0%, #0086F6 98%);
+  border: 10px solid rgba(234, 232, 232, 0.6);
+}
+
+.content-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(51, 51, 51, 0.7);
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20vh;
+}
+
+.mask-rules-title {
+  margin-left: 20px;
+  color: #FF8B26;
+  font-size: 18px;
+  line-height: 46px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.mask-rules-content {
+  color: #FFFFFF;
+  font-size: 16px;
+  line-height: 30px;
+  margin-left: 25px;
+  margin-right: 25px;
+  display: flex;
+}
+
+.mask-rules-point {
+  height: 30px;
+  width: 3px;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.mask-button {
+  background-color: #333333;
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  font-size: 16px;
+  line-height: 40px;
+  margin: 25px 25px 0 25px;
+}
+
+.mask-button-hover {
+  background-color: #30302F;
+  color: #ADADAD;
+  border: 1px solid #ADADAD;
+}
+
+.mask-button::after {
+  border: 0;
+}
+
+.point {
+  display: flex;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}
+
+.reshoot {
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+.ocr-begin {
+  width: 100px;
+}
+
+.ocr-begin-button {
+  background-color: #333333;
+  border: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  font-size: 16px;
+}
+
+.ocr-begin-hover {
+  background-color: #30302F;
+  border: 1px solid #ADADAD;
+  color: #ADADAD;
+}
+
+.reshoot-hover {
+  color: #ADADAD;
+}
+
+.content-common {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(51, 51, 51, 0.7);
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-icon-box {
+  height: 38px;
+}
+
+.loading-box {
+  background-color: #FFFFFF;
+  width: 60px;
+  height: 60px;
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-text {
+  color: #666666;
+  font-size: 10px;
+}
+
+.fail-model {
+  background-color: #FFFFFF;
+  width: 100%;
+  margin-left: 45px;
+  margin-right: 45px;
+  height: 120px;
+  border-radius: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+
+.model-content {
+  color: #333333;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.model-title {
+  color: #333333;
+  font-size: 16px;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: bottom;
+  font-weight: bold;
+}
+
+.model-text {
+  color: #333333;
+  font-size: 14px;
+}
+
+.camera-model-button {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.image-model-button {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.camera-ok-button {
+  background-color: #0086F6;
+  border: 1px solid #0086F6;
+  color: #FFFFFF;
+  font-size: 14px;
+  width: 100%;
+}
+
+.image-button {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.image-left {
+  padding-right: 5px;
+}
+
+.image-right {
+  padding-left: 5px;
+}
+
+.image-cancel-button {
+  background-color: #FFFFFF;
+  color: #0086F6;
+  border: 1px solid #0086F6;
+  font-size: 14px;
+  width: 100%;
+}
+
+.image-ok-button {
+  background-color: #0086F6;
+  border: 1px solid #0086F6;
+  color: #FFFFFF;
+  font-size: 14px;
+  width: 100%;
+}
+
+.model-ok-hover {
+  background-color: #0092F8;
+  color: #E8EDF0;
+}
+
+.model-cancel-hover {
+  background-color: #E8EDF0;
+  color: #0092F8;
+}
+
+.image-avatar {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.image-loading {
+  width: 40px;
+  height: 40px;
+}

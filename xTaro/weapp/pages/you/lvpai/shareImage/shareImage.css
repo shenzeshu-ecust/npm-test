@@ -1,0 +1,182 @@
+.share_image_contaienr {
+  box-sizing: border-box;
+  background-color: #f5f8fa;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: padding-top 0.3s;
+  min-height: 100vh;
+}
+.share_image_contaienr .bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.share_image_contaienr .bg-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(50rpx);
+}
+.share_image_contaienr .one-image-wrapper {
+  margin-top: -88rpx;
+  width: 100%;
+  flex: 1;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.share_image_contaienr .one-image-wrapper image {
+  width: 622rpx;
+  height: 1044rpx;
+  object-fit: cover;
+  border-radius: 32rpx;
+}
+.share_image_contaienr .share-box {
+  z-index: 1;
+  min-height: 228rpx;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 64rpx 64rpx 0 0;
+  padding: 40rpx 56rpx 0 56rpx;
+  display: flex;
+  justify-content: center;
+}
+.share_image_contaienr .share-box .share-item {
+  flex: 1;
+  background: none;
+  border: none;
+  line-height: 1;
+  color: "#333333" !important;
+}
+.share_image_contaienr .share-box .share-item::after {
+  width: 0;
+  height: 0;
+  border: none;
+}
+.share_image_contaienr .share-box .share-item .imgBox {
+  margin-bottom: 10rpx;
+  justify-content: center;
+}
+.share_image_contaienr .share-box .share-item .imgBox image {
+  height: 100rpx;
+  width: 100rpx;
+}
+.share_image_contaienr .share-box .share-item text {
+  display: inline-block;
+  font-family: "PingFangSC-Regular";
+  font-size: 22rpx;
+  color: "#333333";
+  letter-spacing: "0";
+}
+.share_image_contaienr .error-msg {
+  text-align: center;
+  height: 100vh;
+  background: #f0f0f0;
+}
+.share_image_contaienr .error-msg image {
+  width: 260rpx;
+  height: 164rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  margin-top: 300rpx;
+}
+.share_image_contaienr .error-msg .err-emptydiv {
+  width: 280rpx;
+  height: 164rpx;
+  overflow: hidden;
+}
+.share_image_contaienr .error-msg .text {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 46rpx;
+  padding-bottom: 24rpx;
+}
+.share_image_contaienr .error-msg .err-btn {
+  width: 274rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  border-radius: 32rpx;
+  background: #2fcfbb;
+  color: #fff;
+  font-size: 30rpx;
+  margin: 0 auto;
+}
+.share_image_page_title {
+  padding-right: 48rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 34rpx;
+  color: #333;
+  text-align: center;
+  line-height: 88rpx;
+}
+.share_img_wrap {
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding-top: 24rpx;
+  flex: 1;
+  min-height: 76.7vh;
+}
+.share_img_wrap .share_img_swiper {
+  width: 100vw;
+  height: 76.7vh;
+  overflow: hidden;
+  margin-bottom: 48rpx;
+}
+.share_img_wrap .swiper-wrapper {
+  align-items: center;
+}
+.share_img_wrap .share_img_border {
+  width: 38.3vh;
+  height: 76.7vh;
+  border-radius: 24rpx;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  transition-property: height, width;
+  transition-duration: 0.3s;
+}
+.share_img_wrap .share_img {
+  width: 100%;
+  height: 100%;
+  border-radius: 24rpx;
+  object-fit: cover;
+}
+.share_arrow {
+  position: absolute;
+  height: 80rpx;
+  width: 80rpx;
+  align-self: center;
+  z-index: 2;
+  border-radius: 40rpx;
+  border-color: transparent;
+  background-color: #fff;
+  box-shadow: 0 8rpx 22rpx 0 rgba(3, 38, 64, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+}
+.share_arrow image {
+  height: 48rpx;
+  width: 48rpx;
+  object-fit: cover;
+}
+.share_arrow_left {
+  left: 32rpx;
+}
+.share_arrow_right {
+  right: 32rpx;
+}
+.share_arrow_disable {
+  display: none;
+}

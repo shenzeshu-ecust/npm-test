@@ -1,0 +1,1590 @@
+@import "../common/common.wxss";
+@import "operateLoglayer/index.wxss";
+@import "noticelayer/index.wxss";
+@import "../commontemplates/roompackage/package.wxss";
+.module {
+    border-radius: 24rpx;
+    background: #fff;
+    margin-top: 16rpx;
+    padding: 32rpx 24rpx;
+}
+.pb40 { padding-bottom: 40rpx !important; }
+.pb29 { padding-bottom: 29rpx; }
+.ft26 { font-size: 26rpx; }
+.mt7 { margin-top: 7rpx; }
+.va { vertical-align: middle; }
+.iphonex-margin {
+    margin-bottom: 66rpx;
+}
+/*自定义导航栏 start*/
+.nav-bar {
+    color: #fff;
+}
+.nav-bar .weui-navigation-bar__inner {
+    background: linear-gradient(90deg, rgb(0, 136, 246) 0%, rgb(0, 102, 246) 100%);
+}
+/*自定义导航栏 start*/
+/*头部卡片 start*/
+.head-info {
+    background: linear-gradient(90deg, rgb(0, 136, 246) 0%, rgb(0, 102, 246) 100%);
+    padding: 20rpx 24rpx;
+    box-sizing: border-box;
+    padding-bottom: 132rpx;
+}
+.double-ellipsis {
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.oc-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 17rpx;
+    width: 48rpx;
+    height: 48rpx;
+    display: inline-block;
+    background: #eee;
+    border-radius: 0px 16rpx 0px 100rpx;
+    padding: 12rpx 12rpx 20rpx 20rpx;
+    box-sizing: border-box;
+}
+.oc-arrow {
+    width: calc(100% - 598rpx);
+    text-align: right;
+}
+.order-status {
+    color: #fff;
+    line-height: 1;
+}
+.order-status-title {
+    font-size: 50rpx;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+.arrow-ico {
+    font-size: 30rpx;
+    display: inline-block;
+    height: 100%;
+    line-height: 56rpx;
+}
+.order-status-desc {
+    margin-top: 20rpx;
+    font-size: 26rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    line-height: 36rpx;
+}
+.order-card-swiper {
+    height: 128rpx;
+    background: #fff;
+    box-sizing: border-box;
+    border-radius: 16rpx;
+    font-size: 26rpx;
+    margin-top: 20rpx;
+    overflow: hidden;
+}
+.order-card-swiper .wx-swiper-dots .wx-swiper-dot {
+    width: 8rpx !important;
+    height: 8rpx !important;
+}
+.order-card-swiper .wx-swiper-dot.wx-swiper-dot-active {
+    width: 24rpx !important;
+    border-radius: 5rpx !important;
+}
+.order-card-swiper.high-height {
+    height: 200rpx;
+}
+.order-card {
+    height: initial;
+}
+.order-card .content {
+    height: 128rpx;
+    box-sizing: border-box;
+    display: flex;
+    padding: 24rpx;
+    align-items: center;
+}
+.oc-title {
+    color: #111111;
+    font-size: 28rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    height: 36rpx;
+    line-height: 36rpx;
+}
+.order-card .price {
+    color: #0066f6;
+}
+.order-card .green {
+    color: #08a66f;
+}
+.order-card .orange {
+    color: #f50;
+}
+.notice-detail .oc-subtitle {
+    margin: 0 24rpx;
+    position: relative;
+}
+.notice-detail .oc-subtitle:before {
+    content: "";
+    width: 8rpx;
+    height: 8rpx;
+    border-radius: 50%;
+    background: #f70;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -20rpx;
+}
+.notice-detail .title-num {
+    display: flex;
+    align-items: center;
+}
+.oc-subtitle {
+    color: #555555;
+    font-size: 24rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+}
+.order-card .content .left {
+    flex: 1;
+    min-width: 480rpx;
+    max-width: 598rpx;
+}
+.order-card .content .btn{
+    flex-shrink: 0;
+    padding: 13rpx 36rpx;
+    color: #006FF6;
+    border: 1rpx solid #2698f7;
+    border-radius: 8rpx;
+    transform: rotateZ(360deg);
+}
+.order-card .btns {
+    background: #f5f9ff;
+    border-radius: 0 0 16rpx 16rpx;
+    overflow: hidden;
+    display: flex;
+    color: #0066f6;
+    font-size: 26rpx;
+    font-family: PingFangSC-Regular;
+    height: 72rpx;
+    padding: 0;
+    line-height: 72rpx;
+}
+.order-card .btns .single-btn {
+    flex: 1;
+    text-align: center;
+    border-right: 1rpx solid #dde4ed;
+}
+.order-card .btns .sub-label {
+    color: #ffffff;
+    font-size: 16rpx;
+    padding: 1rpx 8rpx;
+    background: #ff7700;
+    margin-left: 10rpx;
+    border-radius: 12rpx 12rpx 12rpx 0;
+}
+.oc-notice-num {
+    display: inline-block;
+    color: #f70;
+    border: 1rpx solid #f70;
+    margin-left: 4rpx;
+    font-size: 20rpx;
+    border-radius: 8rpx;
+    vertical-align: text-bottom;
+    transform: rotateZ(360deg);
+    line-height: 1.3;
+    padding: 0 4rpx;
+}
+.oc-detail-btn {
+    position: absolute;
+    right: 24rpx;
+    bottom: 24rpx;
+    color: #0066f6;
+}
+.order-card .content .btn.pay-btn {
+    font-size: 26rpx;
+    text-align: center;
+    background: #006FF6;
+    color: #fff;
+    padding: 9rpx 30rpx;
+    line-height: 1;
+    font-weight: 500;
+}
+.pay-btn .count-down{
+    font-size: 20rpx;
+    margin-top: 4rpx;
+}
+.refresh {
+    display: inline-block;
+    background: rgba(0,0,0,0.2);
+    border-radius: 22rpx;
+    font-size: 26rpx;
+    font-weight: normal;
+    font-family: PingFangSC-Regular;
+    margin-left: 18rpx;
+    padding: 5rpx 14rpx;
+    flex-shrink: 0;
+}
+/*头部卡片 end*/
+/*通用浮层 start*/
+.card-info {
+    background: #fff;
+    border-radius: 16rpx;
+    color: #111111;
+}
+/*通用浮层 end*/
+/*价格信息卡片 start*/
+.price-cancel-area {
+    margin-top: -108rpx;
+    padding: 31rpx 24rpx 24rpx;
+}
+.price-info {
+    padding-bottom: 24rpx;
+}
+.pay-info {
+    display: flex;
+    align-items: center;
+}
+.pay-item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.pay-item .title {
+    color: #111111;
+    font-size: 38rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    margin-right: 9rpx;
+    flex: 0 0 auto;
+}
+.pay-item .wechat-font-qa {
+    font-size: 28rpx;
+    color: #555;
+}
+.pay-item .price {
+    display: inline-block;
+    margin-left: 9rpx;
+    color: #ff5500;
+    font-size: 44rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+}
+.pay-item .price .desc {
+    font-size: 24rpx;
+    font-weight: normal;
+    font-family: PingFangSC-Regular;
+}
+.price-detail-btn {
+    color: #555555;
+    font-size: 26rpx;
+}
+/*价格信息卡片 end*/
+.policy {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-size: 26rpx;
+    padding-top: 24rpx;
+    border-top: 1rpx solid #eee;
+}
+.policy.presale-order {
+    padding-top: 0;
+    border: unset;
+}
+.policy .desc {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    color: #111;
+}
+.policy .btn {
+    flex-shrink: 0;
+    padding-left: 10rpx;
+    color: #555;
+}
+/* 安心取消 */
+.ec-icon {
+    width: 28rpx;
+    height: 28rpx;
+}
+.ec-name {
+    color: #08a66f;
+    font-size: 24rpx;
+    font-weight: 500;
+    margin: 0 8rpx;
+    font-family: PingFangSC-Medium;
+}
+.policy .ec-detail {
+    line-height: 1;
+}
+.ec-detail-desc .ec-icon  {
+    width: 29rpx;
+    height: 29rpx;
+}
+.ec-detail-desc .ec-name {
+    font-size: 30rpx;
+}
+.ec-detail-desc .ec-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24rpx;
+}
+.ec-detail-desc .desc {
+    background: #f2fcf9;
+    border-radius: 8rpx;
+    padding: 24rpx;
+    font-size: 26rpx;
+    color: #111;
+    margin-bottom: 32rpx;
+}
+.ec-detail-desc .old-title {
+    color: #111111;
+    font-family: PingFangSC-Medium;
+    font-size: 30rpx;
+    font-weight: 500;
+    margin-bottom: 25rpx;
+}
+/* 取消政策浮层 start */
+.tips-list .ladder-cancel{
+    border: unset;
+}
+.tips-list .jt-thead {
+    border-radius: 8rpx 8rpx 0 0;
+}
+.tips-list .jt-thead .jt-txt:first-child {
+    border-radius: 8rpx 0 0 0;
+}
+.tips-list .jt-thead .jt-txt:last-child {
+    border-radius: 0 8rpx 0 0;
+}
+.tips-list .jt-thead .jt-txt {
+    background-color: #eef1f6 !important;
+}
+.tips-list .ladder-cancel {
+    margin-left: 0;
+}
+.tips-list .ladder-cancel .jt-txt {
+    border-right: 3rpx solid #fff;
+    background-color: #f8fafd;
+}
+.ladder-cancel .jt-tbody .jt-free{ color: #009c67; }
+.ladder-cancel .jt-tbody {
+    border-top: unset;
+    border-bottom: 3rpx solid #fff;
+}
+.ladder-cancel .jt-tbody:last-child {
+    border-radius: 0 0 8rpx 8rpx;
+}
+.ladder-cancel .jt-tbody:last-child .jt-txt:first-child {
+    border-radius: 0 0 0 8rpx;
+}
+.ladder-cancel .jt-tbody:last-child .jt-txt:last-child {
+    border-radius: 0 0 8rpx 0;
+}
+.ladder-cancel .hight-light {
+    position: relative;
+}
+.ladder-cancel .hight-light:before {
+    width: 3rpx;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    content:'';
+    background: linear-gradient(-180.2deg, rgb(255, 255, 255) 0%, rgb(0, 134, 246) 29.63%, rgb(0, 134, 246) 55.29%, rgb(255, 255, 255) 100%);
+}
+.ladder-cancel .hight-light:after {
+    height: 0;
+    width: 0;
+    position: absolute;
+    left: 3rpx;
+    top: 30%;
+    content: '';
+    border: 6rpx solid;
+    border-color: transparent transparent transparent #006FF6;
+    border-right: 0;
+}
+.tips-list {
+    color: #111111;
+    font-size: 28rpx;
+    height: 100%;
+    min-height: 700rpx;
+    font-weight: 500;
+}
+.tips-list .tips-item {
+    text-align: justify;
+    line-height: 36rpx;
+    font-size: 24rpx;
+    margin-top: 33rpx;
+}
+/* 取消政策浮层 end */
+/*骨架屏*/
+.order-fishbone {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+}
+.order-fishbone .img {
+    width: 100%;
+    height: 100%;
+}
+.order-fishbone .fishbone-loading {
+    height: 58%;
+    margin-top: 65%;
+    position: absolute;
+    bottom: 170rpx;
+}
+/*登录弹窗*/
+.login-layer {
+    background: #fff;
+    width: 640rpx;
+    border-radius: 8rpx;
+    padding: 80rpx 10rpx;
+    text-align: center;
+}
+.login-layer .text-title {
+    font-size: 32rpx;
+    color: #111111;
+    font-weight: 500;
+    line-height: 32rpx;
+    padding: 20rpx 40rpx;
+}
+.login-layer .text-crude {
+    font-size: 24rpx;
+    color: #555555;
+    font-weight: 500;
+    line-height: 32rpx;
+    padding: 20rpx 40rpx;
+    margin-bottom: 40rpx;
+}
+.login-layer .text-line {
+    width: 500rpx;
+    height: 2rpx;
+    margin: 0 auto;
+    margin-bottom: 30rpx;
+    background-color: #111111;
+}
+.login-layer .agree-btn {
+    width: 500rpx;
+    height: 82rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 28rpx;
+    line-height: 82rpx;
+    font-weight: 500;
+    margin: 0 auto;
+    background: linear-gradient(90deg, rgb(0, 136, 246) 0%, rgb(0, 102, 246) 100%);
+}
+/*酒店信息*/
+.hotel-info {
+    display: flex;
+    position: relative;
+}
+.hotel-logo {
+    width: 150rpx;
+    border-radius: 8rpx;
+    flex: 0 0 auto;
+    margin-right: 18rpx;
+    font-size: 26rpx;
+    color: #111111;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    background-size: cover;
+    background-image: url("https://pages.c-ctrip.com/hotels/wechat/img/default.png");
+}
+.hotel-content {
+    padding-left: 168rpx;
+}
+.hotel-logo .days {
+    font-size: 23rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    color: #fff;
+    padding: 0 10rpx 0 6rpx;
+    background: rgba(0,0,0,0.6);
+    margin: 5rpx;
+    border-radius: 7rpx;
+    text-align: center;
+    display: inline-block;
+    height: 32rpx;
+    line-height: 32rpx;
+}
+.hc-name {
+    font-size: 34rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+}
+.hc-en-name {
+    font-size: 26rpx;
+}
+.hc-address {
+    margin-top: 12rpx;
+    font-size: 26rpx;
+}
+.hc-address .wechat-font-copy {
+    color: #000;
+    font-size: 20rpx;
+}
+.hotel-btns {
+    margin-top: 30rpx;
+    display: flex;
+}
+.hotel-btns .btn {
+    flex: 1;
+    display: inline-block;
+    text-align: center;
+    background: #f5f7fa;
+    border-radius: 8rpx;
+    padding: 19rpx 0;
+    font-size: 26rpx;
+    margin-right: 4%;
+}
+
+.hotel-btns .btn:last-child {
+    margin-right: 0 !important;
+}
+.hotel-btns .car-box {
+    position: relative;
+}
+.hotel-btns .promotion-tag {
+    position: absolute;
+    background: #ff7700;
+    left: 0rpx;
+    top: -8rpx;
+    width: 48rpx;
+    height: 24rpx;
+    border-radius: 12rpx 12rpx 12rpx 0rpx;
+    display: flex;
+    flex-direction: column;
+}
+.hotel-btns .promotion-text {
+    font-size: 16rpx;
+    color: #fff;
+    line-height: 24rpx;
+    justify-content: center;
+}
+.hotel-btns .car-tag {
+    margin-right: 9rpx;
+}
+.hotel-btns .icon {
+    color: #3665a7;
+}
+/*入住信息*/
+.module-title {
+    color: #111111;
+    font-size: 36rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    margin-bottom: 24rpx;
+}
+.checkin-content {
+    box-shadow: 0 0 4px 3px rgb(138 140 142 / 9%);
+    padding: 32rpx 24rpx;
+    border-radius: 16rpx;
+}
+.oversea-time-tip {
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    color: #555;
+    font-size: 26rpx;
+    padding-top: 15rpx;
+}
+.date-info, .date-info-hourrroom {
+    border-bottom: 2rpx dotted #99aeca;
+    padding-bottom: 29rpx;
+    position: relative;
+}
+.date-info:after {
+    content: '';
+    position: absolute;
+    bottom: 32rpx;
+    top: 0;
+    left: 13rpx;
+    width: 10rpx;
+    background: #D9E8FE;
+}
+.date-info .item {
+    line-height: 1;
+    z-index: 1;
+    position: relative;
+}
+.date-info .checkin {
+    margin-bottom: 25rpx;
+}
+.date-info .item .icon {
+    vertical-align: bottom;
+    background: #0f4999;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 24rpx;
+    font-family: FZY3JW--GB1-0;
+    display: inline-block;
+    width: 38rpx;
+    height: 38rpx;
+    line-height: 38rpx;
+    text-align: center;
+    margin-right: 16rpx;
+}
+.date-info .item .time {
+    color: #111111;
+    font-size: 30rpx;
+    font-family: PingFangSC-Medium;
+}
+.room-info {
+    margin-top: 29rpx;
+}
+.room-title {
+    font-size: 30rpx;
+    margin-bottom: 24rpx;
+}
+.date-info-hourrroom .tit, .room-title .tit {
+    color: #111111;
+    font-size: 30rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+}
+.date-info-hourrroom .desc, .room-basic {
+    color: #111111;
+    font-size: 26rpx;
+    font-family: PingFangSC-Regular;
+}
+.room-basic .facility-item:before {
+    content: '|';
+    color: #aaa;
+    margin: 0 8rpx;
+}
+.room-basic .facility-item:first-child:before {
+    content: '' !important;
+    margin: 0;
+}
+/*餐食信息*/
+.checkin-breakfast {
+    margin-top: 32rpx;
+}
+.cb-sub-title {
+    line-height: 1;
+    margin-bottom: 16rpx;
+}
+.cb-sub-title .line {
+    background: linear-gradient(-180deg, rgb(0, 118, 245) 0%, rgba(0, 167, 250, 0.5) 100%);
+    width: 6rpx;
+    height: 22rpx;
+    border-radius: 4rpx;
+    display: inline-block;
+}
+.cb-sub-title .subtitle {
+    display: inline-block;
+    margin-left: 18rpx;
+    color: #111111;
+    font-size: 26rpx;
+    font-family: PingFangSC-Medium;
+}
+.cb-title {
+    font-size: 30rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    margin-bottom: 20rpx;
+    color: #111;
+}
+.breakfast-detail {
+    position: relative;
+    background: #f5f7fa;
+    border-radius: 16rpx;
+    padding: 20rpx 24rpx;
+}
+.breakfast-detail .item {
+    display: flex;
+    font-size: 26rpx;
+    margin-bottom: 8rpx;
+    align-items: center;
+}
+.breakfast-detail .bd-title {
+    width: 124rpx;
+    flex: 0 0 auto;
+}
+.breakfast-fold {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 103rpx;
+    color: #555555;
+    line-height: 146rpx;
+    background: linear-gradient(-180deg, rgba(245,247,250, 0) 0%, rgba(245,247,250, 1) 49.27%, rgb(245,247,250) 100%);
+}
+.checkin-info-module .toggle-btn {
+    font-size: 26rpx;
+    text-align: center;
+}
+.checkin-info-module .wechat-font-g-arrow-up, .breakfast-fold .wechat-font-g-arrow-down {
+    margin-left: 8rpx;
+}
+/*套餐内餐食*/
+.meal-suite, .gift-suite {
+    margin-top: 32rpx;
+}
+.meal-suite-content {
+    position: relative;
+    background: #f5f7fa;
+    border-radius: 16rpx;
+    font-size: 26rpx;
+    padding: 0 24rpx;
+    color: #111;
+}
+.mealsuite-item {
+    padding: 29rpx 0;
+    border-top: 1rpx solid #ddd;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+.meal-suite-content .mealsuite-item:first-child {
+    border: unset;
+}
+.mealsuite-name {
+    flex: 1;
+}
+.ms-appoint {
+    min-width: 160rpx;
+    text-align: right;
+    margin-right: 8rpx;
+}
+.ms-appoint.highlight, .tc-left .highlight{
+    color: #ff7700;
+}
+.meal-suite .breakfast-fold, .gift-suite .breakfast-fold {
+    height: 100rpx;
+    line-height: 123rpx;
+    background: linear-gradient(-180deg, rgba(245,247,250, 0) 0%, rgba(245,247,250, 1) 26.27%, rgb(245,247,250) 100%);
+}
+/*套餐浮层*/
+.sl-content {
+    box-sizing: border-box;
+}
+.suite-item {
+    background: #fff;
+    padding: 28rpx 24rpx 32rpx;
+    border-radius: 16rpx;
+    margin: 16rpx 0;
+}
+.sl-content .pac-menu {
+    margin: 24rpx 0 20rpx;
+}
+.suite-header {
+    display: flex;
+    font-size: 26rpx;
+    align-items: center;
+}
+.suite-header-desc {
+    flex: 1;
+    padding-bottom: 20rpx;
+    border-bottom: 1rpx solid #eee;
+}
+.suite-content {
+    margin-top: 24rpx;
+}
+.suite-header-desc .name {
+    color: #111111;
+    font-size: 30rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8rpx;
+}
+.suite-header-desc .highlight {
+    color: #f24c3d;
+    margin-top: 6rpx;
+    display: block;
+}
+.suite-appoint-btn {
+    padding: 15rpx 28rpx;
+    color: #fff;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    background: #0066f6;
+    border-radius: 8rpx;
+}
+.suite-item .pac-menu-border {
+    border: unset;
+    background: #f8fafd;
+}
+.gift-suite-title {
+    color: #111111;
+    font-size: 30rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    margin: 32rpx 0rpx 20rpx ;
+}
+/*门票*/
+.ticket-info {
+    margin-top: 30rpx;
+    display: flex;
+    margin-bottom: 16rpx;
+    background: #f5f7fa;
+    border-radius: 12rpx;
+    padding: 24rpx 0rpx 24rpx 24rpx;
+}
+.ticket-img {
+    background: url(https://pages.c-ctrip.com/hotels/wechat/img/status-ques.png) center center no-repeat;
+    background-size: cover;
+    width: 88rpx;
+    flex: 0 0 auto;
+    border-radius: 8rpx;
+    overflow: hidden;
+    margin-right: 20rpx;
+}
+.ticket-img .t-icon {
+    display: inline-block;
+    color: #ffffff;
+    font-size: 20rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    background: #ff7700;
+    border-radius: 4rpx;
+    line-height: 24rpx;
+    width: 24rpx;
+    height: 24rpx;
+    text-align: center;
+    margin: 6rpx 0rpx 0rpx 6rpx;
+}
+.ticket-content {
+    flex: 1;
+    display: flex;
+    font-size: 26rpx;
+    align-items: center;
+    position: relative;
+}
+.ticket-title {
+    color: #111111;
+    font-size: 24rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    margin-bottom: 8rpx;
+    line-height: 36rpx;
+}
+.ticket-title .color {
+    color: #555555;
+    vertical-align: middle;
+}
+.tc-left {
+    flex: 1;
+}
+.tc-left .date {
+    font-size: 24rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+    color: #111111;
+}
+.tc-left .appoint {
+    font-size: 24rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+    color: #0f4999 !important;
+}
+.tc-left .appoint:before {
+    content: '|';
+    color: #555555;
+    margin: 0rpx 7rpx;
+}
+.tc-left .tags {
+    margin-top: 12rpx;
+    color: #555555;
+    font-size: 20rpx;
+}
+.tc-left .tags .item {
+    padding: 4rpx 6rpx;
+    border: 1rpx solid #c5c5c5;
+    border-radius: 4rpx;
+    line-height: 1;
+    margin-right: 8rpx;
+}
+.ticket-button {
+    flex: 0 0 auto;
+    color: #0066f6;
+    display: inline-block;
+    font-size: 26rpx;
+    height: 32rpx;
+    line-height: 32rpx;
+    bottom: 0rpx;
+    right: 30rpx;
+    position: absolute;
+    text-align: center;
+}
+.ticket-button text {
+    vertical-align: middle;
+}
+/*问客服*/
+.customer-service {
+    padding: 17rpx 0 15rpx;
+    position: fixed;
+    bottom: 352rpx;
+    right: 24rpx;
+    color: #FFF;
+    width: 88rpx;
+    height: 88rpx;
+    text-align: center;
+    border-radius: 100%;
+    box-sizing: border-box;
+    z-index: 1;
+    background: linear-gradient(90deg, rgb(0, 136, 246) 0%, rgb(0, 102, 246) 100%);
+}
+
+.icon-im-font-customer-service { font-size: 42rpx; }
+.customer-service .name{ font-size: 20rpx; margin-top: 3rpx; }
+/*问携程/问酒店浮层*/
+.customer-layer .ask-hotel, .customer-layer .ask-ctrip{
+    border-top: 8rpx #F4F4F4 solid;
+    padding: 0 24rpx;
+}
+.customer-layer .tit {
+    font-size: 32rpx;
+    font-weight: 700;
+    padding: 24rpx 0;
+}
+.customer-layer .ask-ctrip .tit {
+    padding: 32rpx 0;
+}
+.customer-layer .title {
+    font-size: 28rpx;
+    line-height: 36rpx;
+    height: 36rpx;
+    font-weight: normal;
+}
+.customer-layer .icon-im {
+    font-size: 40rpx;
+    color: #006FF6;
+}
+
+.ask-hotel .item {
+    border-top: 2rpx #ECECEC solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 144rpx;
+}
+
+.ask-hotel .desc {
+    font-size: 24rpx;
+    line-height: 32rpx;
+    height: 32rpx;
+    color: #888888;
+    padding-top: 12rpx;
+}
+
+.ask-hotel .copy {
+    color: #006FF6;
+    padding-left: 16rpx;
+}
+
+.ask-ctrip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ask-ctrip .title {
+    padding-top: 12rpx;
+}
+/*入住信息*/
+.reservation-info-module .basic-info {
+    margin-top: 38rpx;
+}
+.bi-item {
+    font-size: 26rpx;
+    margin-bottom: 24rpx;
+    display: flex;
+}
+.bi-item:last-child {
+    margin-bottom: 0;
+}
+.bi-item .title {
+    width: 160rpx;
+    flex: 0 0 auto;
+    color: #555555;
+    font-family: PingFangSC-Regular;
+}
+.bi-item .ri-content {
+    flex: 1;
+    color: #111111;
+    display: flex;
+    align-items: flex-start;
+    font-family: PingFangSC-Regular;
+}
+.ri-content .icon {
+    margin-left: 11rpx;
+    flex: 0 0 auto;
+    padding-top: 7rpx;
+    color: #555;
+}
+.ri-content .tag {
+    border: 1px solid #b8c6d9;
+    border-radius: 4rpx;
+    color: #3263a6;
+    font-size: 20rpx;
+    display: inline-block;
+    padding: 0 4rpx;
+}
+.ri-content .con {
+    word-break: break-all;
+}
+.reservate-btns {
+    margin-top: 32rpx;
+    display: flex;
+}
+.rb-item {
+    flex: 1;
+    display: inline-block;
+    background: #f5f7fa;
+    border-radius: 8rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    color: #111111;
+    font-size: 26rpx;
+    font-family: PingFangSC-Regular;
+    text-align: center;
+    margin-right: 2%;
+}
+.rb-item:last-child {
+    margin-right: 0;
+}
+.rb-icon {
+    vertical-align: baseline;
+    margin-right: 13rpx;
+    color: #3665a7;
+}
+/*nps*/
+
+.nps-title {
+    color: #111111;
+    font-size: 34rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    margin-bottom: 27rpx;
+}
+.nps-txt {
+    color: #555555;
+    font-size: 26rpx;
+    display: flex;
+    justify-content: space-between;
+    font-family: PingFangSC-Regular;
+}
+.nps-txt .item {
+    flex: 0 0 auto;
+    height: 37rpx;
+    line-height: 37rpx;
+}
+.nps-txt image {
+    width: 32rpx;
+    height: 32rpx;
+    vertical-align: text-top;
+    margin-right: 4rpx;
+}
+.nps-num {
+    margin: 24rpx 0 8rpx;
+    display: flex;
+}
+.nps-num .item {
+    flex: 1;
+    height: 62rpx;
+    line-height: 62rpx;
+    text-align: center;
+    background: #f5f7fa;
+    margin-right: 2rpx;
+    font-size: 26rpx;
+    border-radius: 4rpx;
+}
+.nps-num .item:last-child {
+    margin-right: 0;
+}
+.nps-num .item.current {
+    color: #fff;
+    background: #0066f6;
+}
+.feed-back-title {
+    color: #111111;
+    font-size: 34rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    margin-top: 48rpx;
+}
+.nps-submit {
+    color: #fff;
+    background: #0066f6;
+    text-align: center;
+    padding: 15rpx 0;
+    font-size: 30rpx;
+}
+.nps-submit:after {
+    border: unset;
+}
+.fb-input {
+    width: 100%;
+    margin: 24rpx 0;
+    background: #f5f7fa;
+    border-radius: 8rpx;
+    padding: 24rpx 16rpx;
+    box-sizing: border-box;
+}
+.fb-placeholder {
+    color: #aaaaaa;
+    font-size: 26rpx;
+}
+.nps-module .icon-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40rpx 0 8rpx;
+}
+.nps-module .submit-desc {
+    font-size: 30rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    margin-top: 22rpx;
+    color: #08a66f;
+}
+/*发票信息*/
+.invoice-module .module-title {
+    margin-bottom: 16rpx;
+}
+.invoice-content {
+    font-size: 26rpx;
+}
+.ic-desc {
+    display: inline-block;
+    margin-right: 9rpx;
+}
+.invoice-content .wechat-font-qa {
+    vertical-align: middle;
+}
+/*新版发票样式*/
+.invoice-info {
+    display: flex;
+    align-items: center;
+}
+.invoice-info .invoice-content {
+    min-width: 480rpx;
+    margin-right: 16rpx;
+}
+.invoice-info .max-wd {
+    max-width: 540rpx;
+}
+.invoice-info .sub-title {
+    color: #111;
+    font-size: 30rpx;
+    font-weight: 500;
+    font-family: PingFangSC-Medium;
+    margin-bottom: 12rpx;
+}
+.invoice-info .normal-desc {
+    font-size: 24rpx;
+}
+.invoice-info .special-desc {
+    font-size: 24rpx;
+    color: #888;
+}
+.special-desc .desc-item:before {
+    content: '|';
+    color: #aaa;
+    margin: 0 16rpx;
+}
+.special-desc .desc-item:first-child:before {
+    content: '' !important;
+    margin: 0;
+}
+.invoice-info .invoice-btn {
+    font-size: 26rpx;
+    border: 1rpx solid #2698f7;
+    color: #006FF6;
+    border-radius: 8rpx;
+    padding: 13rpx 36rpx;
+    transform: rotateZ(360deg);
+    margin: 6rpx 0;
+    height: 33rpx;
+    flex-shrink: 0;
+}
+/*资质备案*/
+.qualification-module {
+    background: #ffffff;
+    border-radius: 24rpx;
+    margin: 16rpx 0;
+    padding: 30rpx 24rpx;
+    font-size: 26rpx;
+    color: #111;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+.qualification-icon {
+    vertical-align: sub;
+    color: #0066f6;
+    margin-right: 13rpx;
+}
+.qualification-desc {
+    flex: 1;
+}
+/*底部操作按钮*/
+.operation-btns {
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    display: flex;
+    padding: 24rpx 24rpx 68rpx;
+    box-shadow: 0 -1rpx 13rpx 0 rgba(196, 196, 196, 0.5);
+}
+.operation-placeholder {
+    height: 164rpx;
+}
+.operation-btns .operation {
+    padding: 19rpx 0;
+    text-align: center;
+    flex: 1;
+    background: linear-gradient(90deg, rgb(0, 136, 246) 0%, rgb(0, 102, 246) 100%);
+    border-radius: 8rpx;
+    color: #fff;
+    font-size: 26rpx;
+    margin-right: 16rpx;
+    font-family: PingFangSC-Medium;
+}
+.operation-btns .operation:last-child {
+    margin-right: 0;
+}
+.operate-layer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+}
+.operate-layer .remain-btns {
+    position: absolute;
+    bottom: 113rpx;
+    background: #fff;
+    box-shadow: 0 12rpx 20rpx 2rpx rgba(0, 0, 0, 0.12);
+    right: 24rpx;
+    z-index: 99;
+    border-radius: 8rpx;
+    padding: 26rpx;
+    color: #111111;
+    font-size: 26rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+}
+.operate-layer .remain-btns:after {
+    position: absolute;
+    content: '';
+    bottom: -29rpx;
+    right: 30rpx;
+    width: 0;
+    height: 0;
+    border: 16rpx solid #fff;
+    border-left: 16rpx solid transparent;
+    border-right: 16rpx solid transparent;
+    border-bottom: 16rpx solid transparent;
+}
+.operate-layer .remain-btns .btn {
+    padding: 19rpx;
+    text-align: center;
+    background: #ebeff5;
+    border-radius: 8rpx;
+    margin-bottom: 16rpx;
+}
+/*banner*/
+.swiper-container { width: 100%; height: 100rpx; margin: 16rpx 0; }
+.swiper-banner { width: 100%; height: 100%; display: block; border-radius: 16rpx; overflow: hidden; }
+.swiper-container .wx-swiper-dots{
+    margin-bottom: -10rpx;
+}
+.swiper-container .wx-swiper-dot {
+    width: 10rpx;
+    height: 10rpx;
+    border-radius: 20rpx;
+}
+.swiper-container .wx-swiper-dot-active{
+    width: 30rpx;
+    height: 10rpx;
+    border-radius: 40rpx;
+}
+
+/*扫码住*/
+.g-box{
+    background-color: #fff;
+    padding: 32rpx;
+    margin-bottom: 20rpx;
+}
+.smz-title {
+    font-weight: bold;
+    font-size: 28rpx;
+    color: #111111;
+}
+.module-container {
+    display: flex;
+    margin: 24rpx 0 0 0;
+    flex-wrap: wrap;
+    order: 2;
+    justify-content: space-between;
+}
+.module-card {
+    background: #FFFFFF;
+    border: 1px solid #F2F2F2;
+    border-radius: 8rpx;
+    display: flex;
+    align-items: center;
+    height: 106rpx;
+    width: 303rpx;
+    margin-bottom: 16rpx;
+    padding-left: 28rpx;
+}
+.module-ico {
+    width: 50rpx;
+    height: 50rpx;
+}
+.module-mid {
+    margin-left: 20rpx;
+}
+.module-mid .wechat-font-arrow-right {
+    display: inline-block;
+    font-size: 22rpx;
+    margin-left: 4rpx;
+}
+.module-mid .title {
+    font-weight: bold;
+    font-size: 26rpx;
+    color: #111111;
+    letter-spacing: 0;
+}
+.module-mid .text {
+    font-weight: lighter;
+    font-size: 20rpx;
+}
+.row-module {
+    display: flex;
+    margin-top: 32rpx;
+    align-items: center;
+}
+.module-text {
+    font-weight: lighter;
+    font-size: 20rpx;
+}
+.mla {
+    margin-left: auto;
+}
+/*砍价浮层*/
+.bargain-view{
+    height: 530rpx;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
+}
+.bargain-view .bargain-close{
+    position: absolute;
+    width: 60rpx;
+    height: 60rpx;
+    right: 24rpx;
+    top: -84rpx;
+    background: url(https://pages.c-ctrip.com/hotels/wechat/market/cutprice/bargain-close.png) no-repeat transparent;
+    background-size: contain;
+}
+.bargain-view .bargain-join{
+    height: 530rpx;
+    background: transparent;
+}
+.bargain-view .bargain-header{
+    background: url(https://pages.c-ctrip.com/hotels/wechat/market/cutprice/bargain-layer-awesome.png) no-repeat transparent;
+    background-size: 100% 100%;
+    height: 200rpx;
+}
+.bargain-view .bargain-body{
+    height: 330rpx;
+    position: relative;
+    text-align: center;
+    background: #fff;
+}
+.bargain-view .bargain-body .bargain-button{
+    position: absolute;
+    left: calc(50% - 203rpx);
+    bottom: 45rpx;
+    margin: 0 auto;
+    width: 406rpx;
+    height: 108rpx;
+    background: url(https://pages.c-ctrip.com/hotels/wechat/market/cutprice/bargain-btn.png) no-repeat;
+    background-size: contain;
+    line-height: 89rpx;
+    font-size: 40rpx;
+    color: #fff;
+    text-align: center;
+}
+.bargain-view .bargain-body .bargain-title{
+    font-size: 48rpx;
+    color: #111111;
+    padding: 34rpx 0 15rpx;
+}
+.bargain-view .bargain-body .bargain-title .bargain-amount{
+    color: #FF4400;
+}
+.bargain-view .bargain-body .bargain-sub-title{
+    font-size: 32rpx;
+    color: #555555;
+}
+button::after {
+    border: none;
+}
+/*砍价按钮*/
+.bargain-btn {
+    position: relative;
+    display: inline-block;
+    height: 40rpx;
+    border-radius: 20rpx;
+    align-items: center;
+    line-height: 40rpx;
+    color: #ff5500;
+    font-size: 22rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    border: none;
+    background-image: linear-gradient(to right, rgba(255, 200, 154, 0), rgba(255, 200, 154, 1));
+    z-index: 1;
+}
+.bargain-btn:after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 241, 230) 100%);
+    top: 2rpx;
+    left: 2rpx;
+    right: 2prx;
+    bottom: 2rpx;
+    border-radius: 0 40rpx 40rpx 0;
+    width: calc(200% - 8rpx);
+    height: calc(200% - 8rpx);
+    z-index: -1;
+}
+.bargain-desc {
+    margin-right: 8rpx;
+}
+.bargain-btn .wechat-font-arrow-right {
+    width: 24rpx;
+    height: 24rpx;
+    background: #f70;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    margin-right: 8rpx;
+    line-height: 24rpx;
+}
+.bargain-desc, .bargain-btn .wechat-font-arrow-right {
+    display: inline-block;
+}
+.bargain-module {
+    padding: 0;
+    margin-bottom: 16rpx;
+}
+/*房型浮层下方按钮*/
+.room-layer-btn {
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+    box-sizing: border-box;
+    background: #ffffff;
+    box-shadow: 0 -1rpx 13rpx 0 rgba(196, 196, 196, 0.5);
+    padding: 15rpx 32rpx 50rpx;
+    left: 0;
+    right: 0;
+}
+.rl-btn-content {
+    background: #0066f6;
+    box-shadow: 0 6rpx 16rpx 2rpx rgba(86, 120, 168, 0.1);
+    border-radius: 12rpx;
+    padding: 12rpx 0;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+.rl-btn-top {
+    color: #ffffff;
+    font-size: 32rpx;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+}
+.rl-btn-bottom {
+    color: #bfe0fc;
+    font-size: 24rpx;
+    font-family: PingFangSC-Regular;
+}
+.iphonx-bottom {
+    height: 206rpx;
+}
+/*姓名鉴权浮层*/
+.name-confirm-content{
+    padding: 0 8rpx 24rpx;
+}
+.name-confirm-content .notice {
+    padding: 24rpx;
+    display: flex;
+    font-size: 28rpx;
+    background: #f2f8fe;
+    border-radius: 8rpx 8rpx 8rpx 0;
+    margin-bottom: 42rpx;
+    position: relative;
+}
+.name-confirm-content .notice:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border: 16rpx solid #f2f8fe;
+    border-right: 16rpx transparent solid;
+    border-bottom: 16rpx transparent solid;
+    position: absolute;
+    bottom: -16rpx;
+    left: 0;
+}
+.name-confirm-content .notice .img {
+    width: 64rpx;
+    height: 64rpx;
+    flex: 0 0 auto;
+    margin-right: 24rpx;
+}
+.name-confirm-content .names {
+    display: flex;
+    justify-content: center;
+    height: 88rpx;
+    line-height: 88rpx;
+    font-size: 32rpx;
+    font-weight: 500;
+}
+.nname-confirm-content .names .first, .name-confirm-content .names .last {
+    border: 1rpx solid #ccd6e5;
+    border-radius: 8rpx;
+    background: #f8fafd;
+    padding: 0 28rpx;
+}
+.name-confirm-content .names .pld {
+    height: 88rpx;
+    font-size: 32rpx;
+}
+.name-confirm-content .names .middle {
+    height: 88rpx;
+    width: 190rpx;
+    margin: 0 8rpx;
+    padding-left: 22rpx;
+    border-radius: 8rpx;
+    box-sizing: border-box;
+    border: 1rpx solid #006FF6;
+}

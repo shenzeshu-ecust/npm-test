@@ -1,0 +1,13 @@
+
+<view class="campus-wrap">
+  <view class="group-btn1">
+      <cell class="group-chat__groupCell" iconUrl="" contactText="" paddingStyle="15" url="{{chatGroupUrl1}}" 
+      bind:startmessage='startmessage' 
+      bind:completemessage="completemessage" />
+  </view>
+  <view class="group-btn2">
+    <cell class="group-chat__groupCell" iconUrl="" contactText="" paddingStyle="15" url="{{chatGroupUrl2}}" 
+    bind:startmessage='startmessage' 
+    bind:completemessage="completemessage" />
+  </view>
+</view>

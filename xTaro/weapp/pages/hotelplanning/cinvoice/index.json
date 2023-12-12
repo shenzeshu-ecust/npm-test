@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText":"携程发票",
+    "navigationBarBackgroundColor":"#fff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "usingComponents": {
+        "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar",
+        "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "navigationBarTitleText": "天天领现金",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "usingComponents": {
+      "waterfall": "../../../../commonComponent/cwaterfall/cwaterfall",
+      "captcha": "../../../../commonComponent/captcha_min/captcha",
+      "captcha-placeholder": "../../../../cwx/component/captcha/captcha",
+      "waterfall-placeholder": "../../../../cwx/component/cwaterfall/cwaterfall",
+      "countdown": "../../activity/components/countdown",
+      "taskList": "/pages/market/directory/task",
+      "taskAssist": "/pages/market/directory/taskAssist",
+      "nav-bar": "/cwx/component/navbar/navbar",
+      "task-count-down": "/pages/market/directory/components/taskCountDown/index"
+    },
+    "navigationStyle": "custom",
+    "componentPlaceholder": {
+      "taskList": "view",
+      "taskAssist": "view",
+      "waterfall": "waterfall-placeholder",
+      "captcha": "captcha-placeholder",
+      "task-count-down": "view"
+    }
+  }
+  

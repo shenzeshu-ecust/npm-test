@@ -1,0 +1,66 @@
+<view>
+  <view class="mod-title">
+    <image class="img-title" src="//pic.c-ctrip.com/pic/AssetCatalog/wx/bargainActivity/title_bg_new.png"/>
+    <view class="location-container" catchtap="onClickLocation">
+        <image class="img-location" src="https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/location.png"/>
+        <text class="text-location">{{showLocation}}</text>
+    </view>
+  </view>
+  <block wx:if="{{status === FetchStatus.LOADING}}">
+    <ul class="recommend-list">
+      <li wx:for="{{[1,2,3,4,5,6]}}" wx:key="{{index}}" class="loading-card">
+        <view class="info-wrapper loading-wrapper">
+          <view>
+            <view class="block info-block-cityname"/>
+            <view class="block info-block-date"/>
+          </view>
+          <view class="block info-block"/>
+        </view>
+      </li>
+    </ul>
+  </block>
+  <block wx:elif="{{status === FetchStatus.OK}}">
+    <view class="recommend-list">
+        <button class="card" wx:for="{{recommendList}}" wx:key="index" wx:for-item="item" open-type="launchApp" app-parameter="wechat" data-index="{{index}}" binderror="launchAppError">
+            <view class="info-wrapper">
+                <view class="city-info-part">
+                    <view class="city-name-part">
+                    <text class="{{item.showLittleText ? 'city-name-text-small' : 'city-name-text'}}">{{item.showDCityName}}</text>
+                    <image class="img-arrow" src="https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/arrow.png"/>
+                    <text class="{{item.showLittleText ? 'city-name-text-small' : 'city-name-text'}}">{{item.showACityName}}</text>
+                    </view>
+                    <view class="date-part">
+                    <text class="date-text">{{item.dDate}}</text>
+                    </view>
+                </view>
+                <view class="other-info-part">
+                    <text class="price-text">
+                    <text class="dfn-text">￥</text>{{item.lowPrice}}
+                    </text>
+                    <view class="discount-part" wx:if="{{item.rate && item.rate.length}}">
+                    <text class="discount-text">{{item.rate}}</text>
+                    </view>
+                </view>
+            </view>
+        </button>
+    </view>
+    <view class="nomore-container">
+        <view class="nomore-left-line"/>
+        <text class="nomore-text">没有更多了哦</text>
+        <view class="nomore-right-line"/>
+    </view>
+    <view class="bottom-wrapper"/>
+  </block>
+  <block wx:elif="{{status === FetchStatus.NO_RESULT}}">
+    <view class="no-result-wrapper">
+        <image class="net-error-img" src="https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/net_error.png"/>
+      <text class="no-title-text">该出发地查询无结果</text>
+    </view>
+    <view class="nomore-container">
+        <view class="nomore-left-line"/>
+        <text class="nomore-text">没有更多了哦</text>
+        <view class="nomore-right-line"/>
+    </view>
+    <view class="bottom-wrapper"/>
+  </block>
+</view>

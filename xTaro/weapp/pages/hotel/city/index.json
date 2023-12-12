@@ -1,0 +1,10 @@
+{
+    "navigationBarTitleText": "城市选择",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "usingComponents": {
+        "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar",
+        "hotkeyword": "/pages/hotel/components/hotkeyword/hotkeyword"
+    }
+}

@@ -1,0 +1,27 @@
+function numberGetFloat (number, n, roundFlag = false) {
+  n = n ? parseInt(n) : 0;
+  if (n <= 0) {
+    return Math.round(number);
+  }
+  if (roundFlag) {
+    number = Math.round(number * Math.pow(10, n)) / Math.pow(10, n); // 四舍五入
+  } else {
+    number = number; // 不四舍五入
+  }
+  number = number.toFixed(n); // 补足位数
+  return number;
+}
+
+// 折扣
+function calcDiscount(num) {
+  return numberGetFloat((100.0 - num) / 10, 1, false)
+}
+
+function calcPrice(num) {
+  return parseInt(Math.round(num))
+}
+module.exports = {
+  numberGetFloat: numberGetFloat,
+  calcDiscount: calcDiscount,
+  calcPrice: calcPrice
+}

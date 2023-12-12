@@ -1,0 +1,15 @@
+.invitePlus__normal__btn {
+  width: 666rpx;
+  height: 86rpx;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 43rpx;
+  color: #ffffff;
+  font-size: 38rpx;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 36rpx auto 0;
+}

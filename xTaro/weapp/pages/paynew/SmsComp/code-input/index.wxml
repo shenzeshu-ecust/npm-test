@@ -1,0 +1,10 @@
+<view class="code-input" bindtap="onBoxTap">
+
+  <view class="input-item" wx:for="{{inputItems}}" wx:for-item="item"  wx:for-index="idx" >
+    <view wx:if="{{item && item != ' '}}" class='input-number'>{{item}}</view>
+    <view wx:elif="{{idx == codeValue.length}}" class="cursor"></view>
+  </view>
+
+</view>
+
+<input class="hidden-input" type="number" bindinput='onInput' bindblur="onBlur" maxlength="6" hold-keyboard focus="{{focus}}"/>

@@ -1,0 +1,320 @@
+@font-face {
+    font-family: "wx_font_ctrip_myctrip";
+    src: url("https://pic.c-ctrip.com/platform/h5/miniapp/my/wx_font_ctrip_myctrip.ttf") format('truetype');
+}
+
+.iconfont {
+    font-family: "wx_font_ctrip_myctrip" !important;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    color: #999;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.icon-forward:before {
+    content: "\e944";
+    color: #999999;
+    font-size: 22rpx;
+}
+
+page {
+    background: #F8F8F8;
+    height: 100%;
+}
+.font-weight-regular {
+    font-family: "PingFangSC-Regular";
+}
+.font-weight-medium {
+    font-family: "PingFangSC-Medium";
+}
+.font-weight-semibold {
+    font-family: "PingFangSC-Semibold";
+}
+/* 这是什么字体？ 使用默认字体 */
+.font-weight-FZYOUHS {
+    font-family: "FZYOUHS_512B--GB1-0";
+}
+
+.btn-icon {
+    width: 48rpx;
+    height: 48rpx;
+    margin: 0rpx;
+    padding: 0rpx;
+    line-height: 0rpx;
+}
+.icon {
+    width: 48rpx;
+    height: 48rpx;
+    margin-left: 32rpx;
+}
+.icon:first-child {
+    margin-left: 0rpx;
+}
+.head-icon {
+    display: flex;
+    padding-left: 24rpx;
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+}
+.head-icon-login {
+    background: #FFFFFF;
+    padding-bottom: 10rpx;
+}
+.relative {
+    position: relative;
+}
+.login-header-bg {
+    width: 100%;
+    height: 389rpx;
+    background: url("https://images4.c-ctrip.com/target/0zc5n120008iiz12i1AAD.png");
+    background-size: cover;
+}
+.unlogin-header-content {
+    display: flex;
+    flex-flow: column;
+    margin: 52rpx 51rpx 56rpx;
+}
+.unlogin-header-bg {
+    width: 100%;
+    height: 400rpx;
+    background: url("https://images4.c-ctrip.com/target/0zc54120008iiz0fw7977.jpg");
+    background-size: contain;
+}
+.unlogin-slogan {
+    color: #FFFFFF;
+    font-size: 40rpx;
+    text-align: center;
+}
+.unlogin-btn-wrapper {
+    display: flex;
+    margin-top: 32rpx;
+}
+.unlogin-btn {
+    width: 280rpx;
+    height: 72rpx;
+    border-radius: 8rpx;
+    color: #FFFFFF;
+    font-size: 30rpx;
+}
+#mobile-search {
+    border: 1px solid white;
+    color: #FFFFFF;
+    /* margin-right: 40rpx; */
+}
+.login {
+    background: -webkit-linear-gradient(left, #FFA50A, #FF7700);
+}
+.login-header-wrapper {
+    display: flex;
+    flex-flow: column;
+    padding: 0 0 0 24rpx;
+    position: absolute;
+    bottom: 0rpx;
+    width: 100%;
+    box-sizing: border-box;
+}
+.unlogin-header-wrapper {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    position: absolute;
+    bottom: 0rpx;
+}
+.userinfo-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 24rpx;
+}
+.userinfo {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    padding-left: 16rpx;
+    padding-right: 16rpx;
+    overflow: hidden;
+}
+.avatar {
+    flex: none;
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 60rpx;
+    background: white;
+    margin-left: 16rpx;
+}
+.user-name {
+    color: #000000;
+    font-size: 44rpx;
+    font-weight: bold;
+}
+.user-tag-wrapper {
+    display: flex;
+    margin-top: 8rpx;
+}
+.user-tag {
+    background: #FFFFFF;
+    border-radius: 20rpx;
+    display: flex;
+    padding: 10rpx 16rpx;
+    margin-left: 16rpx;
+}
+.user-tag:first-child {
+    margin-left: 0rpx;
+}
+.user-tag-text {
+    color: #333333;
+    font-size: 20rpx;
+    opacity: 0.9;
+}
+.user-center {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    /* align-items: center; */
+    margin: 16rpx 40rpx 23rpx 152rpx;
+}
+.user-entry {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    flex: auto;
+    /* (750-24*2 - 40*2)/3  */
+    /* width: 207.3rpx; */
+}
+
+.favorite-entry {
+    padding-right: 40rpx;
+}
+
+.ellipsis {
+    white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+image {
+    width: 72rpx;
+    height: 72rpx;
+}
+.home-body {
+    margin: auto 24rpx;
+    position: relative;
+    z-index: 1;
+}
+.module-container {
+    background: #FFFFFF;
+    border-radius: 16rpx;
+    margin-top: 16rpx;
+    padding: 32rpx 32rpx 48rpx 32rpx;
+    width: 638rpx; /* 750 - 24*2 - 32*2 */
+}
+.entry-title {
+    color: #333333;
+    font-size: 24rpx;
+    line-height: 30rpx;
+}
+.entry-description, .entry-name {
+    color: #999999;
+    font-size: 22rpx;
+    text-align: center;
+    margin-right: 4px;
+}
+.entry-number {
+    font-size: 30rpx;
+    margin-right: 4rpx;
+}
+.module-header {
+    display: flex;
+    justify-content: space-between;
+}
+.header-title {
+    color: #333333;
+    font-size: 30rpx;
+}
+.header-more {
+    color: #999999;
+    font-size: 22rpx;
+}
+.module-body {
+    display: flex;
+    width: 654rpx;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+.entry {
+    display: flex;
+    width: 163.5rpx; /* (750-24*4)/4  */
+    flex-flow: column;
+    align-items: center;
+    margin-top: 36rpx;
+}
+.entry image {
+    margin-bottom: 2rpx;
+}
+.order {
+    padding: 22rpx 32rpx 26rpx 32rpx;
+}
+.order .entry {
+    margin-top: 0rpx;
+}
+.logout-wrap {
+    padding-top: 40rpx;
+    padding-bottom: 65rpx;
+}
+.logout {
+    text-align: center;
+    font-size: 30rpx;
+    width: 280rpx;
+    color: #333333;
+    border-radius: 8rpx;
+    border-color: #AAAAAA;
+}
+.btn-im {
+    background-color:transparent;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.btn-im::after {
+    border: 0;
+}
+
+.businesslicense {
+    font-size: 24rpx;
+    line-height: 30rpx;
+    color: #999;
+    text-align: center;
+    padding-bottom: 32rpx;
+}
+
+.businesslicense text {
+    border-bottom: 1rpx solid #999;
+}
+
+.user-home {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 34rpx 0 0 34rpx;
+    width: 150rpx;
+    height: 56rpx;
+    background-color: rgba(230,243,254,0.8);
+}
+
+.user-home-txt {
+    font-size: 24rpx;
+    color: #0086F6;
+    line-height: 30rpx;
+    font-weight: bold;
+}
+
+.user-home .iconfont,
+.user-home .icon-forward:before {
+    color:#0086F6;
+    font-size: 26rpx;
+}

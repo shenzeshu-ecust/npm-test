@@ -1,0 +1,21 @@
+{
+  "navigationBarTitleText": "订酒店 用携程",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "guest": "./components/guest",
+    "jump": "./components/jump",
+    "ranking": "./components/ranking",
+    "component-assist-button": "./components/assist-button",
+    "checkpoint-swiper": "./components/checkpoint-swiper",
+    "countdown": "./components/countdown",
+    "captcha": "../../../../commonComponent/captcha_min/captcha",
+    "captcha-placeholder": "../../../../cwx/component/captcha/captcha",
+    "friends-poster": "./components/friends-poster",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  },
+  "componentPlaceholder": {
+    "captcha": "captcha-placeholder"
+  },
+  "enablePullDownRefresh": true
+}

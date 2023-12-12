@@ -1,0 +1,314 @@
+@import '../components/unlimitQRCode/qrcode.wxss';
+
+/*朋友圈*/
+.share-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    color: #333;
+    font-size: 28rpx;
+    z-index: 1100;
+    text-align: center;
+    padding: 30rpx 0 70rpx;
+    border-radius: 24rpx 24rpx 0 0;
+  }
+  
+  .share-bg .popop_title {
+    margin: 10rpx auto;
+  }
+  
+  .share-wechat {
+    display: flex;
+    justify-content: center;
+    border-radius: 24rpx 24rpx 0 0;
+    align-items: center;
+  }
+  
+  .share-bg .item {
+    margin: 0 30rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 140rpx;
+  }
+  
+  .share-bg .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 24rpx;
+    height: 24rpx;
+    padding: 30rpx;
+    /* background: url(https://pages.ctrip.com/hotel_h5/wechat/duanwu/dw-close2.png) center center no-repeat; */
+    /* background-size: 24rpx 24rpx; */
+  }
+  
+  .share-wechat .img {
+    margin-top: 15rpx;
+    margin-bottom: 10rpx;
+  }
+  
+  .share-wechat .reset-button {
+    line-height: inherit;
+    background: #fff;
+    font-size: inherit;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 200rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .share-wechat .reset-button:after {
+    display: none;
+  }
+
+  .qq-share{
+    position: fixed;
+    width: 200rpx;
+    height: 120rpx;
+    top: 30rpx;
+    right: 120rpx;
+    z-index: 10000000000000000000000;
+  }
+  .qq-share-text1{
+    position: relative;
+    color: #fff;
+    font-size: 30rpx;
+    margin-top: 20rpx;
+  }
+  .qq-share-image{
+    width: 100rpx;
+    height: 44.6rpx;
+    margin-left: 60rpx;
+  }
+  
+  /*分享二维码*/
+  .popup-cover{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.411);
+      z-index: 100000000000000;
+  }
+  .popup-mask{
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10000000000000000000000;
+  }
+  .share-layer {
+    z-index: 1100;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  
+  
+  .share-layer .img {
+    position: absolute;
+    top: 0rpx;
+    left: 0;
+    right: 0;
+    width: 750rpx;
+  }
+  
+  .share_poster {
+    /* background: url('https://images4.c-ctrip.com/img3/marketing/2018/06/xcx_face/icon_detail.png') 0 0/320rpx no-repeat; */
+    width: 95rpx;
+    height: 95rpx;
+    /* background-position: 0 -242rpx; */
+    /* background-size: 280rpx; */
+  }
+  
+  .share_button {
+    /* background: url(https://images4.c-ctrip.com/img3/marketing/2018/06/xcx_face/icon_detail.png) 0 0/320rpx no-repeat; */
+    width: 100rpx;
+    height: 94rpx;
+    margin: 0 auto;
+    /* background-position: -92rpx 10rpx; */
+    /* background-size: 280rpx; */
+  }
+  
+  /*  */
+  .post_canvas {
+    width: 375px;
+    position: fixed;
+    top: 9999px;
+  }
+
+  
+  /* 工具弹窗-返回APP */
+  .tools_box_bg {
+    position: relative;
+    bottom: 0;
+    left: 0rpx;
+    right: 0;
+    z-index: 1100;
+    text-align: center;
+    padding: 10rpx 6rpx 10rpx 0;
+    display: inline-flex;
+    overflow: hidden;
+  }
+  .tools_box_mask{
+    display: inline-flex;
+    width: 120rpx;
+    bottom: 300rpx;
+    left: 0;
+    right: 0;
+    z-index: 9999999;
+  }
+  .tools_popup_layout {
+    position: fixed;
+    bottom: 300rpx;
+    left: 0;
+    width: 120rpx;
+    height: 80rpx;
+    z-index: 100000000000000;
+  }
+  .returnapp_img {
+    width: 100rpx;
+    height: 45rpx;
+  }
+  .mkt_bar_backapp{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+  }
+  
+  .mkt_bar_backapp::after,
+  .mkt_bar_backapp::before {
+    border: none;
+    outline: none;
+  }
+
+  /* 首次小程序组件 */
+  .collection_comp_layout{
+    position: fixed !important;
+    width: 100vw !important;
+    border-radius: 10rpx;
+    font-size: 22rpx;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    opacity: 99999999;
+    position: fixed;
+    height: 80rpx;
+    top: 0;
+    z-index: 100000000000000;
+  }
+  .collection_comp_layout .comp_box {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999999;
+  }
+  .collection_virtual_button {
+    min-width: 100vw;
+    max-width: 100vw !important;
+    height: 82rpx;
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    bottom: 0;
+    left: 0rpx;
+    right: 0;
+    z-index: 1100;
+    text-align: center;
+    padding: 10rpx 6rpx 10rpx 0;
+    display: inline-flex;
+    /* overflow: hidden; */
+  }
+  .collection_virtual_comp_box{
+    position: relative !important;
+    bottom: 0;
+    top: 0;
+    min-width: 100vw;
+    max-width: 100vw !important;
+    height: 82rpx;
+    display: flex;
+    align-items: center;
+    z-index: 200;
+    opacity: 1;
+    z-index: 99999999;
+
+  }
+  .mkt-collection-layout{
+  
+  }
+
+  
+  /* 定制的订阅按钮 */
+  .custom_subscribe_layout {
+    position: fixed;
+    top: 800rpx;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 460rpx;
+    height: 100rpx;
+    z-index: 100000000000000;
+    /* background-color: rgba(255, 0, 0, 0.001); */
+    background: transparent !important;
+  }
+  .custom_subscribe_mask{
+    display: inline-flex;
+    width: 460rpx;
+    bottom: 300rpx;
+    left: 0;
+    right: 0;
+    z-index: 9999999;
+  }
+  .custom_subscribe_bg{
+    position: relative;
+    bottom: 0;
+    left: 0rpx;
+    right: 0;
+    z-index: 1100;
+    text-align: center;
+    display: inline-flex;
+    overflow: hidden;
+    width: 100%;
+    /* background-image: url(https://images3.c-ctrip.com/marketing/2023/04/treasure/icon_button_06.png); */
+    background: transparent !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+  .custom_subscribe_button {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #FFFF;
+  }
+    
+  .custom_subscribe_button::after,
+  .custom_subscribe_button::before {
+    border: none;
+    outline: none;
+  }

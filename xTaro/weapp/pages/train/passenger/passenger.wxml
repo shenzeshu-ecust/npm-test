@@ -1,0 +1,158 @@
+<import src="../common/components/passengerInfoBox/passengerInfoBox.wxml" />
+<view class="wrap">
+    <view class="pasg-add-btn">
+        <button class="btn-submit" bindtap="clickScan" data-ubt-key="train_addbyocr_btnclick" wx:if="{{passengerInfoBoxData.addPassenger.IdentityType == 1 && ocrFlag}}"><text class="ifont-scan"></text>扫描证件添加</button>
+        <button class="btn-submit" open-type="share"><text class="ifont-invite"></text>邀请好友填写</button>
+    </view>
+    <!-- 填写模板 -->
+    <view class="book-white add-box">
+        <template is="passengerInfoBox-passenger" data="{{passengerInfoBoxData, mobileTipsShow}}"></template>
+        <view class="btns">
+            <button class="btn-blue" hover-class="btn-primary_hover" bindtap="submit">确定</button>
+        </view>
+    </view>
+
+    <!-- 儿童票说明 -->
+    <view class="book-white child-tips" hidden="{{!passengerInfoBoxData.addPassenger.isChild}}">
+        <view class="tit">儿童票购票说明</view>
+            <image wx:if="{{isShowOldrule}}" src='https://images3.c-ctrip.com/train/2023-3/app-maipiao/4.20/zhonglaotielu/etongpiao_zhonglao3.png' class='img' mode='widthFix'></image>
+            <!-- <image wx:if="{{isShowOldrule}}" src='https://images3.c-ctrip.com/train/2022/app/8.59/zhuliucheng/ertongpiao_guizegenggai/rule_old.png' class='img' mode='widthFix'></image> -->
+            <image wx:if="{{!isShowOldrule}}" src='https://images3.c-ctrip.com/train/2022/app/8.59/zhuliucheng/ertongpiao_guizegenggai/rule_new1.png' class='img' mode='widthFix'></image>
+            <image wx:if="{{!isShowOldrule}}" src='https://images3.c-ctrip.com/train/2022/app/8.59/zhuliucheng/ertongpiao_guizegenggai/rule_new2.png' class='img' mode='widthFix'></image>
+            <image wx:if="{{!isShowOldrule}}" src='https://images3.c-ctrip.com/train/2022/app/8.59/zhuliucheng/ertongpiao_guizegenggai/rule_new3.png' class='img' mode='widthFix'></image>
+
+        <!-- <image src="https://images3.c-ctrip.com/train/2022/app/8.59/zhuliucheng/ertongpiao_guizegenggai/pic_child_tianxie2.png" class="img" mode="widthFix" ></image>
+       <image src="https://pic.c-ctrip.com/train/wechat/child-tips-img.png" class="img" mode="widthFix" ></image>
+        <view class="child-tips-list">
+          <view class="item">使用儿童本人证件购买儿童票，请使用儿童本人证件取票进站（如儿童无身份证，需携带户口本）</view>
+          <view class="item">使用同行成人证件购买儿童票，请使用同行成人证件取票进站</view>
+          <view class="item">请根据儿童实际身高购票，以免影响正常乘车</view>
+        </view>-->
+    </view>
+
+    <!-- 护照说明 -->
+    <view class="pasg-tips" hidden="{{passengerInfoBoxData.cardTypeText !== '护照'}}">
+        <view class="tit">温馨提示：</view>
+        <view class="item">台籍乘客请使用台胞证，目前车站不支持台湾护照取票。</view>
+        <view class="item">护照上如有中文名，请输入中文名，否则影响取票。</view>
+        <view class="item">请在人工窗口凭<text class="torage">护照</text>取票</view>
+    </view>
+
+    <!-- 学生票说明 -->
+    <view class="pasg-tips" wx:if="{{passengerInfoBoxData.addPassenger.PassengerType == 3 && stuTips.length}}">
+        <view class="tit">学生票购票说明</view>
+        <view class="item" wx:for="{{stuTips}}">{{item}}</view>
+    </view>
+     <view class="pasg-tips">
+          <view class="tit">请您在提交订单前仔细阅读以下内容：</view>
+          <view class="item">根据铁路12306等铁路客运机构实名制购票要求，购买火车票需提供乘客的证件信息和手机号，并需在服务中出具对应证件信息用于验证，请确保录入信息真实有效。携程将采取措施保护您录入的证件信息和手机号，且仅授权提供给【服务方、铁路12306、铁路代售点】等用于为您提供服务。</view>
+    </view>
+
+</view>
+
+
+    <view class="pop-full {{showType == 'name' || showType == child || showType == 'stu' ? 'active' : ''}}" bindtap="hideNameTips">
+            <block wx:if="{{showType == 'name'}}">
+                <view class="txt tblue">网络购票需验证乘客身份信息</view>
+                <view class="txt">请正确填写，乘客身份证件和姓名都通过验证才可以成功出票。</view>
+                <view class="txt tblue">乘客姓名填写说明：</view>
+                <view class="txt">1、使用身份证、回乡证、台胞证预订火车票请优先使用中文姓名。</view>
+                <view class="txt">2、如名字中包含生僻字可直接输入拼音代替。例如：“王鬳”可输入为“王yan”。</view>
+                <view class="txt">3、姓名中有”.”或”?”时，请仔细辩析身份证原件上的”.”或”?”，准确输入。</view>
+                <view class="txt">4、台籍乘客请使用台胞证（台湾居民来往大陆通行证）</view>
+                <view class="txt tblue">身份未通过核验购票失败怎么办？</view>
+                <view class="txt">如身份信息验证未通过造成出票失败，请您持有效证件原件，去火车站或代售点核验购票。    在车站或代售点核验通过后，下次就可以在网络买票了。</view>
+            </block>
+            <block wx:if="{{showType == 'child'}}">
+                <view class="txt tblue">1.儿童不能单独乘车。</view>
+                <view class="txt">为确保儿童出行安全，儿童需有成人同行。</view>
+                <view class="txt tblue">2.身高在1.2米~1.5米的儿童可购买儿童票。</view>
+                <view class="txt">使用同行成人的证件购票，取票时请用成人证件在自助取票机或取票窗口取票。</view>
+                <view class="txt tblue">3.身高超过1.5米的儿童，需购买成人票。</view>
+                <view class="txt">使用该儿童本人的证件购票。</view>
+                <view class="txt tblue">4.身高1.2米以下的儿童无需购票</view>
+                <view class="txt">每位成年旅客可以免费携带一名身高1.2米以下的儿童；携带多名1.2米以下儿童时，其他儿童需购买儿童票。</view>
+                <view class="txt tblue">5.价格问题</view>
+                <view class="txt">由于儿童票价格不定，先按照成人票价收取费用，之后会根据实际出票价格退换差价。</view>
+                <view class="txt tblue">6.卧铺床位问题</view>
+                <view class="txt">卧铺儿童票与同行成人各有床位，需要与儿童共用床位的，请至车站买票。</view>
+                <view class="txt tblue">7.如何取票</view>
+                <view class="txt">儿童使用同行成人的证件购票，取票时请用成人证件在自助取票机或取票窗口取票。</view>
+                <view class="txt">儿童使用同行成人的证件购票，取票时请用成人证件在自助取票机或取票窗口取票。</view>
+                <view class="txt"><text class="bold">注意：</text>请根据儿童实际身高来购票，如在进站时由于儿童身高超过标准而无法进站，我司不承担任何责任。</view>
+            </block>
+            <block wx:if="{{showType == 'stu'}}">
+                <view class="txt">1、学生票乘车时间限为每年的暑假6月1日至9月30日、寒假12月1日至3月31日。其他时间需购买成人票。</view>
+                <view class="txt">2、学生票仅支持购买硬座、硬卧、二等座、无座等座席。其他座席需购买成人票。</view>
+                <view class="txt">3、每年乘车次数限于四次单程。当年未使用的次数，不能留至下年使用。</view>
+                <view class="txt">4、列车出发站和到达站需在优惠乘车区间之内，且优惠乘车区间限于家庭至院校（实习地点）之间。若不在优惠区间内，则无法取票。</view>
+                <view class="txt">5、学生票先收取成人票价，出票后根据票价金额退还差价。差价1-3个工作日原路退回。</view>
+            </block>
+    </view>
+
+    <!-- 一键添加儿童票 -->
+    <view class="backmask {{showType == 'addChild' || showType == 'chooseAdultForChild' ? 'active' : ''}}" bindtap="hidePop"></view>
+    <view class="pop-botm {{showType == 'addChild' ? 'active' : ''}}">
+        <view class="pop-botm-hd">
+            <view class="tit tleft">没有儿童证件？</view>
+            <view class="btn-closed" bindtap="hidePop"></view>
+        </view>
+        <view class="pop-botm-bd pop-child-info">
+            <view class="tit">儿童可通过如下方法使用同行人证件购票，免填儿童证件：</view>
+            <view class="txt">在<text class="torage">订单填写页-添加儿童(用成人证件)</text>，添加儿童</view>
+            <view class="txt">点击下方按钮，一键添加儿童</view>
+            <image src="https://pic.c-ctrip.com/train/wechat/child-tips-img2.png" class="img" mode="widthFix"></image>
+            <view class="botm-pay">
+                <button class="btn-blue" bindtap="addChilHandle">一键添加儿童</button>
+            </view>
+        </view>
+    </view>
+
+    <view class="pop-botm {{showType == 'chooseAdultForChild' ? 'active' : ''}}">
+        <view class="pop-botm-hd">
+            <view class="tit tleft">请选择成人证件为随行儿童购票</view>
+            <view class="btn-closed" bindtap="hidePop"></view>
+        </view>
+        <view class="pop-botm-bd pop-child-select">
+            <view class="child-pasg">
+                <view class="item {{index == curAdultIndex ? 'cur' : ''}}" wx:for="{{adults}}" data-index="{{index}}" bindtap="selectAdultForChild">
+                    <view class="name">{{item.pasName}}</view>
+                    <view class="cert">尾号{{item.tailNumber}}</view>
+                    <text class="ifont-filtercheck"></text>
+                </view>
+            </view>
+            <view class="child-tips">
+                <view class="item">＞1.5m 成人票，全价</view>
+                <view class="item">1.2m-1.5m 儿童票，成人票半价</view>
+                <view class="item">＜1.2m 不需要购票，免费</view>
+            </view>
+        </view>
+    </view>
+<view class="backmask {{showType == 'shareSuccess' || showType == 'showChildDialog' || showType == 'childAgeAlert' ? 'active' : ''}}"></view>
+<view class="pop-mid pop-model {{showType == 'shareSuccess' ? 'active' : ''}}">
+    <icon class="icon-suc"></icon>
+    <view class="tit">分享成功</view>
+    <view class="txt">好友加入行程后，在乘客列表页下拉刷新，就可以看到TA啦</view>
+    <button class="btn-submit" bindtap="hidePop">知道了</button>
+</view>
+
+<view class="pop-mid pop-model {{showType == 'showChildDialog' ? 'active' : ''}}">
+    <view class="title">{{childAlertInfo.Title}}</view>
+    <view class="txt">{{childAlertInfo.Content}}</view>
+    <view class="pop-botm-btn">
+        <block wx:for="{{childAlertInfo.ButtonList}}">
+            <button wx:if="{{item.ActionType == 2}}" class="btn-cancel" bindtap="hidePop" data-package-type="normal">{{item.ButtonName}}</button>
+            <button wx:if="{{item.ActionType == 1}}" class="btn-confirm" bindtap="addChildPassenger" data-intercept-type="default" form-type="submit">{{item.ButtonName}}</button>
+        </block>
+    </view>
+</view>
+
+<view class="pop-mid pop-model {{showType == 'childAgeAlert' ? 'active' : ''}}">
+    <view class="title">温馨提示</view>
+    <view class="txt">当前证件持有儿童已满14岁，不可购买儿童票，请切换为成人票购买</view>
+    <view class="pop-botm-btn">
+        <button class="btn-confirm" bindtap="hidePop" data-intercept-type="default" form-type="submit">确定</button>
+    </view>
+</view>
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

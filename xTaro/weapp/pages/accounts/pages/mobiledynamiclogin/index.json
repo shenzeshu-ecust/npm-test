@@ -1,0 +1,1 @@
+{"usingComponents":{"nav-bar":"../../../../cwx/component/navbar/navbar","captcha":"../../../../commonComponent/captcha_min/captcha","custom-wrapper":"../../../../taroBase/custom-wrapper","comp":"../../../../taroBase/comp"},"componentPlaceholder":{"captcha":"../../../../cwx/component/captcha_min/captcha"},"navigationStyle":"custom","navigationBarTitleText":"","disableScroll":true}

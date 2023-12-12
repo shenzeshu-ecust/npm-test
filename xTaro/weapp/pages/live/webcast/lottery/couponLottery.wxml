@@ -1,0 +1,49 @@
+<wxs src="../home.wxs" module="homeFunction" />
+<template name="couponLottery">
+  <view catchtouchstart="hideLotteryPanel" class="coupon-lottery-bg" bindtap="hideLotteryPanel"></view>
+  <view catchtouchmove="catchtouchmove" class="coupon-lotter-bag" style="padding-bottom: {{isIphoneX ? '64rpx' :'12rpx'}}">
+    <view class="coupon-draw-title">
+      <text>抽奖</text>
+      <view class="more-close" bindtap="hideLotteryPanel"></view>
+      <view class="more-btn" catchtap="jumpToBagInfo" data-type="prize">我的奖品</view>
+    </view>
+    <view class="coupon-lottery-innder">
+      <view class="prizeinfo">
+        {{lotteryPannelResult.name}}
+      </view>
+      <view class="currentinfo">
+        <view class="curtitle">参与条件</view>
+        <block wx:for="{{lotteryPannelResult.taskStatus}}" wx:key="{{item.title}}">
+          <view class="curcondition {{item.status == 1 ? 'on' : ''}}">
+          <view class="task-item-view">
+            <view class="dot-view"></view>
+            <text class="condtitle">{{item.title}}</text>
+          </view>
+            <view class="condtext">{{item.status == 1 ? '已达成' : '未达成'}}</view>
+          </view>
+        </block>
+      </view>
+      <block wx:if="{{lotteryPannelResult && lotteryPannelResult.currentTask && lotteryPannelResult.currentTask.type}}">
+        <block wx:if="{{lotteryPannelResult.currentTask.type == 'share'}}">
+          <button class="prizebtn" open-type="share" bindtap="handleCouponLotteryTaskAction">
+            {{lotteryPannelResult.currentTask.buttonText}}
+          </button>
+        </block>
+        <block wx:else>
+          <view class="prizebtn" bindtap="handleCouponLotteryTaskAction">
+            {{lotteryPannelResult.currentTask.buttonText}}
+          </view>
+        </block>
+      </block>
+      <block wx:else>
+        <view class="prizebtn" bindtap="handleCouponLotteryTaskAction">
+          立即参与
+        </view>
+      </block>
+      <view  catchtap="jumpToBagInfo" data-type="rule" class="accept-rule">
+        参与抽奖即代表同意
+        <view>《抽奖规则》</view>
+      </view>
+    </view>
+  </view>
+</template>

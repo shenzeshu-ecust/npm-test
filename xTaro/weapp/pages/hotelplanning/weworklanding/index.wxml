@@ -1,0 +1,25 @@
+<view>
+    <image src="https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/weworklanding_header.png" class="wework-header" />
+    <view class="wework-body">
+        <view class="wework-title">
+            扫码加本店官方微信
+        </view>
+        <view class="wework-qrcode">
+            <image class="qrcode-img" show-menu-by-longpress="{{true}}" src="{{qrCodeUrl}}" />
+        </view>
+        <view class="wework-desc">
+            长按或截图扫码识别二维码
+        </view>
+        <view class="wework-right-group mb-16">
+            <view class="wework-right mr-24"><view class="wechat-font-success1"></view>续住更优惠</view>
+            <view class="wework-right"><view class="wechat-font-success1"></view>快速开发票</view>
+        </view>
+        <view class="wework-right-group">
+            <view class="wework-right mr-24"><view class="wechat-font-success1"></view>享专属管家</view>
+            <view class="wework-right"><view class="wechat-font-success1"></view>享惊喜好礼</view>
+        </view>
+    </view>
+    <view class="float-ball float-ball-1"></view>
+    <view class="float-ball float-ball-2"></view>
+    <view class="float-ball float-ball-3"></view>
+</view>

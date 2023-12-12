@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "搜索",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "usingComponents": {
+        "hotkeyword": "/pages/hotel/components/hotkeyword/hotkeyword"
+    }
+}

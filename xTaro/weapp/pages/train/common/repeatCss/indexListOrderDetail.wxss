@@ -1,0 +1,11 @@
+.pop-subscribe{width: 600rpx;height: 720rpx;position: fixed;left: 50%;top:50%;transform: translate(-50%,-50%);z-index: 3002;background: #FFFFFF;border-radius: 16rpx;}
+.pop-subscribe .slogan{width: 100%;height: 330rpx;}
+.pop-subscribe .tit{font-size: 44rpx;color: #1F3C64;text-align: center;margin: 32rpx 0 20rpx 0;font-weight: bold;}
+.pop-subscribe .txt{font-size: 28rpx;color: #00B87A;margin: 0 auto;margin-bottom: 80rpx;width: 410rpx;text-align: center;}
+.pop-subscribe .btn-box{display: flex;padding: 0 40rpx;}
+.pop-subscribe .btn-box button{height: 88rpx;border-radius: 6px;line-height: 88rpx;font-size: 32rpx;margin-right: 24rpx;flex: 1;padding: 0;}
+.pop-subscribe .btn-box button:last-child{margin-right: 0;}
+.pop-subscribe .btn-box button::after{border:0}
+.pop-subscribe .btn-box .btn-submit{background: -webkit-linear-gradient(left,#00AAFF,#006FFF);font-weight: 600;color: #fff;}.btn-box .btn-submit{background: -webkit-linear-gradient(left,#00AAFF,#006FFF);font-weight: 600;color: #fff;}
+.pop-subscribe .btn-box .btn-cancel{border:1px solid #0086F6;background: #fff;color:#0086F6}
+.pop-subscribe .ifont-closed{position: absolute;bottom: -120rpx;width: 80rpx;height: 80rpx;border-radius: 80rpx;font-size: 64rpx;text-align: center;line-height: 60rpx;color: #fff;left: 50%;transform: translate(-50%);}

@@ -1,0 +1,206 @@
+<import src="./drawBag.wxml" />
+<import src="./couponLottery.wxml" />
+<wxs src="../home.wxs" module="homeFunction" />
+<block>
+   <!-- <view class="lottery-icons" style="top:{{headerTop}}px; margin-top: 228rpx;">
+
+      <block wx:if="{{lotteryIcon.show && lotteryIcon.lotteryType == 0}}">
+         <view class="message-lottery" bindtap="lotteryIconTapAction" data-type="icon">
+            <image class="message-lotteryimg" src="{{lotteryIcon.imageUrl}}" />
+         </view>
+      </block>
+     
+     
+      <block wx:if="{{lotteryIcon.show && lotteryIcon.lotteryType == 1 }}">
+         <view class="message-lottery coupon" bindtap="lotteryIconTapAction" data-type="icon">
+            <image class="message-lotteryimg" src="{{lotteryIcon.imageUrl}}" />
+            <block wx:if="{{couponCountDownStr}}">
+               <view class="count-down {{couponCountDownStr == '待领取' ? 'on' :''}}">
+                  {{couponCountDownStr}}
+               </view>
+            </block>
+         </view>
+      </block>
+     
+      <block wx:if="{{bagIcon.show && bagIcon.lotteryType == 3}}">
+         <view class="message-lottery bag bagSmallShow" style="margin-top: 16rpx;" bindtap="bagIconTapAction" data-type="bag">
+            <image class="message-lotteryimg" src="{{bagIcon.imageUrl}}" />
+            <block wx:if="{{bagCountDown > 0 }}">
+               <view class="count-down">{{homeFunction.countDownTime(bagCountDown) }}</view>
+            </block>
+            <block wx:else>
+               <view class="count-down">开奖中</view>
+            </block>
+         </view>
+         <view class="message-lottery bagAnimation bagShow" style="margin-top: 8rpx;">
+            <image class="message-lotteryimg" src="{{bagIcon.imageUrl}}" />
+         </view>
+      </block>
+      
+   </view> -->
+   <block wx:if="{{(bagIcon.show && bagIcon.lotteryType == 3) || (lotteryIcon.show && lotteryIcon.lotteryType == 1) || (lotteryIcon.show && lotteryIcon.lotteryType == 0)}}">
+    <view class="lottery-icons" style="top:{{headerTop}}px;left:0; margin-top: 148rpx;margin-left:24rpx;">
+      <!-- 福袋icon -->
+      <block wx:if="{{bagIcon.show && bagIcon.lotteryType == 3}}">
+         <view class="message-lottery bag bagSmallShow"  bindtap="bagIconTapAction" data-type="bag">
+            <image class="message-lotteryimg" src="{{bagIcon.imageUrl}}" />
+            <block wx:if="{{bagCountDown > 0 }}">
+               <view class="count-down">{{homeFunction.countDownTime(bagCountDown) }}</view>
+            </block>
+            <block wx:else>
+               <view class="count-down">开奖中</view>
+            </block>
+         </view>
+         <view class="message-lottery bagAnimation bagShow" style="margin-top: 0rpx;position: absolute;">
+            <image class="message-lotteryimg" src="{{bagIcon.imageUrl}}" />
+         </view>
+      </block>
+      <!-- 福袋icon -->
+    <!-- 优惠券icon 运营自动抽奖 有倒计时-->
+     <block wx:if="{{lotteryIcon.show && lotteryIcon.lotteryType == 1 }}">
+         <view  style="margin-right:0;"  class="message-lottery coupon" bindtap="lotteryIconTapAction" data-type="icon">
+            <image class="message-lotteryimg" src="{{lotteryIcon.imageUrl}}" />
+            <block wx:if="{{couponCountDownStr}}">
+               <view style="bottom:-16rpx" class="count-down {{couponCountDownStr == '待领取' ? 'on' :''}}">
+                  {{couponCountDownStr}}
+               </view>
+            </block>
+         </view>
+      </block>
+      <!-- 优惠券icon -->
+     <!-- 抽奖icon 运营非自动抽奖 无倒计时-->
+     <block wx:if="{{lotteryIcon.show && lotteryIcon.lotteryType == 0}}">
+         <view style="margin-right:0;" class="message-lottery" bindtap="lotteryIconTapAction" data-type="icon">
+            <image class="message-lotteryimg" src="{{lotteryIcon.imageUrl}}" />
+         </view>
+      </block>
+      <!-- 抽奖icon -->
+    
+   </view>
+   </block>
+  
+   <!-- 抽奖模块 -->
+   <block wx:if="{{lotteryIcon.lotteryType != 3  && !lotteryPanelShow && (lotteryResult.lotteryStatus == 1 || lotteryResult.lotteryStatus == 2 || lotteryResult.lotteryStatus == 3 || lotteryResult.lotteryStatus == 4 || lotteryResult.lotteryStatus == 5 || lotteryResult.lotteryStatus == 6)}}">
+      <view class="lottery-container">
+         <view class="lottery-bg" bindtap="closeLottery" catchtouchstart="closeLottery"></view>
+         <!-- 抽奖规则说明 弹出的红包 -->
+         <block wx:if="{{lotteryResult.lotteryStatus == 1}}">
+            <view catchtouchmove="catchtouchmove" class="redpacket-wrapper">
+               <view class="red-packet {{lotteryIcon.lotteryType == 1 ? 'coupon' :''}}">
+                  <image src="{{lotteryResult.result.imageUrl}}" class="packet-img" mode="aspectFit" bindtap="redPacketTapAction" data-type="packet" />
+                  <block wx:if="{{lotteryIcon.lotteryType != 1}}">
+                  <view class="packet-follow">
+                    <view class="packet-avat">
+                        <image src="{{master.imageUrl}}" class="packet-avatimg" />
+                    </view>
+                    <view class="packet-mastername">{{master.masterName}}</view>
+                    <view class="packet-followbtn {{master.isFollow ? 'on' :''}}" catchtap="doPacketMasterFollow">{{master.isFollow ? '已关注': '关注'}}</view>
+                  </view>
+                  </block>
+                  <view class="packet-countDown">{{packetCountDownStr}}</view>
+                  <view class="packet-rule">
+                     参与前请先阅读
+                     <view class="packet-ruletext" catchtap="jumpToBagInfo" data-type="couponrule">
+                        《
+                        <view class="tdr">抽奖规则说明</view>
+                        》
+                     </view>
+                  </view>
+               </view>
+               <view class="packet-close" bindtap="closeLottery"></view>
+            </view>
+         </block>
+         <!-- 抽奖成功 -->
+         <block wx:if="{{lotteryResult.lotteryStatus == 2}}">
+            <view catchtouchmove="catchtouchmove" class="lottery-result win">
+               <view class="win-close" bindtap="closeLottery"></view>
+               <view class="win-top-img">
+                  <image class="img" src="{{lotteryResult.result.topImageUrl}}" mode="aspectFit" />
+               </view>
+               <view class="win-title">{{lotteryResult.result.title}}</view>
+               <view class="win-prize">
+                  <view class="t1">奖品：</view>
+                  <view class="t2">{{lotteryResult.result.prize}}</view>
+               </view>
+               <view class="win-tip">{{lotteryResult.result.tip}}</view>
+               <view class="win-btn" bindtap="jumpToLottery">{{lotteryResult.result.button}}</view>
+            </view>
+         </block>
+         <!-- 抽奖失败 ｜ 再次进入抽奖面板 -->
+         <block wx:if="{{lotteryResult.lotteryStatus == 3 || lotteryResult.lotteryStatus == 5 || lotteryResult.lotteryStatus == 6}}">
+            <view catchtouchmove="catchtouchmove" class="lottery-result lose">
+               <view class="win-close" bindtap="closeLottery"></view>
+               <view class="lose-img">
+                  <image class="img" src="{{lotteryResult.result.failImageUrl || 'https://dimg04.c-ctrip.com/images/0105d1200084681fl6A9F_R_200_10000.png'}}" />
+               </view>
+               <view class="lose-title">{{(lotteryResult.lotteryStatus == 5 ||lotteryResult.lotteryStatus==6) ?'您已经参与过本轮抽奖～':lotteryResult.result.failTip}}</view>
+               <!-- <view class="lose-title">您已经参与过本轮抽奖～</view> -->
+               <view  wx:if="{{lotteryResult.lotteryStatus == 5 ||lotteryResult.lotteryStatus==6}}" class="lose-title-sub">{{lotteryResult.lotteryStatus == 5?'已发放到【携程APP-我的-奖品】':lotteryResult.result.failTip}}</view>
+               <view class="'win-btn' {{(lotteryResult.lotteryStatus == 5||lotteryResult.lotteryStatus == 6) ?'lose-sub':'lose'}}" bindtap="doLotteryBtn">
+                  {{lotteryResult.lotteryStatus==5 || lotteryResult.lotteryStatus==6 ?'返回直播间':lotteryResult.result.button}}
+               </view>
+            </view>
+         </block>
+         <!-- 抽奖已结束 -->
+         <block wx:if="{{lotteryResult.lotteryStatus == 4}}">
+            <view catchtouchmove="catchtouchmove" class="lottery-result lose">
+               <view class="win-close" bindtap="closeLottery"></view>
+               <view class="lose-img">
+                  <image class="img" src="https://dimg04.c-ctrip.com/images/0105d1200084681fl6A9F_R_200_10000.png" />
+               </view>
+               <view class="lose-title">抽奖已结束</view>
+               <view class="win-btn lose"  bindtap="doLotteryBtn">
+                  返回直播间
+               </view>
+            </view>
+         </block>
+      </view>
+   </block>
+   <!-- 抽奖模块 -->
+
+<!-- 优惠券抽奖任务提示模块 -->
+   <block wx:if="{{(lotteryIcon.lotteryType == 1 || lotteryIcon.lotteryType == 0) && lotteryPanelShow}}">
+      <template is="couponLottery" data="{{lotteryPannelResult, lotteryIcon,isIphoneX}}"></template>
+   </block>
+<!-- 优惠券抽奖任务提示模块 -->
+
+   <!-- 福袋模块 -->
+   <block wx:if="{{bagIcon.show && bagIcon.lotteryType == 3 && bagResultPanelShow}}">
+      <view catchtouchstart="hideDrawPanel" class="drawbag-bg" bindtap="hideDrawPanel"></view>
+      <view  catchtouchmove="catchtouchmove" class="draw-bag" style="padding-bottom: {{isIphoneX ? '64rpx' :'0'}}">
+         <view class="draw-bag-title">
+            <text>抽奖</text>
+            <view class="more-close" bindtap="hideDrawPanel"></view>
+            <view class="more-btn" catchtap="jumpToBagInfo" data-type="prize">我的奖品</view>
+         </view>
+         <block wx:if="{{bagResult}}">
+            <template is="drawBag" data="{{bagResult, bagCountDown, bagBtn}}"></template>
+         </block>
+         <block wx:else>
+            <image class="drawbag-loading" src="https://pages.c-ctrip.com/livestream/live/book_live_upload_video_loading.png" />
+         </block>
+      </view>
+      <block wx:if="{{bagRulePanel}}">
+         <view class="drawbag-rule-mask" bindtap="showDrawRulePanel"></view>
+         <view class="drawrule-inner " style="padding-bottom: {{isIphoneX ? '64rpx' :'0'}}">
+            <view class="bag-icon" catchtap="jumpToBagInfo" data-type="prize">
+               <image class="ic" src="https://pages.c-ctrip.com/livestream/video/white-gift2.png" />
+               <view class="it">我的奖品</view>
+            </view>
+            <view class="bag-icon" catchtap="jumpToBagInfo" data-type="rule">
+               <image class="ic" src="https://pages.c-ctrip.com/livestream/video/white-info.png" />
+               <view class="it">规则说明</view>
+            </view>
+         </view>
+      </block>
+   </block>
+   <!-- 福袋模块 -->
+</block>
+<!-- 福袋中奖结果弹窗 -->
+<block wx:if="{{showLuckyBag}}">
+  <luckyBag class="lucky-bag" showLuckyBag="{{showLuckyBag}}" isIphoneX="{{isIphoneX}}" drawResult="{{drawResult}}" showOpenLuckyLoading="{{showOpenLuckyLoading}}" windowHeight="{{windowHeight}}" windowWidth="{{windowWidth}}" bind:viewWinners="viewWinners" bind:hideLuckyBag="hideLuckyBag" bind:viewMyLottery="viewMyLottery" bind:goViewMyLottery="goViewMyLottery"></luckyBag>
+</block>
+<!-- 中奖观众列表弹窗 -->
+<block wx:if="{{showWinners}}">
+  <liveLotteryWinnerList class="follow-guide" showWinners="{{showWinners}}" isIphoneX="{{isIphoneX}}" bind:hideWinners="hideWinners" listLoadingState="{{listLoadingState}}" winnerList="{{winnerList}}"></liveLotteryWinnerList>
+</block>

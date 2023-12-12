@@ -1,0 +1,26 @@
+<!-- 组件模板 -->
+<view style="{{wraperStyle}}">
+<swiper
+  style="{{swiperStyle}}"
+  current="{{currentSwiper}}"
+  autoplay ="{{autoplay}}"
+  interval ="{{swiperData.delayTime}}"
+  circular ="true"
+  bindchange="swiperChange"
+ >
+  <block  wx:for="{{adOpeData}}"  wx:for-item="aditem" wx:key="creativeId">
+    <swiper-item wx:if="{{aditem.isuse && aditem.unionCode}}" style="top:{{ aditem.top}}" class="wxadsdk_tranformstyle">
+      <ad-custom  unit-id="{{aditem.unionCode}}"  ></ad-custom>
+    </swiper-item>
+    <swiper-item  wx:else >
+        <ad-background  adData="{{aditem}}" trackingid="{{trackingid}}" header="{{header}}"  adType="{{adType}}" whObj="{{whObj}}" showSign ="{{showSign}}" adIndex="{{index}}" currentSwiper="{{currentSwiper}}" bind:videoChange="handleVideo">
+        </ad-background>
+    </swiper-item>
+  </block>
+</swiper>
+  <view wx:if="{{swiperData.dotShow}}" style='{{dotWrapStyle}}'>  
+      <block wx:for="{{adOpeData}}"  wx:for-item="aditem" wx:key="creativeId">  
+          <view style='{{index == currentSwiper ? dotCurrentStyle : dotStyle}}' ></view>  
+      </block>  
+  </view>  
+</view>

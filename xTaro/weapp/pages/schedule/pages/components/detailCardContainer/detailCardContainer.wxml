@@ -1,0 +1,6 @@
+<view wx:if="{{loadSuccess}}" class='container'>
+  <detail-header-compt wx:if="{{theme==1}}" card-status="{{cardStatus}}" detail-url="{{detailUrl}}"  action-code="{{actionCode}}"/>
+  <slot></slot>
+  <bottom-options smart-trip-id="{{smartTripId}}" from-uid="{{fromUid}}" theme="{{theme}}" add-action-code='{{addActionCode}}' checktrip-action-code='{{checktripActionCode}}'/>
+</view>
+<loading-fail wx:if="{{showFailView}}" />

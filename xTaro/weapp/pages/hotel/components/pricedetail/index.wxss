@@ -1,0 +1,155 @@
+@import "../../common/common.wxss";
+@import "../../commontemplates/minidialog/dialog.wxss";
+@import "../../commontemplates/deposit/deposit.wxss";
+.ft36 {
+    font-size: 36rpx;
+}
+.guarantee-module {
+    padding-bottom: 48rpx !important;
+}
+.guarantee-module .pd-extra {
+    color: #111111;
+    font-size: 26rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+}
+.guarantee-module .price {
+    color: #111111;
+}
+.dbk {
+    display: block;
+}
+.price-layer {
+    min-height: 50%;
+    border-radius: 16rpx 16rpx 0 0;
+}
+.price-layer .tbody {
+    padding: 48rpx 0;
+    box-sizing: border-box;
+    font-size: 26rpx;
+    color: #555;
+}
+.price-layer .price-detail:first-child {
+    padding-top: 0;
+}
+.price-detail {
+    padding-top: 48rpx;
+}
+
+.pd-head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16rpx;
+}
+.pd-head .title {
+    flex: 1;
+    color: #111111;
+    font-size: 36rpx;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+
+}
+.price {
+    color: #ff5500;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    text-align: right;
+}
+.pd-content .item {
+    display: flex;
+    line-height: 1;
+    margin-bottom: 16rpx;
+}
+.pd-content .left {
+    flex: 1;
+}
+.pd-extra {
+    color: #888888;
+    display: flex;
+    align-items: center;
+}
+.pd-extra .wechat-font-qa {
+    margin-left: 9rpx;
+    font-size: 22rpx;
+}
+.pd-content-item {
+    padding-bottom: 48rpx;
+}
+.pd-content-item:not(:last-child) {
+    border-bottom: 1rpx solid #eee;
+}
+.pd-content-item:not(:first-child) {
+    padding-top: 48rpx;
+}
+.pd-content-item .pd-extra {
+    font-size: 24rpx;
+}
+.grey-border {
+    border-bottom: 16rpx solid #f8f8f8;
+}
+.points-detail {
+    padding-top: 48rpx;
+    border-top: 16rpx solid #f8f8f8;
+}
+.points-detail .pd-content-item {
+    display: flex;
+}
+.pd-dialog-cmask {
+    z-index: 5003;
+}
+/*底部总价bar*/
+.total-price {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding: 32rpx 24rpx 80rpx;
+    background: #fff;
+    border-top: 6rpx solid #f8f8f8;
+}
+.tp-left {
+    color: #111111;
+    font-size: 34rpx;
+    font-family: PingFangSC-Semibold;
+    font-weight: 600;
+}
+.tp-right {
+    text-align: right;
+    flex: 1;
+    line-height: 1;
+}
+.tp-right .title {
+    font-size: 30rpx;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+}
+.tp-right .sub-title {
+    margin-top: 12rpx;
+    color: #555555;
+    font-size: 24rpx;
+}
+.point-item {
+    display: flex;
+    margin-bottom: 16rpx;
+}
+/*底部总价bar*/
+/* 积分加速tag */
+.speed-box {
+    display: inline-block;
+    padding: 2rpx 8rpx;
+    border-radius: 4rpx;
+    margin-left: 8rpx;
+    height: 28rpx;
+    line-height: 28rpx;
+}
+.user-level-icon {
+    font-size: 20rpx;
+    margin-right: 5rpx;
+    vertical-align: middle;
+}
+.user-level-desc {
+    font-size: 20rpx;
+    font-family: PingFangSC-Regular;
+}

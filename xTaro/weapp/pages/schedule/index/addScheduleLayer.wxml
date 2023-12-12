@@ -1,0 +1,20 @@
+<!--pages/components/addScheduleLayer/addScheduleLayer.wxml-->
+<view wx:if='{{showAddScheduleLayer}}'class='background' catchtap='hideScheduleLayer' animation="{{backgrondAnimation}}">
+  <view class='container' catchtap='doNothing' animation="{{containerAnimation}}">
+    <view class='icon-cha-view'  catchtap='hideScheduleLayer'>
+      <Icon className='icon-cha' color='#999999' size='18' />
+    </view>
+
+    <text class='title'>关注航班/火车动态</text>
+    <view class='content'>
+      <view class='item' catchtap='showAddPage' data-biztype='flight'>
+        <image class='icon' src='https://pages.c-ctrip.com/schedule/pic/icon/flighticon.png'></image>
+        <text class='item-title'>航班</text>
+      </view>
+      <view class='item' catchtap='showAddPage' data-biztype='train'>
+        <image class='icon' src='https://pages.c-ctrip.com/schedule/pic/icon/trainicon.png'></image>
+        <text class='item-title'>火车</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,323 @@
+
+/**
+ * author: Di (微信小程序开发工程师)
+ * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+ *               垂直微信小程序开发交流社区
+ *
+ * github地址: https://github.com/icindy/wxParse
+ *
+ * for: 微信小程序富文本解析
+ * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+ */
+
+/*.wxParse{
+    margin: 0 5px;
+    font-family: Helvetica,sans-serif;
+    font-size: 28rpx;
+    color: #666;
+    line-height: 1.8;
+}*/
+view{
+    word-break:break-word;
+    /* word-break:break-all; */
+    overflow:auto;
+}
+.wxParse-inline{
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+/*//标题 */
+/*.wxParse-div{margin: 0;padding: 0;}
+.wxParse-h1{ font-size:2em; margin: .67em 0 }
+.wxParse-h2{ font-size:1.5em; margin: .75em 0 }
+.wxParse-h3{ font-size:1.17em; margin: .83em 0 }
+.wxParse-h4{ margin: 1.12em 0}
+.wxParse-h5 { font-size:.83em; margin: 1.5em 0 }
+.wxParse-h6{ font-size:.75em; margin: 1.67em 0 }
+
+.wxParse-h1 {
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: .9em;
+}
+.wxParse-h2 {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: .34em;
+}
+.wxParse-h3 {
+  font-weight: 400;
+  font-size: 15px;
+  margin-bottom: .34em;
+}
+.wxParse-h4 {
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: .24em;
+}
+.wxParse-h5 {
+  font-weight: 400;
+  font-size: 13px;
+  margin-bottom: .14em;
+}
+.wxParse-h6 {
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: .04em;
+}
+
+.wxParse-h1, .wxParse-h2, .wxParse-h3, .wxParse-h4, .wxParse-h5, .wxParse-h6, .wxParse-b, .wxParse-strong  { font-weight: bolder }
+
+.wxParse-i,.wxParse-cite,.wxParse-em,.wxParse-var,.wxParse-address{font-style:italic}
+.wxParse-pre,.wxParse-tt,.wxParse-code,.wxParse-kbd,.wxParse-samp{font-family:monospace}
+.wxParse-pre{white-space:pre}
+.wxParse-big{font-size:1.17em}
+.wxParse-small,.wxParse-sub,.wxParse-sup{font-size:.83em}
+.wxParse-sub{vertical-align:sub}
+.wxParse-sup{vertical-align:super}
+.wxParse-s,.wxParse-strike,.wxParse-del{text-decoration:line-through}*/
+/*wxparse-自定义个性化的css样式*/
+/*增加video的css样式*/
+/*.wxParse-strong,wxParse-s{display: inline}
+.wxParse-a{
+    color: deepskyblue;
+    word-break:break-all;
+    overflow:auto;
+}*/
+
+/*.wxParse-video{
+    text-align: center;
+    margin: 10px 0;
+}
+
+.wxParse-video-video{
+    width:100%;
+}*/
+
+.wxParse-b, .wxParse-strong  {
+  font-weight: bold;
+}
+
+.wxParse-img{
+  /* background-color: #efefef;
+  overflow: hidden;
+  width:40px;
+  height: 40px; */
+  background: #f0f1f5 url(https://pages.c-ctrip.com/you/common/default.png) no-repeat center;
+}
+
+.wxParse-img + .common-iconfont{
+  display: none;
+}
+
+.wxParse-blockquote {
+    margin: 0;
+    padding:10px 0 10px 5px;
+    font-family:Courier, Calibri,"宋体";
+    background:#f5f5f5;
+    border-left: 3px solid #dbdbdb;
+}
+
+.wxParse-code,.wxParse-wxxxcode-style{
+    display: inline;
+    background:#f5f5f5;
+}
+.wxParse-ul{
+    margin: 20rpx 10rpx;
+}
+
+.wxParse-li,.wxParse-li-inner{
+    display: flex;
+    align-items: baseline;
+    margin: 10rpx 0;
+}
+.wxParse-li-text{
+
+    align-items: center;
+    line-height: 20px;
+}
+/*
+.wxParse-li-circle{
+    display: inline-flex;
+    width: 5px;
+    height: 5px;
+    background-color: #333;
+    margin-right: 5px;
+}
+
+.wxParse-li-square{
+    display: inline-flex;
+    width: 10rpx;
+    height: 10rpx;
+    background-color: #333;
+    margin-right: 5px;
+}
+.wxParse-li-ring{
+    display: inline-flex;
+    width: 10rpx;
+    height: 10rpx;
+    border: 2rpx solid #333;
+    border-radius: 50%;
+    background-color: #fff;
+    margin-right: 5px;
+}*/
+
+/*.wxParse-table{
+    width: 100%;
+    height: 400px;
+}
+.wxParse-thead,.wxParse-tfoot,.wxParse-tr{
+    display: flex;
+    flex-direction: row;
+}
+.wxParse-th,.wxParse-td{
+    display: flex;
+    width: 580px;
+    overflow: auto;
+}*/
+
+.wxParse-u {
+  text-decoration: underline;
+}
+.wxParse-hide{
+    display: none;
+}
+.wxParse-br{
+  height: 32rpx;
+}
+.wxParse-p{
+  padding-top: 40rpx;
+  position: relative;
+  font-size: 16px;
+  color: #444;
+  line-height: 1.7;
+  word-break: break-all;
+}
+.WxEmojiView{
+    align-items: center;
+}
+.wxEmoji{
+    width: 16px;
+    height:16px;
+}
+
+
+
+/* 富文本 */
+.inset-h2{
+  padding-top: 40rpx;
+  vertical-align: top;
+  font: 600 34rpx/1.7 Arial, "Lucida Grande", Verdana, "Microsoft YaHei", hei;
+  color: #c4853a;
+  word-break: break-all;
+  background: #fff;
+}
+.inset-p{
+  padding-top: 40rpx;
+  position: relative;
+  font-size: 16px;
+  color: #444;
+  line-height: 1.7;
+  word-break: break-all;
+  background: #fff;
+}
+.inset-p-link{
+  color: inherit !important;
+  text-decoration: none;
+  word-break: break-all;
+}
+.inset-p-strong{
+  font-weight: bold;
+  
+}
+.inset-img-view{
+  margin-top: 40rpx;
+  padding-top: 0;
+  background: #fff;
+  text-align:center;
+}
+.inset-img{
+  width: 100%;
+  background: #f0f1f5 url(https://pages.c-ctrip.com/you/common/default.png) no-repeat center;
+}
+.inset-vr-view{
+  padding-top: 40rpx;
+  position: relative;
+}
+.inset-vr-img{
+  width: 100%;
+  background: #f0f1f5 url(https://pages.c-ctrip.com/you/common/default.png) no-repeat center;
+}
+.inset-vr-tag{
+  position: absolute;
+  width: 74rpx;
+  height: 42rpx;
+  background-image: url(https://pages.c-ctrip.com/you/common/video_vr.png) no-repeat center;
+  background-size: 74rpx auto;
+  right: 16rpx;
+  bottom: 16rpx;
+  background-position-y: -40rpx;
+}
+.inset-video-view{
+  padding-top: 40rpx;
+  position: relative;
+  height: 400rpx;
+  overflow: hidden;
+}
+.inset-video{
+  width: 100%;
+  height: 400rpx;
+  background-color: #000;
+}
+.inset-prompt{
+  
+}
+.inset-prompt-box{
+
+}
+.inset-prompt-h3{
+  padding-top: 4rpx;
+  font: 100 34rpx/1 Arial, "Lucida Grande", Verdana, "Microsoft YaHei", hei;
+  line-height: 1.6;
+  color: #c4853a;
+}
+.inset-prompt-text{
+  padding-top: 4rpx;
+  position: relative;
+  font-size: 16px;
+  color: #444;
+  line-height: 1.7;
+  word-break: break-all;
+}
+.inset-list{
+
+  font-size: 16px;
+  list-style: none;
+  background: #fff;
+}
+.inset-list-li{
+  color: #444;
+  line-height: 1.5;
+  list-style: none;
+}
+.inset-icon-dot{
+  margin-bottom: 4rpx;
+  margin-right: 20rpx;
+  display: inline-block;
+  width: 14rpx;
+  height: 14rpx;
+  background: url(https://pages.c-ctrip.com/you/common/text-detail-icons.png) no-repeat center;
+  background-size: 48rpx auto;
+  background-position: -34rpx 0;
+  content: '';
+}
+.inset-icon-count{
+  margin-right: 10rpx;
+  color: #fec71f;
+  font-style: normal;
+}
+
+.inset-link-supported {
+  color: #039CDD!important;
+}

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "提交审核",
+  "usingComponents": {
+    "Modal": "../task/comps/modal",
+    "authorizationFloat": "./../../../../cwx/component/authorizationFloat/index",
+    "perinfo-protect-float": "./../../../../cwx/component/perInfoProtectFloat/index"
+  }
+}

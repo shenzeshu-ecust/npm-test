@@ -1,0 +1,688 @@
+<nav-bar navbar-data="{{navbarData}}"
+  bindback="onBack"></nav-bar>
+<import src="../common/template/passengerView.wxml" />
+<import src="../common/template/Modal.wxml" />
+<import src="../common/template/CustomModal.wxml" />
+<import src="../common/template/bookExplain.wxml" />
+<import src="../common/template/busInfo.wxml" />
+<import src="../common/template/xPackageItem.wxml" />
+<import src="../common/template/busNotice.wxml" />
+<import src="../common/template/newUserCoupon.wxml" />
+<import src="./packageRow.wxml" />
+<import src="./packageItem.wxml" />
+<import src="./priceDetail.wxml" />
+<import src="./priceDetailModal.wxml" />
+<import src="./instantDeductionCard.wxml" />
+<import src="book.skeleton.wxml" />
+<block>
+    <template is="skeleton"
+      wx-if="{{isLoading}}" />
+    <view class="container"
+      hidden="{{isLoading}}">
+        <!-- 填写信息 -->
+        <scroll-view scroll-y="{{ (showPriceDetailModal || showPriceDetail) ? false : true }}"
+          class="absoluteCoutainer"
+          bindscrolltoupper="onScrollToTop"
+          scroll-into-view="{{bookAnchor}}"
+          upper-threshold="10"
+          scroll-with-animation>
+            <block>
+                <template is="businfo"
+                  data="{{time, detail, hasSalePackage, classConfig, colorConfig, isPromotion, isBook:true, showExplainIndex, lotteryCouponPrice, effectiveTime}}" />
+                <view class="bus-notice-wrap">
+                    <view wx:if="{{hasBusNotice || isShowNewUseBanner || isShowOldUseBanner}}"
+                      class="swiper-container">
+                        <swiper class='banner'
+                          indicator-dots="{{false}}"
+                          autoplay="{{true}}"
+                          current="{{0}}"
+                          interval="{{3000}}"
+                          duration="{{500}}"
+                          vertical="{{true}}"
+                          circular="{{true}}"
+                          display-multiple-items="{{1}}">
+                            <swiper-item wx:if="{{hasBusNotice}}">
+                                <template is="busnotice"
+                                  data="{{busNoticeData}}" />
+                            </swiper-item>
+                            <swiper-item wx:if="{{isShowNewUseBanner}}"
+                              wx:for="{{newUseBannerDesc}}">
+                                <template is="newUserBanner"
+                                  data="{{isNewActivity: true, item, isShowBgColor, fromBook}}" />
+                            </swiper-item>
+                            <swiper-item wx:if="{{isShowOldUseBanner}}"
+                              wx:for="{{oldUseBannerDesc}}">
+                                <template is="newUserBanner"
+                                  data="{{isNewActivity: false, item, isShowBgColor, fromBook}}" />
+                            </swiper-item>
+                        </swiper>
+                    </view>
+                </view>
+            </block>
+            <view wx:if="{{detail.isPresale}}"
+              class="color-bg_fff line25 margin-bottom-min b-b-row">
+                <view class="flex-row">
+                    <view class="row-title">备选车次</view>
+                    <view class="flex1 bus-book-explain-dark">
+                        <text>{{'无票时更换前后两小时车次'}}</text>
+                    </view>
+                    <icon size="23"
+                      class='padding-margin select {{classConfig.mainColor}} {{acceptFloat ? "icon-checked-round" : "icon-check-round"}} right'
+                      bindtap="changeFloat" />
+                </view>
+            </view>
+            <!-- 乘客 -->
+            <view class="bus-pass-list color-bg_fff">
+                <view class="pass-title flex-row">
+                    <text>乘客<text class="small">{{' (' + '单笔订单限' + ((buyTicketRule && buyTicketRule.maxSaleTicketNumber) || 0) + '张' + ((buyTicketRule && buyTicketRule.isSaleTakeChildTicket && buyTicketRule.supportTakeChildNumber > 0) ? ', 免票携童' + buyTicketRule.supportTakeChildNumber + '个'  : '' ) + ") "}}</text></text>
+                    <view class="flex1"></view>
+                </view>
+                <view class="b-b-passlist">
+                    <view wx:if="{{memberPas.length}}"
+                      class="{{passList.length == 0 ? 'dash_b_border' : ''}} item">
+                        <view wx:for="{{passengerMinSlice}}"
+                          wx:for-item="subList"
+                          class="flex item memberPasRow"
+                          wx:for-index="line">
+                            <block wx:for="{{subList}}">
+                                <button wx:if="{{item.name == 'mock'}}"
+                                  class="memberPasItem"
+                                  bindtap="choosePassengers">
+                                    <view class="extend {{classConfig.mainColor}}"></view>
+                                    <view class="{{classConfig.mainColor}}">新增</view>
+                                </button>
+                                <button wx:else
+                                  class="memberPasItem {{item.chosen ? classConfig.mainColor + ' ' + classConfig.veryLightBakColor + ' ' + classConfig.borderColor : ''}} "
+                                  bindtap="choosePasAndReset"
+                                  data-item="{{item}}"
+                                  data-index="{{line * 4 + index}}">
+                                    <text numberOfLines="{{1}}"
+                                      class="{{item.chosen ? classConfig.mainColor : ''}}">{{item.name}}</text>
+                                    <!-- <icon wx:if="{{item.chosen}}" class='icon-check-triangle {{classConfig.mainColor}}' size='32rpx' /> -->
+                                    <view wx:if="{{item.isSelf}}"
+                                      class="tag {{classConfig.veryLightBakColor}} {{classConfig.lightBorder}} {{classConfig.mainColor}}">
+                                        {{'本人'}}
+                                    </view>
+                                    <view wx:elif="{{item.PassengerType == 'C'}}"
+                                      class="tag {{classConfig.veryLightBakColor}} {{classConfig.lightBorder}} {{classConfig.mainColor}}">
+                                        {{'儿童'}}
+                                    </view>
+                                    <view wx:elif="{{item.PassengerType == 'X'}}"
+                                      class="tag {{classConfig.veryLightBakColor}} {{classConfig.lightBorder}} {{classConfig.mainColor}}">
+                                        {{'携童'}}
+                                    </view>
+                                </button>
+                            </block>
+                        </view>
+                    </view>
+                    <view wx:for="{{passList}}"
+                      wx:key="{{item.PassengerID}}"
+                      class="flex item {{index == passList.length - 1 ? 'dash_b_border' : ''}} ">
+                        <view class="flex-i1 pass-remove"
+                          bindtap="deletePassager"
+                          data-index="{{index}}">
+                            <text class="icon-remove"></text>
+                        </view>
+                        <view class="flex-i6 flex-row info {{index == passList.length - 1 ? '' : 'dash_b_border'}} "
+                          bindtap="editPassenger"
+                          data-index="{{index}}">
+                            <view>
+                                <view>
+                                    <text class="name">{{item.name}}</text>
+                                    <text class="label">{{item.type}}</text>
+                                </view>
+                                <view wx:if="{{item.cardName && item.cardNum}}"
+                                  class="card">
+                                    {{item.cardName}} {{item.no || item.cardNum}}
+                                </view>
+                            </view>
+                            <view class="flex1"></view>
+                            <icon class="icon-arrow-right"
+                              size="20rpx" />
+                        </view>
+                    </view>
+                </view>
+                <view wx:if="{{memberPas.length == 0}}"
+                  class="dash_b_border padding-horizontal padding-vertical">
+                    <button form-type="submit"
+                      class="line-button {{classConfig.mainColor}} {{classConfig.borderColor}}"
+                      hover-class="btn-default_hover"
+                      bindtap="choosePassengers">
+                        + 添加乘客
+                        (成人{{buyTicketRule.isSaleChildTicket ? '、儿童'  :'' }}{{buyTicketRule.isSaleTakeChildTicket ? '、携童' : ''}})
+                    </button>
+                </view>
+                <!-- 手机号 -->
+                <view class="flex-row b-b-phonenum color-bg_fff flex">
+                    <view class="row-title">联系手机</view>
+                    <view class="flex-i3">
+                        <input wx:if="{{(!showPriceDetailModal)}}"
+                          class="phoneInput"
+                          style="border-style:none"
+                          id="phone"
+                          bindchange="bindInputChange"
+                          bindinput="bindInputChange"
+                          bindblur="bindInputChange"
+                          type="number"
+                          maxlength="11"
+                          placeholder="用于接收取票信息"
+                          value="{{phoneNum}}"
+                          bindtap="bindClickPhoneInpunt" />
+                    </view>
+                </view>
+            </view>
+            <block wx:if="{{passList.length > 0 && phoneNum.length == 11}}">
+                <!-- 保险 -->
+                <view wx:if="{{packageList.length > 0 && !selectX.isInsurance}}"
+                  class="mt10 color-bg_fff">
+                    <view wx:if="{{hasVirusIns}}">
+                        <image class="virus-banner"
+                          mode="widthFix"
+                          wx:if="{{hasVirusInsChecked}}"
+                          src="https://pages.c-ctrip.com/bus-images/busapp/rnbus/bookAdjust/checkedViresIns.png">
+                        </image>
+                        <image class="virus-banner"
+                          mode="widthFix"
+                          wx:else
+                          src="https://pages.c-ctrip.com/bus-images/busapp/rnbus/bookAdjust/noCheckedViresIns.png">
+                        </image>
+                    </view>
+                    <view wx:else
+                      class="flex-row b-b-row"
+                      style="padding-top:16rpx;">
+                        <view>{{'汽车意外险'}}</view>
+                        <view class="flex1"></view>
+                        <text class="insuracne-min">买一份保障，多一份安心</text>
+                    </view>
+                    <block wx:if="{{showAllPackage || packageList.length <= 1}}">
+                        <view>
+                            <view class="salepackagerow-container"
+                              wx:for="{{packageList}}"
+                              wx:key="insurance">
+                                <template is="salepackagerow"
+                                  data="{{mutil: false, type: 'right', item:item, number: item.supChild ? aldults.length + childs.length : aldults.length, index:index, onSelect: 'switchSalePackage', onExplain: 'showPackageExplain', classConfig: classConfig, colorConfig: colorConfig}}" />
+                                <view wx:if="{{index < packageList.length - 1}}"
+                                  class="line" />
+                            </view>
+                            <block wx:if="{{insuranceFromSale}}">
+                                <view class="ins-tip-container">
+                                    <view class="ins-tip-text">
+                                        <view>
+                                            本模块由携程保险代理有限公司管理并运营，您添加了「{{selectPackage.title}}」,请您仔细阅读
+                                        </view>
+                                        <view class="highlight"
+                                          bindtap="onPressInsuranceDesc"
+                                          data-key="insuranceNotice">
+                                            投保须知、
+                                        </view>
+                                        <view class="highlight"
+                                          bindtap="onPressInsuranceDesc"
+                                          data-key="insurancePolicy">
+                                            保险条款、
+                                        </view>
+                                        <view class="highlight"
+                                          bindtap="onPressInsuranceDesc"
+                                          data-key="disclaimer">
+                                            免责说明、
+                                        </view>
+                                        <view class="highlight"
+                                          bindtap="onPressInsuranceDesc"
+                                          data-key="insuranrantAgreeNote">
+                                            被保险人同意声明
+                                        </view>
+                                        <view>以及</view>
+                                        <view class="highlight"
+                                          bindtap="onPressInsuranceDesc"
+                                          data-key="privacyPolicy">
+                                            个人信息保护政策、
+                                        </view>
+                                        <view class="highlight"
+                                          bindtap="onPressInsuranceDesc"
+                                          data-key="userNotification">
+                                            客户告知书
+                                        </view>
+                                        <view>等其他内容，为确保您的投保权益，您的投保信息轨迹将被记录。</view>
+                                    </view>
+                                </view>
+                                <view class="insurance-ctrip">
+                                    <image src="https://pages.c-ctrip.com/bus-images/insurancebox/logo-blue.png" />
+                                    <text>携程旗下保险代理自营平台</text>
+                                </view>
+                            </block>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <view>
+                            <view class="salepackagerow-container"
+                              wx:key="insurance">
+                                <template wx:key="insurance"
+                                  is="salepackagerow"
+                                  data="{{mutil: false, type: 'right', item:packageList[0], number: packageList[0].supChild ? aldults.length + childs.length : aldults.length, index:0, onSelect: 'switchSalePackage', onExplain: 'showPackageExplain', classConfig: classConfig, colorConfig: colorConfig}}" />
+                            </view>
+                            <block wx:if="{{insuranceFromSale}}">
+                                <view class="ins-tip-container">
+                                    <view class="ins-tip-text">
+                                        <view>本模块为由携程保险代理有限公司管理并运营，请仔细阅读</view>
+                                        <view class="highlight"
+                                          bindtap="onPressInsuranceDesc"
+                                          data-key="insuranceNotice">
+                                            投保须知
+                                        </view>
+                                        <view>等内容，并知晓承保保险公司和产品条款内容。为确保您的权益，您的投保信息轨迹将被记录。</view>
+                                    </view>
+                                </view>
+                            </block>
+                            <view class="insurance-all"
+                              bindtap="onShowAllPackage">
+                                <view class="desc">其他交通意外保障</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+                <!-- 搭售 -->
+                <block wx:if="{{saleList.length}}">
+                    <template wx:for="{{saleList}}"
+                      wx:key="salelist"
+                      is="salepackagerow"
+                      data="{{mutil: true, type: 'right', item:item, number: item.supChild ? aldults.length + childs.length : aldults.length, index:index, onSelect: 'switchSale', onExplain: 'showPackageExplain', classConfig: classConfig, colorConfig: colorConfig}}" />
+                </block>
+            </block>
+            <!-- 钱包支付 -->
+            <block wx:if="{{passList.length > 0}}">
+                <view class="mt10"></view>
+                <view wx:if="{{!detail.isPresale && purseInfo.available && purseInfo.purseBalanceFee > 0 }}"
+                  class="purse-row color-bg_fff line25 b-b-row">
+                    <view class="flex-row purseInfo {{purseInfo.available ? '' : 'disable'}}">
+                        <view class="row-title">红包抵现</view>
+                        <view class="flex-i1 bus-book-explain-dark ">
+                            <block wx:if="{{isPromotion}}">
+                                <text style="color:#999999">本单暂不支持抵扣</text>
+                            </block>
+                            <block wx:else>
+                                <block wx:if="{{purseInfo.available}}">
+                                    <view wx:if="{{purseInfo.purseBalanceFee > 0}}">
+                                        <text style="color:#333333">余额<text class="color-orange">{{purseInfo.purseBalanceFee}}</text>元，本单最高抵<text class="color-orange">{{countPurseFee}}</text>元</text>
+                                    </view>
+                                    <view wx:else>暂无可用余额</view>
+                                </block>
+                                <view wx:else
+                                  class="normal">您本月的红包抵扣次数已达上限</view>
+                            </block>
+                        </view>
+                        <block wx:if="{{isPromotion}}">
+                            <icon bindtap="showPurseInfo"
+                              type=""
+                              size="32rpx"
+                              class="icon-info {{classConfig.mainColor}}"
+                              color="{{colorConfig.mainColor}}" />
+                        </block>
+                        <block wx:else>
+                            <icon wx:if="{{purseInfo.available}}"
+                              size="22"
+                              class='padding-margin select  {{classConfig.mainColor}} {{rewardChannel ? "icon-checked-round" : "icon-check-round"}} right normal'
+                              bindtap="changeUsePurseFloat" />
+                            <icon wx:else
+                              size="22"
+                              class='padding-margin select {{rewardChannel ? "icon-checked-round" : "icon-check-round"}} right normal' />
+                        </block>
+                    </view>
+                    <view class=" line  b_border border-b special-border"></view>
+                </view>
+                <!-- 优惠券选择 -->
+                <view wx:if="{{couponList.length > 0}}"
+                  class="color-bg_fff line25 b-b-row"
+                  bindtap="onShowCouponList">
+                    <view class="flex-row">
+                        <view class="row-title">优惠券</view>
+                        <view class="flex-i1 bus-book-explain-dark">
+                            <view wx:if="{{usedCoupon}}"
+                              style="color: #ff6600;">
+                                <text>-</text>
+                                <text>¥</text>
+                                <text>{{usedCoupon['deductionAmount']}}</text>
+                            </view>
+                            <view wx:else>
+                                <text class="cpinkgray">未使用</text>
+                            </view>
+                        </view>
+                        <icon class="icon-arrow-right"
+                          size="20rpx" />
+                    </view>
+                    <view class=" line  b_border border-b special-border"></view>
+                </view>
+                <!-- 立减卡 -->
+                <view wx:if="{{reductionCardInfo.checked || (canShowDeductionCard && selectInstantDeductionCard) }}"
+                  class="color-bg_fff line25 b-b-row"
+                  bindtap="onClickInstantDeductionModal">
+                    <view class="flex-row">
+                        <view class="row-title">立减卡</view>
+                        <view class="flex-i1 bus-book-explain-dark">
+                            <view wx:if="{{selectInstantDeductionCard}}">
+                                <text>本单</text>
+                                <text style="color: #ff6600;">减{{reductionCardInfo.discountFee}}元</text>
+                                <text>，还剩{{(reductionCardInfo.quantity  ? reductionCardInfo.quantity  :reductionCardInfo.productQuantity)}}次</text>
+                            </view>
+                            <view wx:else>
+                                <text class="cpinkgray">使用立减卡，本单再减{{reductionCardInfo.discountFee}}元，还剩{{(reductionCardInfo.quantity || reductionCardInfo.productQuantity )}}次</text>
+                            </view>
+                        </view>
+                        <icon class="icon-arrow-right"
+                          size="20rpx" />
+                    </view>
+                    <view class=" line  b_border border-b special-border"></view>
+                </view>
+                <!-- 汽车专享 -->
+                <view wx:if="{{hotelDiscountTip.title}}"
+                  class="color-bg_fff line25 b-b-row">
+                    <view class="flex-row">
+                        <view class="row-title">汽车专享</view>
+                        <view class="flex-i1 bus-book-explain-dark">
+                            <rich-text nodes="{{hotelDiscountTip.title}}" />
+                        </view>
+                    </view>
+                    <view class="line  b_border border-b special-border"></view>
+                </view>
+            </block>
+            <!-- 报销凭证 -->
+            <view class="bus-invoice">
+                <view class="flex-row">
+                    <view class="row-title">报销凭证</view>
+                    <view class="row-content">
+                        <text>{{'订单支付完成后可开具，安心购票'}}</text>
+                    </view>
+                </view>
+            </view>
+            <!-- 说明文案 -->
+            <view class="bus-warmnotes">
+                <view wx:if="{{isSelectChild}}"
+                  class="child-content"
+                  bindtap="onAgreeChild"
+                  animation="{{moveAnim}}">
+                    <icon size="23"
+                      class='padding-margin child-text-select {{isAgreeChild ? "icon-checked-round" : "icon-check-round"}}'></icon>
+                    <text class="child-text">本人是订单中未成年人的监护人或已征得其监护人同意，允许平台以提供产品或服务为目的，处理未成年人信息。</text>
+                </view>
+                <view wx:if="{{detail.tempFields.sellerName}}"
+                  class='flex-row'>
+                    <view style="max-width:632rpx;">
+                        销售供应商：{{detail.tempFields.sellerName}}
+                        <text class="{{classConfig.mainColor}}"
+                          bindtap="onShowOfferDesc">查看资质</text>
+                    </view>
+                </view>
+                <view class="flex-row-text">
+                    <view>{{priceComposeDesc}}</view>
+                    <text>请您在提交订单前仔细阅读</text>
+                    <button class="button-noborder {{classConfig.mainColor}}"
+                      bindtap="showPolicy">
+                        汽车票预订协议
+                    </button>
+                </view>
+                <view wx:if="{{insuranceFromXList}}">
+                    <view class="ins-tip-title">投保说明</view>
+                    <view class="ins-tip-text">
+                        <view>本模块由携程保险代理有限公司管理并运营，您在前序页面添加了「{{selectXlist.title}}」，请您仔细阅读</view>
+                        <view class="highlight"
+                          bindtap="onPressInsuranceDesc"
+                          data-key="insuranceNotice">
+                            投保须知、
+                        </view>
+                        <view class="highlight"
+                          bindtap="onPressInsuranceDesc"
+                          data-key="insurancePolicy">
+                            保险条款、
+                        </view>
+                        <view class="highlight"
+                          bindtap="onPressInsuranceDesc"
+                          data-key="disclaimer">
+                            免责说明、
+                        </view>
+                        <view class="highlight"
+                          bindtap="onPressInsuranceDesc"
+                          data-key="insuranrantAgreeNote">
+                            被保险人同意声明
+                        </view>
+                        <view>以及</view>
+                        <view class="highlight"
+                          bindtap="onPressInsuranceDesc"
+                          data-key="privacyPolicy">
+                            个人信息保护政策、
+                        </view>
+                        <view class="highlight"
+                          bindtap="onPressInsuranceDesc"
+                          data-key="userNotification">
+                            客户告知书
+                        </view>
+                        <view>等其他内容，为确保您的投保权益，您的投保信息轨迹将被记录。</view>
+                    </view>
+                </view>
+            </view>
+            <view class="slogan-container">
+                <view wx:if="{{showSlogan}}"
+                  class="slogan {{classConfig.sloganImage}}"></view>
+                <view id="pagesBottom"></view>
+            </view>
+            <!-- 底部按钮 -->
+            <view style="padding-bottom:248rpx"></view>
+        </scroll-view>
+        <block wx:if="{{showBusNoticeModal}}">
+            <template data="{{busNoticeData}}"
+              is="busnoticemodal" />
+        </block>
+        <view class="fixed  bar-pay {{passList.length > 0 ? '' : 'disabled'}}">
+            <template wx:if="{{isShowDeductionCard && (canShowDeductionCard || reductionCardInfo.checked) }}"
+              is="instantDeductionCard"
+              data="{{isShowDeductionCard, canShowDeductionCard, selectInstantDeductionCard, showInstantDeductionModal, showInstantDeductionRule, reductionCardInfo, reductionCardChannel, onClickInstantDeductionModal, onClickInstantDeductionRule, onClickInstantDeductionBtn}}">
+                <!-- && canShowDeductionCard -->
+            </template>
+            <!-- 价格明细 -->
+            <template wx:if="{{showPriceDetail}}"
+              is="pricedetail"
+              data="{{priceList, priceListExtra, showServiceInfo, onShowServiceFeeDesc: 'onShowServiceFeeDesc', togglePriceDetail: 'togglePriceDetail',cancelSalePackage: 'cancelSalePackage' }}" />
+            <view class="bar"
+              style="{{isIPhoneX ? 'padding-bottom:68rpx' : ''}}">
+                <view class="flex-row"
+                  wx:if="{{detail.isPresale }}">
+                    <view class="flex-row presale-container">
+                        <button form-type='submit'
+                          class='button-noborder left flex-column flex-i1'
+                          bindtap='togglePriceDetail'>
+                            <view class='presale-flex-column full-row'>
+                                <view class="presale-price-container">
+                                    <text class="torange">¥ <text class="fontsize-superbig" >{{passList.length > 0 ? (originTotalPrice || 0) : "--"}}</text></text>
+                                    <text class="fontsize-extrasmall detail {{showPriceDetail ? 'triangle' : 'triangleclose'}}"
+                                      style="margin-right: 20rpx;">明细</text>
+                                </view>
+                                <view wx:if="{{decountFee > 0 && passList.length > 0}}"
+                                  class="tag-back">
+                                    <text class="tagText">已省{{decountFee}}元<text wx:if="{{freeServicePrice}}"> | 享免服务费</text></text>
+                                </view>
+                            </view>
+                        </button>
+                    </view>
+                    <view class="flex1">
+                        <button form-type="submit"
+                          class="btn-primary btn-pay {{(!hasInsurance && supportAfterPay) ? 'gray' : ''}} "
+                          hover-class="btn-primary_hover"
+                          bindtap="doSubmit"
+                          data-method="normal">
+                            <!-- <view> -->
+                            <view class="title">普通支付¥{{totalPrice}}</view>
+                            <view class="subtitle pre">需垫付差价</view>
+                            <!-- <icon class='icon-arrow-right' size='20rpx' /> -->
+                            <!-- </view> -->
+                        </button>
+                    </view>
+                    <view wx:if="{{!hasInsurance && supportAfterPay}}"
+                      class="flex1 buttonView">
+                        <button form-type="submit"
+                          class="btn-primary btn-pay"
+                          hover-class="btn-primary_hover"
+                          bindtap="doSubmit"
+                          data-method="afterpay">
+                            <!-- <view> -->
+                            <view class="title">信用支付¥{{originTotalPrice}}</view>
+                            <view class="subtitle">购票无需先付钱</view>
+                            <!-- </view> -->
+                        </button>
+                    </view>
+                </view>
+                <view wx:else
+                  class="flex-row">
+                    <view class="flex-i2 flex-row ">
+                        <button form-type='submit'
+                          class='button-noborder left flex-column flex-i1'
+                          bindtap='togglePriceDetail'>
+                            <view class='flex-row full-row'>
+                                <view class="price-contanier">
+                                    <text class="torange">¥ <text class="fontsize-superbig" >{{passList.length > 0 ? (totalPrice || 0) : "--"}}</text></text>
+                                    <view wx:if="{{decountFee > 0 && passList.length > 0}}"
+                                      class="tag-back">
+                                        <text class="tagText">已省{{decountFee}}元<text wx:if="{{freeServicePrice}}"> | 享免服务费</text></text>
+                                    </view>
+                                </view>
+                                <text class="fontsize-extrasmall detail margin-horizontal {{showPriceDetail ? 'triangle' : 'triangleclose'}}">明细</text>
+                            </view>
+                        </button>
+                    </view>
+                    <view class="flex-i1">
+                        <button form-type="submit"
+                          class="btn-primary btn-pay"
+                          hover-class="btn-primary_hover"
+                          bindtap="doSubmit"
+                          data-method="normal">
+                            去支付
+                        </button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 保险文案 -->
+    <view class="bus-desc"
+      wx:if="{{insDesc && showInsDesc}}"
+      bindtap="hideInsDesc">
+        <view wx:for="{{insDesc}}"
+          wx:key="{{index}}">{{item}}</view>
+    </view>
+    <view hidden="{{!isShowMask}}"
+      bindtap="hideMask"
+      class="mask {{isShowCouponDlg ? 'mask-top': ''}} "
+      hover-style="none"></view>
+    <!-- 常旅 -->
+    <passenger-modal passenger-list="{{memberPas}}"
+      class-config="{{classConfig}}"
+      color-config="color-config"
+      is-iphone-x="{{isIPhoneX}}"
+      show-ocr="{{supportOcr}}"
+      max-select="{{buyTicketRule.maxSaleTicketNumber}}"
+      show-type="{{showType}}"
+      bind:choose="choosePas"
+      bind:edit="editPas"
+      bind:cancel="cancelPasChoose"
+      bind:add="addNewPas"
+      bind:confirm="confirmPasChoose"></passenger-modal>
+    <!-- 价格明细弹窗 -->
+    <template wx:if="{{showPriceDetailModal}}"
+      is="price-detail-modal"
+      data="{{classConfig, priceList, priceListExtra, showServiceInfo, onShowServiceFeeDesc: 'onShowServiceFeeDesc', togglePriceDetail: 'togglePriceDetail',cancelSalePackage: 'cancelSalePackage', totalPrice  }}" />
+    <!-- 弹框 -->
+    <block wx:if="{{didShowModal}}">
+        <template is="Bus-Modal"
+          data="{{...modalData, hiddenNotice:'hiddenModal'}}" />
+    </block>
+    <!-- <block wx:if="{{customModalData && customModalData.visible}}"> -->
+    <template is="custommodal"
+      data="{{...customModalData}}" />
+    <!-- </block> -->
+    <template wx:if="{{showExplain}}"
+      is="explain"
+      data="{{explains: detail.explainList, showExplainIndex, classConfig, isIPhoneX, onClickExplainShowMap}}" />
+    <template wx:if="{{showOfferDesc}}"
+      is="offerdesc"
+      data="{{isIPhoneX, bindTap:'hideOfferDesc', sellerName: detail.tempFields.sellerName ,carrierInfo: detail.tempFields.carrierInfo, businessLicense: detail.tempFields.businessLicense, note:detail.tempFields.sellerNote}}" />
+    <block wx:if="{{showBusInfoDetail}}">
+        <template is="busdetailinfo"
+          data="{{time, detail, classConfig, colorConfig, onDissMiss: 'dissMissBusInfoDetail'}}" />
+    </block>
+    <template is="servicefee-modal"
+      wx:if="{{showServiceFeeDesc}}"
+      data="{{serviceFeeExplainData}}" />
+    <template wx:if="{{showInsuranceModal}}"
+      is="insuranceModal"
+      data="{{buttonRecommend }}" />
+    <view class="view-check"
+      bindanimationend="viewReadyHandle"></view>
+
+</block>
+<template name="insuranceModal">
+    <view class="filter-container"
+      catchtap="empty">
+        <view class="filter-mask "
+          bindtap="onCancelInsuranceModal"></view>
+        <view class="filter-view insurance-view"
+          bindtap="empty">
+            <view class="icon-font icon-no insurance-icon"
+              bindtap="onCancelInsuranceModal"></view>
+            <view class="insurance-head">
+                <view class="head-title">
+                    <text class="head-title-text">{{buttonRecommend.extraMap.modalTitle || buttonRecommend.title}}</text>
+                    <text class="head-subtitle-text">{{buttonRecommend.extraMap.subModalTitle || '多分保障，家人安心'}} ￥{{buttonRecommend.payShowPrice}}/份 </text>
+                </view>
+                <image src="{{buttonRecommend.extraMap.modalHeadImg || 'https://pages.c-ctrip.com/bus-images/insurancebox/insurance-modal.png'}}">
+                </image>
+            </view>
+            <view class="insurance-content">
+                <view wx:for="{{buttonRecommend.modalTags}}"
+                  class="tag"
+                  wx:for-item="tag"
+                  wx:for-index="index">
+                    <text>
+                        <text class="tag-icon icon-font {{tag.icon}} {{ tag.icon === 'icon-yes' ? 'insurance-font-color' : 'red' }}" />
+                        <text  wx:for="{{tag.texts}}" wx:for-item="text" wx:for-key="index" class="{{text.highLight && !text.fontWeight ? 'insurance-font-speical' : 'insurance-font-normal'}}" style="{{text.highLight && !text.fontWeight ? 'font-weight: 500;' : text.fontWeight ? 'font-weight: 600; padding-right:24rpx;font-size:28rpx;color:#333333':''}}">{{text.text}}</text>
+                    </text>
+                </view>
+            </view>
+            <view class="insurance-desc">
+                <view>
+                    <image src="https://pages.c-ctrip.com/bus-images/insurancebox/logo-white.png" />
+                    <text>官方合作·保障出行</text>
+                </view>
+                <view bindtap="onGoExtraUrl"
+                  data-url="{{buttonRecommend.descUrl }}">
+                    <text wx:if="{{buttonRecommend.extraMap.packageType === 'insurance'}}">投保须知</text>
+                    <text wx:else>详细说明</text>
+                    <icon class="icon-arrow-right"
+                      size="18rpx" />
+                </view>
+            </view>
+            <view wx:if="{{buttonRecommend.extraMap.packageType === 'insurance'}}"
+              class="insurance-text">
+                {{buttonRecommend.channelDesc}}
+            </view>
+            <view wx:if="{{buttonRecommend.extraMap.packageType === 'insurance'}}"
+              class="insurance-ctrip">
+                <image src="https://pages.c-ctrip.com/bus-images/insurancebox/logo-blue.png" />
+                <text>携程旗下保险代理自营平台</text>
+            </view>
+            <view class="insurance-btn">
+                <view class="btn-cancel"
+                  data-method="normal"
+                  data-action="{{false}}"
+                  hover-class="button-next-step-hover"
+                  catchtap="onActionInsuranceModal"
+                  hover-stop-propagation>
+                    否
+                </view>
+                <view class="btn-ok"
+                  data-method="normal"
+                  data-action="{{true}}"
+                  hover-class="button-next-step-hover"
+                  catchtap="onActionInsuranceModal"
+                  hover-stop-propagation>
+                    是
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

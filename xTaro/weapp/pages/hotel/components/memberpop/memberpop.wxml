@@ -1,0 +1,10 @@
+<view wx:if="{{display}}" class="cmask" catchtouchmove="noop">
+    <view class="cmask-popbox mp-box">
+        <image src="{{imgSrc}}" class="mp-img">
+            <view class="mp-act">
+                <view class="mp-getbtn" data-name="领取" catchtap="close"></view>
+            </view>
+        </image>
+        <view data-name="关闭" class="wechat-font-close mp-close" catchtap="close"></view>
+    </view>
+</view>

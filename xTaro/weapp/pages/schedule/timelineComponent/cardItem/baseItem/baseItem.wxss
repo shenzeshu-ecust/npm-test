@@ -1,0 +1,130 @@
+/* pages/timeLine/cardItem/baseItem.wxss */
+
+.contentView {
+  margin-top: 0;
+  /* background-color: blue; */
+}
+
+.show_time_backview {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20rpx;
+  padding-bottom: 12rpx;
+  height: 52rpx;
+}
+
+.show_time_view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 36rpx;
+}
+
+.show_time_dot {
+  width: 11rpx;
+  height: 11rpx;
+  border-radius: 17rpx;
+  border: 5rpx solid #DDD;
+  background-color: #f8f8f8;
+  margin-left: -7px;
+}
+
+.show_time_text {
+  margin-left: 24rpx;
+  font-size: 34rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.show_activity {
+  height: 52rpx;
+  width: 52rpx;
+  margin-right: 50rpx;
+}
+
+.card_content {
+  /* flex: 1; */
+  /* height: 80px; */
+  background-color: #fff;
+  border-radius: 16rpx;
+  position: relative;
+}
+
+.margin-share-card {
+  margin: 0 24rpx 16rpx;
+  padding-bottom: 16rpx;
+}
+.margin-main-card {
+  margin: 0 20rpx 16rpx 60rpx;
+}
+.options-content {
+  position: absolute;
+  top: 0rpx;
+  right: 20rpx;
+  bottom: 16rpx;
+  left: 60rpx;
+}
+
+.real-container {
+  position: relative;
+}
+
+.options-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 10rpx;
+  /* background-color: red; */
+}
+
+.option-view {
+  width: 160rpx;
+  height: 160rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 80rpx;
+}
+
+.option-icon {
+  width: 44rpx;
+  height: 46rpx;
+  /* background-color: rosybrown; */
+}
+
+.option-title {
+  font-size: 10px;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+.line {
+  width: 2rpx;
+  height: 110rpx;
+  background-color: #e7e8e9;
+}
+
+.modify-button {
+  border-radius: 10rpx;
+  /* background-color: yellowgreen; */
+}
+
+.recoveryAnim2 {
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  -webkit-transform: translateX(320rpx);
+  transform: translateX(320rpx);
+}
+
+.recoveryAnim1 {
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  -webkit-transform: translateX(160rpx);
+  transform: translateX(160rpx);
+}
+
+

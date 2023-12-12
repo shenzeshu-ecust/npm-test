@@ -1,0 +1,56 @@
+<view class="container" wx:if="{{ show }}">
+  <view class="title">
+    <text class="title-text">{{ title }}</text>
+    <image class="title-image" src="http://pic.c-ctrip.com/VacationH5Pic/myctrip/star.png" />
+  </view>
+
+  <view class="content">
+    <view class="content-emoji">
+      <view class="content-emoji-sad">
+        <image class="content-emoji-image" src="http://pic.c-ctrip.com/VacationH5Pic/myctrip/no.png" />
+        <text class="content-emoji-text">非常不愿意</text>
+      </view>
+      <view class="content-emoji-glad">
+        <image class="content-emoji-image" src="http://pic.c-ctrip.com/VacationH5Pic/myctrip/ok.png" />
+        <text class="content-emoji-text">非常愿意</text>
+      </view>
+    </view>
+
+    <view class="content-score">
+      <view
+        class="{{ 'content-score-item' + (item === selectedScore ? ' selected-score-item' : '')}}"
+        data-score="{{ item }}"
+        wx:key="*this"
+        wx:for="{{ scores }}"
+        bindtap="selectScore"
+      >
+        <text
+          class="{{ 'content-score-item-text' + (item === selectedScore ? ' selected-score-item-text' : '') }}"
+        >{{ item }}</text>
+        <view
+          wx:if="{{ item !== selectedScore && item < 10 }}"
+          class="content-score-item-split"
+        />
+      </view>
+    </view>
+
+    <view class="content-comment" wx:if="{{ selectedScore > -1 }}">
+      <textarea
+        class="content-comment-input"
+        placeholder-class="content-comment-placeholder"
+        value="{{ value }}"
+        placeholder="{{ commentPlaceholder }}"
+        bindinput="updateComment"
+        maxlength="500"
+      />
+      <view class="content-comment-number">{{ comment.length }}/500</view>
+    </view>
+
+    <view class="footer" wx:if="{{ selectedScore > -1 }}">
+      <view class="footer-button" bindtap="submit">
+        <text class="footer-button-text">提交</text>
+      </view>
+    </view>
+
+  </view>
+</view>

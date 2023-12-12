@@ -1,0 +1,184 @@
+
+
+<wxs module="util" src="./searchUtil.wxs"></wxs>
+<!-- 页面视图部分-->
+<!-- <view class="container-view"> -->
+<view class="search-header">
+    <view class="search-box" style="width:{{searhViewWidth}}px">
+        <input id="search_input" bindinput="bindKeyInput" value="{{inputValue}}" bindconfirm="searchBtnClick" confirm-type="search" placeholder="目的地/酒店/景点/关键字" placeholder-class="placeholder-text" auto-focus/>
+        <span class="i-clear" id="search_button_gs_clear" bindtap="clearText"></span>
+    </view>
+    <span class="cancel-text" bindtap="cancelClick">取消</span>
+</view>
+
+<view class="line-gradient" wx:if="{{showListView&&listData.length>0}}"></view>
+
+ <scroll-view class="scorll-view-v" scroll-y="true"
+ bindscrolltoupper="upper" bindscrolltolower="lower"
+ bindscroll="scroll">
+
+    <view class="{{showListView?'list-content':'view-hide'}}" wx:for="{{listData}}" wx:for-index="idx" wx:key="idx">
+        <view bindtap='suggestItemClick' data-info="{{item}}" data-sort="{{idx}}">
+             <template is="{{item.tempName}}" data="{{...item,idx,inputValue,listTagWidth,listSightTagWidth,isIOS}}"></template>
+        </view>
+    </view>
+    <view wx:if="{{!loading&&showListView&&listData.length==0}}" class="noresult-tip-text">
+           没有搜到相关结果
+    </view>
+ <view wx:if="{{loading}}" class="noresult-tip-text">
+           loading...
+    </view>
+    <view class="{{showListView?'view-hide':'main-content'}}">
+        <block wx:for="{{homeData}}" wx:for-index="ids" wx:key="ids" wx:for-item="objItem">
+        <template is="{{ids==0&&objItem.title=='历史搜索'?'historyItemTmp': 'hotSearchItemTmp'}}" data="{{...objItem,ids}}"/>
+
+       <!-- <template is="{{ids==0&&objItem.title=='历史搜索' ？'historyItemTmp':'hotSearchItemTmp'}}" data="{{...objItem,ids}}" /> -->
+       </block>
+    </view>
+</scroll-view>
+
+
+
+
+
+<template name="listItemTmp">
+   <view class='list-blcok-content'>
+      <label class="label_text">
+         <image class="list-item-img" src="{{imgSrc}}"></image>
+
+         <view class="list-item-text-content">
+           <block wx:for="{{searchArray}}" wx:for-index="saInd" wx:key="saInd">
+              <text class="{{highArray[saInd]?'list-item-text-highLight':'list-item-text-normal'}}">{{item}}</text>
+           </block>
+           <text class="list-item-text-districtname"
+           wx:if="{{districtName.length>0}}">{{districtName}}</text>
+        </view>
+      </label>
+      <text class="price">{{price}}</text>
+      <text class="numText" wx:if="{{numText&&numText.length>0}}">{{numText}}</text>
+      <image  class="icon_more" wx:if="{{more&&more.show}}"    src="//images3.c-ctrip.com/search/native_images/search_more.png"></image>
+  </view>
+
+  <view  class="list-tag-content" wx:if="{{childTagList&&childTagList.length>0}}">
+    <block wx:for="{{childTagList}}" wx:for-index="tagIdx" wx:key="tagIdx">
+      <text style="width:{{type=='sight'||type=='themehotsight'?listSightTagWidth:listTagWidth}}px"  bindtap="listTagClick" class="list-tag" data-info="{{item}}">{{item.word}}</text>
+    </block>
+  </view>
+</template>
+
+<!-- 旗舰店模版 -->
+<template name="hotelStoreTmp">
+   <view class='list-blcok-content'>
+      <label class="label_text">
+         <image class="{{isIOS ? 'list-item-hotelstore-img-ios':'list-item-hotelstore-img'}}" src="{{imgSrc}}"></image>
+
+         <view class="list-item-text-hotelstore-content">
+           <block wx:for="{{searchArray}}" wx:for-index="saInd" wx:key="saInd">
+              <text class="{{highArray[saInd]?'list-item-text-highLight':'list-item-text-normal'}}">{{item}}</text>
+           </block>
+           <text class="list-item-text-districtname"
+           wx:if="{{districtName.length>0}}">{{districtName}}</text>
+        </view>
+      </label>
+      <text class="price">{{price}}</text>
+      <text class="inStore">进店</text>
+      <image class="icon_more" src="//images3.c-ctrip.com/search/native_images/search_more.png"></image>
+  </view>
+
+  <view class="list-tag-content" wx:if="{{hotelstoreInterest&&hotelstoreInterest.length>0}}">
+    <block wx:for="{{hotelstoreInterest}}" wx:for-index="tagIdx" wx:key="index">
+      <View style="width:{{listSightTagWidth}}px;display: inline-block;margin-top: 5px;margin-left: 10px;">
+        <image class="hotelstore_logo" src="{{item.logo}}"></image>
+        <text style="width:{{listSightTagWidth-15}}px" class="{{isIOS ? 'list-logo-tag-ios':'list-logo-tag'}}">{{item.breif}}</text>
+      </View>
+    </block>
+  </view>
+</template>
+
+<!--星球号--->
+
+<template name="plantshipflagTmp">
+  <view class='list-blcok-content'>
+      <label class="label_text">
+         <image class="{{isBigIcon?'plant-big-list-item-img':'plant-list-item-img'}}" src="{{imageUrl}}"></image>
+         <image class="{{isBigIcon?'plant-big-v-list-item-img':'plant-v-list-item-img'}}" src="{{subImageUrl}}"></image>
+         <view class="plant-list-item-text-content" style="margin-left:{{isBigIcon?'100':'58'}}rpx">
+           <block wx:for="{{searchArray}}" wx:for-index="saInd" wx:key="saInd">
+              <text class="{{highArray[saInd]?'plant-list-item-text-highLight':'plant-list-item-text-normal'}}">{{item}}</text>
+           </block>
+           <text class="plant-list-item-text-districtname"
+           wx:if="{{districtName.length>0}}">{{districtName}}</text>
+        </view>
+      </label>
+      <image  class="icon_more" src="//images3.c-ctrip.com/search/native_images/search_more.png"></image>
+  </view>
+  <view class="plant-list-tag-content" style="margin-left:{{isBigIcon?'71':'48'}}px" wx:if="{{hotelstoreInterest&&hotelstoreInterest.length>0}}">
+    <block wx:for="{{hotelstoreInterest}}" wx:for-index="tagIdx" wx:key="tagIdx">
+      <view wx:if="{{tagIdx>0}}" class="plant-line-view"></view>
+      <text class="plant-list-tag" data-info="{{item}}">{{item.breif}}</text>
+    </block>
+  </view>
+</template>
+
+
+<!--用户--->
+
+<template name="authorTmp">
+  <view class='list-blcok-content'>
+      <label class="label_text">
+         <image class='user-list-item-img' src="{{imageUrl}}"></image>
+         <image class='user-v-list-item-img' src="{{subImageUrl}}"></image>
+         <view class="list-item-text-content">
+           <block wx:for="{{searchArray}}" wx:for-index="saInd" wx:key="saInd">
+              <text class="{{highArray[saInd]?'list-item-text-highLight':'list-item-text-normal'}}">{{item}}</text>
+           </block>
+        </view>
+      </label>
+      <image  class="icon_more" src="//images3.c-ctrip.com/search/native_images/search_more.png"></image>
+  </view>
+</template>
+
+<!-- <template name="refItemTmp"> -->
+    <!-- <template is="{{title=='历史搜索'？'historyItemTmp':'hotSearchItemTmp'}}" data="{{...objItem,ids}}"></template> -->
+<!-- </template> -->
+
+
+
+<template name="historyItemTmp">
+  <view class="{{ids==0?'ref-content-first':'ref-content'}}">
+       <view class="his-section-line">
+         <text class="header-title">{{title}}</text>
+            <image class="delete-history" src="//images3.c-ctrip.com/search/native_images/search_delete.png" bindtap="deleteHistoryClick"></image>
+        </view>
+
+        <view class="his-tag-content">
+
+          <view class="ref-tag-content" wx:for="{{itemList}}" wx:for-index="idx" wx:key="idx" wx:for-item="item">
+            <view class="ref-tag" bindtap="hotWordClick" data-itemData="{{item}}" data-history="1" data-sort="{{idx}}">
+            <view class="ref-tag-title">{{util.getShowText(item.text)}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+</template>
+
+<template name="hotSearchItemTmp">
+  <view class="{{ids==0?'ref-content-first':'ref-content'}}">
+        <view class="rec-section-line">
+          <text class="header-title">{{title}}</text>
+        </view>
+        <view class="rec-tag-content">
+
+          <view class="ref-tag-content" wx:for="{{itemList}}" wx:for-index="idx" wx:key="idx" wx:for-item="item">
+            <view class="ref-tag"  wx:if="{{item.url&&item.url.length>0}}" bindtap="hotWordClick" data-itemData="{{item}}" data-history="0" data-sort="{{idx}}">
+              <image class="{{item.iconSrc?'ref-tag-icon':'view-hide'}}" src="{{item.iconSrc}}"></image>
+              <view class="ref-tag-title">{{item.text}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+</template>
+
+<!-- 白屏检测 -->
+<!-- viewReadyHandle为框架提供、实现 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

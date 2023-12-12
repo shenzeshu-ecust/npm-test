@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "common-layer": "../layer/index",
+    "travel-coupons": "../travelcoupons/index"
+  }
+}

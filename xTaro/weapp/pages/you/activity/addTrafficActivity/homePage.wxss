@@ -1,0 +1,2703 @@
+@font-face{
+  font-family: titleFont;/* 方正字迹-文瀚建筑体 简体  FZZJ-WHJZTJW--GB1-0 */
+  src: url('https://images3.c-ctrip.com/marketing/2023/02/single_pic/FZZCHJW--GB1-0.TTF'); 
+}
+.addTrafficBody {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  z-index: 10;
+  background-image: url('https://images3.c-ctrip.com/marketing/2023/01/single_pic/doubleBgH52.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+
+.saveTips {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.70);
+  border-radius: 12rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  top: 18rpx;
+  right: 88rpx;
+  z-index: 30;
+}
+
+.saveTipsUp {
+  position: fixed;
+  top: 0;
+  right: 128rpx;
+  width: 0;
+  /*设置宽高为0，所以div的内容为空，从才能形成三角形尖角*/
+  height: 0px;
+  border: 10rpx solid transparent;
+  border-bottom: 10rpx solid rgba(0, 0, 0, 0.70);
+  z-index: 30;
+}
+
+.coinLeft {
+  position: absolute;
+  left: -30rpx;
+  top: 280rpx;
+  width: 100rpx;
+  height: 144rpx;
+}
+
+.coinRight {
+  position: absolute;
+  left: 180rpx;
+  top: 40rpx;
+  width: 62rpx;
+  height: 50rpx;
+}
+.handImg {
+  position: absolute;
+  right: 0rpx;
+  top: 550rpx;
+  z-index: 100;
+  width: 120rpx;
+  height: 280rpx;
+
+}
+
+.body-container {
+  height: 100vh;
+  padding: 0;
+}
+.body-container.fixed{
+  position: fixed;
+}
+
+#waterfallBox {
+  background-color: #fff;
+  margin-top: 20rpx;
+  padding-top: 10rpx;
+}
+
+.topInfo {
+  padding-top: 162rpx;
+}
+
+.rulesAndSubscribeBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+}
+
+#subscribeBox {
+  width: 132rpx;
+  height: 54rpx;
+  margin-left: 10rpx;
+}
+
+.rulesBox {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 100rpx 0 0 100rpx;
+  width: 124rpx;
+  height: 38rpx;
+  line-height: 38rpx;
+  font-family: "PingFangSC-Regular";
+  font-size: 24rpx;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+
+.cashDetail_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 34rpx 0 34rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+}
+  .cashDetail_left {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      height: 50rpx;
+      justify-content: flex-start;
+      color: rgba(255, 255, 255, 1);
+      font-family: PingFangSC-Semibold;
+  }
+      .balanceText {
+          font-size: 24rpx;
+          text-align: center;
+          margin-right: 8rpx;
+      }
+
+      .moneyIcon {
+          margin-right: 8rpx;
+          height: 20rpx;
+          width: 20rpx;
+          margin-bottom: 12rpx;
+      }
+      .cashDatail {
+        font-size: 38rpx;
+        text-align: center;
+        margin-right: 8rpx;
+        font-family: "PingFangSC-Semibold";
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        height: 50rpx;
+        line-height: 50rpx;    
+        font-weight: 700;
+    }
+    @keyframes moveAction{
+        0% {
+            margin-top: 0;
+        }
+        100%{
+            margin-top: -60rpx;
+        }
+    }
+    .cashBalancePro{
+        animation: moveAction 0.8s ease-in-out forwards;
+        margin-bottom: 8rpx;
+    }
+      .unit {
+          font-size: 20rpx;
+          height: 50rpx;
+          line-height: 55rpx;
+          text-align: center;
+      }
+  
+
+  .cashDetail_right {
+      color: rgba(255, 255, 255, 1);
+      font-family: PingFangSC-Semibold;
+      font-weight: bold;
+  }
+      .withDrawalText {
+        color: rgba(255, 255, 255, 1);
+          font-size: 30rpx;
+          text-align: center;
+          margin-right: 8rpx;
+      }
+
+      .goToWithdrawal {
+        color: rgba(255, 255, 255, 1);
+          font-size: 24rpx;
+          text-align: center;
+      }
+
+      .leftIcon {
+        color: rgba(255, 255, 255, 1);
+      }
+
+
+.cashUnit {
+  font-family: "PingFangSC-Medium";
+  font-size: 28rpx;
+  color: #F3361A;
+  margin-left: 4rpx;
+}
+
+.cashDetail_right {
+  margin-left: 40rpx;
+  font-family: "PingFangSC-Regular";
+  font-size: 22rpx;
+  color: #666666;
+}
+
+.withdrawal {
+  padding-left: 10rpx;
+  height: 40rpx;
+  margin-top: 50rpx;
+  border: 1px solid #FECBAE;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+  color: #FECBAE;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.withdrawalText {
+  white-space: nowrap;
+}
+
+.rightIcon {
+  height: 24rpx;
+  width: 24rpx;
+}
+
+.countDownBox {
+  height: 54rpx;
+  margin: 0 32rpx 0 32rpx;
+  display: flex;
+  flex-direction: row;
+  margin-top: 0;
+}
+
+.acquireCashText {
+  font-family: "PingFangSC-Medium";
+  font-size: 38rpx;
+  color: #FFFFFF;
+  text-shadow: 0 4rpx rgba(216, 40, 40, 0.50);
+  font-weight: 700;
+}
+
+#subscribeBox {
+  width: 132rpx;
+  height: 54rpx;
+  /* margin-left: 10rpx; */
+  /* border: 1px solid red; */
+}
+
+#subscribeBox .task_wrap_5 .task_btn {
+  height: 54rpx;
+}
+
+.countdown {
+  flex: 1;
+  text-align: right;
+  margin-top: -20rpx;
+}
+
+/* 邀请好友 */
+
+.inviteFriendsBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+  height: 640rpx;
+  background-repeat: no-repeat;
+  background-size: 99% 100%;
+  object-fit: cover;
+  background-image: url('https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/a-nredCard.png');
+}
+.inviteFriendsBox .wu-tag{
+  position: absolute;
+  right: 20rpx;
+  top: 2rpx;
+  width: 193rpx;
+  height: 200rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2022/07/you/wu-tag.png') 0 0/100% no-repeat;
+}
+
+.inviteFriendFirstLine {
+  color: rgba(40, 40, 40, 1);
+  font-size: 28rpx;
+  font-family: PingFangSC-Semibold;
+}
+
+.inviteFriendSecLine {
+  color: rgba(187, 93, 56, 1);
+  font-size: 62rpx;
+  font-family: PingFangSC-Semibold;
+  height: 110rpx;
+  line-height: 110rpx;
+}
+
+.twentyCashNum {
+  color: rgba(228, 33, 26, 1);
+  font-size: 110rpx;
+  font-family: PingFangSC-Semibold;
+  margin-left: -10rpx;
+}
+.inviteFriendUnit{
+  color: rgba(187, 93, 56, 1);
+  font-size: 62rpx;
+  font-family: PingFangSC-Semibold;
+  height: 110rpx;
+  line-height: 110rpx;
+  margin-left: -10rpx;
+}
+.inviteFriendThridLine {
+  color: rgba(187, 93, 56, 1);
+  font-size: 24rpx;
+  font-family: PingFangSC-Semibold;
+}
+
+.inviteFriendImgBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30rpx;
+  width: 72%;
+  justify-content: space-between;
+}
+
+.inviteFriendImgOne {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inviteFriendCircle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  z-index: 6;
+  height: 73rpx;
+  border: 1px dashed rgba(85, 58, 34, 1);
+  width: 73rpx;
+}
+
+.userHeadImg {
+  width: 83rpx;
+  height: 83rpx;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 100;
+}
+
+.inviteFriendImgAdd {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  z-index: 99;
+}
+
+.inviteFriendCoupon {
+  background-color: rgba(238, 130, 81, 1);
+  border-radius: 21rpx;
+  min-width: 70rpx;
+  z-index: 9;
+  height: 42rpx;
+  padding: 0rpx 8rpx 0rpx 8rpx;
+  color: rgba(255, 255, 255, 1);
+  font-size: 24rpx;
+  font-family: PingFangSC-Semibold;
+  text-align: center;
+  line-height: 42rpx;
+  margin-top: -5px;
+}
+
+.inviteFriendImgText {
+  color: rgba(255, 255, 255, 1);
+  font-size: 20rpx;
+  font-family: PingFangSC-Semibold;
+  margin-top: 8rpx;
+}
+
+.inviteFriendBtn {
+  width: 440rpx;
+  height: 120rpx;
+  margin-top: 90rpx;
+  background-size: 100% 100%;
+  background-image: url("https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/n-btn.png");
+  background-repeat: no-repeat;
+  line-height: 105rpx;
+  text-align: center;
+  color: rgba(230, 29, 20, 1);
+  font-size: 38rpx;
+  font-family: PingFangSC-Semibold;
+  text-align: center;
+}
+/* .inviteFriendBtn.scaleIn{
+  animation: scaleIn 1.2s linear infinite;
+} */
+.p-relative{
+  position: relative;
+}
+/* .intro{
+  position: absolute;
+  top: 4rpx;
+  right: -60rpx;
+  font-size: 26rpx;
+  color: #fff;
+  width: 326rpx;
+  height: 74rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12rpx;
+  background: rgba(0,0,0,.7);
+}
+.intro::after{
+  content: '';
+  position: absolute;
+  bottom: -14rpx;
+  left: 40rpx;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 14rpx solid transparent;
+  border-right: 14rpx solid transparent;
+  border-top: 16rpx solid rgba(0,0,0,.7);
+
+}
+.intro .icon-wallet{
+  width: 30rpx;
+  height: 37rpx;
+  margin-left: 10rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2023/01/icon-wallet.png') 0 0/100% no-repeat;
+}
+.task-wrapper .intro{
+  width: 225rpx;
+  top: -20rpx;
+  right: 0;
+  letter-spacing: 1rpx;
+}
+.task-wrapper .intro::after{
+  left: 50%;
+  transform: translateX(-50%);
+} */
+.isSuccess{
+  color: #464646;
+  background-image: url('https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/greyBTn.png');
+}
+.countDownText {
+  font-family: "PingFangSC-Regular";
+  font-size: 24rpx;
+  color: #FFFFFF;
+  height: 30rpx;
+  line-height: 30rpx;
+  flex: 1;
+  text-align: right;
+  margin-bottom: 20rpx;
+}
+
+/* 活动规则弹框start */
+.backgroundPop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.70);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.backgroundPopTask {
+  z-index: 200;
+}
+
+.activityRulesBox {
+  height: 1000rpx;
+  width: 654rpx;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: auto;
+  position: relative;
+  border-radius: 30rpx;
+  box-shadow: 0 4px 16px 1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 140rpx;
+  box-sizing: border-box;
+}
+
+.activityRulesIcon {
+  position: absolute;
+  height: 250rpx;
+  width: 654rpx;
+  top: -106rpx;
+  left: 0;
+}
+
+.activityRulesTitle {
+  font-size: 36rpx;
+  color: #CF0C3A;
+  margin-top: 50rpx;
+  font-weight: 600;
+}
+
+.activityRulesContent {
+  height: 550rpx;
+  margin-top: 32rpx;
+  width: 574rpx;
+  font-size: 26rpx;
+  color: #333333;
+  overflow-y: auto;
+}
+
+.activityRulesButton {
+  height: 90rpx;
+  line-height: 90rpx;
+  margin-top: 32rpx;
+  text-align: center;
+  width: 547rpx;
+  font-size: 32rpx;
+  color: #FFFFFF;
+  background-image: linear-gradient(270deg, #FF9060 0%, #FF3646 48%, #FF4E8A 100%);
+  border-radius: 62rpx;
+  font-weight: 700;
+}
+
+.newUserTips {
+  position: absolute;
+  right: 24rpx;
+  bottom: -44rpx;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 12rpx;
+  padding: 20rpx 16rpx;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  z-index: 2;
+}
+
+.newUserTipsUp {
+  position: absolute;
+  right: 70rpx;
+  bottom: 35rpx;
+  width: 0px;
+  /*设置宽高为0，所以div的内容为空，从才能形成三角形尖角*/
+  height: 0px;
+  border: 16rpx solid transparent;
+  border-bottom: 16rpx solid rgba(0, 0, 0, 0.70);
+}
+
+/* 活动规则弹框end */
+
+.RedEnvelopesBox {
+  height: 773rpx;
+  width: 580rpx;
+  position: relative;
+  border-radius: 30rpx;
+  box-shadow: 0 4rpx 16rpx 1rpx rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 158rpx;
+  box-sizing: border-box;
+  background-image: url('https://images3.c-ctrip.com/marketing/2022/07/you/redEnvelopes2-1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.RedEnvelopesBox2 {
+  background-image: url('https://images3.c-ctrip.com/marketing/2022/07/you/redEnvelopes1.png');
+  padding-top: 190rpx;
+  position: relative;
+}
+.RedEnvelopesBox2.notePop{
+  background-image: url('https://images3.c-ctrip.com/marketing/2022/09/single_pic/redEnvelopes2.png');
+}
+
+.notLoginRedEnvelopesTitle {
+  font-size: 46rpx;
+  color: #FFE6D7;
+  text-align: center;
+  line-height: 54rpx;
+  margin-top: 80rpx;
+  font-weight: 600;
+  font-family: PingFangSC-Medium;
+  letter-spacing: 0.73rpx;
+}
+
+.big_text {
+  color: #FFDC5C;
+}
+
+.big_number {
+  font-size: 56rpx;
+}
+
+.notLoginRedEnvelopesSubTitle {
+  font-size: 32rpx;
+  color: #FFE6D7;
+  margin-top: 4rpx;
+  font-weight: 600;
+}
+
+.get_red_envelopes_btn {
+  width: 238rpx;
+  height: 238rpx;
+  margin-top: 56rpx;
+  /* border: 1px solid #fff; */
+}
+
+.get_red_envelopes_btn2 {
+  width: 238rpx;
+  height: 238rpx;
+  position: absolute;
+  bottom: 140rpx;
+  left: 170rpx;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
+button::before {
+  border: 0;
+  border: none;
+}
+
+button::after {
+  border: 0;
+  border: none;
+}
+
+.redEnvelopesTitle {
+  font-size: 46rpx;
+  color: #BB5D38;
+  text-align: center;
+  line-height: 54rpx;
+  margin-top: 60rpx;
+  font-weight: 600;
+}
+
+.get_big_text {
+  color: #FFDC5C;
+  color: #E4211A;
+}
+
+.get_big_number {
+  font-size: 56rpx;
+}
+
+.RedEnvelopesSubTitle {
+  font-size: 32rpx;
+  color: #BB5D38;
+  letter-spacing: 0.51rpx;
+  text-align: center;
+  line-height: 54rpx;
+  margin-top: 4rpx;
+  font-weight: 600;
+}
+
+.RedEnvelopesCloseIcon {
+  height: 48rpx;
+  width: 48rpx;
+  position: absolute;
+  top: -70rpx;
+  right: 0;
+  z-index: 5;
+}
+
+.RedEnvelopesFrom {
+  height: 56rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.RedEnvelopesHelperIcons {
+  margin-right: 4rpx;
+  margin-left: 16rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.fromIcon {
+  height: 56rpx;
+  width: 56rpx;
+  border-radius: 50%;
+}
+
+.fromName {
+  font-size: 26rpx;
+  color: #BB5D38;
+  text-align: left;
+  margin-left: 8rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  max-width: 360rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.RedEnvelopesButton {
+  font-size: 42rpx;
+  color: #DC140D;
+  letter-spacing: 0.67px;
+  text-align: center;
+  margin-top: 225rpx;
+  font-weight: 600;
+}
+
+.RedEnvelopesButton2 {
+  margin-top: 192rpx;
+}
+
+.RedEnvelopesHelperNames {
+  height: 36rpx;
+  line-height: 36rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  color: #BB5D38;
+}
+
+.RedEnvelopesHelperIcons {
+  margin-right: 4rpx;
+  margin-left: 16rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.helperIcon {
+  height: 36rpx;
+  width: 36rpx;
+  border-radius: 50%;
+  margin-left: -12rpx;
+}
+
+.RedEnvelopesHelpWhat {
+  font-size: 34rpx;
+  color: #BB5D38;
+  text-align: center;
+  line-height: 42rpx;
+  margin-top: 24rpx;
+  font-weight: bold;
+}
+
+.RedEnvelopesHelpNumber {
+  font-size: 80rpx;
+  color: #E4211A;
+  font-weight: 700;
+  margin-top: 24rpx;
+}
+
+.RedEnvelopesHelpNumber span {
+  font-size: 40rpx;
+}
+
+.RedEnvelopesColor {
+  color: #E4211A;
+  font-size: 56rpx;
+  font-weight: 700;
+  margin-top: 24rpx;
+}
+
+.RedEnvelopesColor span {
+  font-size: 46rpx;
+  color: #BB5D38;
+}
+
+.RedEnvelopesColor .cashUnit {
+  font-size: 46rpx;
+  color: #E4211A;
+}
+
+.RedEnvelopesButtons {
+  font-size: 42rpx;
+  color: #DC140D;
+  letter-spacing: 0.67px;
+  text-align: center;
+  font-weight: bold;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 90rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+
+.RedEnvelopesButtonsTips {
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  color: #FFE6D7;
+  letter-spacing: -0.18px;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 40rpx;
+}
+
+.RedEnvelopesButtonsTips::before {
+  content: '';
+  position: absolute;
+  width: 72rpx;
+  height: 4rpx;
+  background-image: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0.00) 100%);
+  top: 50%;
+  transform: translateY(-50%);
+  left: 80rpx;
+}
+
+.RedEnvelopesButtonsTips::after {
+  content: '';
+  position: absolute;
+  width: 72rpx;
+  height: 4rpx;
+  background-image: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0.00) 100%);
+  top: 50%;
+  transform: translateY(-50%);
+  right: 80rpx;
+  transform: scaleX(-1);
+}
+
+.persuadeStayBox {
+  width: 562rpx;
+  background-color: #fff;
+  position: relative;
+  border-radius: 30rpx;
+  box-shadow: 0 4rpx 16rpx 1rpx rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 205rpx;
+  box-sizing: border-box;
+  padding-bottom: 48rpx;
+}
+
+.persuadeStayIcon {
+  position: absolute;
+  height: 256rpx;
+  width: 562rpx;
+  top: -90rpx;
+  left: 0;
+}
+
+.persuadeStayTitle {
+  font-size: 34rpx;
+  color: #333333;
+  font-weight: bold;
+  width: 64vw;
+  text-align: center;
+  line-height: 7vw;
+}
+
+.persuadeStayContent {
+  font-size: 28rpx;
+  color: #333333;
+  width: 482rpx;
+  text-align: center;
+  margin-top: 12rpx;
+}
+
+.persuadeStayContent span {
+  color: #FF7258;
+  font-weight: 600;
+}
+
+.buttonList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 72rpx;
+  font-weight: 700;
+}
+
+.cancelButton,
+.acceptButton,
+.shareAcceptButton {
+  height: 90rpx;
+  width: 229rpx;
+  line-height: 90rpx;
+  text-align: center;
+  border-radius: 45rpx;
+  color: #FF3F60;
+  border: 1px solid #FF3F60;
+  box-sizing: border-box;
+  font-size: 32rpx;
+  margin: 0 12rpx;
+}
+
+.acceptButton {
+  background-image: linear-gradient(270deg, #FF9060 0%, #FF3646 48%, #FF4E8A 100%);
+  border: none;
+  color: #FFFFFF;
+}
+
+.shareAcceptButton {
+  background-image: linear-gradient(270deg, #FF9060 0%, #FF3646 48%, #FF4E8A 100%);
+  border-radius: 62rpx;
+  width: 482rpx;
+  border: none;
+  color: #FFFFFF;
+  position: relative;
+}
+
+.promptBox {
+  width: 562rpx;
+  background-color: #fff;
+  position: relative;
+  border-radius: 30rpx;
+  box-shadow: 0 4rpx 16rpx 1rpx rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 48rpx;
+  box-sizing: border-box;
+  padding-bottom: 48rpx;
+}
+
+.persuadeStayTitle {
+  font-size: 34rpx;
+  color: #333333;
+  font-weight: bold;
+  line-height: 46rpx;
+}
+
+.persuadeStayButton {
+  background-image: linear-gradient(270deg, #0086F6 0%, #2DCCC1 100%);
+  border-radius: 36rpx;
+  width: 498rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 30rpx;
+  margin-top: 48rpx;
+  position: relative;
+}
+
+.slipVerificationBox {
+  background-image: none;
+  background-color: #fff;
+  width: auto;
+  padding: 32rpx;
+  box-sizing: border-box;
+  height: auto;
+  border-radius: 16rpx;
+}
+
+.slipVerificationTitle {
+  font-size: 26rpx;
+  color: #333333;
+  margin-bottom: 24rpx;
+  width: 100%;
+  text-align: left;
+}
+
+#verification-box {
+  width: 100%;
+}
+
+.cpt-drop-bg {
+  background-image: linear-gradient(270deg, #FF9060 0%, #FF3646 48%, #FF4E8A 100%);
+  border-radius: 8rpx;
+}
+
+.cpt-info-board,
+.tip-text {
+  font-weight: 600;
+  color: #333333;
+}
+
+.cpt-drop-box,
+.cpt-icon-box {
+  background-color: #F6F7F9;
+  border-radius: 8rpx;
+}
+
+.cpt-drop-btn {
+  border-radius: 8rpx;
+}
+
+.cpt-drop-box {
+  margin-top: 24rpx;
+  border-radius: 8rpx;
+}
+
+.icon-content {
+  display: flex;
+  align-items: center;
+}
+
+.task-wrapper {
+  border-radius: 20rpx;
+  margin: 16rpx 24rpx 0 24rpx;
+  /* overflow: hidden; */
+  background-image: linear-gradient(180deg, #FEE0E3 0%, #FFFCFC 27%, #FFFFFF 100%);
+  box-shadow: 0 4rpx 4rpx rgba(0, 0, 0, 0.06);
+}
+
+#browseNote {
+  /* overflow: hidden;
+  height: 130rpx; */
+  position: relative;
+}
+
+.taskDialog {
+  height: 130rpx;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+
+#browseNote .title {
+  font-weight: 700;
+}
+
+#browseNote .title text {
+  font-weight: 400;
+}
+
+.moreTasks {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12rpx;
+  height: 98rpx;
+  position: relative;
+}
+
+.moreTasks::after {
+  content: '';
+  position: absolute;
+  width: calc(100% - 64rpx);
+  left: 32rpx;
+  top: 0;
+  height: 2rpx;
+  transform: scale(1, 0.5);
+  background-color: #DDD;
+}
+
+.moreTasksText {
+  margin-left: 5rpx;
+  font-size: 24rpx;
+  color: #FF3843;
+  /* font-weight: 600; */
+}
+
+.redEnvelopesIcon {
+  height: 32rpx;
+  width: 32rpx;
+}
+
+.downIcon {
+  height: 28rpx;
+  width: 28rpx;
+}
+
+.sharePop {
+  background-color: rgba(0, 0, 0, .3);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  z-index: 2001;
+}
+
+.shareTop {
+  flex: 1;
+}
+
+.shareBox {
+  background: #FFFFFF;
+  border-radius: 32rpx 32rpx 0 0;
+  height: 288rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 40rpx;
+  box-sizing: border-box;
+  font-size: 22rpx;
+  color: #333333;
+}
+
+.heightMove {
+  animation: moveHeight 0.5s ease-in-out forwards;
+}
+
+@keyframes moveHeight {
+  0% {
+    height: 120rpx;
+  }
+
+  100% {
+    height: 288rpx;
+  }
+}
+
+.shareFriendButton {
+  text-align: center;
+  height: 160rpx;
+  font-size: 22rpx;
+  color: #333333;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.shareItem {
+  text-align: center;
+  margin-bottom: 10rpx;
+  height: 140rpx;
+}
+
+.shareIcon {
+  height: 100rpx;
+  width: 100rpx;
+}
+
+.shareButton {
+  font-size: 22rpx;
+  color: #333333;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.posterIcon {
+  height: 943rpx;
+  width: 580rpx;
+  border-radius: 30rpx;
+  margin-bottom: 32rpx;
+}
+
+.posterBox {
+  position: relative;
+}
+
+.posterText {
+  font-size: 35rpx;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 52rpx;
+  font-weight: 500;
+}
+
+.posterText span {
+  color: #FFDC5C;
+}
+
+.addFavoriteCard {
+  position: relative;
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 48rpx 40rpx;
+
+}
+
+.addFavoriteCardTitile {
+  width: 100%;
+  font-family: "PingFangSC-Medium";
+  font-size: 36rpx;
+  color: #333333;
+  text-align: center;
+}
+
+.addFavoriteCardsubTitle {
+  font-family: "PingFangSC-Regular";
+  font-size: 26rpx;
+  color: #999999;
+  text-align: center;
+  width: 100%;
+  margin-top: 16rpx;
+}
+
+.addFavoriteCardImg {
+  width: 482rpx;
+  height: 327rpx;
+  margin-top: 24rpx;
+}
+
+.addFavoriteCardButton {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  background-image: linear-gradient(270deg, #FF9060 0%, #FF3646 48%, #FF4E8A 100%);
+  border-radius: 61.5rpx;
+  font-family: "PingFangSC-Medium";
+  font-size: 32rpx;
+  color: #FFFFFF;
+  margin-top: 32rpx;
+}
+.bottom-close{
+  position: absolute;
+  bottom: -168rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72rpx;
+  height: 72rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2023/02/single_pic/btn-cancel.png') 0 0/100% no-repeat;
+}
+.allTasks {
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 16rpx 16rpx 0 0;
+  padding: 0 24rpx;
+  /* padding-bottom: 174rpx; */
+}
+
+.allTasksTittle {
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 34rpx;
+  color: #333333;
+  position: relative;
+  font-weight: bold;
+}
+
+.allTasksCloseIcon {
+  position: absolute;
+  height: 40rpx;
+  width: 40rpx;
+  opacity: 0.6;
+  left: 0;
+  top: 24rpx;
+}
+.pop-task-content{
+  max-height: 800rpx;
+  overflow-y: auto;
+}
+.taskItem {
+  height: 144rpx;
+  width: 100%;
+  margin: 24rpx 0;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  /* box-shadow: 0 4rpx 16rpx 1rpx rgba(0,0,0,0.06); */
+  border: 1px solid #f5f5f5;
+  border-radius: 8rpx;
+}
+
+.allTasks .task_item {
+  margin-top: 24rpx;
+  border-radius: 8rpx;
+  width: 702rpx;
+  border: none;
+  /* box-shadow: 0 4rpx 16rpx 1rpx rgba(0,0,0,0.06); */
+  box-sizing: border-box;
+  border: 1px solid #f5f5f5;
+}
+
+.allTasks .task_item .title {
+  font-weight: bold !important;
+}
+
+.taskItemBox {
+  height: 144rpx;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  padding: 0 32rpx;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.taskItemTitle {
+  font-size: 34rpx;
+  color: #333333;
+  font-weight: bold;
+}
+
+.taskItemTitle text {
+  font-size: 30rpx;
+  color: #666666;
+  font-weight: 400;
+  letter-spacing: 4rpx;
+}
+
+.taskItemDesc {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.taskItemDesc text {
+  color: #FF3843;
+}
+
+.taskItemButton {
+  background-image: linear-gradient(270deg, #FF9060 0%, #FF3646 48%, #FF4E8A 100%);
+  border-radius: 31rpx;
+  height: 60rpx;
+  width: 152rpx;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.taskItemButtonGray {
+  background: #CCCCCC;
+}
+@keyframes redCardBox {
+  0%{
+      transform: scale(0.6);
+  }
+  13%{
+      transform: scale(1.05);
+  }
+  22%{
+      transform: scale(0.95);
+  }
+  31%{
+      transform: scale(1.02);
+  }
+  40%{
+      transform: scale(0.99);
+  }
+  50%{
+      transform: scale(1);
+  }
+  100%{
+      transform: scale(1);
+  }
+}
+@keyframes smallCardBoxNo2 {
+  0%{
+      transform: scale(0);
+  }
+  38%{
+      transform: scale(1);
+      opacity: 1;
+  }
+  100%{
+      transform: translateY(60px);
+      opacity: 0;
+  }
+}
+@keyframes coinLeft {
+    0%{
+        opacity: 0;
+    }
+    30%{
+        opacity: 0;
+    }
+    62%{
+        opacity: 1;
+    }
+    100%{
+        animation-delay: 0.3s;
+        transform: translate(-108px,108px);
+    }
+}
+@keyframes coinRight {
+    0%{
+        opacity: 0;
+    }
+    62%{
+        opacity: 1;
+    }
+    100%{
+        transform: translate(70px,-50px);
+    }
+}
+@keyframes handsImg {
+  0%{
+      opacity: 0;
+  }
+  20%{
+      opacity: 1;
+  }
+  40%{
+      transform: rotate(-17deg);
+  }
+  60%{
+      transform: rotate(0);
+  }
+  80%{
+      transform: rotate(-17deg);
+  }
+  100%{
+      transform: rotate(0);
+  }
+}
+@keyframes lightCircle {
+  0%{
+transform: rotate(0);
+  }
+  100%{
+transform: rotate(360deg);
+  }
+}
+/* @keyframes scaleIn{
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.1);
+  }
+  100%{
+    transform: scale(1);
+  }
+} */
+.withdrawalDetailBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  z-index: 3000;
+}
+.withdrawalDetailBg .lightCircle {
+  width: 250%;
+  top: 0;
+  position: absolute;
+  animation: lightCircle 3s  forwards;
+}
+.withdrawalDetailBg .successRecivedText {
+  margin-top: 114px;
+  z-index: 3001;
+}
+.withdrawalDetailBg .successRecivedText .firstLine {
+  display: block;
+  overflow-wrap: break-word;
+  color: #ffffff;
+  font-size: 42rpx;
+  font-family: PingFangSC-Semibold;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 42rpx;
+}
+.withdrawalDetailBg .withdrawalText {
+  margin-top: 30px;
+  height: 52rpx;
+  overflow-wrap: break-word;
+  color: #fff;
+  font-size: 55rpx;
+  font-family: PingFangSC-Semibold;
+  text-align: center;
+  line-height: 52rpx;
+  margin-bottom: 112rpx;
+  z-index: 3001;
+}
+.withdrawalDetailBg .redCardBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 80%;
+  height: 800rpx;
+  /* margin-top: 8%; */
+  position: relative;
+  background-size: 100% ;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-image: url('https://pages.c-ctrip.com/travesnap-j/addTrafficActivity/s-redCard.png');
+  animation: redCardBox 3s  forwards;
+}
+.withdrawalDetailBg .redCardBox.qwPop{
+  margin-top: -40rpx;
+  height: 820rpx;
+  background-image: url('https://images3.c-ctrip.com/marketing/2022/07/single_pic/pop-add.png');
+}
+.withdrawalDetailBg .redCardBox .smallCardsBox {
+  position: absolute;
+  width: 100%;
+  animation: smallCardBoxNo2 0.5s forwards;
+}
+.withdrawalDetailBg .redCardBox .pinkCardBg {
+  width: 90%;
+  top: 2%;
+  margin-top: 16rpx;
+  position: absolute;
+}
+.withdrawalDetailBg .redCardBox .lineCardBox {
+  width: 103%;
+  position: absolute;
+  top: 53%;
+  z-index: 3001;
+}
+.withdrawalDetailBg .redCardBox .userInfoBox {
+  margin-bottom: 72rpx;
+  margin-top: -10%;
+  z-index: 3001;
+  height: 218rpx;
+}
+.withdrawalDetailBg .redCardBox .userInfoBox .userHeadImgPop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 162rpx;
+  height: 162rpx;
+  margin-bottom: 24rpx;
+  background-image: linear-gradient(to right top, #ED7F4E, #EFB38E);
+}
+.withdrawalDetailBg .redCardBox .userInfoBox .userHeadImgPop .userImg {
+  border-radius: 50%;
+  width: 148rpx;
+  height: 148rpx;
+  background-color: #fff;
+}
+.withdrawalDetailBg .redCardBox .userInfoBox .userNameText {
+  height: 26rpx;
+  overflow-wrap: break-word;
+  color: #BB5D38;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 28rpx;
+  display: block;
+  margin-top: 192rpx;
+}
+.withdrawalDetailBg .redCardBox .withdrawalTextNo2 {
+  color: #7d4832;
+  font-size: 38rpx;
+  font-family: PingFangSC-Semibold;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 38rpx;
+  z-index: 3001;
+}
+.withdrawalDetailBg .redCardBox .withdrawalTextNo2.m-t-126{
+  margin-top: 126rpx;
+}
+.withdrawalDetailBg .redCardBox .red{
+  color: #E4211A;
+}
+.withdrawalDetailBg .redCardBox .pressTips{
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  color: #B95D38;
+  width: 362rpx;
+  height: 46rpx;
+  line-height: 46rpx;
+  text-align: center;
+  border-radius: 28rpx;
+  margin-top: 20rpx;
+  background: linear-gradient(270deg, rgba(255,144,96,0.05) 0%, rgba(254,51,1,.1) 44%, rgba(253,56,28,.11) 100%);
+}
+.withdrawalDetailBg .redCardBox .pressTips::before{
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 10rpx solid transparent;
+  border-right: 10rpx solid transparent;
+  border-top: 15rpx solid #B95D38;
+}
+.withdrawalDetailBg .redCardBox .qrcode{
+  width: 340rpx;
+  height: 340rpx;
+  margin-top: 12rpx;
+}
+.withdrawalDetailBg .redCardBox .qrcode image{
+  width: 100%;
+  height: 100%;
+}
+.withdrawalDetailBg .redCardBox .qwCash{
+  margin-top: 8rpx;
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  color: #B95D38;
+}
+.withdrawalDetailBg .redCardBox .moneyText {
+  z-index: 3001;
+}
+.withdrawalDetailBg .redCardBox .moneyText .moneyNum {
+  color: #e4211a;
+  font-size: 100rpx;
+  font-family: PingFangSC-Semibold;
+}
+.withdrawalDetailBg .redCardBox .moneyText .moneyUnit {
+  color: #bb5d38;
+  font-size: 47rpx;
+  font-family: PingFangSC-Semibold;
+}
+.withdrawalDetailBg .redCardBox .countDownTextPop {
+  color: #bb5d38;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  z-index: 3001;
+  margin-top: 30rpx;
+}
+.withdrawalDetailBg .redCardBox .inviteFriendsText {
+  position: absolute;
+  color: #e61d14;
+  font-size: 42rpx;
+  margin-top: 107%;
+  font-family: PingFangSC-Semibold;
+  width: 65%;
+  text-align: center;
+}
+.withdrawalDetailBg .redCardBox .coinLeftPop {
+  position: absolute;
+  top: 19%;
+  width: 80rpx;
+  animation-delay: 0.5s;
+  animation: coinLeft 0.52s forwards;
+}
+.withdrawalDetailBg .redCardBox .coinRightPop {
+  position: absolute;
+  top: 25%;
+  width: 50rpx;
+  animation: coinRight 0.52s forwards;
+}
+.withdrawalDetailBg .redCardBox .handsImg {
+  position: absolute;
+  top: 45%;
+  left: 73%;
+  width: 156rpx;
+  height: 190rpx;
+  animation: handsImg 2s  forwards;
+}
+.withdrawalDetailBg .closeBox {
+  background-color: rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  height: 68rpx;
+  width: 68rpx;
+  position: absolute;
+  top: 180rpx;
+  right: 60rpx;
+  z-index: 3003;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.withdrawalDetailBg .closeBox .closeBtn {
+  width: 38rpx;
+  margin: 0 auto;
+}
+
+/* 助力加企微 */
+.promptBox.qw{
+  padding-top: 210rpx;
+}
+.pop-qw{
+  height: 256rpx;
+  width: 562rpx;
+  position: absolute;
+  top: -90rpx;
+  right: 0;
+  z-index: 4;
+}
+.persuadeStayButton.red{
+  font-size: 32rpx;
+  width: 482rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  margin-top: 60rpx;
+  border-radius: 44rpx;
+  background: linear-gradient(270deg, #FF9060 0%, #FF3646 48%, #FF4E8A 100%);
+}
+.persuadeStayContent .red-bg{
+  display: inline-block;
+  color: #fff;
+  opacity: 0.7;
+  background: linear-gradient(270deg, #FF7258 0%, #FF7258 100%);
+  border-radius: 20rpx;
+  width: 175rpx;
+  height: 40rpx;
+}
+.button-wrap{
+  display: flex;
+  margin-top: 80rpx;
+  width: 100%;
+  justify-content: space-around;
+}
+.button-wrap.red{
+  margin-top: 32rpx;
+  justify-content: space-between;
+}
+.button-wrap.red .btn-white{
+  width: 233rpx;
+  color: #FF3843;
+  border-color: #FF3843;
+}
+.button-wrap.red .btn-red{
+  width: 233rpx;
+  background: linear-gradient(270deg, #FF9060 0%, #FF3646 48%, #FF4E8A 100%);
+}
+.btn-white{
+  font-size: 30rpx;
+  color: #0086F6;
+  width: 237rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  border: 1px solid #0086F6;
+  border-radius: 36rpx;
+}
+.btn-red{
+  font-size: 30rpx;
+  color: #fff;
+  width: 237rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  background: linear-gradient(270deg, #0086F6 0%, #2DCCC1 100%);
+  border-radius: 36rpx;
+}
+.RedEnvelopesBox.loginNewPop{
+  padding-top: 72rpx;
+}
+.loginNewPop .fromName{
+  color: #FFE6D7;
+}
+.notLoginRedEnvelopesTitle.m-t-20{
+  margin-top: 20rpx;
+}
+.assistSuccessPop{
+  padding-top: 135rpx;
+}
+.assistSuccessPop .fromName{
+  font-size: 32rpx;
+  max-width: 160rpx;
+}
+.assistSuccessPop .couponName{
+  font-size: 40rpx;
+  color: #BB5D38;
+  font-family: "PingFangSC-Medium";
+  margin-bottom: 2rpx;
+}
+.assistSuccessPop .couponName.m-t-20{
+  margin-top: 20rpx;
+}
+.assistSuccessPop .noteTitle{
+  font-size: 24rpx;
+  color: #BB5D38;
+  margin-top: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.noteTitle .notePic{
+  margin: 0 4rpx 0 16rpx;
+  display: flex;
+}
+.noteTitle .notePic .noteItem{
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-left: -12rpx;
+  border: 1px solid #eee;
+}
+.noteTitle .notePic .noteItem image{
+  width: 100%;
+  height: 100%;
+}
+.assistSuccessPop .noteSubtitle{
+  font-size: 30rpx;
+  color: #BB5D38;
+  margin: 10rpx 0 40rpx;
+}
+.assistSuccessPop .noteSubtitle .red{
+  color: #E4211A;
+}
+.assistSuccessPop .RedEnvelopesFrom{
+  margin-top: 30rpx;
+}
+.assistSuccessPop .redNumber{
+  font-family: "PingFangSC-Semibold";
+  font-size: 40rpx;
+  color: #E4211A;
+  margin-top: 5rpx;
+}
+.redNumber .f-big{
+  font-size: 100rpx;
+  font-family: "PingFangSC-Medium";
+  vertical-align: -4rpx;
+}
+.assistSuccessPop .RedEnvelopesSubTitle{
+  line-height: 1.2;
+  margin-top: 0;
+}
+.RedEnvelopesSubTitle.m-t-40{
+  margin-top: 40rpx;
+}
+.RedEnvelopesSubTitle.m-t-60{
+  margin-top: 60rpx;
+}
+/* 0722 */
+.get_red_envelopes_btn2.invite{
+  top: -10rpx;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+}
+.get_red_envelopes_btn2.btn-invite{
+  bottom: 70rpx;
+  left: 100rpx;
+  width: 400rpx;
+  height: 100rpx;
+}
+.get_red_envelopes_btn2.p-invite{
+  bottom: 100rpx;
+  left: 170rpx;
+  width: 400rpx;
+  height: 80rpx;
+}
+/* 0727 无门槛弹窗 */
+.giudeToShareCarcBox{
+  position: fixed;
+  top:0;
+  left:0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  z-index: 1999;
+}
+.giudeToShareCarcBox.center{
+  justify-content: center;
+}
+
+.threshold.giudeToShareCarcBox .userInfoBox{
+  margin-bottom: 72rpx;
+  /* margin-top: 25%; */
+}
+.threshold .userInfoBox .userHeadImgShareBox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 162rpx;
+  height: 162rpx;
+  margin: 0 auto 24rpx;
+  background-image: linear-gradient(to right top,#ED7F4E,#EFB38E);
+  
+}
+.threshold .userInfoBox .userHeadImgShareBox .userImg{
+  border-radius: 50%;
+  width: 148rpx;
+  height: 148rpx;
+  background-color: #fff;
+}
+.threshold .userInfoBox .userNameText{
+  height: 26rpx;
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 28rpx;
+  display: block;
+}
+.threshold.giudeToShareCarcBox .successRecivedText{
+  margin-bottom: 62rpx;
+}
+.threshold .successRecivedText .firstLine{
+  display: block;
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 42rpx;
+  font-family: PingFangSC-Semibold;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 42rpx;
+  margin-bottom: 33rpx;
+}
+.threshold .successRecivedText .secondLine{
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 42rpx;
+  font-family: PingFangSC-Semibold;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 42rpx;
+  display: block;
+}
+
+
+.threshold.giudeToShareCarcBox .withdrawalText{
+  height: 52rpx;
+  overflow-wrap: break-word;
+  color: rgba(255, 98, 98, 1);
+  font-size: 55rpx;
+  font-family: PingFangSC-Semibold;
+  text-align: center;
+  line-height: 52rpx;
+  margin-bottom:60rpx;
+}
+.threshold.giudeToShareCarcBox .redEnvlopsBox{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  width: 541rpx;
+  height: 251rpx;
+  z-index: 10;
+  position: relative;
+  
+}
+.threshold .redEnvlopsBox .firstRedEnvlop{
+  width: 144rpx;
+  height: 189rpx;
+  margin-right: 32rpx;
+  animation: firstRedEnvlop 1.5s  forwards;
+  animation-iteration-count: infinite;
+
+}
+.threshold .redEnvlopsBox .secondRedEnvlop{
+  width: 192rpx;
+  height: 251rpx;
+  margin-right: 32rpx;
+  animation: secondRedEnvlop 1.5s  forwards;
+  animation-iteration-count: infinite;
+
+}
+.threshold .redEnvlopsBox .thirdRedEnvlop{
+  width: 144rpx;
+  height: 189rpx;
+  animation: thirdRedEnvlop 1.5s  forwards;
+  animation-iteration-count: infinite;
+
+}
+.threshold.giudeToShareCarcBox .autoChoseText{
+  font-family: PingFangSC-Regular;
+  color: #fff;
+  font-size: 26rpx;
+  margin-top: 30rpx;
+}
+.threshold.giudeToShareCarcBox .smallCardsBox{
+  width: 100%;
+  position: absolute;
+  margin-top: 38%;
+  animation: smallCardBox  0.76s  forwards;
+  animation-delay: 200ms;
+}
+.threshold.giudeToShareCarcBox .pop-back{
+  position: absolute;
+  top: 170rpx;
+  right: 80rpx;
+  width: 68rpx;
+  height: 68rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2022/12/single_pic/pop-close.png') 0 0/100% no-repeat;
+}
+.threshold.giudeToShareCarcBox .btn-login{
+  width: 514rpx;
+  height: 112rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2022/12/single_pic/button-login.png') 0 0/100% no-repeat;
+  margin-top: 100rpx;
+  z-index: 10;
+}
+.threshold.giudeToShareCarcBox .closeBox,.redCardBox.qwPop .closeBox{
+  background-color: rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  height: 34px;
+  width: 34px;
+  position: absolute;
+  top: 100px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3003;
+
+}
+.threshold .closeBox .closeBtn,.redCardBox.qwPop .closeBox{
+  width: 38rpx;
+  height: 38rpx;
+  margin: 0 auto;
+}
+.threshold.giudeToShareCarcBox .successRecivedTextMiddle{
+  margin-top: 30%;
+  
+  transform: scale(0);
+  animation: middleText 0.24s  forwards;
+  animation-delay: 80ms;
+
+  position: relative;
+  z-index: 300;
+}
+.threshold .successRecivedTextMiddle .firstLine{
+  display: block;
+  overflow-wrap: break-word;
+  color: rgba(255, 255, 255, 1);
+  font-size: 42rpx;
+  font-family: PingFangSC-Semibold;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 42rpx;
+}
+.threshold.giudeToShareCarcBox .withdrawalTextMiddle{
+  margin-top: 30px;
+  height: 52rpx;
+  overflow-wrap: break-word;
+  color: #fff;
+  font-size: 55rpx;
+  font-family: PingFangSC-Semibold;
+  text-align: center;
+  line-height: 52rpx;
+  margin-bottom:60rpx;
+  transform: scale(0);
+  animation: middleText 0.24s  forwards;
+  animation-delay: 80ms;
+
+  position: relative;
+  z-index: 300;
+}
+.threshold.giudeToShareCarcBox .secondRedEnvlopMiddle{
+  margin-top: 50%;
+  width: 192rpx;
+  height: 251rpx;
+  animation: mediaSecondRedEnvlop 0.72s  forwards;
+  animation-iteration-count: infinite;
+}
+
+.threshold.giudeToShareCarcBox .lightLine{
+  position: absolute;
+  width: 100%;
+  top: 30%;
+  z-index: 100;
+  transform: scale(0);
+  animation: lightLine  0.52s  forwards;
+  animation-delay: 100ms;
+}
+
+.threshold.giudeToShareCarcBox .lightCircle{
+  width: 250vw;
+  top: -5%;
+  position: absolute;
+  transform: rotate(0);
+  animation: lightCircle 3s  forwards;
+}
+.threshold.giudeToShareCarcBox .redCardBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 80%;
+  height: 860rpx;
+  margin-top: 40rpx;
+  position: relative;
+  background-size: 100% ;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-image: url('https://pages.c-ctrip.com/livestream/tripshoot/guideShare_bg.png');
+  animation: redCardBox 3s  forwards;
+ 
+}
+.threshold .redCardBox .smallCardsBox{
+  position: absolute;
+  width: 100%;
+  animation: smallCardBoxNo2 0.5s  forwards;
+}
+.threshold .redCardBox .pinkCardBg{
+  width: 90%;
+  top:3%;
+  margin-top: 16rpx;
+  position: absolute;
+  height: 607rpx;
+}
+.threshold .redCardBox .lineCardBox{
+  width: 103%;
+  position: absolute;
+  top:58%;
+  z-index: 3001;
+}
+.threshold .redCardBox .userInfoBox{
+  margin-bottom: 72rpx;
+  margin-top: -10%;
+  z-index: 3001;
+}
+.threshold .redCardBox .userInfoBox .userHeadImg{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 162rpx;
+  height: 162rpx;
+  margin-bottom: 24rpx;
+  background-image: linear-gradient(to right top,#ED7F4E,#EFB38E);
+  
+}
+.threshold .redCardBox .userInfoBox .userHeadImg .userImg{
+  border-radius: 50%;
+  width: 148rpx;
+  height: 148rpx;
+  background-color: #fff;
+}
+.threshold .redCardBox .userInfoBox .userNameText{
+  height: 26rpx;
+  overflow-wrap: break-word;
+  color: #BB5D38;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 28rpx;
+  display: block;
+}
+.threshold .redCardBox .withdrawalTextNo2{
+  color: rgba(125, 72, 50, 1);
+  font-size: 38rpx;
+  font-family: PingFangSC-Semibold;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 38rpx;
+  z-index:3001 ;
+  margin-top: 130rpx;
+}
+.threshold .redCardBox .moneyText{
+  z-index: 3001;
+  
+}
+.threshold .redCardBox .moneyText .moneyNum{
+  color: rgba(228, 33, 26, 1);
+  font-size: 150rpx;
+  font-family: PingFangSC-Semibold;
+}
+.threshold .redCardBox .moneyText .moneyUnit{
+  color: rgba(187, 93, 56, 1);
+  font-size: 47rpx;
+  font-family: PingFangSC-Semibold;
+}
+.threshold .redCardBox .countDownText2{
+  color: rgba(187, 93, 56, 1);
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+  z-index: 3001;
+}
+.threshold .redCardBox .inviteFriendsText{
+  position: absolute;
+  left: 0;
+  bottom: 92rpx;
+  width: 100%;
+  text-align: center;
+  color: rgba(230, 29, 20, 1);
+  font-size: 42rpx;
+  font-family: PingFangSC-Semibold;
+}
+.threshold .redCardBox .coinLeft2{
+  position: absolute;
+  top:10%;
+  width: 80rpx;
+  animation-delay: 0.5s;
+  animation: coinLeft 0.52s  forwards;
+}
+.threshold .redCardBox .coinRight2{
+  position: absolute;
+  top:25%;
+  width: 50rpx;
+  animation: coinRight 0.52s  forwards;
+}
+.threshold .redCardBox .assistBox{
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 3002;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 60rpx;
+}
+.threshold .redCardBox .assistBox .assistItem{
+  position: relative;
+}
+.threshold .assistBox .assistItem .addBox{
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+  border: 1rpx dashed #553A22;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: -10rpx auto 0;
+  z-index: -1;
+}
+.threshold .assistItem .addBox .addImg{
+  width: 24rpx;
+  height: 24rpx;
+}
+.threshold .assistItem .addBox .userHeadImg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 68rpx;
+    height: 68rpx;
+    border-radius: 50%;
+    z-index: 2;
+}
+.threshold .assistBox .assistItem .rewardText{
+  min-width: 90rpx;
+  box-sizing: border-box;
+  padding: 0 2px;
+  height: 38rpx;
+  line-height: 38rpx;
+  border-radius: 20rpx;
+  background-color: #EE8251;
+  font-family: PingFangSC-Semibold;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-align: center;
+  margin-top: -10rpx;
+}
+.threshold .assistBox .assistItem .inviteText{
+  text-align: center;
+  margin-top: 14rpx;
+  font-size: 18rpx;
+  font-family: PingFang SC;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.threshold.giudeToShareCarcBox .shareToGroupCard{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 575rpx;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 20rpx;
+  height: 760rpx;
+  border: 1px solid rgba(0, 0, 0, 1);
+  z-index: 3001;
+  position: absolute;
+  top: 26%;
+}
+.threshold.giudeToShareCarcBox .shareToGroupCard .popShare{
+  position: absolute;
+  left: 93rpx;
+  bottom: 60rpx;
+  width: 380rpx;
+  height: 120rpx;
+  background-color: transparent;
+}
+.popShare::after{
+  display: none;
+}
+.threshold .shareToGroupCard .headImg {
+  width: 100%;
+  position: absolute;
+  top: -10%
+}
+
+.threshold .shareToGroupCard .firstLineText {
+  color: rgba(187, 93, 56, 1);
+  font-size: 28rpx;
+  margin-top: 34%;
+  font-family: PingFangSC-Medium;
+  z-index: 3001;
+}
+
+.threshold .shareToGroupCard .secondLineText {
+  color: rgba(237, 41, 30, 1);
+  font-size: 36rpx;
+  font-family: PingFangSC-Semibold;
+  z-index: 3001;
+}
+
+.threshold .shareToGroupCard .moneyText {
+  z-index: 3001;
+
+  
+}
+.threshold .shareToGroupCard .moneyText .moneyNum {
+  color: rgba(228, 33, 26, 1);
+  font-size: 150rpx;
+  font-family: PingFangSC-Semibold;
+}
+
+.threshold .shareToGroupCard .moneyText .moneyUnit {
+  color: rgba(187, 93, 56, 1);
+  font-size: 47rpx;
+  font-family: PingFangSC-Semibold;
+}
+.threshold .shareToGroupCard .thirdText {
+  color: rgba(125, 72, 50, 1);
+  font-size: 36rpx;
+  font-family: PingFangSC-Semibold;
+  z-index: 3001;
+}
+
+.threshold .shareToGroupCard .countDownText3 {
+  color: rgba(187, 93, 56, 1);
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular;
+}
+
+.threshold .shareToGroupCard .inviteButton {
+  width: 400rpx;
+}
+
+
+/* 2023-1-10加轮播 */
+.swiper-wrap{
+  position: absolute;
+  top: 32rpx;
+  left: 24rpx;
+  width: 528rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  background: rgba(0,0,0,.5);
+  border-radius: 32rpx;
+}
+.swiper-wrap .icon-notice{
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 16rpx;
+  margin-right: 10rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2023/01/icon-notice.png') 0 0/100% no-repeat;
+}
+.swiper-wrap .swiper{
+  width: 100%;
+  height: 100%;
+  line-height: 64rpx;
+}
+.swiper-wrap .swiper-item{
+  font-size: 26rpx;
+  color: #fff;
+}
+.swiper-item .c-yellow{
+  color: #FFDC5C;
+}
+
+/* 2023-1-31邀请折叠 */
+.foldInviteBox{
+  position: relative;
+  width: 728rpx;
+  padding-top: 40rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2023/02/single_pic/fold-card.png') 0 0/100% no-repeat;
+}
+.foldInviteBox .icon-tag{
+  position: absolute;
+  top: -6rpx;
+  right: -14rpx;
+  width: 182rpx;
+  height: 194rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2023/02/single_pic/menkan.png') 0 0/100% no-repeat;
+}
+.foldInviteBox .top-title{
+  font-size: 37rpx;
+  font-family: titleFont;
+  color: #fff;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0 0 0 48rpx;
+  text-shadow: 0 2rpx 4rpx rgba(255,23,36,0.62);
+}
+.foldInviteBox .f-invite{
+  width: 100%;
+  padding: 0 32rpx 0 56rpx;
+  height: 200rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.f-left{
+  flex: 1;
+}
+.f-left .head-wraper{
+  display: flex;
+
+}
+.head-wraper .h-item{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 70rpx;
+  height: 70rpx;
+  margin-right: 24rpx;
+  background-color:rgba(255,56,67,0.1);
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  border: 1px dashed rgba(255,56,67,0.7);
+}
+.head-wraper .h-item.new-border{
+  border: none;
+}
+.head-wraper .h-item .h-plus{
+  font-size:40rpx;
+  font-weight: 400;
+  color: #ff384380;
+  margin-bottom: 10rpx;
+}
+.head-wraper .h-item .h-price{
+  font-size: 24rpx;
+  line-height: 1;
+  color: #fff;
+  background: linear-gradient(270deg, #FF9060 0%, #FF3646 48%, #FF4E8A 100%);
+  border-radius: 16rpx;
+  padding: 4rpx 8rpx;
+  position: absolute;
+  left: 50%;
+  bottom: -10rpx;
+  white-space:nowrap;
+  transform: translateX(-50%) scale(.8);
+}
+.head-wraper .h-item .head-auth{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.f-left .h-tips{
+  font-size: 24rpx;
+  color: #999;
+  margin-top:8rpx;
+}
+.f-left .h-tips .c-red{
+  color: #FF3843;
+}
+.f-right{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.f-right .f-subtitle{
+  color: rgba(179,27,56,1);
+  font-family: PingFangSC-Regular;
+  font-size: 24rpx;
+  letter-spacing: -0.3px;
+}
+.f-right .f-btn{
+  width: 152rpx;
+  height: 62rpx;
+  background: url('https://images3.c-ctrip.com/marketing/2023/02/single_pic/btn-invite.png') 0 0/100% no-repeat;
+  margin: 2rpx 0;
+}
+.f-right .f-btn.disabled{
+  font-size: 28rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 62rpx;
+  border-radius: 31rpx;
+  background: #ccc;
+}
+.f-right .f-desc{
+  font-size: 20rpx;
+  color: #FF3843;
+}
+
+@keyframes smallCardBox{
+  0%{
+      transform: translateY(0) scale(0);
+      opacity: 1;
+  }
+  21% {
+      transform: translateY(0) scale(0.8);
+      opacity: 1;
+  }
+  26% {
+      transform: translateY(px2vw(29)) scale(1);
+      opacity: 1;
+  }
+
+  42% {
+      transform: translateY(px2vw(124)) scale(1);
+      opacity: 1;
+  }
+
+  84% {
+      transform: translateY(px2vw(371)) scale(1);
+      opacity: 0;
+  }
+
+  100% {
+      transform: translateY(px2vw(466)) scale(1);
+      opacity: 0;
+  }
+}
+@keyframes firstRedEnvlop{
+  0%{
+      transform: scale(1);
+  }
+  25%{
+      transform: scale(1.2);
+  }
+  50%{
+      transform: scale(1);
+  }
+  100%{
+      transform:scale(1);
+  }
+}
+@keyframes secondRedEnvlop {
+  0%{
+      transform: scale(1);
+  }
+  25%{
+      transform: scale(0.76);
+      margin-bottom: -22px;
+  }
+  50%{
+      transform: scale(1);
+      margin-bottom: 0px;
+  }
+  100%{
+      transform:scale(1);
+  }
+}
+@keyframes thirdRedEnvlop {
+  0%{
+      transform: scale(1);
+  }
+  25%{
+      transform: scale(1.2);
+  }
+  50%{
+      transform: scale(1);
+  }
+  100%{
+      transform:scale(1);
+  }
+}
+
+@keyframes middleText {
+  0% {
+      transform: scale(0);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+@keyframes mediaSecondRedEnvlop {
+  0%{
+      transform: scale(0);
+  }
+  44%{
+      transform: scale(2.54);
+      margin-top: 45%;
+  }
+  100%{
+      transform: scale(1.34);
+      margin-top: 40%;
+  }
+}
+@keyframes lightLine {
+  0%{
+      transform: scale(0);
+  }
+  38%{
+      transform: scale(1);
+  }
+  46%{
+      transform: scale(1) translateY(0);
+  }
+  62%{
+      transform: scale(1) translateY(35);
+      opacity: 1;
+  }
+  100%{
+      transform: scale(1) translateY(px2vw(119));
+      opacity: 0;
+  }
+}
+
+/**-任务相关-**/
+#browseNote .task_wrap.module {
+  padding: 0;
+}
+.browseNote.task_wrap_1 .task_list_wrap, .browseNote.task_list_wrap_2 .task_list_wrap{
+  width: auto;
+}
+.browseNote .task_wrap.module {
+  padding: 0;
+}
+.browseNote .task_item {
+  padding: 28rpx 32rpx;
+}
+.browseNote .task-main .info {
+  padding-left: 0;
+}
+.browseNote .task-main .info .title {
+  font-size: 34rpx;
+  font-weight: 400;
+  height: 34rpx;
+  line-height: 1;
+}
+.browseNote .task-main .info .taskProcess{
+  font-family: "PingFangSC-Regular";
+  font-size: 30rpx;
+  color: #666666;
+  line-height: 1;
+}
+.browseNote .task-main .info .connection-symbol{
+  font-family: "PingFangSC-Regular";
+  font-size: 30rpx;
+  color: #666666;
+  line-height: 1;
+}
+.browseNote .task-main .info .desc {
+  font-family: "PingFangSC-Regular";
+  font-size: 24rpx;
+  color: #999999;
+  width: auto;
+  margin-top: 8rpx;
+  opacity: 1;
+}
+.browseNote .task-main .tap_wrap .task_btn {
+  width: 152rpx;
+  height: 60rpx;
+  border-radius: 32rpx;
+}
+.browseNote .task-main .tap_wrap .task_btn button{
+  font-family: "PingFangSC-Medium";
+  font-size: 28rpx;
+  line-height: 60rpx;
+  height: 60rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+.browseNote .task-main .tap_wrap .task_btn3 {
+  background: #cccccc;
+  color: #FFFFFF;
+}
+#browseNote .task_wrap .show_more{
+  display: none;
+}
+page .task_wrap .avatar_box{
+  border-color: rgba(255,56,67,0.7);
+  background-color: rgba(255,56,67,0.1);
+  margin-right:24rpx;
+}
+page .task_wrap .avatar_box_receive_price{
+  font-size: 24rpx;
+  line-height:1;
+  bottom:-10rpx;
+  transform: translateX(-50%) scale(.8);
+}
+page .task_wrap .avatar_plus{
+  font-weight: 400;
+  color: #ff384380;
+}
+page .avatar_box_receive_award{
+  border: none;
+  background-color: rgba(255,56,67,0.1);
+}
+@import "./abTestCss.wxss";
+
+
+/* 2023-6-7 右边加两个任务图标 */
+.homepage-task-icon{
+  position: absolute;
+  right: 4rpx;
+  width: 120rpx;
+  height: 120rpx;
+  z-index: 1;
+}
+.homepage-task-icon.one{
+  top: 390rpx;
+}
+.homepage-task-icon.two{
+  top: 534rpx;
+}

@@ -1,0 +1,29 @@
+<view class="share-container">
+  <!-- 途家唤起弹层，选择分享好友还是好物圈 -->
+  <view wx:if="{{platformName === 'tujia'}}" class="share-btn" catchtap="handleCloseSharePopup">
+    <image class="share-btn-img" src="{{picUrlHost}}/upload/festatic/mp/ndetail_share.png"></image>
+  </view>
+  <!-- 直接触发好友分享 -->
+  <button wx:else class="share-btn" open-type="share">
+    <image class="share-btn-img" src="{{picUrlHost}}/upload/festatic/mp/ndetail_share.png"></image>
+  </button>
+</view>
+<!-- 微信好物圈的弹层 -->
+<block wx:if="{{product.item_code}}">
+  <bottom-popup frameTitle="" show="{{isShowBottomPopup}}" noPadding="{{true}}" popupBgColor="#fff">
+    <view class="share-content">
+      <view class="title">- 分享到 -</view>
+      <view class="btns">
+        <view class="btn" catchtap="handleToFriend">
+          <button class="share" open-type="share" hover-class="none">
+            <view class="image-bg">
+              <image class="image-bg-icon" src="{{picUrlHost}}/upload/festatic/mp/wx_wechat.png"></image>
+            </view>
+            <view class="text">微信好友</view>
+          </button>
+        </view> 
+      </view>
+      <view class="cancle" catchtap="handleCloseSharePopup">取消</view>
+    </view>
+  </bottom-popup>
+</block>

@@ -1,0 +1,278 @@
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+<timelineFloat></timelineFloat>
+<webp bind:pageImageSuccess="pageImageSuccess"></webp>
+
+<mp-navigation-bar
+    wx:if="{{!isQuickApp}}"
+    id="mp-navigation"
+    back="{{navigationBar.back}}"
+    color="{{navigationBar.color}}"
+    background="{{navigationBar.background}}"
+    animated="{{navigationBar.animated}}" >
+    <view wx:if="{{!hiddenNavBack}}"
+        slot="left"
+        class="custom-navigation-back" bindtap="handleCustomBack">
+        <text class="navback-arrow wechat-font-g-arrow-down"></text>
+    </view>
+    <view slot="center" class="custom-navigation-center">
+        <text class="title">{{navigationBar.title}}</text>
+    </view>
+</mp-navigation-bar>
+<!--收藏小程序  -->
+<collection-guide wx:if="{{!isQuickApp && shwoCollectTip}}"></collection-guide>
+
+<scroll-view
+    class="body-container"
+    scroll-y="true"
+    enable-back-to-top="{{true}}"
+    lower-threshold="300"
+    scroll-top="{{inquireTop}}"
+    scroll-with-animation="{{isWechat}}"
+    bindscrolltolower="getWaterfallListMore"
+    bindscroll="onScroll">
+
+<view class="home page-background ">
+    <!-- 活动banner -->
+    <view class="ad-slider {{adInfo.slider.isVisible ? 'visible' : ''}}">
+        <ad-sdk
+            wx:if="{{adInfo.slider.advertiseDataWidth && adInfo.slider.advertiseDataHeight}}"
+            bindgetAdData="handleAdDataReady"
+            impId="04041XKJGVU0512XCDXBPVNQYGQ"
+            site="{{adInfo.site}}"
+            width="{{adInfo.slider.advertiseDataWidth}}"
+            height="{{adInfo.slider.advertiseDataHeight}}"
+            slideVideo="{{adInfo.slider.slideVideo}}"
+            lonAndLat="{{adInfo.lonAndLat}}"
+            showSign="{{adInfo.showAdSign}}">
+        </ad-sdk>
+        <view class="ad-shadow"></view>
+    </view>
+    <view class="thead">
+        <view class="head-box">
+            <view class="tab-box">
+                <!--tab-->
+                <view class="tab-view" bindtap="onTabSwitch">
+                    <view wx:if="{{curType != 'hourroom'}}" class="item pd current tab-view both" data-type="both">
+                        <view class="item sub {{curType === 'domestic' ? 'current' : ''}}" data-type="domestic" data-ubt-key="xcx_cxy_inland" id="autotest_homepage_domestictab">国内</view>
+                        <view class="item sub {{curType === 'oversea' ? 'current' : ''}}" data-type="oversea" data-ubt-key="xcx_cxy_oversea" id="autotest_homepage_overseatab">海外</view>
+                    </view>
+                    <view wx:else class="item pd tab-view" data-type="domestic">
+                        <view class="item sub right-16" data-type="domestic" data-ubt-key="xcx_cxy_both" id="autotest_homepage_domestictab">国内·海外</view>
+                    </view>
+                    <view class="item pd sub {{curType === 'hourroom' ? 'current' : ''}}" data-type="hourroom" data-ubt-key="xcx_cxy_hourroom" id="autotest_homepage_hourroom">钟点房</view>
+                    <view class="scrollbar {{curType === 'hourroom' ? 'sc-right' : 'sc-left'}}">
+                        <view wx:if="{{curType === 'domestic'}}" class="line left-short"></view>
+                        <view wx:if="{{curType === 'oversea'}}" class="line right-short"></view>
+                        <view wx:if="{{curType === 'hourroom'}}" class="line long"></view>
+                    </view>
+                </view>
+                <view wx:if="{{isWechat}}" class="tab-bnb" bindtap="goToBnb" data-ubt-key="xcx_cxy_homeroom" id="autotest_homepage_homeroom">民宿</view>
+            </view>
+
+            <view class="search-view">
+                <!--出行提示-->
+                <emegencynotice
+                    warp-class="em-notic-style"
+                    inner="em-query-inner"
+                    lmask="em-query-lmask"
+                    page='QUERY_PAGE'
+                    cityId="{{search.location.cityId}}"
+                >
+                </emegencynotice>
+                <!--search-->
+                <!--位置信息-->
+                <view class="item" hover-class="hover-active">
+                    <view class="star location-height" data-type="{{curType}}" bindtap="onSelectCity" data-ubt-key="xcx_cxy_city" id="autotest_homepage_cityinput">
+                        <text class="current-text2 black1 {{search.location.displayText.length > 12 ? 'location-text': ''}}">{{search.location.displayText}}
+                        </text>
+                    </view>
+                    <view class="end" bindtap="onMyPosition" data-ubt-key="xcx_cxy_location" id="autotest_xcx_cxy_location">
+                        <view class="lbs">
+                            <view class="wechat-font-position" id="autotest_homepage_locationlabel"></view>
+                            <view class="loc-text">我的位置</view>
+                        </view>
+                    </view>
+                </view>
+                <!--国内海外入离时间-->
+                <view class="item check-wrap" bindtap="onCalenderTap" hover-class="hover-active" style="{{search.date.showMoningTip ? 'border-bottom: 0;' : ''}}" data-ubt-key="xcx_cxy_date" id="autotest_xcx_cxy_date">
+                    <view class="star cell-start">
+                        <view class="checkin date-box">
+                            <view class="current-text3 black1 minw" id="autotest_homepage_startdateinput">{{search.date.inDay_disp[0]}}</view>
+                            <view class="check-text {{search.date.selectMorning ? 'blue' : ''}}">{{search.date.inDay_disp[1]}}</view>
+                        </view>
+                        <block wx:if="{{curType !== 'hourroom'}}">
+                            <view class="to-x"><view class="line"></view></view>
+                            <view class="checkout date-box">
+                                <view class="current-text3 black1 minw">{{search.date.outDay_disp[0]}}</view>
+                                <view class="check-text {{search.date.selectMorning ? 'blue' : ''}}">{{search.date.outDay_disp[1]}}</view>
+                            </view>
+                        </block>
+                    </view>
+                    <block wx:if="{{curType !== 'hourroom'}}">
+                        <view class="end num-late">
+                            <text class="color ">共{{search.date.days}}晚</text>
+                        </view>
+                    </block>
+                </view>
+                <block wx:if="{{search.date.showMoningTip}}">
+                    <view wx:if="{{search.date.showMoningInTip}}" class="check-tips">{{search.date.checkinTip}}</view>
+                    <view wx:else class="check-tips moning-out-tips">{{search.date.checkoutTip}}</view>
+                    <view class="item" style="height: 15rpx;"></view>
+                </block>
+                <!--关键字-->
+                <view class="item {{search.keyword.val ? 'fe--active' : ''}}" hover-class="hover-active" data-ubt-key="xcx_cxy_gwpj" id="autotest_homepage_keywordinput" bindtap="onKeywordTap">
+                    <view class="star rspace width-94">
+                        <view class="current-text black1 {{ search.keyword.val ? '' : 'placeholder'}}">
+                            <icon wx:if="{{!search.keyword.val}}" class="search-icon" type="search" size="28rpx" color="#c5c5c5" />
+                            {{search.keyword.val || '景点/品牌/酒店名'}}
+                        </view>
+                    </view>
+                    <view wx:if="{{search.keyword.val}}" class="end">
+                        <view class="close wechat-font-close icon-text" catchtap="onClearKeyword"></view>
+                    </view>
+                </view>
+                <!--价格/星级-->
+                <view class="item {{search.priceStar.text ? 'fe--active' : ''}}" hover-class="hover-active" data-ubt-key="xcx_cxy_jgxj" id="autotest_homepage_starinput" bindtap="onPriceStar">
+                    <view class="star rspace width-94">
+                        <view class="star-text black1 {{ search.priceStar.text ? '' : 'placeholder'}}">{{search.priceStar.text || ((curType === 'oversea') ? '价格/钻级' : '价格/星级')}}</view>
+                    </view>
+                    <view wx:if="{{search.priceStar.text}}" class="end">
+                        <view class="close wechat-font-close icon-text" catchtap="onPriceStarClear"></view>
+                    </view>
+                </view>
+                <!--查询酒店-->
+                <button class="search-btn" bindtap="onSearch" data-ubt-key="xcx_cxy_button" id="autotest_homepage_querybutton">查询</button>
+                <button wx:if="{{isDevEnv}}" class="search-btn mt-12" bindtap="onTestConfigTap">testconfig</button>
+            </view>
+        </view>
+    </view>
+    <view class="tbody">
+        <!--新客大礼包-->
+        <view wx:if="{{ curType === 'domestic' && newerCoupon.coupons.length >= 3}}" class="newer-coupon-box" bindtap="toNewerCouponPage">
+            <view wx:if="{{newerCoupon.expiredTime}}" class="coupon-right-expired">
+                <view class="coupon-expired-text">即将过期</view>
+                <expiredtime expiredTime="{{newerCoupon.expiredTime}}" bind:closeNewerCouponShow="onCloseNewerCoupon"></expiredtime>
+            </view>
+            <view wx:else class="coupon-right-detail">
+                <view class="coupon-detail-text">详情</view>
+                <view class="wechat-font-arrow-right"></view>
+            </view>
+            <view class="coupon-box">
+            <block wx:for="{{newerCoupon.coupons}}">
+                <view wx:if="{{item.amount}}" class="coupon-bg">
+                    <view class="c-left-text" wx:if="{{item.isDiscount}}">
+                        <view class="c-bold-text">{{item.amount}}</view>
+                        <view class="c-normal-text">折</view>
+                    </view>
+                    <view class="c-left-text" wx:else>
+                        <view class="c-normal-text">￥</view>
+                        <view class="c-bold-text">{{item.amount}}</view>
+                    </view>
+                    <view class="c-right-text">{{item.text}}</view>
+                </view>
+                <view wx:else class="coupon-bg">
+                    <view class="c-left-text">
+                        <view class="reward-type-bg reward-type-{{item.type}}"></view>
+                    </view>
+                    <view class="c-right-text">{{item.text}}</view>
+                </view>
+            </block>
+            </view>
+        </view>
+
+        <!-- 金刚位 -->
+        <block wx:if="{{showHotNearByView && curType === 'domestic'}}">
+            <view class="hot-sales">
+                <view class="item rank" bindtap="onRankPage" data-type="hourRoomList">
+                    <view class="title">口碑榜</view>
+                    <view class="sub-title">城市精选</view>
+                </view>
+                <view class="item nearby" bindtap="onNearbySearch" data-type="nearby" data-ubt-key="xcx_cxy_fjrm">
+                    <view class="title">附近热卖</view>
+                    <view class="sub-title">2公里内</view>
+                </view>
+                <block wx:if="{{isWechat || isAliApp}}">
+                    <view class="item lowprice" bindtap="toSpecialHotels" data-ubt-key="xcx_cxy_tjjd">
+                        <view class="title">超值低价</view>
+                        <view class="sub-title">7折起</view>
+                    </view>
+                </block>
+            </view>
+        </block>
+
+        <!-- 关注企业微信 -->
+        <view class="enterprise-wechat">
+            <taskList
+            tempid='hotelxcxsy'
+            compid='183411'
+            hideUpdateAvatar="{{true}}"
+            />
+        </view>
+        <!-- 酒店信息流组件 -->
+        <block wx:if="{{personalRecommendSwitch && (curType !== 'hourroom')}}">
+            <waterfall id="waterfall"
+                source="{{waterfallInfo.source}}"
+                ignoreLocation="{{waterfallInfo.ignoreLocation}}"
+                globalInfo="{{waterfallInfo.cityInfo}}"
+                hotelInfo="{{waterfallInfo.dateInfo}}"
+                bindgetref="getWaterfallRef">
+            </waterfall>
+        </block>
+        <!--服务保障-->
+        <service isOversea="{{search.location.isOversea}}"></service>
+
+        <view class="bottom-space {{isIphoneX ? 'iphonex' : ''}}"></view>
+    </view>
+</view>
+
+</scroll-view>
+
+
+<!--bootom bar-->
+<toolbar currentPage="homepage" secondScreen="{{secondScreen}}" bind:toTop="toTop"  class="compindex"></toolbar>
+
+<!--登录引导-->
+<loginbar wx:if="{{!isLoggedin}}" bind:toLoginTap="toLogin" page-from="inquire"></loginbar>
+
+<!--价格/星级-->
+<pricestarfilter
+        wx:if="{{!psStates.hidden}}"
+        bind:closeStarFilter="onPriceStarClose"
+        bind:updateStarFilterData="onPriceStarUpdate"
+        page-from="inquire"
+        isIphoneX="{{isIphoneX}}"
+        isOversea="{{curType==='oversea'}}"
+        isHourRoom="{{curType==='hourroom'}}"
+        isLongRent="{{search.date.isLongRent}}"
+        cityID="{{search.location.cityId || 2}}"
+        priceStarXtaroSwitch="{{priceStarXtaroSwitch}}"
+        priceInfo="{{search.priceStar}}">
+</pricestarfilter>
+
+<!-- 活动类弹窗接纵横系统 -->
+<ad-sdk wx:if="{{isWechat && adInfo.showPop}}" impId="05JDAWSH0512XCDXBPXCDCTV" site="{{adInfo.site}}" showSign="{{adInfo.showAdSign}}" lonAndLat="{{adInfo.lonAndLat}}"></ad-sdk>
+
+<!-- 会员等级弹窗 -->
+<memberpop enable="{{rightsPop.enable}}" imgSrc="{{rightsPop.imgSrc}}"></memberpop>
+
+<!-- 新客弹窗 -->
+<newerpop
+        from="inquire"
+        enable="{{newerPop.enable}}"
+        newGuestType="{{newerPop.newGuestType}}"
+        bind:getNewerCouponInfo="getNewerCouponInfo">
+</newerpop>
+
+<!-- 澳门券发券弹窗 -->
+<macaopop enable="{{macaoPop.enable}}" imgSrc="{{macaoPop.imgSrc}}" coupons="{{macaoPop.coupons}}" bind:showRealNamePop="onShowRealNamePop"></macaopop>
+
+<!-- 澳门券实名认证弹窗 -->
+<realnamepop enable="{{realNamePop.enable}}" message="{{realNamePop.message}}" coupons="{{realNamePop.coupons}}" bind:authRealNameCallback="onAuthRealNameCallback" bind:closeRealName="onCloseRealName"></realnamepop>
+
+<!-- 浮窗接纵横系统 -->
+<view wx:if="{{isWechat}}" class="float-ad">
+    <ad-sdk impId="05JDAWSH0512XCDXBPWXQTTZ" site="{{adInfo.site}}" height="60" width="60" showSign="{{adInfo.showAdSign}}" lonAndLat="{{adInfo.lonAndLat}}"></ad-sdk>
+</view>
+
+<!-- 白屏检测及上报 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

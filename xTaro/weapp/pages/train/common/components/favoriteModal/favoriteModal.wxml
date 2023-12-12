@@ -1,0 +1,15 @@
+<template name="favoriteModal">
+    <view class="backmask active" bindtap="hideBackDrop" catchtouchmove="preventBackMove"></view>
+    <view class="pop-add-tips" bindtap="hideBackDrop">
+        <view class="add-top">
+            <icon class="add-arr"></icon>
+            <view class="txt">添加到我的小程序</view>
+        </view>
+
+        <view class="pop-mid-bd-f">
+            <view class="pop-collect-f">
+                <text class="ifont-closed" bindtap="hideBackdrop"></text>
+            </view>
+        </view>
+    </view>
+</template>

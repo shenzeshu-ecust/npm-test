@@ -1,0 +1,48 @@
+<view class="wx_mdcp_common_wrap">
+
+  <view wx:if="{{status == 0}}" class="send_wrap">
+    <view class="send_main" bindtap="checkLogin">
+      <view class="send_btn"></view>
+      <image src="https://images4.c-ctrip.com/img3/marketing/2018/01/all_single_pic/coupon_pop.png" class="send_pic" mode="widthFix"></image>
+    </view>
+  </view>
+
+  <view wx:elif="{{status == 1}}" class="coupon_wrap">
+    <view class="coupon_main">
+      <view class="coupon_list">
+        <view class="tips">
+          <view class="tips_bf">恭喜您获得携程优惠券</view>
+          <view class="tips_desc">优惠券已发到您的账户</view>
+        </view>
+
+        <block wx:for="{{couponList}}" wx:for-item="item">
+          <view class="coupon_item">
+            <view class="i_price">
+              <text class="price">{{item.deductionAmount}}</text>
+              <text class="currency">{{item.units}}</text>
+            </view>
+            <view class="i_detail">
+              <view class="bu">{{item.bUType}}</view>
+              <view class="sm">{{item.endTime ? item.endTime + "前有效" : ""}}</view>
+            </view>
+            <view class="i_btn" data-url="{{item.toUseURL}}" bindtap="goBUPage">立即使用</view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="yoyo_ye"></view>
+  </view>
+
+  <view wx:elif="{{status == 2}}" class="error_wrap">
+    <view class="tips">
+      <view class="tips_bf">{{tipsTitle}}</view>
+      <view>{{tipsMsg}}</view>
+    </view>
+    <image src="https://images4.c-ctrip.com/img3/marketing/2018/01/all_single_pic/coupon_bg01.png" class="tips_bg" mode="widthFix"></image>
+    <view class="btn_group">
+      <button class="t_btn red" wx:if="{{fButtonText}}" bindtap="{{fButtonAction}}">{{fButtonText}}</button>
+      <button class="t_btn" wx:if="{{sButtonText}}" bindtap="{{sButtonAction}}">{{sButtonText}}</button>
+    </view>
+  </view>
+
+</view>

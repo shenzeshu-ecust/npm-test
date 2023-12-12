@@ -1,0 +1,529 @@
+@import "../../common/css/common.wxss";
+
+.liner-title-top {
+    width: 100%;
+    height: 45rpx;
+    background: linear-gradient(-180deg, rgb(238, 241, 246) 0%, rgb(255, 255, 255) 100%);
+}
+
+.wf-container {
+  justify-content: space-between;
+  position: relative;
+  width: 702rpx;
+  margin: 0 auto;
+}
+
+.wf-item-2 {
+  width: 343rpx;
+  border-radius: 8rpx;
+}
+
+.wf-item .wf-item-inner {
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+  padding-bottom: 20rpx;
+  box-shadow: 0 2rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.itemimg {
+  width: 100%;
+  position: relative;
+  border-radius: 16rpx 16rpx 0 0;
+  max-height: 600rpx;
+  overflow: hidden;
+}
+
+.itemimg .itemimg-wapper {
+  width: 100%;
+  position: relative;
+  border-radius: 16rpx 16rpx 0 0;
+  overflow: hidden;
+  background: #eee url(https://pages.c-ctrip.com/you/component-local/default.png) no-repeat center;
+  background-size: 70rpx auto;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.itemimg .itemimg-wapper .img,
+.itemimg .itemimg-wapper .video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16rpx 16rpx 0 0;
+}
+
+.itemimg .itemimg-wapper-bg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 96rpx;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.60) 2%, rgba(0, 0, 0, 0.00) 100%);
+  z-index: 2;
+}
+
+.pai-tag {
+  height: 42rpx;
+  font-size: 24rpx;
+  display: inline-block;
+  padding: 0 16rpx;
+  color: #fff;
+  line-height: 42rpx;
+  position: absolute;
+  right: 16rpx;
+  bottom: 16rpx;
+}
+
+.pai-tag::before {
+  content: '';
+  width: 32rpx;
+  height: 32rpx;
+  overflow: hidden;
+  border-radius: 32rpx;
+  margin: 2rpx 6rpx 0 0;
+}
+
+.protag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 22rpx;
+  color: #FFF;
+  align-items: center;
+  background-color: rgba(0, 0, 0);
+  opacity: 0.75;
+  padding: 2rpx 16rpx;
+  border-bottom-right-radius: 12rpx;
+}
+
+.poiTag {
+  position: absolute;
+  left: 16rpx;
+  bottom: 16rpx;
+  max-width: 250rpx;
+  height: 24rpx;
+  font-size: 22rpx;
+  color: #fff;
+  line-height: 24rpx;
+  padding-left: 28rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 2;
+}
+
+.poiTag::before {
+  content: '';
+  position: absolute;
+  left: 0rpx;
+  width: 24rpx;
+  height: 24rpx;
+  overflow: hidden;
+  background: url(https://pic.c-ctrip.com/platform/h5/mini_programe/v2021.1.7/home/location_shape.png) no-repeat;
+  background-size: 100%;
+}
+
+.isvideo {
+  position: absolute;
+  right: 16rpx;
+  bottom: 16rpx;
+  width: 24rpx;
+  height: 24rpx;
+  overflow: hidden;
+  background: url(https://pic.c-ctrip.com/platform/h5/mini_programe/v2021.1.7/home/video.png) no-repeat;
+  background-size: 100%;
+  z-index: 2;
+}
+
+.isadvert {
+  position: absolute;
+  right: 8rpx;
+  top: 8rpx;
+  width: 44rpx;
+  height: 24rpx;
+  overflow: hidden;
+  background: url(https://pic.c-ctrip.com/platform/h5/mini_programe/v2021.1.7/home/advert.png) no-repeat;
+  background-size: 100%;
+  z-index: 2;
+}
+
+.infotext {
+  padding: 0 16rpx;
+  overflow: hidden;
+}
+
+.tagView {
+  display: flex;
+  flex-wrap: wrap;
+  height: 28rpx;
+  margin-top: 10rpx;
+  overflow: hidden;
+}
+
+.tagView .tag {
+  flex: none;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  font-size: 20rpx;
+  height: 28rpx;
+  padding: 0 6rpx;
+  margin-bottom: 10rpx;
+  border-radius: 4rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.tag + .tag {
+  margin-left: 8rpx;
+}
+
+.tagView .itag-view {
+  color: #fff;
+  background: linear-gradient(to right, #FA5956, #FB8650);
+}
+
+.tagView .stag-view {
+  color: #FF7700;
+  background: #FFF8F2;
+}
+
+.tagView .tag-view {
+  color: #0086F6;
+  background: #F2F8FE;
+}
+
+.subtitle {
+  font-size: 22rpx;
+  color: #666;
+  line-height: 24rpx;
+  margin-top: 14rpx;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.price-num {
+  align-items: baseline;
+  padding: 0 -4rpx;
+  margin-top: 16rpx;
+}
+
+.price-num .price-mini {
+  flex: none;
+  font-size: 20rpx;
+  line-height: 20rpx;
+  color: #FF6600;
+  font-weight: bold;
+}
+
+.price-num .price {
+  flex: none;
+  font-size: 36rpx;
+  line-height: 36rpx;
+  color: #FF6600;
+  font-weight: bold;
+}
+
+.price-num .price.small {
+  font-size: 28rpx;
+  line-height: 28rpx;
+}
+
+.price-num .price-text {
+  flex: none;
+  font-size: 20rpx;
+  line-height: 20rpx;
+  color: #666;
+}
+
+.price-num .text {
+  flex: auto;
+  color: #666;
+  font-size: 22rpx;
+  line-height: 22rpx;
+  margin-left: 12rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.infotext .infotitle {
+  font-size: 28rpx;
+  line-height: 36rpx;
+  color: #333;
+  padding-top: 20rpx;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  overflow: hidden;
+}
+
+.linewrap {
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.linewrap .userhead {
+  flex: none;
+  position: relative;
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.linewrap .userhead .userhead-img {
+  width: 100%;
+  height: 100%;
+  background: #EAEAEA;
+  margin-right: 6rpx;
+  border-radius: 48rpx;
+}
+
+.linewrap .userhead .userhead-vicon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 16rpx;
+  width: 16rpx;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.linewrap .usertext {
+  flex: auto;
+  overflow: hidden;
+  margin-left: 6rpx;
+}
+
+.linewrap .usertext .usertext-username {
+  font-size: 22rpx;
+  color: #333;
+  line-height: 24rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.linewrap .usertext .usertext-hasvip {
+  font-size: 20rpx;
+  width: fit-content;
+  max-width: 100%;
+  line-height: 20rpx;
+  padding: 4rpx 6rpx;
+  margin-top: 6rpx;
+  border-radius: 4rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  border-radius: 14rpx 2rpx;
+}
+
+.linewrap .usertext .usertext-hasvip.B-user {
+  color: #0086F6;
+  background: #F2F8FE;
+}
+
+.linewrap .usertext .usertext-hasvip.C-user {
+  color: #CC8408;
+  background: #FFF9EB;
+}
+
+/* 加载状态 */
+.loading-state {
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 120rpx;
+}
+
+.loading-state .loading-fail-img {
+  flex: none;
+  height: 32rpx;
+  width: 32rpx;
+  background: url(https://pic.c-ctrip.com/platform/h5/mini_programe/v2021.1.7/home/refresh.png) no-repeat;
+  background-size: 100%;
+}
+
+.loading-state .loading-txt {
+  font-size: 28rpx;
+  line-height: 28rpx;
+  color: #999;
+  margin-left: 12rpx;
+}
+
+.loading-state .loading-txt.all {
+  position: relative;
+  background: #F8F8F8;
+  margin-left: 0;
+  padding: 0 10rpx;
+  z-index: 2;
+}
+
+.loading-state .loading-img {
+  flex: none;
+  height: 32rpx;
+  width: 32rpx;
+  background: url(https://pic.c-ctrip.com/platform/h5/mini_programe/v2021.1.7/home/loading.png) no-repeat;
+  background-size: 100%;
+  animation: loading .8s linear 0s infinite;
+}
+
+@keyframes loading {
+  0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg)
+  }
+
+  100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg)
+  }
+}
+
+.loading-state .loading-line {
+  position: absolute;
+  height: 2rpx;
+  background: #999;
+  width: 216rpx;
+}
+
+.waterflow-title {
+  width: 100%;
+  height: 74rpx;
+}
+
+.common-title {
+  padding: 32rpx 24rpx;
+  color: #f8e4c3;
+  font-weight: 500;
+  font-size: 36rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+}
+
+.es-title {
+  width: 115rpx;
+  height: 52rpx;
+  padding: 24rpx;
+}
+.es-titlev1 {
+  width: 161rpx;
+  height: 42rpx;
+  padding: 24rpx;
+}
+
+.es-title-new {
+    width: 100%;
+    height: 109rpx;
+}
+
+.es-item-inner {
+  background-color: transparent !important;
+}
+
+.es-itemimg image {
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.es-infotitle {
+  color: #fff !important;
+}
+
+.user-wrapper {
+  align-items: center;
+  margin-top: 18rpx;
+  font-size: 20rpx;
+}
+
+.user-info {
+  align-items: center;
+}
+
+.user-info-group {
+  justify-content: space-between;
+}
+
+.user-nickname {
+  color: #fff;
+  line-height: 1;
+}
+
+.user-tag {
+  font-size: 20rpx;
+  border-radius: 16rpx 2rpx 16rpx 2rpx;
+  padding: 4rpx 6rpx;
+  margin-top: 6rpx;
+  width: fit-content;
+  line-height: 1;
+}
+
+.user-avatar {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.avatar-group {
+  position: relative;
+  margin-right: 8rpx;
+}
+
+.vip-icon {
+  position: absolute;
+  width: 24rpx;
+  height: 24rpx;
+  bottom: 0;
+  right: 0;
+}
+
+.like-count {
+  color: #fff;
+}
+
+.video-player {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.user-tag-blue {
+  background-color: rgba(0, 134, 246, 0.25);
+  color: #0086F6;
+}
+
+.user-tag-orange {
+  background-color: rgba(255, 119, 0, 0.25);
+  color: #FF7700;
+}
+
+.user-tag-red {
+  background-color: rgba(246, 59, 46, 0.25);
+  color: #F63B2E;
+}
+
+
+.es-new .es-item-inner, .wf-new .wf-item-inner {
+  background-color: #f6f8fa !important;
+  border-radius: 24rpx;
+}
+.es-new .infotitle, .es-new .user-nickname, .es-new .like-count {
+  color: #333 !important;
+}
+.wf-new {
+  background-color: #fff !important;
+}
+.loading-blank {
+  height: 120rpx;
+}

@@ -1,0 +1,11 @@
+.desc-tit {
+    font-weight: 500;
+    margin: 32rpx 0 12rpx;
+}
+.desc-item .desc-key {
+    color: #666;
+}
+.gift-sp  {
+    font-weight: 300;
+    text-align: justify;
+}

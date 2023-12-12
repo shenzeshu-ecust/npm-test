@@ -1,0 +1,40 @@
+<view class="team_container" wx:if="{{guideSuccess}}" catchtap="guideIdJump">
+  <block wx:if="{{guideBasicInfo.logoImgUrl}}">
+    <image src="{{guideBasicInfo.logoImgUrl}}" class="team_avatar" />
+  </block>
+  <view class="team_info">
+    <view class="team_name">
+      <block wx:if="{{guideBasicInfo.name}}">
+        {{guideBasicInfo.name}}
+      </block>
+      <text wx:if="{{guideBasicInfo.homeH5Url}}" class="wechat_vtm_font-rigth3 team_name_right"></text>
+    </view>
+    <view class="team_city" wx:if="{{!hideCityTop && guideBasicInfo.cityTopInfo}}" catchtap="cityTopJump">
+      <view class="team_city_tag"></view>
+      <view class="team_city_content">
+        <text class="team_city_text">{{guideBasicInfo.cityTopInfo.content}}</text>
+        <text class="wechat_vtm_font-rigth3 team_city_right"></text>
+      </view>
+    </view>
+    <view class="team_service" wx:if="{{orderAmount}}">
+      已经连续<text class="team_bold">{{guideBasicInfo.entrytime}}</text>为大家提供<text class="team_bold">{{orderAmount}}次</text>总服务
+    </view>
+    <view class="team_give_thumbs_up" wx:if="{{guideBasicInfo.commentCount}}">
+      <block wx:if="{{guideBasicInfo.commentCount > 300}}">
+        <view class="team_mini_avatar"></view>
+        <text>{{guideBasicInfo.commentCount}}人觉得我们很棒</text>
+      </block>
+      <block wx:elif="{{guideBasicInfo.commentCount <= 300 && guideBasicInfo.recommendedReason}}">
+        <view class="team_mini_avatar1"></view>“<text class="team_mini_avatar1_text">{{guideBasicInfo.recommendedReason}}</text>”
+      </block>
+    </view>
+  </view>
+</view>
+<view class="gj_t_container" wx:elif="{{guideLoading}}">
+  <view class="gj_t_left"></view>
+  <view class="gj_t_right">
+    <view class="gj_t_row"></view>
+    <view class="gj_t_row"></view>
+    <view class="gj_t_row"></view>
+  </view>
+</view>

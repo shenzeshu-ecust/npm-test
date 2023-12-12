@@ -1,0 +1,30 @@
+<perinfo-protect-float></perinfo-protect-float>
+
+
+<skyline_bar back bind:lefttap="backWebAct" title="{{pageOption.pageTitle || pageConfig.pageTitle || ''}}"></skyline_bar>
+
+<scroll-view scroll-y style="flex: 1; width: 100%; overflow: hidden; padding-bottom: 0;" type="list" show-scrollbar="{{false}}">
+  <view class="page_warn_content" wx:if="{{pageConfig.pageContent}}">
+    <view class="title">
+      <image mode="widthFix" src="https://images3.c-ctrip.com/marketing/2021/09/task/task_icon.png" class="title_icon">
+      </image> 任务说明
+    </view>
+    <view class="content">{{pageOption.pageContent || pageConfig.pageContent}}</view>
+  </view>
+
+  <loreal_waterfall class="waterfall-content" id="waterfall" bind:showAuthorizePopup="showAuthorizePopup" bind:updateUserInfoSuccess="updateUserInfoSuccess" wxsdkVersionFlag="{{wxsdkVersionFlag}}" masonryData="{{masonryList}}" keyCfg="{{keyCfg}}" styleCfg="{{styleCfg}}" authResult="{{authResult}}" authConfig="{{authConfig}}" pageOption="{{pageOption}}" />
+
+  <view class="guide_more" wx:if="{{bottomMoreButtonVisible}}">
+    <view class="guide_more_button" bindtap="openMoreVideo">进入主页 查看更多视频</view>
+  </view>
+  <view class="banner" wx:if="{{pageConfig.adShow == '开'}}">
+    <view class="slider-show">
+      <ad-sdk impId="{{pageConfig.adId || ''}}" width="{{AdvertiseDataWidth}}" height="{{AdvertiseDataHeight}}" slideVideo="{{slideVideo}}"></ad-sdk>
+    </view>
+  </view>
+  <view class="empty_view"></view>
+</scroll-view>
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>
+
+

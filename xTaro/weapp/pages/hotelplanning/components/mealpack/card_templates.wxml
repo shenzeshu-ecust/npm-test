@@ -1,0 +1,51 @@
+<template name="multiple-card">
+    <view class="multiple-card">
+        <view class="card-title">酒店次卡
+            <block wx:for="{{cardDesc}}" wx:for-item="descItem" wx:key="index">
+                <view class="desc-item"><text class="wechat-font-success1 desc-icon"></text>{{descItem}}</view>
+            </block>
+        </view>
+        <swiper class="swiper" next-margin="92rpx" snap-to-edge="true" wx:if="{{ multipleCardLen > 1}}">
+            <block wx:for="{{multipleCardList}}" wx:for-item="pack" wx:key="pack.basicInfo.productId">
+                <swiper-item class="card-item">
+                    <template is="card-item" data="{{pack, canSwiper: true, last: index === multipleCardList.length - 1, index}}"></template>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view wx:else>
+            <template is="card-item" data="{{pack: multipleCardList[0], index: 0}}"></template>
+        </view>
+        <view class="more-card" wx:if="{{ multipleCardLen > 3}}">
+            <view class="divider"></view>
+            <view class="more-link" catchtap="gotoProductList" data-producttype="2">更多次卡<text class="wechat-font-arrow-right2 more-arrow"></text></view>
+        </view>
+    </view>
+</template>
+
+<template name="card-item">
+    <view class="card-wrapper {{canSwiper && !last && 'item-right'}} {{pack.hasSave && 'hide-border'}}" catchtap="gotoProductDetail" data-url="{{pack.urlInfo}}" data-idx="{{index}}" data-producttype="2" data-clicktype="1">
+        <view class="top-card {{pack.hasSave && 'mb-10'}}">
+            <view class="left-card">
+                <view class="pack-name {{pack.basicInfo.isSoldOut && 'sold-out-text'}}">
+                    <view class="room-desc single-ellipsis">{{pack.basicInfo.roomName}}</view>
+                    {{pack.basicInfo.nights}}晚
+                </view>
+                <view class="now-pack {{pack.hasSave ? '' : 'no-compare'}} {{pack.basicInfo.isSoldOut && 'sold-out-text'}}">
+                    ¥<text class="pack-price">{{pack.productPriceInfo.actualPrice}}</text>
+                    /{{pack.basicInfo.nights}}晚
+                </view>
+            </view>
+            <view class="right-card">
+                <view class="sold-btn {{pack.basicInfo.isSoldOut && 'sold-out-btn'}}">
+                    {{pack.basicInfo.isSoldOut ? '售罄' : '抢购'}}
+                </view>
+                <text class="sold-count {{pack.basicInfo.isSoldOut && 'sold-out-text'}}">{{pack.soldQuantity}}</text>
+            </view>
+        </view>
+        <view class="bottom-card" wx:if="{{pack.hasSave}}">
+            <image src="https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/compare_vs.png" class="compare-vs"/>
+            次卡¥{{pack.perNightPrice}}/晚 比分开订省<text class="save-price">¥{{pack.priceDiff}}</text>
+            <view class="triangle"></view>
+        </view>
+    </view>
+</template>

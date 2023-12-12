@@ -1,0 +1,21 @@
+<template name="liveMessageGift">
+	<block wx:for="{{topMessageGift}}">
+		<block wx:if="{{item.message && item.message.liveMessage}}">
+		<view class="gift-messageitem {{item.message.show ? 'on': 'hide'}} " style="bottom: {{index == 1 ? '96rpx': '0'}}">
+		<view class="gift-messageLeft">
+			<image class="gift-headView" src="{{item.message.liveMessage.presentUserImg || 'https://pages.c-ctrip.com/you/livestream/ic_zero_420_420.png'}}" />
+			<view class="gift-userinfo">
+				<view class="g-name">{{item.message.nickName}}</view>
+				<view class="g-giftname">送{{item.message.liveMessage.presentName}}</view>
+			</view>
+			<image class="gift-pic" src="{{item.message.liveMessage.presentImg || 'https://pages.c-ctrip.com/you/livestream/ic_zero_420_420.png'}}" />
+		</view>
+		<!-- <block wx:if="{{item.message.liveMessage.presentCount > 1}}"> -->
+		<view class="gift-combox">X</view>
+		<view class="gift-combonumber">{{item.message.liveMessage.presentCount}}</view>
+		<!-- </block> -->
+		</view>
+		</block>
+	
+	</block>
+</template>

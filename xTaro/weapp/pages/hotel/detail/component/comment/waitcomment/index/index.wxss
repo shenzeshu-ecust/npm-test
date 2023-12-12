@@ -1,0 +1,65 @@
+@import '../../../../../common/common.wxss';
+.waitcomment-info {
+    margin: 32rpx 24rpx 37rpx;
+    background: #ffffff;
+    box-shadow: 0rpx 0rpx 16rpx 1rpx rgba(0, 0, 0, 0.08);
+    border-radius: 16rpx;
+    padding: 20rpx 0rpx 32rpx 0rpx;
+    position: relative;
+}
+.encourage-info {
+    font-size: 26rpx;
+    color: #111111;
+    font-weight: 600;
+    font-family: PingFangSC-Medium;
+    padding-left: 24rpx;
+    margin-bottom: 24rpx;
+}
+.encourage-info .encourage-score {
+    background: #fff8f2;
+    border-radius: 27rpx;
+    display: inline-block;
+    font-size: 24rpx;
+    color: #FF5500;
+    font-weight: 500;
+    padding: 8rpx 18rpx 8rpx 22rpx;
+}
+.encourage-score image {
+    vertical-align: middle;
+}
+.encourage-icon {
+    width: 32rpx;
+    height: 32rpx;
+    margin-left: 8rpx;
+}
+.rating-box {
+    display: flex;
+    align-items: center;
+    margin-left: 70rpx;
+    font-size: 24rpx;
+    color: #666;
+}
+.rating-box .rating-icon {
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 28rpx;
+}
+.rating-box .rating-icon:last-of-type {
+    margin-right: 0;
+}
+.left-desc {
+    margin-right: 32rpx;
+}
+.right-desc {
+    margin-left: 32rpx;
+}
+.close-icon {
+    position: absolute;
+    top: 19rpx;
+    right: 19rpx;
+    color: #aaa;
+    height: 40rpx;
+    width: 40rpx;
+    font-size: 19rpx;
+    text-align: center;
+}

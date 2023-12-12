@@ -1,0 +1,11 @@
+<view wx:if="{{loadSuccess}}">
+  <detail-header-compt wx:if="{{trainCardInfo && trainCardInfo.isShowHeader}}" cardStatus="{{trainCardInfo.orderStatusName}}" detailUrl="{{trainCardInfo.orderDetailUrl}}" actionCode="c_train_detail_order_detail_click"></detail-header-compt>
+  <train-compt trainCardInfo="{{trainCardInfo}}" bindshowStopStationLayer="showStopStationLayerEventListener" isShowDialog="{{isShowDialog}}"></train-compt>
+  <bottom-options wx:if="{{trainCardInfo && trainCardInfo.isFixed}}" smart-trip-id="{{trainCardInfo.smartTripId}}" theme="1" />
+</view>
+
+<loading-fail wx:if="{{!loadSuccess && isLoadCompleted}}" />
+
+<!-- 白屏检测 -->
+<!-- viewReadyHandle为框架提供、实现 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

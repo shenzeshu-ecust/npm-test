@@ -1,0 +1,61 @@
+@import "../../../../common/css/common.wxss";
+@import "../../icon.wxss";
+
+.cut-btn {
+    border: none !important;
+    overflow: visible;
+}
+
+.btn-txt {
+    color: #aa4c00;
+    font-size: 48rpx;
+    font-weight: 700;
+    margin-bottom: 4rpx;
+}
+
+.sub-title {
+    color: #fff;
+    text-align: center;
+    margin: 20rpx 0;
+    padding: 0 84rpx;
+    font-size: 28rpx;
+    font-weight: 400;
+}
+
+@keyframes shake {
+    0% {
+        transform:scale(0.95)
+    }
+    50% {
+        transform:scale(1)
+    }
+    100% {
+        transform:scale(0.95)
+    }
+}
+
+.shake {animation: shake 0.9s ease-in-out infinite;}
+
+.assist-bubble {
+    position: absolute;
+    background: #FFA50A;
+    color: #fff;
+    font-size: 24rpx;
+    padding: 8rpx 16rpx;
+    border-radius: 20rpx;
+    right: 30rpx;
+    top: -20rpx;
+    line-height: 1;
+}
+
+.assist-bubble::after {
+    content: "";
+    width: 0;
+    height: 0;
+    left: 40rpx;
+    top: 95%;
+    position: absolute;
+    border-width: 8rpx 15rpx 8rpx 15rpx;
+    border-style: solid;
+    border-color: #FFA50A transparent transparent #FFA50A;
+}

@@ -1,0 +1,23 @@
+<!-- 注意，这个组件必须放在顶层，需要把 z-index 设置得非常大 , BU 使用时不能有比他层级还高的元素 -->
+<!-- 测试是否有自动滚动到顶部的问题 -->
+<!-- 解决滚动穿透 -->
+<!-- 方案1 已放弃：因为有使用限制，必须把这个元素置于顶部 https://developers.weixin.qq.com/community/develop/article/doc/000886e3d182a8c8d00ca216e5fc13 -->
+<view class="perInfoProtectFloat" wx:if="{{show}}">
+  <view class="pop">
+      <view class="float-wrapper">
+        <view class="title">个人信息保护指引</view>
+        <view class="content" bindtap="navToUrl">
+          <view class="paragraph" wx:for="{{descList}}" wx:for-item="pItem">
+            <block wx:for="{{pItem}}" wx:for-item="tItem">
+              <text class="{{tItem.url ? 'link' : ''}}" data-url="{{tItem.url}}">{{tItem.text}}</text>
+            </block>
+          </view>
+        </view>
+        <view class="btns">
+          <button class="agree" bindtap="handleAgree">同意并继续</button>
+          <button class="reject" bindtap="handleReject">{{rejectBtnText}}</button>
+        </view>
+      </view>
+  </view>
+  <view class="bg" catchtouchmove="true"></view>
+</view>

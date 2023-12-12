@@ -1,0 +1,432 @@
+@import '../common/css/common.wxss';
+/* icon */
+@font-face {font-family: 'iconfont';
+    src:url('data:;base64,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') format('truetype');
+    font-weight: normal;
+}
+.iconfont {
+    font-family:"iconfont" !important;
+    font-size:32rpx;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    /* -webkit-text-stroke-width: 0.2rpx; */
+    -moz-osx-font-smoothing: grayscale;
+    display: inline;
+}
+
+.icon-drop-down::after{content: "\E945"}
+.icon-drop-up::after{content: "\E946"}
+.icon-back::after{content: "\E943"}
+.icon-forword::after{content: "\E944"}
+.icon-warn::after{content: "\E664";color:#F5190A;font-size: 22rpx;padding-right: 8rpx;}
+.icon-closed::after{content: "\E6a8";color: #ddd;font-size:32rpx; }
+.icon-closed{align-self: flex-start;}
+.icon-selected::after{content: "\E93d";}
+.pd1{padding:0 30rpx;}
+.bold{font-weight: bold;}
+.icon-empty{margin-right: 92rpx;}
+.icon-empty{margin-right: 84rpx;}
+
+/* 公共font + color*/
+.ft24{font-size: 24rpx}
+.c1{color:#0086F6 ;}
+
+/* header */
+page{background: #F4F4F5;position: relative;}
+.c-invoice{background: #F4F4F5 url("https://pages.c-ctrip.com/hotels/h5/img/cinvoice/cinvoice-header-bg.png") 0 0% no-repeat; background-size:contain; width: 100%}
+.c-invo-header{display: flex; height: 140rpx; justify-content: space-between;align-items:flex-end;padding:0 24rpx 0 32rpx;}
+.c-invo-header .desc{font-size:40rpx;color: #FFFFFF;font-weight: 500; line-height: 140rpx;}
+.ico-invoice{display: inline-block;background: url(https://pages.c-ctrip.com/hotels/h5/img/cinvoice/cinvoice-header-icon.png) no-repeat center center;width: 94rpx;height: 82rpx;background-size: 94rpx 82rpx;}
+/* content */
+.c-invo-wrap{margin: 0 24rpx;background:#fff;border-radius:8rpx; box-shadow: 0 4rpx 16rpx 1rpx rgba(0, 0, 0, 0.06);}
+.c-invo-wrap .item{margin-left:26rpx;margin-right:26rpx;min-height: 96rpx;line-height: 96rpx;border-width: 0 0 1rpx 0;border-style: solid; border-color: #ddd; border-image: url('data:image/gif;base64,R0lGODlhBQAFAIABAN3d3f///yH5BAEAAAEALAAAAAAFAAUAAAIHhB9pGatnCgA7') 2 stretch;-webkit-box-align: center; -webkit-align-items: center; align-items: center;}
+.c-invo-wrap .item{display: -webkit-box; display: -webkit-flex; display: flex;}
+.c-invo-wrap .item .subitem-title{width:160rpx;color: #666;font-size: 28rpx;align-self: flex-start;}
+.c-invo-wrap .item .c-start{
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+.c-invo-wrap .item .txt{position: relative;height: 78rpx;padding:0;font-size: 28rpx;color: #333;}
+.c-invo-wrap .item .c-invo-warning{color:#F5190A;font-size: 20rpx;height:50rpx;line-height: 50rpx;}
+.c-invo-wrap .more-cinvo-info{font-size: 28rpx;color:#0086F6; text-align: center; height: 96rpx; line-height: 96rpx;}
+.c-invo-wrap .error-icon{height:60rpx;line-height: 40rpx;border: 1px solid red;border-width: 0 0 1px 0;}
+.title-item .pd1 {
+    padding-right: 24rpx;
+}
+.title-item .icon-empty{margin-right: 56rpx;}
+.title-item .icon-forword {
+    color:#999;
+}
+/* tab */
+.c-invo-wrap .item .c-start.tabs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 32rpx 0;
+}
+
+.c-invo-wrap .item .c-start .card{
+    border:1rpx solid #0086F6;
+    color: #0086F6;
+    font-size: 28rpx;
+    border-radius: 28rpx;
+    line-height: 56rpx;
+    width: 200rpx;
+    text-align: center;
+    margin:0 10px;
+}
+.c-invo-wrap .item .c-start .card.current{background:#0086F6;color:#fff;}
+
+
+/* 联想框 */
+.c-search-wrap{max-height: 354rpx;position: absolute; width: 90.5%; z-index: 999;background: #fff; border-radius: 8rpx;box-shadow: 0rpx 0rpx 16rpx 2rpx rgba(51, 51, 51, 0.2);padding-right:24rpx;overflow-y: scroll;}
+.c-search-wrap .c-start{line-height: 40rpx;} 
+.c-search-wrap .end{font-size: 24rpx;color: #999;padding-left: 20rpx;}
+.c-search-wrap .end-close{width: 36rpx; text-align: right;}
+.c-search-wrap  .item-history text {line-height: 90rpx;}
+
+/* bottom buttom */
+.c-invo-support{background: url("https://pages.c-ctrip.com/hotels/h5/img/cinvoice/cinvoice-bottom-ad.png") center center no-repeat; background-size:contain;height:37rpx;vertical-align: middle;margin-top:190rpx;margin-bottom: 170rpx;width: 100%;}
+.c-invo-support-long{margin-top: 65rpx;}
+.c-invo-btn{position: fixed;left:0rpx;right:0rpx;bottom:0rpx;padding:30rpx 40rpx 32rpx;background-color: #fff;z-index: 101; }
+.c-invo-btndesc{color:#fff;background: #0086F6;border-radius: 44rpx;height: 88rpx;line-height: 88rpx;text-align: center;font-weight: 500;font-size: 34rpx;}
+
+
+
+/* 发票成功页 */
+.c-succ-header{background-image: linear-gradient(90deg, #00A7FA 0%, #0076F5 100%); height:379rpx;text-align: center;}
+.c-succ-header .icon{display:block;padding-top: 48rpx;padding-bottom: 24rpx;color: #fff;font-size: 100rpx;}
+.c-succ-info{font-size: 30rpx;color:#fff;display: block;}
+.c-succ-wrap{margin: -130rpx 24rpx 0;min-height:200rpx;background:#fff;border-radius:8rpx; box-shadow: 0 4rpx 16rpx 1rpx rgba(0, 0, 0, 0.06);}
+.c-succ-wrap .item{padding:32rpx 32rpx 24rpx;border-width: 0 0 1rpx 0;border-style: solid; border-color: #eee;}
+.c-succ-wrap .item .subitem .title{font-size: 28rpx;color: #666;padding-right: 24rpx;}
+.c-succ-wrap .item .subitem .desc{font-size: 30rpx;color: #333; }
+.c-succ-wrap .item .subitem {padding-bottom: 24rpx;}
+
+/* 优惠券 */
+.coupons-wrapper {
+    margin: 30rpx 24rpx;
+    padding-bottom: 12rpx;
+    background: #fff;
+    position: relative;
+    border-radius: 8rpx;
+}
+.coupons-wrapper .coupons-title {
+    background: url('https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/coupon-title.png');
+    height: 71rpx;
+    width: 100%;
+    background-size: cover;
+    color: #fff;
+    font-size: 28rpx;
+    font-weight: 600;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+}
+.coupons-wrapper .coupons-hint {
+    color: #333;
+    font-size: 24rpx;
+    text-align: center;
+    padding: 20rpx 0;
+    font-weight: 200;
+}
+.coupons-wrapper .coupon-item {
+  padding: 10rpx 0;
+}
+.coupons-wrapper .coupon {
+    background-image: url('https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/coupon.png');
+    background-size: cover;
+    display: flex;
+    justify-content:start;
+    align-items:center;
+    width: 606rpx;
+    height: 140rpx;
+    margin: 0 auto;
+    position: relative;
+    text-align:center;
+}
+.coupons-wrapper .coupon-got {
+    background-image: url('https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/coupon_got.png');
+}
+.coupons-wrapper .coupon view{
+  background: transparent;
+}
+.coupons-wrapper .coupon .cp-tip {
+    position: absolute;
+    font-size: 24rpx;
+    color:#fff;
+    top:12rpx;
+    left:32rpx
+}
+.coupons-wrapper .coupon .left {
+  color: #fff;
+  font-size: 24rpx;
+  width: 152rpx;
+}
+.coupons-wrapper .coupon .left text {
+  font-size: 50rpx;
+  font-weight: 600;
+}
+.coupons-wrapper .coupon .right {
+  width: 324rpx;
+}
+.coupons-wrapper .coupon .right view{
+  text-align: left;
+  padding-left: 24rpx;
+}
+.coupons-wrapper .coupon .right .cp-name {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #333;
+}
+.coupons-wrapper .coupon .right .cp-time {
+  font-size: 18rpx;
+  font-weight: 400;
+  color: #333;
+}
+.coupons-wrapper .coupon .cp-btn {
+    border: 2rpx solid #FF6913;
+    color: #FF6913;
+    font-size: 24rpx;
+    border-radius: 100rpx;
+    width: 128rpx;
+    line-height: 40rpx;
+    position: absolute;
+    display: block;
+    right: 24rpx;
+}
+
+.yoyo-card-wrapper {
+  padding: 0 26rpx 30rpx;
+}
+
+.yoyo-card-bg {
+  margin-bottom: 32rpx;
+  background-size: cover;
+  width: 100%;
+  height: 340rpx;
+  position: relative;
+  padding: 250rpx 67rpx 0;
+  box-sizing: border-box;
+}
+
+.yoyo-card-btn {
+  width: 100%;
+  background: linear-gradient(90deg, rgb(255, 198, 68) 0%, rgb(223, 129, 15) 100%);
+  border-radius: 48rpx 48rpx 48rpx 48rpx;
+  height: 80rpx;
+  color: #FFF;
+  font-size: 32rpx;
+  font-weight: 600;
+  border: none;
+  margin-bottom: 24rpx;
+}
+
+.yoyo-card-sub-btn {
+  font-size: 32rpx;
+  font-weight: 600;
+  height: 42rpx;
+  color: #6d4e1b;
+  text-align: center;
+  padding-left: 20rpx;
+}
+
+.c-succ-header-new {
+  background-color: #fff8f2;
+}
+
+.invoice-bg {
+  background-image: url(https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/cinvoice_bg.png);
+  height: 908rpx;
+  background-size: 100% 908rpx;
+  position: absolute;
+  top: 0;
+  padding-top: 200rpx;
+  box-sizing: border-box;
+}
+
+/* alert style */
+.mask {
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.7);
+  position:fixed;
+  top:0;
+  left:0;
+  z-index: 10;
+}
+
+.invoice-alert {
+  background: #fff;
+  border-radius: 8rpx;
+  width: 702rpx;
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  z-index:1001;
+}
+.invoice-alert .title {
+  font-size: 30rpx;
+  font-weight: 600;
+  padding: 40rpx 32rpx 24rpx 32rpx;
+  color: #333;
+  border-bottom: 1px solid #eeeeee;
+}
+.invoice-alert .invoice-body {
+  padding: 32rpx;
+}
+.close {
+  background-image:url('https://pages.c-ctrip.com/hotels/wechat/market/smz/wifi/close.png');
+}
+.invoice-alert .invoice-close {
+  width: 76rpx;
+  height: 76rpx;
+  background-size: cover;
+  position: absolute;
+  bottom: -116rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.detail-wrap {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 24rpx;
+}
+.invoice-title {
+  color: #666666;
+  font-size: 28rpx;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+  line-height: 36rpx;
+}
+.invoice-detail {
+  color: #333333;
+  font-size: 30rpx;
+  line-height: 36rpx;
+}
+.c-succ-header-new-yoyo {
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 26rpx;
+  margin-bottom: 20rpx;
+}
+.c-succ-header-new-yoyo .success-desc{
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #2470b0;
+}
+.invoice-btn {
+  background: #2470b0;
+  border-radius: 32rpx;
+  height: 40rpx;
+  width: 115rpx;
+  font-size: 20rpx;
+  color: #ffffff;
+  opacity: 0.8;
+  line-height: 40rpx;
+  text-align: center;  
+}
+.yoyocard-rights-wrapper {
+  display: flex;
+  width: 564rpx;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.yoyocard-rights {
+  display: flex;
+  align-items: center;
+}
+.yoyocard-rights-icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 4rpx;
+}
+.yoyocard-rights-text {
+  color: #6d4e1b;
+  font-size: 26rpx;
+  font-weight: 500;
+}
+.custom-navigation-left .back-icon {
+  font-weight: 700;
+}
+.reserve-wrapper {
+  background-color: #fff;
+  padding: 32rpx 20rpx;
+  margin: 0 26rpx 32rpx;
+  border-radius: 20rpx;
+}
+.reserve-title {
+  color: #333333;
+  font-size: 28rpx;
+  font-weight: 700;
+  margin-left: 20rpx;
+}
+.reserve-item  {
+  background: #f6fbff;
+  border-radius: 20rpx;
+  padding: 16rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 16rpx;
+}
+.reserve-way {
+  color: #333;
+  font-size: 20rpx;
+}
+.reserve-remark {
+  color: #666;
+  font-size: 24rpx;
+}
+.reserve-item-title {
+  color: #333;
+  font-weight: 700;
+  font-size: 24rpx;
+}
+.reserve-qrcode {
+  border: 4rpx solid #67b9ff;
+  width: 136rpx;
+  height: 136rpx;
+  padding: 4rpx;
+  box-sizing: border-box;
+}
+.reserve-qrcode image {
+  width: 100%;
+  height: 100%;
+}
+.reserve-call button {
+  background: #2698f7;
+  border-radius: 8rpx;
+  color: #fff;
+  font-size: 24rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  width: 128rpx;
+  padding: 0;
+}
+.reserve-call button::after {
+  border: none;
+}
+.phone-reserve {
+  align-items: center;
+}
+.wechat-font-success {
+  margin-right: 8rpx;
+  display: inline-flex;
+  color: #2470b0;
+}
+.only-phone-wrapper {
+  padding: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 26rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  margin-bottom: 32rpx;
+}

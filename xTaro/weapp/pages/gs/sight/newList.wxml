@@ -1,0 +1,64 @@
+<!--pages/sight/list.wxml-->
+<import src="../template/loadingMore.wxml" />
+<import src="../template/stars.wxml" />
+<scroll-view scroll-y="true" bindscrolltolower="scrollToLower" style='height:100%;flex:1;display:flex;width:100%;' lower-threshold="200">
+  <view class="bg">
+    <!--景点列表-->
+    <block wx:if="{{sightList.length>0}}">
+      <view class='sight_list_bg'>
+        <block wx:for="{{sightList}}" wx:key="{{index}}">
+          <view class='sight_list_item rfsc' bindtap="goSightDetail" data-id="{{item.id}}">
+            <!--左侧图片-->
+            <view class='sight_list_item_img_bg'>
+              <image src="{{item.coverImageUrl}}" mode="scaleToFill" class="sight_list_img" />
+            </view>
+            <!--右侧内容-->
+            <view class='sight_list_item_info cfsfs'>
+              <view class='sight_item_info_title_bg'>
+                <text class='sight_item_info_title_text'>{{item.name}}</text>
+              </view>
+              <!--点评-->
+              <view class='sight_item_info_comment_bg rfsc'>
+                <text class='sight_item_info_score' wx:if="{{item.commentScore!='-1'}}">{{item.commentScore+'分'}}</text>
+                <text class='sight_item_info_num' wx:if="{{item.commentCount!='-1'}}">{{item.commentCount+'条点评'}}</text>
+              </view>
+              <view class='sight_item_info_label_bg rsbc'>
+                <!--标签-->
+                <view class='sight_item_info_label_tag_bg rfsc'>
+                  <block wx:for="{{item.tagNameList}}" wx:key="{{index}}">
+                    <view class='sight_item_info_label_tag_b_bg sight_item_info_label_tag_item rcc'>
+                      <text class='sight_item_info_label_tag_b_text'>{{item}}</text>
+                    </view>
+                  </block>
+                </view>
+              </view>
+              <!--距离您多少米-->
+              <view class="sight_item_info_foot_bg rsbfe">
+                <view class='sight_item_info_foot_distance'>
+                  <text class='sight_item_info_foot_distance_text'>{{item.distanceStr}}</text>
+                </view>
+                <block wx:if="{{item.priceProductType==1&&!!item.displayMinPrice && item.displayMinPrice>0}}">
+                  <view class='sight_item_info_foot_price rfefe'>
+                    <text class='sight_item_info_foot_price_text'>￥</text>
+                    <text class='sight_item_info_foot_price_text' style='font-size: 40rpx;line-height:36rpx;padding-right:4rpx;'> {{item.displayMinPrice}}</text>
+                    <text class='sight_item_info_foot_price_text'>起</text>
+                  </view>
+                </block>
+                <view class='sight_item_info_foot_price rfefe' wx:elif="{{item.displayMinPrice == 0}}">
+                  免费
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+        <block wx:if="{{sightList.length>0}}">
+          <template is="loadingMore" data="{{loadMoreFailed: loadMoreFailed, hasNextPage: hasNextPage}}" />
+        </block>
+      </view>
+    </block>
+  </view>
+</scroll-view>
+
+<block wx:if="{{isIphoneX}}">
+  <view class="iphoneX-fixed"></view>
+</block>

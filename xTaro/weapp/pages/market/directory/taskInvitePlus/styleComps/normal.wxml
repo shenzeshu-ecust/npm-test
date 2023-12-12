@@ -1,0 +1,21 @@
+<view wx:if="{{taskItem}}" class="invitePlus__normal" style="background-image: url({{legaoInfo.bgImage}});background-color: {{legaoInfo.bgColor}};">
+  <view class="invitePlus__normal__title">{{taskItem.displayName}}</view>
+
+  <view class="invitePlus__normal__avatat-wraper">
+    <block wx:for="{{taskItem.itemList}}">
+      <avatar class="invitePlus__normal__avatar" 
+        item="{{item}}" 
+        legaoInfo="{{legaoInfo}}" 
+        index="{{index}}"
+        bind:clickAvatar="handleClickAvatar"
+        bind:clickSmallAward="handleClickSmallAward"
+      />
+    </block>
+  </view>
+
+  <taskBtn 
+    taskItem="{{taskItem}}"
+    legaoInfo="{{legaoInfo}}"
+    bind:clickBtn="clickBtn"
+  />
+</view>

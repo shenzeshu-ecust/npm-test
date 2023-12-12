@@ -1,0 +1,654 @@
+page {
+  background-image: linear-gradient(-180deg, rgb(62, 195, 255) 30%, rgb(34, 143, 243) 100%);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.page-container {
+    width: 100%;
+    overflow-x: hidden;
+}
+.page-pop-container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.success-modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.banner-bg {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 750rpx;
+  height: 960rpx;
+}
+
+.test-button {
+    position: absolute;
+    z-index: 999;
+    height: 70rpx;
+    width: 300rpx;
+}
+
+.user-info-modal{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40vh;
+  background-color: white;
+  border-radius: 16rpx 16rpx 0 0;
+}
+
+.user-info-close{
+  position: absolute;
+  top: 2vh;
+  left: 4vw;
+  width: 40rpx;
+  height: 40rpx;
+  color: #fff;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  background: transparent;
+  border: none;
+  background-color: transparent;
+}
+
+.user-info-close-button{
+  width: 100%;
+  height: 100%;
+}
+
+.user-info-logo-image{
+  margin-right: 24rpx;
+  width: 56rpx;
+  height: 56rpx;
+}
+
+.user-info-title{
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  top: 8vh;
+  left: 5vw;
+}
+
+.user-info-welcome{
+  color: #333333;
+  font-family: PingFangSC-Medium;
+  font-size: 26rpx;
+  font-weight: 500;
+}
+
+.user-info-explain{
+  position: absolute;
+  left: 5vw;
+  top: 14vh;
+}
+
+.user-info-mainText{
+  color: #333333;
+  font-family: PingFangSC-Medium;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.user-info-detail{
+  position: absolute;
+  left: 5vw;
+  top: 19vh;
+}
+
+.user-info-smallText{
+  color: #999999;
+  font-family: PingFangSC-Regular;
+  font-size: 26rpx;
+  font-weight: normal;
+}
+
+.user-info-confirm{
+  position: absolute;
+  left: 5vw;
+  bottom: 8vh;
+}
+
+.user-info-confirm-button{
+  margin-right: 32rpx;
+  width: 686rpx;
+  height: 88rpx;
+  color: #fff;
+  padding: 0;
+  line-height: 88rpx;
+  background: transparent;
+  border: none;
+  border-radius: 12rpx;
+  background-color: #0086f6;
+}
+
+.success-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.success-modal .wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 654rpx;
+  height: 732rpx;
+  color: #fff;
+}
+
+.success-modal .new-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 662rpx;
+    height: 877rpx;
+    color: #fff;
+}
+
+.success-modal .bg-no-coupon{
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 100rpx;
+  width: 646rpx;
+  height: 534rpx;
+}
+
+.success-modal .bg{
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.button-box image {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.success-modal .title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40rpx;
+  font-size: 40rpx;
+  font-weight: 500;
+}
+.success-modal .nocoupon-title {
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 220rpx;
+    padding-left: 80rpx;
+    font-size: 40rpx;
+    font-weight: 500;
+}
+.success-modal .price {
+  align-self: start;
+  margin-left: 66rpx;
+  color: #FFFEAB;
+  font-size: 56rpx;
+  font-weight: 500;
+}
+.success-modal .no-coupon-price {
+  margin-top: 2rpx;
+  color: #FFFEAB;
+  font-size: 56rpx;
+  font-weight: 500;
+}
+.success-modal .share-tip {
+  font-size: 30rpx;
+  color: #FFF;
+}
+
+.success-modal .price .dfn {
+  margin-right: 2rpx;
+  font-size: 40rpx;
+  font-weight: normal;
+}
+
+.nocoupon-text{
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 34rpx;
+}
+.coupon-list {
+  padding-top: 45rpx;
+}
+.coupon-title {
+    align-self: flex-start;
+    margin-top: 77rpx;
+    margin-left: 66rpx;
+    font-size: 34rpx;
+    line-height: 48rpx;
+    color: #fff;
+}
+.coupon-title1 {
+  margin-top: 56rpx;
+  font-size: 34rpx;
+  line-height: 42rpx;
+  color: #fff;
+}
+.coupon-title2 {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  line-height: 30rpx;
+  color: #fff;
+}
+
+.coupon-desc {
+    text-align: left;
+    font-size: 26rpx;
+    font-weight: 300;
+}
+.coupon-subtitle {
+  margin-top: 8rpx;
+  font-size: 34rpx;
+  line-height: 42rpx;
+  color: #fff;
+}
+
+.coupon-wrapper {
+    position: relative;
+    margin-top: 16rpx;
+    margin-bottom: 41rpx;
+    height: 366rpx;
+}
+.coupon-list-container {
+    height: 366rpx;
+    overflow: scroll;
+}
+.coupon-linear-gradient {
+    position: absolute;
+    bottom: 0rpx;
+    height: 24rpx;
+    width: 100%;
+    opacity: 0.32;
+    background-image: linear-gradient(180deg, rgba(239,60,48,0) 0%, rgba(239,60,48,1) 100%);
+}
+.coupon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 526rpx;
+  height: 124rpx;
+  margin-bottom: 16rpx;
+  background: url("https://pic.c-ctrip.com/AssetCatalog/wx/bargainActivity/pop_counpon.png");
+  background-size: 526rpx 124rpx;
+  color: #333;
+}
+.coupon-info {
+  flex: 1;
+  padding-left: 32rpx;
+  color: #333;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+.coupon .validity {
+  display: block;
+  margin-top: 4rpx;
+  color: #999;
+  font-size: 24rpx;
+  font-weight: 300;
+}
+.coupon-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 172rpx;
+  color: #f60;
+  font-size: 24rpx;
+  font-weight: 300;
+}
+.coupon-type .amount {
+  font-size: 44rpx;
+  font-weight: 500;
+}
+.coupon-type .amount .dfn {
+  margin-right: 2rpx;
+  font-size: 34rpx;
+  font-weight: normal;
+}
+.button-box {
+  position: relative;
+  width: 550rpx;
+  height: 123rpx;
+  margin-bottom: 48rpx;
+}
+.button-box .btn {
+  margin-top: 5rpx;
+  width: 550rpx;
+  height: 100rpx;
+  color: #fff;
+  font-size: 40rpx;
+  line-height: 100rpx;
+  background: transparent;
+  border: none;
+  background-color: transparent;
+}
+.button-box .btn:after {
+  border: none;
+}
+
+.get-coupon-button-box {
+    position: relative;
+    margin-top: 166rpx;
+    width: 208rpx;
+    height: 208rpx;
+  }
+  .get-coupon-button-box .btn {
+    width: 208rpx;
+    height: 208rpx;
+    border-radius: 104rpx;
+    background: transparent;
+    border: none;
+    background-color: transparent;
+  }
+  .get-coupon-button-box .btn:after {
+    border: none;
+  }
+
+  .bottom-container {
+      position: relative;
+      height: 30rpx;
+      margin-top: 64rpx;
+      font-size: 24rpx;
+      font-weight: 300;
+      color: #FFE7A0;
+  }
+
+  .history-title {
+    margin-top: 331rpx;
+    font-size: 36rpx;
+    color: #fff;
+    line-height: 42rpx;
+}
+
+.history-subtitle {
+    margin-top: 12rpx;
+    font-size: 36rpx;
+    color: #fff;
+    margin-bottom: 73rpx;
+    line-height: 42rpx;
+}
+
+.history-button-box image {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+.history-button-box {
+    position: relative;
+    width: 534rpx;
+    height: 122rpx;
+}
+
+.history-button-box .btn {
+    width: 100%;
+    height: 108rpx;
+    color: #a43d10;
+    font-weight: 600;
+    font-size: 40rpx;
+    background: transparent;
+    border: none;
+  }
+  .history-button-box .btn:after {
+    border: none;
+  }
+
+  .bargain-close-btn {
+    margin-top: 60rpx;
+    height: 60rpx;
+    width: 60rpx;
+  }
+
+  .close-btn {
+      margin-top: 88rpx;
+      height: 60rpx;
+      width: 60rpx;
+  }
+  .close-btn-image {
+    height: 60rpx;
+    width: 60rpx;
+  }
+
+.nocoupon-button-box image {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+.nocoupon-button-box {
+    position: relative;
+    width: 510rpx;
+    height: 117rpx;
+    margin-bottom: 160rpx;
+}
+
+.nocoupon-button-box .btn {
+    width: 100%;
+    height: 100%;
+    color: #a43d10;
+    font-weight: 600;
+    font-size: 40rpx;
+    background: transparent;
+    border: none;
+  }
+  .nocoupon-button-box .btn:after {
+    border: none;
+  }
+
+
+
+.rule-details-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.rule-details-modal .wrapper {
+  margin: 100rpx;
+  padding: 50rpx;
+  border-radius: 16rpx;
+  background-color: #FFF;
+}
+.rule-details-modal .title-text {
+  display: block;
+  margin-top: 50rpx;
+  margin-bottom: 20rpx;
+  color: #333;
+  font-size: 40rpx;
+  font-weight: 500;
+  text-align: center;
+}
+.rule-details-modal .content-text {
+  display: block;
+  color: #333;
+  font-size: 30rpx;
+}
+
+.rule-details-modal .content-text {
+  margin-top: 4rpx;
+  font-size: 24rpx;
+  font-weight: 300;
+}
+.rule-details-modal .btn {
+  margin-top: 40rpx;
+  width: 480rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 8rpx;
+  color: #FFF;
+  font-size: 30rpx;
+  text-align: center;
+  background-color: #FF5E28;
+}
+.rule-details-modal .btn:after {
+  border: none;
+}
+.rule-details-modal .hover-btn {
+  background-color: #548B6B;
+}
+.rule-details-btn {
+  position: absolute;
+  right: 0;
+  top: 34rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48rpx;
+  padding: 0 12rpx 0 20rpx;
+  color: #0079bf;
+  font-size: 24rpx;
+  font-weight: 500;
+  background: linear-gradient(-180deg, rgb(179, 224, 255) 0%, rgb(109, 204, 255) 100%);
+  border-top-left-radius: 24rpx;
+  border-bottom-left-radius: 24rpx;
+}
+
+.bargain-container-modal {
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bargain-container-modal-mask {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.7);
+}
+
+.bargain-container-modal-content {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.pop-modal {
+  position: fixed;
+  height: 148rpx;
+  width: 150rpx;
+  right: 8rpx;
+  bottom: 344rpx;
+  z-index: 99;
+}
+
+.modal-bottom {
+  position: absolute;
+  bottom: 0rpx;
+  right: 0rpx;
+  height: 86rpx;
+  width: 129rpx;
+  z-index: 100
+}
+
+.modal-top {
+  position: absolute;
+  bottom: 40rpx;
+  right: -10rpx;
+  height: 93rpx;
+  width: 140rpx;
+}
+
+.modal-top-left {
+  position: absolute;
+  top: 36rpx;
+  left: 22rpx;
+  height: 27rpx;
+  width: 29rpx;
+}
+
+.modal-left-ball {
+  position: absolute;
+  top: 20rpx;
+  left: 38rpx;
+  height: 22rpx;
+  width: 22rpx;
+  z-index: 100;
+}
+
+.modal-right-ball {
+  position: absolute;
+  top: 30rpx;
+  right: 14rpx;
+  height: 13rpx;
+  width: 20rpx;
+  z-index: 100;
+}
+
+.modal-top-right{
+  position: absolute;
+  top: 40rpx;
+  right: 4rpx;
+  height: 17rpx;
+  width: 18rpx;
+  z-index: 100;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: -10rpx;
+  right: -5rpx;
+  width: 34rpx;
+  height: 34rpx;
+  padding: 0;
+  background-color: transparent;
+  line-height: unset;
+  z-index: 101;
+}
+
+.modal-close {
+  width: 100%;
+  height: 100%
+}
+
+.btnnew {
+  width: 100%;
+  height: 100%;
+  color: #fff!important;
+  font-size: 42rpx;
+  background: transparent!important;
+  border: none;
+}

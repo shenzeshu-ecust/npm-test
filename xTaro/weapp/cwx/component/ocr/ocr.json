@@ -1,0 +1,8 @@
+{
+  "disableScroll": true,
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "authorizationFloat": "../authorizationFloat/index"
+  }
+}

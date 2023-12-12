@@ -1,0 +1,6 @@
+<view class="rating-box">
+    <block wx:for="{{ratingIconList}}" wx:for-item="ratingIconItem">
+        <image src="{{ratingIconItem}}" class="rating-icon" data-index="{{index}}" wx:for-index="index" bindtap="handleRatingIcon"></image>
+    </block>
+    <view class="desc">{{ratingDesc}}</view>
+</view>

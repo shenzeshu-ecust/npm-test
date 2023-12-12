@@ -1,0 +1,4 @@
+/* pages/cardShare/trainShare/trainShare.wxss */
+page {
+  background-color:#ffffff;
+}

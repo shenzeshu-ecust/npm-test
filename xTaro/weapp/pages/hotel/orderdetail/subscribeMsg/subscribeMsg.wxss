@@ -1,0 +1,50 @@
+@import '../../common/fac.wxss';
+@import '../../common/common.wxss';
+
+.subscribe-wrap {
+    padding:0 24rpx;
+    box-sizing: border-box;
+    background-color: #FFF8F2;
+    display: flex;
+    align-items: center;
+    color: #555555;
+    font-size: 24rpx;
+    line-height: 72rpx;
+    border-radius: 8rpx;
+}
+.subscribe-wrap.done{ color: #555555}
+.subscribe-wrap.hide{display: none;}
+.subscribe-wrap .icon-clock {
+    color: #ff7700;
+    margin-right: 16rpx;
+}
+.subscribe-wrap .wechat-font-book-notice {
+    transform: rotate(180deg);
+}
+.subscribe-wrap .tips{flex: 1;}
+.subscribe-wrap.done .tips{color: #555555;}
+.subscribe-wrap .btn-subscribe{
+    padding: 0 16rpx;
+    display: inline-block;
+    height: 44rpx;
+    line-height: 44rpx;
+    box-sizing: border-box;
+    font-size: 26rpx;
+    margin-left: 16rpx;
+    position: relative;
+}
+.subscribe-wrap .btn-subscribe:after {
+    content: '';
+    top: -1rpx;
+    left: -1rpx;
+    position: absolute;
+    width: 200%;
+    height: 88rpx;
+    line-height: 88rpx;
+    box-sizing: border-box;
+    border-radius: 16rpx;
+    border: 2rpx solid #555555;
+    transform: scale(0.5);
+    transform-origin: top left;
+}
+.subscribe-wrap.done .btn-subscribe{display:none; }

@@ -1,0 +1,45 @@
+@import '../common/common.wxss';
+@import '../common/hotellist.wxss';
+@import '../common/hotellistCommon.wxss';
+@import '../commontemplates/pricedetail/pricedetail.wxss';
+page {background-color:#f3f3f8;height:100%;}
+
+/*thead*/
+.my-path .thead {background-color:#fff;position:fixed; top:0; padding:20rpx 20rpx 10rpx 20rpx; width: calc(100% - 40rpx); z-index: 1001;}
+.my-path .cal-bar{box-shadow: 0 4px 16px 1px rgba(0,0,0,0.06); border-radius: 8px; height:76rpx; display: flex;justify-content: space-around; font-size: 28rpx; line-height: 76rpx;  color: #555555;align-items: center;padding: 0 20rpx;} .my-path .blue {color: #006FF6;}
+ .my-path .night{width: 76rpx; height:44rpx;border: 1px solid #EEEEEE; border-radius: 22px; margin:0 10rpx; line-height: 44rpx;text-align: center;}
+.my-path .filter-bar{margin-top: 10rpx; display:flex; }
+
+.filter-bar .scroll{ flex-wrap: nowrap; justify-content: flex-start; overflow: scroll; -webkit-overflow-scrolling: touch;align-items: flex-end;  }
+.filter-bar .item {flex-shrink: 0; text-align: center; padding: 12rpx 20rpx; position: relative; background: #F4F4F4; border-radius: 8rpx;color: #111111;font-size: 26rpx;line-height: 54rpx; padding:0 16rpx; margin: 10rpx 20rpx 10rpx 0;display: inline-block; height: 54rpx;}
+.filter-bar .item.current{background: #006FF6; color:#fff}
+.filter-bar .city-more{ width: 68px; background:#fff; line-height: 74rpx; height: 74rpx; font-size: 26rpx; display: flex; text-align:center; align-items: center;justify-content:center; position:relative; }
+.filter-bar .city-more::before{content: '';position: absolute; top: 0; bottom: 0; left: -.4rem; z-index: 1; width: .4rem; background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.05)); }
+.filter-bar .city-more .icon-more { margin-left: 4rpx;}
+.tab-view {width:420rpx;display:flex;margin:auto;position:relative}
+.filter-bar .flex-wrap{display:flex; flex-wrap: nowrap ; height:auto !important;}
+.scroll-view{ flex:1;width: calc(100% - 124rpx); overflow: scroll; }
+.filter-bar .scroll-view.unfold { height: 200rpx; }
+.spread{ white-space:normal}
+.nowrap{white-space: nowrap;}
+.filter-bar .items{ display: inline-block; }
+
+/*tbody*/
+.mp-text{font-size:24rpx;font-weight:300;padding:20rpx;height:72rpx;box-sizing:border-box;position:sticky;top:88rpx;z-index:11;background-color:#f3f3f8}
+.mp-tips {font-size:32rpx;font-weight:300;padding:20rpx;margin-top:400rpx;text-align:center}
+.mp-list {box-sizing:border-box;font-size:28rpx;}
+.list-bottom-no-more {display:flex; justify-content:center; align-items:center; padding: 70rpx 0 250px 0; font-size:24rpx;line-height:24rpx;color:#111111;font-weight:300;}
+
+.pa-tab {display: flex;font-size:28rpx; color: #006FF6; border: 2rpx solid #006FF6; border-radius: 8rpx;}
+.pa-tab .item { width:152rpx;  line-height: 54rpx;}
+.pa-tab .item.current {color: #fff; background-color: #006FF6;}
+
+/*.headfixed .thead{ position:fixed; top: 64px; }
+.headfixed-ipx .thead{ top: 84px;}
+.headfixed .tbody{padding-top: 96rpx;}
+.headfixed .tbody.pd{padding-top: 178rpx;}*/
+
+.my-path{ height: 100%;}
+.tbody {height:calc(100% - 214rpx); padding-top: 190rpx;}
+.tbody.iphone-x{height:calc(100%);}
+.headfixed-ipx .list-bottom-no-more{ padding-bottom: 600rpx}

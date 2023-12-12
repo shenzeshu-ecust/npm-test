@@ -1,0 +1,28 @@
+<view class="wrap" bindtap="clickSubscribe" data-ubt-key="train_wx_subscribe_{{ubtKey}}" style="background: url({{bgUrl}});background-size:100% auto;background-repeat: no-repeat">
+    <view class="top-bar" style="padding-top: {{statusBarHeight}}px">
+        <view class="ifont-back" catch:tap="goBack"></view>
+    </view>
+    <!-- <button class="btn"></button> -->
+    <view class="btn"><image src="{{btnUrl}}" class="img" mode="widthFix"></image></view>
+</view>
+
+<block wx:if="{{showType == 'success'}}">
+    <view class="blackmask"></view>
+    <view class="pop-mid pop-model">
+        <view class="pop-model-bd">
+            <view class="txt">订阅成功</view>
+        </view>
+
+        <!-- 小程序中的内嵌H5 -->
+        <view class="pop-model-btn" wx:if="{{channel == 'h5' && from == 'mp'}}">
+            <button class="btn-submit" bindtap="backToPreviousInMp">返回活动</button>
+        </view>
+        <!-- app中的内嵌h5 或者 app页面 -->
+        <view class="pop-model-btn" wx:if="{{channel == 'h5' && from == 'app'}}">
+            <!-- <button class="btn-cancel" bindtap="hidePop">留在微信</button> -->
+            <button class="btn-submit" bindtap="backToPreviousApp" form-type="submit" open-type="launchApp" app-parameter="{{launchAPPUrl}}" binderror="launchAppError">返回APP</button>
+        </view>
+    </view>
+</block>
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

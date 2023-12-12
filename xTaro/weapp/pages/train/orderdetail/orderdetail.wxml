@@ -1,0 +1,11 @@
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+
+<view class="book-loading">
+    <view class="txt">正在为你生成订单详情，请耐心等待</view>
+    <view class="loading-bar">
+    <icon class="icon-loading"></icon>
+    </view>
+</view>
+
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

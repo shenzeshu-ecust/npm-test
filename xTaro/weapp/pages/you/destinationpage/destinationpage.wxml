@@ -1,0 +1,5 @@
+<block wx:if="{{!!options}}">
+        <Component-destination id="componentDestination" pageId="10650008566"  bind:toTraceSelectCity="toTraceSelectCity" options="{{options}}"></Component-destination>
+        <view class="view-check" bindanimationend="viewReadyHandle"></view>
+        <perinfo-protect-float></perinfo-protect-float>
+</block>

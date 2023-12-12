@@ -1,0 +1,20 @@
+<view class="{{className}}" style="{{cStyle}}">
+  <view wx:if="{{waterfallLeftList.length || waterfallRightList.length}}" class="wf-container">
+    <view wx:for="{{[1,2]}}" wx:for-item="itemName" wx:key="itemName" class="wf-item wf-item-2" id="{{itemName == 1 ? 'c-waterfallList-left' : 'c-waterfallList-right'}}">
+      
+      <block wx:for="{{itemName == 1 ? waterfallLeftList : waterfallRightList}}">
+        <view wx:key="id" class="wf-item-inner wf-item-left" >
+          <view class="itemimg"></view>
+          <view class="bottom-wrap">
+            <view class="bottom-ph-1"></view>
+            <view class="bottom-ph-1"></view>
+            <view class="bottom-ph-2-wrap">
+              <view class="circle"></view>
+              <view class="block"></view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

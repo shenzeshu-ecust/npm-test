@@ -1,0 +1,26 @@
+<template name="destinationTrainTicket">
+  <view class="destination-section destination-trainticket" wx:if="{{trainData.fromStationName}}" data-modulename="火车票">
+    <!-- destinationTrainTicket -->
+    <view class="destination-title destination-title-padding1">
+        <!-- 高铁动车 -->
+        <view class="trainticket-left">
+            <view class="trainticket-img" style="background: url({{trainData.icon ? trainData.icon : 'https://pages.c-ctrip.com/you/livestream/you-destination-hightrain.png'}});background-size: 100% 100%;"></view>
+            <view class="trainticket-info">
+                <view class="trainticket-des">
+                    {{trainData.fromStationName}}
+                    <!-- <text></text> -->
+                    <image src="{{trainData.iconUrl}}" style="width: {{trainData.iconWidth}}rpx;height: {{trainData.iconHeight}}rpx" />
+                    {{trainData.destStationName}}
+                </view>
+                <view class="trainticket-time">{{trainData.duration}}
+                    <!-- <text wx:if="{{trainData.trainCount}}">共{{trainData.trainCount}}个班次</text> -->
+                </view>
+            </view>
+        </view>
+        <view class="trainticket-right" bindtap="toBuyTrainTicket" data-ubttitle="火车票" data-ubtname="立即购票{{trainData.fromStationName}}到{{trainData.destStationName}}"  data-ticketschema="{{trainData.routeSchema}}">
+            <view class="trainticket-buy">立即购票</view>
+            <!-- <view class="trainticket-price" wx:if="{{trainData.price}}">¥{{trainData.price}}起</view> -->
+        </view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,28 @@
+.countDownText {
+    font-family: "PingFangSC-Regular";
+    font-size: 24rpx;
+    height: 54rpx;
+    line-height: 54rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    color: #ffffff;
+}
+.wordText {
+    font-size: 24rpx;
+    font-family: "PingFangSC-Regular";
+    margin:0 2rpx;
+}
+.numberText {
+    display: inline-block;
+    font-size: 24rpx;
+    font-family: "PingFangSC-Regular";
+    color: #ffffff;
+    text-align: center;
+    min-width: 33rpx;
+    height: 38rpx;
+    line-height: 38rpx;
+    opacity: 1;
+    border-radius: 2.2rpx;
+}

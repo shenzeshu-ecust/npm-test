@@ -1,0 +1,269 @@
+<view class='train-detail-container'>
+  <!-- 火车信息 -->
+  <view class='{{trainInfo.isShowHeader?"station-info":"station-info-for-nonorder"}}'>
+    <!-- 非抢票订单火车信息 -->
+    <block wx:if="{{!isGrabTicket && trainInfo}}">
+      <view class='common-line-view'>
+        <text class='station-text' wx:if="{{trainInfo.departureStationName}}">{{trainInfo.departureStationName}}</text>
+        <text class='station-text right' wx:if="{{trainInfo.arrivalStationName}}">{{trainInfo.arrivalStationName}}</text>
+      </view>
+      <view class="time-quantum">
+        <text class='time-quantum-text' wx:if="{{trainInfo.departureTime}}">{{trainInfo.departureTime}}</text>
+        <image class='train-icon' src='https://pages.c-ctrip.com/schedule/pic/wxxcx/icon_train_title.png'></image>
+        <text class='time-quantum-text right' wx:if="{{trainInfo.arrivalTime}}">{{trainInfo.arrivalTime}}</text>
+      </view>
+      <view class='date-quantum'>
+        <text class='date-quantum-text' wx:if="{{trainInfo.departureDate}}">{{trainInfo.departureDate}}</text>
+        <text class='date-quantum-text middle' wx:if="{{trainInfo.trainName}}">{{trainInfo.trainName}}</text>
+        <text class='date-quantum-text right' wx:if="{{trainInfo.arrivalDate}}">{{trainInfo.arrivalDate}}</text>
+      </view>
+    </block>
+
+    <!-- 抢票订单火车信息 -->
+    <block wx:if="{{isGrabTicket && trainInfo}}">
+      <view class='common-line-view' wx:if="{{isSingleTrain}}">
+        <text class='station-text' wx:if="{{trainInfo.departureStationName}}">{{trainInfo.departureStationName}}</text>
+        <text class='station-text middle' wx:if="{{trainInfo.grabTrainOrderInfo && trainInfo.grabTrainOrderInfo.buyingStatus}}">{{trainInfo.grabTrainOrderInfo.buyingStatus}}</text>
+        <text class='station-text right' wx:if="{{trainInfo.arrivalStationName}}">{{trainInfo.arrivalStationName}}</text>
+      </view>
+      <view class='common-line-view' wx:else>
+        <text class='station-text'>--</text>
+        <text class='station-text middle' wx:if="{{trainInfo.grabTrainOrderInfo && trainInfo.grabTrainOrderInfo.buyingStatus}}">{{trainInfo.grabTrainOrderInfo.buyingStatus}}</text>
+        <text class='station-text right'>--</text>
+      </view>
+
+      <view class="time-quantum" wx:if="{{isSingleTrain}}">
+        <text class='time-quantum-text' wx:if="{{trainInfo.departureTime}}">{{trainInfo.departureTime}}</text>
+        <image class='train-icon' src='https://pages.c-ctrip.com/schedule/pic/wxxcx/icon_train_title.png'></image>
+        <text class='time-quantum-text right' wx:if="{{trainInfo.arrivalTime}}">{{trainInfo.arrivalTime}}</text>
+      </view>
+      <view class="time-quantum" wx:else>
+        <text class='time-quantum-text' wx:if="{{trainInfo.departureCityName}}">{{trainInfo.departureCityName}}</text>
+        <image class='train-icon' src='https://pages.c-ctrip.com/schedule/pic/wxxcx/icon_train_title.png'></image>
+        <text class='time-quantum-text right' wx:if="{{trainInfo.arrivalCityName}}">{{trainInfo.arrivalCityName}}</text>
+      </view>
+    </block>
+
+  </view>
+
+  <!-- 非抢票订单乘客信息 -->
+  <block wx:if="{{!isGrabTicket && trainInfo.passengerList}}">
+    <view class='cutting-line'></view>
+    <view class='passenger-list'>
+      <image class='train-passenger-icon' src='../../images/icon_train_passenger.png'></image>
+      <view class='passenger-info-box'>
+        <view wx:for="{{trainInfo.passengerList}}" wx:key="" class='passenger-info'>
+          <text class='passenger-name' wx:if="{{item.passengerName}}">{{item.passengerName}}</text>
+          <text class='passenger-seat' wx:if="{{item.seatName || item.seatNo}}">{{item.seatName || ""}}{{item.seatNo || ""}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+  <!-- 抢票订单乘客信息 -->
+  <block wx:if="{{isGrabTicket && trainInfo.passengerList}}">
+    <view class='cutting-line'></view>
+    <view class='passenger-list'>
+      <view class='grab-train-passenger-icon-box'>
+        <image class='grab-train-passenger-icon' src='../../images/icon_train_passenger.png'></image>
+      </view>
+      <view class='grab-passenger-info'>
+        <block wx:for="{{trainInfo.passengerList}}" wx:key="">
+          <text class='passenger-name'>{{item.passengerName}}</text>
+        </block>
+      </view>
+    </view>
+  </block>
+
+  <!-- 车票信息 -->
+  <block wx:if="{{!isGrabTicket && trainInfo.isOrder}}">
+    <view class='cutting-line'></view>
+    <view class='check-port'>
+      <text class='check-port-label'>检票口/候车地点</text>
+      <text class='check-port-text'>{{trainInfo.ticketGates || "--"}}</text>
+    </view>
+    <view class='ticket-code'>
+      <text class='ticket-code-label'>取票号</text>
+      <text class='ticket-code-text'>{{trainInfo.ticketCode || "--"}}</text>
+    </view>
+  </block>
+
+  <!-- 抢票信息 -->
+  <block wx:if='{{isGrabTicket && trainInfo.grabTrainOrderInfo}}'>
+    <view class='cutting-line'></view>
+    <view class='grab-time' wx:if='{{isShowGrabTime}}'>
+      <text class='grab-time-label'>开抢时间</text>
+      <text class='grab-time-text'>{{grabTime || '--'}}</text>
+    </view>
+    <view wx:if='{{!isShowTrainNames}}' class='{{!isShowGrabTime ? "grab-train-date-no-grab-time": "grab-train-date-after-grab-time"}}'>
+      <text class='grab-train-number-label'>已选车次</text>
+      <text class='grab-train-number-text' wx:if='{{trainInfo.grabTrainOrderInfo.trainNames}}'>{{trainInfo.grabTrainOrderInfo.trainNames}}</text>
+      <text class='grab-train-number-text' wx:else>--</text>
+    </view>
+    <view class='{{!isShowGrabTime && isShowTrainNames ? "grab-train-date-no-grab-time": "grab-train-date-after-grab-time"}}'>
+      <text class='grab-train-date-label'>日期</text>
+      <text class='grab-train-date-text' wx:if='{{trainInfo.grabTrainOrderInfo.departureDates && trainInfo.grabTrainOrderInfo.departureDates!="00010101000000"}}'>{{trainInfo.grabTrainOrderInfo.departureDates}}</text>
+      <text class='grab-train-date-text' wx:else>--</text>
+    </view>
+    <view wx:if='{{isShowTrainNames}}' class='grab-train-number'>
+      <text class='grab-train-number-label'>车次</text>
+      <text class='grab-train-number-text' wx:if='{{trainInfo.grabTrainOrderInfo.trainNames}}'>{{trainInfo.grabTrainOrderInfo.trainNames}}</text>
+      <text class='grab-train-number-text' wx:else>--</text>
+    </view>
+    <view class='grab-seats'>
+      <text class='grab-seats-label'>坐席</text>
+      <text class='grab-seats-text' wx:if='{{trainInfo.grabTrainOrderInfo.seats}}'>{{trainInfo.grabTrainOrderInfo.seats}}</text>
+      <text class='grab-seats-text' wx:else>--</text>
+    </view>
+  </block>
+
+  <!-- 火车经停站点 -->
+  <block wx:if="{{!isGrabTicket && stopStationList && stopStationList.length>0}}">
+    <view class='cutting-line'></view>
+    <view class="stop-station" catchtap='onShowStopStation'>
+      <text class='stop-station-text'>经停站点</text>
+      <!-- 只有两站会显示的样式 -->
+      <block wx:if="{{stopStationList.length === 2}}">
+        <view class='stop-station-map'>
+          <view class='stop-station-map-pole'>
+            <view class='stop-station-map-blank'></view>
+            <view class='depart-station-dot'></view>
+          </view>
+          <view class='stop-station-map-fill'></view>
+          <view class='stop-station-map-pole'>
+            <view class='depart-station-dot'></view>
+            <view class='stop-station-map-blank'></view>
+          </view>
+        </view>
+        <view class='stop-station-route'>
+          <view class='stop-station-route-text'>{{stopStationList[0].stationName}}</view>
+          <view class='stop-station-route-text'>{{stopStationList[stopStationList.length-1].stationName}}</view>
+        </view>
+        <view class='stop-station-route'>
+          <view class='stop-station-route-time'>{{stopStationList[0].departureTime}}</view>
+          <view class='stop-station-route-time'>{{stopStationList[stopStationList.length-1].arrivalTime}}</view>
+        </view>
+      </block>
+
+      <!-- 只有三站会显示的样式 -->
+      <block wx:if="{{stopStationList.length === 3}}">
+        <view class='stop-station-map'>
+          <view class='stop-station-map-pole'>
+            <view class='stop-station-map-blank'></view>
+            <view class='depart-station-dot'></view>
+          </view>
+          <view class='stop-station-map-fill'></view>
+          <view class='depart-station-blank-dot'></view>
+          <view class='stop-station-map-fill'></view>
+          <view class='stop-station-map-pole'>
+            <view class='depart-station-dot'></view>
+            <view class='stop-station-map-blank'></view>
+          </view>
+        </view>
+        <view class='stop-station-route'>
+          <view class='stop-station-route-text'>{{stopStationList[0].stationName}}</view>
+          <view class='stop-station-route-text stop-station-route-middle'>{{stopStationList[1].stationName}}</view>
+          <view class='stop-station-route-text'>{{stopStationList[stopStationList.length-1].stationName}}</view>
+        </view>
+        <view class='stop-station-route'>
+          <view class='stop-station-route-time'>{{stopStationList[0].departureTime}}</view>
+          <view class='stop-station-route-time stop-station-route-middle'>{{stopStationList[1].arrivalTime}}</view>
+          <view class='stop-station-route-time'>{{stopStationList[stopStationList.length-1].arrivalTime}}</view>
+        </view>
+      </block>
+
+      <!-- 只有四站会显示的样式 -->
+      <block wx:if="{{stopStationList.length === 4}}">
+        <view class='stop-station-map'>
+          <view class='stop-station-map-pole'>
+            <view class='stop-station-map-blank'></view>
+            <view class='depart-station-dot'></view>
+          </view>
+          <view class='stop-station-map-fill'></view>
+          <view class="fill-blank-dot" wx:for="{{[0,1]}}" wx:key="index">
+            <view class='depart-station-blank-dot'></view>
+            <view class='stop-station-map-fill'></view>
+          </view>
+          <view class='stop-station-map-pole'>
+            <view class='depart-station-dot'></view>
+            <view class='stop-station-map-blank'></view>
+          </view>
+        </view>
+        <view class='stop-station-route'>
+          <view class='stop-station-route-text'>{{stopStationList[0].stationName}}</view>
+          <view class='stop-station-route-text stop-station-route-middle'>{{stopStationList[1].stationName}}</view>
+          <view class='stop-station-route-text stop-station-route-middle'>{{stopStationList[2].stationName}}</view>
+          <view class='stop-station-route-text'>{{stopStationList[stopStationList.length-1].stationName}}</view>
+        </view>
+        <view class='stop-station-route'>
+          <view class='stop-station-route-time'>{{stopStationList[0].departureTime}}</view>
+          <view class='stop-station-route-time stop-station-route-middle'>{{stopStationList[1].arrivalTime}}</view>
+          <view class='stop-station-route-time stop-station-route-middle'>{{stopStationList[2].arrivalTime}}</view>
+          <view class='stop-station-route-time'>{{stopStationList[stopStationList.length-1].arrivalTime}}</view>
+        </view>
+      </block>
+
+      <!-- 大于四站会显示的样式 -->
+      <block wx:if="{{stopStationList.length > 4}}">
+        <view class='stop-station-map'>
+          <view class='stop-station-map-pole'>
+            <view class='stop-station-map-blank'></view>
+            <view class='depart-station-dot'></view>
+          </view>
+          <view class="fill-blank-dot">
+            <view class='stop-station-map-fill'></view>
+            <view class='depart-station-blank-dot'></view>
+          </view>
+          <view class='mini-dot-group'>
+            <view class='depart-station-mini-dot' wx:for="{{[0,1,2]}}" wx:key="index"></view>
+          </view>
+          <view class="fill-blank-dot" wx:for="{{[0,1]}}" wx:key="index">
+            <view class='depart-station-blank-dot'></view>
+            <view class='stop-station-map-fill'></view>
+          </view>
+          <view class='stop-station-map-pole'>
+            <view class='depart-station-dot'></view>
+            <view class='stop-station-map-blank'></view>
+          </view>
+        </view>
+        <view class='stop-station-route'>
+          <view class='stop-station-route-text'>{{stopStationList[0].stationName}}</view>
+          <view class='stop-station-route-text omit'>{{stopStationList.length-3}}站</view>
+          <view class='stop-station-route-text stop-station-route-middle'>{{stopStationList[stopStationList.length-2].stationName}}</view>
+          <view class='stop-station-route-text'>{{stopStationList[stopStationList.length-1].stationName}}</view>
+        </view>
+        <view class='stop-station-route'>
+          <view class='stop-station-route-time'>{{stopStationList[0].departureTime}}</view>
+          <view class='stop-station-route-time omit'></view>
+          <view class='stop-station-route-time stop-station-route-middle'>{{stopStationList[stopStationList.length-2].arrivalTime}}</view>
+          <view class='stop-station-route-time'>{{stopStationList[stopStationList.length-1].arrivalTime}}</view>
+        </view>
+      </block>
+    </view>
+  </block>
+
+  <!-- 车站地图导航 -->
+  <view wx:if="{{!isGrabTicket && isShowTrainMap}}" class='train-map'>
+    <detail-mapView-compt location="{{trainInfo.location}}"></detail-mapView-compt>
+  </view>
+</view>
+
+<view class='stop-station-detail-box' wx:if="{{showStopStation}}" catchtap='onHideStopStation'>
+  <view class='stop-station-detail'>
+    <view class='detail-header'>
+      <text class='detail-herder-text'>车站</text>
+      <text class='detail-herder-text'>到达</text>
+      <text class='detail-herder-text'>出发</text>
+      <text class='detail-herder-text'>停留</text>
+    </view>
+    <scroll-view scroll-y='true' class='detail-body' scroll-into-view="a{{trainInfo.departureTime}}">
+      <view wx:for="{{allStopStationList}}" wx:key="stationSequence" id="a{{item.departureTime}}" class='{{index === allStopStationList.length - 1 ? "detail-row":"detail-underline-row"}}'>
+        <text wx:if="{{item.stopType===0}}" class='detail-text stop-station-others-color'>{{item.stationName}}</text>
+        <text wx:elif="{{item.stopType===1 || item.stopType===2 }}" class='detail-text stop-station-start-end-color'>{{item.stationName}}</text>
+        <text wx:else class='detail-text  stop-station-color'>{{item.stationName}}</text>
+        <text class='detail-text'>{{item.arrivalTime}}</text>
+        <text class='detail-text'>{{item.departureTime}}</text>
+        <text class='detail-text'>{{item.stopTimes === 0 ? '--' : item.stopTimes + '分钟'}}</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

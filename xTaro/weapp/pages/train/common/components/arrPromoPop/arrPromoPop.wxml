@@ -1,0 +1,38 @@
+<template name="arr-promo-pop">
+  <view class="backmask {{arrPromoPopVisible ? 'active' : ''}}"></view>
+   <view class="guanquan pic {{arrPromoPopVisible ? 'active' : ''}}" ></view>
+    <!-- <view class="guanquan guanquan2 pic {{arrPromoPopVisible ? 'active' : ''}}"></view> -->
+  <view class="promo-pop-wrap {{arrPromoPopVisible ? 'active' : ''}}">
+    <view class="top-img-tit pic">
+    </view>
+    <view class="right-img-cover pic"></view>
+    <view class="left-star pic"></view>
+    <view class="top-new-user pic"></view>
+    <view class="icon-close pic" bindtap="onClosePromoPop"></view>
+   
+    <view class="promo-pop-content">
+      <view class="right-circle pic {{arrPromoPopVisible ? 'active' : ''}}"></view>
+      <view class="cont-tit">
+        <rich-text nodes="{{arrPromoPopInfo.titleNode}}"></rich-text>
+      </view>
+      <view class="cont-list" wx:if="{{arrPromoPopInfo.couponItemList}}">
+        <view class="cp-item pic" wx:for="{{arrPromoPopInfo.couponItemList}}" wx:key="{{index}}">
+          <!-- <view class="cp-wrap"> -->
+            <view class="cp-price number-zx2">
+              {{item.price}}<text>元</text>
+            </view>
+            <view class="cp-text-wrap">
+              <view class="cp-tit">{{item.title}}</view>
+              <view class="cp-subtit">{{item.subTitle}}</view>
+            </view>
+          <!-- </view> -->
+        </view>
+      </view>
+      <view class="cp-btn-box pic" bindtap="onClosePromoPop">
+        <view class="btn-cover"></view>
+      </view>
+    </view>
+    
+    
+  </view>
+</template>

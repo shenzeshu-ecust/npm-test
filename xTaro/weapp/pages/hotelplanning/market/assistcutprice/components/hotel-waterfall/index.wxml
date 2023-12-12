@@ -1,0 +1,86 @@
+<view class="hotSupport-wrap">
+    <view class="wrap-left">
+        <block wx:key="idx" wx:for="{{leftList}}" wx:for-index="idx" wx:for-item="item">
+            <view class="item" bindtap="hoteltap" data-idx="{{idx}}" data-id="{{item.hotelId}}" data-position="left" data-decimal="{{item.isPriceWithDecimal}}" data-ubt-key="xcx_cutprice_leftlist_hotelposition_{{idx}}" id="autotest_xcx_cutprice_leftlist_hotelposition_{{idx}}">
+                <view wx:if="{{idx === 0 && item.hotelId == friendRecommendHotelId}}" class="friend-recommand">
+                    <image src="https://pages.c-ctrip.com/hotels/wechat/market/cutprice/friend_recommand.png"></image>
+                    好友推荐
+                </view>
+                <block wx:if="{{item.rpxInLogoPic}}">
+                    <view src="{{item.logoPic}}" class="img-hotel"></view>
+                </block>
+                <block wx:else>
+                    <view class='img-hotel' style='background:url({{item.logoPic}});background-size:cover;'></view>
+                </block>
+                <view class="content-wrap">
+                    <view>
+                        <text class="hs-title" decode="{{true}}">{{item.hotelName}}&nbsp;</text>
+                        <!-- 星钻&非标圈圈 -->
+                        <image wx:if="{{item.starIcon}}" class="star-icon" src="{{item.starIcon}}" mode="heightFix" lazy-load></image>
+                        <!-- 金钻/铂钻 -->
+                        <image wx:if="{{item.dStar === 1}}" class="icon-d-star" src="https://pic.c-ctrip.com/picaresonline/hotel/tinyappwebresource/imgs/featured/jz.4ce7b176.png" />
+                        <image wx:if="{{item.dStar === 2}}" class="icon-d-star" src="https://pic.c-ctrip.com/picaresonline/hotel/tinyappwebresource/imgs/featured/bz.c6be8b4e.png" />
+                    </view>
+                    <view>
+                        <text class="color-5 font-1 hs-addr" wx:if="{{item.commentScore > 0}}">
+                            <text class="font-4 bold">{{item.commentScoreText}}</text>
+                            <text>分</text>
+                        </text>
+                        <text class="font-1 hs-comment-num" wx:if="{{item.commenterNumber > 0}}">{{item.commenterNumber}}条点评</text>
+                    </view>
+                    <view class="color-13 font-1 text-lh" wx:if="{{item.positionDesc}}">{{item.positionDesc}}</view>
+                    <view class="fs-price">
+                        <block wx:if="{{item.price>0}}">
+                            <text class="font-2 color-15 del" wx:if="{{item.originPrice > 0 && item.originPrice > item.price}}">￥{{item.originPrice}}</text>
+                            <text class="font-4 color-14 bold">
+                                <text class="font-2">￥</text>
+                                <text>{{item.price}}</text>
+                            </text>
+                            <text class="font-1 color-15 price-star">起</text>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="wrap-right">
+        <block wx:key="idx" wx:for="{{rightList}}" wx:for-index="idx" wx:for-item="item">
+            <view class="item" bindtap="hoteltap" data-idx="{{idx}}" data-id="{{item.hotelId}}" data-position="right" data-decimal="{{item.isPriceWithDecimal}}" data-ubt-key="xcx_cutprice_rightlist_hotelposition_{{idx}}" id="autotest_xcx_cutprice_rightlist_hotelposition_{{idx}}">
+                <block wx:if="{{item.rpxInLogoPic}}">
+                    <view src="{{item.logoPic}}" class="img-hotel"></view>
+                </block>
+                <block wx:else>
+                    <view class='img-hotel' style='background:url({{item.logoPic}});background-size:cover;'></view>
+                </block>
+                <view class="content-wrap">
+                    <view>
+                        <text class="hs-title" decode="{{true}}">{{item.hotelName}}&nbsp;</text>
+                        <!-- 星钻&非标圈圈 -->
+                        <image wx:if="{{item.starIcon}}" class="star-icon" src="{{item.starIcon}}" mode="heightFix" lazy-load></image>
+                        <!-- 金钻/铂钻 -->
+                        <image wx:if="{{item.dStar === 1}}" class="icon-d-star" src="https://pic.c-ctrip.com/picaresonline/hotel/tinyappwebresource/imgs/featured/jz.4ce7b176.png" />
+                        <image wx:if="{{item.dStar === 2}}" class="icon-d-star" src="https://pic.c-ctrip.com/picaresonline/hotel/tinyappwebresource/imgs/featured/bz.c6be8b4e.png" />
+                    </view>
+                    <view>
+                        <text class="color-5 font-1 hs-addr" wx:if="{{item.commentScore > 0}}">
+                            <text class="font-4 bold">{{item.commentScoreText}}</text>
+                            <text>分</text>
+                        </text>
+                        <text class="font-1 hs-comment-num" wx:if="{{item.commenterNumber > 0}}">{{item.commenterNumber}}条点评</text>
+                    </view>
+                    <view class="color-13 font-1 text-lh" wx:if="{{item.positionDesc}}">{{item.positionDesc}}</view>
+                    <view class="fs-price">
+                        <block wx:if="{{item.price>0}}">
+                            <text class="font-2 color-15 del" wx:if="{{item.originPrice > 0 && item.originPrice > item.price}}">￥{{item.originPrice}}</text>
+                            <text class="font-4 color-14 bold">
+                                <text class="font-2">￥</text>
+                                <text>{{item.price}}</text>
+                            </text>
+                            <text class="font-1 color-15 price-star">起</text>
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

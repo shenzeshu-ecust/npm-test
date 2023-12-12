@@ -1,0 +1,46 @@
+<perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+<authorizationFloat id="cwxAuthFloat"></authorizationFloat>
+<image class="audit-banner" src="https://pages.c-ctrip.com/market/components/xiaohongshu/process.png"></image>
+<view class="audit-box">
+    <view class="audit-content">
+        <view class="audit-row">
+            <view class="audit-label audit-articleLabel">
+                <text class="audit-star">{{eventDisplay._textTitle}}</text>
+                <!-- <text class="audit-tips">{{eventDisplay._textDesc}}</text> -->
+            </view>
+            <textarea class="audit-articleInput" defaultValue="content" bindinput="handleContentChange" placeholder="{{eventDisplay._textDesc}}"></textarea>
+            <view class="audit-error" wx:if="{{showError}}">
+              <view class="audit-error-icon">!</view>请填写{{eventDisplay._textTitle}}</view>
+            </view>
+        <view class="audit-row">
+            <view class="audit-label, audit-star">
+                {{eventDisplay._uploadFileTitle}}
+                <text class="audit-tips">{{auditMaxSize}}M以内,最多三张</text>
+            </view>
+            <view class="audit-imgList">
+                <view wx:for="{{urls}}" wx:key="item" class="audit-displayImageBox">
+                    <image bindtap="handleDel" data-index="{{index}}" class="audit-closeBtn" src="https://pages.c-ctrip.com/market/components/static/iconfont-close.png" alt="" />
+                    <image class="audit-displayImage" src="{{item}}" alt="" />
+                </view>
+                <view wx:if="{{urls.length < maxCount}}" class="audit-uploadbox" bindtap="handleUpload">
+                    <text class="audit-uploadPlus">+</text>
+                    <text class="audit-uploadText">上传照片</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="bottom-tips">
+        <image class="tips-image" src="https://pages.c-ctrip.com/market/components/xiaohongshu/tips.png"></image>
+        仅可提交一次 提交后无法修改
+    </view>
+</view>
+<view class="audit-footer">
+    <view class="audit-cancelBtn" bindtap="handleCancel">取消</view>
+    <view class="audit-submitBtn" bindtap="handleSubmit">确认提交</view>
+</view>
+
+<Modal show="{{showNextModal}}" maskClosable="{{false}}">
+  <image class="next-modal-img" mode="widthFix" src="{{legaoInfo.nextModalImg}}" bindtap="handleNextJump"></image>
+  <image class="next-modal-close" src="https://pages.c-ctrip.com/market/components/static/light-close.png" bindtap="handleCloseNextModal"></image>
+
+</Modal>

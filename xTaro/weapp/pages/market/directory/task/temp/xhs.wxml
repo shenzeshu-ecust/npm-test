@@ -1,0 +1,54 @@
+<template name="xhsTaskItem">
+  <view class="xhs-task-main xhs-task-main_{{item.taskStatus}} xhs-task-main_rateLevel-{{item.eventDisplayObj._rateLevel}} {{item.disabeld ? 'xhs-task-main_disabeld' : ''}}">
+    <view class="xhs-tap_wrap">
+      <view class="task_btn ellipsis task_btn3 task_btn_disbaled" wx:if="{{item.disabeld}}"
+        style="background-color:{{taskInfo.rewardDoneBtn}};background-image:url({{taskInfo.rewardDoneBtnBgImg}});border-radius: {{taskInfo.rewardDoneBtnBgImg ? 'unset' : 'inhert'}}">
+        <button style="color:{{taskInfo.rewardDone}}" data-taskid="{{item.taskId}}"
+          bindtap="handleTask">{{item.buttonText}}</button>
+      </view>
+
+        <block  wx:elif="{{item.taskStatus == 0}}">
+          <view class="task_btn ellipsis task_btn0" wx:if="{{item.needReceive == 1}}"
+            style="background-color:{{taskInfo.taskToReceiveBtn}};background-image:url({{taskInfo.taskToReceiveBtnBgImg}});border-radius:  {{taskInfo.taskToReceiveBtnBgImg ? 'unset' : 'inhert'}};box-shadow:{{item.taskStatus == 2 ? 'none': ''}}">
+            <button style="color:{{taskInfo.taskToReceive}}"
+              bindtap="handleTask"
+              data-taskid="{{item.taskId}}" >{{item.receiveTaskText}}</button>
+          </view>
+          <view class="task_btn ellipsis task_btn1" wx:else
+            style="background-color:{{taskInfo.taskTodoBtn}};background-image:url({{taskInfo.taskTodoBtnBgImg}});border-radius:  {{taskInfo.taskTodoBtnBgImg ? 'unset' : 'inhert'}};box-shadow:{{item.taskStatus == 2 ? 'none': ''}}">
+            <button style="color:{{taskInfo.taskTodo}}" 
+              bindtap="handleTask" data-type="{{item.eventType}}"
+              data-taskid="{{item.taskId}}" data-viewtime="{{item.viewTime}}" data-customcode="{{item.customCode}}"
+              data-aim="{{item.taskTarget}}" data-progress="{{item.taskProcess}}"
+              data-url="{{item.wechatUrl}}">{{item.buttonText}}</button>
+          </view>
+        </block>
+
+      <view class="task_btn ellipsis task_btn1" wx:elif="{{item.taskStatus == 1}}"
+        style="background-color:{{taskInfo.taskTodoBtn}};background-image:url({{taskInfo.taskTodoBtnBgImg}});border-radius:  {{taskInfo.taskTodoBtnBgImg ? 'unset' : 'inhert'}};box-shadow:{{item.taskStatus == 2 ? 'none': ''}}">
+        <button style="color:{{taskInfo.taskTodo}}" bindtap="handleTask" data-type="{{item.eventType}}"
+          data-taskid="{{item.taskId}}" data-viewtime="{{item.viewTime}}" data-customcode="{{item.customCode}}"
+          data-aim="{{item.taskTarget}}" data-progress="{{item.taskProcess}}"
+          data-url="{{item.wechatUrl}}">{{item.buttonText}}</button>
+      </view>
+
+      <view class="task_btn ellipsis task_btn2" wx:elif="{{item.taskStatus == 2}}"
+        style="background-color:{{taskInfo.taskDoneBtn}};background-image:url({{taskInfo.taskDoneBtnBgImg}});border-radius: {{taskInfo.taskDoneBtnBgImg ? 'unset' : 'inhert'}};box-shadow:{{item.taskStatus == 3 ? 'none': ''}}">
+        <button style="color:{{taskInfo.taskDone}}" bindtap="handleUserAcceptPrize"
+          data-taskid="{{item.taskId}}" data-currencynum="{{item.currencyNum}}">{{item.receiveAwardTaskText}}</button>
+      </view>
+
+      <view class="task_btn ellipsis task_btn3" wx:else
+        style="background-color:{{taskInfo.rewardDoneBtn}};background-image:url({{taskInfo.rewardDoneBtnBgImg}});border-radius: {{taskInfo.rewardDoneBtnBgImg ? 'unset' : 'inhert'}};box-shadow:{{item.taskStatus == 3 ? 'none': ''}}">
+        <button style="color:{{taskInfo.rewardDone}}" data-url="{{item.wechatUrl}}" data-type="{{item.eventType}}"
+          data-isdone="{{true}}" data-taskid="{{item.taskId}}"
+          bindtap="handleWithoutTask">{{item.buttonDoneText || '已完成'}}</button>
+      </view>
+
+    </view>
+    <view class="xhs-info">
+      <view class="xhs-desc ellipsis" style="font-size:{{taskInfo.taskDescSize}}rpx;color:{{taskInfo.taskDescColor}}">
+        {{item.taskDesc}}</view>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,10 @@
+<view class="m-imageSlider" style="padding:{{item.sliderPadding}}; background-color:{{item.bgColor}}; background-size:100% 100%; background-image:{{item.bgImage?'url('+item.bgImage+')':''}};">
+  <swiper style="height:{{item.itemHeight || 150}}px;" indicator-dots="true" indicator-color="hsla(0,0%,100%,.6)" indicator-active-color="#099fde" autoplay="{{item.autoPlay}}" interval="{{item.delaySec*1000}}" duration="500" circular="{{item.needLoop}}">
+    <block wx:for="{{item.sliderData}}" wx:key="idx">
+      <swiper-item data-item="{{item}}" bindtap="_handleClick">
+        <image src="{{item.image}}" mode="scaleToFill" class="slide-image" style="width:100%;height:100%;" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+

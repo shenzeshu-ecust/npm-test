@@ -1,0 +1,8 @@
+.pop-mid-bd-f{vertical-align:middle;display:table-cell;}
+.pop-add-tips{position: fixed;left: 0;top:0;right: 0;bottom: 0;z-index: 3002;width: 100%;height: 100%;display: table;}
+.pop-add-tips .img-tips{width: 414rpx;height: 270rpx;position: absolute;top:5rpx;right:100rpx;}
+
+.pop-add-tips .add-top{position: absolute;top:20rpx;right:120rpx;color:#fff;width: 240rpx;text-align: right;font-size: 28rpx;}
+.pop-add-tips .add-top .add-arr{width: 56rpx;height: 76rpx;background: url(https://images3.c-ctrip.com/train/wechat/ic_arrow_guide@3x.png) no-repeat;background-size: 100% 100%;margin: 0 auto 4rpx;}
+.pop-collect-f{width: 602rpx;height: 776rpx;background: url(https://images3.c-ctrip.com/train/xiaochengxu/8.34/image_pay_pop@3x.png) no-repeat;background-size: 100% 100%;margin: 0 auto;padding: 0;position: relative;top: -90rpx;}
+.pop-collect-f .ifont-closed{position: absolute;left: 50%;transform: translateX(-50%);font-size: 64rpx;color: #fff;bottom: -140rpx;}

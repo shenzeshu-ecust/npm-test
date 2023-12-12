@@ -5,5 +5,9 @@
     "minimist": "^1.2.6",
     "progress": "^2.0.3"
   },
-  "type": "module"
+  "type": "module",
+  "name": "hello",
+  "bin": {
+    "hello": "hello.js"
+  }
 }

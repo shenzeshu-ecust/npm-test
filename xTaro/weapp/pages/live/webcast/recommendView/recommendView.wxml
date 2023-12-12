@@ -1,0 +1,33 @@
+<block wx:if="{{masterRecommendGoods && masterRecommendGoods.length > 0 && commentKeybordBottom<=0}}">
+  <view class="master-recommend" style="bottom: {{bottomSafe+12+90+8}}rpx">
+    <image class="mr-backround-image" src="{{displayTheme != null ? displayTheme : ''}}" />
+    <view class="mr-head-image" />
+    <swiper class="swiper" style="height:{{changeHeight}}rpx;" autoplay="{{true}}" circular="{{true}}" interval="{{5000}}" bindchange="swiperchange">
+      <block wx:for="{{masterRecommendGoods}}" wx:key='index'>
+        <swiper-item>
+          <view class="mr-card-content" bindtap="clickRecommend" data-item="{{item}}">
+            <image class="mr-card-image" src="{{item.imageUrl}}" mode="aspectFill" />
+
+            <view wx:if="{{item.priceType !=2 && item.priceIsNum && item.fromPrice.price>0}}" class="mr-price-btn">￥
+            <text class="mr-goods-price">{{item.fromPrice.price}}</text>
+            {{item.fromPrice.needStart ? '起':''}}{{(item.nights >1 && item.nights) ? '/'+item.nights+'晚' : ''}}{{item.nights == 1 ? '/晚' : ''}}</view>
+            <!-- 区间价 -->
+            <view wx:if="{{item.priceType==2 && item.priceIsNum}}" class="mr-price-btn">￥
+            <text class="mr-goods-price">{{item.rangePriceString}}</text>
+            {{item.rangePriceStringSuffix}}
+            </view>
+            <view class="mr-goods-title">{{item.title}}</view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+
+   <block wx:if="{{masterRecommendGoods && masterRecommendGoods.length > 1}}">
+    <view class="dots">
+      <block wx:for="{{masterRecommendGoods}}" wx:for-index="index">
+        <view class="dot{{index == current ? ' active' : ''}}"></view>
+      </block>
+    </view>
+   </block>
+  </view>
+</block>

@@ -1,0 +1,463 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors xfzhao (xfzhao@ctrip.com)
+ * @date    2017-05-05 19:28:24
+ * @version $Id$
+ */
+body {
+  background-color: white;
+}
+.ls-border {
+  border-bottom: 1px solid #e5e5e5;
+}
+.ls-wordbreak-hard {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ls-btn-yellow {
+  display: block;
+  text-align: center;
+  color: #fff;
+  background-image: linear-gradient(-90deg, #F9D334 24%, #FFB800 100%);
+  border-radius: 2px;
+}
+.ls-btn-white {
+  display: block;
+  text-align: center;
+  border: 1px solid #ffba00;
+  background: #fff;
+  color: #ffba00;
+  border-radius: 2px;
+}
+.backWrap {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.backBtn {
+  background: url("https://pages.c-ctrip.com/you/livestream/class.png") no-repeat 0px -55px;
+  background-size: 200px 110px;
+  width: 17px;
+  height: 17px;
+}
+.icon-message {
+  background: url("https://pages.c-ctrip.com/you/livestream/ic_news_66-66.png");
+  background-size: 100%;
+  width: 44px!important;
+  height: 44px!important;
+  display: block;
+}
+.icon-hshare {
+  background: url("https://pages.c-ctrip.com/you/livestream/ic_share_66-66.png");
+  background-size: 100%;
+  width: 44px!important;
+  height: 44px!important;
+  display: block;
+}
+.icon-alerton {
+  background: url("https://pages.c-ctrip.com/you/livestream/ic_param-message66-66.png");
+  background-size: 100%;
+  width: 44px!important;
+  height: 44px!important;
+  display: block;
+}
+.icon-alertoff {
+  background: url("https://pages.c-ctrip.com/you/livestream/ic_close-message66-66.png");
+  background-size: 100%;
+  width: 44px!important;
+  height: 44px!important;
+  display: block;
+}
+.icon-message-close {
+  background: url("https://pages.c-ctrip.com/you/livestream/ic_turn_off_hints.png");
+  background-size: 100%;
+  width: 17px;
+  height: 18px;
+  display: block;
+  margin-top: 14px;
+}
+/**/
+.noMoreResult {
+  padding: 10px 0;
+  color: #999;
+  text-align: center;
+  background-color: #fff;
+  display: none;
+}
+.coverimage {
+  width: 100%;
+  background: url('https://pages.c-ctrip.com/you/livestream/ic_zero_420_420.png');
+  background-size: contain;
+}
+.nodata-btn {
+  height: 45px;
+  line-height: 45px;
+  font-size: 16px;
+  margin-top: 48px;
+}
+.card-container {
+  position: relative;
+  height: 0;
+  opacity: 0;
+}
+.card-container.on {
+  animation: showCardView 0.16s 0.16s 1 linear forwards;
+  -webkit-animation: showCardView 0.16s 0.16s 1 linear forwards;
+}
+@keyframes showCardView {
+  0% {
+    height: 100%;
+    opacity: 1;
+    transform: scale(0);
+  }
+  100% {
+    height: 100%;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.card-container.hide {
+  animation: hideCardView 0.16s 1 linear forwards;
+  -webkit-animation: hideCardView 0.16s 1 linear forwards;
+  overflow: hidden;
+}
+@keyframes hideCardView {
+  0% {
+    height: 100%;
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    height: 0;
+    opacity: 1;
+    transform: scale(0);
+  }
+}
+.card-container .sk_scene_class {
+  max-width: 482rpx !important;
+  min-width: 482rpx !important;
+  box-sizing: border-box !important;
+  padding: 8rpx !important;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+  background: transparent;
+  display: none;
+}
+.messageRoot {
+  width: 500rpx;
+  display: flex;
+  flex-direction: column;
+  margin-left: 24rpx;
+  position: relative;
+}
+.message-container {
+  position: relative;
+}
+.message-container scroll-view {
+  max-height: 298rpx;
+  width: 480rpx;
+  overflow: hidden;
+}
+.message-container .notice {
+  background-color: rgba(0, 0, 0, 0.3);
+  font-size: 28rpx;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  color: #99cefb;
+  margin-bottom: 12rpx;
+}
+.message-container .tips {
+  position: absolute;
+  bottom: 0;
+  opacity: 0.96;
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  color: #0086f6;
+  font-size: 22rpx;
+  padding: 8rpx 16rpx 8rpx 24rpx;
+  align-items: center;
+}
+.message-container .tips image {
+  height: 24rpx;
+  width: 24rpx;
+  vertical-align: middle;
+}
+.message-item {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 30rpx;
+  margin: 0 0 12rpx 0;
+  line-height: 36rpx;
+  word-break: break-all;
+  font-size: 26rpx;
+  padding: 7rpx 24rpx 7rpx 24rpx;
+  overflow: hidden;
+}
+.message-item .headView {
+  float: left;
+  height: 36rpx;
+  width: 36rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+  background-image: url(https://pages.c-ctrip.com/livestream/video/userAvat-default.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.message-item .user-level {
+  float: left;
+  height: 32rpx;
+  width: 86rpx;
+  vertical-align: middle;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  padding-right: 8rpx;
+}
+.message-item .userName1 {
+  display: inline;
+  color: #bfe0fc;
+  font-size: 28rpx;
+  line-height: 36rpx;
+}
+.message-item .userName1.replay {
+  color: #ffa95f;
+  max-width: 100%;
+}
+.message-item .userName1 .userNameMark1 {
+  color: #bfe0fc;
+  font-size: 28rpx;
+  line-height: 36rpx;
+  height: 36rpx;
+  display: inline;
+}
+.message-item .userName1 .userNameMark1.replay {
+  color: #ffa95f;
+}
+.message-item .userName1 .message1 {
+  display: inline;
+  color: #ffffff;
+  font-size: 28rpx;
+  word-break: break-all;
+}
+.message-item .userName {
+  color: #bfe0fc;
+  font-size: 28rpx;
+  float: left;
+  line-height: 36rpx;
+  height: 36rpx;
+  max-width: 75%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.message-item .userName.replay {
+  color: #ffa95f;
+}
+.message-item .userNameMark {
+  color: #bfe0fc;
+  font-size: 28rpx;
+  float: left;
+  line-height: 36rpx;
+  height: 36rpx;
+}
+.message-item .userNameMark.replay {
+  color: #ffa95f;
+}
+.message-item .message {
+  display: inline;
+  color: #ffffff;
+  font-size: 28rpx;
+  word-break: break-all;
+}
+.message-item .message-giftinfo {
+  display: inline-block;
+  height: 36rpx;
+  font-size: 0;
+  vertical-align: middle;
+}
+.message-item .message-gift {
+  margin-left: 4rpx;
+  width: 36rpx;
+  height: 36rpx;
+  vertical-align: middle;
+  float: left;
+}
+.message-item .message-giftcount {
+  margin-left: 12rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 26rpx;
+  color: #ffffff;
+  line-height: 34rpx;
+}
+.topView {
+  position: absolute;
+  z-index: 1;
+  top: -70rpx;
+}
+.topView.on {
+  animation: showTopView 0.3s 1 linear forwards;
+  -webkit-animation: showTopView 0.3s 1 linear forwards;
+}
+@keyframes showTopView {
+  0% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.topView.hide {
+  animation: hideTopView 0.3s 1 linear forwards;
+  -webkit-animation: hideTopView 0.3s 1 linear forwards;
+}
+@keyframes hideTopView {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+.topView .message-item {
+  padding: 8rpx 16prx !important;
+  line-height: 32rpx !important;
+  font-size: 24rpx !important;
+  background-image: linear-gradient(270deg, #ff8b41 0%, #ff6633 100%, #ff6633 100%) !important;
+  margin-bottom: 0 !important;
+}
+.topView .message-item .userName {
+  float: left;
+  max-width: 120rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.topView .message-item .message {
+  padding-left: 4rpx;
+}
+.topViewGift {
+  position: absolute;
+  z-index: 1;
+  top: -262rpx;
+  width: 420rpx;
+  height: 192rpx;
+}
+.topViewGift .gift-messageitem {
+  display: flex;
+  align-items: flex-end;
+  position: absolute;
+  left: 0;
+  margin-bottom: 8rpx;
+}
+.topViewGift .gift-messageitem.on {
+  animation: showTopView 0.3s 1 linear forwards;
+  -webkit-animation: showTopView 0.3s 1 linear forwards;
+}
+@keyframes showTopView {
+  0% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.topViewGift .gift-messageitem.hide {
+  animation: hideTopView 0.3s 1 linear forwards;
+  -webkit-animation: hideTopView 0.3s 1 linear forwards;
+}
+@keyframes hideTopView {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100rpx);
+    opacity: 0;
+  }
+}
+.topViewGift .gift-messageitem .gift-messageLeft {
+  padding: 8rpx;
+  background-image: linear-gradient(90deg, rgba(51, 51, 51, 0.6) 0%, rgba(51, 51, 51, 0.3) 100%);
+  border-radius: 42rpx;
+  display: flex;
+  flex-direction: row;
+}
+.topViewGift .gift-messageitem .gift-messageLeft .gift-headView {
+  width: 68rpx;
+  height: 68rpx;
+  border-radius: 50%;
+}
+.topViewGift .gift-messageitem .gift-messageLeft .gift-userinfo {
+  margin-left: 12rpx;
+  max-width: 120rpx;
+  height: 68rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+.topViewGift .gift-messageitem .gift-messageLeft .gift-userinfo .g-name {
+  font-family: PingFangSC-Medium;
+  font-size: 24rpx;
+  color: #ffffff;
+  line-height: 30rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topViewGift .gift-messageitem .gift-messageLeft .gift-userinfo .g-giftname {
+  margin-top: 4rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 18rpx;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 20rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topViewGift .gift-messageitem .gift-messageLeft .gift-pic {
+  width: 64rpx;
+  height: 64rpx;
+  margin-right: 8rpx;
+  margin-left: 12rpx;
+}
+.topViewGift .gift-messageitem .gift-combox {
+  margin-left: 8rpx;
+  font-family: 20th_bold;
+  font-size: 30rpx;
+  color: #ffffff;
+  text-align: center;
+  line-height: 38rpx;
+  text-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+}
+.topViewGift .gift-messageitem .gift-combonumber {
+  margin-left: 8rpx;
+  font-family: 20th_bold1102;
+  font-size: 60rpx;
+  color: #ffffff;
+  text-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.2);
+  line-height: 1;
+}
+.card-animation-container {
+  margin-top: 12rpx;
+  position: relative;
+  overflow: hidden;
+}
+.card-animation-container .card-item-animation .card-item-img {
+  width: 386rpx;
+  height: 210rpx;
+  position: relative;
+  padding: 16rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}

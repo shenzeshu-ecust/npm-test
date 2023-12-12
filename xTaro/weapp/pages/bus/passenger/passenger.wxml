@@ -1,0 +1,194 @@
+<nav-bar navbar-data="{{navbarData}}"></nav-bar>
+<view>
+    <view class="passenger-container">
+        <view wx:if="{{isNew}}"
+          class="scan-block"
+          bindtap="scanCard">
+            <view class="flex-row">
+                <view class="icon-font icon-camera {{classConfig.mainColor}}"></view>
+                <view class="scan-title">扫描证件添加</view>
+            </view>
+            <view class="scan-desc">仅支持二代身份证</view>
+        </view>
+        <view class="add-block">
+            <view class="title">选择票种</view>
+            <view class="item-row">
+                <block wx:for="{{ticketTypeList}}"
+                  wx:for-key="index"
+                  wx:if="{{item.display}}">
+                    <view class="item {{selectedIndex == index ? 'selected' : ''}}"
+                      style="{{selectedIndex == index ? 'border-color:' + colorConfig.mainColor: ''}}"
+                      bind:tap="selectPassengerType"
+                      data-index="{{index}}">
+                        <view class="title-row">
+                            <view class="title">{{item.title}}</view>
+                            <view class="flex-row">
+                                <view class="flex1" />
+                                <view class="price">￥{{item.ticketPrice}}</view>
+                                <view class="unit">/张</view>
+                            </view>
+                        </view>
+                        <view class="flex-row">
+                            <view class="desc">{{item.desc}}</view>
+                        </view>
+                        <view wx:if="{{selectedIndex == index}}"
+                          class=" select-tag {{ classConfig.mainColor}}">
+                            <view class="icon-font icon-check-triangle" />
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="train-list">
+            <view wx:if="{{pas.idcard.type != 2}}"
+              class="item add-box">
+                <view class="label name"
+                  bindtap="showNameTips">
+                    <text>姓名</text>
+                    <view class='icon-font icon-question {{classConfig.mainColor}}' />
+                </view>
+                <input type="text"
+                  placeholder="与乘车证件一致"
+                  placeholder-class="input-placeholder"
+                  value="{{pas.cname}}"
+                  bindchange="inputName"
+                  bindblur="blurName"
+                  bindinput='inputName'
+                  bindconfirm="inputNext"
+                  confirm-type="next" />
+            </view>
+            <view wx:if="{{pas.idcard.type == 2}}"
+              class="item add-box">
+                <view class="label name"
+                  bindtap="showNameTips">英文姓</view>
+                <input type="text"
+                  placeholder="英文姓/Sur name"
+                  placeholder-class="input-placeholder"
+                  value="{{pas.ENFirstName}}"
+                  bindchange="inputFirstName"
+                  bindinput='inputFirstName'
+                  bindconfirm="inputNextFirst"
+                  confirm-type="next" />
+            </view>
+            <view wx:if="{{pas.idcard.type == 2}}"
+              class="item add-box">
+                <view class="label name"
+                  bindtap="showNameTips">英文名</view>
+                <input type="text"
+                  placeholder="英文名/Given name"
+                  placeholder-class="input-placeholder"
+                  value="{{pas.ENLastName}}"
+                  bindchange="inputLastName"
+                  bindinput='inputLastName'
+                  bindconfirm="inputNextLast"
+                  confirm-type="next" />
+            </view>
+            <view class="item add-box"
+              bindtap="showCardType">
+                <view class="label">证件类型</view>
+                <text class="">{{pas.idcard.text}}</text>
+            </view>
+            <view class="item add-box">
+                <view class="label">证件号码</view>
+                <input wx:if="{{pas.idcard.type ==1}}"
+                  placeholder="与乘车证件一致"
+                  placeholder-class="input-placeholder"
+                  type="idcard"
+                  value="{{pas.idcard.no}}"
+                  bindchange="inputCardNum"
+                  bindinput='inputCardNum'
+                  bindblur="blurCardNum" />
+                <input wx:else
+                  placeholder="与乘车证件一致"
+                  placeholder-class="input-placeholder"
+                  type="text"
+                  value="{{pas.idcard.no}}"
+                  bindchange="inputCardNum"
+                  bindinput='inputCardNum'
+                  bindblur="blurCardNum" />
+            </view>
+            <view wx:if="{{pas.idcard.type !=1 }}"
+              class="item add-box">
+                <view class="label">生日</view>
+                <picker mode="date"
+                  value="{{pas.birth}}"
+                  start="1900-09-01"
+                  end="2200-09-01"
+                  bindchange="birthChange">
+                    <view class="picker">{{pas.birth}}</view>
+                </picker>
+            </view>
+            <view wx:if="{{pas.fromScan}}"
+              class="item">
+                <text class="tip">
+                    <text class="icon-font icon-info"></text>
+                <text>请仔细核对乘客信息，如有错误请及时修改，以免影响出行</text>
+                </text>
+            </view>
+        </view>
+        <view wx:if="{{pas.isTakeChild}}"
+          class="content-container">
+            <view class="child-tip-info">
+                <view class="title">携童票购买说明：</view>
+                <view wx:for="{{takeChildTicketTips}}"
+                  wx:for-key="index"
+                  class="desc">
+                    {{item}}
+                </view>
+            </view>
+        </view>
+        <view wx:elif="{{pas.isChild}}"
+          class="content-container">
+            <view class="child-tip-info">
+                <view class="title">儿童票购买说明：</view>
+                <view wx:for="{{childTicketTips}}"
+                  wx:for-key="index"
+                  class="desc">{{item}}</view>
+            </view>
+        </view>
+        <view class="confirm-content">
+            <view class="desc important">请您仔细阅读并理解以下内容</view>
+            <view class="desc">
+                根据实名制要求，购买汽车票需提交乘客的身份证信息，并需在乘车时出具对应身份证用于验证，请确保录入信息真实有效。携程将通过加密等方式保护您录入的身份证信息，且仅在具体订票过程中授权提供给与您进行交易的商户/承运人
+            </view>
+        </view>
+    </view>
+    <view class="btns fixed">
+        <view class="bar-confirm"
+          style="{{isIPhoneX ? 'padding-bottom:68rpx' : ''}}">
+            <button class="btn {{classConfig.mainBackColor}}"
+              hover-class="btn-primary_hover"
+              bindtouchstart='onTouchButton'
+              bindtap="submit">
+                保存
+            </button>
+        </view>
+    </view>
+    <view class="tip-txt {{showType ? 'active' : ''}}"
+      bindtap="hideNameTips">
+        <view class="wrapper">
+            <block wx:if="{{showType == 'name'}}">
+                <view class="cblue">网络购票需验证乘客身份信息</view>
+                <view class="p">请正确填写，乘客身份证件和姓名都通过验证才可以成功出票。</view>
+                <view class="cblue">乘客姓名填写说明：</view>
+                <view class="p">1、使用身份证、回乡证、台胞证预订火车票请优先使用中文姓名。</view>
+                <view class="p">2、如名字中包含生僻字可直接输入拼音代替。例如：“王鬳”可输入为“王yan”。</view>
+                <view class="p">3、姓名中有”.”或”?”时，请仔细辩析身份证原件上的”.”或”?”，准确输入。</view>
+                <view class="p">4、台籍乘客请使用台胞证（台湾居民来往大陆通行证）</view>
+                <view class="p">5、英文姓名可用拼音代替</view>
+                <view class="cblue">身份未通过核验购票失败怎么办？</view>
+                <view class="p">
+                    如身份信息验证未通过造成出票失败，请您持有效证件原件，去火车站或代售点核验购票。
+                    在车站或代售点核验通过后，下次就可以在网络买票了。
+                </view>
+            </block>
+            <block wx:if="{{showType == 'child' && childTips}}">
+                <view class="cblue">{{childTips.title}}</view>
+                <view wx:for="{{childTips.info}}"
+                  class="p">{{item}}</view>
+            </block>
+        </view>
+    </view>
+    <view class="view-check"
+      bindanimationend="viewReadyHandle"></view>
+</view>

@@ -1,0 +1,52 @@
+.task_wrap.task_wrap_3.module {
+  padding: 0;
+}
+.task-main.no-icon-taskItem {
+  align-items: flex-start;
+}
+
+.task-main.no-icon-taskItem .info {
+  padding-left: 0;
+}
+.task-main.no-icon-taskItem .info .title {
+  font-size: 34rpx;
+  font-weight: 400;
+  height: 34rpx;
+  line-height: 1;
+}
+.task-main.no-icon-taskItem .info .no-icon-taskProcess{
+  font-family: "PingFangSC-Regular";
+  font-size: 30rpx;
+  color: #666666;
+  line-height: 1;
+  margin-left: 8rpx;
+}
+.task-main.no-icon-taskItem .info .desc {
+  /* width: 460rpx; */
+  font-family: "PingFangSC-Regular";
+  font-size: 24rpx;
+  color: #999999;
+  width: auto;
+  margin-top: 8rpx;
+  opacity: 1;
+}
+.task-main.no-icon-taskItem .tap_wrap .task_btn {
+  width: 152rpx;
+  height: 60rpx;
+  background: linear-gradient(270deg, #FF9060 0%, #FF3646 48%, #FF4E8A 100%);
+  border-radius: 32rpx;
+}
+
+.task-main.no-icon-taskItem .tap_wrap .task_btn button{
+  font-family: "PingFangSC-Medium";
+  font-size: 28rpx;
+  line-height: 60rpx;
+  height: 60rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.task-main.no-icon-taskItem .tap_wrap .task_btn3 {
+  background: #cccccc;
+  color: #FFFFFF;
+}

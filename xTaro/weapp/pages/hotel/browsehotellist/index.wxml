@@ -1,0 +1,53 @@
+<import src='../commontemplates/pricedetail/pricedetail.wxml' />
+
+<view class="my-path {{isIPhoneX ? 'headfixed-ipx' : 'headfixed'}}">
+    <view class="thead">
+        <view class="cal-bar" bindtap="showCalender">
+            <view class="blue">{{ dateInfo.inDayText }}</view>
+            <view>{{dateInfo.inDayDesc}}入住</view>
+            <view class="night">{{dateInfo.days}}晚</view>
+            <view class="blue">{{ dateInfo.outDayText }}</view>
+            <view>{{dateInfo.outDayDesc}}离店</view>
+        </view>
+        <view class="filter-bar" wx:if="{{favCities.length}}">
+            <view id="collection-city-warp" class="scroll-view {{ collection.citySpread ? 'unfold' :'nowrap'}}">
+                <view class="item {{collection.cityId == item.id ? 'current' : ''}}" id="scroll-item-{{item.id}}" wx:for="{{favCities}}" wx:for-index="idx" wx:for-item="item" data-current="{{collection.cityId == item.id}}" data-id="{{item.id}}" data-index="{{idx}}" bindtap="changeCity"> {{ item.name }} </view>
+            </view>
+            <view class="city-more" wx:if="{{collection.moreIcon}}" bindtap="cityToggle" data-type="collection">
+                更多<text class="blue icon-more {{collection.citySpread ? 'wechat-font-filter-arrow-full-up' : 'wechat-font-filter-arrow-full-down'}}"></text>
+            </view>
+        </view>
+    </view>
+    <!--tbody-->
+    <view class="tbody  {{isIPhoneX ? 'iphone-x' : ''}} {{hotels.length ? 'pd':'' }}">
+        <!--hotellist-->
+        <scroll-view class="mp-list" scroll-y="true" bindscrolltolower="loadMore" lower-threshold="550" enable-back-to-top="true" style="height: {{hotels.length ? '100%;' : ''}}">
+            <view wx:for="{{hotels}}" wx:for-index="idx" wx:for-item="hotel" wx:key="hotelId">
+                <!-- 酒店cell -->
+                <include src="../list/hotelcard.wxml" />
+            </view>
+            <view wx:if="{{listLoading}}" class="list-bottom-tip">
+                <icon type="waiting" color="#888888" size="15" />
+                <text class="list-bottom-text">加载中</text>
+            </view>
+            <view wx:if="{{!listLoading && (!hasNextPage && !noHotels)}}" class="list-bottom-no-more">
+                没有更多了
+            </view>
+        </scroll-view>
+        <!--无内容提示-->
+        <view class="mp-tips" wx:if="{{!listLoading && noHotels}}">您还未有收藏的酒店，快去看看吧~</view>
+        <view class="cmask" wx:if="{{collection.citySpread}}" bindtap="cityToggle" catchtouchmove="noop"></view>
+    </view>
+</view>
+
+<!-- pricedetail -->
+<common-layer wx:if="{{showPriceDetail}}"
+      title="优惠说明"
+      subTitle="{{dateInfo.inDayText}}-{{dateInfo.outDayText}} {{dateInfo.days}}晚"
+      confirmButtonText="{{confirmBtnText}}"
+      bind:closeLayer="closePriceDetail"
+      bind:confirm="{{priceDetailConfirmFuc}}">
+    <template is="price-detail" data="{{dateInfo, priceDetail, priceDetailSkey: detailRoomId}}"></template>
+</common-layer>
+<!--白屏检测-->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

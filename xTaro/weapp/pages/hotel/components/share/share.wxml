@@ -1,0 +1,36 @@
+<view class="share-bg" style="background-url:url({{bgImage}});" hidden="{{hidden}}">
+    <!--分享朋友圈-->
+    <view class="share-wechat" hidden="{{!friendsLayerHidden}}" catchtouchmove="noop">
+        <slot name="topView"></slot>
+
+        <view class="share-wx">
+            <view class="close" bindtap="close"></view>
+            <button class="item reset-button" open-type="share" data-ubt-key="xcx_xqy_wxhy">
+                <image src="https://pages.ctrip.com/hotel_h5/wechat/wechat02.png" class="img"></image>
+                <view>微信好友</view>
+            </button>
+            <view class="item" bindtap="openFriendsLayer" data-ubt-key="xcx_xqy_pyq">
+                <image src="https://pages.ctrip.com/hotel_h5/wechat/wechat-pyq2.png" class="img"></image>
+                <view>微信朋友圈</view>
+            </view>
+        </view>
+    </view>
+
+    <!--分享二维码-->
+    <view class="share-layer {{from === 'couponhelp' ? 'bot50' : 'bot45'}}" hidden="{{friendsLayerHidden}}" catchtouchmove="noop">
+        <image src="{{imageUrl}}" bindtap="shareToFriends" binderror="" mode="scaleToFill" class="img" wx:if="{{!friendsLayerHidden}}"></image>
+        <view class="close" bindtap="closeFriendsShare"></view>
+        <!--save-->
+        <view class="share-bottom">
+            <block wx:if="{{from === 'couponhelp'}}">
+                <view class="ch-btn"  bindtap="shareToFriends"><view class="mbt10">保存后分享至朋友圈</view></view>            
+            </block>
+            <block wx:else>
+                <view class="btn"  bindtap="shareToFriends" data-ubt-key="xcx_xqy_bcbd">保存至本地</view>
+                <view class="color1">保存图片到手机后, 可以到朋友圈分享该酒店</view>
+            </block>
+        </view>
+    </view>
+</view>
+<view class="cmask" hidden="{{hidden}}" bindtap="close" catchtouchmove="noop"></view>
+<view class="cmask" hidden="{{friendsLayerHidden}}" bindtap="closeFriendsShare" catchtouchmove="noop"></view>

@@ -1,0 +1,49 @@
+<nav-bar navbar-data="{{navbarData}}"
+  bindback="onBack"></nav-bar>
+<!-- pages/bus/router/index.wxml -->
+<form bindsubmit='reportSubmitFromID'
+  report-submit="{{reportSubmit}}">
+    <view class="container">
+        <view class="tips_top"
+          style="display:{{errorMsgShow || 'none'}}">{{errorMsg}}</view>
+        <block wx:if="{{showTraceStep && !showLoginWindow}}">
+            <view class="clientid-text">{{clientID}}</view>
+            <view class="step-info">
+                <view wx:for="{{traceSteps}}">
+                    <text>
+            <text>{{item.message}}</text>
+                    <text>{{item.time}}</text>
+                    </text>
+                </view>
+            </view>
+            <view style="display:{{showError ? 'block' : 'none'}}">
+                <view class='error-text'>{{errInfo}}</view>
+            </view>
+        </block>
+        <view wx:if="{{showDefaultElement || isDebug}}"
+          class="container">
+            <block wx:if="{{isDebug}}">
+                <input style='height:50px; width:100%; background-color:#fff; font-size: 36rpx;'
+                  maxlength='-1'
+                  type='text'
+                  placeholder='请输入需要测试的路径'
+                  bindconfirm='onTest'></input>
+                <switch checked="{{origin}}"
+                  bindchange="changeType"></switch>
+                <text>是否原生链接</text>
+            </block>
+            <button form-type='submit'
+              class="btn-primary margin-horizontal"
+              hover-class='btn-primary_hover'
+              bindtap='toDefaultPage'>
+                回到首页
+            </button>
+        </view>
+    </view>
+    <view class="view-check"
+      bindanimationend="viewReadyHandle"></view>
+    <template is='loginwindow'
+      data="{{visible: showLoginWindow, ...loginWindowData}}"></template>
+    <perinfo-protect-float forceExitMiniapp="{{true}}"></perinfo-protect-float>
+    <authorizationFloat id="cwxAuthFloat"></authorizationFloat>
+</form>

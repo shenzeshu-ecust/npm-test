@@ -1,0 +1,48 @@
+<template name="strideTrain">
+    <view class="bupiao-box-bd">
+        <block wx:if="{{solItem.RecommendDepartType > 0}}">
+            <view class="item" wx:if="{{solItem.RecommendDepartType}}">
+                <!-- <view class="time">{{solItem.RecommendDepStationTime}}</view> -->
+                <view class="station station--notime">{{solItem.RecommendDepartStation}}</view>
+                <view class="info">多买{{solItem.RecommendDepartType}}站</view>
+            </view>
+        </block>
+        <view class="item">
+            <view class="time">{{mainTrainItem.OriginDepartTime}}</view>
+            <view class="station">{{mainTrainItem.OriginDepartStation}}</view>
+        </view>
+        <block wx:if="{{solItem.RecommendDepartType < 0}}">
+            <view class="item bu" wx:if="{{solItem.RecommendDepartType}}">
+                <view class="time">{{solItem.RecommendDepStationTime}}</view>
+                <view class="station">{{solItem.RecommendDepartStation}}</view>
+                <view class="info">补票{{-solItem.RecommendDepartType}}站</view>
+            </view>
+        </block>
+
+        <block wx:if="{{solItem.RecommendArriveType < 0}}">
+            <view class="item">
+                <view class="time">{{solItem.RecommendArrStationTime}}</view>
+                <view class="station">{{solItem.RecommendArriveStation}}</view>
+            </view>
+        </block>
+        <view class="item {{solItem.RecommendArriveType < 0 ? 'bu':''}}">
+            <view class="time">{{mainTrainItem.OriginArriveTime}}</view>
+            <view class="station">{{mainTrainItem.OriginArriveStation}}</view>
+            <view class="info" wx:if="{{solItem.RecommendArriveType < 0}}">补票{{-solItem.RecommendArriveType}}站</view>
+        </view>
+        <block wx:if="{{solItem.RecommendArriveType > 0}}">
+            <view class="item">
+                <!-- <view class="time">{{solItem.RecommendArrStationTime}}</view> -->
+                <view class="station station--notime">{{solItem.RecommendArriveStation}}</view>
+                <view class="info">多买{{solItem.RecommendArriveType}}站</view>
+            </view>
+        </block>
+    </view>
+    <view class="train-price">
+        <dfn>￥</dfn>
+        <text class="strong">{{solItem.RecommendPrice}}</text>
+    </view>
+    <view class="bupiao-tick">
+        <view class="item" wx:for="{{solItem.SeatInfoList}}" wx:for-item="solSeat">{{solSeat.SeatType + solSeat.SeatCount}}张</view>
+    </view>
+</template>

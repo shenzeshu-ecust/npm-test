@@ -1,0 +1,194 @@
+@import './utils/machine.wxss';
+
+
+/******F*************/
+
+.index-hd {
+  padding: 80rpx;
+  text-align: center;
+  padding: 20rpx 26rpx 40rpx;
+}
+
+.index-desc {
+  margin-top: 20rpx;
+  color: #888888;
+  font-size: 28rpx;
+}
+
+.index-tip {
+  color: #888;
+  font-size: 28rpx;
+  text-align: center;
+  margin: 20rpx 0;
+}
+/* 
+button {
+  margin-top: 40rpx;
+  width: 400rpx;
+} */
+
+.index-mod {
+  margin: 10rpx 60rpx 10rpx 60rpx;
+  color: #888;
+}
+
+.index-mod text {
+  display: inline-block;
+  line-height: 20px;
+  font-size: 32rpx;
+}
+
+/************************** 温馨提示弹窗 ***************************************************/
+.train_tips {
+    position: relative;
+    width: 600rpx;
+    border-radius: 10rpx;
+    text-align: center;
+    padding-top: 40rpx;
+    padding-bottom: 40rpx;
+}
+
+.train_tips__title {
+    color: #333333;
+    font-family: PingFangSC-Medium;
+    font-size: 40rpx;
+    font-weight: 600;
+    margin-top: 8rpx;
+    margin-bottom: 16rpx;
+}
+
+.train_tips__tips {
+    color: #666666;
+    font-family: PingFangSC-Regular;
+    font-size: 24rpx;
+    margin-bottom: 48rpx;
+    padding: 0 30px;
+}
+
+.train_tips__brn-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.train_tips__assist-btn {
+    height: 80rpx;
+    width: 520rpx;
+    background: rgb(77, 132, 228);
+    color: #ffffff;
+    font-size: 30rpx;
+    line-height: 80rpx;
+    padding-bottom: 8rpx;
+    border-radius: 10rpx;
+}
+
+.train_tips__assist-btn.gray {
+    background: #33333340;
+}
+
+/************************** 温馨提示弹窗 ***************************************************/
+.train_success {
+    position: relative;
+    width: 600rpx;
+    border-radius: 16rpx;
+    text-align: center;
+    padding-top: 110rpx;
+    padding-bottom: 40rpx;
+    background: url(https://images3.c-ctrip.com/train/2022/app/8.55/zengzhang/zhuli/BG.png) center top / contain no-repeat;
+}
+.train_success__noaward{
+    padding-top: 50rpx;
+}
+
+.train_success__headImage {
+    position: absolute;
+    top: -90rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300rpx;
+    height: 223rpx;
+}
+
+.train_success__title {
+    color: #1f3c64;
+    font-family: PingFangSC-Semibold;
+    font-size: 40rpx;
+    font-weight: bold;
+    margin-top: 8rpx;
+    margin-bottom: 16rpx;
+}
+
+.train_success__tips {
+    color: #666666;
+    font-family: PingFangSC-Regular;
+    font-size: 30rpx;
+    margin-bottom: 20rpx;
+}
+
+.train_success_prize {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50rpx;
+}
+
+.train_success_prize_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 14rpx 24rpx 14rpx 18rpx;
+    color: #ffffff;
+    font-size: 30rpx;
+    font-family: PingFangSC-Semibold;
+    line-height: 1;
+}
+
+.train_success_prize_item_img {
+    width: 36rpx;
+    height: 36rpx;
+    margin-right: 10rpx;
+}
+
+.prize_zhuli {
+    background: linear-gradient(-90deg, rgb(255, 104, 70) -6.59%, rgb(255, 181, 32) 100%);
+    border-radius: 24rpx 6rpx;
+    margin-right: 26rpx;
+}
+
+.prize_sudu {
+    background: linear-gradient(-90deg, rgb(23, 200, 142) -6.59%, rgb(59, 230, 173) 100%);
+    border-radius: 24rpx 6rpx;
+}
+
+.train_success__coupon-img {
+    height: 138rpx;
+    width: 520rpx;
+    margin-bottom: 48rpx;
+}
+
+.train_success__brn-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.train_success__assist-btn {
+    width: 520rpx;
+    height: 88rpx;
+    background: linear-gradient(-90deg, rgb(0, 118, 245) 0%, rgb(0, 167, 250) 97.42%);
+    border-radius: 12rpx;
+    color: #ffffff;
+    font-size: 34rpx;
+    font-family: PingFangSC-Regular;
+    padding-bottom: 8rpx;
+}
+
+.train_success__assist-btn.gray {
+    background: #33333340;
+}
+
+.train_success__close-btn {
+    position: absolute;
+    right: 20rpx;
+    top: 20rpx;
+    width: 50rpx;
+    height: 50rpx;
+    background: url("https://images3.c-ctrip.com/marketing/static/wangzhe_ic_popup_close.png") center / 32rpx 32rpx no-repeat;
+}

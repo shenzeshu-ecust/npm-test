@@ -1,0 +1,86 @@
+<perinfo-protect-float></perinfo-protect-float>
+<view>
+    <authorizationFloat id="cwxAuthFloat"></authorizationFloat>
+    <view class="content-box">
+        <view wx:if="{{!showMask && !showPhoto}}" class="content-tip">
+            <text class="content-tip-text">请将身份证置于框内并尝试对齐边缘</text>
+            <view class="iconfont icon-help" bindtap="showMaskLayerTap" />
+        </view>
+        <view wx:if="{{!showMask && !showPhoto}}" class="camera-box" style="height: {{cameraHeight}}px; width: {{cameraWidth}}px;">
+            <view class="box-border lt" />
+            <view class="box-border rt" />
+            <view class="box-border rb" />
+            <view class="box-border lb" />
+            <camera device-position="back" flash="{{flashStatus ? 'on':'off'}}" binderror="error" style="height: {{cameraHeight - 2}}px; width: {{cameraWidth - 2}}px; border:1px solid #FFFFFF;" >
+                <cover-view class="image-avatar">
+                    <cover-image src="https://pic.c-ctrip.com/platform/h5/miniapp/ocr/avatar.png" style="height: {{cameraHeight-120}}px; width: {{(cameraHeight-120) * 0.85}}px; margin-right: 20px;" />
+                </cover-view>
+            </camera>
+        </view>
+        <view wx:if="{{showPhoto}}" class="photo-box">
+            <image src="{{photoPath}}" mode="aspectFit" />
+        </view>
+        <view class="button-box">
+            <view wx:if="{{!showPhoto}}" class="button-inner-box box-image" bindtap="chooseImageTap">
+                <view class="iconfont icon-image" />
+                <view class="button-inner-text">相册</view>
+            </view>
+            <view wx:if="{{showPhoto}}" class="reshoot" hover-class="reshoot-hover" bindtap="reshootTap">重新拍摄</view>
+            <view class="take-photo" bindtap="takePhotoTap" hover-class="take-photo-hover" />
+            <view wx:if="{{!showPhoto}}" class="button-inner-box box-flash" bindtap="changeFlashStatusTap">
+                <view wx:if="{{flashStatus}}" class="iconfont icon-flash-on" />
+                <view wx:if="{{!flashStatus}}" class="iconfont icon-flash-off" />
+                <view class="button-inner-text">闪光灯</view>  
+            </view>
+            <view wx:if="{{showPhoto}}" class="ocr-begin">
+                <button class="ocr-begin-button" bindtap="beginOCRTap" hover-class="ocr-begin-hover">开始识别</button>
+            </view>
+        </view>
+    </view>
+    <cover-view wx:if="{{showLoading}}" class="content-common">
+        <cover-view class="loading-box">
+            <cover-image src="https://pic.c-ctrip.com/platform/h5/miniapp/ocr/loading.gif" class="image-loading" ></cover-image>
+            <cover-view class="loading-text">正在识别</cover-view>
+        </cover-view>
+    </cover-view>
+    <cover-view wx:if="{{showFailModel}}" class="content-common">
+        <cover-view class="fail-model">
+            <cover-view class="model-content">
+                <cover-view class="model-title">识别失败</cover-view>
+                <cover-view class="model-text">请检查证件是否清晰或正确</cover-view>
+            </cover-view>
+            <cover-view wx:if="{{modelButtonStatus}}" class="camera-model-button">
+                <button class="camera-ok-button" hover-class="model-ok-hover" bindtap="hideFailModelTap">我知道了</button>
+            </cover-view>
+            <cover-view wx:if="{{!modelButtonStatus}}" class="image-model-button">
+                <cover-view class="image-button image-left">
+                    <button class="image-cancel-button" hover-class="model-cancel-hover" bindtap="hideFailModelTap">取消</button>
+                </cover-view>
+                <cover-view class="image-button image-right">
+                    <button class="image-ok-button" hover-class="model-ok-hover" bindtap="chooseImageTap">重选照片</button>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
+    <view wx:if="{{showMask}}" class="content-mask">
+        <text class="mask-rules-title">请确保以下几点\n</text>
+        <view class="mask-rules-content">
+            <view class="mask-rules-point"><text class="point" /></view>
+            <text>证件为有效证件</text>
+        </view>
+        <view class="mask-rules-content">
+            <view class="mask-rules-point"><text class="point" /></view>
+            <text>扫描角度正对证件，无倾斜、无抖动</text>
+        </view>
+        <view class="mask-rules-content">
+            <view class="mask-rules-point"><text class="point" /></view>
+            <text>证件无反光且清晰。若灯光过暗，请打开闪光灯或至明亮的地方扫描</text>
+        </view>
+        
+        <view class="mask-rules-content">
+            <view class="mask-rules-point"><text class="point" /></view>
+            <text>网络顺畅</text>
+        </view>
+        <button class="mask-button" bindtap="hideMaskLayerTap" hover-class="mask-button-hover">知道了</button>
+    </view>
+</view>

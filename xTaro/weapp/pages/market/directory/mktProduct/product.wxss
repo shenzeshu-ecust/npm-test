@@ -1,0 +1,4 @@
+@import "./../legaoComponents/productCanvas/index.wxss";
+.wechat-long-list-chunk .list-item{
+  min-height: 14960px !important;
+}

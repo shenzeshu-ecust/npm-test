@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "landlord-said": "../landlord_said/index",
+    "bottom-popup": "../bottom_popup/index",
+    "bubble-tips": "../bubble_tips/index"
+  }
+}

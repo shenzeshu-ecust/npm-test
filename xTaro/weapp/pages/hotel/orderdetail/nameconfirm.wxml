@@ -1,0 +1,17 @@
+<common-layer title="请输入住客姓名"
+              confirmButtonText="确认提交"
+              confirmDisabled="{{!occupantNameValid}}"
+              bind:confirm="submitName"
+              bind:closeLayer="closeNameValidLayer">
+    <view class="name-confirm-content" slot="content">
+        <view class="notice">
+            <image src="https://pages.c-ctrip.com/hotels/wechat/img/dolphin.png" class="img"></image>
+            <text>由于您未登录携程账号，为保障信息安全，请输入完整的住客姓名。</text>
+        </view>
+        <view class="names">
+            <view class="first" wx:if="{{psgName[0]}}">{{psgName[0]}}</view>
+            <input class="middle" placeholder="请补充" placeholder-class="pld" value="{{occupantName}}" bindinput="inputUserName" bindconfirm="submitName" cursor-spacing="100" />
+            <view wx:if="{{psgName[1]}}" class="last">{{psgName[1]}}</view>
+        </view>
+    </view>
+</common-layer>

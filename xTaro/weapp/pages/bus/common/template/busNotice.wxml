@@ -1,0 +1,28 @@
+<template name="busnotice">
+    <view class="bus-notice-container">
+        <view class='banner'>
+            <view class="bus-notice-item" bindtap="onBusNoticeClick">
+                <view class="flex-row-center info">
+                    <icon type="" size="32rpx" class="icon-info phoneNumber-icon"/>
+                    <view class="content"
+                          style="width:{{busNoticeData.noticeContentWidth}}rpx; color:{{busNoticeData.noticeContentWidth === 580 ? '#666666' : '#FF7700'}}">
+                        {{busNoticeData.busNoticeContent}}
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>
+<template name="busnoticemodal">
+    <view class="bus-notice-modal" bindtap="onClosebusNoticeModal" catchtouchmove='empty' catchlongtap='empty'>
+        <view class="bus-notice-modal-container">
+            <view class="bus-notice-title-content">
+                <view class="title">{{busNoticeData.busNoticeTitle}}</view>
+                <view class="close-tips icon-font icon-close bus-notice-close" bindtap="onClosebusNoticeModal"></view>
+            </view>
+            <scroll-view scroll-y class="bus-notice-scroll">
+                <view class="content">{{busNoticeData.busNoticeContent}}</view>
+            </scroll-view>
+        </view>
+    </view>
+</template>

@@ -1,0 +1,9 @@
+{
+	"backgroundTextStyle": "dark",
+	"navigationBarTitleText": "消息",
+	"navigationBarBackgroundColor": "#fff",
+	"navigationBarTextStyle": "black",
+	"backgroundColor": "#FAFAFC",
+	"navigationStyle": "default",
+	"usingComponents": {}
+}

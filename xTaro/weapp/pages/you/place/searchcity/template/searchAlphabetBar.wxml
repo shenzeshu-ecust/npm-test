@@ -1,0 +1,10 @@
+<template name="searchAlphabetBar">
+  <view class="searchalphabetbar-con {{searchTouchFlag ? 'searchalphabetbar-conhover' : ''}}" wx-if="{{searchAlphabetBarList}}">
+  <!-- <view class="searchalphabetbar-con {{touchFlag ? 'searchalphabetbar-conhover' : ''}}" wx-if="{{searchAlphabetBarList}}" bindtouchstart="searchAlphabetTouchStart" bindtouchend="searchAlphabetTouchEnd" bindtouchmove="searchAlphabetTouchMove"> -->
+    <block wx:for="{{searchAlphabetBarList}}" wx:key="{{key}}">
+      <view class="searchalphabetbar-item" data-alpha="{{item}}" bindtap="searchAlphabetClick">
+        <text>{{item.alpha === 'Hot' ? '热门' : item.alpha}}</text>
+      </view>
+    </block>
+  </view>
+</template>

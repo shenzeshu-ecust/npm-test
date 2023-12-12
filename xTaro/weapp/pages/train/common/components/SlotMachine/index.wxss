@@ -1,0 +1,21 @@
+@import "../../iconfont.wxss";
+.backmask {transition: all 300ms ease-in-out;position: fixed;top: 0;left: 0;z-index:3000;bottom:0;right:0;background-color: rgba(0, 0, 0, 0.7);}
+.wheel-boxs {position: fixed;top:200rpx;left: 50%;transform: translateX(-50%);z-index: 3002;}
+.wheel-boxs .box-hd {width: 680rpx;height: 594rpx;background-size: 100% 100%;background-repeat: no-repeat;}
+.wheel-boxs .box-hd.jl {background-image: url(https://images3.c-ctrip.com/train/app/8.29/xcx/ddxq_pop/pop_ddxq_bg2.png);}
+.wheel-boxs .box-hd.ordinary {background-image: url(https://images3.c-ctrip.com/train/2021/app/V8.43/xiaochengxu/xinkezhuanhua/img-tou.png);}
+.wheel-boxs .box-bm {width: 540rpx;height: 68rpx;margin: 0 auto;background: url('https://images3.c-ctrip.com/train/app/8.29/xcx/ddxq_pop/pop_ddxq_dibu.png') no-repeat;background-size: 100% 100%;border-radius: 0 0 60rpx 60rpx;position: relative;top:-1px;z-index: -1;}
+.wheel-boxs .box-hd .tit {width: 100%;text-align: center;font-size: 36rpx;color: #7B3D3D;position: absolute;top: 358rpx;font-weight: 500;}
+.wheel-boxs .box-hd .cont {width: 516rpx;height: 156rpx;margin-top: 0 auto;background: url(https://images3.c-ctrip.com/train/2022/app/8.46/zengzhang/kanjia/pop_ddxq_redbg@3x.png) no-repeat;background-size: 100% 100%;position: absolute;top: 438rpx;left: 50%;transform: translateX(-50%);}
+.wheel-boxs .btn {width: 468rpx;height: 148rpx; background: url(https://images3.c-ctrip.com/train/2022/app/8.46/zengzhang/kanjia/anniu_hong@3x.png) no-repeat;background-size: 100% 100%;text-align: center;line-height: 136rpx;font-size: 40rpx;font-weight: 600;color: #FFFFFF;background-position-y: 10rpx;}
+.wheel-boxs .btn::after{border: 0;}
+.wheel-boxs .num {width: 80rpx;height:56px;display: inline-block;}
+.wheel-boxs .num:nth-child(1) { margin-left: 90rpx;margin-top: 10rpx;}
+.wheel-boxs .num:nth-child(3) { margin-left: 60rpx;margin-top: 10rpx;}
+.addHeight {animation:addHeight 0.2s forwards;transform-origin:bottom}
+.wheel-boxs .ifont-closed{position: absolute;bottom: -130rpx;left: 50%;transform: translateX(-50%);font-size: 64rpx;color: #fff}
+
+@keyframes addHeight {
+  from { height: 68rpx}
+  to   { height: 192rpx}
+}

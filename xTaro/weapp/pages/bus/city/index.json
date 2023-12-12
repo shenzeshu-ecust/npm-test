@@ -1,0 +1,9 @@
+{
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "city-list": "./components/city-list/index",
+    "city-search": "./components/city-search/index",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index",
+    "authorizationFloat": "/cwx/component/authorizationFloat/index"
+  }
+}

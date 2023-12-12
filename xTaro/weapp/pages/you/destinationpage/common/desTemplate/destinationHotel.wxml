@@ -1,0 +1,25 @@
+<template name="destinationHotel">
+  	<view class="destination-section destination-hotel" wx:if="{{hotelData.hotelInfoList}}" data-modulename="{{hotelData.title}}">
+    	<!-- destinationHotel -->
+		<view class="destination-title destination-title-padding1">
+    		<view class="title-name">{{hotelData.title}}</view>
+    	</view>
+    	<view class="hotel-list">
+    		<block wx:for="{{hotelData.hotelInfoList}}" wx:key="*this" wx:index="index">
+				<view class="hotel-item" bindtap="toHotelDetail" data-ubttitle="{{hotelData.title}}" data-ubtitemid="{{item.hotelId}}" data-ubtname="{{item.name}}" data-hoteldetail="{{item.hotelSchema}}">
+	    			<image src="{{item.imageUrl}}" />
+	    			<view class="hotel-detail">
+	    				<view class="hotel-name">{{item.name}}</view>
+	    				<view class="hotel-score"><text wx:if="{{item.rating}}">{{item.rating}}</text><text wx:if="{{item.rating}}" class="score">分</text><text>{{item.ratingText}}</text></view>
+	    				<view class="hotel-position">
+	    					<view class="hotel-pos">{{item.distance}}</view>
+	    					<view class="hotel-priold" wx:if="{{item.originalPrice}}">￥<text>{{item.originalPrice}}</text></view>
+						</view>
+						<view class="hotel-prinew">￥<text>{{item.price}}</text>起</view>
+	    			</view>
+	    		</view>
+    		</block>
+    		<view wx:if="{{hotelData.moreSchema}}" class="hotel-more" bindtap="toViewMoreHotel" data-ubttitle="{{hotelData.title}}" data-ubtname="查看更多" data-moreschema="{{hotelData.moreSchema}}">查看更多<text></text></view>
+    	</view>
+  	</view>
+</template>

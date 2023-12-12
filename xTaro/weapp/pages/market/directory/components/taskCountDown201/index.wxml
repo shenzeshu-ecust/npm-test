@@ -1,0 +1,23 @@
+<movable-area class="task-count-down__movable-area">
+  <movable-view y="200" direction="vertical">
+    <view class="task-count-down-wraper">
+      <view wx:if="{{taskPopType == 201}}" class="task-count-down {{status === START_ING || status === PAUSE_ING ? 'task-count-down__start' : ''}} {{status === PAUSE_ING ? 'task-count-down__pause' : '' }}" bindtap="handleClick">
+        <image wx:if="{{status === FINAL}}" src="https://pages.c-ctrip.com/market/components/task/task-count-down-close.png" class="task-count-down__image task-count-down__image-close" mode="aspectFit"></image>
+        <block wx:else>
+          <!-- 关闭的红包 -->
+          <image src="https://pages.c-ctrip.com/market/components/task/task-count-down-close.png" class="task-count-down__image task-count-down__image-close task-count-down__animate {{status == END ? 'task-count-down__image-close-animate' : ''}}" mode="aspectFit"></image>
+          <!-- 开封的红包 -->
+          <image class="task-count-down__image task-count-down__image-open {{status == END ? 'task-count-down__image-open-animate' : ''}}" src="https://pages.c-ctrip.com/market/components/task/task-count-down-open.png" mode="aspectFit"></image>
+        </block>
+
+        <view class="task-count-down__cover-left {{status === FINAL ? 'task-count-down__cover-transparent' : ''}}">
+          <view class="task-count-down__curcle-border-left" style="animation-duration: {{task_times}}s" bind:animationend="handleAnimationEnd"></view>
+        </view>
+        <view class="task-count-down__cover-right {{status === FINAL ? 'task-count-down__cover-transparent' : ''}}">
+          <view class="task-count-down__curcle-border-right" style="animation-duration: {{task_times}}s" bind:animationstart="handleAnimationStart"></view>
+        </view>
+      </view>
+      <view wx:if="{{showTipType == 'loginTips'}}" class="task-count-down__login-tips arrow">登录后完成任务领取奖励</view>
+    </view>
+  </movable-view>
+</movable-area>

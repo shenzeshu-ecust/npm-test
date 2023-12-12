@@ -1,0 +1,67 @@
+.bargin-banner{
+    position: relative;
+    height: 150rpx;
+    width: 750rpx;
+    box-sizing: border-box;
+    background: url('https://pages.c-ctrip.com/hotels/wechat/market/cutprice/cutprice-mporderdetail-started.png?__ares_maxage=10m') no-repeat 0 0;
+    background-size: cover;
+    padding: 14rpx 0 14rpx 14rpx;
+ }
+.unstarted{
+    height: 150rpx;
+    width: 750rpx;
+    background: url('https://pages.c-ctrip.com/hotels/wechat/market/cutprice/cutprice-mporderdetail-unstarted.png?__ares_maxage=10m') no-repeat 0 0;
+    background-size: cover;
+    padding: 0;
+}
+.unstarted-new {
+    height: 150rpx;
+    width: 750rpx;
+    padding: 0;
+    background: url('https://pages.c-ctrip.com/hotels/wechat/market/cutprice/cutprice-mporderdetail-unstarted-new.png?__ares_maxage=10m') no-repeat 0 0;
+    background-size: cover;
+}
+
+.bargin-banner .title{
+    font-size: 50rpx;
+    color: #fff;
+}
+
+.bargin-banner .title .price{
+    color: #fff500;
+    font-size: 72rpx;
+    margin: 10rpx;
+}
+
+.bargin-banner .detail{
+    font-size: 30rpx;
+    color: #ffe3d3;
+}
+
+.bargin-banner .detail .time{
+    display: inline-block;
+    width: 60rpx;
+    height: 40rpx;
+    border-radius: 0.28rpx;
+    background: #fff;
+    color: #FF5F5C;
+    text-align: center;
+    line-height: 40rpx;
+    margin: 0 5rpx;
+    font-weight: 500;
+}
+
+.bargin-banner .action{
+    font-size: 36rpx;
+    position: absolute;
+    right: 5%;
+    top: 50rpx;
+    color: #fff;
+    font-weight: bolder
+}
+
+button{
+    padding: 0;
+    text-align: left;
+    line-height: normal;
+}

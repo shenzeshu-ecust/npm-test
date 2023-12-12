@@ -1,0 +1,9 @@
+<!--朋友圈海报-->
+<block wx:if="{{showPoster}}">
+    <view catchtouchmove="noop" class="mask"  bindtap="toggleFriendsPoster"></view>
+    <view class="friends-poster" catchtouchmove="noop">
+        <image src="{{imageUrl}}" mode="aspectFit" bindload="posterLoad" binderror="posterError" class="img"></image>
+        <!--save-->
+        <view wx:if="{{showBtn}}" class="btn d-flex flex-center" bindtap="downLoadPoster"><view class="wechat-font wechat-font-download"></view>保存到相册</view>
+    </view>
+</block>

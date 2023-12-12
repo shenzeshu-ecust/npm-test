@@ -1,0 +1,149 @@
+<import src="../commontemplates/deposit/deposit.wxml"/>
+<view scroll-y class="pd-box black2" slot="content">
+    <!-- 担保 -->
+    <view wx:if="{{priceInfo.guaranteeInfo.id}}" class="pd-item">
+        <view class="title-box">
+            <view class="title black1">在线担保</view>
+            <view class="common-price constant-color">
+                <view>
+                    <block wx:if="{{priceInfo.guaranteeInfo.localAmount}}">约</block>
+                    ¥<text class="price-bold">{{priceInfo.guaranteeInfo.amount}}</text>
+                </view>
+                <view wx:if="{{priceInfo.guaranteeInfo.localAmount}}">
+                    {{priceInfo.localCurrency}}{{priceInfo.guaranteeInfo.localAmount}}
+                </view>
+            </view>
+        </view>
+        <view >
+            <text >担保金用于锁定房源</text>
+            <!-- <text >离店后原路返回</text> -->
+        </view>
+        <block wx:if="{{priceInfo.guaranteeInfo.depositPolicy}}">
+            <view class="mt16">
+                <template is="deposit-policy-table" data="{{depositPolicyTable: priceInfo.guaranteeInfo.depositPolicy.depositPolicyTable, desc:priceInfo.guaranteeInfo.depositPolicy.desc}}"></template>
+            </view>
+        </block>
+    </view>
+
+    <!-- 支付 -->
+    <view class="pd-item">
+        <view class="title-box">
+            <view class="title black1">{{uiInfo.paymentTitle}}</view>
+            <view class="common-price constant-color">
+                <view>
+                    <block wx:if="{{priceInfo.localAmount}}">约</block>
+                    ¥<text class="price-bold">{{priceInfo.amount}}</text>
+                </view>
+                <view wx:if="{{priceInfo.localAmount}}">
+                    {{priceInfo.localCurrency}}{{priceInfo.localAmount}}
+                </view>
+            </view>
+        </view>
+        <!-- 每晚明细 -->
+        <block wx:if="{{!dateInfo.isLongRent}}">
+        <view class="pd-li" wx:for="{{priceInfo.dailyDetails}}">
+            <view class="li-left">
+                <text >{{item.date}}</text>
+                <text class="ml12">{{item.mealDescFull}}</text>
+            </view>
+            <view wx:if="{{item.amount}}">
+                ¥{{item.amount}}
+                <block wx:if="{{roomQuantity > 1}}">x {{roomQuantity}}</block>
+            </view>
+        </view>
+        </block>
+        <!-- 含税费说明 -->
+        <view wx:if="{{priceInfo.taxInPriceDesc}}" class="tax-inprice black3">{{priceInfo.taxInPriceDesc}}</view>
+        <!--额外购买的产品价格明细，例如：券包-->
+        <view wx:if="{{priceInfo.additionPriceItems.length}}" class="discount-box">
+            <view wx:for="{{priceInfo.additionPriceItems}}" class="pd-li" wx:for-item="item" wx:key="title">
+                <view class="li-left">{{item.title}}</view>
+                <view>¥{{item.amount}}</view>
+            </view>
+        </view>
+        <!-- 优惠减 -->
+        <view wx:if="{{priceInfo.deductionItems.length}}" class="discount-box">
+            <view wx:for="{{priceInfo.deductionItems}}" class="pd-li">
+                <view class="li-left">{{item.title}}</view>
+                <view>- ¥{{item.amount}}</view>
+            </view>
+            <!--积分抵房费-->
+            <block wx:for="{{mpInfo.checkboxList}}" wx:for-item="item" wx:key="id">
+                <view wx:if="{{item.isPartFree && item.isSelected}}" class="pd-li">
+                    <view class="li-left">积分兑房费立减</view>
+                    <view>- ¥{{item.maxFreePrice}}</view>
+                </view>
+            </block>
+
+        </view>
+        <!-- 返现模块 -->
+        <block wx:if="{{priceInfo.backAmountAll}}">
+            <view class="title-box">
+                <text class="title black1">离店返现</text>
+                <text class="common-price constant-color">
+                    返<text >¥</text><text class="price-bold">{{priceInfo.backAmountAll}}</text>
+                </text>
+            </view>
+            <view wx:for="{{priceInfo.backItems}}" class="pd-li">
+                <view class="li-left">{{item.title}}</view>
+                <view>¥{{item.amount}}</view>
+            </view>
+        </block>
+
+        <!-- 税费 -->
+        <block wx:if="{{priceInfo.isOnlinePayRoom && priceInfo.isShowExtraTax}}">
+            <!-- 到店付税title -->
+            <view class="title-box">
+                <view class="title black1">到店支付</view>
+                <view wx:if="{{priceInfo.extraTax.amount > 0}}" class="common-price constant-color">
+                    <view>
+                        <block wx:if="{{priceInfo.extraTax.localAmount}}">约</block>
+                        ¥<text class="price-bold">{{priceInfo.extraTax.amount}}</text>
+                    </view>
+                    <view wx:if="{{priceInfo.extraTax.localAmount}}">
+                        {{priceInfo.localCurrency}}{{priceInfo.extraTax.localAmount}}
+                    </view>
+                </view>
+            </view>
+            <!-- 另付税费明细 -->
+            <view wx:if="{{priceInfo.extraTax.items && priceInfo.extraTax.items.length}}" wx:for="{{priceInfo.extraTax.items}}" class="pd-li">
+                <view class="li-left">{{item.title}}</view>
+                <view wx:if="{{item.amount && item.amount > 0}}">¥{{item.amount}}</view>
+            </view>
+            <view wx:if="{{priceInfo.extraTax.desc}}" class="pd-li" catchtap="toggleExtraTaxDesc">
+                <view>{{priceInfo.extraTax.title}}</view>
+                <view class="wechat-font-qa ml12"></view>
+            </view>
+        </block>
+
+        <!-- 多晚或多间 -->
+        <view wx:if="{{priceInfo.realCost > 0}}" class="days-amount">
+            <view >实际花费 ¥{{priceInfo.realCost}}</view>
+            <view >每间每晚均价 ¥{{priceInfo.avgRealCost}}</view>
+        </view>
+    </view>
+
+    <!-- 积分 -->
+    <view class="pd-item">
+        <view class="title-box">
+            <text class="title black1">本单积分</text>
+        </view>
+        <view class="pd-li">
+            <view class="li-left">
+                <text >离店可获积分</text>
+                <text class="points-tag">{{pointsGetInfo.coefficient}}倍加速</text>
+            </view>
+            <view>{{pointsGetInfo.calculationPoint}}分</view>
+        </view>
+        <!-- 积分兑换 -->
+        <view wx:for="{{mpInfo.selectedList}}" class="pd-li">
+            <view class="li-left">
+                <text >{{item.name}}</text>
+                <text wx:if="{{item.tag}}" class="points-tag">{{item.tag}}</text>
+            </view>
+            <view>- {{item.trueCost}}分</view>
+        </view>
+    </view>
+
+</view>
+

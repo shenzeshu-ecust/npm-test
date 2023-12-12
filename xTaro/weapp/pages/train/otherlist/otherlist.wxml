@@ -1,0 +1,210 @@
+<import src="../common/components/TrainCardInfo/TrainCardInfo.wxml" />
+
+<view class="page">
+  <!--<view class="book-tips linear fixed">多选抢票车次，可大幅提高成功率！<button class="btn-screen"  bindtap="showFilter"><text class="ifont-screen"></text>筛选<text class="dot" wx:if="{{hasFilter}}"></text></button></view>加个提示-->
+  <view class="filter-bar">
+    <view class="filters-con-li {{isSortTimeTxtBlue?'blue':''}}" bindtap="onTapSortByTime">出发{{isSortTimeTxtBlue ?isSortTimeAesc?' 早-晚':' 晚-早':''}}</view>
+    <view class="filters-con-li {{isSortDiffTxtBlue?'blue':''}}" bindtap="onTapSortByDiff">行程耗时{{isSortDiffTxtBlue ?isSortDiffAesc?' 短-长':' 长-短':''}}</view>
+    <view class="filters-con-li" bindtap="showFilter">筛选</view>
+  </view>
+<scroll-view class="wrap" scroll-y scroll-into-view="{{scrollToView}}">
+  <view class="pop-checi ">
+
+    <block wx:if="{{hasFilter}}">
+        <view class="sel-box {{train.current ? 'cur' : '' }}" wx:for="{{filterTrainList}}" wx:key="trainNumber" wx:for-item="train" data-index="{{index}}" bindtap="toggleFilterTrain">
+          <view class="recomand-tag" wx:if="{{train.Tag}}">
+            {{train.Tag}}
+          </view>
+          <view class="sel-inner-box">
+            <template is="train-card-info" data="{{train}}"></template>
+            <view class="rbox">
+              <icon type="{{train.current? 'success':'circle'}}" size="20" class="{{train.disabled?'cir-marker':train.current?'':'cir-grey'}}"
+                color="rgb(0,134,246)"></icon>
+            </view>
+          </view>
+          <view class="seat">
+              <!-- 座席余票显示 -->
+              <view class="sel-info">
+                <view wx:if="{{train.isPreSale}}" class="torage">{{train.preSaleTimeStr}}</view>
+                <view wx:elif="{{!train.SeatCount && train.SucRate}}" class="torage">暂无余票，建议抢票</view>
+                <block wx:else>
+                  <view wx:for="{{train.SeatList}}" wx:key="SeatName" wx:for-item="seat"
+                    class="item {{!seat.SeatInventory ? 'disabled' : ''}}" hidden="{{index > 3}}">
+                    <view class="icon-jing" wx:if="{{seat.IsCanSilent}}">静</view>
+                    {{seat.SeatName + (seat.SeatInventory < 21 ? (seat.SeatInventory ? ' ' + seat.SeatInventory + '张' : '' ) : '有票'
+                      )}} <text class="torage" wx:if="{{!seat.SeatInventory}}">(抢)</text>
+                  </view>
+                  <view class="item" wx:for="{{train.extraEmptytSeat}}"></view>
+                  <!--不足4个的时候，补齐4个item-->
+                </block>
+              </view>
+            </view>
+        </view>
+        <view wx:if="{{filterTrainList.length === 0}}" class="norecommandtrain">当前条件下无可筛选车次</view>
+    </block>
+    <block wx:else>
+      <view wx:if="{{primeOtherTrainList.length > 0}}">
+        <view
+          wx:for="{{primeOtherTrainList}}" wx:key="trainNumber" wx:for-item="train"
+          id="{{'train_item_' + index}}"
+        >
+          <view
+            class="sel-box"
+            data-index="{{index}}"
+            bindtap="toggleOtherTrain">
+            <view class="recomand-tag" wx:if="{{train.Tag}}">
+              {{train.Tag}}
+            </view>
+            <view class="sel-inner-box">
+                <template is="train-card-info" data="{{train}}"></template>
+              <view class="rbox">
+                <!-- <text class="ifont-checkbox"></text> -->
+                <icon type="{{train.current? 'success':'circle'}}" size="20" class="{{train.disabled?'cir-marker':train.current?'':'cir-grey'}}"
+                  color="rgb(0,134,246)"></icon>
+
+              </view>
+            </view>
+            <view class="seat">
+              <!-- 座席余票显示 -->
+             <!-- 座席余票显示 -->
+                <template is="train-sale-info" data="{{train}}"></template>
+            </view>
+          </view>
+          <view class="rcmd-box" wx:if="{{isShowRecomand && primeRecommendTrainList.length > 1 && train.TrainNumber === primeTrain.TrainNumber && train.DepartStation == primeTrain.DepartStation && train.ArriveStation == primeTrain.ArriveStation}}">
+            <view class="rcmd-inner-box" >
+              <view class="rcmd-hd">
+                <view class="l-icon"></view>
+                <view class="title">大数据为您推荐以下车次</view>
+              </view>
+              <view class="rcmd-bd">
+                <view class="bd-ul">
+                  <view class="bd-li" wx:for="{{primeRecommendTrainList}}" wx:key="trainNumber" wx:for-item="rTrain" data-rindex="{{index}}" wx:if="{{rTrain.Tag}}" bindtap="toggleRecommendTrain">
+
+                    <view class="recomand-tag" wx:if="{{rTrain.Tag}}">
+                      {{rTrain.Tag}}
+                    </view>
+                    <!-- 占位 -->
+                    <view wx:else class="recomand-blank"></view>
+                    <view class="li-inner-box">
+                      <view class="li-from">
+                        <view class="time">{{rTrain.DepartTime}}</view>
+                        <view class="station">{{rTrain.DepartStation}}</view>
+                      </view>
+                      <view class="li-checi">
+                        <view class="txt needtime">{{rTrain.TimesCost}}</view>
+                        <view class="txt">{{rTrain.TrainNumber}}</view>
+                      </view>
+                      <view class="li-to">
+                        <view class="time">{{rTrain.ArriveTime}}<text class="small">{{rTrain.TakeDays ? '+' + rTrain.TakeDays :
+                            ''}}</text>
+                        </view>
+                        <view class="station">{{rTrain.ArriveStation}}</view>
+                      </view>
+                      <view class="li-rbox">
+                        <icon type="{{rTrain.current? 'success':'circle'}}" size="20" class="{{rTrain.disabled?'cir-marker':rTrain.current?'':'cir-grey'}}"
+                          color="rgb(0,134,246)"></icon>
+                      </view>
+                    </view>
+                  </view>
+
+                  <view class="li-r-pad"></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+
+    <view wx:if="{{(primeRecommendTrainList.length === 0 && primeOtherTrainList.length === 0)}}" class="norecommandtrain">当前条件下无可推荐车次</view>
+
+  </view>
+</scroll-view >
+
+<view class="botm-pay">
+   <view class="lbox">抢票成功率:<success-rate class="strong" success-rate='{{jLSuccessRate}}' show-percent='{{false}}' /></view>
+  <button class="btn-submit" hover-class="btn-ok_hover" bindtap="confirm">确定</button>
+</view>
+
+
+<!-- 筛选浮层 -->
+<view class="backmask {{isFilterViewAnimation ? 'active' : ''}}" bindtap="hideFilterView" catchtouchmove="preventBackMove">
+    </view>
+    <view class="pop-botm {{isFilterViewAnimation ? 'active' : ''}}" catchtouchmove="preventBackMove">
+        <view class="pop-botm-hd">
+            <view class="btn-cancel" bindtap="resetFilter">清空</view>
+            <view class="tit">
+                筛选
+            </view>
+            <view class="btn-submit" bindtap="confirmFilter">确定</view>
+        </view>
+        <view class="pop-botm-bd filter-box">
+            <view class="tit">车型选择</view>
+            <view class="filter-list">
+                <view bindtap="selectType" data-type="2" class="item {{filterTrainConditions.Train_GC ? 'cur' : ''}}">
+                  <view class="cont">高铁（G/C）</view>
+                  <text class="ifont-filtercheck"></text>
+                </view>
+                <view bindtap="selectType" data-type="4" class="item {{filterTrainConditions.Train_D ? 'cur' : ''}}">
+                  <view class="cont">动车（D）</view>
+                  <text class="ifont-filtercheck"></text>
+                </view>
+                <view bindtap="selectType" data-type="8" class="item {{filterTrainConditions.Train_ZTK ? 'cur' : ''}}">
+                  <view class="cont">普通（Z/T/K）</view>
+                  <text class="ifont-filtercheck"></text>
+                </view>
+                <view bindtap="selectType" data-type="16" class="item {{filterTrainConditions.Train_YL ? 'cur' : ''}}">
+                  <view class="cont">其他（Y/L等）</view>
+                  <text class="ifont-filtercheck"></text>
+                </view>
+            </view>
+            <view class="tit">
+                <text>出发时间</text>
+            </view>
+            <view class="filter-list">
+                <view catchtap="selectTime" data-time="2" class="item {{filterTimeConditions.TIME_0_6 ? 'cur' : ''}}">
+                  <view class="cont">
+                    <view class="t">早上</view>
+                    <view class="time">00:00 - 06:00</view>
+                  </view>
+                  <text class="ifont-filtercheck"></text>
+                </view>
+                <view catchtap="selectTime" data-time="4" class="item {{filterTimeConditions.TIME_6_12 ? 'cur' : ''}}">
+                  <view class="cont">
+                    <view class="t">上午</view>
+                    <view class="time">06:00 - 12:00</view>
+                  </view>
+                  <text class="ifont-filtercheck"></text>
+                </view>
+                <view catchtap="selectTime" data-time="8" class="item {{filterTimeConditions.TIME_12_18 ? 'cur' : ''}}">
+                  <view class="cont">
+                    <view class="t">下午</view>
+                    <view class="time">12:00 - 18:00</view>
+                  </view>
+                  <text class="ifont-filtercheck"></text>
+                </view>
+                <view catchtap="selectTime" data-time="16" class="item {{filterTimeConditions.TIME_18_24 ? 'cur' : ''}}">
+                  <view class="cont">
+                    <view class="t">晚上</view>
+                    <view class="time">18:00 - 24:00</view>
+                  </view>
+                  <text class="ifont-filtercheck"></text>
+                </view>
+            </view>
+            <view class="tit">
+                <text>出发/到达车站</text>
+            </view>
+            <view class="filter-list">
+                <view bindtap="selectStation" data-type="{{s.isDepart ? 'depart':'arrive'}}" data-index="{{index}}" class="item station {{s.isSelected ? 'cur' : ''}}" wx:for="{{stations}}"
+                    wx:for-item="s" wx:key="index">
+                    <view class="cont">{{s.name}}</view>
+                    <text class="ifont-filtercheck"></text>
+                </view>
+            </view>
+
+        </view>
+    </view>
+</view>
+
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

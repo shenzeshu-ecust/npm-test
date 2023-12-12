@@ -1,0 +1,27 @@
+<view class="bk-pay-container {{isIphoneX ? 'fix-iphonex-border' : ''}} {{priceInfo.isDetailOpen ? '' : 'bk-pay-fixed'}} autoExpose" data-expose="{{priceBarExposeObj}}">
+    <view class="pay-txt" bindtap="togglePriceDetail" data-ubt-key="xcx_hotel_order_bill" id="autotest_xcx_hotel_order_bill">
+        <view class="pay-left">
+            <view class="main-box">
+                <view class="main-title">{{uiInfo.priceMainTitle}}</view>
+                <view class="common-price constant-color price-flex">
+                    <block wx:if="{{uiInfo.priceMainLocalAmount}}">约</block>
+                    ¥<text class="price-bold mr4">{{uiInfo.priceMainAmount}}</text>
+                    <text wx:if="{{uiInfo.priceMainLocalAmount}}">({{priceInfo.localCurrency}}{{uiInfo.priceMainLocalAmount}})</text>
+                    <text class="tax-tip" wx:if="{{priceInfo.touristTaxTip}}">{{priceInfo.touristTaxTip}}</text>
+                </view>
+                <text wx:if="{{newCustomerInfo.isNewMember && newCustomerInfo.deductionAmount > 0}}" class="new-customer-price-tag cell-v">新人价</text>
+            </view>
+            <view wx:if="{{uiInfo.priceSubTitle}}" class="">
+                <text>{{uiInfo.priceSubTitle}}</text><text>{{uiInfo.priceSubAmountText}}</text>
+            </view>
+            <view wx:elif="{{uiInfo.priceSubAmountText}}">{{uiInfo.priceSubAmountText}}</view>
+        </view>
+        <view class="pay-right">{{dateInfo.days > 1 ? (dateInfo.days + '晚明细') : '费用明细'}}</view>
+    </view>
+    <button wx:if="{{isBaidu && !hasLogin}}" class="submit-btn btn constant-bgc" open-type="getPhoneNumber" bindgetphonenumber="handleThirdLogin">
+        {{uiInfo.submitButtonText}}
+    </button>
+    <view wx:else class="submit-btn constant-bgc" catchtap="toCreateOrder" data-ubt-key="xcx_hotel_order_paybutton" id="autotest_hotelbookpage_paybutton">
+        {{uiInfo.submitButtonText}}
+    </view>
+</view>

@@ -1,0 +1,31 @@
+<template name="commonPassenger">
+  <!-- 常旅 -->
+  <view class="tip-bot {{(showType == 'pas' || showType == 'pick' )? 'active' : ''}}">
+    <view class="cui-hd {{classConfig.headerBgColor}}">
+      <view class="cell cancel-btn" bindtap="cancelPasChoose">取消</view>
+      <view class="cell ok-btn" bindtap="confirmPasChoose">确定</view>
+    </view>
+    <view class="cui-bg tip-addpas" style="{{isIPhoneX ? 'padding-bottom:68rpx' : ''}}">
+      <view class="tip-text">乘客需为实际乘车人，否则会影响保险保障的权益哦</view>
+      <view wx:if="{{showType == 'pas'}}" class="add-btn {{classConfig.mainColor}}" bindtap="addNewPas">
+        新增乘客
+      </view>
+      <view class="train-list tip-pass-list mt5">
+        <block wx:for="{{passengerList}}">
+          <view wx:key="{{index}}" wx:if="{{item.isChild || (item.idcard.text && item.idcard.no)}}" class="item {{item.chosen ? 'current ' + classConfig.mainColor : ''}} {{showType == 'pick' ? 'item-noedit' : 'item-edit'}}" data-index="{{index}}" data-item="{{item}}" bindtap="choosePas">
+            <icon wx:if="{{showType == 'pas'}}" class="icon-edit-noborder {{classConfig.mainColor}}" data-index="{{index}}" catchtap="editPas" size='25'></icon>
+            <view class="info">
+              <text class="name">{{item.name}}</text>
+              <text class="tag-grey">{{item.ptypeText}}</text>
+              <view class="identity {{item.chosen ? classConfig.mainColor : ''}}">
+                {{(item.idcard.text && item.idcard.no) ? (item.idcard.text + ' ' + item.idcard.no) : '信息不全，点击补充'}}
+              </view>
+            </view>
+            <icon class="{{item.chosen ? 'icon-checkedbox ' + classConfig.mainColor : 'icon-checkbox color-gray'}}" size='20'></icon>
+          </view>
+        </block>
+      </view>
+      <view wx:if="{{!passengerList.length}}" class="tip-pass-none">您还没有添加过乘客信息哦</view>
+    </view>
+  </view>
+</template>

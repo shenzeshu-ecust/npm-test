@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "关注火车",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "formid-button": "../../../timelineComponent/formid-button/formid-button"
+  },
+  "componentPlaceholder": {
+    "formid-button": "view"
+  }
+}

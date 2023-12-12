@@ -1,0 +1,24 @@
+<view class="db_detail">
+    <nav-bar navbar-data="{{navbarData}}"></nav-bar>
+
+    <view class="db_detail__head">
+        <view class="db_detail__head_total">
+            <text class="db_detail__head_number">{{yoNumber}}</text>
+            <image class="db_detail__head_gold" src="https://pages.c-ctrip.com/market/components/static/duobao/img_guidance_yo.png"></image>
+        </view>
+        <!-- <view class="db_detail__head_btn" bindtap="jumpIndex">去攒票子</view> -->
+    </view>
+
+    <view class="db_detail__content">
+        <view wx:for="{{detailList}}" wx:key="time" class="db_detail__item">
+            <view class="db_detail__item_top">
+                <text class="">{{item.title}}</text>
+                <text class="{{item.change > 0 ? 'red' :''}}">{{item.change > 0 ? '+' : ''}}{{item.change}}</text>
+            </view>
+            <view class="db_detail__item_bottom">{{item.time}}</view>
+        </view>
+    </view>
+</view>
+
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

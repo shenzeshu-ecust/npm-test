@@ -1,0 +1,15 @@
+<block wx:if="{{type == 'simple' && pushSceneInfo && afterRenderData}}">
+  <sk_simple data-index="{{idx}}" idx="{{idx}}" pushSceneInfo="{{pushSceneInfo}}" selfApiInfo="{{sceneAllInfo}}" sceneCode="{{sceneCode}}" item="{{afterRenderData}}" index="{{0}}" idx="{{0}}" renderData="{{afterRenderData}}" data-clickhandlersname="list_scene_box" bindtap="clickHandlers" bind:clickHandlers="clickHandlers" bind:simpleCssStyle="simpleCssStyle" type="simple" custom_scene_class='custom_scene_class' style="overflow: hidden; width: 432rpx;" />
+</block>
+<block wx:if="{{type == 'list'}}">
+  <block scroll-y bindscrolltolower="handleScrollLower" style="height: 84vh;" lower-threshold="{{300}}" enhanced bounces="{{false}}" catchtouchmove="bottomTouchMove">
+    <block wx:for="{{listProduct}}" wx:key="index">
+      <wechat-long-list-chunk chunkId="{{'_chunk_id_'+index}}" showLogInfo="{{true}}">
+        <block wx:for="{{item}}" wx:for-item="product" wx:for-index="productIndex" wx:key="{{item.goodsId || item.index}}">
+          <sk_newproduct filterProductProps="{{filterProductProps}}" renderData="{{product}}" item="{{product}}" index="{{productIndex}}" parentIndex="{{index}}" selfApiInfo="{{selfApiInfo}}" sceneCode="{{sceneCode}}" bind:clickHandlers="clickHandlers" bind:productExposure="productExposure" />
+        </block>
+      </wechat-long-list-chunk>
+    </block>
+    <view class="list_product_empty"></view>
+  </block>
+</block>

@@ -1,0 +1,6 @@
+Component({
+    externalClasses: ['initialbackground'],
+    properties: {
+
+    }
+})

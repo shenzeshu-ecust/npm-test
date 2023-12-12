@@ -1,0 +1,4 @@
+/* 积分兑换浮层 */
+.tbody scroll-view {max-height: 800rpx;}
+.tbody .scroll-box {padding: 0 32rpx 80rpx; font-size: 26rpx;}
+.tbody .pointsl-tit {margin: 30rpx 0; font-weight: 800;}

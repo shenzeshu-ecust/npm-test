@@ -1,0 +1,25 @@
+<block wx:if="{{showFollowGuide}}">
+	
+<view catchtouchstart="_hidePanel" class="userpanel-mask" bindtap="_hidePanel"></view>
+<view catchtouchmove="catchtouchmove" class="userpanel-wrapper" style="padding-bottom: {{isIphoneX ? '64rpx': '0'}};">
+	<view class="panel-avat">
+		<image class="avaturl" src="{{userPanelInfo.imageUrl || 'https://pages.c-ctrip.com/you/lvpai-home-defaultavat.jpg'}}" />
+		<block wx:if="{{userPanelInfo.vIcon}}">
+			<image class="vip"  src="{{userPanelInfo.vIcon}}" />
+		</block>
+		
+	</view>
+	<view class="panel-name">看了这么久，关注一下主播吧～</view>
+	<view class="panel-brief">主播开播及时通知</view>
+	<view class="panel-buttons">
+		<view class="panel-btnitem focus-btn" bindtap="_focusUser" data-id="{{userPanelInfo.masterID}}" data-isfollow="{{userPanelInfo.isFollow}}">
+			<image class="focus-icon" src="{{userPanelInfo.isFollow ? 'https://pages.c-ctrip.com/livestream/video/webcast-focused-btn.png' : 'https://pages.c-ctrip.com/livestream/video/webcast-focus-btn.png'}}"/>
+			<text>{{userPanelInfo.isFollow ? '已': ''}}关注</text>
+		</view>
+	</view>
+	<view class="panel-brief countdown">{{countdown}}秒后自动关闭</view>
+</view>
+</block>
+
+
+

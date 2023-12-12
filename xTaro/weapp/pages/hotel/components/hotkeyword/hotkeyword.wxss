@@ -1,0 +1,97 @@
+@import '../../common/common.wxss';
+@import '../../common/searchres.wxss';
+.search-body {
+    background-color: #f3f3f8;
+    width: 100%;
+    height: calc(100% - 88rpx);
+    position: fixed;
+    box-sizing: border-box;
+}
+.city-height {
+    height: calc(100% - 182rpx) !important;
+}
+.content {
+    overflow: hidden;
+    background: #fff;
+    margin: 10rpx 0;
+}
+.content .title-bar {
+    display: flex;
+    margin: 28rpx 24rpx 24rpx;
+    position: relative;
+}
+.content .title-bar .title {
+    flex: 1;
+    font-size: 28rpx;
+    font-weight: bold;
+    color: #111111;
+}
+.content .title-bar .icon-del {
+    padding-left: 30rpx;
+    color: #006FF6;
+    font-size: 24rpx;
+}
+.content .keywords {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: -2rpx;
+    border-top: 1rpx solid #ddd;
+}
+.content .keywords .item {
+    height: 72rpx;
+    line-height: 72rpx;
+    width: calc(25% - 2rpx);
+    text-align: center;
+    border: 1rpx solid #ddd;
+    border-width: 0 1rpx 1rpx 0;
+    overflow: hidden;
+    padding: 2rpx 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.content .keywords .txt-ellipsis {
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-pack: center;
+}
+.content .keywords .item:nth-child(4n+4) {
+    border-right: 0;
+}
+.ft28 {font-size: 28rpx;}
+.ft24{font-size: 24rpx;}
+.lh14 { line-height: 1.4 !important; }
+.title-icon {margin-right: 16rpx; font-size: 40rpx;}
+.font-shopping-color {color: #bec1ff;}
+.font-search-color {color: #83c3f8;}
+.font-brand-color {color: #ad83f8;}
+.font-hotkey-color {color: #ffc380;}
+.font-special-color {color: #ff96a3;}
+.font-hospital-color {color: #4ae8c1;}
+.font-university-color {color: #ffaf96;}
+.font-train-color {color: #ffdb6b;}
+.font-office-color {color: #c1f048;}
+.font-air-color {color: #8fdfff;}
+.font-spots-color {color: #a8ed89;}
+.font-eating-color {color: #ffca72;}
+.font-buy-color {color: #b9a7f6;}
+
+.keywords-layer {
+    height: 800rpx;
+}
+.keywords-layer  .item {
+    height: 72rpx;
+    line-height: 72rpx;
+    padding-left: 24rpx;
+    border-bottom: 1rpx solid #ddd;
+}
+.keywords-layer .item:last-child {
+    border-bottom: unset;
+    padding-bottom: 40rpx;
+}

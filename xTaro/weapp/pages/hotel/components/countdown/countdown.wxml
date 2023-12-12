@@ -1,0 +1,19 @@
+<view class="count-down-pendant {{status === END ? 'task-finish' : ''}}" wx:if="{{!taskFinished}}">
+    <image src="{{status === END ? endImgSrc : processImgSrc}}" class="img"></image>
+    <view class="content">
+        <view class="process">
+            <view
+                    class="inner {{status === START_ING ? 'start-animation' : ''}}"
+                    style="width: {{width}}rpx; animation-duration: {{leftTime}}s;"
+                    id="inner"
+                    bindanimationend="handleTaskCompleted"
+            ></view>
+        </view>
+        <view class="desc" bindtap="{{status === END ? 'back' : ''}}">
+            {{message}}
+            <view wx:if="{{status === END}}" class="arrow">
+                    去领奖<text class="wechat-font-arrow-right"></text>
+            </view>
+        </view>
+    </view>
+</view>

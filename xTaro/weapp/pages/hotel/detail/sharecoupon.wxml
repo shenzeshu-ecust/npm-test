@@ -1,0 +1,16 @@
+
+<view class="cmask" wx:if="{{showCouponDialog}}" bindtap="closeCouponDialog">
+    <view class="share-coupon">
+        <view class="top"></view>
+        <view class="content">
+            <view class="title">送您一张优惠券</view>
+            <view class="desc">{{shareCoupnLayerInfo.promotionName}}</view>
+            <view class="btns" catchtap="closeCouponDialog">
+                <text class="btn cancel">取消</text>
+                <text class="btn confirm"
+                      bindtap="{{shareCoupnLayerInfo.owned ? '' : 'handleCouponReceive'}}"
+                      data-id="{{shareCoupnLayerInfo.promotionID}}">{{shareCoupnLayerInfo.owned ? '查看酒店' : '领取查看酒店'}}</text>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "collectionMiniapp": "/pages/market/components/collection/collection",
+    "taskCountDown": "/pages/market/directory/components/taskCountDown/index"
+  },
+  "componentPlaceholder": {
+    "collectionMiniapp": "cover-view",
+    "taskCountDown": "cover-view"
+  }
+}

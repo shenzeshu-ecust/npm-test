@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "cMask": "/pages/hotelplanning/common/components/cMask/cMask"
+  }
+}

@@ -1,0 +1,10 @@
+<!-- 登录弹窗引导 -->
+<block wx:if="{{!hidden}}">
+    <view class="cmask"></view>
+    <view class="cmask-popbox login-layer" bindtap="toLogin">
+        <view class="text-title">立即登录携程账号，查阅该订单点评信息</view>
+        <view class="text-line"></view>
+        <view class="text-crude">tips：登录对应的携程账号才可以点评哦，若提示账号信息不一致，请点击右上角“···”中的“返回小程序首页”，重新切换账号再尝试~</view>
+        <button class='agree-btn' bindgetuserinfo=" " open-type=" ">立即登录</button>
+    </view>
+</block>

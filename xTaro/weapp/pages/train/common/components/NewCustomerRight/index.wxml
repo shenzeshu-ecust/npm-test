@@ -1,0 +1,39 @@
+<!-- 已领取新客弹窗 -->
+<view class="backmask {{ visible ? 'active' : '' }}" bindtap="onClose"></view>
+<view class="new-guest-received-pop {{ visible ? 'active' : '' }}">
+    <view class="y-box">
+        <view class="y-bg">
+            <image class="slogan" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/7yue/xinke/xinke.png" />
+            <view class="tit">送您 <text class="p">{{ data.priceAmount }}元</text> 特权礼包，请笑纳</view>
+            <block wx:if="{{ data.RightInfoType2.list.length > 0 }}">
+                <view class="cash-box">
+                    <view class="tag" wx:if="{{!unLoginShow}}">已领取</view>
+                    <view class="list">
+                        <view class="item" wx:for="{{ data.RightInfoType2.list }}">
+                            <image class="icon" src="{{ item.IconUrl }}" />
+                            <view class="text">
+                                <view class="title">{{ item.Name }}</view>
+                                <view class="desc">{{ item.Desc }}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <image class="add" src="https://images3.c-ctrip.com/train/2023-3/zengzhang/7yue/xinke/ic-add.png"></image>
+            </block>
+            <view class="box">
+                <view class="tag" wx:if="{{!unLoginShow}}">已领取</view>
+                <view class="list">
+                    <view class="item" wx:for="{{ data.RightInfoType1.list }}">
+                        <image class="icon" src="{{ item.IconUrl }}" />
+                        <view class="title">{{ item.Name }}</view>
+                        <view class="desc">{{ item.Desc }}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="r-bg">
+        <slot></slot>
+    </view>
+    <text class="ifont-close" bindtap="onClose"></text>
+</view>

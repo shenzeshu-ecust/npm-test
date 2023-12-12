@@ -1,0 +1,8 @@
+<!--{{component}}.wxml-->
+<view class="back-view" catchtap="mapClickTap">
+    <image class="map-img" mode='aspectFit' src='https://pages.c-ctrip.com/schedule/pic/wxxcx/map_bg_new.png' />
+    <view class="content-view">
+        <!-- <Icon className='Location_coordinate' color='#48A8FF' size='18' /> -->
+        <text class="map-navi-text">{{mapText || '地图'}}</text>
+    </view>
+</view>

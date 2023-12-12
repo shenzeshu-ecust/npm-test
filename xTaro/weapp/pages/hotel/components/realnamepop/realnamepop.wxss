@@ -1,0 +1,45 @@
+@import "../../common/common.wxss";
+
+.mp-box {
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 12rpx;
+  width: 562rpx;
+  padding: 32rpx;
+}
+.mp-box .mp-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  text-align: center;
+  padding: 12rpx 0;
+}
+.mp-box .mp-content {
+  font-size: 28rpx;
+  padding: 12rpx 0;
+  text-align: center;
+}
+.mp-box .mp-btn-box {
+  margin-top: 32rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.mp-box .mp-btn-box .mp-btn {
+  border-radius: 8rpx;
+  height: 72rpx;
+  width: 237rpx;
+  font-size: 32rpx;
+  margin: 0;
+}
+.mp-box .mp-btn-box .mp-btn::after {
+  border: none;
+}
+.mp-box .mp-btn.cancel {
+  background: #fff;
+  border: 2rpx solid #006FF6;
+  color: #006FF6;
+}
+
+.mp-box .mp-btn.confirm {
+  background: #006FF6;
+  color: #ffffff;
+}

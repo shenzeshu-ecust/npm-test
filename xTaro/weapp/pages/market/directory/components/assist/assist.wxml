@@ -1,0 +1,25 @@
+<!-- class:mkt-前缀 防止命名冲突 -->
+<view class="mkt-assist-wrap">
+  <view class="mkt-pic" wx:if="{{!isMaster}}">
+    <image src="{{masterInfo.headImage}}"></image>
+  </view>
+  <view class="mkt-nickname" wx:if="{{!isMaster}}">{{masterInfo.nickName||'携程用户'}}</view>
+  <view class="mkt-title mkt-ellipsis" wx:if="{{!isMaster}}">{{activityConf.activityTitle}}</view>
+  <view class="mkt-subtitle mkt-ellipsis" wx:if="{{!isMaster}}">{{activityConf.activityTips}}</view>
+  <slot></slot>
+  <view class="mkt-assist-list"> 
+    <view class="mkt-assist-item" wx:for="{{defaultFriendList}}" wx:key="nickName">
+      <view class="mkt-assist-pic">
+        <image src="{{friendList[index].headImage}}"></image>
+      </view>
+      <view class="mkt-assist-text mkt-ellipsis">{{friendList[index].nickName||'待助力'}}</view>
+    </view>
+  </view>
+  <view class="mkt-guest-btn" wx:if="{{!isMaster && showType=='init'}}">
+    <view class="btn-assist" style="background-image:url({{activityConf.customerJoinButtonImg}})" bindtap="assistToRedirect" data-url="{{activityConf.customerJoinButtonUrl}}">{{activityConf.customerJoinButtonText}}</view>
+    <button class="btn-assist" style="background-image:url({{activityConf.customerAssistButtonImg}})"  bindtap="{{isLogin?'startAssist':'loginToStartAssist'}}">{{activityConf.customerAssistButtonText}}</button>
+  </view>
+  <view class="btn-assist-long" wx:if="{{!isMaster && showType=='long'}}" style="background-image:url({{activityConf.customerBrowseButtonImg}})" bindtap="assistToRedirectBefore" data-url="{{activityConf.customerJoinButtonUrl}}">{{activityConf.customerJoinButtonText}}</view>
+  <view class="btn-assist-long" wx:if="{{!isMaster && showType=='other'}}" style="background-image:url({{activityConf.customerBrowseButtonImg}})" bindtap="assistToNavigate" data-url="{{activityConf.customerBrowseButtonUrl}}">{{activityConf.customerBrowseButtonText}}</view>
+  <!-- <view class="mkt-owner-btn" wx:if="{{showOwnerBtn && isMaster}}">{{activityConf.masterInviteButtonText}}</view> -->
+</view>

@@ -1,0 +1,160 @@
+<block wx:if="{{mpInfo.enable}}">
+    <!--优先级高的权益,积分抵房费-->
+    <view wx:for="{{mpInfo.topOrderList}}" class="li-item points-box">
+        <template is="checkbox-title" data="{{item}}"></template>
+        <view class="m-txt">
+            <view class="points-cost">
+                <text class="points-tit">{{item.trueCost}}积分</text>
+            </view>
+        </view>
+        <template is="checkbox-select" data="{{item}}"></template>
+    </view>
+    <!-- 加号类型，目前仅早餐 -->
+    <block wx:if="{{mpInfo.plusList.length}}">
+    <view wx:for="{{mpInfo.plusList}}" class="li-item points-box">
+        <view class="m-label title-box">
+            <view>{{item.title}}</view>
+            <view wx:if="{{item.hotelRemainsDesc}}" class="hotel-remains">{{item.hotelRemainsDesc}}</view>
+        </view>
+        <view class="m-txt">
+            <!-- 免费部分 -->
+            <view wx:if="{{item.freeTitle}}" class="points-cost">
+                <view class="cell-star">
+                    <text class="points-tit">{{item.freeTitle}}</text>
+                    <text wx:if="{{item.freeTimesDesc}}" class="free-times black2">{{item.freeTimesDesc}}</text>
+                </view>
+                <!-- 多晚展开选择 -->
+                <view wx:if="{{item.displaySelectBar}}" class="select-bar"
+                    bindtap="toggleBreakfastSelect" data-id="{{item.id}}" data-type="free">
+                    <text class="color-focus">选择日期及份数</text>
+                    <text class="{{item.detailFreeExpanded ? 'wechat-font-g-arrow-up' : 'wechat-font-g-arrow-down'}} ml12"></text>
+                </view>
+                <view wx:else class="ui-num-adjust">
+                    <block wx:if="{{item.detailsFree[0].count > 0}}">
+                        <text class="wechat-font-minus icon-style" data-id="{{item.id}}" data-idx="{{0}}"
+                            data-type="free" bindtap="pointMinus"
+                            data-ubt-key="xcx_ddtx_jjan" id="autotest_xcx_ddtx_jjan" ></text>
+                        <text class="ui-adjust-value">{{item.detailsFree[0].count}}</text>
+                    </block>
+                    <text class="wechat-font-add icon-style {{item.detailsFree[0].enablePlus ? '' : 'icon-disabled'}}"
+                        data-id="{{item.id}}" data-idx="{{0}}" data-enable="{{item.detailsFree[0].enablePlus}}"
+                        data-type="free" bindtap="pointPlus"
+                        data-ubt-key="xcx_ddtx_jhan" id="autotest_xcx_ddtx_jhan"></text>
+                </view>
+            </view>
+            <!-- 免费部分：日期选择模板 -->
+            <view wx:if="{{item.detailFreeExpanded}}" class="items daily-exchange-box">
+                <view wx:for="{{item.detailsFree}}" wx:for-item="detail" class="item">
+                    <view class="cell-star">{{detail.ymd}}</view>
+                    <view class="ui-num-adjust">
+                        <block wx:if="{{detail.count > 0}}">
+                            <text class="wechat-font-minus icon-style" data-id="{{item.id}}"
+                                data-idx="{{index}}" data-type="free" bindtap="pointMinus"
+                                data-ubt-key="xcx_ddtx_jjan" id="autotest_xcx_ddtx_jjan"></text>
+                            <text class="ui-adjust-value">{{detail.count}}</text>
+                        </block>
+                        <text class="wechat-font-add icon-style {{detail.enablePlus ? '' : 'icon-disabled'}}"
+                            data-enable="{{detail.enablePlus}}" data-id="{{item.id}}"
+                            data-idx="{{index}}" data-type="free" bindtap="pointPlus"
+                            data-ubt-key="xcx_ddtx_jhan" id="autotest_xcx_ddtx_jhan" ></text>
+                    </view>
+                </view>
+            </view>
+
+            <!-- 积分兑换 -->
+            <view wx:if="{{item.showPointsPart}}" class="points-cost">
+                <view class="cell-star">
+                    <text class="points-tit">{{item.costPoints}}积分/份</text>
+                </view>
+                <!-- 多晚展开选择 -->
+                <view wx:if="{{item.displaySelectBar}}" class="select-bar"
+                    bindtap="toggleBreakfastSelect" data-id="{{item.id}}" data-type="points">
+                    <text class="color-focus">选择日期及份数</text>
+                    <text class="{{item.detailPointsExpanded ? 'wechat-font-g-arrow-up' : 'wechat-font-g-arrow-down'}} ml12"></text>
+                </view>
+                <view wx:else class="ui-num-adjust">
+                    <block wx:if="{{item.detailsNeedPoints[0].count > 0}}">
+                        <text class="wechat-font-minus icon-style" data-id="{{item.id}}"
+                            data-idx="{{0}}" data-type="points" bindtap="pointMinus"
+                            data-ubt-key="xcx_ddtx_jjan" id="autotest_xcx_ddtx_jjan" ></text>
+                        <text class="ui-adjust-value">{{item.detailsNeedPoints[0].count}}</text>
+                    </block>
+                    <text class="wechat-font-add icon-style {{item.detailsNeedPoints[0].enablePlus ? '' : 'icon-disabled'}}"
+                        data-id="{{item.id}}" data-idx="{{0}}" data-enable="{{item.detailsNeedPoints[0].enablePlus}}"
+                        data-type="points" bindtap="pointPlus"
+                        data-ubt-key="xcx_ddtx_jhan" id="autotest_xcx_ddtx_jhan"></text>
+                </view>
+            </view>
+            <!-- 积分部分：日期选择模板 -->
+            <view wx:if="{{item.detailPointsExpanded}}" class="items daily-exchange-box">
+                <view wx:for="{{item.detailsNeedPoints}}" wx:for-item="detail" class="item">
+                    <view class="cell-star">{{detail.ymd}}</view>
+                    <view class="ui-num-adjust">
+                        <block wx:if="{{detail.count > 0}}">
+                            <text class="wechat-font-minus icon-style" data-id="{{item.id}}"
+                                data-idx="{{index}}" data-type="points" bindtap="pointMinus"
+                                data-ubt-key="xcx_ddtx_jjan" id="autotest_xcx_ddtx_jjan">
+                            </text>
+                            <text class="ui-adjust-value">{{detail.count}}</text>
+                        </block>
+                        <text class="wechat-font-add icon-style {{detail.enablePlus ? '' : 'icon-disabled'}}"
+                            data-id="{{item.id}}" data-idx="{{index}}" data-enable="{{detail.enablePlus}}"
+                            data-type="points" bindtap="pointPlus"
+                            data-ubt-key="xcx_ddtx_jhan" id="autotest_xcx_ddtx_jhan" ></text>
+                    </view>
+                </view>
+            </view>
+
+            <view class="points-desc">{{item.desc}}</view>
+        </view>
+    </view>
+    </block>
+
+    <!-- 对勾类型 -->
+    <block wx:for="{{mpInfo.checkboxList}}">
+    <view wx:if="{{!item.isOrderTop}}" class="li-item points-box">
+        <template is="checkbox-title" data="{{item}}"></template>
+        <view class="m-txt">
+            <view wx:if="{{item.freeTitle}}" class="points-cost">
+                <text class="points-tit">{{item.freeTitle}}</text>
+                <text wx:if="{{item.freeTimesDesc}}" class="free-times black2">{{item.freeTimesDesc}}</text>
+                <text wx:elif="{{item.freeTag}}" class="points-tag">{{item.freeTag}}</text>
+            </view>
+            <view wx:elif="{{item.costPoints}}" class="points-cost">
+                <text class="points-tit">{{item.costPoints}}积分</text>
+            </view>
+            <view class="points-desc">
+                <text>{{item.unit}} · </text><text>{{item.desc}}</text>
+            </view>
+        </view>
+        <template is="checkbox-select" data="{{item}}"></template>
+    </view>
+    </block>
+
+    <!-- 静态权益，目前仅会员专享通道 -->
+    <view wx:for="{{mpInfo.staticList}}" class="li-item points-box">
+        <view class="m-label">
+            <view class="static-tit">{{item.title}}</view>
+        </view>
+        <view class="m-txt">
+            <view class="points-cost points-tit">{{item.staticTitle}}</view>
+            <view class="points-desc">{{item.desc}}</view>
+        </view>
+    </view>
+</block>
+
+<!-- 勾选框 -->
+<template name="checkbox-select">
+    <view wx:if="{{item.isSelected}}" class="wechat-font-selected icon-style" bindtap="togglePointReward"
+          data-id="{{item.id}}" data-enable="{{true}}" data-ubt-key="xcx_ddtx_jjan" id="autotest_xcx_ddtx_jjan">
+    </view>
+    <view wx:else class="wechat-font-unselected icon-style {{item.enablePlus ? '' : 'icon-disabled'}}" bindtap="togglePointReward" data-id="{{item.id}}"
+          data-enable="{{item.enablePlus}}" data-ubt-key="xcx_ddtx_jhan" id="autotest_xcx_ddtx_jhan">
+    </view>
+</template>
+<template name="checkbox-title">
+    <view class="m-label title-box">
+        <text>{{item.title}}</text>
+        <text wx:if="{{item.subTitle}}">{{item.subTitle}}</text>
+    </view>
+</template>

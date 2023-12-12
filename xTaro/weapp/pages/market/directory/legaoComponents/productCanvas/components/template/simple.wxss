@@ -1,0 +1,16 @@
+.custom_simple_class_1{
+  width: 492rpx !important;
+  height: 164rpx !important;
+}
+.custom_simple_class_2{
+  width: 492rpx !important;
+  height: 223rpx !important;
+  max-height: 117px !important;
+
+  /* height: 205rpx !important;
+  max-height: 205rpx !important; */
+
+  border-radius: 8rpx;
+}
+
+

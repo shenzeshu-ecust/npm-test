@@ -1,0 +1,6 @@
+{
+    "component": true,
+    "usingComponents": {
+        "common-layer": "/pages/hotel/components/layer/index"
+    }
+}

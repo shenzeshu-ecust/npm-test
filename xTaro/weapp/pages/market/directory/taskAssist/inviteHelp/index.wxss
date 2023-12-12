@@ -1,0 +1,104 @@
+.assist-wrap {
+    position: relative;
+    width: 620rpx;
+    background: #ffffff;
+    border-radius: 16rpx;
+    text-align: center;
+    padding-top: 60rpx;
+    padding-bottom: 40rpx;
+}
+.avatar-box{
+    position: absolute;
+    top: -55rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100rpx;
+    height: 100rpx;
+    padding: 5rpx;
+    border-radius: 50%;
+    background-color: #fff;
+}
+.avatar-box .main-avatar-img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.nickname {
+    color: #333333;
+    font-family: PingFang-SC-Medium;
+    font-size: 30rpx;
+    font-weight: bold;
+}
+.title {
+    color: #333333;
+    font-family: PingFangSC-Medium;
+    font-size: 34rpx;
+    font-weight: bold;
+    margin-top: 8rpx;
+}
+.sub-title{
+    color: #999999;
+    font-family: PingFang-SC-Medium;
+    font-size: 24rpx;
+    font-weight: bold;
+    margin-top: 8rpx;
+}
+.brn-wrap{
+    display: flex;
+    justify-content: center;
+}
+.assist-btn{
+    height: 98rpx;
+    width: 580rpx;
+    background: url('https://images3.c-ctrip.com/marketing/2021/06/xcx_deductAmount/btn-long.png') no-repeat center;
+    background-size: contain;
+    color: #ffffff;
+    font-family: PingFangSC-Medium;
+    font-size: 32rpx;
+    font-weight: bold;
+    padding-bottom: 8rpx;
+    border-radius: 45rpx;
+}
+.assist-btn.gray{
+    background: #33333340;
+}
+.avatar-wrap{
+    margin: 48rpx 50rpx 50rpx;
+}
+.close-btn{
+    position: absolute;
+    right: 20rpx;
+    top: 20rpx;
+    width: 50rpx;
+    height: 50rpx;
+    font-size: 30px;
+    line-height: 1;
+    color: rgba(153,153,153,0.6);
+}
+
+.avatar-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.avatar-list .avatar {
+    width: 100rpx;
+    background-color: #fff;
+    margin-right: 25rpx;
+}
+.avatar-list .avatar:nth-last-child(1){
+    margin-right: 0;
+}
+.avatar-list .avatar-img {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+}
+.avatar-list .avatar .text {
+    color: #333333;
+    font-family: PingFang-SC-Medium;
+    font-size: 22rpx;
+    height: 36rpx;
+    font-weight: bold;
+    margin-top: 10rpx;
+}

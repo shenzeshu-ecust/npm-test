@@ -1,0 +1,53 @@
+<view class='schedule_container' wx:if="{{loadSuccess}}">
+  
+  <view class='train-card-box'>
+    <view catchtap='onNavToDetail' url=''>
+      <header icon-url="{{cardInfo.cardIcon}}" title="{{cardInfo.headerTitle}}" sub-title="{{cardInfo.sharedCard ? cardInfo.headerSubTitle : ''}}" card-operation-data="{{cardInfo.cardOperationData}}"/>
+      <view class='train-card-body' >
+        <view class='train-card-info' wx:if="{{cardInfo.isFixed || (cardInfo.grabTrainOrderInfo && !cardInfo.grabTrainOrderInfo.hasMultipleTrains)}}">
+          <view class='train-card-info-text left'>
+            <text class='font-size48 font-bold'>{{cardInfo.departureTime}}</text>
+            <text class='font-size26'>{{cardInfo.departureStationName}}</text>
+          </view>
+          <view class="train-card-mid" catchtap='onNavToStopover'>
+            <text class="train-card-mid-time font-size22">{{cardInfo.durationTime}}</text>
+            <text class="train-card-mid-text font-size20">经停信息</text>
+          </view>
+          <view class='train-card-info-text right'>
+            <view>
+              <text class='font-size48 font-bold'>{{cardInfo.arrivalTime}}</text>
+              <text class="font-size20" wx:if="{{cardInfo.takeDay > 0}}">+{{cardInfo.takeDay}}</text>
+            </view>
+            <text class='font-size26'>{{cardInfo.arrivalStationName}}</text>
+          </view>
+        </view>
+        
+        <view class='tran-card-grab font-size48' wx:if="{{!cardInfo.isFixed && cardInfo.grabTrainOrderInfo && cardInfo.grabTrainOrderInfo.hasMultipleTrains}}">
+          <text>{{cardInfo.departureCityName}}</text>
+          <text>-</text>
+          <text>{{cardInfo.arrivalCityName}}</text>
+        </view>
+
+        <view class='font-size26' wx:if="{{cardInfo.grabTrainOrderInfo && cardInfo.grabTrainOrderInfo.isReserve && !cardInfo.grabTrainOrderInfo.hasStartedSelling && cardInfo.grabTrainOrderInfo.startDate}}">
+          预计{{cardInfo.grabTrainOrderInfo.startDate}}开始抢票
+        </view>
+      </view>
+      <view class="train-info-box check-entry font-size26">
+        <text class="train-info-box-check-entry">检票口(请以车站公告为准)</text>
+        <!-- <Icon className='information_icon' class="train-info-box-check-icon" color='#999' size='15'/> -->
+        <text>{{cardInfo.ticketGates}}</text>
+      </view>
+      <view class='train-info-box font-size26 margin-top12' wx:if='{{cardInfo.passengers.length > 0}}'>
+        <view class='train-passenger-list' wx:for="{{cardInfo.passengers}}" wx:key="name">
+          <view class="train-passenger-item {{cardInfo.passengers.length > 1 ? 'more-people' : ''}}" wx:if="{{item.name}}">
+            <text class='train-passenger-item-name'>{{item.name}}</text>
+            <text class='flex1 right'><text class="seat-position">{{item.seatPosition}}</text>{{item.seatNo || ''}} {{item.seatName || ''}}</text>
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <operation wx:if="{{cardInfo.cardOperationData && !cardData.sharedCard}}" card-operation-data="{{cardInfo.cardOperationData}}" isShowTopLine="{{false}}"/>
+  </view>
+  
+</view>

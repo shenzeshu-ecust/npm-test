@@ -1,0 +1,10 @@
+<view class='bg' hidden="{{hiddenAll}}">
+    <form bindsubmit="formSubmit" report-submit="true">
+        <button wx:if="{{canIUseProfile}}" bindtap="onGotUserInfo" class="cover" plain="true" form-type="submit">
+            <text>{{buttonText}}</text>
+        </button>
+        <button wx:else class="cover" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" plain="true" form-type="submit">
+            <text>{{buttonText}}</text>
+        </button>
+    </form>
+</view>

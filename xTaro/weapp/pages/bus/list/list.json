@@ -1,0 +1,12 @@
+{
+  "backgroundColor": "#f2f2f2",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "nav-bar": "../cwx/component/navbar/navbar",
+    "coupon-float": "/cwx/component/couponFloat/couponFloat",
+    "expiration-coupon": "../common/template/expirationCoupon",
+    "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index",
+    "authorizationFloat": "/cwx/component/authorizationFloat/index"
+  },
+  "navigationStyle": "custom"
+}

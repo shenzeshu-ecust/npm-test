@@ -1,0 +1,21 @@
+<view class="license-box" bindtap="handleCloseLicense" catchtouchmove='_handleCatchNone' wx:if="{{isShowLicense}}">
+  <view class="preview-license-container">
+    <cover-view class="cover-bar"></cover-view>
+    <view class="page-swiper">
+      <swiper class="swiper" duration="{{duration}}" current="{{currentIndex}}" bindchange="handleChangeIndex">
+        <block wx:for="{{licenseImageList}}" wx:for-item="imageItem" wx:for-index="imageIndex" wx:key="imageIndex">
+          <swiper-item class="swiper-item">
+            <image class="swiper-item-img" src="{{imageItem}}"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class="license-bottom">
+      <view class="license-name">营业执照{{currentIndex + 1}}</view>
+      <view class="license-current-index">
+        {{currentIndex + 1}}
+        <text class="license-all-count">/{{licenseImageList.length}}</text>
+      </view>
+    </view>
+  </view>
+</view>

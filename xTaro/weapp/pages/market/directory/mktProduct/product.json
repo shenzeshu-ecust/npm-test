@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "sk_newproduct": "./skyline",
+    "wechat-long-list-chunk": "./chunk/index"
+  }
+}

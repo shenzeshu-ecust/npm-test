@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "gift-info": "/pages/hotel/components/giftinfo/giftinfo",
+        "room-special": "/pages/hotel/components/specialroom/specialroom"
+    }
+}

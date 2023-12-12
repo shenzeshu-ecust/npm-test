@@ -1,0 +1,8 @@
+<view class="nav-bar {{isShow?'navAnimate':'navAnimateOut'}}">
+  <view class="nav-bar-inner">
+    <view class="nav-bar-li {{index === currentNavIndex ? 'active' : ''}}" bindtap="_handleChangeNav" data-index="{{index}}" wx:for="{{navList}}" wx:key="item">
+      {{item.name}}
+      <view class="{{index === currentNavIndex ? ' bottom-active' : ''}}"></view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,76 @@
+<import src="../common/template/shareMenu.wxml" />
+<import src="../common/template/shareModal.wxml" />
+<import src="./components/ActivityAward/index.wxml" />
+<nav-bar navbar-data="{{navbarData}}"
+  bindback="onBack"
+  bindhome="onBack"></nav-bar>
+<block>
+    <view class='page-container'>
+        <block>
+            <view class='tip-button'
+              bindtap="showRuleModal">
+                <view class="inner">规则</view>
+            </view>
+        </block>
+        <view class="ad-back"
+          style="background-image: url({{activity.activityOwner? 'https://pages.c-ctrip.com/bus-images/order-axtrefund/onwer-header.png' : 'https://pages.c-ctrip.com/bus-images/order-axtrefund/customer-header.png'}})">
+            <view class="{{activity.activityOwner ? 'time-message owner-message' : 'time-message'}}">
+                {{reactTimeMessage}}
+            </view>
+        </view>
+        <view class='main-container'>
+            <block wx:if="{{activity.activityOwner}}">
+                <activity-ownerprocess activity="{{activity}}"
+                  endDateTime="{{activity.endDateTime}}"
+                  bindaction='activityAction'
+                  bindsubscribe="onSubscribe"
+                  bindcash='cashAction'
+                  bindgo='goAction'
+                  bindorder='goOrderDetail'
+                  avatarArray="{{avatarArray}}" />
+            </block>
+            <block wx:elif="{{activity.partStatus == 4}}">
+                <template is="activityaward"
+                  data="{{activity,otherAction: 'otherAction',goAction: 'goAction'}}"></template>
+            </block>
+            <block wx:else>
+                <activity-customerprocess activity="{{activity}}"
+                  endDateTime="{{activity.endDateTime}}"
+                  bindenter='enterAction'
+                  bindgo='goAction' />
+            </block>
+            <view class='block-container'>
+                <view class="block-header-bg"></view>
+                <view class='title'>活动玩法</view>
+                <image class="steps-image"
+                  mode="widthFix"
+                  src="https://pages.c-ctrip.com/bus-images/order-axtrefund/activity-steps.png" />
+            </view>
+        </view>
+        <view class="slogan-container">
+            <view class="slogan ctripSlogan"></view>
+        </view>
+    </view>
+    <activity-modal-overtime show="{{showOverTimeModal}}"
+      type="overTime"
+      bindclose="closeModal"
+      cashPrice="{{activity.cashPrice}}" />
+    <activity-modal-rules show="{{showRulesModal}}"
+      type="rules"
+      bindclose="closeModal"
+      rules="{{activity.activityRule}}" />
+    <activity-modal-stay show="{{showStayModal}}"
+      type="stay"
+      endDateTime="{{activity.leftTime}}"
+      remainCount="{{activity.minSharePeopleBeforeCash}}"
+      cashPrice="{{activity.smallPacket}}"
+      bindclose="closeModal"
+      bindshare="shareAction" />
+    <template is="share-menu"
+      data="{{...shareInfoData,isIPhoneX}}" />
+    <share-modal data="{{modalData}}"
+      bindclose="hiddenShareModal"
+      bindmodalbutton="onShareModalButton" />
+    <view class="view-check"
+      bindanimationend="viewReadyHandle"></view>
+</block>

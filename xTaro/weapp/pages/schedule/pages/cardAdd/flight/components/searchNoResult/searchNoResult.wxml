@@ -1,0 +1,4 @@
+<view class='searchNoResult'>
+  <text>您搜索的结果来自火星</text>
+  <text>请修改条件</text>
+</view>

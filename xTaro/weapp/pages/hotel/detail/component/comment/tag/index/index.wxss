@@ -1,0 +1,13 @@
+.tag-box {
+    display: flex;
+    margin: 0 24rpx;
+    margin-bottom: 24rpx;
+}
+.tag-item {
+    font-size: 24rpx;
+    color: #0f4999;
+    background: #ebf3ff;
+    border-radius: 8rpx;
+    padding: 12rpx 16rpx;
+    margin-right: 16rpx;
+}

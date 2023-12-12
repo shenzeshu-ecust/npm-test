@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "component-assist-button": "../assist-button",
+    "component-hotel-waterfall": "../hotel-waterfall",
+    "component-jump": "../jump",
+    "component-loading": "../loading"
+  }
+}

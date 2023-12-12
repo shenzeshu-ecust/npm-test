@@ -1,0 +1,11 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "loading-component": "../../../component/loading/index",
+    "task-count-down": "/pages/market/directory/components/taskCountDown/index"
+  },
+  "componentPlaceholder": {
+    "task-count-down": "view"
+  }
+}

@@ -1,0 +1,13 @@
+<view class="upload-img-show" wx:if="{{pictures.length}}">
+    <block wx:for='{{pictures}}' wx:for-item="picture" wx:for-index="index">
+        <view class="u-img-thumbnail" bindtap="{{picture.isFail ? 'uploadAgain' : 'previewPicture'}}" data-idx="{{index}}">
+            <image src="{{picture.url}}" class="img"></image>
+            <view wx:if="{{picture.status}}" class="u-img-status">{{picture.status}}</view>
+            <text class="wechat-font-close2 img-close" catchtap="removePicture"></text>
+        </view>
+    </block>
+</view>
+<view wx:if="{{showUploadIcon}}" class="upload-img" bindtap="uploadImage">
+    <image src="https://pages.c-ctrip.com/hotels/wechat/img/ordercomment-pic.png" class="u-img-icon"></image>
+    <view class="u-img-desc">添加图片</view>
+</view>

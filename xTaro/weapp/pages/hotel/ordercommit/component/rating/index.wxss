@@ -1,0 +1,14 @@
+.rating-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24rpx;
+}
+.rating-box .rating-icon {
+    width: 46rpx;
+    height: 46rpx;
+    margin-right: 28rpx;
+}
+.rating-box .desc {
+    color: #555;
+    font-size: 24rpx;
+}

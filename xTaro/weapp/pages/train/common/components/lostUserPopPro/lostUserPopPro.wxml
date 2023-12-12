@@ -1,0 +1,23 @@
+<template name="lostUserPopPro">
+    <block>
+        <view class="backmask active" bindtap="hideBackDrop"></view>
+        <view class="pop-lostp-sec-area">
+            <view class="pop-lostp-sec">
+                <view class="bprice">{{lostUserPopDetail.Price}}</view>
+                <view class="tip">{{'礼包已全部发至您的账户'}}</view>
+                <view wx:for="{{lostUserPopDetail.AlertGiftList}}" class="{{index===0?'main-lostp-coupon':'main-lostp-scoupon'}}" wx:if="{{index<3}}" style="{{index===1?'left:36rpx':(index===2?'right:36rpx':'')}}">
+                    <image mode="heightFix" class="ava" src="{{item.ImgUrl}}" wx:if="{{index===0}}" />
+                    <view class="price" wx:if="{{index>0}}">
+                        {{item.Price}}
+                        <text class="sprice">{{item.Unit}}</text>
+                    </view>
+                    <text class="title">{{item.Title}}</text>
+                    <text class="subtitle">{{item.SubTitle}}</text>
+                    <text class="jiao">{{item.IsSend ? '已领取' : '未领取'}}</text>
+                </view>
+            </view>
+            <button bindtap="onClickLosrUserSubscribeBtn">去购票</button>
+            <text class="ifont-closed" bindtap="hideBackDrop"></text>
+        </view>
+    </block>
+</template>

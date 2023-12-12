@@ -1,0 +1,115 @@
+/*价格明细浮层*/
+.pd-body {
+    min-height: 600rpx;
+    box-sizing: border-box;
+    font-size: 24rpx;
+    color: #555555;
+}
+.pd-room-num {
+    font-size: 20rpx;
+    margin-left: 12rpx;
+}
+
+.op-box {
+    padding: 20rpx 24rpx;
+    background-color: #f8fafd;
+    border-radius: 8rpx;
+    margin-top: 24rpx;
+}
+.op-box .price-item{
+    margin: 0;
+}
+.op-box .tax-desc {
+    font-size: 24rpx;
+    color: #888;
+    margin-top: 10rpx;
+}
+.op-box .del-price { text-decoration: line-through;}
+.detail-box {
+    margin-top: 12rpx;
+    padding: 20rpx 24rpx;
+    background: linear-gradient(90deg, rgba(255, 246, 232, 0.2) 0%, rgba(255, 233, 196, 0.3) 100%);
+    border-radius: 8rpx;
+}
+.box-tit {
+    flex: 1;
+    font-size: 32rpx;
+    font-weight: 600;
+    color: #111111;
+}
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16rpx 0 8rpx;
+}
+.sale-tit {
+    border-bottom: 1rpx solid #eee;
+    padding-bottom: 24rpx;
+    margin: 0;
+}
+.price-tag {
+    color: #f70;
+    border: 1rpx solid #ffa04d;
+    border-radius: 4rpx;
+    font-size: 20rpx;
+    padding: 4rpx;
+    line-height: 18rpx;
+}
+.price-desc {
+    font-size: 20rpx;
+    color: #888888;
+    line-height: 1;
+}
+.price-avg {
+    margin-top: 48rpx;
+    color: #f70;
+    font-size: 20rpx;
+    font-weight: 500;
+}
+.price-color {
+    color: #f70;
+}
+.price-constant-color {
+    display: inline-block;
+    color: #111111 !important;
+}
+.price-color .strong {
+    font-size: 32rpx;
+    font-weight: 600;
+}
+.price-strong {
+    font-size: 40rpx;
+    font-weight: 600;
+}
+.tr { text-align: right; }
+.single-day { display: inline-block; }
+.mr8 { margin-right: 8rpx; }
+
+.price-left-desc {
+    margin-right: 8rpx;
+    font-size: 24rpx;
+    color: #555555;
+    font-weight: 400;
+}
+.tax-box {
+    margin-top: 12rpx;
+    padding: 20rpx 24rpx;
+    background-color: #f8fafd;
+    border-radius: 8rpx;
+}
+.tax-box .tax-tit {
+    flex: 1;
+    color: #111111;
+    font-weight: 500;
+}
+.tax-box .tax-item {
+    color: #888888;
+}
+.price-before {
+    color: #555;
+    font-size: 24rpx;
+}
+.price-avg .tips {
+    color: #888;
+}

@@ -1,0 +1,50 @@
+.add-travel {
+  height: 90rpx;
+  width: 100%;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  padding-bottom: 30rpx;
+  padding-top: 30rpx;
+}
+
+.add-text-view {
+    position: relative;
+    height: 100%;
+    background-color: #1980fe;
+    color: white;
+    font-size: 34rpx;
+    border-radius: 49rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.submitting-image {
+  width: 26rpx;
+  height: 8rpx;
+  display: inline-block;
+}
+
+.add-submitting {
+  height: 90rpx;
+  width: 100%;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  padding-bottom: 30rpx;
+  padding-top: 30rpx;
+}
+
+.add-submitting-btn {
+  margin: 0rpx 50rpx;
+  height: 100%;
+  display: block;
+  font-weight: 500;
+  font-size: 34rpx;
+  border-radius: 49rpx;
+  background: #6e92bf;
+  line-height: 90rpx;
+  text-align: center;
+  color: #fff;
+}

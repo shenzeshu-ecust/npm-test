@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "taskList": "../task"
+  }
+}

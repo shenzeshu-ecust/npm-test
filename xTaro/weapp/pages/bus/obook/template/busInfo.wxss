@@ -1,0 +1,237 @@
+.headerContainer {
+  padding: 20rpx;
+}
+.headerInfo {
+  /* overflow: hidden; */
+  position: relative;
+  border-radius:  10rpx;
+  flex-direction: column;
+
+}
+
+.headerInfo .shadow {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 0 150rpx rgba(0, 0, 0, 0.1);
+}
+
+
+.headerInfo .rightScroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  z-index: 2;
+  width: 100%;
+  border-bottom-left-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+
+.headerInfo .importantInfo {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #333333;
+  padding: 0 20rpx;
+  z-index: 2;
+}
+
+.headerInfo .importantInfo .gray {
+  color: #666666;
+  font-size: 28rpx;
+}
+
+.icon-arrow-to-long {
+  /* height: 20rpx; */
+  font-family: 'bus_wechat_icon';
+  font-weight: 300;
+}
+.icon-arrow-to-long:before {
+  font-size: 80rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+}
+
+.headerInfo .importantInfo.center {
+  text-align: center;
+}
+
+.headerInfo .light {
+  font-weight: 400;
+}
+
+
+.headerInfo .subInfo {
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #999999;
+}
+.headerInfo .icon-location {
+    padding-top: 5rpx;
+}
+.headerInfo .icon-location:before {
+  font-size: 24rpx;
+}
+.headerInfo .stationRow {
+  display:  flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.headerInfo .stationContainer {
+  min-width: 20%;
+  max-width: 70%;
+}
+.headerInfo .stationContainer.wrap {
+  min-width: 20%;
+  max-width: 70%;
+  white-space: normal;
+}
+.headerInfo .stationInfo {
+  padding: 5rpx 5rpx;
+}
+.headerInfo .stationInfo:active {
+  background-color: #f4f4f4;
+  border-radius: 4rpx;
+}
+
+.headerInfo .busOffer {
+  font-size: 24rpx;
+  color: #888888;
+  margin-left: 20rpx;
+  padding-left: 0;
+  padding-right: 0;
+  line-height: 40rpx;
+  background: transparent;
+  border-radius: 4rpx;
+  /* flex-direction: row; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+}
+
+.headerInfo .busOffer:after {
+  border: none;
+} 
+
+.headerInfo .busOffer.button-hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #aaaaaa;
+}
+
+
+.headerInfo .busOffer .icon_info:before {
+  content: '\e010';
+  font-family: 'bus_wechat_icon';
+  font-size: 24rpx;
+  line-height: 40rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+.headerInfo .top {
+  position: relative;
+  overflow: hidden;
+  padding: 34rpx 0 30rpx;
+  border-radius: 10rpx;
+  border-top-left-radius:  10rpx;
+  border-top-right-radius: 10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.headerInfo .bottom {
+  position: relative;
+  overflow: hidden;
+  border-bottom-left-radius:  10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+.headerInfo .top:after, .headerInfo .top:before { 
+  bottom: -6px;
+  box-shadow: 0 0 200rpx 470rpx rgba(255,255,255,0.98);
+}
+.headerInfo .bottom:before, .headerInfo .bottom:after {
+  top: -6px;
+  box-shadow: 0 0 200rpx 470rpx rgba(255,255,255,0.8);
+}
+
+.headerInfo .info {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+.headerInfo .rightInfo {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #333333;
+  margin-left: 30rpx;
+  padding: 0 20rpx;
+  z-index: 2;
+}
+  
+.headerInfo .bottom:before, .headerInfo .bottom:after, .headerInfo .top:after, .headerInfo .top:before {
+    position: absolute;
+    background-color: #ffffff;
+    content:  '';
+    height: 0rpx;
+    width: 0rpx;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 6px;
+}
+.headerInfo .bottom:before, .headerInfo .top:before {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;  
+  border-left-width: 0;
+  left: 0;
+  
+}
+
+.headerInfo .bottom:after, .headerInfo .top:after {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-right-width: 0;
+    right: 0;
+}
+
+.headerInfo .dashLine {
+    border-color: transparent;
+    border-width: 0;
+    border-bottom-width: 0;
+    border-top:  1px dashed  #f4f4f4;
+    height: 0;
+}
+
+
+.bus_tip {
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #333333;
+}
+.bus_tip image {
+  height: 32rpx;
+  width: 32rpx;
+  margin-right: 20rpx;
+}
+
+.headerdetailinfo, .headerdetailinfoMask {
+
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  padding-top: 200rpx;
+}
+.headerdetailinfoMask {
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+.margin-huge {
+  margin-left: 40rpx;
+  margin-right: 50rpx;
+}

@@ -1,0 +1,117 @@
+<!--砍价后的优惠券弹层-->
+<template name="couponLayer">
+    <view class="modal_cover" bindtap="hideCoupon" catchtouchmove='empty' bindtouchmove='empty'></view>
+    <view class="pmt_layer">
+        <view class="layer_close" bind:tap="hideCoupon"></view>
+        <!--有领券-->
+        <block wx:if="{{promotions && promotions.length}}">
+        <view>
+            <view class="content_title title_tb">
+                <text style="line-height: 26rpx">
+                    谢谢你帮我砍了{{cutAmount}}元
+                </text>
+                <text style="font-size: 24rpx">
+                    感谢参与活动，还有 {{promotions.length}} 张券待领取
+                </text>
+            </view>
+            <view class="content_info"  wx:if="{{promotions && promotions.length}}">
+                <block wx:for="{{promotions}}" wx:key="coupon" wx:for-item="item">
+                    <view class="coupon_card">
+                        <view class="card_left">
+                            <view class="price">
+                                <text>¥</text>
+                                <text class="num">{{item.bestDeduction}}</text>
+                            </view>
+                            <view class="price_info">
+                                <text>{{item.desc}}</text>
+                            </view>
+                        </view>
+                        <view class="card_right">
+                            <view style="font-size: 28rpx">{{item.displayName}}</view>
+                            <block wx:if="{{item.promotionStatus === 2}}">
+                                <view class="use_coupon" style="border: 1px solid #FE483F;" bindtap="useCoupon" data-linkUrl="{{item.promotionDescUrl}}">
+                                    <text style="color: #FE483F">去使用</text>
+                                </view>
+                            </block>
+                            <block wx:elif="{{item.promotionStatus === 1}}">
+                                <view class="use_coupon" style="background: #FE483F;"
+                                      data-secretid="{{item.promotionSecretId}}"
+                                      bindtap="receiveCoupon"
+                                >
+                                    <text style="color: #fff">领取</text>
+                                </view>
+                            </block>
+                            <block wx:elif="{{item.promotionStatus === 3 || item.promotionStatus === 4}}">
+                                <view class="use_coupon" style="background: #ddd;">
+                                    <text style="color: #fff">已领完</text>
+                                </view>
+                            </block>
+                            <block wx:elif="{{item.promotionStatus === 5}}">
+                                <view class="use_coupon" style="background: #ddd;">
+                                    <text style="color: #fff">已过期</text>
+                                </view>
+                            </block>
+                            <block wx:elif="{{item.promotionStatus === 6}}">
+                                <view class="use_coupon" style="background: #ddd;">
+                                    <text style="color: #fff">未开始</text>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="bg_svg"></view>
+        <view class="bg_bottom">
+            <button class="shape_btn an_breath btn_absolute" open-type="share">
+                <text class="text">找人帮TA砍</text>
+            </button>
+        </view>
+        </block>
+
+        <block wx:else>
+            <view class="content_info">
+                <view class="content_title" style="background-image:none">
+                    <text class="txt_tip" wx:if="{{showRisk}}">
+                        {{customerErrorMessage}}
+                    </text>
+                    <text wx:else>谢谢你帮我砍了{{cutAmount}}元</text>
+                </view>
+                <view class="bg_svg"></view>
+                <view class="bg_bottom">
+                    <button class="shape_btn an_breath btn_absolute" open-type="share">
+                        <text class="text">找人帮TA砍</text>
+                    </button>
+                </view>
+            </view>
+        </block>
+    </view>
+    
+</template>
+<!--砍价记录-->
+<template name="cutRecordLayer" >
+    <view class="modal_cover" bindtap="hideRecord" catchtouchmove='empty' bindtouchmove='empty'></view>
+    <view class="pmt_layer log_list">
+        <view class="layer_close" bindtap="hideRecord"></view>
+        <!--没有券-->
+        <view class="content_title">
+            <text style="color: #333;">
+                帮砍记录
+            </text>
+        </view>
+        <view class="content_info pmt_ul">
+            <block wx:for="{{cutDetails}}" wx:key="user" wx:for-item="item">
+                <view class="pmt_li">
+                    <view class="info_box">
+                        <image src="{{item.avatarUrl}}" class="user_img"/>
+                        <text class="title">{{item.nickName}}</text>
+                    </view>
+                    <view class="info_box">
+                        <text class="tag" wx:if="{{item.cutDesc !== ''}}">{{item.cutDesc}}</text>
+                        <view class="txt">砍掉<text style="color: #FE483F"><text class="price_width">{{item.amount}}</text>元</text></view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</template>

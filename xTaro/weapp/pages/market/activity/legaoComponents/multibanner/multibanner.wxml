@@ -1,0 +1,23 @@
+<!--pages/market/legaoComponents/multibanner/multibanner.wxml-->
+<view class="m-multibanner" style="{{item.isSideSpace?'margin: 0 10px;':''}}padding-top:{{item.top}};">
+		<view class="list {{item.showMore?'active':''}}">
+			<block wx:if="{{item.isScrollx}}">
+				<scroll-view wx:if="{{item.isScrollx}}" class="row" scroll-x="true" wx:for="{{item.list}}" wx:key="idx1" wx:for-index="idx1" wx:for-item="row" style="white-space:nowrap;margin-top:{{item.spacing}};{{idx1>=Number(item.rows)?'display:none;':''}}{{idx1===0?'margin-top:0;':''}}height:{{item.rowHeight}};">
+					<view class="item" wx:for="{{row}}" wx:key="idx2" wx:for-index="idx2" wx:for-item="name"  style="display:inline-block;margin-right:{{idx2===row.length-1?0:item.spacing}};height:100%;">
+						<image src="{{name.fig}}" data-mpurl="{{name.mpUrl}}" mode="heightFix" bindtap="handleJump" style="border-radius:{{item.borderRadius}};height:100%;"/>				
+					</view>
+				</scroll-view>
+			</block>
+			<block wx:else>
+				<view class="row" wx:for="{{item.list}}" wx:key="idx1" wx:for-index="idx1" wx:for-item="row" style="margin-top:{{item.spacing}};{{item.showMore?'display:flex;':''}}{{!item.showMore&&idx1>=item.rows?'display:none;':''}}{{idx1===0?'margin-top:0;':''}}">
+					<view class="item"  wx:for="{{row}}" wx:key="idx2" wx:for-index="idx2" wx:for-item="name"  style="margin-right:{{idx2===row.length-1?0:item.spacing}};">
+						<image src="{{name.fig}}" style="width:100%" mode="widthFix" data-item="{{name}}" bindtap="_handleClick" style="border-radius:{{item.borderRadius}};"/>				
+					</view>
+				</view>
+			</block>
+		</view>												
+		<view class="btn-expend {{item.showMore?'active':''}}" style="display:{{item.isExt?'block':'none'}};" bindtap="_handleExpand">
+				展开更多
+			<i class="icon-arrow"></i>
+		</view>
+</view>

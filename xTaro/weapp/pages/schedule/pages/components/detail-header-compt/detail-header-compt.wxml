@@ -1,0 +1,12 @@
+<!--pages/components/detail-header-compt/detail-header-compt.wxml-->
+<view class='container' wx:if="{{cardStatus&&detailUrl}}">
+  <text class='card-status'>{{cardStatus}}</text>
+  <view class='detail-container' wx:if="{{detailUrl}}" catchtap='detailClickTap'>
+    <text class='detail'>订单详情</text>
+    <image class="detail-card-icon" src='../../images/icon/cts_white_arrow_right_icon.png'></image>
+  </view>
+</view>
+
+<view class='semi-arc-container' wx:if="{{cardStatus&&detailUrl}}">
+  <view class='semi-arc'></view>
+</view>

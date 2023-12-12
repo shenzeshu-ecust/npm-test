@@ -1,0 +1,7 @@
+<view class="force-login-layer" wx:if="{{showForceLogin}}">
+    <view class="fl-img"></view>
+    <view>查看酒店信息请登录</view>
+    <view class="fl-btn" catchtap="forceToLogin">去登录</view>
+</view>
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

@@ -1,0 +1,76 @@
+<block wx:if="{{showLuckyBag}}">
+  <view catchtouchstart="catchtouchstart" class="userpanel-mask" bindtap="_hidePanel"></view>
+  <view catchtouchmove="catchtouchmove" class="userpanel-wrapper" style="padding-bottom: {{isIphoneX ? '68rpx': '0'}};">
+    <!-- 头部头图 -->
+    <view class="head-view">
+      <image wx:if="{{showOpenLuckyLoading}}" class="head-image" mode="aspectFill" src="https://dimg02.c-ctrip.com/images/01A5i120008r3lml9D914.png" style="height: {'{headImageHeight}}rpx'" />
+      <image wx:elif="{{drawResult.hasPrize}}" class="head-image" mode="aspectFill" src="https://dimg02.c-ctrip.com/images/01A50120008r3m1c2FD19.png" style="height: {'{headImageHeight}}rpx'" />
+      <image wx:elif="{{!drawResult || !drawResult.hasPrize}}" class="head-image" mode="aspectFill" src="https://dimg02.c-ctrip.com/images/01A17120008r3lkqq478D.png" style="height: {'{headImageHeight}}rpx'" />
+    </view>
+    <view class="content-view" style="height:{{isIphoneX ? '578rpx': '510rpx'}};">
+      <!-- 加载中弹窗 -->
+      <block wx:if="{{showOpenLuckyLoading}}">
+        <image class="loading" src="https://pages.c-ctrip.com/livestream/live/book_live_upload_video_loading.png" />
+      </block>
+      <!-- 中奖了弹窗 -->
+      <block wx:elif="{{drawResult.hasPrize}}">
+        <block wx:if="{{drawResult.prizeType === 2 || drawResult.prizeType === 4 || drawResult.prizeType === 5}}">
+          <view class="panel-thing-title">
+            <view class="panel-thing-des">
+              <text class="panel-thing-title-text">奖品: {{drawResult.prize}}</text>
+              <view class="panel-thing-title-view">
+                <text class="panel-thing-brief">{{tips[0]}}</text>
+                <text class="panel-thing-brief other">{{tips[1]}}</text>
+              </view>
+              <block wx:if="{{drawResult.prizeType === 2 && tips.length >= 3}}">
+                <text class="panel-thing-brief thing">{{tips[2]}}</text>              
+              </block>
+            </view>
+
+            <view class="panel-title-buttons">
+              <view class="panel-title-btnitem" bindtap="goViewMyLottery">
+                <text>前往查看</text>
+              </view>
+            </view>
+          </view>
+          <view class="panel-thing-img">
+            <image  class= "panel-title-thing-img" mode = "widthFix" src="https://dimg04.c-ctrip.com/images/0AS6z12000a31xypu2D69.png"></image>
+          </view>
+           <view class="look-user-list other" bindtap="viewWinners">
+            查看抽奖结果
+            <image class="arrow-icon" src="https://pages.c-ctrip.com/livestream/live/common-arrowheadjiantouzhibof06fe-f.png" />
+          </view>
+        </block>
+
+        <block wx:else>
+          <view class="prize-name-bg">
+            <text class="prize-name">{{drawResult.prize}}</text>
+          </view>
+          <text class="panel-brief">{{drawResult.tip}}</text>
+          <view class="look-user-list" bindtap="viewWinners">
+            查看抽奖结果
+            <image class="arrow-icon" src="https://pages.c-ctrip.com/livestream/live/common-arrowheadjiantouzhibof06fe-f.png" />
+          </view>
+          <view class="panel-buttons">
+            <view class="panel-btnitem focus-btn" bindtap="goViewMyLottery">
+              <text>前往查看</text>
+            </view>
+          </view>
+        </block>
+      </block>
+      <!-- 未中奖弹窗 -->
+      <block wx:elif="{{!drawResult || !drawResult.hasPrize}}">
+        <view class="my-prize" bindtap="viewMyLottery">
+          我的奖品
+          <image class="arrow-icon my-arrow-icon" src="https://pages.c-ctrip.com/livestream/live/common-arrowheadjiantouzhibof06fe-f.png" />
+        </view>
+        <view class="panel-brief not-prize">{{drawResult && drawResult.failTip ? drawResult.failTip : "错过了，下次早点来哦"}}
+        </view>
+        <view class="look-user-list notprize-look" bindtap="viewWinners">
+          查看抽奖结果
+          <image class="arrow-icon" src="https://pages.c-ctrip.com/livestream/live/common-arrowheadjiantouzhibof06fe-f.png" />
+        </view>
+      </block>
+    </view>
+  </view>
+</block>

@@ -1,0 +1,66 @@
+<!--{{component}}.wxml-->
+<wxs src="../tool.wxs" module="tool" />
+
+<view class='row-view' data-detail-url='{{itemData.detailUrl}}' bindtap="onGoToDetails">
+    <image class='poi-name-image' mode="scaleToFill" src='{{itemData.image}}'></image>
+    <view class='poi-view-2'>
+        <view class='poi-right-up'>
+            <view class='row-view' style="align-items: center;">
+                <text class='poi-name-text only-one-line'>{{itemData.itemName}}</text>
+                <text wx:if='{{itemData.titleTag}}' class='poi-name-tag' style="color: {{tool.titleTagColor(itemData)}}; background-color: {{tool.titleTagBgColor(itemData)}};">{{itemData.titleTag}}</text>
+            </view>
+            
+            <view wx:if='{{itemData.description}}'>
+                <text class='only-one-line' style="font-size: 28rpx; color: {{tool.descriptionColor(itemData)}}" numberOfLines='{{1}}'>{{itemData.description}}</text>
+            </view>
+            <view wx:if='{{(itemData.poiType <= 4) && (itemData.score || itemData.commentNum)}}'>
+                <text wx:if='{{itemData.score}}' class='poi-dark-text' style="margin-right: 8rpx">{{itemData.score}}</text>
+                <text wx:if='{{itemData.commentNum}}' class='poi-gray-text'>{{itemData.commentNum}}</text>
+            </view>
+            <view wx:if='{{item.tagList && item.tagList > 0}}' class='row-view'>
+                <text wx:for='{{item.tagList}}' wx:for-item="tagItem" class='poi-tag' style="color: {{tagItem.color}}; background-color: {{tagItem.backgroundColor}};">{{tagItem.tag}}</text>
+            </view>
+            <text wx:if='{{itemData.subInfo}}' class='poi-sub-info'>{{itemData.subInfo}}</text>
+        </view>
+        <view wx:if='{{itemData.leftBottomText}}' class='poi-right-down only-one-line'>
+            <text class='poi-gray-text only-one-line'>{{itemData.leftBottomText}}</text>
+            <!-- <rich-text nodes='{{priceHtml}}'/> -->
+            <template is='{{priceTool.priceTemplate(itemData)}}' data="{{price: itemData.price}}" />
+        </view>
+    </view>
+</view>
+
+<wxs module="priceTool">
+    function priceTemplate(item) {
+        if (!item.price) return '';
+        if (item.poiType === 1) {
+            if (item.price === 0) return 'priceFree';
+            return 'pricePoi';
+        } else {
+            return 'priceFood';
+        }
+    }
+    module.exports = {
+        priceTemplate: priceTemplate
+    }
+</wxs>
+
+<template name='priceFree'>
+    <text class="price-number price-container">免费</text>
+</template>
+
+<template name='priceFood'>
+    <view class='price-container'>
+        <tex class="pric-reminder">人均</tex>
+        <tex class='price-currency-symbol'>¥</tex>
+        <text class="price-number">{{price}}</text>
+    </view>
+</template>
+
+<template name='pricePoi'>
+    <view class='price-container'>
+        <tex class='price-currency-symbol'>¥</tex>
+        <text class="price-number">{{price}}</text>
+        <tex class="pric-reminder">起</tex>
+    </view>
+</template>

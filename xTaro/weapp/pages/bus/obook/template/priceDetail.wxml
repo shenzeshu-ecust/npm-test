@@ -1,0 +1,45 @@
+<template name="pricedetail" >
+    <block>
+        <view class="mask" catchtap="{{togglePriceDetail}}" ></view>
+        <view class="price-detail"  bindtap="{{togglePriceDetail}}">
+
+            <block wx:for='{{priceList}}' wx:key='{{index}}'>
+                <view class='margin' wx:if="{{showHidden || !item.hidden}}">
+                    <view class='flex-row nobr' >
+                        <text class='left' >{{item.name}}</text>
+                        <button wx:if="{{item.tag}}" disabled='{{!item.canCancel}}' class='cancelButton  {{item.canCancel ?classConfig.mainColor : ""}}' data-id='{{item.id}}' data-index="{{index - 2}}" catchtap='{{cancelSalePackage}}' >{{item.tag}}</button>
+                        <view class='flex1 nobr' ></view>
+
+                        <text class='{{item.decount ? "line-through" : ""}}' >¥{{item.price}}<text wx:if="{{item.count}}">{{item.count >= 0 ? ' x ' + item.count + item.unit : ''}}</text></text>
+                    </view>
+                    <view wx:if="{{item.discount > 0}}" class='discount flex-row'>
+                        <text class='left' >{{item.name}}立减</text>
+
+                        <button disabled='{{!item.canCancel}}' class='cancelButton  {{item.canCancel ?classConfig.mainColor : ""}}' data-id='{{item.id}}' catchtap='{{cancelSalePackage}}' >{{item.discountTag}}</button>
+                        <view class='flex1 nobr' ></view>
+                        <text class="torange">-¥{{item.discount + (item.count >= 0 ? ' x ' + item.count + item.unit : '')}}</text>
+                    </view>
+                    <view wx:if="{{item.hasGive}}" class='discount flex-row' >
+                        <text>{{item.giveProduct.title}}</text>
+                        <view class='flex1 nobr' ></view>
+                        <text class="torange">¥{{item.giveProduct.price + (item.giveProduct.count >= 0 ? ' x ' + item.giveProduct.count + item.giveProduct.unit : '')}}</text>
+                    </view>
+                    <view wx:for="{{item.giveActivitys}}" class="discount flex-row" wx:for-item="giveItem" >
+                        <text>{{giveItem.title}}</text>
+                        <view class='flex1 nobr' ></view>
+                        <text class="line-through">¥{{giveItem.price + (giveItem.count >= 0 ? ' x ' + giveItem.count + giveItem.unit : '')}}</text>
+                    </view>
+                </view>
+            </block>
+            <block wx:for='{{priceListExtra}}' wx:key='{{index}}' wx:for-item="priceItem">
+                <view class='margin minlist' wx:if="{{showHidden || !item.hidden}}">
+                    <view class='flex-row nobr' >
+                        <text class='left' >{{priceItem.name}}</text>
+                        <text class="flex1"></text>
+                        <text >{{priceItem.symbol}}{{priceItem.price + (priceItem.count >= 0 ? ' x ' + priceItem.count : '')}}</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </block>
+</template>

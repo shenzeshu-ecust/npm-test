@@ -1,0 +1,9 @@
+{
+  "backgroundColor": "#efefef",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "nav-bar": "../cwx/component/navbar/navbar",
+    "passenger-modal": "./components/passengerModal/passengerModal"
+  },
+  "navigationStyle": "custom"
+}

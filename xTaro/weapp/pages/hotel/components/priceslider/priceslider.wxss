@@ -1,0 +1,109 @@
+.container {
+    width: 702rpx;
+}
+.container .desc {
+    display: flex;
+    justify-content: space-between;
+    padding: 16rpx 0 9rpx 0;
+}
+.container .desc .val {
+    color: #555555;
+    font-size: 28rpx;
+    line-height: 28rpx;
+}
+.silder-area {
+    position: relative;
+    height: 40rpx;
+    margin-bottom: 32rpx;
+}
+.slider-body {
+    height: 8rpx;
+    background-color: #ddd;
+    position: absolute;
+    border-radius: 4rpx;
+}
+.silder-area .left {
+    bottom: 17rpx;
+    z-index: 0.1;
+}
+.silder-area .body {
+    bottom: 17rpx;
+    background-color: #19896f;
+    z-index: 0.3;
+    will-change: width,transform;
+}
+.silder-area .right {
+    z-index: 0.2;
+    bottom: 17rpx;
+}
+.silder-area .bubble {
+    position: absolute;
+    height: 34rpx;
+    font-size: 26rpx;
+    line-height: 34rpx;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #006ff6;
+    color: #fff;
+    border-radius: 23rpx;
+    bottom: 56rpx;
+    will-change: float,right,left;
+    padding: 6rpx 16rpx;
+}
+.silder-area .bubble:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 8rpx solid #006ff6;
+    border-left: 8rpx solid transparent;
+    border-right: 8rpx solid transparent;
+    display: inline-block;
+    content: "";
+    position: absolute;
+    bottom: -8rpx;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.slider-item {
+    border-radius: 50%;
+    width: 36rpx;
+    height: 36rpx;
+    background: rgb(255, 255, 255);
+    border: 2rpx solid rgb(0, 111, 246);
+    z-index: 2;
+    position: relative;
+    will-change: transform;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slider-item .slider-shadow {
+    width: 4rpx;
+    height: 22rpx;
+    border: 2rpx;
+    background-color: #93BCF5;
+}
+.slider-item .slider-shadow:before, .slider-item .slider-shadow:after {
+    content: "";
+    width: 4rpx;
+    height: 14rpx;
+    border-radius: 2rpx;
+    background-color: #93BCF5;
+    position: absolute;
+}
+.slider-item .slider-shadow:before {
+    transform: translate3d(-8rpx, 7rpx, 0);
+}
+.slider-item .slider-shadow:after {
+    transform: translate3d(8rpx, 7rpx, 0);
+}
+.silder-area .min {
+    position: absolute;
+    top: 0rpx;
+}
+.silder-area .max {
+    position: absolute;
+}
+.hide {
+  display: none;
+}

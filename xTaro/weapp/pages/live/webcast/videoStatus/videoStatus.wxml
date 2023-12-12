@@ -1,0 +1,16 @@
+	<block wx:if="{{loadingStatus == 1}}">
+    	<view class="loading-sbg">
+	        <view class="lvpai-loading"></view>
+	    </view>
+	</block>
+		<!-- 播放失败  -->
+	<block wx:if="{{loadingStatus == 3}}">
+		<view class="reload-wapper">
+	        <view class="reload-sbg">
+	            <view class="t1">
+	            	<view class="tt">网络连接超时，无法为您进行加载</view>
+	            	<view class="tt">请点击屏幕<text id="share_refresh" bindtap="reloadWatchLive">重新加载</text></view>
+	            </view>
+	        </view>
+	    </view>
+	</block>

@@ -1,0 +1,13 @@
+{
+    "navigationBarTitleText": "天天领现金",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "componentPlaceholder": {
+      "taskList": "view",
+      "taskAssist": "view",
+      "waterfall": "waterfall-placeholder",
+      "captcha": "captcha-placeholder"
+    }
+  }
+  

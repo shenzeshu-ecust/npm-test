@@ -1,0 +1,19 @@
+{
+  "navigationBarTitleText": "携程抢票",
+  "navigationBarBackgroundColor": "#2884FF",
+  "usingComponents": {
+      "swiper-banner": "/pages/train/common/components/SwiperBanner/banner",
+      "taskList": "/pages/market/directory/task",
+      "taskSignIn": "/pages/market/directory/taskSignIn",
+      "taskModal": "/pages/train/common/components/robTaskModal/index",
+      "newGuestPop": "/pages/train/common/components/NewCustomerRight/index",
+      "slotMachine": "/pages/market/directory/components/slotMachine",
+      "subscribeGuide": "/pages/train/common/components/SubscribeGuide/index",
+      "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index"
+  },
+  "componentPlaceholder": {
+    "taskList": "view",
+    "taskSignIn": "view",
+    "slotMachine": "view"
+  }
+}

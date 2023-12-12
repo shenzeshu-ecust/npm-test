@@ -1,0 +1,64 @@
+@import '../common/common.wxss';
+@import '../common/searchres.wxss';
+@import '../components/city/city.wxss';
+page {background-color: #fff;}
+/* sticky-top */
+.searchbar {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    z-index: 99;
+}
+.searchbar .search-module_ico_focus {
+    transform: translateX(50%);
+}
+.searchbar .search-module_input { padding: 0 80rpx 0 60rpx; }
+.search-module_clear { right: 24rpx; z-index: 100; }
+/* scroll-body */
+.search-body {
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+/* suggest-result */
+.search-result {
+    width: 100%;
+    position: absolute;
+    padding-bottom: 160rpx;
+}
+.search-result .city-nores {
+    font-size: 24rpx;
+    background-color: #FFF2BF;
+    padding: 16rpx 24rpx;
+}
+.search-result .search-tit {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #eee;
+    font-size: 24rpx;
+    padding: 12rpx 24rpx;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+.search-result .no-result {
+    padding: 200rpx 60rpx;
+    -webkit-line-clamp: 2;
+    text-align: center;
+    font-size: 28rpx;
+    color: #111111;
+}
+
+.font-shopping-color {color: #bec1ff;}
+.font-search-color {color: #83c3f8;}
+.font-brand-color {color: #ad83f8;}
+.font-hotkey-color {color: #ffc380;}
+.font-special-color {color: #ff96a3;}
+.font-hospital-color {color: #4ae8c1;}
+.font-university-color {color: #ffaf96;}
+.font-train-color {color: #ffdb6b;}
+.font-office-color {color: #c1f048;}
+.font-air-color {color: #8fdfff;}
+.font-spots-color {color: #a8ed89;}
+.font-eating-color {color: #ffca72;}
+.font-buy-color {color: #b9a7f6;}

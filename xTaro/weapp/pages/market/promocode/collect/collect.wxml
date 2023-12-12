@@ -1,0 +1,26 @@
+<!--pages/market/promocode/collect/collect.wxml-->
+<view class="coupon_main">
+	<view class="coupon_txt">
+	<text>您可以输入</text>
+	<text class="bold">活动口令或兑换码</text>
+	<text>，兑换优惠券</text>
+	</view>
+	<view class="coupon_input">
+		<view class="login_box">
+			<view class="login_dl">
+				<view class="login_dd">
+					<input class="input_tel" value="{{input.inputValue}}" placeholder-style="color:#ccc;text-align: left;" placeholder="请输入活动口令或兑换码"  bindinput="bindKeyInput" bindblur="bindOutInput"  id="cp_input" />
+					<view class="input_clear " href="javascript:;" >
+						<view id="clear_Collect_Captcha">
+						</view>
+					</view>
+				</view>
+				<view class="captcha-box">
+					<captcha settings='{{settings1}}' refresh="{{captchaRefresh}}"/>
+				</view>
+			</view>
+			<view class="error-tip"  wx:if="{{errMsg.errorShow}}">{{errMsg.msg}}</view>
+			<button type="default" class="coupon_btn {{!input.inputValue||!captchainputValue ? 'disabled':''}}" disabled="{{!input.inputValue||!captchainputValue}}" bindtap="collectAction" id="btnExchange">兑换</button>
+		</view>
+	</view>
+</view>

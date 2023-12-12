@@ -1,0 +1,15 @@
+<!-- 组件模板 -->
+  <block  wx:if="{{!showTencentAd}}">
+    <block wx:if="{{adType =='BANNER'}}">
+      <ad-chaping  wx:if="{{loadFlag && impType =='2'}}" adType="{{adType}}" adData="{{adData}}" trackingid="{{trackingid}}" header="{{header}}" showSign="{{showSign}}" screenRatio="{{screenRatio}}" whObj="{{whObj}}"></ad-chaping>
+      <block wx:else >
+        <ad-background wx:if="{{loadFlag}}" borderRadius="{{borderRadius}}" adType="{{adType}}" trackingid="{{trackingid}}" header="{{header}}" adData="{{adData}}" showSign="{{showSign}}" whObj="{{whObj}}"></ad-background>
+      </block>
+    </block>
+      <!-- 默认是slider，video后面再加 -->
+    <ad-slider  wx:else adData="{{adData}}" borderRadius="{{borderRadius}}" adType="{{adType}}" trackingid="{{trackingid}}" header="{{header}}" showSign="{{showSign}}" whObj="{{whObj}}" slideVideo="{{slideVideo}}"></ad-slider>
+  </block>
+  <div wx:else  style='{{adStyle}}'>
+    <ad wx:if="{{!showAdCustomSDK}}" unit-id="{{tencentAdCode}}"></ad>
+    <ad-custom wx:else style='{{adCustomSDKStyle}}' unit-id="{{tencentAdCode}}"  ></ad-custom>
+   </div>

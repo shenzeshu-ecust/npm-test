@@ -1,0 +1,52 @@
+<template name="meal-modal">
+        <view class="contentbox-wrapper">
+            <view wx:for="{{highStarData.mealProductList}}" wx:for-item="meal" wx:for-index="index">
+                <view class="content-box">
+                    <image mode="aspectFill" src="{{meal.basicInfo.picUrl ? meal.basicInfo.picUrl : defaultMealUrl}}" class="content-pic" binderror="noImageTrace"/>
+                    <view class="content-info" style="{{index===1 ? 'border:none;': ''}}">
+                        <view bindtap="gotoProductDetail" data-url="{{meal.urlInfo}}" data-idx="{{index}}" data-producttype="1" data-clicktype="4" class="product-name {{meal.basicInfo.isSoldOut && 'sold-out-text' }}">{{meal.basicInfo.productName}}<text class="wechat-font-arrow-right2 arrow-right"></text>
+                        </view>
+                        <view bindtap="gotoProductDetail" data-url="{{meal.urlInfo}}" data-idx="{{index}}" data-producttype="1" data-clicktype="2" class="content">
+                            <view class="content-left">
+                                <view class="center-info">
+                                    <view wx:if="{{meal.basicInfo.soldQuantity > 0}}" class="copies {{meal.basicInfo.isSoldOut && 'sold-out-text'}}">
+                                        已售{{meal.basicInfo.soldQuantity}}份
+                                    </view>
+                                    <view class="price-box">
+                                        <view wx:if="{{meal.productPriceInfo.originalPrice && meal.productPriceInfo.originalPrice !== meal.productPriceInfo.actualPrice}}" class="original-price {{meal.basicInfo.isSoldOut && 'sold-out-text'}}">
+                                            ¥{{meal.productPriceInfo.originalPrice}}
+                                        </view>
+                                        <view class="now-price {{meal.basicInfo.isSoldOut && 'sold-out-text'}}">
+                                            <text class="money-type">¥</text>
+                                            <text class="price-value">{{meal.productPriceInfo.actualPrice}}</text>
+                                        </view>
+                                    </view>
+                                </view>
+                                <view class="bottom-info">
+                                    <view class="tip {{meal.basicInfo.isSoldOut && 'sold-out-text'}}">
+                                        过期退·随时退
+                                    </view>
+                                    <view wx:if="{{meal.productPriceInfo.discount || meal.productPriceInfo.reducedAmount}}" class="discount-wrapper {{meal.basicInfo.isSoldOut && 'sold-out-text sold-out-label'}}">
+                                        <view wx:if="{{meal.productPriceInfo.discount}}" class="discount br">
+                                            {{meal.productPriceInfo.discount}}折
+                                        </view>
+                                        <view wx:if="{{meal.productPriceInfo.reducedAmount}}" class="discount-price">
+                                            优惠{{meal.productPriceInfo.reducedAmount}}
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="content-right">
+                                <view class="buy-car {{meal.basicInfo.isSoldOut && 'sold-out-btn'}}" catchtap="gotoProductDetail" data-url="{{meal.urlInfo}}" data-idx="{{index}}" data-producttype="1" data-clicktype="1">
+                                    <view class="wechat-font-shop-car car-icon"></view>
+                                    <view class="buying">
+                                        {{meal.basicInfo.isSoldOut ? '售罄' : '抢购'}}
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+</template>

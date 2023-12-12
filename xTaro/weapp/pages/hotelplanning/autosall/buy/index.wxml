@@ -1,0 +1,23 @@
+<mp-navigation-bar
+    id="mp-navigation"
+    back="{{navigationBar.back}}"
+    color="{{navigationBar.color}}"
+    background="{{navigationBar.background}}"
+    show="{{navigationBar.show}}"
+    animated="{{navigationBar.animated}}">
+    <view></view>
+</mp-navigation-bar>
+
+<view class="buy-container">
+    <image class="vend-bg" src="{{backImg}}" mode="aspectFill"/>
+    <image wx:if="{{showBuyBtn && source === 'yuechao'}}" class="buy-btn" bindtap="goBuy" src="{{supplierConfig.btnImg}}" />
+    <image wx:elif="{{showBuyBtn}}" class="buy-btn" bindtap="goBuy" src="{{supplierConfig.btnImg}}" />
+</view>
+
+<!-- 新客优惠券弹窗 -->
+<view class="mask" wx:if="{{newCustomer && !received}}"></view>
+<view class="new-customer-pop" wx:if="{{newCustomer && !received}}" bindtap="clickCoupon">
+  <image class="new-coustomer" src="https://pages.c-ctrip.com/hotels/wechat/market/smz/aggregate/autosall-newcustomer-pop.png"  />
+</view>
+<!-- 白屏检测 -->
+<view class="view-check" bindanimationend="viewReadyHandle"></view>

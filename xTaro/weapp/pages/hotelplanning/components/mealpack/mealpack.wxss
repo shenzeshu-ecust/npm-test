@@ -1,0 +1,572 @@
+@import "../../common/css/common.wxss";
+@import "../../common/css/theme.wxss";
+
+.relative{
+    position: relative;
+}
+
+.mealpack-wrapper{
+    background: var(--mealpack-background);
+    padding: 0 16rpx;
+    border-radius: 40rpx 40rpx 24rpx 24rpx;
+    margin: var(--mealpack-margin);
+}
+
+.tab-header{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 28rpx;
+    padding-bottom: 44rpx;
+}
+
+.title-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.meal-title, .pack-title{
+    text-align: center;
+    font-size: 36rpx;
+    color: var(--meal-color);
+}
+
+.title-selected{
+    font-weight: 500;
+    color: var(--single-header-color);
+}
+
+.underline{
+    position: absolute;
+    bottom: 26rpx;
+    width: 96rpx;
+    height: 8rpx;
+    border-radius: 35rpx;
+    background: var(--meal-pack-underline);
+    transition: transform 0.2s;
+}
+.transform-right{
+    transform: var(--transform-right)
+}
+
+
+.segmentation{
+    width: 2rpx;
+    height: 42rpx;
+    background-color: #fff;
+}
+
+.contentbox-wrapper{
+    border-radius: 24rpx;
+    padding:var(--contentbox-padding);
+    background-color: #fff;
+}
+
+.content-box{
+    display: flex;
+    flex-direction: row;
+    padding-top: 32rpx;
+    min-height: 212rpx;
+}
+
+.content-info{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 33rpx;
+    justify-content: space-between;
+    border-bottom: 1rpx solid #eee;
+}
+
+.content-pic{
+    border-radius: 16rpx;
+    height: 168rpx;
+    width: 168rpx;
+    min-width: 168rpx;
+    margin-right: 24rpx;
+}
+
+.product-name{
+    color: #333;
+    font-size: 32rpx;
+    font-weight: 500;
+    line-height: 40rpx;
+    word-break: break-all;
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+}
+
+.content-left{
+    flex: 1;
+    margin-right: 20rpx;
+}
+
+.content-right{
+    height: 88rpx;
+    width: 88rpx;    
+}
+
+.center-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    /* height: 48rpx; */
+}
+
+.price-box{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.copies{
+    color: #999;
+    font-size: 24rpx;
+}
+
+.now-price{
+    color: #333;
+}
+
+.original-price{
+    /* height: 32rpx; */
+    margin-right: 18rpx;
+    color: #999;
+    font-size: 24rpx;
+    text-decoration:line-through;
+    padding: 4rpx 0;
+}
+
+.money-type{
+    font-size: 24rpx;
+}
+
+.price-value{
+    font-size: 40rpx;
+    font-family: Helvetica;
+}
+
+.bottom-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8rpx;
+}
+
+.tip{
+    color: #333;
+    font-size: 24rpx;
+}
+
+.discount-wrapper{
+    display: flex;
+    flex-direction: row;
+    height: 28rpx;
+    color: #ff6600;
+    font-size: 20rpx;
+    background: #fff8f2;
+}
+
+.discount{
+    height: 28rpx;
+    line-height: 28rpx;
+    text-align: center;
+    border-right: 2rpx dashed #ffd6bb;
+    padding: 0 10rpx;
+}
+
+.discount-price{
+    flex: 1;
+    height: 28rpx;
+    line-height: 28rpx;
+    text-align: center;
+    padding-left: 8rpx;
+    padding-right: 8rpx;
+}
+
+.buy-car{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 88rpx;
+    height: 88rpx;
+    background: linear-gradient(-221.81deg, rgb(0, 167, 250) 0%, rgb(0, 118, 245) 100%);
+    border-radius: 16rpx;
+}
+
+.car-icon{
+    font-size: 30rpx;
+    color: #fff;
+}
+
+.arrow-right{
+    position: relative;
+    top: 2rpx;
+    font-size: 28rpx;
+    color: #333;
+}
+
+.arrow-right-icon{
+    font-size: 16rpx;
+    margin-left: 6rpx;
+}
+
+.buying{
+    height: 34rpx;
+    margin-top: 5rpx;
+    line-height: 34rpx;
+    font-size: 26rpx;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+}
+
+.mealenjoy-wrapper{
+    margin-top: 12rpx;
+    margin-bottom: 24rpx;
+}
+
+.logo-wrapper{
+    display: flex;
+    flex-direction: row;
+    margin-top: 12rpx;
+}
+
+.logo{
+    height: 28rpx;
+    line-height: 28rpx;
+    width: 28rpx;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 19rpx;
+    color: #fff;
+    background: #2698f7;
+    z-index:1;
+}
+
+.detail{
+    flex: 1;
+    display: flex;
+    width: 300rpx;
+    line-height: 32rpx;
+    margin-left: 12rpx;
+    font-size: 24rpx;
+    color: #333;
+}
+
+.detail-text{
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.connect{
+    position: absolute;
+    top: 25rpx;
+    left: 13rpx;
+    width: 8rpx;
+    height: 100%;
+    background: #e6f3fe;
+}
+
+.alert-box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 32rpx;
+    color: #d0021b;
+    font-size: 24rpx;
+    margin-top: 8rpx;
+}
+
+.goto-more-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80rpx;
+    padding-top: 20rpx;
+    background: var(--mealpack-background);
+    color: var(--goto-more-text);
+    font-size: 24rpx;
+}
+
+.show-more-btn{
+    line-height: 32px;
+}
+
+.single-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--single-header-color);
+    padding: var(--single-header-padding);
+}
+
+
+.single-header-new{
+    color: #0066f6;
+    padding: 40rpx 0 32rpx 0;
+}
+
+.product-name-wrapper{
+    font-size: 36rpx;
+    height: 44rpx;
+    line-height: 44rpx;
+    font-weight: bold;
+}
+
+.find-more-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 32rpx;
+    font-size: 24rpx;
+}
+
+.icon-log {
+    width: 32rpx;
+    height: 32rpx;
+    margin-top: -1rpx;
+    z-index: 2;
+}
+
+.has-meal-icon {
+    background-position: -41rpx -6rpx;
+}
+
+.has-enjoy-icon {
+  background-position: -83rpx -6rpx;
+}
+
+.no-meal-icon {
+  background-position: -124rpx -6rpx;
+}
+
+.no-enjoy-icon {
+  background-position: -166rpx -6rpx;
+}
+
+.little-alert-icon{
+    margin-right: 9rpx;
+    position: relative;
+    top: 2rpx;
+}
+
+/* 次卡 */
+.multiple-card {
+    padding: 32rpx 0 24rpx 24rpx;
+    background-color: #fff;
+    border-radius: 16rpx;
+    margin: var(--mealpack-margin);
+}
+
+.card-title {
+    color: #000;
+    font-size: 32rpx;
+    font-weight: 500;
+    line-height: 40rpx;
+    display: flex;
+    align-items: center;
+    margin-bottom: 28rpx;
+    margin-right: 4rpx;
+}
+
+.desc-item {
+    margin-left: 8rpx;
+    display: flex;
+    align-items: center;
+    color: #555;
+    font-size: 24rpx;
+    line-height: 32rpx;
+}
+
+.desc-item:first-child {
+    margin-left: 12rpx;
+}
+
+.desc-icon {
+    margin-right: 4rpx;
+}
+
+.swiper {
+    height: 234rpx;
+}
+
+.card-wrapper {
+    border-radius: 24rpx;
+    background: url('https://pages.c-ctrip.com/hotels/wechat/market/smz/unionvip/multi-card2.png') left top/cover no-repeat;
+    margin-right: 24rpx;
+    height: 232rpx;
+    position: relative;
+    box-shadow: 0 2rpx 12rpx 0 rgba(0, 0, 0, 0.1);
+}
+
+.item-right {
+    margin-right: 18rpx;
+}
+
+.hide-border {
+    border-radius: 24rpx 24rpx 30rpx 30rpx;
+}
+
+.top-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22rpx 28rpx 10rpx 32rpx;
+}
+
+.swiper .card-item {
+    width: 590rpx;
+}
+
+.left-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pack-name {
+    color: #fff;
+    font-size: 28rpx;
+    font-weight: 500;
+    line-height: 40rpx;
+    display: flex;
+    align-items: center;
+    margin-top: 8rpx;
+}
+
+.room-desc {
+    max-width: 328rpx;
+    margin-right: 14rpx;
+}
+
+.now-pack {
+    color: #fff;
+    font-size: 28rpx;
+    line-height: 28rpx;
+    margin-top: 8rpx;
+}
+  
+.pack-price {
+    font-size: 56rpx;
+    line-height: 66rpx;
+    margin-right: 6rpx;
+}
+
+.sold-btn {
+    background: #fff;
+    border-radius: 29rpx;
+    color: #1a2250;
+    font-size: 24rpx;
+    font-weight: 500;
+    padding: 10rpx 28rpx;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8rpx;
+}
+
+.sold-count {
+    color: #fff;
+    font-size: 20rpx;
+}
+
+.bottom-card {
+    background: #f5f7fa;
+    border-radius: 0 0 24rpx 24rpx;
+    padding: 24rpx 24rpx 24rpx 32rpx;
+    color: #333;
+    font-size: 24rpx;
+    line-height: 32rpx;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 54rpx);
+}
+
+.compare-vs {
+    width: 84rpx;
+    height: 28rpx;
+    margin-right: 22rpx;
+}
+
+.save-price {
+    color: #ff6600;
+    font-weight: 500;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    position: absolute;
+    border: solid;
+    left: 100rpx;
+    top: -18rpx;
+    border-width: 10rpx 12rpx 10rpx 12rpx;
+    border-color: transparent transparent #fef3f2 transparent;
+}
+
+.more-card {
+    padding-right: 24rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.divider {
+    width: 100%;
+    height: 1rpx;
+    background-color: #e5e5e5;
+    margin: 24rpx 0;
+}
+
+.more-link {
+    color: #333;
+    font-size: 24rpx;
+    line-height: 38rpx;
+    display: flex;
+    align-items: center;
+}
+
+.more-arrow {
+    top: 6rpx;
+    font-size: 24rpx;
+}
+
+.sold-out-text{
+    color: #bbb;
+    z-index: 3;
+}
+
+.sold-out-label{
+    background-color: #eee;
+    z-index: 3;
+}
+
+.sold-out-btn{
+    background: #bbb;
+}
+
+.no-compare {
+    margin: 66rpx 0 28rpx 0;
+}

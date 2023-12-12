@@ -1,0 +1,17 @@
+<!-- 猜您想问 -->
+<view class="train-list order-qus">
+    <view class="tit">
+        猜您想问
+        <text
+            class="fr txt-blue"
+            bindtap="goQuestionList"
+            data-ubt-key="c_train_wx_orderdetail_otherquestion">其他问题</text>
+    </view>
+    <view
+        class="item greyarr"
+        wx:for="{{ questionList }}"
+        wx:key="{{ index }}"
+        data-item="{{ item }}"
+        data-ubt-key="{{ item.RelationGuid }}"
+        bindtap="goToBuAnswer">{{ item.Content }}</view>
+</view>

@@ -1,0 +1,11 @@
+{
+    "navigationBarTitleText": "订单详情",
+    "enablePullDownRefresh": true,
+    "navigationBarBackgroundColor": "#0086F6",
+    "usingComponents": {
+        "customer-service": "/pages/train/orderdetail/components/CustomerService/index",
+        "slot-machine": "/pages/train/common/components/SlotMachine/index",
+        "swiper-banner": "/pages/train/common/components/SwiperBanner/banner",
+        "OmnipotentGrab": "/pages/train/common/components/omnipotentGrab/omnipotentGrab"
+    }
+}

@@ -1,0 +1,226 @@
+
+<view bindtap="hoteltap" class="hotel-item {{hotel.browseClass}} {{idx === 0 ? 'no-border' : ''}} autoExpose" id="{{hotel.ubt && hotel.ubt.autotest_item || ''}}"
+    data-idx="{{idx}}" data-id="{{hotel.hotelId}}" data-ubt-key="{{hotel.ubt && hotel.ubt.item || ''}}"
+    data-price="{{hotel.price}}"
+    data-expose="{{hotel.hotelCardExposeObj}}">
+    <view class="hotel-img-container">
+        <image class="hotel-img" src="{{hotel.logoPic}}" binderror="noImageTrace" style="display: inline-block;" data-id="{{hotel.hotelId}}" lazy-load data-type="list"></image>
+        <!--pictureIcon: 1, 图片顶部标签     2, 图片底部标签      3,sha标签-->
+        <view class="pic-icon-tag">
+            <template is="hotel-pic-tag" wx:if="{{hotel.pictureTags && hotel.pictureTags.tags}}" data="{{tags: hotel.pictureTags.tags, pictureIcon: 1}}"></template>
+            <image wx:if="{{hotel.shaTag}}" class="cell-category-icon icon-image-3" src="{{hotel.shaTag.icon}}" mode="heightFix" style="height: 40rpx" lazy-load></image>
+        </view>
+        <template is="hotel-pic-tag" wx:if="{{hotel.pictureBottomTags && hotel.pictureBottomTags.tags}}" data="{{tags: hotel.pictureBottomTags.tags, pictureIcon: 2}}"></template>
+        <view wx:if="{{hotel.topRecommend && hotel.topRecommendReason}}" class="top-desc">{{hotel.topRecommendReason}}</view>
+    </view>
+    <view wx:if="{{hotel.isFullBooking}}" class="full-booking-mark"></view>
+    <view class="hotel-info {{hotel.showGrayFilter ? 'gray-filter' : ''}}" id="{{ hotel.ubt && hotel.ubt.autotest_item_info || '' }}">
+        <view class="head-line">
+            <view class="hotel-name">
+                <text class="{{fromMap && 'single-ellipsis'}}">{{hotel.hotelName}}</text>
+                <!-- 星钻&非标圈圈 -->
+                <image wx:if="{{hotel.starIcon}}" class="star-icon {{isQuickApp ? 'level-'+hotel.starLevel : ''}}" src="{{hotel.starIcon}}" mode="heightFix" lazy-load></image>
+                <!-- 金钻/铂钻 -->
+                <image wx:if="{{hotel.dStar === 1}}" class="icon-d-star" src="https://pages.c-ctrip.com/wireless-app/imgs/hotel_list/hotel_logo_star_golden_list.png" />
+                <image wx:if="{{hotel.dStar === 2}}" class="icon-d-star" src="https://pages.c-ctrip.com/wireless-app/imgs/hotel_list/hotel_logo_star_pt_list.png" />
+                <!-- 挂牌 -->
+                <image wx:if="{{hotel.medalIconSrc}}" class="list-medal" src="{{hotel.medalIconSrc}}" lazy-load></image>
+                <!-- 精选(与特牌（medal等于4）互斥，优先展示特牌) -->
+                <image wx:if="{{hotel.wowHotel && hotel.medal !== 4}}" class="wow-icon"
+                    src="https://pic.c-ctrip.com/picaresonline/hotel/tinyappwebresource/imgs/featured/jx.064f9ff6.png" lazy-load />
+                <!-- 酒店类型 -->
+                <template wx:if="{{hotel.featureHotelTag}}" is="hotel-card-tag" data="{{tag: hotel.featureHotelTag}}"></template>
+            </view>
+            <view wx:if="{{hotel.isAdSlot && !hotel.isFullBooking && !fromMap}}" class="hotel-pyramid-ad">
+                <text>广告</text>
+            </view>
+        </view>
+        <view class="list-c">
+            <view class="rate-info lnum">
+                <block wx:if="{{hotel.commentScore > 0}}">
+                    <text class="rate-num rate-fize">{{hotel.commentScore}}</text>
+                </block>
+                <block wx:else>
+                    <text class="list-cgray" style="font-size:22rpx;">暂无评分</text>
+                </block>
+                <text wx:if="{{hotel.commentDescription}}" class="rate-num pl10 ft-24">{{hotel.commentDescription}}</text>
+                <!-- 点评标签: APP已下线 -->
+                <!-- <text wx:if="{{hotel.commentLabels}}" class="hotel-label">“{{hotel.commentLabels[0]}}”</text> -->
+                <text wx:if="{{hotel.commentNumberText}}" class="hotel-comment">{{hotel.commentNumberText}}</text>
+                <text wx:if="{{hotel.commentNumberText && hotel.collectedText}}" class="hotel-comment"> · </text>
+                <text wx:if="{{hotel.collectedText}}" class="hotel-comment">{{hotel.collectedText}}</text>
+            </view>
+        </view>
+        <view wx:if="{{hotel.positionDesc}}">
+            <view class="list-cgray addr {{fromMap && 'single-ellipsis'}}">{{hotel.positionDesc}}</view>
+        </view>
+        <block wx:for="{{hotel.hotelCardTags}}" wx:key="tags" wx:for-index='tagsIndex'>
+            <view wx:if="{{item.tags && item.tags.length}}" class="tags-wrap tags-line ft-0">
+                <block wx:for="{{item.tags}}" wx:for-item="p" wx:key="title">
+                    <block wx:if="{{isHourroomModule}}">
+                        <template wx:if="{{tagsIndex === 0}}" is="hotel-card-tag" data="{{tag: p, isIOS}}"></template>
+                    </block>
+                    <block wx:else>
+                        <template is="hotel-card-tag" data="{{tag: p, isIOS}}"></template>
+                    </block>
+                </block>
+            </view>
+        </block>
+        <!--钟点房场景--不可订原因-->
+        <block wx:if="{{isHourroomModule && (hotel.isClose || hotel.isHotelNoPrice) && hotel.canNotBeOrderedInfo.messageBold}}">
+            <view class="invalid-reason">{{hotel.canNotBeOrderedInfo.messageBold}}</view>
+        </block>
+        <!--价格模块-->
+        <block wx:if="{{!isHourroomModule}}">
+        <view class="layout-reset">
+            <!--Layout Left-->
+            <view class="left-shrink flex-box">
+                <!-- 激励话术-->
+                <template is="hotel-card-tag" wx:if="{{hotel.inspireTag}}" data="{{tag: hotel.inspireTag}}"></template>
+            </view>
+            <!--非钟点房场景--不可订原因-->
+            <block wx:if="{{(hotel.isClose || hotel.isHotelNoPrice) && hotel.canNotBeOrderedInfo.messageBold}}">
+                <view class="invalid-reason">{{hotel.canNotBeOrderedInfo.messageBold}}</view>
+            </block>
+            <block wx:else>
+            <!--Layout Right-->
+                <view class="price-layout ln" wx:if="{{!hotel.isFullBooking}}">
+                    <block wx:if="{{hotel.duringTime > 0}}">
+                        <view class="hotel-hourtime black2 mb16">{{hotel.duringTime}}小时</view>
+                    </block>
+                    <view wx:if="{{hotel.price >= 0}}" class="price2 price-cell">
+                        <view wx:if="{{dateInfo.isLongRent}}" class="price-days">{{dateInfo.days}}晚</view>
+                        <view wx:if="{{hotel.priceLabelDesc}}" class="price-left-txt">{{hotel.priceLabelDesc}}</view>
+                        <view wx:if="{{hotel.originPrice > 0}}" class="del ml-0">
+                            <text class="yen">¥</text><text class="origin-price">{{hotel.originPrice}}</text>
+                        </view>
+                        <view class="lnum constant-color ml4">
+                            <text class="yen">¥</text>
+                            <text class="strong">{{hotel.price}}</text>
+                            <text class="fw300">起</text>
+                        </view>
+                    </view>
+                    <template wx:elif="{{hotel.priceStr}}" is="priceFuzzy" data="{{hotel, dateInfo}}"></template>
+                    <view wx:else class="black3 lnumb">暂无起价</view>
+                    <!-- 税费等说明 -->
+                    <view wx:if="{{hotel.priceLabelExtraDesc && hotel.price >= 0}}" class="price-bottom-txt mt16 black3"
+                        catchtap="starPriceDetailInfo" data-hid="{{hotel.hotelId}}">
+                        <text class="wechat-font-qa mr5"></text>
+                        {{hotel.priceLabelExtraDesc}}
+                    </view>
+                    <!-- 均价 -->
+                    <view wx:if="{{dateInfo.isLongRent && hotel.priceAvg}}" class="price-avg-date">￥{{hotel.priceAvg}}/晚</view>
+                </view>
+            </block>
+        </view>
+        <!-- 价格标签整合单独一行 -->
+        <view wx:if="{{!hotel.isFullBooking && !hotel.isClose && !hotel.isHotelNoPrice && hotel.priceTags && hotel.priceTags.length && hotel.price >= 0}}"
+            class="price-calc-box" catchtap="starPriceDetailInfo" data-hid="{{hotel.hotelId}}"
+            data-ubt-key="{{ hotel.ubt && hotel.ubt.price || ''}}" id="{{ hotel.ubt && hotel.ubt.autotest_price}}">
+            <price-tag-new priceCalcItems="{{hotel.priceTags}}"></price-tag-new>
+        </view>
+        </block>
+
+    </view>
+</view>
+
+<!-- 钟点房模板 -->
+<block  wx:if="{{hotel.roomInfo && hotel.roomInfo.roomId && isHourroomModule}}">
+    <view class="hour-room-wrap layout-reset hotel-item-child" data-hid="{{hotel.hotelId}}" catchtap="showRoomLayer">
+        <view class="left-shrink" >
+            <view class="child-info">
+                <view class="name">
+                    <text class="dt-fn14">{{hotel.hourRoomHours}}小时-{{hotel.roomInfo.physicalRoomName}}</text>
+                    <text class="dt-font wechat-font-arrow-right ml10"></text>
+                </view>
+                <view class="policy">
+                    <text class="ibk mr10 dt-fn12 black3" wx:if="{{hotel.checkInInterval}}">{{hotel.checkInInterval}}</text>
+                    <text wx:if="{{hotel.hourRoomConfirmTag && hotel.hourRoomConfirmTag.title}}" class="dbk dt-fn12 black3">{{hotel.hourRoomConfirmTag.title}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="right-shrink">
+            <view class="dt-cell-v justify-flex-end {{hotel.roomInfo.isBooking !==true ? 'dt-disabled' : ''}} constant-color">
+                <view wx:if="{{hotel.price >= 0 && hotel.roomInfo.isBooking}}" catchtap="{{hotel.originPrice > hotel.price ? 'starPriceDetailInfo' : ''}}" data-hid="{{hotel.hotelId}}">
+                    <view class="price-layout">
+                        <text wx:if="{{hotel.priceLabelDesc}}" class="price-left-txt">{{hotel.priceLabelDesc}}</text>
+                        <text class="del" wx:if="{{hotel.originPrice > 0 && hotel.originPrice > hotel.price}}">
+                            <text class="yen">￥</text>{{hotel.originPrice}}
+                        </text>
+                        <text class="price2">
+                            <text class="yen">￥</text><text class="strong">{{hotel.price}}</text>
+                        </text>
+                    </view>
+                    <view wx:if="{{hotel.priceLabelExtraDesc}}" class="price-bottom-txt black3">{{hotel.priceLabelExtraDesc}}</view>
+
+                    <!-- 价格标签整合单独一行 -->
+                    <view wx:if="{{hotel && hotel.priceCalcItems && hotel.priceCalcItems.length}}"
+                        class="price-calc-box">
+                        <price-tag-new priceCalcItems="{{hotel.priceCalcItems}}"></price-tag-new>
+                    </view>
+                </view>
+                <template is="priceFuzzy" wx:elif="{{hotel.priceStr && hotel.roomInfo.isBooking}}" data="{{hotel, isHourroomModule}}" />
+
+                <!--预订按钮-->
+                <block wx:if="{{hotel.price >= 0}}">
+                <view class="btn-layout" wx:if="{{!hotel.roomInfo.isBooking}}">
+                    <button class="btn"><text class="button btn-t">订完</text></button>
+                </view>
+                <view wx:else class="btn-layout"  catchtap="hourhotelRoomtap" data-hid="{{hotel.hotelId}}">
+                    <button  class="default-btn btn constant-bgc constant-color">
+                        <view class="button btn-t">订</view>
+                        <view wx:if="{{hotel.roomInfo.payType == 1 }}" class="button btn-booking">在线付</view>
+                        <view wx:if="{{hotel.roomInfo.payType == 2 }}" class="button btn-booking">到店付</view>
+                        <view wx:if="{{hotel.roomInfo.payType == 3 }}" class="button btn-booking">到店付</view>
+                    </button>
+                </view>
+                </block>
+                <button wx:elif="{{hotel.priceStr}}" class="default-btn btn need-login constant-bgc" catchtap="toLoginTap">解锁</button>
+            </view>
+
+        </view>
+    </view>
+</block>
+
+<!-- id等于20005为榜单标签，id等于20005 && rankType等于'3'为年度榜单-->
+<template name="hotel-card-tag">
+    <view wx:if="{{tag.id === 20005}}" class="tag-info {{tag.rankType === '3' ? 'annual-tag' : ''}}">
+        <view class="icon-box">
+            <image wx:if="{{tag.icon}}" src="{{tag.icon}}" class="tag-icon" mode="heightFix" lazy-load></image>
+        </view>
+        <view wx:if="{{!pictureIcon && tag.title}}" class="tag-item {{tag.icon ? '' : 'ml-8'}}" style="color:{{tag.rankType === '3' ? tag.fntColor : ''}}">
+            {{tag.title}}
+        </view>
+    </view>
+    <block wx:else>
+        <image wx:if="{{pictureIcon === 1 || pictureIcon === 2}}" class="cell-category-icon icon-image-{{pictureIcon}}"
+            src="{{pictureIcon === 2 ? tag.bkgUrl : tag.icon}}" mode="{{pictureIcon === 2 ? 'widthFix' : 'heightFix'}}" lazy-load></image>
+        <view wx:elif="{{tag.title}}" class="cell-category-tag new-tag single-ellipsis {{isIOS ? 'pt2' : ''}} {{tag.frmwdth ? 'plr4' : ''}}"
+              style="color:{{tag.fntColor}}; border:{{tag.frmwdth}}rpx solid {{tag.frmColor}}; font-size: {{tag.size}}rpx;">
+            <image wx:if="{{tag.icon}}" class="cell-category-icon"
+                   src="{{tag.icon}}" mode="heightFix"
+                   style="height: {{tag.size}}rpx;" lazy-load></image>
+            <text>{{tag.title}}</text>
+        </view>
+    </block>
+</template>
+
+<!--酒店图片上标签-->
+<template name="hotel-pic-tag">
+    <view wx:if="{{tags && tags.length}}" class="tags-wrap-{{pictureIcon}}">
+        <block wx:for="{{tags}}" wx:for-item="tag" wx:key="index">
+            <template is="hotel-card-tag" data="{{tag, pictureIcon}}"></template>
+        </block>
+    </view>
+</template>
+
+<!--含税费文案+打码价格-->
+<template name="priceFuzzy">
+    <view class="lnum price-fuzzy ft20">
+        <view wx:if="{{dateInfo.isLongRent}}" class="price-days">{{dateInfo.days}}晚</view>
+        <view wx:if="{{hotel.priceLabelDesc}}" class="price-left-txt">{{hotel.priceLabelDesc}}</view>
+        <view class="price2 constant-color">
+            ￥<text class="strong">{{hotel.priceStr}}</text>
+        </view>
+    </view>
+</template>

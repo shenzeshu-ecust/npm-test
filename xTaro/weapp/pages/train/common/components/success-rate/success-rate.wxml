@@ -1,0 +1,2 @@
+
+<text>{{showRate}}{{showPercent ? '%': ''}}</text>

@@ -1,0 +1,32 @@
+{
+    "navigationBarTitleText": "携程酒店",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "disableScroll": true,
+    "usingComponents": {
+        "perinfo-protect-float": "/cwx/component/perInfoProtectFloat/index",
+        "webp": "/pages/hotel/components/webp/webp",
+        "toolbar": "/pages/hotel/components/toolbar/toolbar",
+        "memberpop": "/pages/hotel/components/memberpop/memberpop",
+        "newerpop": "/pages/hotel/components/newerpop/newerpop",
+        "realnamepop": "/pages/hotel/components/realnamepop/realnamepop",
+        "macaopop": "/pages/hotel/components/macaopop/macaopop",
+        "emegencynotice": "/pages/hotel/components/emegencynotice/emegencynotice",
+        "collection-guide": "/pages/hotel/components/collectionguide/collectionguide",
+        "pricestarfilter": "/pages/hotel/components/pricestarfilter/pricestarfilter",
+        "loginbar": "/pages/hotel/components/loginbar/loginbar",
+        "expiredtime": "/pages/hotel/components/expiredtime/expiredtime",
+        "service": "/pages/hotel/components/service/service",
+        "ad-sdk":"/pages/market/advertiseNew/ad-sdk",
+        "taskList": "/pages/market/directory/task",
+        "waterfall": "../../../commonComponent/cwaterfall/cwaterfall",
+        "waterfall-placeholder": "../../../cwx/component/cwaterfall/cwaterfall",
+        "timelineFloat": "/cwx/component/timelineFloat/timelineFloat",
+        "mp-navigation-bar": "/cwx/component/weui-miniprogram/navigation-bar/navigation-bar"
+    },
+    "componentPlaceholder": {
+        "taskList": "view",
+        "waterfall": "waterfall-placeholder"
+    }
+}

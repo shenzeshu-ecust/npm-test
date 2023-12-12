@@ -1,0 +1,7 @@
+<!-- pages/bus/web/index.wxml -->
+<view class='container'>
+    <web-view class="webview"
+      style='top:100px;height:100px'
+      src="{{url}}"
+      bindmessage="webViewMessage"></web-view>
+</view>

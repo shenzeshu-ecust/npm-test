@@ -1,0 +1,603 @@
+<view class='page-content {{overhide? "ohidden" : ""}}' wx:if="{{showPage}}">
+  <!-- 美食林餐厅 start -->
+  <view class='star-detail' wx:if="{{resMsg.ShiMeiLinType > 0}}">
+    <!-- 餐厅公告 -->
+    <view class="marquee_container" wx:if="{{showTips === 2}}" style="--marqueeWidth--:{{marqueeW}};--allTs--:{{allT}};background-color:rgba(0,0,0,0.4); position: absolute;top: 0;">
+      <view class="marquee_text" style="color:#fff;">{{tipsContent}}</view>
+    </view>
+    <view class="marquee_container" wx:if="{{showTips === 1}}" style="background-color:rgba(0,0,0,0.4); position: absolute;top: 0;">
+      <view class="marquee_text" style="color:#fff;">{{tipsContent}}</view>
+    </view>
+    <block wx:if="{{!isShowOpenAppPopUpBoxNum}}">
+      <swiper duration="500" circular='true' class='res-banner' indicator-active-color='#fff' bindchange="swiperChange" circular='false' current='{{show_index}}' autoplay="true">
+        <block wx:for="{{bannerUrls}}" wx:key="*this" wx:if="{{index < 4}}">
+          <swiper-item>
+            <image src="{{item}}" data-img="{{item}}" class="slide-image" bindtap='lookBannerPic' />
+          </swiper-item>
+        </block>
+        <block wx:for="{{bannerUrls}}" wx:key="*this" wx:if="{{index === 4}}">
+          <swiper-item>
+            <image src="{{item}}" data-img="{{item}}" class="slide-image" bindtap='lookBannerPic' />
+          </swiper-item>
+        </block>
+      </swiper>
+    </block>
+    <block wx:else>
+      <swiper autoplay="true" interval="3000" duration="500" circular='true' class='res-banner' indicator-active-color='#fff' bindchange="swiperChange">
+        <block wx:for="{{bannerUrls}}" wx:key="*this">
+          <swiper-item>
+            <image src="{{item}}" data-img="{{item}}" class="slide-image" bindtap='lookBannerPic' />
+          </swiper-item>
+        </block>
+      </swiper>
+    </block>
+    <!-- 自定义小圆点 -->
+    <view class="dots">
+      <block wx:for="{{bannerUrls}}" wx:key="dots_{{index}}">
+        <view class="dot {{index == currentSwiper ? ' active' : ''}}"></view>
+      </block>
+    </view>
+    <view class="shadow_bg"></view>
+    <view class="res-baseinfo">
+      <view class='baseinfo-top'>
+        <view class="res_name">
+          <view class="name_txt">
+            <view class='name'>{{resMsg.Name}}</view>
+            <view class="ename" wx:if="{{resMsg.SecondName}}">{{resMsg.SecondName}}</view>
+          </view>
+          <view class="branch" wx:if="{{score}}">
+            <text>{{score}}</text>
+            分
+          </view>
+        </view>
+        <view class='info-des'>
+          <view class="res-label">
+            <text class="label_food" wx:if="{{resMsg.Labels.length}}">
+              {{resMsg.Labels[0].Name}}
+            </text>
+            <text class="label_food" wx:if="{{resMsg.Cuisine.length}}">
+              {{resMsg.Cuisine[0].Name}}
+            </text>
+            <text wx:if="{{resMsg.AveragePrice&&resMsg.AveragePrice>0}}">
+              人均¥{{resMsg.AveragePrice}}
+            </text>
+            <text wx:if="{{resMsg.LocalCurrency}}" class='current-price'>
+              {{resMsg.LocalCurrency}}{{resMsg.LocalPrice}}
+            </text>
+            <text wx:if="{{0==1}}">{{distance}}</text>
+          </view>
+          <view class="comment" wx:if="{{totalCount}}">{{totalCount}}条点评</view>
+        </view>
+        <!-- ugc -->
+        <block wx:if="{{!!ugc && ugc.length > 0 }}">
+          <view class="ugcBox">
+            <swiper autoplay="{{true}}" vertical="{{true}}" circular="{{true}}" style="height:100%">
+              <block wx:for="{{ugc}}" wx:key="{{index}}">
+                <swiper-item>
+                  <text>{{item.content}}</text>
+                </swiper-item>
+              </block>
+            </swiper>
+          </view>
+        </block>
+        <view class="{{rankingNum >1 ? 'hasRightShadow hasRightShadowAfter':'hasRightShadow'}}" style="margin-right:{{rankingNum ===1 ? '12rpx': 0}}" wx:if="{{sourcefrom!='xunWeiVote'}}">
+          <scroll-view scroll-x="true" class="hasTwo" bindscroll="bindRankingLabelScroll" scroll-left="{{scrollLeft}}">
+            <block wx:for="{{resMsg.RankingInfos}}" wx:key="*this">
+              <view class="res-new-ranking-item" style="display:{{rankingNum === 1 ? 'flex': 'inline-flex'}}" wx:if="{{item&&item.type&& item.type === 1 && shiMeiLinTypeText}}" data-rankitem="{{item}}" bindtap="goRankingList">
+                <text class="food-rank-text">{{item.title}}</text>
+                <text class="food-level-text">{{shiMeiLinTypeText}}餐厅</text>
+              </view>
+              <view class="res-new-ranking-item" style="display:{{rankingNum === 1 ? 'flex': 'inline-flex'}}" wx:elif="{{item&&item.type&& item.type === 3}}" data-rankitem="{{item}}" bindtap="goRankingList">
+                <text class="food-rank-text">{{item.title}}</text>
+                <text class="food-level-text">入围餐厅</text>
+              </view>
+              <view class="res-new-ranking-item second" style="display:{{rankingNum === 1 ? 'flex': 'inline-flex'}}" wx:elif="{{item&&item.type&& item.type === 2}}" data-rankitem="{{item}}" bindtap="goRankingList">
+                <span class="msl-iconfont icon-popular"></span>
+                <text class="rankTitle">{{item.title}}</text>
+              </view>
+            </block>
+          </scroll-view>
+        </view>
+      </view>
+      <view class="baseinfo-bottom">
+        <view class="res_info_text" wx:if="{{featureText}}">
+          <view class='level' wx:if="{{!isNewStyle2021}}">
+            <text class='level-name'>{{resMsg.ShiMeiLinName}}</text>
+            <view class='view-star-box' wx:if="{{resMsg.ShiMeiLinType === 3}}">
+              <text class='level-star'></text>
+            </view>
+            <view class='view-star-box' wx:elif="{{resMsg.ShiMeiLinType === 2}}">
+              <text class='level-star'></text>
+              <text class='level-star'></text>
+            </view>
+            <view class='view-star-box' wx:elif="{{resMsg.ShiMeiLinType === 1}}">
+              <text class='level-star'></text>
+              <text class='level-star'></text>
+              <text class='level-star'></text>
+            </view>
+          </view>
+          <view class='level' wx:else>
+            <text class='level-new-name'>推荐语</text>
+          </view>
+          <view class=' {{showHeight? "current": ""}} {{isNewStyle2021?"why-new-star":"why-star"}}' id="why-star">
+            <text class="inner-text">{{featureText}}</text>
+            <text class="res_icon_open" bindtap="openText" wx:if="{{showHeight}}"></text>
+          </view>
+        </view>
+        <!-- 餐厅信息 start -->
+        <view class='res-info'>
+          <resmsg-component prop="{{rescomponentMsg}}" showOpenriceTieshi="{{showOpenriceTieshi}}" showtime="{{showtime1}}" showtime2="{{showtime2}}" time="{{timeMsg}}" bind:makePhone="clickMakePhone" bind:showtipModel="showPopupTip" bind:showtimeModel="showPopupTime" bind:locationPoint="clicklocPoint" bind:goOrder="order"></resmsg-component>
+        </view>
+        <!-- 餐厅信息 end -->
+      </view>
+    </view>
+    <block wx:if="{{QueueStatus}}">
+      <view class="res_take_number_assembly">
+        <view class="title">提前排队不用等</view>
+        <block wx:if="{{OrderQueueId  || (QueueStatus && QueueStatus!==6)}}">
+          <view class="booking_btn" bindtap="goQueue">取号</view>
+        </block>
+        <block wx:else>
+          <p class="stop">暂停取号</p>
+        </block>
+      </view>
+    </block>
+  </view>
+  <!-- 美食林餐厅  end -->
+  <!-- 一般餐厅 start -->
+  <!-- 餐厅公告 -->
+  <view class='common-detail {{bannerUrls.length >= 3? "" : "gray-bg"}}' wx:if="{{resMsg.ShiMeiLinType == 0}}">
+    <view class="marquee_container" wx:if="{{!!resMsg.OpenStatus}}" style="background-color:#FFF8F2;">
+      <view class="marquee_text" style="color:#666;">
+        {{resMsg.OpenStatusRemark || resMsg.OpenStatus}}
+      </view>
+    </view>
+    <view class="marquee_container" wx:if="{{!resMsg.OpenStatus && showTips===2}}" style="--marqueeWidth--:{{marqueeW}};--allTs--:{{allT}};background-color:#FFF8F2;">
+      <view class="marquee_text" style="color:#666;">{{tipsContent}}</view>
+    </view>
+    <view class="marquee_container" wx:if="{{!resMsg.OpenStatus && showTips===1}}" style="background-color:#FFF8F2;">
+      <view class="marquee_text" style="color:#666;">{{tipsContent}}</view>
+    </view>
+    <view class='banner' wx:if="{{bannerUrls.length >= 3}}">
+      <view class="res-baseinfo">
+        <view class='baseinfo-top'>
+          <view class="res_name">
+            <view class="name_txt">
+              <view class='name'>{{resMsg.Name}}</view>
+              <view class="ename" wx:if="{{resMsg.SecondName}}">{{resMsg.SecondName}}</view>
+            </view>
+            <view class="branch" wx:if="{{score}}">
+              <text>{{score}}</text>
+              分
+            </view>
+          </view>
+          <view class='info-des'>
+            <view class="res-label">
+              <text class="label_food" wx:if="{{resMsg.Labels.length}}">
+                {{resMsg.Labels[0].Name}}
+              </text>
+              <text class="label_food" wx:if="{{resMsg.Cuisine.length}}">
+                {{resMsg.Cuisine[0].Name}}
+              </text>
+              <text wx:if="{{resMsg.AveragePrice&&resMsg.AveragePrice>0}}">
+                人均¥{{resMsg.AveragePrice}}
+              </text>
+              <text wx:if="{{resMsg.LocalCurrency}}" class='current-price'>
+                {{resMsg.LocalCurrency}}{{resMsg.LocalPrice}}
+              </text>
+              <text wx:if="{{0==1}}">{{distance}}</text>
+            </view>
+            <view class="comment" wx:if="{{totalCount}}">{{totalCount}}条点评</view>
+          </view>
+        </view>
+      </view>
+      <!-- ugc -->
+      <block wx:if="{{!!ugc && ugc.length > 0 }}">
+        <view class="ugcBox">
+          <swiper autoplay="{{true}}" vertical="{{true}}" circular="{{true}}" style="height:100%">
+            <block wx:for="{{ugc}}" wx:key="content">
+              <swiper-item>
+                <text>{{item.content}}</text>
+              </swiper-item>
+            </block>
+          </swiper>
+        </view>
+      </block>
+      <view class="{{rankingNum >1 ? 'hasRightShadow hasRightShadowAfter':'hasRightShadow'}}" style="margin-right:{{rankingNum ===1 ? '12rpx': 0}}; margin-bottom:{{resMsg.RankingInfos.length>0 ?'20rpx': 0}}">
+        <scroll-view scroll-x="true" class="hasTwo" style="margin-right:{{rankingNum >1 ? '20px': '0'}}" bindscroll="bindRankingLabelScroll" scroll-left="{{scrollLeft}}">
+          <block wx:for="{{resMsg.RankingInfos}}" wx:key="*this">
+            <view class="res-new-ranking-item" style="display:{{rankingNum === 1 ? 'flex': 'inline-flex'}}" wx:if="{{item&&item.type && item.type=== 1 && shiMeiLinTypeText}}" data-rankitem="{{item}}" bindtap="goRankingList">
+              <text class="food-rank-text">{{item.title}}</text>
+              <text class="food-level-text">{{shiMeiLinTypeText}}餐厅</text>
+            </view>
+            <view class="res-new-ranking-item" style="display:{{rankingNum === 1 ? 'flex': 'inline-flex'}}" wx:elif="{{item&&item.type && item.type === 3}}" data-rankitem="{{item}}" bindtap="goRankingList">
+              <text class="food-rank-text">{{item.title}}</text>
+              <text class="food-level-text">入围餐厅</text>
+            </view>
+            <view class="res-new-ranking-item second" style="display:{{rankingNum === 1 ? 'flex': 'inline-flex'}}" wx:elif="{{item&&item.type && item.type === 2}}" data-rankitem="{{item}}" bindtap="goRankingList">
+              <span class="msl-iconfont icon-popular"></span>
+              <text class="rankTitle">{{item.title}}</text>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
+      <block wx:if="{{!isShowOpenAppPopUpBoxNum&&showOpenApp}}">
+        <!-- 分享渠道的页面 && 每天第一次打开的话  只显示五张图 -->
+        <scroll-view class='img-box' scroll-x="true" bindscrolltolower="picListScrollToLower">
+          <image class='banner-left-image' wx:for="{{bannerUrls}}" wx:key="*this" src='{{bannerUrls[index]}}' data-img="{{bannerUrls[i]}}" bindtap='lookBannerPic'></image>
+          <view class="look-more-pic-box">
+            <view class="look-more-pic">
+              <view>查</view>
+              <view>看</view>
+              <view>更</view>
+              <view>多</view>
+              <view class="icon">
+                <image src="https://pages.c-ctrip.com/you/wechat-food-mini/resDetail/circle-arrow.png" />
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </block>
+      <block wx:else>
+        <!-- 普通渠道显示全部的图 -->
+        <scroll-view class='img-box' scroll-x="true">
+          <image class='banner-left-image' wx:for="{{bannerUrls}}" wx:key="*this" src='{{bannerUrls[index]}}' data-img="{{bannerUrls[i]}}" bindtap='lookBannerPic'></image>
+        </scroll-view>
+      </block>
+    </view>
+    <!-- 多图banner end -->
+    <!-- 小图banner start -->
+    <view class="one-peace" wx:else>
+      <view class="one-pic-banner">
+        <view class="res-baseinfo">
+          <view class='baseinfo-top'>
+            <view class="res_name">
+              <view class="name_txt">
+                <view class='name'>{{resMsg.Name}}</view>
+                <view class="ename" wx:if="{{resMsg.SecondName}}">{{resMsg.SecondName}}</view>
+              </view>
+            </view>
+            <view class='info-des'>
+              <view class="res-label">
+                <text class="label_food" wx:if="{{resMsg.Labels.length}}">
+                  {{resMsg.Labels[0].Name}}
+                </text>
+                <text class="label_food" wx:if="{{resMsg.Cuisine.length}}">
+                  {{resMsg.Cuisine[0].Name}}
+                </text>
+                <text wx:if="{{0==1}}">{{distance}}</text>
+              </view>
+            </view>
+            <view class="comment-score" wx:if="{{resMsg.CommentScore || resMsg.CommentCount}}">
+              <view class="branch" wx:if="{{score}}">{{score}}分</view>
+              <view class="comment" wx:if="{{totalCount}}">{{totalCount}}条点评</view>
+            </view>
+            <view class="one-pic-money">
+              <text wx:if="{{resMsg.AveragePrice&&resMsg.AveragePrice>0}}">
+                人均¥{{resMsg.AveragePrice}}
+              </text>
+              <text wx:if="{{resMsg.LocalCurrency}}" class='current-price'>
+                {{resMsg.LocalCurrency}}{{resMsg.LocalPrice}}
+              </text>
+            </view>
+          </view>
+        </view>
+        <view class='img-box' scroll-x="true">
+          <image class='banner-left-image' src='{{bannerUrls[0]}}' data-img="{{bannerUrls[0]}}" bindtap='lookBannerPic'></image>
+        </view>
+      </view>
+      <view class="{{rankingNum >1 ? 'hasRightShadow hasRightShadowAfter':'hasRightShadow'}}" style="margin-right:{{rankingNum ===1 ? '12rpx': 0}}; margin-top:{{'24rpx'}}">
+        <scroll-view scroll-x="true" class="hasTwo" bindscroll="bindRankingLabelScroll" scroll-left="{{scrollLeft}}">
+          <block wx:for="{{resMsg.RankingInfos}}" wx:key="*this">
+            <view class="res-new-ranking-item" style="display:{{rankingNum === 1 ? 'flex': 'inline-flex'}}" wx:if="{{item&&item.type && item.type === 1 && shiMeiLinTypeText}}" data-rankitem="{{item}}" bindtap="goRankingList">
+              <text class="food-rank-text">{{item.title}}</text>
+              <text class="food-level-text">{{shiMeiLinTypeText}}餐厅</text>
+            </view>
+            <view class="res-new-ranking-item" style="display:{{rankingNum === 1 ? 'flex': 'inline-flex'}}" wx:elif="{{item&&item.type && item.type === 3}}" data-rankitem="{{item}}" bindtap="goRankingList">
+              <text class="food-rank-text">{{item.title}}</text>
+              <text class="food-level-text">入围餐厅</text>
+            </view>
+            <view class="res-new-ranking-item second" style="display:{{rankingNum === 1 ? 'flex': 'inline-flex'}}" wx:elif="{{item&&item.type && item.type === 2}}" data-rankitem="{{item}}" bindtap="goRankingList">
+              <span class="msl-iconfont icon-popular"></span>
+              <text class="rankTitle">{{item.title}}</text>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
+    </view>
+    <!-- 餐厅信息 start -->
+    <view class='res-info {{bannerUrls.length < 3? "no-margin": ""}}'>
+      <resmsg-component isShow="{{isShow}}" prop="{{rescomponentMsg}}" showOpenriceTieshi="{{showOpenriceTieshi}}" showtime="{{showtime}} " time="{{timeMsg}}" bind:makePhone="clickMakePhone" bind:showtipModel="showPopupTip" bind:showtimeModel="showPopupTime" bind:locationPoint="clicklocPoint" bind:goOrder="order"></resmsg-component>
+    </view>
+    <!-- 餐厅信息 end -->
+    <!-- 餐厅亮点 start -->
+    <view class='res-features' wx:if="{{resMsg.Feature}}">
+      <image src='https://pages.c-ctrip.com/you/wechat-food-mini/resDetail/res-features.png' mode="{{scaleToFill}}"></image>
+      <rich-text nodes="{{resMsg.Feature}}" style="flex:1;"></rich-text>
+    </view>
+    <!-- 餐厅亮点 end -->
+    <block wx:if="{{QueueStatus}}">
+      <view class="res_take_number_assembly">
+        <view class="title">提前排队不用等</view>
+        <block wx:if="{{OrderQueueId  || (QueueStatus && QueueStatus!==6)}}">
+          <view class="booking_btn" bindtap="goQueue">取号</view>
+        </block>
+        <block wx:else>
+          <p class="stop">暂停取号</p>
+        </block>
+      </view>
+    </block>
+  </view>
+  <!-- 一般餐厅end -->
+  <!-- 在线订座 外露时间start -->
+  <!-- <view class="restaurant_detail_reserve" wx:if="{{showBook && bookMsg.bookTime}}">
+    <view class="title">
+      <text class="explain">{{bookSubtitle||'免排队，到店就餐'}}</text>
+      <view class="reservation_tips" wx:if="{{allMsg.BookingInfo || allMsg.RestaurantInfo.BookTipRich}}" bindtap="showPopupTip">
+        预定贴士
+      </view>
+    </view>
+    <view class="reserve_detail_info">
+      <block wx:if="{{bookStatus && bookStatus[0]}}">
+        <view class="order-status success-status" bindtap="_goOrderStatus" wx:if="{{ bookStatus[0].orderStatus == 2}}">
+          <view class="status">订座成功</view>
+          <view class="user_reserve_info">
+            <text wx:if="{{bookStatus[0].bookDate}}">{{bookStatus[0].bookDate}}</text>
+            <text class="how-may-peo" wx:if="{{bookStatus[0].peopleNum}}">
+              {{bookStatus[0].peopleNum}}人
+            </text>
+            <text class="how-may-peo" wx:if="{{bookStatus[0].seatArea}}">
+              {{bookStatus[0].seatArea}}
+            </text>
+          </view>
+        </view>
+        <view class="order-status current-status" wx:if="{{bookStatus[0].orderStatus == 1}}" bindtap="_goOrderStatus">
+          <text class="status">餐厅确认中..</text>
+          <view class="user_reserve_info">
+            <text wx:if="{{bookStatus[0].bookDate}}">{{bookStatus[0].bookDate}}</text>
+            <text class="how-may-peo" wx:if="{{bookStatus[0].peopleNum}}">
+              {{bookStatus[0].peopleNum}}人
+            </text>
+            <text class="how-may-peo" wx:if="{{bookStatus[0].seatArea}}">
+              {{bookStatus[0].seatArea}}
+            </text>
+          </view>
+        </view>
+      </block>
+      <view class="time" wx:if="{{showBookLoading}}">
+        <view class="time-words">
+          <view class="loading-bottom">
+            <text class="loading-ring"></text>
+          </view>
+          正在查询今日可订时间～
+        </view>
+      </view> -->
+  <!-- G餐厅预定 -->
+  <!-- <order-for-gurunavi wx:if="{{sourceType==='Gurunavi'}}" bookMsg="{{bookMsg}}" showBookLoading="{{showBookLoading}}" bind:order="order"></order-for-gurunavi> -->
+  <!-- eatigo的order -->
+  <!-- <order-for-eatigo wx:elif="{{sourceType==='eatigo'}}" bookMsg="{{bookMsg}}" showBookLoading="{{showBookLoading}}" bind:order="order"></order-for-eatigo> -->
+  <!-- MSL的order -->
+  <!-- <order-for-MSL wx:else bookTimeId="{{bookTimeId}}" bookMsg="{{bookMsg}}" bookTimeBottom="{{bookTimeBottom}}" showBookLoading="{{showBookLoading}}" bind:order="order" bind:selectTime="selectTime"></order-for-MSL> -->
+  <!-- <view class="time" wx:if="{{showTryAgain}}" bindtap="tryAgain">
+        <view class="time-words">网络不给力，请再试一次～</view>
+        <view class="try-again">再试一次</view>
+      </view>
+    </view>
+  </view> -->
+  <!-- 在线订座 外露时间end -->
+  <!-- 优惠券start -->
+  <discount-coupon discountCouponList="{{discountCouponList}}"></discount-coupon>
+  <!-- 优惠模块 start -->
+  <view class="prefence-section" wx:if="{{autoPrefenceList.length> 0 &&sourcefrom!='xunWeiVote'}}">
+    <!-- <view class="prefence-title">店内优惠</view> -->
+    <view class="title_box">
+      <image class="box_icon" src="https://pages.c-ctrip.com/you/foods/list_icon_hui.png" alt=""></image>
+      <text class="box_title">优惠套餐</text>
+    </view>
+    <view class="auto-height">
+      <view wx:for="{{autoHeight ? autoPrefenceList : prefenceList}}" wx:key="Title">
+        <view wx:if="{{item.SourceType === 'DingCityPackage'}}" class="prefence-item" data-subid="{{item.SubId}}" data-productid="{{item.Id}}" bindtap="goMenuList">
+          <image class="prefence-item-img-DC" src="{{item.ImageUrl}}"></image>
+          <view class="prefence-des">
+            <text class="prefence-item-title">{{item.Title}}</text>
+            <view class="prefence-price">
+              <span wx:if="{{!!item.SubTitle && !!item.Currency}}" wx:for="{{item.myTags}}" wx:for-item="tag" wx:for-index="i" wx:key="menu">
+                <span>{{tag.menu}}</span>
+                <span class="now-price">{{item.Currency}}{{tag.price}}</span>
+                <span class="line-h" wx:if="{{item.myTags.length > 1 && i !== item.myTags.length - 1}}">
+                  |
+                </span>
+              </span>
+            </view>
+          </view>
+          <view class="prefence-btn-style">
+            <view class="btn-text">预订</view>
+            <view class="sale-num" wx:if="{{item.SalesVolume || item.SellingCount}}">
+              {{item.SalesVolume||item.SellingCount}}
+            </view>
+          </view>
+        </view>
+        <view wx:else class="prefence-item" data-source="{{item.SourceType}}" data-url="{{item.LinkUrl||item.MiniProgramUrl||item.H5Url}}" data-id="{{item.Id}}" bindtap="goPrePage">
+          <image class="prefence-item-img" src="{{item.ImageUrl || item.ImageUrls[0]}}"></image>
+          <view class="prefence-des">
+            <text class="prefence-item-title">{{item.Title}}</text>
+            <view wx:if="{{item.TagList && item.TagList.length>0}}" class="prefence-tags">
+              <text wx:for="{{item.TagList}}" wx:key="*this">
+                <text wx:if="{{index > 0}}" style="margin:0 4px">|</text>
+                <text>{{item}}</text>
+              </text>
+            </view>
+            <view class="prefence-price">
+              <text class="now-price">
+                {{item.Currency || item.CurrencySymbol||''}}{{item.Price}}
+              </text>
+              <text class="origin-price" wx:if="{{item.OriginPrice}}">
+                {{item.Currency || item.CurrencySymbol||''}}{{item.OriginPrice}}
+              </text>
+              <text class="prefence-discount" wx:if="{{item.Discount}}">{{item.Discount}}</text>
+            </view>
+          </view>
+          <view class="prefence-btn-style">
+            <view class="btn-text">抢购</view>
+            <view class="sale-num" wx:if="{{item.SalesVolume || item.SellingCount}}">
+              {{item.SalesVolume||item.SellingCount}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="bottom-see-more-btn" bindtap="toggleAutoHeight" wx:if="{{!autoHeight && autoPrefenceList.length > 3}}">
+      展开更多{{autoPrefenceList.length - 3}}个套餐
+    </view>
+    <view class="bottom-see-more-btn show-all" wx:if="{{autoHeight}}" bindtap="toggleAutoHeight">
+      收起
+    </view>
+  </view>
+  <!-- 优惠模块 end -->
+  <!-- 优惠券end -->
+  <!-- 美食林 定制菜单 start -->
+  <view class='custom-menu' wx:if="{{resMsg.ShiMeiLinType > 0 && restaurantMenu}}">
+    <view class='msl_new_menu_title'>
+      <view class='menu_title'>{{menuName}}</view>
+      <view class='menu_price'>
+        {{menuPrice}}
+        <text>{{menuPriceUnit}}</text>
+      </view>
+    </view>
+    <view class='msl_new_menu_name'>
+      <text class='menu_info'>{{menuSubName}}</text>
+      <view class='menu_gomore' bindtap='goToDetail'>查看</view>
+    </view>
+    <scroll-view scroll-x='true' class='custom-food'>
+      <view class='custom-scroll'>
+        <view style='padding-right:16rpx;' wx:for="{{menuFoodsList}}" wx:key="{{index}}" data-index="{{index}}">
+          <view class='custom-scroll-padding' style="margin-left:{{index==0?'30rpx':0}};margin-right:{{index+1==menuFoodsList.length?'24rpx':0}}" data-img="{{item.ImageUrl}}" bindtap='lookBannerPic2'>
+            <image src="{{item.ImageUrl}}" class='slide-image' />
+            <view class='custom-food-name'>{{item.Name}}</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 定制菜单 end -->
+  <!-- 推荐菜 start -->
+  <view class="res_detail_recommend_food" wx:if="{{recomeurls.length>0||resMsg.Foods.length>0}}">
+    <view class='res-food-title'>推荐菜</view>
+    <view wx:if="{{recomeurls.length>0}}">
+      <scroll-view scroll-x='true' class='common-scroll'>
+        <view class='rf-scroll pic_box'>
+          <view class='pic_list' wx:for="{{recomeurls}}" wx:key="Title" bindtap='looktuijianPic' data-img="{{item.OriginalImageUrl}}">
+            <image src="{{item.ImageUrl}}" class="slide-image" />
+            <block wx:if="{{index < 3}}">
+              <span class="recommend_food_icon">TOP{{index+1}}</span>
+            </block>
+            <view class="food_name">{{item.Title}}</view>
+          </view>
+          <view class='pic_list last' wx:if="{{recomeurls.length < 3}}">
+            <text>敬请期待</text>
+          </view>
+        </view>
+      </scroll-view>
+      <view wx:if="{{resMsg.Foods.length>0}}" class="box" style="padding-top: 15px">
+        <view class="food_list" wx:for="{{resMsg.Foods}}" wx:key="*this">{{item}}</view>
+      </view>
+    </view>
+    <view wx:else class="box">
+      <view class="food_list {{index<3 ? 'current':''}}" wx:for="{{resMsg.Foods}}" wx:key="*this">
+        {{item}}
+      </view>
+    </view>
+  </view>
+  <!-- 推荐菜 end -->
+  <!-- 评论 start -->
+  <view class='msl_new_comment_container' wx:if="{{commentList && commentList.length>0}}">
+    <view class='msl_new_comment_title'>
+      <view class="title_text">
+        总评价
+        <text wx:if="{{score}}">{{score}}</text>
+      </view>
+      <text class="title-num-num" wx:if="{{totalCount}}">{{totalCount}}条评论</text>
+    </view>
+    <view wx:if="{{showAddComment}}" class="recordCountBox">
+      <view class="title">你觉得这家店好吃吗？</view>
+      <view class="evaluate-list">
+        <view wx:for="{{evaluateList}}" wx:key="*this" bind:tap="goComment">
+          <image src="{{'https://pages.c-ctrip.com/you/foods/miniProgram/comment'+(index+1)+'.png'}}" />
+          <view>{{item}}</view>
+        </view>
+      </view>
+      <!-- <view class="text">点评<span>积分+60</span>，以及帮助更多用户选店</view> -->
+    </view>
+    <comment-component bind:showOpenAppPopUpBox="showOpenAppPopUpBox" showOpenApp="{{showOpenApp}}" isShowOpenAppPopUpBoxNum="{{isShowOpenAppPopUpBoxNum}}" list="{{commentList}}" styleList="{{styleArr}}" textList="{{textArr}}" specialData="{{Expert}}" ExpertList="{{ExpertList}}" name="{{name}}" showExpertor="{{showexpert}}" showexpertList="{{showexpertList}}" showLoading="{{showLoading}}" peotext="{{text}}"></comment-component>
+  </view>
+  <!-- 无评论展示 -->
+  <view class='res-info none-recome' wx:else>
+    <view class="l-borderwrap__item" bindtap='makeComment' wx:if="{{!authType}}">
+      <p class="l-borderwrap__text l-borderwrap__text--fontchange">这里还没有点评，快来写第一条吧！</p>
+      <i class="l-borderwrap__arrow"></i>
+    </view>
+    <view class="l-borderwrap__item" wx:if="{{authType}}">
+      <navigator hover-class="none" class='bar-btn write-comment' target="miniProgram" app-id="wxd8c133444ecfdec8" version="trial" path="/pages/comment/add?BusinessId={{resMsg.RestaurantId}}&BusinessType=12&PoiId={{resMsg.PoiId}}&districtId={{resMsg.DistrictId}}&type=food&token={{userToken}}" bindsuccess="success">
+        <p class="l-borderwrap__text l-borderwrap__text--fontchange">这里还没有点评，快来写第一条吧！</p>
+        <i class="l-borderwrap__arrow"></i>
+      </navigator>
+    </view>
+  </view>
+  <!-- 评论 end -->
+  <!-- 附近热门 start -->
+  <view class='res-around' wx:if="{{ commentList.length==0 || commentList.length == totalCount}}">
+    <view class='container'>
+      <view class="around-title">附近热门</view>
+      <!-- Tab布局 -->
+      <view class="swiper-tab">
+        <view wx:for="{{tabsArr}}" wx:key="*this" class="swiper-tab-item {{currentTab == index ? 'active' : ''}}" data-current="{{index}}" bindtap="clickTab">
+          <text>{{item}}</text>
+        </view>
+      </view>
+      <swiper current="{{currentTab}}" duration="300" bindchange="swiperTab">
+        <swiper-item wx:if="{{aroundRestaurants.length>0}}">
+          <view wx:for="{{aroundRestaurants}}" wx:key="Name" id="{{index}}" class='recordItem' wx:if="{{index < 2}}">
+            <around-item aroundItem="{{item}}" idx="{{index}}" aroundType="food" bindmyevent="goDetail" isNewStyle2021="{{isNewStyle2021}}"></around-item>
+          </view>
+        </swiper-item>
+        <swiper-item wx:if="{{aroundHotel.length>0}}">
+          <view wx:for="{{aroundHotel}}" wx:key="Name" id="{{index}}" class='recordItem' wx:if="{{index<2}}">
+            <around-item aroundItem="{{item}}" idx="{{index}}" aroundType="hotel" bindmyevent="goDetail"></around-item>
+          </view>
+        </swiper-item>
+        <swiper-item wx:if="{{aroundSights.length>0}}">
+          <view wx:for="{{aroundSights}}" wx:key="Name" id="{{index}}" class='recordItem' wx:if="{{index<2}}">
+            <around-item aroundItem="{{item}}" idx="{{index}}" aroundType="sight" bindmyevent="goDetail"></around-item>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+  <!-- 附近热门 end -->
+  <!-- 底部弹层组件 -->
+  <popup-component wx:if="{{showPopup}}" bind:closePopup="closePopup" popupMsg="{{popupMsg}}" isOpenTime="{{isOpenTime}}"></popup-component>
+  <!-- 手写一个提示打开app的弹框 -->
+  <view class="openAppPopUpBox" wx:if="{{isShowOpenAppPopUpBox}}">
+    <view class="mock" catchtouchmove="true"></view>
+    <view class="openAppBox">
+      <view class="top">前往APP查看更多{{moreTxt?moreTxt:''}}</view>
+      <view class="bottom">
+        <view class="cancel" bindtap="hideOpenAppPopUpBox">留在此页</view>
+        <view>
+          <button class="confirm" open-type="launchApp" app-parameter="{{appUrl}}" binderror="launchAppError" bindtap="clickLunchApp">
+            打开APP
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 底部的bar -->
+  <view class="save-pop" wx:if="{{showSavePop}}">
+    <text class="save-pop-item top-save">餐厅收藏成功！</text>
+    <text class="save-pop-item red-save" bindtap="goFavPage">查看收藏列表</text>
+  </view>
+  <fix-component wx:if="{{sourcefrom!='xunWeiVote'}}" isShowOrderBtn="{{isShowOrderBtn}}" bind:barShare="onShareAppMessage" bind:order="order" bind:comment="makeComment" bind:ubtTrac="ubtTrac" bind:toggleFavRes="toggleFavRes" pageSecne="{{secne}}" sourceType="{{sourceType}}" authType="{{authType}}" userToken="{{userToken}}" resMsg="{{resMsg}}" aleardyFav="{{aleardyFav}}"></fix-component>
+</view>
+<view class="fixed-right-btn">
+  <image wx:if="{{topShow}}" bindtap='toTop' class='toTop' src="scaleToFill" src="https://pages.c-ctrip.com/you/wechat-food-mini/index/upLogo.png"></image>
+</view>

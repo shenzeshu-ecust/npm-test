@@ -1,0 +1,77 @@
+<web-view wx:if="{{url}}" src="{{url}}" bindmessage="onWebMessage">
+    </web-view>
+    <view class="wx_unlimit_qrcode_wrap" wx:else>
+        <image src="https://images4.c-ctrip.com/img3/marketing/2017/08/wx_marathon/user_photo03.png" mode="widthFix"></image>
+        <view class="loading_tips">
+            <text>精彩内容加载中</text><text class="ani_dot">...</text>
+        </view>
+    </view>
+<!-- websocket分享弹窗 -->
+<cover-view wx:if="{{maskType}}" class="popup-cover"  aria-role="button">
+    <!-- 分享 弹窗 -->
+    <cover-view show="{{maskType > 0}}" class="popup-mask" catchtap="handleCloseShare">
+        <cover-view class="share-bg" wx:if="{{maskType == 1}}" catchtap="doNothing">
+            <cover-view class="popop_title">{{pageBottomShareTitle||'请选择分享方式'}}</cover-view>
+            <cover-image class="close" bindtap="handleCloseShare" src="https://pages.ctrip.com/hotel_h5/wechat/duanwu/dw-close2.png"></cover-image>
+            <block wx:if="{{pageBottomShareType == 'A'}}">
+                <cover-view class="share-wechat" style="padding:0;">
+                    <button class="item reset-button" open-type="share">
+                        <cover-image src="https://pages.c-ctrip.com/market/components/static/icon-weixin.png" class="img share_button"></cover-image>
+                        <cover-view>发送到好友</cover-view>
+                    </button>
+                </cover-view>
+            </block>
+            <block wx:if="{{pageBottomShareType == 'B'}}">
+                <cover-view class="share-wechat">
+                    <cover-view class="item" bindtap="openPoster" data-status="{{11}}" style="padding:0;">
+                        <cover-image src="https://pages.c-ctrip.com/market/components/static/icon-friend.png" class="img share_poster"></cover-image>
+                        <cover-view>分享到朋友圈</cover-view>
+                    </cover-view>
+                </cover-view>
+            </block>
+            <block wx:if="{{pageBottomShareType == 'C'}}">
+                <cover-view class="share-wechat">
+                    <cover-view class="item" bindtap="openPoster" data-status="{{11}}">
+                        <cover-image src="https://pages.c-ctrip.com/market/components/static/icon-friend.png" class="img share_poster"></cover-image>
+                        <cover-view>分享到朋友圈</cover-view>
+                    </cover-view>
+                    <button class="item reset-button" open-type="share">
+                        <cover-image src="https://pages.c-ctrip.com/market/components/static/icon-weixin.png" class="img share_button"></cover-image>
+                        <cover-view>发送到好友</cover-view>
+                    </button>
+                </cover-view>
+            </block>
+        </cover-view>
+        <!-- QQ打开小程序的分享 -->
+        <block wx:if="{{maskType == 2}}">
+          <cover-view class="qq-share">
+            <cover-image class="qq-share-image" src="https://images3.c-ctrip.com/marketing/task_components/static/arraw.png"></cover-image>
+            <cover-view class="qq-share-text1">发送给QQ好友</cover-view>
+          </cover-view>
+        </block>
+    </cover-view>
+</cover-view>
+
+<!-- 以usingComponents的形式引入组件，一直提示找不到，可能是因为不在通过独立分包的缘故，无法使用自定义组件的形式，暂且放进来 -->
+<cover-view class="tools_popup_layout" aria-role="button" wx:if="{{pageScene === 1069 && url && pageOptions.isbackapp != 0}}">
+  <cover-view show="{{true}}" class="tools_box_mask">
+    <cover-view class="tools_box_bg">
+      <button class="mkt_bar_backapp" open-type="launchApp" app-parameter="{{url}}" binderror="launchAppError">
+        <cover-image class="returnapp_img" src="{{pageOptions.iconBackAppImage || 'https://images3.c-ctrip.com/marketing/2023/02/tencent/icon_returnapp_bar.png'}}"></cover-image>
+      </button>
+    </cover-view>
+  </cover-view>
+</cover-view>
+
+<!-- 首次小程序组件 -->
+<collectionMiniapp isWebview="{{true}}" />
+<taskCountDown isInWebView="{{true}}" />
+
+<!-- 原先socket在接收method时有局限，采用H5定制原生的订阅弹窗，通过 socket 外部控制显示、样式 -->
+<cover-view class="custom_subscribe_layout" bindtap="openSubscribe" aria-role="button" wx:if="{{webviewAbsolutSubscribe}}">
+  <cover-view show="{{true}}" class="custom_subscribe_mask">
+    <cover-view class="custom_subscribe_bg">
+      <button class="custom_subscribe_button" bindtap="openSubscribe"></button>
+    </cover-view>
+  </cover-view>
+</cover-view>

@@ -1,0 +1,16 @@
+<view class="barrage-area" style="opacity: 1;">
+  <block wx:for="{{bulletsLanes}}" wx:key="index" wx:for-item="lane" wx:for-index="index">
+    <view class="barrage-lane" style="height: {{lane.height}}px;">
+      <view wx:for="{{lane.bullets}}" wx:key="id" wx:for-item="bullet" wx:for-index="id">
+        <view 
+          class="bullet-item {{bullet.moving ? 'bullet-move' : ''}}" 
+          style="animation-duration:{{lane.duration}}s; animation-play-state: {{pause ? 'paused' : 'running'}}" bindanimationend="_onAnimationend" data-lane="{{index}}" data-bullet-id="{{bullet.id}}">
+          <image class="bullet-item_img" src="{{bullet.image}}" mode="scaleToFill"></image>
+          <view class="bullet-item_text">
+            <span wx:for="{{bullet.textList}}" wx:key="index" wx:for-item="item" style="{{item.style}}">{{item.content}}</span>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,87 @@
+@import '../../common/css/common.wxss';
+
+.order-layer {
+    padding: 0 24rpx 68rpx;
+}
+
+.order-layer .head {
+  padding: 24rpx 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.head .order-layer-close {
+  position: absolute;
+  padding: 24rpx;
+  top: 6rpx;
+  left: 4rpx;
+  font-size: 28rpx;
+}
+
+.order-layer .body {
+    padding: 30rpx 0 32rpx;
+}
+
+.body .order-title {
+    color: #333;
+    font-size: 34rpx;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    margin-bottom: 22rpx
+}
+
+.body .order-info {
+    padding: 32rpx 32rpx 24rpx;
+    background: #f5f9ff;
+    border-radius: 16rpx;
+    color: #111;
+    font-size: 28rpx;
+    line-height: 36rpx;
+}
+
+.order-info .info-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.info-wrapper .divider {
+    height: 24rpx;
+    width: 1rpx;
+    transform: scale(.5, 0, 0);
+    margin: 0 16rpx;
+    background-color: #ccc;
+}
+
+.info-wrapper .line {
+    height: 2rpx;
+    width: 18rpx;
+    background-color: #999;
+    margin: 0 8rpx;
+    overflow: hidden;
+}
+
+.order-layer .footer {
+    padding: 16rpx 0;
+}
+
+.footer .order-btn {
+    background: #0086f6;
+    border-radius: 8rpx;
+    color: #fff;
+    font-size: 36rpx;
+    font-weight: 500;
+    line-height: 36rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 26rpx 0;
+}
+
+.mr-76 {
+	margin-right: 76rpx;
+}

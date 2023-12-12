@@ -1,0 +1,39 @@
+
+<template name="coupon-dialog">
+    <view class="coupon-backmask active"  data-closetype="close"  bindtap="hideBackHotel" catchtouchmove="preventBackMove"></view>
+    <view class="coupon-order-modal">
+        <view class="coupon-order-box">
+            <view class="coupon-box-img">
+                <view class="coupon-box-piaodai"></view>
+            </view>
+            <view class="coupon-order-img">
+                <view class="coupon-bd {{subIndex == 0 ? 'coupon-bd-special' :'' }}"  wx:for="{{couponList}}"  wx:for-index="subIndex">
+                        <view class="coupon-left">
+                            <view wx:if="{{item.Tag}}" class="coupon-tag">{{item.Tag}}</view>
+                            <view wx:if="{{item.CouponType != 2 && item.CouponType !==5 }}" class="{{ item.Price <= 999 ? 'coupon-left-price' : 'coupon-left-long-price'}}">
+                            <text>￥</text>{{item.Price}}
+                            </view>
+                            <view wx:if="{{item.CouponType == 2}}" class="coupon-left-price">
+                                {{item.Price}}<text>折</text>
+                            </view>
+                             <view wx:if="{{item.CouponType == 5}}" class="coupon-left-price">
+                                {{item.Price}}
+                            </view>
+                        </view>
+                        <view class="coupon-right  {{subIndex == 0 ? 'coupon-special' :'' }}" >
+                            <view class="coupon-right-txts">
+                                <view class="txts-title">{{item.Tittle}}</view>
+                                <view class="txts-date">{{item.SubTittle}}</view>
+                            </view>
+                            <view class="coupon-btn {{subIndex == 0 ? 'coupon-btn-special' :'' }}" wx:if="{{item.JumpUrl}}" data-url="{{item.JumpUrl}}" data-name="{{item.Tittle}}" bindtap="toDetailPage">
+                                <text class="coupon-used" >{{ item.ButtonName || '去使用' }}</text>   
+                            </view>
+                        
+                        </view>
+                </view>
+            </view>
+            <view class="coupon-order-btn" data-closetype="happy" bindtap="hideBackHotel">
+                <text class="ifont-closed" data-closetype="close" bindtap="hideBackHotel"></text></view>
+        </view>
+    </view>
+</template>

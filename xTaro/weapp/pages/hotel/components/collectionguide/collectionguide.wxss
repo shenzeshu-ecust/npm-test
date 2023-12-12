@@ -1,0 +1,50 @@
+@import '../../common/common.wxss';
+
+/* 收藏引导浮窗 */
+.collect-guide {
+    position: fixed;
+    z-index: 999;
+}
+.collect-window {
+    color: #fff;
+    position: fixed;
+    right: 23rpx;
+    line-height: 1;
+    font-size: 28rpx;
+    font-family: "PingFangSC-Regular";
+    padding: 14rpx 37rpx 14rpx 30rpx;
+    background-image: linear-gradient(90deg, #0091FF 2%, #006FF6 79%);
+    border-radius: 12rpx;
+    display:flex;
+    align-items:center;
+    z-index: 2;
+}
+.border-right {
+    padding-right: 20rpx;
+    margin-right: 16rpx;
+    border-right: 1rpx solid rgba(255,255,255,0.36);
+}
+.collect-window .collect-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 14rpx;
+    height: 56rpx;
+    line-height: 56rpx;
+    padding-right: 23rpx;
+}
+.collect-window .little-dot {
+    height: 8rpx;
+    width: 8rpx;
+    border-radius: 50%;
+    background-color: #fff;
+    margin: 0 34rpx 0 8rpx;
+    box-shadow: 15rpx 0 0 3rpx #fff, 30rpx 0 0 0 #fff;
+}
+.triangle-up {
+    width: 0;
+    height: 0;
+    border-bottom: 6px solid #0E8CF6;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+}

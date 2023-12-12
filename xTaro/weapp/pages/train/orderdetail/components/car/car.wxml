@@ -1,0 +1,18 @@
+<template name="car">
+    <view class="order-x-box car">
+        <image src="{{carRecommendInfo.Image}}" class="icon"></image>
+        <!-- <image src="https://images3.c-ctrip.com/train/2021/app/V8.37.4/jiesongzhan/img-dachengshi.png" class="icon"></image> -->
+        <view class="hd">
+            <view class="tit">{{carRecommendInfo.Title}}</view>
+        </view>
+        <view class="conts">
+            <image src="{{carRecommendInfo.Icon}}" class="avatar"></image>
+            <view class="mid">
+                <view class="tit">{{carRecommendInfo.JntProductName}}<text wx:if="{{carRecommendInfo.JntProductName && carRecommendInfo.SndProductName}}">/</text>{{carRecommendInfo.SndProductName}}</view>
+                <view class="txt"><view class="item" wx:for="{{carRecommendInfo.TagList}}">{{item}}</view></view>
+                <view class="detail"><text class="price">{{carRecommendInfo.Price}}</text><view class="tag" wx:if="{{carRecommendInfo.Tip}}"><image class="envelope" src="https://images3.c-ctrip.com/train/zhuliucheng/8.37.6/jiesongzhan/hongbao.png" alt=""/>{{carRecommendInfo.Tip}}</view></view>
+            </view>
+            <button class="reserve" data-url="{{carRecommendInfo.JumpUrl}}" bindtap="toCarPage">立即预约</button>
+        </view>
+    </view>
+</template>

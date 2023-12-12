@@ -1,0 +1,27 @@
+<wxs src="./util.wxs" module="util" />
+<view class='tour_del_bg'>
+    <image class="tour_del_pic" mode="scaleToFill" src="https://pic.c-ctrip.com/VacationH5Pic/group_travel/weixin/weixin_bg02.png"></image>
+    <view class='tour_logo_box'>
+        <image class="tour_del_logo" mode="scaleToFill" src="https://pic.c-ctrip.com/VacationH5Pic/group_travel/weixin/weixin_logo.png"></image>
+        <text class='tour_logo_text'>好眼光，热门产品被你相中了</text>
+    </view>
+    <view class='tour_del_content'>
+        <view class='tour_del_pic_bg'>
+            <image class="tour_del_pic" mode="scaleToFill" src="{{util.getProductImg(MediaInfo)}}"></image>
+        </view>
+        <view class='tour_del_pic_content'>
+            <view class='tour_del_price_content'>
+                <text wx:if="{{PriceInfo.MinPrice}}" class='tour_del_price'><text class='tour_del_price_yellow'>¥</text><text class='tour_del_price_nb'>{{PriceInfo.MinPrice}}</text>/人起</text>
+                <text wx:if="{{PriceInfo && !PriceInfo.MinPrice}}" class='tour_del_price'><text class='tour_del_price_nb'>实时计价</text></text>
+                <text class='tour_del_price_blue'>{{commentAggregation.scoreAvg}}分</text>
+                <text>{{BasicInfo.OrderPersonCount}}人出游</text>
+            </view>
+            <text class='tour_del_title'>{{BasicInfo.Title}}</text>
+            <view class='tour_del_btn_bg'>
+                <button class='tour_del_btn' open-type="launchApp" app-parameter="{{util.getWakePageUrl(BasicInfo)}}" binderror="launchAppError">
+                    打开APP，立即预订
+                </button>
+            </view>
+        </view>
+    </view>
+</view>

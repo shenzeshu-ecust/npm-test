@@ -1,0 +1,10 @@
+<!--pages/noLogin/noLogin.wxml-->
+<view class="back_view">
+  <view class="content_view">
+    <image class="reminder_icon" src="https://pages.c-ctrip.com/schedule/pic/wxxcx/cts_wechat_logo.png"/>
+    <text class="reminder_text">人的一生中至少要有两次冲动\n一次为奋不顾身的爱情\n一次为说走就走的旅行</text>
+    <view class="line"/>
+    <text class="reminder_text2">Andy Andrews</text>
+  </view>
+  <view class="login_action" bindtap="login">登录携程，开启行程</view>
+</view>

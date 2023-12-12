@@ -1,0 +1,139 @@
+<template name="waterfall">
+	<view class="wf-container">
+    <view class="wf-item wf-item-2 " id="waterfallLeftList">
+      <block wx:for="{{waterfallLeftList}}" wx:key="left{{index}}">
+        <view class="wf-item-inner" bindtap="jumpToDetail" data-id="{{item.articleId}}" data-type="waterfall" data-index="左{{index}}">
+          <view class="itemimg {{item.isVideo ? 'isvideo': ''}}">
+            <view class="itemimg-wapper">
+              <image class="img" src="{{item.image.url}}" style="width:{{item.image.picWidth}}rpx;height: {{item.image.picHeight}}rpx" lazy-load="true" mode="aspectFill"></image>
+            </view>
+            <block wx:if="{{item.poiName}}">
+                <view class="poiTag">{{item.poiName}}</view>
+              </block>
+          </view>
+          <view class="infotext">
+              <view class="infotitle">
+                <cemoji-converter inputObj="{{pageFuntion.assembleEmojiObj(item, 'title')}}"></cemoji-converter>
+              </view>
+              <view class="linewrap">
+                  <view class="usertext">
+                      <view class="userhead">
+                          <view class="rel_head_img_wrap">
+                            <image class="rel_head_img " src="{{item.author.avatUrl}}" ></image>
+                            <image class="rel_head_img_vIcon " src="{{item.author.vIcon}}" wx:if="{{item.author.vIcon}}" ></image>
+                          </view>
+                          <text class="username">{{item.author.nickName}}</text>
+                      </view>
+                  </view>
+                  <view class="praisecount" catchtap="toPraise" data-ispraise="{{item.isLike}}"  data-articleid="{{item.articleId}}" data-type="relatedArticle" data-position="{{item.itemIndex}}">
+                  <block wx:if="{{item.isLike}}">
+                    <block wx:if="{{item.showAnimation}}">
+                      <view class="do-comment-animation"></view>
+                    </block>
+                    <block wx:else>
+                        <image class="img" src="https://pages.c-ctrip.com/you/livestream/lvpai_detail_commentprised.png"></image>
+                    </block>
+                  </block>
+                  <block wx:else>
+                    <image class="img" src="https://pages.c-ctrip.com/you/livestream/lvpai_detail_commentprise.png"></image>
+                  </block>
+                    <text class="text">{{ item.praiseCount ? pageFuntion.formateNum(item.praiseCount) : ''}}</text>
+                  </view>
+              </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="wf-item wf-item-2 " id="waterfallRightList">
+      <block wx:for="{{waterfallRightList}}" wx:key="right{{index}}">
+         <view wx:if="{{waterfallRightList.length > 1 ? index===1 : index === waterfallRightList.length - 1}}"  class="wf-item-inner wf-item-inner-overflow {{!isHasAd ? 'wf-item-inner-overflow-margin' : ''}}">
+               <ad-sdk impId="01011TUOYRH0181XQCDSUZYEIOV" width="{{adWidth3}}" height="{{adWidth3 / 3 * 4}}" bindgetExtensionAdData="getWXAdData"></ad-sdk>
+         </view>
+        <view class="wf-item-inner" bindtap="jumpToDetail" data-id="{{item.articleId}}" data-type="waterfall" data-index="右{{index}}">
+          <view class="itemimg {{item.isVideo ? 'isvideo': ''}}">
+            <view class="itemimg-wapper">
+              <image class="img" src="{{item.image.url}}" style="width:{{item.image.picWidth}}rpx;height: {{item.image.picHeight}}rpx" lazy-load="true" mode="aspectFill"></image>
+            </view>
+            <block wx:if="{{item.poiName}}">
+                <view class="poiTag">{{item.poiName}}</view>
+              </block>
+          </view>
+          <view class="infotext">
+              <view class="infotitle">
+                <cemoji-converter inputObj="{{pageFuntion.assembleEmojiObj(item, 'title')}}"></cemoji-converter>
+              </view>
+              <view class="linewrap">
+                  <view class="usertext">
+                      <view class="userhead">
+                          <view class="rel_head_img_wrap">
+                            <image class="rel_head_img " src="{{item.author.avatUrl}}" ></image>
+                            <image class="rel_head_img_vIcon " src="{{item.author.vIcon}}" wx:if="{{item.author.vIcon}}" ></image>
+                          </view>
+                          <text class="username">{{item.author.nickName}}</text>
+                      </view>
+                  </view>
+                  <view class="praisecount" catchtap="toPraise" data-ispraise="{{item.isLike}}"  data-articleid="{{item.articleId}}" data-type="relatedArticle" data-position="{{item.itemIndex}}">
+                  <block wx:if="{{item.isLike}}">
+                    <block wx:if="{{item.showAnimation}}">
+                      <view class="do-comment-animation"></view>
+                    </block>
+                    <block wx:else>
+                      <image class="img" src="https://pages.c-ctrip.com/you/livestream/lvpai_detail_commentprised.png"></image>
+                    </block>
+                  </block>
+                  <block wx:else>
+                    <image class="img" src="https://pages.c-ctrip.com/you/livestream/lvpai_detail_commentprise.png"></image>
+                  </block>
+                    <text class="text">{{item.praiseCount ? pageFuntion.formateNum(item.praiseCount) : ''}}</text>
+                  </view>
+              </view>
+          </view>
+        </view>
+      </block>
+
+    </view>
+</view>
+</template>
+<wxs module="pageFuntion">
+  function formateNum(num) {
+  var result;
+  if (num == 0 || num == undefined) {
+    return 0;
+  }
+  if (num >= 10000000) {
+    num = (num / 10000000).toFixed(1);
+    result = num + "kw";
+  } else if (num >= 10000) {
+    num = (num / 10000).toFixed(1);
+    result = num + "w";
+  } else {
+    result = num;
+  }
+  return result;
+}
+
+
+// 把普通数据对象转换成可传入cemoji-converter组件的数据对象
+function assembleEmojiObj (obj, keyword, styleOptions) {
+  var titleWrapperStyle = 'font-size: 14px; line-height: 21px; color: #222; padding-top: 5px; -webkit-box-orient: vertical; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;'
+  var titleCemojiStyle = 'height: 18px;vertical-align: text-bottom';
+  var emojiObj = {
+    text: '', // 待转换文本
+    wrapperStyle: titleWrapperStyle, // 组件壳的行内样式（注意：行内样式中，尺寸单位应为 px）
+    cemojiStyle: titleCemojiStyle // 表情图片的行内样式（注意：行内样式中，尺寸单位应为 px）
+  }
+  if (obj) {
+    emojiObj.text = obj[keyword];
+    if (styleOptions) {
+      emojiObj.wrapperStyle = styleOptions.wrapperStyle;
+      emojiObj.cemojiStyle = styleOptions.cemojiStyle;
+    }
+  }
+  return emojiObj;
+}
+
+module.exports = {
+  formateNum: formateNum,
+  assembleEmojiObj: assembleEmojiObj
+}
+</wxs>

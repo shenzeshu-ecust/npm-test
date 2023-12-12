@@ -1,0 +1,13 @@
+.pop-botm-btn{padding: 16rpx 0 0 0 ;display: flex;}
+.pop-botm-btn button{flex: 1;height: 88rpx;border-radius: 6px;margin-right: 32rpx;font-size: 32rpx;line-height: 88rpx;}
+.pop-botm-btn button:last-child{margin-right: 0;}
+.pop-botm-btn .btn-cancel{background: #fff;border:1px solid rgba(204,204,204,.5);}
+.pop-botm-btn .btn-confirm{background:-webkit-linear-gradient(left,#00A7FA,#0076F5);color: #fff;}
+.pop-botm-btn .btn-confirm[disabled]{background: #ddd;}
+
+.pop-model{background: url(//pic.c-ctrip.com/train/wechat/pop-top-bg.png) no-repeat #fff;background-size: 100% auto;padding: 48rpx 40rpx 40rpx;text-align: center;}
+.pop-model .icon-suc{width: 104rpx;height: 88rpx;display: block;margin: 0 auto;background: url(//pic.c-ctrip.com/train/wechat/icon-suc2.png) no-repeat;background-size: cover;}
+.pop-model .tit{margin-top: 48rpx;font-size: 36rpx;font-weight: 600;}
+.pop-model .title{font-size: 36rpx;font-weight: 600;color:#333333;}
+.pop-model .txt{margin: 24rpx 10rpx;color: #666;font-size: 30rpx;}
+.pop-model .btn-submit{margin-top: 64rpx;height: 88rpx;border-radius: 6px;background: -webkit-linear-gradient(left,#00AAFF,#006FFF);font-size: 34rpx;font-weight: 600;color: #fff;}

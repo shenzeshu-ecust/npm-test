@@ -1,0 +1,347 @@
+/* tab 选项卡与公共部分不同的部分 */
+/* tab选项卡的样式 */
+.tab-module {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 94rpx;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #fafafa;
+    color: #333;
+    z-index: 90;
+}
+.tab-item {
+    flex: 1 1 auto;
+    height: 94rpx;
+    padding-top: 14rpx;
+    line-height: 70rpx;
+    box-sizing: border-box;
+}
+.tab-item_current {
+    color: #0086f6 !important;
+    border-bottom: 3px solid #0086f6 !important;
+}
+
+.tab-text {
+    display: block;
+    text-align: center;
+    font-size: 28rpx;
+}
+
+.tab-item {
+    line-height: 70rpx;
+    background-color: #fafafa;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.city-module_letter {
+    position: fixed;
+    top: 74rpx;
+    right: 0;
+    bottom: 0;
+    width: 40rpx;
+    padding-top: 130rpx;
+    /* background-color: #fff; */
+    z-index: 10;
+    box-sizing: border-box;
+}
+.city-module_letter-item1,
+.city-module_letter-item {
+    display: block;
+    height: 28rpx;
+    overflow: hidden;
+    line-height: 28rpx;
+    white-space: nowrap;
+    font-size: 22rpx;
+    color: #0086f6;
+    text-align: center;
+}
+.city-module_letter-item1 {
+    font-size: 18rpx;
+}
+.city-module_list {
+    position: fixed;
+    top: 182rpx;
+    left: 0;
+    right: 40rpx;
+    bottom: 0;
+    background-color: #fff;
+}
+
+.city-module_type {
+    clear: both;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    height: 56rpx;
+    overflow: hidden;
+    line-height: 60rpx;
+    text-indent: 30rpx;
+    font-size: 26rpx;
+    color: #666;
+    background-color: #efefef;
+}
+.city-module_items {
+    display: block;
+    margin-bottom: -1px;
+    overflow: visible;
+    padding: 0 30rpx;
+}
+
+.city-module_items .expand-text {
+    color: #0086f6;
+    border-bottom: 1rpx solid #e5e5e5;
+}
+.city-module_items .expand-text.close:after,
+.city-module_items .expand-text.open:after {
+    position: relative;
+    content: '';
+    display: inline-block;
+    width: 9rpx;
+    height: 9rpx;
+    border-top-width: 3rpx;
+    border-top-style: solid;
+    border-right-width: 3rpx;
+    border-right-style: solid;
+    -webkit-transform: rotate(135deg);
+    transform: rotate(135deg);
+    vertical-align: middle;
+    margin: -9rpx 0 0 15rpx;
+    transition: all 200ms ease-in-out;
+}
+.city-module_items .expand-text.close:after {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    margin: 0rpx 0 0 15rpx;
+}
+
+.city-module_items.block {
+    margin-top: 20rpx;
+}
+.city-module_items .station-v-line.first {
+    top: 0;
+    height: 50%;
+}
+.city-module_items .station-v-line {
+    left: 0;
+    width: 0;
+    top: -50%;
+    height: 100%;
+    border-left: 1rpx solid #e5e5e5;
+    position: absolute;
+}
+.city-module_items .station-line {
+    width: 30rpx;
+    margin-right: 20rpx;
+    height: 0;
+    border-top: 1rpx solid #e5e5e5;
+}
+.city-module_items .station {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    margin-left: 10rpx;
+}
+
+.city-module_items .city-module_name-road.selected {
+    color: #0086f6;
+    border-color: #0086f6;
+}
+
+/* .city-module_items {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 60rpx;
+} */
+
+.empty-view {
+    padding-top: 120rpx;
+    font-size: 28rpx;
+    color: #999999;
+    text-align: center;
+}
+
+.city-module_name1,
+.city-module_name-road {
+    float: left;
+    width: 200rpx;
+    height: 60rpx;
+    overflow: hidden;
+    margin: 0 20rpx 20rpx 0;
+    text-align: center;
+    line-height: 60rpx;
+    font-size: 28rpx;
+    color: #666;
+    border: 1px solid #dbdbdb;
+    border-radius: 8rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.city-module_name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 88rpx;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 88rpx;
+    font-size: 28rpx;
+    color: #333;
+    border-bottom: 1px solid #e5e5e5;
+}
+.city-module_items .distance-tag {
+    font-size: 24rpx;
+    color: #999999;
+    margin-left: 20rpx;
+}
+.city-module_items .station-tag {
+    color: #00b87a;
+    text-align: center;
+    word-wrap: none;
+    white-space: nowrap;
+    background-color: #bfe0fc;
+    margin-left: 20rpx;
+    font-size: 24rpx;
+    line-height: 30rpx;
+    box-sizing: border-box;
+    border-radius: 4rpx;
+    padding: 0 3rpx;
+    background-color: #ffffff;
+    min-width: 80rpx;
+    border: 1rpx solid;
+}
+
+.city-module_items icon {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 60rpx;
+    transform: translateY(-50%);
+}
+
+.city-module_items.selected .city-module_name {
+    color: #0086f6;
+}
+
+.selected .city-module_name {
+    color: #0086f6;
+}
+
+.city-module_items.selected icon {
+    display: block;
+}
+
+.letter-select_tips {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 160rpx;
+    height: 160rpx;
+    overflow: hidden;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    line-height: 160rpx;
+    border-radius: 50%;
+    font-size: 72rpx;
+    color: #fff;
+    background-color: rgba(82, 188, 232, 0.8);
+}
+
+/*****我的定位相关****/
+
+.city-module_item-list {
+    position: relative;
+    /* padding: 28rpx 0 28rpx 50rpx; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.city-module_item-list icon {
+    display: none;
+    top: 50%;
+    right: 30rpx;
+    transform: translateY(-50%);
+}
+.city-module_item-list.selected .title {
+    color: #0086f6;
+}
+.city-module_item-list.selected icon {
+    display: block;
+}
+
+.city-module_item-list .icon {
+    /* position: absolute; */
+    margin-right: 20rpx;
+}
+.city-module_item-list .title,
+.city-module_item-list .detail {
+    display: block;
+    /* line-height: 1; */
+}
+.city-module_item-list .title {
+    color: #333;
+    font-size: 28rpx;
+    line-height: 88rpx;
+}
+.city-module_item-list .detail {
+    margin-top: 20rpx;
+    color: #999;
+}
+
+.city-module_item-list .icon-locate {
+    display: inline-block;
+    width: 26rpx;
+    height: 30rpx;
+    background: url(//pic.c-ctrip.com/platform/h5/miniapp/component/icon-locate.png) 0 0 no-repeat;
+    -webkit-background-size: 24rpx 30rpx;
+    background-size: 24rpx 30rpx;
+}
+.city-module_item-list.selected .icon-locate {
+    background: url(//pic.c-ctrip.com/platform/h5/miniapp/component/icon-locateC.png) 0 0 no-repeat;
+    -webkit-background-size: 24rpx 30rpx;
+    background-size: 24rpx 30rpx;
+}
+.icon-loading {
+    display: inline-block;
+    /* margin-left: -50rpx; */
+    width: 26rpx;
+    height: 26rpx;
+    background: url(//pic.c-ctrip.com/platform/h5/miniapp/component/icon-loading.png) 0 0 no-repeat;
+    -webkit-background-size: 26rpx 26rpx;
+    background-size: 26rpx 26rpx;
+}
+.icon-fail {
+    display: inline-block;
+    /* position: absolute; */
+    /* margin-left: -50rpx; */
+    width: 26rpx;
+    height: 26rpx;
+    background: url(//pic.c-ctrip.com/platform/h5/miniapp/component/icon-fail.png) 0 0 no-repeat;
+    -webkit-background-size: 26rpx 26rpx;
+    background-size: 26rpx 26rpx;
+}
+
+.city-module_type .icon-delete {
+    display: inline-block;
+    width: 24rpx;
+    height: 26rpx;
+    background: url(https://pic.c-ctrip.com/bus/resource/index/icon-delete.png) 0 0 no-repeat;
+    background-size: 24rpx 26rpx;
+    position: absolute;
+    left: 600rpx;
+    top: 18rpx;
+}
+
+.city-module_type .delete-title {
+    color: rgb(153, 153, 153);
+    display: inline-block;
+    position: absolute;
+    font-size: 24rpx;
+    left: 600rpx;
+    top: 0rpx;
+}

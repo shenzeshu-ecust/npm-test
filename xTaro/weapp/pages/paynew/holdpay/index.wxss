@@ -1,0 +1,185 @@
+.hpaybox{
+	padding: 0 10px;
+}
+
+.tip-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hpaytip{
+	display: block;
+	font-size: 14px;
+	color: #474747;
+	height: 37px;
+	line-height: 37px;
+}
+
+.hpayitem{
+	height: 64px;
+	border-radius: 6px;
+	background:#FFF url('https://pic.c-ctrip.com/picaresonline/h5paymentsdk/smallprogram/img/weichat-icon.0bbf72c7.png') no-repeat 15px center;
+	background-size: 40px 37px;
+	padding-top:20px;
+}
+
+.hpayitemwxf{
+	height: 64px;
+	border-radius: 6px;
+	background:#FFF url('https://pic.c-ctrip.com/picaresonline/h5paymentsdk/smallprogram/img/webchatfen.19db8534.png') no-repeat 15px center;
+	background-size: 40px 37px;
+	padding-top:20px;
+}
+
+.hpaytext {
+	padding-left: 70px;
+	font-size: 18px;
+	color: #000;
+	display:inline-block;
+	float:left;
+}
+
+.hpaytextwxf {
+	padding-left: 70px;
+	font-size: 18px;
+	color: #222;
+}
+
+.hpaysubtext {
+	padding-top: 2px;
+	padding-left: 70px;
+	font-size: 12px;
+	color: #999;
+	display:inline-block;
+	float:left;
+}
+
+
+.hpaybtn{
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+	background-color: #ff9913;
+	color: #FFF;
+	font-size: 18px;
+	border-radius: 5px;
+	border: none;
+	margin-top: 17px;
+}
+
+.hpayamtw{
+	font-size: 14px;
+	color: #9d9d9d;
+	line-height: 35px;
+}
+
+.hpayamt{
+	color: #19a0f0
+}
+
+.hpaymask{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: #FFF;
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+.hpaymask.active{
+	display: block;
+}
+
+.hpayamtp{
+	height: 100%;
+}
+
+.hpayamtbody{
+	padding: 10px;
+}
+
+.hpayhead{
+	font-size: 20px;
+	text-align: center;
+	line-height: 28px;
+	padding: 20px 0;
+	position: relative;
+}
+
+.hpayt{
+	font-size: 14px;
+	line-height: 20px;
+	padding: 3px 0;
+	font-weight: 700;
+	color: #222;
+}
+
+.hpaytxt{
+	padding-bottom: 5px;
+	font-size: 14px;
+	line-height: 20px;
+	color: #444;
+}
+
+.hpayimport{
+	font-weight: 700;
+	text-decoration:underline;
+}
+
+.hpaysimpt{
+	font-weight: 700
+}
+
+.hpayhclose{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	overflow: hidden;
+	top: 20px;
+	right: 20px;
+}
+
+.hpayhclose::before {
+    content: "\2716";
+	position: absolute;
+	font-size: 16px;
+	line-height: 18px;
+	left: 0;
+	top: 0;
+}
+
+.hnopay{
+	background: #F3F5F8;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: center
+}
+
+.hpayeicon{
+	width:124px;
+	height:124px;
+	background: url("https://pic.c-ctrip.com/picaresonline/h5paymentsdk/smallprogram/img/holderr.86ab12be.png") no-repeat 0 0;
+	background-size: 124px 124px;
+	margin-top: 125px;
+}
+
+.hpayetext{
+	font-size: 20px;
+	color: #474747;
+	padding: 0 30px;
+	line-height: 30px;
+	text-align: center;
+}
+
+.hideview{
+	display:none;
+}
+
+.wxf-test{
+	display:none;
+}

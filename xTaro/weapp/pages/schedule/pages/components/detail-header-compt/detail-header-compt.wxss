@@ -1,0 +1,45 @@
+/* pages/components/detail-header-compt/detail-header-compt.wxss */
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 100rpx;
+  background-color: #1980fe;
+  padding-left: 50rpx;
+  padding-right: 50rpx;
+}
+
+.card-status {
+  color: #fff;
+  font-size: 50rpx;
+  flex: 1;
+}
+
+.detail-container {
+  align-items: center;
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+}
+
+.detail {
+  color: #fff;
+  font-size: 28rpx;
+}
+
+.detail-card-icon {
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.semi-arc-container {
+  background-color: #1980fe;
+}
+
+.semi-arc {
+  background-color: #fff;
+  height: 20rpx;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+}

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "banner": "./legaoComponents/banner/banner",
+    "imageSlider": "./legaoComponents/imageSlider/imageSlider",
+    "multibanner": "./legaoComponents/multibanner/multibanner",
+    "picture": "./legaoComponents/picture/picture",
+    "ruleV2": "./legaoComponents/ruleV2/ruleV2"
+  }
+}

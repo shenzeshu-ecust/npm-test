@@ -1,0 +1,21 @@
+
+<view class="column">
+  <view class="column" catchtap='gotoDetail'>
+    <card-header-compt iconUrl="{{bizModel.status.iconUrl}}" title="{{bizModel.status.title}}" subTitle="{{bizModel.status.subTitle}}" card-operation-data="{{bizModel.operationData}}"/>
+    <view class="poi-row">
+      <view class="left-container">
+        <view class="poi-name-wrapper" catchtap='cardTitleClickTap'>
+          <text wx:if="{{ticketCard.scenicSpotName}}" class="poi-name ellipsis-2">{{ticketCard.scenicSpotName}}</text>
+          <Icon className='Forward' class="poi-name_forward" color='#333' size='15' />
+        </view>
+          
+          <text wx:if="{{bizModel.status.seatAndGrade}}" class="poi-info ellipsis-2">{{bizModel.status.seatAndGrade}}</text>
+          <text wx:if="{{bizModel.status.categoryAndCount}}" class="poi-info">{{bizModel.status.categoryAndCount}}</text>
+          <text wx:if="{{ticketCard.usingWay}}" class="poi-tip ellipsis">{{ticketCard.usingWay}}</text>
+          <text wx:if="{{ticketCard.tips}}" class="poi-tip ellipsis">{{ticketCard.tips}}</text>
+      </view>
+      <card-map-compt address='{{ticketCard.poiAddress}}' coordinate='{{ticketCard.location}}' />
+    </view>  
+  </view>
+  <card-operation-compt wx:if="{{bizModel.operationData && !cardData.sharedCard}}" card-operation-data="{{bizModel.operationData}}" />
+</view>

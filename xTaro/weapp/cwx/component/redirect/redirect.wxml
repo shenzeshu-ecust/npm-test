@@ -1,0 +1,4 @@
+<view class='redirect'>
+  <view class="return-page" wx:if="{{showReturnHome}}" bindtap="_ToReturnHome"><text>去首页</text></view>
+  <view class="return-page" wx:if="{{showOpenApp}}" bindtap="_ToOpenApp"><text>打开\nAPP</text></view>
+</view>

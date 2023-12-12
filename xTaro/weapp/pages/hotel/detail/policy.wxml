@@ -1,0 +1,24 @@
+<!-- 订房必读-->
+<view wx:if="{{gqlNoticeList.content.length}}" class="dt-fs-box autoExpose" id="notices" data-expose="{{noticeExposeObj}}">
+    <view class="notice">
+        <view class="h2"><text class="wechat-font-book-notice" wx:if="{{gqlNoticeList.category === 1}}"></text>{{gqlNoticeList.title}}</view>
+        <view wx:for="{{gqlNoticeList.content}}" class="type" wx:for-item="item">{{item}}</view>
+    </view>
+    <view class="jump-box" bindtap="gotoSellingPoint" data-id="notice">
+        <text class="cbtn">全部重要提示</text>
+    </view>
+</view>
+<!-- 政策-->
+<view wx:if="{{gqlPolicyList.length}}" class="dt-fs-box autoExpose" id="policies" data-expose="{{policyExposeObj}}">
+    <view class="h2">政策</view>
+    <block wx:for="{{gqlPolicyList}}" wx:for-item="policy" wx:for-index="policyIndex">
+        <view class="policy-title {{policyIndex > 0 ? 'not-first' : ''}}">
+            <image class="policy-icon" src="{{policy.iconUrl}}" lazy-load />
+            <text>{{policy.title}}</text>
+        </view>
+        <view class="policy-content" wx:for="{{policy.content}}">{{item}}</view>
+    </block>
+    <view class="jump-box" bindtap="gotoSellingPoint" data-id="policy">
+        <text class="cbtn">全部酒店政策</text>
+    </view>
+</view>

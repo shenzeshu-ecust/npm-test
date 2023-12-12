@@ -1,0 +1,20 @@
+<view catchtouchstart="handleClickMask" class="i-as-mask i-class-mask {{ visible ? 'i-as-mask-show' : '' }}" bindtap="handleClickMask"></view>
+<view  catchtouchmove="catchtouchmove" style="padding-bottom:{{bottomSafe}}rpx" class="i-class i-as {{ visible ? 'i-as-show' : '' }}">
+    <view class="i-as-header i-class-header"><slot name="header"></slot></view>
+    <view class="i-as-actions">
+        <view class="i-as-action-item" wx:for="{{ actions }}" wx:key="{{ item.name }}">
+            <view
+                class="i-as-action-item-btn"
+                bindtap="handleClickItem"
+                data-index="{{ index }}"
+            >
+                <view class="i-as-btn-loading" wx:if="{{ item.loading }}"></view>
+                <view class="i-as-btn-text" style="{{ item.color ? 'color: ' + item.color : '' }}">{{ item.name }}</view>
+            </view>
+        </view>
+    </view>
+    <view class="i-as-cancel" wx:if="{{ showCancel }}">
+        <view class="i-as-cancel-btn"  bindtap="handleClickCancel">{{ cancelText }}</view>
+    </view>
+</view>
+
